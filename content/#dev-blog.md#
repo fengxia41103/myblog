@@ -1,0 +1,81 @@
+Title: Dev blog setup
+Date: 2016-07-02 11:25
+Modified: 2016-07-02 11:25
+Category: conf
+Tags: internal, nginx
+Slug: dev-blog
+Author: Feng Xia
+Summary: Dev blog
+
+
+Linkage dev blog
+================
+
+本项目旨在为公司内部建立易维护的信息发布、知识库和内部资源管理平台。
+Blog基于[pelican](http://docs.getpelican.com/en/3.6.3/)。
+
+安装
+--
+
+1. pip install pelican
+2. pip install Markdown
+3. git clone https://github.com/getpelican/pelican-themes.Theme样式可参考[pelican theme](http://www.pelicanthemes.com/)。
+4. 在theme路径下，用pelican-themes --install [theme名称]安装theme.
+5. nano pelicanconf.py，更新THEME。
+
+本地测试
+----
+
+1. 在dev-blog路径下，运行
+   pelican -r
+
+2. 在dev-blog/output路径下，运行
+   pelican -m SimpleHTTPServer
+
+3. 打开浏览器，访问http://localhost:8000
+
+上线
+--
+
+Deployment使用python [fabric](http://www.fabfile.org/)。详细请见其文档。
+在quickstart步骤时已自动生成了fabfile。目前推到/home/fengxia/workspace。
+这个可根据fabfile中使用的ssh user的权限修改。命令如下：
+
+    fab publish
+
+NGINX服务器
+---------
+
+Blog服务器选用nginx，DEV-Blog.conf中配置:
+
+	server {
+
+	    listen [::]:8012;
+	    listen 8012;
+
+	    server_name .linkage.top, linkage.top;
+	    root /home/fengxia/workspace;
+
+	    location = / {
+	        # Instead of handling the index, just
+	        # rewrite / to /index.html
+	        rewrite ^ /index.html;
+	    }
+
+	    location / {
+	        # Serve a .gz version if it exists
+	        gzip_static on;
+	        # Try to serve the clean url version first
+	        try_files $uri.htm $uri.html $uri =404;
+	    }
+
+	    location = /favicon.ico {
+	        # This never changes, so don't let it expire
+	        expires max;
+	    }
+
+	    location ^~ /theme {
+	        # This content should very rarely, if ever, change
+	        expires 1y;
+	    }
+	}

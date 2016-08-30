@@ -1,10 +1,10 @@
-Title: Continuous integration setup
+Title: Buildbot continuous integration set
 Date: 2016-07-20 10:45
-Modified: 2016-07-20 11:25
-Tags: internal, ci, build
+Tags: dev, ci, build
 Slug: buildbot
 Author: Feng Xia
-Summary: CI
+Summary: Using Python Buildbot to set up a continuous integration
+    workflow.
 
 
 Continuous integration

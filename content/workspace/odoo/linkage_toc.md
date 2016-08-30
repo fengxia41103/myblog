@@ -1,4 +1,4 @@
-Title: Linage environments
+Title: Linkage environments
 Date: 2016-07-01 23:10
 Modified: 2016-07-19 17:11
 Category: reference
@@ -6,6 +6,19 @@ Tags: internal
 Slug: linkage-env-reference
 Author: Feng Xia
 Summary: Linkage internal environment references
+
+Introduction
+=============
+
+Project was initiated in March 2016. Linkage is a Chinese startup
+company located in Shanghai. The company aimed to develop customized
+modules based on ODOO V8. Fuctions of its clients range from construction
+industry to client services. Besides
+module development, the primary challenge was to to clean up
+legacy code base, establish dev baseline including code styles, naming
+conventions, code review process and etc., and
+draw up a roadmap that illustrates company's product evolution path
+going forward.
 
 Build master
 ============

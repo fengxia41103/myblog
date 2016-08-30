@@ -33,3 +33,17 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+# Theme
+THEME = 'alchemy'
+PAGES_ON_MENU = True
+TAGES_ON_MENU = True
+ARCHIVES_ON_MENU = True
+CATEGORIES_ON_MENU = True
+GITHUB_ADDRESS = 'http://github.com/fengxia41103/'
+EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
+
+# Plugins
+LOAD_CONTENT_CACHE = False  # for development use
+PLUGIN_PATHS = ['../pelican-plugins']
+PLUGINS = ['pin_to_top', 'just_table']

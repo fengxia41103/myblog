@@ -6,6 +6,7 @@ Tags: internal
 Slug: linkage-env-reference
 Author: Feng Xia
 Summary: Linkage internal environment references
+Status: draft
 
 Introduction
 =============

@@ -35,6 +35,7 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 # Theme
+#THEME = 'html5-dopetrope'
 THEME = 'alchemy'
 PAGES_ON_MENU = True
 TAGES_ON_MENU = True
@@ -46,4 +47,4 @@ EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
 # Plugins
 LOAD_CONTENT_CACHE = False  # for development use
 PLUGIN_PATHS = ['../pelican-plugins']
-PLUGINS = ['pin_to_top', 'just_table']
+PLUGINS = ['pin_to_top', ]

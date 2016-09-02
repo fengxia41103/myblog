@@ -1,4 +1,4 @@
-Title: Buildbot continuous integration set
+Title: Buildbot continuous integration setup
 Date: 2016-07-20 10:45
 Tags: dev, ci, build
 Slug: buildbot
@@ -7,56 +7,72 @@ Summary: Using Python Buildbot to set up a continuous integration
     workflow.
 
 
-Continuous integration
-=====================================
+# Continuous integration
 
-关于CI对内部开发的功效，以及选用的[buildbot](http://buildbot.net/)，
-可以参见[IBM的这篇文章](http://www.ibm.com/developerworks/cn/linux/l-buildbot/index.html).
-这里我们主要描述在linkage服务器上的基础环境搭建，如何增加新的测试机，和日常的工作流程三部分。
+The whole point of quick development cycle is to shorten
+the path between a verbal or written requirement, and an actionable
+application that reflects an implementation of this requirement. Therefore,
+it becomes crucial to set up an CI environment not only to facilitate
+development and testing, but to enforce our practice of agile prototyping
+by setting up a complete automated test instance for our clients that closely
+mirrors development progress. Once achieved, clients and developers can now
+truely accalaim that they are *on the same page*.
 
-安装
---
-如同以往，先选择一个python virtualenv，然后利用pip安装。
+# Buildbot
 
-1. SSH登陆后
-2. source .bashrc
-3. workon build
-1. pip install buildbot
-2. pip install buildbot-slave
+We chose [buildbot](http://buildbot.net/) as our CI tool.
+Another common choice is the [jenkins](https://jenkins.io/). Jenkins
+is in Java. So in order to maintain a technology stack as consistent as
+we can, we opted to buildbot for this purpose.
 
-安装后的对于master和slave环境的设置详见[buildbot文档](http://docs.buildbot.net/current/tutorial/firstrun.html)。
-在服务器上对应的环境路径为:
+## Installation
+
+Create a python virtualenv and use pip is all it takes:
+
+1. workon build
+2. pip install buildbot
+3. pip install buildbot-slave
+
+For configuration, you can refer to
+[buildbot文档](http://docs.buildbot.net/current/tutorial/firstrun.html)
+for more details.
+
+On our test server, we have set the paths to:
 
 * master: ~/build-master
 * slave: ~/build-slave
 
-运行服务
-----
-1. 首先，切换到"build" virtualenv.
-2. 启动master: buildbot start build-master
-3. 启动slave: buildslave start build-slave
+## Run service
 
-至此，启动完成，可以在[此处](http://fengxia.co:8011)察看，用户登陆信息
-为:
+1. activate *build* virtualenv.
+2. to start master: buildbot start build-master
+3. to start slave: buildslave start build-slave
+
+To view and administrate our [CI server](http://fengxia.co:8011):
 * username: admin
-* pwd: natalie
+* pwd: xxxxxx
 
-如果因为某种原因造成CI超时不响应或宕机，可以通过以下命令重启服务：
+To restart master and slave:
 * master: buildbot restart build-master
 * slave: buildslave restart build-slave
 
-根据经验，服务启动是应遵循先启动master，再启动slave的原则。在实际使用中，这个顺序并没有
-不良影响，但我们依然建议遵循此原则作为最佳实践。
+If config has been modified, it is useful to run *buildbot checkconfig build-master*
+to check configurations for error.
 
-build master配置
--------------------
+Note that it is recommended to start master before the slave.
+In practice we have not experienced any problem if this order was reversed.
 
-系统配置的核心为build-master/master.cfg，对一个slave环境，只需改动两处：
 
-1. 加载slave定义的.py（见import）
-2. 加载slave中的配置到master
+## Build master configurations
 
-master.cfg可参见以下定义：
+We modified the stock *master.cfg* to make slaves modular. With this,
+adding a new slave only requires two changes:
+
+
+1. import slave's .py
+2. add slave configurations to master (nearly a copy and paste)
+
+Sample *master.cfg* is shown here:
 
     # -*- python -*-
     # ex: set syntax=python:
@@ -68,10 +84,8 @@ master.cfg可参见以下定义：
     from buildbot.status.web import authz, auth
 
     # <====================================
-    # 此处加载不同slave， 如test_cheersum
+    # import slave configuration
     import test_gkp
-    import test_jk
-    import prod_fashion
     # <====================================
 
     # This is the dictionary that the buildmaster pays attention to. We also use
@@ -91,7 +105,7 @@ master.cfg可参见以下定义：
     }
 
     # <====================================
-    # 此处加载不同slave的配置到master。
+    # Add slave configuration to master
     target = test_gkp.MyTarget()
     c['change_source'] += [target.change_source]
     c['schedulers'] += [target.scheduler, target.force_scheduler]
@@ -103,7 +117,7 @@ master.cfg可参见以下定义：
     # The 'slaves' list defines the set of recognized buildslaves. Each element is
     # a BuildSlave object, specifying a unique slave name and password.  The same
     # slave name and password must be configured on the slave.
-    slave1 = buildslave.BuildSlave("myslave", "natalie")
+    slave1 = buildslave.BuildSlave("myslave", "xxxxxx")
     c['slaves'] = [slave1]
 
     # 'protocols' contains information about protocols which master will use for
@@ -127,7 +141,7 @@ master.cfg可参见以下定义：
     authz_cfg=authz.Authz(
         # change any of these to True to enable; see the manual for more
         # options
-        auth=auth.BasicAuth([("admin","Linabc123")],
+        auth=auth.BasicAuth([("admin","xxxxxx")],
         gracefulShutdown = True,
         forceBuild = 'auth', # use this to test your slave once it is set up
         forceAllBuilds = 'auth',  # ..or this
@@ -146,8 +160,8 @@ master.cfg可参见以下定义：
     # the 'title' string will appear at the top of this buildbot
     # installation's html.WebStatus home page (linked to the
     # 'titleURL') and is embedded in the title of the waterfall HTML page.
-    c['title'] = "Linkage project"
-    c['titleURL'] = "http://www.linkage.top:8012"
+    c['title'] = "Fengxia.co"
+    c['titleURL'] = "http://fengxia.co"
 
     # the 'buildbotURL' string should point to the location where the buildbot's
     # internal web server (usually the html.WebStatus page) is visible. This
@@ -163,16 +177,17 @@ master.cfg可参见以下定义：
         'db_url' : "sqlite:///state.sqlite",
     }
 
-master.cfg中的几个配置说明：
+A couple notes of master.cfg connfigurations:
 
-1. slave1 = buildslave.BuildSlave("myslave", "natalie"): 此处在建立
-slave时定义，因此必须保持和build-slave中的配置一致。
-2. auth=auth.BasicAuth([("admin","natalie")]: 为master网页界面的用户登陆名和密码
+1. slave1 = buildslave.BuildSlave("myslave", "xxxxxx"): the name and password
+must be the same as the ones used to create build-slave.
+2. auth=auth.BasicAuth([("admin","xxxxx")]: defines the admin username
+and password to buildbot's admin web UI.
 
-build slave配置
-------------------
+## Build slave configurations
 
-针对每一个测试环境，都应建立一个新的slave配置。以test_gkp为例：
+We set up a new configuration for each slave, which corresponds to a project.
+Take *test_gkp* configuration for example:
 
     # -*- python -*-
     # ex: set syntax=python:
@@ -189,7 +204,7 @@ build slave配置
             project_configs = {
                 'git': 'http://fengxia41103:xxxxxx@github.com/fengxia41103/gkp.git',
                 'git username': 'fengxia41103',
-                'git password': 'xf123456',
+                'git password': 'xxxxxx',
                 'git source': '~/build-slave/mybuild-%s/build'%self.name,
                 'build name': 'mybuild-%s'%self.name
             }
@@ -240,22 +255,19 @@ build slave配置
                 slavenames=["myslave"],
                 factory=factory)
 
-增加新的测试机
-----------
+## Add a new project to CI
 
-CI实现的是从代码（GIT）到测试环境部署的全流程的自动化，因此CI的成功不仅依赖于对build
-master和build slave的配置，还需要系统层面的系统服务配置，端口分配，
-NGINX代理配置等。此处，我们重点针对buildbot的环境配置。
+Adding a new project to CI takes a few steps:
 
-1. 创立新的slave配置.py.
-2. build-master/master.cfg加载新的配置.
-3. 重新加载master.cfg: buildbot reload build-master，或重启build-master.
-4. 在网页端确认有新的slave.
-5. 测试force build.
+1. Create slave configuration .py.
+2. Add it to build-master/master.cfg.
+3. Restart build master: buildbot restart build-master.
+4. Login to buildbot admin web UI to confirm that slave has been added successfully.
+5. Force a build to test.
 
-日程工作流程
-------
+## Daily workflow
 
-CI前期配置完成并通过测试后，日常的工作流程被大大简化。开发人员只需要在本地测试通过后提交
-代码到build slave跟踪的GIT分支，然后等待CI自动更新公用的测试环境。如果是hot fix提交，
-也可由CI的管理员启动force build, 强制更新测试环境。
+Once CI has been integrated, developer needs only submit changes to Git
+and wait for the next build to refresh the test environment. For *hot fixes*
+build master can also kickoff a force build to make the changes avaialbe
+immediately in test environment.

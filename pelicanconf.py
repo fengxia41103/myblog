@@ -35,16 +35,12 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 # Theme
-#THEME = 'html5-dopetrope'
 THEME = 'feng'
-DISPLAY_PAGES_ON_MENU = True
-DISPLAY_TAGS_ON_MENU = True
-ARCHIVES_ON_MENU = True
-DISPLAY_CATEGORIES_ON_MENU = True
+
 GITHUB_ADDRESS = 'http://github.com/fengxia41103/'
 EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
 
 # Plugins
 LOAD_CONTENT_CACHE = False  # for development use
 PLUGIN_PATHS = ['../pelican-plugins']
-PLUGINS = ['pin_to_top', ]
+PLUGINS = ['pin_to_top']

@@ -5,6 +5,7 @@ Tags: internal
 Slug: internal-env-reference
 Author: Feng Xia
 Summary: Internal environment references
+Pin: True
 
 # Build master
 

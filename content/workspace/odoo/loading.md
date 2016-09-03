@@ -2,10 +2,13 @@ Title: ODOO8 native server loading process
 Date: 2016-07-23
 Modified: 2016-07-23
 Category: odoo
-Tags: odoo8
+Tags: odoo8, internal
 Slug: odoo8 server loading process
 Author: Feng Xia
-Summary: odoo8 server loading
+Summary: This article analyzes the bootup process of ODOO8. We have traced
+    its call stack, and from source code learned what is in the core
+    of a ODOO8 server.
+
 
 
 # ODOO8 server loading

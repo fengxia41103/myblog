@@ -34,7 +34,7 @@ Create a python virtualenv and use pip is all it takes:
 3. pip install buildbot-slave
 
 For configuration, you can refer to
-[buildbot文档](http://docs.buildbot.net/current/tutorial/firstrun.html)
+[buildbot tutorial](http://docs.buildbot.net/current/tutorial/firstrun.html)
 for more details.
 
 On our test server, we have set the paths to:

@@ -328,9 +328,13 @@ footer {
 }
 
 .myheader {
-    background: url(/theme/images/background-444.jpg) no-repeat cover center fixed;
+    background: url("/theme/images/background-1684.jpg") no-repeat;
+    min-height: 700px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    color: #efefef;
+    padding: 3em 0em;
+    margin-bottom: 2em;
 }

@@ -37,6 +37,7 @@ DEFAULT_PAGINATION = 10
 # Theme
 THEME = 'feng'
 
+LINKEDIN_ADDRESS = 'https://www.linkedin.com/in/fengxia41103'
 GITHUB_ADDRESS = 'http://github.com/fengxia41103/'
 EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
 

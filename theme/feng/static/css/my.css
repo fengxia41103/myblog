@@ -337,4 +337,5 @@ footer {
     color: #efefef;
     padding: 3em 0em;
     margin-bottom: 2em;
+    overflow-x: hidden;
 }

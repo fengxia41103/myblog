@@ -83,6 +83,9 @@
 		        {% block content %}
 		        {% endblock %}
 
+                {# pagination #}
+                {% block pagination %}
+                {% endblock %}
 	        </div><!-- /.container -->
 	        <div id="push"></div>
 	    </div>
@@ -90,20 +93,45 @@
 
 
         {% block footer %}
-        <footer class="" id="footer">
-	        <div class="col-md-6">
-                <p>PY Consulting Ltd.</p>
-                <p>1236 Beacon St., #1</p>
-                <p>Brookline, MA 0246</p>
-                <abbr title="Phone">P:</abbr> (508) 801-1794
-            </div><div class="col-md-6">
-                <label>Email</label>
-                <a href="mailto:feng_xia41103@hotmail.com">feng_xia41103@hotmail.com</a>
+        <footer>
+            <div class="row">
+	            <div class="col-md-offset-1 col-md-10">
+                    <h3>Categories:</h3>
+                    <ul class="list-inline">
+                        {% for c,article in categories %}
+                        <li>
+                            <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
+                                <i class="fa fa-at"></i>
+                                {{ c }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <h3>Tags:</h3>
+                    <ul class="list-inline">
+                        {% for c,article in tags %}
+                        <li>
+                            <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
+                                <i class="fa fa-tag"></i>
+                                {{ c }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-	        <i class="fa fa-copyright"></i>
-	        2015 PY Consulting Compile
+
+            <div class="row" style="text-align:center;margin-top:3em;opacity:0.5;" >
+                <strong>
+                    2016 PY Consulting Ltd., 1236 Beacon Street, Brookline, MA 02146
+                </strong>
+                <p>
+                    <i class="fa fa-copyright" ></i>All rights reserved.
+                </p>
+            </div>
         </footer>
         {% endblock %}<!- end of block footer -->
+
 
         <!-- Placed at the end of the document so the pages load faster -->
         {% block Javascripts %}

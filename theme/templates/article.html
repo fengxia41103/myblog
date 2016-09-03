@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<article>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="pennant pennant-alt date">
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+                {{ article.date|strftime('%Y-%m-%d') }}
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h1 class="">{{ article.title }}</h1>
+            <i class="fa fa-language"></i>
+            <span class="active">{{ article.lang }}</span>
+            {# translations #}
+            {% if article.translations %}
+            {% for t in article.translations %}
+            <a href="{{ t.url }}">
+                | {{ t.lang }}
+            </a>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-5">
+            <ul class="list-inline pull-right">
+                {# article category #}
+                {% if article.category %}
+                <li>
+                    <a class="btn btn-default" href="{{article.category.url}}">
+                        <i class="fa fa-at"></i>
+                        {{ article.category.name }}
+                    </a>
+                </li>
+                {% endif %}
+
+                {# tags #}
+                {% if article.tags %}
+                {% for t in article.tags %}
+                <li>
+                    <a class="btn btn-default" href="{{ t.url }}">
+                        <i class="fa fa-tag"></i>
+                        {{ t.name }}
+                    </a>
+                </li>
+                {% endfor %}
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10" style="margin-top:20px;">
+            <p>
+                {{ article.content }}
+            </p>
+
+            <p>
+              &mdash; by
+              <a href="{{article.author.url}}">{{ article.author }}</a>
+            </p>
+        </div>
+    </div>
+</article>
+
+{% endblock %}

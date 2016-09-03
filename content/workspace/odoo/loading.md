@@ -140,7 +140,9 @@ call trace in its memory and knows details of call stack.
 [Pycallgraph]: http://pycallgraph.slowchop.com/en/develop/guide/command_line_usage.html
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html
 
-![ODOO8 Loading Call Graph](/images/odoo8_loading_callgraph.png)
+<a href="/images/odoo8_loading_callgraph.png" data-lightbox="odoo">
+<img src="/images/odoo8_loading_callgraph.png" style="max-width:100%;"/>
+</a>
 
 
 # Thoughts

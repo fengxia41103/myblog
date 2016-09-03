@@ -36,11 +36,11 @@ DEFAULT_PAGINATION = 10
 
 # Theme
 #THEME = 'html5-dopetrope'
-THEME = 'alchemy'
-PAGES_ON_MENU = True
-TAGES_ON_MENU = True
+THEME = 'feng'
+DISPLAY_PAGES_ON_MENU = True
+DISPLAY_TAGS_ON_MENU = True
 ARCHIVES_ON_MENU = True
-CATEGORIES_ON_MENU = True
+DISPLAY_CATEGORIES_ON_MENU = True
 GITHUB_ADDRESS = 'http://github.com/fengxia41103/'
 EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
 

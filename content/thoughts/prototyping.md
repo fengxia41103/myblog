@@ -10,7 +10,7 @@ Summary: Building a prototype is a must-have for any new project
     common platform for client and developers to communicate while they
     are looking at the same thing.
 
-![Proof of concept](images/20150930_transporter.png)
+<img src="images/20150930_transporter.png" class="img-responsive center-block"/>
 
 I believe in the power of prototypes.
 That is to say, I want to see an idea in action before
@@ -39,32 +39,32 @@ Prototype, or proof-of-concept (POC), is a wonderful
 thing. In my opinion it serves four important functions:
 
 1. It proves the concept. Nothing is more valuable than knowing
-   the path in mind is not a dea end. This applies in particular to
-   those projects that have large share of uncertainties. Taking
-   a trip to Mars is not mind-boggling if you know your friend
-   John has just traveled there and back. But if you were the first
-   one sent to Mars, oh boy.
+the path in mind is not a dead end. This applies in particular to
+those projects that have large share of uncertainties. Taking
+a trip to Mars is not mind-boggling if you know your friend
+John has just traveled there and back. But if you were the first
+one sent to Mars, oh boy.
 
 2. It formulates a design. Over the process of building a prototype, key
-   components will be researched, evaluated, adopted,
-   developed, integrated and tested. System boundaries will emerge. Key
-   functions and services will be grouped into at least three tiers:
-   low-hanging fruits, hard but do-ables, and dont-know-hows.
-   This knowledge, in turn,  will drive task
-   priorities, task estimation, and risk evaluation.
-   All these will become a cornerstone of the system design so it will be
-   practical, executable, and working.
+components will be researched, evaluated, adopted,
+developed, integrated and tested. System boundaries will emerge. Key
+functions and services will be grouped into at least three tiers:
+low-hanging fruits, hard but do-ables, and dont-know-hows.
+This knowledge, in turn,  will drive task
+priorities, task estimation, and risk evaluation.
+All these will become a cornerstone of the system design so it will be
+practical, executable, and working.
 
 
-3. It builds communication. Building prototypes involvs lots of
-discussions. Clients brain dupms their expectations to dev team, while
+3. It builds communication. Building prototypes involves lots of
+discussions. Clients brain dumps their expectations to dev team, while
 dev team internalizes those business functions into
-a coherent picture illustrated using their familiar technology jargons.
+a coherent picture illustrated using their familiar technology jargon.
 Details that hold importance but have been neglected will be discovered
 and ironed out. A common knowledge base
-and a common vocabulary will be buit over the course. Instead of
+and a common vocabulary will be built over the course. Instead of
 business syntax on one side (requirements)
-while some technology jargons on
+while some technology jargon on
 the other (SQL? Queue?), we now have a vocabulary that all
 could understand, contribute, and use to effectively communicate.
 Back in the MBA days I recall a case on Starbucks. One of the company's
@@ -81,7 +81,7 @@ sequence to communicate their order:
     8. Drink type (latte, Frappuccino, etc.)
 
 
-    Why do they do that? To build a common a vacabulary and
+    Why do they do that? To build a common a vocabulary and
     to improve communication. The result, less error and happier customer.
 
 4. It removes risks. Hiccups will be discovered early

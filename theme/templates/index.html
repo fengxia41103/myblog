@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="my-multicol-3">
+    {% for a in articles %}
+    <div class="pin-card">
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+        <em>
+          {{ a.date|strftime('%Y-%m-%d')}}
+        </em>
+        <h3>{{ a.title }}</h3>
+
+        <p>
+            {{ a.summary }}
+        </p>
+      <div style="margin-top: 10px;">
+            <a class="btn btn-default button" href="{{ a.url }}">
+              <i class="fa fa-coffee" style="opacity:0.5;"></i>
+              continue reading
+            </a>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

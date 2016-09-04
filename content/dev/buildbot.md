@@ -3,11 +3,6 @@ Date: 2016-07-20 10:45
 Tags: dev, ci, build
 Slug: buildbot
 Author: Feng Xia
-Summary: Using Python Buildbot to set up a continuous integration
-    workflow.
-
-
-# Continuous integration
 
 The whole point of quick development cycle is to shorten
 the path between a verbal or written requirement, and an actionable

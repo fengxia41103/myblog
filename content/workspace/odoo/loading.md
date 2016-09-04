@@ -6,7 +6,7 @@ Tags: odoo8, internal
 Slug: odoo8 server loading process
 Author: Feng Xia
 Summary: This article analyzes the bootup process of ODOO8. We have traced
-    its call stack, and from source code learned what is in the core
+    its call stack and have, from its source code, pinpointed what is in the core
     of a ODOO8 server.
 
 
@@ -144,7 +144,7 @@ call trace in its memory and knows details of call stack.
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html
 
 <a href="/images/odoo8_loading_callgraph.png" data-lightbox="odoo">
-<img src="/images/odoo8_loading_callgraph.png" style="max-width:100%;"/>
+<img src="/images/odoo8_loading_callgraph.png" class="center-block"/>
 </a>
 
 

@@ -24,9 +24,11 @@ we can, we opted to buildbot for this purpose.
 
 Create a python virtualenv and use pip is all it takes:
 
-1. workon build
-2. pip install buildbot
-3. pip install buildbot-slave
+<pre class="brush:bash;">
+workon build
+pip install buildbot
+pip install buildbot-slave
+</pre>
 
 For configuration, you can refer to
 [buildbot tutorial](http://docs.buildbot.net/current/tutorial/firstrun.html)
@@ -69,6 +71,7 @@ adding a new slave only requires two changes:
 
 Sample *master.cfg* is shown here:
 
+<pre class="brush:python;">
     # -*- python -*-
     # ex: set syntax=python:
 
@@ -171,6 +174,7 @@ Sample *master.cfg* is shown here:
         # this at its default for all but the largest installations.
         'db_url' : "sqlite:///state.sqlite",
     }
+</pre>
 
 A couple notes of master.cfg connfigurations:
 
@@ -184,6 +188,7 @@ and password to buildbot's admin web UI.
 We set up a new configuration for each slave, which corresponds to a project.
 Take *test_gkp* configuration for example:
 
+<pre class="brush:python;">
     # -*- python -*-
     # ex: set syntax=python:
 
@@ -249,6 +254,7 @@ Take *test_gkp* configuration for example:
                 name=project_configs['build name'],
                 slavenames=["myslave"],
                 factory=factory)
+</pre>
 
 ## Add a new project to CI
 

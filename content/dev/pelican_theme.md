@@ -26,7 +26,7 @@ Quickly we wrote down a few on wish list:
 5. [Google fonts](https://fonts.google.com/?category=Serif,Sans+Serif,Monospace&selection.family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko)
 
 The actual work was pretty straightforward. Below shows the
-"layout.html" that is inherited by all the other html
+`layout.html` that is inherited by all the other html
 templates.
 
 <pre class="brush:xml;">
@@ -237,9 +237,9 @@ templates.
 </pre>
 
 Once this is set up, creating an individual page is simple. Just replace
-the "{% block content %}" with relevant content and you are done.
-Take the "page.html" for example that displays all static pages
-such as "About.""
+the `{% block content %}` with relevant content and you are done.
+Take the `page.html` for example that displays all static pages
+such as `About`.
 
 <pre class="brush:xml;">
 {% extends "layout.html" %}

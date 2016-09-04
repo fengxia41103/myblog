@@ -60,7 +60,7 @@ class PlainUtility():
 
 We kicked off the crawler in multiprocessing mode (between 200-300
 subprocesses) and sat back to watch data pouring in, until
-a *403 forbidden*, ban!
+a `403 forbidden`, ban!
 Needless to say, the server must have experienced a trigger event which
 prompted the action. What could it be?
 
@@ -97,8 +97,8 @@ powerful.
 <img class="center-block" src="/images/crawler.jpg"/>
 </a>
 
-Besides the old school "PlainUtility", we have introduced
-two upgrades &rarr; "TorUtility" and "SeleniumUtility". Both
+Besides the old school `PlainUtility`, we have introduced
+two upgrades &rarr; `TorUtility` and `SeleniumUtility`. Both
 added a layer of indirection to the puzzle, but also a layer of protection.
 
 # TOR
@@ -177,7 +177,7 @@ and renew it when counter is up so we could return the IP back to the IP.
 
 ## TOR config
 
-The key to config the TOR was to enable "ControlPort" and set up "HashedControlPassword".
+The key to config the TOR was to enable `ControlPort` and set up `HashedControlPassword`.
 The password would be used when sending request to the local TOR service such as renewing a connection. TOR
 service would in turn pass that on to TOR network on our behalf.
 
@@ -197,7 +197,7 @@ Password is created using [TOR commandline](https://www.torproject.org/docs/tor-
 
 ## Privoxy config
 
-In */etc/privoxy/config*, we set up a receiving port and a forwarding port.
+In `/etc/privoxy/config`, we set up a receiving port and a forwarding port.
 Forwarding port was set to 9050 as that's the default listening port by
 the TOR service.
 

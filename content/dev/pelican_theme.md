@@ -1,3 +1,35 @@
+Title: DIY Pelican theme
+Date: 2016-09-04 11:00
+Tags: dev, pelican
+Slug: pelican theme
+Author: Feng Xia
+
+As a Python house, [Pelican](http://blog.getpelican.com/) is
+definitely a winner for our blog site. But like any software engineer
+who hold a high standard to his work, I got turned off by
+all the [available themes](http://www.pelicanthemes.com/).
+"Ugly", "Where is the document?", "Why my translation is not shown?", I felt
+running in a maze where there were reflections of exit everywhere, but none
+was real. "Well, if it's in Python, we can make one." Solution is that simple.
+Besides, we love [Jinja2](http://jinja.pocoo.org/docs/dev/) template systems,
+and Pelican has spelled out [everything](http://docs.getpelican.com/en/3.6.3/themes.html#templates-and-variables)
+we need.
+
+Quickly we wrote down a few on wish list:
+
+1. The design must be based on [Bootstrap](http://getbootstrap.com/components/).
+2. Includes [Fontawesome](http://fontawesome.io/icons/), [Datatable](https://datatables.net/),
+    [Lightbox2](http://lokeshdhakar.com/projects/lightbox2/), and
+    [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/).
+3. Reuse elements we have designed for [showcases]({filename}/toc.md), such as layout, CSS and images.
+4. Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <font color="#d52349">red(#d52349)</font>.
+5. [Google fonts](https://fonts.google.com/?category=Serif,Sans+Serif,Monospace&selection.family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko)
+
+The actual work was pretty straightforward. Below shows the
+"layout.html" that is inherited by all the other html
+templates.
+
+<pre class="brush:xml;">
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +44,7 @@
 	    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
         <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="author" content="{{AUTHOR}}">
 
         {% block core_library %}
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,20 +57,20 @@
 
 
 	    {# Fontawesome #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+	    <link rel="stylesheet" type="text/css" href="/theme/js/font-awesome/css/font-awesome.min.css">
 
 	    {# DataTable #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+	    <link rel="stylesheet" type="text/css" href="/theme/js/datatables/media/css/dataTables.bootstrap.min.css">
 
         {# lightbox #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+	    <link rel="stylesheet" type="text/css" href="/theme/js/lightbox2/dist/css/lightbox.min.css">
 
         {# Bootstrap #}
-	    <link rel="stylesheet" href="/theme/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="/theme/js/bootstrap/dist/css/bootstrap.min.css">
 
         {# Syntaxhighlighter #}
-	    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
-	    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+	    <link rel="stylesheet" href="/theme/js/SyntaxHighlighter/styles/shCoreDefault.css">
+	    <link rel="stylesheet" href="/theme/js/SyntaxHighlighter/styles/shThemeDefault.css">
 
         {# my own #}
 	    <link rel="stylesheet" type="text/css" href="/theme/css/my.css">
@@ -47,7 +79,7 @@
         <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko" rel="stylesheet">
 
 	    {# JQuery lib #}
-	    <script type="text/javascript" src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+	    <script type="text/javascript" src="/theme/js/jquery/dist/jquery.min.js"></script>
         {% endblock %}
 
 
@@ -86,6 +118,7 @@
 		        </div><!-- end of block header -->
             </div>
 
+            {# introduction #}
             {% block introduction %}
             {% endblock %}
 
@@ -105,10 +138,6 @@
 
         {% block footer %}
         <footer>
-            {# block of related contents #}
-            {% block related %}
-            {% endblock %}
-
             <div class="row">
 	            <div class="col-md-offset-1 col-md-10">
                     <h3>Categories:</h3>
@@ -135,44 +164,7 @@
                     </ul>
                 </div>
            </div>
-
-
-            <div class="row" style="text-align:center; margin-top:5em;">
-                <h4>
-                    2016 PY Consulting Ltd.
-                    1236 Beacon Street, Brookline, MA 021461
-                </h4>
-
-                <ul class="list-inline">
-                    <li>
-                        <a href="mailto:{{EMAIL_ADDRESS}}">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{GITHUB_ADDRESS}}">
-                            <i class="fa fa-github"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{LINKEDIN_ADDRESS}}">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-phone-square"></i>
-                            (508)801-1794
-                        </a>
-                    </li>
-
-                </ul>
-                <p>
-                    <i class="fa fa-copyright" ></i>All rights reserved.
-                </p>
-            </div>
-            </footer>
+        </footer>
         {% endblock %}<!- end of block footer -->
 
 
@@ -180,42 +172,36 @@
         {% block Javascripts %}
 	    <!-- Bootstrap -->
 	    <script
-            src="/theme/bower_components/bootstrap/dist/js/bootstrap.min.js">
+            src="/theme/js/bootstrap/dist/js/bootstrap.min.js">
         </script>
 
 	    {# DataTable #}
         <script type="text/javascript"
-                src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+                src="/theme/js/datatables/media/js/jquery.dataTables.min.js">
         </script>
         <script type="text/javascript"
-                src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+                src="/theme/js/datatables/media/js/dataTables.bootstrap.min.js">
         </script>
 
 	    {# lightbox: http://ashleydw.github.io/lightbox/ #}
         <script type="text/javascript"
-                src="/theme/bower_components/lightbox2/dist/js/lightbox.min.js">
+                src="/theme/js/lightbox2/dist/js/lightbox.min.js">
         </script>
 
         {# Syntaxhighlighter #}
         <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/XRegExp.js">
+                src="/theme/js/SyntaxHighlighter/scripts/XRegExp.js">
         </script>
         <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shCore.js">
+                src="/theme/js/SyntaxHighlighter/scripts/shCore.js">
         </script>
         <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushXml.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushBash.js">
+                src="/theme/js/SyntaxHighlighter/scripts/shBrushPython.js">
         </script>
 
 	    {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
         <script type="text/javascript"
-                src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+                src="/theme/js/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
         </script>
 
 
@@ -233,13 +219,6 @@
 			 });
 
 
-             // lightbox
-			 j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
-				 var url = j$(this).attr('src');
-				 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
-				 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
-			 });
-
              // syntaxhighlighter
              SyntaxHighlighter.defaults['toolbar'] = false;
              SyntaxHighlighter.all();
@@ -255,3 +234,25 @@
     </body>
 
 </html>
+</pre>
+
+Once this is set up, creating an individual page is simple. Just replace
+the "{% block content %}" with relevant content and you are done.
+Take the "page.html" for example that displays all static pages
+such as "About.""
+
+<pre class="brush:xml;">
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ page.title }}</h1>
+
+<div class="col-md-offset-1 col-md-10">
+<article>
+  {{ page.content }}
+</article>
+</div>
+{% endblock %}
+</pre>
+
+Like what you see? Roll up your sleeves and make a new theme. 1,2,3, Go!

@@ -90,12 +90,16 @@ But that is just not nice. Crossed off the list with a 100% vote.
 Second, use a VPN. This is a good and common approach. We could use
 either an in-house server or a commercial one. But that's too, "boring",
 said one developer. So after a few
-tries, we ended up was something quite interesting, simple yet
+tries, we ended up with something quite interesting, simple yet
 powerful.
 
 <a href="/images/crawler.jpg" data-lightbox="crawler" data-title="Crawler architecture">
 <img class="center-block" src="/images/crawler.jpg"/>
 </a>
+
+Besides the old school "PlainUtility", we have introduced
+two upgrades &rarr; "TorUtility" and "SeleniumUtility". Both
+added a layer of indirection to the puzzle, but also a layer of protection.
 
 # TOR
 
@@ -177,7 +181,7 @@ The key to config the TOR was to enable "ControlPort" and set up "HashedControlP
 The password would be used when sending request to the local TOR service such as renewing a connection. TOR
 service would in turn pass that on to TOR network on our behalf.
 
-<pre>
+<pre class="brush:bash;">
 In /etc/tor/torrc:
 
 ## The port on which Tor will listen for local connections from Tor
@@ -197,7 +201,7 @@ In */etc/privoxy/config*, we set up a receiving port and a forwarding port.
 Forwarding port was set to 9050 as that's the default listening port by
 the TOR service.
 
-<pre>
+<pre class="brush:bash;">
 listen-address  localhost:8118
 forward-socks5   /   127.0.0.1:9050
 </pre>

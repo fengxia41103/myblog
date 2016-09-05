@@ -25,15 +25,32 @@ Quickly we wrote down a few on wish list:
 4. Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <font color="#d52349">red(#d52349)</font>.
 5. [Google fonts](https://fonts.google.com/?category=Serif,Sans+Serif,Monospace&selection.family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko)
 
-The actual work was pretty straightforward. Below shows the
-`layout.html` that is inherited by all the other html
-templates.
+The actual work was pretty straightforward. Follow Pelican official document
+to set up a working directory:
+
+<pre class="brush:bash;">
+├── static
+│   ├── bower_components
+│   ├── css
+│   │   └── my.css
+│   └── js
+│       ├── html5shiv.min.js
+│       └── respond.min.js
+└── templates
+    ├── article.html
+    ├── author.html
+    ├── category.html
+    ├── index.html
+    ├── layout.html
+    ├── page.html
+    └── tag.html
+</pre>
+
+`bower_components` has all the third party libraries.
+The key is the `layout.html` which is the root template of all others (shown below).
 
 <pre class="brush:xml;">
-<!DOCTYPE html>
-<html>
     <head>
-
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
@@ -233,7 +250,6 @@ templates.
         {% endblock %}
     </body>
 
-</html>
 </pre>
 
 Once this is set up, creating an individual page is simple. Just replace

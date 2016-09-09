@@ -22,7 +22,7 @@ Quickly we wrote down a few on wish list:
     [Lightbox2](http://lokeshdhakar.com/projects/lightbox2/), and
     [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/).
 3. Reuse elements we have designed for [showcases]({filename}/toc.md), such as layout, CSS and images.
-4. Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <font color="#d52349">red(#d52349)</font>.
+4. Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <span class="myhighlight">red(#d52349)</span>.
 5. [Google fonts](https://fonts.google.com/?category=Serif,Sans+Serif,Monospace&selection.family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko)
 
 The actual work was pretty straightforward. Follow Pelican official document

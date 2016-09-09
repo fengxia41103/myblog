@@ -38,14 +38,16 @@ being conservative is a good trait.
 Prototype, or proof-of-concept (POC), is a wonderful
 thing. In my opinion it serves four important functions:
 
-1. It proves the concept. Nothing is more valuable than knowing
+1. <span class="myhighlight">It proves the concept</span>.
+Nothing is more valuable than knowing
 the path in mind is not a dead end. This applies in particular to
 those projects that have large share of uncertainties. Taking
 a trip to Mars is not mind-boggling if you know your friend
 John has just traveled there and back. But if you were the first
 one sent to Mars, oh boy.
 
-2. It formulates a design. Over the process of building a prototype, key
+2. <span class="myhighlight">It formulates a design</span>.
+Over the process of building a prototype, key
 components will be researched, evaluated, adopted,
 developed, integrated and tested. System boundaries will emerge. Key
 functions and services will be grouped into at least three tiers:
@@ -56,7 +58,8 @@ All these will become a cornerstone of the system design so it will be
 practical, executable, and working.
 
 
-3. It builds communication. Building prototypes involves lots of
+3. <span class="myhighlight">It builds communication</span>.
+Building prototypes involves lots of
 discussions. Clients brain dumps their expectations to dev team, while
 dev team internalizes those business functions into
 a coherent picture illustrated using their familiar technology jargon.
@@ -67,9 +70,8 @@ business syntax on one side (requirements)
 while some technology jargon on
 the other (SQL? Queue?), we now have a vocabulary that all
 could understand, contribute, and use to effectively communicate.
-Back in the MBA days I recall a case on Starbucks. One of the company's
-strategy was to *silently* educate their customers on a specific
-sequence to communicate their order:
+This reminds me a strategy by Starbucks. Their staff will repeat
+a customer's order in a particular sequence:
 
     1. Hot or iced.
     2. Size.
@@ -84,7 +86,7 @@ sequence to communicate their order:
     Why do they do that? To build a common a vocabulary and
     to improve communication. The result, less error and happier customer.
 
-4. It removes risks. Hiccups will be discovered early
+4. <span class="myhighlight">It removes risks</span>. Hiccups will be discovered early
 on in the game; workarounds will be put in place; strategies
 will be clarified; team knowledge will be shared; and collaboration
 will be formed and adapted. Let's put it this way: if a POC

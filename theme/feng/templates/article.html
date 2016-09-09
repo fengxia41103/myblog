@@ -67,7 +67,9 @@
 {% endblock %}
 
 {% block related %}
-<h1><span style="color:#cdcdcd;">Related: </span></h1>
+
+
+<h1><span style="color:#adadad;">Related: </span></h1>
 
 {% for cat,articles in categories %}
 {% if cat == category %}
@@ -81,18 +83,18 @@
             {{ a.date|strftime('%Y-%m-%d') }}
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-7">
         <h4>
             {{ a.title }}
         </h4>
 
-        <div style="color:#cdcdcd;">
+        <div style="color:#adadad;">
             <p>
                 {{ a.summary }}
             </p>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-3">
         <a class="btn button pull-right" href="{{SITEURL}}/{{a.url}}">
             read more
         </a>

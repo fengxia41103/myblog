@@ -28,7 +28,7 @@
                 {% if article.category %}
                 <li>
                     <a class="btn btn-default" href="{{article.category.url}}">
-                        <i class="fa fa-at"></i>
+                        <i class="fa fa-folder-open-o"></i>
                         {{ article.category.name }}
                     </a>
                 </li>
@@ -72,7 +72,8 @@
 {% for cat,articles in categories %}
 {% if cat == category %}
 {% for a in articles %}
-{% if article != a %}
+{% if article != a and loop.index < 6 %}
+
 <div class="row page-header" style="margin-top:2em;margin-bottom:2em;">
     <div class="col-md-2">
         <div class="label label-default">

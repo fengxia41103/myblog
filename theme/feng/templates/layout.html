@@ -114,9 +114,9 @@
                     <h3>Categories:</h3>
                     <ul class="list-inline">
                         {% for c,article in categories %}
-                        <li>
+                        <li style="margin-top:0.7em;">
                             <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
-                                <i class="fa fa-at"></i>
+                                <i class="fa fa-folder-open-o"></i>
                                 {{ c }}
                             </a>
                         </li>
@@ -125,7 +125,7 @@
                     <h3>Tags:</h3>
                     <ul class="list-inline">
                         {% for c,article in tags %}
-                        <li>
+                        <li style="margin-top:0.7em;">
                             <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
                                 <i class="fa fa-tag"></i>
                                 {{ c }}

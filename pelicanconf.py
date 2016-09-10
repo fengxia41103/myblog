@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Feng Xia'
-SITENAME = u'C-x C-b'
-SITEURL = ''
+SITENAME = u'PY'
+SITEURL = 'http://fengxia.co'
 
 PATH = 'content'
 

@@ -257,9 +257,10 @@ label {
     transition: background-color .25s ease-in-out;
 }
 
-.button:hover{
+.button:hover {
     background: #f7456b;
 }
+
 
 /* Pennant */
 
@@ -351,6 +352,26 @@ footer a:hover {
     overflow-x: hidden;
 }
 
-.myhighlight{
+.myhighlight {
     color: #d52349;
+}
+
+.my-resume-header {
+    border-left: 0.5em solid #cecece;
+    font-weight: bold;
+    //font-variant: small-caps;
+    padding: 1em 1em 0.2em 1em;
+    background-color: #d52349;
+    color: white;
+    margin-bottom: 1em;
+    font-size: 0.9em;
+}
+
+resume li:last-child {
+    margin-bottom: 1em;
+}
+
+.my-multicol-5 li {
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 0;
 }

@@ -93,7 +93,7 @@
             {% block introduction %}
             {% endblock %}
 
-	        <div class="container center-block">
+	        <div class="container center-block" id="content">
                 {# main content #}
 		        {% block content %}
 		        {% endblock %}
@@ -183,6 +183,11 @@
 
         <!-- Placed at the end of the document so the pages load faster -->
         {% block Javascripts %}
+	    {# jquery-ui #}
+        <script type="text/javascript"
+                src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+        </script>
+
 	    {# tether #}
         <script type="text/javascript"
                 src="/theme/bower_components/tether/dist/js/tether.min.js">
@@ -255,6 +260,7 @@
 
              // tooltips
              j$('[data-toggle="tooltip"]').tooltip();
+
 		 });
 	    </script>
         {% endblock %} <!-- end of block JS -->

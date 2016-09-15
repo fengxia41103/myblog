@@ -360,9 +360,9 @@ footer a:hover {
     border-left: 0.5em solid #cecece;
     font-weight: bold;
     //font-variant: small-caps;
-    padding: 1em 1em 0.2em 1em;
-    background-color: #d52349;
-    color: white;
+    padding: 1em;
+    background-color: #eee;
+    color: #232323;
     margin-bottom: 1em;
     font-size: 0.9em;
 }

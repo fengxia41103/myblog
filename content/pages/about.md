@@ -3,7 +3,7 @@ Tags: about
 Slug: about
 Author: Feng Xia
 Summary: about page
-Status: draft
+Status: hidden
 
 PY Consulting was founded in 2015 by a group of software engineers
 who share a passion on technology and want to provide quality

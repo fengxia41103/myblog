@@ -16,12 +16,13 @@ Summary: Feng Xia's resum&eacute;
 
 ## Skills
 
-<ul>
-
-    <li>
-    <h4>Software development</h4>
+<table class="table table-responsive">
+  <tr><td>
+      <strong>Software development</strong>
+  </td><td>
 <ul class="list-unstyled my-multicol-5">
-    <li>Python, Django</li>
+    <li>Python</li>
+    <li>Django</li>
     <li>Bootstrap</li>
     <li>CSS, JS, HTML</li>
     <li>jQuery</li>
@@ -37,10 +38,11 @@ Summary: Feng Xia's resum&eacute;
     <li>Yeoman</li>
     <li>Jira</li>
 </ul>
-    </li>
+  </td></tr>
 
-    <li>
-    <h4>QA</h4>
+  <tr><td>
+    <strong>QA</strong>
+  </td><td>
 <ul class="list-unstyled my-multicol-5">
     <li>Selenium</li>
     <li>HP LoadRunner</li>
@@ -49,10 +51,11 @@ Summary: Feng Xia's resum&eacute;
     <li>Redmine</li>
     <li>Bugzilla</li>
 </ul>
-    </li>
+  </td></tr>
 
-<li>
-    <h4>System deployment</h4>
+  <tr><td>
+    <strong>System deployment</strong>
+  </td><td>
 <ul class="list-unstyled my-multicol-5">
     <li>Amazon EC2,RDS,S3</li>
     <li>uWSGI</li>
@@ -61,30 +64,32 @@ Summary: Feng Xia's resum&eacute;
     <li>Builtbot</li>
     <li>Fabric</li>
 </ul>
-    </li>
+  </td></tr>
 
-<li>
-    <h4>System monitoring</h4>
+  <tr><td>
+    <strong>System monitoring</strong>
+  </td><td>
 <ul class="list-unstyled my-multicol-5">
     <li>InfluxDB</li>
     <li>Grafana</li>
     <li>Cacti</li>
     <li>Nagios</li>
 </ul>
-    </li>
+  </td></tr>
 
-<li>
-    <h4>System administration</h4>
+  <tr><td>
+    <strong>System administration</strong>
+  </td><td>
 <ul class="list-unstyled my-multicol-5">
     <li>Salesforce</li>
     <li>AWS</li>
     <li>Ubuntu Linux</li>
 </ul>
-    </li>
+  </td></tr>
 
-
-<li>
-    <h4>Administrative tasks</h4>
+  <tr><td>
+    <strong>Administrative tasks</strong>
+  </td><td>
 <ul class="list-unstyled my-multicol-5">
     <li>LaTex</li>
     <li>Word</li>
@@ -93,111 +98,28 @@ Summary: Feng Xia's resum&eacute;
     <li>MS Project</li>
     <li>Taskjuggler</li>
 </ul>
-    </li>
+  </td></tr>
 
-
-</ul>
+</table>
 
 ## Experience
 
-<div class="dropdown text-right">
-<a class="dropdown-toggle" id="experience-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <i class="fa fa-hand-o-right"></i>
-    Quick time line
-    <span class="caret"></span>
-</a>
-<ul class="dropdown-menu" aria-labelledby="experience-dropdown" style="padding:10px 20px;">
-<table class="table table-striped table-responsive table-hover">
-    <thead>
-        <th>Year</th>
-        <th>Responsibility</th>
-        <th>Company</th>
-        <th></th>
-    </thead>
-
-    <tbody>
-    <tr><td>
-        present - 2015
-    </td><td>
-        Founder, Consultant
-    </td><td>
-        PY Consulting
-    </td><td>
-        <a class="btn btn-default" href="#py-consulting">
-            Read more
-        </a>
-    </td></tr>
-    <tr><td>
-        2015 - 2013
-    </td><td>
-        Managing director
-    </td><td>
-        Beijing Lean Strategy Consulting Group
-    </td><td>
-        <a class="btn btn-default" href="#lean">
-            Read more
-        </a>
-    </td></tr>
-    <tr><td>
-        2013 - 2010
-    </td><td>
-        Project manager
-    </td><td>
-        CrunchTime! Information Systems
-    </td><td>
-        <a class="btn btn-default" href="#crunchtime">
-            Read more
-        </a>
-    </td></tr>
-    <tr><td>
-        2010 - 2009
-    </td><td>
-        Senior business manager
-    </td><td>
-        China Everbright Bank
-    </td><td>
-        <a class="btn btn-default" href="#everbright">
-            Read more
-        </a>
-    </td></tr>
-    <tr><td>
-        2007 - 2004
-    </td><td>
-        Research scientist
-    </td><td>
-        Bit9 Inc.
-    </td><td>
-        <a class="btn btn-default" href="#bit9">
-            Read more
-        </a>
-    </td></tr>
-    <tr><td>
-        2004 - 1998
-    </td><td>
-        Senior engineer
-    </td><td>
-        Instron Corp.
-    </td><td>
-        <a class="btn btn-default" href="#instron">
-            Read more
-        </a>
-    </td></tr>
-    </tbody>
-</table>
-</ul>
-</div>
-
-<ul class="list-unstyled my-resume-header text-right" id="py-consulting">
-    <li class="pull-left text-left">
+<div class="my-resume-header row" id="py-consulting">
+    <div class="text-left col-md-6">
         Founder, Consultant<br />
         <span style="opacity:0.5;">PY Consulting</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         01/2015 - present<br />
         <span style="opacity:0.5;">Raleigh, NC</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-up"></i>
+    </div>
+</div>
+
 
 * __Wei Fashion Group project__. Wei Fashion Group is an international
   fashion product trading company. Designed and built an inventory
@@ -237,17 +159,22 @@ Summary: Feng Xia's resum&eacute;
 [http://fengxia.co:8001/gaokao/]: http://fengxia.co:8001/gaokao/
 [http://fengxia.co:8002/jk/]: http://fengxia.co:8002/jk/
 
-<ul class="list-unstyled my-resume-header text-right" id="lean">
-    <li class="pull-left text-left">
+
+<div class="row my-resume-header" id="lean">
+    <div class="text-left col-md-6">
         Managing Director <br />
         <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         11/2013 - 01/2015<br />
         <span style="opacity:0.5;">Beijing, China</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 * Responsible for a $3-million fixed-bid software contract. Client is a
 Fortune-500 company. Project included designing and developing
@@ -278,17 +205,21 @@ base, a project management system and a configuration management system.
 * Setup a local service team. Screened hundreds of resume and
 interviewed nearly one hundred candidates.
 
-<ul class="list-unstyled my-resume-header text-right" id="crunchtime">
-    <li class="pull-left text-left">
+<div class="row my-resume-header" id="crunchtime">
+    <div class="text-left col-md-6">
         Project Manager<br />
         <span style="opacity:0.5;">CrunchTime! Information Systems</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         07/2010 - 11/2013<br />
         <span style="opacity:0.5;">Boston, MA</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 * Provided technical support to client on administrating our ERP
 product. Initiated statement-of-work(SOW) and followed it through
@@ -324,17 +255,21 @@ reducing one UAT cycle from 40-man-hour to less than 2 hours.
 
     * <span class="myhighlight">Tools</span>: Python, Selenium webdriver, Django
 
-<ul class="list-unstyled my-resume-header text-right" id="everbright">
-    <li class="pull-left text-left">
+<div class="row my-resume-header" id="everbright">
+    <div class="text-left col-md-6">
         Senior Business Manager<br />
         <span style="opacity:0.5;">China Everbright Bank</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         04/2009 - 04/2010<br />
         <span style="opacity:0.5;">Beijing, China</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 
 * Supervised two vendor invitation-for-bids. In charge of a $2-million
@@ -351,44 +286,53 @@ two loans of substantial amount.
 training materials.
 
 
-<ul class="list-unstyled my-resume-header text-right" id="bit9">
-    <li class="pull-left text-left">
+<div class="row my-resume-header" id="bit9">
+    <div class="text-left col-md-6">
         Research Scientist<br />
         <span style="opacity:0.5;">Bit9 Inc.</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         04/2004 - 01/2007<br />
         <span style="opacity:0.5;">Cambridge, MA</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
-* Created a breakthrough technology in endpoint application control
+* Led a breakthrough in endpoint application control
 product, which played a key role in winning Bit9 a $6-million B-round
 led by Kleiner Perkins.
 
-    * <span class="myhighlight">Tools</span>: kernel rootkits, VMWare, Python, Graphviz
+    * <span class="myhighlight">Tools</span>: NT kernel, Python, Graphviz
 
 * Member of Bit9's SaaS team. Built the world's largest Windows binary
-repository at the time featuring four billion records. Wrote C++
-parser for the PE16/32/64 formats.
+repository at the time featuring four billion data records. Wrote C++
+parser for Windows binary PE formats.
 
     * <span class="myhighlight">Tools</span>: VC++
 
 * Hands on experience with undocumented NT kernel data structures and rootkits.
 
+    * <span class="myhighlight">Tools</span>: NT kernel, rootkits, VMWare
 
-<ul class="list-unstyled my-resume-header text-right" id="instron">
-    <li class="pull-left text-left">
+<div class="row my-resume-header" id="instron">
+    <div class="text-left col-md-6">
         Senior Engineer<br />
         <span style="opacity:0.5;">Instron Corp.</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         07/1998 - 04/2004<br />
         <span style="opacity:0.5;">Canton, MA</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 * Developed embedded controller of Instron’s impact tester line (9250HV).
 
@@ -408,17 +352,21 @@ system training. 　　
 
 ## Education
 
-<ul class="list-unstyled my-resume-header text-right">
-    <li class="pull-left text-left">
+<div class="row my-resume-header">
+    <div class="text-left col-md-6">
         MBA<br />
         <span style="opacity:0.5;">Boston University</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         04/2007 - 09/2008<br />
         <span style="opacity:0.5;">Boston, MA</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 
 * GPA: 3.75/4.0
@@ -426,32 +374,71 @@ system training. 　　
 * "_Certificate of International Management Program_"
 * 2nd place in the "_13th Annual Net Impact Case Competition_"
 
-<ul class="list-unstyled my-resume-header text-right">
-    <li class="pull-left text-left">
+<div class="row my-resume-header">
+    <div class="text-left col-md-6">
         Master of Science<br />
         <span style="opacity:0.5;">Ohio University</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         09/1995 - 05/1997<br />
         <span style="opacity:0.5;">Athens, OH</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 * GPA: 3.5/4.0
 * "_Student Employee of the Month_"
 
 
-<ul class="list-unstyled my-resume-header text-right">
-    <li class="pull-left text-left">
+<div class="row my-resume-header">
+    <div class="text-left col-md-6">
         Bachelor of Engineering<br />
         <span style="opacity:0.5;">Shanghai Jiaotong University</span>
-    </li>
-    <li>
+    </div>
+    <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
         09/1990 - 07/1994<br />
         <span style="opacity:0.5;">Shanghai, China</span>
-    </li>
-</ul>
+    </div>
+    <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+        <br />
+        <i class="fa fa-angle-double-down"></i>
+    </div>
+</div>
 
 * GPA: 3.15/4.0
+
+<script type="text/javascript">
+var j$ = jQuery.noConflict();
+
+
+j$(document).ready(function() {
+    // toggle resume exp content by clicking on its header
+    j$('.my-resume-header').click(function() {
+        j$(this).next('ul').toggle("slide", {
+            direction: "right"
+        }, 1000);
+
+        j$(this).find('i').last().toggleClass('fa-angle-double-up');
+        j$(this).find('i').last().toggleClass('fa-angle-double-down');
+    });
+
+    // on page loading, show the 1st section and collapse rest
+    j$('h2').siblings('.my-resume-header').each(function(index) {
+        if (index > 0) {
+            j$(this).next('ul').hide();
+        }
+    });
+
+    // quick time line nav, click to open collapsed section
+    j$('[data-toggle="myexp"]').click(function(){
+        var id = j$(this).attr('href');
+        j$(id).next('ul').toggle("slide", {
+            direction: "right"
+        }, 1000);
+    });
+});</script>

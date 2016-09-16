@@ -150,7 +150,7 @@ Summary: Feng Xia's resum&eacute;
 
     * <span class="myhighlight">Tools</span>:
       Django, Bootstrap, Redis, Google map API, Baidu map API, Baidu Echarts, TOR API, Privoxy, AWS, uWSGI, Nginx
-    * <span class="myhighlight">Demo</span>: [http://fengxia.co:8001/gaokao/]
+    * <span class="myhighlight">Demo</span>: [http://fengxia.co:8001/gaokao/][] (in Chinese)
 
 * __JK project__. Developed an open-source web application that runs stock
   trading simulation with step-by-step transaction trace. User can
@@ -161,17 +161,17 @@ Summary: Feng Xia's resum&eacute;
     * <span class="myhighlight">Tools</span>: Django, Bootstrap, Redis, Highcharts, AWS, uWSGI, Nginx
     * <span class="myhighlight">Demo</span>: [http://fengxia.co:8002/jk/][]
 
-* __Linkage project__. Linkage Ltd. is a start-up software company
+* __Linkage project__. Linkage Ltd. is a Chinese start-up software company
   specializing ODOO module development. Built ODOO’s continuous
   integration (CI) server. Customized ODOO inventory management
   system. Authored the company’s “_2016-17 Technology Roadmap_”.
 
     * <span class="myhighlight">Tools</span>: Python, ODOO, Buildbot
+    * <span class="myhighlight">PPT</span>: [2016-17 Technology Roadmap]({filename}/downloads/odoo roadmap.pdf) (in Chinese)
 
 [http://fengxia.co:8003/wei/]: http://fengxia.co:8003/wei/
 [http://fengxia.co:8001/gaokao/]: http://fengxia.co:8001/gaokao/
 [http://fengxia.co:8002/jk/]: http://fengxia.co:8002/jk/
-
 
 <div class="row my-resume-header" id="lean">
     <div class="text-left col-md-6 col-sm-3">
@@ -191,7 +191,7 @@ Summary: Feng Xia's resum&eacute;
 
 * Responsible for a $3-million fixed-bid software contract. Client is a
 Fortune-500 company. Project included designing and developing
-full-stack web and mobile applications that
+full-stack web and mobile applications which
 replaced three legacy systems.
 
 

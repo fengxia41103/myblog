@@ -272,3 +272,8 @@ Once CI has been integrated, developer needs only submit changes to Git
 and wait for the next build to refresh the test environment. For *hot fixes*
 build master can also kickoff a force build to make the changes avaialbe
 immediately in test environment.
+
+
+# Build master admin
+
+* [Build master](http://fengxia.co:8011)

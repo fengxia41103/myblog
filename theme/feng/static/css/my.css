@@ -357,14 +357,20 @@ footer a:hover {
 }
 
 .my-resume-header {
-    border-left: 0.5em solid #cecece;
     font-weight: bold;
     //font-variant: small-caps;
     padding: 1em;
-    background-color: #eee;
+    //background-color: #eee;
+    border: 1px solid #eee;
+    border-left: 0.5em solid #eee;
     color: #232323;
     margin-bottom: 1em;
     font-size: 0.9em;
+}
+
+.my-resume-header:hover {
+    border: 1px solid #d52349;
+    border-left: 0.5em solid #d52349;
 }
 
 resume li:last-child {

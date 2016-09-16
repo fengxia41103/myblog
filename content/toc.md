@@ -4,7 +4,8 @@ Category: reference
 Tags: internal
 Slug: internal-env-reference
 Author: Feng Xia
-Summary: We have done these prototypes
+
+We have done these prototypes
     in 2015. All were proposed by an entrepreneur
     who has spotted an opportunity which s/he
     was hoping to pursue. Putting the ideas aside,

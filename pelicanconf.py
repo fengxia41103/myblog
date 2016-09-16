@@ -8,6 +8,7 @@ SITENAME = u'PY'
 SITEURL = ''
 
 PATH = 'content'
+STATIC_PATHS = ['images', 'downloads']
 
 TIMEZONE = 'America/New_York'
 

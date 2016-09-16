@@ -13,6 +13,19 @@ Summary: Feng Xia's resum&eacute;
 * Welcome challenging problem.
 * Have a high standard in work quality.
 * Salesforce advocate.
+* <span class="myhighlight">Also available in</span>:
+    <a href="https://www.linkedin.com/in/fengxia41103">
+        <i class="fa fa-linkedin-square"></i>
+        LinkedIn
+    </a>
+    <a href="/downloads/resume.pdf">
+        <i class="fa fa-file-pdf-o"></i>
+        PDF
+    </a>
+    <a href="/downloads/resume.doc">
+        <i class="fa fa-file-word-o"></i>
+        Word
+    </a>
 
 ## Skills
 
@@ -105,7 +118,7 @@ Summary: Feng Xia's resum&eacute;
 ## Experience
 
 <div class="my-resume-header row" id="py-consulting">
-    <div class="text-left col-md-6">
+    <div class="text-left col-md-6 col-sm-3">
         Founder, Consultant<br />
         <span style="opacity:0.5;">PY Consulting</span>
     </div>
@@ -116,7 +129,7 @@ Summary: Feng Xia's resum&eacute;
     </div>
     <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
         <br />
-        <i class="fa fa-angle-double-up"></i>
+        <i class="fa fa-angle-double-down"></i>
     </div>
 </div>
 
@@ -161,8 +174,8 @@ Summary: Feng Xia's resum&eacute;
 
 
 <div class="row my-resume-header" id="lean">
-    <div class="text-left col-md-6">
-        Managing Director <br />
+    <div class="text-left col-md-6 col-sm-3">
+        Director <br />
         <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
     </div>
     <div class="text-right col-md-5">
@@ -206,7 +219,7 @@ base, a project management system and a configuration management system.
 interviewed nearly one hundred candidates.
 
 <div class="row my-resume-header" id="crunchtime">
-    <div class="text-left col-md-6">
+    <div class="text-left col-md-6 col-sm-3">
         Project Manager<br />
         <span style="opacity:0.5;">CrunchTime! Information Systems</span>
     </div>
@@ -256,8 +269,8 @@ reducing one UAT cycle from 40-man-hour to less than 2 hours.
     * <span class="myhighlight">Tools</span>: Python, Selenium webdriver, Django
 
 <div class="row my-resume-header" id="everbright">
-    <div class="text-left col-md-6">
-        Senior Business Manager<br />
+    <div class="text-left col-md-6 col-sm-3">
+        Business Manager<br />
         <span style="opacity:0.5;">China Everbright Bank</span>
     </div>
     <div class="text-right col-md-5">
@@ -287,13 +300,13 @@ training materials.
 
 
 <div class="row my-resume-header" id="bit9">
-    <div class="text-left col-md-6">
-        Research Scientist<br />
+    <div class="text-left col-md-6 col-sm-3">
+        Team Lead<br />
         <span style="opacity:0.5;">Bit9 Inc.</span>
     </div>
     <div class="text-right col-md-5">
         <i class="fa fa-calendar"></i>
-        04/2004 - 01/2007<br />
+        04/2004 - 05/2007<br />
         <span style="opacity:0.5;">Cambridge, MA</span>
     </div>
     <div  class="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
@@ -319,7 +332,7 @@ parser for Windows binary PE formats.
     * <span class="myhighlight">Tools</span>: NT kernel, rootkits, VMWare
 
 <div class="row my-resume-header" id="instron">
-    <div class="text-left col-md-6">
+    <div class="text-left col-md-6 col-sm-3">
         Senior Engineer<br />
         <span style="opacity:0.5;">Instron Corp.</span>
     </div>
@@ -353,7 +366,7 @@ system training. 　　
 ## Education
 
 <div class="row my-resume-header">
-    <div class="text-left col-md-6">
+    <div class="text-left col-md-6 col-sm-3">
         MBA<br />
         <span style="opacity:0.5;">Boston University</span>
     </div>
@@ -369,13 +382,14 @@ system training. 　　
 </div>
 
 
+* <span class="myhighlight">Major</span>: International Management Program
 * GPA: 3.75/4.0
 * Recipient of "_High Honor and Dean’s Achievement Scholarship_"
 * "_Certificate of International Management Program_"
 * 2nd place in the "_13th Annual Net Impact Case Competition_"
 
 <div class="row my-resume-header">
-    <div class="text-left col-md-6">
+    <div class="text-left col-md-6 col-sm-3">
         Master of Science<br />
         <span style="opacity:0.5;">Ohio University</span>
     </div>
@@ -390,13 +404,14 @@ system training. 　　
     </div>
 </div>
 
+* <span class="myhighlight">Major</span>: Telecommunication, Digital Signal Processing
 * GPA: 3.5/4.0
 * "_Student Employee of the Month_"
 
 
 <div class="row my-resume-header">
-    <div class="text-left col-md-6">
-        Bachelor of Engineering<br />
+    <div class="text-left col-md-6 col-sm-3">
+        Bachelor of Science<br />
         <span style="opacity:0.5;">Shanghai Jiaotong University</span>
     </div>
     <div class="text-right col-md-5">
@@ -410,6 +425,7 @@ system training. 　　
     </div>
 </div>
 
+* <span class="myhighlight">Major</span>: Power System Automation
 * GPA: 3.15/4.0
 
 <script type="text/javascript">
@@ -429,9 +445,7 @@ j$(document).ready(function() {
 
     // on page loading, show the 1st section and collapse rest
     j$('h2').siblings('.my-resume-header').each(function(index) {
-        if (index > 0) {
-            j$(this).next('ul').hide();
-        }
+        j$(this).next('ul').hide();
     });
 
     // quick time line nav, click to open collapsed section

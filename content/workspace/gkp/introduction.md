@@ -23,9 +23,10 @@ An important tool is the _user preference_. Each user can specify her own
 searching criteria so to narrow down from a general search to a more
 customized version.
 
-<div class="row">
+<figure class="row">
     <img class="img-responsive center-block" src="images/gkp_2.png" />
-</div>
+    <figcaption>Set up user preferences</figcaption>
+</figure>
 
 These settings are related directly to how Chinese college categorize students. Take
 the **Geo requirement** setting for example.
@@ -47,18 +48,32 @@ she is locked in to the quota assigned to her *home* state. This is a sad realit
 The drive behind this function is that students often have a geo preference in mind.
 This function is to make it easy
 when she wants to browse schools based on its geo location.
-Legend on the bottom left corner shows school counts categorized into different
-shades of color. The darker an area is, the more schools there are.
-Schools in each state are further grouped by its city (shown on the right) and can be
-drilled down.
-
-<div class="row">
-<img class="img-responsive center-block" src="images/gkp_1.png"/>
-</div>
 
 Initially I was to build a Google map view with overlayed filter.
-Geo code was looked up first using Google map API.
-Then out of curiosity I also decoded them with Baidu map API. That's when all hell broke loose.
+Geo code was looked up first using Google map API. This alone took
+about a week to resolve limited by the upper limit Google imposed
+on each API account and the initial trial and error time. Drawing the
+map was straightforward using [Google map API] and [marker cluster][].
+
+<figure class="row">
+    <img class="img-responsive center-block" src="images/gkp_21.png"/>
+    <figcaption>Using Google map to browse schools</figcaption>
+</figure>
+
+However, a couple issues with this approach:
+
+1. Computing markers within the view bound was time consuming. This
+is especially so when user has few filtering criteria.
+This will result in displaying all schools on the map. Zooming in will
+reduce the number of markers. So a potential solution is to set the initial zoom
+large enough to view only a section of the country's territory.
+
+2. Some addresses were not resolved or resolved incorrectly. They
+were viewable on Google map itself, but the returned geo code
+was different. It feels like Google uses a better version for his own use
+and serves the rest of us with a lower quality data set. A way
+to resolve this is to check the address with other geo decoding
+services. So I tried Baidu map API. That's when all hell broke loose.
 
 First of all, two systems yielded two different geo codes for the same school address!
 How could this be? Are they having two different GPS systems? My guess is that their
@@ -72,6 +87,19 @@ create this incompatibility.
 
 Considering the GFW, I abandoned both maps and back to a simple Chart. Map is drawn using [Echarts][].
 
+<figure class="row">
+    <img class="img-responsive center-block" src="images/gkp_1.png"/>
+    <figcaption>School map using Echarts</figcaption>
+</figure>
+
+Legend on the bottom left corner shows school counts categorized into different
+shades of color. The darker an area is, the more schools there are.
+Schools in each state are further grouped by its city (shown on the right) and can be
+drilled down.
+
+
+[google map api]: https://developers.google.com/maps/documentation/javascript/tutorial
+[marker cluster]: https://github.com/googlemaps/js-marker-clusterer
 [echarts]: https://ecomfe.github.io/echarts/index-en.html
 
 ## State level: statistics
@@ -83,17 +111,19 @@ we focused on aggregated data analysis. In short, schools within the same state 
 be grouped along different dimensions. Statistics are then computed on the fly
 to provide quick facts.
 
-<div class="row">
+<figure class="row">
     <img class="img-responsive center-block" src="images/gkp_3.png"/>
-</div>
+    <figcaption>School statistics quickview at State level</figcaption>
+</figure>
 
 Each dimension can be drilled down to reveal more stats. Among them,
 two important dimensions are important for a student
 &mdash; Bachelor's vs. Associate program, and tiers.
 
-<div class="row">
+<figure class="row">
     <img class="img-responsive center-block" src="images/gkp_4.png"/>
-</div>
+    <figcaption>School statistics drill down by programs and admission tiers</figcaption>
+</figure>
 
 The distinction in the degrees are simple to understand. Some schools and programs
 offer certificate program while others are accredited by the government to
@@ -110,9 +140,10 @@ the time when elite students get picked by school. For all others,
 they have to make a decision prior to the exam day which tier she is going into, and the primary
 reference is her estimated score.
 
-<div class="row">
+<figure class="row">
     <img class="img-responsive center-block" src="images/gkp_5.png"/>
-</div>
+    <figcaption>School statistics drill down by school types</figcaption>
+</figure>
 
 Another dimension is the type of school. Students who want to study
 arts can quickly find schools specializing in that.
@@ -124,23 +155,27 @@ imported from wikipedia. Since wikipedia does not have an API for keyword search
 the challenge was to have the computer matching city name to
 a wiki page and parse the page for imported data bits.
 
-<div class="row">
+<figure>
+    <div class="row">
     <div class="col-md-6">
     <img class="img-responsive center-block" src="images/gkp_6.png"/>
     </div>
     <div class="col-md-6">
     <img class="img-responsive center-block" src="images/gkp_7.png"/>
     </div>
-</div>
+    </div>
+    <figcaption>City wiki</figcaption>
+</figure>
 
 Next, an interesting idea came up during our discussion. _How convenient
 is it to get to the city from where I live?_ So we decided to build
 a train schedule that will show exactly which train are available
 to take, all stops in between, and the actual time elapse.
 
-<div class="row">
+<figure class="row">
     <img class="img-responsive center-block" src="images/gkp_8.png"/>
-</div>
+    <figcaption>City to city train schedule search engine</figcaption>
+</figure>
 
 Considering that
 no map API or travel search engine can mix up flight with train to

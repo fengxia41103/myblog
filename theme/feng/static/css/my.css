@@ -381,3 +381,24 @@ resume li:last-child {
     border-bottom: 1px solid #ececec;
     margin-bottom: 0;
 }
+
+img {
+    margin-bottom: 1em;
+}
+
+article{
+    counter-reset: figures;
+}
+
+figure{
+    counter-increment: figures;
+}
+
+figcaption{
+    margin-bottom: 1em;
+    color: #545454;
+    text-align: center;
+}
+figcaption:before{
+    content: 'Fig.' counter(figures) ': ';
+}

@@ -4,7 +4,7 @@ Tags: dev, crawler
 Slug: tor crawler
 Author: Feng Xia
 
-Many projects we have done involved harvesting data from
+Many projects I have done involved harvesting data from
 public sites. Data crawling is an exciting business. On one hand, it
 is easy to develop a crawler these days. In the Python world,
 plenty tutorials will show you how to build
@@ -66,7 +66,7 @@ prompted the action. What could it be?
 
 First, load. We suspected the load we were generating put us on the
 radar. This was a public site who claimed a over three million live
-daily users. However, we have always viewed such information with a
+daily users. However, I have always viewed such information with a
 grain of salt. So in this case, we guessed those million members were
 certainly not clicking at the same time as we were, and that site was
 likely hosted on a budget server as many startups have done. With this
@@ -93,11 +93,8 @@ said one developer. So after a few
 tries, we ended up with something quite interesting, simple yet
 powerful.
 
-<a href="/images/crawler.jpg" data-lightbox="crawler" data-title="Crawler architecture">
-<img class="center-block" src="/images/crawler.jpg"/>
-</a>
 
-Besides the old school `PlainUtility`, we have introduced
+Besides the old school `PlainUtility`, I have introduced
 two upgrades &rarr; `TorUtility` and `SeleniumUtility`. Both
 added a layer of indirection to the puzzle, but also a layer of protection.
 
@@ -259,6 +256,14 @@ class SeleniumUtility():
 At this point, the stack has blown quite a bit from a native Python urllib
 to now **Python+Java+Javascript** and a third party web proxy tool.
 The downside was apparently the complexity. But the upside was also obvious.
-We have achieved a better control over our data harvesting process.
+I have achieved a better control over our data harvesting process.
 More importantly, we tried our best to be a good web citizen, and let's stick
 to that.
+
+# Final design
+
+After all the tweaks, the final design of my crawler comes down to this:
+
+<a href="/images/crawler.jpg" data-lightbox="crawler" data-title="Crawler architecture">
+<img class="center-block" src="/images/crawler.jpg"/>
+</a>

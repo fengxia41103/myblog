@@ -34,7 +34,7 @@ For configuration, you can refer to
 [buildbot tutorial](http://docs.buildbot.net/current/tutorial/firstrun.html)
 for more details.
 
-On our test server, we have set the paths to:
+On our test server, I have set the paths to:
 
 * master: ~/build-master
 * slave: ~/build-slave
@@ -57,7 +57,7 @@ If config has been modified, it is useful to run *buildbot checkconfig build-mas
 to check configurations for error.
 
 Note that it is recommended to start master before the slave.
-In practice we have not experienced any problem if this order was reversed.
+In practice I have not experienced any problem if this order was reversed.
 
 
 ## Build master configurations

@@ -4,16 +4,14 @@ Slug: project fashion demo
 Author: Feng Xia
 
 
-## Demo-Fashion
 
 <figure class="row">
     <img src="images/demo_fashion.png"/>
     <figcaption>Project Fashion frontpage</figcaption>
 </figure>
 
-> * Demo: [http://fengxia.co:8003/wei/][1]
-> * User: demo
-> * Pwd: demopassword
+> * [Demo][1]
+> * Login: (demo, demopassword)
 
 Project Fashion is built to support daily business
 of an international trading company with a special focus

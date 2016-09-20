@@ -3,7 +3,6 @@ Date: 2015-08-06 15:00
 Slug: project stock demo
 Author: Feng Xia
 
-## Demo-Stock
 
 <figure class="row">
     <img src="images/demo_jk.png"/>
@@ -11,9 +10,8 @@ Author: Feng Xia
 </figure>
 
 
-> * Demo: [http://fengxia.co:8002/jk/][1]
-> * User: demo
-> * Pwd: demopassword
+> * [Demo][1]
+> * Login: (demo, demopassword)
 
 As its name, thi is a stock backtesting tool. User can define
 a _trading plan_ which spells out data source, time frame,

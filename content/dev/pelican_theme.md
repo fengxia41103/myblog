@@ -21,7 +21,7 @@ Quickly we wrote down a few on wish list:
 2. Includes [Fontawesome](http://fontawesome.io/icons/), [Datatable](https://datatables.net/),
     [Lightbox2](http://lokeshdhakar.com/projects/lightbox2/), and
     [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/).
-3. Reuse elements I have designed for [showcases]({filename}/toc.md), such as layout, CSS and images.
+3. Reuse elements I have designed for [showcases]({filename}/workspace/demo/gkp.md), such as layout, CSS and images.
 4. Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <span class="myhighlight">red(#d52349)</span>.
 5. [Google fonts](https://fonts.google.com/?category=Serif,Sans+Serif,Monospace&selection.family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko)
 

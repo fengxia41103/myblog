@@ -3,16 +3,14 @@ Date: 2015-03-06 9:00
 Slug: project gkp demo
 Author: Feng Xia
 
-## Demo-GKP
 
 <figure class="row">
     <img src="images/demo_gkp.png"/>
     <figcaption>Project GKP frontpage</figcaption>
 </figure>
 
-> * Demo (in Chinese): [http://fengxia.co:8001/gkp/][2]
-> * User: demo
-> * Pwd: demopassword
+> * [Demo (in Chinese)][2]
+> * Login: (demo, demopassword)
 
 
 Project GKP is a web application assisting high school

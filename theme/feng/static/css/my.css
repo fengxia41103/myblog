@@ -402,3 +402,6 @@ figcaption{
 figcaption:before{
     content: 'Fig.' counter(figures) ': ';
 }
+figure img{
+    max-width: 100%;
+}

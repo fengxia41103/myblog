@@ -104,7 +104,7 @@ walks into the store's storage to count. Therefore, it is crucial to understand 
 comparing the two implies a time stamp that both sides have to agree. Otherwise, such comparison
 is meaningless.
 
-<table class="table table-striped table-hover">
+<table class="table table-striped">
     <thead>
         <th>Theoretical inventory</th>
         <th>Physical inventory</th>
@@ -130,7 +130,7 @@ storage by the application automatically.
 </figure>
 
 When taking the physical count, one has two modes to choose from depending on
-how counting is done. Admin mode displays product details such as style and size.
+how counting is done. **Admin mode** displays product details such as style and size.
 They are used as assisting information to the counting staff. Counts are default to 0.
 Only the ones having a non-zero count will be highlighted and saved later.
 However, it is possible that a product has been sold out. So to handle this special

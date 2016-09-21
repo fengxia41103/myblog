@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="row">
-    <img src="images/demo_fashion.png"/>
+    <img src="/images/demo_fashion.png"/>
     <figcaption>Project Fashion frontpage</figcaption>
 </figure>
 

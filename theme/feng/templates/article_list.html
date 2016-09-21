@@ -4,7 +4,7 @@
 {% block list_title %}
 {% endblock %}
 
-{% for article in articles %}
+{% for article in articles_page.object_list %}
 <div class="row page-header" style="margin-top:2em;margin-bottom:2em;">
     <div class="col-md-2">
         <div class="label label-default">
@@ -29,7 +29,7 @@
         </a>
     </div>
 </div>
-
 {% endfor %}
 
+{% include 'pagination.html' %}
 {% endblock %}

@@ -31,17 +31,21 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
-DEFAULT_PAGINATION = 10
+# pagination
+DEFAULT_PAGINATION = 5
+# PAGINATION_PATTERNS = (
+#    (1, '{base_name}/', '{base_name}/index.html'),
+#    (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
+#)
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
 # Theme
 THEME = 'feng'
-
-LINKEDIN_ADDRESS = 'https://www.linkedin.com/in/fengxia41103'
-GITHUB_ADDRESS = 'http://github.com/fengxia41103/'
 EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
+GITHUB_ADDRESS = 'http://github.com/fengxia41103'
+LINKEDIN_ADDRESS = 'https://www.linkedin.com/in/fengxia41103'
 
 # Plugins
 LOAD_CONTENT_CACHE = False  # for development use

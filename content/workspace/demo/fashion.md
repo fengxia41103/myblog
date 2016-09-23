@@ -31,5 +31,8 @@ Not only information becomes transparent and accountable,
 but efficiency is achieved through intelligent cross
 reference and aggressive statistic analysis.
 
+Read on about its [core functions and design considerations][2].
+
 
 [1]: http://fengxia.co:8003/wei/
+[2]: {filename}/workspace/fashion/intro.md

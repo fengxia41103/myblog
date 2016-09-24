@@ -136,6 +136,27 @@ either do this on each fulfillment (eg. in a long
 running order where fulfillment come in over a stretched
 period of time), or close them all with a single click. Simple.
 
+## Return a product
+
+Product return is a common scenario.
+Rule we applied here is that _quantity available for return
+is determined by received fulfillments_. This also means
+that a return is always associated with an order. This contrasts
+to the approach where return is checked against inventory regardless
+how that product got into the inventory at the first place.
+
+<figure>
+    <img class="center-block" src="/images/fashion_16.png">
+    <figcaption>Return a product</figcaption>
+</figure>
+
+Also, each line item needs a _reason_. The list is configurable. An important
+decision to make is who will absorb the damage, seller or buyer. For example,
+if the agreement is that buyer bears damages if it was caused by third-party shipper,
+then no credit will be issued, which in the application shows as unchanged
+_account payable_. Otherwise, if seller is to pay for this, a credit will be deducted
+from the current _account payable_ so buyer owes less now due to the return.
+
 ## Make a payment
 
 <figure>
@@ -178,3 +199,69 @@ and so forth.
 </figure>
 
 [drop shipping]: https://en.wikipedia.org/wiki/Drop_shipping
+
+## Purchase order
+
+I have always viewed purchase as the mirror image of sales. It really depends
+on whose view you are referring to because in any transaction there are
+always two parties, one will sell and the other will buy. So from buyer's stand point
+of view, an order is a PO, and the same order is a SO for the seller. In turn,
+a SO will reduce inventory while PO increases inventory.
+However, SO and PO bring in some important factors
+in practice besides driving the supply chain in opposite directions.
+
+First,
+tax. In most cases seller is responsible for paying tax. In application
+this becomes a requirement that SO has functions to compute and track tax.
+Because each business model, industry, state and country can be
+quite different in this matter, this is an area I have experienced a lot of
+customization and code refactoring.
+
+Second, what is the relationship
+of a SO and a PO in your business? Drop shipping, for example, can be modeled
+as a back-to-back 1-N model where one SO is parsed to create multiple(N) POs.
+This provides full traceability from sales to purchase.
+Retail, on the other hand, may purchase in bulk with PO way before a SO
+takes place. Therefore, seller may not be interested in knowing the product just sold
+came from which PO. But on top of this, there are retail business
+to whom such traceability is required, for example, food retailer.
+Therefore, attempting to answer this question with a single answer will not work!
+What is missing is a business context, something that provides additional
+information for the application to make such decision.
+In my client's case, she sells supplier's stock under her name with a markup.
+Goods are then shipped to her distribution warehouse before re-shipped to end client.
+Therefore, when the application runs in this business context
+it will enforce a back-to-back SO-PO reference.
+She also runs a wholesale business in which purchase and sales have no such
+strong bound. Thus the application will leave the SO-PO reference optional.
+
+<figure>
+    <img class="center-block" src="/images/fashion_17.png">
+    <figcaption>Purchase order summary</figcaption>
+</figure>
+
+An interesting thing of fashion industry is that product
+often has long lead time. For most vendors a calendar year is divided into
+two seasons &mdash; Spring/Summer season and Fall/Winter season. Buyer
+will place PO in October or even earlier for the Spring/Summer season of next year.
+So it is not uncommon to see a 6-month lead time, which introduces large amount of
+uncertainties to the buyer's operation. To accommodate this, it is wise
+to keep informed by vendor on which line item will be available when. In application
+we have add a dropdown list, _"Available In"_, so this information is captured:
+
+* <span class="myhighlight">unknown</span>: default state, vendor has not released information of its availability
+* <span class="myhighlight">never</span>: this product has been dropped out or sold out
+* <span class="myhighlight">local</span>: can be fulfilled right now by vendor's local outlet
+* <span class="myhighlight">Jan - Dec</span>: calendar month. Its year is implied.
+
+
+<figure>
+    <img class="center-block" src="/images/fashion_18.png">
+    <figcaption>Purchase order line item availability</figcaption>
+</figure>
+
+In this article, I have covered sales order and purchase order.
+They are the core of the company's operation.
+In [part three]({filename}/workspace/fashion/report.md), we will get to
+the exciting part of the application where all these data points will
+be utilized to drive a better operation.

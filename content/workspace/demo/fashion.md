@@ -7,31 +7,26 @@ Author: Feng Xia
 
 <figure class="row">
     <img src="/images/demo_fashion.png"/>
-    <figcaption>Project Fashion frontpage</figcaption>
+    <figcaption>Project Fashion front page</figcaption>
 </figure>
 
 > * [Demo][1]
 > * Login: (demo, demopassword)
 
 Project Fashion is built to support daily business
-of an international trading company with a special focus
-on fashion products. Its main functions include
+of an international trading company who specializes
+ fashion products. Main functions of the application
+include
 product management, customer and vendor database,
 order management (both sales and purchase), and inventory management.
-For trading business, it is a bridge between
-suppliers and clients. Its value added property lies
-in offering client a uniformed view of products and services
-regardless the suppliers' differences, and tracking
-order throughout creation,
-execution, closure, cancellation, and modification.
-This system maps closely to each step of these
-so a user only needs to run her own function while the system
-will glue all pieces together to form a coherent workflow.
-Not only information becomes transparent and accountable,
-but efficiency is achieved through intelligent cross
-reference and aggressive statistic analysis.
 
-Read on about its [core functions and design considerations][2].
+The company is based in US with two subsidiaries in mainland China.
+The system is to replace all its offline documents so that information
+that were used to be communicated via email attachments and later
+through shared network drives are now centrally maintained
+and shared.
+
+Read on about [core functions and design considerations][2].
 
 
 [1]: http://fengxia.co:8003/wei/

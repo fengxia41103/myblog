@@ -150,6 +150,6 @@ size information for reference.
 </figure>
 
 So far I have covered Product and Inventory functions.
-In [part two]({filename}/workspace/fashion/so.md), I will
+In [part two]({filename}/workspace/fashion/order.md), I will
 dive into the core of this application to talk about
 how we will handle sales orders and purchase orders.

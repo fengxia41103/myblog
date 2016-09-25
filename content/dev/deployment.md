@@ -18,9 +18,10 @@ run into such problem with AWS, but would like to keep
 options open.
 
 
-<a href="images/deployment_architecture.png" data-lightbox="deploy">
-    <img src="images/deployment_architecture.png" class="center-block" width="100%"/>
-</a>
+<figure>
+    <img src="/images/deployment_architecture.png" class="img-responsive center-block"/>
+    <figcaption>Deployment architecture</figcaption>
+</figure>
 
 Notice that I do not have multiple database in the diagram. First of all,
 I have not had use of DB cluster. Secondly, database replica

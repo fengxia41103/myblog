@@ -36,9 +36,10 @@ may include initial data import, runtime data synchronization, data extraction a
 system backup.
 
 
-<a href="images/system_architecture.png" data-lightbox="system architecture">
-    <img src="images/system_architecture.png" class="center-block"/>
-</a>
+<figure>
+    <img src="images/system_architecture.png" class="center-block img-responsive"/>
+    <figcaption>System architecture diagram</figcaption>
+</figure>
 
 The beauty of this architecture is that message queue becomes a
 distribution hub where tasks are dispatched to different destination

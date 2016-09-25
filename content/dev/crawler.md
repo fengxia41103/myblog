@@ -12,9 +12,9 @@ a simple crawler using the [Python urllib](https://docs.python.org/2/library/url
 or building upon some more sophisticate tool like
 [Scrapy](http://doc.scrapy.org/en/latest/intro/tutorial.html).
 
-<a href="/theme/images/regular_expressions.png" data-lightbox="crawler">
+<figure>
 <img src="images/regular_expressions.png" class="img-responsive center-block"/>
-</a>
+</figure>
 
 But before carried away by the fun and the power,
 let's lay down a ground rule &mdash; to respect
@@ -264,6 +264,7 @@ to that.
 
 After all the tweaks, the final design of my crawler comes down to this:
 
-<a href="/images/crawler.jpg" data-lightbox="crawler" data-title="Crawler architecture">
-<img class="center-block" src="/images/crawler.jpg"/>
-</a>
+<figure>
+    <img class="center-block img-responsive" src="/images/crawler.jpg"/>
+    <figcaption>Crawler architecture</figcaption>
+</figure>

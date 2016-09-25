@@ -10,7 +10,9 @@ Summary: Building a prototype is a must-have for any new project
     common platform for client and developers to communicate while they
     are looking at the same thing.
 
-<img src="images/20150930_transporter.png" class="img-responsive center-block"/>
+<figure>
+<img src="/images/20150930_transporter.png" class="img-responsive center-block"/>
+</figure>
 
 I believe in the power of prototypes.
 That is to say, I want to see an idea in action before

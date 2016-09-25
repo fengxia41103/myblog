@@ -27,7 +27,7 @@ Knowing the top seller is the most important thing for any business.
 The report is compiled from sales orders to show which product is high in demand.
 
 <figure>
-    <img class="center-block" src="/images/fashion_19.png">
+    <img class="center-block img-responsive" src="/images/fashion_19.png">
     <figcaption>Top seller report</figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ efforts.
 > can also be an indicator of wrong strategy.
 
 <figure>
-    <img class="center-block" src="/images/fashion_20.png">
+    <img class="center-block img-responsive" src="/images/fashion_20.png">
     <figcaption>Most profitable product report</figcaption>
 </figure>
 
@@ -59,7 +59,7 @@ ensure that your business is not just piling up inventory without
 an exit plan.
 
 <figure>
-    <img class="center-block" src="/images/fashion_21.png">
+    <img class="center-block img-responsive" src="/images/fashion_21.png">
     <figcaption>Top purchased product report</figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ to fulfill properly. However, it does not distinguish between an order that has 
 rate and the ones that are in-progress.
 
 <figure>
-    <img class="center-block" src="/images/fashion_22.png">
+    <img class="center-block img-responsive" src="/images/fashion_22.png">
     <figcaption>Top sales order by QTY balance report</figcaption>
 </figure>
 
@@ -87,7 +87,7 @@ and filing fulfillment form are handled by two groups of people who are
 not synchronized.
 
 <figure>
-    <img class="center-block" src="/images/fashion_23.png">
+    <img class="center-block img-responsive" src="/images/fashion_23.png">
     <figcaption>Top sales order in-progress fulfills report</figcaption>
 </figure>
 
@@ -100,9 +100,9 @@ we are maintaining a relationship with our peers.
 <figure>
     <div class="row">
     <div class="col-md-6">
-    <img class="center-block" src="/images/fashion_24.png">
+    <img class="center-block img-responsive" src="/images/fashion_24.png">
     </div><div class="col-md-6">
-    <img class="center-block" src="/images/fashion_25.png">
+    <img class="center-block img-responsive" src="/images/fashion_25.png">
     </div></div>
     <figcaption>Customer AR and vendor AP report</figcaption>
 </figure>

@@ -18,9 +18,9 @@ and manage them by _x-out_(remove) it from saved list. Convenient.
 <figure>
 <div class="row">
     <div class="col-md-6">
-    <img class="img-responsive center-block" src="images/gkp_9.png" />
+    <img class="img-responsive center-block" src="/images/gkp_9.png" />
     </div><div class="col-md-6">
-    <img class="img-responsive center-block" src="images/gkp_10.png" />
+    <img class="img-responsive center-block" src="/images/gkp_10.png" />
     </div>
 </div>
     <figcaption>Bookmark a school</figcaption>
@@ -34,7 +34,7 @@ It contains many meta data that can be extracted to form
 more data dimensions.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_11.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_11.png"/>
     <figcaption>School summary</figcaption>
 </figure>
 
@@ -42,7 +42,7 @@ School detail page expands on top of the introduction. One small feature
 concerning development is that TOC is auto generated.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_12.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_12.png"/>
     <figcaption>School wiki</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ in past admissions. GKP has collected over 2,000,000 data records
 between 2010 and 2014 and covering 3,000 schools.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_13.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_13.png"/>
     <figcaption>School historical cutoff scores</figcaption>
 </figure>
 
@@ -71,7 +71,7 @@ popular social media facilities and pull in live chat stream at
 gives students a rich information on how the campus life is like.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_14.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_14.png"/>
     <figcaption>School social media data stream</figcaption>
 </figure>
 
@@ -85,9 +85,9 @@ the higher priority the page has in term of  receiving the next update.
 <figure>
 <div class="row">
     <div class="col-md-6">
-    <img class="img-responsive center-block" src="images/gkp_15.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_15.png"/>
     </div><div class="col-md-6">
-    <img class="img-responsive center-block" src="images/gkp_16.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_16.png"/>
     </div>
 </div>
     <figcaption>Social media keyword cloud and news ticker</figcaption>
@@ -111,7 +111,7 @@ as scanning the barcode with her phone. It is another
 unique feature that makes acquiring school information as painless as possible.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_17.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_17.png"/>
     <figcaption>School Wechat channels</figcaption>
 </figure>
 

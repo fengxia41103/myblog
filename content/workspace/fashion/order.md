@@ -31,7 +31,7 @@ At this point, seller has fulfilled what the buyer is expecting, either by origi
 products or replacement or any other forms of settlement in between.
 
 <figure>
-    <img class="center-block" src="images/order life cycle.png">
+    <img class="center-block img-responsive" src="images/order life cycle.png">
     <figcaption>Order life cycle</figcaption>
 </figure>
 
@@ -61,9 +61,9 @@ create a sales order through traditional shopping cart method.
 <figure>
     <div class="row">
     <div class="col-md-6">
-    <img class="center-block" src="/images/fashion_7.png">
+    <img class="center-block img-responsive" src="/images/fashion_7.png">
     </div><div class="col-md-6">
-    <img class="center-block" src="/images/fashion_8.png">
+    <img class="center-block img-responsive" src="/images/fashion_8.png">
     </div></div>
     <figcaption>
         One can use a quick way or shopping cart to create a sales order
@@ -77,7 +77,7 @@ quantity and sum, the application offers a dropdown that user can
 easily view a broken-down detail by each vendor.
 
 <figure>
-    <img class="center-block" src="/images/fashion_9.png">
+    <img class="center-block img-responsive" src="/images/fashion_9.png">
 </figure>
 
 Order details are grouped by vendor also. Each vendor tab has details
@@ -85,7 +85,7 @@ of products on order. At the bottom of tab, the application computes
 a _total qty_ and _total value_ for that vendor.
 
 <figure>
-    <img class="center-block" src="/images/fashion_10.png">
+    <img class="center-block img-responsive" src="/images/fashion_10.png">
     <figcaption>Order detail tabs are a set of shopping basket, one per vendor</figcaption>
 </figure>
 
@@ -102,7 +102,7 @@ inaccurate because item can be received but then returned due to damage.
 > fulfill rate = count of fulfilled item / total number of items
 
 <figure>
-    <img class="center-block" src="/images/fashion_11.png">
+    <img class="center-block img-responsive" src="/images/fashion_11.png">
     <figcaption>Create an order fulfillment</figcaption>
 </figure>
 
@@ -120,7 +120,7 @@ value for a line time, and the addition of all received fulfillment will
 be the _actual_.
 
 <figure>
-    <img class="center-block" src="/images/fashion_12.png">
+    <img class="center-block img-responsive" src="/images/fashion_12.png">
     <figcaption>Fulfillment summary</figcaption>
 </figure>
 
@@ -146,7 +146,7 @@ to the approach where return is checked against inventory regardless
 how that product got into the inventory at the first place.
 
 <figure>
-    <img class="center-block" src="/images/fashion_16.png">
+    <img class="center-block img-responsive" src="/images/fashion_16.png">
     <figcaption>Return a product</figcaption>
 </figure>
 
@@ -160,7 +160,7 @@ from the current _account payable_ so buyer owes less now due to the return.
 ## Make a payment
 
 <figure>
-    <img class="center-block" src="/images/fashion_13.png">
+    <img class="center-block img-responsive" src="/images/fashion_13.png">
     <figcaption>Make a payment</figcaption>
 </figure>
 
@@ -170,7 +170,7 @@ Also, user can finalize a payment by _reviewing_ it. This in effect
 locks down the payment so it is not editable anymore.
 
 <figure>
-    <img class="center-block" src="/images/fashion_14.png">
+    <img class="center-block img-responsive" src="/images/fashion_14.png">
     <figcaption>Review a payment</figcaption>
 </figure>
 
@@ -194,7 +194,7 @@ These orders will then be tracked individually for fulfillment, payment
 and so forth.
 
 <figure>
-    <img class="center-block" src="/images/fashion_15.png">
+    <img class="center-block img-responsive" src="/images/fashion_15.png">
     <figcaption>Keep purchase orders in sync with sales order in drop shipping</figcaption>
 </figure>
 
@@ -236,7 +236,7 @@ She also runs a wholesale business in which purchase and sales have no such
 strong bound. Thus the application will leave the SO-PO reference optional.
 
 <figure>
-    <img class="center-block" src="/images/fashion_17.png">
+    <img class="center-block img-responsive" src="/images/fashion_17.png">
     <figcaption>Purchase order summary</figcaption>
 </figure>
 
@@ -256,7 +256,7 @@ we have add a dropdown list, _"Available In"_, so this information is captured:
 
 
 <figure>
-    <img class="center-block" src="/images/fashion_18.png">
+    <img class="center-block img-responsive" src="/images/fashion_18.png">
     <figcaption>Purchase order line item availability</figcaption>
 </figure>
 

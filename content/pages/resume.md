@@ -18,7 +18,7 @@ Summary: Feng Xia's resum&eacute;
         <i class="fa fa-linkedin-square"></i>
         LinkedIn
     </a>
-    <a href="/downloads/resume.pdf">
+    <a href="/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/resume.pdf">
         <i class="fa fa-file-pdf-o"></i>
         PDF
     </a>
@@ -167,11 +167,12 @@ Summary: Feng Xia's resum&eacute;
   system. Authored the company’s “_2016-17 Technology Roadmap_”.
 
     * <span class="myhighlight">Tools</span>: Python, ODOO, Buildbot
-    * <span class="myhighlight">PPT</span>: [2016-17 Technology Roadmap]({filename}/downloads/odoo roadmap.pdf) (in Chinese)
+    * <span class="myhighlight">PPT</span>: [2016-17 Technology Roadmap][1] (in Chinese)
 
 [http://fengxia.co:8003/wei/]: http://fengxia.co:8003/wei/
 [http://fengxia.co:8001/gaokao/]: http://fengxia.co:8001/gaokao/
 [http://fengxia.co:8002/jk/]: http://fengxia.co:8002/jk/
+[1]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/resume.pdf
 
 <div class="row my-resume-header" id="lean">
     <div class="text-left col-md-6 col-sm-3">

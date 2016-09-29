@@ -7,7 +7,7 @@ controller('CarLeasingController', ['$scope',
         var finance = new Finance();
 
         // constants
-        var security_refund_rate = 0.2;
+
         vm.example_msrp = 18881;
         vm.example_lease = 13270;
         vm.msrp = 25375;
@@ -29,6 +29,7 @@ controller('CarLeasingController', ['$scope',
         vm.documentation_fee = 550;
         vm.acquisition_fee = 995;
         vm.security_deposit = 0;
+        vm.security_refund_rate = 20;
         vm.monthly_lease_payment_before_tax = 0;
         vm.monthly_lease_payment_after_tax = 0;
         vm.msd = 0;
@@ -37,7 +38,7 @@ controller('CarLeasingController', ['$scope',
 
         // Prices and discounts
         vm.$watchGroup(['msrp', 'invoice', 'purchase', 'lease'],
-            function(newVal, oldVal) {
+            function() {
                 // Discounts from MSRP
                 vm.msrp_invoice_discount = (vm.msrp - vm.invoice) / vm.msrp * 100;
                 vm.msrp_purchase_discount = (vm.msrp - vm.purchase) / vm.msrp * 100;
@@ -46,18 +47,41 @@ controller('CarLeasingController', ['$scope',
                 // Discount from invoice
                 vm.invoice_purchase_discount = (vm.invoice - vm.purchase) / vm.invoice * 100;
                 vm.invoice_lease_discount = (vm.invoice - vm.lease) / vm.invoice * 100;
+
+                // Assumptions
+                vm.deal_term_assumptions = [{
+                    name: 'Invoice discount by MSRP',
+                    value: vm.msrp_invoice_discount,
+                    type: '%'
+                }, {
+                    name: 'Lease discount by MSRP',
+                    value: vm.msrp_lease_discount,
+                    type: '%'
+                }, {
+                    name: 'Lease discount by Invoice',
+                    value: vm.invoice_lease_discount,
+                    type: '%'
+                }];
             });
 
         // Official lease example
         vm.$watchGroup(['example_msrp', 'example_lease'],
-            function(newVal, oldVal) {
+            function() {
                 vm.residue = vm.example_lease / vm.example_msrp * 100;
                 vm.residue = parseFloat(vm.residue.toFixed(2));
+
+                // Assumptions
+                vm.official_example_assumptions = [{
+                    name: 'Residue percentage',
+                    value: vm.residue,
+                    type: '%'
+                }];
             });
 
         // Residue value
         vm.$watchGroup(['msrp', 'residue'],
-            function(newVal, oldVal) {
+            function() {
+                // Residue value is always computed from MSRP!
                 vm.residue_value = vm.msrp * vm.residue / 100;
             });
 
@@ -69,12 +93,20 @@ controller('CarLeasingController', ['$scope',
                 vm.actual_mf = vm.dealer_mf - vm.max_msd_discount;
                 vm.actual_apr = vm.actual_mf * 2400;
                 vm.msd_discount_apr = -1 * vm.max_msd_discount * 2400;
+
+                // Assumptions
+                vm.mf_assumptions = [{
+                    name: 'Effective APR',
+                    value: vm.actual_apr,
+                    type: '%'
+                }];
             });
 
         // Deal
         vm.$watchGroup(['lease', 'sales_tax', 'downpayment', 'rebates', 'credits'],
             function() {
                 vm.lease_after_tax = vm.lease * (1 + vm.sales_tax / 100);
+                vm.lease_sales_tax = vm.lease_after_tax - vm.lease;
                 vm.net_capital_cost = vm.lease_after_tax - vm.downpayment - vm.rebates - vm.credits;
             });
 
@@ -97,7 +129,11 @@ controller('CarLeasingController', ['$scope',
             function() {
                 vm.monthly_lease_payment_before_tax = vm.monthly_depreciation + vm.monthly_financing;
                 vm.monthly_lease_payment_after_tax = vm.monthly_lease_payment_before_tax * (1 + vm.monthly_tax / 100);
+
+                // Taxes
                 vm.monthly_tax_charge = vm.monthly_lease_payment_after_tax - vm.monthly_lease_payment_before_tax;
+                vm.total_payment_tax = vm.monthly_tax_charge * vm.term;
+                vm.total_tax = vm.total_payment_tax + vm.lease_sales_tax;
 
                 // MSD is rounded to the nearest 50
                 vm.msd = Math.ceil(vm.monthly_lease_payment_after_tax / 50) * 50;
@@ -112,9 +148,32 @@ controller('CarLeasingController', ['$scope',
                 }, {
                     name: 'financing cost',
                     y: vm.monthly_financing
-                },{
+                }, {
                     name: 'tax',
                     y: vm.monthly_tax_charge
+                }];
+
+                // Assumptions
+                vm.monthly_assumptions = [{
+                    name: 'MSD',
+                    value: vm.msd,
+                    type: '$'
+                }, {
+                    name: 'Total selected MSD',
+                    value: vm.total_msd,
+                    type: '$'
+                }, {
+                    name: 'Total tax from payments',
+                    value: vm.total_payment_tax,
+                    type: '$'
+                }, {
+                    name: 'Total sales tax',
+                    value: vm.lease_sales_tax,
+                    type: '$'
+                }, {
+                    name: 'Total tax',
+                    value: vm.total_tax,
+                    type: '$'
                 }];
             });
 
@@ -126,55 +185,122 @@ controller('CarLeasingController', ['$scope',
                 vm.upfront_bank = vm.acquisition_fee;
                 vm.upfront_forme = vm.downpayment + vm.monthly_lease_payment_after_tax + vm.total_msd;
                 vm.upfront_cost = vm.upfront_gov + vm.upfront_dealer + vm.upfront_bank + vm.upfront_forme;
+
+                // Assumptions
+                vm.upfront_cost_assumptions = [{
+                    name: 'Walk off cost',
+                    value: vm.upfront_cost
+                }, {
+                    name: 'Government administration fees',
+                    value: vm.upfront_gov,
+                    type: '$'
+                }, {
+                    name: 'Dealer fees',
+                    value: vm.upfront_dealer,
+                    type: '$'
+                }, {
+                    name: 'Bank fees',
+                    value: vm.upfront_bank,
+                    type: '$'
+                }, {
+                    name: 'Used to payoff the deal',
+                    value: vm.upfront_forme,
+                    type: '$'
+                }];
+            });
+
+        // Security deposit
+        vm.$watchGroup(['security_refund_rate', 'security_deposit'],
+            function() {
+                vm.security_refund = vm.security_refund_rate / 100 * vm.security_deposit;
             });
 
         // Lease end cost
-        vm.$watchGroup(['disposition_fee', 'wear_charge', 'total_msd'],
-            function(){
-                console.log(vm.total_msd);
+        vm.$watchGroup(['disposition_fee', 'wear_charge', 'total_msd', 'security_refund', 'monthly_lease_payment_after_tax'],
+            function() {
                 vm.lease_end_charges = vm.disposition_fee + vm.wear_charge;
-                vm.lease_end_refund = vm.total_msd + security_refund_rate * vm.security_deposit;
-                vm.lease_end_cost = vm.lease_end_charges - vm.lease_end_refund;
+                vm.lease_end_refund = vm.total_msd + vm.security_refund;
+                vm.lease_end_cost = vm.lease_end_charges - vm.lease_end_refund + vm.monthly_lease_payment_after_tax;
             });
 
         // Cost of ownership
-        vm.$watchGroup(['upfront_cost','lease_end_cost'],
-            function(){
-                vm.cost_of_ownership = vm.upfront_cost + vm.lease_end_cost + vm.total_lease_payment_after_tax - vm.monthly_lease_payment_after_tax;
+        vm.$watchGroup(['upfront_cost', 'lease_end_cost'],
+            function() {
+                vm.cost_of_ownership = vm.upfront_cost + vm.lease_end_cost + (vm.term - 2) * vm.monthly_lease_payment_after_tax;
+
+                // cost of ownership breakdown
+                vm.cost_of_ownership_chart = [{
+                    name: 'Walk off cost',
+                    y: vm.upfront_cost - vm.monthly_lease_payment_after_tax
+                }, {
+                    name: 'Lease payments',
+                    y: vm.total_lease_payment_after_tax
+                }, {
+                    name: 'Lease end cost',
+                    y: vm.lease_end_cost - vm.monthly_lease_payment_after_tax
+                }];
             });
+
 
         // dealer
+        vm.dealer_cogs = 20000;
         vm.dealer_cost_of_capital = 1.5;
         vm.dealer_resale_markup = 25;
-        vm.dealer_discount = 14;
-        vm.deale_front_cost = 0;
+        vm.dealer_ownership_resale = 100;
 
-        vm.$watchGroup(['residue_value', 'dealer_resale_markup'],
+        vm.$watchGroup(['residue_value', 'dealer_resale_markup', 'dealer_ownership_resale'],
             function() {
                 vm.resale_price = vm.residue_value * (1 + vm.dealer_resale_markup / 100);
+                vm.dealer_resale_value = vm.resale_price * vm.dealer_ownership_resale /100;
             });
 
-        vm.$watchGroup(['upfront_cost', 'invoice', 'dealer_discount'],
+        vm.$watchGroup(['dealer_cogs', 'msrp', 'invoice', 'resale_price'],
+            function(){
+                vm.dealer_cogs_msrp_discount = (vm.msrp - vm.dealer_cogs)/vm.msrp*100;
+                vm.dealer_cogs_invoice_discount = (vm.invoice - vm.dealer_cogs)/vm.invoice*100;
+
+                // Assumptions
+                vm.dealer_assumptions = [{
+                    name: 'Resale price',
+                    value: vm.resale_price,
+                    type: '$'
+                },{
+                    name: "Dealer's COGS discount by Invoice",
+                    value: vm.dealer_cogs_invoice_discount,
+                    type: '%'
+                },{
+                    name: "Dealer's' COGS discount by MSRP",
+                    value: vm.dealer_cogs_msrp_discount,
+                    type: '%'                }];
+            });
+
+        vm.$watchGroup(['upfront_cost', 'dealer_cogs', 'lease_sales_tax'],
             function() {
-                vm.dealer_initial_investment = vm.upfront_cost - vm.invoice * (100 - vm.dealer_discount) / 100;
+                vm.dealer_initial_investment = vm.upfront_cost - vm.dealer_cogs - vm.lease_sales_tax - vm.upfront_gov - vm.upfront_bank - vm.monthly_tax_charge;
             });
 
-        vm.$watchGroup(['lease_end_cost', 'resale_price'],
+        vm.$watchGroup(['lease_end_cost', 'dealer_resale_value'],
             function() {
-                vm.dealer_terminal_value = vm.lease_end_cost + vm.resale_price;
+                vm.dealer_terminal_value = vm.lease_end_cost + vm.dealer_resale_value - vm.monthly_tax_charge;
             });
 
-        vm.$watchGroup(['dealer_initial_investment', 'dealer_terminal_value', 'term', 'monthly_lease_payment_after_tax'],
+        vm.$watchGroup(['dealer_initial_investment', 'dealer_terminal_value', 'dealer_cost_of_capital'],
             function() {
                 // Compute IRR
                 var a = new Array();
                 a.push(vm.dealer_initial_investment);
                 for (i = 0; i < vm.term - 2; i++) {
-                    a.push(vm.monthly_lease_payment_after_tax);
+                    a.push(vm.monthly_lease_payment_before_tax);
                 }
-                a.push(vm.dealer_terminal_value + vm.monthly_lease_payment_after_tax);
+                a.push(vm.dealer_terminal_value);
                 vm.dealer_cash_flow = a;
-                vm.dealer_irr = finance.IRR.apply(this, a);
+                if (vm.dealer_initial_investment < 0){
+                    // IRR is only valid when there is a negative initial investment
+                    vm.dealer_irr = finance.IRR.apply(this, a);
+                }else{
+                    // Set to undefined
+                    vm.dealer_irr = (function () { return; })();
+                }
 
                 // Compute NPV
                 var b = a.slice();
@@ -187,9 +313,20 @@ controller('CarLeasingController', ['$scope',
     bindings: {
         label: '@',
         model: '=',
-        type: '@'
+        type: '@',
+        max: '@',
+        min: '@',
+        step: '@'
     },
-    templateUrl: '/app/car-leasing/form_input.hh'
+    templateUrl: '/app/car-leasing/form_input.hh',
+    controller: function(){
+        // Decimal points
+        if (this.min) {
+            this.min = parseInt(this.min);
+        } else {
+            this.min = 0;
+        }
+    }
 }).component('formheader', {
     bindings: {
         title: '@'
@@ -212,18 +349,24 @@ controller('CarLeasingController', ['$scope',
             this.decimal_place = 2;
         }
     }
-}).component('assumption', {
+}).component('assumptions', {
+    bindings: {
+        id: '@',
+        values: '<'
+    },
+    templateUrl: '/app/car-leasing/assumption.hh',
+}).component('summary', {
     bindings: {
         label: '@',
         model: '<',
         precision: '@',
         type: '@'
     },
-    templateUrl: '/app/car-leasing/assumption_line_item.hh',
+    templateUrl: '/app/car-leasing/summary_line_item.hh',
     controller: function() {
         // Decimal points
         var p = parseInt(this.precision);
-        if (p > 0) {
+        if (p >= 0) {
             this.decimal_place = p;
         } else {
             this.decimal_place = 2;
@@ -231,6 +374,7 @@ controller('CarLeasingController', ['$scope',
     }
 }).component('piechart', {
     bindings: {
+        id: '@',
         title: '@',
         data: '<',
         style: '@',
@@ -238,54 +382,54 @@ controller('CarLeasingController', ['$scope',
     },
     templateUrl: '/app/car-leasing/piechart.hh',
     controller: function() {
-        var previousValue;
+            var previousValue;
 
-        this.$doCheck = function() {
-            var currentValue = this.data && this.data.valueOf();
-            if (previousValue !== currentValue) {
-                previousValue = currentValue;
+            this.$doCheck = function() {
+                    var currentValue = this.data && this.data.valueOf();
+                    if (previousValue !== currentValue) {
+                        previousValue = currentValue;
 
-                Highcharts.chart('pie', {
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: 0,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: this.title,
-                        align: 'center',
-                        verticalAlign: 'top',
-                        y: 40
-                    },
-                     tooltip: {
-                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                     },
-                     plotOptions: {
-                         pie: {
-                             dataLabels: {
-                                 enabled: true,
-                                 distance: -50,
-                                 format: '<b>{point.percentage:.2f}%</b>',
-                                 style: {
-                                     fontWeight: 'bold',
-                                     color: 'white',
-                                     textShadow: '0px 1px 2px black'
-                                 }
-                             },
-                             startAngle: -90,
-                             endAngle: 90,
-                             center: ['50%', '75%'],
-                             showInLegend: true
-                         }
-                     },
-                     series: [{
-                         type: 'pie',
-                         name: this.title,
-                         innerSize: '50%',
-                         data: this.data
-                     }]
-                 }); // end of highcharts
-             } // end of if
-         } // end of doCheck
-    } // end of controller
+                        Highcharts.chart(this.id, {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: 0,
+                                plotShadow: false
+                            },
+                            title: {
+                                text: this.title,
+                                align: 'center',
+                                verticalAlign: 'top',
+                                y: 40
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        distance: -50,
+                                        format: '<b>{point.percentage:.2f}%</b>',
+                                        style: {
+                                            fontWeight: 'bold',
+                                            color: 'white',
+                                            textShadow: '0px 1px 2px black'
+                                        }
+                                    },
+                                    startAngle: -90,
+                                    endAngle: 90,
+                                    center: ['50%', '75%'],
+                                    showInLegend: true
+                                }
+                            },
+                            series: [{
+                                type: 'pie',
+                                name: this.title,
+                                innerSize: '50%',
+                                data: this.data
+                            }]
+                        }); // end of highcharts
+                    } // end of if
+                } // end of doCheck
+        } // end of controller
 });

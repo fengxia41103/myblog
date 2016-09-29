@@ -1,6 +1,6 @@
 Title: Car leasing calculator
 Date: 2016-09-25 13:00
-lug: car leasing
+slug: car leasing
 Author: Feng Xia
 Summary: Car leasing calculator is a tool
     for car buyer to evaluate different offers. Car leasing, IMHO, is
@@ -37,13 +37,16 @@ Summary: Car leasing calculator is a tool
     </div>
 
     <formheader title="Official leasing sample"></formheader>
+    <section>
     <assumptions id="official-example" values="official_example_assumptions"></assumptions>
     <fieldset class="my-multicol-2">
         <myinput label="Example MSRP" model="example_msrp" type="$" step="1000"></myinput>
         <myinput label="Example lease price" model="example_lease" type="$" max="[[example_msrp]]" step="1000"></myinput>
     </fieldset>
+    </section>
 
     <formheader title="Deal terms"></formheader>
+    <section>
     <assumptions id="deal-term" values="deal_term_assumptions"></assumptions>
     <fieldset class="my-multicol-2">
         <myinput label="MSRP" model="msrp" type="$"></myinput>
@@ -54,10 +57,11 @@ Summary: Car leasing calculator is a tool
         <myinput label="NC HUT" model="monthly_tax" type="%"></myinput>
         <myinput label="Sales tax" model="sales_tax" type="%"></myinput>
     </fieldset>
-
+    </section>
 
     <!-- Deductions -->
     <formheader title="Deductions"></formheader>
+    <section>
     <assumptions id="deduction" values="mf_assumptions"></assumptions>
     <fieldset class="my-multicol-2">
         <myinput label="Credits" model="credits" type="$"></myinput>
@@ -67,21 +71,22 @@ Summary: Car leasing calculator is a tool
         <myinput label="MSD selected" model="msd_selected"></myinput>
         <myvalue label="Equivalent APR discount" model="msd_discount_apr" precision="2" type="%"></myvalue>
     </fieldset>
-
+    </section>
 
     <!-- Depreciation -->
     <formheader title="Monthly costs"></formheader>
+    <section>
     <assumptions id="monthly-costs" values="monthly_assumptions"></assumptions>
-
     <fieldset class="my-multicol-2">
         <myvalue label="Depreciation cost" model="monthly_depreciation" type="$"></myvalue>
         <myvalue label="Financing cost" model="monthly_financing" type="$"></myvalue>
         <myvalue label="Monthly tax" model="monthly_tax" type="$"></myvalue>
         <myvalue label="Monthly payment w/ tax" model="monthly_lease_payment_after_tax" type="$"></myvalue>
     </fieldset>
-
+    </section>
 
     <formheader title="Due at signing"></formheader>
+    <section>
     <assumptions id="upfront-costs" values="upfront_cost_assumptions"></assumptions>
 
     <fieldset class="my-multicol-2">
@@ -93,9 +98,10 @@ Summary: Car leasing calculator is a tool
         <myinput label="Acquisition fee" model="acquisition_fee" type="$"></myinput>
         <myinput label="Security deposit" model="security_deposit" type="$"></myinput>
     </fieldset>
-
+    </section>
 
     <formheader title="Due at lease end"></formheader>
+    <section>
     <fieldset class="my-multicol-2">
         <myinput label="Disposition fee" model="disposition_fee" type="$"></myinput>
         <myinput label="Wear & tear charge" model="wear_charge" type="$"></myinput>
@@ -103,8 +109,10 @@ Summary: Car leasing calculator is a tool
         <myvalue label="Security refund" model="security_refund" type="$"></myvalue>
         <myvalue label="MSD refund" model="total_msd" type="$"></myvalue>
     </fieldset>
+    </section>
 
     <formheader title="Dealer's book"></formheader>
+    <section>
     <assumptions id="dealer" values="dealer_assumptions"></assumptions>
     <fieldset class="my-multicol-2">
         <myinput label="COGS" model="dealer_cogs" min="[[residue_value]] step="100" type="$"></myinput>
@@ -114,6 +122,7 @@ Summary: Car leasing calculator is a tool
         <myvalue label="NPV" model="dealer_npv" type="$"></myvalue>
         <myvalue label="IRR" model="dealer_irr" type="%"></myvalue>
     </fieldset>
+    </section>
 </div>
 
 <script type="text/javascript">
@@ -123,7 +132,7 @@ Summary: Car leasing calculator is a tool
     j$(document).ready(function() {
         // toggle resume exp content by clicking on its header
         j$('formheader').click(function() {
-            j$(this).next('fieldset').toggle("slide", {
+            j$(this).next('section').toggle("slide", {
                 direction: "right"
             }, 1000);
 

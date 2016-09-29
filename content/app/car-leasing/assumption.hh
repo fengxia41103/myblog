@@ -1,5 +1,6 @@
 <div type="button" class="dropdown btn btn-link myhighlight" style="margin-bottom: 1em;">
     <span class="dropdown-toggle" id="$ctrl.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="fa fa-flag"></i>
         Assumptions
         <span class="caret"></span>
     </span>

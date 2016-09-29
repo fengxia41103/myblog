@@ -60,7 +60,7 @@ your hand with demo.
 3. [majors][5]
 
 [1]: {filename}/workspace/gkp/introduction.md
-[2]: http://fengxia.co:8001/gkp/
+[2]: http://fengxia.co:8001/gaokao/
 [3]: http://www.gaokaopi.com/
 [4]: {filename}/workspace/gkp/schools.md
 [5]: {filename}/workspace/gkp/majors.md

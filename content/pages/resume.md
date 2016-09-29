@@ -33,7 +33,7 @@ Summary: Feng Xia's resum&eacute;
   <tr><td>
       <strong>Software development</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-5">
+<ul class="list-unstyled my-multicol-3">
     <li>Python</li>
     <li>Django</li>
     <li>Bootstrap</li>
@@ -56,7 +56,7 @@ Summary: Feng Xia's resum&eacute;
   <tr><td>
     <strong>QA</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-5">
+<ul class="list-unstyled my-multicol-3">
     <li>Selenium</li>
     <li>HP LoadRunner</li>
     <li>SonarQube</li>
@@ -69,7 +69,7 @@ Summary: Feng Xia's resum&eacute;
   <tr><td>
     <strong>System deployment</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-5">
+<ul class="list-unstyled my-multicol-3">
     <li>Amazon EC2,RDS,S3</li>
     <li>uWSGI</li>
     <li>Nginx</li>
@@ -82,7 +82,7 @@ Summary: Feng Xia's resum&eacute;
   <tr><td>
     <strong>System monitoring</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-5">
+<ul class="list-unstyled my-multicol-3">
     <li>InfluxDB</li>
     <li>Grafana</li>
     <li>Cacti</li>
@@ -93,7 +93,7 @@ Summary: Feng Xia's resum&eacute;
   <tr><td>
     <strong>System administration</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-5">
+<ul class="list-unstyled my-multicol-3">
     <li>Salesforce</li>
     <li>AWS</li>
     <li>Ubuntu Linux</li>
@@ -103,7 +103,7 @@ Summary: Feng Xia's resum&eacute;
   <tr><td>
     <strong>Administrative tasks</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-5">
+<ul class="list-unstyled my-multicol-3">
     <li>LaTex</li>
     <li>Word</li>
     <li>Powerpoint</li>

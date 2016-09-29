@@ -49,33 +49,33 @@ h6 {
 }
 
 .my-multicol-2 {
-    -moz-columns: 2 480px;
-    -webkit-columns: 2 480px;
-    columns: 2 480px;
+    -moz-columns: 2;
+    -webkit-columns: 2;
+    columns: 2;
 }
 
 .my-multicol-3 {
-    -moz-columns: 3 320px;
-    -webkit-columns: 3 320px;
-    columns: 3 320px;
+    -moz-columns: 3;
+    -webkit-columns: 3;
+    columns: 3;
 }
 
 .my-multicol-4 {
-    -moz-columns: 4 240px;
-    -webkit-columns: 4 240px;
-    columns: 4 240px;
+    -moz-columns: 4;
+    -webkit-columns: 4;
+    columns: 4;
 }
 
 .my-multicol-5 {
-    -moz-columns: 5 192px;
-    -webkit-columns: 5 192px;
-    columns: 5 192px;
+    -moz-columns: 5;
+    -webkit-columns: 5;
+    columns: 5;
 }
 
 .my-multicol-6 {
-    -moz-columns: 6 160px;
-    -webkit-columns: 6 160px;
-    columns: 6 160px;
+    -moz-columns: 6;
+    -webkit-columns: 6;
+    columns: 6;
 }
 
 .flabel {
@@ -99,7 +99,7 @@ h6 {
 }
 
 .flabel:hover {
-    border: 1px solid red;
+    border: 1px solid #d52349;
 }
 
 .glyphicon-remove:hover,
@@ -377,10 +377,6 @@ resume li:last-child {
     margin-bottom: 1em;
 }
 
-.my-multicol-5 li {
-    border-bottom: 1px solid #ececec;
-    margin-bottom: 0;
-}
 
 img {
     margin-bottom: 1em;

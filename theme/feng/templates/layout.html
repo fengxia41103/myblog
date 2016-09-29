@@ -43,9 +43,6 @@
 	    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
 	    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
 
-	    {# mozilla pdf.js #}
-	    <link rel="stylesheet" href="/theme/bower_components/pdf.js-viewer/viewer.css">
-
         {# my own #}
 	    <link rel="stylesheet" type="text/css" href="/theme/css/my.css">
 
@@ -55,12 +52,16 @@
 	    {# JQuery lib #}
 	    <script type="text/javascript" src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
 
+        {# angularJS #}
+        <script type="text/javascript"
+                src="/theme/bower_components/angular/angular.min.js">
+        </script>
 
         {% endblock %}
 
-
         {# page title #}
         {% block title %}
+        <title>PY Consulting</title>
         {% endblock %}
     </head>
 
@@ -238,6 +239,15 @@
                 src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
         </script>
 
+        {# financejs #}
+        <script type="text/javascript"
+                src="/theme/bower_components/financejs/finance.js">
+        </script>
+
+        {# Highcharts #}
+        <script type="text/javascript"
+                src="/theme/bower_components/highcharts/highcharts.js">
+        </script>
 
         {# application js #}
 	    <script type="text/javascript">

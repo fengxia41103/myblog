@@ -62,53 +62,10 @@ to set up a working directory:
 The key is the `layout.html` which is the root template of all others (shown below).
 
 <pre class="brush:xml;">
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-	    <meta name="apple-mobile-web-app-capable" content="yes" />
-	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-	    {# http://hammerjs.github.io/getting-started/ #}
-	    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-
-        <meta name="description" content="">
-        <meta name="author" content="{{AUTHOR}}">
-
-        {% block core_library %}
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <!-- script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script -->
-        <!-- script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script -->
-        <script src="/theme/js/html5shiv.min.js"></script>
-        <script src="/theme/js/respond.min.js"></script>
-        <![endif]-->
-
-
-	    {# Fontawesome #}
-	    <link rel="stylesheet" type="text/css" href="/theme/js/font-awesome/css/font-awesome.min.css">
-
-	    {# DataTable #}
-	    <link rel="stylesheet" type="text/css" href="/theme/js/datatables/media/css/dataTables.bootstrap.min.css">
-
-        {# lightbox #}
-	    <link rel="stylesheet" type="text/css" href="/theme/js/lightbox2/dist/css/lightbox.min.css">
-
-        {# Bootstrap #}
-	    <link rel="stylesheet" href="/theme/js/bootstrap/dist/css/bootstrap.min.css">
-
-        {# Syntaxhighlighter #}
-	    <link rel="stylesheet" href="/theme/js/SyntaxHighlighter/styles/shCoreDefault.css">
-	    <link rel="stylesheet" href="/theme/js/SyntaxHighlighter/styles/shThemeDefault.css">
-
-        {# my own #}
-	    <link rel="stylesheet" type="text/css" href="/theme/css/my.css">
-
-        {# google fonts #}
-        <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko" rel="stylesheet">
-
-	    {# JQuery lib #}
-	    <script type="text/javascript" src="/theme/js/jquery/dist/jquery.min.js"></script>
+        {% block css %}
         {% endblock %}
 
 
@@ -135,6 +92,7 @@ The key is the `layout.html` which is the root template of all others (shown bel
                             <li>
                                 <a class="label label-default" href="{{SITEURL}}/">Home</a>
                             </li>
+
 				            {% for p in PAGES %}
 				            <li>
                                 <a class="label label-default" href="{{SITEURL}}/{{ p.url }}">
@@ -147,11 +105,10 @@ The key is the `layout.html` which is the root template of all others (shown bel
 		        </div><!-- end of block header -->
             </div>
 
-            {# introduction #}
             {% block introduction %}
             {% endblock %}
 
-	        <div class="container center-block">
+	        <div class="container center-block" id="content">
                 {# main content #}
 		        {% block content %}
 		        {% endblock %}
@@ -167,14 +124,18 @@ The key is the `layout.html` which is the root template of all others (shown bel
 
         {% block footer %}
         <footer>
+            {# block of related contents #}
+            {% block related %}
+            {% endblock %}
+
             <div class="row">
 	            <div class="col-md-offset-1 col-md-10">
                     <h3>Categories:</h3>
                     <ul class="list-inline">
                         {% for c,article in categories %}
-                        <li>
+                        <li style="margin-top:0.7em;">
                             <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
-                                <i class="fa fa-at"></i>
+                                <i class="fa fa-folder-open-o"></i>
                                 {{ c }}
                             </a>
                         </li>
@@ -183,56 +144,60 @@ The key is the `layout.html` which is the root template of all others (shown bel
                     <h3>Tags:</h3>
                     <ul class="list-inline">
                         {% for c,article in tags %}
-                        <li>
-                            <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
+                        <li style="margin-top:0.7em;">
+                            <a href="{{SITEURL}}/{{c.url}}" class="btn mytag">
                                 <i class="fa fa-tag"></i>
                                 {{ c }}
                             </a>
                         </li>
                         {% endfor %}
                     </ul>
+
                 </div>
            </div>
-        </footer>
+
+
+            <div class="row" style="text-align:center; margin-top:5em;">
+                <h4>
+                    2016 PY Consulting Ltd.
+                    1236 Beacon Street, Brookline, MA 021461
+                </h4>
+
+                <ul class="list-inline">
+                    <li>
+                        <a href="mailto:{{EMAIL_ADDRESS}}">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{GITHUB_ADDRESS}}">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{LINKEDIN_ADDRESS}}">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-phone-square"></i>
+                            (508)801-1794
+                        </a>
+                    </li>
+
+                </ul>
+                <p>
+                    <i class="fa fa-copyright" ></i>All rights reserved.
+                </p>
+            </div>
+            </footer>
         {% endblock %}<!- end of block footer -->
 
 
         <!-- Placed at the end of the document so the pages load faster -->
         {% block Javascripts %}
-	    <!-- Bootstrap -->
-	    <script
-            src="/theme/js/bootstrap/dist/js/bootstrap.min.js">
-        </script>
-
-	    {# DataTable #}
-        <script type="text/javascript"
-                src="/theme/js/datatables/media/js/jquery.dataTables.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/js/datatables/media/js/dataTables.bootstrap.min.js">
-        </script>
-
-	    {# lightbox: http://ashleydw.github.io/lightbox/ #}
-        <script type="text/javascript"
-                src="/theme/js/lightbox2/dist/js/lightbox.min.js">
-        </script>
-
-        {# Syntaxhighlighter #}
-        <script type="text/javascript"
-                src="/theme/js/SyntaxHighlighter/scripts/XRegExp.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/js/SyntaxHighlighter/scripts/shCore.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/js/SyntaxHighlighter/scripts/shBrushPython.js">
-        </script>
-
-	    {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
-        <script type="text/javascript"
-                src="/theme/js/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
-        </script>
-
 
         {# application js #}
 	    <script type="text/javascript">
@@ -240,17 +205,6 @@ The key is the `layout.html` which is the root template of all others (shown bel
 
 
 		 j$(document).ready(function(){
-			 // common global widget initializations
-			 var table = j$('table.my-datatable').dataTable({
-				 paging: false,
-				 info:false,
-				 "pagingType": "simple"
-			 });
-
-
-             // syntaxhighlighter
-             SyntaxHighlighter.defaults['toolbar'] = false;
-             SyntaxHighlighter.all();
 		 });
 	    </script>
         {% endblock %} <!-- end of block JS -->
@@ -262,6 +216,7 @@ The key is the `layout.html` which is the root template of all others (shown bel
         {% endblock %}
     </body>
 
+</html>
 </pre>
 
 Once this is set up, creating an individual page is simple. Just replace

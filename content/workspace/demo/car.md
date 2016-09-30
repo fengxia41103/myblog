@@ -43,7 +43,7 @@ First of all, let's turn those maths into diagram:
     </figcaption>
 </figure>
 
-Now it's obvious, two numbers are the key:
+Now it's obvious, two numbers are the key because they determine monthly payment:
 
 1. Financing cost: How much you are borrowing from bank? This is determined
 by how much you can negotiate down the price, how much deduction you can get, eg.
@@ -78,8 +78,83 @@ make sure to use this tool to figure out what the residue rate
 the dealer's offer is implying. If it's too far off from the
 official flyer number, walk away!
 
-
 [1]: {filename}/workspace/angular/car.md
+
+### Math
+
+This is an example by [Edmunds][]. See if you can follow the math
+now after reading the diagram above. Now by looking at this,
+I'm wondering maybe I should have built using this format. It is
+more form-like than a SPA so this can be easier for user to follow:
+
+<table class="table table-responsive">
+  <tbody><tr>
+    <td>1. Sticker Price of the car + options</td>
+    <td>$23,000</td>
+  </tr>
+  <tr>
+    <td>2. Times the residual value percentage</td>
+    <td>X 57%</td>
+  </tr>
+  <tr>
+    <td>3. Equals the residual value</td>
+    <td>= $13,110</td>
+  </tr>
+  <tr>
+    <td>4. Invoice price of car minus incentives (net capitalized cost) </td>
+    <td>$20,000</td>
+  </tr>
+  <tr>
+    <td>5. Minus the residual (from line 3)</td>
+    <td>- $13,110</td>
+  </tr>
+  <tr>
+    <td>6. Equals the depreciation over 36 months</td>
+    <td>= $6,890</td>
+  </tr>
+  <tr>
+    <td>7. Depreciation (line 6) divided by term in months</td>
+    <td>÷ 36</td>
+  </tr>
+  <tr>
+    <td>8. Equals the monthly depreciation payment</td>
+    <td>= $191</td>
+  </tr>
+  <tr>
+    <td>9. Net capitalized cost (From line 4)</td>
+    <td>$20,000</td>
+  </tr>
+  <tr>
+    <td>10. Plus the residual (From line 3)</td>
+    <td>+ $13,110</td>
+  </tr>
+  <tr>
+    <td>11. Equals</td>
+    <td>= $33,110</td>
+  </tr>
+  <tr>
+    <td>12. Times the money factor</td>
+    <td>X 0.00125 (3 percent)</td>
+  </tr>
+  <tr>
+    <td>13. Equals money factor (interest) payment portion</td>
+    <td>= $41</td>
+  </tr>
+  <tr>
+    <td>14. Monthly depreciation payment (from line 8)</td>
+    <td>$191</td>
+  </tr>
+  <tr>
+    <td>15. Plus money factor payment portion (from line 12)</td>
+    <td>+ $41</td>
+  </tr>
+  <tr>
+    <td>16. Equals bottom-line monthly lease payment</td>
+    <td>= $232</td>
+  </tr>
+</tbody></table>
+
+[edmunds]: http://www.edmunds.com/car-leasing/calculate-your-own-lease-payment.html
 
 ## AngularJS
 

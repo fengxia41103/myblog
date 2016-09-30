@@ -1,15 +1,10 @@
 Title: Car leasing calculator
 Date: 2016-09-25 13:00
-slug: car leasing
+Slug: car leasing calculator
+Category: Angular
+Tag: Angular
 Author: Feng Xia
-Summary: Car leasing calculator is a tool
-    for car buyer to evaluate different offers. Car leasing, IMHO, is
-    built with whoops and traps that seller has _intentionally_ put there
-    in order to take advantage of buyers. These maths are not advanced,
-    but complex enough to intimidate buyers to the point that they will
-    take whatever is handed down by the dealer just to avoid the
-    stress. It doesn't need to be that way. This tool is to lift the hood
-    and show you how every pieces are connected.
+Status: draft
 
 <script type="text/javascript" src="/app/app.module.js">
 </script>
@@ -26,7 +21,7 @@ Summary: Car leasing calculator is a tool
             <summary label="Term" model="term" type="month" precision="0"></summary>
         </div><div class="col-md-6">
             <summary label="Cost of ownership" model="cost_of_ownership" type="$"></summary>
-            <summary label="First payment" model="upfront_cost" type="$"></summary>
+            <summary label="Drive off cost" model="upfront_cost" type="$"></summary>
             <summary label="Last payment/refund" model="lease_end_cost" type="$"></summary>
         </div>
     </div>
@@ -128,8 +123,9 @@ Summary: Car leasing calculator is a tool
 <script type="text/javascript">
     var j$ = jQuery.noConflict();
 
-
     j$(document).ready(function() {
+        j$('section').hide();
+
         // toggle resume exp content by clicking on its header
         j$('formheader').click(function() {
             j$(this).next('section').toggle("slide", {

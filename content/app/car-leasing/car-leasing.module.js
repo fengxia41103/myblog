@@ -143,13 +143,13 @@ controller('CarLeasingController', ['$scope',
 
                 // monthly payment breakdown
                 vm.monthly_payments_chart = [{
-                    name: 'depreciation cost',
+                    name: 'Depreciation cost',
                     y: vm.monthly_depreciation
                 }, {
-                    name: 'financing cost',
+                    name: 'Financing cost',
                     y: vm.monthly_financing
                 }, {
-                    name: 'tax',
+                    name: 'Tax',
                     y: vm.monthly_tax_charge
                 }];
 
@@ -399,26 +399,20 @@ controller('CarLeasingController', ['$scope',
                                 text: this.title,
                                 align: 'center',
                                 verticalAlign: 'top',
-                                y: 40
+                                y: 25
                             },
                             tooltip: {
-                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
                             },
                             plotOptions: {
                                 pie: {
                                     dataLabels: {
                                         enabled: true,
-                                        distance: -50,
-                                        format: '<b>{point.percentage:.2f}%</b>',
-                                        style: {
-                                            fontWeight: 'bold',
-                                            color: 'white',
-                                            textShadow: '0px 1px 2px black'
-                                        }
+                                        format: '<b>{point.percentage:.0f}%</b>'
                                     },
                                     startAngle: -90,
                                     endAngle: 90,
-                                    center: ['50%', '75%'],
+                                    center: ['50%', '85%'],
                                     showInLegend: true
                                 }
                             },

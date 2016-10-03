@@ -36,7 +36,7 @@ Status: draft
     <assumptions id="official-example" values="official_example_assumptions"></assumptions>
     <fieldset class="my-multicol-2">
         <myinput label="Example MSRP" model="example_msrp" type="$" step="1000"></myinput>
-        <myinput label="Example lease price" model="example_lease" type="$" max="[[example_msrp]]" step="1000"></myinput>
+        <myinput label="Example residue" model="example_residue" type="$" max="[[example_msrp]]" step="1000"></myinput>
     </fieldset>
     </section>
 

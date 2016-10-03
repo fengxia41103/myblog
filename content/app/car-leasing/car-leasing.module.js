@@ -9,7 +9,7 @@ controller('CarLeasingController', ['$scope',
         // constants
 
         vm.example_msrp = 18881;
-        vm.example_lease = 13270;
+        vm.example_residue = 13270;
         vm.msrp = 25375;
         vm.invoice = 24440;
         vm.purchase = 23000;
@@ -65,9 +65,9 @@ controller('CarLeasingController', ['$scope',
             });
 
         // Official lease example
-        vm.$watchGroup(['example_msrp', 'example_lease'],
+        vm.$watchGroup(['example_msrp', 'example_residue'],
             function() {
-                vm.residue = vm.example_lease / vm.example_msrp * 100;
+                vm.residue = vm.example_residue / vm.example_msrp * 100;
                 vm.residue = parseFloat(vm.residue.toFixed(2));
 
                 // Assumptions

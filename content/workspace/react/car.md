@@ -12,36 +12,48 @@ Author: Feng Xia
 var Summary = React.createClass({
     render: function(){
         var divStyle = {
-            backgroundColor: '#337ab7',
-            padding: '0em 1em 1em 1em',
-            color: '#efefef',
-            marginBottom:'1em'
+            backgroundColor: "#337ab7",
+            padding: "0em 1em 1em 1em",
+            color: "#efefef",
+            marginBottom:"1em"
         };
 
         var summaryNodes = this.props.data.map(function(summary) {
           return (
-            <SummaryList label={summary.label} value={summary.value} />
+            <SummaryValueDisplay {...summary} />
           );
         });
 
         return (
             <div className="row" style={divStyle}>
                 <h4 className="page-header">Summary</h4>
-                {summaryNodes}
+                <div className="my-multicol-2">
+                    {summaryNodes}
+                </div>
            </div>
         );
     }
 });
 
-var SummaryList = React.createClass({
+var SummaryValueDisplay = React.createClass({
     render: function(){
+        var dollar = (typeof this.props.unit=="undefined") || this.props.unit =="$"?
+            <span style={{"marginRight": "0.3em"}}>$</span>: "";
+        var negativeHighlight = this.props.value >= 0 ? "": "myhighlight";
+        var pcnt = (this.props.unit=="%" || this.props.unit=="month") ?
+            <span style={{"marginLeft": "0.3em"}}>{this.props.unit}</span>:"";
+
         return (
-            <div className="row">
-                <div className="col-xs-6">
+            <div className="row my-nobreak">
+                <span className="col-xs-6">
                     {this.props.label}
-                </div>
+                </span>
                 <div className="col-xs-6">
-                    $ {this.props.value}
+                    {dollar}
+                    <span className={negativeHighlight}>
+                        {this.props.value.toFixed(2)}
+                    </span>
+                    {pcnt}
                 </div>
             </div>
         );
@@ -55,20 +67,20 @@ var FormInput = React.createClass({
     },
     render: function(){
         var inputStyle = {
-            float: 'left'
+            float: "left"
         };
-        var dollar = this.props.unit =='$'?
+        var dollar = (typeof this.props.unit=="undefined") || this.props.unit =="$"?
             <div className="input-group-addon">
                 $
-            </div> : '';
-        var negativeHighlight = this.props.value > 0 ? '': "myhighlight";
-        var pcnt = (this.props.unit=='%' || this.props.unit=='month') ?
+            </div> : "";
+        var negativeHighlight = this.props.value > 0 ? "": "myhighlight";
+        var pcnt = (this.props.unit=="%" || this.props.unit=="month") ?
             <div className="input-group-addon">
                 {this.props.unit}
-            </div> : '';
+            </div> : "";
 
         return (
-            <div className="row form-group">
+            <div className="row form-group my-nobreak">
                 <span className="col-xs-6 col-form-label text-right">
                     {this.props.label}
                 </span>
@@ -78,6 +90,30 @@ var FormInput = React.createClass({
                         value={this.props.value}
                         onChange={this.handleChange}
                     />
+                    {pcnt}
+                </div>
+            </div>
+        );
+    }
+});
+var FormValueDisplay = React.createClass({
+    render: function(){
+        var dollar = (typeof this.props.unit=="undefined") || this.props.unit =="$"?
+            <span style={{"marginRight": "0.3em"}}>$</span>: "";
+        var negativeHighlight = this.props.value >= 0 ? "": "myhighlight";
+        var pcnt = (this.props.unit=="%" || this.props.unit=="month") ?
+            <span style={{"marginLeft": "0.3em"}}>{this.props.unit}</span>:"";
+
+        return (
+            <div className="row form-group my-nobreak">
+                <span className="col-xs-6 col-form-label text-right">
+                    {this.props.label}
+                </span>
+                <div className="col-xs-6" style={{"borderBottom":"1px solid #efefef"}}>
+                    {dollar}
+                    <span className={negativeHighlight}>
+                        {this.props.value.toFixed(2)}
+                    </span>
                     {pcnt}
                 </div>
             </div>
@@ -103,24 +139,33 @@ var FormHeader = React.createClass({
 
 var FormBox = React.createClass({
     render: function(){
+        // Input fields
+        var formFields = [];
+        if (typeof this.props.data.fields != "undefined"){
+            formFields = this.props.data.fields.map(function(field) {
+                field.onChange = this.props.onChange;
+                field.id = field.name;
+                return <FormInput {...field} />
+            }, this);
+        }
 
-        var formFields = this.props.data.fields.map(function(field) {
-            var props = {
-                id: field.name,
-                onChange: this.props.onChange,
-                value: field.value,
-                label: field.label,
-                type: field.unit
-            };
-            return <FormInput {...props} />
-        }, this);
+        // Value displays
+        var valueFields = [];
+        if (typeof this.props.data.values != "undefined"){
+            valueFields = this.props.data.values.map(function(field) {
+                field.id = field.name;
+                return <FormValueDisplay {...field} />
+            }, this);
+        }
 
+        // Render
         return (
             <div>
                 <FormHeader title={this.props.data.title} />
                 <AssumptionBox fields={this.props.data.assumptions} />
                 <div className="my-multicol-2">
-                { formFields }
+                    { valueFields }
+                    { formFields }
                 </div>
             </div>
         );
@@ -129,23 +174,23 @@ var FormBox = React.createClass({
 
 var AssumptionBox = React.createClass({
     render: function(){
-        if (typeof this.props.fields == 'undefined'){
+        if (typeof this.props.fields == "undefined"){
             return null;
         }
-        // Render when there is assumptions
 
+        // Render when there is assumptions
         var fields = this.props.fields.map(function(field){
-            var dollar = field.unit =='$'?field.unit:'';
-            var negativeHighlight = field.value > 0 ? '': "myhighlight";
-            var pcnt = (field.unit=='%' || field.unit=='month') ?field.unit: '';
+            var value = parseFloat(field.value).toFixed(2);
+            var dollar = (typeof field.unit=="undefined" || field.unit =="$")?"$":"";
+            var negativeHighlight = value >= 0 ? "": "myhighlight";
+            var pcnt = (field.unit=="%" || field.unit=="month") ?field.unit: "";
 
             return (
                 <tr><td>
-                    {dollar}
                     {field.label}
                 </td><td>
                     <span className={negativeHighlight}>
-                        {field.value}{pcnt}
+                    {dollar}{value}{pcnt}
                     </span>
                 </td></tr>
             );
@@ -158,7 +203,7 @@ var AssumptionBox = React.createClass({
                     Assumptions
                     <span className="caret"></span>
                 </span>
-                <ul className="dropdown-menu" aria-labelledby={this.props.id} style={{'padding':'10px 20px'}}>
+                <ul className="dropdown-menu" aria-labelledby={this.props.id} style={{"padding":"10px 20px"}}>
                     <table className="table table-striped table-hover table-responsive">
                         <tbody>
                             <tr>
@@ -177,108 +222,108 @@ var AssumptionBox = React.createClass({
 var CarLeasingCalculatorBox = React.createClass({
     getInitialState: function() {
         var tmp = {
-            'example msrp': {
-                label: 'Example MSRP',
+            "example msrp": {
+                label: "Example MSRP",
                 value: 18881
             },
-            'example lease': {
-                label: 'Example lease price',
+            "example residue": {
+                label: "example residue price",
                 value: 13270
             },
-            'msrp': {
-                label: 'MSRP',
+            "msrp": {
+                label: "MSRP",
                 value: 25375
             },
-            'invoice': {
-                label: 'Invoice',
+            "invoice": {
+                label: "Invoice",
                 value: 24440
             },
-            'purchase': {
-                label: 'Purchase',
+            "purchase": {
+                label: "Purchase",
                 value: 23000
             },
-            'lease': {
-                label: 'Lease price',
+            "lease": {
+                label: "Lease price",
                 value: 21287
             },
-            'sales tax': {
-                label: 'Sales tax',
+            "sales tax": {
+                label: "Sales tax",
                 value: 6,
-                unit: '%'
+                unit: "%"
             },
-            'msd mf discount': {
-                label: 'MSD MF Discount',
+            "msd mf discount": {
+                label: "MSD MF Discount",
                 value: 0.00007,
-                unit: ''
+                unit: ""
             },
-            'max msd allowed': {
-                label: 'Max MSD allowed',
+            "max msd allowed": {
+                label: "Max MSD allowed",
                 value: 7,
-                unit: ''
+                unit: ""
             },
-            'msd selected': {
-                label: 'MSD selected',
+            "msd selected": {
+                label: "MSD selected",
                 value: 0,
-                unit: ''
+                unit: ""
             },
-            'apr': {
-                label: 'APR',
+            "apr": {
+                label: "APR",
                 value: 4,
-                unit: '%'
+                unit: "%"
             },
             term: {
-                label: 'Term',
+                label: "Term",
                 value: 36,
-                unit: 'month'
+                unit: "month"
             },
-            'downpayment': {
-                label: 'Downpayment',
+            "downpayment": {
+                label: "Downpayment",
                 value: 2000
             },
-            'rebate': {
-                label: 'Rebates',
+            "rebates": {
+                label: "Rebates",
                 value: 0
             },
-            'credits': {
-                label: 'Credits',
+            "credits": {
+                label: "Credits",
                 value: 0
             },
-            'monthly tax': {
-                label: 'Monthly tax',
+            "monthly tax": {
+                label: "Monthly tax",
                 value: 3,
-                unit: '%'
+                unit: "%"
             },
-            'registration fee': {
-                label: 'Registration fee',
+            "registration fee": {
+                label: "Registration fee",
                 value: 40
             },
-            'plate fee': {
-                label: 'Plate fee',
+            "plate fee": {
+                label: "Plate fee",
                 value: 28
             },
-            'documentation fee': {
-                label: 'Documentation fee',
+            "documentation fee": {
+                label: "Documentation fee",
                 value: 550
             },
-            'acquisition fee': {
-                label: 'Acquisition fee',
+            "acquisition fee": {
+                label: "Acquisition fee",
                 value: 995
             },
-            'security deposit': {
-                label: 'Security deposit',
+            "security deposit": {
+                label: "Security deposit",
                 value: 0
             },
-            'security refund rate': {
-                label: 'Security refund rate',
+            "security refund rate": {
+                label: "Security refund rate",
                 value: 20,
-                unit: '%'
+                unit: "%"
             },
-            'disposition fee': {
-                label: 'Disposition fee',
+            "disposition fee": {
+                label: "Disposition fee",
                 value: 350
             },
-            'wear charge': {
-                label: 'Wear charge',
+            "wear charge": {
+                label: "Wear charge",
                 value: 0
             }
         }; // end of initial state
@@ -286,63 +331,257 @@ var CarLeasingCalculatorBox = React.createClass({
     },
     handleFieldChange: function(fieldId, value) {
         var newState = this.state[fieldId];
-        newState.value = value;
+        newState.value = parseFloat(value); // convert to Float
         this.setState(newState);
     },
-    getSubsetState: function(pickList){
-        var tmpList = [];
-        for (var i=0; i<pickList.length; i++){
-            var tmp = this.state[pickList[i]];
-            tmp.name = pickList[i];
 
-            if (typeof tmp.value  == 'undefined'){
-                tmp.value = 0;
+    getFields: function(pickList){
+            var tmpList = [];
+            for (var i=0; i<pickList.length; i++){
+                var tmp = this.state[pickList[i]];
+                tmp.name = pickList[i];
+
+                if (typeof tmp.value  == "undefined"){
+                    tmp.value = 0;
+                }
+                if (typeof tmp.unit == "undefined"){
+                    tmp.unit = "$";
+                }
+                tmpList.push(tmp);
             }
-            if (typeof tmp.unit == 'undefined'){
-                tmp.unit = '$';
-            }
-            tmpList.push(tmp);
-        }
-        return tmpList;
+            return tmpList;
     },
-    computeDiscount: function(field1, field2){
-        var val1 = this.state[field1].value;
-        var val2 = this.state[field2].value;
-        var discount = (val2-val1)/val2*100;
-        return discount.toFixed(2);
+    getDiscount: function(field1, field2){
+            var val1 = this.state[field1].value;
+            var val2 = this.state[field2].value;
+            var discount = (val2-val1)/val2*100;
+            return discount.toFixed(2);
     },
     render: function(){
-        var summaryList = this.getSubsetState([
-            'example msrp',
-            'example lease'
-        ]);
-
-        var exampleLeaseForm = {
-            title: 'Official leasing sample',
-            fields: this.getSubsetState(['example msrp', 'example lease'])
+        var helper = {
+            getFields: this.getFields,
+            getDiscount: this.getDiscount
         };
-        var dealTermForm = {
-            title: 'Deal terms',
-            fields: this.getSubsetState(['msrp', 'invoice', 'lease','apr','term','monthly tax','sales tax']),
+
+        // example residue form
+        var residue_rate = 100-helper.getDiscount("example residue", "example msrp");
+        var exampleLeaseForm = {
+            title: "Official leasing sample",
+            fields: helper.getFields(["example msrp", "example residue"]),
             assumptions: [{
-                label: "Invoice discount by MSRP",
-                value: this.computeDiscount('invoice','msrp'),
-                unit: '%'
-            },{
-                label: "Lease discount by MSRP",
-                value: this.computeDiscount('lease','msrp'),
-                unit: '%'
-            },{
-                label: "Lease discount by invoice",
-                value: this.computeDiscount('lease','invoice'),
-                unit: '%'
+                label: "Residue percentage",
+                value: residue_rate,
+                unit: "%"
             }]
         };
+
+        // Deal terms
+        var apr_as_mf = this.state["apr"].value/2400;
+        var residue_value = this.state["msrp"].value * residue_rate/100;
+        var sales_tax = this.state["lease"].value * this.state["sales tax"].value/100;
+        var lease_after_tax = this.state["lease"].value + sales_tax;
+
+        var dealTermForm = {
+            title: "Deal terms",
+            fields: helper.getFields([
+                "msrp", "invoice", "lease","apr","term","monthly tax","sales tax"
+            ]),
+            assumptions: [{
+                label: "Invoice discount by MSRP",
+                value: helper.getDiscount("invoice","msrp"),
+                unit: "%"
+            },{
+                label: "Lease discount by MSRP",
+                value: helper.getDiscount("lease","msrp"),
+                unit: "%"
+            },{
+                label: "Lease discount by invoice",
+                value: helper.getDiscount("lease","invoice"),
+                unit: "%"
+            },{
+                label: "Deal APR as MF",
+                value: apr_as_mf,
+                unit: ""
+            },{
+                label: "Residue value",
+                value: residue_value
+            },{
+                label: "Lease after tax",
+                value: lease_after_tax
+            },{
+                label: "Sales tax",
+                value: sales_tax
+            }]
+        };
+
+        // Deductions
+        var apr = this.state["apr"].value;
+        var msd_discount = this.state["msd mf discount"].value;
+        var msd_selected = this.state["msd selected"].value;
+        var msd_discount_equivalent = msd_discount*msd_selected*2400;
+        var effective_apr = apr-msd_discount_equivalent;
+
+        var deductionForm = {
+            title: "Deductions",
+            fields: helper.getFields([
+                "credits", "rebates", "downpayment",
+                "msd mf discount", "msd selected"
+            ]),
+            assumptions: [{
+                label: "Effiective APR",
+                value: effective_apr,
+                unit: "%"
+            },{
+                label: "MSD equivalent discoiunt",
+                value: msd_discount_equivalent,
+                unit: "%"
+            }]
+        };
+
+        // Monthly costs
+        var depreciation_cost = this.state['lease'].value - residue_value;
+        var monthly_depreciation_cost = depreciation_cost/this.state["term"].value;
+        var net_capitalized_cost = lease_after_tax - (
+            this.state["credits"].value +
+            this.state["rebates"].value +
+            this.state["downpayment"].value
+        );
+        var financing_cost = net_capitalized_cost+residue_value;
+        var monthly_financing_cost = financing_cost * effective_apr/2400;
+        var monthly_cost_before_tax = monthly_depreciation_cost + monthly_financing_cost;
+        var monthly_tax = monthly_cost_before_tax * this.state["monthly tax"].value/100;
+        var monthly_cost_after_tax = monthly_cost_before_tax + monthly_tax;
+        var total_tax = sales_tax + this.state["term"].value * monthly_tax;
+        var msd = Math.ceil(monthly_cost_after_tax/50)*50;
+        var total_msd = this.state["msd selected"].value * msd;
+
+        var monthlyCostForm = {
+            title: "Monthly costs",
+            values: [{
+                label: "Depreciation cost",
+                value: monthly_depreciation_cost
+            },{
+                label: "Financing cost",
+                value: monthly_financing_cost
+            },{
+                label: "Monthly tax",
+                value: monthly_tax
+            },{
+                label: "Monthly leasing cost",
+                value: monthly_cost_after_tax
+            }],
+            assumptions: [{
+                label: "Net capitalized cost",
+                value: net_capitalized_cost
+            },{
+                label: "Total depreciation",
+                value: depreciation_cost
+            },{
+                label: "MSD",
+                value: msd
+            },{
+                label: "Total tax",
+                value: total_tax
+            }]
+        };
+
+        // Due at signing
+        var to_gov = this.state["registration fee"].value + this.state["plate fee"].value;
+        var to_dealer = this.state["documentation fee"].value + this.state["security deposit"].value;
+        var to_bank = this.state["acquisition fee"].value;
+        var to_myself = this.state["downpayment"].value + total_msd + monthly_cost_after_tax;
+        var driveoff_cost = to_gov + to_dealer + to_bank + to_myself;
+        var driveOffForm = {
+            title: "Due at signing",
+            fields: helper.getFields([
+                "registration fee", "plate fee", "documentation fee",
+                "acquisition fee", "security deposit"
+                ]),
+            values: [{
+                label: "Downpayment",
+                value: this.state["downpayment"].value
+            },{
+                label: "1st month payment",
+                value: monthly_cost_after_tax
+            }],
+            assumptions: [{
+                label: "Drive off cost",
+                value: driveoff_cost
+            },{
+                label: "Government administration fee",
+                value: to_gov
+            },{
+                label: "Dealer fees",
+                value: to_dealer
+            },{
+                label: "Bank fees",
+                value: to_bank
+            },{
+                label: "Used to payoff the deal",
+                value: to_myself
+            }]
+        };
+
+        // Due at lease end
+        var security_refund = this.state["security deposit"].value * this.state["security refund rate"].value / 100;
+        var refund = security_refund + total_msd;
+        var lease_end_cost = this.state["disposition fee"].value +
+            this.state["wear charge"].value - refund;
+        var leaseEndForm = {
+            title: "Due at lease end",
+            fields: helper.getFields([
+                "disposition fee", "security refund rate", "wear charge"
+            ]),
+            values:[{
+                label: "Security refund",
+                value: security_refund
+            },{
+                label: "MSD refund",
+                value: total_msd
+            }],
+            assumptions:[{
+                label: "Lease end cost",
+                value: lease_end_cost
+            }]
+        };
+
+        // Summaries
+        var cost_of_ownership = driveoff_cost + lease_end_cost - 2*monthly_cost_after_tax;
+        var summaryList = [{
+            label: "Total lease",
+            value: lease_after_tax
+        },{
+            label: "Monthly payment",
+            value: monthly_cost_after_tax
+        },{
+            label: "APR",
+            value: this.state["apr"].value,
+            unit: this.state["apr"].unit
+        },{
+            label: "Term",
+            value: this.state["term"].value,
+            unit: this.state["term"].unit
+        },{
+            label: "Cost of ownership",
+            value: cost_of_ownership
+        },{
+            label: "Drive off cost",
+            value: driveoff_cost
+        },{
+            label: "Last payment/refund",
+            value: lease_end_cost
+        }];
+
+        // Render
         return (
             <div>
                 <Summary data={summaryList} />
                 <FormBox data={exampleLeaseForm} onChange={this.handleFieldChange} />
                 <FormBox data={dealTermForm} onChange={this.handleFieldChange} />
+                <FormBox data={deductionForm} onChange={this.handleFieldChange} />
+                <FormBox data={monthlyCostForm} />
+                <FormBox data={driveOffForm} onChange={this.handleFieldChange} />
+                <FormBox data={leaseEndForm} onChange={this.handleFieldChange} />
             </div>
         );
     }
@@ -350,7 +589,7 @@ var CarLeasingCalculatorBox = React.createClass({
 
 ReactDOM.render(
   <CarLeasingCalculatorBox />,
-  document.getElementById('sth')
+  document.getElementById("sth")
 );
 
 </script>

@@ -48,6 +48,16 @@ h6 {
     font-family: Copperplate/Copperplate Gothic Light, sans-serif;
 }
 
+.my-nobreak{
+    overflow: hidden; /* Fix for firefox and IE 10-11  */
+    -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+    page-break-inside: avoid; /* Deprecated Firefox */
+    -moz-column-break-inside:avoid; /* Current Firefox */
+    column-break-inside:avoid;
+    break-inside: avoid; /* IE 10+ */
+    break-inside: avoid-column;
+}
+
 .my-multicol-2 {
     -moz-columns: 2;
     -webkit-columns: 2;

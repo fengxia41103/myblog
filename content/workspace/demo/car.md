@@ -1,4 +1,4 @@
-Title: Car leasing
+Title: Car leasing & AngularJS
 Date: 2016-09-30 21:00
 Slug: car leasing
 Author: Feng Xia
@@ -213,6 +213,31 @@ With the component in place, rendering an `form input` section like this one is 
         AngularJS Component rendered form inputs
     </figcaption>
 </figure>
+
+To complete this, below shows the file structure:
+
+<pre class="brush:bash;">
+├── app.module.js
+└── car-leasing
+    ├── assumption.hh
+    ├── car-leasing.module.js
+    ├── form_input.hh
+    ├── form_section_header.hh
+    ├── piechart.hh
+    ├── summary_line_item.hh
+    └── var_display.hh
+</pre>
+
+This maps directly to the component structure of this page:
+
+* Summary &larr; a virtual container
+    - summary line item &larr; summary_line_item.hh
+* Charts &larr; a virtual container
+    - pie chart &larr; piechart.hh
+* Form &larr; a virtual container
+    - form header &larr; form_section_header.hh
+    - input boxes &larr; form_input.hh
+    - derived value display &larr; var_display.hh
 
 
 [2]: https://angularjs.org/

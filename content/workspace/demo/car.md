@@ -1,6 +1,7 @@
-Title: Car leasing & AngularJS
+Title: SPA: car leasing calculator
 Date: 2016-09-30 21:00
 Slug: car leasing
+Tags: demo, angular, react
 Author: Feng Xia
 
 Car leasing rooted in my own experience
@@ -13,7 +14,7 @@ this is a perfect candidate for a single
 page application (SPA).
 
 Two versions have
-been created &mdash; one in [Angular][2],
+been created &mdash; one in [Angular][],
 and another in [REACT][]. This ties to
 my belief that however wonderful a tool may be,
 it is also important how well it fits _your way
@@ -21,6 +22,7 @@ of thinking and typing_. So this project
 gives a case to evaluate which one I'd like
 to invest into for more development.
 
+[angular]: https://angularjs.org/
 [react]: https://facebook.github.io/react/docs/getting-started.html
 
 <figure class="row">
@@ -173,15 +175,17 @@ more form-like than a SPA so this can be easier for user to follow:
 
 ## AngularJS
 
-First version was created in [AngularJS][2].
+First version was created in [Angular][].
 In particular, I was interested
-in its [component][3]. It has been quite interesting to
+in its [component][]. It has been quite interesting to
 make this page design based on component architecture.
 Component encapsulates logic and view rendering into one piece.
 The HTML templating capability has saved a lot of typings
 as well as making changing any component a simple task.
 For example, we put all form input boxes into a component called
 `myinput`:
+
+[component]: https://docs.angularjs.org/guide/component
 
 <pre class="brush:javascript">
     ]).component('myinput', {
@@ -256,8 +260,8 @@ This maps directly to the component structure of this page:
     - derived value display &larr; `var_display.hh`
 
 
-[2]: https://angularjs.org/
-[3]: https://docs.angularjs.org/guide/component
+
+
 
 ## REACT
 
@@ -311,7 +315,7 @@ to be as explicit as possible. jQuery's element selection is too depending
 on the HTML structure to work right. Further, jQuery's code lives in its own
 `<script` section that it becomes hard to understand which section of the
 DOM it will manipulate. As a matter of fact it has access to the entire
-DOM so it is irrelevant which template it lives, it can screw up
+DOM so it is irrelevant which template it lives in, it can screw up
 the others if it chooses so. It gets even worse when using a templating system
 that DOM details are not known until full rendered so that the query
 line has to observe things like the sequence of the list item so picking

@@ -2,7 +2,7 @@ Title: Car leasing calculator REACT
 Date: 2016-09-30 13:00
 Slug: car leasing calculator react
 Category: REACT
-Tag: REACT
+Tags: react
 Author: Feng Xia
 Status: draft
 

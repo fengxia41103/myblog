@@ -1,6 +1,6 @@
 Title: Car leasing calculator Angular
 Date: 2016-09-25 13:00
-Slug: car leasing calculator
+Slug: car leasing calculator angular
 Category: Angular
 Tag: Angular
 Author: Feng Xia

@@ -4,6 +4,7 @@ Slug: car leasing calculator react
 Category: REACT
 Tag: REACT
 Author: Feng Xia
+Status: draft
 
 <div id="sth"></div>
 

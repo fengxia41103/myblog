@@ -3,14 +3,6 @@ Date: 2016-09-30 21:00
 Slug: car leasing
 Author: Feng Xia
 
-<figure class="row">
-    <img src="/images/demo_car.png"/>
-    <figcaption>Project Car Leasing Calculator</figcaption>
-</figure>
-
-
-> * [Car leasing calculator][1]
-
 Car leasing rooted in my own experience
 while researching for a new car.
 After putting together an Excel to model
@@ -18,9 +10,32 @@ the car leasing process, I started to think
 how to make the lesson learned available
 for other buyers. Also, I figure
 this is a perfect candidate for a single
-page application (SPA). Time for some [Angular][2].
+page application (SPA).
 
-## Logic
+Two versions have
+been created &mdash; one in [Angular][2],
+and another in [REACT][]. This ties to
+my belief that however wonderful a tool may be,
+it is also important how well it fits _your way
+of thinking and typing_. So this project
+gives a case to evaluate which one I'd like
+to invest into for more development.
+
+[react]: https://facebook.github.io/react/docs/getting-started.html
+
+<figure class="row">
+    <img src="/images/demo_car.png"/>
+    <figcaption>Project Car Leasing Calculator</figcaption>
+</figure>
+
+> * [AngularJS version][1]
+> * [REACT version][4]
+
+
+[1]: {filename}/workspace/angular/car.md
+[4]: {filename}/workspace/react/car.md
+
+## Leasing
 
 Sad reality is, all the leverages
 one can pull in a car leasing deal
@@ -78,7 +93,7 @@ make sure to use this tool to figure out what the residue rate
 the dealer's offer is implying. If it's too far off from the
 official flyer number, walk away!
 
-[1]: {filename}/workspace/angular/car.md
+
 
 ### Math
 
@@ -158,7 +173,8 @@ more form-like than a SPA so this can be easier for user to follow:
 
 ## AngularJS
 
-[AngularJS][2] was picked for the project. In particular, I was interested
+First version was created in [AngularJS][2].
+In particular, I was interested
 in its [component][3]. It has been quite interesting to
 make this page design based on component architecture.
 Component encapsulates logic and view rendering into one piece.
@@ -189,7 +205,7 @@ For example, we put all form input boxes into a component called
 </pre>
 
 And the template code `form_input.hh` (shown below). The extension `.hh` is
-because `.html` or `.htm` will all be picked up by Pelican for page
+chosen because `.html` or `.htm` will be picked up by Pelican for page
 rendering and not copied as static
 file even though its parent path is a _STATIC_. Oh well.
 
@@ -231,14 +247,87 @@ To complete this, below shows the file structure:
 This maps directly to the component structure of this page:
 
 * Summary &larr; a virtual container
-    - summary line item &larr; summary_line_item.hh
+    - summary line item &larr; `summary_line_item.hh`
 * Charts &larr; a virtual container
-    - pie chart &larr; piechart.hh
+    - pie chart &larr; `piechart.hh`
 * Form &larr; a virtual container
-    - form header &larr; form_section_header.hh
-    - input boxes &larr; form_input.hh
-    - derived value display &larr; var_display.hh
+    - form header &larr; `form_section_header.hh`
+    - input boxes &larr; `form_input.hh`
+    - derived value display &larr; `var_display.hh`
 
 
 [2]: https://angularjs.org/
 [3]: https://docs.angularjs.org/guide/component
+
+## REACT
+
+[REACT][] is making a lot of buzz in my circle these days. Using this project
+as an exercise I decided to look into building an _identical_ version as
+the Angular's. Both ended up writing about 700 lines of code so typing wise
+they are almost the same.
+
+REACT is done essentially in a big blob of code. I don't see there is a templating system
+for JSX so everything is wired in a single file. This is a plus when it's a one-man
+show because I don't have to jump from file to file. But I can see in large-scale project
+this will be a problem.
+
+### Component
+
+Similar to Angular's [component][], view and logic
+are encapsulated within a REACT [react component][]. But different from Angular's, REACT's
+philosophy of one-way data flow enforces design to separate _props_ from _state_, which
+makes internal concepts clearer. State becomes only necessary if its value will change
+and the change will drive a UI decision.
+
+[react component]: https://facebook.github.io/react/docs/component-api.html
+
+This separation makes sense to me because too often I find myself creating an army
+of variables just to transfer information from module to module and there is
+not distinction between what is to be `consumed` only in submodule for display or
+further computation, and what is to be modifiable and make the change available else where.
+Even though REACT's `onChange` event way of bubbling a change back to parent component
+feels awkward, it does enforce such design decision.
+
+Angular, on the other hand, gives you two-way binding for free so
+everything becomes changeable. It's convenient for prototyping. But in my
+opinion it delays these decisions which will surface in refactoring phase
+anyway. So I think REACT helps in this regard to make the
+separation more natural than Angular's way.
+
+### View and Control
+
+I have been doing things in MVC pattern all along. But there is a
+devil lurking in background that feels strange and awkward &mdash; how to
+make the UX dynamic? jQuery has been the tool for the last 3-5 years.
+But honestly selecting element makes it tightly coupled with
+HTML presentation layer that it is too fragile to be maintainable! How many
+times you have added outer `div` and broke a jQuery action?
+
+Angular and REACT both make life easier by tieing an actual variable with
+such task. This goes back to my argument about decision making &mdash;
+despite that it's a UI or a business logic, if there is a decision to be made
+in order to set its _state_ accordingly, such decision needs
+to be as explicit as possible. jQuery's element selection is too depending
+on the HTML structure to work right. Further, jQuery's code lives in its own
+`<script` section that it becomes hard to understand which section of the
+DOM it will manipulate. As a matter of fact it has access to the entire
+DOM so it is irrelevant which template it lives, it can screw up
+the others if it chooses so. It gets even worse when using a templating system
+that DOM details are not known until full rendered so that the query
+line has to observe things like the sequence of the list item so picking
+the `next("li")` gives you the one you want. These _techniques_ is
+simply **counter-productive**.
+
+
+# Conclusion
+
+I liked [Angular][] and [REACT][]. My sense at this moment is that [Angular][]
+is more developed. Especially with its [component][] design, one can do the
+same thing as [REACT][], and with all the other good stuff [Angular][] can do.
+
+[REACT][] is a good choice for SPA. Its one-way data binding is a great idea, IMHO,
+that enforces an important design decision. Putting both HTML and JS in one place
+is a brave attempt to define what a component is. Let's face it, in today's web application,
+all UI elements may respond to some user event or data event
+so leveraging Javascript's full power to control presentation from
+its birth instead from jQuery's backwards logic is the right direction.

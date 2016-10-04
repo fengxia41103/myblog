@@ -78,6 +78,9 @@ var FormInput = React.createClass({
             <div className="input-group-addon">
                 {this.props.unit}
             </div> : "";
+        var max = this.props.max? this.props.max:"";
+        var min = this.props.min? this.props.min:"0";
+        var step = this.props.step? this.props.step: "1";
 
         return (
             <div className="row form-group my-nobreak">
@@ -87,6 +90,7 @@ var FormInput = React.createClass({
                 <div className="col-xs-5 input-group" style={inputStyle}>
                     {dollar}
                     <input type="number" className="form-control {negativeHighlight}"
+                        max={max} min={min} step={step}
                         value={this.props.value}
                         onChange={this.handleChange}
                     />
@@ -143,7 +147,10 @@ var FormBox = React.createClass({
         var formFields = [];
         if (typeof this.props.data.fields != "undefined"){
             formFields = this.props.data.fields.map(function(field) {
+                // This is the magic line to make the state update
+                // in sync with parent's state
                 field.onChange = this.props.onChange;
+
                 field.id = field.name;
                 return <FormInput {...field} />
             }, this);
@@ -224,6 +231,7 @@ var PieChartBox = React.createClass({
     componentWillUnmount: function () {
         this.chart.destroy();
     },
+
     //Create the div which the chart will be rendered to.
     render: function () {
         var data = this.props.data;
@@ -232,13 +240,14 @@ var PieChartBox = React.createClass({
             this.preValue = currentValue;
 
             // Update chart
-            if (this.chart){
-                console.log(data.values);
-                this.chart.series[0].setData(data.values);
+            if (this.chart && this.debounceUpdateData){
+                this.debounceUpdateData(data);
             }
         }
         this.container = this.props.title.replace(/\s/g,"-").toLowerCase();
-        return React.createElement('div', { id: this.container });
+        return React.createElement('div', {
+            id: this.container
+        });
     },
     componentDidMount: function () {
         this.chart = Highcharts.chart(this.container, {
@@ -270,13 +279,36 @@ var PieChartBox = React.createClass({
                 },
                 series: [{
                     type: 'pie',
-                    name: this.props.data.name,
+                    name: this.props.title,
                     innerSize: '50%',
-                    data: this.props.data.values
+                    data: this.props.data
                 }]
             }); // end of highcharts
 
+           // Set up debound function
+           this.debounceUpdateData = _.debounce(function(data){
+               this.chart.series[0].setData(data);
+           },500);
+
     }// end of func
+});
+
+var ChartBox = React.createClass({
+    render: function() {
+        if (typeof this.props.data == "undefined"){
+            return null;
+        }
+
+        var charts = this.props.data.map(function(field) {
+            return <PieChartBox {...field} />
+        }, this);
+
+        return (
+            <div className="my-multicol-2">
+                {charts}
+            </div>
+        );
+    }
 });
 
 var CarLeasingCalculatorBox = React.createClass({
@@ -334,7 +366,10 @@ var CarLeasingCalculatorBox = React.createClass({
             term: {
                 label: "Term",
                 value: 36,
-                unit: "month"
+                unit: "month",
+                step: 12,
+                min: 12,
+                max: 60
             },
             "downpayment": {
                 label: "Downpayment",
@@ -586,7 +621,7 @@ var CarLeasingCalculatorBox = React.createClass({
         var security_refund = this.state["security deposit"].value * this.state["security refund rate"].value / 100;
         var refund = security_refund + total_msd;
         var lease_end_cost = this.state["disposition fee"].value +
-            this.state["wear charge"].value - refund;
+            this.state["wear charge"].value - refund + monthly_cost_after_tax;
         var leaseEndForm = {
             title: "Due at lease end",
             fields: helper.getFields([
@@ -606,7 +641,8 @@ var CarLeasingCalculatorBox = React.createClass({
         };
 
         // Summaries
-        var cost_of_ownership = driveoff_cost + lease_end_cost + (this.state["term"].value-2)*monthly_cost_after_tax;
+        var lease_payments = (this.state["term"].value-2)*monthly_cost_after_tax;
+        var cost_of_ownership = driveoff_cost + lease_end_cost + lease_payments;
         var summaryList = [{
             label: "Total lease",
             value: lease_after_tax
@@ -633,9 +669,9 @@ var CarLeasingCalculatorBox = React.createClass({
         }];
 
         // Monthly payment breakdown chart
-        var monthly_breakdown_chart = {
-            name: "Monthly breakdown",
-            values: [{
+        var chartData = [{
+            title: "Monthly payment breakdown",
+            data: [{
                 name: "Depreciation cost",
                 y: monthly_depreciation_cost
             },{
@@ -645,13 +681,25 @@ var CarLeasingCalculatorBox = React.createClass({
                 name: "Tax",
                 y: monthly_tax
             }]
-        };
+        },{
+            title: "Cost of ownership",
+            data: [{
+                name: "Drive off cost",
+                y: driveoff_cost
+            },{
+                name: "Lease payments",
+                y: lease_payments
+            },{
+                name: "Lease end",
+                y: lease_end_cost
+            }]
+        }];
 
         // Render
         return (
             <div>
                 <Summary data={summaryList} />
-                <PieChartBox title="Monthly payment breakdown" data={monthly_breakdown_chart} />
+                <ChartBox data={chartData} />
                 <FormBox data={exampleLeaseForm} onChange={this.handleFieldChange} />
                 <FormBox data={dealTermForm} onChange={this.handleFieldChange} />
                 <FormBox data={deductionForm} onChange={this.handleFieldChange} />

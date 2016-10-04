@@ -126,15 +126,23 @@ var FormValueDisplay = React.createClass({
 });
 
 var FormHeader = React.createClass({
+    handleClick: function(event) {
+        this.props.handleClick();
+    },
     render: function(){
+        var switchClass = classNames("fa", {
+            "fa-angle-double-up": this.props.showFields,
+            "fa-angle-double-down": !this.props.showFields
+        });
+
         return (
-            <div className="row my-resume-header">
+            <div className="row my-resume-header" onClick={this.handleClick}>
                 <div className="col-md-11">
                     <h4>{this.props.title}</h4>
                 </div>
                 <div  className="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
                     <br />
-                    <i className="fa fa-angle-double-down"></i>
+                    <i className={switchClass}></i>
                 </div>
             </div>
         );
@@ -142,6 +150,14 @@ var FormHeader = React.createClass({
 });
 
 var FormBox = React.createClass({
+    getInitialState: function(){
+        return {showFields: false};
+    },
+    handleClick: function(){
+        this.setState({
+            showFields: !this.state.showFields, // toggle
+        });
+    },
     render: function(){
         // Input fields
         var formFields = [];
@@ -165,15 +181,17 @@ var FormBox = React.createClass({
             }, this);
         }
 
+        var assumptions = this.state.showFields?
+            <AssumptionBox fields={this.props.data.assumptions} />:null;
+        var fields = this.state.showFields?
+            <div className="my-multicol-2">{valueFields}{formFields}</div>: null;
+
         // Render
         return (
             <div>
-                <FormHeader title={this.props.data.title} />
-                <AssumptionBox fields={this.props.data.assumptions} />
-                <div className="my-multicol-2">
-                    { valueFields }
-                    { formFields }
-                </div>
+                <FormHeader title={this.props.data.title} showFields={this.state.showFields} handleClick={this.handleClick} />
+                {assumptions }
+                {fields}
             </div>
         );
     }

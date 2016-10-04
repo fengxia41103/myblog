@@ -113,7 +113,7 @@ controller('CarLeasingController', ['$scope',
         // Depreciation cost
         vm.$watchGroup(['net_capital_cost', 'residue_value', 'term'],
             function() {
-                vm.depreciation_cost = vm.net_capital_cost - vm.residue_value;
+                vm.depreciation_cost = vm.lease - vm.residue_value;
                 vm.monthly_depreciation = vm.depreciation_cost / vm.term;
             });
 
@@ -382,48 +382,48 @@ controller('CarLeasingController', ['$scope',
     },
     templateUrl: '/app/car-leasing/piechart.hh',
     controller: function() {
-            var previousValue;
+        var previousValue;
 
-            this.$doCheck = function() {
-                    var currentValue = this.data && this.data.valueOf();
-                    if (previousValue !== currentValue) {
-                        previousValue = currentValue;
+        this.$doCheck = function() {
+            var currentValue = this.data && this.data.valueOf();
+            if (previousValue !== currentValue) {
+                previousValue = currentValue;
 
-                        Highcharts.chart(this.id, {
-                            chart: {
-                                plotBackgroundColor: null,
-                                plotBorderWidth: 0,
-                                plotShadow: false
+                Highcharts.chart(this.id, {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: 0,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: this.title,
+                        align: 'center',
+                        verticalAlign: 'top',
+                        y: 25
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.percentage:.0f}%</b>'
                             },
-                            title: {
-                                text: this.title,
-                                align: 'center',
-                                verticalAlign: 'top',
-                                y: 25
-                            },
-                            tooltip: {
-                                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
-                            },
-                            plotOptions: {
-                                pie: {
-                                    dataLabels: {
-                                        enabled: true,
-                                        format: '<b>{point.percentage:.0f}%</b>'
-                                    },
-                                    startAngle: -90,
-                                    endAngle: 90,
-                                    center: ['50%', '85%'],
-                                    showInLegend: true
-                                }
-                            },
-                            series: [{
-                                type: 'pie',
-                                name: this.title,
-                                innerSize: '50%',
-                                data: this.data
-                            }]
-                        }); // end of highcharts
-                    } // end of if
-                } // end of doCheck
-        } // end of controller
+                            startAngle: -90,
+                            endAngle: 90,
+                            center: ['50%', '85%'],
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: this.title,
+                        innerSize: '50%',
+                        data: this.data
+                    }]
+                }); // end of highcharts
+            } // end of if
+        } // end of doCheck
+    } // end of controller
 });

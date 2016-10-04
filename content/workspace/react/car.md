@@ -1,4 +1,4 @@
-Title: Car leasing calculator in REACT
+Title: Car leasing calculator REACT
 Date: 2016-09-30 13:00
 Slug: car leasing calculator react
 Category: REACT
@@ -219,6 +219,66 @@ var AssumptionBox = React.createClass({
     }
 });
 
+var PieChartBox = React.createClass({
+    //Destroy chart before unmount.
+    componentWillUnmount: function () {
+        this.chart.destroy();
+    },
+    //Create the div which the chart will be rendered to.
+    render: function () {
+        var data = this.props.data;
+        var currentValue = data && data.valueOf();
+        if (this.prevValue !== currentValue){
+            this.preValue = currentValue;
+
+            // Update chart
+            if (this.chart){
+                console.log(data.values);
+                this.chart.series[0].setData(data.values);
+            }
+        }
+        this.container = this.props.title.replace(/\s/g,"-").toLowerCase();
+        return React.createElement('div', { id: this.container });
+    },
+    componentDidMount: function () {
+        this.chart = Highcharts.chart(this.container, {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                },
+                title: {
+                    text: this.props.title,
+                    align: 'center',
+                    verticalAlign: 'top',
+                    y: 25
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.percentage:.0f}%</b>'
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ['50%', '85%'],
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: this.props.data.name,
+                    innerSize: '50%',
+                    data: this.props.data.values
+                }]
+            }); // end of highcharts
+
+    }// end of func
+});
+
 var CarLeasingCalculatorBox = React.createClass({
     getInitialState: function() {
         var tmp = {
@@ -263,7 +323,7 @@ var CarLeasingCalculatorBox = React.createClass({
             },
             "msd selected": {
                 label: "MSD selected",
-                value: 0,
+                value: 7,
                 unit: ""
             },
             "apr": {
@@ -546,7 +606,7 @@ var CarLeasingCalculatorBox = React.createClass({
         };
 
         // Summaries
-        var cost_of_ownership = driveoff_cost + lease_end_cost - 2*monthly_cost_after_tax;
+        var cost_of_ownership = driveoff_cost + lease_end_cost + (this.state["term"].value-2)*monthly_cost_after_tax;
         var summaryList = [{
             label: "Total lease",
             value: lease_after_tax
@@ -572,10 +632,26 @@ var CarLeasingCalculatorBox = React.createClass({
             value: lease_end_cost
         }];
 
+        // Monthly payment breakdown chart
+        var monthly_breakdown_chart = {
+            name: "Monthly breakdown",
+            values: [{
+                name: "Depreciation cost",
+                y: monthly_depreciation_cost
+            },{
+                name: "Financing cost",
+                y: monthly_financing_cost
+            },{
+                name: "Tax",
+                y: monthly_tax
+            }]
+        };
+
         // Render
         return (
             <div>
                 <Summary data={summaryList} />
+                <PieChartBox title="Monthly payment breakdown" data={monthly_breakdown_chart} />
                 <FormBox data={exampleLeaseForm} onChange={this.handleFieldChange} />
                 <FormBox data={dealTermForm} onChange={this.handleFieldChange} />
                 <FormBox data={deductionForm} onChange={this.handleFieldChange} />

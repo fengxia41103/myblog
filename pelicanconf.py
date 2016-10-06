@@ -32,7 +32,7 @@ SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
 # pagination
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 6
 # PAGINATION_PATTERNS = (
 #    (1, '{base_name}/', '{base_name}/index.html'),
 #    (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),

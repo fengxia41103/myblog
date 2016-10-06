@@ -441,3 +441,14 @@ figure img{
 .btn.mytag:hover:before{
   border-right: solid 0.6em #efefef;
 }
+
+/* fluid 5 columns */
+.grid {
+    -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;
+}
+.grid img{
+    margin: 0px;
+    vertical-align: none;
+}

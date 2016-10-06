@@ -36,9 +36,14 @@
 
 {% block content %}
 <div class="row page-header">
-<div class="my-multicol-3">
+<table>
     {% for a in articles_page.object_list %}
-    <div class="pin-card">
+    {% if loop.index % 4 == 0 %}
+    <tr>
+      {% endif %}
+      <td class="col-xs-3">
+        {{ loop.index }}
+    <div class="pin-card" style="height: 800px; display: block;">
         <i class="fa fa-calendar" style="opacity:0.5;"></i>
         <em>
             {{ a.date|strftime('%Y-%m-%d')}}
@@ -46,7 +51,7 @@
         <h3>{{ a.title }}</h3>
 
         <p>
-            {{ a.summary }}
+            {{ a.summary | do_truncate:"100" }}
         </p>
         <div style="margin-top: 10px;">
             <a class="btn btn-default button" href="{{ a.url }}">
@@ -54,8 +59,13 @@
             </a>
         </div>
     </div>
+    </td>
+
+      {% if loop.index % 4 == 0 %}
+      </tr>
+      {% endif %}
     {% endfor %}
-</div>
+</table>
 </div>
 
 {% include 'pagination.html' %}

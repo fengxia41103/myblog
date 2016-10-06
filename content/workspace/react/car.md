@@ -335,42 +335,51 @@ var CarLeasingCalculatorBox = React.createClass({
         var tmp = {
             "example msrp": {
                 label: "Example MSRP",
-                value: 18881
+                value: 18881,
+                step: 1000
             },
             "example residue": {
                 label: "example residue price",
-                value: 13270
+                value: 13270,
+                step: 1000
             },
             "msrp": {
                 label: "MSRP",
-                value: 25375
+                value: 25375,
+                step: 1000
             },
             "invoice": {
                 label: "Invoice",
-                value: 24440
+                value: 24440,
+                step: 1000
             },
             "purchase": {
                 label: "Purchase",
-                value: 23000
+                value: 23000,
+                step: 1000
             },
             "lease": {
                 label: "Lease price",
-                value: 21287
+                value: 21287,
+                step: 1000
             },
             "sales tax": {
                 label: "Sales tax",
                 value: 6,
-                unit: "%"
+                unit: "%",
+                max: 10
             },
             "msd mf discount": {
                 label: "MSD MF Discount",
                 value: 0.00007,
-                unit: ""
+                unit: "",
+                step: 0.00001
             },
             "max msd allowed": {
                 label: "Max MSD allowed",
                 value: 7,
-                unit: ""
+                unit: "",
+                max: 10
             },
             "msd selected": {
                 label: "MSD selected",
@@ -380,7 +389,8 @@ var CarLeasingCalculatorBox = React.createClass({
             "apr": {
                 label: "APR",
                 value: 4,
-                unit: "%"
+                unit: "%",
+                max: 40
             },
             term: {
                 label: "Term",
@@ -392,20 +402,24 @@ var CarLeasingCalculatorBox = React.createClass({
             },
             "downpayment": {
                 label: "Downpayment",
-                value: 2000
+                value: 2000,
+                step: 100
             },
             "rebates": {
                 label: "Rebates",
-                value: 0
+                value: 0,
+                step: 1000
             },
             "credits": {
                 label: "Credits",
-                value: 0
+                value: 0,
+                step: 1000
             },
             "monthly tax": {
                 label: "Monthly tax",
                 value: 3,
-                unit: "%"
+                unit: "%",
+                max: 10
             },
             "registration fee": {
                 label: "Registration fee",
@@ -425,12 +439,15 @@ var CarLeasingCalculatorBox = React.createClass({
             },
             "security deposit": {
                 label: "Security deposit",
-                value: 0
+                value: 0,
+                step: 1000
             },
             "security refund rate": {
                 label: "Security refund rate",
                 value: 20,
-                unit: "%"
+                unit: "%",
+                max: 100,
+                step: 10
             },
             "disposition fee": {
                 label: "Disposition fee",

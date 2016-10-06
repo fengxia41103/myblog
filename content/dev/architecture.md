@@ -4,12 +4,37 @@ Tags: dev, architecture
 Slug: general system architecture
 Author: Feng Xia
 
+
+<figure class="col-md-8">
+<img src="/images/architecture_joke.jpg" class="center-block img-responsive" />
+</figure>
+
+The word "system architect" has been puzzling to me.
+I was hired to be one at one point. But it was not a comfortable
+position. How much do we understand the business?
+What is the problem we are to solve? How
+does the current "architecture" fail? What is the downfall
+of this (or any) proposal? Overall, I feel an architecture
+emerges along with development and research. The more we
+start to understand the client's needs, habits, workflows,
+relationships, priorities, the more information
+we have when evaluating and making decisions on whether one piece
+in the stack fits or not, and why so. It is, IMHO, a backwards
+process when an architecture is pre-defined as if
+it is set in stone. We need to start from somewhere, but keeping
+in mind that it evolves and shifts like a living organ.
+
+> System architecture evolves and shifts like a living organ.
+
 This is a system architecture I have been using recently
 in projects. It is divided into four components:
 
 1. <span class="myhighlight">foreground service provider</span>: this includes machinery that interface
 with web server, taking HTTP and AJAX requests, and generate response to request.
-The core of this component is Python [Django][].
+The core of this component is Python [Django][]. Django is chosen
+for its reputation, for my past experience, for its maturity,
+excellent documentations and a broad user base. Backed by Python,
+it is a great _starting point_ for building a web application.
 
 2. <span class="myhighlight">background service provider</span>: it handles all code executions that
 do **not** need be in synchronous fashion with a user request.

@@ -5,13 +5,6 @@ Category: odoo
 Tags: odoo8, internal
 Slug: odoo8 server loading process
 Author: Feng Xia
-Summary: This article analyzes the bootup process of ODOO8. We have traced
-    its call stack and have, from its source code, pinpointed what is in the core
-    of a ODOO8 server.
-
-
-
-# ODOO8 server loading
 
 During daily development of ODOO8 modules, one thing
 I have been noticing is the slowness when ODOO first boot up.

@@ -4,6 +4,19 @@ Slug: car leasing
 Tags: demo, angular, react
 Author: Feng Xia
 
+<figure class="row">
+    <img src="/images/demo_car.png"/>
+    <figcaption>Project Car Leasing Calculator</figcaption>
+</figure>
+
+> * [AngularJS version][1]
+> * [REACT version][4]
+
+
+[1]: {filename}/workspace/angular/car.md
+[4]: {filename}/workspace/react/car.md
+
+
 Car leasing rooted in my own experience
 while researching for a new car.
 After putting together an Excel to model
@@ -24,18 +37,6 @@ to invest into for more development.
 
 [angular]: https://angularjs.org/
 [react]: https://facebook.github.io/react/docs/getting-started.html
-
-<figure class="row">
-    <img src="/images/demo_car.png"/>
-    <figcaption>Project Car Leasing Calculator</figcaption>
-</figure>
-
-> * [AngularJS version][1]
-> * [REACT version][4]
-
-
-[1]: {filename}/workspace/angular/car.md
-[4]: {filename}/workspace/react/car.md
 
 ## Leasing
 

@@ -1,5 +1,7 @@
-{% extends "layout.html" %} {% block introduction %}
+{% extends "layout.html" %}
 
+{% block introduction %}
+{% if not articles_page.has_previous() %}
 <div class="myheader">
     <div class="row">
         <article class="col-md-offset-1 col-md-5" style="padding: 2em;">
@@ -32,40 +34,34 @@
         </article>
     </div>
 </div>
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
-<div class="row page-header">
-<table>
-    {% for a in articles_page.object_list %}
-    {% if loop.index % 4 == 0 %}
-    <tr>
-      {% endif %}
-      <td class="col-xs-3">
-        {{ loop.index }}
-    <div class="pin-card" style="height: 800px; display: block;">
+{% include 'pagination.html' %}
+
+<div class="page-header">
+    {% for article in articles_page.object_list %}
+    <div class="row">
+    <div class="pin-card">
         <i class="fa fa-calendar" style="opacity:0.5;"></i>
         <em>
-            {{ a.date|strftime('%Y-%m-%d')}}
+            {{ article.date|strftime('%Y-%m-%d')}}
         </em>
-        <h3>{{ a.title }}</h3>
+        <h3>{{ article.title }}</h3>
 
         <p>
-            {{ a.summary | do_truncate:"100" }}
+            {{ article.summary|truncate(600) }}
         </p>
         <div style="margin-top: 10px;">
-            <a class="btn btn-default button" href="{{ a.url }}">
+            <a class="btn btn-default button" href="{{ article.url }}">
                 <i class="fa fa-coffee" style="opacity:0.5;"></i> continue reading
             </a>
         </div>
     </div>
-    </td>
-
-      {% if loop.index % 4 == 0 %}
-      </tr>
-      {% endif %}
+    </div>
     {% endfor %}
-</table>
 </div>
 
 {% include 'pagination.html' %}

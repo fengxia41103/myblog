@@ -156,8 +156,7 @@ h6 {
 
 .my-huge-font {
     font-family: 'Francois One', sans-serif;
-    font-size: 2em;
-    color: #819FF7;
+    font-size: 3em;
     display: inline-block;
 }
 
@@ -451,4 +450,19 @@ figure img{
 .grid img{
     margin: 0px;
     vertical-align: none;
+}
+
+.fa-expand:hover {
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    -o-transition: all 0.6s ease-in-out;
+    -ms-transition: all 0.6s ease-in-out;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    color: #ffe933;
+}
+#showMore:hover {
+    color: #ffe933;
 }

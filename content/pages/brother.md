@@ -6,7 +6,6 @@ Author: Feng Xia
 <div id="sth"></div>
 
 <script type="text/babel">
-
 var images = [];
 for (var i=1; i<125; i++){
     var pad = "0000";
@@ -19,22 +18,42 @@ for (var i=1; i<125; i++){
     });
 }
 
+var DisplayListBox = React.createClass({
+    render: function(){
+        var imageThumbs = this.props.displayList.map(function(img){
+            return (
+                <li key={img.key} onClick={this.props.onClick.bind(null,img)}>
+                    <img src={img.thumb} className="mythumbnail" />
+                </li>
+            );
+        },this);
+
+        return (
+            <div>
+                <ul className="list-inline">
+                    {imageThumbs}
+                </ul>
+            </div>
+        );
+    }
+});
+
 var OneBox = React.createClass({
     render: function(){
         return(
             <div className="pin-card" style={{backgroundColor:"#1e1e1f", color:"#cecece", fontSize:"10pt"}}>
-                <img src={this.props.image.full} className="center-block img-responsive" />
+                <img src={this.props.image.full} className="center-block img-responsive" style={{height:"600px"}}/>
                 <h3>
                     I miss you very much.
                 </h3>
-                <div className="row text-right">
+                <div className="row text-right mynav" style={{top:"-300px",position:"relative"}}>
                 <span className="flabel">
                     <i className="fa fa-angle-left my-huge-font" style={{paddingRight:"1em"}}
-                    onClick={this.props.prev}></i>
+                    onClick={this.props.onPrev}></i>
                 </span>
                 <span className="flabel pull-right">
                     <i className="fa fa-angle-right my-huge-font" style={{paddingLeft:"1em"}}
-                    onClick={this.props.next}></i>
+                    onClick={this.props.onNext}></i>
                 </span>
                 </div>
 
@@ -46,6 +65,9 @@ var OneBox = React.createClass({
                     Show more
                 </div>
                 :null }
+
+                <DisplayListBox displayList={this.props.displayList}
+                    onClick={this.props.setImage} />
             </div>
         );
     }
@@ -69,13 +91,17 @@ var PresentationBox = React.createClass({
     getInitialState: function(){
         return {
             showing: this.props.images[70],
-            showMore: true
+            showMore: true,
+            displayList: []
         }
     },
-    handleImageFieldClick: function(img){
+    setImage: function(img){
         this.setState({
             showing: img
         });
+    },
+    handleImageFieldClick: function(img){
+        this.setImage(img);
 
         // toggle show more
         this.toggleShowMore();
@@ -85,45 +111,52 @@ var PresentationBox = React.createClass({
             showMore: !this.state.showMore
         });
     },
-    next: function(){
+    onNext: function(){
         var current = this.state.showing;
         var images = this.props.images;
-        for(var i=0; i<images.length; i++){
-            if (images[i].key===current.key){
-                if (i== images.length-1){
-                    // Circle back to beginning
-                    this.setState({
-                        showing: images[0]
-                    });
-                }else{ // set current to next
-                    this.setState({
-                        showing: images[i+1]
-                    });
-                }
-                break;
-            }
+        if (current.key == images.length){
+            // Circle back to beginning
+            this.setState({
+                showing: images[0]
+            });
+        }else{ // set current to next
+            this.setState({
+                showing: images[current.key]
+            });
         }
-    },
-    prev: function(){
-        var current = this.state.showing;
-        var images = this.props.images;
-        for(var i=0; i<images.length; i++){
-            if (images[i].key===current.key){
-                if (i== 0){
-                    // Circle back
-                    this.setState({
-                        showing: images[images.length-1]
-                    });
-                }else{ // set current to next
-                    this.setState({
-                        showing: images[i-1]
-                    });
-                }
-                break;
-            }
-        }
-    },
 
+        this.handleUpdate();
+    },
+    onPrev: function(){
+        var current = this.state.showing;
+        var images = this.props.images;
+        if (current.key == 1){
+            // Circle back
+            this.setState({
+                showing: images[images.length-1]
+            });
+        }else{ // set current to next
+            this.setState({
+                showing: images[current.key-2]
+            });
+        }
+
+        this.handleUpdate();
+    },
+    handleUpdate: function(){
+        // Always show 11 photos
+        var current = this.state.showing;
+        var images = this.props.images;
+        var start = Math.max(0,current.key-3);
+        var end = Math.min(current.key+3,images.length);
+        var tmp = [];
+        for(var i=start-1; i<end;i++){
+            tmp.push(images[i]);
+        }
+        this.setState({
+            displayList: tmp
+        });
+    },
     componentDidMount: function(){
     },
     render: function(){
@@ -137,8 +170,10 @@ var PresentationBox = React.createClass({
                 { this.state.showMore?
                 <OneBox image={this.state.showing} showMore={this.state.showMore}
                     onClick={this.toggleShowMore}
-                    next={this.next}
-                    prev={this.prev}
+                    onNext={this.onNext}
+                    onPrev={this.onPrev}
+                    displayList={this.state.displayList}
+                    setImage={this.setImage}
                 />:
                 <div className="my-multicol-4 grid">
                     {imageFields}

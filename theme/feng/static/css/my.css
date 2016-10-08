@@ -466,3 +466,12 @@ figure img{
 #showMore:hover {
     color: #ffe933;
 }
+
+.mythumbnail{
+    width: 80px;
+    height: 100px;
+}
+
+.mynav {
+    opacity: 0.5;
+}

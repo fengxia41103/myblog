@@ -33,13 +33,7 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 # pagination
 DEFAULT_PAGINATION = 6
-# PAGINATION_PATTERNS = (
-#    (1, '{base_name}/', '{base_name}/index.html'),
-#    (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
-#)
 
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
 
 # Theme
 THEME = 'feng'
@@ -47,7 +41,6 @@ EMAIL_ADDRESS = 'feng_xia41103@hotmail.com'
 GITHUB_ADDRESS = 'http://github.com/fengxia41103'
 LINKEDIN_ADDRESS = 'https://www.linkedin.com/in/fengxia41103'
 
-# Plugins
 LOAD_CONTENT_CACHE = False  # for development use
-PLUGIN_PATHS = ['../pelican-plugins']
-PLUGINS = ['pin_to_top']
+SUMMARY_MAX_LENGTH = None
+IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]

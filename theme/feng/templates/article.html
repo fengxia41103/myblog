@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<article>
+<div style="background-color: #fefefe;">
+<article class="container center-block" style="padding:2em 0;">
+    {% block main_content %}
     <div class="row">
         <div class="col-md-2">
             <div class="pennant pennant-alt date">
@@ -62,6 +64,7 @@
             </p>
         </div>
     </div>
+    {% endblock %}
 </article>
 
 {% endblock %}

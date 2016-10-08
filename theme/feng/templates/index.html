@@ -39,6 +39,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="container center-block">
 {% include 'pagination.html' %}
 
 <div class="page-header">
@@ -65,4 +66,10 @@
 </div>
 
 {% include 'pagination.html' %}
+</div>
+
+{% endblock %}
+
+{% block push %}
+<div id="push"></div>
 {% endblock %}

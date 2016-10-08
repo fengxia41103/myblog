@@ -58,21 +58,6 @@
         </script>
 
         {# REACT #}
-        <script type="text/javascript"
-                src="/theme/bower_components/react/react.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/react/react-dom.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/babel/browser-polyfill.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/babel/browser.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/remarkable/dist/remarkable.min.js">
-        </script>
 
         {% endblock %}
         {# page title #}
@@ -86,7 +71,7 @@
         {% endblock %}<!-- end of block navbar -->
 
         {% block main %}
-	    <div id="wrap" style="background-color:#fefefe;">
+	    <div id="wrap" style="background-color:#eee;">
 	        <div class="container center-block">
 		        <div class="row page-header">
                     <div class="col-md-6">
@@ -115,7 +100,7 @@
             {% block introduction %}
             {% endblock %}
 
-	        <div class="container center-block" id="content">
+	        <div id="content">
                 {# main content #}
 		        {% block content %}
 		        {% endblock %}
@@ -124,7 +109,10 @@
                 {% block pagination %}
                 {% endblock %}
 	        </div><!-- /.container -->
-	        <div id="push"></div>
+
+            {# block push #}
+            {% block push %}
+            {% endblock %}
 	    </div>
         {% endblock %}<!-- end of block main -->
 
@@ -277,6 +265,24 @@
         <script type="text/javascript"
                 src="/theme/bower_components/classnames/index.js">
         </script>
+
+        {# REACT #}
+        <script type="text/javascript"
+                src="/theme/bower_components/react/react.js">
+        </script>
+        <script type="text/javascript"
+                src="/theme/bower_components/react/react-dom.min.js">
+        </script>
+        <script type="text/javascript"
+                src="/theme/bower_components/babel/browser-polyfill.min.js">
+        </script>
+        <script type="text/javascript"
+                src="/theme/bower_components/babel/browser.min.js">
+        </script>
+        <script type="text/javascript"
+                src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+        </script>
+
 
         {# application js #}
 	    <script type="text/javascript">

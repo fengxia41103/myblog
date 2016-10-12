@@ -2,6 +2,7 @@ Title: 夏雷
 Tags: Lei
 Slug: lei
 Author: Feng Xia
+Status: draft
 
 <div id="sth"></div>
 
@@ -42,11 +43,15 @@ var OneBox = React.createClass({
     render: function(){
         return(
             <div className="pin-card" style={{backgroundColor:"#1e1e1f", color:"#cecece", fontSize:"10pt"}}>
-                <img src={this.props.image.full} className="center-block img-responsive" style={{height:"600px"}}/>
+                <img src={this.props.image.full}
+                    className="center-block img-responsive"
+                    onClick={this.props.onNext}
+                    style={{height:"600px"}}
+                />
                 <h3>
                     I miss you very much.
                 </h3>
-                <div className="row text-right mynav" style={{top:"-300px",position:"relative"}}>
+                <div className="row text-right mynav">
                 <span className="flabel">
                     <i className="fa fa-angle-left my-huge-font" style={{paddingRight:"1em"}}
                     onClick={this.props.onPrev}></i>

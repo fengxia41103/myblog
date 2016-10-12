@@ -283,6 +283,13 @@
                 src="/theme/bower_components/remarkable/dist/remarkable.min.js">
         </script>
 
+        {# d3 and d3plus #}
+        <script type="text/javascript"
+                src="/theme/bower_components/d3/d3.min.js">
+        </script>
+        <script type="text/javascript"
+                src="/theme/js/d3plus.full.min.js">
+        </script>
 
         {# application js #}
 	    <script type="text/javascript">
@@ -319,6 +326,8 @@
         {% block theme_js %}
         {% endblock %}
         {% block custom_js %}
+        {% endblock %}
+        {% block reactjs %}
         {% endblock %}
     </body>
 

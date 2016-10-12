@@ -21,7 +21,7 @@ var Summary = React.createClass({
 
         var summaryNodes = this.props.data.map(function(summary) {
           return (
-            <SummaryValueDisplay {...summary} />
+            <SummaryValueDisplay key={summary.label} {...summary} />
           );
         });
 
@@ -172,6 +172,8 @@ var FormBox = React.createClass({
                 return <FormInput {...field} />
             }, this);
         }
+        var fields = this.state.showFields?
+            <div className="my-multicol-2">{valueFields}{formFields}</div>: null;
 
         // Value displays
         var valueFields = [];
@@ -184,8 +186,6 @@ var FormBox = React.createClass({
 
         var assumptions = this.state.showFields?
             <AssumptionBox fields={this.props.data.assumptions} />:null;
-        var fields = this.state.showFields?
-            <div className="my-multicol-2">{valueFields}{formFields}</div>: null;
 
         // Render
         return (
@@ -319,7 +319,7 @@ var ChartBox = React.createClass({
         }
 
         var charts = this.props.data.map(function(field) {
-            return <PieChartBox {...field} />
+            return <PieChartBox key={field.title} {...field} />
         }, this);
 
         return (

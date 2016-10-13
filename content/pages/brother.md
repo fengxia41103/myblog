@@ -2,7 +2,7 @@ Title: 夏雷
 Tags: Lei
 Slug: lei
 Author: Feng Xia
-Status: draft
+Status: hidden
 
 <div id="sth"></div>
 

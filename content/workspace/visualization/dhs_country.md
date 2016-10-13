@@ -4,7 +4,22 @@ Category: REACT
 Tags: dhs, react
 Slug: dhs by cuontry
 Author: Feng Xia
-Summary: DHS data set visulization by country.
+
+[DHS][] data set is published by [us aid][]. Following its [API][]
+documents, this page is a prototype that
+uses data from selected [indicators][]
+to draw a picture of a given country.  Considering the massive
+amount of [indicators][] available, it is an opportunity
+to build visual presentation of these data. As a prototype,
+I am starting with only a few KPIs. The list will continue
+to grow as I gain more insights of the dataset and its meanings.
+Note that a KPI will be
+omitted if there is no data in [DHS][] database.
+
+[dhs]: http://dhsprogram.com/data/
+[us aid]: https://www.usaid.gov/
+[api]: http://api.dhsprogram.com/#/index.html
+[indicators]: http://api.dhsprogram.com/#/api-indicators.cfm
 
 <div id="dhs"></div>
 
@@ -120,7 +135,16 @@ var RootBox = React.createClass({
                     "FE_FRTR_W_A40",
                     "FE_FRTR_W_A45",
                 ],
-                type: "Bar"
+                type: "bar"
+            },{
+                title:"HIV prevalence among couples",
+                indicators:[
+                    "HA_HPAC_B_CPP",
+                    "HA_HPAC_B_CPN",
+                    "HA_HPAC_B_CNP",
+                    "HA_HPAC_B_CNN"
+                ],
+                type: "bar"
             }]
         }
     },
@@ -173,6 +197,7 @@ var D3GraphContainer = React.createClass({
             }
         }
         var apiUrl = baseUrl+tmp.join("&");
+        console.log(apiUrl);
 
         // Get data
         j$.ajax({
@@ -204,18 +229,23 @@ var D3GraphContainer = React.createClass({
         }
         return (
             <div>
-                <h3>
-                    {this.props.countryCode}
-                </h3>
-                <D3GraphBar containerId={this.containerId}
-                    data={this.state.data}
-                    title={this.props.title} />
+                {this.state.data.length>0?
+                <div>
+                    <h3>
+                        {this.props.countryCode}
+                    </h3>
+                    <D3GraphBox containerId={this.containerId}
+                        data={this.state.data}
+                        title={this.props.title}
+                        type={this.props.type} />
+                </div>
+                :null}
             </div>
         );
     }
 });
 
-var D3GraphBar = React.createClass({
+var D3GraphBox = React.createClass({
     getInitialState: function(){
         return {
             prevData: []
@@ -231,7 +261,7 @@ var D3GraphBar = React.createClass({
     makeViz: function(data){
         this.viz = d3plus.viz().container("#"+this.props.containerId)
             .data(this.cleanData(data))
-            .type("bar")
+            .type(this.props.type.toLowerCase())
             .id("Indicator")
             .color("Indicator")
             .text("Indicator")

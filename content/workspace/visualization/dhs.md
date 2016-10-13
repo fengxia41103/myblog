@@ -4,8 +4,9 @@ Category: REACT
 Tags: dhs, react
 Slug: dhs
 Author: Feng Xia
-Summary: DHS data set visulization using D3plus library. Inspired by DATA USA.
 Status: Draft
+Summary: DHS data set visulization using D3plus library. Inspired by DATA USA.
+
 
 <div id="dhs"></div>
 
@@ -207,7 +208,7 @@ var D3Graph = React.createClass({
         }
 
         return (
-            <figure id={this.state.id}>
+            <figure id={this.state.id} style={{minHeight:"500px"}}>
                 <figcaption>{this.props.title}</figcaption>
             </figure>
         );

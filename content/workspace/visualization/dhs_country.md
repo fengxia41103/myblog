@@ -5,7 +5,7 @@ Tags: dhs, react
 Slug: dhs by cuontry
 Author: Feng Xia
 
-[DHS][] data set is published by [us aid][]. Following its [API][]
+[DHS][] data set is published by [US AID][]. Following its [API][]
 documents, this page is a prototype that
 uses data from selected [indicators][]
 to draw a picture of a given country.  Considering the massive
@@ -144,7 +144,7 @@ var RootBox = React.createClass({
                     "HA_HPAC_B_CNP",
                     "HA_HPAC_B_CNN"
                 ],
-                type: "bar"
+                type: "pie"
             }]
         }
     },
@@ -218,30 +218,68 @@ var D3GraphContainer = React.createClass({
         this.debounceGetData = _.debounce(function(countryCode, indicators){
             this.getData(countryCode, indicators);
         }, 500);
-
-        // container id
-        this.containerId = randomId();
-    },
+     },
     render: function(){
         // Update data if country code has changed
         if (this.props.countryCode && !_.isEqual(this.state.countryCode, this.props.countryCode)){
             this.debounceGetData(this.props.countryCode, this.props.indicators);
         }
-        return (
-            <div>
-                {this.state.data.length>0?
-                <div>
+
+        // Render graph
+        if (this.props.type === "bar" && this.state.data.length){
+            // container id
+            var containerId = randomId();
+            return (
+                <div className="page-header">
                     <h3>
                         {this.props.countryCode}
                     </h3>
-                    <D3GraphBox containerId={this.containerId}
+                    <D3GraphBox containerId={containerId}
                         data={this.state.data}
                         title={this.props.title}
                         type={this.props.type} />
                 </div>
-                :null}
-            </div>
-        );
+            );
+        } else if (this.props.type === "pie" && this.state.data.length){
+            var graphs = [];
+            var data = this.state.data;
+
+            // Regroup by year
+            var tmp = {};
+            for (var i=0; i<data.length;i++){
+                var year = data[i].SurveyYear;
+                if (tmp.hasOwnProperty(year)){
+                    tmp[year].push(data[i])
+                } else{
+                    tmp[year] = [data[i]];
+                }
+            }
+            for (year in tmp){
+                var containerId = randomId();
+                var title= [this.props.title, year].join(" -- ");
+
+                graphs.push(
+                <div key={randomId()} style={{display:"inline-block"}}>
+                    <h3>
+                        {this.props.countryCode}
+                    </h3>
+                    <D3GraphBox containerId={containerId}
+                        data={tmp[year]}
+                        title={title}
+                        type={this.props.type} />
+                </div>
+
+                );
+            }
+            return (
+                <div className="row my-multicol-2 page-header">
+                    {graphs}
+                </div>
+            );
+        }
+
+        // Default
+        return null;
     }
 });
 
@@ -267,6 +305,7 @@ var D3GraphBox = React.createClass({
             .text("Indicator")
             .y("Value")
             .x("SurveyYear")
+            .size("Value")
             .draw();
     },
     componentDidMount: function(){

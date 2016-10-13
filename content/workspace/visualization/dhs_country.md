@@ -19,12 +19,13 @@ var CountryAlphabeticList = React.createClass({
         var letter = this.props.letter;
         var setCountry = this.props.setCountry;
         var fields = this.props.countries.map(function(c){
-            if (c.CountryName.startsWith(letter)){
+            if (c.CountryName.startsWith(letter) || letter.toLowerCase()=="all"){
                 return (
-                    <li key={c.DHS_CountryCode}>
+                    <li key={c.DHS_CountryCode} style={{marginTop:"0.7em"}}>
                     <button className="btn btn-default"
                         onClick={setCountry.bind(null,c.DHS_CountryCode)}
-                    >{c.CountryName}
+                    >
+                        {c.CountryName} ({c.DHS_CountryCode})
                     </button>
                     </li>
                 );
@@ -76,10 +77,11 @@ var CountryBox = React.createClass({
     },
     render: function(){
         var alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
+        alphabet.unshift("All");
         var current = this.state.index;
         var setIndex = this.setIndex;
         var index = alphabet.map(function(letter){
-            var highlight = current==letter?"flabel myhighlight":"flabel";
+            var highlight = current==letter?"myhighlight":"";
             return (
                 <li key={letter} onClick={setIndex.bind(null,letter)}>
                     <a className={highlight}>{letter}</a>
@@ -152,17 +154,10 @@ var D3GraphContainer = React.createClass({
     getInitialState: function(){
         return {
             countryCode: "",
-            data: [],
-            loading: false
+            data: []
         }
     },
     getData:function(countryCode, indicators){
-        // Protect from loading multiple times
-        // and only when country code has changed
-        if (this.state.loading && _.isEqual(countryCode,"")){
-            return null;
-        }
-
         // Set up URL
         var that = this;
         var baseUrl = "http://api.dhsprogram.com/rest/dhs/v4/data?";
@@ -188,8 +183,7 @@ var D3GraphContainer = React.createClass({
                 if ((typeof resp != "undefined") && resp){
                     that.setState({
                         data: resp.Data,
-                        countryCode: countryCode,
-                        loading: false
+                        countryCode: countryCode
                     });
                 }
             } // end of success
@@ -198,7 +192,7 @@ var D3GraphContainer = React.createClass({
     componentWillMount: function(){
         this.debounceGetData = _.debounce(function(countryCode, indicators){
             this.getData(countryCode, indicators);
-        }, 1000);
+        }, 500);
 
         // container id
         this.containerId = randomId();
@@ -210,7 +204,9 @@ var D3GraphContainer = React.createClass({
         }
         return (
             <div>
-                <h3>{this.props.countryCode}</h3>
+                <h3>
+                    {this.props.countryCode}
+                </h3>
                 <D3GraphBar containerId={this.containerId}
                     data={this.state.data}
                     title={this.props.title} />
@@ -252,12 +248,11 @@ var D3GraphBar = React.createClass({
         this.debounceUpdate = _.debounce(function(data){
             that.viz.data(this.cleanData(data));
             that.viz.draw();
-
             // Save data
             that.setState({
                 prevData: data
             });
-        }, 500);
+        }, 200);
     },
     render: function(){
         // Update graph only when data has changed

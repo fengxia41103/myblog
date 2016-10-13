@@ -124,7 +124,7 @@ var RootBox = React.createClass({
     getInitialState: function(){
         return {
             countryCode: null,
-            graphs: [{
+            dhsGraphs: [{
                 title: "Age-specific fertility rate for the three years preceding the survey, expressed per 1,000 women",
                 indicators:[
                     "FE_FRTR_W_A15",
@@ -145,6 +145,11 @@ var RootBox = React.createClass({
                     "HA_HPAC_B_CNN"
                 ],
                 type: "pie"
+            }],
+            wbGraphs:[{
+                title: "GNI per capita, Atlas method (current US$)",
+                indicator: "NY.GNP.PCAP.CD",
+                type: "bar"
             }]
         }
     },
@@ -155,39 +160,54 @@ var RootBox = React.createClass({
     },
     render: function(){
         var countryCode = this.state.countryCode;
-        var graphs = this.state.graphs.map(function(g){
+        var dhs = this.state.dhsGraphs.map(function(g){
             var id = randomId();
             return (
-                <D3GraphContainer
+                <DhsGraphContainer
                     key={id}
                     countryCode={countryCode}
                     {...g}
                 />
             );
         });
+        var wb = this.state.wbGraphs.map(function(g){
+            var id = randomId();
+            return (
+                <WbGraphContainer
+                    key={id}
+                    countryCode={countryCode}
+                    {...g}
+                />
+            );
+        });
+
         return (
             <div>
                 <CountryBox setCountry={this.setCountry} />
-                {graphs}
+                {dhs}
+                {wb}
             </div>
         );
     }
 });
 
-var D3GraphContainer = React.createClass({
+var DhsGraphContainer = React.createClass({
     getInitialState: function(){
         return {
             countryCode: "",
             data: []
         }
     },
-    getData:function(countryCode, indicators){
-        // Set up URL
-        var that = this;
+    getUrl: function(countryCode, indicators){
+        // Build DHS API url
         var baseUrl = "http://api.dhsprogram.com/rest/dhs/v4/data?";
         var queries = {
             "countryIds": countryCode,
-            "indicatorIds": indicators.join(",")
+            "indicatorIds": indicators.join(","),
+            "perpage": 1000, // max for non-registered user
+
+            // return fields must match what is being used in D3 graph
+            "returnFields": ["Indicator","Value","SurveyYear"].join(",")
         };
         var tmp = [];
         for (var key in queries){
@@ -196,10 +216,15 @@ var D3GraphContainer = React.createClass({
                 tmp.push(key + "=" + val);
             }
         }
-        var apiUrl = baseUrl+tmp.join("&");
+        return baseUrl+tmp.join("&");
+    },
+    getData:function(countryCode, indicators){
+        // Set up URL
+        var apiUrl = this.getUrl(countryCode, indicators);
         console.log(apiUrl);
 
         // Get data
+        var that = this;
         j$.ajax({
             url: apiUrl,
             dataType: "json",
@@ -222,7 +247,10 @@ var D3GraphContainer = React.createClass({
     render: function(){
         // Update data if country code has changed
         if (this.props.countryCode && !_.isEqual(this.state.countryCode, this.props.countryCode)){
-            this.debounceGetData(this.props.countryCode, this.props.indicators);
+            this.debounceGetData(
+                this.props.countryCode,
+                this.props.indicators
+            );
         }
 
         // Render graph
@@ -234,7 +262,7 @@ var D3GraphContainer = React.createClass({
                     <h3>
                         {this.props.countryCode}
                     </h3>
-                    <D3GraphBox containerId={containerId}
+                    <DhsGraphBox containerId={containerId}
                         data={this.state.data}
                         title={this.props.title}
                         type={this.props.type} />
@@ -263,7 +291,7 @@ var D3GraphContainer = React.createClass({
                     <h3>
                         {this.props.countryCode}
                     </h3>
-                    <D3GraphBox containerId={containerId}
+                    <DhsGraphBox containerId={containerId}
                         data={tmp[year]}
                         title={title}
                         type={this.props.type} />
@@ -283,7 +311,7 @@ var D3GraphContainer = React.createClass({
     }
 });
 
-var D3GraphBox = React.createClass({
+var DhsGraphBox = React.createClass({
     getInitialState: function(){
         return {
             prevData: []
@@ -306,6 +334,170 @@ var D3GraphBox = React.createClass({
             .y("Value")
             .x("SurveyYear")
             .size("Value")
+            .draw();
+    },
+    componentDidMount: function(){
+        // Initialize graph
+        this.makeViz(this.props.data);
+
+        // Set up data updater
+        var that = this;
+        this.debounceUpdate = _.debounce(function(data){
+            that.viz.data(this.cleanData(data));
+            that.viz.draw();
+            // Save data
+            that.setState({
+                prevData: data
+            });
+        }, 200);
+    },
+    render: function(){
+        // Update graph only when data has changed
+        if (this.viz && !_.isEqual(this.state.prevData, this.props.data)){
+            this.debounceUpdate(this.props.data);
+        }
+        return (
+            <figure id={this.props.containerId} style={{minHeight:"500px"}}>
+                <figcaption>{this.props.title}</figcaption>
+            </figure>
+        );
+    }
+});
+
+var WbGraphContainer = React.createClass({
+    getInitialState: function(){
+        return {
+            countryCode: "",
+            data: []
+        }
+    },
+    getUrl: function(countryCode, indicator){
+        // Build DHS API url
+        var baseUrl = "http://api.worldbank.org/countries/";
+        var tmp = [countryCode, "indicators", indicator].join("/");
+        var query = "?date=2000:2015&format=json";
+        return baseUrl+tmp+query;
+    },
+    getData:function(countryCode, indicator){
+        // Set up URL
+        var apiUrl = this.getUrl(countryCode, indicator);
+        console.log(apiUrl);
+
+        // Get data
+        var that = this;
+        j$.ajax({
+            url: apiUrl,
+            //dataType: "json",
+            method: "GET",
+            success: function(resp){
+                if ((typeof resp != "undefined") && resp){
+                    that.setState({
+                        data: resp[1],
+                        countryCode: countryCode
+                    });
+                }
+            } // end of success
+        });
+    },
+    componentWillMount: function(){
+        this.debounceGetData = _.debounce(function(countryCode, indicator){
+            this.getData(countryCode, indicator);
+        }, 500);
+     },
+    render: function(){
+        // Update data if country code has changed
+        if (this.props.countryCode && !_.isEqual(this.state.countryCode, this.props.countryCode)){
+            this.debounceGetData(
+                this.props.countryCode,
+                this.props.indicator
+            );
+        }
+
+        // Render graph
+        if (this.props.type !== "pie" && this.state.data.length){
+            // container id
+            var containerId = randomId();
+            return (
+                <div className="page-header">
+                    <h3>
+                        {this.props.countryCode}
+                    </h3>
+                    <WbGraphBox containerId={containerId}
+                        data={this.state.data}
+                        title={this.props.title}
+                        type={this.props.type} />
+                </div>
+            );
+        } else if (this.props.type === "pie" && this.state.data.length){
+            var graphs = [];
+            var data = this.state.data;
+
+            // Regroup by year
+            var tmp = {};
+            for (var i=0; i<data.length;i++){
+                var year = data[i].SurveyYear;
+                if (tmp.hasOwnProperty(year)){
+                    tmp[year].push(data[i])
+                } else{
+                    tmp[year] = [data[i]];
+                }
+            }
+            for (year in tmp){
+                var containerId = randomId();
+                var title= [this.props.title, year].join(" -- ");
+
+                graphs.push(
+                <div key={randomId()} style={{display:"inline-block"}}>
+                    <h3>
+                        {this.props.countryCode}
+                    </h3>
+                    <WbGraphBox containerId={containerId}
+                        data={tmp[year]}
+                        title={title}
+                        type={this.props.type} />
+                </div>
+
+                );
+            }
+            return (
+                <div className="row my-multicol-2 page-header">
+                    {graphs}
+                </div>
+            );
+        }
+
+        // Default
+        return null;
+    }
+});
+
+var WbGraphBox = React.createClass({
+    getInitialState: function(){
+        return {
+            prevData: []
+        }
+    },
+    cleanData:function(data){
+        var tmp = []; // make a copy
+        for (var i = 0; i<data.length; i++){
+            if (data[i].value !== null){
+                data[i].value = parseInt(data[i].value);
+                tmp.push(data[i]);
+            }
+        }
+        return  _.sortBy(tmp, 'date');
+    },
+    makeViz: function(data){
+        this.viz = d3plus.viz().container("#"+this.props.containerId)
+            .data(this.cleanData(data))
+            .type(this.props.type.toLowerCase())
+            .id("date")
+            .color("date")
+            .text("date")
+            .y("value")
+            .x("date")
+            .size("value")
+            .legend(false)
             .draw();
     },
     componentDidMount: function(){

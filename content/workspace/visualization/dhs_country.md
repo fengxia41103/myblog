@@ -10,6 +10,10 @@ Summary: DHS data set visulization by country.
 
 <script type="text/babel">
 
+var randomId = function(){
+    return "DHS"+(Math.random()*1e32).toString(12);
+};
+
 var CountryAlphabeticList = React.createClass({
     render: function(){
         var letter = this.props.letter;
@@ -102,7 +106,20 @@ var CountryBox = React.createClass({
 var RootBox = React.createClass({
     getInitialState: function(){
         return {
-            countryCode: null
+            countryCode: null,
+            graphs: [{
+                title: "Age-specific fertility rate for the three years preceding the survey, expressed per 1,000 women",
+                indicators:[
+                    "FE_FRTR_W_A15",
+                    "FE_FRTR_W_A20",
+                    "FE_FRTR_W_A25",
+                    "FE_FRTR_W_A30",
+                    "FE_FRTR_W_A35",
+                    "FE_FRTR_W_A40",
+                    "FE_FRTR_W_A45",
+                ],
+                type: "Bar"
+            }]
         }
     },
     setCountry: function(code){
@@ -111,10 +128,21 @@ var RootBox = React.createClass({
         });
     },
     render: function(){
+        var countryCode = this.state.countryCode;
+        var graphs = this.state.graphs.map(function(g){
+            var id = randomId();
+            return (
+                <D3GraphContainer
+                    key={id}
+                    countryCode={countryCode}
+                    {...g}
+                />
+            );
+        });
         return (
             <div>
                 <CountryBox setCountry={this.setCountry} />
-                <D3GraphContainer countryCode={this.state.countryCode} />
+                {graphs}
             </div>
         );
     }
@@ -123,22 +151,12 @@ var RootBox = React.createClass({
 var D3GraphContainer = React.createClass({
     getInitialState: function(){
         return {
-            title: "Age-specific fertility rate for the three years preceding the survey, expressed per 1,000 women",
             countryCode: "",
-            indicators:[
-                "FE_FRTR_W_A15",
-                "FE_FRTR_W_A20",
-                "FE_FRTR_W_A25",
-                "FE_FRTR_W_A30",
-                "FE_FRTR_W_A35",
-                "FE_FRTR_W_A40",
-                "FE_FRTR_W_A45",
-            ],
             data: [],
             loading: false
         }
     },
-    getData:function(countryCode){
+    getData:function(countryCode, indicators){
         // Protect from loading multiple times
         // and only when country code has changed
         if (this.state.loading && _.isEqual(countryCode,"")){
@@ -150,7 +168,7 @@ var D3GraphContainer = React.createClass({
         var baseUrl = "http://api.dhsprogram.com/rest/dhs/v4/data?";
         var queries = {
             "countryIds": countryCode,
-            "indicatorIds": this.state.indicators.join(",")
+            "indicatorIds": indicators.join(",")
         };
         var tmp = [];
         for (var key in queries){
@@ -160,7 +178,6 @@ var D3GraphContainer = React.createClass({
             }
         }
         var apiUrl = baseUrl+tmp.join("&");
-        console.log(apiUrl);
 
         // Get data
         j$.ajax({
@@ -179,21 +196,24 @@ var D3GraphContainer = React.createClass({
         });
     },
     componentWillMount: function(){
-        this.getData(this.props.countryCode);
-        this.debounceGetData = _.debounce(function(countryCode){
-            this.getData(countryCode);
+        this.debounceGetData = _.debounce(function(countryCode, indicators){
+            this.getData(countryCode, indicators);
         }, 1000);
+
+        // container id
+        this.containerId = randomId();
     },
     render: function(){
+        // Update data if country code has changed
         if (this.props.countryCode && !_.isEqual(this.state.countryCode, this.props.countryCode)){
-            this.debounceGetData(this.props.countryCode);
+            this.debounceGetData(this.props.countryCode, this.props.indicators);
         }
         return (
             <div>
                 <h3>{this.props.countryCode}</h3>
-                <D3GraphBar id="kjlsdjflsjf"
+                <D3GraphBar containerId={this.containerId}
                     data={this.state.data}
-                    title={this.state.title} />
+                    title={this.props.title} />
             </div>
         );
     }
@@ -202,9 +222,7 @@ var D3GraphContainer = React.createClass({
 var D3GraphBar = React.createClass({
     getInitialState: function(){
         return {
-            id: "DHS"+this.props.id,
-            prevData: [],
-            viz: null
+            prevData: []
         }
     },
     cleanData:function(data){
@@ -215,8 +233,7 @@ var D3GraphBar = React.createClass({
         return tmp;
     },
     makeViz: function(data){
-        this.setState({
-            viz: d3plus.viz().container("#"+this.state.id)
+        this.viz = d3plus.viz().container("#"+this.props.containerId)
             .data(this.cleanData(data))
             .type("bar")
             .id("Indicator")
@@ -224,31 +241,31 @@ var D3GraphBar = React.createClass({
             .text("Indicator")
             .y("Value")
             .x("SurveyYear")
-            .draw()
-        });
+            .draw();
+    },
+    componentDidMount: function(){
+        // Initialize graph
+        this.makeViz(this.props.data);
+
+        // Set up data updater
+        var that = this;
         this.debounceUpdate = _.debounce(function(data){
-            this.state.viz.data(this.cleanData(data));
-            this.state.viz.draw();
+            that.viz.data(this.cleanData(data));
+            that.viz.draw();
 
             // Save data
-            this.setState({
+            that.setState({
                 prevData: data
             });
         }, 500);
     },
-    componentDidMount: function(){
-        this.setState({
-            prevData: this.props.data
-        });
-        this.makeViz(this.props.data);
-    },
     render: function(){
-        if (this.state.viz && !_.isEqual(this.state.prevData, this.props.data)){
+        // Update graph only when data has changed
+        if (this.viz && !_.isEqual(this.state.prevData, this.props.data)){
             this.debounceUpdate(this.props.data);
         }
-
         return (
-            <figure id={this.state.id} style={{minHeight:"500px"}}>
+            <figure id={this.props.containerId} style={{minHeight:"500px"}}>
                 <figcaption>{this.props.title}</figcaption>
             </figure>
         );

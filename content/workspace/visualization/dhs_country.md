@@ -29,36 +29,6 @@ var randomId = function(){
     return "DHS"+(Math.random()*1e32).toString(12);
 };
 
-var CountryAlphabeticList = React.createClass({
-    render: function(){
-        var letter = this.props.letter;
-        var setCountry = this.props.setCountry;
-        var fields = this.props.countries.map(function(c){
-            if (c.CountryName.startsWith(letter) || letter.toLowerCase()=="all"){
-                return (
-                    <li key={c.DHS_CountryCode} style={{marginTop:"0.7em"}}>
-                    <button className="btn btn-default"
-                        onClick={setCountry.bind(null,c.DHS_CountryCode)}
-                    >
-                        {c.CountryName} ({c.DHS_CountryCode})
-                    </button>
-                    </li>
-                );
-            }
-        });
-
-        return (
-            <div>
-                <h3>{this.props.letter}</h3>
-                <ul className="list-inline">
-                    {fields}
-                </ul>
-            </div>
-        );
-    }
-});
-
-
 var AjaxContainer = React.createClass({
     getInitialState: function(){
         return {
@@ -104,10 +74,37 @@ var AjaxContainer = React.createClass({
     }
 });
 
+var CountryAlphabeticList = React.createClass({
+    render: function(){
+        var letter = this.props.letter;
+        var setCountry = this.props.setCountry;
+        var fields = this.props.countries.map(function(c){
+            if (c.CountryName.startsWith(letter) || letter.toLowerCase()=="all"){
+                return (
+                    <li key={c.DHS_CountryCode} style={{marginTop:"0.7em"}}>
+                    <button className="btn btn-default"
+                        onClick={setCountry.bind(null,c.DHS_CountryCode)}
+                    >
+                        {c.CountryName} ({c.DHS_CountryCode})
+                    </button>
+                    </li>
+                );
+            }
+        });
+
+        return (
+            <div>
+                <h3>{this.props.letter}</h3>
+                <ul className="list-inline">
+                    {fields}
+                </ul>
+            </div>
+        );
+    }
+});
 
 var CountryBox = React.createClass({
     getInitialState: function(){
-        this.api = "http://api.dhsprogram.com/rest/dhs/countries";
         return {
             data: [],
             index: "A"
@@ -119,12 +116,17 @@ var CountryBox = React.createClass({
             data: data.Data
         });
     },
+    getUrl: function(){
+        var api = "http://api.dhsprogram.com/rest/dhs/countries";
+        return api;
+    },
     setIndex: function(letter){
         this.setState({
             index: letter
         });
     },
     render: function(){
+        // Build A-Z index
         var alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
         alphabet.unshift("All");
         var current = this.state.index;
@@ -138,17 +140,19 @@ var CountryBox = React.createClass({
             );
         });
 
+        // Update data
+        if (this.state.data=="undefined" || this.state.data.length < 1){
+            var api = this.getUrl();
+            return (
+                <AjaxContainer
+                    apiUrl={api}
+                    handleUpdate={this.handleUpdate} />
+            );
+        }
+
+        // Render
         return (
             <div className="page-header">
-                {this.state.data.length<1?
-                <AjaxContainer
-                    apiUrl={this.api}
-                    handleUpdate={this.handleUpdate} />
-                :null}
-
-                {this.state.loading?
-                    <i className="fa fa-spinner">Loading</i>
-                : null}
                 <ul className="list-inline">
                     {index}
                 </ul>
@@ -161,76 +165,6 @@ var CountryBox = React.createClass({
     }
 });
 
-var RootBox = React.createClass({
-    getInitialState: function(){
-        return {
-            countryCode: null,
-            dhsGraphs: [{
-                title: "Age-specific fertility rate for the three years preceding the survey, expressed per 1,000 women",
-                indicators:[
-                    "FE_FRTR_W_A15",
-                    "FE_FRTR_W_A20",
-                    "FE_FRTR_W_A25",
-                    "FE_FRTR_W_A30",
-                    "FE_FRTR_W_A35",
-                    "FE_FRTR_W_A40",
-                    "FE_FRTR_W_A45",
-                ],
-                type: "bar"
-            },{
-                title:"HIV prevalence among couples",
-                indicators:[
-                    "HA_HPAC_B_CPP",
-                    "HA_HPAC_B_CPN",
-                    "HA_HPAC_B_CNP",
-                    "HA_HPAC_B_CNN"
-                ],
-                type: "pie"
-            }],
-            wbGraphs:[{
-                title: "GNI per capita, Atlas method (current US$)",
-                indicator: "NY.GNP.PCAP.CD",
-                type: "bar"
-            }]
-        }
-    },
-    setCountry: function(code){
-        this.setState({
-            countryCode: code
-        });
-    },
-    render: function(){
-        var countryCode = this.state.countryCode;
-        var dhs = this.state.dhsGraphs.map(function(g){
-            var id = randomId();
-            return (
-                <DhsGraphContainer
-                    key={id}
-                    countryCode={countryCode}
-                    {...g}
-                />
-            );
-        });
-        var wb = this.state.wbGraphs.map(function(g){
-            var id = randomId();
-            return (
-                <WbGraphContainer
-                    key={id}
-                    countryCode={countryCode}
-                    {...g}
-                />
-            );
-        });
-
-        return (
-            <div>
-                <CountryBox setCountry={this.setCountry} />
-                {dhs}
-                {wb}
-            </div>
-        );
-    }
-});
 
 
 var DhsGraphContainer = React.createClass({
@@ -265,13 +199,12 @@ var DhsGraphContainer = React.createClass({
         });
     },
     render: function(){
-        var api = this.getUrl(this.props.countryCode, this.props.indicators);
-
         // If country code changed, update data
         var changed = false;
         var currentValue = this.props.countryCode && this.props.countryCode.valueOf();
         if (currentValue != null && this.preValue !== currentValue){
             this.preValue = currentValue;
+            var api = this.getUrl(this.props.countryCode, this.props.indicators);
             return (
                 <AjaxContainer
                     handleUpdate={this.handleUpdate}
@@ -393,7 +326,6 @@ var DhsGraphBox = React.createClass({
 var WbGraphContainer = React.createClass({
     getInitialState: function(){
         return {
-            countryCode: "",
             data: []
         }
     },
@@ -404,38 +336,23 @@ var WbGraphContainer = React.createClass({
         var query = "?date=2000:2015&format=json";
         return baseUrl+tmp+query;
     },
-    getData:function(countryCode, indicator){
-        // Set up URL
-        var apiUrl = this.getUrl(countryCode, indicator);
-        console.log(apiUrl);
-
-        // Get data
-        var that = this;
-        j$.ajax({
-            url: apiUrl,
-            //dataType: "json",
-            method: "GET",
-            success: function(resp){
-                if ((typeof resp != "undefined") && resp){
-                    that.setState({
-                        data: resp[1],
-                        countryCode: countryCode
-                    });
-                }
-            } // end of success
+    handleUpdate: function(data){
+        this.setState({
+            data: data[1]
         });
     },
-    componentWillMount: function(){
-        this.debounceGetData = _.debounce(function(countryCode, indicator){
-            this.getData(countryCode, indicator);
-        }, 500);
-     },
+
     render: function(){
-        // Update data if country code has changed
-        if (this.props.countryCode && !_.isEqual(this.state.countryCode, this.props.countryCode)){
-            this.debounceGetData(
-                this.props.countryCode,
-                this.props.indicator
+        // If country code changed, update data
+        var changed = false;
+        var currentValue = this.props.countryCode && this.props.countryCode.valueOf();
+        if (currentValue != null && this.preValue !== currentValue){
+            this.preValue = currentValue;
+            var api = this.getUrl(this.props.countryCode, this.props.indicator);
+            return (
+                <AjaxContainer
+                    handleUpdate={this.handleUpdate}
+                    apiUrl={api} />
             );
         }
 
@@ -554,7 +471,76 @@ var WbGraphBox = React.createClass({
     }
 });
 
+var RootBox = React.createClass({
+    getInitialState: function(){
+        return {
+            countryCode: null,
+            dhsGraphs: [{
+                title: "Age-specific fertility rate for the three years preceding the survey, expressed per 1,000 women",
+                indicators:[
+                    "FE_FRTR_W_A15",
+                    "FE_FRTR_W_A20",
+                    "FE_FRTR_W_A25",
+                    "FE_FRTR_W_A30",
+                    "FE_FRTR_W_A35",
+                    "FE_FRTR_W_A40",
+                    "FE_FRTR_W_A45",
+                ],
+                type: "bar"
+            },{
+                title:"HIV prevalence among couples",
+                indicators:[
+                    "HA_HPAC_B_CPP",
+                    "HA_HPAC_B_CPN",
+                    "HA_HPAC_B_CNP",
+                    "HA_HPAC_B_CNN"
+                ],
+                type: "pie"
+            }],
+            wbGraphs:[{
+                title: "GNI per capita, Atlas method (current US$)",
+                indicator: "NY.GNP.PCAP.CD",
+                type: "bar"
+            }]
+        }
+    },
+    setCountry: function(code){
+        this.setState({
+            countryCode: code
+        });
+    },
+    render: function(){
+        var countryCode = this.state.countryCode;
+        var dhs = this.state.dhsGraphs.map(function(g){
+            var id = randomId();
+            return (
+                <DhsGraphContainer
+                    key={id}
+                    countryCode={countryCode}
+                    {...g}
+                />
+            );
+        });
+        var wb = this.state.wbGraphs.map(function(g){
+            var id = randomId();
+            return (
+                <WbGraphContainer
+                    key={id}
+                    countryCode={countryCode}
+                    {...g}
+                />
+            );
+        });
 
+        return (
+            <div>
+                <CountryBox setCountry={this.setCountry} />
+                {dhs}
+                {wb}
+            </div>
+        );
+    }
+});
 
 ReactDOM.render(
     <RootBox />,

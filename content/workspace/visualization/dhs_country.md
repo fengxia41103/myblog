@@ -86,8 +86,13 @@ var AjaxContainer = React.createClass({
 //****************************************
 var GraphFactory = React.createClass({
     render: function(){
-        // Render graph
-        if (this.props.type === "bar" && this.props.data.length){
+        // Validate data set
+        if (this.props.data.length === "undefined" || this.props.data.length < 1){
+            return null;
+        }
+
+        // Render graph by chart type
+        if (this.props.type === "bar"){
             // container id
             var containerId = randomId();
             return (
@@ -97,12 +102,27 @@ var GraphFactory = React.createClass({
                     </h3>
                     <GraphBox containerId={containerId}
                         data={this.props.data}
-                        d3config={this.props.d3config}
+                        d3config={this.props.d3config.default}
                         title={this.props.title}
                         type={this.props.type} />
                 </div>
             );
-        } else if (this.props.type === "pie" && this.props.data.length){
+        } else if (this.props.type === "line"){
+            // container id
+            var containerId = randomId();
+            return (
+                <div className="page-header">
+                    <h3>
+                        {this.props.countryCode}
+                    </h3>
+                    <GraphBox containerId={containerId}
+                        data={this.props.data}
+                        d3config={this.props.d3config.line}
+                        title={this.props.title}
+                        type={this.props.type} />
+                </div>
+            );
+        } else if (this.props.type === "pie"){
             var graphs = [];
             var data = this.props.data;
 
@@ -116,6 +136,8 @@ var GraphFactory = React.createClass({
                     tmp[year] = [data[i]];
                 }
             }
+
+            // One pie chart per year's data
             for (year in tmp){
                 var containerId = randomId();
                 var title= [this.props.title, year].join(" -- ");
@@ -127,7 +149,7 @@ var GraphFactory = React.createClass({
                         </h3>
                         <GraphBox containerId={containerId}
                             data={tmp[year]}
-                            d3config={this.props.d3config}
+                            d3config={this.props.d3config.default}
                             title={title}
                             type={this.props.type} />
                     </div>
@@ -147,10 +169,11 @@ var GraphFactory = React.createClass({
 
 var GraphBox = React.createClass({
     makeViz: function(data){
-        this.viz = d3plus.viz().container("#"+this.props.containerId)
+        this.viz = d3plus.viz()
+            .container("#"+this.props.containerId)
             .config(this.props.d3config)
             .data(this.props.data)
-            .type(this.props.type.toLowerCase())
+            .type(this.props.type)
             .draw();
     },
     componentDidMount: function(){
@@ -162,14 +185,16 @@ var GraphBox = React.createClass({
         this.debounceUpdate = _.debounce(function(data){
             that.viz.data(data);
             that.viz.draw();
-        }, 200);
+        }, 500);
     },
     render: function(){
         // If data changed
         var currentValue = this.props.data && this.props.data.valueOf();
         if (currentValue != null && this.preValue !== currentValue){
             this.preValue = currentValue;
-            if (this.debounceUpdate){
+
+            // Update graph data
+            if (this.viz && this.debounceUpdate){
                 this.debounceUpdate(this.props.data);
             }
         }
@@ -288,12 +313,29 @@ var DhsGraphContainer = React.createClass({
             // data structure saved in "data" so the graph
             // knows which property stands for what
             d3config: {
-                "id": "Indicator",
-                "color": "Indicator",
-                "text": "Indicator",
-                "y": "Value",
-                "x": "SurveyYear",
-                "size": "Value"
+                "default": {
+                    "id": "Indicator",
+                    "color": "Indicator",
+                    "text": "Indicator",
+                    "y": "Value",
+                    "x": "SurveyYear",
+                    "time": "SurveyYear",
+                    "size": "Value",
+                    "footer": {
+                        position: "top",
+                        value: "Data source: USAID DHS Program"
+                    }
+                },
+                "line": {
+                    "id": "",
+                    "text": "Indicator",
+                    "y": "Value",
+                    "x": "SurveyYear",
+                    "footer": {
+                        position: "top",
+                        value: "Data source: USAID DHS Program"
+                    }
+                }
             }
         }
     },
@@ -318,12 +360,16 @@ var DhsGraphContainer = React.createClass({
         return baseUrl+tmp.join("&");
     },
     cleanData:function(data){
-        // Data needs to be massaged
-        var tmp = data.slice(); // make a copy
-        for (var i = 0; i<data.length; i++){
-            tmp[i].SurveyYear = ""+tmp[i].SurveyYear;
+        if (typeof data === "undefined"){
+            return [];
+        }else {
+            // Data needs to be massaged
+            for (var i = 0; i<data.length; i++){
+                data[i].SurveyYear = ""+data[i].SurveyYear;
+            }
+            return data;
         }
-        return tmp;
+
     },
     handleUpdate: function(data){
         this.setState({
@@ -360,13 +406,29 @@ var WbGraphContainer = React.createClass({
         return {
             data: [],
             d3config: {
-                "id": "date",
-                "color": "date",
-                "text": "date",
-                "y": "value",
-                "x": "date",
-                "size": "value",
-                "legend": false
+                "default": {
+                    "id": "date",
+                    "color": "date",
+                    "text": "date",
+                    "time": "date",
+                    "y": "value",
+                    "x": "date",
+                    "size": "value",
+                    "footer": {
+                        position: "top",
+                        value: "Data source: The World Bank"
+                    }
+                },
+                "line": {
+                    "id": "country",
+                    "text": "date",
+                    "y": "value",
+                    "x": "date",
+                    "footer": {
+                        position: "top",
+                        value: "Data source: The World Bank"
+                    }
+                }
             }
         }
     },
@@ -383,17 +445,15 @@ var WbGraphContainer = React.createClass({
         });
     },
     cleanData:function(data){
-        if (data === "undefined"){
+        if (typeof data === "undefined"){
             return [];
         }else{
-            var tmp = []; // make a copy
             for (var i = 0; i<data.length; i++){
                 if (data[i].value !== null){
-                    data[i].value = parseInt(data[i].value);
-                    tmp.push(data[i]);
+                    data[i].value = Math.round(parseFloat(data[i].value));
                 }
             }
-            return  _.sortBy(tmp, 'date');
+            return  _.sortBy(data, 'date');
         }
     },
     render: function(){
@@ -451,6 +511,10 @@ var RootBox = React.createClass({
                 title: "GNI per capita, Atlas method (current US$)",
                 indicator: "NY.GNP.PCAP.CD",
                 type: "bar"
+            },{
+                title: "GDP per capita (current US$)",
+                indicator: "NY.GDP.PCAP.CD",
+                type: "line"
             }]
         }
     },

@@ -29,6 +29,11 @@ var randomId = function(){
     return "DHS"+(Math.random()*1e32).toString(12);
 };
 
+//****************************************
+//
+//    Common AJAX containers
+//
+//****************************************
 var AjaxContainer = React.createClass({
     getInitialState: function(){
         return {
@@ -74,6 +79,115 @@ var AjaxContainer = React.createClass({
     }
 });
 
+//****************************************
+//
+//    Common graph containers
+//
+//****************************************
+var GraphFactory = React.createClass({
+    render: function(){
+        // Render graph
+        if (this.props.type === "bar" && this.props.data.length){
+            // container id
+            var containerId = randomId();
+            return (
+                <div className="page-header">
+                    <h3>
+                        {this.props.countryCode}
+                    </h3>
+                    <GraphBox containerId={containerId}
+                        data={this.props.data}
+                        d3config={this.props.d3config}
+                        title={this.props.title}
+                        type={this.props.type} />
+                </div>
+            );
+        } else if (this.props.type === "pie" && this.props.data.length){
+            var graphs = [];
+            var data = this.props.data;
+
+            // Regroup by year
+            var tmp = {};
+            for (var i=0; i<data.length;i++){
+                var year = data[i].SurveyYear;
+                if (tmp.hasOwnProperty(year)){
+                    tmp[year].push(data[i])
+                } else{
+                    tmp[year] = [data[i]];
+                }
+            }
+            for (year in tmp){
+                var containerId = randomId();
+                var title= [this.props.title, year].join(" -- ");
+
+                graphs.push(
+                    <div key={randomId()} style={{display:"inline-block"}}>
+                        <h3>
+                            {this.props.countryCode}
+                        </h3>
+                        <GraphBox containerId={containerId}
+                            data={tmp[year]}
+                            d3config={this.props.d3config}
+                            title={title}
+                            type={this.props.type} />
+                    </div>
+                );
+            }
+            return (
+                <div className="row my-multicol-2 page-header">
+                    {graphs}
+                </div>
+            );
+        }
+
+        // Default
+        return null;
+    }
+});
+
+var GraphBox = React.createClass({
+    makeViz: function(data){
+        this.viz = d3plus.viz().container("#"+this.props.containerId)
+            .config(this.props.d3config)
+            .data(this.props.data)
+            .type(this.props.type.toLowerCase())
+            .draw();
+    },
+    componentDidMount: function(){
+        // Initialize graph
+        this.makeViz(this.props.data);
+
+        // Set up data updater
+        var that = this;
+        this.debounceUpdate = _.debounce(function(data){
+            that.viz.data(data);
+            that.viz.draw();
+        }, 200);
+    },
+    render: function(){
+        // If data changed
+        var currentValue = this.props.data && this.props.data.valueOf();
+        if (currentValue != null && this.preValue !== currentValue){
+            this.preValue = currentValue;
+            if (this.debounceUpdate){
+                this.debounceUpdate(this.props.data);
+            }
+        }
+
+        return (
+            <figure id={this.props.containerId} style={{minHeight:"500px"}}>
+                <figcaption>{this.props.title}</figcaption>
+            </figure>
+        );
+    }
+});
+
+
+//****************************************
+//
+//    Application containers
+//
+//****************************************
 var CountryAlphabeticList = React.createClass({
     render: function(){
         var letter = this.props.letter;
@@ -166,11 +280,21 @@ var CountryBox = React.createClass({
 });
 
 
-
 var DhsGraphContainer = React.createClass({
     getInitialState: function(){
         return {
-            data: []
+            data: [],
+            // graph config, mostly to define based on
+            // data structure saved in "data" so the graph
+            // knows which property stands for what
+            d3config: {
+                "id": "Indicator",
+                "color": "Indicator",
+                "text": "Indicator",
+                "y": "Value",
+                "x": "SurveyYear",
+                "size": "Value"
+            }
         }
     },
     getUrl: function(countryCode, indicators){
@@ -193,9 +317,17 @@ var DhsGraphContainer = React.createClass({
         }
         return baseUrl+tmp.join("&");
     },
+    cleanData:function(data){
+        // Data needs to be massaged
+        var tmp = data.slice(); // make a copy
+        for (var i = 0; i<data.length; i++){
+            tmp[i].SurveyYear = ""+tmp[i].SurveyYear;
+        }
+        return tmp;
+    },
     handleUpdate: function(data){
         this.setState({
-            data: data.Data
+            data: this.cleanData(data.Data)
         });
     },
     render: function(){
@@ -212,113 +344,13 @@ var DhsGraphContainer = React.createClass({
             );
         }
 
-        // Render graph
-        if (this.props.type === "bar" && this.state.data.length){
-            // container id
-            var containerId = randomId();
-            return (
-                <div className="page-header">
-                    <h3>
-                        {this.props.countryCode}
-                    </h3>
-                    <DhsGraphBox containerId={containerId}
-                        data={this.state.data}
-                        title={this.props.title}
-                        type={this.props.type} />
-                </div>
-            );
-        } else if (this.props.type === "pie" && this.state.data.length){
-            var graphs = [];
-            var data = this.state.data;
-
-            // Regroup by year
-            var tmp = {};
-            for (var i=0; i<data.length;i++){
-                var year = data[i].SurveyYear;
-                if (tmp.hasOwnProperty(year)){
-                    tmp[year].push(data[i])
-                } else{
-                    tmp[year] = [data[i]];
-                }
-            }
-            for (year in tmp){
-                var containerId = randomId();
-                var title= [this.props.title, year].join(" -- ");
-
-                graphs.push(
-                <div key={randomId()} style={{display:"inline-block"}}>
-                    <h3>
-                        {this.props.countryCode}
-                    </h3>
-                    <DhsGraphBox containerId={containerId}
-                        data={tmp[year]}
-                        title={title}
-                        type={this.props.type} />
-                </div>
-
-                );
-            }
-            return (
-                <div className="row my-multicol-2 page-header">
-                    {graphs}
-                </div>
-            );
-        }
-
-        // Default
-        return null;
-    }
-});
-
-var DhsGraphBox = React.createClass({
-    getInitialState: function(){
-        return {
-            prevData: []
-        }
-    },
-    cleanData:function(data){
-        var tmp = data.slice(); // make a copy
-        for (var i = 0; i<data.length; i++){
-            tmp[i].SurveyYear = ""+tmp[i].SurveyYear;
-        }
-        return tmp;
-    },
-    makeViz: function(data){
-        this.viz = d3plus.viz().container("#"+this.props.containerId)
-            .data(this.cleanData(data))
-            .type(this.props.type.toLowerCase())
-            .id("Indicator")
-            .color("Indicator")
-            .text("Indicator")
-            .y("Value")
-            .x("SurveyYear")
-            .size("Value")
-            .draw();
-    },
-    componentDidMount: function(){
-        // Initialize graph
-        this.makeViz(this.props.data);
-
-        // Set up data updater
-        var that = this;
-        this.debounceUpdate = _.debounce(function(data){
-            that.viz.data(this.cleanData(data));
-            that.viz.draw();
-            // Save data
-            that.setState({
-                prevData: data
-            });
-        }, 200);
-    },
-    render: function(){
-        // Update graph only when data has changed
-        if (this.viz && !_.isEqual(this.state.prevData, this.props.data)){
-            this.debounceUpdate(this.props.data);
-        }
+        // Render graphs
         return (
-            <figure id={this.props.containerId} style={{minHeight:"500px"}}>
-                <figcaption>{this.props.title}</figcaption>
-            </figure>
+            <GraphFactory
+                data={this.state.data}
+                d3config={this.state.d3config}
+                {...this.props}
+            />
         );
     }
 });
@@ -326,7 +358,16 @@ var DhsGraphBox = React.createClass({
 var WbGraphContainer = React.createClass({
     getInitialState: function(){
         return {
-            data: []
+            data: [],
+            d3config: {
+                "id": "date",
+                "color": "date",
+                "text": "date",
+                "y": "value",
+                "x": "date",
+                "size": "value",
+                "legend": false
+            }
         }
     },
     getUrl: function(countryCode, indicator){
@@ -338,10 +379,23 @@ var WbGraphContainer = React.createClass({
     },
     handleUpdate: function(data){
         this.setState({
-            data: data[1]
+            data: this.cleanData(data[1])
         });
     },
-
+    cleanData:function(data){
+        if (data === "undefined"){
+            return [];
+        }else{
+            var tmp = []; // make a copy
+            for (var i = 0; i<data.length; i++){
+                if (data[i].value !== null){
+                    data[i].value = parseInt(data[i].value);
+                    tmp.push(data[i]);
+                }
+            }
+            return  _.sortBy(tmp, 'date');
+        }
+    },
     render: function(){
         // If country code changed, update data
         var changed = false;
@@ -356,117 +410,13 @@ var WbGraphContainer = React.createClass({
             );
         }
 
-        // Render graph
-        if (this.props.type !== "pie" && this.state.data.length){
-            // container id
-            var containerId = randomId();
-            return (
-                <div className="page-header">
-                    <h3>
-                        {this.props.countryCode}
-                    </h3>
-                    <WbGraphBox containerId={containerId}
-                        data={this.state.data}
-                        title={this.props.title}
-                        type={this.props.type} />
-                </div>
-            );
-        } else if (this.props.type === "pie" && this.state.data.length){
-            var graphs = [];
-            var data = this.state.data;
-
-            // Regroup by year
-            var tmp = {};
-            for (var i=0; i<data.length;i++){
-                var year = data[i].SurveyYear;
-                if (tmp.hasOwnProperty(year)){
-                    tmp[year].push(data[i])
-                } else{
-                    tmp[year] = [data[i]];
-                }
-            }
-            for (year in tmp){
-                var containerId = randomId();
-                var title= [this.props.title, year].join(" -- ");
-
-                graphs.push(
-                <div key={randomId()} style={{display:"inline-block"}}>
-                    <h3>
-                        {this.props.countryCode}
-                    </h3>
-                    <WbGraphBox containerId={containerId}
-                        data={tmp[year]}
-                        title={title}
-                        type={this.props.type} />
-                </div>
-
-                );
-            }
-            return (
-                <div className="row my-multicol-2 page-header">
-                    {graphs}
-                </div>
-            );
-        }
-
-        // Default
-        return null;
-    }
-});
-
-var WbGraphBox = React.createClass({
-    getInitialState: function(){
-        return {
-            prevData: []
-        }
-    },
-    cleanData:function(data){
-        var tmp = []; // make a copy
-        for (var i = 0; i<data.length; i++){
-            if (data[i].value !== null){
-                data[i].value = parseInt(data[i].value);
-                tmp.push(data[i]);
-            }
-        }
-        return  _.sortBy(tmp, 'date');
-    },
-    makeViz: function(data){
-        this.viz = d3plus.viz().container("#"+this.props.containerId)
-            .data(this.cleanData(data))
-            .type(this.props.type.toLowerCase())
-            .id("date")
-            .color("date")
-            .text("date")
-            .y("value")
-            .x("date")
-            .size("value")
-            .legend(false)
-            .draw();
-    },
-    componentDidMount: function(){
-        // Initialize graph
-        this.makeViz(this.props.data);
-
-        // Set up data updater
-        var that = this;
-        this.debounceUpdate = _.debounce(function(data){
-            that.viz.data(this.cleanData(data));
-            that.viz.draw();
-            // Save data
-            that.setState({
-                prevData: data
-            });
-        }, 200);
-    },
-    render: function(){
-        // Update graph only when data has changed
-        if (this.viz && !_.isEqual(this.state.prevData, this.props.data)){
-            this.debounceUpdate(this.props.data);
-        }
+        // Render graphs
         return (
-            <figure id={this.props.containerId} style={{minHeight:"500px"}}>
-                <figcaption>{this.props.title}</figcaption>
-            </figure>
+            <GraphFactory
+                data={this.state.data}
+                d3config={this.state.d3config}
+                {...this.props}
+            />
         );
     }
 });

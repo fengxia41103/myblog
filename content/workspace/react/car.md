@@ -255,7 +255,7 @@ var PieChartBox = React.createClass({
     render: function () {
         var data = this.props.data;
         var currentValue = data && data.valueOf();
-        if (this.prevValue !== currentValue){
+        if (this.preValue !== currentValue){
             this.preValue = currentValue;
 
             // Update chart

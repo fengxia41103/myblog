@@ -58,31 +58,65 @@ var CountryAlphabeticList = React.createClass({
     }
 });
 
-var CountryBox = React.createClass({
+
+var AjaxContainer = React.createClass({
     getInitialState: function(){
         return {
-            countries: [],
-            index: "A",
-            loading: true
+            loading: false
         }
     },
-    componentWillMount: function(){
-        var that = this;
-        var apiUrl= "http://api.dhsprogram.com/rest/dhs/countries?returnFields=CountryName,DHS_CountryCode&f=json";
+    getData: function(){
+        if (this.state.loading){
+            return null;
+        }else{
+            this.setState({
+                loading: true
+            });
+        }
 
         // Get data
+        var that = this;
+        var handleUpdate = this.props.handleUpdate;
+        console.log("getting: "+this.props.apiUrl);
+
         j$.ajax({
-            url: apiUrl,
+            url: this.props.apiUrl,
             dataType: "json",
             method: "GET",
             success: function(resp){
                 if ((typeof resp != "undefined") && resp){
-                    that.setState({
-                        countries: resp.Data,
-                        loading: false
-                    });
+                    handleUpdate(resp);
                 }
             } // end of success
+        });
+    },
+    componentWillMount: function(){
+        this.debounceGetData = _.debounce(function(){
+            this.getData();
+        }, 500);
+    },
+    render: function(){
+        // Get data
+        if (!this.state.loading && this.debounceGetData){
+            this.debounceGetData();
+        }
+        return null;
+    }
+});
+
+
+var CountryBox = React.createClass({
+    getInitialState: function(){
+        this.api = "http://api.dhsprogram.com/rest/dhs/countries";
+        return {
+            data: [],
+            index: "A"
+        }
+    },
+    handleUpdate: function(data){
+        // Save response data
+        this.setState({
+            data: data.Data
         });
     },
     setIndex: function(letter){
@@ -103,8 +137,15 @@ var CountryBox = React.createClass({
                 </li>
             );
         });
+
         return (
             <div className="page-header">
+                {this.state.data.length<1?
+                <AjaxContainer
+                    apiUrl={this.api}
+                    handleUpdate={this.handleUpdate} />
+                :null}
+
                 {this.state.loading?
                     <i className="fa fa-spinner">Loading</i>
                 : null}
@@ -112,8 +153,8 @@ var CountryBox = React.createClass({
                     {index}
                 </ul>
                 <CountryAlphabeticList
-                    letter={this.state.index}
-                    countries={this.state.countries}
+                    letter={current}
+                    countries={this.state.data}
                     setCountry={this.props.setCountry} />
             </div>
         );
@@ -191,10 +232,10 @@ var RootBox = React.createClass({
     }
 });
 
+
 var DhsGraphContainer = React.createClass({
     getInitialState: function(){
         return {
-            countryCode: "",
             data: []
         }
     },
@@ -218,38 +259,23 @@ var DhsGraphContainer = React.createClass({
         }
         return baseUrl+tmp.join("&");
     },
-    getData:function(countryCode, indicators){
-        // Set up URL
-        var apiUrl = this.getUrl(countryCode, indicators);
-        console.log(apiUrl);
-
-        // Get data
-        var that = this;
-        j$.ajax({
-            url: apiUrl,
-            dataType: "json",
-            method: "GET",
-            success: function(resp){
-                if ((typeof resp != "undefined") && resp){
-                    that.setState({
-                        data: resp.Data,
-                        countryCode: countryCode
-                    });
-                }
-            } // end of success
+    handleUpdate: function(data){
+        this.setState({
+            data: data.Data
         });
     },
-    componentWillMount: function(){
-        this.debounceGetData = _.debounce(function(countryCode, indicators){
-            this.getData(countryCode, indicators);
-        }, 500);
-     },
     render: function(){
-        // Update data if country code has changed
-        if (this.props.countryCode && !_.isEqual(this.state.countryCode, this.props.countryCode)){
-            this.debounceGetData(
-                this.props.countryCode,
-                this.props.indicators
+        var api = this.getUrl(this.props.countryCode, this.props.indicators);
+
+        // If country code changed, update data
+        var changed = false;
+        var currentValue = this.props.countryCode && this.props.countryCode.valueOf();
+        if (currentValue != null && this.preValue !== currentValue){
+            this.preValue = currentValue;
+            return (
+                <AjaxContainer
+                    handleUpdate={this.handleUpdate}
+                    apiUrl={api} />
             );
         }
 

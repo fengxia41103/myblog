@@ -5,27 +5,31 @@ Tags: dhs, react
 Slug: country heath
 Author: Feng Xia
 
-[DHS][] data set is published by [US AID][]. Following its [API][]
-documents, this page is a prototype that
-uses data from selected [indicators][]
-to draw a picture of a given country.  Considering the massive
-amount of [indicators][] available, it is an opportunity
-to build visual presentation of these data. As a prototype,
-I am starting with only a few KPIs. The list will continue
-to grow as I gain more insights of the dataset and its meanings.
-Note that a KPI will be
-omitted if there is no data in [DHS][] database.
+I used the following data sets to build a SPA inspired by [DATA USA][].
+This is to demonstrate using REACT for front end development while there
+is a data-driven backend with RESTful API that is ready for consumption.
 
+
+1. [DHS][]: [DHS][] data set is published by [US AID][]. Following its [API][]
+   documents, I selected  [indicators][] to depict a country's well doing.
+2. [The World Bank]:  Another comprehensive data set is [The World Bank][] set.
+   Check out its [indicators][1] page for a list of available indexes.
+
+[data usa]: https://datausa.io/
+[react]: https://facebook.github.io/react/
 [dhs]: http://dhsprogram.com/data/
 [us aid]: https://www.usaid.gov/
 [api]: http://api.dhsprogram.com/#/index.html
 [indicators]: http://api.dhsprogram.com/#/api-indicators.cfm
-
-I'm also adding [The World Bank][] data set to
-draw a better picture of the country interested. However,
-[DHS][]'s country list is smaller than the World Bank's
-
 [the world bank]: https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries
+[1]: http://data.worldbank.org/indicator
+
+
+As a prototype,
+I am starting with only a few KPIs. The list will continue
+to grow as I gain more insights of the dataset and its meanings.
+Note that a KPI will be
+omitted if the source returns no data or null values.
 
 
 <div id="dhs"></div>
@@ -448,14 +452,16 @@ var WbGraphContainer = React.createClass({
                         value: "Data source: The World Bank"
                     }
                 }
-            }
+            },
+            start: "1960",
+            end: "2015"
         }
     },
     getUrl: function(countryCode, indicator){
         // Build DHS API url
         var baseUrl = "http://api.worldbank.org/countries/";
         var tmp = [countryCode, "indicators", indicator].join("/");
-        var query = "?date=1995:2015&format=json&per_page=1000";
+        var query = "?date="+this.state.start+":"+this.state.end+"&format=json&per_page=1000";
         return baseUrl+tmp+query;
     },
     handleUpdate: function(data){
@@ -469,9 +475,13 @@ var WbGraphContainer = React.createClass({
         }else{
             var tmp = [];
             for (var i = 0; i<data.length; i++){
+                // Original data can be null or 0, skip both
+                // in the final data set
                 if (data[i].value !== null){
                     data[i].value = parseFloat(data[i].value);
-                    tmp.push(data[i]);
+                    if (data[i].value > 0){
+                        tmp.push(data[i]);
+                    }
                 }
             }
             return  _.sortBy(tmp, 'date');
@@ -529,13 +539,17 @@ var RootBox = React.createClass({
                 type: "pie"
             }],
             wbGraphs:[{
-                title: "Rural population (% of total population)",
-                indicator: "SP.RUR.TOTL.ZS",
-                type: "bar"
-            },{
                 title: "GNI per capita, Atlas method (current US$)",
                 indicator: "NY.GNP.PCAP.CD",
                 type: "bar"
+            },{
+                title: "GDP per person employed (constant 2011 PPP $)",
+                indicator: "SL.GDP.PCAP.EM.KD",
+                type: "line"
+            },{
+                title: "Labor force, total",
+                indicator: "SL.TLF.TOTL.IN",
+                type: "line"
             },{
                 title: "Life expectancy at birth, total (years)",
                 indicator: "SP.DYN.LE00.IN",
@@ -573,6 +587,10 @@ var RootBox = React.createClass({
                 indicator: "SH.XPD.PCAP",
                 type: "bar"
             },{
+                title: "Rural population (% of total population)",
+                indicator: "SP.RUR.TOTL.ZS",
+                type: "bar"
+            },{
                 title: "Urban population (% of total)",
                 indicator: "SP.URB.TOTL.IN.ZS",
                 type: "bar"
@@ -601,8 +619,20 @@ var RootBox = React.createClass({
                 indicator: "FM.LBL.BMNY.ZG",
                 type: "line"
             },{
+                title: "Net barter terms of trade index (2000 = 100)",
+                indicator: "TT.PRI.MRCH.XD.WD",
+                type: "bar"
+            },{
                 title: "Merchandise trade (% of GDP)",
                 indicator: "TG.VAL.TOTL.GD.ZS",
+                type: "line"
+            },{
+                title: "Exports of goods and services (% of GDP)",
+                indicator: "NE.EXP.GNFS.ZS",
+                type: "line"
+            },{
+                title: "Imports of goods and services (% of GDP)",
+                indicator: "NE.IMP.GNFS.ZS",
                 type: "line"
             },{
                 title: "Merchandise exports (current US$)",
@@ -636,6 +666,26 @@ var RootBox = React.createClass({
                 title: "Tax revenue (% of GDP)",
                 indicator: "GC.TAX.TOTL.GD.ZS",
                 type: "line"
+            },{
+                title: "Patent applications, residents",
+                indicator: "IP.PAT.RESD",
+                type: "line"
+            },{
+                title: "Patent applications, nonresidents",
+                indicator: "IP.PAT.NRES",
+                type: "line"
+            },{
+                title: "Researchers in R&D (per million people)",
+                indicator: "SP.POP.SCIE.RD.P6",
+                type: "bar"
+            },{
+                title: "Scientific and technical journal articles",
+                indicator: "IP.JRN.ARTC.SC",
+                type: "bar"
+            },{
+                title: "Research and development expenditure (% of GDP)",
+                indicator: "GB.XPD.RSDV.GD.ZS",
+                type: "bar"
             },{
                 title: "CO2 emissions (metric tons per capita)",
                 indicator: "EN.ATM.CO2E.PC",

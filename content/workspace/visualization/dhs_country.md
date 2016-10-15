@@ -1,8 +1,8 @@
-Title: DHS data set by Country
+Title: Country health (DHS & World Bank)
 Date: 2016-10-15 11:00
 Category: REACT
 Tags: dhs, react
-Slug: dhs by cuontry
+Slug: country heath
 Author: Feng Xia
 
 [DHS][] data set is published by [US AID][]. Following its [API][]
@@ -20,6 +20,13 @@ omitted if there is no data in [DHS][] database.
 [us aid]: https://www.usaid.gov/
 [api]: http://api.dhsprogram.com/#/index.html
 [indicators]: http://api.dhsprogram.com/#/api-indicators.cfm
+
+I'm also adding [The World Bank][] data set to
+draw a better picture of the country interested. However,
+[DHS][]'s country list is smaller than the World Bank's
+
+[the world bank]: https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries
+
 
 <div id="dhs"></div>
 
@@ -86,8 +93,10 @@ var AjaxContainer = React.createClass({
 //****************************************
 var GraphFactory = React.createClass({
     render: function(){
+        var data = this.props.data;
+
         // Validate data set
-        if (this.props.data.length === "undefined" || this.props.data.length < 1){
+        if (typeof data == "undefined" || data === null || data.length == 0){
             return null;
         }
 
@@ -101,10 +110,8 @@ var GraphFactory = React.createClass({
                         {this.props.countryCode}
                     </h3>
                     <GraphBox containerId={containerId}
-                        data={this.props.data}
-                        d3config={this.props.d3config.default}
-                        title={this.props.title}
-                        type={this.props.type} />
+                        {...this.props}
+                        d3config={this.props.d3config.default}/>
                 </div>
             );
         } else if (this.props.type === "line"){
@@ -116,10 +123,10 @@ var GraphFactory = React.createClass({
                         {this.props.countryCode}
                     </h3>
                     <GraphBox containerId={containerId}
-                        data={this.props.data}
+                        {...this.props}
+                        data={data}
                         d3config={this.props.d3config.line}
-                        title={this.props.title}
-                        type={this.props.type} />
+                    />
                 </div>
             );
         } else if (this.props.type === "pie"){
@@ -148,10 +155,10 @@ var GraphFactory = React.createClass({
                             {this.props.countryCode}
                         </h3>
                         <GraphBox containerId={containerId}
+                            {...this.props}
                             data={tmp[year]}
                             d3config={this.props.d3config.default}
-                            title={title}
-                            type={this.props.type} />
+                            title={title}/>
                     </div>
                 );
             }
@@ -218,13 +225,13 @@ var CountryAlphabeticList = React.createClass({
         var letter = this.props.letter;
         var setCountry = this.props.setCountry;
         var fields = this.props.countries.map(function(c){
-            if (c.CountryName.startsWith(letter) || letter.toLowerCase()=="all"){
+            if (c.iso2Code.startsWith(letter) || letter.toLowerCase()=="all"){
                 return (
-                    <li key={c.DHS_CountryCode} style={{marginTop:"0.7em"}}>
+                    <li key={c.iso2Code} style={{marginTop:"0.7em"}}>
                     <button className="btn btn-default"
-                        onClick={setCountry.bind(null,c.DHS_CountryCode)}
+                        onClick={setCountry.bind(null,c.iso2Code)}
                     >
-                        {c.CountryName} ({c.DHS_CountryCode})
+                        {c.name} ({c.iso2Code})
                     </button>
                     </li>
                 );
@@ -252,11 +259,12 @@ var CountryBox = React.createClass({
     handleUpdate: function(data){
         // Save response data
         this.setState({
-            data: data.Data
+            data: data[1]
         });
     },
     getUrl: function(){
-        var api = "http://api.dhsprogram.com/rest/dhs/countries";
+        //var api = "http://api.dhsprogram.com/rest/dhs/countries";
+        var api = "http://api.worldbank.org/countries?format=json&per_page=1000";
         return api;
     },
     setIndex: function(letter){
@@ -317,6 +325,7 @@ var DhsGraphContainer = React.createClass({
                     "id": "Indicator",
                     "color": "Indicator",
                     "text": "Indicator",
+                    "legend": false,
                     "y": "Value",
                     "x": "SurveyYear",
                     "time": "SurveyYear",
@@ -329,6 +338,10 @@ var DhsGraphContainer = React.createClass({
                 "line": {
                     "id": "",
                     "text": "Indicator",
+                    "time": "SurveyYear",
+                    "shape": {
+                        interpolate: "step"
+                    },
                     "y": "Value",
                     "x": "SurveyYear",
                     "footer": {
@@ -360,7 +373,7 @@ var DhsGraphContainer = React.createClass({
         return baseUrl+tmp.join("&");
     },
     cleanData:function(data){
-        if (typeof data === "undefined"){
+        if (typeof data === "undefined" || data === null){
             return [];
         }else {
             // Data needs to be massaged
@@ -411,6 +424,7 @@ var WbGraphContainer = React.createClass({
                     "color": "date",
                     "text": "date",
                     "time": "date",
+                    "legend": false,
                     "y": "value",
                     "x": "date",
                     "size": "value",
@@ -422,6 +436,11 @@ var WbGraphContainer = React.createClass({
                 "line": {
                     "id": "country",
                     "text": "date",
+                    "time": "date",
+                    "shape": {
+                        interpolate: "basis"
+                    },
+                    "legend": false,
                     "y": "value",
                     "x": "date",
                     "footer": {
@@ -436,7 +455,7 @@ var WbGraphContainer = React.createClass({
         // Build DHS API url
         var baseUrl = "http://api.worldbank.org/countries/";
         var tmp = [countryCode, "indicators", indicator].join("/");
-        var query = "?date=2000:2015&format=json";
+        var query = "?date=1995:2015&format=json&per_page=1000";
         return baseUrl+tmp+query;
     },
     handleUpdate: function(data){
@@ -445,15 +464,17 @@ var WbGraphContainer = React.createClass({
         });
     },
     cleanData:function(data){
-        if (typeof data === "undefined"){
+        if (typeof data === "undefined" || data === null){
             return [];
         }else{
+            var tmp = [];
             for (var i = 0; i<data.length; i++){
                 if (data[i].value !== null){
-                    data[i].value = Math.round(parseFloat(data[i].value));
+                    data[i].value = parseFloat(data[i].value);
+                    tmp.push(data[i]);
                 }
             }
-            return  _.sortBy(data, 'date');
+            return  _.sortBy(tmp, 'date');
         }
     },
     render: function(){
@@ -508,12 +529,128 @@ var RootBox = React.createClass({
                 type: "pie"
             }],
             wbGraphs:[{
+                title: "Rural population (% of total population)",
+                indicator: "SP.RUR.TOTL.ZS",
+                type: "bar"
+            },{
                 title: "GNI per capita, Atlas method (current US$)",
                 indicator: "NY.GNP.PCAP.CD",
                 type: "bar"
             },{
-                title: "GDP per capita (current US$)",
-                indicator: "NY.GDP.PCAP.CD",
+                title: "Life expectancy at birth, total (years)",
+                indicator: "SP.DYN.LE00.IN",
+                type: "line"
+            },{
+                title: "Inflation, GDP deflator (annual %)",
+                indicator: "NY.GDP.DEFL.KD.ZG",
+                type: "bar"
+            },{
+                title: "Inflation, consumer prices (annual %)",
+                indicator: "FP.CPI.TOTL.ZG",
+                type: "bar"
+            },{
+                title: "Real interest rate (%)",
+                indicator: "FR.INR.RINR",
+                type: "line"
+            },{
+                title: "Fertility rate, total (births per woman)",
+                indicator: "SP.DYN.TFRT.IN",
+                type: "line"
+            },{
+                title: "Population ages 0-14 (% of total)",
+                indicator: "SP.POP.0014.TO.ZS",
+                type: "line"
+            },{
+                title: "Population ages 15-64 (% of total)",
+                indicator: "SP.POP.1564.TO.ZS",
+                type: "line"
+            },{
+                title: "Health expenditure, total (% of GDP)",
+                indicator: "SH.XPD.TOTL.ZS",
+                type: "bar"
+            },{
+                title: "Health expenditure per capita (current US$)",
+                indicator: "SH.XPD.PCAP",
+                type: "bar"
+            },{
+                title: "Urban population (% of total)",
+                indicator: "SP.URB.TOTL.IN.ZS",
+                type: "bar"
+            },{
+                title: "Population living in slums, (% of urban population)",
+                indicator: "EN.POP.SLUM.UR.ZS",
+                type: "bar"
+            },{
+                title: "Revenue, excluding grants (% of GDP)",
+                indicator: "GC.REV.XGRT.GD.ZS",
+                type: "bar"
+            },{
+                title: "External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",
+                indicator: "DT.DOD.DPPG.CD",
+                type: "line"
+            },{
+                title: "Bank nonperforming loans to total gross loans (%)",
+                indicator: "FB.AST.NPER.ZS",
+                type: "bar"
+            },{
+                title: "Bank capital to assets ratio (%)",
+                indicator: "FB.BNK.CAPA.ZS",
+                type: "bar"
+            },{
+                title: "Broad money growth (annual %)",
+                indicator: "FM.LBL.BMNY.ZG",
+                type: "line"
+            },{
+                title: "Merchandise trade (% of GDP)",
+                indicator: "TG.VAL.TOTL.GD.ZS",
+                type: "line"
+            },{
+                title: "Merchandise exports (current US$)",
+                indicator: "TX.VAL.MRCH.CD.WT",
+                type: "line"
+            },{
+                title: "Merchandise imports (current US$)",
+                indicator: "TM.VAL.MRCH.CD.WT",
+                type: "line"
+            },{
+                title: "High-technology exports (% of manufactured exports)",
+                indicator: "TX.VAL.TECH.MF.ZS",
+                type: "line"
+            },{
+                title: "Foreign direct investment, net inflows (BoP, current US$)",
+                indicator: "BX.KLT.DINV.CD.WD",
+                type: "line"
+            },{
+                title: "Stocks traded, total value (% of GDP)",
+                indicator: "CM.MKT.TRAD.GD.ZS",
+                type: "line"
+            },{
+                title: "Stocks traded, turnover ratio of domestic shares (%)",
+                indicator: "CM.MKT.TRNR",
+                type: "line"
+            },{
+                title: "Expense (% of GDP)",
+                indicator: "GC.XPN.TOTL.GD.ZS",
+                type: "line"
+            },{
+                title: "Tax revenue (% of GDP)",
+                indicator: "GC.TAX.TOTL.GD.ZS",
+                type: "line"
+            },{
+                title: "CO2 emissions (metric tons per capita)",
+                indicator: "EN.ATM.CO2E.PC",
+                type: "line"
+            },{
+                title: "Energy use (kg of oil equivalent per capita)",
+                indicator: "EG.USE.PCAP.KG.OE",
+                type: "line"
+            },{
+                title: "International tourism, expenditures (% of total imports)",
+                indicator: "ST.INT.XPND.MP.ZS",
+                type: "line"
+            },{
+                title: "International tourism, receipts (% of total exports)",
+                indicator: "ST.INT.RCPT.XP.ZS",
                 type: "line"
             }]
         }

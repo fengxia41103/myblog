@@ -326,7 +326,7 @@ simply **counter-productive**.
 
 # Conclusion
 
-I liked [Angular][] and [REACT][]. My sense at this moment is that [Angular][]
+I like both [Angular][] and [REACT][]. My sense at this moment is that [Angular][]
 is more developed. Especially with its [component][] design, one can do the
 same thing as [REACT][], and with all the other good stuff [Angular][] can do.
 

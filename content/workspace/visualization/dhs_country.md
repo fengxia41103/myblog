@@ -1,9 +1,10 @@
-Title: Country health (DHS & World Bank)
+Title: Country health
 Date: 2016-10-15 11:00
 Category: REACT
 Tags: dhs, react
-Slug: country heath
+Slug: country health
 Author: Feng Xia
+Status: Draft
 
 I used the following data sets to build a SPA inspired by [DATA USA][].
 This is to demonstrate using REACT for front end development while there

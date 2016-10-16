@@ -32,7 +32,7 @@ SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
 # pagination
-DEFAULT_PAGINATION = 6
+DEFAULT_PAGINATION = 5
 
 
 # Theme
@@ -42,5 +42,5 @@ GITHUB_ADDRESS = 'http://github.com/fengxia41103'
 LINKEDIN_ADDRESS = 'https://www.linkedin.com/in/fengxia41103'
 
 LOAD_CONTENT_CACHE = False  # for development use
-SUMMARY_MAX_LENGTH = None
+#SUMMARY_MAX_LENGTH = 300
 IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]

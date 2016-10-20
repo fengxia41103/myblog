@@ -9,11 +9,8 @@ Author: Feng Xia
     <figcaption>Project Data Visualization</figcaption>
 </figure>
 
-> * [Country health][]
-
-
-[country health]: {filename}/workspace/visualization/dhs_country.md
-
+> * [World Snapshot][]
+[world snapshot]: http://worldsnapshot.s3-website-us-east-1.amazonaws.com/
 
 The joy of making graphs in a data-driven web application has been
 the highlight that kept me going from project to project. Once all things
@@ -28,14 +25,45 @@ KPI is above or below threshold, department
 A is doing better than department B, sales of this month dropped comparing
 to last month's...
 
-After finding [these open source data API][1], the thought is to construct
-a SPA to turn these data into visual form. Using REACT for the job, I came
-up with this structure which consumes [The World Bank][] data
-to illustrate a [country's KPIs][2].
+## Data sources
 
-[1]: https://github.com/toddmotto/public-apis
+1. [DHS][]: [DHS][] data set is published by [US AID][]. Following its [API][]
+   documents, [indicators][] are selected to depict a country's well doing.
+2. [The World Bank]:  Another comprehensive data set is [The World Bank][] set.
+   Check out its [indicators][1] page for a list of available indexes. Note that
+   [official document][2] is still refering to _v1_ version of the API, which
+   will block on CORS requests. Using **v2/en** endpoint instead. For example,
+   to get a list of country names:
+
+<pre class="brush:javascript">
+var api = "http://api.worldbank.org/v2/en/countries?format=json&per_page=1000";
+</pre>
+
+[data usa]: https://datausa.io/
+[dhs]: http://dhsprogram.com/data/
+[us aid]: https://www.usaid.gov/
+[api]: http://api.dhsprogram.com/#/index.html
+[indicators]: http://api.dhsprogram.com/#/api-indicators.cfm
 [the world bank]: https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries
-[2]: {filename}/workspace/visulization/dhs_country.md
+[1]: http://data.worldbank.org/indicator
+[2]: https://datahelpdesk.worldbank.org/knowledgebase/topics/125589
+
+## Toolset
+
+* [Materialize][]: "A modern responsive front-end framework based on Material Design" by their words.
+* [REACT][]: core
+* [webpack][]: new module builder that is making lot of buzz these days.
+* [fetch][]: a new way to talk to API endpoints instead of `jQuery AJAX`.
+
+[materialize]: http://materializecss.com/
+[react]: https://facebook.github.io/react/
+[webpack]: https://webpack.github.io/
+[fetch]: https://github.com/github/fetch
+
+## REACT components
+
+Following REACT practice, compoents have been designed to handle both the
+data acquisition through 3rd party API, and ploting using the awesome D3 library:
 
 <figure>
     <img class="center-block img-responsive" src="/images/country health.png"/>
@@ -48,6 +76,3 @@ data acquisition into `AjaxContainer`, data source handling into
 Therefore, we can swap out any of these components, for example, using
 Google chart for graphing, adding a new data source, or
 using [fetch][] instead of `jQuery` for AJAX calls.
-
-
-[fetch]: https://github.com/github/fetch

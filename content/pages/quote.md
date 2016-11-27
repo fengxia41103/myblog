@@ -51,8 +51,7 @@ var QuoteBox = React.createClass({
                         <span className="flabel"
                         onClick={this.setImage}
                         style={{marginLeft:"1em", float:"none"}}>
-                            <i className="fa"
-                                className={this.state.loading? "fa-spinner":"fa-angle-right"}
+                            <i className={this.state.loading? "fa fa-spinner":"fa fa-angle-right"}
                             style={{paddingLeft:"1em",marginRight:"1em"}}></i>
                             more
                         </span>

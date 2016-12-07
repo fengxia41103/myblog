@@ -10,8 +10,7 @@ Canonical [MAAS][1] is a deployment tool that can give a bare metal life by putt
 [2]: https://www.ubuntu.com/cloud/juju
 
 This article shows how to setup a virtual lab so one can play with these two tools and get a sense of what they do. The whole setup is based on Virtualbox. One 
-thing I found out the hard way is that despite their nice looking website and rather recent project history, there is no single
-document that can bring this environment live from A to Z. All official documents have out-of-date commands here and there which made following them useless. I consulted countless blogs, posts, chasing down bugs (or I thought they were bugs), and finally when everything works, it became so obvious and simple. Hopefully this article will shorten this journey for readers and they can have this environment easily.
+thing I found out the hard way is that despite their nice looking website and rather recent project history, there is no single document that can bring this environment live from A to Z. All official documents have out-of-date commands here and there which made following them useless. I consulted countless blogs, posts, chasing down bugs (or I thought they were bugs), and finally when everything works, it became so obvious and simple. Hopefully this article will shorten this journey for readers and they can have this environment easily.
 
 
 # Baseline environment
@@ -26,7 +25,7 @@ There will be two VMs and one internal network, "**intnet1**".
 
 1. **VM #1** is the MAAS server. Use Xenial 16.04 desktop image.
 2. **VM #2** is an emulated BM. 
-3. **intnet1** is the subnet that MAAS server will live together with its managed nodes (I call them targets).
+3. **intnet1** is a subnet (192.168.8.0/24) that MAAS server will live together with its managed nodes (I call them targets).
 
 <figure>
 <img src="/images/maas_networking_topology.png" class="center-block img-responsive" />
@@ -42,8 +41,12 @@ Personally I dislike those step-by-step instructions because first of all, it is
 MAAS server uses Ubuntu 16.04 Xenial desktop image. Setup the networking to have two interfaces &mdash; one uses
 default NAT so you have internet access, while the other uses **Internal Network** with name **intnet1**.
 
-1. Config subnet **intnet**. Define it as **192.168.8.x**. Use _ifconfig_ to find out interface name corresponding
-to _intnet1_ (a clue: the one that has no IP assigned):
+> Defining the subnet managed by MAAS server is the most imporant step in MAAS configuration. 
+
+1. Config subnet **intnet1**. Define it as **192.168.8.x** (This is completely arbitrary. Use whatever
+   network range you want to use). Use _ifconfig_ to find out interface name that corresponds
+   to _intnet1_ (a clue: the one that has no IP assigned):
+
     <pre class="brush:bash;">
     nano /etc/network/interfaces
     auto enp0s9
@@ -53,7 +56,7 @@ to _intnet1_ (a clue: the one that has no IP assigned):
       gateway 192.168.8.1
     </pre>
 
-    This is the single important step where we define the subnet managed by MAAS server. At Virtualbox level we have added an interface to this VM using _Internal Network_, we need then define this network in VM. Also, defining this before installing MAAS will have MAAS installer picks up this subnet automatically so to save some manual work down the road.
+    At Virtualbox level we have added an interface to this VM using _Internal Network_, we need then define this network in VM. Also, defining this before installing MAAS will have MAAS installer pick up this subnet automatically so to save some manual work down the road.
 
 2. Install MAAS is simple. Don't bother with other methods.
     <pre class="brush:bash;">
@@ -86,9 +89,9 @@ Install [UFW][]. UFW is infinitely easier to use than iptables. Making the MAAS 
 
 [UFW]: https://help.ubuntu.com/community/UFW
 
-<font color="red">Note:</font> enabling UFW will deny all access (except the current ssh session). So before anything, allow port 22!
+> Enabling UFW will deny all access (except the current ssh session). So before anything, allow port 22!
 
-To config MAAS server to route 192.168.8.x subnet traffic to internet using UFW is simple. Using _ifconfig_ to find the interface names that are connected to the internet (usually NAT, in this example, enp0s3):
+To config MAAS server to route 192.168.8.x subnet traffic to internet using UFW is simple. Using _ifconfig_ to find the interface name that is connected to the internet(NAT), in this example, enp0s3:
     <pre class="brush:bash;">
     nano /etc/ufw/before.rules
     </pre>

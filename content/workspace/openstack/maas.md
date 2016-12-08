@@ -1,7 +1,7 @@
 Title: Setup a MAAS Virtualbox lab
 Date: 2016-12-08 10:45
-Tags: dev, ci, build
-Slug: maas, openstack
+Tags: openstack
+Slug: maas virtualbox
 Author: Feng Xia
 
 Canonical [MAAS][1] is a deployment tool that can give a bare metal life by putting an OS on it. Working together with [Juju][2], they can setup a cluster of applications quite quickly. Think of them as a package manage like Ubuntu's **apt-get**, but in the context of a cloud. Interesting.
@@ -145,4 +145,6 @@ MAAS admin web is the tool to use for this configuration.
     </figure>
 
 
-We have done the hard part &mdash; setting up the MAAS server. In our next article, I'll show you what MAAS can do for fun &rarr; brining up a bare metal machine to life. Stay tuned.
+We have done the hard part &mdash; setting up the MAAS server. In our [next article][3], I'll show you what MAAS can do for fun &rarr; brining up a bare metal machine to life. Stay tuned.
+
+[3]: {filename}/workspace/openstack/maas_target.md

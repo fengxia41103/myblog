@@ -4,16 +4,27 @@ Tags: openstack
 Slug: juju bootstrap
 Author: Feng Xia
 
-Canonical Juju is a powerful orchestration tool. Being an orchestration tool, its power lies in deploying some applications by
+# Develop a new provider
+
+Case in point is to develop a new provider. Juju's [document][2] is helpful to guide development provides that one
+is familiar with code base and the rest of the Juju environment. The article fill in gap between a design document and
+code itself so not only one defines these interfaces, methods and so on, but one understands when these methods will be called,
+how they are called, and what they are to achieve.
+
+[2]: https://github.com/juju/juju/wiki/Implementing-environment-providers
+
+# Juju cloud & provider
+
+Canonical Juju is a powerful orchestration tool. Its power lies in deploying some applications by
 sending a form of _request_ to underline cloud and have the cloud figuring out what type of machine should be provisioned,
 putting an OS on it, installing necessary tools and application, and finally putting the desired applications on top. It's magic.
 
-Being able to handle multiple types of cloud, Juju's abstraction of a _cloud_ is called _an envrionment_ (we will use "cloud" and
+Being able to handle multiple types of cloud, Juju abstracs a _cloud_ with _an envrionment_ (we will use "cloud" and
 "environment" interchangeably in this article). 
 Within an environment, there is a special machine, the _machine-0_, that functions as a management node to all other machines.
 In essence it is a state controller where configurations of all slave nodes, status of deployed applications and so on are kept.
-The _cloud provider_ is the driver layer where Juju's CLI talks to a cloud. Each cloud has a different API. Juju provides
-a common bootstrap framework to tie these providers into its process.
+The _cloud provider_ is the driver layer where Juju's CLI speaks to a cloud. Each cloud has a different API. Juju provides
+a common bootstrap framework to tie these providers into a common process.
 
 <figure class="row">
     <img class="img-responsive center-block" src="images/juju%20cloud%20and%20provider.png" />
@@ -22,7 +33,7 @@ a common bootstrap framework to tie these providers into its process.
 
 # Bootstrap usage
 
-Before Juju bootstraps an environment, it needs to know [clouds][1]. Off the shelf Juju supports the followings:
+Before Juju bootstraps an environment, it needs to know to have basic knowledge of [clouds][1]. Off the shelf Juju supports the followings:
 
 1. Azure
 2. Cloudsigma
@@ -38,7 +49,7 @@ Before Juju bootstraps an environment, it needs to know [clouds][1]. Off the she
 
 [1]: https://jujucharms.com/docs/2.0/clouds
 
-For these clouds, nearly everything is built-in(!) The bare minimum to bootstrap a machine is
+For the above, nearly everything is built-in(!) The bare minimum to bootstrap a machine is
 user credential (and some cloud, eg. LXD, doesn't use credentials). Juju
 handles everything else. Depending on the selected cloud type, Juju commands also offer different configurations
 that can be customized, for example, direct request to a particular EC2 region.
@@ -149,6 +160,38 @@ What is expected from the cloud? Four things that are all hardware centric:
 2. network information
 3. storage volume
 4. storage volume attachment
+
+<pre class="brush:bash;">
+// StartInstanceResult holds the result of an
+// InstanceBroker.StartInstance method call.
+type StartInstanceResult struct {
+	// Instance is an interface representing a cloud instance.
+	Instance instance.Instance
+
+	// Config holds the environment config to be used for any further
+	// operations, if the instance is for a controller.
+	Config *config.Config
+
+	// HardwareCharacteristics represents the hardware characteristics
+	// of the newly created instance.
+	Hardware *instance.HardwareCharacteristics
+
+	// NetworkInfo contains information about how to configure network
+	// interfaces on the instance. Depending on the provider, this
+	// might be the same StartInstanceParams.NetworkInfo or may be
+	// modified as needed.
+	NetworkInfo []network.InterfaceInfo
+
+	// Volumes contains a list of volumes created, each one having the
+	// same Name as one of the VolumeParams in StartInstanceParams.Volumes.
+	// VolumeAttachment information is reported separately.
+	Volumes []storage.Volume
+
+	// VolumeAttachments contains a attachment-specific information about
+	// volumes that were attached to the started instance.
+	VolumeAttachments []storage.VolumeAttachment
+}
+</pre>
 
 ### Hardware characteristics
 
@@ -362,7 +405,8 @@ However, we are separating it here for discussion purpose.
     <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
 </figure>
 
-The most critical thing in this step is to install Juju agent.
+The most critical thing in this step is to install Juju agent. We will write more about this agent in other articles. For bootstrap,
+the followings are observed:
 
 * default path: /var/lib/juju
 * hardcoded log file name: cloud-init-output.log
@@ -372,6 +416,55 @@ The most critical thing in this step is to install Juju agent.
 
 Juju identifies machine-0 by
 SSH-ing into the machine and matching _/var/lib/juju/nonce.txt_
-content to a special string: __user-admin:bootstrap_.
+content to a special string: _*user-admin:bootstrap*_.
 
   > Machine-0 must have file (_/var/lib/juju/nonce.txt_) with content: <font color="red">user-admin:bootstrap</font>
+
+# Wrapup
+
+This concludes our humble attempt to decipher Juju's bootstrap mechanisms. We have covered quite some grounds. The key take away
+is to understand where provider is expected. However, this is an over simplified view because it also depends on how much involvement
+a cloud want to have in this process. Argubly one can say that cloud provider is really called for in each of the six steps in this process &mdash;
+it needs to validate constraints, it should pick the OS image, it certainly should control the tool and cloud-init process,
+and certainly it is doing the provisioning. 
+
+I think this argument is nearly true if one looks into stock providers and pull all their implementation together. For writing a new provider, XClarity,
+it comes down to a design decision then how much the underline cloud wants control. The bare minimum (as we have done in the simulation, see below)
+is to rely on default values, _common_ provider's _Bootstrap_ functions, and return a _StartInstanceResult_.
+
+<pre class="brush:bash;">
+	// For now, we are imitating a successful instance by directly returning a result struct
+	var tmpArch string = arch.AMD64
+	var tmpMem uint64 = 2000000
+	var tmpCpuCore uint64 = 1
+	var tmpCpuPower uint64 = 100
+	hardware := instance.HardwareCharacteristics{
+		Arch: &tmpArch,
+		Mem: &tmpMem,
+		CpuCores: &tmpCpuCore,
+		CpuPower: &tmpCpuPower,
+	}
+    volumes := make([]storage.Volume, 0)
+	networkInfo := make([]network.InterfaceInfo, 0)
+	volumeAttachments := make([]storage.VolumeAttachment, 0)
+
+	return &environs.StartInstanceResult{
+		Instance:          xclarityBootstrapInstance{},
+		Config:			   env.ecfg.Config,
+		Hardware:          &hardware, // type instance.HardwareCharacteristics struct
+		NetworkInfo:       networkInfo, // type network.InterfaceInfo struct
+		Volumes:           volumes, // type storage.Volume struct
+		VolumeAttachments: volumeAttachments, // type storageVolumeAttachment struct
+	}, nil
+</pre>
+
+There are a few topics that are not covered in this article, but need to be studied further: 
+
+1. Juju agent & tools: What does an agent do? What is the DB look like? How is information registered with jujud (aka. agent)? How does agent communicates with CLI controller? Why is it an issue to match agent with juju binary? How to build a custom agent?
+2. cloud-init: My understanding at the moment is that the entire node configuration is done via [cloud-init][3]. Itself is not interesting. But what Juju does to make cloud-init carry out its task is interesting. I think there are scripts involved. So who is generating these scripts? what type of scripts? Can they be customized? This helps us to know how much we can control the final state of an instance.
+3. SimpleStream: I think it is a form of communication protocol. It is how one communicates with jujud. What capability does it have? Who is providing that
+in Juju's environment? How it may be affected by other network design/configuration?
+
+[3]: https://launchpad.net/cloud-init
+
+Well, stay tuned.

@@ -4,27 +4,61 @@ Tags: openstack
 Slug: juju bootstrap
 Author: Feng Xia
 
+The very first command user will encounter is the _juju bootstrap_. It
+createa a special machine &mdash; state controller, machine-0, control
+node, etc. &mdash; naming convention aside, it is the brain that
+tracks others nodes in the cloud, applications installed and their
+status. 
+
+Through research I want to learn about its process, internal
+mechanism, how this command triggers off other juju components, what
+is the minimum take to simulate a successful bootstrap, and if things
+go south, what is the minimum to simulate a clean state so we can run
+_juju bootstrap_ again as if from scratch. This last point is
+particuarly useful for development and troubleshooting.
+
+First thing first, if we have create a cloud or are using a stock
+cloud type:
+
+<pre class="brush:bash;">
+$ juju bootstrap [cloudname] [machine-0 name]
+
+for example:
+$ juju bootstrap devx test-1
+</pre>
+
+
 # Develop a new provider
 
-Case in point is to develop a new provider. Juju's [document][2] is helpful to guide development provides that one
-is familiar with code base and the rest of the Juju environment. The article fill in gap between a design document and
-code itself so not only one defines these interfaces, methods and so on, but one understands when these methods will be called,
-how they are called, and what they are to achieve.
+Case in point is to develop a new provider. Juju's [document][2] is
+helpful to guide development provides that one is familiar with code
+base and the rest of the Juju environment. The article fill in gap
+between a design document and code itself so not only one defines
+these interfaces, methods and so on, but one understands when these
+methods will be called, how they are called, and what they are to
+achieve.
 
 [2]: https://github.com/juju/juju/wiki/Implementing-environment-providers
 
 # Juju cloud & provider
 
-Canonical Juju is a powerful orchestration tool. Its power lies in deploying some applications by
-sending a form of _request_ to underline cloud and have the cloud figuring out what type of machine should be provisioned,
-putting an OS on it, installing necessary tools and application, and finally putting the desired applications on top. It's magic.
+Canonical Juju is a powerful orchestration tool. Its power lies in
+deploying some applications by sending a form of _request_ to
+underline cloud and have the cloud figuring out what type of machine
+should be provisioned, putting an OS on it, installing necessary tools
+and application, and finally putting the desired applications on
+top. It's magic.
 
-Being able to handle multiple types of cloud, Juju abstracs a _cloud_ with _an envrionment_ (we will use "cloud" and
-"environment" interchangeably in this article). 
-Within an environment, there is a special machine, the _machine-0_, that functions as a management node to all other machines.
-In essence it is a state controller where configurations of all slave nodes, status of deployed applications and so on are kept.
-The _cloud provider_ is the driver layer where Juju's CLI speaks to a cloud. Each cloud has a different API. Juju provides
-a common bootstrap framework to tie these providers into a common process.
+Being able to handle multiple types of cloud, Juju abstracs a _cloud_
+with _an envrionment_ (we will use "cloud" and "environment"
+interchangeably in this article).  Within an environment, there is a
+special machine, the _machine-0_, that functions as a management node
+to all other machines.  In essence it is a state controller where
+configurations of all slave nodes, status of deployed applications and
+so on are kept.  The _cloud provider_ is the driver layer where Juju's
+CLI speaks to a cloud. Each cloud has a different API. Juju provides a
+common bootstrap framework to tie these providers into a common
+process.
 
 <figure class="row">
     <img class="img-responsive center-block" src="images/juju%20cloud%20and%20provider.png" />
@@ -33,7 +67,8 @@ a common bootstrap framework to tie these providers into a common process.
 
 # Bootstrap usage
 
-Before Juju bootstraps an environment, it needs to know to have basic knowledge of [clouds][1]. Off the shelf Juju supports the followings:
+Before Juju bootstraps an environment, it needs to know to have basic
+knowledge of [clouds][1]. Off the shelf Juju supports the followings:
 
 1. Azure
 2. Cloudsigma
@@ -49,13 +84,17 @@ Before Juju bootstraps an environment, it needs to know to have basic knowledge 
 
 [1]: https://jujucharms.com/docs/2.0/clouds
 
-For the above, nearly everything is built-in(!) The bare minimum to bootstrap a machine is
-user credential (and some cloud, eg. LXD, doesn't use credentials). Juju
-handles everything else. Depending on the selected cloud type, Juju commands also offer different configurations
-that can be customized, for example, direct request to a particular EC2 region.
+For the above, nearly everything is built-in(!) The bare minimum to
+bootstrap a machine is user credential (and some cloud, eg. LXD,
+doesn't use credentials). Juju handles everything else. Depending on
+the selected cloud type, Juju commands also offer different
+configurations that can be customized, for example, direct request to
+a particular EC2 region.
 
-LXD is a special type of cloud because it does not involve another machine throughout &mdash; everything is taking place on the same machine where
-CLI are being issued. For all others, it always involves some kind of remote API interface for commanding purpose.
+LXD is a special type of cloud because it does not involve another
+machine throughout &mdash; everything is taking place on the same
+machine where CLI are being issued. For all others, it always involves
+some kind of remote API interface for commanding purpose.
 
 To list all supported cloud types:
 
@@ -78,8 +117,9 @@ devmaas            0                 maas        Metal As A Service
 devx               0                 xclarity    Lenovo XClarity
 </pre>
 
-To bootstrap an environment is simple if everything has been setup correctly. It is really up to the underline cloud
-to provide a machine, and this is where we are going to analye in further details.
+To bootstrap an environment is simple if everything has been setup
+correctly. It is really up to the underline cloud to provide a
+machine, and this is where we are going to analye in further details.
 
 <pre class="brush:bash;">
 $ juju bootstrap [cloud type][any name]
@@ -87,27 +127,36 @@ $ juju bootstrap [cloud type][any name]
 
 # Bootstrap overview
 
-Juju offers a generalized framework into which code that drives a cloud type is tied. Being the first
-machine to create in a given environment, machine-0 involves tremendous amount of machinary to go live.
-In a nutshell, all activities can be categorized into the followings:
+Juju offers a generalized framework into which code that drives a
+cloud type is tied. Being the first machine to create in a given
+environment, machine-0 involves tremendous amount of machinary to go
+live.  In a nutshell, all activities can be categorized into the
+followings:
 
 <figure class="row">
     <img class="img-responsive center-block" src="images/juju%20bootstrap%20overview.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
-* Setup constraints: An umbrella term containing anything from memory size to region to the version of OS itself. 
-* Pick OS image: For Ubuntu, it does mapping from a name, eg. Precise, to an actual OS version.
-* Pick agent/tools: Juju requires to install an agent, _jujud_, on all slave nodes. Bootstrap will abort if no 
-adequate agent can be located.
+* Setup constraints: An umbrella term containing anything from memory
+  size to region to the version of OS itself.
+* Pick OS image: For Ubuntu, it does mapping from a name, eg. Precise,
+  to an actual OS version.
+* Pick agent/tools: Juju requires to install an agent, _jujud_, on all
+  slave nodes. Bootstrap will abort if no adequate agent can be located.
   
   > Chaning version number to a non-official one, eg. 2.0.1.99, will force Juju binary to use a local jujud (compiled).
   
-* Provision OS: Machine is setup for SSH access via public-key (including root). A default user, _ubuntu_, is created on the machine.
-* Set up instance configuration: An instance configuration controls all things beyond a bare OS, such as
-triggering an OS update & upgrade (eg. apt upgrade), ports Juju agent should listen to, networking configurations, etc..
-* Configure node: From the main controller, Juju will SSH into the node, install Juju agent and tools,
-set up a mongoDB for data persistence and running other chores using cloud-init.
+* Provision OS: Machine is setup for SSH access via public-key
+  (including root). A default user, _ubuntu_, is created on the
+  machine.
+* Set up instance configuration: An instance configuration controls
+  all things beyond a bare OS, such as triggering an OS update & upgrade
+  (eg. apt upgrade), ports Juju agent should listen to, networking
+  configurations, etc..
+* Configure node: From the main controller, Juju will SSH into the
+  node, install Juju agent and tools, set up a mongoDB for data
+  persistence and running other chores using cloud-init.
 
   > Default Juju agent path: /var/lib/juju
 
@@ -125,15 +174,16 @@ how to configure an OS-ed machine. The latter can be argued cloud agnostic. Howe
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
-The purpose of this framework is to pre-evaluate constraints and requested resources for provider's consumption. For example, it will cponstruct
-a list of Juju agents and tools but delay its final picking until providre's code is called. Same for OS images (imageMetadata).
+The purpose of this framework is to pre-evaluate constraints and
+requested resources for provider's consumption. For example, it will
+cponstruct a list of Juju agents and tools but delay its final picking
+until providre's code is called. Same for OS images (imageMetadata).
 
-The Juju tools & agent play such
-a key role in bootstraping that the entire process will abort if no
-matching tool is located.  The assumption is that privisioning OS is
-the job the cloud and Juju is responsible for actions from OS
-onward. So if there is no tools to take the machine to the next stage,
-why bother installing an OS? 
+The Juju tools & agent play such a key role in bootstraping that the
+entire process will abort if no matching tool is located.  The
+assumption is that privisioning OS is the job the cloud and Juju is
+responsible for actions from OS onward. So if there is no tools to
+take the machine to the next stage, why bother installing an OS?
 
 
 Now let's drive into a provider's arena and take a look what a provider offers.
@@ -468,3 +518,4 @@ in Juju's environment? How it may be affected by other network design/configurat
 [3]: https://launchpad.net/cloud-init
 
 Well, stay tuned.
+

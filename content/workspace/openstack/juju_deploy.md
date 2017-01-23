@@ -9,11 +9,22 @@ continue our research into another important function &mdash; juju deploy.
 
 [1]: {filename}/workspace/openstack/juju_cloud_bootstrap.md
 
+
 Deploy will command a node to pull down requested charm and install
 whatever needed based the charm's instruction. As the bootstrap
 research, I'm interested in the internal mechanism of this process,
 the bare minimum to simulate a successful run, and the minimum steps
 to repeat this for development and troubleshooting.
+
+# Screencast
+
+See the process in action:
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="images/juju%20deploy%20jenkins.gif" />
+    <figcaption>Screencast of juju deploying Jenkins</figcaption>
+</figure>
 
 # Deploy illustrated
 
@@ -74,10 +85,10 @@ installed.
 # What takes to be a good machine
 
 In our previous example, we used _add-machine_ command to bring new
-machine into the juju environment. As it turned out, one can add any provisioned machine into
-the cloud (as long as it knows how to install juju agent which is
-another topic). Now let's take a look what installing an agent will do
-to this machine.
+machine into the juju environment. As it turned out, one can add any
+provisioned machine into the cloud (as long as it knows how to install
+juju agent which is another topic). Now let's take a look what
+installing an agent will do to this machine.
 
 First We created a vanilla Xenial 16.04 server with certainly *no
 knowledge* of juju. The only user account is under

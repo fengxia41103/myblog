@@ -10,6 +10,16 @@ node, etc. &mdash; naming convention aside, it is the brain that
 tracks others nodes in the cloud, applications installed and their
 status. 
 
+# Screencast
+
+See the process in action:
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="images/juju%20bootstrap.gif" />
+    <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
+</figure>
+
 Through research I want to learn about its process, internal
 mechanism, how this command triggers off other juju components, what
 is the minimum take to simulate a successful bootstrap, and if things

@@ -1,7 +1,23 @@
+Title: Emacs
+Date: 2017-01-21 11:45
+Tags: dev
+Slug: emacs
+Author: Feng Xia
 
+What a wonderful editor!
+
+I wouldn't even call it an editor because it
+can do so much beyond text editing. Still on the learning curve to get
+a grasp of what it can do in my daily development workflow. Here is to
+document the [init.el][1] that I'm using. It's a work in progress of
+course since I'm updating it all the time. Nonetheless, I'm already in
+love with what I have so far.
+
+[1]: {attach}/downloads/init.el
+
+<pre class="brush:plain;">
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
-
 
 (defvar current-user
   (getenv
@@ -1184,9 +1200,7 @@ non-nil; otherwise prompts the user to enter the directory."
   (w3m-goto-url-new-session
    (concat "http://" site)))
 
-(message "Emacs is ready to do thy bidding, Master %s!" current-user)
+(message "Emacs is ready to do thy bidding, Master %s!" current-user)                          
+</pre>
 
-;; Local Variables:
-;; coding: utf-8
-;; no-byte-compile: t
-;; End:
+Happy coding.

@@ -328,7 +328,7 @@ future."
 
 ;; Great font on the mac
 ;; (set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
-(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 120)
+(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 130)
 
 ;; Is this now removed by default?
 (menu-bar-mode 1)
@@ -1119,16 +1119,15 @@ non-nil; otherwise prompts the user to enter the directory."
 (add-hook 'go-mode-hook 'go-mode-setup)
 
 ;; go-imports
-(defun go-mode-setup ()
-  (go-eldoc-setup)
-  (setq gofmt-command "goimports")
-  (add-hook 'before-save-hook 'gofmt-before-save))
-(add-hook 'go-mode-hook 'go-mode-setup)
+;; (defun go-mode-setup ()
+;;   (go-eldoc-setup)
+;;   (setq gofmt-command "goimports")
+;;   (add-hook 'before-save-hook 'gofmt-before-save))
+;; (add-hook 'go-mode-hook 'go-mode-setup)
 
 ;;Godef, shows function definition when calling godef-jump
 (defun go-mode-setup ()
   (go-eldoc-setup)
-  (setq gofmt-command "goimports")
   (add-hook 'before-save-hook 'gofmt-before-save)
   (local-set-key (kbd "M-.") 'godef-jump))
 (add-hook 'go-mode-hook 'go-mode-setup)
@@ -1183,6 +1182,25 @@ non-nil; otherwise prompts the user to enter the directory."
    (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page nil )))
   (w3m-goto-url-new-session
    (concat "http://" site)))
+
+;; IRC client
+(use-package circe
+  :ensure
+  :config)
+
+(setq circe-network-options
+      '(("Freenode"
+         :tls t
+         :nick "fengxia41103"
+         ;; :sasl-username "my-nick"
+         ;; :sasl-password "my-password"
+         :channels ("#emacs" "#python" "#odoo" "#reactjs" "#latex"  "#openstack-charms" "#openstack-horizon" "#openstack-heat")
+         )))
+
+(use-package helm-circe
+  :ensure
+  :config)
+
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

@@ -12,7 +12,12 @@ status.
 
 # Screencast
 
-See the process in action:
+Through research I want to learn about its process, internal
+mechanism, how this command triggers off other juju components, what
+is the minimum take to simulate a successful bootstrap, and if things
+go south, what is the minimum to simulate a clean state so we can run
+_juju bootstrap_ again as if from scratch. This last point is
+particuarly useful for development and troubleshooting.
 
 <figure class="row">
     <img class="img-responsive center-block"
@@ -20,12 +25,6 @@ See the process in action:
     <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
 </figure>
 
-Through research I want to learn about its process, internal
-mechanism, how this command triggers off other juju components, what
-is the minimum take to simulate a successful bootstrap, and if things
-go south, what is the minimum to simulate a clean state so we can run
-_juju bootstrap_ again as if from scratch. This last point is
-particuarly useful for development and troubleshooting.
 
 First thing first, if we have create a cloud or are using a stock
 cloud type:
@@ -37,6 +36,8 @@ for example:
 $ juju bootstrap devx test-1
 </pre>
 
+This will create a state controller (machine-0) that will be the
+management node within juju's cloud environment.
 
 # Develop a new provider
 

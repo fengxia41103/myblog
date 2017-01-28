@@ -49,7 +49,7 @@ it is the smallest unit the company chooses to manage its product.
 The more detailed it is, the more accurate the rest of the
 operations can be, but also the more work to set it up initially.
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="images/fashion_1.png">
     <figcaption>For staffs, search by filter</figcaption>
 </figure>
@@ -66,7 +66,7 @@ instead of seeing it physically. Therefore, to staffs filtering
 by these attributes will be more efficient.
 
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="images/fashion_3.png">
     <figcaption>For customers, browse/search by season and vendor</figcaption>
 </figure>
@@ -90,7 +90,7 @@ in storage can then be rolled up to location level and company level. There is a
 a common setup of _region_ or _district_ level that is between company and location. It is
 not implemented but can be added easily.
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="images/fashion_2.png">
     <figcaption>Inventory structure diagram</figcaption>
 </figure>
@@ -124,7 +124,7 @@ can select from a list of storages to do the counting. Season and vendor
 list within each storage are derived from products in that
 storage by the application automatically.
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="images/fashion_4.png">
     <figcaption>Select location and vendor to count</figcaption>
 </figure>
@@ -136,7 +136,7 @@ Only the ones having a non-zero count will be highlighted and saved later.
 However, it is possible that a product has been sold out. So to handle this special
 case we use a _star_ to indicate this situation.
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="images/fashion_5.png">
     <figcaption>Physical inventory admin mode</figcaption>
 </figure>
@@ -144,7 +144,7 @@ case we use a _star_ to indicate this situation.
 User mode removes product details from the view, leaving only product SKU and
 size information for reference.
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="images/fashion_6.png">
     <figcaption>Physical inventory user mode</figcaption>
 </figure>

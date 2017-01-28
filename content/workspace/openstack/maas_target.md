@@ -33,7 +33,7 @@ After this, start the target VM and it should PXE boot and will shut itself down
 
 MAAS target goes through a life cycel as shown below:
 
-<figure>
+<figure class="row">
 <img src="/images/maas_target_life_cycle.png" class="center-block img-responsive" />
 <figcaption>MAAS target node life cycle</figcaption>
 </figure>

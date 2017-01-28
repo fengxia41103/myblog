@@ -6,7 +6,7 @@ Author: Feng Xia
 
 Canonical [MAAS][1] is a deployment tool that can give a bare metal life by putting an OS on it. Working together with [Juju][2], they can setup a cluster of applications quite quickly. Think of them as a package manage like Ubuntu's **apt-get**, but in the context of a cloud. Interesting.
 
-n[1]: http://maas.io/
+[1]: http://maas.io/
 [2]: https://www.ubuntu.com/cloud/juju
 
 This article shows how to setup a virtual lab so one can play with these two tools and get a sense of what they do. The whole setup is based on Virtualbox. One 

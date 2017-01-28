@@ -4,7 +4,7 @@ Slug: data visualization
 Tags: demo, react, visualization
 Author: Feng Xia
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="/images/country_1.png"/>
     <figcaption>Project Data Visualization</figcaption>
 </figure>
@@ -65,7 +65,7 @@ var api = "http://api.worldbank.org/v2/en/countries?format=json&per_page=1000";
 Following REACT practice, compoents have been designed to handle both the
 data acquisition through 3rd party API, and ploting using the awesome D3 library:
 
-<figure>
+<figure class="row">
     <img class="center-block img-responsive" src="/images/country health.png"/>
     <figcaption>Data visualization SPA architecture</figcaption>
 </figure>

@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
 
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-	    <meta name="apple-mobile-web-app-capable" content="yes" />
-	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<head>
 
-	    {# http://hammerjs.github.io/getting-started/ #}
-	    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> {# http://hammerjs.github.io/getting-started/ #}
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        {% block core_library %}
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
+    <meta name="description" content="">
+    <meta name="author" content=""> {% block core_library %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
             <!-- script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script -->
-        <!-- script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script -->
-        <script src="/theme/js/html5shiv.min.js"></script>
-        <script src="/theme/js/respond.min.js"></script>
-        <![endif]-->
+    <!-- script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script -->
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+    <![endif]-->
 
 
 	    {# Fontawesome #}
@@ -73,7 +70,7 @@
         {% block main %}
 	    <div id="wrap" style="background-color:#eee;">
 	        <div class="container center-block">
-		        <div class="row page-header">
+		  <div class="row page-header">
                     <div class="col-md-6">
 			            <h1 class="my-banner">
                             <a href="{{SITEURL}}/">{{ SITENAME }}</a>
@@ -94,7 +91,7 @@
 				            {% endfor %}
                         </ul>
                     </div>
-		        </div><!-- end of block header -->
+		  </div><!-- end of block header -->
             </div>
 
             {% block introduction %}
@@ -102,8 +99,8 @@
 
 	        <div id="content">
                 {# main content #}
-		        {% block content %}
-		        {% endblock %}
+		{% block content %}
+		{% endblock %}
 
                 {# pagination #}
                 {% block pagination %}
@@ -123,8 +120,7 @@
             {% block related %}
             {% endblock %}
 
-            <div class="container">
-	            <div class="">
+	      <div class="container">
                     <h3>Categories:</h3>
                     <ul class="list-inline">
                         {% for c,article in categories %}
@@ -147,12 +143,10 @@
                         </li>
                         {% endfor %}
                     </ul>
-
                 </div>
-           </div>
 
 
-            <div class="row" style="text-align:center; margin-top:3em;padding-top:2em;border-top:1px solid #cfcfcf;">
+            <div style="text-align:center; margin-top:1em;padding-top:2em;border-top:1px solid #cfcfcf;">
                 <h4>
                     2016 PY Consulting Ltd.
                     1236 Beacon Street, Brookline, MA 021461

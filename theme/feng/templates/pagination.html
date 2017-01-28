@@ -1,7 +1,7 @@
 
 {% if DEFAULT_PAGINATION %}
-<div class="row">
-<ul class="list-inline col-md-12">
+
+<ul class="list-inline row">
     {% if articles_page.has_previous() %}
     {% set num = articles_page.previous_page_number() %}
         <li class="prev">
@@ -27,5 +27,5 @@
         </li>
     {% endif %}
 </ul>
-</div>
+
 {% endif %}

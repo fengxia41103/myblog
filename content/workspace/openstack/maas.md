@@ -6,7 +6,7 @@ Author: Feng Xia
 
 Canonical [MAAS][1] is a deployment tool that can give a bare metal life by putting an OS on it. Working together with [Juju][2], they can setup a cluster of applications quite quickly. Think of them as a package manage like Ubuntu's **apt-get**, but in the context of a cloud. Interesting.
 
-[1]: http://maas.io/
+n[1]: http://maas.io/
 [2]: https://www.ubuntu.com/cloud/juju
 
 This article shows how to setup a virtual lab so one can play with these two tools and get a sense of what they do. The whole setup is based on Virtualbox. One 
@@ -63,7 +63,7 @@ default NAT so you have internet access, while the other uses **Internal Network
     sudo add-apt-repository ppa:maas/stable
     sudo apt update
     sudo apt install maas
-    </pre>
+    </pre>xo
 
 3. Create MAAS admin: 
     <pre class="brush:bash;">
@@ -88,6 +88,25 @@ At this point, the MAAS server is installed and user can login the web admin con
 Install [UFW][]. UFW is infinitely easier to use than iptables. Making the MAAS server as a router is necessary because targets, once acquired an OS, will need internet access in order to APT other things. (If using real metal server, the server can be connected to multiple VLANs among which one is providing internet access.)
 
 [UFW]: https://help.ubuntu.com/community/UFW
+
+### Masquerading
+
+Following the [instructions][4] to enable default port forwarding:
+
+[4]: https://help.ubuntu.com/lts/serverguide/firewall.html
+
+1. Packet forwarding needs to be enabled in ufw. Two configuration files will need to be adjusted, in _/etc/default/ufw_ change the DEFAULT_FORWARD_POLICY to “ACCEPT”:
+   <pre class="brush:bash;">
+   DEFAULT_FORWARD_POLICY="ACCEPT"
+   </pre>
+
+2. Then edit _/etc/ufw/sysctl.conf_ and uncomment:
+  <pre class="brush:bash;">
+  net/ipv4/ip_forward=1
+  net/ipv6/conf/default/forwarding=1
+  </pre>
+  
+### Firewall policies
 
 > Enabling UFW will deny all access (except the current ssh session). So before anything, allow port 22!
 

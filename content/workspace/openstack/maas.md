@@ -140,6 +140,7 @@ What this does is to make **enp0s3** as the router for subnet 192.168.8.x &larr;
 8. Allow rndc service: 5247
 9. Allow iscsi: 3260
 10. Allow ntp: 123
+11. Allow MAAS bootstrap sever: 8000
 
 Finally, **ufw enable**. Our GFW is up.
 
@@ -149,11 +150,14 @@ Finally, **ufw enable**. Our GFW is up.
 
 MAAS admin web is the tool to use for this configuration. 
 
-1. Login into _http://192.168.8.1:5240/_, goto **Subnets**:
+1. Login into _http://192.168.8.1/MAAS/_, goto **Subnets** and select
+   the VLAN &larr; this is how you can turn on DHCP on a subnet:
 
     <figure class="row">
-    <img src="/images/maas_subnet_config.png" class="center-block img-responsive" />
-    <figcaption>MAAS admin subnet config</figcaption>
+    <img src="/images/maas_vlan_config.png" class="center-block
+    img-responsive" />
+    <img src="/images/maas_subnet_config.png" class="center-block img-responsive" />    
+    <figcaption>MAAS  DHCP config</figcaption>
     </figure>
 
 2. Click **"Vlan"** to get to the Vlan configuration page. _Take action_ to enable DHCP. Change the gateway to 192.168.8.1, which is this server's static IP on this subnet.

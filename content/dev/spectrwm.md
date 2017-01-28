@@ -3,6 +3,7 @@ Date: 2017-01-21 11:45
 Tags: dev
 Slug: spectrwm
 Author: Feng Xia
+Status: Draft
 
 My favourate [desktop manage][1] which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. 

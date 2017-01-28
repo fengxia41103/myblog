@@ -74,12 +74,12 @@
 	    <div id="wrap" style="background-color:#eee;">
 	        <div class="container center-block">
 		        <div class="row page-header">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6">
 			            <h1 class="my-banner">
                             <a href="{{SITEURL}}/">{{ SITENAME }}</a>
 			            </h1>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6">
                         <ul class="list-inline pull-right" style="padding-top:100px;">
                             <li>
                                 <a class="label label-default" href="{{SITEURL}}/">Home</a>
@@ -119,13 +119,14 @@
 
         {% block footer %}
         <footer>
-            {# block of related contents #}
+             {# block of related contents #}
+             <div class="container">
             {% block related %}
-            {% endblock %}
+             {% endblock %}
+             </div>
 
-            <div class="container">
-	            <div class="">
-                    <h3>Categories:</h3>
+             <div class="container">
+             <h3>Categories:</h3>
                     <ul class="list-inline">
                         {% for c,article in categories %}
                         <li style="margin-top:0.7em;">
@@ -148,11 +149,10 @@
                         {% endfor %}
                     </ul>
 
-                </div>
-           </div>
+            </div>
 
 
-            <div class="row" style="text-align:center; margin-top:3em;padding-top:2em;border-top:1px solid #cfcfcf;">
+            <div style="text-align:center; margin-top:3em;padding-top:2em;border-top:1px solid #cfcfcf;">
                 <h4>
                     2016 PY Consulting Ltd.
                     1236 Beacon Street, Brookline, MA 021461
@@ -305,11 +305,11 @@
 			 });
 
              // lightbox
-			 j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
-				 var url = j$(this).attr('src');
-				 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
-				 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
-			 });
+                   j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+		     var url = j$(this).attr('src');
+		     j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+		     j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+		   });
 
              // syntaxhighlighter
              SyntaxHighlighter.defaults['toolbar'] = false;

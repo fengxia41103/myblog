@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col-md-8">
-<img src="/images/architecture_joke.jpg" class="center-block img-responsive" />
+<img src="/images/architecture_joke.jpg" class="center-block
 </figure>
 
 The word "system architect" has been puzzling to me.
@@ -61,7 +61,7 @@ may include initial data import, runtime data synchronization, data extraction a
 system backup.
 
 
-<figure>
+<figure class="row">
     <img src="images/system_architecture.png" class="center-block img-responsive"/>
     <figcaption>System architecture diagram</figcaption>
 </figure>

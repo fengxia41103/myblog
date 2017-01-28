@@ -27,7 +27,7 @@ There will be two VMs and one internal network, "**intnet1**".
 2. **VM #2** is an emulated BM. 
 3. **intnet1** is a subnet (192.168.8.0/24) that MAAS server will live together with its managed nodes (I call them targets).
 
-<figure>
+<figure class="row">
 <img src="/images/maas_networking_topology.png" class="center-block img-responsive" />
 <figcaption>MAAS Virtualbox lab networking topology</figcaption>
 </figure>
@@ -132,14 +132,14 @@ MAAS admin web is the tool to use for this configuration.
 
 1. Login into _http://192.168.8.1:5240/_, goto **Subnets**:
 
-    <figure>
+    <figure class="row">
     <img src="/images/maas_subnet_config.png" class="center-block img-responsive" />
     <figcaption>MAAS admin subnet config</figcaption>
     </figure>
 
 2. Click **"Vlan"** to get to the Vlan configuration page. _Take action_ to enable DHCP. Change the gateway to 192.168.8.1, which is this server's static IP on this subnet.
 
-    <figure>
+    <figure class="row">
     <img src="/images/maas_dhcp_config.png" class="center-block img-responsive" />
     <figcaption>MAAS admin DHCP config</figcaption>
     </figure>

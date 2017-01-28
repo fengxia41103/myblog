@@ -15,14 +15,12 @@ While research schools, it is useful to bookmark a page for later use. That's
 where the _bookmark_ feature comes in. User can save unlimited bookmarks
 and manage them by _x-out_(remove) it from saved list. Convenient.
 
-<figure>
-<div class="row">
+<figure class="row">
     <div class="col-md-6">
     <img class="img-responsive center-block" src="/images/gkp_9.png" />
     </div><div class="col-md-6">
     <img class="img-responsive center-block" src="/images/gkp_10.png" />
     </div>
-</div>
     <figcaption>Bookmark a school</figcaption>
 </figure>
 
@@ -82,14 +80,12 @@ Also, there is a voting mechanism behind the scene so that the more
 users a page is being viewed (thus indicating more popularity),
 the higher priority the page has in term of  receiving the next update.
 
-<figure>
-<div class="row">
+<figure class="row">
     <div class="col-md-6">
     <img class="img-responsive center-block" src="/images/gkp_15.png"/>
     </div><div class="col-md-6">
     <img class="img-responsive center-block" src="/images/gkp_16.png"/>
     </div>
-</div>
     <figcaption>Social media keyword cloud and news ticker</figcaption>
 </figure>
 

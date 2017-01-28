@@ -155,14 +155,12 @@ imported from wikipedia. Since wikipedia does not have an API for keyword search
 the challenge was to have the computer matching city name to
 a wiki page and parse the page for imported data bits.
 
-<figure>
-    <div class="row">
+<figure class="row">
     <div class="col-md-6">
     <img class="img-responsive center-block" src="images/gkp_6.png"/>
     </div>
     <div class="col-md-6">
     <img class="img-responsive center-block" src="images/gkp_7.png"/>
-    </div>
     </div>
     <figcaption>City wiki</figcaption>
 </figure>

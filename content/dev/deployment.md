@@ -18,7 +18,7 @@ run into such problem with AWS, but would like to keep
 options open.
 
 
-<figure>
+<figure class="row">
     <img src="/images/deployment_architecture.png" class="img-responsive center-block"/>
     <figcaption>Deployment architecture</figcaption>
 </figure>

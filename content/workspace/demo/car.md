@@ -54,7 +54,7 @@ I know there are many car leasing tutorials, blogs, articles
 and so on. But here I want to present a different approach.
 First of all, let's turn those maths into diagram:
 
-<figure>
+<figure class="row">
     <img src="/images/car leasing.png"/ class="img-responsive center-block">
     <figcaption>
         How do you get a monthly payment
@@ -228,7 +228,7 @@ file even though its parent path is a _STATIC_. Oh well.
 
 With the component in place, rendering an `form input` section like this one is a breeze:
 
-<figure>
+<figure class="row">
     <img src="/images/car_1.png" class="img-responsive center-block"/>
     <figcaption>
         AngularJS Component rendered form inputs

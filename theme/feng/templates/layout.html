@@ -118,11 +118,12 @@
         <footer>
              {# block of related contents #}
              <div class="container">
-            {% block related %}
+             {% block related %}
              {% endblock %}
              </div>
 
              <div class="container">
+	     <div class="row">
              <h3>Categories:</h3>
                     <ul class="list-inline">
                         {% for c,article in categories %}
@@ -145,7 +146,8 @@
                         </li>
                         {% endfor %}
                     </ul>
-            </div>
+	     </div>
+             </div>
 
 
 

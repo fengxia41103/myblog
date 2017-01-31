@@ -40,7 +40,7 @@ how those states are related.
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
-# Deploy illustrated
+# Deploy steps illustrated
 
 This is a more detailed view of juju deploying a charm broken down
 into three steps.

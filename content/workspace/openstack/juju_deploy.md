@@ -26,16 +26,29 @@ See the process in action:
     <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
 
+## Juju + MAAS
+
+We have already covered state machine of [MAAS target node][3]. In the
+context of deploying a charm driven by Juju, we can take a look MAAS internals
+how those states are related.
+
+[3]: {filename}/workspace/openstack/maas_target.md
+
+<figure class="row">
+    <img class="img-responsive center-block" 
+    src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
+</figure>
+
 # Deploy illustrated
 
-Juju's strength lies in its capability to deploy application with a
-key stroke &mdash; juju deploy. Let's first take a look how it
-accomplishes such a task.
+This is a more detailed view of juju deploying a charm broken down
+into three steps.
 
 <figure class="row">
     <img class="img-responsive center-block" 
     src="images/juju%20deploy%20original.png" />
-    <figcaption>Illustration of a Juju cloud environment</figcaption>
+    <figcaption>Illustration of a Juju cloud environment before a deployment</figcaption>
 </figure>
 
 In this environment, we have a CLI controller where we will type in
@@ -61,7 +74,7 @@ job done:
 
 3. Issuing a deploy command
   <pre class="brush:bash;">
-  $ juju deploy jenkins
+  $ juju deploy jenkinsn
   </pre>
 
 4. Jujud will download [Jenkins charm][2] and execute per its instruction.
@@ -81,6 +94,7 @@ installed.
     src="images/juju%20deploy%20result.png" />
     <figcaption>Deployment result</figcaption>
 </figure>
+
 
 # What takes to be a good machine
 

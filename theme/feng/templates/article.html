@@ -92,7 +92,7 @@
 {% endblock %}
 
 {% block related %}
-<h1><span style="color:#adadad;">Related: </span></h1>
+<h1 style="color:#adadad;">Related: </h1>
 
 {% for cat,articles in categories %}
 {% if cat == category %}
@@ -120,7 +120,7 @@
     <div class="col-md-3 col-sm-3">
         <a class="btn button pull-right" href="{{SITEURL}}/{{a.url}}">
             read more
-        </a>*
+        </a>
     </div>
 </div>
 {% endif %}

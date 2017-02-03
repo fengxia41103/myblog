@@ -172,7 +172,7 @@ Summary: Feng Xia's resum&eacute;
 [http://fengxia.co:8003/wei/]: http://fengxia.co:8003/wei/
 [http://fengxia.co:8001/gaokao/]: http://fengxia.co:8001/gaokao/
 [http://fengxia.co:8002/jk/]: http://fengxia.co:8002/jk/
-[1]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/resume.pdf
+[1]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/odoo%20roadmap.pdf
 
 <div class="row my-resume-header" id="lean">
     <div class="text-left col-md-6 col-sm-3">

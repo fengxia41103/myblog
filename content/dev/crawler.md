@@ -13,7 +13,7 @@ or building upon some more sophisticate tool like
 [Scrapy](http://doc.scrapy.org/en/latest/intro/tutorial.html).
 
 <figure class="row">
-<img src="images/regular_expressions.png" class="img-responsive center-block"/>
+<img src="/images/regular_expressions.png" class="img-responsive center-block"/>
 <figcaption>Fun with regular expression</figcaption>
 </figure>
 

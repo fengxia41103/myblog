@@ -3,6 +3,7 @@ Date: 2017-1-03 10:45
 Tags: openstack
 Slug: juju
 Author: Feng Xia
+Status: Draft
 
 This article is a high level view of Juju's internal modelings. For me it was fairly confusing when looking at its document
 which has an army of these concepts: charm, bundle, model, unit.... of course, each of them makes sense after a while. Its [terminology][1] page helps on understanding individual term. But like other Canonical documents, it needs a design level diagram

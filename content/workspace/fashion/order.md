@@ -31,7 +31,7 @@ At this point, seller has fulfilled what the buyer is expecting, either by origi
 products or replacement or any other forms of settlement in between.
 
 <figure>
-    <img class="center-block img-responsive" src="images/order life cycle.png">
+    <img class="center-block img-responsive" src="/images/order life cycle.png">
     <figcaption>Order life cycle</figcaption>
 </figure>
 

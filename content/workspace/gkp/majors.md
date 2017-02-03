@@ -19,7 +19,7 @@ details that are relevant to that particular major which students
 would find useful.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_major_setup.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_major_setup.png"/>
     <figcaption>Majors are split into 3 layers</figcaption>
 </figure>
 
@@ -34,7 +34,7 @@ At this level, focus was to provide statistics which
 is similar to what is done for schools at _State level_.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_18.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_18.png"/>
     <figcaption>Major category and subcategory</figcaption>
 </figure>
 
@@ -54,7 +54,7 @@ most recent 50 job posts that matches this major.
 
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_19.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_19.png"/>
     <figcaption>Job title cloud</figcaption>
 </figure>
 
@@ -65,7 +65,7 @@ they are further grouped into cities so they provide another
 geo reference for students.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_20.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_20.png"/>
     <figcaption>Schools grouped by job locations</figcaption>
 </figure>
 

@@ -3,6 +3,7 @@ Date: 2017-01-19 15:45
 Tags: openstack
 Slug: juju deploy
 Author: Feng Xia
+Status: Draft
 
 We have covered Juju's [bootstrap][1] phase. In this article, we will
 continue our research into another important function &mdash; juju deploy.
@@ -22,7 +23,7 @@ See the process in action:
 
 <figure class="row">
     <img class="img-responsive center-block"
-    src="images/juju%20deploy%20jenkins.gif" />
+    src="/images/juju%20deploy%20jenkins.gif" />
     <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
 
@@ -36,7 +37,7 @@ how those states are related.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -47,7 +48,7 @@ into three steps.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="images/juju%20deploy%20original.png" />
+    src="/images/juju%20deploy%20original.png" />
     <figcaption>Illustration of a Juju cloud environment before a deployment</figcaption>
 </figure>
 
@@ -81,7 +82,7 @@ job done:
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="images/juju%20deploy%20commands.png" />
+    src="/images/juju%20deploy%20commands.png" />
     <figcaption>Issuing command to deploy Jenkins</figcaption>
 </figure>
 
@@ -91,7 +92,7 @@ installed.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="images/juju%20deploy%20result.png" />
+    src="/images/juju%20deploy%20result.png" />
     <figcaption>Deployment result</figcaption>
 </figure>
 

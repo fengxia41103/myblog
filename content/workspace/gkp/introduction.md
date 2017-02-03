@@ -24,7 +24,7 @@ searching criteria so to narrow down from a general search to a more
 customized version.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_2.png" />
+    <img class="img-responsive center-block" src="/images/gkp_2.png" />
     <figcaption>Set up user preferences</figcaption>
 </figure>
 
@@ -56,7 +56,7 @@ on each API account and the initial trial and error time. Drawing the
 map was straightforward using [Google map API] and [marker cluster][].
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_21.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_21.png"/>
     <figcaption>Using Google map to browse schools</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ create this incompatibility.
 Considering the GFW, I abandoned both maps and back to a simple Chart. Map is drawn using [Echarts][].
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_1.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_1.png"/>
     <figcaption>School map using Echarts</figcaption>
 </figure>
 
@@ -112,7 +112,7 @@ be grouped along different dimensions. Statistics are then computed on the fly
 to provide quick facts.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_3.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_3.png"/>
     <figcaption>School statistics quickview at State level</figcaption>
 </figure>
 
@@ -121,7 +121,7 @@ two important dimensions are important for a student
 &mdash; Bachelor's vs. Associate program, and tiers.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_4.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_4.png"/>
     <figcaption>School statistics drill down by programs and admission tiers</figcaption>
 </figure>
 
@@ -141,7 +141,7 @@ they have to make a decision prior to the exam day which tier she is going into,
 reference is her estimated score.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_5.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_5.png"/>
     <figcaption>School statistics drill down by school types</figcaption>
 </figure>
 
@@ -157,10 +157,10 @@ a wiki page and parse the page for imported data bits.
 
 <figure class="row">
     <div class="col-md-6">
-    <img class="img-responsive center-block" src="images/gkp_6.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_6.png"/>
     </div>
     <div class="col-md-6">
-    <img class="img-responsive center-block" src="images/gkp_7.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_7.png"/>
     </div>
     <figcaption>City wiki</figcaption>
 </figure>
@@ -171,7 +171,7 @@ a train schedule that will show exactly which train are available
 to take, all stops in between, and the actual time elapse.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/gkp_8.png"/>
+    <img class="img-responsive center-block" src="/images/gkp_8.png"/>
     <figcaption>City to city train schedule search engine</figcaption>
 </figure>
 

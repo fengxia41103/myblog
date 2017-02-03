@@ -3,6 +3,7 @@ Date: 2017-1-11 17:00
 Tags: openstack
 Slug: juju bootstrap
 Author: Feng Xia
+Status: Draft
 
 The very first command user will encounter is the _juju bootstrap_. It
 createa a special machine &mdash; state controller, machine-0, control
@@ -21,7 +22,7 @@ particuarly useful for development and troubleshooting.
 
 <figure class="row">
     <img class="img-responsive center-block"
-    src="images/juju%20bootstrap.gif" />
+    src="/images/juju%20bootstrap.gif" />
     <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
 </figure>
 
@@ -72,7 +73,7 @@ common bootstrap framework to tie these providers into a common
 process.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/juju%20cloud%20and%20provider.png" />
+    <img class="img-responsive center-block" src="/images/juju%20cloud%20and%20provider.png" />
     <figcaption>Juju cloud abstraction</figcaption>
 </figure>
 
@@ -145,7 +146,7 @@ live.  In a nutshell, all activities can be categorized into the
 followings:
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/juju%20bootstrap%20overview.png" />
+    <img class="img-responsive center-block" src="/images/juju%20bootstrap%20overview.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -181,7 +182,7 @@ how to configure an OS-ed machine. The latter can be argued cloud agnostic. Howe
 * <font color="blue">Blue</font>: are clearly Canonical dependent due to hard-coded values (eg. simplestream URL).
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/juju%20bootstrap%20process.png" />
+    <img class="img-responsive center-block" src="/images/juju%20bootstrap%20process.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -211,7 +212,7 @@ Thing like selecting the OS image and juju agent and tools are all taking place 
 function &larr; and this is the point where underline cloud meets Juju.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/juju%20common%20BootstrapInstance.png" />
+    <img class="img-responsive center-block" src="/images/juju%20common%20BootstrapInstance.png" />
     <figcaption>"common" provider's BootstrapInstance function</figcaption>
 </figure>
 
@@ -462,7 +463,7 @@ In code this step is presented as an "interface" function within the _BootstrapI
 However, we are separating it here for discussion purpose.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
+    <img class="img-responsive center-block" src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
     <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
 </figure>
 

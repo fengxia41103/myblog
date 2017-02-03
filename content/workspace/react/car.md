@@ -173,7 +173,7 @@ var FormBox = React.createClass({
             }, this);
         }
         var fields = this.state.showFields?
-            <div className="my-multicol-2">{valueFields}{formFields}</div>: null;
+            <div className="my-multicol-2" style={{marginBottom:"2em"}}>{valueFields}{formFields}</div>: null;
 
         // Value displays
         var valueFields = [];

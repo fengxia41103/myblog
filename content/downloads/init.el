@@ -1230,6 +1230,13 @@ non-nil; otherwise prompts the user to enter the directory."
   :ensure
   :config)
 
+;; py-isort
+(use-package py-isort
+  :ensure
+  :config)
+(add-hook 'before-save-hook 'py-isort-before-save)
+(setq py-isort-options '("-sl")) ;; One module per line
+
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

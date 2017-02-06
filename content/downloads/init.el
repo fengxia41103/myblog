@@ -371,7 +371,7 @@ future."
 
 ;; Great font on the mac
 ;; (set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
-;;(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 130)
+(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 130)
 
 ;; Is this now removed by default?
 (menu-bar-mode 1)

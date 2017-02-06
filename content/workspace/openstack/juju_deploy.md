@@ -73,7 +73,7 @@ job done:
 2. Juju state controller (aka. machine-0) will recoganize the new
    machine and register its availability.
 
-3. Issuing a deploy command
+n3. Issuing a deploy command
   <pre class="brush:bash;">
   $ juju deploy jenkinsn
   </pre>

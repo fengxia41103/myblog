@@ -347,13 +347,27 @@ future."
 (use-package firecode-theme
   :ensure
   :config)
-(load-theme 'firecode t)
+;; (load-theme 'firecode t)
 
 (use-package molokai-theme
   :ensure
   :config)
 ;; (load-theme 'molokai t)
 
+(use-package zenburn-theme
+  :ensure
+  :config)
+;; (load-theme 'zenburn t)
+
+(use-package solarized-theme
+  :ensure
+  :config)
+;; (load-theme 'solarized t)
+
+(use-package color-theme-modern
+  :ensure
+  :config)
+;; (load-theme 'hober t)
 
 ;; Great font on the mac
 ;; (set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)

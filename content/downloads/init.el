@@ -1251,6 +1251,23 @@ non-nil; otherwise prompts the user to enter the directory."
 (add-hook 'before-save-hook 'py-isort-before-save)
 (setq py-isort-options '("-sl")) ;; One module per line
 
+;; org-mode export
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+
+;; web-mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(setq web-mode-content-types-alist
+      '(("jsx" . "\\.js[x]?\\'")))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  )
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

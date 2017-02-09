@@ -3,7 +3,7 @@ Date: 2017-01-19 15:45
 Tags: openstack
 Slug: juju deploy
 Author: Feng Xia
-
+Status: Draft
 
 We have covered Juju's [bootstrap][1] phase. In this article, we will
 continue our research into another important function &mdash; juju deploy.
@@ -456,9 +456,3 @@ deploying an application, in this case, jenkins.
 
 45 directories, 194 files
 </pre>
-
-
-
-
-
-# Conclusion

@@ -5,8 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(bbdb-file "~/.emacs.d/bbdb")
  '(custom-enabled-themes (quote (pok-wob)))
  '(custom-safe-themes
@@ -34,7 +32,6 @@ static char *note[] = {
 \"#######...\",
 \"######....\",
 \"#######..#\" };")))
- '(fci-rule-color "#eee8d5")
  '(global-linum-mode t)
  '(gnus-logo-colors (quote ("#528d8d" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
@@ -60,39 +57,13 @@ static char *gnus-pointer[] = {
 \"###....####.######\",
 \"###..######.######\",
 \"###########.######\" };")) t)
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (solarized-theme color-theme-modern color-theme-solarized zenburn-theme py-isort helm-circe circe f3 helm-cscope writegood-mode org-autolist restart-emacs magit-find-file comment-dwim-2 bash-completion scratch-ext diredful beacon helm-fuzzier git-gutter-fringe elfeed-goodies elfeed magit-gitflow helm-swoop smartscan unicode-enbox auto-highlight-symbol sane-term autopair highlight-chars elpy xcscope ssh helm-ack helm-bbdb helm-bibtex helm-bibtexkey helm-cmd-t helm-core helm-css-scss helm-dictionary helm-dired-history helm-dired-recent-dirs helm-dirset helm-git helm-git-files helm-git-grep helm-github-stars helm-gitignore helm-gitlab helm-go-package helm-google helm-grepint helm-helm-commands helm-ls-git helm-package helm-pydoc helm markdown-mode+ markdown-toc markdownfmt dumb-jump go-mode go-snippets go-stacktracer yari yaml-mode yagist whole-line-or-region whitespace-cleanup-mode wgrep virtualenv vc-darcs unfill undo-tree tidy textile-mode tagedit switch-window sql-indent smex smarty-mode slime-company skewer-less session scss-mode scratch sass-mode ruby-hash-syntax rspec-mode robe rinari regex-tool redshank rainbow-mode rainbow-delimiters py-autopep8 projectile-rails project-local-variables pip-requirements php-mode paredit-everywhere page-break-lines origami org-pomodoro org-fstree org-cliplink nvm nlinum mwe-log-commands multiple-cursors move-dup mmm-mode markdown-mode magit-gh-pulls lua-mode lively less-css-mode ledger-mode jsx-mode json-mode js-comint js-auto-beautify ipretty intero indent-guide immortal-scratch ibuffer-vc htmlize hl-sexp hippie-expand-slime hindent highlight-symbol highlight-quoted highlight-escape-sequences hayoo guide-key graphviz-dot-mode goto-gem go-eldoc go-complete go-autocomplete go-add-tags gnuplot gitignore-mode github-issues github-clone gitconfig-mode git-timemachine git-messenger git-blamed fullframe flycheck-package flycheck-ledger flycheck-elm flycheck-clojure fill-column-indicator expand-region exec-path-from-shell erlang elm-mode elisp-slime-nav elein dsvn disable-mouse dired-sort dired+ diminish diff-hl default-text-scale darcsum csv-nav csv-mode css-eldoc crontab-mode counsel company-quickhelp company-anaconda color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cljsbuild-mode cl-lib-highlight cask-mode bundler bug-reference-github browse-kill-ring browse-at-remote avy auto-compile anzu aggressive-indent)))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(session-use-package t nil (session))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#dc322f")
-     (40 . "#cb4b16")
-     (60 . "#b58900")
-     (80 . "#859900")
-     (100 . "#2aa198")
-     (120 . "#268bd2")
-     (140 . "#d33682")
-     (160 . "#6c71c4")
-     (180 . "#dc322f")
-     (200 . "#cb4b16")
-     (220 . "#b58900")
-     (240 . "#859900")
-     (260 . "#2aa198")
-     (280 . "#268bd2")
-     (300 . "#d33682")
-     (320 . "#6c71c4")
-     (340 . "#dc322f")
-     (360 . "#cb4b16"))))
- '(vc-annotate-very-old-color nil))
+    (elisp-format solarized-theme color-theme-modern color-theme-solarized zenburn-theme py-isort helm-circe circe f3 helm-cscope writegood-mode org-autolist restart-emacs magit-find-file comment-dwim-2 bash-completion scratch-ext diredful beacon helm-fuzzier git-gutter-fringe elfeed-goodies elfeed magit-gitflow helm-swoop smartscan unicode-enbox auto-highlight-symbol sane-term autopair highlight-chars elpy xcscope ssh helm-ack helm-bbdb helm-bibtex helm-bibtexkey helm-cmd-t helm-core helm-css-scss helm-dictionary helm-dired-history helm-dired-recent-dirs helm-dirset helm-git helm-git-files helm-git-grep helm-github-stars helm-gitignore helm-gitlab helm-go-package helm-google helm-grepint helm-helm-commands helm-ls-git helm-package helm-pydoc helm markdown-mode+ markdown-toc markdownfmt dumb-jump go-mode go-snippets go-stacktracer yari yaml-mode yagist whole-line-or-region whitespace-cleanup-mode wgrep virtualenv vc-darcs unfill undo-tree tidy textile-mode tagedit switch-window sql-indent smex smarty-mode slime-company skewer-less session scss-mode scratch sass-mode ruby-hash-syntax rspec-mode robe rinari regex-tool redshank rainbow-mode rainbow-delimiters py-autopep8 projectile-rails project-local-variables pip-requirements php-mode paredit-everywhere page-break-lines origami org-pomodoro org-fstree org-cliplink nvm nlinum mwe-log-commands multiple-cursors move-dup mmm-mode markdown-mode magit-gh-pulls lua-mode lively less-css-mode ledger-mode jsx-mode json-mode js-comint js-auto-beautify ipretty intero indent-guide immortal-scratch ibuffer-vc htmlize hl-sexp hippie-expand-slime hindent highlight-symbol highlight-quoted highlight-escape-sequences hayoo guide-key graphviz-dot-mode goto-gem go-eldoc go-complete go-autocomplete go-add-tags gnuplot gitignore-mode github-issues github-clone gitconfig-mode git-timemachine git-messenger git-blamed fullframe flycheck-package flycheck-ledger flycheck-elm flycheck-clojure fill-column-indicator expand-region exec-path-from-shell erlang elm-mode elisp-slime-nav elein dsvn disable-mouse dired-sort dired+ diminish diff-hl default-text-scale darcsum csv-nav csv-mode css-eldoc crontab-mode counsel company-quickhelp company-anaconda color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cljsbuild-mode cl-lib-highlight cask-mode bundler bug-reference-github browse-kill-ring browse-at-remote avy auto-compile anzu aggressive-indent)))
+ '(session-use-package t nil (session)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(whitespace-tab ((t (:background "#2d2d2d" :foreground "#073642")))))
+ )

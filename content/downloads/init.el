@@ -3,18 +3,19 @@
 ;;; a number of other files.
 
 
-(defvar current-user
-  (getenv
-   (if (equal system-type 'windows-nt) "USERNAME" "USER")))
+(defvar current-user (getenv (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
 (message "Emacs is powering up... Be patient, Master %s!" current-user)
 
 
-(let ((minver "23.3"))
-  (when (version<= emacs-version minver)
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
-(when (version<= emacs-version "24")
-  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
+(let ((minver "23.3")) 
+  (when (version<= emacs-version minver) 
+    (error 
+     "Your Emacs is too old -- this config requires v%s or higher"
+     minver)))
+(when (version<= emacs-version "24") 
+  (message
+   "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'init-benchmarking) ;; Measure startup time
@@ -25,11 +26,12 @@
 ;;----------------------------------------------------------------------------
 ;; Temporarily reduce garbage collection during startup
 ;;----------------------------------------------------------------------------
-(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
+(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold 
   "Initial value of `gc-cons-threshold' at start-up time.")
 (setq gc-cons-threshold (* 128 1024 1024))
-(add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
+(add-hook 'after-init-hook 
+          (lambda () 
+            (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config
@@ -39,7 +41,7 @@
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
+(require 'init-elpa) ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
 
 ;;----------------------------------------------------------------------------
@@ -107,7 +109,7 @@
 (require 'init-css)
 (require 'init-haml)
 (require 'init-python-mode)
-(unless (version<= emacs-version "24.3")
+(unless (version<= emacs-version "24.3") 
   (require 'init-haskell))
 (require 'init-elm)
 (require 'init-ruby-mode)
@@ -117,12 +119,12 @@
 (require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
-(unless (version<= emacs-version "24.2")
-  (require 'init-clojure)
+(unless (version<= emacs-version "24.2") 
+  (require 'init-clojure) 
   (require 'init-clojure-cider))
 (require 'init-common-lisp)
 
-(when *spell-check-support-enabled*
+(when *spell-check-support-enabled* 
   (require 'init-spelling))
 
 (require 'init-misc)
@@ -136,22 +138,21 @@
 (require-package 'lua-mode)
 (require-package 'htmlize)
 (require-package 'dsvn)
-(when *is-a-mac*
-  (require-package 'osx-location))
+(when *is-a-mac* (require-package 'osx-location))
 (require-package 'regex-tool)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
 (require 'server)
-(unless (server-running-p)
+(unless (server-running-p) 
   (server-start))
 
 
 ;;----------------------------------------------------------------------------
 ;; Variables configured via the interactive 'customize' interface
 ;;----------------------------------------------------------------------------
-(when (file-exists-p custom-file)
+(when (file-exists-p custom-file) 
   (load custom-file))
 
 
@@ -170,65 +171,49 @@
 ;; nvm
 ;;----------------------------------------------------------------------------
 (require-package 'nvm)
-(defun do-nvm-use (version)
-  (interactive "sVersion: ")
-  (nvm-use version)
+(defun do-nvm-use (version) 
+  (interactive "sVersion: ") 
+  (nvm-use version) 
   (exec-path-from-shell-copy-env "PATH"))
 
 ;;----------------------------------------------------------------------------
 ;; web-beautify
 ;;----------------------------------------------------------------------------
 (require 'web-beautify) ;; Not necessary if using ELPA package
-(eval-after-load 'js2-mode
-  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'js2-mode '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
 ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-(eval-after-load 'js
-  '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'js '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
 
-(eval-after-load 'json-mode
-  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'json-mode '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
 
-(eval-after-load 'sgml-mode
-  '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+(eval-after-load 'sgml-mode '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
 
-(eval-after-load 'web-mode
-  '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
+(eval-after-load 'web-mode '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
 
-(eval-after-load 'css-mode
-  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+(eval-after-load 'css-mode '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
 
 (require 'js-auto-beautify)
 
 (add-hook 'js2-mode-hook 'js-auto-beautify-mode)
-(eval-after-load 'js2-mode
-  '(add-hook 'js2-mode-hook
-             (lambda ()
-               (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+(eval-after-load 'js2-mode '(add-hook 'js2-mode-hook 
+                                      (lambda () 
+                                        (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-(eval-after-load 'js-jsx-mode
-  (add-hook 'js-jsx-mode-hook '
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+(eval-after-load 'js-mode '(add-hook 'js-mode-hook 
+                                     (lambda () 
+                                       (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-(eval-after-load 'js-mode
-  '(add-hook 'js-mode-hook
-             (lambda ()
-               (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+(eval-after-load 'json-mode '(add-hook 'json-mode-hook 
+                                       (lambda () 
+                                         (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-(eval-after-load 'json-mode
-  '(add-hook 'json-mode-hook
-             (lambda ()
-               (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+(eval-after-load 'sgml-mode '(add-hook 'html-mode-hook 
+                                       (lambda () 
+                                         (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
 
-(eval-after-load 'sgml-mode
-  '(add-hook 'html-mode-hook
-             (lambda ()
-               (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
-
-(eval-after-load 'css-mode
-  '(add-hook 'css-mode-hook
-             (lambda ()
-               (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
+(eval-after-load 'css-mode '(add-hook 'css-mode-hook 
+                                      (lambda () 
+                                        (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
 
 ;;----------------------------------------------------------------------------
 ;; py-autopep8
@@ -239,10 +224,10 @@
 
 ;; Golang gofmt hook
 (add-hook 'before-save-hook #'gofmt-before-save)
-(add-hook 'go-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'gofmt-before-save)
-            (setq tab-width 4)
+(add-hook 'go-mode-hook 
+          (lambda () 
+            (add-hook 'before-save-hook 'gofmt-before-save) 
+            (setq tab-width 4) 
             (setq indent-tabs-mode 1)))
 
 (provide 'init)
@@ -254,18 +239,17 @@
 
 
 ;; Save the current macro as reusable function. MOVE
-(defun save-current-kbd-macro-to-dot-emacs (name)
+(defun save-current-kbd-macro-to-dot-emacs (name) 
   "Save the current macro as named function definition inside
 your initialization file so you can reuse it anytime in the
-future."
-  (interactive "Save Macro as: ")
-  (name-last-kbd-macro name)
-  (save-excursion
-    (find-file-literally user-init-file)
-    (goto-char (point-max))
-    (insert "\n\n;; Saved macro\n")
-    (insert-kbd-macro name)
-    (insert "\n")))
+future." 
+  (interactive "Save Macro as: ") 
+  (name-last-kbd-macro name) 
+  (save-excursion (find-file-literally user-init-file) 
+                  (goto-char (point-max)) 
+                  (insert "\n\n;; Saved macro\n") 
+                  (insert-kbd-macro name) 
+                  (insert "\n")))
 
 
 ;; Save the place in files
@@ -273,105 +257,131 @@ future."
 (setq-default save-place t)
 
 ;; Undentation and buffer cleanup
-(defun untabify-buffer ()
-  (interactive)
-  (untabify (point-min) (point-max)))
+(defun untabify-buffer () 
+  (interactive) 
+  (untabify (point-min) 
+            (point-max)))
 
-(defun indent-buffer ()
-  (interactive)
-  (indent-region (point-min) (point-max)))
+(defun indent-buffer () 
+  (interactive) 
+  (indent-region (point-min) 
+                 (point-max)))
 
-(defun cleanup-buffer ()
-  "Perform a bunch of operations on the whitespace content of a buffer."
-  (interactive)
-  (indent-buffer)
-  (untabify-buffer)
+(defun cleanup-buffer () 
+  "Perform a bunch of operations on the whitespace content of a buffer." 
+  (interactive) 
+  (indent-buffer) 
+  (untabify-buffer) 
   (delete-trailing-whitespace))
 
-(defun cleanup-region (beg end)
-  "Remove tmux artifacts from region."
-  (interactive "r")
-  (dolist (re '("\\\\|\·*\n" "\W*|\·*"))
+(defun cleanup-region (beg end) 
+  "Remove tmux artifacts from region." 
+  (interactive "r") 
+  (dolist (re '("\\\\|\·*\n" "\W*|\·*")) 
     (replace-regexp re "" nil beg end)))
 
 (global-set-key (kbd "C-x M-t") 'cleanup-region)
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
 ;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
+(unless (package-installed-p 'use-package) 
   (package-install 'use-package))
 (setq use-package-always-ensure t)
 
 ;; Theme and font good for coding
-(use-package suscolors-theme
-             :ensure
-             :config)
+(use-package 
+  suscolors-theme 
+
+  :ensure 
+  :config)
 ;; (load-theme 'suscolors t)
 
-(use-package lush-theme
-  :ensure
+(use-package 
+  lush-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'lush t)
 
-(use-package moe-theme
-  :ensure
+(use-package 
+  moe-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'moe-dark t)
 
-(use-package alect-themes
-  :ensure
+(use-package 
+  alect-themes 
+
+  :ensure 
   :config)
 ;; (load-theme 'alect-black t)
 
-(use-package metalheart-theme
-  :ensure
+(use-package 
+  metalheart-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'metalheart t)
 
-(use-package paganini-theme
-  :ensure
+(use-package 
+  paganini-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'paganini t)
 
 ;; Smart Mode Line
-(use-package smart-mode-line
-  :ensure
-  :config
-  (progn
-    ;; (use-package smart-mode-line-powerline-theme
-    ;; :ensure)
-    (sml/setup)
-    (setq sml/apply-theme 'respectful)
-    ))
+(use-package 
+  smart-mode-line 
 
-(use-package firecode-theme
-  :ensure
+  :ensure 
+  :config (progn
+            ;; (use-package smart-mode-line-powerline-theme
+            ;; :ensure)
+            (sml/setup) 
+            (setq sml/apply-theme 'respectful)))
+
+(use-package 
+  firecode-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'firecode t)
 
-(use-package molokai-theme
-  :ensure
+(use-package 
+  molokai-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'molokai t)
 
-(use-package zenburn-theme
-  :ensure
+(use-package 
+  zenburn-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'zenburn t)
 
-(use-package solarized-theme
-  :ensure
+(use-package 
+  solarized-theme 
+
+  :ensure 
   :config)
 ;; (load-theme 'solarized t)
 
-(use-package color-theme-modern
-  :ensure
+(use-package 
+  color-theme-modern 
+
+  :ensure 
   :config)
 ;; (load-theme 'hober t)
 
 ;; Great font on the mac
 ;; (set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
-(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 130)
+(set-face-attribute 'default nil 
+                    :family "Bitstream Vera Sans Mono" 
+                    :height 130)
 
 ;; Is this now removed by default?
 (menu-bar-mode 1)
@@ -381,29 +391,23 @@ future."
 
 
 ;; Remove bell and replace with message
-(setq ring-bell-function '(lambda () (message "The answer is 42...")))
+(setq ring-bell-function 
+      '(lambda () 
+         (message "The answer is 42...")))
 
 ;; quiet, please! No dinging!
-(setq echo-keystrokes 0.1
-      use-dialog-box nil
-      visible-bell t)
+(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
 
 
-(setq-default frame-title-format
-              '(:eval
-                (format "%s@%s: %s %s"
-                        (or (file-remote-p default-directory 'user)
-                            user-real-login-name)
-                        (or (file-remote-p default-directory 'host)
-                            system-name)
-                        (buffer-name)
-                        (cond
-                         (buffer-file-truename
-                          (concat "(" buffer-file-truename ")"))
-                         (dired-directory
-                          (concat "{" dired-directory "}"))
-                         (t
-                          "[no file]")))))
+(setq-default frame-title-format 
+              '(:eval (format "%s@%s: %s %s" (or (file-remote-p default-directory 'user) 
+                                                 user-real-login-name) 
+                              (or (file-remote-p default-directory 'host) 
+                                  system-name) 
+                              (buffer-name) 
+                              (cond (buffer-file-truename (concat "(" buffer-file-truename ")")) 
+                                    (dired-directory (concat "{" dired-directory "}")) 
+                                    (t "[no file]")))))
 
 ;; Auto decompress compressed files.
 (auto-compression-mode 1)
@@ -420,10 +424,7 @@ future."
 (setq history-length t)
 (setq history-delete-duplicates t)
 (setq savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables
-      '(kill-ring
-        search-ring
-        regexp-search-ring))
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 ;; Some pretty stuff
 (setq font-lock-maximum-decoration t)
@@ -432,8 +433,7 @@ future."
 (global-font-lock-mode 1)
 
 ;; Remove tabs
-(setq tab-width 4
-      indent-tabs-mode nil)
+(setq tab-width 4 indent-tabs-mode nil)
 
 ;; Nothing over 80 characters
 (setq fill-column 80)
@@ -494,56 +494,51 @@ future."
 ;; Make eww default browser
 (setq browse-url-browser-function 'eww-browse-url)
 
-(setq auto-mode-alist
-      (append '
-       (("\\.[CH]$"    . c++-mode)
-        ("\\.[ch]pp$"  . c++-mode)
-        ("\\.cc$"      . c++-mode)
-        ("\\.c$"       . c++-mode)
-        ("\\.h$"       . c++-mode)
-        ("\\.reg$"     . c++-mode)
-        ("\\.c.gcov$"  . c++-mode)
-        ("\\.my$"      . snmpv2-mode)
-        ("\\.mib$"     . snmpv2-mode)
-        ("\\.lib$"     . tcl-mode)
-        ("\\.suite$"   . tcl-mode)
-        ("\\.pdl$"     . quoted-lisp-mode)
-        ("\\.yaml$"     . yaml-mode)
-        ("\\.yml$"     . yaml-mode)
-        ("\\.diff$"    . diff-mode))
-       auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.[CH]$"    . c++-mode) 
+                                ("\\.[ch]pp$"  . c++-mode) 
+                                ("\\.cc$"      . c++-mode) 
+                                ("\\.c$"       . c++-mode) 
+                                ("\\.h$"       . c++-mode) 
+                                ("\\.reg$"     . c++-mode) 
+                                ("\\.c.gcov$"  . c++-mode) 
+                                ("\\.my$"      . snmpv2-mode) 
+                                ("\\.mib$"     . snmpv2-mode) 
+                                ("\\.lib$"     . tcl-mode) 
+                                ("\\.suite$"   . tcl-mode) 
+                                ("\\.pdl$"     . quoted-lisp-mode) 
+                                ("\\.yaml$"     . yaml-mode) 
+                                ("\\.yml$"     . yaml-mode) 
+                                ("\\.diff$"    . diff-mode)) auto-mode-alist))
 
 ;; open multiple unique eshells
-(defun ushell ()
-  "Open uniquely named eshell window."
-  (interactive)
-  (shell)
+(defun ushell () 
+  "Open uniquely named eshell window." 
+  (interactive) 
+  (shell) 
   (rename-uniquely))
 
 ;; Swap the buffers around - intelligent
-(defun swap-buffer-in-window ()
+(defun swap-buffer-in-window () 
   "Switch display of buffer in window to next item in buffer list.
 This actually picks the first 'interesting' buffer it finds in the
 buffer list (see also the 'buffer-list' function), with preference
 given to windows not already displayed in another window.
 
 Executing this function repeatedly will just toggle back and forth
-between the first two 'interesting' items in the 'buffer-list'."
-  (interactive)
-  (switch-to-buffer (other-buffer))
-  )
+between the first two 'interesting' items in the 'buffer-list'." 
+  (interactive) 
+  (switch-to-buffer (other-buffer)))
 
-(defun cycle-buffers-in-window ()
+(defun cycle-buffers-in-window () 
   "Cycles through the buffers in the current window.  'Uninteresting' buffers,
-and buffers which are visible in other windows are normally skipped."
-  (interactive)
-  (bury-buffer)
-  )
+and buffers which are visible in other windows are normally skipped." 
+  (interactive) 
+  (bury-buffer))
 
 ;; Dired mode additions
-(defun my-dired-mode-hook ()
+(defun my-dired-mode-hook () 
   "Hook run when entering 'dired-mode'."
-  (define-key dired-mode-map "X" 'dired-execute-file)
+  (define-key dired-mode-map "X" 'dired-execute-file) 
   (define-key dired-mode-map [double-down-mouse-1] 'dired-mouse-execute-file))
 (add-hook 'dired-mode-hook 'my-dired-mode-hook)
 
@@ -553,12 +548,11 @@ and buffers which are visible in other windows are normally skipped."
 ;; (add-hook 'c-mode-common-hook 'hc-highlight-hard-spaces)
 
 ;; Try linux style indentation
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(setq c-default-style "linux" c-basic-offset 4)
 
-(add-hook 'c-mode-hook
-          (lambda ()
-            (add-to-list 'ac-sources 'ac-source-c-headers)
+(add-hook 'c-mode-hook 
+          (lambda () 
+            (add-to-list 'ac-sources 'ac-source-c-headers) 
             (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
 
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
@@ -610,12 +604,15 @@ and buffers which are visible in other windows are normally skipped."
 (global-set-key "\C-ck" 'mode-compile-kill)
 
 ;; Setting Tab to indent region if anything is selected
-(defun maybe-tab ()
-  (interactive)
-  (if (and transient-mark-mode mark-active)
-      (indent-region (region-beginning) (region-end) nil)
+(defun maybe-tab () 
+  (interactive) 
+  (if (and transient-mark-mode 
+           mark-active) 
+      (indent-region (region-beginning) 
+                     (region-end) nil) 
     (c-indent-command)))
-(defun tab-indents-region () (local-set-key [(tab)] 'maybe-tab))
+(defun tab-indents-region () 
+  (local-set-key [(tab)] 'maybe-tab))
 
 (add-hook 'c-mode-common-hook   'tab-indents-region)
 (add-hook 'python-mode-hook   'tab-indents-region)
@@ -626,18 +623,16 @@ and buffers which are visible in other windows are normally skipped."
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; Auto indent pasted code
-(dolist (command '(yank yank-pop))
-  (eval `(defadvice ,command (after indent-region activate)
-           (and (not current-prefix-arg)
-                (member major-mode '(emacs-lisp-mode lisp-mode
-                                                     clojure-mode    scheme-mode
-                                                     haskell-mode    ruby-mode
-                                                     rspec-mode
-                                                     c-mode          c++-mode
-                                                     objc-mode       latex-mode
-                                                     plain-tex-mode))
-                (let ((mark-even-if-inactive transient-mark-mode))
-                  (indent-region (region-beginning) (region-end) nil))))))
+(dolist (command '(yank yank-pop)) 
+  (eval 
+   `(defadvice ,command (after indent-region activate) 
+      (and (not current-prefix-arg) 
+           (member major-mode '(emacs-lisp-mode lisp-mode clojure-mode    scheme-mode haskell-mode
+                                                ruby-mode rspec-mode c-mode          c++-mode
+                                                objc-mode       latex-mode plain-tex-mode)) 
+           (let ((mark-even-if-inactive transient-mark-mode)) 
+             (indent-region (region-beginning) 
+                            (region-end) nil))))))
 
 ;; Hide Lines
 (autoload 'hide-lines "hide-lines" "Hide lines based on a regexp" t)
@@ -645,11 +640,12 @@ and buffers which are visible in other windows are normally skipped."
 
 
 ;; xrvr_ddts -i remote
-(defun xrvr-ddts-info ()
-  "Run xrvr_ddts -i across remote ssh."
-  (interactive)
-  (compilation-start (concat "ssh -Y -o LogLevel=Error rtp-ads-474 'xrvr_ddts -i'")
-                     nil #'(lambda (mode-name) "*xrvr-ddts-info*")))
+(defun xrvr-ddts-info () 
+  "Run xrvr_ddts -i across remote ssh." 
+  (interactive) 
+  (compilation-start (concat "ssh -Y -o LogLevel=Error rtp-ads-474 'xrvr_ddts -i'") nil #
+                     '(lambda (mode-name) 
+                        "*xrvr-ddts-info*")))
 (global-set-key "\C-ci" 'xrvr-ddts-info)
 
 ;; Autoload diff mode
@@ -658,14 +654,17 @@ and buffers which are visible in other windows are normally skipped."
 
 ;; Always highlight parens or go mad
 (show-paren-mode t)
-(set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+(set-face-attribute 'region nil 
+                    :background "#666" 
+                    :foreground "#ffffff")
 (set-face-background 'show-paren-match (face-background 'default))
 (set-face-foreground 'show-paren-match "#def")
-(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(set-face-attribute 'show-paren-match nil 
+                    :weight 'extra-bold)
 
 ;; Org mode
-(unless (package-installed-p 'org)  ;; Make sure the Org package is
-  (package-install 'org))           ;; installed, install it if not
+(unless (package-installed-p 'org) ;; Make sure the Org package is
+  (package-install 'org))          ;; installed, install it if not
 
 ;; Standard key bindings
 (global-set-key "\C-cl" 'org-store-link)
@@ -676,66 +675,70 @@ and buffers which are visible in other windows are normally skipped."
 
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 
-(setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "WORKING(k@/!)" "|" "DONE(d@/!)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+(setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "WORKING(k@/!)" "|" "DONE(d@/!)") 
+                                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
-(setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "red" :weight bold)
-              ("DONE" :foreground "forest green" :weight bold)
-              ("WAITING" :foreground "orange" :weight bold)
-              ("HOLD" :foreground "magenta" :weight bold)
-              ("CANCELLED" :foreground "forest green" :weight bold)
-              ("WORKING" :foreground "forest green" :weight bold))))
+(setq org-todo-keyword-faces (quote (("TODO" :foreground "red" 
+                                      :weight bold) 
+                                     ("DONE" :foreground "forest green" 
+                                      :weight bold) 
+                                     ("WAITING" :foreground "orange" 
+                                      :weight bold) 
+                                     ("HOLD" :foreground "magenta" 
+                                      :weight bold) 
+                                     ("CANCELLED" :foreground "forest green" 
+                                      :weight bold) 
+                                     ("WORKING" :foreground "forest green" 
+                                      :weight bold))))
 
 (setq org-use-fast-todo-selection t)
 
-(setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-              ("WAITING" ("WAITING" . t))
-              ("HOLD" ("WAITING") ("HOLD" . t))
-              ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+(setq org-todo-state-tags-triggers (quote (("CANCELLED" ("CANCELLED" . t)) 
+                                           ("WAITING" ("WAITING" . t)) 
+                                           ("HOLD" ("WAITING") 
+                                            ("HOLD" . t)) 
+                                           ("TODO" ("WAITING") 
+                                            ("CANCELLED") 
+                                            ("HOLD")) 
+                                           ("NEXT" ("WAITING") 
+                                            ("CANCELLED") 
+                                            ("HOLD")) 
+                                           ("DONE" ("WAITING") 
+                                            ("CANCELLED") 
+                                            ("HOLD")))))
 
 ;; Org Capture mode
 (setq org-directory "~/org/")
 (setq org-default-notes-file "~/org/notes.org")
 
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/todo_mac.org" "Tasks")
-         "* TODO %?\n %i\n")
-        ("n" "Note" entry (file+datetree "~/org/notes_mac.org")
-         "* NOTE %?\n %i\n ")
-        ("o" "Tool" entry (file+datetree "~/org/tools.org")
-         "* TOOL %?\n %i\n ")
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n ")
-        ("x" "XRv" entry (file+datetree "~/org/xrv.org")
-         "* XRV %?\n %i\n ")
-        ("a" "Agile" entry (file+datetree "~/org/agile.org")
-         "* %?\n %i\n ")
-        ("s" "Sunstone" entry (file+datetree "~/org/sunstone.org")
-         "* Sunstone %?\n %i\n ")
-        ("d" "Devnet" entry (file+datetree "~/org/devnet.org")
-         "* Devnet %?\n %i\n ")
-        ("p" "Puppet" entry (file+datetree "~/org/puppet.org")
-         "* PUPPET %?\n %i\n ")
-        ))
+(setq org-capture-templates '(("t" "Todo" entry (file+headline "~/org/todo_mac.org" "Tasks")
+                               "* TODO %?\n %i\n") 
+                              ("n" "Note" entry (file+datetree "~/org/notes_mac.org")
+                               "* NOTE %?\n %i\n ") 
+                              ("o" "Tool" entry (file+datetree "~/org/tools.org")
+                               "* TOOL %?\n %i\n ") 
+                              ("j" "Journal" entry (file+datetree "~/org/journal.org")
+                               "* %?\nEntered on %U\n  %i\n ") 
+                              ("x" "XRv" entry (file+datetree "~/org/xrv.org") "* XRV %?\n %i\n ") 
+                              ("a" "Agile" entry (file+datetree "~/org/agile.org") "* %?\n %i\n ") 
+                              ("s" "Sunstone" entry (file+datetree "~/org/sunstone.org")
+                               "* Sunstone %?\n %i\n ") 
+                              ("d" "Devnet" entry (file+datetree "~/org/devnet.org")
+                               "* Devnet %?\n %i\n ") 
+                              ("p" "Puppet" entry (file+datetree "~/org/puppet.org")
+                               "* PUPPET %?\n %i\n ")))
 
 (setq header-line-format mode-line-format)
 
-(setq org-publish-project-alist
-      '(("org"
-         :base-directory "~/org/"
-         :publishing-directory "/nfs/wwwPeople/fxia1/Notes"
-         :recursive t
-         :section-numbers t
-         :table-of-contents t
-         :publishing-function org-html-publish-to-html
-         :headline-levels 4             ; Just the default for this project.
-         :auto-preamble t
-         :style "<link rel=\"stylesheet\"
+(setq org-publish-project-alist '(("org" :base-directory "~/org/" 
+                                   :publishing-directory "/nfs/wwwPeople/fxia1/Notes" 
+                                   :recursive t 
+                                   :section-numbers t 
+                                   :table-of-contents t 
+                                   :publishing-function org-html-publish-to-html 
+                                   :headline-levels 4 ; Just the default for this project.
+                                   :auto-preamble t 
+                                   :style "<link rel=\"stylesheet\"
                      href=\"../other/mystyle.css\"
                      type=\"text/css\"/>")))
 
@@ -744,41 +747,57 @@ and buffers which are visible in other windows are normally skipped."
 
 ;; Better buffer cycling
 ;; f4-f5 for user buffers, f6, f7 for emacs buffers
-(defun next-user-buffer ()
+(defun next-user-buffer () 
   "Switch to the next user buffer.
- (buffer name does not start with "*".)"
- (interactive)
- (next-buffer)
- (let ((i 0))
-   (while (and (string-equal "*" (substring (buffer-name) 0 1)) (< i 20))
-     (setq i (1+ i)) (next-buffer))))
+ (buffer name does not start with "
+  *
+  ".)" 
+  (interactive) 
+  (next-buffer) 
+  (let ((i 0)) 
+    (while (and (string-equal "*" (substring (buffer-name) 0 1)) 
+                (< i 20)) 
+      (setq i (1+ i)) 
+      (next-buffer))))
 
-(defun previous-user-buffer ()
+(defun previous-user-buffer () 
   "Switch to the previous user buffer.
- (buffer name does not start with "*".)"
- (interactive)
- (previous-buffer)
- (let ((i 0))
-   (while (and (string-equal "*" (substring (buffer-name) 0 1)) (< i 20))
-     (setq i (1+ i)) (previous-buffer))))
+ (buffer name does not start with "
+  *
+  ".)" 
+  (interactive) 
+  (previous-buffer) 
+  (let ((i 0)) 
+    (while (and (string-equal "*" (substring (buffer-name) 0 1)) 
+                (< i 20)) 
+      (setq i (1+ i)) 
+      (previous-buffer))))
 
-(defun next-emacs-buffer ()
+(defun next-emacs-buffer () 
   "Switch to the next emacs buffer.
- (buffer name that starts with "*")"
- (interactive)
- (next-buffer)
- (let ((i 0))
-   (while (and (not (string-equal "*" (substring (buffer-name) 0 1))) (< i 20))
-     (setq i (1+ i)) (next-buffer))))
+ (buffer name that starts with "
+  *
+  ")" 
+  (interactive) 
+  (next-buffer) 
+  (let ((i 0)) 
+    (while (and (not (string-equal "*" (substring (buffer-name) 0 1))) 
+                (< i 20)) 
+      (setq i (1+ i)) 
+      (next-buffer))))
 
-(defun previous-emacs-buffer ()
+(defun previous-emacs-buffer () 
   "Switch to the previous emacs buffer.
- (buffer name that starts with "*")"
- (interactive)
- (previous-buffer)
- (let ((i 0))
-   (while (and (not (string-equal "*" (substring (buffer-name) 0 1))) (< i 20))
-     (setq i (1+ i)) (previous-buffer))))
+ (buffer name that starts with "
+  *
+  ")" 
+  (interactive) 
+  (previous-buffer) 
+  (let ((i 0)) 
+    (while (and (not (string-equal "*" (substring (buffer-name) 0 1))) 
+                (< i 20)) 
+      (setq i (1+ i)) 
+      (previous-buffer))))
 
 (global-set-key (kbd "<f4>") 'previous-user-buffer)
 (global-set-key (kbd "<f5>") 'next-user-buffer)
@@ -787,7 +806,9 @@ and buffers which are visible in other windows are normally skipped."
 (global-set-key (kbd "<f7>") 'next-emacs-buffer)
 
 ;; Makes orgmode auto lists work better
-(add-hook 'org-mode-hook (lambda () (org-autolist-mode)))
+(add-hook 'org-mode-hook 
+          (lambda () 
+            (org-autolist-mode)))
 
 ;; crontab editing
 (add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode))
@@ -800,35 +821,31 @@ and buffers which are visible in other windows are normally skipped."
 (setq tramp-default-method "ssh")
 
 ;; yaml mode indents new line
-(add-hook 'yaml-mode-hook
-          (lambda ()
+(add-hook 'yaml-mode-hook 
+          (lambda () 
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Org publish (org-publish-all)
-(setq org-publish-project-alist
-      '("org-notes"
-        :base-directory "~/org"
-        :publishing-directory "/nfs/wwwPeople/fxia1/org_publish/"
-        :publishing-function org-twbs-publish-to-html
-        :with-sub-superscript nil
-        ))
+(setq org-publish-project-alist '("org-notes" :base-directory "~/org" 
+                                  :publishing-directory "/nfs/wwwPeople/fxia1/org_publish/" 
+                                  :publishing-function org-twbs-publish-to-html 
+                                  :with-sub-superscript nil))
 
-(defun my-org-publish-buffer ()
-  (interactive)
-  (save-buffer)
-  (save-excursion (org-publish-current-file))
-  (let* ((proj (org-publish-get-project-from-filename buffer-file-name))
-         (proj-plist (cdr proj))
-         (rel (file-relative-name buffer-file-name
-                                  (plist-get proj-plist :base-directory)))
-         (dest (plist-get proj-plist :publishing-directory)))
-    (browse-url (concat "file://"
-                        (file-name-as-directory (expand-file-name dest))
-                        (file-name-sans-extension rel)
-                        ".html"))))
+(defun my-org-publish-buffer () 
+  (interactive) 
+  (save-buffer) 
+  (save-excursion (org-publish-current-file)) 
+  (let* ((proj (org-publish-get-project-from-filename buffer-file-name)) 
+         (proj-plist (cdr proj)) 
+         (rel (file-relative-name buffer-file-name (plist-get proj-plist 
+                                                              :base-directory))) 
+         (dest (plist-get proj-plist 
+                          :publishing-directory))) 
+    (browse-url (concat "file://" (file-name-as-directory (expand-file-name dest)) 
+                        (file-name-sans-extension rel) ".html"))))
 
-(add-hook 'org-mode-hook
-          (lambda ()
+(add-hook 'org-mode-hook 
+          (lambda () 
             (local-set-key (kbd "s-\\") 'my-org-publish-buffer)))
 
 ;; Add latin
@@ -843,18 +860,19 @@ and buffers which are visible in other windows are normally skipped."
 (put 'cd-compile-directory 'safe-local-variable 'stringp)
 
 ;;;###autoload
-(defun cd-compile (dir)
+(defun cd-compile (dir) 
   "Run compile in a specific directory.
 Runs \\[compile] in the directory DIR.
 Interactively, uses `cd-compile-directory' for the directory if
-non-nil; otherwise prompts the user to enter the directory."
-  (interactive
-   (list (or cd-compile-directory
-             (read-directory-name "Compile directory: "))))
-  (let ((compile-directory (file-name-as-directory dir)))
-    (if (not (file-directory-p compile-directory))
-        (user-error "%s: no such directory" compile-directory)
-      (let ((default-directory compile-directory))
+non-nil; otherwise prompts the user to enter the directory." 
+  (interactive (list (or cd-compile-directory 
+                         (read-directory-name "Compile directory: ")))) 
+  (let ((compile-directory (file-name-as-directory dir))) 
+    (if (not (file-directory-p compile-directory)) 
+        (user-error 
+         "%s: no such directory"
+         compile-directory) 
+      (let ((default-directory compile-directory)) 
         (call-interactively 'compile)))))
 
 
@@ -867,32 +885,42 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;
 
 ;; Useful for mac path issues and tools
-(use-package exec-path-from-shell
-  :ensure
+(use-package 
+  exec-path-from-shell 
+
+  :ensure 
   :config (exec-path-from-shell-initialize))
 
 ;; take any buffer and turn it into an html file,
 ;; including syntax hightlighting
-(use-package htmlize
-  :ensure
+(use-package 
+  htmlize 
+
+  :ensure 
   :config)
 
 ;; ssh directly from emacs
-(use-package ssh
-  :ensure
+(use-package 
+  ssh 
+
+  :ensure 
   :config)
 
 ;; xcscope package
-(use-package xcscope
-  :ensure
+(use-package 
+  xcscope 
+
+  :ensure 
   :config (cscope-setup))
-(defvar cisco-cscope-inited nil
+(defvar cisco-cscope-inited nil 
   "Used to initialize the cisco extension only once.")
 
 ;; flycheck
-(use-package flycheck
-  :ensure
-  :config(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package 
+  flycheck 
+
+  :ensure 
+  :config(add-hook 'after-init-hook #'global-flycheck-mode) 
   :config(setq-default flycheck-disabled-checkers '(ruby-rubylint)))
 
 ;; python-mode
@@ -903,19 +931,25 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; elpy pEython mode
 ;; Note uses flake8 - pip install flake8
-(use-package elpy
-  :ensure
+(use-package 
+  elpy 
+
+  :ensure 
   :config)
 (elpy-enable)
 
 ;;  highlight
-(use-package highlight-chars
-  :ensure
+(use-package 
+  highlight-chars 
+
+  :ensure 
   :config)
 
 ;; autopair parens
-(use-package autopair
-  :ensure
+(use-package 
+  autopair 
+
+  :ensure 
   :config)
 (setq show-paren-style 'mixed)
 
@@ -923,33 +957,43 @@ non-nil; otherwise prompts the user to enter the directory."
 ;; (exec-path-from-shell-initialize)
 
 ;; Sane term
-(use-package sane-term
-  :ensure
+(use-package 
+  sane-term 
+
+  :ensure 
   :config)
 (global-set-key (kbd "C-x t") 'sane-term)
 (global-set-key (kbd "C-x T") 'sane-term-create)
 
 ;; auto highlite symbol
-(use-package auto-highlight-symbol
-  :ensure
+(use-package 
+  auto-highlight-symbol 
+
+  :ensure 
   :config)
 (global-auto-highlight-symbol-mode t)
 
 ;; Display number of matches in searches
-(use-package anzu
-  :ensure
+(use-package 
+  anzu 
+
+  :ensure 
   :config)
 (global-anzu-mode +1)
 
 ;; Unibox a string
-(use-package unicode-enbox
-  :ensure
+(use-package 
+  unicode-enbox 
+
+  :ensure 
   :config)
 
 ;; helm - anything successor
 ;; http://tuhdo.github.io/helm-intro.html
-(use-package helm
-  :ensure
+(use-package 
+  helm 
+
+  :ensure 
   :config)
 (helm-mode 1)
 (require 'helm-config)
@@ -972,13 +1016,12 @@ non-nil; otherwise prompts the user to enter the directory."
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (global-set-key (kbd "C-c h x") 'helm-register)
 
-(when (executable-find "ack-grep")
+(when (executable-find "ack-grep") 
   (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
         helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
 
-(setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match    t)
-(when (executable-find "curl")
+(setq helm-buffers-fuzzy-matching t helm-recentf-fuzzy-match    t)
+(when (executable-find "curl") 
   (setq helm-google-suggest-use-curl-p t))
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
@@ -990,8 +1033,10 @@ non-nil; otherwise prompts the user to enter the directory."
       helm-ff-file-name-history-use-recentf t)
 
 ;; Smartscan for symbols
-(use-package smartscan
-  :ensure
+(use-package 
+  smartscan 
+
+  :ensure 
   :config (global-smartscan-mode 1))
 ;; Simply type `smartscan-symbol-go-forward' (or press M-n) to go
 ;; forward; or `smartscan-symbol-go-backward' (M-p) to go
@@ -999,49 +1044,67 @@ non-nil; otherwise prompts the user to enter the directory."
 ;; invoking M-' (that's "M-quote")
 
 ;; helm-swoop
-(use-package helm-swoop
-  :ensure
+(use-package 
+  helm-swoop 
+
+  :ensure 
   :config (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch))
 
 ;; Magit gitflow
-(use-package magit-gitflow
-  :ensure
+(use-package 
+  magit-gitflow 
+
+  :ensure 
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 
 ;; Elfeed
-(use-package elfeed
-  :ensure
+(use-package 
+  elfeed 
+
+  :ensure 
   :config)
 
-(use-package elfeed-goodies
-  :ensure
+(use-package 
+  elfeed-goodies 
+
+  :ensure 
   :config (elfeed-goodies/setup))
 
 ;; git-gutter
-(use-package git-gutter-fringe
-  :ensure
+(use-package 
+  git-gutter-fringe 
+
+  :ensure 
   :config (global-git-gutter-mode t))
 
 ;; Fuzzier helm logic
-(use-package helm-fuzzier
-  :ensure
+(use-package 
+  helm-fuzzier 
+
+  :ensure 
   :config (helm-fuzzier-mode 1))
 
 ;; Magit pull requests
-(use-package magit-gh-pulls
-  :ensure
+(use-package 
+  magit-gh-pulls 
+
+  :ensure 
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
 ;; Make cursor show up
-(use-package beacon
-  :ensure
-  :config (beacon-mode 1)
-  :config (setq beacon-push-mark 35)
+(use-package 
+  beacon 
+
+  :ensure 
+  :config (beacon-mode 1) 
+  :config (setq beacon-push-mark 35) 
   :config (setq beacon-color "#666600"))
 
 ;; diredful - colored dired
-(use-package diredful
-  :ensure
+(use-package 
+  diredful 
+
+  :ensure 
   :config (diredful-mode 1))
 
 ;; ace-window
@@ -1052,112 +1115,141 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; Scratch-buffer improvements
 ;; Log file goes to ~/.scratch
-(use-package scratch-ext
-  :ensure
+(use-package 
+  scratch-ext 
+
+  :ensure 
   :config)
 
 ;; Highlite unnecessary chars and lines over 80
-(use-package whitespace
-  :ensure
-  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
+(use-package 
+  whitespace 
+
+  :ensure 
+  :config (setq whitespace-style '(face empty tabs lines-tail trailing)) 
   :config (global-whitespace-mode t))
 
 ;; auto-complete
-(use-package auto-complete
-  :ensure
-  :config
-  :config (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
-  :config (ac-config-default)
-  :config (setq ac-use-menu-map t)
-  :config (define-key ac-menu-map "\C-n" 'ac-next)
+(use-package 
+  auto-complete 
+
+  :ensure 
+
+  :config 
+  :config (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict") 
+  :config (ac-config-default) 
+  :config (setq ac-use-menu-map t) 
+  :config (define-key ac-menu-map "\C-n" 'ac-next) 
   :config (define-key ac-menu-map "\C-p" 'ac-previous))
 
 ;; Bash completion
-(use-package bash-completion
-  :ensure
+(use-package 
+  bash-completion 
+
+  :ensure 
   :config (bash-completion-setup))
 
 ;; Comment dwim2
-(use-package comment-dwim-2
-  :ensure
+(use-package 
+  comment-dwim-2 
+
+  :ensure 
   :bind (("M-;" . comment-dwim-2)))
 
 ;; magit find file
-(use-package magit-find-file
-  :ensure
+(use-package 
+  magit-find-file 
+
+  :ensure 
   :config)
 
 ;; restart emacs
-(use-package restart-emacs
-  :ensure
+(use-package 
+  restart-emacs 
+
+  :ensure 
   :config)
 
 ;; org auto
-(use-package org-autolist
-  :ensure
+(use-package 
+  org-autolist 
+
+  :ensure 
   :config)
 
 ;; writegood-mode
-(use-package writegood-mode
-  :ensure
+(use-package 
+  writegood-mode 
+
+  :ensure 
   :config)
 
 ;; markdown mode
-(use-package markdown-mode
-  :ensure
-  :config (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  :config (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-  :config (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-  :config (add-to-list 'auto-mode-alist '("\\.mdown$" . markdown-mode))
-  :config (add-hook 'markdown-mode-hook
-                    (lambda ()
-                      (visual-line-mode t)
-                      (writegood-mode t)
-                      (flyspell-mode t)))
-  )
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
+(use-package 
+  markdown-mode 
+
+  :ensure 
+  :config (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode)) 
+  :config (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode)) 
+  :config (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)) 
+  :config (add-to-list 'auto-mode-alist '("\\.mdown$" . markdown-mode)) 
+  :config (add-hook 'markdown-mode-hook 
+                    (lambda () 
+                      (visual-line-mode t) 
+                      (writegood-mode t) 
+                      (flyspell-mode t))))
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 
 ;;  big brother database
-(use-package bbdb
-  :ensure
-  :config (customize-set-variable 'bbdb-file "~/.emacs.d/bbdb")
-  :config (add-to-list 'after-init-hook (lambda () (bbdb-initialize 'gnus 'message))))
+(use-package 
+  bbdb 
+
+  :ensure 
+  :config (customize-set-variable 'bbdb-file "~/.emacs.d/bbdb") 
+  :config (add-to-list 'after-init-hook 
+                       (lambda () 
+                         (bbdb-initialize 'gnus 'message))))
 
 
 ;; helm cscope interface
-(use-package helm-cscope
-  :ensure
+(use-package 
+  helm-cscope 
+
+  :ensure 
   :config)
 
 ;; f3 find
-(use-package f3
-  :ensure
+(use-package 
+  f3 
+
+  :ensure 
   :config)
 
 ;; f3 find
-(use-package py-autopep8
-  :ensure
-  :config (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(use-package 
+  py-autopep8 
+
+  :ensure 
+  :config (add-hook 'python-mode-hook 'py-autopep8-enable-on-save) 
   :config (setq py-autopep8-options '("--max-line-length=100")))
 
 ;; go-mode tab
 (add-hook 'go-mode-hook 
           (lambda ()
                                         ; Use goimports instead of go-fmt
-            (add-hook 'before-save-hook 'gofmt-before-save)
+            (add-hook 'before-save-hook 'gofmt-before-save) 
             (setq-default) 
             (setq tab-width 4) 
             (setq standard-indent 4) 
             (setq indent-tabs-mode nil)))
 
 ;; go-eldoc
-(defun go-mode-setup ()
+(defun go-mode-setup () 
   (go-eldoc-setup))
 
 ;;Format before saving
-(defun go-mode-setup ()
-  (go-eldoc-setup)
+(defun go-mode-setup () 
+  (go-eldoc-setup) 
   (add-hook 'before-save-hook 'gofmt-before-save))
 (add-hook 'go-mode-hook 'go-mode-setup)
 
@@ -1169,15 +1261,17 @@ non-nil; otherwise prompts the user to enter the directory."
 ;; (add-hook 'go-mode-hook 'go-mode-setup)
 
 ;;Godef, shows function definition when calling godef-jump
-(defun go-mode-setup ()
-  (go-eldoc-setup)
-  (add-hook 'before-save-hook 'gofmt-before-save)
+(defun go-mode-setup () 
+  (go-eldoc-setup) 
+  (add-hook 'before-save-hook 'gofmt-before-save) 
   (local-set-key (kbd "M-.") 'godef-jump))
 (add-hook 'go-mode-hook 'go-mode-setup)
 
 ;; go-autocomplete
-(use-package go-autocomplete
-  :ensure
+(use-package 
+  go-autocomplete 
+
+  :ensure 
   :config)
 
 ;; w3m browser
@@ -1185,89 +1279,91 @@ non-nil; otherwise prompts the user to enter the directory."
 (setq browse-url-browser-function 'w3m-goto-url-new-session)
 
 ;;change w3m user-agent to android
-(setq w3m-user-agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.")
+(setq w3m-user-agent
+      "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.")
 
 ;;quick access hacker news
-(defun hn ()
-  (interactive)
+(defun hn () 
+  (interactive) 
   (browse-url "http://news.ycombinator.com"))
 
 ;;quick access reddit
-(defun reddit (reddit)
-  "Opens the REDDIT in w3m-new-session"
-  (interactive (list
-                (read-string "Enter the reddit (default: psycology): " nil nil "psychology" nil)))
-  (browse-url (format "http://m.reddit.com/r/%s" reddit))
-  )
+(defun reddit (reddit) 
+  "Opens the REDDIT in w3m-new-session" 
+  (interactive (list (read-string "Enter the reddit (default: psycology): " nil nil "psychology"
+                                  nil))) 
+  (browse-url (format "http://m.reddit.com/r/%s" reddit)))
 
 ;;i need this often
-(defun wikipedia-search (search-term)
-  "Search for SEARCH-TERM on wikipedia"
-  (interactive
-   (let ((term (if mark-active
-                   (buffer-substring (region-beginning) (region-end))
-                 (word-at-point))))
-     (list
-      (read-string
-       (format "Wikipedia (%s):" term) nil nil term)))
-   )
-  (browse-url
-   (concat
-    "http://en.m.wikipedia.org/w/index.php?search="
-    search-term
-    ))
-  )
+(defun wikipedia-search (search-term) 
+  "Search for SEARCH-TERM on wikipedia" 
+  (interactive (let ((term (if mark-active 
+                               (buffer-substring 
+                                (region-beginning) 
+                                (region-end)) 
+                             (word-at-point)))) 
+                 (list (read-string (format "Wikipedia (%s):" term) nil nil term)))) 
+  (browse-url (concat "http://en.m.wikipedia.org/w/index.php?search=" search-term)))
 
 ;;when I want to enter the web address all by hand
-(defun w3m-open-site (site)
-  "Opens site in new w3m session with 'http://' appended"
-  (interactive
-   (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page nil )))
-  (w3m-goto-url-new-session
-   (concat "http://" site)))
+(defun w3m-open-site (site) 
+  "Opens site in new w3m session with 'http://' appended" 
+  (interactive (list (read-string "Enter website address(default: w3m-home):" nil nil w3m-home-page
+                                  nil ))) 
+  (w3m-goto-url-new-session (concat "http://" site)))
 
 ;; IRC client
-(use-package circe
-  :ensure
+(use-package 
+  circe 
+
+  :ensure 
   :config)
 
-(setq circe-network-options
-      '(("Freenode"
-         :tls t
-         :nick "fengxia41103"
-         ;; :sasl-username "my-nick"
-         ;; :sasl-password "my-password"
-         :channels ("#emacs" "#python" "#odoo" "#reactjs" "#latex"  "#openstack-charms" "#openstack-horizon" "#openstack-heat")
-         )))
+(setq circe-network-options '(("Freenode" :tls t 
+                               :nick "fengxia41103"
+                               ;; :sasl-username "my-nick"
+                               ;; :sasl-password "my-password"
+                               :channels ("#emacs" "#python" "#odoo" "#reactjs" "#latex"
+                                          "#openstack-charms" "#openstack-horizon"
+                                          "#openstack-heat"))))
 
-(use-package helm-circe
-  :ensure
+(use-package 
+  helm-circe 
+
+  :ensure 
   :config)
 
 ;; py-isort
-(use-package py-isort
-  :ensure
+(use-package 
+  py-isort 
+
+  :ensure 
   :config)
 (add-hook 'before-save-hook 'py-isort-before-save)
 (setq py-isort-options '("-sl")) ;; One module per line
 
 ;; org-mode export
-(eval-after-load "org"
+(eval-after-load "org" 
   '(require 'ox-md nil t))
 
 ;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(setq web-mode-content-types-alist
-      '(("jsx" . "\\.js[x]?\\'")))
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  )
+(defun my-web-mode-hook () 
+  "Hooks for Web mode." 
+  (setq web-mode-markup-indent-offset 2) 
+  (setq web-mode-code-indent-offset 2) 
+  (setq web-mode-css-indent-offset 2))
 (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+;; to format LISP code
+(use-package 
+  elisp-format 
+
+  :ensure 
+  :config)
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

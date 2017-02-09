@@ -1,7 +1,5 @@
-
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
-
 
 (defvar current-user (getenv (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
@@ -290,51 +288,44 @@ future."
 
 ;; Theme and font good for coding
 (use-package 
-  suscolors-theme 
-
+  suscolors-theme
   :ensure 
   :config)
 ;; (load-theme 'suscolors t)
 
 (use-package 
-  lush-theme 
-
+  lush-theme
   :ensure 
   :config)
 ;; (load-theme 'lush t)
 
 (use-package 
-  moe-theme 
-
+  moe-theme
   :ensure 
   :config)
 ;; (load-theme 'moe-dark t)
 
 (use-package 
-  alect-themes 
-
+  alect-themes
   :ensure 
   :config)
 ;; (load-theme 'alect-black t)
 
 (use-package 
-  metalheart-theme 
-
+  metalheart-theme
   :ensure 
   :config)
 ;; (load-theme 'metalheart t)
 
 (use-package 
-  paganini-theme 
-
+  paganini-theme
   :ensure 
   :config)
 ;; (load-theme 'paganini t)
 
 ;; Smart Mode Line
 (use-package 
-  smart-mode-line 
-
+  smart-mode-line
   :ensure 
   :config (progn
             ;; (use-package smart-mode-line-powerline-theme
@@ -343,36 +334,31 @@ future."
             (setq sml/apply-theme 'respectful)))
 
 (use-package 
-  firecode-theme 
-
+  firecode-theme
   :ensure 
   :config)
 ;; (load-theme 'firecode t)
 
 (use-package 
-  molokai-theme 
-
+  molokai-theme
   :ensure 
   :config)
 ;; (load-theme 'molokai t)
 
 (use-package 
-  zenburn-theme 
-
+  zenburn-theme
   :ensure 
   :config)
 ;; (load-theme 'zenburn t)
 
 (use-package 
-  solarized-theme 
-
+  solarized-theme
   :ensure 
   :config)
 ;; (load-theme 'solarized t)
 
 (use-package 
-  color-theme-modern 
-
+  color-theme-modern
   :ensure 
   :config)
 ;; (load-theme 'hober t)
@@ -643,7 +629,7 @@ and buffers which are visible in other windows are normally skipped."
 (defun xrvr-ddts-info () 
   "Run xrvr_ddts -i across remote ssh." 
   (interactive) 
-  (compilation-start (concat "ssh -Y -o LogLevel=Error rtp-ads-474 'xrvr_ddts -i'") nil #
+  (compilation-start (concat "ssh -Y -o LogLevel=Error rtp-ads-474 'xrvr_ddts -i'") nil
                      '(lambda (mode-name) 
                         "*xrvr-ddts-info*")))
 (global-set-key "\C-ci" 'xrvr-ddts-info)
@@ -886,30 +872,26 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; Useful for mac path issues and tools
 (use-package 
-  exec-path-from-shell 
-
+  exec-path-from-shell
   :ensure 
   :config (exec-path-from-shell-initialize))
 
 ;; take any buffer and turn it into an html file,
 ;; including syntax hightlighting
 (use-package 
-  htmlize 
-
+  htmlize
   :ensure 
   :config)
 
 ;; ssh directly from emacs
 (use-package 
-  ssh 
-
+  ssh
   :ensure 
   :config)
 
 ;; xcscope package
 (use-package 
-  xcscope 
-
+  xcscope
   :ensure 
   :config (cscope-setup))
 (defvar cisco-cscope-inited nil 
@@ -917,8 +899,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; flycheck
 (use-package 
-  flycheck 
-
+  flycheck
   :ensure 
   :config(add-hook 'after-init-hook #'global-flycheck-mode) 
   :config(setq-default flycheck-disabled-checkers '(ruby-rubylint)))
@@ -932,23 +913,20 @@ non-nil; otherwise prompts the user to enter the directory."
 ;; elpy pEython mode
 ;; Note uses flake8 - pip install flake8
 (use-package 
-  elpy 
-
+  elpy
   :ensure 
   :config)
 (elpy-enable)
 
 ;;  highlight
 (use-package 
-  highlight-chars 
-
+  highlight-chars
   :ensure 
   :config)
 
 ;; autopair parens
 (use-package 
-  autopair 
-
+  autopair
   :ensure 
   :config)
 (setq show-paren-style 'mixed)
@@ -958,8 +936,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; Sane term
 (use-package 
-  sane-term 
-
+  sane-term
   :ensure 
   :config)
 (global-set-key (kbd "C-x t") 'sane-term)
@@ -967,32 +944,28 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; auto highlite symbol
 (use-package 
-  auto-highlight-symbol 
-
+  auto-highlight-symbol
   :ensure 
   :config)
 (global-auto-highlight-symbol-mode t)
 
 ;; Display number of matches in searches
 (use-package 
-  anzu 
-
+  anzu
   :ensure 
   :config)
 (global-anzu-mode +1)
 
 ;; Unibox a string
 (use-package 
-  unicode-enbox 
-
+  unicode-enbox
   :ensure 
   :config)
 
 ;; helm - anything successor
 ;; http://tuhdo.github.io/helm-intro.html
 (use-package 
-  helm 
-
+  helm
   :ensure 
   :config)
 (helm-mode 1)
@@ -1034,8 +1007,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; Smartscan for symbols
 (use-package 
-  smartscan 
-
+  smartscan
   :ensure 
   :config (global-smartscan-mode 1))
 ;; Simply type `smartscan-symbol-go-forward' (or press M-n) to go
@@ -1045,56 +1017,48 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; helm-swoop
 (use-package 
-  helm-swoop 
-
+  helm-swoop
   :ensure 
   :config (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch))
 
 ;; Magit gitflow
 (use-package 
-  magit-gitflow 
-
+  magit-gitflow
   :ensure 
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 
 ;; Elfeed
 (use-package 
-  elfeed 
-
+  elfeed
   :ensure 
   :config)
 
 (use-package 
-  elfeed-goodies 
-
+  elfeed-goodies
   :ensure 
   :config (elfeed-goodies/setup))
 
 ;; git-gutter
 (use-package 
-  git-gutter-fringe 
-
+  git-gutter-fringe
   :ensure 
   :config (global-git-gutter-mode t))
 
 ;; Fuzzier helm logic
 (use-package 
-  helm-fuzzier 
-
+  helm-fuzzier
   :ensure 
   :config (helm-fuzzier-mode 1))
 
 ;; Magit pull requests
 (use-package 
-  magit-gh-pulls 
-
+  magit-gh-pulls
   :ensure 
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
 ;; Make cursor show up
 (use-package 
-  beacon 
-
+  beacon
   :ensure 
   :config (beacon-mode 1) 
   :config (setq beacon-push-mark 35) 
@@ -1102,8 +1066,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; diredful - colored dired
 (use-package 
-  diredful 
-
+  diredful
   :ensure 
   :config (diredful-mode 1))
 
@@ -1116,27 +1079,24 @@ non-nil; otherwise prompts the user to enter the directory."
 ;; Scratch-buffer improvements
 ;; Log file goes to ~/.scratch
 (use-package 
-  scratch-ext 
-
+  scratch-ext
   :ensure 
   :config)
 
 ;; Highlite unnecessary chars and lines over 80
 (use-package 
-  whitespace 
-
+  whitespace
   :ensure 
   :config (setq whitespace-style '(face empty tabs lines-tail trailing)) 
   :config (global-whitespace-mode t))
 
 ;; auto-complete
 (use-package 
-  auto-complete 
-
-  :ensure 
-
+  auto-complete
+  :ensure
   :config 
-  :config (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict") 
+  :config 
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict") 
   :config (ac-config-default) 
   :config (setq ac-use-menu-map t) 
   :config (define-key ac-menu-map "\C-n" 'ac-next) 
@@ -1144,50 +1104,43 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; Bash completion
 (use-package 
-  bash-completion 
-
+  bash-completion
   :ensure 
   :config (bash-completion-setup))
 
 ;; Comment dwim2
 (use-package 
-  comment-dwim-2 
-
+  comment-dwim-2
   :ensure 
   :bind (("M-;" . comment-dwim-2)))
 
 ;; magit find file
 (use-package 
-  magit-find-file 
-
+  magit-find-file
   :ensure 
   :config)
 
 ;; restart emacs
 (use-package 
-  restart-emacs 
-
+  restart-emacs
   :ensure 
   :config)
 
 ;; org auto
 (use-package 
-  org-autolist 
-
+  org-autolist
   :ensure 
   :config)
 
 ;; writegood-mode
 (use-package 
-  writegood-mode 
-
+  writegood-mode
   :ensure 
   :config)
 
 ;; markdown mode
 (use-package 
-  markdown-mode 
-
+  markdown-mode
   :ensure 
   :config (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode)) 
   :config (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode)) 
@@ -1202,8 +1155,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;;  big brother database
 (use-package 
-  bbdb 
-
+  bbdb
   :ensure 
   :config (customize-set-variable 'bbdb-file "~/.emacs.d/bbdb") 
   :config (add-to-list 'after-init-hook 
@@ -1213,22 +1165,19 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; helm cscope interface
 (use-package 
-  helm-cscope 
-
+  helm-cscope
   :ensure 
   :config)
 
 ;; f3 find
 (use-package 
-  f3 
-
+  f3
   :ensure 
   :config)
 
 ;; f3 find
 (use-package 
-  py-autopep8 
-
+  py-autopep8
   :ensure 
   :config (add-hook 'python-mode-hook 'py-autopep8-enable-on-save) 
   :config (setq py-autopep8-options '("--max-line-length=100")))
@@ -1269,8 +1218,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; go-autocomplete
 (use-package 
-  go-autocomplete 
-
+  go-autocomplete
   :ensure 
   :config)
 
@@ -1314,8 +1262,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; IRC client
 (use-package 
-  circe 
-
+  circe
   :ensure 
   :config)
 
@@ -1328,15 +1275,13 @@ non-nil; otherwise prompts the user to enter the directory."
                                           "#openstack-heat"))))
 
 (use-package 
-  helm-circe 
-
+  helm-circe
   :ensure 
   :config)
 
 ;; py-isort
 (use-package 
-  py-isort 
-
+  py-isort
   :ensure 
   :config)
 (add-hook 'before-save-hook 'py-isort-before-save)
@@ -1347,21 +1292,30 @@ non-nil; otherwise prompts the user to enter the directory."
   '(require 'ox-md nil t))
 
 ;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(use-package 
+  web-mode
+  :ensure 
+  :config (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+  :config(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
-(defun my-web-mode-hook () 
-  "Hooks for Web mode." 
-  (setq web-mode-markup-indent-offset 2) 
-  (setq web-mode-code-indent-offset 2) 
-  (setq web-mode-css-indent-offset 2))
+(defun my-web-mode-hook ()
+  ;; java/c/c++
+  (setq c-basic-offset 2)
+  ;; web development
+  (setq coffee-tab-width 2)        ; coffeescript
+  (setq javascript-indent-level 2) ; javascript-mode
+  (setq js-indent-level 2)         ; js-mode
+  (setq js2-basic-offset 2) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
+  (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
+  (setq css-indent-offset 2)           ; css-mode
+  )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;; to format LISP code
 (use-package 
-  elisp-format 
-
+  elisp-format
   :ensure 
   :config)
 

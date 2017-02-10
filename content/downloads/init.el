@@ -225,7 +225,7 @@
 (add-hook 'go-mode-hook 
           (lambda () 
             (add-hook 'before-save-hook 'gofmt-before-save) 
-            (setq tab-width 4) 
+            (setq tab-width 2) 
             (setq indent-tabs-mode 1)))
 
 (provide 'init)
@@ -337,7 +337,7 @@ future."
   :config (progn 
             (use-package 
               smart-mode-line-powerline-theme) 
-            (sml/setup) 
+            (sml/setup)
             ;;(setq sml/apply-theme 'respectful)
             ))
 
@@ -377,12 +377,20 @@ future."
 (load-theme 'hober t)
 
 ;; Great font on the mac
+;; (dolist (font-family (font-family-list)) 
+;;   (let ((str font-family)) 
+;;     (insert (propertize (concat "The quick brown fox jumps over the lazy dog (" str ")") 'face 
+;;                         `((:family ,font-family)))) 
+;;     (newline)))
+
 ;;(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
 ;; (add-to-list 'default-frame-alist '(font . "Inconsolata"))
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono"))
-(set-face-attribute 'default nil :family "DejaVu Sans Mono)" :height 120)
-;; (set-face-attribute 'default nil 
-;;                     :family "Inconsolata" 
+(set-face-attribute 'default nil 
+                    :family "DejaVu Sans Mono)" 
+                    :height 120)
+;; (set-face-attribute 'default nil
+;;                     :family "Inconsolata"
 ;;                     :height 120)
 
 ;; Is this now removed by default?

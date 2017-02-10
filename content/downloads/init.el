@@ -332,14 +332,14 @@ future."
 
 ;; Smart Mode Line
 (use-package 
-  smart-mode-line 
-
+  smart-mode-line
   :ensure 
-  :config (progn
-            ;; (use-package smart-mode-line-powerline-theme
-            ;; :ensure)
+  :config (progn 
+            (use-package 
+              smart-mode-line-powerline-theme) 
             (sml/setup) 
-            (setq sml/apply-theme 'respectful)))
+            ;;(setq sml/apply-theme 'respectful)
+            ))
 
 (use-package 
   firecode-theme 
@@ -374,13 +374,16 @@ future."
 
   :ensure 
   :config)
-;;(load-theme 'hober t)
+(load-theme 'hober t)
 
 ;; Great font on the mac
-;; (set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
-(set-face-attribute 'default nil 
-                    :family "DejaVu Serif" 
-                    :height 120)
+;;(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
+;; (add-to-list 'default-frame-alist '(font . "Inconsolata"))
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono"))
+(set-face-attribute 'default nil :family "DejaVu Sans Mono)" :height 120)
+;; (set-face-attribute 'default nil 
+;;                     :family "Inconsolata" 
+;;                     :height 120)
 
 ;; Is this now removed by default?
 (menu-bar-mode 1)
@@ -458,7 +461,7 @@ future."
 (setq column-number-mode t)
 
 ;; Show the current function in the mode line
-;; (which-function-mode t)
+(which-function-mode t)
 
 ;; Emacs could care less what character your file ends with.
 (setq require-final-newline t)
@@ -1324,9 +1327,8 @@ non-nil; otherwise prompts the user to enter the directory."
                                ;; :sasl-password "my-password"
                                :channels ("#emacs" "#python" "#odoo" "#reactjs" "#latex"
                                           "#openstack-meeting-5" ; Heat weekly meeting
-                                          "#openstack-meeting-3"; Horizon weekly meeting
-                                          "#openstack-horizon"
-                                          "#openstack-heat"))))
+                                          "#openstack-meeting-3" ; Horizon weekly meeting
+                                          "#openstack-horizon" "#openstack-heat"))))
 
 (use-package 
   helm-circe 
@@ -1356,7 +1358,7 @@ non-nil; otherwise prompts the user to enter the directory."
   :config(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 (require 'web-mode)
 
-(defun my-web-mode-hook ()
+(defun my-web-mode-hook () 
   "Hooks for Web mode."
 
   ;; java/c/c++
@@ -1366,11 +1368,11 @@ non-nil; otherwise prompts the user to enter the directory."
   (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
   (setq web-mode-css-indent-offset 2)    ; web-mode, css in html file
   (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
-  ;; (setq coffee-tab-width 2)             ; coffeescript
-  ;; (setq javascript-indent-level 2)      ; javascript-mode
-  ;; (setq js-indent-level 2)              ; js-mode
-  ;; (setq js2-basic-offset 2) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
-  ;; (setq css-indent-offset 2)           ; css-mode
+  (setq coffee-tab-width 2)            ; coffeescript
+  (setq javascript-indent-level 2)     ; javascript-mode
+  (setq js-indent-level 2)             ; js-mode
+  (setq js2-basic-offset 2) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+  (setq css-indent-offset 2)            ; css-mode
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 

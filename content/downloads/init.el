@@ -308,6 +308,7 @@ future."
   :config)
 ;; (load-theme 'moe-dark t)
 
+
 (use-package 
   alect-themes 
 
@@ -373,13 +374,13 @@ future."
 
   :ensure 
   :config)
-(load-theme 'hober t)
+;;(load-theme 'hober t)
 
 ;; Great font on the mac
 ;; (set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
 (set-face-attribute 'default nil 
-                    :family "Bitstream Vera Sans Mono" 
-                    :height 130)
+                    :family "DejaVu Serif" 
+                    :height 120)
 
 ;; Is this now removed by default?
 (menu-bar-mode 1)
@@ -1353,19 +1354,23 @@ non-nil; otherwise prompts the user to enter the directory."
   :ensure 
   :config (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode)) 
   :config(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+(require 'web-mode)
 
 (defun my-web-mode-hook ()
+  "Hooks for Web mode."
+
   ;; java/c/c++
   (setq c-basic-offset 2)
+
   ;; web development
-  (setq coffee-tab-width 2)             ; coffeescript
-  (setq javascript-indent-level 2)      ; javascript-mode
-  (setq js-indent-level 2)              ; js-mode
-  (setq js2-basic-offset 2) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
   (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
   (setq web-mode-css-indent-offset 2)    ; web-mode, css in html file
   (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
-  (setq css-indent-offset 2)           ; css-mode
+  ;; (setq coffee-tab-width 2)             ; coffeescript
+  ;; (setq javascript-indent-level 2)      ; javascript-mode
+  ;; (setq js-indent-level 2)              ; js-mode
+  ;; (setq js2-basic-offset 2) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+  ;; (setq css-indent-offset 2)           ; css-mode
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 

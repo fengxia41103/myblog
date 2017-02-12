@@ -286,6 +286,16 @@ future."
   (package-install 'use-package))
 (setq use-package-always-ensure t)
 
+;; Great font on the mac
+;;(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
+;; (add-to-list 'default-frame-alist '(font . "Inconsolata"))
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono"))
+(set-face-attribute 'default nil :family "DejaVu Sans Mono)" :height 120)
+;; (set-face-attribute 'default nil 
+;;                     :family "Inconsolata" 
+;;                     :height 120)
+
+
 ;; Theme and font good for coding
 (use-package 
   suscolors-theme 
@@ -335,8 +345,8 @@ future."
   smart-mode-line
   :ensure 
   :config (progn 
-            (use-package 
-              smart-mode-line-powerline-theme) 
+            ;; (use-package 
+            ;;   smart-mode-line-powerline-theme) 
             (sml/setup) 
             ;;(setq sml/apply-theme 'respectful)
             ))
@@ -376,14 +386,6 @@ future."
   :config)
 (load-theme 'hober t)
 
-;; Great font on the mac
-;;(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
-;; (add-to-list 'default-frame-alist '(font . "Inconsolata"))
-(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono"))
-(set-face-attribute 'default nil :family "DejaVu Sans Mono)" :height 120)
-;; (set-face-attribute 'default nil 
-;;                     :family "Inconsolata" 
-;;                     :height 120)
 
 ;; Is this now removed by default?
 (menu-bar-mode 1)
@@ -1356,7 +1358,6 @@ non-nil; otherwise prompts the user to enter the directory."
   :ensure 
   :config (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode)) 
   :config(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
-(require 'web-mode)
 
 (defun my-web-mode-hook () 
   "Hooks for Web mode."
@@ -1382,6 +1383,14 @@ non-nil; otherwise prompts the user to enter the directory."
 
   :ensure 
   :config)
+
+;; undo-tree package
+(use-package 
+  undo-tree
+
+  :ensure 
+  :config)
+(global-undo-tree-mode)
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

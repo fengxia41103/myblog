@@ -197,3 +197,13 @@ is how charm build can pull in dependencies of other charms/layers.
 ## Charm layer
 
 This is where the application logics live.
+
+# Screencast
+
+See the process in action:
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/vanilla%20charm%20deploy.gif" />
+    <figcaption>Screencast showing deploying a Vanilla charm</figcaption>
+</figure>

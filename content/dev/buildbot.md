@@ -25,9 +25,9 @@ we can, we opted to buildbot for this purpose.
 Create a python virtualenv and use pip is all it takes:
 
 <pre class="brush:bash;">
-workon build
-pip install buildbot
-pip install buildbot-slave
+$ workon build
+$ pip install buildbot
+$ pip install buildbot-slave
 </pre>
 
 For configuration, you can refer to

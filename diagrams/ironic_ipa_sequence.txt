@@ -1,0 +1,18 @@
+@startuml
+actor Operator
+
+Operator -> BM: boot with IPA-enabled ramdisk image
+BM -> BM: boot from ramdisk
+BM -> IPA: run IPA service
+activate IPA
+
+IPA -> IPA: run hardware managers to collect HW inventory, eg. MAC
+IPA -> "Ironic API": GET /v1/lookup, param: MAC address
+"Ironic API" -> IPA: config JSON, has node UUID, heartbeat timeout...
+IPA -> "Ironic API": POST /v1/heartbeat/{node_ident}, param: IPA callback URL
+"Ironic API" -> "Ironic API": populate driver_internal_info: {"agent_url":}
+...
+
+Operator -> "Ironic API": POST /v1/provision, kick off provisioning
+"Ironic API" -> IPA: provision OS image 
+@enduml

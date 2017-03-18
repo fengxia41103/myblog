@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,320 +14,320 @@
     <meta name="author" content=""> {% block core_library %}
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-            <!-- script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script -->
+      <!-- script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script -->
     <!-- script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script -->
     <script src="/theme/js/html5shiv.min.js"></script>
     <script src="/theme/js/respond.min.js"></script>
     <![endif]-->
 
 
-	    {# Fontawesome #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+    {# Fontawesome #}
+    <link rel="stylesheet" type="text/css" href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
 
-	    {# DataTable #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+    {# DataTable #}
+    <link rel="stylesheet" type="text/css" href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
 
-        {# lightbox #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+    {# lightbox #}
+    <link rel="stylesheet" type="text/css" href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
 
-        {# tether #}
-	    <link rel="stylesheet" type="text/css" href="/theme/bower_components/tether/dist/css/tether.min.css">
+    {# tether #}
+    <link rel="stylesheet" type="text/css" href="/theme/bower_components/tether/dist/css/tether.min.css">
 
-        {# Bootstrap #}
-	    <link rel="stylesheet" href="/theme/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    {# Bootstrap #}
+    <link rel="stylesheet" href="/theme/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-        {# Syntaxhighlighter #}
-	    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
-	    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+    {# Syntaxhighlighter #}
+    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
+    <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
 
-        {# my own #}
-	    <link rel="stylesheet" type="text/css" href="/theme/css/my.css">
+    {# my own #}
+    <link rel="stylesheet" type="text/css" href="/theme/css/my.css">
 
-        {# google fonts #}
-        <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko" rel="stylesheet">
+    {# google fonts #}
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko" rel="stylesheet">
 
-	    {# JQuery lib #}
-	    <script type="text/javascript" src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+    {# JQuery lib #}
+    <script type="text/javascript" src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
 
-        {# angularJS #}
-        <script type="text/javascript"
-                src="/theme/bower_components/angular/angular.min.js">
-        </script>
+    {# angularJS #}
+    <script type="text/javascript"
+            src="/theme/bower_components/angular/angular.min.js">
+    </script>
 
-        {# REACT #}
+    {# REACT #}
 
+    {% endblock %}
+    {# page title #}
+    {% block title %}
+    <title>PY Consulting</title>
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block navbar %}
+    {% endblock %}<!-- end of block navbar -->
+
+    {% block main %}
+    <div id="wrap" style="background-color:#eee;">
+      <div class="container center-block">
+	<div class="row page-header">
+          <div class="col-md-6 col-sm-6">
+	    <h1 class="my-banner">
+              <a href="{{SITEURL}}/">{{ SITENAME }}</a>
+	    </h1>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <ul class="list-inline pull-right" style="padding-top:100px;">
+              <li>
+                <a class="label label-default" href="{{SITEURL}}/">Home</a>
+              </li>
+
+	      {% for p in PAGES %}
+	      <li>
+                <a class="label label-default" href="{{SITEURL}}/{{ p.url }}">
+                  {{ p.title }}
+                </a>
+              </li>
+	      {% endfor %}
+            </ul>
+          </div>
+	</div><!-- end of block header -->
+      </div>
+
+      {% block introduction %}
+      {% endblock %}
+
+      <div id="content">
+        {# main content #}
+	{% block content %}
+	{% endblock %}
+
+        {# pagination #}
+        {% block pagination %}
         {% endblock %}
-        {# page title #}
-        {% block title %}
-        <title>PY Consulting</title>
+      </div><!-- /.container -->
+
+      {# block push #}
+      {% block push %}
+      {% endblock %}
+    </div>
+    {% endblock %}<!-- end of block main -->
+
+
+    {% block footer %}
+    <footer>
+      {# block of related contents #}
+      <div class="container">
+        {% block related %}
         {% endblock %}
-    </head>
+      </div>
 
-    <body>
-        {% block navbar %}
-        {% endblock %}<!-- end of block navbar -->
-
-        {% block main %}
-	    <div id="wrap" style="background-color:#eee;">
-	        <div class="container center-block">
-		        <div class="row page-header">
-                    <div class="col-md-6 col-sm-6">
-			            <h1 class="my-banner">
-                            <a href="{{SITEURL}}/">{{ SITENAME }}</a>
-			            </h1>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="list-inline pull-right" style="padding-top:100px;">
-                            <li>
-                                <a class="label label-default" href="{{SITEURL}}/">Home</a>
-                            </li>
-
-				            {% for p in PAGES %}
-				            <li>
-                                <a class="label label-default" href="{{SITEURL}}/{{ p.url }}">
-                                    {{ p.title }}
-                                </a>
-                            </li>
-				            {% endfor %}
-                        </ul>
-                    </div>
-		  </div><!-- end of block header -->
-            </div>
-
-            {% block introduction %}
-            {% endblock %}
-
-	        <div id="content">
-                {# main content #}
-		{% block content %}
-		{% endblock %}
-
-                {# pagination #}
-                {% block pagination %}
-                {% endblock %}
-	        </div><!-- /.container -->
-
-            {# block push #}
-            {% block push %}
-            {% endblock %}
-	    </div>
-        {% endblock %}<!-- end of block main -->
-
-
-        {% block footer %}
-        <footer>
-             {# block of related contents #}
-             <div class="container">
-             {% block related %}
-             {% endblock %}
-             </div>
-
-             <div class="container">
-	     <div class="row">
-             <h3>Categories:</h3>
-                    <ul class="list-inline">
-                        {% for c,article in categories %}
-                        <li style="margin-top:0.7em;">
-                            <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
-                                <i class="fa fa-folder-open-o"></i>
-                                {{ c }}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    <h3>Tags:</h3>
-                    <ul class="list-inline">
-                        {% for c,article in tags %}
-                        <li style="margin-top:0.7em;">
-                            <a href="{{SITEURL}}/{{c.url}}" class="btn mytag">
-                                <i class="fa fa-tag"></i>
-                                {{ c }}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-	     </div>
-             </div>
+      <div class="container">
+	<div class="row">
+          <h3>Categories:</h3>
+          <ul class="list-inline">
+            {% for c,article in categories %}
+            <li style="margin-top:0.7em;">
+              <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
+                <i class="fa fa-folder-open-o"></i>
+                {{ c }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          <h3>Tags:</h3>
+          <ul class="list-inline">
+            {% for c,article in tags %}
+            <li style="margin-top:0.7em;">
+              <a href="{{SITEURL}}/{{c.url}}" class="btn mytag">
+                <i class="fa fa-tag"></i>
+                {{ c }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+	</div>
+      </div>
 
 
 
-            <div style="text-align:center; margin-top:3em;padding-top:2em;border-top:1px solid #cfcfcf;">
-                <h4>
-                    2017 PY Consulting Ltd.
-                    1236 Beacon Street, Brookline, MA 02146
-                </h4>
+      <div style="text-align:center; margin-top:3em;padding-top:2em;border-top:1px solid #cfcfcf;">
+        <h4>
+          2017 PY Consulting Ltd.
+          1236 Beacon Street, Brookline, MA 02146
+        </h4>
 
-                <ul class="list-inline">
-                    <li>
-                        <a href="mailto:{{EMAIL_ADDRESS}}">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </li>
+        <ul class="list-inline">
+          <li>
+            <a href="mailto:{{EMAIL_ADDRESS}}">
+              <i class="fa fa-envelope"></i>
+            </a>
+          </li>
 
-                    <li>
-                        <a href="{{GITHUB_ADDRESS}}">
-                            <i class="fa fa-github"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{LINKEDIN_ADDRESS}}">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-phone-square"></i>
-                            (508)801-1794
-                        </a>
-                    </li>
+          <li>
+            <a href="{{GITHUB_ADDRESS}}">
+              <i class="fa fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a href="{{LINKEDIN_ADDRESS}}">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </li>
 
-                </ul>
-                <p>
-                    <i class="fa fa-copyright" ></i>All rights reserved.
-                </p>
-            </div>
-            </footer>
-        {% endblock %}<!- end of block footer -->
-
-
-        <!-- Placed at the end of the document so the pages load faster -->
-        {% block Javascripts %}
-	    {# jquery-ui #}
-        <script type="text/javascript"
-                src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
-        </script>
-
-	    {# tether #}
-        <script type="text/javascript"
-                src="/theme/bower_components/tether/dist/js/tether.min.js">
-        </script>
-
-	    {# bootstrap #}
-	    <script
-            src="/theme/bower_components/bootstrap/dist/js/bootstrap.min.js">
-        </script>
-
-	    {# DataTable #}
-        <script type="text/javascript"
-                src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
-        </script>
-
-	    {# lightbox: http://ashleydw.github.io/lightbox
-        <script type="text/javascript"
-                src="/theme/bower_components/lightbox2/dist/js/lightbox.min.js">
-        </script>
-
-        {# Syntaxhighlighter #}
-        <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shAutoloader.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushXml.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushBash.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushJScript.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPlain.js">
-        </script>
-
-	    {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
-        <script type="text/javascript"
-                src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
-        </script>
-
-        {# financejs #}
-        <script type="text/javascript"
-                src="/theme/bower_components/financejs/finance.js">
-        </script>
-
-        {# Highcharts #}
-        <script type="text/javascript"
-                src="/theme/bower_components/highcharts/highcharts.js">
-        </script>
-
-        {# Lodash #}
-        <script type="text/javascript"
-                src="/theme/bower_components/lodash/dist/lodash.min.js">
-        </script>
-
-        {# https://github.com/JedWatson/classnames #}
-        <script type="text/javascript"
-                src="/theme/bower_components/classnames/index.js">
-        </script>
-
-        {# REACT #}
-        <script type="text/javascript"
-                src="/theme/bower_components/react/react.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/react/react-dom.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/babel/browser.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/bower_components/remarkable/dist/remarkable.min.js">
-        </script>
-
-        {# d3 and d3plus #}
-        <script type="text/javascript"
-                src="/theme/bower_components/d3/d3.min.js">
-        </script>
-        <script type="text/javascript"
-                src="/theme/js/d3plus.full.min.js">
-        </script>
-
-        {# application js #}
-	    <script type="text/javascript">
-		 var j$ = jQuery.noConflict();
+        </ul>
+        <p>
+          <i class="fa fa-copyright" ></i>All rights reserved.
+        </p>
+      </div>
+    </footer>
+    {% endblock %}<!- end of block footer -->
 
 
-		 j$(document).ready(function(){
-			 // common global widget initializations
-			 var table = j$('table.my-datatable').dataTable({
-				 paging: false,
-				 info:false,
-				 "pagingType": "simple"
-			 });
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block Javascripts %}
+    {# jquery-ui #}
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
 
-             // lightbox
-                   j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
-		     var url = j$(this).attr('src');
-		     j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
-		     j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
-		   });
+    {# tether #}
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
 
-             // syntaxhighlighter
-             SyntaxHighlighter.defaults['toolbar'] = false;
-             SyntaxHighlighter.all();
+    {# bootstrap #}
+    <script
+        src="/theme/bower_components/bootstrap/dist/js/bootstrap.min.js">
+    </script>
 
-             // tooltips
-             j$('[data-toggle="tooltip"]').tooltip();
+    {# DataTable #}
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
 
-		 });
-	    </script>
-        {% endblock %} <!-- end of block JS -->
+    {# lightbox: http://ashleydw.github.io/lightbox
+    <script type="text/javascript"
+            src="/theme/bower_components/lightbox2/dist/js/lightbox.min.js">
+    </script>
 
-        {# extra javascript code #}
-        {% block theme_js %}
-        {% endblock %}
-        {% block custom_js %}
-        {% endblock %}
-        {% block reactjs %}
-        {% endblock %}
-    </body>
+    {# Syntaxhighlighter #}
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/SyntaxHighlighter/scripts/shAutoloader.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushXml.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushBash.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushJScript.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPlain.js">
+    </script>
+
+    {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    {# financejs #}
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    {# Highcharts #}
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    {# Lodash #}
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    {# https://github.com/JedWatson/classnames #}
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    {# REACT #}
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    {# d3 and d3plus #}
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    {# application js #}
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // syntaxhighlighter
+       SyntaxHighlighter.defaults['toolbar'] = false;
+       SyntaxHighlighter.all();
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+     });
+    </script>
+    {% endblock %} <!-- end of block JS -->
+
+    {# extra javascript code #}
+    {% block theme_js %}
+    {% endblock %}
+    {% block custom_js %}
+    {% endblock %}
+    {% block reactjs %}
+    {% endblock %}
+  </body>
 
 </html>

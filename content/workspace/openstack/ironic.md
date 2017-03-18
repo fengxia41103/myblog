@@ -157,6 +157,42 @@ displays details of a node.
 
 The rest of the fields are self-explanatory so I'll skip them for now.
 
+# Hardware inventory
+
+Hardware inventory is to collect characteristics such as the number of
+CPUs, memory size, disk partition, MAC address and so on. There are
+two ways to collect these: out-of-band and
+in-band. In-band inspection involves booting an OS on the target node
+and fetching information directly from it. This process is more
+fragile and time-consuming than the out-of-band inspection, but it is
+not vendor-specific and works across a wide range of hardware.;
+out-of-band, on the other hand, does not involve an OS. Instead,
+information is collected by a built-in BMC controllera on the baremetal box
+and are then queried through the box's IPMI interface.
+
+So translate these into Ironic, it has two ways to inventory hardware:
+
+1. IPA's [hardware manager][9] &mdash; in-band only. [IPA][7] is a
+   Python client packaged inside a ramdisk that will be run at the
+   beginning of a provisioning process. Hardware manager
+   is part of IPA's capability. They can run together with IPA to
+   collect node information.
+2. [Ironic Inspector][8] &mdash; in-band and out-of-band. Inspector is
+   a separate service running outside the target node. It exposes a
+   set of [API][10]. When caller sends request to its endpoint `POST
+   /v1/introspection/<node_indent>`, inspector uses the UUID to
+   extract node's `drive_info` from Ironic DB. With the IPMI credentials
+   it can now query node info from BMC as well controlling its
+   power cycle if it chooses to run a ramdisk
+   as [in-band method][11]. 
+
+[8]: https://docs.openstack.org/developer/ironic/deploy/inspection.html
+[9]: https://docs.openstack.org/developer/ironic-python-agent/#hardware-managers
+[10]: https://docs.openstack.org/developer/ironic-inspector/http-api.html#
+[11]: https://docs.openstack.org/developer/ironic/deploy/inspection.html#in-band-inspection
+
+
+
 # Image [TBD]
 
 Two types of images: deploy image and user image. Plenty blogs showing
@@ -228,7 +264,7 @@ Source by [devananda github][18].
     <figcaption>Ironic deploy &mdash; PXE</figcaption>
 </figure>
 
-## Using NOVA API to create an instance
+# Using NOVA API to create an instance
 
 Using Devstack, the easiest way to start an instance is CLI command.
 <pre class="brush:bash;">
@@ -306,38 +342,23 @@ Where:
     resp = json.loads(r.content)
   </pre>
 
+## Deploy node API calls
+
 Now let's see how this commands utilizes various API calls:
 
-<table class="table">
-    <thead>
-        <th>Index</th>
-        <th>Call</th>
-        <th>Service</th>
-        <th>Endpoint</th>
-        <th>HTTP Header</th>
-        <th>JSON Payload</th>
-        <th>Response</th>
-        <th>Note</th>
-    </thead>
-    <tbody>
-      <!-- Get basic information from Keystone API -->
-        <tr><td>1</td><td>
-            GET
-        </td><td>
-            Keystone
-        </td><td>
-            /identity/v3
-        </td><td>
-          None
-        </td><td>
-            <ol>
-                <li>Accept: application/json</li>
-                <li>User-Agent: osc-lib/1.3.0 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12" </li>
-            </ol>
-        </td><td>
- <pre class="brush:bash;;">
- {
-   "version":{
+### Step 1: Read basic information from Keystone
+
++ Service: Keystone
++ Method: `GET`
++ Endpoint: `/identity/v3`
++ HTTP header:
+    1. Accept: `application/json`
+    2. User-Agent: `osc-lib/1.3.0 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;;">
+{
+"version":{
       "status":"stable",
       "updated":"2017-02-22T00:00:00Z",
       "media-types":[
@@ -356,22 +377,19 @@ Now let's see how this commands utilizes various API calls:
    }
 }
 </pre>
-    </td><td>
-    
-    </td></tr>
-    
-    <!-- Get security token from Keystone API -->
-    <tr><td>2</td><td>
-        POST
-    </td><td>
-        Keystone
-    </td><td>
-        /identity/v3/auth/tokens
-    </td><td>
-        <ol>
-            <li>Content-Type: "application/json"</li>
-        </ol>
-    </td><td>
+
+### Step 2: Get security token
+
+The token is in response's header `X-Subject-Token` field.
+We are using "Password authentication with scoped authorization".
+
++ Service: Keystone
++ Method: `POST`
++ Endpoint: `/identity/v3/auth/tokens` ([ref][22])
+[22]: https://developer.openstack.org/api-ref/identity/v3/?expanded=password-authentication-with-scoped-authorization-detail#password-authentication-with-scoped-authorization
++ HTTP header:
+    1. Content-Type: `application/json`
++ JSON payload:
 <pre class="brush:bash;">
 {
    "auth":{
@@ -399,37 +417,29 @@ Now let's see how this commands utilizes various API calls:
       }
    }
 }</pre>
-    </td><td>
-    Too long to paste.
-    </td><td>
-      The token is in HTTP header "X-Subject-Token" field.
-    </td></tr>
++ Response: too long to paste. Not important.
 
-    <!-- Get user image meta data -->
-    <tr><td>3</td><td>
-        Glance
-    </td><td>
-        GET
-    </td><td>
-        /v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a
-    </td><td>
-        <ol>
-            <li>Accept-Encoding: gzip, deflate</li>
-            <li>Accept: */*</li>
-            <li>User-Agent: python-glanceclient</li>
-            <li>Connection: keep-alive</li>
-            <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-            <li>Content-Type: application/octet-stream</li>
-        </ol>
-    </td><td>
-      None
-    </td><td>
-      <pre class="brush:bash;">
+
+### Step 3: Get user image meta data
+
++ Service: `Glance`
++ Method: `GET`
++ Endpoint: `/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a` ([ref][23])
+[23]: https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details
++ HTTP header:
+    1. Accept-Encoding: `gzip, deflate`
+    2. Accept: `*/*`
+    3. User-Agent: `python-glanceclient`
+    4. Connection: `keep-alive`
+    5. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
+    6. Content-Type: `application/octet-stream`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;">
 {
    "status":"active",
    "name":"cirros-0.3.4-x86_64-uec",
    "tags":[
-
    ],
    "kernel_id":"ef538456-704c-445c-a98b-c081be22ad71",
    "container_format":"ami",
@@ -450,39 +460,34 @@ Now let's see how this commands utilizes various API calls:
    "min_ram":0,
    "schema":"/v2/schemas/image"
 }
-      </pre>      
-    </td></tr>
+</pre>
 
-    <!-- Get image schema -->
-    <tr><td>4</td><td>
-      Glance
-    </td><td>
-      GET
-    </td><td>
-      /v2/schemas/images
-    </td><td>
-      None
-    </td><td>
-      Too long to paste.
-    </td></tr>
+### Step 4: Get image schema
+Gets a JSON-schema document that represents the various entities
+talked about by the Images v2 API.
 
-    <!-- Get flavor details -->
-    <tr><td>5</td><td>
-      Glance
-    </td><td>
-      GET
-    </td><td>
-      /v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e
-    </td><td>
-      <ol>
-        <li>User-Agent: python-novaclient</li>
-        <li>Accept: application/json</li>
-        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-      </ol>
-    </td><td>
-      None
-    </td><td>
-      <pre class="brush:bash;">
++ Service: Glance
++ Method: `GET`
++ Endpoint: `/v2/schemas/images` ([ref][24])
+[24]: https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-images-schema-detail#show-images-schema
++ HTTP header: none
++ JSON payload: none
++ Response: too long to paste.
+
+### Step 5: Get flavor details
+
++ Service: Nova
++ Method: `GET`
++ Endpoint: `/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e`
+  ([ref][25])
+[25]: https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details
++ HTTP header:
+    1. User-Agent: `python-novaclient`
+    2. Accept: `application/json`
+    3. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;">
 {
    "flavor":{
       "links":[
@@ -507,35 +512,29 @@ Now let's see how this commands utilizes various API calls:
       "OS-FLV-EXT-DATA:ephemeral":0
    }
 }
-      </pre>
-    </td><td></td></tr>
-    
-    <!-- Get port details -->
-    <tr><td>6</td><td>
-      Neutron
-    </td><td>
-      GET
-    </td><td>
-      /v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0
-    </td><td>
-      <ol>
-        <li>User-Agent: openstacksdk/0.9.13 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12</li>
-        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-      </ol>
-    </td><td>
-      None
-    </td><td>
-      <pre class="brush:bash;">
+</pre>
+
+### Step 6: Get port details
+
++ Service: Neutron
++ Method: `GET`
++ Endpoint: `/v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0`
+([ref][26])
+[26]: https://developer.openstack.org/api-ref/networking/v2/?expanded=show-port-details-detail#show-port-details
++ HTTP header:
+    1. User-Agent: `openstacksdk/0.9.13 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12`
+    2. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;">
 {
    "port":{
       "status":"DOWN",
       "binding:host_id":"",
       "description":"",
       "allowed_address_pairs":[
-
       ],
       "tags":[
-
       ],
       "extra_dhcp_opts":[
          {
@@ -564,7 +563,6 @@ Now let's see how this commands utilizes various API calls:
       "revision_number":9,
       "port_security_enabled":false,
       "binding:profile":{
-
       },
       "fixed_ips":[
          {
@@ -578,15 +576,13 @@ Now let's see how this commands utilizes various API calls:
       ],
       "id":"22d79b92-0848-4053-ad0d-f182d02d01a0",
       "security_groups":[
-
       ],
       "device_id":"",
-      "name":"hlngk",
+      "name":"LNG",
       "admin_state_up":true,
       "network_id":"980f4a97-0f8e-4347-a324-d9d1247f7c3f",
       "tenant_id":"3b2594f2569542f694ff346a6db7fa1e",
       "binding:vif_details":{
-
       },
       "binding:vnic_type":"normal",
       "binding:vif_type":"unbound",
@@ -595,25 +591,21 @@ Now let's see how this commands utilizes various API calls:
       "created_at":"2017-03-03T23:01:47Z"
    }
 }
-      </pre>
-    </td><td></td></tr>
+</pre>
 
-    <!-- Create a NOVA instance based on image and flavor -->
-    <tr><td>7</td><td>
-      Nova
-    </td><td>
-      POST
-    </td><td>
-      /v2.1/servers
-    </td><td>
-      <ol>
-        <li>User-Agent: python-novaclient</li>
-        <li>Content-Type: application/json</li>
-        <li>Accept: application/json</li>
-        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-      </ol>
-    </td><td>
-      <pre class="brush:bash;">
+## Step 7: Create a NOVA instance based on image and flavor
+
++ Service: Nova
++ Method: `POST`
++ Endpoint: `/v2.1/servers` ([ref][27])
+[27]: https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,create-server-detail#create-server
++ HTTP header:
+    1. User-Agent: `python-novaclient`
+    2. Content-Type: `application/json`
+    3. Accept: `application/json`
+    4. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
++ JSON payload:
+<pre class="brush:bash;">
 {
    "server":{
       "name":"tt1",
@@ -628,9 +620,10 @@ Now let's see how this commands utilizes various API calls:
       ]
    }
 }
-      </pre>
-    </td><td>
-    <pre class="brush:bash;">
+</pre>
+
++ Response:
+<pre class="brush:bash;">
 {
    "server":{
       "security_groups":[
@@ -653,31 +646,26 @@ Now let's see how this commands utilizes various API calls:
       "adminPass":"xvcZ3HXf9Zr4"
    }
 }
-    </pre>  
-    </td></tr>
+</pre>  
 
-    <!-- Read NOVA instance details -->
-    <tr><td>8</td><td>
-      Nova
-    </td><td>
-      GET
-    </td><td>
-      /v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6
-    </td><td>
-      <ol>
-        <li>User-Agent: python-novaclient</li>
-        <li>Accept: application/json</li>
-        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-      </ol>
-    </td><td>
-      None
-    </td><td>
-      <pre class="brush:bash;">
+### Step 8: Read NOVA instance details
+
++ Service: Nova
++ Method: `GET`
++ Endpoint: `/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6`
+  ([ref][28])
+[28]: https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,show-server-details-detail#show-server-details
++ HTTP header:
+    1. User-Agent: `python-novaclient`
+    2. Accept: `application/json`
+    3. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;">
 {
    "server":{
       "OS-EXT-STS:task_state":"scheduling",
       "addresses":{
-
       },
       "links":[
          {
@@ -719,7 +707,6 @@ Now let's see how this commands utilizes various API calls:
       "OS-EXT-STS:power_state":0,
       "OS-EXT-AZ:availability_zone":"",
       "metadata":{
-
       },
       "status":"BUILD",
       "updated":"2017-03-03T23:02:45Z",
@@ -732,39 +719,31 @@ Now let's see how this commands utilizes various API calls:
       "created":"2017-03-03T23:02:45Z",
       "tenant_id":"3b2594f2569542f694ff346a6db7fa1e",
       "os-extended-volumes:volumes_attached":[
-
       ],
       "config_drive":""
    }
 }
-      </pre>
-    </td></tr>
+</pre>
 
-    <!-- Get user image detail -->
-    <tr><td>9</td><td>
-      Glance
-    </td><td>
-      GET
-    </td><td>
-      /v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a
-    </td><td>
-      <ol>
-        <li>Accept-Encoding: gzip, deflate</li>
-        <li>Accept: */*</li>
-        <li>User-Agent: python-glanceclient</li>
-        <li>Connection: keep-alive</li>
-        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-        <li>Content-Type: application/octet-stream</li>
-      </ol>
-    </td><td>
-      None
-    </td><td>
-      <pre class="brush:bash;">
+### Step 9: Get user image detail
+
++ Service: Glance
++ Method: `GET`
++ Endpoint: `/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a` ([ref][23])
++ HTTP header:
+    1. Accept-Encoding: `gzip, deflate`
+    2. Accept: `*/*`
+    3. User-Agent: `python-glanceclient`
+    4. Connection: `keep-alive`
+    5. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
+    6. Content-Type: `application/octet-stream`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;">
 {
    "status":"active",
    "name":"cirros-0.3.4-x86_64-uec",
    "tags":[
-
    ],
    "kernel_id":"ef538456-704c-445c-a98b-c081be22ad71",
    "container_format":"ami",
@@ -785,26 +764,20 @@ Now let's see how this commands utilizes various API calls:
    "min_ram":0,
    "schema":"/v2/schemas/image"
 }
-      </pre>
-    </td></tr>
+</pre>
 
-    <!-- Get flavor detail -->
-    <tr><td>10</td><td>
-      Nova
-    </td><td>
-      GET
-    </td><td>
-      /v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e
-    </td><td>
-      <ol>
-        <li>User-Agent: python-novaclient</li>
-        <li>Accept: application/json</li>
-        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
-      </ol>
-    </td><td>
-      None
-    </td><td>
-      <pre class="brush:bash;">
+### Step 10: Get flavor detail
+
++ Service: Nova
++ Method: `GET`
++ Endpoint: `/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e` ([ref][25])
++ HTTP header:
+    1. User-Agent: `python-novaclient`
+    2. Accept: `application/json`
+    3. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
++ JSON payload: none
++ Response:
+<pre class="brush:bash;">
 {
    "flavor":{
       "links":[
@@ -829,43 +802,8 @@ Now let's see how this commands utilizes various API calls:
       "OS-FLV-EXT-DATA:ephemeral":0
    }
 }
-      </pre>
-    </td><td>
-    </td></tr>
+</pre>
 
-    </tbody>
-</table>
-
-# Hardware inventory
-
-Hardware inventory is to collect characteristics such as the number of
-CPUs, memory size, disk partition, MAC address and so on. There are
-two ways to collect these: out-of-band and
-in-band. In-band inspection involves booting an OS on the target node
-and fetching information directly from it. This process is more
-fragile and time-consuming than the out-of-band inspection, but it is
-not vendor-specific and works across a wide range of hardware.;
-out-of-band, on the other hand, does not involve an OS. Instead,
-information is collected by a built-in BMC controllera on the baremetal box
-and are then queried through the box's IPMI interface.
-
-So translate these into Ironic, it has two ways to inventory hardware:
-
-1. IPA's [hardware manager][9] &mdash; in-band only. Hardware manager
-   is part of IPA's capability. They can run together with IPA to
-   collect node information.
-2. [Ironic Inspector][8] &mdash; in-band and out-of-band. Inspector is
-   a separate service running outside the target node. It exposes a
-   set of [API][10]. When caller `POST
-   /v1/introspection/<node_indent>`, inspector uses the UUID to
-   extract node's drive_info from Ironic DB. With the IPMI credentials
-   it can now control the node. Its [in-band inspection][11] will boot
-   a ramdisk. Inspector will then update node's `properties` field
-   with values it collected.
-[8]: https://docs.openstack.org/developer/ironic/deploy/inspection.html
-[9]: https://docs.openstack.org/developer/ironic-python-agent/#hardware-managers
-[10]: https://docs.openstack.org/developer/ironic-inspector/http-api.html#
-[11]: https://docs.openstack.org/developer/ironic/deploy/inspection.html#in-band-inspection
 
 
 

@@ -459,248 +459,380 @@ Now let's see how this commands utilizes various API calls:
     </td><td>
       GET
     </td><td>
+      /v2/schemas/images
     </td><td>
+      None
+    </td><td>
+      Too long to paste.
+    </td></tr>
+
+    <!-- Get flavor details -->
+    <tr><td>5</td><td>
+      Glance
+    </td><td>
+      GET
+    </td><td>
+      /v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e
+    </td><td>
+      <ol>
+        <li>User-Agent: python-novaclient</li>
+        <li>Accept: application/json</li>
+        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
+      </ol>
+    </td><td>
+      None
     </td><td>
       <pre class="brush:bash;">
 {
-   "additionalProperties":{
-      "type":"string"
-   },
-   "name":"image",
-   "links":[
-      {
-         "href":"{self}",
-         "rel":"self"
-      },
-      {
-         "href":"{file}",
-         "rel":"enclosure"
-      },
-      {
-         "href":"{schema}",
-         "rel":"describedby"
-      }
-   ],
-   "properties":{
-      "status":{
-         "readOnly":true,
-         "enum":[
-            "queued",
-            "saving",
-            "active",
-            "killed",
-            "deleted",
-            "pending_delete",
-            "deactivated"
-         ],
-         "type":"string",
-         "description":"Status of the image"
-      },
-      "tags":{
-         "items":{
-            "type":"string",
-            "maxLength":255
+   "flavor":{
+      "links":[
+         {
+            "href":"http://10.0.2.15:8774/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+            "rel":"self"
          },
-         "type":"array",
-         "description":"List of strings related to the image"
-      },
-      "kernel_id":{
-         "pattern":"^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$",
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"ID of image stored in Glance that should be used as the kernel when booting an AMI-style image.",
-         "is_base":false
-      },
-      "container_format":{
-         "enum":[
-            null,
-            "ami",
-            "ari",
-            "aki",
-            "bare",
-            "ovf",
-            "ova",
-            "docker"
-         ],
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"Format of the container"
-      },
-      "min_ram":{
-         "type":"integer",
-         "description":"Amount of ram (in MB) required to boot image."
-      },
-      "ramdisk_id":{
-         "pattern":"^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$",
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"ID of image stored in Glance that should be used as the ramdisk when booting an AMI-style image.",
-         "is_base":false
-      },
-      "locations":{
-         "items":{
-            "required":[
-               "url",
-               "metadata"
-            ],
-            "type":"object",
-            "properties":{
-               "url":{
-                  "type":"string",
-                  "maxLength":255
-               },
-               "metadata":{
-                  "type":"object"
-               }
-            }
-         },
-         "type":"array",
-         "description":"A set of URLs to access the image file kept in external store"
-      },
-      "visibility":{
-         "enum":[
-            "community",
-            "public",
-            "private",
-            "shared"
-         ],
-         "type":"string",
-         "description":"Scope of image accessibility"
-      },
-      "updated_at":{
-         "readOnly":true,
-         "type":"string",
-         "description":"Date and time of the last image modification"
-      },
-      "owner":{
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"Owner of the image",
-         "maxLength":255
-      },
-      "file":{
-         "readOnly":true,
-         "type":"string",
-         "description":"An image file url"
-      },
-      "min_disk":{
-         "type":"integer",
-         "description":"Amount of disk space (in GB) required to boot image."
-      },
-      "virtual_size":{
-         "readOnly":true,
-         "type":[
-            "null",
-            "integer"
-         ],
-         "description":"Virtual size of image in bytes"
-      },
-      "id":{
-         "pattern":"^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$",
-         "type":"string",
-         "description":"An identifier for the image"
-      },
-      "size":{
-         "readOnly":true,
-         "type":[
-            "null",
-            "integer"
-         ],
-         "description":"Size of image file in bytes"
-      },
-      "instance_uuid":{
-         "type":"string",
-         "description":"Metadata which can be used to record which instance this image is associated with. (Informational only, does not create an instance snapshot.)",
-         "is_base":false
-      },
-      "os_distro":{
-         "type":"string",
-         "description":"Common name of operating system distribution as specified in http://docs.openstack.org/trunk/openstack-compute/admin/content/adding-images.html",
-         "is_base":false
-      },
-      "name":{
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"Descriptive name for the image",
-         "maxLength":255
-      },
-      "checksum":{
-         "readOnly":true,
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"md5 hash of image contents.",
-         "maxLength":32
-      },
-      "created_at":{
-         "readOnly":true,
-         "type":"string",
-         "description":"Date and time of image registration"
-      },
-      "disk_format":{
-         "enum":[
-            null,
-            "ami",
-            "ari",
-            "aki",
-            "vhd",
-            "vhdx",
-            "vmdk",
-            "raw",
-            "qcow2",
-            "vdi",
-            "iso",
-            "ploop"
-         ],
-         "type":[
-            "null",
-            "string"
-         ],
-         "description":"Format of the disk"
-      },
-      "os_version":{
-         "type":"string",
-         "description":"Operating system version as specified by the distributor",
-         "is_base":false
-      },
-      "protected":{
-         "type":"boolean",
-         "description":"If true, image will not be deletable."
-      },
-      "architecture":{
-         "type":"string",
-         "description":"Operating system architecture as specified in http://docs.openstack.org/trunk/openstack-compute/admin/content/adding-images.html",
-         "is_base":false
-      },
-      "direct_url":{
-         "readOnly":true,
-         "type":"string",
-         "description":"URL to access the image file kept in external store"
-      },
-      "self":{
-         "readOnly":true,
-         "type":"string",
-         "description":"An image self url"
-      },
-      "schema":{
-         "readOnly":true,
-         "type":"string",
-         "description":"An image schema url"
-      }
+         {
+            "href":"http://10.0.2.15:8774/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+            "rel":"bookmark"
+         }
+      ],
+      "ram":1280,
+      "OS-FLV-DISABLED:disabled":false,
+      "os-flavor-access:is_public":true,
+      "rxtx_factor":1.0,
+      "disk":10,
+      "id":"a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+      "name":"baremetal",
+      "vcpus":1,
+      "swap":"",
+      "OS-FLV-EXT-DATA:ephemeral":0
    }
-}      </pre>
+}
+      </pre>
+    </td><td></td></tr>
+    
+    <!-- Get port details -->
+    <tr><td>6</td><td>
+      Neutron
+    </td><td>
+      GET
+    </td><td>
+      /v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0
+    </td><td>
+      <ol>
+        <li>User-Agent: openstacksdk/0.9.13 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12</li>
+        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
+      </ol>
+    </td><td>
+      None
+    </td><td>
+      <pre class="brush:bash;">
+{
+   "port":{
+      "status":"DOWN",
+      "binding:host_id":"",
+      "description":"",
+      "allowed_address_pairs":[
+
+      ],
+      "tags":[
+
+      ],
+      "extra_dhcp_opts":[
+         {
+            "opt_value":"http://10.0.2.15:3928/boot.ipxe",
+            "ip_version":4,
+            "opt_name":"tag:ipxe,bootfile-name"
+         },
+         {
+            "opt_value":"10.0.2.15",
+            "ip_version":4,
+            "opt_name":"server-ip-address"
+         },
+         {
+            "opt_value":"10.0.2.15",
+            "ip_version":4,
+            "opt_name":"tftp-server"
+         },
+         {
+            "opt_value":"undionly.kpxe",
+            "ip_version":4,
+            "opt_name":"tag:!ipxe,bootfile-name"
+         }
+      ],
+      "updated_at":"2017-03-03T23:01:48Z",
+      "device_owner":"network:dhcp",
+      "revision_number":9,
+      "port_security_enabled":false,
+      "binding:profile":{
+
+      },
+      "fixed_ips":[
+         {
+            "subnet_id":"d2c3a067-ccda-45c0-9c8e-b73e88b0402e",
+            "ip_address":"10.0.0.3"
+         },
+         {
+            "subnet_id":"70ce2eae-bcff-45a5-bf1f-b9720e526e7f",
+            "ip_address":"fdb2:c07c:cdc9:0:f816:3eff:feb3:da44"
+         }
+      ],
+      "id":"22d79b92-0848-4053-ad0d-f182d02d01a0",
+      "security_groups":[
+
+      ],
+      "device_id":"",
+      "name":"hlngk",
+      "admin_state_up":true,
+      "network_id":"980f4a97-0f8e-4347-a324-d9d1247f7c3f",
+      "tenant_id":"3b2594f2569542f694ff346a6db7fa1e",
+      "binding:vif_details":{
+
+      },
+      "binding:vnic_type":"normal",
+      "binding:vif_type":"unbound",
+      "mac_address":"fa:16:3e:b3:da:44",
+      "project_id":"3b2594f2569542f694ff346a6db7fa1e",
+      "created_at":"2017-03-03T23:01:47Z"
+   }
+}
+      </pre>
+    </td><td></td></tr>
+
+    <!-- Create a NOVA instance based on image and flavor -->
+    <tr><td>7</td><td>
+      Nova
+    </td><td>
+      POST
+    </td><td>
+      /v2.1/servers
+    </td><td>
+      <ol>
+        <li>User-Agent: python-novaclient</li>
+        <li>Content-Type: application/json</li>
+        <li>Accept: application/json</li>
+        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
+      </ol>
+    </td><td>
+      <pre class="brush:bash;">
+{
+   "server":{
+      "name":"tt1",
+      "imageRef":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+      "flavorRef":"a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+      "max_count":1,
+      "min_count":1,
+      "networks":[
+         {
+            "port":"22d79b92-0848-4053-ad0d-f182d02d01a0"
+         }
+      ]
+   }
+}
+      </pre>
+    </td><td>
+    <pre class="brush:bash;">
+{
+   "server":{
+      "security_groups":[
+         {
+            "name":"default"
+         }
+      ],
+      "OS-DCF:diskConfig":"MANUAL",
+      "id":"3d79d699-16c7-4f99-b034-57403d2d18e6",
+      "links":[
+         {
+            "href":"http://10.0.2.15:8774/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6",
+            "rel":"self"
+         },
+         {
+            "href":"http://10.0.2.15:8774/servers/3d79d699-16c7-4f99-b034-57403d2d18e6",
+            "rel":"bookmark"
+         }
+      ],
+      "adminPass":"xvcZ3HXf9Zr4"
+   }
+}
+    </pre>  
     </td></tr>
+
+    <!-- Read NOVA instance details -->
+    <tr><td>8</td><td>
+      Nova
+    </td><td>
+      GET
+    </td><td>
+      /v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6
+    </td><td>
+      <ol>
+        <li>User-Agent: python-novaclient</li>
+        <li>Accept: application/json</li>
+        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
+      </ol>
+    </td><td>
+      None
+    </td><td>
+      <pre class="brush:bash;">
+{
+   "server":{
+      "OS-EXT-STS:task_state":"scheduling",
+      "addresses":{
+
+      },
+      "links":[
+         {
+            "href":"http://10.0.2.15:8774/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6",
+            "rel":"self"
+         },
+         {
+            "href":"http://10.0.2.15:8774/servers/3d79d699-16c7-4f99-b034-57403d2d18e6",
+            "rel":"bookmark"
+         }
+      ],
+      "image":{
+         "id":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+         "links":[
+            {
+               "href":"http://10.0.2.15:8774/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+               "rel":"bookmark"
+            }
+         ]
+      },
+      "OS-EXT-STS:vm_state":"building",
+      "OS-EXT-SRV-ATTR:instance_name":"",
+      "OS-SRV-USG:launched_at":null,
+      "flavor":{
+         "id":"a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+         "links":[
+            {
+               "href":"http://10.0.2.15:8774/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+               "rel":"bookmark"
+            }
+         ]
+      },
+      "id":"3d79d699-16c7-4f99-b034-57403d2d18e6",
+      "user_id":"277d3bed50964145998606c8a66982fd",
+      "OS-DCF:diskConfig":"MANUAL",
+      "accessIPv4":"",
+      "accessIPv6":"",
+      "progress":0,
+      "OS-EXT-STS:power_state":0,
+      "OS-EXT-AZ:availability_zone":"",
+      "metadata":{
+
+      },
+      "status":"BUILD",
+      "updated":"2017-03-03T23:02:45Z",
+      "hostId":"",
+      "OS-EXT-SRV-ATTR:host":null,
+      "OS-SRV-USG:terminated_at":null,
+      "key_name":null,
+      "OS-EXT-SRV-ATTR:hypervisor_hostname":null,
+      "name":"tt1",
+      "created":"2017-03-03T23:02:45Z",
+      "tenant_id":"3b2594f2569542f694ff346a6db7fa1e",
+      "os-extended-volumes:volumes_attached":[
+
+      ],
+      "config_drive":""
+   }
+}
+      </pre>
+    </td></tr>
+
+    <!-- Get user image detail -->
+    <tr><td>9</td><td>
+      Glance
+    </td><td>
+      GET
+    </td><td>
+      /v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a
+    </td><td>
+      <ol>
+        <li>Accept-Encoding: gzip, deflate</li>
+        <li>Accept: */*</li>
+        <li>User-Agent: python-glanceclient</li>
+        <li>Connection: keep-alive</li>
+        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
+        <li>Content-Type: application/octet-stream</li>
+      </ol>
+    </td><td>
+      None
+    </td><td>
+      <pre class="brush:bash;">
+{
+   "status":"active",
+   "name":"cirros-0.3.4-x86_64-uec",
+   "tags":[
+
+   ],
+   "kernel_id":"ef538456-704c-445c-a98b-c081be22ad71",
+   "container_format":"ami",
+   "created_at":"2017-03-03T22:38:57Z",
+   "ramdisk_id":"1a243f7b-3e96-4140-8408-b82064599cec",
+   "disk_format":"ami",
+   "updated_at":"2017-03-03T22:38:58Z",
+   "visibility":"public",
+   "self":"/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+   "min_disk":0,
+   "protected":false,
+   "id":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+   "size":25165824,
+   "file":"/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file",
+   "checksum":"eb9139e4942121f22bbc2afc0400b2a4",
+   "owner":"3b2594f2569542f694ff346a6db7fa1e",
+   "virtual_size":null,
+   "min_ram":0,
+   "schema":"/v2/schemas/image"
+}
+      </pre>
+    </td></tr>
+
+    <!-- Get flavor detail -->
+    <tr><td>10</td><td>
+      Nova
+    </td><td>
+      GET
+    </td><td>
+      /v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e
+    </td><td>
+      <ol>
+        <li>User-Agent: python-novaclient</li>
+        <li>Accept: application/json</li>
+        <li>X-Auth-Token: ccc5f650029b710c4a3c8f20320afaaed04326f1</li>
+      </ol>
+    </td><td>
+      None
+    </td><td>
+      <pre class="brush:bash;">
+{
+   "flavor":{
+      "links":[
+         {
+            "href":"http://10.0.2.15:8774/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+            "rel":"self"
+         },
+         {
+            "href":"http://10.0.2.15:8774/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+            "rel":"bookmark"
+         }
+      ],
+      "ram":1280,
+      "OS-FLV-DISABLED:disabled":false,
+      "os-flavor-access:is_public":true,
+      "rxtx_factor":1.0,
+      "disk":10,
+      "id":"a5178caf-6b3a-49ec-ab47-a6daaf05423e",
+      "name":"baremetal",
+      "vcpus":1,
+      "swap":"",
+      "OS-FLV-EXT-DATA:ephemeral":0
+   }
+}
+      </pre>
+    </td><td>
+    </td></tr>
+
     </tbody>
 </table>
 

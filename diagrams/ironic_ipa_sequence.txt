@@ -1,5 +1,10 @@
 @startuml
+skinparam BoxPadding 30
 actor Operator
+box "Ironic node" #efefef
+    participant BM
+    participant IPA
+end box
 
 Operator -> BM: boot with IPA-enabled ramdisk image
 BM -> BM: boot from ramdisk

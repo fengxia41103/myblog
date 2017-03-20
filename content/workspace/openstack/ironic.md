@@ -134,19 +134,65 @@ displays details of a node.
    retrieved from the /v1/drivers/<DRIVER_NAME>/properties resource.
    For example, for `_ipmi` drivers, one needs:   
        + `ipmi_port`
-       + `ipmi_username` 
+       + `ipmi_username`  in devstack, default to "admin"
        + `ipmi_password`: in devstack, default to "password"
-       + `ipmi_address`
+       + `ipmi_address`: 
        + `deploy_kernel`: in devstack, it is "ir-deploy-agent_ipmitool.kernel".
-       + `deploy_ramdisk`: in devstack, it is
-         "ir-deploy-agent_ipmitool.initramfs"
+       + `deploy_ramdisk`: in devstack, it is "ir-deploy-agent_ipmitool.initramfs"
+
+    Example payload:
+
+        driver_info = {
+            'ipmi_port': 6230,
+            'ipmi_username': "admin",
+            'deploy_kernel': ir-deploy-agent_ipmitool.kernel UUID,
+            'deploy_ramdisk': ir-deploy-agent_ipmitool.initramfs UUID,
+            'ipmi_address': "10.0.2.15",
+            'ipmi_password': "password"
+        }
+
 4. `driver_internal_info` (read-only): this field is not accessible
    via API. Used by driver to store internal information.
    + `agent_url`: this is the callback URL to the Ironic Python Agent (IPA)
      running on the node (when an agent ramdisk image is selected). We
      will cover more of IPA later. The value is filled in when the IPA
      calls Ironic's `/v1/heartbeat` endpoint.
-5. `instance_info`: is populated when the node is provisioned.
+5. `instance_info`: is populated when the node is
+   provisioned. However, user can also set this field through API.
+   
+    Example payload:
+
+        {
+           "ramdisk":"1a243f7b-3e96-4140-8408-b82064599cec",
+           "kernel":"ef538456-704c-445c-a98b-c081be22ad71",
+           "image_source":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+           "ephemeral_gb":0,
+           "image_properties":{
+              "kernel_id":"ef538456-704c-445c-a98b-c081be22ad71",
+              "ramdisk_id":"1a243f7b-3e96-4140-8408-b82064599cec",
+              "virtual_size":null
+           },
+           "preserve_ephemeral":false,
+           "ephemeral_mb":0,
+           "local_gb":"10",
+           "image_disk_format":"ami",
+           "image_checksum":"eb9139e4942121f22bbc2afc0400b2a4",
+           "nova_host_id":"devstack",
+           "ephemeral_format":null,
+           "root_gb":"10",
+           "display_name":"tt1",
+           "configdrive":null,
+           "image_type":"partition",
+           "image_tags":[
+           ],
+           "memory_mb":"1280",
+           "vcpus":"1",
+           "image_url":"http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&temp_url_expires=1488585783",
+           "image_container_format":"ami",
+           "root_mb":10240,
+           "swap_mb":0
+        }
+   
 6. `properties` (<font color="red">required</font>): Physical
    characteristics of this Node. Populated by ironic-inspector during
    inspection. Can also be set via the REST API at any time. These
@@ -154,6 +200,16 @@ displays details of a node.
    of _baremetal management_ is to filter what a workload wants
    vs. what we have, and the values in `properties` define what we
    have.
+
+    Example payload:
+
+        properties = {
+            'cpus': 1,
+            'memory_mb': 1280,
+            'local_gb': 10,
+            'cpu_arch': 'x86_64',
+            'capabilities': 'memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local'
+        }   
 
 The rest of the fields are self-explanatory so I'll skip them for now.
 

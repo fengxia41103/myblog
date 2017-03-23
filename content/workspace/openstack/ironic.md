@@ -273,8 +273,10 @@ Devstack image list:
 # Ironic deploy method: agent & PXE
 
 Ironic offers two deploy methods: agent ([Ironic Python Agent (IPA)][7]) and
-PXE.
+PXE. The agent-based deploy method came from [Rackspace][32] and was [blueprinted].
 
+[31]: https://blueprints.launchpad.net/ironic/+spec/agent-driver
+[32]: https://journal.paul.querna.org/articles/2014/07/02/putting-teeth-in-our-public-cloud/
 
 [7]: https://docs.openstack.org/developer/ironic-python-agent/#how-it-works
 
@@ -289,14 +291,23 @@ UUID. From that point on, IPA will ping home (hearbeat) periodically
 hearbeat payload is a callback URL, so apparently IPA also exposes a HTTP service
 that Ironic conductor can use for commands.
 
-
 <figure class="row">
     <img class="img-responsive center-block"
     src="/images/ironic_ipa_sequence.png" />
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
 
-Now how does Ironic conductor interact with this agent? [TBD]
+With IPA the DHCP, PXE and TFTP configurations become the static for
+all baremetal nodes, reducing complexity. Once running, the Agent
+sends a heartbeat to the Ironic Conductors with hardware
+information. Then the Conductors can order the Agent to take different
+actions. For example in the case of provisioning an instance, the
+Conductor sends an HTTP POST to prepare_image with the URL for an
+Image, and the Agent downloads and writes it to disk itself, keeping
+the Ironic Conductor out of the data plane for an image download. Once
+the image is written to disk, the Ironic Conductor simply reboots the
+baremetal node, and it boots from disk, removing a runtime dependency
+on a DHCP or TFTP server.
 
 ## Provision process &mdash; Agent
 Source by [devananda github][18].

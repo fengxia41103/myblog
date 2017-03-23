@@ -1,0 +1,29 @@
+@startuml
+autonumber "<font color=red><b>Step 0"
+participant "PXE client" as client
+participant "DHCP/Proxy DHCP service" as server
+participant "Boot service" as boot
+participant "M/TFTP service" as tftp
+
+== Look for Boot Service address, determine client address  ==
+client -> server: DHCP DISCOVER to port 67\nContains "PXEClient" extention tags
+
+server -> client: Extended DHCP Offer to port 68\ncontains: PXE server extension tags + [Other DHCP option tags] + Client IP addr
+
+client -> server: DHCP Request to Installation Server port 67\nContains "PXEClient" extension tags + [Other DHCP option tags]
+
+server -> client: DHCP Ack reply to Port 68
+
+== Look for  TFTP service address & bootfile file name from Boot Service ==
+client -> server: Boot Service Discover to port 67 or 4011\nContains: “PXEClient” extension tags + [Other DHCP option tags]
+
+boot -> client: Boot Service Ack reply to client source port\nContains: [ PXE Server extension tags] (contains Network Bootstrap Program file name)
+
+== Download bootfile file from TFTP ==
+client -> tftp: Network Bootstrap Program(NBP) download\nrequest to TFTP port 69 or MTFTP port (from Boot Service Ack)
+
+tftp -> client: Network Bootstrap Program Download to Client's port
+
+== Bootstrap ==
+client -> client: Executed downloaded boot image
+@enduml

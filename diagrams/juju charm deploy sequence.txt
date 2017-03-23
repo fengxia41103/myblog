@@ -1,0 +1,22 @@
+@startuml
+scale 600*800
+actor Operator
+participant Machine0
+
+Operator -> Machine0: $ deploy workload ABC
+Machine0 -> Operator: request registered
+...wait for an eligible node...
+
+Agent -> Machine0: node becomes available
+activate Agent
+
+Machine0 -> Agent: deploy ABC-charm
+Agent -> "Charm store": search charm of correct version
+"Charm store" -> Agent: charm URL
+Agent -> "Charm store": HTTP get charm
+"Charm store" -> Agent: charm
+...execute charm scripts...
+Agent -> Machine0: states updated
+deactivate Agent
+
+@enduml 

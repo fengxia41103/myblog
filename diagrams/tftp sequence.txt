@@ -1,0 +1,114 @@
+@startuml
+
+== Establish connection ==
+participant client
+participant server
+
+client -> server: read request RRQ
+note right
+     OP code =1
+     filename: 2 bytes
+     mode: ASCII, octet
+
+     UDP header:
+         source port = client's port
+         destination port = 69
+end note
+activate server #DeepSkyBlue
+
+server -> client: data packet #1
+note right
+     OP code = 3
+     block number = 1
+     data length = 512 bytes
+
+     UDP header:
+         source port = server's port (69)
+         destination = client's port
+end note
+activate client #FFBBBB
+
+client -> server: ACK
+note right
+     OP code = 4
+     block number = 1
+end note
+
+== Data transmission ==
+server -> client: data packet #2
+note right
+     OP code = 3
+     data block number = 2
+     data length = 512 bytes
+
+     UDP header:
+         source port = server's port agreed in initial steps above
+         Mismatched packets will be ignored.
+end note
+
+client -> server: ACK
+note right
+     OP code = 4
+     block number = 2
+end note
+
+server -> client: data packet #3
+client -> server: ACK for data packet #3
+
+...
+...
+
+== Termination ==
+server -> client: data packet #N
+note right
+   data length = 0-511 bytes
+   indicating this is the last data packet
+end note
+
+client -> server: final ACK
+note right
+     Client can terminate its port right now.
+     However, it is encouraged to
+     wait for a while before terminating
+     to ensure ACK is received by server.
+
+     If received the last data packet again,
+     then ACK has been lost.
+end note
+deactivate client
+
+server -> client: ACK (optional)
+note right
+     Server sends ACK responding to
+     client's last ACK -- a final goodbye.
+end note
+deactivate server
+
+== Error handling ==
+ref over client, server
+    Can ACK any packet (including ACK packets).
+    Sender is not expecting any response.
+    Error msg is 0 terminated string.
+    No guarantee for delivery.
+end ref
+
+client -> server: ERROR
+server -> client: ERROR
+note right
+     OP code = 5
+     Error Codes
+
+      Value     Meaning
+
+      0         Not defined, see error message (if any).
+      1         File not found.
+      2         Access violation.
+      3         Disk full or allocation exceeded.
+      4         Illegal TFTP operation.
+      5         Unknown transfer ID.
+      6         File already exists.
+      7         No such user.
+end note
+
+
+@enduml

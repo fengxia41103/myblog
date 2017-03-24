@@ -41,8 +41,91 @@ TFTP.  Each nonterminal packet is acknowledged separately. It has been implement
 [4]: https://tools.ietf.org/html/rfc1350
 
 The only thing it can do is read and write files (or mail) from/to a
-remote server &rarr; no user authentication.  Three modes of transfer
+remote server &rarr; no user authentication.  Two modes of transfer
 are currently supported: ASCII (8-bit) and octet (raw 8-bit bytes).
+<font color="red">Note</font> that [spec][4] defines 3rd mode
+_message_ but it is obsoleted.
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/tftp%20sequence.png" />
+    <figcaption>TFTP sequence diagram</figcaption>
+</figure>
+
+The [spec][4] has nice illustration of the data formats so I'll copy &
+paste them here for reference:
+
+Order of Headers and op codes:
+<pre class="brush:plain;">
+                                                  2 bytes
+    ----------------------------------------------------------
+   |  Local Medium  |  Internet  |  Datagram  |  TFTP Opcode  |
+    ----------------------------------------------------------
+          opcode  operation
+          -----   ---------
+            1     Read request (RRQ)
+            2     Write request (WRQ)
+            3     Data (DATA)
+            4     Acknowledgment (ACK)
+            5     Error (ERROR)
+</pre>
+
+TFTP data packet formats:
+<pre class="brush:plain;">
+   Type   Op #     Format without header
+   ----   ----     --------------------
+          2 bytes    string   1 byte     string   1 byte
+          -----------------------------------------------
+   RRQ/  | 01/02 |  Filename  |   0  |    Mode    |   0  |
+   WRQ    -----------------------------------------------
+          2 bytes    2 bytes       n bytes
+          ---------------------------------
+   DATA  | 03    |   Block #  |    Data    |
+          ---------------------------------
+          2 bytes    2 bytes
+          -------------------
+   ACK   | 04    |   Block #  |
+          --------------------
+          2 bytes  2 bytes        string    1 byte
+          ----------------------------------------
+   ERROR | 05    |  ErrorCode |   ErrMsg   |   0  |
+          ----------------------------------------
+</pre>
+
+Error codes:
+<pre class="brush:plain;">
+Value     Meaning
+-----     -------
+0         Not defined, see error message (if any).
+1         File not found.
+2         Access violation.
+3         Disk full or allocation exceeded.
+4         Illegal TFTP operation.
+5         Unknown transfer ID.
+6         File already exists.
+7         No such user.
+</pre>
+
+UDP header format:
+<pre class="brush:plain;">
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |          Source Port          |       Destination Port        |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |            Length             |           Checksum            |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+
+where the values of fields are:
+
++ **Source Port**: Picked by originator of packet.
++ **Dest. Port**: Picked by destination machine (69 for RRQ or WRQ).
++ **Length**: Number of bytes in UDP packet, including UDP header.
++ **Checksum**: Reference 2 describes rules for computing checksum.  (The
+  implementor of this should be sure that the correct algorithm is used
+  here.)  Field contains zero if unused.
+
 
 # Preboote Execution Environment (PXE)
 

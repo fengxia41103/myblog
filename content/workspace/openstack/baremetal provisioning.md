@@ -46,29 +46,12 @@ are currently supported: ASCII (8-bit) and octet (raw 8-bit bytes).
 <font color="red">Note</font> that [spec][4] defines 3rd mode
 _message_ but it is obsoleted.
 
-<figure class="row">
-    <img class="img-responsive center-block"
-    src="/images/tftp%20sequence.png" />
-    <figcaption>TFTP sequence diagram</figcaption>
-</figure>
-
+Between client and server, everything is transported as a _data
+packet_, and each data packet includes a `op code` which
+indicates the meaning of this packet as well as the rest of 
+data structure. 
 The [spec][4] has nice illustration of the data formats so I'll copy &
 paste them here for reference:
-
-Order of Headers and op codes:
-<pre class="brush:plain;">
-                                                  2 bytes
-    ----------------------------------------------------------
-   |  Local Medium  |  Internet  |  Datagram  |  TFTP Opcode  |
-    ----------------------------------------------------------
-          opcode  operation
-          -----   ---------
-            1     Read request (RRQ)
-            2     Write request (WRQ)
-            3     Data (DATA)
-            4     Acknowledgment (ACK)
-            5     Error (ERROR)
-</pre>
 
 TFTP data packet formats:
 <pre class="brush:plain;">
@@ -92,6 +75,17 @@ TFTP data packet formats:
           ----------------------------------------
 </pre>
 
+OP codes:
+<pre class="brush:plain;">
+opcode  operation
+-----   ---------
+  1     Read request (RRQ)
+  2     Write request (WRQ)
+  3     Data (DATA)
+  4     Acknowledgment (ACK)
+  5     Error (ERROR)
+</pre>
+
 Error codes:
 <pre class="brush:plain;">
 Value     Meaning
@@ -106,6 +100,13 @@ Value     Meaning
 7         No such user.
 </pre>
 
+Additionally, server always listens to a pre-known port (known as **transfer
+identifier**) to begin with. In its first returning data packet, it can
+change this to a different port by setting the `Source Port`, and
+client will then only accept packets bearing this port number.
+
+However, client has not such default. Since client is to initialize
+the contact, it's free to tell the server which port it uses.
 UDP header format:
 <pre class="brush:plain;">
     0                   1                   2                   3
@@ -119,12 +120,18 @@ UDP header format:
 
 where the values of fields are:
 
-+ **Source Port**: Picked by originator of packet.
-+ **Dest. Port**: Picked by destination machine (69 for RRQ or WRQ).
-+ **Length**: Number of bytes in UDP packet, including UDP header.
-+ **Checksum**: Reference 2 describes rules for computing checksum.  (The
++ `Source Port`: Picked by originator of packet.
++ `Dest. Port`: Picked by destination machine (69 for RRQ or WRQ).
++ `Length`: Number of bytes in UDP packet, including UDP header.
++ `Checksum`: Reference 2 describes rules for computing checksum.  (The
   implementor of this should be sure that the correct algorithm is used
   here.)  Field contains zero if unused.
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/tftp%20sequence.png" />
+    <figcaption>TFTP sequence diagram</figcaption>
+</figure>
 
 
 # Preboote Execution Environment (PXE)
@@ -154,6 +161,7 @@ services to make a PXE working:
    registry_ or something like that. There can be more than one Boot
    services co-existed. It is up to the client to choose.
 
+    <pre class="brush:plain;">
         Type   Architecture Name
         ----   -----------------
         0    Intel x86PC
@@ -166,6 +174,7 @@ services to make a PXE working:
         7    EFI BC
         8    EFI Xscale
         9    EFI x86-64
+    </pre>
 
 3. **TFTP service**: The actual server that will serve the NBP file for
    client to download.

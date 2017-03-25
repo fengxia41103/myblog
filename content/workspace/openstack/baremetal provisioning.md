@@ -26,6 +26,17 @@ the finest details. So let's take a look what we get.
 
 # BOOTP
 
+This is an earlier IETF-defined booting protocol that is much less
+flexible than DHCP. However, DHCP has been defined to be
+upwardly compatible with BOOTP and both these protocols can coexist
+and function simultaneously in the same network. 
+BOOTP is about "address determination and bootfile selection".
+From its [spec][5], we can derive a sequence diagram shown below:
+
+[5]: https://tools.ietf.org/html/rfc951
+
+
+
 # NBP
 Acronym for Network Bootstrap Program. The remote boot image
 downloaded by the PXE client via TFTP or MTFTP.

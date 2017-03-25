@@ -1,0 +1,67 @@
+@startuml
+
+participant client
+participant server
+
+== BOOTREQUEST ==
+client -> server: BOOTREQUEST packet
+note right
+     op code = 1, BOOTREQUEST
+     htype = hardware address type
+     xid = random transaction ID
+     ciaddr = my IP, 0.0.0.0 if unknown
+     chaddr = harware address
+     source address = IP (if known)
+     sname = name of the server (optional)
+     file = filename to boot, left null means "give me the default file"
+
+     UDP header:
+         source port = BOOTP client port (68)
+         destination port = BOOTP server port (67)
+
+     if client doesn't know his own IP,
+     packet is sent to 255.255.255.255 as broadcast
+
+end note
+
+== BOOTREPLY ==
+server -> client: BOOTREPLY packet
+note right
+     op code = 2, BOOTREPLY
+     xid = same as BOOTREQUEST's
+     yiaddr = client's IP set by server if was 0
+     siaddr = server's IP
+
+     UDP header:
+         destination port = client's (68) if ciaddr is set;\n
+                            server's (67) if giaddr is set
+
+     If client didn't know its own address,
+     server will look up MAC in his database
+     using (chaddr, hlen, htype)
+     and reply client his IP in yiaddr field.
+     If lookup returns null also,
+     REPLY will be broadcasted.
+
+     If client asks for a specific filename
+     and server fails to locate it, packet
+     will be ignored.
+
+     if giaddr is set, REPLY will be sent to gateway address.
+end note
+
+== REPLY reception ==
+client -> client: ready to contact TFTP
+note right
+     yiaddr = my IP
+     file = boot file full path
+     siaddr = TFTP server address
+
+     The client should discard incoming packets that:
+     1. are not IP/UDPs addressed to the boot port;
+     2. are not BOOTREPLYs;
+     3. do not match my IP address (if I know it) or my hardware address;
+     4. do not match my transaction id.
+end note
+
+@enduml

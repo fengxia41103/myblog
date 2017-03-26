@@ -118,8 +118,10 @@
     <footer>
       {# block of related contents #}
       <div class="container">
+        <div class="row">
         {% block related %}
-        {% endblock %}
+          {% endblock %}
+        </div>
       </div>
 
       <div class="container">
@@ -290,6 +292,11 @@
             src="/theme/js/d3plus.full.min.js">
     </script>
 
+    {# TOC https://github.com/ndabas/toc #}
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
     {# application js #}
     <script type="text/javascript">
      var j$ = jQuery.noConflict();
@@ -317,6 +324,10 @@
        // tooltips
        j$('[data-toggle="tooltip"]').tooltip();
 
+       // table of contents
+       j$("#toc").toc({
+         content:"div#article-content"
+       });
      });
     </script>
     {% endblock %} <!-- end of block JS -->

@@ -33,7 +33,7 @@ note right
      siaddr = server's IP
 
      UDP header:
-         destination port = client's (68) if ciaddr is set;\n
+         destination port = client's (68) if ciaddr is set;
                             server's (67) if giaddr is set
 
      If client didn't know its own address,
@@ -50,7 +50,7 @@ note right
      if giaddr is set, REPLY will be sent to gateway address.
 end note
 
-== REPLY reception ==
+== Client process REPLY ==
 client -> client: ready to contact TFTP
 note right
      yiaddr = my IP

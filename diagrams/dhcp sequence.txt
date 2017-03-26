@@ -1,0 +1,34 @@
+@startuml
+
+participant "client\nport **68**" as client
+participant "server\nport **67**" as server
+
+== Start ==
+client -> server: DHCPDISCOVER
+server -> client: DHCPOFFER
+note right
+     Those servers that can provide
+     the service will respond
+end note
+client -> server: DHCPREQUEST
+note right
+     Client selects one offer and makes a request
+end note
+server -> client: DHCPACK
+
+== Resume lease ==
+client -> server: DHCPREQUEST
+note right
+     When 50% of the lease
+     period is expired, client asks
+     for a renewal.
+end note
+server -> client: DHCPACK
+note right
+     If ACK received, reset timer.
+     If NAK, go back to intializing state.
+end note
+
+== Release ==
+client -> server: DHCPRELEASE
+@enduml

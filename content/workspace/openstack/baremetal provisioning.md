@@ -20,28 +20,85 @@ to physically access to it to insert that OS disk &mdash; in a
 data center setting, I think the walking part is neither fun nor
 desired. Remote provisioning is, therefore, the way to go. 
 
-So how does it work? Of course, there is no magic but engineering to
-the finest details. So let's take a look what we get.
+First, let's define **provisioning**. Here we mean
+to have installed an operating system or hypervisor on a baremetal so
+it is available for further software installation.
+In the simplest term, one needs to answer these three questions:
 
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/baremetal%20provisioning%20intro.png" />
+    <figcaption>Minimal setup for baremetal provisioning</figcaption>
+</figure>
 
-# BOOTP
+1. **What is my address?**. If using BOOTP, the address will be static;
+   if using DHCP, it can be either static or dynamic.
+2. **Which boot file to use?**. Also referred as **Network Bootstrap
+   Program (NBP)**. This is controlled by a boot service. BOOTP can
+   provide this service, so is DHCP. This can be as simple as a static
+   list mapping client's architecture to a file. But it can also be a
+   very specific so a client can get a completely customized file.
+   Also, the file must be in some pre-determined format based on
+   client's architecture so the client knows how to execute it.
+3. **How to download the file?**. This is handled by TFTP protocol.
 
-This is an earlier IETF-defined booting protocol that is much less
-flexible than DHCP. However, DHCP has been defined to be
-upwardly compatible with BOOTP and both these protocols can coexist
-and function simultaneously in the same network. 
-BOOTP is about "address determination and bootfile selection".
+Boot file is often pretty minimal.  Once the file
+is downloaded and loaded in memory, baremetal's firmware will start
+its execution, which can then take over the machine and possibly pull
+down another image, such as the actual OS image, and then hand over
+the execution to OS's bootloader.
+
+# BOOTP, DHCP &mdash; address and boot file list
+
+When a client is connected, it needs an address. Two services are
+created for this task &mdash; BOOTP and DHCP. In addition, both will
+boot service by telling the client which boot file to use.
+
+BOOTP is an earlier IETF-defined booting protocol that is much less
+flexible than DHCP. However, DHCP has been defined to be upwardly
+compatible with BOOTP and both these protocols can coexist and
+function simultaneously in the same network.  BOOTP is about "<font
+color="blue">address determination and bootfile selection</font>".
 From its [spec][5], we can derive a sequence diagram shown below:
 
 [5]: https://tools.ietf.org/html/rfc951
 
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/bootp%20sequence.png" />
+    <figcaption>BOOTP sequence diagram</figcaption>
+</figure>
+
+One major characteristic of BOOT is that it is **static**, meaning
+when server looks the client information, such as its IP address, it
+is using a **static** table (the _database_ referred in the diagram
+above is actually a plain text file). Therefore, everytime client asks
+for its information, it will get the same result. Below shows the
+format of a BOOTP data packet. This same format in both directions.
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/bootp%20packet%20format.png" />
+    <figcaption>BOOTP data packet</figcaption>
+</figure>
+
+DHCP's data packet is nearly identical to BOOTP's for compatibility
+reason. Same ports (67 on the server side & 68 on the client side) are
+used. Below shows a simplified DHCP cycles ([source][6]):
+[6]: http://facweb.cs.depaul.edu/cwhite/TDC%20365/BOOTP%20and%20DHCP.ppt
+
+<figure class="row">
+    <img class="img-responsive center-block"
+    src="/images/dhcp%20sequence.png" />
+    <figcaption>Simplified DHCP sequence diagram</figcaption>
+</figure>
 
 
-# NBP
-Acronym for Network Bootstrap Program. The remote boot image
-downloaded by the PXE client via TFTP or MTFTP.
+# TFTP &mdash; download boot file 
 
-# TFTP 
+At this point, client has acquired an address and knows
+which file to download. Next, it needs to contact a _file server_
+to get the file. Here comes TFTP.
 
 [TFTP][4] is a very simple protocol used to transfer files.  It is
 from this that its name comes, Trivial File Transfer Protocol or
@@ -147,7 +204,9 @@ where the values of fields are:
 
 # Preboote Execution Environment (PXE)
 
-Being such a core technology used widely in baremetal provisioning,
+Once we put BOOTP/DHCP and TFTP together, we will have an environment
+suitable for client to select PXE boot.  Being such a core technology
+used widely in baremetal provisioning,
 the [Preboot Execution Environment (PXE) Specification Version 2.1][1]
 should be the first document to read. Honestly I'm amazed how well it
 was written, thought through, clearly defined, and neatly illustrated,
@@ -170,7 +229,8 @@ services to make a PXE working:
    PXE [Client System Architecture Type Option Definition][3], values below) and NBP
    file names. So in modern term, it would have been called _NBP
    registry_ or something like that. There can be more than one Boot
-   services co-existed. It is up to the client to choose.
+   services co-existed. It is up to the client to choose. According to
+   the [spec][1], PXE 2.1 supports the following client architectures:
 
     <pre class="brush:plain;">
         Type   Architecture Name

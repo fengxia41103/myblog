@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% for article in articles_page.object_list %}
-<div class="row page-header" style="margin-top:2em;margin-bottom:2em;">
-    <div class="col-md-2 col-sm-2">
+<div class="row page-header">
+    <div class="col s12">
         <div class="label label-default">
             <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
             {{ article.date|strftime('%Y-%m-%d') }}
         </div>
     </div>
-    <div class="col-md-7 col-sm-7">
+    <div class="col s12">
         <h4>
             {{ article.title }}
         </h4>
@@ -23,11 +23,12 @@
             </p>
         </div>
     </div>
-    <div class="col-md-3 col-sm-3">
-        <a class="btn button pull-right" href="{{SITEURL}}/{{article.url}}">
+    <div class="right-align">
+        <a class="btn wave-effect" href="{{SITEURL}}/{{article.url}}">
             read more
         </a>
     </div>
+    <div class="divider"></div>
 </div>
 {% endfor %}
 

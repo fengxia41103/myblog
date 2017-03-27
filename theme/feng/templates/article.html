@@ -2,12 +2,12 @@
 
 {% block content %}
 <div style="background-color: #fefefe;">
-  <article class="container center-block" style="padding:2em 0;">
+  <article class="container" style="padding-top:1em;">
     {% block main_content %}
     <div class="page-header row">
 
       {# article title #}
-      <div class="col-md-9 col-sm-9">
+      <div class="col s12">
         {# article date #}
         <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
         {{ article.date|strftime('%Y-%m-%d') }}
@@ -24,37 +24,30 @@
         {% endfor %}
         {% endif %}
 
-        {# article title #}
-        <h1 class="myhighlight">{{ article.title }}</h1>
-      </div>
-
-      {# tags & categories #}
-      <div class="col-md-3 text-right">
-        <ul class="list-inline">
+        {# tags & categories #}
           {# article category #}
           {% if article.category %}
-          <li>
-            <a class="btn btn-default" href="{{article.category.url}}">
+            <a class="wave-effect" href="{{article.category.url}}">
               <i class="fa fa-folder-open-o"></i>
               {{ article.category.name }}
             </a>
-          </li>
           {% endif %}
 
           {# tags #}
           {% if article.tags %}
           {% for t in article.tags %}
-          <li>
-            <a class="btn btn-default" href="{{ t.url }}">
+            <a class="wave-effect" href="{{ t.url }}">
               <i class="fa fa-tag"></i>
               {{ t.name }}
             </a>
-          </li>
           {% endfor %}
           {% endif %}
 
-        </ul>
+        {# article title #}
+        <h1 class="myhighlight">{{ article.title }}</h1>
       </div>
+
+
     </div>
 
     {# table of contents #}
@@ -103,40 +96,41 @@
   {% endblock %}
 
   {% block related %}
-  <h1 style="color:#adadad;">Related: </h1>
-
+  <h2>Related:</h2>
+  <div class="row" style="max-height:200px;">
   {% for cat,articles in categories %}
   {% if cat == category %}
   {% for a in articles %}
-  {% if article != a and loop.index < 6 %}
+    {% if article != a and loop.index < 4 %}
+    <div class="col s6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <div>
+            <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+            {{ a.date|strftime('%Y-%m-%d') }}
+          </div>
 
-  <div class="page-header" style="margin-top:2em;margin-bottom:2em;">
-    <div class="col-md-2 col-sm-2">
-      <div class="label label-default">
-        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-        {{ a.date|strftime('%Y-%m-%d') }}
+          <h5 class="card-title">
+            {{ a.title }}
+          </h5>
+
+          <p>
+            {{ a.summary | truncate }}
+          </p>
+
+          <div class="card-action">
+            <a class="flabel wave-effect"
+               href="{{SITEURL}}/{{a.url}}">
+              read more
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-7 col-sm-7">
-      <h4>
-        {{ a.title }}
-      </h4>
-
-      <div style="color:#adadad;">
-        <p>
-          {{ a.summary }}
-        </p>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-3">
-      <a class="btn button pull-right" href="{{SITEURL}}/{{a.url}}">
-        read more
-      </a>
-    </div>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
   </div>
-  {% endif %}
-  {% endfor %}
-  {% endif %}
-  {% endfor %}
 
   {% endblock %}

@@ -2,42 +2,43 @@
 
 {% block introduction %}
 {% if not articles_page.has_previous() %}
-<div class="myheader">
-    <div class="row">
-        <article class="col-md-offset-1 col-md-5" style="padding: 2em;">
-            <h2>Building Prototype</h2>
+<div class="row white-text">
+  <article class="col m8 s9">
+    <h2>Building Prototype</h2>
 
-            <p>
-                I build prototypes. My mission is to lower the barrier for entrepreneurs to translate their idea into web application.
-            </p>
+    <p>
+      I build prototypes. My mission is to lower the barrier for
+      entrepreneurs to translate their idea into web application.
+    </p>
 
-            <p>
-                Here I present some samples of my works and projects. Dig in and look around. If you'd like to convert your idea into a real web application, I'm here to help.
-            </p>
+    <p>
+      Here I present some samples of my works and projects. Dig in and
+      look around. If you'd like to convert your idea into a real web
+      application, I'm here to help.
+    </p>
 
-            <p class="flabel">
-              Showcase:
-              <a href="{{SITEURL}}/project gkp demo.html" style="color:white;">Demo-GKP</a>
-            </p>
-            <p class="flabel">
-              Showcase:
-              <a href="{{SITEURL}}/project fashion demo.html" style="color:white;">Demo-Fashion</a>
-            </p>
-            <p class="flabel">
-              Showcase:
-              <a href="{{SITEURL}}/project stock demo.html" style="color:white;">Demo-Stock</a>
-            </p>
-            <p class="flabel">
-              Showcase:
-              <a href="{{SITEURL}}/car leasing.html" style="color:white;">Demo-SPA (Angular & REACT)</a>
-            </p>
-            <p class="flabel">
-              Showcase:
-              <a href="{{SITEURL}}/data visualization.html" style="color:white;">Demo-Data visualization</a>
-            </p>
-        </article>
-    </div>
-
+    <p class="flabel">
+      Showcase:
+      <a href="{{SITEURL}}/project gkp demo.html" style="color:white;">Demo-GKP</a>
+    </p>
+    <p class="flabel">
+      Showcase:
+      <a href="{{SITEURL}}/project fashion demo.html" style="color:white;">Demo-Fashion</a>
+    </p>
+    <p class="flabel">
+      Showcase:
+      <a href="{{SITEURL}}/project stock demo.html" style="color:white;">Demo-Stock</a>
+    </p>
+    <p class="flabel">
+      Showcase:
+      <a href="{{SITEURL}}/car leasing.html" style="color:white;">Demo-SPA (Angular & REACT)</a>
+    </p>
+    <p class="flabel">
+      Showcase:
+      <a href="{{SITEURL}}/data visualization.html" style="color:white;">Demo-Data visualization</a>
+    </p>
+  </article>
+  <div class="col s6"></div>
 </div>
 {% endif %}
 
@@ -45,32 +46,30 @@
 
 {% block content %}
 <div class="container center-block">
-{% include 'pagination.html' %}
+  {% include 'pagination.html' %}
 
-<div class="page-header">
-    {% for article in articles_page.object_list %}
-    <div class="row">
+  {% for article in articles_page.object_list %}
+  <div class="row">
     <div class="pin-card">
-        <i class="fa fa-calendar" style="opacity:0.5;"></i>
-        <em>
-            {{ article.date|strftime('%Y-%m-%d')}}
-        </em>
-        <h3>{{ article.title }}</h3>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        {{ article.date|strftime('%Y-%m-%d')}}
+      </em>
+      <h3>{{ article.title }}</h3>
 
-        <p>
-            {{ article.summary|truncate(600) }}
-        </p>
-        <div style="margin-top: 10px;">
-            <a class="btn btn-default button" href="{{ article.url }}">
-                <i class="fa fa-coffee" style="opacity:0.5;"></i> continue reading
-            </a>
-        </div>
+      <p>
+        {{ article.summary|truncate(600) }}
+      </p>
+      <div style="margin-top: 10px;">
+        <a class="btn btn-default button" href="{{ article.url }}">
+          <i class="fa fa-coffee" style="opacity:0.5;"></i> continue reading
+        </a>
+      </div>
     </div>
-    </div>
-    {% endfor %}
-</div>
+  </div>
+  {% endfor %}
 
-{% include 'pagination.html' %}
+  {% include 'pagination.html' %}
 </div>
 
 {% endblock %}

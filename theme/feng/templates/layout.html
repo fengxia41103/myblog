@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="/theme/bower_components/tether/dist/css/tether.min.css">
 
     {# Bootstrap #}
-    <link rel="stylesheet" href="/theme/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/theme/bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
 
     {# Syntaxhighlighter #}
     <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
@@ -45,6 +45,9 @@
 
     {# google fonts #}
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko" rel="stylesheet">
+
+    {# material css #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
 
     {# JQuery lib #}
     <script type="text/javascript" src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
@@ -69,33 +72,32 @@
 
     {% block main %}
     <div id="wrap" style="background-color:#eee;">
-      <div class="container center-block">
-	<div class="row page-header">
-          <div class="col-md-6 col-sm-6">
-	    <h1 class="my-banner">
+      <header class="page-header">
+        <div class="container">
+          <div class="row">
+	    <h1 class="my-banner col s12">
               <a href="{{SITEURL}}/">{{ SITENAME }}</a>
 	    </h1>
           </div>
-          <div class="col-md-6 col-sm-6">
-            <ul class="list-inline pull-right" style="padding-top:100px;">
-              <li>
-                <a class="label label-default" href="{{SITEURL}}/">Home</a>
-              </li>
 
+          {# front page intro section #}
+          {% block introduction %}
+          {% endblock %}
+
+          {# static pages #}
+          <div class="row">
+            <div class="col s12">
+              <a class="white-text" href="{{SITEURL}}/">Home</a>
 	      {% for p in PAGES %}
-	      <li>
-                <a class="label label-default" href="{{SITEURL}}/{{ p.url }}">
-                  {{ p.title }}
-                </a>
-              </li>
+              <a class="white-text" href="{{SITEURL}}/{{ p.url }}">
+                . {{ p.title }}
+              </a>
 	      {% endfor %}
-            </ul>
+            </div>
           </div>
-	</div><!-- end of block header -->
-      </div>
 
-      {% block introduction %}
-      {% endblock %}
+        </div>
+      </header><!-- end of block header -->
 
       <div id="content">
         {# main content #}
@@ -105,6 +107,15 @@
         {# pagination #}
         {% block pagination %}
         {% endblock %}
+
+        {# block of related contents #}
+        <div class="container">
+          <div class="row">
+            {% block related %}
+            {% endblock %}
+          </div>
+        </div>
+
       </div><!-- /.container -->
 
       {# block push #}
@@ -115,78 +126,55 @@
 
 
     {% block footer %}
-    <footer>
-      {# block of related contents #}
-      <div class="container">
-        <div class="row">
-        {% block related %}
-          {% endblock %}
-        </div>
-      </div>
-
+    <footer class="page-footer">
       <div class="container">
 	<div class="row">
           <h3>Categories:</h3>
-          <ul class="list-inline">
-            {% for c,article in categories %}
-            <li style="margin-top:0.7em;">
-              <a href="{{SITEURL}}/{{c.url}}" class="btn btn-default">
-                <i class="fa fa-folder-open-o"></i>
-                {{ c }}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
+          {% for c,article in categories %}
+          <a href="{{SITEURL}}/{{c.url}}" class="white-text">
+            <i class="fa fa-folder-open-o"></i>
+            {{ c }}
+          </a>
+          {% endfor %}
+
           <h3>Tags:</h3>
-          <ul class="list-inline">
-            {% for c,article in tags %}
-            <li style="margin-top:0.7em;">
-              <a href="{{SITEURL}}/{{c.url}}" class="btn mytag">
-                <i class="fa fa-tag"></i>
-                {{ c }}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
+          {% for c,article in tags %}
+          <a href="{{SITEURL}}/{{c.url}}" class="white-text">
+            <i class="fa fa-tag"></i>
+            {{ c }}
+          </a>
+          {% endfor %}
 	</div>
-      </div>
 
-
-
-      <div style="text-align:center; margin-top:3em;padding-top:2em;border-top:1px solid #cfcfcf;">
-        <h4>
+        <div class="row divider"></div>
+        <div class="row center-align">
+          <p>
           2017 PY Consulting Ltd.
-          1236 Beacon Street, Brookline, MA 02146
-        </h4>
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
 
-        <ul class="list-inline">
-          <li>
+          <p>
             <a href="mailto:{{EMAIL_ADDRESS}}">
               <i class="fa fa-envelope"></i>
             </a>
-          </li>
 
-          <li>
             <a href="{{GITHUB_ADDRESS}}">
               <i class="fa fa-github"></i>
             </a>
-          </li>
-          <li>
+
             <a href="{{LINKEDIN_ADDRESS}}">
               <i class="fa fa-linkedin"></i>
             </a>
-          </li>
-          <li>
+
             <a href="">
               <i class="fa fa-phone-square"></i>
               (508)801-1794
             </a>
-          </li>
-
-        </ul>
-        <p>
-          <i class="fa fa-copyright" ></i>All rights reserved.
-        </p>
+          </p>
+            <p>
+            <i class="fa fa-copyright" ></i>All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
     {% endblock %}<!- end of block footer -->
@@ -204,10 +192,14 @@
             src="/theme/bower_components/tether/dist/js/tether.min.js">
     </script>
 
-    {# bootstrap #}
-    <script
-        src="/theme/bower_components/bootstrap/dist/js/bootstrap.min.js">
-    </script>
+    <!-- {# bootstrap #}
+         <script
+         src="/theme/bower_components/bootstrap/dist/js/bootstrap.min.js">
+         </script> -->
+
+    {# material css #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+
 
     {# DataTable #}
     <script type="text/javascript"

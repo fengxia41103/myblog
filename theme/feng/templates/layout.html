@@ -109,13 +109,8 @@
         {% endblock %}
 
         {# block of related contents #}
-        <div class="container">
-          <div class="row">
-            {% block related %}
-            {% endblock %}
-          </div>
-        </div>
-
+        {% block related %}
+        {% endblock %}
       </div><!-- /.container -->
 
       {# block push #}
@@ -126,10 +121,10 @@
 
 
     {% block footer %}
-    <footer class="page-footer">
+    <footer class="page-footer white-text">
       <div class="container">
 	<div class="row">
-          <h3>Categories:</h3>
+          <h5>Categories:</h5>
           {% for c,article in categories %}
           <a href="{{SITEURL}}/{{c.url}}" class="white-text">
             <i class="fa fa-folder-open-o"></i>
@@ -137,7 +132,7 @@
           </a>
           {% endfor %}
 
-          <h3>Tags:</h3>
+          <h5>Tags:</h5>
           {% for c,article in tags %}
           <a href="{{SITEURL}}/{{c.url}}" class="white-text">
             <i class="fa fa-tag"></i>

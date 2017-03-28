@@ -16,7 +16,7 @@ Status: Draft
    render: function(){
      var divStyle = {
        backgroundColor: "#337ab7",
-       padding: "0em 1em 1em 1em",
+       padding: "1em",
        color: "#efefef",
        marginBottom:"1em"
      };
@@ -31,7 +31,8 @@ Status: Draft
        <div className="row" style={divStyle}>
          <h4 className="page-header">Summary</h4>
          <div className="divider"></div>
-         <div className="my-multicol-2">
+         <br />
+         <div className="row">
            {summaryNodes}
          </div>
        </div>
@@ -48,7 +49,7 @@ Status: Draft
                 <span style={{"marginLeft": "0.3em"}}>{this.props.unit}</span>:"";
 
      return (
-       <div className="">
+       <div className="col s6">
          <span className="col s6">
            {this.props.label}
          </span>

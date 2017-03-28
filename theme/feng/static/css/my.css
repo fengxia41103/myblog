@@ -170,9 +170,7 @@ h6 {
     border: 1px solid #efefef;
     margin: 10px 0;
     display: inline-block;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
-    padding: 3em 2em;
-    font-size: 12pt;
+    padding: 4.75em 5em;
 }
 
 .pin-card h3 {

@@ -33,9 +33,6 @@
     {# tether #}
     <link rel="stylesheet" type="text/css" href="/theme/bower_components/tether/dist/css/tether.min.css">
 
-    {# Bootstrap #}
-    <!-- <link rel="stylesheet" href="/theme/bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
-
     {# Syntaxhighlighter #}
     <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
     <link rel="stylesheet" href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
@@ -322,6 +319,10 @@
        j$("#toc").toc({
          content:"div#article-content"
        });
+
+       // This is needed to deal with browser-default
+       // that is used in Material css. How stupid.
+       j$("ul").addClass("browser-default");
      });
     </script>
     {% endblock %} <!-- end of block JS -->

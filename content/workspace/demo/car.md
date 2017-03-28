@@ -105,7 +105,7 @@ now after reading the diagram above. Now by looking at this,
 I'm wondering maybe I should have built using this format. It is
 more form-like than a SPA so this can be easier for user to follow:
 
-<table class="table table-responsive">
+<table class="bordered">
   <tbody><tr>
     <td>1. Sticker Price of the car + options</td>
     <td>$23,000</td>

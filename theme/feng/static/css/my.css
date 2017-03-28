@@ -17,12 +17,6 @@ h6 {
     font-size: 1.3em;
 }
 
-.my-header {
-    padding: 40px;
-    font-size: 1.2em;
-    color: #eee;
-}
-
 .my-banner {
     font-size: 5em;
     font-weight: bold;
@@ -246,7 +240,7 @@ article p {
 
 header {
     background: url("/theme/images/background-1684.jpg") no-repeat;
-    /* min-height: 700px; */
+    min-height: 100vh;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

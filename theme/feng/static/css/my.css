@@ -166,13 +166,13 @@ h6 {
 
 .pin-card {
     width: 100%;
-    background-color: #fefefe;
+    background-color: #eee;
     border-radius: 5px;
     border: 1px solid #efefef;
     margin: 10px 0;
     display: inline-block;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
-    padding: 5.75em 4.75em;
+    padding: 3em 2em;
     font-size: 12pt;
 }
 

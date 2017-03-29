@@ -74,6 +74,13 @@
 
 {% endblock %}
 
-{% block push %}
-<div id="push"></div>
+{% block custom_js %}
+{# application js #}
+<script type="text/javascript">
+ var j$ = jQuery.noConflict();
+
+ j$(document).ready(function(){
+   j$("header").css("min-height","100vh");
+ });
+</script>
 {% endblock %}

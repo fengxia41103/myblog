@@ -9,3 +9,21 @@
 </resume>
 </div>
 {% endblock %}
+
+{% block custom_js %}
+{# application js #}
+<script type="text/javascript">
+ var j$ = jQuery.noConflict();
+
+ j$(document).ready(function(){
+   // table of contents
+   j$("#toc").toc({
+     content:"div#article-content"
+   });
+
+   // This is needed to deal with browser-default
+   // that is used in Material css. How stupid.
+   j$("ul").addClass("browser-default");
+ });
+</script>
+{% endblock %}

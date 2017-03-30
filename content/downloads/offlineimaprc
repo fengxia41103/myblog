@@ -1,0 +1,59 @@
+[general]
+accounts = Gmail, Hotmail
+maxsyncaccounts = 3
+
+[Account Gmail]
+localrepository = LocalGmail
+remoterepository = RemoteGmail
+
+[Repository LocalGmail]
+type = Maildir
+localfolders = ~/Maildir/Gmail
+
+folderfilter = lambda foldername: foldername not in ['queue']
+nametrans = lambda folder: re.sub('drafts', '[Gmail].Drafts',
+                           re.sub('sent', '[Gmail].Sent Mail',
+                           re.sub('trash', '[Gmail].Trash', folder)))
+
+[Repository RemoteGmail]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = xxx@gmail.com
+remotepass = xxx
+maxconnections = 5
+realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+folderfilter = lambda foldername: foldername not in ['[Gmail]/Spam','[Gmail]/Starred','[Gmail]/All Mail',
+                                                     'aliquote','StackExchange','genim','ciep','cnrs','ovh','job-ads']
+# nametrans = lambda foldername: foldername.replace("[Gmail]/","")
+nametrans = lambda folder: re.sub('.*Drafts$', 'drafts',
+                           re.sub('.*Sent Mail$', 'sent',
+                           re.sub('.*Trash$', 'trash', folder)))
+
+[Account Hotmail]
+localrepository = LocalHotmail
+remoterepository = RemoteHotmail
+
+[Repository LocalHotmail]
+type = Maildir
+localfolders = ~/Maildir/Hotmail
+
+folderfilter = lambda foldername: foldername not in ['queue']
+nametrans = lambda folder: re.sub('drafts', '[Hotmail].Drafts',
+                           re.sub('sent', '[Hotmail].Sent Mail',
+                           re.sub('trash', '[Hotmail].Trash', folder)))
+
+[Repository RemoteHotmail]
+type = IMAP
+remotehost = imap-mail.outlook.com
+remoteuser = xxx@hotmail.com
+remotepass = xxx
+maxconnections = 5
+realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+folderfilter = lambda foldername: foldername not in ['[Hotmail]/Spam','[Hotmail]/Starred','[Hotmail]/All Mail',
+                                                     'aliquote','StackExchange','genim','ciep','cnrs','ovh','job-ads']
+# nametrans = lambda foldername: foldername.replace("[Hotmail]/","")
+nametrans = lambda folder: re.sub('.*Drafts$', 'drafts',
+                           re.sub('.*Sent Mail$', 'sent',
+                           re.sub('.*Trash$', 'trash', folder)))

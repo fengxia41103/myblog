@@ -447,7 +447,7 @@ more network interfaces. The three Option ROMs are:
    the Base-Code and UNDI ROMs, BUSD’s call mechanism must be added to
    the BIOS.
 
-### Time to boot
+## Time to boot
 
 Now with all the basics out of the way, let's power on
 the computer! Page 77 in
@@ -460,11 +460,4 @@ from BIOS to a PXE:
     <figcaption>PXE IPL (from power on to PXE)</figcaption>
 </figure>
 
-# General bootstrap process & Linux two-stage loading
-
-
-# UEFI
-# Ramdisk
-# initrd vs. initramfs
-# Evolution
 

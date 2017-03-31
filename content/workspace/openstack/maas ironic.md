@@ -56,6 +56,7 @@ the APIs as reference to analyze different capabilities each tool
 offers for a caller function. We'll artificially group these functions
 into the following subject domains for discussion purpose:
 
++ minimal setup
 * power
 * select boot order
 * new server discovery and enlisting
@@ -63,18 +64,23 @@ into the following subject domains for discussion purpose:
 * image
 * OS provisioning
 * networking
-    * interface
-    * subnet
-    * vlan
-    * grouping
 + storage and partition
-+ placement
-+ customization
-    * commissioning scripts pre and post
-    * kernel option
-    * cloud init, cloud config
++ deployment customization
++ server grouping
 + multi-tenant
-+ barebone setup
+
+# Minimal setup
+
+<figure class="col s12">
+    <img class="img-responsive center-block"
+    src="/images/maas%20minimum%20setup.png" />
+    <figcaption>MAAS minimal setup</figcaption>
+</figure>
+<figure class="col s12">
+    <img class="img-responsive center-block"
+    src="/images/ironic%20minimal%20setup.png" />
+    <figcaption>Ironic minimal setup</figcaption>
+</figure>
 
 # Power
 
@@ -125,8 +131,13 @@ where Ironic's are more general purposed.
 
 # Boot order
 
-Except the MAAS's Microsoft OCS driver, there is no support to select
-or change  boot order even among those IPMI drivers.
+Except Microsoft OCS driver, MAAS has no support to select
+or change  boot order, even in its IPMI-based drivers.
+
+Ironic, however, supports selecting [boot device][19] using
+`*_ipmitool` drivers.
+
+[19]: https://developer.openstack.org/api-ref/baremetal/?expanded=update-node-detail,set-boot-device-detail,inject-nmi-non-masking-interrupts-detail#set-boot-device
 
 # New server discovery and enlisting
 
@@ -151,16 +162,38 @@ handles this in a separate step, **Commission**, after
 discovery, where this is optional in Ironic.
 
 MAAS does so by loading a minimal Ubuntu image at next boot (must be
-PXE booting) and the image will then load some tools for hardware
-discovery.
+PXE booting) and run commissioning scripts to harvest
+system information:
+
+1. DHCP server is contacted
+2. kernel and initrd are received over TFTP
+3. machine boots
+4. initrd mounts a Squashfs image ephemerally over iSCSI
+5. cloud-init runs commissioning scripts
+6. machine shuts down
+
 
 Ironic, on the other hand, relies on a separate
-setup, [Ironic Inspector][8] to orchestrate this process. The
+setup, [Ironic Inspector][8] to orchestrate this process (see [steps][19] below). The
 principle is the same that Inspector will acquire credentials to
 manage the node power from Ironic, then using that to PXE rebooting
 the node and load a ramdisk. The difference is, however, that ramdisk
 is not limited to Ubuntu.
 [8]:https://docs.openstack.org/developer/ironic-inspector/
+[19]: https://docs.openstack.org/developer/ironic-inspector/workflow.html#state-machine-diagram
+
+1. Operator sends nodes on introspection using ironic-inspector API or CLI
+2. On receiving node UUID ironic-inspector:
+    * validates node power credentials, current power and provisioning states,
+    * allows firewall access to PXE boot service for the nodes,
+    * issues reboot command for the nodes, so that they boot the ramdisk.
+    * The ramdisk collects the required information and posts it back to ironic-inspector.
+3. On receiving data from the ramdisk, ironic-inspector:
+    * validates received data,
+    * finds the node in Ironic database using it’s BMC address (MAC address in case of SSH driver),
+    * fills missing node properties with received data and creates
+      missing ports.
+
 
 # Image
 
@@ -201,25 +234,28 @@ maas local boot-resources import
 
 First of all, both support PXE. This is standard and not much to talk
 about. In term of iSCSI, both has implementation, but with different objectives.
-Ironic [code][11] will use the SCSI disk for partition and image
-deployment. MAAS, on the other hand, uses `tgt-admin` for the job, and
-its objective is to **[re-use][12]** an existing root `/`. 
+Ironic conductor([code][11]) will use the SCSI disk to write image data;
+MAAS, on the other hand, uses `tgt-admin` for the job, and
+its objective is to **[re-use][12]** an existing root `/` file system. 
 
 [11]: https://docs.openstack.org/developer/ironic/_modules/ironic/drivers/modules/iscsi_deploy.html
 [12]: https://blueprints.launchpad.net/maas/+spec/t-cloud-maas-diskless
 
-Second, both tools lack the capability to change
+Second, MAAS lack the capability to change
 boot order. Therefore, a provisioned server will be seemed 
 _out of management_ from that point on
-because booting from HD is now the default instead of PXE.
-Both solve this chicken-egg problem by installing a default account
-and SSH credential so they can login the system.
+because booting from HD is now preferred instead of PXE.
+It solves this chicken-egg problem by installing a default account
+and SSH credential so they can continue management. Instead, Ironic
+can use IPMI driver to set boot device so it does not create
+such artificial user account in the system.
 
-Third, Ironic developed an agent-based deployment method that a
-ramdisk with IPA installed will be loaded first. Once the agent is
+Third, Ironic has an agent-based deployment method that a
+ramdisk with [IPA][15] installed will be loaded first. Once the agent is
 running, it can take further commands including partitioning
 (`parted`), mounting remote disk (iSCSI), cleaning disk, and write
 OS image to disk.
+[15]: https://docs.openstack.org/developer/ironic-python-agent/
 
 Fourth, post-seed operation. MAAS API can accept a `Base64` encoded
 `user-data` string used by cloud-init in next boot, where Ironic API
@@ -228,10 +264,19 @@ can accept cloud [configdrive][13] string.
 
 
 # Networking
-    * interface
-    * subnet
-    * vlan
-    * grouping
+
+Ironic does not handle networking. In Openstack, Neutron will be
+providing this service.
+
+MAAS understands `subnet` and `vlan`. Subnets can be further grouped
+into `space` and vlans into `fabric`. It also
+supports [container fan network][14], which Neutron has no support either.
+
+[14]: https://wiki.ubuntu.com/FanNetworking?_ga=1.139973107.197000268.1480367852
+
+Further, MAAS can reserve IP ranges to assign to discovered nodes, CRUD interface on a
+particular node, link an interface to a VLAN, and even create a bridge
+interface on node. None of these Ironic can do or care.
 
 # Storage and partition
 
@@ -244,10 +289,67 @@ MAAS API supports CRUD operations for partitions. According to its
 
 Ironic has **no** API in this regards. By default it will only deploy
 image to full disk. A [spec][10] has been called for to handle
-partition image implemented through IPA.
+partition image implemented through [IPA][15].
 
 [10]: https://specs.openstack.org/openstack/ironic-specs/specs/kilo/partition-image-support-for-agent-driver.html
 
-# Barebone setup
+# Deployment customization
 
+It is certainly possible to provision a customized image (see section
+"Image"). MAAS provides three other entry points to influence the
+result: commissioning scripts, [kernel option][18], and cloud-init
+`user-data`. Commissioning scripts are used to collect server hardware
+information. System is shutdown at the end of the process. Kernel
+options can be either global and per-node based.
  
+[18]: https://docs.ubuntu.com/maas/2.1/en/installconfig-nodes-kernel-boot-options
+
+Ironic API accepts cloud configdrive string. Since it can have an
+agent-based deployment, it is certainly possible to instruct the agent
+to run some commands or scripts. However, there is no method to pass
+in kernel options.
+
+# Server grouping
+
+MAAS has created concept of `zone` and zones can be further grouped
+into `region`. As a matter of fact, MAAS also has a concept of _region
+controller_ which can then manage multiple _rack controller_.
+
+From MAAS [document][16]:
+[16]: https://docs.ubuntu.com/maas/2.1/en/intro-concepts#zones
+> Zone:
+> A physical zone, or just zone, is an organizational unit that contains
+> nodes where each node is in one, and only one, zone. Later, while in
+> production, a node can be taken (allocated) from a specific zone (or
+> not from a specific zone). Since zones, by nature, are custom-designed
+> (with the exception of the 'default' zone), they provide more
+> flexibility than a similar feature offered by a public cloud service
+> (ex: availability zones).
+>
+> Some prime examples of how zones can be put to use include
+> fault-tolerance, service performance, and power management. 
+>
+> A newly installed MAAS comes with a default zone, and unless a new
+> zone is created all nodes get placed within it. You can therefore
+> safely ignore the entire concept if you're not interested in
+> leveraging zones.
+>
+> The 'default' zone cannot be removed and its name cannot be edited.
+
+Ironic provides no similar grouping concept. That level of management
+is left for other service (eg. NOVA) to handle.
+
+# Multi-tenant
+
+MAAS has no capability to manipulate an existing network layout. Its
+concept of fabric and space are artificial groupings only. Therefore,
+it has no say in multi-tenant support. In many cases, baremetal
+servers are put on the same network &mdash; provisioning network &mdash; 
+as the MAAS server because that's how MAAS can discover and enlist
+new servers, thus exposing all tenants to each other. 
+
+Ironic has not concept of multi-tenant either. However, it can
+dynamically _bind_ a port to use, where port is then managed by
+service such as Neutron. This leaves Ironic not suffering from the
+same risk that MAAS setup may have.
+

@@ -187,8 +187,7 @@ displays details of a node.
            "image_tags":[
            ],
            "memory_mb":"1280",
-           "vcpus":"1",
-           "image_url":"http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&temp_url_expires=1488585783",
+           "vcpus":"1",           "image_url":"http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&temp_url_expires=1488585783",
            "image_container_format":"ami",
            "root_mb":10240,
            "swap_mb":0

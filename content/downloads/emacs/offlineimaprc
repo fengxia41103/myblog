@@ -29,6 +29,7 @@ folderfilter = lambda foldername: foldername not in ['[Gmail]/Spam','[Gmail]/Sta
 nametrans = lambda folder: re.sub('.*Drafts$', 'drafts',
                            re.sub('.*Sent Mail$', 'sent',
                            re.sub('.*Trash$', 'trash', folder)))
+auth_mechanisms = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 
 [Account Hotmail]
 localrepository = LocalHotmail
@@ -48,7 +49,7 @@ type = IMAP
 remotehost = imap-mail.outlook.com
 remoteuser = xxx@hotmail.com
 remotepass = xxx
-maxconnections = 5
+maxconnections = 1 # set to 5 will cause too-manage connection error
 realdelete = no
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 folderfilter = lambda foldername: foldername not in ['[Hotmail]/Spam','[Hotmail]/Starred','[Hotmail]/All Mail',
@@ -57,3 +58,4 @@ folderfilter = lambda foldername: foldername not in ['[Hotmail]/Spam','[Hotmail]
 nametrans = lambda folder: re.sub('.*Drafts$', 'drafts',
                            re.sub('.*Sent Mail$', 'sent',
                            re.sub('.*Trash$', 'trash', folder)))
+auth_mechanisms = GSSAPI, CRAM-MD5, PLAIN, LOGIN

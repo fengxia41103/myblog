@@ -141,16 +141,17 @@ displays details of a node.
        + `deploy_ramdisk`: in devstack, it is "ir-deploy-agent_ipmitool.initramfs"
 
     Example payload:
-
-        driver_info = {
-            'ipmi_port': 6230,
-            'ipmi_username': "admin",
-            'deploy_kernel': ir-deploy-agent_ipmitool.kernel UUID,
-            'deploy_ramdisk': ir-deploy-agent_ipmitool.initramfs UUID,
-            'ipmi_address': "10.0.2.15",
-            'ipmi_password': "password"
-        }
-
+    <pre class="brush:plain;">
+    driver_info = {
+        'ipmi_port': 6230,
+        'ipmi_username': "admin",
+        'deploy_kernel': ir-deploy-agent_ipmitool.kernel UUID,
+        'deploy_ramdisk': ir-deploy-agent_ipmitool.initramfs UUID,
+        'ipmi_address': "10.0.2.15",
+        'ipmi_password': "password"
+    }
+    </pre>
+    
 4. `driver_internal_info` (read-only): this field is not accessible
    via API. Used by driver to store internal information.
    + `agent_url`: this is the callback URL to the Ironic Python Agent (IPA)
@@ -159,9 +160,9 @@ displays details of a node.
      calls Ironic's `/v1/heartbeat` endpoint.
 5. `instance_info`: is populated when the node is
    provisioned. However, user can also set this field through API.
-   
-    Example payload:
 
+    Example payload:
+    <pre class="brush:plain;">
         {
            "ramdisk":"1a243f7b-3e96-4140-8408-b82064599cec",
            "kernel":"ef538456-704c-445c-a98b-c081be22ad71",
@@ -192,7 +193,8 @@ displays details of a node.
            "root_mb":10240,
            "swap_mb":0
         }
-   
+    </pre>
+
 6. `properties` (<font color="red">required</font>): Physical
    characteristics of this Node. Populated by ironic-inspector during
    inspection. Can also be set via the REST API at any time. These
@@ -203,13 +205,15 @@ displays details of a node.
 
     Example payload:
 
-        properties = {
-            'cpus': 1,
-            'memory_mb': 1280,
-            'local_gb': 10,
-            'cpu_arch': 'x86_64',
-            'capabilities': 'memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local'
-        }   
+    <pre class="brush:plain;">
+    properties = {
+        'cpus': 1,
+        'memory_mb': 1280,
+        'local_gb': 10,
+        'cpu_arch': 'x86_64',
+        'capabilities': 'memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local'
+    }
+    </pre>
 
 The rest of the fields are self-explanatory so I'll skip them for now.
 
@@ -297,17 +301,19 @@ that Ironic conductor can use for commands.
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
 
-With IPA the DHCP, PXE and TFTP configurations become the static for
-all baremetal nodes, reducing complexity. Once running, the Agent
-sends a heartbeat to the Ironic Conductors with hardware
-information. Then the Conductors can order the Agent to take different
-actions. For example in the case of provisioning an instance, the
-Conductor sends an HTTP POST to prepare_image with the URL for an
-Image, and the Agent downloads and writes it to disk itself, keeping
-the Ironic Conductor out of the data plane for an image download. Once
-the image is written to disk, the Ironic Conductor simply reboots the
-baremetal node, and it boots from disk, removing a runtime dependency
-on a DHCP or TFTP server.
+Quoting from the [Rackspace OnMetal blog][32]:
+
+> With IPA the DHCP, PXE and TFTP configurations become the static for
+> all baremetal nodes, reducing complexity. Once running, the Agent
+> sends a heartbeat to the Ironic Conductors with hardware
+> information. Then the Conductors can order the Agent to take different
+> actions. For example in the case of provisioning an instance, the
+> Conductor sends an HTTP POST to prepare_image with the URL for an
+> Image, and the Agent downloads and writes it to disk itself, keeping
+> the Ironic Conductor out of the data plane for an image download. Once
+> the image is written to disk, the Ironic Conductor simply reboots the
+> baremetal node, and it boots from disk, removing a runtime dependency
+> on a DHCP or TFTP server.
 
 ## Provision process &mdash; Agent
 Source by [devananda github][18].
@@ -318,6 +324,102 @@ Source by [devananda github][18].
     src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" />
     <figcaption>Ironic deploy &mdash; Agent</figcaption>
 </figure>
+
+The IPA server is implemented using [Python Pecan][41]. The
+long-running process is `IronicPythonAgent` in `ironic_python_agent/agent.py`:
+<pre class="brush:python;">
+wsgi = simple_server.make_server(
+   self.listen_address.hostname,
+   self.listen_address.port,
+   self.api,
+   server_class=simple_server.WSGIServer)
+if not self.standalone and self.api_url:
+   # Don't start heartbeating until the server is listening
+   self.heartbeater.start()
+try:
+   wsgi.serve_forever()
+except BaseException:
+   LOG.exception('shutting down')
+if not self.standalone and self.api_url:
+   self.heartbeater.stop()
+</pre>
+
+The `heartbeater.start()` is a thread that expects to receive letter
+`'a'` from Ironic and will stop upon receiving `'b'`. IPA also
+implements a RPC using the below syntax:
+<pre class="brush:python;">
+@base.async_command('prepare_image', _validate_image_info)
+def prepare_image(self,
+                  image_info=None,
+                  configdrive=None):
+</pre>
+
+The function `prepare_image` is the key. Ironic's
+`xx-Agent` driver will call POST to IPA's endpoint
+using the string `prepare_image` as a RPC call that will 
+envoke the corresponding function on the IPA side, in this case,
+the function `prepare_image`, which is to write image to disk. The IPA
+implementation of this function is shown below. As one can see,
+it is assuming that a block device is available and it will then run a 
+`bash` script to write this image to disk. After image is written to
+disk, it can also write a bootloader (eg. grub2). Then IPA will signal
+Ironic that deploy is all done, and Ironic will go ahead to reboot the
+node &mdash; this then completes the provisioning process.
+<pre class="brush:python;">
+@base.async_command('prepare_image', _validate_image_info)
+def prepare_image(self,
+                  image_info=None,
+                  configdrive=None):
+    """Asynchronously prepares specified image on local OS install device.
+    In this case, 'prepare' means make local machine completely ready to
+    reboot to the image specified by image_info.
+    Downloads and writes an image to disk if necessary. Also writes a
+    configdrive to disk if the configdrive parameter is specified.
+    :param image_info: Image information dictionary.
+    :param configdrive: A string containing the location of the config
+                        drive as a URL OR the contents (as gzip/base64)
+                        of the configdrive. Optional, defaults to None.
+    :raises: ImageDownloadError if the image download encounters an error.
+    :raises: ImageChecksumError if the checksum of the local image does not
+         match the checksum as reported by glance in image_info.
+    :raises: ImageWriteError if writing the image fails.
+    :raises: InstanceDeployFailure if failed to create config drive.
+         large to store on the given device.
+    """
+    LOG.debug('Preparing image %s', image_info['id'])
+    device = hardware.dispatch_to_managers('get_os_install_device')
+    disk_format = image_info.get('disk_format')
+    stream_raw_images = image_info.get('stream_raw_images', False)
+    # don't write image again if already cached
+    if self.cached_image_id != image_info['id']:
+        if self.cached_image_id is not None:
+            LOG.debug('Already had %s cached, overwriting',
+                      self.cached_image_id)
+        if (stream_raw_images and disk_format == 'raw' and
+            image_info.get('image_type') != 'partition'):
+            self._stream_raw_image_onto_device(image_info, device)
+        else:
+            self._cache_and_write_image(image_info, device)
+    # the configdrive creation is taken care by ironic-lib's
+    # work_on_disk().
+    if image_info.get('image_type') != 'partition':
+        if configdrive is not None:
+            # Will use dummy value of 'local' for 'node_uuid',
+            # if it is not available. This is to handle scenario
+            # wherein new IPA is being used with older version
+            # of Ironic that did not pass 'node_uuid' in 'image_info'
+            node_uuid = image_info.get('node_uuid', 'local')
+            disk_utils.create_config_drive_partition(node_uuid,
+                                                     device,
+                                                     configdrive)
+    msg = 'image ({}) written to device {} '
+    result_msg = _message_format(msg, image_info, device,
+                                 self.partition_uuids)
+    LOG.info(result_msg)
+    return result_msg
+</pre>
+
+[41]: https://pecan.readthedocs.io/en/latest/
 
 ## Provision process &mdash; PXE
 Source by [devananda github][18].
@@ -343,77 +445,75 @@ Where:
 + `--image`: using image UUID. Here we use the `cirros-0.3.4-x86_64-uec`
   image.
 + `--flavor`: using _baremetal_ flavor
-  <pre class="brush:bash;">
-  +----------------------------+--------------------------------------+
-  | Field                      | Value                                |
-  +----------------------------+--------------------------------------+
-  | OS-FLV-DISABLED:disabled   | False                                |
-  | OS-FLV-EXT-DATA:ephemeral  | 0                                    |
-  | access_project_ids         | None                                 |
-  | disk                       | 10                                   |
-  | id                         | a5178caf-6b3a-49ec-ab47-a6daaf05423e |
-  | name                       | baremetal                            |
-  | os-flavor-access:is_public | True                                 |
-  | properties                 | cpu_arch='x86_64'                    |
-  | ram                        | 1280                                 |
-  | rxtx_factor                | 1.0                                  |
-  | swap                       |                                      |
-  | vcpus                      | 1                                    |
-  +----------------------------+--------------------------------------+
-  </pre>
+    <pre class="brush:bash;">
+    +----------------------------+--------------------------------------+
+    | Field                      | Value                                |
+    +----------------------------+--------------------------------------+
+    | OS-FLV-DISABLED:disabled   | False                                |
+    | OS-FLV-EXT-DATA:ephemeral  | 0                                    |
+    | access_project_ids         | None                                 |
+    | disk                       | 10                                   |
+    | id                         | a5178caf-6b3a-49ec-ab47-a6daaf05423e |
+    | name                       | baremetal                            |
+    | os-flavor-access:is_public | True                                 |
+    | properties                 | cpu_arch='x86_64'                    |
+    | ram                        | 1280                                 |
+    | rxtx_factor                | 1.0                                  |
+    | swap                       |                                      |
+    | vcpus                      | 1                                    |
+    +----------------------------+--------------------------------------+
+    </pre>
   + `--port`: we create a port on _private_ network using Neutron API
   `POST /v2.0/ports`.
-  <pre class="brush:python;">
-  def create_port(token, network):
-    name = randomword(5)
+    <pre class="brush:python;">
+    def create_port(token, network):
+      name = randomword(5)
+      # Neutron: create a port
+      url = 'http://%s:9696/v2.0/ports' % DEVSTACK_SERVER
+      headers = {
+          'X-Auth-Token': '%s' % token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+      }
+      payload = {
+          "port": {
+              "name": name,
+              "network_id": network,
+              "admin_state_up": True,
+              "extra_dhcp_opts": [
+                  {
+                      'ip_version': '4',
+                      'opt_name': 'tftp-server',
+                      'opt_value': '10.0.2.15'
+                  }, {
+                      'ip_version': '4',
+                      'opt_name': 'tag:!ipxe,bootfile-name',
+                      'opt_value': 'undionly.kpxe'
+                  }, {
+                      'ip_version': '4',
+                      'opt_name': 'tag:ipxe,bootfile-name',
+                      'opt_value': 'http://10.0.2.15:3928/boot.ipxe'
+                  }, {
+                      'ip_version': '4',
+                      'opt_name': 'server-ip-address',
+                      'opt_value': '10.0.2.15'
+                  }],
+              "binding:vnic_type": "normal",
+              "device_owner": "network:dhcp"
+          }
+      }
+      r = requests.post(
+          url,
+          data=json.dumps(payload),
+          headers=headers
+      )
+      resp = json.loads(r.content)
+    </pre>
 
-    # Neutron: create a port
-    url = 'http://%s:9696/v2.0/ports' % DEVSTACK_SERVER
-    headers = {
-        'X-Auth-Token': '%s' % token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
-    payload = {
-        "port": {
-            "name": name,
-            "network_id": network,
-            "admin_state_up": True,
-            "extra_dhcp_opts": [
-                {
-                    'ip_version': '4',
-                    'opt_name': 'tftp-server',
-                    'opt_value': '10.0.2.15'
-                }, {
-                    'ip_version': '4',
-                    'opt_name': 'tag:!ipxe,bootfile-name',
-                    'opt_value': 'undionly.kpxe'
-                }, {
-                    'ip_version': '4',
-                    'opt_name': 'tag:ipxe,bootfile-name',
-                    'opt_value': 'http://10.0.2.15:3928/boot.ipxe'
-                }, {
-                    'ip_version': '4',
-                    'opt_name': 'server-ip-address',
-                    'opt_value': '10.0.2.15'
-                }],
-            "binding:vnic_type": "normal",
-            "device_owner": "network:dhcp"
-        }
-    }
-    r = requests.post(
-        url,
-        data=json.dumps(payload),
-        headers=headers
-    )
-    resp = json.loads(r.content)
-  </pre>
-
-## Deploy node API calls
 
 Now let's see how this commands utilizes various API calls:
 
-### Step 1: Read basic information from Keystone
+## Step 1: Read basic information from Keystone
 
 + Service: Keystone
 + Method: `GET`
@@ -445,7 +545,7 @@ Now let's see how this commands utilizes various API calls:
 }
 </pre>
 
-### Step 2: Get security token
+## Step 2: Get security token
 
 The token is in response's header `X-Subject-Token` field.
 We are using "Password authentication with scoped authorization".
@@ -487,7 +587,7 @@ We are using "Password authentication with scoped authorization".
 + Response: too long to paste. Not important.
 
 
-### Step 3: Get user image meta data
+## Step 3: Get user image meta data
 
 + Service: `Glance`
 + Method: `GET`
@@ -529,7 +629,7 @@ We are using "Password authentication with scoped authorization".
 }
 </pre>
 
-### Step 4: Get image schema
+## Step 4: Get image schema
 Gets a JSON-schema document that represents the various entities
 talked about by the Images v2 API.
 
@@ -541,7 +641,7 @@ talked about by the Images v2 API.
 + JSON payload: none
 + Response: too long to paste.
 
-### Step 5: Get flavor details
+## Step 5: Get flavor details
 
 + Service: Nova
 + Method: `GET`
@@ -581,7 +681,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-### Step 6: Get port details
+## Step 6: Get port details
 
 + Service: Neutron
 + Method: `GET`
@@ -715,7 +815,7 @@ talked about by the Images v2 API.
 }
 </pre>  
 
-### Step 8: Read NOVA instance details
+## Step 8: Read NOVA instance details
 
 + Service: Nova
 + Method: `GET`
@@ -792,7 +892,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-### Step 9: Get user image detail
+## Step 9: Get user image detail
 
 + Service: Glance
 + Method: `GET`
@@ -833,7 +933,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-### Step 10: Get flavor detail
+## Step 10: Get flavor detail
 
 + Service: Nova
 + Method: `GET`

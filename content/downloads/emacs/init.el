@@ -1,4 +1,4 @@
-;;; This file bootstraps the configuration, which is divided into
+;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
 
 (defvar current-user (getenv (if (equal system-type 'windows-nt) "USERNAME" "USER")))
@@ -1437,13 +1437,9 @@ non-nil; otherwise prompts the user to enter the directory."
 (global-undo-tree-mode)
 
 ;; mu42 gmail setup
-(require 'offlineimap)
-
-(add-to-list 'load-path "~/.emacs.d/lib/mu/mu4e")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
-(require 'mu4e-maildirs-extension)
 (mu4e-maildirs-extension)
-
 (setq mu4e-drafts-folder "/drafts"
       mu4e-sent-folder   "/sent"
       mu4e-trash-folder  "/trash")
@@ -1503,58 +1499,58 @@ non-nil; otherwise prompts the user to enter the directory."
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 (setq mu4e-attachment-dir  "~/Downloads")
 
-;; chinese-pyim
-(use-package chinese-pyim
-  :ensure nil
-  :config
-  ;; 激活 basedict 拼音词库
-  (use-package chinese-pyim-basedict
-    :ensure nil
-    :config (chinese-pyim-basedict-enable))
+;; ;; chinese-pyim
+;; (use-package chinese-pyim
+;;   :ensure nil
+;;   :config
+;;   ;; 激活 basedict 拼音词库
+;;   (use-package chinese-pyim-basedict
+;;     :ensure nil
+;;     :config (chinese-pyim-basedict-enable))
 
-  ;; 五笔用户使用 wbdict 词库
-  ;; (use-package chinese-pyim-wbdict
-  ;;   :ensure nil
-  ;;   :config (chinese-pyim-wbdict-gbk-enable))
+;;   ;; 五笔用户使用 wbdict 词库
+;;   ;; (use-package chinese-pyim-wbdict
+;;   ;;   :ensure nil
+;;   ;;   :config (chinese-pyim-wbdict-gbk-enable))
 
-  (setq default-input-method "chinese-pyim")
+;;   (setq default-input-method "chinese-pyim")
 
-  ;; 我使用全拼
-  (setq pyim-default-scheme 'quanpin)
+;;   ;; 我使用全拼
+;;   (setq pyim-default-scheme 'quanpin)
 
-  ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
-  ;; 我自己使用的中英文动态切换规则是：
-  ;; 1. 光标只有在注释里面时，才可以输入中文。
-  ;; 2. 光标前是汉字字符时，才能输入中文。
-  ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-  (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-dynamic-english
-                  pyim-probe-isearch-mode
-                  pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
+;;   ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
+;;   ;; 我自己使用的中英文动态切换规则是：
+;;   ;; 1. 光标只有在注释里面时，才可以输入中文。
+;;   ;; 2. 光标前是汉字字符时，才能输入中文。
+;;   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
+;;   (setq-default pyim-english-input-switch-functions
+;;                 '(pyim-probe-dynamic-english
+;;                   pyim-probe-isearch-mode
+;;                   pyim-probe-program-mode
+;;                   pyim-probe-org-structure-template))
 
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+;;   (setq-default pyim-punctuation-half-width-functions
+;;                 '(pyim-probe-punctuation-line-beginning
+;;                   pyim-probe-punctuation-after-punctuation))
 
-  ;; 开启拼音搜索功能
-  (setq pyim-isearch-enable-pinyin-search t)
+;;   ;; 开启拼音搜索功能
+;;   (setq pyim-isearch-enable-pinyin-search t)
 
-  ;; 使用 pupup-el 来绘制选词框
-  (setq pyim-page-tooltip 'popup)
+;;   ;; 使用 pupup-el 来绘制选词框
+;;   (setq pyim-page-tooltip 'popup)
 
-  ;; 选词框显示5个候选词
-  (setq pyim-page-length 5)
+;;   ;; 选词框显示5个候选词
+;;   (setq pyim-page-length 5)
 
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  (add-hook 'emacs-startup-hook
-            #'(lambda () (pyim-restart-1 t)))
-  :bind
-  (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
-   ("C-;" . pyim-delete-word-from-personal-buffer))
+;;   ;; 让 Emacs 启动时自动加载 pyim 词库
+;;   (add-hook 'emacs-startup-hook
+;;             #'(lambda () (pyim-restart-1 t)))
+;;   :bind
+;;   (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
+;;    ("C-;" . pyim-delete-word-from-personal-buffer))
 
-  (setq default-input-method "chinese-pyim")
-  (global-set-key (kbd "C-\\") 'toggle-input-method))
+;;   (setq default-input-method "chinese-pyim")
+;;   (global-set-key (kbd "C-\\") 'toggle-input-method))
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

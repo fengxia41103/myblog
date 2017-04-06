@@ -2,7 +2,6 @@ Title: 夏雷
 Tags: Lei
 Slug: lei
 Author: Feng Xia
-Status: hidden
 
 <div id="sth"></div>
 
@@ -23,17 +22,16 @@ Status: hidden
    render: function(){
      var imageThumbs = this.props.displayList.map(function(img){
        return (
-         <li key={img.key} onClick={this.props.onClick.bind(null,img)}>
-           <img src={img.thumb} className="mythumbnail" />
-         </li>
+         <img key={img.key}
+              onClick={this.props.onClick.bind(null,img)}
+              className="mythumbnail"
+              src={img.thumb} />
        );
      },this);
 
      return (
        <div>
-         <ul className="list-inline">
-           {imageThumbs}
-         </ul>
+         {imageThumbs}
        </div>
      );
    }
@@ -42,29 +40,14 @@ Status: hidden
  var OneBox = React.createClass({
    render: function(){
      return(
-       <div className="pin-card" style={{backgroundColor:"#1e1e1f", color:"#cecece", fontSize:"10pt"}}>
+       <div>
          <img src={this.props.image.full}
               className="center-block img-responsive"
               onClick={this.props.onNext}
-              style={{height:"600px"}}
-         />
-         <h3>
-           I miss you very much.
-         </h3>
-         <div className="row text-right mynav">
-           <span className="flabel">
-             <i className="fa fa-angle-left my-huge-font" style={{paddingRight:"1em"}}
-                onClick={this.props.onPrev}></i>
-           </span>
-           <span className="flabel pull-right">
-             <i className="fa fa-angle-right my-huge-font" style={{paddingLeft:"1em"}}
-                onClick={this.props.onNext}></i>
-           </span>
-         </div>
+              style={{height:"90vh"}} />
 
          { this.props.showMore?
-            <div className="row text-right" id="showMore"
-                 style={{marginTop:"2em",fontSize:""}}
+            <div id="showMore"
                  onClick={this.props.onClick}>
               <i className="fa fa-expand"></i>
               Show more
@@ -72,7 +55,8 @@ Status: hidden
          :null }
 
          <DisplayListBox displayList={this.props.displayList}
-                         onClick={this.props.setImage} />
+                         onClick={this.props.setImage}
+                         className="col s12"/>
        </div>
      );
    }
@@ -157,40 +141,39 @@ Status: hidden
      var tmp = [];
      for(var i=start-1; i<end;i++){
         tmp.push(images[i]);
-                                  }
-        this.setState({
-           displayList: tmp
-                      });
-        },
-        componentDidMount: function(){
-                                     },
-        render: function(){
-           var imageFields = this.props.images.map(function(img){
-             return (
-               <ImageField img={img} onClick={this.handleImageFieldClick} key={img.key}/>
-             );
-           }, this);
-           return (
-             <div>
-               { this.state.showMore?
-                  <OneBox image={this.state.showing} showMore={this.state.showMore}
-                          onClick={this.toggleShowMore}
-                          onNext={this.onNext}
-                          onPrev={this.onPrev}
-                          displayList={this.state.displayList}
-                          setImage={this.setImage}
-                  />:
-                                   <div className="my-multicol-4 grid">
-                                     {imageFields}
-                                   </div>
-               }
+     }
+     this.setState({
+        displayList: tmp
+     });
+   },
+   render: function(){
+      var imageFields = this.props.images.map(function(img){
+        return (
+          <ImageField img={img}
+                      onClick={this.handleImageFieldClick}
+                      key={img.key}/>
+        );
+      }, this);
+      return (
+        <div>
+          { this.state.showMore?
+             <OneBox image={this.state.showing} showMore={this.state.showMore}
+                     onClick={this.toggleShowMore}
+                     onNext={this.onNext}
+                     onPrev={this.onPrev}
+                     displayList={this.state.displayList}
+                     setImage={this.setImage} />:
+             <div className="my-multicol-4 grid">
+               {imageFields}
              </div>
-           );
-                          }
-       });
+          }
+        </div>
+      );
+    }
+ });
 
-       ReactDOM.render(
-       <PresentationBox images={images} />,
-         document.getElementById("sth")
-       );
+ ReactDOM.render(
+   <PresentationBox images={images} />,
+   document.getElementById("sth")
+ );
 </script>

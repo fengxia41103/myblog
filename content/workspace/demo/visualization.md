@@ -10,7 +10,7 @@ Author: Feng Xia
 </figure>
 
 > * [World Snapshot][]
-[world snapshot]: http://worldsnapshot.s3-website-us-east-1.amazonaws.com/
+[world snapshot]: http://snapshots.world/
 
 The joy of making graphs in a data-driven web application has been
 the highlight that kept me going from project to project. Once all things

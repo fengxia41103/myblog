@@ -3,7 +3,6 @@ Date: 2017-03-22 15:45
 Tags: openstack
 Slug: baremetal provisioning
 Author: Feng Xia
-Status: Draft
 
 Everyone of us has installed an operating system to a computer at some point in
 life. It is easy to perceive inserting a disk or USB key to make this

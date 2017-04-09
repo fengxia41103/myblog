@@ -3,7 +3,6 @@ Date: 2016-12-09 22:00
 Tags: openstack
 Slug: maas target
 Author: Feng Xia
-Status: Draft
 
 After setting up the MAAS server and its subnet, bringing up a target node
 is simple.

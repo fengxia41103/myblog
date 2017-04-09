@@ -3,7 +3,6 @@ Date: 2016-12-08 10:45
 Tags: openstack
 Slug: maas virtualbox
 Author: Feng Xia
-Status: Draft
 
 Canonical [MAAS][1] is a deployment tool that can give a bare metal life by putting an OS on it. Working together with [Juju][2], they can setup a cluster of applications quite quickly. Think of them as a package manage like Ubuntu's **apt-get**, but in the context of a cloud. Interesting.
 

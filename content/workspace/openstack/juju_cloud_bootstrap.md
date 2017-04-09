@@ -3,7 +3,6 @@ Date: 2017-1-11 17:00
 Tags: openstack
 Slug: juju bootstrap
 Author: Feng Xia
-Status: Draft
 
 The very first command user will encounter is the _juju bootstrap_. It
 createa a special machine &mdash; state controller, machine-0, control

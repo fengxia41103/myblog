@@ -3,7 +3,6 @@ Date: 2017-02-28 17:00
 Tags: openstack
 Slug: juju charm layers
 Author: Feng Xia
-Status: Draft
 
 Juju [charms][1] are, charming. It promises a selection of blueprints
 that hold magic to make an application deployment easy. But devils are

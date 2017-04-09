@@ -3,7 +3,6 @@ Date: 2017-02-08 14:00
 Tags: openstack
 Slug: juju deploy provider
 Author: Feng Xia
-Status: Draft
 
 In [this][1] article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will

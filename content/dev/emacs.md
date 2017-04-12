@@ -14,7 +14,7 @@ document the [init.el][1] that I'm using. It's a work in progress of
 course since I'm updating it all the time. Nonetheless, I'm already in
 love with what I have so far.
 
-[1]: {attach}/downloads/init.el
+[1]: {attach}/downloads/emacs/init.el
 
 <pre class="brush:plain;">
 ;;; This file bootstraps the configuration, which is divided into

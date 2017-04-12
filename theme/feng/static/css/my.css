@@ -66,13 +66,18 @@ h1 {
   border-bottom: 1px solid #ccc;
 }
 
-#article-content h1,
+#article-content h1 {
+  font-family: 'Baloo Paaji', cursive;
+  font-size: 3.0em;
+}
+
+#article-content h2,
 #article-content h3,
 #article-content h4,
 #article-content h5,
 #article-content h6 {
   font-family: 'Baloo Paaji', cursive;
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 .my-image-center {

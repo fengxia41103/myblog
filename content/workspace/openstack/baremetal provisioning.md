@@ -56,8 +56,8 @@ boot service by telling the client which boot file to use.
 BOOTP is an earlier IETF-defined booting protocol that is much less
 flexible than DHCP. However, DHCP has been defined to be upwardly
 compatible with BOOTP and both these protocols can coexist and
-function simultaneously in the same network.  BOOTP is about "<font
-color="blue">address determination and bootfile selection</font>".
+function simultaneously in the same network.  BOOTP is about <font
+color="blue">address determination and bootfile selection</font>.
 From its [spec][5], we can derive a sequence diagram shown below:
 
 [5]: https://tools.ietf.org/html/rfc951
@@ -68,8 +68,8 @@ From its [spec][5], we can derive a sequence diagram shown below:
     <figcaption>BOOTP sequence diagram</figcaption>
 </figure>
 
-One major characteristic of BOOT is that it is **static**, meaning
-when server looks the client information, such as its IP address, it
+One major characteristic of BOOTP is that it is **static**, meaning
+when server looks up the client information, such as its IP address, it
 is using a **static** table (the _database_ referred in the diagram
 above is actually a plain text file). Therefore, everytime client asks
 for its information, it will get the same result. Below shows the
@@ -379,12 +379,12 @@ In the 1996 [BBS Specification][2],
 boot devices are categorized into:
 [2]: http://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
 
-1. BIOS Aware IPL Devices (BAID): have all the code necessary to perform
+1. **BIOS Aware IPL Devices (BAID)**: have all the code necessary to perform
 IPL resident in the system BIOS. BAID devices include floppy or fixed
 drives.
-2. Boot Connection Vector (BCV) devices: use Option ROM on associated
+2. **Boot Connection Vector (BCV)** devices: use Option ROM on associated
    device or in non-volatile storage on the motherboard.
-3. Bootstrap Entry Vector (BEV) devices: use Option ROM on associated
+3. **Bootstrap Entry Vector (BEV)** devices: use Option ROM on associated
    device or in non-volativel storage on the motherboard. 
    **PXE is implemented as a BEV device**!.
 
@@ -408,9 +408,9 @@ enduser through BIOS setup &rarr; thus, the boot order option!
 ### PXE Split ROM Architecture
 
 So BIOS can find PXE option by finding its Option ROM. Great. Since
-PXE is network dependent, how it can handles different networking
-hardware? Two techniques come into play: Split ROM architecture and
-UNDI. We will cover UNDI separately. Here, let's look at the split
+PXE is network dependent, how can it handles different networking
+hardware? Two techniques come into play: **Split ROM** architecture and
+**UNDI**. We will cover UNDI separately. Here, let's look at the split
 architecture.
 
 <figure class="row">
@@ -450,7 +450,7 @@ more network interfaces. The three Option ROMs are:
 
 Now with all the basics out of the way, let's power on
 the computer! Page 77 in
-the [Spec][1] has a nice diagram showing the details behind the scene
+the [PXE Spec][1] has a nice diagram showing the details behind the scene
 from BIOS to a PXE:
 
 <figure class="row">

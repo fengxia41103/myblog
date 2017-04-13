@@ -511,7 +511,7 @@ Where:
 
 Now let's see how this commands utilizes various API calls:
 
-## Step 1: Read basic information from Keystone
+## Read basic information from Keystone
 
 + Service: Keystone
 + Method: `GET`
@@ -543,7 +543,7 @@ Now let's see how this commands utilizes various API calls:
 }
 </pre>
 
-## Step 2: Get security token
+## Get security token
 
 The token is in response's header `X-Subject-Token` field.
 We are using "Password authentication with scoped authorization".
@@ -585,7 +585,7 @@ We are using "Password authentication with scoped authorization".
 + Response: too long to paste. Not important.
 
 
-## Step 3: Get user image meta data
+## Get user image meta data
 
 + Service: `Glance`
 + Method: `GET`
@@ -627,7 +627,7 @@ We are using "Password authentication with scoped authorization".
 }
 </pre>
 
-## Step 4: Get image schema
+## Get image schema
 Gets a JSON-schema document that represents the various entities
 talked about by the Images v2 API.
 
@@ -639,7 +639,7 @@ talked about by the Images v2 API.
 + JSON payload: none
 + Response: too long to paste.
 
-## Step 5: Get flavor details
+## Get flavor details
 
 + Service: Nova
 + Method: `GET`
@@ -679,7 +679,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-## Step 6: Get port details
+## Get port details
 
 + Service: Neutron
 + Method: `GET`
@@ -758,7 +758,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-## Step 7: Create a NOVA instance based on image and flavor
+## Create a NOVA instance based on image and flavor
 
 + Service: Nova
 + Method: `POST`
@@ -813,7 +813,7 @@ talked about by the Images v2 API.
 }
 </pre>  
 
-## Step 8: Read NOVA instance details
+## Read NOVA instance details
 
 + Service: Nova
 + Method: `GET`
@@ -890,7 +890,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-## Step 9: Get user image detail
+## Get user image detail
 
 + Service: Glance
 + Method: `GET`
@@ -931,7 +931,7 @@ talked about by the Images v2 API.
 }
 </pre>
 
-## Step 10: Get flavor detail
+## Get flavor detail
 
 + Service: Nova
 + Method: `GET`
@@ -968,7 +968,3 @@ talked about by the Images v2 API.
    }
 }
 </pre>
-
-
-
-

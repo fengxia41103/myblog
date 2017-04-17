@@ -29,7 +29,7 @@ Status: Draft
 
      return (
        <div className="row" style={divStyle}>
-         <h4 className="page-header">Summary</h4>
+         <h4 className="page-header nocount">Summary</h4>
          <div className="divider"></div>
          <br />
          <div className="row">
@@ -135,7 +135,7 @@ Status: Draft
      return (
        <div className="row my-resume-header" onClick={this.handleClick}>
          <div className="col s11">
-           <h4>{this.props.title}</h4>
+           <h4 className="nocount">{this.props.title}</h4>
          </div>
          <div  className="right-align col s1" data-toggle="tooltip" title="Click to expand and collapse">
            <br />
@@ -186,7 +186,7 @@ Status: Draft
      (
        <div>
          <p></p>
-         <h6 className="myhighlight">
+         <h6 className="myhighlight nocount">
            Adjustments
          </h6>
          <div style={{marginBottom:"2em"}}
@@ -242,10 +242,10 @@ Status: Draft
      var id = randomId();
      return (
        <div>
-         <h6 className="myhighlight">
+         <h6 className="myhighlight nocount">
            Assumptions
          </h6>
-         <table className="bordered responsive-table">
+         <table className="table bordered striped highlgiht">
            <tbody>
              <tr>
                <th>Item</th>

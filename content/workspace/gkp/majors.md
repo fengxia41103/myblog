@@ -28,7 +28,7 @@ published by the [Department of Education][] in 2012,
 there are 12 categories, 92 subcategories and
 506 majors.
 
-## Category and subcategory
+# Category and subcategory
 
 At this level, focus was to provide statistics which
 is similar to what is done for schools at _State level_.
@@ -43,14 +43,13 @@ area of interest she wants to drill further down.
 
 [department of education]: http://www.moe.gov.cn/publicfiles/business/htmlfiles/moe/s3882/201210/xxgk_143152.html
 
-## Major
+# Major
 
-At this level, we think the most relevant information students
-want to know is the job market datat.
-So we built an
-integration point with popular job posting sites. Dynamically
-the application will query these sites and compile the
-most recent 50 job posts that matches this major.
+At this level, we think the most relevant information students want to
+know is the job market datat.  So we built an integration point with
+popular job posting sites. Dynamically the application will query
+these sites and compile the most recent 50 job posts that matches this
+major.
 
 
 <figure class="row">
@@ -58,21 +57,19 @@ most recent 50 job posts that matches this major.
     <figcaption>Job title cloud</figcaption>
 </figure>
 
-Based on these data stream, a _job title
-keyword cloud_ is compiled taht shows the
-job titles used by the industry, and
-they are further grouped into cities so they provide another
-geo reference for students.
+Based on these data stream, a _job title keyword cloud_ is compiled
+taht shows the job titles used by the industry, and they are further
+grouped into cities so they provide another geo reference for
+students.
 
 <figure class="row">
     <img class="img-responsive center-block" src="/images/gkp_20.png"/>
     <figcaption>Schools grouped by job locations</figcaption>
 </figure>
 
-Below listed jobs, application will conveniently show schools
-that are located in those cities since  local graduate usually
-have an advantage competing for jobs in local market. Another
-feature is that a toggle switch
-will turn user's preference on and off so researcher can easily
+Below listed jobs, application will conveniently show schools that are
+located in those cities since local graduate usually have an advantage
+competing for jobs in local market. Another feature is that a toggle
+switch will turn user's preference on and off so researcher can easily
 search either by major and jobs alone, or by combination of the market
 data and her own criteria.

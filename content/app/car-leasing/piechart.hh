@@ -1,1 +1,3 @@
-<div id="$ctrl.id" class="$ctrl.class" style="$ctrl.style"></div>
+<div id="$ctrl.id"
+     class="$ctrl.class"
+     style="$ctrl.style"></div>

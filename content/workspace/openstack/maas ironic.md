@@ -1,16 +1,16 @@
-Title: Openstack Ironic vs. Canonical MAAS
+Title: MAAS vs. Ironic
 Date: 2017-03-30 10:20
 Tags: openstack
 Slug: maas and ironic
 Author: Feng Xia
 
 This article is to analyze Openstack Ironic and Canonical MAAS, both
-are tools to turn baremetal into a pool of managed resources that are ready for
-consumption by upstream srervice.
-On the highest level, a baremetal is either managed or
-not-managed. Being **managed** requires that the manager is aware of
-the existence of the baremetal, and has acquired necessary information
-of the server so that these two things are now possible:
+are tools to turn baremetal into a pool of managed resources that are
+ready for consumption by upstream srervice.  On the highest level, a
+baremetal is either managed or not-managed. Being **managed** requires
+that the manager is aware of the existence of the baremetal, and has
+acquired necessary information of the server so that these two things
+are now possible:
 
 1. Power cycle the server
 2. Install a software such as operating system

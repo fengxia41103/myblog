@@ -39,7 +39,7 @@ On the broad side, functions are divided into the following categories:
 * <span class="myhighlight">Invoice</span>: order invoices
 * <span class="myhighlight">Report</span>: management reports
 
-## Product
+# Product
 
 The key concept I'd like to clarify is the product [SKU][].
 It has
@@ -82,7 +82,7 @@ cart which later turns into a sales order.
 [sku]: https://en.wikipedia.org/wiki/Stock_keeping_unit
 
 
-## Inventory
+# Inventory
 
 Product inventory are mapped to a 3-layer structure: company &mdash; location &mdash; storages.
 A location represents a store, and within a store there can be multiple storages. Inventory
@@ -104,18 +104,20 @@ walks into the store's storage to count. Therefore, it is crucial to understand 
 comparing the two implies a time stamp that both sides have to agree. Otherwise, such comparison
 is meaningless.
 
-<table class="table table-striped">
-    <thead>
-        <th>Theoretical inventory</th>
-        <th>Physical inventory</th>
-    </thead>
-    <tbody>
-        <tr><td>
-            Product count will increase and decrease dynamically due to sales and purchase.
-        </td><td>
-            Product count is obstained only through counting goods in inventory physically.
-        </td></tr>
-    </tbody>
+<table class="table bordered striped">
+  <thead>
+    <th>Theoretical inventory</th>
+    <th>Physical inventory</th>
+  </thead>
+  <tbody>
+    <tr><td>
+      Product count will increase and decrease dynamically due to
+      sales and purchase.
+    </td><td>
+      Product count is obstained only through counting goods in
+      inventory physically.
+    </td></tr>
+  </tbody>
 </table>
 
 Physical inventory is usually scheduled. Some companies have daily count

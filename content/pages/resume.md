@@ -1,4 +1,5 @@
 Title: Resum&eacute;
+Date: 2017-01-01 12:00
 Tags: resume
 Slug: resume
 Author: Feng Xia
@@ -14,123 +15,146 @@ Summary: Feng Xia's resum&eacute;
 * Have a high standard in work quality.
 * Salesforce advocate.
 * <span class="myhighlight">Also available in</span>:
-    <a href="https://www.linkedin.com/in/fengxia41103">
-        <i class="fa fa-linkedin-square"></i>
-        LinkedIn
-    </a>
-    <a href="/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/resume.pdf">
-        <i class="fa fa-file-pdf-o"></i>
-        PDF
-    </a>
-    <a href="/downloads/resume.doc">
-        <i class="fa fa-file-word-o"></i>
-        Word
-    </a>
+<a href="https://www.linkedin.com/in/fengxia41103">
+  <i class="fa fa-linkedin-square"></i>
+  LinkedIn
+</a>
+<a href="/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/resume.pdf">
+  <i class="fa fa-file-pdf-o"></i>
+  PDF
+</a>
+<a href="/downloads/resume.doc">
+  <i class="fa fa-file-word-o"></i>
+  Word
+</a>
 
 ## Skills
 
 <table class="bordered responsive-table">
   <tr><td>
-      <strong>Software development</strong>
+    <strong>Software development</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-3">
-    <li>Python</li>
-    <li>Django</li>
-    <li>Bootstrap</li>
-    <li>CSS, JS, HTML</li>
-    <li>jQuery</li>
-    <li>ODOO</li>
-    <li>SQL</li>
-    <li>Salesforce APEX</li>
-    <li>Cordova</li>
-    <li>Google app engine</li>
-    <li>C</li>
-    <li>Git</li>
-    <li>SVN</li>
-    <li>Bower</li>
-    <li>Yeoman</li>
-    <li>Jira</li>
-</ul>
+    <ul class="list-unstyled my-multicol-3">
+      <li>Python</li>
+      <li>Django</li>
+      <li>Bootstrap</li>
+      <li>CSS, JS, HTML</li>
+      <li>jQuery</li>
+      <li>ODOO</li>
+      <li>SQL</li>
+      <li>Salesforce APEX</li>
+      <li>Cordova</li>
+      <li>Google app engine</li>
+      <li>C</li>
+      <li>Git</li>
+      <li>SVN</li>
+      <li>Bower</li>
+      <li>Yeoman</li>
+      <li>Jira</li>
+    </ul>
   </td></tr>
 
   <tr><td>
     <strong>QA</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-3">
-    <li>Selenium</li>
-    <li>HP LoadRunner</li>
-    <li>SonarQube</li>
-    <li>Cucumber</li>
-    <li>Redmine</li>
-    <li>Bugzilla</li>
-</ul>
+    <ul class="list-unstyled my-multicol-3">
+      <li>Selenium</li>
+      <li>HP LoadRunner</li>
+      <li>SonarQube</li>
+      <li>Cucumber</li>
+      <li>Redmine</li>
+      <li>Bugzilla</li>
+    </ul>
   </td></tr>
 
   <tr><td>
     <strong>System deployment</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-3">
-    <li>Amazon EC2,RDS,S3</li>
-    <li>uWSGI</li>
-    <li>Nginx</li>
-    <li>Apache</li>
-    <li>Builtbot</li>
-    <li>Fabric</li>
-</ul>
+    <ul class="list-unstyled my-multicol-3">
+      <li>Amazon EC2,RDS,S3</li>
+      <li>uWSGI</li>
+      <li>Nginx</li>
+      <li>Apache</li>
+      <li>Builtbot</li>
+      <li>Fabric</li>
+    </ul>
   </td></tr>
 
   <tr><td>
     <strong>System monitoring</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-3">
-    <li>InfluxDB</li>
-    <li>Grafana</li>
-    <li>Cacti</li>
-    <li>Nagios</li>
-</ul>
+    <ul class="list-unstyled my-multicol-3">
+      <li>InfluxDB</li>
+      <li>Grafana</li>
+      <li>Cacti</li>
+      <li>Nagios</li>
+    </ul>
   </td></tr>
 
   <tr><td>
     <strong>System administration</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-3">
-    <li>Salesforce</li>
-    <li>AWS</li>
-    <li>Ubuntu Linux</li>
-</ul>
+    <ul class="list-unstyled my-multicol-3">
+      <li>Salesforce</li>
+      <li>AWS</li>
+      <li>Ubuntu Linux</li>
+    </ul>
   </td></tr>
 
   <tr><td>
     <strong>Administrative tasks</strong>
   </td><td>
-<ul class="list-unstyled my-multicol-3">
-    <li>LaTex</li>
-    <li>Word</li>
-    <li>Powerpoint</li>
-    <li>Excel</li>
-    <li>MS Project</li>
-    <li>Taskjuggler</li>
-</ul>
+    <ul class="list-unstyled my-multicol-3">
+      <li>LaTex</li>
+      <li>Word</li>
+      <li>Powerpoint</li>
+      <li>Excel</li>
+      <li>MS Project</li>
+      <li>Taskjuggler</li>
+    </ul>
   </td></tr>
 
 </table>
 
 ## Experience
 
+<div class="my-resume-header row" id="lenovo">
+  <div class="text-left col s6">
+    Advisory Engineer<br />
+    <span style="opacity:0.5;">Lenovo</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    11/2016 - present<br />
+    <span style="opacity:0.5;">RTP, NC</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
+</div>
+
+* Led _Workload Solution_ project evaluating service orchestration
+  technologies and developing Lenovo's core competence in automating
+  rack configuration, baremetal provisioning, Openstack and
+  Lenovo application deployment.
+    - <span class="myhighlight">Tools</span>: Openstack, Ironic, Juju,
+      MaaS, charms, Python, LXD, KVM, Virtualbox
+
 <div class="my-resume-header row" id="py-consulting">
-    <div class="text-left col s6">
-        Founder, Consultant<br />
-        <span style="opacity:0.5;">PY Consulting</span>
-    </div>
-    <div class="text-right col s5">
-        <i class="fa fa-calendar"></i>
-        01/2015 - present<br />
-        <span style="opacity:0.5;">Raleigh, NC</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Founder, Consultant<br />
+    <span style="opacity:0.5;">PY Consulting</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    01/2015 - 11/2016<br />
+    <span style="opacity:0.5;">Raleigh, NC</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 
@@ -140,26 +164,40 @@ Summary: Feng Xia's resum&eacute;
   Android prototype in two weeks. Played a key role in setting up its
   Shenzhen subsidiary. Invited as feature speaker by "_2016 Jiuzhou
   e-Commerce Convention_" on Dec 8th, 2015, Shenzhen, China.
-    - <span class="myhighlight">Tools</span>: Django, Bootstrap, jQuery, Cordova, AngularJS, AWS, uWSGI, Nginx
-    - <span class="myhighlight">Demo</span>: [http://fengxia.co:8003/wei/][]
+    - <span class="myhighlight">Tools</span>: Django, Bootstrap,
+      jQuery, Cordova, AngularJS, AWS, uWSGI, Nginx
+    - <span class="myhighlight">Demo</span>: [view project Fashion for
+      details][1]
+
+[1]: {filename}/workspace/demo/fashion.md
 
 * __GKP project__. Designed a web reference tool assisting Chinese
   high school graduate selecting domestic colleges. Featuring information
   about 3,383 colleges and universities, 1,663 majors, two million
   historical exam records and 50,000 lines per minute live chat stream.
 
-    * <span class="myhighlight">Tools</span>:
-      Django, Bootstrap, Redis, Google map API, Baidu map API, Baidu Echarts, TOR API, Privoxy, AWS, uWSGI, Nginx
-    * <span class="myhighlight">Demo</span>: [http://fengxia.co:8001/gaokao/][] (in Chinese)
+    * <span class="myhighlight">Tools</span>: Django, Bootstrap,
+      Redis, Google map API, Baidu map API, Baidu Echarts, TOR API,
+      Privoxy, AWS, uWSGI, Nginx
+    - <span class="myhighlight">Demo</span>: [view project GKP for
+      details][2]
 
-* __JK project__. Developed an open-source web application that runs stock
-  trading simulation with step-by-step transaction trace. User can
-  test strategy and view comparisons with actual S&P500 daily data and
-  China’s S&P500 equivalent. Asynchronous design puts CPU intense
-  computation to background processed by multithreading consumer.
+[2]: {filename}/workspace/demo/gkp.md
 
-    * <span class="myhighlight">Tools</span>: Django, Bootstrap, Redis, Highcharts, AWS, uWSGI, Nginx
-    * <span class="myhighlight">Demo</span>: [http://fengxia.co:8002/jk/][]
+* __Stock project__. Developed an open-source web application that
+  runs stock trading simulation with step-by-step transaction
+  trace. User can test strategy and view comparisons with actual
+  S&P500 daily data and China’s S&P500 equivalent. Asynchronous design
+  puts CPU intense computation to background processed by
+  multithreading consumer.
+
+    * <span class="myhighlight">Tools</span>: Django, Bootstrap,
+      Redis, Highcharts, AWS, uWSGI, Nginx
+    - <span class="myhighlight">Demo</span>: [view project Stock for
+      details][3]
+
+[3]: {filename}/workspace/demo/stock.md
+
 
 * __Linkage project__. Linkage Ltd. is a Chinese start-up software company
   specializing ODOO module development. Built ODOO’s continuous
@@ -167,27 +205,25 @@ Summary: Feng Xia's resum&eacute;
   system. Authored the company’s “_2016-17 Technology Roadmap_”.
 
     * <span class="myhighlight">Tools</span>: Python, ODOO, Buildbot
-    * <span class="myhighlight">PPT</span>: [2016-17 Technology Roadmap][1] (in Chinese)
+    * <span class="myhighlight">PPT</span>: [Linkage 2016-17
+      Technology Roadmap][1] (in Chinese)
 
-[http://fengxia.co:8003/wei/]: http://fengxia.co:8003/wei/
-[http://fengxia.co:8001/gaokao/]: http://fengxia.co:8001/gaokao/
-[http://fengxia.co:8002/jk/]: http://fengxia.co:8002/jk/
-[1]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/odoo%20roadmap.pdf
+[4]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/odoo%20roadmap.pdf
 
 <div class="row my-resume-header" id="lean">
-    <div class="text-left col s6">
-        Director <br />
-        <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
-    </div>
-    <div class="text-right col-md-5">
-        <i class="fa fa-calendar"></i>
-        11/2013 - 01/2015<br />
-        <span style="opacity:0.5;">Beijing, China</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Director <br />
+    <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    11/2013 - 01/2015<br />
+    <span style="opacity:0.5;">Beijing, China</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 * Responsible for a $3-million fixed-bid software contract. Client is a
@@ -224,7 +260,7 @@ interviewed nearly one hundred candidates.
         Project Manager<br />
         <span style="opacity:0.5;">CrunchTime! Information Systems</span>
     </div>
-    <div class="text-right col-md-5">
+    <div class="text-right col s5">
         <i class="fa fa-calendar"></i>
         07/2010 - 11/2013<br />
         <span style="opacity:0.5;">Boston, MA</span>
@@ -270,19 +306,19 @@ reducing one UAT cycle from 40-man-hour to less than 2 hours.
     * <span class="myhighlight">Tools</span>: Python, Selenium webdriver, Django
 
 <div class="row my-resume-header" id="everbright">
-    <div class="text-left col s6">
-        Business Manager<br />
-        <span style="opacity:0.5;">China Everbright Bank</span>
-    </div>
-    <div class="text-right col-md-5">
-        <i class="fa fa-calendar"></i>
-        04/2009 - 04/2010<br />
-        <span style="opacity:0.5;">Beijing, China</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Business Manager<br />
+    <span style="opacity:0.5;">China Everbright Bank</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    04/2009 - 04/2010<br />
+    <span style="opacity:0.5;">Beijing, China</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 
@@ -301,19 +337,19 @@ training materials.
 
 
 <div class="row my-resume-header" id="bit9">
-    <div class="text-left col s6">
-        Team Lead<br />
-        <span style="opacity:0.5;">Bit9 Inc.</span>
-    </div>
-    <div class="text-right col-md-5">
-        <i class="fa fa-calendar"></i>
-        04/2004 - 05/2007<br />
-        <span style="opacity:0.5;">Cambridge, MA</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Team Lead<br />
+    <span style="opacity:0.5;">Bit9 Inc.</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    04/2004 - 05/2007<br />
+    <span style="opacity:0.5;">Cambridge, MA</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 * Led a breakthrough in endpoint application control
@@ -333,19 +369,19 @@ parser for Windows binary PE formats.
     * <span class="myhighlight">Tools</span>: NT kernel, rootkits, VMWare
 
 <div class="row my-resume-header" id="instron">
-    <div class="text-left col s6">
-        Senior Engineer<br />
-        <span style="opacity:0.5;">Instron Corp.</span>
-    </div>
-    <div class="text-right col-md-5">
-        <i class="fa fa-calendar"></i>
-        07/1998 - 04/2004<br />
-        <span style="opacity:0.5;">Canton, MA</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Senior Engineer<br />
+    <span style="opacity:0.5;">Instron Corp.</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    07/1998 - 04/2004<br />
+    <span style="opacity:0.5;">Canton, MA</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 * Developed embedded controller of Instron’s impact tester line (9250HV).
@@ -367,19 +403,19 @@ system training. 　　
 ## Education
 
 <div class="row my-resume-header">
-    <div class="text-left col s6">
-        MBA<br />
-        <span style="opacity:0.5;">Boston University</span>
-    </div>
-    <div class="text-right col-md-5">
-        <i class="fa fa-calendar"></i>
-        04/2007 - 09/2008<br />
-        <span style="opacity:0.5;">Boston, MA</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    MBA<br />
+    <span style="opacity:0.5;">Boston University</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    04/2007 - 09/2008<br />
+    <span style="opacity:0.5;">Boston, MA</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 
@@ -390,19 +426,19 @@ system training. 　　
 * 2nd place in the "_13th Annual Net Impact Case Competition_"
 
 <div class="row my-resume-header">
-    <div class="text-left col s6">
-        Master of Science<br />
-        <span style="opacity:0.5;">Ohio University</span>
-    </div>
-    <div class="text-right col-md-5">
-        <i class="fa fa-calendar"></i>
-        09/1995 - 05/1997<br />
-        <span style="opacity:0.5;">Athens, OH</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Master of Science<br />
+    <span style="opacity:0.5;">Ohio University</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    09/1995 - 05/1997<br />
+    <span style="opacity:0.5;">Athens, OH</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 * <span class="myhighlight">Major</span>: Telecommunication, Digital Signal Processing
@@ -411,49 +447,50 @@ system training. 　　
 
 
 <div class="row my-resume-header">
-    <div class="text-left col s6">
-        Bachelor of Science<br />
-        <span style="opacity:0.5;">Shanghai Jiaotong University</span>
-    </div>
-    <div class="text-right col s5">
-        <i class="fa fa-calendar"></i>
-        09/1990 - 07/1994<br />
-        <span style="opacity:0.5;">Shanghai, China</span>
-    </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
-        <br />
-        <i class="fa fa-angle-double-down"></i>
-    </div>
+  <div class="text-left col s6">
+    Bachelor of Science<br />
+    <span style="opacity:0.5;">Shanghai Jiaotong University</span>
+  </div>
+  <div class="text-right col s5">
+    <i class="fa fa-calendar"></i>
+    09/1990 - 07/1994<br />
+    <span style="opacity:0.5;">Shanghai, China</span>
+  </div>
+  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <br />
+    <i class="fa fa-angle-double-down"></i>
+  </div>
 </div>
 
 * <span class="myhighlight">Major</span>: Power System Automation
 * GPA: 3.15/4.0
 
 <script type="text/javascript">
-var j$ = jQuery.noConflict();
+ var j$ = jQuery.noConflict();
 
 
-j$(document).ready(function() {
-    // toggle resume exp content by clicking on its header
-    j$('.my-resume-header').click(function() {
-        j$(this).next('ul').toggle("slide", {
-            direction: "right"
-        }, 1000);
+ j$(document).ready(function() {
+   // toggle resume exp content by clicking on its header
+   j$('.my-resume-header').click(function() {
+     j$(this).next('ul').toggle("slide", {
+       direction: "right"
+     }, 1000);
 
-        j$(this).find('i').last().toggleClass('fa-angle-double-up');
-        j$(this).find('i').last().toggleClass('fa-angle-double-down');
-    });
+     j$(this).find('i').last().toggleClass('fa-angle-double-up');
+     j$(this).find('i').last().toggleClass('fa-angle-double-down');
+   });
 
-    // on page loading, show the 1st section and collapse rest
-    j$('h2').siblings('.my-resume-header').each(function(index) {
-        j$(this).next('ul').hide();
-    });
+   // on page loading, show the 1st section and collapse rest
+   j$('h2').siblings('.my-resume-header').each(function(index) {
+     j$(this).next('ul').hide();
+   });
 
-    // quick time line nav, click to open collapsed section
-    j$('[data-toggle="myexp"]').click(function(){
-        var id = j$(this).attr('href');
-        j$(id).next('ul').toggle("slide", {
-            direction: "right"
-        }, 1000);
-    });
-});</script>
+   // quick time line nav, click to open collapsed section
+   j$('[data-toggle="myexp"]').click(function(){
+     var id = j$(this).attr('href');
+     j$(id).next('ul').toggle("slide", {
+       direction: "right"
+     }, 1000);
+   });
+ });
+</script>

@@ -1,9 +1,13 @@
-<div class="row form-group">
-    <span class="col-xs-6 col-form-label text-right">[[ $ctrl.label ]]</span>
-    <div class="col-xs-5 input-group" style="float:left;">
-        <div class="input-group-addon" ng-show="$ctrl.type=='$'">$</div>
-        <input type="number" class="form-control" min="[[$ctrl.min]]" max="[[$ctrl.max]]" step="[[$ctrl.step]]" ng-model="$ctrl.model">
-        <div class="input-group-addon" ng-show="$ctrl.type=='%'">%</div>
-        <div class="input-group-addon" ng-show="$ctrl.type=='month'">month</div>
-    </div>
+<div class="input-field col s11">
+  <label class="active">
+    [[ $ctrl.label ]]
+    <span  ng-show="$ctrl.type=='$'">$</span>
+    <span ng-show="$ctrl.type=='%'">%</span>
+    <span ng-show="$ctrl.type=='month'">month</span>
+  </label>
+  <input type="number"
+         min="[[$ctrl.min]]"
+         max="[[$ctrl.max]]"
+         step="[[$ctrl.step]]"
+         ng-model="$ctrl.model">
 </div>

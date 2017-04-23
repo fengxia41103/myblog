@@ -128,4 +128,9 @@ gvm use 1.6
 
 # virtualenv
 workon dev
-ssh -X fengxia@10.240.43.74
+
+# gp2 charm dev
+#ssh -X fengxia@10.240.43.74
+
+# local virtualbox charm dev
+ssh -X fengxia@192.168.5.14

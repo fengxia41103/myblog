@@ -106,7 +106,7 @@
 (require 'init-html)
 (require 'init-css)
 (require 'init-haml)
-;; (require 'init-python-mode)
+(require 'init-python-mode)
 (unless (version<= emacs-version "24.3") 
   (require 'init-haskell))
 (require 'init-elm)
@@ -219,11 +219,6 @@
 
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 (setq py-autopep8-options '("--max-line-length=100"))
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode 1)
-            (setq tab-width 4)
-            (setq python-indent 4)))
 
 ;; Golang gofmt hook
 (add-hook 'before-save-hook #'gofmt-before-save)
@@ -1270,12 +1265,12 @@ non-nil; otherwise prompts the user to enter the directory."
   :config)
 
 ;; f3 find
-;; (use-package 
-;;   py-autopep8 
+(use-package 
+  py-autopep8 
 
-;;   :ensure 
-;;   :config (add-hook 'python-mode-hook 'py-autopep8-enable-on-save) 
-;;   :config (setq py-autopep8-options '("--max-line-length=100")))
+  :ensure 
+  :config (add-hook 'python-mode-hook 'py-autopep8-enable-on-save) 
+  :config (setq py-autopep8-options '("--max-line-length=100")))
 
 ;; go-mode tab
 (add-hook 'go-mode-hook 

@@ -1440,20 +1440,34 @@ non-nil; otherwise prompts the user to enter the directory."
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
 (mu4e-maildirs-extension)
+
+;;location of my maildir
+(setq mu4e-maildir (expand-file-name "~/Maildir"))
+
+;;command used to get mail
+;; use this for testing
+(setq mu4e-get-mail-command "true")
+
+(setq mu4e-view-prefer-html t)
+
+;; use this to sync with mbsync
+(setq mu4e-get-mail-command "mbsync -a")
+
+
 (setq mu4e-drafts-folder "/drafts"
       mu4e-sent-folder   "/sent"
       mu4e-trash-folder  "/trash")
-(setq mu4e-maildir-shortcuts
-      '(("/INBOX"             . ?i)
-	("/sent"              . ?s)
-	("/trash"             . ?t)
-	("/drafts"            . ?d)
-	("/review"            . ?r)
-	("/cours"             . ?c)
-	("/private"           . ?p)
-	("/inserm"            . ?m)
-	("/aphp"              . ?a)
-	("/mailing"           . ?l)))
+;; (setq mu4e-maildir-shortcuts
+;;       '(("/INBOX"             . ?i)
+;; 	("/sent"              . ?s)
+;; 	("/trash"             . ?t)
+;; 	("/drafts"            . ?d)
+;; 	("/review"            . ?r)
+;; 	("/cours"             . ?c)
+;; 	("/private"           . ?p)
+;; 	("/inserm"            . ?m)
+;; 	("/aphp"              . ?a)
+;; 	("/mailing"           . ?l)))
 (add-to-list 'mu4e-bookmarks '("flag:attach"    "Messages with attachment"   ?a) t)
 (add-to-list 'mu4e-bookmarks '("size:5M..500M"  "Big messages"               ?b) t)
 (add-to-list 'mu4e-bookmarks '("flag:flagged"   "Flagged messages"           ?f) t)
@@ -1465,12 +1479,12 @@ non-nil; otherwise prompts the user to enter the directory."
 			    (:from-or-to . 25)
 			    (:subject . nil))) 
 
-(setq mu4e-reply-to-address "fengxia41103@gmail.com"
-      user-mail-address "fengxia41103@gmail.com"
+(setq mu4e-reply-to-address "feng_xia41103@hotmail.com"
+      user-mail-address "feng_xia41103@hotmail.com"
       user-full-name "Feng Xia"
       message-signature  (concat
-                          "Foo X. Bar\n"
-                          "http://www.example.com\n")
+                          "Feng Xia\n"
+                          "http://fengxia.co\n")
       message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
       message-citation-line-function 'message-insert-formatted-citation-line
       mu4e-headers-results-limit 250)
@@ -1491,13 +1505,20 @@ non-nil; otherwise prompts the user to enter the directory."
       mu4e-headers-skip-duplicates t
       mu4e-headers-include-related t
       mail-user-agent 'mu4e-user-agent
-      mu4e-get-mail-command "offlineimap"
+      ;; mu4e-get-mail-command "offlineimap"
+      mu4e-get-mail-command "mbsync -a"
+      mu4e-update-interval 300
       mu4e-attachment-dir  "~/Downloads"
+      ;;set up queue for offline email
+      ;;use mu mkdir  ~/Maildir/queue to set up first
       smtpmail-queue-mail  nil
       smtpmail-queue-dir   "~/Maildir/queue/cur")
 (setq mu4e-html2text-command "html2text -utf8 -width 72")
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
-(setq mu4e-attachment-dir  "~/Downloads")
+
+;;rename files when moving
+;;NEEDED FOR MBSYNC
+(setq mu4e-change-filenames-when-moving t)
 
 ;; ;; chinese-pyim
 ;; (use-package chinese-pyim

@@ -109,6 +109,15 @@ Channel gmail-starred
 
 # mbsync config
 
+Follow these steps to set up your local folders:
+
+1. Copy and paste this config to `~/.mbsyncrc`.
+2. Create these folders: `~/Maildir`, `~/Maildir/Hotmail`, and
+   `~/Maildir/Gmail`.
+3. Run command `mbsync -a`, sit back, and watch your remote emails got
+pull down and backed up locally.
+4. Run `mu index` to index local emails.
+
 <pre class="brush:plain;">
 # mbsyncrc based on
 # http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html

@@ -1491,14 +1491,22 @@ non-nil; otherwise prompts the user to enter the directory."
 
 
 (require 'smtpmail)
+;; (setq message-send-mail-function 'smtpmail-send-it
+;;       starttls-use-gnutls t
+;;       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+;;       smtpmail-auth-credentials
+;;       '(("smtp.gmail.com" 587 "fengxia41103@gmail.com" nil))
+;;       smtpmail-default-smtp-server "smtp.gmail.com"
+;;       smtpmail-smtp-server "smtp.gmail.com"
+;;       smtpmail-smtp-service 587)
 (setq message-send-mail-function 'smtpmail-send-it
       starttls-use-gnutls t
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-starttls-credentials '(("smtp.live.com" 25 nil nil))
       smtpmail-auth-credentials
-      '(("smtp.gmail.com" 587 "fengxia41103@gmail.com" nil))
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587)
+      '(("smtp.live.com" 25 "feng_xia41103@hotmail.com" nil))
+      smtpmail-default-smtp-server "smtp.live.com"
+      smtpmail-smtp-server "smtp.live.com"
+      smtpmail-smtp-service 25)
 
 (setq message-kill-buffer-on-exit t
       mu4e-sent-messages-behavior 'delete

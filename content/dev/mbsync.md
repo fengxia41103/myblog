@@ -116,7 +116,8 @@ Follow these steps to set up your local folders:
    `~/Maildir/Gmail`.
 3. Run command `mbsync -a`, sit back, and watch your remote emails got
 pull down and backed up locally.
-4. Run `mu index` to index local emails.
+4. Clear old index `rm -r ~/.mu`.
+5. Run `mu index` to index local emails.
 
 <pre class="brush:plain;">
 # mbsyncrc based on

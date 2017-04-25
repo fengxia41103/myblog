@@ -23,9 +23,9 @@ a relation, if defined, must be one of the two types:
 2. **require** (eg. I'm Mediawiki and I require a SQL database).
 
 <figure class="row">
-<img class="img-responsive center-block"
-src="/images/juju%20control%20modeling.png" />
-<figcaption>Juju control modeling</figcaption>
+  <img class="img-responsive center-block"
+       src="/images/juju%20control%20modeling.png" />
+  <figcaption>Juju control modeling</figcaption>
 </figure>
 
 
@@ -79,26 +79,26 @@ scripts. Any charm supports the following hooks:
 7. leader-elected
 8. leader-settings-changed
 
-where each event also has four _relation hooks_:
+For each `relation` defined, there are four _relation hooks_:
 
 1. [name]-relation-joined
 2. [name]-relation-changed
 3. [name]-relation-departed
 4. [name]-relation-broken
 
-This will give us total of 32 different hooks to choose from. But what
-if we want to do something based on a combination of the above events,
-and maybe even with some logics &rarr; run this script _after install
-is done, and the application has stopped, and a
-[update-status]-relation-joined has occured_? This is messy.
-
-So instead of individual hooks, we have now a better way to capture
-this concept using **[States][16]** &mdash; [reactive pattern][10].  A
-charm can define arbitrary state, say **foo**. Another charm can then
-uses Python decorator, eg. **@when**, **@when_not**, to specify the
-status of **foo**, which then determined whether the function will be
+Hooks run in a paritcular sequence, and that sequence is
+**hardcoded**.  This is terrible. So instead of individual hooks, we
+have now a better way to capture this concept using **[States][16]**
+&mdash; [reactive pattern][10].  A charm can define arbitrary state,
+say **foo**. Another layer in the same charm can then uses Python
+decorator, eg. **@when**, **@when_not**, to specify the status of
+**foo**, which then determined whether the function will be
 executed. I suppose the framework itself handles event polling,
 broadcasting and the like.
+
+> State has a namespace per charm per unit. Therefore, states do not
+> go across unit boundary, nor charm boundary.
+> For states between charms/units, use `interface`.
 
 [10]: https://pythonhosted.org/charms.reactive/
 [16]: https://jujucharms.com/docs/stable/developer-layers#states

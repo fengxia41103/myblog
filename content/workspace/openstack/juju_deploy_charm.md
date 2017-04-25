@@ -65,7 +65,7 @@ job done:
 1. Add the new machine to juju's environment. A juju agent
    (aka. jujud) will be installed. More details are discussed 
    in the next section.
-  <pre class="brush:bash;">
+  <pre class="brush:plain;">
   $ juju add-machine ssh://[username]@192.168.8.235
   </pre>
 
@@ -73,7 +73,7 @@ job done:
    machine and register its availability.
 
 3. Issuing a deploy command
-  <pre class="brush:bash;">
+  <pre class="brush:plain;">
   $ juju deploy jenkinsn
   </pre>
 
@@ -110,7 +110,7 @@ _whateverusername_. We intentionally avoided using _ubuntu_ as user
 because we know the bootstrap was relying on such an account. Will
 juju complain of its missing? Let's find out.
 
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 $ juju add-machine ssh://[username]@192.168.8.235
 </pre>
 
@@ -122,7 +122,7 @@ installed by this command.
 This is the *home* folder for juju &mdash; _/var/lib/juju_.  Remember,
 this folder did not exist prior to the _add-machine_ command.
 
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 /var/lib/juju
 ├── agents
 │   └── machine-15
@@ -153,7 +153,7 @@ forth), but will be tedious.
 
 ## /etc
 
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 /etc/apt/apt.conf.d/42-juju-proxy-settings
 /etc/profile.d/juju-introspection.sh
 /etc/sudoers.d/90-juju-ubuntu
@@ -173,7 +173,7 @@ others.
 Two binaries appeared, both linked (again) to some files under the
 _/var/lib/juju/_ folder.
 
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 /usr/bin/juju-dumplogs
 /usr/bin/juju-run
 
@@ -184,7 +184,7 @@ lrwxrwxrwx 1 root   root      36 Jan 19 16:47 juju-run -> /var/lib/juju/tools/ma
 
 ## /usr/share
 
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 /usr/share/sosreport/sos/plugins/juju.py
 /usr/share/sosreport/sos/plugins/\_\_pycache\_\_/juju.cpython-35.pyc
 </pre>
@@ -195,7 +195,7 @@ So juju's agent install process actually created a user *ubuntu* which
 did not exist before. In _/home/ubuntu/.ssh_ folder, a file of
 _authorized_keys_. Um.
 
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 /home/ubuntu/.juju-proxy
 </pre>
 
@@ -211,7 +211,7 @@ deploying an application, in this case, jenkins.
   > Juju charm is a zip file. You can use command _unzip_ to extract
   > these contents under the /var/lib/juju/unit-jenkins-1/ folder.
   
-<pre class="brush:bash;">
+<pre class="brush:plain;">
 /var/lib/juju
 ├── agents
 │   ├── machine-15

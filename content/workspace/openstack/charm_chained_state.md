@@ -1,4 +1,4 @@
-Title: Charm development -- chained states
+Title: Charm chained states
 Date: 2017-04-24 13:00
 Tags: juju charm state
 Slug: juju charm chained states

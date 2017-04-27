@@ -1,0 +1,30 @@
+@startuml
+
+actor BootstrapAgent as agent
+participant LXCA as lxca
+participant Orchestrator as orche
+participant ResourceRepo as repo
+participant WorkloadRepo as workload
+
+agent -> orche: register resource from repo XYZ
+note left
+     repo URL
+     resource list or data file pattern
+end note
+
+orche -> workload: get "resource registration" workloads
+activate workload
+workload -> orche: workload blueprints
+orche -> orche: execute workload
+
+orche -> repo: GET resource data files
+repo -> orche: resource metadata
+orche -> orche: parse and validate
+orche -> lxca: POST resource metadata
+orche -> orche: next state -- wait for ACK
+lxca -> lxca: register resources
+lxca -> orche: ACK
+deactivate workload
+
+orche -> agent: done
+@enduml

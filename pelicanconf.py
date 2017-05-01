@@ -45,3 +45,9 @@ LOAD_CONTENT_CACHE = False  # for development use
 
 #SUMMARY_MAX_LENGTH = 300
 IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
+
+
+# plugins
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['tipue_search']
+DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'archives', 'search']

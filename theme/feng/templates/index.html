@@ -47,15 +47,6 @@
 {% block content %}
 <div class="container center-block">
   {% include 'pagination.html' %}
-  <form id="searchform"
-        action="/search.html"
-        onsubmit="return (this.elements['q'].value.length > 0)">
-    <input id="searchbox"
-           type="text"
-           name="q"
-           size="12"
-           placeholder="Search">
-  </form>
 
   {% for article in articles_page.object_list %}
   <div class="row">

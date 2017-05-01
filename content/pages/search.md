@@ -1,14 +1,10 @@
-{% extends "article.html" %}
+Title: Search
+Tags: search
+Slug: search
+Author: Feng Xia
 
-{% block main_content %}
-<div id="sth"></div>
-{% endblock %}
+<div id="search"></div>
 
-{# reset related section on purpose #}
-{% block related %}
-{% endblock %}
-
-{% block reactjs %}
 <script type="text/babel">
  var randomId = function() {
    return "MY" + (Math.random() * 1e32).toString(12);
@@ -16,7 +12,8 @@
 
  var ItemBox = React.createClass({
    render: function(){
-     return (
+      var url = "/"+this.props.url;
+      return (
        <div className="row">
          <div className="col s2">
            <i className="fa fa-tag">&nbsp;</i>
@@ -26,7 +23,7 @@
            {this.props.title}
          </div>
          <div className="col s3 right-align">
-           <a href={this.props.url}>
+           <a href={url}>
              read more
            </a>
          </div>
@@ -68,7 +65,7 @@
        this.setState({
          in_search: data
        })
-     }, 1000);
+     }, 500);
    },
    render: function(){
      var pages = this.state.articles.pages;
@@ -108,9 +105,6 @@
    render: function(){
      return (
        <div className="input-field">
-         <label className="active">
-           Search
-         </label>
          <input type="text"
                 placeholder="Search content"
                 onChange={this.props.handleChange}/>
@@ -122,8 +116,8 @@
 
  ReactDOM.render(
    <SearchBox />,
-   document.getElementById("sth")
+   document.getElementById("search")
  );
 
 </script>
-{% endblock %}
+

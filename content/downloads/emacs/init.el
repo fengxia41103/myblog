@@ -91,7 +91,7 @@
 (require 'init-git)
 (require 'init-github)
 
-(require 'init-projectile)
+;; (require 'init-projectile)
 
 (require 'init-compile)
 (require 'init-crontab)
@@ -1515,7 +1515,7 @@ non-nil; otherwise prompts the user to enter the directory."
       mail-user-agent 'mu4e-user-agent
       ;; mu4e-get-mail-command "offlineimap"
       mu4e-get-mail-command "mbsync -a"
-      mu4e-update-interval 300
+      mu4e-update-interval 3600
       mu4e-attachment-dir  "~/Downloads"
       ;;set up queue for offline email
       ;;use mu mkdir  ~/Maildir/queue to set up first

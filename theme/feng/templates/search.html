@@ -16,7 +16,7 @@
        <div className="row">
          <div className="col s12">
            <div className="label label-default">
-             <i className="fa fa-calendar">&nbsp;</i>
+             <i className="fa fa-tag">&nbsp;</i>
              {this.props.tags}
            </div>
          </div>
@@ -72,21 +72,28 @@
    render: function(){
      var pages = this.state.articles.pages;
      var in_search = this.state.in_search;
-     var items = _.filter(pages, function(p){
-       // search for searchbox input
-       if (p.title.indexOf(in_search)>0 || p.text.indexOf(in_search)>0){
-         return true;
-       }else{
-         return false;
-       }
-     });
+     var items = pages; // by default, display all pages
+     if (in_search){
+       items = _.filter(pages, function(p){
+         // search for searchbox input
+         if (p.title.indexOf(in_search)>0 || p.text.indexOf(in_search)>0){
+           return true;
+         }else{
+           return false;
+         }
+       });
+     }
 
-     items = items.map(function(p){
-       return <ItemBox key ={p.url}
-                       {...p}/>
+     // display all pages or filtered items
+     if (pages){
+       items = items.map(function(p){
+         return <ItemBox key ={p.url}
+                         {...p}/>
 
-     });
+       });
+     }
 
+     // render
      return (
        <div>
          <SearchInput handleChange ={this._handleChange}/>

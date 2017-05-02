@@ -417,3 +417,8 @@ code {
   border-radius: 4px;
   padding: 2px 4px;
 }
+
+section.myslides {
+  text-align: left;
+  padding-left: 5em;
+}

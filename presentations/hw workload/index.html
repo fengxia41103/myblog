@@ -1,33 +1,208 @@
 <html>
   <head>
-    <link rel="stylesheet"
-          type="text/css"
-          href="../bower_components/reveal.js/css/reveal.css">
-    <link rel="stylesheet"
-          type="text/css"
-          href="../bower_components/reveal.js/css/theme/white.css">
     <title>Workload Solution Project</title>
     <meta name="date" content="2017-05-01"></meta>
+
+    <!-- reveal.js -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="/static/bower_components/reveal.js/css/reveal.css">
+    <!-- <link rel="stylesheet"
+         type="text/css"
+         href="/static/bower_components/reveal.js/css/static/white.css">
+       -->
+    <!-- {# Fontawesome #} -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="/static/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <!-- {# DataTable #} -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="/static/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <!-- {# Syntaxhighlighter #} -->
+    <link rel="stylesheet"
+          href="/static/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
+    <link rel="stylesheet"
+          href="/static/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+
+    <!-- {# google fonts #} -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Baloo+Paaji|Jaldi|Teko" rel="stylesheet"> -->
+
+
+    <!-- {# my own #} -->
+    <link rel="stylesheet"
+          href="/static/css/my.css">
+
+    <!-- {# JQuery lib #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- {# angularJS #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/angular/angular.min.js">
+    </script>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
 	<section>
-          Workload Solution
+          <h1>
+            Workload Solution Project
+          </h1>
+        </section>
+	<section>
+          <h1>
+            Agenda
+          </h1>
+
+            <p> Project overview</p>
+            <p> HW workload</p>
+            <p> Juju intro</p>
+            <p> Charm intro</p>
 
         </section>
-	<section>Slide 2</section>
-	<section>Slide 3</section>
-	<section>Slide 4</section>
+
+        <section>
+          <img data-src="images/deploy%20openstack%20juju%20gui.gif"
+               width="100%"
+               alt="Down arrow"/>
+          <br />
+          <h2>
+            We are deploying Openstack &mdash; total 16 services
+            and 4 containers
+          </h2>
+        </section>
+        <section>
+          <section>
+              left pane
+          </section>
+          <section>
+              right pane
+          </section>
+        </section>
       </div>
     </div>
     <script type="text/javascript"
-            src="../bower_components/reveal.js/js/reveal.js">
+            src="/static/bower_components/reveal.js/js/reveal.js">
     </script>
 
+    <!-- {% block Javascripts %} -->
+    <!-- {# jquery-ui #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <!-- {# tether #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <!-- {# DataTable #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/static/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+
+    <!-- {# Syntaxhighlighter #} -->
+    <!-- <script type="text/javascript"
+         src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shAutoloader.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shBrushXml.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shBrushBash.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shBrushJScript.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shBrushPlain.js">
+         </script>
+         <script type="text/javascript"
+         src="/static/bower_components/SyntaxHighlighter/scripts/shBrushYaml.js">
+         </script> -->
+
+    <!-- {# TOC https://github.com/dcneiner/TableOfContents/tree/master #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <!-- {# financejs #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/financejs/finance.js">
+    </script>
+
+    <!-- {# Highcharts #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <!-- {# Lodash #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <!-- {# https://github.com/JedWatson/classnames #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/classnames/index.js">
+    </script>
+
+    <!-- {# REACT #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/static/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/static/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/static/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+
+    <!-- {# TOC https://github.com/ndabas/toc #} -->
+    <script type="text/javascript"
+            src="/static/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <!-- {# application js #} -->
     <script type="text/javascript">
-     Reveal.initialize({
-       touch: true
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // syntaxhighlighter
+       /* SyntaxHighlighter.defaults['toolbar'] = false;
+        * SyntaxHighlighter.all();*/
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // Reveal.js
+       Reveal.initialize({
+         touch: true
+       });
      });
     </script>
   </body>

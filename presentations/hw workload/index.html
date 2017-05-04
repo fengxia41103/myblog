@@ -19,7 +19,8 @@
   <body>
     <div class="reveal">
       <div class="slides">
-	<section class="myslides mycover">
+        <!-- cover page -->
+	<section class="myslides">
           <h1>Workload Solution Project</h1>
           <p class="myhighlight">
             Juju & charms
@@ -27,15 +28,61 @@
           <div class="divider"></div>
         </section>
 
-        <section>
-            <img src="/hw%20workload/images/deploy%20openstack%20juju%20gui.gif"
-            <p>
-              Deploying Openstack &mdash; 16 services into 4 containers
-            </p>
+        <!-- agenda -->
+        <section class="myslides" data-markdown>
+          <script type="text/template">
+## Agenda
+
+1. A new way
+2. Design patterns
+3. HW workload demo
+          </script>
         </section>
 
+        <!-- openstack deploy demo -->
+        <section>
+          <img data-src="/hw%20workload/images/deploy%20openstack%20juju%20gui.gif"/>
+          <span class="myhighlight">
+            Deploying Openstack &mdash; 16 services into 4 containers
+          </span>
+        </section>
+
+        <!-- HW manifest today -->
 	<section class="myslides">
-          this is my cover page
+            <h2>Hardware manifest today</h2>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="col s6">
+                <img data-src="/hw%20workload/images/hw%20manifest%20yaml.png"/>
+              </div>
+              <div class="col s6" data-markdown style="font-size: 22px;">
+                <script type="text/template">
+<span class="myhighlight">
+**ThinkAgile CX manufacturing manifest**
+</span>
+
+- The good:
+   - Lots of domain knowledge
+- The challenge:
+   - Not built for human consumption
+- The hope:
+   - A clear tree hierarchy and modular components.
+   - A easy-to-digest data format for system
+                </script>
+
+                <img data-src="/hw%20workload/images/disappointed-mel.jpg"/>
+              </div>
+        </section>
+
+        <!-- HW manifest tomorrow -->
+        <section class="row">
+          <div class="col s6">
+          </div>
+          <div class="col s6">
+          </div>
+        </section>
+
+        <section>
           <pre class="brush:python">
             def main():
               try:
@@ -43,6 +90,16 @@
               except:
                 that
           </pre>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+             ## Try Markdown
+
+             If I can write contents in Markdown
+             1. this item bullet
+             2. another one
+          </script>
         </section>
       </div>
     </div>
@@ -76,8 +133,11 @@
             src="/static/bower_components/SyntaxHighlighter/scripts/shBrushYaml.js">
     </script>
 
+    <!-- <script type="text/javascript"
+         src="/static/bower_components/reveal.js/plugin/markdown/marked.js">
+         </script> -->
     <script type="text/javascript"
-            src="/static/js/head.min.js">
+            src="/static/bower_components/reveal.js/lib/js/head.min.js">
     </script>
 
     <script>
@@ -93,7 +153,7 @@
            { src: '/static/bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 
            // Interpret Markdown in <section> elements
-           { src: '/static/bower_compoents/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+           { src: '/static/bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
            { src: '/static/bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 
            // Syntax highlight for <code> elements

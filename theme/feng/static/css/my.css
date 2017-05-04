@@ -420,5 +420,15 @@ code {
 
 section.myslides {
   text-align: left;
-  padding-left: 5em;
+  padding-left: 2em;
+}
+
+section.mycover {
+  background: url("/static/images/background-1684.jpg") no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #efefef;
+  overflow-x: hidden;
 }

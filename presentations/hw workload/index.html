@@ -19,20 +19,29 @@
   <body>
     <div class="reveal">
       <div class="slides">
-	<section class="left-align">
+	<section class="myslides mycover">
           <h1>Workload Solution Project</h1>
           <p class="myhighlight">
             Juju & charms
           </p>
           <div class="divider"></div>
         </section>
-	<section>
+
+        <section>
+            <img src="/hw%20workload/images/deploy%20openstack%20juju%20gui.gif"
+            <p>
+              Deploying Openstack &mdash; 16 services into 4 containers
+            </p>
+        </section>
+
+	<section class="myslides">
+          this is my cover page
           <pre class="brush:python">
-def main():
-  try:
-    this
-  except:
-    that
+            def main():
+              try:
+                this
+              except:
+                that
           </pre>
         </section>
       </div>
@@ -67,6 +76,9 @@ def main():
             src="/static/bower_components/SyntaxHighlighter/scripts/shBrushYaml.js">
     </script>
 
+    <script type="text/javascript"
+            src="/static/js/head.min.js">
+    </script>
 
     <script>
      var j$ = jQuery.noConflict();
@@ -76,6 +88,26 @@ def main():
        SyntaxHighlighter.all();
 
        Reveal.initialize({
+         dependencies: [
+           // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+           { src: '/static/bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+           // Interpret Markdown in <section> elements
+           { src: '/static/bower_compoents/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+           { src: '/static/bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+           // Syntax highlight for <code> elements
+           { src: '/static/bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+           // Zoom in and out with Alt+click
+           { src: '/static/bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true },
+
+           // Speaker notes
+           { src: '/static/bower_components/reveal.js/plugin/notes/notes.js', async: true },
+
+           // MathJax
+           { src: '/static/bower_components/reveal.js/plugin/math/math.js', async: true }
+         ],
          markdown:{
            smartypants: true
          }

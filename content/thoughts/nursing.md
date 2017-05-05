@@ -3,12 +3,11 @@ Date: 2017-05-05 16:31
 Tags: dementia
 Slug: nursing home evaluation
 Author: Feng Xia
-Status: Draft
 
 Due to Dad's deterioating condition, nursing home becomes a necessary
-option that we can consider as a way to handle this situation. The
+option that we must consider as a way to handle this situation. The
 following are notes most based on recollection and first impression
-that they are likely biased and are certainly opinionated.
+so that they are likely biased and are certainly opinionated.
 
 Sites visited:
 
@@ -17,9 +16,10 @@ Sites visited:
    quite successful.
 2. 苏州怡养园: recommended by 大姐、小姐 and our neighbour. It's meant
    to be the best option in Suzhou.
-3. 上海泰康申园: recommended by a BJ friend. The facility has location in
+3. 上海泰康申园: recommended by a BJ friend. The facility also has locations in
    BJ and Guangzhou. Well known for its patients such as 前外交部长吴
-   仪.
+   仪. It was also mentioned that enrolled patients can move from
+   location to location free of charge.
 4. 上海凯健国际Cascade Health: invested by Cascade from the
    States. Looks great on paper. Highend service.
 
@@ -55,7 +55,7 @@ hair cut, physical therapy, nutrition consulting. Quality however varies.
 | Info organized (1-5)     | 4             | 3                    | 5                                  | 2                       |
 | Sales熟悉业务程度 (1-5)  | 4             | 3                    | 4                                  | 1                       |
 
-# 自理区
+# Independent care 自理区
 
 Independent care can be rather lively. People in BJ site are rather
 young. So it feels more like a group living that these people are
@@ -83,7 +83,7 @@ room.
 | 老人精神面貌 (1-5)                  |          5 |          3 |              |                         |
 | 护工精神面貌 (1-5)                  |          4 |          3 |              | 2                       |
 
-# Dependent care
+# Dependent care 护理区
 
 First of all, none provide dedicated dementia services. They all have
 such patients. Only 上海泰康 is actively pursing assisting methods to
@@ -100,7 +100,7 @@ to take to help the situation.
 Facility is nearly identical to its independent care section except an
 added nurse frontdesk on each floor. However the woman doctor
 disappaered during my short visit and the desk was unattended. Even
-though there is medical cabinet in the back room, but I felt the room
+though there is medical cabinet in the back room, I felt the room
 was strangely uncluttered so I suspect the room doesn't have much
 supply, therefore the service it can provide will also be limited.
 
@@ -108,9 +108,9 @@ I did not see any patient with Dad's symptom. They may be taken for
 walk, or the patient they have are 卧床 type instead of Dad's
 situation. Either way, helpers are midage country women who unlikely
 received much training. There is 1 on 1 available but the person will
-not be in the same room. Independent section, on the other hand, has
-room with double beds or a small storage room that can be used for
-helper's bedroom.
+not sleep in the same room, therefore this is only a 12-hour deal.
+Independent section, on the other hand, has room with double beds or a
+small storage room that can be used for helper's bedroom.
 
 Each room has two beds so it is shared. However, not many patients on
 the floor I visited so many rooms are open to pick.
@@ -164,7 +164,7 @@ made feel a lack of will to be responsible in general. Both these two
 people talked with shifting eyes looking at each other as if to sync
 the message. This turned me off.
 
-## 上海泰康
+## 上海泰康(申园)
 
 Facility is absolutely top notch. The library room and movie theater
 were impressive. There were cleaning staff throughout the building and
@@ -205,11 +205,35 @@ games for them, similar to ones for babies, and "他们可以作这些简单的
 游戏". There is also nutritionist who is responsible to each patient's
 meals.
 
-Overall, in place I felt **hopeful**, and what a priceless anyone can
-wish right now?
+Overall, in place I felt **hopeful**, and what a priceless feeling anyone can
+wish for right now?
+
+## 上海凯健Cascade Health
+
+This was a complete disappointment. The sales contact were not there
+and the frontdesk boy she directed me knew next to nothing about the
+service and price. Walking around the facility was rather depressing
+also.
+
+First, the location bragged river view (by 黄浦江). Yet the section of
+that water can at most be called a creek. Forget about the view, I
+suspect there is even much water in that canal.
+
+Many sections of the facility had no lights. Since it was a cloudy day
+the whole place felt poor lit and damp. I peeked into a few rooms in
+both sections. There were couples living together with likely their
+own furniture since they look awefully familiar to those I found in 江
+南 homes &mdash; all dark colored and looked heavy. All room doors
+were semi-opened which is another living custom among
+southerners. 
+
+There were physical therapy for patients who are paralyzed. I couldn't
+however tell how well it was received or performed. Since little
+information the boy was able to provide, the tour was short, dry and
+little helpful. Oh well, so much for an international name.
 
 | Evaluation                                | 北京金手杖     |            苏州怡养园 | 上海泰康申园   | 上海凯健 cascade health |
-|-------------------------------------------+----------------+-----------------------+----------------+-------------------------|
+|-------------------------------------------|----------------|-----------------------|----------------|-------------------------|
 | 护理区room for couple                     | N              |                     N | N              |                         |
 | 护理区share room                          | 2 per room     |                   2-3 | 1              |                         |
 | 护理区 overall expanse per month          | 16000          |                 10000 | 24000          |                         |
@@ -225,3 +249,33 @@ wish right now?
 | 老人精神面貌 (1-5)                        | 4              |                     3 | 5              |                         |
 | 护工精神面貌 (1-5)                        | 4              |                     3 | 5              |                       2 |
 
+# Recommendation
+
+Based on all these and the indirect signals I picked up, I highly
+recommend 上海泰康 for Dad's well being both in the short term and in
+the long run.
+
+To get in it requires 200k deposit and 3-month fee, an all-inclusive
+24k per month &rarr; 280k at first payment. Each following month
+payment can be handled by dividing it into three tranches:
+
+1. Dad's pension: 7000
+2. Suzhou fund: 10000
+3. Feng: 7000
+
+First of all, this is sustainable. Suzhou fund has plenty to sustain
+in that rate and will leave good amount reserve for rainy days. 
+My portion is affordable with my current job.
+
+Second, this makes it possible that we all keep our current job and
+family setup without much change. Of course being nearby is still
+preferred. But this level of service makes one feel comfortable to
+leave for job or travel if needed.
+
+Third, Mom may join. If the facility is inviting for her, she
+can decide to join nursing home soon, thus making an arrangement now instead of
+later. To afford this we will make it clear that one of the two houses
+must be used for the support. This can also help her to realize the
+tradeoff and, if so, use the equity for true need instead of paper
+profit. Not to mention liquidation now also lessen the hassles of their
+will concerns.

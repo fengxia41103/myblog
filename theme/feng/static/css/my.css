@@ -431,3 +431,7 @@ section.mycover {
   color: #efefef;
   overflow-x: hidden;
 }
+
+.reveal section img {
+  border: none;
+}

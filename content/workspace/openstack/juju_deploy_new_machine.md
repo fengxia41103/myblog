@@ -12,7 +12,7 @@ a deploy process:
 [1]: {filename}/workspace/openstack/juju_deploy_charm.md
 
 1. Add a new machine to the cloud environment. In the [demo][1],
-   we added this machine manually using _juju add-machine_ command.
+   we added this machine manually using `juju add-machine` command.
 2. Machine-0 recognizes the new node.
 3. CLI issues a deploy command.
 4. Charm gets deployed.
@@ -26,15 +26,15 @@ fly? MAAS provider can almost do just that.
 # MAAS way of a deploy
 
 We have briefly touched upon [the MAAS way][1].  By default, Juju
-deploy will request for a new machine unless using the "--to [machine
-number]" flag. While using MAAS it is seen that MAAS will turn a READY
-machine into ALLOCATED then DEPLOYING. Once a Juju agent is installed
+deploy will request for a new machine unless using the `--to [machine
+number]` flag. While using MAAS it is seen that MAAS will turn a `READY`
+machine into `ALLOCATED` then `DEPLOYING`. Once a Juju agent is installed
 (provisioned), the agent executes application deployment.
 
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
+         src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -59,17 +59,17 @@ application. So just how are agents wired together?
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20agent%20overview.png" />
+         src="/images/juju%20agent%20overview.png" />
     <figcaption>High level view of Juju agents in an environment</figcaption>
 </figure>
 
 The key of this diagram is that the agents are connected in a
-    **client-server** configuration, where machine-0's agent is the
-    _API server_ and all other agents are its clients. The API server
-    provides a _facade_, a design pattern, which exposes functions for
-    client to call. It is not clear yet how function is mapped to a
-    string, eg. "Deploy" RPC will translate to facade's _Deploy()_
-    function call.So Juju CLI is a client, same as a provisioned node.
+**client-server** configuration, where machine-0's agent is the _API
+server_ and all other agents are its clients. The API server provides
+a _facade_, a design pattern, which exposes functions for client to
+call. It is not clear yet how function is mapped to a string,
+eg. `Deploy` RPC will translate to facade's `Deploy()` function
+call.So Juju CLI is a client, same as a provisioned node.
 
 
 ## Machine-0, state, and provisioner
@@ -80,14 +80,14 @@ persisted in a mongo DB. A command will cause a state change, eg. if
 machine XYZ's current state is one that has no MySQL (state A), a
 deploy MySQL command will generate a state B (=state A + MySQL
 installed).  This change is then saved to the DB. There is a
-background loop called **provisioner**, who monitors this state
+background loop called `provisioner`, who monitors this state
 change. The change(set) essentially has all the information the
 provisioner needs to take an action so to bring machine from state A
 &rarr; state B.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20machine%200%20state.png" />
+         src="/images/juju%20machine%200%20state.png" />
     <figcaption>Machine-0 state & provisioner</figcaption>
 </figure>
 
@@ -95,9 +95,9 @@ provisioner needs to take an action so to bring machine from state A
 
 Ok, so the provisioner loop is the action taker. How is it aware of
 the cloud provider? This is the final piece of the puzzle &mdash;
-within the _provisionTask_ struct, there is a
-_environs.InstanceBroker_. Now if you recall, the _environs_ is
-another name for provider, where _InstanceBroker_ is a provider
+within the `provisionTask` struct, there is a
+`environs.InstanceBroker`. Now if you recall, the `environs` is
+another name for provider, where `InstanceBroker` is a provider
 interface! Bingo.
 
 <pre class="brush:bash;">
@@ -132,19 +132,17 @@ roughly like this:
 2. RPC figures out what the next state needs to be.
 3. machine-0's agent write the change to DB.
 4. Provisioner detects a state change.
-5. Provisioner task calls _environs.broker.StartInstance_ function to
+5. Provisioner task calls `environs.broker.StartInstance` function to
    kick off a new machine.
 
 Mapping everything here into what's in the code, here is a
 illustration showing call chain from one module to the next. Some of
 them are just think wrapper of next function. The mapping between a
-command to a state is taking place in _state.AddApplication()_ which
+command to a state is taking place in `state.AddApplication()` which
 I'm highlighting in <font color="green">green</font>.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20deploy%20call%20chain.png" />
+         src="/images/juju%20deploy%20call%20chain.png" />
     <figcaption>Illustration of call chain by "juju deploy" command</figcaption>
 </figure>
-
-

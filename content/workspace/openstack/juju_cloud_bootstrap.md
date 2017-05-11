@@ -1,11 +1,11 @@
-Title: Canonical Juju bootstrap process
+Title: Juju bootstrap process
 Date: 2017-1-11 17:00
 Tags: openstack
 Slug: juju bootstrap
 Author: Feng Xia
 
-The very first command user will encounter is the _juju bootstrap_. It
-createa a special machine &mdash; state controller, machine-0, control
+The very first command user will encounter is the `juju bootstrap`. It
+createa a special machine &mdash; state controller, `machine-0`, control
 node, etc. &mdash; naming convention aside, it is the brain that
 tracks others nodes in the cloud, applications installed and their
 status. 
@@ -16,12 +16,12 @@ Through research I want to learn about its process, internal
 mechanism, how this command triggers off other juju components, what
 is the minimum take to simulate a successful bootstrap, and if things
 go south, what is the minimum to simulate a clean state so we can run
-_juju bootstrap_ again as if from scratch. This last point is
+`juju bootstrap` again as if from scratch. This last point is
 particuarly useful for development and troubleshooting.
 
 <figure class="row">
     <img class="img-responsive center-block"
-    src="/images/juju%20bootstrap.gif" />
+         src="/images/juju%20bootstrap.gif" />
     <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
 </figure>
 
@@ -63,7 +63,7 @@ top. It's magic.
 Being able to handle multiple types of cloud, Juju abstracs a _cloud_
 with _an envrionment_ (we will use "cloud" and "environment"
 interchangeably in this article).  Within an environment, there is a
-special machine, the _machine-0_, that functions as a management node
+special machine, the `machine-0`, that functions as a management node
 to all other machines.  In essence it is a state controller where
 configurations of all slave nodes, status of deployed applications and
 so on are kept.  The _cloud provider_ is the driver layer where Juju's
@@ -72,7 +72,8 @@ common bootstrap framework to tie these providers into a common
 process.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="/images/juju%20cloud%20and%20provider.png" />
+  <img class="img-responsive center-block"
+       src="/images/juju%20cloud%20and%20provider.png" />
     <figcaption>Juju cloud abstraction</figcaption>
 </figure>
 
@@ -145,7 +146,8 @@ live.  In a nutshell, all activities can be categorized into the
 followings:
 
 <figure class="row">
-    <img class="img-responsive center-block" src="/images/juju%20bootstrap%20overview.png" />
+  <img class="img-responsive center-block"
+       src="/images/juju%20bootstrap%20overview.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -173,15 +175,22 @@ followings:
 
 # Bootstrap framework 
 
-With the overview in mind, let's take a look Juju's actual bootstrap process located in _juju.juju.environs.Bootstrap_ function.
+With the overview in mind, let's take a look Juju's actual bootstrap
+process located in `juju.juju.environs.Bootstrap` function.
 
-* <font color="gray">Gray</font> boxes: depicts data inputs to each functional block, and details of data structures. 
-* <font color="green">Green</font> boxes: are integration points with different cloud providers &mdash; how to start an instance from scratch (provisioning), and
-how to configure an OS-ed machine. The latter can be argued cloud agnostic. However, it is heavily geared towards Ubuntu environment by default.
-* <font color="blue">Blue</font>: are clearly Canonical dependent due to hard-coded values (eg. simplestream URL).
+* <font color="gray">Gray</font> boxes: depicts data inputs to each
+  functional block, and details of data structures.
+* <font color="green">Green</font> boxes: are integration points with
+  different cloud providers &mdash; how to start an instance from
+  scratch (provisioning), and how to configure an OS-ed machine. The
+  latter can be argued cloud agnostic. However, it is heavily geared
+  towards Ubuntu environment by default.
+* <font color="blue">Blue</font>: are clearly Canonical dependent due
+  to hard-coded values (eg. simplestream URL).
 
 <figure class="row">
-    <img class="img-responsive center-block" src="/images/juju%20bootstrap%20process.png" />
+  <img class="img-responsive center-block"
+       src="/images/juju%20bootstrap%20process.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -201,17 +210,22 @@ Now let's drive into a provider's arena and take a look what a provider offers.
 
 # Illustration of a "common" provider 
 
-Juju's _common_ provider serves as an example for study. It can looked as a _standard_ way to provision and configure a node. As a matter of fact,
-some providers uses its _Bootstrap_ function completely. 
+Juju's _common_ provider serves as an example for study. It can looked
+as a _standard_ way to provision and configure a node. As a matter of
+fact, some providers uses its `Bootstrap` function completely.
 
 ## "common" provisioning & cloud integration
 
-If framework has done preliminary sanity checks and collected possible resources, provider's task is to make a final pick. 
-Thing like selecting the OS image and juju agent and tools are all taking place here. Once ducks are in line, call a _provider's BootstrapInstance_
-function &larr; and this is the point where underline cloud meets Juju.
+If framework has done preliminary sanity checks and collected possible
+resources, provider's task is to make a final pick.  Thing like
+selecting the OS image and juju agent and tools are all taking place
+here. Once ducks are in line, call a provider's `BootstrapInstance`
+function &larr; and this is the point where underline cloud meets
+Juju.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="/images/juju%20common%20BootstrapInstance.png" />
+  <img class="img-responsive center-block"
+       src="/images/juju%20common%20BootstrapInstance.png" />
     <figcaption>"common" provider's BootstrapInstance function</figcaption>
 </figure>
 
@@ -226,31 +240,31 @@ What is expected from the cloud? Four things that are all hardware centric:
 // StartInstanceResult holds the result of an
 // InstanceBroker.StartInstance method call.
 type StartInstanceResult struct {
-	// Instance is an interface representing a cloud instance.
-	Instance instance.Instance
+    // Instance is an interface representing a cloud instance.
+    Instance instance.Instance
 
-	// Config holds the environment config to be used for any further
-	// operations, if the instance is for a controller.
-	Config *config.Config
+    // Config holds the environment config to be used for any further
+    // operations, if the instance is for a controller.
+    Config *config.Config
 
-	// HardwareCharacteristics represents the hardware characteristics
-	// of the newly created instance.
-	Hardware *instance.HardwareCharacteristics
+    // HardwareCharacteristics represents the hardware characteristics
+    // of the newly created instance.
+    Hardware *instance.HardwareCharacteristics
 
-	// NetworkInfo contains information about how to configure network
-	// interfaces on the instance. Depending on the provider, this
-	// might be the same StartInstanceParams.NetworkInfo or may be
-	// modified as needed.
-	NetworkInfo []network.InterfaceInfo
+    // NetworkInfo contains information about how to configure network
+    // interfaces on the instance. Depending on the provider, this
+    // might be the same StartInstanceParams.NetworkInfo or may be
+    // modified as needed.
+    NetworkInfo []network.InterfaceInfo
 
-	// Volumes contains a list of volumes created, each one having the
-	// same Name as one of the VolumeParams in StartInstanceParams.Volumes.
-	// VolumeAttachment information is reported separately.
-	Volumes []storage.Volume
+    // Volumes contains a list of volumes created, each one having the
+    // same Name as one of the VolumeParams in StartInstanceParams.Volumes.
+    // VolumeAttachment information is reported separately.
+    Volumes []storage.Volume
 
-	// VolumeAttachments contains a attachment-specific information about
-	// volumes that were attached to the started instance.
-	VolumeAttachments []storage.VolumeAttachment
+    // VolumeAttachments contains a attachment-specific information about
+    // volumes that were attached to the started instance.
+    VolumeAttachments []storage.VolumeAttachment
 }
 </pre>
 
@@ -260,26 +274,26 @@ type StartInstanceResult struct {
 // HardwareCharacteristics represents the characteristics of the instance (if known).
 // Attributes that are nil are unknown or not supported.
 type HardwareCharacteristics struct {
-	// Arch is the architecture of the processor.
-	Arch *string `json:"arch,omitempty" yaml:"arch,omitempty"`
+    // Arch is the architecture of the processor.
+    Arch *string `json:"arch,omitempty" yaml:"arch,omitempty"`
 
-	// Mem is the size of RAM in megabytes.
-	Mem *uint64 `json:"mem,omitempty" yaml:"mem,omitempty"`
+    // Mem is the size of RAM in megabytes.
+    Mem *uint64 `json:"mem,omitempty" yaml:"mem,omitempty"`
 
-	// RootDisk is the size of the disk in megabytes.
-	RootDisk *uint64 `json:"root-disk,omitempty" yaml:"rootdisk,omitempty"`
+    // RootDisk is the size of the disk in megabytes.
+    RootDisk *uint64 `json:"root-disk,omitempty" yaml:"rootdisk,omitempty"`
 
-	// CpuCores is the number of logical cores the processor has.
-	CpuCores *uint64 `json:"cpu-cores,omitempty" yaml:"cpucores,omitempty"`
+    // CpuCores is the number of logical cores the processor has.
+    CpuCores *uint64 `json:"cpu-cores,omitempty" yaml:"cpucores,omitempty"`
 
-	// CpuPower is a relative representation of the speed of the processor.
-	CpuPower *uint64 `json:"cpu-power,omitempty" yaml:"cpupower,omitempty"`
+    // CpuPower is a relative representation of the speed of the processor.
+    CpuPower *uint64 `json:"cpu-power,omitempty" yaml:"cpupower,omitempty"`
 
-	// Tags is a list of strings that identify the machine.
-	Tags *[]string `json:"tags,omitempty" yaml:"tags,omitempty"`
+    // Tags is a list of strings that identify the machine.
+    Tags *[]string `json:"tags,omitempty" yaml:"tags,omitempty"`
 
-	// AvailabilityZone defines the zone in which the machine resides.
-	AvailabilityZone *string `json:"availability-zone,omitempty" yaml:"availabilityzone,omitempty"`
+    // AvailabilityZone defines the zone in which the machine resides.
+    AvailabilityZone *string `json:"availability-zone,omitempty" yaml:"availabilityzone,omitempty"`
 }
 </pre>
 
@@ -291,91 +305,91 @@ type HardwareCharacteristics struct {
 // available at StartInstance() time.
 // TODO(mue): Rename to InterfaceConfig due to consistency later.
 type InterfaceInfo struct {
-	// DeviceIndex specifies the order in which the network interface
-	// appears on the host. The primary interface has an index of 0.
-	DeviceIndex int
+    // DeviceIndex specifies the order in which the network interface
+    // appears on the host. The primary interface has an index of 0.
+    DeviceIndex int
 
-	// MACAddress is the network interface's hardware MAC address
-	// (e.g. "aa:bb:cc:dd:ee:ff").
-	MACAddress string
+    // MACAddress is the network interface's hardware MAC address
+    // (e.g. "aa:bb:cc:dd:ee:ff").
+    MACAddress string
 
-	// CIDR of the network, in 123.45.67.89/24 format.
-	CIDR string
+    // CIDR of the network, in 123.45.67.89/24 format.
+    CIDR string
 
-	// ProviderId is a provider-specific NIC id.
-	ProviderId Id
+    // ProviderId is a provider-specific NIC id.
+    ProviderId Id
 
-	// ProviderSubnetId is the provider-specific id for the associated
-	// subnet.
-	ProviderSubnetId Id
+    // ProviderSubnetId is the provider-specific id for the associated
+    // subnet.
+    ProviderSubnetId Id
 
-	// ProviderSpaceId is the provider-specific id for the associated space, if
-	// known and supported.
-	ProviderSpaceId Id
+    // ProviderSpaceId is the provider-specific id for the associated space, if
+    // known and supported.
+    ProviderSpaceId Id
 
-	// ProviderVLANId is the provider-specific id of the VLAN for this
-	// interface.
-	ProviderVLANId Id
+    // ProviderVLANId is the provider-specific id of the VLAN for this
+    // interface.
+    ProviderVLANId Id
 
-	// ProviderAddressId is the provider-specific id of the assigned address.
-	ProviderAddressId Id
+    // ProviderAddressId is the provider-specific id of the assigned address.
+    ProviderAddressId Id
 
-	// AvailabilityZones describes the availability zones the associated
-	// subnet is in.
-	AvailabilityZones []string
+    // AvailabilityZones describes the availability zones the associated
+    // subnet is in.
+    AvailabilityZones []string
 
-	// VLANTag needs to be between 1 and 4094 for VLANs and 0 for
-	// normal networks. It's defined by IEEE 802.1Q standard.
-	VLANTag int
+    // VLANTag needs to be between 1 and 4094 for VLANs and 0 for
+    // normal networks. It's defined by IEEE 802.1Q standard.
+    VLANTag int
 
-	// InterfaceName is the raw OS-specific network device name (e.g.
-	// "eth1", even for a VLAN eth1.42 virtual interface).
-	InterfaceName string
+    // InterfaceName is the raw OS-specific network device name (e.g.
+    // "eth1", even for a VLAN eth1.42 virtual interface).
+    InterfaceName string
 
-	// ParentInterfaceName is the name of the parent interface to use, if known.
-	ParentInterfaceName string
+    // ParentInterfaceName is the name of the parent interface to use, if known.
+    ParentInterfaceName string
 
-	// InterfaceType is the type of the interface.
-	InterfaceType InterfaceType
+    // InterfaceType is the type of the interface.
+    InterfaceType InterfaceType
 
-	// Disabled is true when the interface needs to be disabled on the
-	// machine, e.g. not to configure it.
-	Disabled bool
+    // Disabled is true when the interface needs to be disabled on the
+    // machine, e.g. not to configure it.
+    Disabled bool
 
-	// NoAutoStart is true when the interface should not be configured
-	// to start automatically on boot. By default and for
-	// backwards-compatibility, interfaces are configured to
-	// auto-start.
-	NoAutoStart bool
+    // NoAutoStart is true when the interface should not be configured
+    // to start automatically on boot. By default and for
+    // backwards-compatibility, interfaces are configured to
+    // auto-start.
+    NoAutoStart bool
 
-	// ConfigType determines whether the interface should be
-	// configured via DHCP, statically, manually, etc. See
-	// interfaces(5) for more information.
-	ConfigType InterfaceConfigType
+    // ConfigType determines whether the interface should be
+    // configured via DHCP, statically, manually, etc. See
+    // interfaces(5) for more information.
+    ConfigType InterfaceConfigType
 
-	// Address contains an optional static IP address to configure for
-	// this network interface. The subnet mask to set will be inferred
-	// from the CIDR value.
-	Address Address
+    // Address contains an optional static IP address to configure for
+    // this network interface. The subnet mask to set will be inferred
+    // from the CIDR value.
+    Address Address
 
-	// DNSServers contains an optional list of IP addresses and/or
-	// hostnames to configure as DNS servers for this network
-	// interface.
-	DNSServers []Address
+    // DNSServers contains an optional list of IP addresses and/or
+    // hostnames to configure as DNS servers for this network
+    // interface.
+    DNSServers []Address
 
-	// MTU is the Maximum Transmission Unit controlling the maximum size of the
-	// protocol packats that the interface can pass through. It is only used
-	// when > 0.
-	MTU int
+    // MTU is the Maximum Transmission Unit controlling the maximum size of the
+    // protocol packats that the interface can pass through. It is only used
+    // when > 0.
+    MTU int
 
-	// DNSSearchDomains contains the default DNS domain to use for non-FQDN
-	// lookups.
-	DNSSearchDomains []string
+    // DNSSearchDomains contains the default DNS domain to use for non-FQDN
+    // lookups.
+    DNSSearchDomains []string
 
-	// Gateway address, if set, defines the default gateway to
-	// configure for this network interface. For containers this
-	// usually is (one of) the host address(es).
-	GatewayAddress Address
+    // Gateway address, if set, defines the default gateway to
+    // configure for this network interface. For containers this
+    // usually is (one of) the host address(es).
+    GatewayAddress Address
 }
 </pre>
 
@@ -384,29 +398,29 @@ type InterfaceInfo struct {
 <pre class="brush:bash;">
 // Volume identifies and describes a volume (disk, logical volume, etc.)
 type Volume struct {
-	// Name is a unique name assigned by Juju to the volume.
-	Tag names.VolumeTag
+    // Name is a unique name assigned by Juju to the volume.
+    Tag names.VolumeTag
 
-	VolumeInfo
+    VolumeInfo
 }
 
 // VolumeInfo describes a volume (disk, logical volume etc.)
 type VolumeInfo struct {
-	// VolumeId is a unique provider-supplied ID for the volume.
-	// VolumeId is required to be unique for the lifetime of the
-	// volume, but may be reused.
-	VolumeId string
+    // VolumeId is a unique provider-supplied ID for the volume.
+    // VolumeId is required to be unique for the lifetime of the
+    // volume, but may be reused.
+    VolumeId string
 
-	// HardwareId is the volume's hardware ID. Not all volumes have
-	// a hardware ID, so this may be left blank.
-	HardwareId string
+    // HardwareId is the volume's hardware ID. Not all volumes have
+    // a hardware ID, so this may be left blank.
+    HardwareId string
 
-	// Size is the size of the volume, in MiB.
-	Size uint64
+    // Size is the size of the volume, in MiB.
+    Size uint64
 
-	// Persistent reflects whether the volume is destroyed with the
-	// machine to which it is attached.
-	Persistent bool
+    // Persistent reflects whether the volume is destroyed with the
+    // machine to which it is attached.
+    Persistent bool
 }
 </pre>
 
@@ -417,114 +431,136 @@ type VolumeInfo struct {
 // attachment information, including how the volume is exposed on the
 // machine.
 type VolumeAttachment struct {
-	// Volume is the unique tag assigned by Juju for the volume
-	// that this attachment corresponds to.
-	Volume names.VolumeTag
+    // Volume is the unique tag assigned by Juju for the volume
+    // that this attachment corresponds to.
+    Volume names.VolumeTag
 
-	// Machine is the unique tag assigned by Juju for the machine that
-	// this attachment corresponds to.
-	Machine names.MachineTag
+    // Machine is the unique tag assigned by Juju for the machine that
+    // this attachment corresponds to.
+    Machine names.MachineTag
 
-	VolumeAttachmentInfo
+    VolumeAttachmentInfo
 }
 
 // VolumeAttachmentInfo describes machine-specific volume attachment
 // information, including how the volume is exposed on the machine.
 type VolumeAttachmentInfo struct {
-	// DeviceName is the volume's OS-specific device name (e.g. "sdb").
-	//
-	// If the device name may change (e.g. on machine restart), then this
-	// field must be left blank.
-	DeviceName string
+    // DeviceName is the volume's OS-specific device name (e.g. "sdb").
+    //
+    // If the device name may change (e.g. on machine restart), then this
+    // field must be left blank.
+    DeviceName string
 
-	// DeviceLink is an OS-specific device link that must exactly match
-	// one of the block device's links when attached.
-	//
-	// If no device link is known, or it may change (e.g. on machine
-	// restart), then this field must be left blank.
-	DeviceLink string
+    // DeviceLink is an OS-specific device link that must exactly match
+    // one of the block device's links when attached.
+    //
+    // If no device link is known, or it may change (e.g. on machine
+    // restart), then this field must be left blank.
+    DeviceLink string
 
-	// BusAddress is the bus address, where the volume is attached to
-	// the machine.
-	//
-	// The format of this field must match the field of the same name
-	// in BlockDevice.
-	BusAddress string
+    // BusAddress is the bus address, where the volume is attached to
+    // the machine.
+    //
+    // The format of this field must match the field of the same name
+    // in BlockDevice.
+    BusAddress string
 
-	// ReadOnly signifies whether the volume is read only or writable.
-	ReadOnly bool
+    // ReadOnly signifies whether the volume is read only or writable.
+    ReadOnly bool
 }
 </pre>
 
 ## "common" node configuring
 
-In code this step is presented as an "interface" function within the _BootstrapInstance_. So it is really part of the provisioning calls. 
+In code this step is presented as an "interface" function within the
+`BootstrapInstance`. So it is really part of the provisioning calls.
 However, we are separating it here for discussion purpose.
 
 <figure class="row">
-    <img class="img-responsive center-block" src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
+  <img class="img-responsive center-block"
+       src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
     <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
 </figure>
 
-The most critical thing in this step is to install Juju agent. We will write more about this agent in other articles. For bootstrap,
-the followings are observed:
+The most critical thing in this step is to install Juju agent. We will
+write more about this agent in other articles. For bootstrap, the
+followings are observed:
 
-* default path: /var/lib/juju
-* hardcoded log file name: cloud-init-output.log
+* default path: `/var/lib/juju`
+* hardcoded log file name: `cloud-init-output.log`
 * nonce content (see below)
 
 ### nonce
 
-Juju identifies machine-0 by
-SSH-ing into the machine and matching _/var/lib/juju/nonce.txt_
-content to a special string: _*user-admin:bootstrap*_.
+Juju identifies machine-0 by SSH-ing into the machine and matching
+`/var/lib/juju/nonce.txt` content to a special string:
+`user-admin:bootstrap`.
 
-  > Machine-0 must have file (_/var/lib/juju/nonce.txt_) with content: <font color="red">user-admin:bootstrap</font>
+  > Machine-0 must have file (`/var/lib/juju/nonce.txt`) with content: <span class="myhighlight">user-admin:bootstrap</span>
 
 # Wrapup
 
-This concludes our humble attempt to decipher Juju's bootstrap mechanisms. We have covered quite some grounds. The key take away
-is to understand where provider is expected. However, this is an over simplified view because it also depends on how much involvement
-a cloud want to have in this process. Argubly one can say that cloud provider is really called for in each of the six steps in this process &mdash;
-it needs to validate constraints, it should pick the OS image, it certainly should control the tool and cloud-init process,
-and certainly it is doing the provisioning. 
+This concludes our humble attempt to decipher Juju's bootstrap
+mechanisms. We have covered quite some grounds. The key take away is
+to understand where provider is expected. However, this is an over
+simplified view because it also depends on how much involvement a
+cloud want to have in this process. Argubly one can say that cloud
+provider is really called for in each of the six steps in this process
+&mdash; it needs to validate constraints, it should pick the OS image,
+it certainly should control the tool and cloud-init process, and
+certainly it is doing the provisioning.
 
-I think this argument is nearly true if one looks into stock providers and pull all their implementation together. For writing a new provider, XClarity,
-it comes down to a design decision then how much the underline cloud wants control. The bare minimum (as we have done in the simulation, see below)
-is to rely on default values, _common_ provider's _Bootstrap_ functions, and return a _StartInstanceResult_.
+I think this argument is nearly true if one looks into stock providers
+and pull all their implementation together. For writing a new
+provider, XClarity, it comes down to a design decision then how much
+the underline cloud wants control. The bare minimum (as we have done
+in the simulation, see below) is to rely on default values, `common`
+provider's `Bootstrap` functions, and return a `StartInstanceResult`.
 
 <pre class="brush:bash;">
-	// For now, we are imitating a successful instance by directly returning a result struct
-	var tmpArch string = arch.AMD64
-	var tmpMem uint64 = 2000000
-	var tmpCpuCore uint64 = 1
-	var tmpCpuPower uint64 = 100
-	hardware := instance.HardwareCharacteristics{
-		Arch: &tmpArch,
-		Mem: &tmpMem,
-		CpuCores: &tmpCpuCore,
-		CpuPower: &tmpCpuPower,
-	}
-    volumes := make([]storage.Volume, 0)
-	networkInfo := make([]network.InterfaceInfo, 0)
-	volumeAttachments := make([]storage.VolumeAttachment, 0)
+// For now, we are imitating a successful instance by directly returning a result struct
+var tmpArch string = arch.AMD64
+var tmpMem uint64 = 2000000
+var tmpCpuCore uint64 = 1
+var tmpCpuPower uint64 = 100
+hardware := instance.HardwareCharacteristics{
+        Arch: &tmpArch,
+        Mem: &tmpMem,
+        CpuCores: &tmpCpuCore,
+        CpuPower: &tmpCpuPower,
+}
+volumes := make([]storage.Volume, 0)
+networkInfo := make([]network.InterfaceInfo, 0)
+volumeAttachments := make([]storage.VolumeAttachment, 0)
 
-	return &environs.StartInstanceResult{
-		Instance:          xclarityBootstrapInstance{},
-		Config:			   env.ecfg.Config,
-		Hardware:          &hardware, // type instance.HardwareCharacteristics struct
-		NetworkInfo:       networkInfo, // type network.InterfaceInfo struct
-		Volumes:           volumes, // type storage.Volume struct
-		VolumeAttachments: volumeAttachments, // type storageVolumeAttachment struct
-	}, nil
+return &environs.StartInstanceResult{
+        Instance:          xclarityBootstrapInstance{},
+        Config:			   env.ecfg.Config,
+        Hardware:          &hardware, // type instance.HardwareCharacteristics struct
+        NetworkInfo:       networkInfo, // type network.InterfaceInfo struct
+        Volumes:           volumes, // type storage.Volume struct
+        VolumeAttachments: volumeAttachments, // type storageVolumeAttachment struct
+}, nil
 </pre>
 
-There are a few topics that are not covered in this article, but need to be studied further: 
+There are a few topics that are not covered in this article, but need
+to be studied further:
 
-1. Juju agent & tools: What does an agent do? What is the DB look like? How is information registered with jujud (aka. agent)? How does agent communicates with CLI controller? Why is it an issue to match agent with juju binary? How to build a custom agent?
-2. cloud-init: My understanding at the moment is that the entire node configuration is done via [cloud-init][3]. Itself is not interesting. But what Juju does to make cloud-init carry out its task is interesting. I think there are scripts involved. So who is generating these scripts? what type of scripts? Can they be customized? This helps us to know how much we can control the final state of an instance.
-3. SimpleStream: I think it is a form of communication protocol. It is how one communicates with jujud. What capability does it have? Who is providing that
-in Juju's environment? How it may be affected by other network design/configuration?
+1. Juju agent & tools: What does an agent do? What is the DB look
+like? How is information registered with jujud (aka. agent)? How does
+agent communicates with CLI controller? Why is it an issue to match
+agent with juju binary? How to build a custom agent?
+2. cloud-init: My understanding at the moment is that the entire node
+configuration is done via [cloud-init][3]. Itself is not
+interesting. But what Juju does to make cloud-init carry out its task
+is interesting. I think there are scripts involved. So who is
+generating these scripts? what type of scripts? Can they be
+customized? This helps us to know how much we can control the final
+state of an instance.
+3. SimpleStream: I think it is a form of communication protocol. It is
+how one communicates with jujud. What capability does it have? Who is
+providing that in Juju's environment? How it may be affected by other
+network design/configuration?
 
 [3]: https://launchpad.net/cloud-init
 

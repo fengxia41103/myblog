@@ -205,7 +205,7 @@ games for them, similar to ones for babies, and "他们可以作这些简单的
 游戏". There is also nutritionist who is responsible to each patient's
 meals.
 
-Overall, in place I felt **hopeful**, and what a priceless feeling anyone can
+Overall, in this place I felt **hopeful**, and what a priceless feeling anyone can
 wish for right now?
 
 ## 上海凯健Cascade Health

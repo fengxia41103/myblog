@@ -1,4 +1,4 @@
-Title: Canonical Juju deploying charm
+Title: Juju charm deployment
 Date: 2017-01-19 15:45
 Tags: openstack
 Slug: juju deploy
@@ -22,7 +22,7 @@ See the process in action:
 
 <figure class="row">
     <img class="img-responsive center-block"
-    src="/images/juju%20deploy%20jenkins.gif" />
+         src="/images/juju%20deploy%20jenkins.gif" />
     <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
 
@@ -36,7 +36,7 @@ how those states are related.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
+         src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -47,7 +47,7 @@ into three steps.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20deploy%20original.png" />
+         src="/images/juju%20deploy%20original.png" />
     <figcaption>Illustration of a Juju cloud environment before a deployment</figcaption>
 </figure>
 
@@ -81,7 +81,7 @@ job done:
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20deploy%20commands.png" />
+         src="/images/juju%20deploy%20commands.png" />
     <figcaption>Issuing command to deploy Jenkins</figcaption>
 </figure>
 
@@ -91,14 +91,14 @@ installed.
 
 <figure class="row">
     <img class="img-responsive center-block" 
-    src="/images/juju%20deploy%20result.png" />
+         src="/images/juju%20deploy%20result.png" />
     <figcaption>Deployment result</figcaption>
 </figure>
 
 
 # What takes to be a good machine
 
-In our previous example, we used _add-machine_ command to bring new
+In our previous example, we used `add-machine` command to bring new
 machine into the juju environment. As it turned out, one can add any
 provisioned machine into the cloud (as long as it knows how to install
 juju agent which is another topic). Now let's take a look what
@@ -119,8 +119,8 @@ installed by this command.
 
 ## /var/lib/juju
 
-This is the *home* folder for juju &mdash; _/var/lib/juju_.  Remember,
-this folder did not exist prior to the _add-machine_ command.
+This is the *home* folder for juju &mdash; `/var/lib/juju`.  Remember,
+this folder did not exist prior to the `add-machine` command.
 
 <pre class="brush:plain;">
 /var/lib/juju
@@ -164,14 +164,14 @@ root@192-168-8-235:~# ls -lh /etc/systemd/system | grep juju
 lrwxrwxrwx 1 root root   60 Jan 19 16:47 jujud-machine-15.service -> /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
 </pre>
 
-You can use the common _service juju-machine-15
-start|stop|restart|status_ to manage this service like any
+You can use the common `service juju-machine-15
+start|stop|restart|status` to manage this service like any
 others. 
 
 ## /usr/bin
 
 Two binaries appeared, both linked (again) to some files under the
-_/var/lib/juju/_ folder.
+`/var/lib/juju/` folder.
 
 <pre class="brush:plain;">
 /usr/bin/juju-dumplogs
@@ -192,8 +192,8 @@ lrwxrwxrwx 1 root   root      36 Jan 19 16:47 juju-run -> /var/lib/juju/tools/ma
 ## /home/ubuntu
 
 So juju's agent install process actually created a user *ubuntu* which
-did not exist before. In _/home/ubuntu/.ssh_ folder, a file of
-_authorized_keys_. Um.
+did not exist before. In `/home/ubuntu/.ssh` folder, a file of
+`authorized_keys`. Um.
 
 <pre class="brush:plain;">
 /home/ubuntu/.juju-proxy
@@ -205,11 +205,11 @@ Once the node has been recognized by machine-0, it's ready to be used
 by a juju deploy. Let's pick something _light_ (for example, an
 application which will request only one node) to try.
 
-Below is an *impressive* capture of the _/var/lib/juju_ contents when
+Below is an *impressive* capture of the `/var/lib/juju` contents when
 deploying an application, in this case, jenkins.
 
-  > Juju charm is a zip file. You can use command _unzip_ to extract
-  > these contents under the /var/lib/juju/unit-jenkins-1/ folder.
+  > Juju charm is a zip file. You can use command `unzip` to extract
+  > these contents under the `/var/lib/juju/unit-jenkins-1/` folder.
   
 <pre class="brush:plain;">
 /var/lib/juju

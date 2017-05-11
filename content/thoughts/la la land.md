@@ -34,6 +34,12 @@ in life? Why? Wouldn't it be better than you can stay with the
 soulmate or the make-you-a-better-person person so you two continue to
 produce the better self and learn from each other? Why stop?
 
+<figure class="col s6">
+  <img class="img-responsive center-block"
+       src="/images/la-la-land-2.png" />
+</figure>
+
+
 I truly don't understand. But this is a movie that made me cry and to
 write this journal so I will ask myself later what was sad about it
 and why cannt I be over it. No I cant.

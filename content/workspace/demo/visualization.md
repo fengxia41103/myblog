@@ -1,12 +1,13 @@
-Title: SPA: data visualization
+Title: SPA: World Snapshot
 Date: 2016-10-15 22:00
 Slug: data visualization
 Tags: demo, react, visualization
 Author: Feng Xia
 
 <figure class="row">
-    <img class="center-block img-responsive" src="/images/country_1.png"/>
-    <figcaption>Project Data Visualization</figcaption>
+  <img class="center-block img-responsive"
+       src="/images/country_1.png"/>
+    <figcaption>World Snapshot</figcaption>
 </figure>
 
 > * [World Snapshot][]
@@ -25,7 +26,7 @@ KPI is above or below threshold, department
 A is doing better than department B, sales of this month dropped comparing
 to last month's...
 
-## Data sources
+# Data sources
 
 1. [DHS][]: [DHS][] data set is published by [US AID][]. Following its [API][]
    documents, [indicators][] are selected to depict a country's well doing.
@@ -48,7 +49,7 @@ var api = "http://api.worldbank.org/v2/en/countries?format=json&per_page=1000";
 [1]: http://data.worldbank.org/indicator
 [2]: https://datahelpdesk.worldbank.org/knowledgebase/topics/125589
 
-## Toolset
+# Toolset
 
 * [Materialize][]: "A modern responsive front-end framework based on Material Design" by their words.
 * [REACT][]: core
@@ -60,13 +61,14 @@ var api = "http://api.worldbank.org/v2/en/countries?format=json&per_page=1000";
 [webpack]: https://webpack.github.io/
 [fetch]: https://github.com/github/fetch
 
-## REACT components
+# REACT components
 
 Following REACT practice, compoents have been designed to handle both the
 data acquisition through 3rd party API, and ploting using the awesome D3 library:
 
 <figure class="row">
-    <img class="center-block img-responsive" src="/images/country health.png"/>
+  <img class="center-block img-responsive"
+       src="/images/country health.png"/>
     <figcaption>Data visualization SPA architecture</figcaption>
 </figure>
 

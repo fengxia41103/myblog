@@ -63,29 +63,38 @@ default NAT so you have internet access, while the other uses **Internal Network
     sudo add-apt-repository ppa:maas/stable
     sudo apt update
     sudo apt install maas
-    </pre>xo
+    </pre>
 
 3. Create MAAS admin: 
     <pre class="brush:bash;">
     sudo maas createadmin
     </pre>
 
-4. Create SSH key and copy content from _.ssh/id_rsa.pub_:
+4. Create SSH key and copy content from `~/.ssh/id_rsa.pub`:
     <pre class="brush:bash;">
     mkdir .ssh
     ssh-keygen -t rsa
     less ~/.ssh/id_rsa.pub
     </pre>
 
-5. Login in _http://localhost:5240_ using admin created in step 3. At the step where it complains about SSH key missing,
-    select **upload** and paste step 4's content into the text box. This is the public key that will be copied to each MAAS
-    target at deployment so later you can SSH into these targets without knowing the password.
+5. Login in `http://localhost:5240/MAAS` using admin created in step 3. At
+    the step where it complains about SSH key missing, select
+    **upload** and paste step 4's content into the text box. This is
+    the public key that will be copied to each MAAS target at
+    deployment so later you can SSH into these targets without knowing
+    the password.
 
-At this point, the MAAS server is installed and user can login the web admin console. Next, setup firewall rules on MAAS server so it can be the router for managed subnet.
+At this point, the MAAS server is installed and user can login the web
+admin console. Next, setup firewall rules on MAAS server so it can be
+the router for managed subnet.
 
 ## MAAS server firewall rules
 
-Install [UFW][]. UFW is infinitely easier to use than iptables. Making the MAAS server as a router is necessary because targets, once acquired an OS, will need internet access in order to APT other things. (If using real metal server, the server can be connected to multiple VLANs among which one is providing internet access.)
+Install [UFW][]. UFW is infinitely easier to use than iptables. Making
+the MAAS server as a router is necessary because targets, once
+acquired an OS, will need internet access in order to APT other
+things. (If using real metal server, the server can be connected to
+multiple VLANs among which one is providing internet access.)
 
 [UFW]: https://help.ubuntu.com/community/UFW
 
@@ -95,12 +104,14 @@ Following the [instructions][4] to enable default port forwarding:
 
 [4]: https://help.ubuntu.com/lts/serverguide/firewall.html
 
-1. Packet forwarding needs to be enabled in ufw. Two configuration files will need to be adjusted, in _/etc/default/ufw_ change the DEFAULT_FORWARD_POLICY to “ACCEPT”:
+1. Packet forwarding needs to be enabled in ufw. Two configuration
+   files will need to be adjusted, in `/etc/default/ufw` change the
+   DEFAULT_FORWARD_POLICY to “ACCEPT”:
    <pre class="brush:bash;">
    DEFAULT_FORWARD_POLICY="ACCEPT"
    </pre>
 
-2. Then edit _/etc/ufw/sysctl.conf_ and uncomment:
+2. Then edit `/etc/ufw/sysctl.conf` and uncomment:
   <pre class="brush:bash;">
   net/ipv4/ip_forward=1
   net/ipv6/conf/default/forwarding=1
@@ -110,12 +121,15 @@ Following the [instructions][4] to enable default port forwarding:
 
 > Enabling UFW will deny all access (except the current ssh session). So before anything, allow port 22!
 
-To config MAAS server to route 192.168.8.x subnet traffic to internet using UFW is simple. Using _ifconfig_ to find the interface name that is connected to the internet(NAT), in this example, enp0s3:
+To config MAAS server to route 192.168.8.x subnet traffic to internet
+using UFW is simple. Using `ifconfig` to find the interface name that
+is connected to the internet(NAT), in this example, enp0s3:
     <pre class="brush:bash;">
     nano /etc/ufw/before.rules
     </pre>
 
-Paste this at the bottom of the file, **after** the _COMMIT_ that has already been in that document:
+Paste this at the bottom of the file, **after** the `COMMIT` that has
+already been in that document:
     <pre class="brush:bash;">
     # nat Table rules
     *nat
@@ -124,11 +138,12 @@ Paste this at the bottom of the file, **after** the _COMMIT_ that has already be
     COMMIT
     </pre>
 
-What this does is to make **enp0s3** as the router for subnet 192.168.8.x &larr; welcome the internet!
+What this does is to make `enp0s3` as the router for subnet 192.168.8.x &larr; welcome the internet!
 
 ### Ports
 
-[UFW][] will erect a firewall that blocks everything by default! We have poked holes for port 22 to allow SSH. More need to be done:
+[UFW][] will erect a firewall that blocks everything by default! We
+have poked holes for port 22 to allow SSH. More need to be done:
 
 1. Allow http 80: ufw allow http
 2. Allow ping: ufw allow 53
@@ -146,21 +161,25 @@ Finally, **ufw enable**. Our GFW is up.
 
 ## MAAS as DHCP server
 
-> As I have mentioned, the MAAS server node **must** be the DHCP server on subnet 192.168.8.x. No exception!
+> As I have mentioned, the MAAS server node **must** be the DHCP
+> server on subnet 192.168.8.x. No exception!
 
 MAAS admin web is the tool to use for this configuration. 
 
-1. Login into _http://192.168.8.1/MAAS/_, goto **Subnets** and select
-   the VLAN &larr; this is how you can turn on DHCP on a subnet:
+1. Login into `http://192.168.8.1/MAAS/`, goto `Subnets` and select
+   the `VLAN` &larr; this is how you can turn on DHCP on a subnet:
 
     <figure class="row">
-    <img src="/images/maas_vlan_config.png" class="center-block
-    img-responsive" />
-    <img src="/images/maas_subnet_config.png" class="center-block img-responsive" />    
-    <figcaption>MAAS  DHCP config</figcaption>
+      <img src="/images/maas_vlan_config.png"
+           class="center-block img-responsive" />
+      <img src="/images/maas_subnet_config.png"
+           class="center-block img-responsive" />    
+      <figcaption>MAAS  DHCP config</figcaption>
     </figure>
 
-2. Click **"Vlan"** to get to the Vlan configuration page. _Take action_ to enable DHCP. Change the gateway to 192.168.8.1, which is this server's static IP on this subnet.
+2. Click `Vlan` to get to the Vlan configuration page. `Take action`
+   to enable DHCP. Change the gateway to 192.168.8.1, which is this
+   server's static IP on this subnet.
 
     <figure class="row">
     <img src="/images/maas_dhcp_config.png" class="center-block img-responsive" />
@@ -168,6 +187,8 @@ MAAS admin web is the tool to use for this configuration.
     </figure>
 
 
-We have done the hard part &mdash; setting up the MAAS server. In our [next article][3], I'll show you what MAAS can do for fun &rarr; brining up a bare metal machine to life. Stay tuned.
+We have done the hard part &mdash; setting up the MAAS server. In our
+[next article][3], I'll show you what MAAS can do for fun &rarr;
+brining up a bare metal machine to life. Stay tuned.
 
 [3]: {filename}/workspace/openstack/maas_target.md

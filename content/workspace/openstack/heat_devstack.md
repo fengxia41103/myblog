@@ -5,6 +5,8 @@ Slug: heat devstack
 Author: Feng Xia
 Status: Draft
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 Setting up [Heat][1] with [Openstack Devstack][2] is straightforward
 once user realizes that the official [instructions][3] is not
 up to date. In the doc there are two ways to enable Heat service:

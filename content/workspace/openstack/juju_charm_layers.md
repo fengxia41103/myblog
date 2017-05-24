@@ -4,6 +4,8 @@ Tags: openstack
 Slug: juju charm layers
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 Juju [charms][1] are, charming. It promises a selection of blueprints
 that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in

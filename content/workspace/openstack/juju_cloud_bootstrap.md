@@ -4,6 +4,8 @@ Tags: openstack
 Slug: juju bootstrap
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 The very first command user will encounter is the `juju bootstrap`. It
 createa a special machine &mdash; state controller, `machine-0`, control
 node, etc. &mdash; naming convention aside, it is the brain that

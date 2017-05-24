@@ -5,6 +5,8 @@ Slug: gerrit access
 Author: Feng Xia
 Status: Draft
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 # Gerrit access
 
 Accessing Gerrit involves setting up user account on the VM server itself and an account on Gerrit. The two are linked via the same SSH public key you will use.

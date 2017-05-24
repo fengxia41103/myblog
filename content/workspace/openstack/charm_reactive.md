@@ -4,10 +4,10 @@ Tags: juju charm
 Slug: juju charm reactive
 Author: Feng Xia
 
-In this article we will study charm's
-[reactive][1] framework to get a firm understanding of what they mean
-by writing an reactive charm.
+> <span class="myhighlight">Copyright @ Lenovo US</span>
 
+In this article we will study charm's [reactive][1] framework to get a
+firm understanding of what they mean by writing an reactive charm.
 
 [1]: https://pythonhosted.org/charms.reactive/
 

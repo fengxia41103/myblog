@@ -4,6 +4,8 @@ Tags: openstack
 Slug: baremetal provisioning
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 Everyone of us has installed an operating system to a computer at some point in
 life. It is easy to perceive inserting a disk or USB key to make this
 happen because the OS files are _there_. A fancier version is to boot
@@ -458,5 +460,4 @@ from BIOS to a PXE:
     src="/images/pxe%20IPL.svg" />
     <figcaption>PXE IPL (from power on to PXE)</figcaption>
 </figure>
-
 

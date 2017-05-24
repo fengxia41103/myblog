@@ -4,6 +4,8 @@ Tags: openstack
 Slug: ironic intro
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &mdash; start an instance on demand, then build those

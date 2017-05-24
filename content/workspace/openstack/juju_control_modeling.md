@@ -4,6 +4,8 @@ Tags: openstack
 Slug: juju charm model
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 This article is a high level view of Juju's internal modelings. For me
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of

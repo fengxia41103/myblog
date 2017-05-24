@@ -4,6 +4,8 @@ Tags: juju charm state
 Slug: juju charm chained states
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 This charm is created to demonstrate chained states using Juju
 charm. Chained states is essentially mirroring a pattern of any sequential
 execution in a workflow. Potentially each execution block can also

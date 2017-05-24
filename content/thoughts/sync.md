@@ -5,6 +5,12 @@ Slug: sync async
 Author: Feng Xia
 
 
+<figure class="col s4">
+  <img src="/images/funny/pointers.png"/>
+</figure>
+
+# Bogus topic
+
 Sync vs. Async. I have been thinking this to myself and have involved
 quite a few discussions with smart (and mostly young) developers which
 from time to time makes me wonder whether there is a definite answer
@@ -21,23 +27,29 @@ believed in, and a mind field that no one is willing to step into again.
 
 
 Really, a particular framework or programming language does not make
-the design async or sync. [Tornado][1], [Twisted][4], or libs
-like [Asyncio][2], [Gevent][3], they all have the capability to help
-an __async implementation__ if needed, but they don't make **your
-design** or **your architecture** async. Fundamentally one can even
-argue that computer architecture is genetically synchronous because
-CPU can execute one instruction at a time, unless multicore can be
-utilized, and I do mean they are utilized either by at the HW level
-where CPU, cache and memory are smart enough to take some instructions
-for parallel computing, or the higher level interpretation --
-assembly, C, or sth even more abstract -- have the design and internal
-implementation all the way through to generate those instructions that
-make the CPU **smart**.
+the design async or sync. [Tornado][1], [Twisted][4], or libs like
+[Asyncio][2], [Gevent][3], they all have the capability to help an
+__async implementation__ if needed, but <span class="myhighlight">
+they don't make your design or your architecture
+async</span>. Fundamentally one can even argue that computer
+architecture is genetically synchronous because CPU can execute one
+instruction at a time, unless multicore can be utilized, and I do mean
+they are utilized either by at the HW level where CPU, cache and
+memory are smart enough to take some instructions for parallel
+computing, or the higher level interpretation -- assembly, C, or sth
+even more abstract -- have the design and internal implementation all
+the way through to generate those instructions that make the CPU
+**smart**.
 
 [1]: http://www.tornadoweb.org/en/stable/
 [2]: https://docs.python.org/3/library/asyncio.html
 [3]: http://www.gevent.org/
 [4]: https://github.com/twisted/twisted
+
+<figure class="col s4">
+  <img src="/images/funny/1519232-geek_poke02.jpg"/>
+</figure>
+
 
 Too many times ppl take multithreading and multiprocessing as the
 statement that my code or my design is now asynchronous, or event
@@ -52,6 +64,8 @@ async? Even step along the stack can bring your system to a halt
 regardless how some part of the stack is actually async. So my point
 here is **async design or architecture is irrelevant** because it is
 not a technical topic, but a business topic.
+
+# Dependency
 
 Why so? Because what really matters is <span
 class="myhighlight">dependency</span>. Your business workflow is the
@@ -71,18 +85,17 @@ watch this [Tech talk][6], yes, technology is not a silver bullet
 unless you know what you want to get out of it.
 
 
-
 [5]: https://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-does-it-really-mean
 [6]: https://www.ted.com/talks/renny_gleeson_404_the_story_of_a_page_not_found
 
 
 Now looking back to my career, funny the only __real asyn__
 requirement I have encountered is in china's workflow, the concept of
-会签（consensus voting), but without a majority rule. Go figure. My
-implementation is to give everyone a high-five page and not bother to
-even post data back to the server &mdash; everything is handled on
-client side, no IO blocking concern of any kind, click-at-will and
-guaranteed consistent and satisfying responsive, realtime, event
-driven, taking advantage of any HW resource the user happens to have,
-distributed, HA, zero single point of failure....this, is an
-asynchronous design. 
+会签（consensus voting &larr; this is my phrase), but without a
+majority rule. Go figure. My implementation is to give everyone a
+high-five page and not bother to even post data back to the server
+&mdash; everything is handled on client side, no IO blocking concern
+of any kind, click-at-will and guaranteed consistent and satisfying
+responsive, realtime, event driven, taking advantage of any HW
+resource the user happens to have, distributed, HA, zero single point
+of failure....this, is an asynchronous design.

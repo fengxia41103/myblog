@@ -5,6 +5,8 @@ Slug: juju charm hw workload
 Author: Feng Xia
 Status: Draft
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 In this article we will introduce the HW workload charms and how to
 build them. **What is a HW workload?** In orchestration space we can
 divide technologies into two categories: description language and

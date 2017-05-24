@@ -4,6 +4,8 @@ Tags: openstack
 Slug: maas and ironic
 Author: Feng Xia
 
+> <span class="myhighlight">Copyright @ Lenovo US</span>
+
 This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a

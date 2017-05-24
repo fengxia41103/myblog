@@ -4,6 +4,12 @@ Tags: love
 Slug: la la land
 Author: Feng Xia
 
+
+<figure class="col s4">
+  <img src="/images/funny/love.png"/>
+</figure>
+
+
 Maybe it's the travel, maybe it's the stress of my dad's worsening
 health condition, maybe I'm tired from all these and trying the
 impossible without knowing the loss is done already. But I know why
@@ -21,6 +27,7 @@ the path both have walked, together? How many times can you really
 walk with someone so close, so intimate, so letting all guards down,
 weaving the image into a future that two, instead of one, are in it? 
 
+
 I hate the ending of this movie. I just hate it. Fxxk reality, fxxk
 success. It means nothing, absolutely nothing, to me if success is
 here and the person I cherished is gone. What is the point? whom are
@@ -33,12 +40,6 @@ what is so **better** of your becoming if you take a separate path now
 in life? Why? Wouldn't it be better than you can stay with the
 soulmate or the make-you-a-better-person person so you two continue to
 produce the better self and learn from each other? Why stop?
-
-<figure class="col s6">
-  <img class="img-responsive center-block"
-       src="/images/la-la-land-2.png" />
-</figure>
-
 
 I truly don't understand. But this is a movie that made me cry and to
 write this journal so I will ask myself later what was sad about it

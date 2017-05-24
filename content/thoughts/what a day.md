@@ -4,6 +4,10 @@ Tags: love
 Slug: what a day
 Author: Feng Xia
 
+<figure class="col s4">
+  <img src="/images/funny/depression.jpg"/>
+</figure>
+
 I was sitting in this underground little food court, breathing the
 muggy air, eating a spicy food, watching people coming in and out,
 full of life, full of noise, full of hope. Yet, I kept wondering that

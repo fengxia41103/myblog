@@ -3,7 +3,7 @@ Date: 2017-04-12 11:00
 Tags: openstack
 Slug: lenovo glusterfs
 Author: Feng Xia
-Status: Hidden
+Status: Draft
 
 
 > <span class="myhighlight">Copyright @ Lenovo US</span>

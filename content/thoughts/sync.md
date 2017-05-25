@@ -9,7 +9,7 @@ Author: Feng Xia
   <img src="/images/funny/pointers.png"/>
 </figure>
 
-# Bogus topic
+# This is actually irrelevant
 
 Sync vs. Async. I have been thinking this to myself and have involved
 quite a few discussions with smart (and mostly young) developers which

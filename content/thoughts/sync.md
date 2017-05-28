@@ -14,16 +14,18 @@ Author: Feng Xia
 Sync vs. Async. I have been thinking this to myself and have involved
 quite a few discussions with smart (and mostly young) developers which
 from time to time makes me wonder whether there is a definite answer
-for this at all. One thing I can fairly state is that there isn't a
-**right** or even an answer. It depends. Yes, it depends on what you
-mean by sync or async, and why you care about one way or the other. The
-discussion isn't technical, it isn't philosophical, it is to
-understand use case, user's expectation, workflow, execution sequence,
-business assumption, and maybe last, system performance. If the
-discussion isn't confined in these areas, it will go nowhere and
-quickly downgrade to a heated argument without a satisfaction from
-either parties involved but feelings hurt, self-opinion firmer
-believed in, and a mind field that no one is willing to step into again.
+for this at all.
+
+One thing I can fairly state is that there isn't a **right** or even
+an answer. It depends. Yes, it depends on what you mean by sync or
+async, and why you care about one way or the other. The discussion
+isn't technical, it isn't philosophical, it is to understand use case,
+user's expectation, workflow, execution sequence, business assumption,
+and maybe last, system performance. If the discussion isn't confined
+in these areas, it will go nowhere and quickly downgrade to a heated
+argument without a satisfaction from either parties involved but
+feelings hurt, self-opinion firmer believed in, and a mine field that
+no one is willing to step into again.
 
 
 Really, a particular framework or programming language does not make

@@ -333,16 +333,18 @@ search path work.
 
 ### `basic.py`
 
-Changes to this file look intimidating. However, the theme is quite
-straightforward:
+Changes to this file look intimidating (showing diff -r old
+new). However, the theme is quite straightforward:
 
 1. Install python2 modules, eg `python-setuptools`, as prerequisite to
 prepare the environment.
 2. The correct binary path for your `pip`.
+3. Use `platform.linux_distribution()[0]` to determine host platform.
+4. `apt` uses `--assume-yes`, where `yum` uses `--assumeyes`.
 
 There are mixed `apt_install` using the mapped function and direct
-`check_call`. Moving forward, we should consolidate all package
-functions to mapped version.
+`check_call` shell calls. Moving forward, we should consolidate all
+package functions to mapped version.
 
 <pre class="brush:plain;">
 6a7
@@ -451,3 +453,28 @@ A formatting error?
 ---
 >             print("ERROR ({}) running {}".format(e.returncode, e.cmd),file=stderr)
 </pre>
+
+# How to build
+
+## layer-basic
+
+There is no magic. First of all, make change to `layer-basic` and put
+the modified version in `LAYER_PATH` so `charm build` will use local
+`layer-basic`.
+
+## libs
+
+Second, `charm build` will pull down default `charmhelpers`
+and `charms.reactive` from source and put them 
+in `dist/trusty/yourcharm/wheelhouse`. They will then be installed in
+execution host `site-packages`, and only installed once. So until
+their sources are updated with our changes, the only way to make this
+work is to <span class="myhighlight">overwrite</span> these two
+`.tar.gz` files after charm build.
+
+## hooks
+
+Well, keep a local copy of hooks with changed outlined above, and
+overwrite built versions (how to update hook.template?)
+
+Have fun with CentOS.

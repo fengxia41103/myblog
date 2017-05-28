@@ -456,25 +456,13 @@ A formatting error?
 
 # How to build
 
-## layer-basic
-
-There is no magic. First of all, make change to `layer-basic` and put
-the modified version in `LAYER_PATH` so `charm build` will use local
-`layer-basic`.
-
-## libs
-
-Second, `charm build` will pull down default `charmhelpers`
-and `charms.reactive` from source and put them 
-in `dist/trusty/yourcharm/wheelhouse`. They will then be installed in
-execution host `site-packages`, and only installed once. So until
-their sources are updated with our changes, the only way to make this
-work is to <span class="myhighlight">overwrite</span> these two
-`.tar.gz` files after charm build.
-
-## hooks
-
-Well, keep a local copy of hooks with changed outlined above, and
-overwrite built versions (how to update hook.template?)
+1. git clone `http://hpcgitlab.labs.lenovo.com/WSS/wss.git`.
+2. Copy (or symlink) `wss/hack/layer-basic` to `LAYER_PATH`.
+3. `charm build` your charm as usual.
+4. Copy `wss/hack/charmhelpers....tar.gz` and
+   `charms.reactive....tar.gz` to `dist/trusty(or
+   centos)/yourcharm/wheelhouse`.
+5. Copy `wss/hack/hooks` to `dist/.../hooks`. However, if you have
+   customized hooks, you need to make modifications manually. 
 
 Have fun with CentOS.

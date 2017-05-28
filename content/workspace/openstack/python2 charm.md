@@ -222,6 +222,7 @@ first offender are hooks:
 #!/usr/bin/env python3
 
 change to:
+
 #!/usr/bin/env python
 </pre>
 
@@ -286,6 +287,7 @@ class RelationBase(object, metaclass=AutoAccessors):
     """
 
 change to:
+
 class RelationBase(object):
     __metaclass__=AutoAccessors
 </pre>
@@ -336,7 +338,7 @@ straightforward:
 
 1. Install python2 modules, eg `python-setuptools`, as prerequisite to
 prepare the environment.
-2. The correct binary for `pip`.
+2. The correct binary path for your `pip`.
 
 There are mixed `apt_install` using the mapped function and direct
 `check_call`. Moving forward, we should consolidate all package

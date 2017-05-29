@@ -3,7 +3,6 @@ Date: 2017-05-27 10:00
 Tags: openstack
 Slug: python2 charm
 Author: Feng Xia
-Status: Draft
 
 > <span class="myhighlight">Copyright @ Lenovo US</span>
 

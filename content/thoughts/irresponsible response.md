@@ -16,7 +16,7 @@ or do they?
 The whole thing started one morning when I was sitting in this noodle
 shop eating breakfast. A woman walked in and ordered a fried dish. 
 
-> Cashier girl: This disk needs wait.  
+> Cashier girl: This dish needs wait.  
 Woman: Oh, how long would that be?  
 > Cashier girl: They just started cooking them.
 

@@ -12,6 +12,7 @@ or do they?
 
 # The play
 
+
 The whole thing started one morning when I was sitting in this noodle
 shop eating breakfast. A woman walked in and ordered a fried dish. 
 
@@ -19,10 +20,12 @@ shop eating breakfast. A woman walked in and ordered a fried dish.
 Woman: Oh, how long would that be?  
 > Cashier girl: They just started cooking them.
 
+
 The conversation ended there. Strange! well, at least to my ears, this
 is really really strange, and frustrating, and maddening, and is the
 root cause of everything that you don't like about this society, this
 country, this life. Really.
+
 
 The woman was certainly not satisfied with the response. However, she
 didn't pursue. Obviously she asked the question because she wanted to
@@ -57,6 +60,10 @@ back to the woman and put her brain on a spin now:
 > this dish, if only it won't take too long.....
 
 # The pattern
+
+<figure class="col s4">
+  <img src="/images/funny/blame.jpg"/>
+</figure>
 
 By the end of the day, she still doesn't know how long she will wait,
 and she could only make her move based on what I call <span

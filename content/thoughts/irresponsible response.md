@@ -125,7 +125,7 @@ behalf the customer, and taking a responsibility of the message said:
 
 Yes, making straight answer takes guts. You say what you mean, and you
 mean what you say. You stand behind your statement with a sense of
-responsibility that you take pride and no afraid of being proven
+responsibility that you take pride and not afraid of being proven
 wrong. More than this, you make those statement because you are
 actively engaging the customer to understand their needs, did homework
 so you have a fair confidence in your recommendation, and make

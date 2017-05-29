@@ -10,7 +10,7 @@ Author: Feng Xia
 
 I was thinking about [future value][1] this morning. Why? because I
 was thinking about this Chinese phrase, 寅吃卯粮, which means that one
-consumes now stock meant for future use. The term bears a negative
+consumes savings meant for future use. The term bears a negative
 emotion that is used to criticize someone or some action that is
 irresponsible (in view of the present) and generally a bad idea. After
 all, shouldn't one only use what his means can cover? It is a
@@ -49,8 +49,7 @@ is everywhere.
 Stock price, bond price are all computed based on FV. Market adjusts
 their prices based on runtime guess of what the FV is like. Therefore
 it will fluctuate constantly. In its core it is consensus decision
-making where all market participants are casting a vote. So how do you
-determine the price of a washing machine? Exactly the same! The price
+making where all market participants are casting a vote.  The price
 is nothing but a form of FV. But finance ppl are crooks, you say. They
 invented these theories so to justify their irresponsible actions
 today. How can there be no harm done if to take what belongs to the
@@ -58,7 +57,7 @@ future and use them now? Just take a look at social security, working
 class are paying for their parents' generation, and so hope their kids
 will pay theirs. This is a ponzi scheme in reality. So what is a
 counter example to this? How about manufacturing? They are solid ppl
-who make stuff, and making stuff creates value. You can BS around
+who make stuff, and making stuff creates value. You can **NOT** BS around
 making a solid bulk of physical stuff, a pile of steel that hums,
 works, and makes your life better. Well, let's see. 
 
@@ -68,26 +67,31 @@ just once, but multiple times in the future. There is a life time by
 design, of course, and no one really keeps track of how many loads one
 does per week, and how many uses you will be doing in the next 5 years
 or before the machine is broken. But that's exactly how the price
-represents &mdash; one implicitly give each wash a price, multiplied
-over a time and FV back to the present! This explains exactly why ppl
+represents &mdash; one implicitly gives each load a price, multiplied
+over a time span and FV back to the present! This explains exactly why ppl
 cares about quality &mdash; because one doesn't know how many times
 she is going to use the washing machine, the longer it last, or the
 more loads you throw at it, the greater its FV should be, then
 discounted to PV, it should have a higher price. Now if you buy it
 lower than the PV in your mind, you feel it is a good deal &mdash;
 this, I call it <span class="myhighlight">the truth of the consumer
-motives</span>.
+threshold</span>.
 
 # FV the service
 
 The story doesn't end here. So after all, the logic of FV is correct?
 The financial gurus and manufacturer of consumer goods are all
-operating by the same logic. What about the present? We constantly
+operating by the same principle. What about the present? We constantly
 hear the preach that happiness is about the present and one should
 live by the moment. Then how can one do that if one's consumer
 instinct is naturally about the future, about FV. Is there anything
-only valued at present? How about food? or services in general? We
-don't lump sum future services and discount them to a PV price, do we?
+only valued at present? How about food? Food is consumed in the
+moment, right? There isn't a future value associated with it, or is
+there? Or any other service, a haircut, a smile from a cashier,
+grocery shopping... transactions are done then and now, you pay, you
+get your goods, done, period.
+
+We don't lump sum future services and discount them to a PV price, do we?
 or we actually do? When I sit in a restaurant ordered a dish, am I
 only paying for this round, this dish, or there is a share of the well
 being of this restaurant tomorrow, and next week? Certainly the profit
@@ -98,7 +102,7 @@ should both parties support this bond? Doesn't this make those
 thin-margin, low-prices strategy a weaker contract or equally the
 same? and when we shop in those value stores, are we lowering our
 expectation, thus our FV, but still expecting the contractual
-__promise__ still holds true?  
+__promise__ hold true?  
 
 Everybody understand you get what you
 pay for. Yet, we constantly struggle between a mismatched
@@ -125,13 +129,14 @@ to accept. The trick then, is how well I can discover these numbers
 comparing to how well my competitors are using these numbers. If my
 competitor builds a machine twice as durable as mine but sell at the
 same PV, should I panic? Obviously now with the context we have
-discussed, the key to answer this is not how durable his machine is,
-but how often consumer changes their machine! The design life time
-should last slightly longer than what they are expecting to use it
-for, in theory. But to defeat my competitor at perception level, I
-want to show a machine that lasts twice as long as others' in the
-market &mdash; no one is to going to keep it that long, but the images
-matters.
+discussed, the key to answer this is <span class="myhighlight"> not
+how durable his machine is, but how often consumer changes their
+machines</span>! &mdash; the design life time should last slightly
+longer than what customers are expecting to use it for, in theory. If it is
+**too durable**, it is an over design and is a waste. Therefore, a
+strategy to defeat my competitor at perception level, I want to show a
+machine that lasts twice as long as others' in the market &mdash; no
+one is to going to keep it that long, but the image matters.
 
 # Marketing time
 

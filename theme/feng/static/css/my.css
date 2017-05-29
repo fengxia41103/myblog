@@ -435,3 +435,12 @@ section.mycover {
 .reveal section img {
   border: none;
 }
+
+.card-content h1,
+.card-content h2,
+.card-content h3,
+.card-content h4,
+.card-content h5,
+.card-content h6 {
+  font-size: 1.0em;
+}

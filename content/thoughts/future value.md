@@ -9,7 +9,7 @@ Author: Feng Xia
 </figure>
 
 I was thinking about [future value][1] this morning. Why? because I
-was think about this Chinese phrase, 寅吃卯粮, which means that one
+was thinking about this Chinese phrase, 寅吃卯粮, which means that one
 consumes now stock meant for future use. The term bears a negative
 emotion that is used to criticize someone or some action that is
 irresponsible (in view of the present) and generally a bad idea. After

@@ -1,6 +1,6 @@
 Title: Charm chained states
 Date: 2017-04-24 13:00
-Tags: juju charm state
+Tags: juju charm
 Slug: juju charm chained states
 Author: Feng Xia
 

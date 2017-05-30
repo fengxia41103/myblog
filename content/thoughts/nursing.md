@@ -4,6 +4,11 @@ Tags: dementia
 Slug: nursing home evaluation
 Author: Feng Xia
 
+<figure class="col s6">
+  <img src="/images/funny/stress.jpg"/>
+</figure>
+
+
 Due to Dad's deterioating condition, nursing home becomes a necessary
 option that we must consider as a way to handle this situation. The
 following are notes most based on recollection and first impression

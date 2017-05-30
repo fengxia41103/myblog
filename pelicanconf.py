@@ -32,7 +32,7 @@ SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
 # pagination
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 10
 
 
 # Theme

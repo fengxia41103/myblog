@@ -66,13 +66,9 @@ from charms.layer import basic
 # See https://jujucharms.com/docs/stable/authors-charm-building
 # for more information on this pattern.
 from charms.reactive import main
-
 sys.path.append('lib')
-
 basic.bootstrap_charm_deps()
 basic.init_config_states()
-
-
 main()
 </pre>
 
@@ -118,7 +114,7 @@ Ah ha, that's where it is expecting `hook.template`. Following this we have disc
             raise BuildError('At least one layer must provide %s',
                              self.HOOK_TEMPLATE_FILE)
     </pre>
-    
+
 2. If you didn't define those **must-have** hooks, eg. `install` hook,
 charm build will happily make the dist, but it will fail at run
 time. What is happening!? It turned out `charm` binary has an option
@@ -148,3 +144,89 @@ to make `proof`, and this will complain if you miss expected hooks
         I: missing recommended hook install
         I: missing recommended hook start
         </pre>
+
+If charm is executed, `install` hook will run first, which
+then call two functions from `layer-basic`:
+
+1. `basic.bootstrap_charm_deps()`
+2. `basic.init_config_states()`
+
+Let's take a look them respectively.
+
+# `boostrap_charm_deps`
+
+This function is to setup the host Python environment for charms.
+
+1. `charm-pre-install`: execute any nested file named `charm-pre-install`
+   under an `exec.d` folder. It uses `check_call` so any script will work.
+   Once the script has been executed without error, a hidden file
+   `.{}_{}.done'.format(module_name, submodule_name))` will be created so
+   the same preinstall script will only run ONCE &rarr; this is the
+   way to make the execution only once regardless the sequence of
+   hooks. Therefore whoever runs it once will write this file as
+   breadcrumb for others to check.
+
+2. Install packages in `wheelhouse` folder. Again, if this has run,
+   a hidden file `wheelhouse/.bootstrapped` is created so all these
+   packages are installed ONCE (reference: [distutils][4], [easy_install][5]).
+
+[4]: https://docs.python.org/3/install/index.html#inst-config-files
+[5]: http://setuptools.readthedocs.io/en/latest/easy_install.html#configuration-files
+
+    In `wheelhouse.txt` file:
+    <pre class="brush:plain;">
+    pip>=7.0.0,<8.2.0
+    charmhelpers>=0.4.0,<1.0.0
+    charms.reactive>=0.1.0,<2.0.0
+    </pre>
+    
+3. Install `python-virtualenv` if it is included in
+   `config.yaml`. 
+
+# `init_config_states`
+
+This is where charms will start using Juju commands (via
+[charmhelpers][6] lib) to set states with Juju controller.
+I'm copying the codes below since they are fairly self-explanatory.
+Unlike `bootstrap_charm_deps`, there is no magic file or flag to
+prevent this block executed multiple times. This makes sense since
+each hook can potentially modify charm states, thus run this in each
+hook is necessary.
+
+[6]: https://pythonhosted.org/charmhelpers/
+
+<pre class="brush:python;">
+def init_config_states():
+    import yaml
+    from charmhelpers.core import hookenv
+    from charms.reactive import set_state
+    from charms.reactive import toggle_state
+    config = hookenv.config()
+    config_defaults = {}
+    config_defs = {}
+    config_yaml = os.path.join(hookenv.charm_dir(), 'config.yaml')
+    if os.path.exists(config_yaml):
+        with open(config_yaml) as fp:
+            config_defs = yaml.safe_load(fp).get('options', {})
+            config_defaults = {key: value.get('default')
+                               for key, value in config_defs.items()}
+    for opt in config_defs.keys():
+        if config.changed(opt):
+            set_state('config.changed')
+            set_state('config.changed.{}'.format(opt))
+        toggle_state('config.set.{}'.format(opt), config.get(opt))
+        toggle_state('config.default.{}'.format(opt),
+                     config.get(opt) == config_defaults[opt])
+    hookenv.atexit(clear_config_states)
+
+def clear_config_states():
+    from charmhelpers.core import hookenv, unitdata
+    from charms.reactive import remove_state
+    config = hookenv.config()
+    remove_state('config.changed')
+    for opt in config.keys():
+        remove_state('config.changed.{}'.format(opt))
+        remove_state('config.set.{}'.format(opt))
+        remove_state('config.default.{}'.format(opt))
+    unitdata.kv().flush()
+</pre>

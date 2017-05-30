@@ -3,6 +3,7 @@ Date: 2017-05-29 9:22
 Tags: openstack
 Slug: charm layer-basic
 Author: Feng Xia
+Status: Draft
 
 > <span class="myhighlight">Copyright @ Lenovo US</span>
 

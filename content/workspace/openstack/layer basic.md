@@ -3,7 +3,6 @@ Date: 2017-05-29 9:22
 Tags: openstack
 Slug: charm layer-basic
 Author: Feng Xia
-Status: Draft
 
 > <span class="myhighlight">Copyright @ Lenovo US</span>
 
@@ -59,12 +58,14 @@ Take `install` hook script for example:
 import sys
 
 from charms.layer import basic
+
 # This will load and run the appropriate @hook and other decorated
 # handlers from $JUJU_CHARM_DIR/reactive, $JUJU_CHARM_DIR/hooks/reactive,
 # and $JUJU_CHARM_DIR/hooks/relations.
 #
 # See https://jujucharms.com/docs/stable/authors-charm-building
 # for more information on this pattern.
+
 from charms.reactive import main
 sys.path.append('lib')
 basic.bootstrap_charm_deps()
@@ -230,3 +231,15 @@ def clear_config_states():
         remove_state('config.default.{}'.format(opt))
     unitdata.kv().flush()
 </pre>
+
+# Conclusion
+
+`layer-basic` is the foundation of charm building because it provides
+the entry point to call preinstall scripts, to setup the host Python
+environment and to initialize charm states. It has many hardcoded
+lines for using `apt-get` CLI and expecting an Ubuntu
+environment. These have been addressed somewhat in [python2 charm][7].
+Going forward, the code base can use some work to support host other
+than Ubuntu and Python2 instead of 3.
+
+[7]: {filename}/workspace/openstack/python2%20charm.md

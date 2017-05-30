@@ -247,6 +247,10 @@ import os
 sys.path.append(os.path.join(os.getcwd(),'lib'))
 </pre>
 
+Btw, don't be fooled by the comment line __$JUJU_CHARM_DIR__,
+there isn't one. Otherwise, there is no need to
+make this change.
+
 ## Function mapping in `charmhelpers`
 
 Update `charmhelpers/fetch/__init__.py` to add CentOS function
@@ -293,11 +297,12 @@ class RelationBase(object):
 
 ## `layer-basic`
 
-[layer-basic][2] is inherited in all charms. We will have a separate
-analysis on this lib alone. For now, let's take it for granted and
+[layer-basic][2] is inherited in all charms. We will have a [separate
+analysis][6] on this lib alone. For now, let's take it for granted and
 work around the issues to make Python2 charms.
 
 [2]: https://github.com/juju-solutions/layer-basic
+[6]: {filename}/workspace/openstack/layer%20basic.md
 
 Diff file list:
 
@@ -336,16 +341,19 @@ Changes to this file look intimidating (showing diff -r old
 new). However, the theme is quite straightforward:
 
 1. Install python2 modules, eg `python-setuptools`, as prerequisite to
-prepare the environment.
+prepare the environment ([bug #97][4]).
 2. The correct binary path for your `pip`.
 3. Use `platform.linux_distribution()[0]` to determine host platform.
 4. `apt` uses `--assume-yes`, where `yum` uses `--assumeyes`.
 
-There are mixed `apt_install` using the mapped function and direct
+There are mixed `apt_install` ([bug #98][3]) using the mapped function and direct
 `check_call` shell calls. Moving forward, we should consolidate all
 package functions to mapped version.
 
-<pre class="brush:plain;">
+[3]: https://github.com/juju-solutions/layer-basic/issues/98
+[4]: https://github.com/juju-solutions/layer-basic/issues/97
+
+<pre class="brush:diff;">
 6a7
 > import platform
 51,56c52,77

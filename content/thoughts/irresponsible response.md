@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: irresponsible response
 Author: Feng Xia
 
+<figure class="col s6">
+  <img src="/images/funny/prime.png"/>
+</figure>
+
+
 Doesn't the title sound like a tongue twister? That's where the irony
 is. How can you make a response **irresponsible**? and what does it
 give? Any harm done? Does it matter? What does it mean when it
@@ -12,14 +17,13 @@ or do they?
 
 # The play
 
-
 The whole thing started one morning when I was sitting in this noodle
 shop eating breakfast. A woman walked in and ordered a fried dish. 
 
-> Cashier girl: This dish needs wait.  
-Woman: Oh, how long would that be?  
-> Cashier girl: They just started cooking them.
 
+> Cashier girl: This dish needs wait.  
+> Woman: Oh, how long would that be?  
+> Cashier girl: They just started cooking them.
 
 The conversation ended there. Strange! well, at least to my ears, this
 is really really strange, and frustrating, and maddening, and is the

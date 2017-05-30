@@ -89,7 +89,7 @@ necessary as we thought.
 
 # charm build
 
-Source of `charm build` is [here][2]. Looking into the charm builder class:
+Source of `charm build` is [here][2]. Looking into the charm `Builder` class:
 
 [2]: https://github.com/juju/charm-tools
 
@@ -119,16 +119,32 @@ Ah ha, that's where it is expecting `hook.template`. Following this we have disc
                              self.HOOK_TEMPLATE_FILE)
     </pre>
     
-2. If you didn't define those **must-have** hooks, eg. `install` hook, charm build will happily make the dist, but it will fail at run time. What is happening!? It runed out `charm` binary has an option to make `proof`, and this will complain if you miss expected hooks ([bug #325][3]):
+2. If you didn't define those **must-have** hooks, eg. `install` hook,
+charm build will happily make the dist, but it will fail at run
+time. What is happening!? It turned out `charm` binary has an option
+to make `proof`, and this will complain if you miss expected hooks
+([bug #325][3]), but the proof isn't part of the `charm build` process.
 
 [3]: https://github.com/juju/charm-tools/issues/325
-    
-    <pre class="brush:plain;">
-    fengxia@fengxia-xenial-dev:~/workspace/wss/charms/charm-pdu$ charm proof
-    I: metadata name (pdu) must match directory name (charm-pdu) exactly for local deployment.
-    W: no copyright file
-    W: no README file
-    I: relation rack has no hooks
-    I: missing recommended hook install
-    I: missing recommended hook start
-    </pre>
+
+    1. Code expected hooks:
+        <pre class="brush:python;">
+        lint.check_hook('install', hooks_path, recommended=True)
+        lint.check_hook('start', hooks_path, recommended=True)
+        lint.check_hook('stop', hooks_path, recommended=True)
+        if os.path.exists(os.path.join(charm_path, 'config.yaml')):
+            lint.check_hook('config-changed', hooks_path, recommended=True)
+        else:
+            lint.check_hook('config-changed', hooks_path)
+        </pre>
+
+    2. `charm proof` will catch the missing hooks:
+        <pre class="brush:plain;">
+        fengxia@fengxia-xenial-dev:~/workspace/wss/charms/charm-pdu$ charm proof
+        I: metadata name (pdu) must match directory name (charm-pdu) exactly for local deployment.
+        W: no copyright file
+        W: no README file
+        I: relation rack has no hooks
+        I: missing recommended hook install
+        I: missing recommended hook start
+        </pre>

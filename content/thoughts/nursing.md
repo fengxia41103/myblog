@@ -4,7 +4,7 @@ Tags: dementia
 Slug: nursing home evaluation
 Author: Feng Xia
 
-<figure class="col s6">
+<figure class="col l6 m6 s12">
   <img src="/images/funny/stress.jpg"/>
 </figure>
 

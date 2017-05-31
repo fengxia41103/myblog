@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: girl love
 Author: Feng Xia
 
-<figure class="col s4">
+<figure class="col l4 m4 s12">
   <img src="/images/funny/bookcover.jpg"/>
 </figure>
 

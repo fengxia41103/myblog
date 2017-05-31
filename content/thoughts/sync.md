@@ -5,7 +5,7 @@ Slug: sync async
 Author: Feng Xia
 
 
-<figure class="col s4">
+<figure class="col l4 m4 s12">
   <img src="/images/funny/pointers.png"/>
 </figure>
 
@@ -48,7 +48,7 @@ the way through to generate those instructions that make the CPU
 [3]: http://www.gevent.org/
 [4]: https://github.com/twisted/twisted
 
-<figure class="col s4">
+<figure class="col l4 m4 s12">
   <img src="/images/funny/1519232-geek_poke02.jpg"/>
 </figure>
 

@@ -4,7 +4,7 @@ Tags: finance
 Slug: future value
 Author: Feng Xia
 
-<figure class="col s6">
+<figure class="col l6 m6 s12">
   <img src="/images/funny/kickoff.jpg"/>
 </figure>
 
@@ -140,7 +140,7 @@ one is to going to keep it that long, but the image matters.
 
 # Marketing time
 
-<figure class="col s4">
+<figure class="col l4 m4 s12">
   <img src="/images/funny/direct%20marketing.jpg"/>
 </figure>
 

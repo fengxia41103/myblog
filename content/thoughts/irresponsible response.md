@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: irresponsible response
 Author: Feng Xia
 
-<figure class="col s6">
+<figure class="col l6 m6 s12">
   <img src="/images/funny/prime.png"/>
 </figure>
 
@@ -65,7 +65,7 @@ back to the woman and put her brain on a spin now:
 
 # The pattern
 
-<figure class="col s4">
+<figure class="col l4 m4 s12">
   <img src="/images/funny/blame.jpg"/>
 </figure>
 

@@ -14,7 +14,7 @@ Author: Feng Xia
    render: function(){
      var url = "/"+this.props.url;
      return (
-       <div>
+       <div style={{marginBottom: "1em"}}>
          <div className="row">
            <div className="col l2 m2 s12">
              <i className="fa fa-tag">&nbsp;</i>

@@ -444,3 +444,7 @@ section.mycover {
 .card-content h6 {
   font-size: 1.0em;
 }
+
+.card {
+  min-height: 350px;
+}

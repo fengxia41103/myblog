@@ -15,14 +15,14 @@ Author: Feng Xia
       var url = "/"+this.props.url;
       return (
        <div className="row">
-         <div className="col s2">
+         <div className="col l2 m2 s12">
            <i className="fa fa-tag">&nbsp;</i>
            {this.props.tags}
          </div>
-         <div className="col s7 myhighlight">
+         <div className="col l7 m7 s7 myhighlight">
            {this.props.title}
          </div>
-         <div className="col s3 right-align">
+         <div className="col l3 m3 s3 right-align">
            <a href={url}>
              read more
            </a>

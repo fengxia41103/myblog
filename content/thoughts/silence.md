@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: sound of silence
 Author: Feng Xia
 
+<figure class="col s4">
+  <img src="/images/funny/life%20kick.jpg"/>
+</figure>
+
 What is everybody looking for? Identity? I see people in the middle of
 the social rung are all searching for something. Waking up this
 morning and walking on the street, the place was certainly busier
@@ -22,9 +26,8 @@ of indirection.  So as far as I'm concerned, his trouble stays in his
 life, and I get mine.
 
 I know everybody is looking for something. The most recent thought I
-have is that people are looking for an image of themselves, someone that
-she wants to be. It isn't just a face value image, but a general
-description of life and how she walks through that life. I can't say
+have is that people are looking for an image of themselves, someone
+that they want to be, living the life they want to have.  I can't say
 she is searching for the meaning of life. Life can be quite
 __meaningless__. After all it's a subjective judgement &mdash; yours
 vs. mine. Your life might be wonderfully exciting, to you, but quite
@@ -41,7 +44,7 @@ more and more of the same projections of being, which I suppose should
 bring them closer and closer. But no. More likely they find each
 other's pitfalls that doesn't fit with the image, and the initial
 thought of similarity became conflict, and they walk apart, live
-apart, love apart. How sad? but why?
+apart, love apart. How sad. But why?
 
 I have been watching young lovers sitting at food table, while one of
 them would pull out the iphone (or whatever) and.. and there is no
@@ -51,8 +54,9 @@ chat, chat, flip from screen to screen, click an icon to launch an
 app, shut it down after maybe 10 secs, flip, flip, click another icon,
 launch back the chat, no message, switch..... that's really boring!
 and she is really bored! And the guy would be on his phone, playing
-games? chatting with friends? or doing same boring finger dance? I
-don't get it. When two ppl spending time together at breakfast or
+games? chatting with friends? or doing same boring finger dance? 
+
+I don't get it. When two ppl spending time together at breakfast or
 dinner, it's a commitment to me, that I'm willing to spend these
 minutes of my life, with you. I have so much to say, to comment, to
 share with you, just watch the ppl coming in and out this place,
@@ -61,14 +65,14 @@ wonderful legs. The guy ordering food has obnoxious attitude, and he
 didn't bathe before leaving home this morning, how can any girl want
 to touch or kiss him? but then his wife (or gf, or whatever) has a
 nice dress, and they have a baby! How could that be? Doesn't the woman
-deserve someone, better? or does she? The food is good. And I like
-watching you, with your fine hair, your eyes sparkling with you, the
-only sparkle you can have, and how wonderful this is.... there are
+deserve someone, better? but she looks, satisfied, and bored?  And I
+like watching you, with your fine hair, your eyes sparkling with you,
+the only sparkle you can have, and how wonderful this is.... there are
 just sooooo much to talk about, to go around, to spend this time,
-together, truly, together, not just two well-know-to-each-other
-strangers each owns a fancy mobile phone. For God sake anyone can own
+together, truly, together, not just two well-known-to-each-other
+strangers each owns a fancy mobile phone. **For God sake anyone can own
 a phone like that if s/he chooses so, but not everyone can spend the
-time with her, with him, with you.
+time with her, with him, with you**.
 
 I heard the sign of lost love and lost passion is when two have
 nothing to talk about. <span class="myhighlight">How sad, the sound of
@@ -98,11 +102,14 @@ a few seconds of ourselves, to each other. Isn't it better than any
 gift or present or handbags or roses or whatever?
 
 If you still love, even just yourself, give the piece of your life to
-that person, who happens to be there, to be sitting next to you, to be
-sharing that segment of memory with you, whether you like it or
-not. If you have the power to revert time or wipe it clean afterwards,
-your time is actually more than what I can imagine. But for now, if
-you are a walking body with all the fits and emotions and desires like
-I have, please, look at him, look at her, how wonderful that is, that
-this human being, also chose to have you, in memory, in life, in time.
+that person, whose hand you just held, whose night you just spent
+with, whose skin you just touched, whose name you just said, whose
+smell you just can't forget, whose will to share that segment of
+memory with you, fully. Don't busy yourself with the boring phone,
+really. If you have the power to revert time or wipe it clean
+afterwards, your time is actually more than what I can imagine. But
+for now, if you are a walking body with all the fits and emotions and
+desires like I have, please, look at him, look at her, how wonderful
+that is, that this human being, also chose to have you, in memory, in
+life, in time.
 

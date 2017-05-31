@@ -30,87 +30,87 @@ Summary: Feng Xia's resum&eacute;
 
 ## Skills
 
-<table class="bordered responsive-table">
+<table class="bordered striped">
   <tr><td>
     <strong>Software development</strong>
   </td><td>
-    <ul class="list-unstyled my-multicol-3">
-      <li>Python</li>
-      <li>Django</li>
-      <li>Bootstrap</li>
-      <li>CSS, JS, HTML</li>
-      <li>jQuery</li>
-      <li>ODOO</li>
-      <li>SQL</li>
-      <li>Salesforce APEX</li>
-      <li>Cordova</li>
-      <li>Google app engine</li>
-      <li>C</li>
-      <li>Git</li>
-      <li>SVN</li>
-      <li>Bower</li>
-      <li>Yeoman</li>
-      <li>Jira</li>
+    <ul class="list-unstyled">
+      <li class="col l4 m4 s6">Python</li>
+      <li class="col l4 m4 s6">Django</li>
+      <li class="col l4 m4 s6">Bootstrap</li>
+      <li class="col l4 m4 s6">CSS, JS, HTML</li>
+      <li class="col l4 m4 s6">jQuery</li>
+      <li class="col l4 m4 s6">ODOO</li>
+      <li class="col l4 m4 s6">SQL</li>
+      <li class="col l4 m4 s6">Salesforce APEX</li>
+      <li class="col l4 m4 s6">Cordova</li>
+      <li class="col l4 m4 s6">Google app engine</li>
+      <li class="col l4 m4 s6">C</li>
+      <li class="col l4 m4 s6">Git</li>
+      <li class="col l4 m4 s6">SVN</li>
+      <li class="col l4 m4 s6">Bower</li>
+      <li class="col l4 m4 s6">Yeoman</li>
+      <li class="col l4 m4 s6">Jira</li>
     </ul>
   </td></tr>
 
   <tr><td>
     <strong>QA</strong>
   </td><td>
-    <ul class="list-unstyled my-multicol-3">
-      <li>Selenium</li>
-      <li>HP LoadRunner</li>
-      <li>SonarQube</li>
-      <li>Cucumber</li>
-      <li>Redmine</li>
-      <li>Bugzilla</li>
+    <ul class="list-unstyled">
+      <li class="col l4 m4 s6">Selenium</li>
+      <li class="col l4 m4 s6">HP LoadRunner</li>
+      <li class="col l4 m4 s6">SonarQube</li>
+      <li class="col l4 m4 s6">Cucumber</li>
+      <li class="col l4 m4 s6">Redmine</li>
+      <li class="col l4 m4 s6">Bugzilla</li>
     </ul>
   </td></tr>
 
   <tr><td>
     <strong>System deployment</strong>
   </td><td>
-    <ul class="list-unstyled my-multicol-3">
-      <li>Amazon EC2,RDS,S3</li>
-      <li>uWSGI</li>
-      <li>Nginx</li>
-      <li>Apache</li>
-      <li>Builtbot</li>
-      <li>Fabric</li>
+    <ul class="list-unstyled">
+      <li class="col l4 m4 s6">Amazon EC2,RDS,S3</li>
+      <li class="col l4 m4 s6">uWSGI</li>
+      <li class="col l4 m4 s6">Nginx</li>
+      <li class="col l4 m4 s6">Apache</li>
+      <li class="col l4 m4 s6">Builtbot</li>
+      <li class="col l4 m4 s6">Fabric</li>
     </ul>
   </td></tr>
 
   <tr><td>
     <strong>System monitoring</strong>
   </td><td>
-    <ul class="list-unstyled my-multicol-3">
-      <li>InfluxDB</li>
-      <li>Grafana</li>
-      <li>Cacti</li>
-      <li>Nagios</li>
+    <ul class="list-unstyled">
+      <li class="col l4 m4 s6">InfluxDB</li>
+      <li class="col l4 m4 s6">Grafana</li>
+      <li class="col l4 m4 s6">Cacti</li>
+      <li class="col l4 m4 s6">Nagios</li>
     </ul>
   </td></tr>
 
   <tr><td>
     <strong>System administration</strong>
   </td><td>
-    <ul class="list-unstyled my-multicol-3">
-      <li>Salesforce</li>
-      <li>AWS</li>
-      <li>Ubuntu Linux</li>
+    <ul class="list-unstyled">
+      <li class="col l4 m4 s6">Salesforce</li>
+      <li class="col l4 m4 s6">AWS</li>
+      <li class="col l4 m4 s6">Ubuntu Linux</li>
     </ul>
   </td></tr>
 
   <tr><td>
     <strong>Administrative tasks</strong>
   </td><td>
-    <ul class="list-unstyled my-multicol-3">
-      <li>LaTex</li>
-      <li>Word</li>
-      <li>Powerpoint</li>
-      <li>Excel</li>
-      <li>MS Project</li>
-      <li>Taskjuggler</li>
+    <ul class="list-unstyled">
+      <li class="col l4 m4 s6">LaTex</li>
+      <li class="col l4 m4 s6">Word</li>
+      <li class="col l4 m4 s6">Powerpoint</li>
+      <li class="col l4 m4 s6">Excel</li>
+      <li class="col l4 m4 s6">MS Project</li>
+      <li class="col l4 m4 s6">Taskjuggler</li>
     </ul>
   </td></tr>
 
@@ -119,16 +119,18 @@ Summary: Feng Xia's resum&eacute;
 ## Experience
 
 <div class="my-resume-header row" id="lenovo">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Advisory Engineer<br />
     <span style="opacity:0.5;">Lenovo</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     11/2016 - present<br />
     <span style="opacity:0.5;">RTP, NC</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -142,16 +144,18 @@ Summary: Feng Xia's resum&eacute;
       MaaS, charms, Python, LXD, KVM, Virtualbox
 
 <div class="my-resume-header row" id="py-consulting">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Founder, Consultant<br />
     <span style="opacity:0.5;">PY Consulting</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     01/2015 - 11/2016<br />
     <span style="opacity:0.5;">Raleigh, NC</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -211,16 +215,18 @@ Summary: Feng Xia's resum&eacute;
 [4]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/odoo%20roadmap.pdf
 
 <div class="row my-resume-header" id="lean">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Director <br />
     <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     11/2013 - 01/2015<br />
     <span style="opacity:0.5;">Beijing, China</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -256,16 +262,18 @@ base, a project management system and a configuration management system.
 interviewed nearly one hundred candidates.
 
 <div class="row my-resume-header" id="crunchtime">
-    <div class="text-left col s6">
+    <div class="text-left col l6 m6 s6">
         Project Manager<br />
         <span style="opacity:0.5;">CrunchTime! Information Systems</span>
     </div>
-    <div class="text-right col s5">
+    <div class="text-right col l5 m5 s5">
         <i class="fa fa-calendar"></i>
         07/2010 - 11/2013<br />
         <span style="opacity:0.5;">Boston, MA</span>
     </div>
-    <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
         <br />
         <i class="fa fa-angle-double-down"></i>
     </div>
@@ -306,16 +314,18 @@ reducing one UAT cycle from 40-man-hour to less than 2 hours.
     * <span class="myhighlight">Tools</span>: Python, Selenium webdriver, Django
 
 <div class="row my-resume-header" id="everbright">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Business Manager<br />
     <span style="opacity:0.5;">China Everbright Bank</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     04/2009 - 04/2010<br />
     <span style="opacity:0.5;">Beijing, China</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -337,16 +347,18 @@ training materials.
 
 
 <div class="row my-resume-header" id="bit9">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Team Lead<br />
     <span style="opacity:0.5;">Bit9 Inc.</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     04/2004 - 05/2007<br />
     <span style="opacity:0.5;">Cambridge, MA</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -369,16 +381,18 @@ parser for Windows binary PE formats.
     * <span class="myhighlight">Tools</span>: NT kernel, rootkits, VMWare
 
 <div class="row my-resume-header" id="instron">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Senior Engineer<br />
     <span style="opacity:0.5;">Instron Corp.</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     07/1998 - 04/2004<br />
     <span style="opacity:0.5;">Canton, MA</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -403,16 +417,18 @@ system training. 　　
 ## Education
 
 <div class="row my-resume-header">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     MBA<br />
     <span style="opacity:0.5;">Boston University</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     04/2007 - 09/2008<br />
     <span style="opacity:0.5;">Boston, MA</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -426,16 +442,18 @@ system training. 　　
 * 2nd place in the "_13th Annual Net Impact Case Competition_"
 
 <div class="row my-resume-header">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Master of Science<br />
     <span style="opacity:0.5;">Ohio University</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     09/1995 - 05/1997<br />
     <span style="opacity:0.5;">Athens, OH</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>
@@ -447,16 +465,18 @@ system training. 　　
 
 
 <div class="row my-resume-header">
-  <div class="text-left col s6">
+  <div class="text-left col l6 m6 s6">
     Bachelor of Science<br />
     <span style="opacity:0.5;">Shanghai Jiaotong University</span>
   </div>
-  <div class="text-right col s5">
+  <div class="text-right col l5 m5 s5">
     <i class="fa fa-calendar"></i>
     09/1990 - 07/1994<br />
     <span style="opacity:0.5;">Shanghai, China</span>
   </div>
-  <div  class="text-right col s1" data-toggle="tooltip" title="Click to expand and collapse">
+  <div  class="text-right col l1 m1 s1"
+        data-toggle="tooltip"
+        title="Click to expand and collapse">
     <br />
     <i class="fa fa-angle-double-down"></i>
   </div>

@@ -45,7 +45,8 @@ Author: Feng Xia
      return (
        <div>
          <figure>
-           <img src={this.state.img} className="center-block img-responsive" />
+           <img src={this.state.img}
+                className="center-block img-responsive" />
            <figcaption>
              {this.state.quote}
              <span className="flabel"

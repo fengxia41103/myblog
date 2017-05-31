@@ -40,11 +40,10 @@ Author: Feng Xia
  var OneBox = React.createClass({
    render: function(){
      return(
-       <div>
+       <div className="row">
          <img src={this.props.image.full}
-              className="center-block img-responsive"
               onClick={this.props.onNext}
-              style={{height:"90vh"}} />
+              style={{width:"90vw"}} />
 
          { this.props.showMore?
             <div id="showMore"
@@ -157,13 +156,14 @@ Author: Feng Xia
       return (
         <div>
           { this.state.showMore?
-             <OneBox image={this.state.showing} showMore={this.state.showMore}
+             <OneBox image={this.state.showing}
+                     showMore={this.state.showMore}
                      onClick={this.toggleShowMore}
                      onNext={this.onNext}
                      onPrev={this.onPrev}
                      displayList={this.state.displayList}
                      setImage={this.setImage} />:
-             <div className="my-multicol-4 grid">
+             <div className="my-multicol-3">
                {imageFields}
              </div>
           }

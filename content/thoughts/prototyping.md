@@ -15,31 +15,26 @@ Summary: Building a prototype is a must-have for any new project
        class="img-responsive center-block"/>
 </figure>
 
-I believe in the power of prototypes.
-That is to say, I want to see an idea in action before
-I feel comfortable of its existence and the soundness
-its being. A few years back
-when I first
-started a career as engineer, I learned a valuable lesson.
-After making modifications based on a requirement and checked
-code into SourceSafe (a Microsoft source control product), I
-thought all was well, until a senior team member called on me.
-Part of his job was to mentor and supervise my work.
-He asked to review
-the change. So we sat down side by side. I showed him
-and he said it was a good job. Then he said,"Not
-that I don't trust you. It's just my thing that I need to see
-things with my own eyes in order to believe."
+I believe in the power of prototypes.  That is to say, I want to see
+an idea in action before I feel comfortable of its existence and the
+soundness its being. A few years back when I first started a career as
+engineer, I learned a valuable lesson.  After making modifications
+based on a requirement and checked code into SourceSafe (a Microsoft
+source control product), I thought all was well, until a senior team
+member called on me.  Part of his job was to mentor and supervise my
+work.  He asked to review the change. So we sat down side by side. I
+showed him and he said it was a good job. Then he said,"Not that I
+don't trust you. It's just my thing that I need to see things with my
+own eyes in order to believe."
 
-Fast forward to now, after 20 years doing software development
-and project management, I am leaning more and more towards
-this "seeing things with my own eyes" mentality. Maybe it is
-an age thing. But considering the complexity of a
-software application these days and the precision it requires,
-being conservative is a good trait.
+Fast forward to now, after 20 years doing software development and
+project management, I am leaning more and more towards this "seeing
+things with my own eyes" mentality. Maybe it is an age thing. But
+considering the complexity of a software application these days and
+the precision it requires, being conservative is a good trait.
 
-Prototype, or proof-of-concept (POC), is a wonderful
-thing. In my opinion it serves four important functions:
+Prototype, or proof-of-concept (POC), is a wonderful thing. In my
+opinion it serves four important functions:
 
 1. <span class="myhighlight">It proves the concept</span>.
 Nothing is more valuable than knowing

@@ -65,7 +65,7 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 Use `IMAPStore` to pair email account with a remote. The name of
 remote store is user defined.
 
-<pre class=""brush:plain;">
+<pre class="brush:plain;">
 IMAPStore gmail-remote # <-- user defined name
 Account gmail # <-- the account name defined in Account section
 </pre>

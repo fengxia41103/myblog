@@ -12,23 +12,24 @@ Author: Feng Xia
 
  var ItemBox = React.createClass({
    render: function(){
-      var url = "/"+this.props.url;
-      return (
-       <div className="row">
-         <div className="col l2 m2 s12">
-           <i className="fa fa-tag">&nbsp;</i>
-           {this.props.tags}
+     var url = "/"+this.props.url;
+     return (
+       <div>
+         <div className="row">
+           <div className="col l2 m2 s12">
+             <i className="fa fa-tag">&nbsp;</i>
+             {this.props.tags}
+           </div>
+           <div className="col l7 m7 s8 myhighlight">
+             {this.props.title}
+           </div>
+           <div className="col l3 m3 s4 right-align">
+             <a href={url}>
+               read more
+             </a>
+           </div>
          </div>
-         <div className="col l7 m7 s7 myhighlight">
-           {this.props.title}
-         </div>
-         <div className="col l3 m3 s3 right-align">
-           <a href={url}>
-             read more
-           </a>
-         </div>
-         <br />
-         <div className="divider"></div>
+         <div className="divider"/>
        </div>
      );
    }

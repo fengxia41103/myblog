@@ -5,7 +5,7 @@ Slug: general system architecture
 Author: Feng Xia
 
 
-<figure class="col s8">
+<figure class="col l8 m8 s12">
   <img src="/images/architecture_joke.jpg"
        class="center-block img-responsive">
 </figure>

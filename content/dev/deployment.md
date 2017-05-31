@@ -19,8 +19,9 @@ options open.
 
 
 <figure class="row">
-    <img src="/images/deployment_architecture.png" class="img-responsive center-block"/>
-    <figcaption>Deployment architecture</figcaption>
+  <img src="/images/deployment_architecture.png"
+       class="img-responsive center-block"/>
+  <figcaption>Deployment architecture</figcaption>
 </figure>
 
 Notice that I do not have multiple database in the diagram. First of all,

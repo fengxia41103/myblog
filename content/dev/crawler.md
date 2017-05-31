@@ -13,8 +13,9 @@ or building upon some more sophisticate tool like
 [Scrapy](http://doc.scrapy.org/en/latest/intro/tutorial.html).
 
 <figure class="row">
-<img src="/images/regular_expressions.png" class="img-responsive center-block"/>
-<figcaption>Fun with regular expression</figcaption>
+  <img src="/images/regular_expressions.png"
+       class="img-responsive center-block"/>
+  <figcaption>Fun with regular expression</figcaption>
 </figure>
 
 But before carried away by the fun and the power,
@@ -35,7 +36,6 @@ developers, too. So we took this on almost like an arm race.
 
 <pre class="brush: python;">
 from urllib3 import PoolManager, Retry, Timeout, ProxyManager
-
 
 class PlainUtility():
 
@@ -266,6 +266,7 @@ to that.
 After all the tweaks, the final design of my crawler comes down to this:
 
 <figure class="row">
-    <img class="center-block img-responsive" src="/images/crawler.jpg"/>
-    <figcaption>Crawler architecture</figcaption>
+  <img class="center-block img-responsive"
+       src="/images/crawler.jpg"/>
+  <figcaption>Crawler architecture</figcaption>
 </figure>

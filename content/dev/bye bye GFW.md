@@ -4,7 +4,7 @@ Tags: dev
 Slug: bye bye gfw
 Author: Feng Xia
 
-<figure class="col s3">
+<figure class="col l3 m3 s12">
   <img src="/images/funny/gfw.jpg"/>
 </figure>
 

@@ -1,6 +1,6 @@
 Title: Consume the future
 Date: 2017-05-24 8:36
-Tags: finance
+Tags: thoughts
 Slug: future value
 Author: Feng Xia
 

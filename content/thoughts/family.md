@@ -4,6 +4,10 @@ Tags: dementia family
 Slug: family info
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/funny/family.jpg"/>
+</figure>
+
 # 爷爷，奶奶，幸福邨，夏炽宇（九弟）
 
 > 父亲叫爷爷“大大”，奶奶“亲妈”

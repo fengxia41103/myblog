@@ -1,4 +1,4 @@
-Title: Color
+Title: A color
 Date: 2017-06-01 13:00
 Tags: thoughts
 Slug: color

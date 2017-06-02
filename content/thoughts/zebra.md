@@ -12,7 +12,7 @@ Walking on the street in SH, I just realized what is wrong with this
 place. So I was walking across this giant intersection, and I do mean
 **giant** because everytime I had to put in the high gear and used my
 dash speed at the first moment the walking sign turned green in order
-to **barely** make to the other side, provides there were not many
+to **barely** make to the other side, provides there were many
 cars making their right turn and cut me off in the middle of the
 intersection. Let's put this way, to walk across these modern looking
 six-lane intersection is a matter of courage, full mindness of being

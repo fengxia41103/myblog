@@ -54,10 +54,11 @@ line when nothing is stopping those cars?
 Instead, let's cancel the turn-right signal while there is a walking
 sign on. No more opportunist. When I walk, all cars that can cut in
 the zebra lines get red light, period. Until drivers learn to give
-pedestrians a safe zone, they pay the price in form of longer wait for their
+pedestrians a safety zone, they pay the price in form of longer wait for their
 ignorance and arrogance. Oh, and please make the walk timer longer. If
 the city is troubled by ever growing number of cars which made these
 **giant** intersections necessary, pedestrians should be encouraged,
 not defeated.
 
-The Beatles, won't survive long in China I guess ^_^
+Is this why we don't have Beatles in China?
+

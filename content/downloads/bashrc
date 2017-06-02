@@ -130,4 +130,5 @@ gvm use 1.6
 workon dev
 #ssh -X fengxia@10.240.43.74
 #ssh -X fengxia@192.168.5.14
-ssh -C -D 1080 fxia1@lctc-gp2.labs.lenovo.com
+ssh -C -D 1082 fxia1@lctc-gp2.labs.lenovo.com
+#ssh -C -D 1081 fengxia@10.240.43.74

@@ -8,6 +8,7 @@ Author: Feng Xia
   <img src="/images/funny/color.png"/>
 </figure>
 
+
 This is interesting. I am at the nursing home eating, and suddenly
 realized the color of the book cover that I'm reading is nearly
 identical to the color of the food containers. You know what? I have never
@@ -31,6 +32,7 @@ this color? What does it stand for? I can't even think of a physical
 thing that is in this color, yet it is here, everywhere. It reminds me
 icecream, but it isn't cold or cool or sugary. It feels, mixed,
 confused, puzzled. I thought it was pink, but is it also purple?
+
 
 If colors arouse certain emotion, what we feel everyday while walking
 on the street? Is the brain even processing or capable of processing

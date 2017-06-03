@@ -33,87 +33,74 @@ Summary: Feng Xia's resum&eacute;
 <table class="bordered striped">
   <tr><td>
     <strong>Software development</strong>
-  </td><td>
-    <ul class="list-unstyled">
-      <li class="col l4 m4 s6">Python</li>
-      <li class="col l4 m4 s6">Django</li>
-      <li class="col l4 m4 s6">Bootstrap</li>
-      <li class="col l4 m4 s6">CSS, JS, HTML</li>
-      <li class="col l4 m4 s6">jQuery</li>
-      <li class="col l4 m4 s6">ODOO</li>
-      <li class="col l4 m4 s6">SQL</li>
-      <li class="col l4 m4 s6">Salesforce APEX</li>
-      <li class="col l4 m4 s6">Cordova</li>
-      <li class="col l4 m4 s6">Google app engine</li>
-      <li class="col l4 m4 s6">C</li>
-      <li class="col l4 m4 s6">Git</li>
-      <li class="col l4 m4 s6">SVN</li>
-      <li class="col l4 m4 s6">Bower</li>
-      <li class="col l4 m4 s6">Yeoman</li>
-      <li class="col l4 m4 s6">Jira</li>
-    </ul>
+  </td><td class="row">
+      <span class="col l3 m4 s12">Python</span>
+      <span class="col l3 m4 s12">Django</span>
+      <span class="col l3 m4 s12">Bootstrap</span>
+      <span class="col l3 m4 s12">CSS, JS, HTML</span>
+      <span class="col l3 m4 s12">jQuery</span>
+      <span class="col l3 m4 s12">ODOO</span>
+      <span class="col l3 m4 s12">SQL</span>
+      <span class="col l3 m4 s12">Salesforce APEX</span>
+      <span class="col l3 m4 s12">Cordova</span>
+      <span class="col l3 m4 s12">Google app engine</span>
+      <span class="col l3 m4 s12">C</span>
+      <span class="col l3 m4 s12">Git</span>
+      <span class="col l3 m4 s12">SVN</span>
+      <span class="col l3 m4 s12">Bower</span>
+      <span class="col l3 m4 s12">Yeoman</span>
+      <span class="col l3 m4 s12">Jira</span>
   </td></tr>
 
   <tr><td>
     <strong>QA</strong>
-  </td><td>
-    <ul class="list-unstyled">
-      <li class="col l4 m4 s6">Selenium</li>
-      <li class="col l4 m4 s6">HP LoadRunner</li>
-      <li class="col l4 m4 s6">SonarQube</li>
-      <li class="col l4 m4 s6">Cucumber</li>
-      <li class="col l4 m4 s6">Redmine</li>
-      <li class="col l4 m4 s6">Bugzilla</li>
-    </ul>
+  </td><td class="row">
+      <span class="col l3 m4 s12">Selenium</span>
+      <span class="col l3 m4 s12">HP LoadRunner</span>
+      <span class="col l3 m4 s12">SonarQube</span>
+      <span class="col l3 m4 s12">Cucumber</span>
+      <span class="col l3 m4 s12">Redmine</span>
+      <span class="col l3 m4 s12">Bugzilla</span>
   </td></tr>
 
   <tr><td>
     <strong>System deployment</strong>
-  </td><td>
-    <ul class="list-unstyled">
-      <li class="col l4 m4 s6">Amazon EC2,RDS,S3</li>
-      <li class="col l4 m4 s6">uWSGI</li>
-      <li class="col l4 m4 s6">Nginx</li>
-      <li class="col l4 m4 s6">Apache</li>
-      <li class="col l4 m4 s6">Builtbot</li>
-      <li class="col l4 m4 s6">Fabric</li>
-    </ul>
+  </td><td class="row">
+      <span class="col l3 m4 s12">Amazon EC2,RDS,S3</span>
+      <span class="col l3 m4 s12">uWSGI</span>
+      <span class="col l3 m4 s12">Nginx</span>
+      <span class="col l3 m4 s12">Apache</span>
+      <span class="col l3 m4 s12">Builtbot</span>
+      <span class="col l3 m4 s12">Fabric</span>
   </td></tr>
 
   <tr><td>
     <strong>System monitoring</strong>
-  </td><td>
-    <ul class="list-unstyled">
-      <li class="col l4 m4 s6">InfluxDB</li>
-      <li class="col l4 m4 s6">Grafana</li>
-      <li class="col l4 m4 s6">Cacti</li>
-      <li class="col l4 m4 s6">Nagios</li>
-    </ul>
+  </td><td class="row">
+      <span class="col l3 m4 s12">InfluxDB</span>
+      <span class="col l3 m4 s12">Grafana</span>
+      <span class="col l3 m4 s12">Cacti</span>
+      <span class="col l3 m4 s12">Nagios</span>
   </td></tr>
 
   <tr><td>
     <strong>System administration</strong>
-  </td><td>
-    <ul class="list-unstyled">
-      <li class="col l4 m4 s6">Salesforce</li>
-      <li class="col l4 m4 s6">AWS</li>
-      <li class="col l4 m4 s6">Ubuntu Linux</li>
-    </ul>
+  </td><td class="row">
+      <span class="col l3 m4 s12">Salesforce</span>
+      <span class="col l3 m4 s12">AWS</span>
+      <span class="col l3 m4 s12">Ubuntu Spannux</span>
   </td></tr>
 
   <tr><td>
     <strong>Administrative tasks</strong>
-  </td><td>
-    <ul class="list-unstyled">
-      <li class="col l4 m4 s6">LaTex</li>
-      <li class="col l4 m4 s6">Word</li>
-      <li class="col l4 m4 s6">Powerpoint</li>
-      <li class="col l4 m4 s6">Excel</li>
-      <li class="col l4 m4 s6">MS Project</li>
-      <li class="col l4 m4 s6">Taskjuggler</li>
-    </ul>
+  </td><td class="row">
+      <span class="col l3 m4 s12">LaTex</span>
+      <span class="col l3 m4 s12">Word</span>
+      <span class="col l3 m4 s12">Powerpoint</span>
+      <span class="col l3 m4 s12">Excel</span>
+      <span class="col l3 m4 s12">MS Project</span>
+      <span class="col l3 m4 s12">Taskjuggler</span>
   </td></tr>
-
 </table>
 
 ## Experience

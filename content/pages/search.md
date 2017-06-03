@@ -14,8 +14,8 @@ Author: Feng Xia
    render: function(){
      var url = "/"+this.props.url;
      return (
-       <div style={{marginBottom: "1em"}}>
-         <section className="row">
+       <div className="section">
+         <div className="row">
            <div className="col l2 m2 s12">
              <i className="fa fa-tag">&nbsp;</i>
              {this.props.tags}
@@ -28,7 +28,7 @@ Author: Feng Xia
                read more
              </a>
            </div>
-         </section>
+         </div>
          <div className="divider"/>
        </div>
      );

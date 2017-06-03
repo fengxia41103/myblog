@@ -105,21 +105,23 @@ Summary: Feng Xia's resum&eacute;
 
 ## Experience
 
-<div class="my-resume-header row" id="lenovo">
-  <div class="text-left col l6 m6 s6">
-    Advisory Engineer<br />
-    <span style="opacity:0.5;">Lenovo</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    11/2016 - present<br />
-    <span style="opacity:0.5;">RTP, NC</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header" id="lenovo">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Advisory Engineer<br />
+      <span style="opacity:0.5;">Lenovo</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      11/2016 - present<br />
+      <span style="opacity:0.5;">RTP, NC</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -130,21 +132,23 @@ Summary: Feng Xia's resum&eacute;
     - <span class="myhighlight">Tools</span>: Openstack, Ironic, Juju,
       MaaS, charms, Python, LXD, KVM, Virtualbox
 
-<div class="my-resume-header row" id="py-consulting">
-  <div class="text-left col l6 m6 s6">
-    Founder, Consultant<br />
-    <span style="opacity:0.5;">PY Consulting</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    01/2015 - 11/2016<br />
-    <span style="opacity:0.5;">Raleigh, NC</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header" id="py-consulting">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Founder, Consultant<br />
+      <span style="opacity:0.5;">PY Consulting</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      01/2015 - 11/2016<br />
+      <span style="opacity:0.5;">Raleigh, NC</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -201,21 +205,23 @@ Summary: Feng Xia's resum&eacute;
 
 [4]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/odoo%20roadmap.pdf
 
-<div class="row my-resume-header" id="lean">
-  <div class="text-left col l6 m6 s6">
-    Director <br />
-    <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    11/2013 - 01/2015<br />
-    <span style="opacity:0.5;">Beijing, China</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header" id="lean">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Director <br />
+      <span style="opacity: 0.5;">Beijing Lean Strategy Consulting Group</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      11/2013 - 01/2015<br />
+      <span style="opacity:0.5;">Beijing, China</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -248,7 +254,8 @@ base, a project management system and a configuration management system.
 * Setup a local service team. Screened hundreds of resume and
 interviewed nearly one hundred candidates.
 
-<div class="row my-resume-header" id="crunchtime">
+<div class="my-resume-header" id="crunchtime">
+  <div class="row">
     <div class="text-left col l6 m6 s6">
         Project Manager<br />
         <span style="opacity:0.5;">CrunchTime! Information Systems</span>
@@ -264,6 +271,7 @@ interviewed nearly one hundred candidates.
         <br />
         <i class="fa fa-angle-double-down"></i>
     </div>
+  </div>
 </div>
 
 * Provided technical support to client on administrating our ERP
@@ -300,21 +308,23 @@ reducing one UAT cycle from 40-man-hour to less than 2 hours.
 
     * <span class="myhighlight">Tools</span>: Python, Selenium webdriver, Django
 
-<div class="row my-resume-header" id="everbright">
-  <div class="text-left col l6 m6 s6">
-    Business Manager<br />
-    <span style="opacity:0.5;">China Everbright Bank</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    04/2009 - 04/2010<br />
-    <span style="opacity:0.5;">Beijing, China</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header" id="everbright">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Business Manager<br />
+      <span style="opacity:0.5;">China Everbright Bank</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      04/2009 - 04/2010<br />
+      <span style="opacity:0.5;">Beijing, China</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -333,21 +343,23 @@ two loans of substantial amount.
 training materials.
 
 
-<div class="row my-resume-header" id="bit9">
-  <div class="text-left col l6 m6 s6">
-    Team Lead<br />
-    <span style="opacity:0.5;">Bit9 Inc.</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    04/2004 - 05/2007<br />
-    <span style="opacity:0.5;">Cambridge, MA</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header" id="bit9">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Team Lead<br />
+      <span style="opacity:0.5;">Bit9 Inc.</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      04/2004 - 05/2007<br />
+      <span style="opacity:0.5;">Cambridge, MA</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -367,21 +379,23 @@ parser for Windows binary PE formats.
 
     * <span class="myhighlight">Tools</span>: NT kernel, rootkits, VMWare
 
-<div class="row my-resume-header" id="instron">
-  <div class="text-left col l6 m6 s6">
-    Senior Engineer<br />
-    <span style="opacity:0.5;">Instron Corp.</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    07/1998 - 04/2004<br />
-    <span style="opacity:0.5;">Canton, MA</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header" id="instron">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Senior Engineer<br />
+      <span style="opacity:0.5;">Instron Corp.</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      07/1998 - 04/2004<br />
+      <span style="opacity:0.5;">Canton, MA</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -403,21 +417,23 @@ system training. 　　
 
 ## Education
 
-<div class="row my-resume-header">
-  <div class="text-left col l6 m6 s6">
-    MBA<br />
-    <span style="opacity:0.5;">Boston University</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    04/2007 - 09/2008<br />
-    <span style="opacity:0.5;">Boston, MA</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      MBA<br />
+      <span style="opacity:0.5;">Boston University</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      04/2007 - 09/2008<br />
+      <span style="opacity:0.5;">Boston, MA</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -428,21 +444,23 @@ system training. 　　
 * "_Certificate of International Management Program_"
 * 2nd place in the "_13th Annual Net Impact Case Competition_"
 
-<div class="row my-resume-header">
-  <div class="text-left col l6 m6 s6">
-    Master of Science<br />
-    <span style="opacity:0.5;">Ohio University</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    09/1995 - 05/1997<br />
-    <span style="opacity:0.5;">Athens, OH</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Master of Science<br />
+      <span style="opacity:0.5;">Ohio University</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      09/1995 - 05/1997<br />
+      <span style="opacity:0.5;">Athens, OH</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 
@@ -451,21 +469,23 @@ system training. 　　
 * "_Student Employee of the Month_"
 
 
-<div class="row my-resume-header">
-  <div class="text-left col l6 m6 s6">
-    Bachelor of Science<br />
-    <span style="opacity:0.5;">Shanghai Jiaotong University</span>
-  </div>
-  <div class="text-right col l5 m5 s5">
-    <i class="fa fa-calendar"></i>
-    09/1990 - 07/1994<br />
-    <span style="opacity:0.5;">Shanghai, China</span>
-  </div>
-  <div  class="text-right col l1 m1 s1"
-        data-toggle="tooltip"
-        title="Click to expand and collapse">
-    <br />
-    <i class="fa fa-angle-double-down"></i>
+<div class="my-resume-header">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      Bachelor of Science<br />
+      <span style="opacity:0.5;">Shanghai Jiaotong University</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      09/1990 - 07/1994<br />
+      <span style="opacity:0.5;">Shanghai, China</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
   </div>
 </div>
 

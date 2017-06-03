@@ -1,6 +1,6 @@
 Title: 父亲一家
 Date: 2017-05-18 17:31
-Tags: dementia family
+Tags: family
 Slug: family info
 Author: Feng Xia
 

@@ -2,7 +2,7 @@ Title: ODOO8 native server loading process
 Date: 2016-07-23
 Modified: 2016-07-23
 Category: odoo
-Tags: odoo8, internal
+Tags: odoo
 Slug: odoo8 server loading process
 Author: Feng Xia
 

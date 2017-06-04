@@ -17,7 +17,7 @@ wealthy they are, how wonderful they look to outsiders, how much love
 they have for each other. There just
 isn't one single, perfectly happy, worry-free, trouble-free,
 conflict-free family. But then, with dad's current condition, he
-doesn't understands these troubles anymore. What used to be a
+doesn't understand these troubles anymore. What used to be a
 forbidden topic can now be safely said in front of him &mdash;
 grantedly he has his own world these days and that world isn't worry
 free either. However, he is not bothered by the worries that is

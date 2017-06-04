@@ -21,7 +21,7 @@ taste of similar food, similar decoration, a few more photos that ppl
 can recognize the link between then and now, a trace of heritage.
 
 Doesn't this description remind you the well-known
-place, [Teahouse 茶馆][1]? The backdrop of the play was a turmoil era
+play, [Teahouse 茶馆][1]? The backdrop of the play was a turmoil era
 in the Chinese history when the world was experiencing the WWI and
 WWII. Many were lost, disrupted, changed. In the play, the teahouse
 was passed down from generation to generation, business as usual, ppl

@@ -87,13 +87,13 @@ concept so human don't forget.
 
 Human intelligence, AI, same deal, no one is superior to the
 other. There is difference in efficiency, and there is difference in
-how objective one versus another. If human loses the game, not because
-the machine is smarter, but there are a group of human who are
-satisfied with the given answer, and wanted to push the boundary of
-inherited __truth__. Computer, just like any other mechanics and
-electronics human invented, are just tools to make the work more
-efficient. Tools don't crack the code, we do; computer doesn't make
-decisions, the writer of that `if-else` line do. 
+how objective one versus another. If someone loses his game, not
+because the machine is smarter, but because the group of ppl behind
+those machines are not satisfied with the given answer, and wanted to
+think deeper of inherited __truth__.  Computer, just like any other
+mechanics and electronics human invented, are just tools to make the
+work more efficient. Tools don't crack the code, we do; computer
+doesn't make decisions, the writer of that `if-else` line do.
 
 <pre class="brush:python;">
 # FACT: is he naked
@@ -109,9 +109,9 @@ else:
     looking_good = False;
 </pre>
 
-Computer identifies two variables representing two completely
-different dimensions. If you mixed the two in your head, wow, it's a
-Dao, a Zen, a culture, a you-can-only-feel-it abstract, and that is
-when you lose the touch with yourself and start saying "how wonderful
-his new gown looks!"
+Here, computer identifies two variables representing two completely
+different dimensions. This is just my simplified view of the world
+when looking at the empror. If you mixed the two in your head, wow,
+it's a Dao, a Zen, a culture, a you-can-only-feel-it abstract, and
+that is when you start saying "how wonderful his new gown looks!"
 

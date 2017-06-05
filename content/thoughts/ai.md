@@ -76,8 +76,8 @@ Alpha Go, just like addition vs. multiplication, gets us one step
 closer to what the core of Go is, after thousands of years of zen-ing
 of self-addiction. This is not only a feat of computer engineering and
 so called deep learning or AI or whatever fancy words you know, this
-is also the wonder of a machine &mdash; it is a challenger, it is a
-cold-blooded emotionless solid-state electronics, it is that kid who
+is a **giant leap** for Go itself &mdash; machine is a challenger, a
+pile of cold-blooded emotionless solid-state electronics, a kid who
 shouted out "Look he is, naked!" Multiplication is a must in math
 concept, it has its use in many many ways. When machine derives the
 same answer by brute-force addition, it is not cheating, it is not
@@ -85,12 +85,33 @@ same answer by brute-force addition, it is not cheating, it is not
 concept so human don't forget.
 
 
-Machine will win. I don't think there is any doubt. And they are the
-best assistant human have. It doesn't take human's BS for an
-answer. Once it cracks the code, and I do mean **code**, its
-efficiency will put us to shame. It's not a triumph of machine, but a
-progress for human, and an applause for anyone who cares to take
-"sorry but I don't understand this" with pride.
+Human intelligence, AI, same deal, no one is superior to the
+other. There is difference in efficiency, and there is difference in
+how objective one versus another. If human loses the game, not because
+the machine is smarter, but there are a group of human who are
+satisfied with the given answer, and wanted to push the boundary of
+inherited __truth__. Computer, just like any other mechanics and
+electronics human invented, are just tools to make the work more
+efficient. Tools don't crack the code, we do; computer doesn't make
+decisions, the writer of that `if-else` line do. 
 
-Empror can enjoy his naked walk, so will be my way to enjoy the scene
-by saying "OMG, what the!?"
+<pre class="brush:python;">
+# FACT: is he naked
+if have_clothes_on:
+    naked = False;
+else:
+    naked = True;
+
+# OPINION: does he look good
+if i_like_it:
+    looking_good = True;
+else:
+    looking_good = False;
+</pre>
+
+Computer identifies two variables representing two completely
+different dimensions. If you mixed the two in your head, wow, it's a
+Dao, a Zen, a culture, a you-can-only-feel-it abstract, and that is
+when you lose the touch with yourself and start saying "how wonderful
+his new gown looks!"
+

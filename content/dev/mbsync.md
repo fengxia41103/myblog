@@ -31,7 +31,7 @@ glance, but it isn't really. In a nutshell, it defines three things:
 3. <span class="myhighlight">A channel</span>: a link that connects
    the a remote store with a local store.
    
-<figure class="col l8 m8 s12">
+<figure class="col l12 m12 s12">
   <img src="/images/mbsync.png"
        class="center-block img-responsive">
   <figcaption>mbsync components</figcaption>

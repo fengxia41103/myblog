@@ -18,10 +18,9 @@ to looking at things with a straight face, cut to the core, no more
 BS, no more hand waving and using some abstract, ideological fuzziness
 to fool ppl.
 
-At least 20
-years ago I have read a line about artificial intelligence, which
-cleared formed my view on this &mdash; There are two ways to define
-__intelligence__:
+At least 20 years ago I have read a line about artificial
+intelligence, which cleared formed my view on this &mdash; There are
+two ways to define __intelligence__:
 
 1. Machine emulate human's train of thoughts, and derives
    the same conclusion.
@@ -30,7 +29,7 @@ __intelligence__:
 
 The key is, <span class="myhighlight">the final result is the
 same</span>. So how can you distinguish the difference? does process
-even matter? If we both doing math, `4x8`, human uses
+even matter? If we both doing math, `4 x 8`, human uses
 **multiplication**, you know what? computers know nothing about
 multiplications, to it, everything is an `add`, period. It will add
 these numbers that many times, but much much much faster than any human can
@@ -42,7 +41,7 @@ every, single, time. You know why?
 because to computer, `4x8` is the same as `29837497972 x 980987574009`,
 same method, same logic, repetitive of the same action.
 
-That's be beauty of it, isn't it? If you just look at this example
+That's the beauty of it, isn't it? If you just look at this example
 closely, you will start to realize this isn't even a need for debate
 &mdash; the core of multiplication, or the true concept of
 multiplication, is addition. So putting the same lens over Alpha Go

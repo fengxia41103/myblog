@@ -1,43 +1,45 @@
 Title: ODOO8 native server loading process
 Date: 2016-07-23
-Modified: 2016-07-23
+Modified: 2017-06-07 8:31
 Category: odoo
 Tags: odoo
 Slug: odoo8 server loading process
 Author: Feng Xia
 
-During daily development of ODOO8 modules, one thing
-I have been noticing is the slowness when ODOO first boot up.
-We are observing up to minutes of a bootup time. This plainly is
-too slow.
-Watching debug prints indicates that ODOO scans through
-all modules listed on Python path and
-builds a _map_ in memory before dev server starts responding
-to request. Intuitively I suspected such loading practice is
-causing an unnecessary delay.
-This aggravates further
-when ODOO server becomes completely unusable if any of the module
-chokes during this loading process. But this is too common
-a scenario during development. One consequence of this is that
-debugging becomes difficult. Often enough ODOO doesn't yield
-useful trace track to help determine the root cause of an error.
-Another problem of such approach is the availability
-of servic becoming binary &mdash; it either fully works or nothing
-runs. By analogy, the ODOO loading process is like compiling phase in
-running a C code. No executable is available until the compiler and linker
-are happy.
+During daily development of ODOO8 modules, one thing I have been
+noticing is the slowness when ODOO first boot up.  We are observing up
+to minutes of a bootup time. This plainly is too slow.  Watching debug
+prints indicates that ODOO scans through all modules listed on Python
+path and builds a _map_ in memory before dev server starts responding
+to request. Intuitively I suspected such loading practice is causing
+an unnecessary delay.  This aggravates further when ODOO server
+becomes completely unusable if any of the module chokes during this
+loading process. But this is too common a scenario during
+development. One consequence of this is that debugging becomes
+difficult. Often enough ODOO doesn't yield useful trace track to help
+determine the root cause of an error.  Another problem of such
+approach is the availability of servic becoming binary &mdash; it
+either fully works or nothing runs. By analogy, the ODOO loading
+process is like compiling phase in running a C code. No executable is
+available until the compiler and linker are happy.
 
-Under this light, this article analyzes this booting process with a hope
-to understand why ODOO takes such an approach and how we could improve
-or circumvent during development in order to gain efficiency. Considering
-a developer lives with this bootup process as a daily need, it becomes
-interesting how we can reduce this bootup time consumption.
+Under this light, this article analyzes this booting process with a
+hope to understand why ODOO takes such an approach and how we could
+improve or circumvent during development in order to gain
+efficiency. Considering a developer lives with this bootup process as
+a daily need, it becomes interesting how we can reduce this bootup
+time.
 
 # Quick glance
 
-Tracing through ODOO boot code, we have illustrated steps in diagram below:
+Tracing through ODOO boot code, we have illustrated steps 
+of ODOO's loading process in diagram below:
 
-![ODOO8 Loading Process](/images/odoo8_loading.png).
+<figure class="row">
+  <img class="img-responsive center-block"
+       src="/images/odoo8_loading.png" />
+  <figcaption>ODOO8 loading sequence</figcaption>
+</figure>
 
 Why does ODOO call `tools.config.parse_config` twice? The function
 fullfills the same purpose by parsing the configuration file and
@@ -47,31 +49,29 @@ builds the in memory `tools.config` global variable. This is redundant.
 # Server selection
 
 The meat of this loading is to boot up a HTTP server. ODOO offers
-3 types of servers:
+three types of servers:
 
-1. ThreadedServer
-2. PreforkServer
-3. GeventServer
+1. `ThreadedServer`
+2. `PreforkServer`
+3. `GeventServer`
 
-But which one to use?
-If configuration option `config['workers']` is non zero,
-it will pick the `PreforkServer`; otherwise,
-it takes default ThreadedServer.
+But which one to use?  If configuration option `config['workers']` is
+non zero, it will pick the `PreforkServer`; otherwise, it takes
+default `ThreadedServer`.
 
 <pre class="brush:python;">
-    if openerp.evented:
-        server = GeventServer(openerp.service.wsgi_server.application)
-    elif config['workers']:
-        server = PreforkServer(openerp.service.wsgi_server.application)
-    else:
-        server = ThreadedServer(openerp.service.wsgi_server.application)
+if openerp.evented:
+    server = GeventServer(openerp.service.wsgi_server.application)
+elif config['workers']:
+    server = PreforkServer(openerp.service.wsgi_server.application)
+else:
+    server = ThreadedServer(openerp.service.wsgi_server.application)
 </pre>
 
 `ThreadedServer` runs in a single thread, where `PreforServer` uses
-`select` to handle _multiprocessing_. This choice apparently makes
-the prefork server more appealing
-for production site. ODOO's own manual on _deployment_ also
-confirms this:
+`select` to handle _multiprocessing_. This choice apparently makes the
+prefork server more appealing for production site. ODOO's own manual
+on _deployment_ also confirms this:
 
 >Odoo includes built-in HTTP servers, using either multithreading or
 >multiprocessing.  For production use, it is recommended to use the
@@ -102,7 +102,12 @@ as [Guicorn][] and [uwsgi][].
 [lighthttpd]: http://www.lighttpd.net/
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html#BaseHTTPServer.HTTPServer
 
-![ODOO8 Server Run](/images/odoo8_server_run.png)
+<figure class="row">
+  <img class="img-responsive center-block"
+       src="/images/odoo8_server_run.png" />
+  <figcaption>ODOO8 ThreadedServer</figcaption>
+</figure>
+
 
 # Runtime call trace
 
@@ -121,26 +126,24 @@ pycallgraph -v -d -s -i openerp.\*
 -- odoo.py -c ../works/contract/8290.conf
 </pre>
 
-The decision to exclude these patters, in particular, the `openerp.report.*`
-is purely out of layout consideration &mdash; it clutters
-the diagram too much. This, on the other hand,
-could be considered as a clue why bootup
-is slow.
+The decision to exclude these patters, in particular, the
+`openerp.report.*` is purely out of layout consideration &mdash; it
+clutters the diagram too much. This, on the other hand, could be
+considered as a clue why bootup is slow.
 
-Note that no tool
-can do _static_ analysis of code and generate a call stack.
-The only sure way to create this is to run the
-code and monitor its runtime stack, in which case language
-such as Python shines due its interpreting nature.
-The Python GIL will keep track the entire
-call trace in its memory and knows details of call stack.
+Note that no tool can do _static_ analysis of code and generate a call
+stack.  The only sure way to create this is to run the code and
+monitor its runtime stack, in which case language such as Python
+shines due its interpreting nature.  The Python GIL will keep track
+the entire call trace in its memory and knows details of call stack.
 
 
 [Pycallgraph]: http://pycallgraph.slowchop.com/en/develop/guide/command_line_usage.html
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html
 
 <figure class="row">
-    <img src="/images/odoo8_loading_callgraph.png" class="img-responsive center-block"/>
+  <img src="/images/odoo8_loading_callgraph.png"
+       class="img-responsive center-block"/>
     <figcaption>ODOO 8 loading call trace diagram</figcaption>
 </figure>
 
@@ -148,7 +151,7 @@ call trace in its memory and knows details of call stack.
 # Thoughts
 
 After examining ODOO code and its run time, two areas I would
-recommend ODOO to recondier its approach:
+recommend ODOO to reconsider its approach:
 
 1. how configuration options are being shared among modules
 2. using ThreadedServer as default
@@ -169,21 +172,21 @@ the configuration object globally. I don't know whether I should call
 this a trick or a bad practice. So in short, ODOO's configuration
 is global.
 
-The proper way to handle this is to either set it up as `global`, or making
-caller to parse the disk conf file if it needs information.
-The former will build an in memory image. As long as
-it is in read-only mode, no locking mechanism is needed. The downside
-is that disck changes won't necessarily update the in memory
-object. The latter is better, though more expansive since disk file
-is accessed each time.
+The proper way to handle this is to either set it up as `global`, or
+making caller to parse the disk conf file if it needs information.
+The former will build an in memory image. As long as it is in
+read-only mode, no locking mechanism is needed. The downside is that
+disck changes won't necessarily update the in memory object. The
+latter is better, though more expansive since disk file is accessed
+each time.
 
 
 ## ThreadedServer
 
-My suspecion is that native server
-is suitable for development environment, but lacks features to be production
-ready. I'm considering features such as plugin loading (think Apache2),
-configuration, security, HTTP protocol support, SSL, and much much more.
+My suspecion is that native server is suitable for development
+environment, but lacks features to be production ready. I'm
+considering features such as plugin loading (think Apache2),
+configuration, security, HTTP protocol support, SSL...?
 
 In short, ODOO's `ThreadedServer` works fine as development tool,
 but should not be used for production deployment unless, well,

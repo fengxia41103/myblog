@@ -130,7 +130,18 @@ Summary: Feng Xia's resum&eacute;
   rack configuration, baremetal provisioning, Openstack and
   Lenovo application deployment.
     - <span class="myhighlight">Tools</span>: Openstack, Ironic, Juju,
-      MaaS, charms, Python, LXD, KVM, Virtualbox
+    MaaS, charms, Python, LXD, KVM, Virtualbox
+    - <span class="myhighlight">Sample research</span>: [MAAS lab][5],
+           Juju charm's [reactive framework][6], introduction
+           of [Openstack Ironic][8] and comparison analysis
+           of [Ironic vs. MAAS][9], technologies used
+           in [baremetal provisioining][7]
+
+[5]: {filename}/workspace/openstack/maas.md
+[6]: {filename}/workspace/openstack/charm_reactive.md
+[7]: {filename}/workspace/openstack/baremetal%20provisioning.md
+[8]: {filename}/workspace/openstack/ironic.md
+[9]: {filename}/workspace/openstack/maas%20ironic.md
 
 <div class="my-resume-header" id="py-consulting">
   <div class="row">

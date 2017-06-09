@@ -1,6 +1,6 @@
-Title: Quote of the day
+Title: Quote
 Tags: quote
-Slug: quote of the day
+Slug: quote
 Author: Feng Xia
 
 <div id="quote"></div>

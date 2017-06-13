@@ -1,10 +1,9 @@
  Title: Setup a MAAS Virtualbox lab
 Date: 2016-12-08 10:45
-Tags: openstack
+Tags: lenovo
 Slug: maas virtualbox
 Author: Feng Xia
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 Canonical [MAAS][1] is a deployment tool that can give a bare metal
 life by putting an OS on it. Working together with [Juju][2], they can

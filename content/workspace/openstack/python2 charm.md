@@ -1,10 +1,8 @@
 Title: Juju charm Python2
 Date: 2017-05-27 10:00
-Tags: openstack
+Tags: lenovo
 Slug: python2 charm
 Author: Feng Xia
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 Why do we want to build Python2 charms? Charms are claimed to built
 for Python3. However, the catch is that charms are also built for

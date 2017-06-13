@@ -1,12 +1,10 @@
 Title: Enable GlusterFS and Virtualization on CIMP
 Date: 2017-04-12 11:00
-Tags: openstack
+Tags: lenovo
 Slug: lenovo glusterfs
 Author: Feng Xia
 Status: Draft
 
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 > Pre-requirement:
 > 

@@ -1,10 +1,8 @@
 Title: Targets in MAAS lab
 Date: 2016-12-09 22:00
-Tags: openstack
+Tags: lenovo
 Slug: maas target
 Author: Feng Xia
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 After setting up the MAAS server and its subnet, bringing up a target
 node is simple.

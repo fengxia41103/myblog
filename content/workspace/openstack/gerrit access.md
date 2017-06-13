@@ -1,11 +1,10 @@
 Title: Gerrit access setup
 Date: 2017-1-12 15:00
-Tags: openstack
+Tags: lenovo
 Slug: gerrit access
 Author: Feng Xia
 Status: Draft
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 # Gerrit access
 

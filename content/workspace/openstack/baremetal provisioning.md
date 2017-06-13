@@ -1,10 +1,9 @@
 Title: Baremetal provisioning
 Date: 2017-03-22 15:45
-Tags: openstack
+Tags: lenovo
 Slug: baremetal provisioning
 Author: Feng Xia
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 Everyone of us has installed an operating system to a computer at some point in
 life. It is easy to perceive inserting a disk or USB key to make this

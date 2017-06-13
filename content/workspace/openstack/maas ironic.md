@@ -1,10 +1,9 @@
 Title: MAAS vs. Ironic
 Date: 2017-03-30 10:20
-Tags: openstack
+Tags: lenovo
 Slug: maas and ironic
 Author: Feng Xia
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are

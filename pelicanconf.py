@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import sys
+
 AUTHOR = u'Feng Xia'
 SITENAME = u'PY'
 #SITEURL = 'http://fengxia.co'
@@ -49,3 +51,16 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 # plugins
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['tipue_search']
+
+##############################
+#
+# Custom filters
+#
+##############################
+
+
+def tags_contain(test_list, item):
+    return item in [t.name for t in test_list]
+
+
+JINJA_FILTERS = {'tags_contain': tags_contain}

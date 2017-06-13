@@ -1,11 +1,9 @@
 Title: HW workload charms
 Date: 2017-04-25 8:00
-Tags: juju charm hw
+Tags: lenovo
 Slug: juju charm hw workload
 Author: Feng Xia
 Status: Draft
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 In this article we will introduce the HW workload charms and how to
 build them. **What is a HW workload?** In orchestration space we can

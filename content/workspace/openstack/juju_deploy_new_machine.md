@@ -1,10 +1,9 @@
 Title: Juju deploy and Provider
 Date: 2017-02-08 14:00
-Tags: openstack
+Tags: lenovo
 Slug: juju deploy provider
 Author: Feng Xia
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 In [this][1] article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will

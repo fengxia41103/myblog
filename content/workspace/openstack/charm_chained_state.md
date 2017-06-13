@@ -1,10 +1,8 @@
 Title: Charm chained states
 Date: 2017-04-24 13:00
-Tags: juju charm
+Tags: lenovo
 Slug: juju charm chained states
 Author: Feng Xia
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 This charm is created to demonstrate chained states using Juju
 charm. Chained states is essentially mirroring a pattern of any sequential

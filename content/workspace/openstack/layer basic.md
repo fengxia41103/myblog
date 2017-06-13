@@ -1,10 +1,8 @@
 Title: Charm layer-basic
 Date: 2017-05-29 9:22
-Tags: openstack
+Tags: lenovo
 Slug: charm layer-basic
 Author: Feng Xia
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 Have you ever wondered what [layer-basic][1] is for? and why every
 charm needs to include it? In this article we will take a look

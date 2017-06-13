@@ -1,11 +1,9 @@
 Title: Devstack & Heat
 Date: 2017-02-27 17:00
-Tags: openstack
+Tags: lenovo
 Slug: heat devstack
 Author: Feng Xia
 Status: Draft
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 Setting up [Heat][1] with [Openstack Devstack][2] is straightforward
 once user realizes that the official [instructions][3] is not

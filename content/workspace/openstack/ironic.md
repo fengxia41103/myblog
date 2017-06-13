@@ -1,10 +1,8 @@
 Title: Openstack Ironic
 Date: 2017-03-15 22:45
-Tags: openstack
+Tags: lenovo
 Slug: ironic intro
 Author: Feng Xia
-
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju

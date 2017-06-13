@@ -1,10 +1,9 @@
 Title: Juju charm deployment
 Date: 2017-01-19 15:45
-Tags: openstack
+Tags: lenovo
 Slug: juju deploy
 Author: Feng Xia
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 We have covered Juju's [bootstrap][1] phase. In this article, we will
 continue our research into another important function &mdash; juju deploy.

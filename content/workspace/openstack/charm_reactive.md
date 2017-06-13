@@ -1,10 +1,9 @@
 Title: Charm Reactive
 Date: 2017-04-24 14:00
-Tags: juju charm
+Tags: lenovo
 Slug: juju charm reactive
 Author: Feng Xia
 
-> <span class="myhighlight">Copyright @ Lenovo US</span>
 
 In this article we will study charm's [reactive][1] framework to get a
 firm understanding of what they mean by writing an reactive charm.

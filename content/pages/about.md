@@ -14,6 +14,11 @@ environment. A typical cycle runs between 2 to 4 weeks, and in most
 cases, your system will be up and running within one week.
 
 
+<figure class="col l6 m6 s12">
+  <img src="/images/funny/wtf-code.png"/>
+</figure>
+
+
 From experience, we have come to realize that most _customers_ have a
 fairly broad idea of what the solution will be like. Often enough they
 have a certain _technology_ in mind they prefer to use. However, such

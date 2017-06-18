@@ -1581,6 +1581,19 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;   (setq default-input-method "chinese-pyim")
 ;;   (global-set-key (kbd "C-\\") 'toggle-input-method))
 
+(require 'chinese-fonts-setup)
+;; 让 chinese-fonts-setup 随着 emacs 自动生效。
+;; (chinese-fonts-setup-enable)
+;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+;; (cfs-set-spacemacs-fallback-fonts)
+
+;; artist
+(use-package 
+  artist  
+
+  :ensure 
+  :config)
+
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 
 ;; Local Variables:

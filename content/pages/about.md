@@ -46,8 +46,8 @@ having a shallow knowledge a hot topic is easy; having sufficient
 experience and insight to create a robust and efficient overall system
 is hard. Knowing alphabet doesn't mean one can write a novel. System
 nowadays requires a sound knowledge of the entire stack, which covers
-at least half dozen languages &mdash; CSS, JS and HTML for frontend,
-Python/Ruby/Javascript/Java/Go/.net for backend, and SQL/XML/JSON/YAML
+at least half dozen languages &mdash; `CSS`, `JS` and `HTML` for frontend,
+`Python/Ruby/Javascript/Java/Go/.net` for backend, and `SQL/XML/JSON/YAML`
 for data persistence. Each of them has different syntax, style rules,
 process to compile, build, test, and deploy. Not to mention for each
 task there are another half dozen frameworks and libraries written in

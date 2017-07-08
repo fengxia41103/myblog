@@ -57,6 +57,12 @@
       </em>
       <h3>{{ article.title }}</h3>
 
+      <blockquote>
+        {% if article.tags|tags_contain("lenovo") %}
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+        {% endif %}
+      </blockquote>
+
       <p>
         {# Dont' use article.content. The content is generated HTML. #}
         {{ article.summary|truncate(600) }}

@@ -180,14 +180,20 @@ ignorance which enpowers the seemingly superior position (mgt? founder? investor
 to legitimize its ignorance &mdash; "Hey look, IT guy, I hired you
 because I don't know IT...".
 
-Stop using the word "IT"! It's an enormous topic under this umbrella
-that each consists of a technology that can be extremely
-challenging. If you are an IT guy, do you know `database`? how about
-`nosql`? and deployment? and performance tuning? clustering? modeling?
-driver?... and network? server? storage? virtualization?... So to make
-things straight, <span class="myhighlight">stop IT me</span>. Let IT's
-voice be part of the contribution, not just a downstream magic pod
-that will turn idea into reality.
+So how to fix this? Stop using the word "IT"! It's an enormous topic
+under this umbrella that each consists of a technology that can be
+extremely challenging. If you are an IT guy, do you know `database`?
+how about `nosql`? and deployment? and performance tuning? clustering?
+modeling?  driver?... and network? server? storage?
+virtualization?... So to make things straight, <span
+class="myhighlight">stop IT me</span>. Let IT's voice be part of the
+contribution, not just a downstream magic pod that will turn idea into
+reality. Let everyone be <span class="myhighlight">practical</span> 
+and <span class="myhighlight">specific</span> in term of their domain &mdash; yes
+I know something about Python and Django web framework; no, I don't
+know much about database, networking and storage. Same goes for HR,
+for business analyst, for product owner, for investor, and for everone
+who takes innovation seriously. 
 
 # Disruptive, not
 

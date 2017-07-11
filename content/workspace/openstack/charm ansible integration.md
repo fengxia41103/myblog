@@ -201,7 +201,7 @@ followings:
 
 1. Include layer. In `layer.yaml`:
 
-      <pre class="brush:plain;">
+      <pre class="brush:yaml;">
       includes:
         - 'layer:basic'
         - 'layer:myansible'
@@ -225,7 +225,7 @@ followings:
    defined in the charm states. For example, define `test.yaml` for an
    action in `state-0`:
 
-      <pre class="brush:plain;">
+      <pre class="brush:yaml;">
       options:
         state-0-playbook:
           type: string

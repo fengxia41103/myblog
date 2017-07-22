@@ -1,15 +1,22 @@
-Title: Is math important
+Title: Math, the decline of the US
 Date: 2017-07-21 20:30
 Tags: thoughts
 Slug: is math important
 Author: Feng Xia
 
-Came across an article tonight. The argument is actually not new
+<figure class="col l6 m6 s12">
+  <img src="/images/funny/image008.gif"/>
+</figure>
+
+
+Came across an [article][2] tonight. The argument is actually not new
 &mdash; that US is now in decline and the only **hard fact** that no
 one is disagreeing, <span class="myhighlight">its
 leadership in technology</span>, especially in computer related stuff,
 is shaken. The evidence, or its supporting argument, comes in two
 folds:
+
+[2]: https://www.zhihu.com/question/20953633
 
 1. that the education in American public school, in particular, its math
    education, is inferior to those in China.

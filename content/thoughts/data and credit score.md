@@ -15,6 +15,10 @@ credit score system.
 
 # Now we have data
 
+<figure class="col l8 m12 s12 center">
+  <img src="/images/data%20and%20love.png"/>
+</figure>
+
 With China's economy boom and in particular the ever thirsty
 interest by the mass of any kind of financial leverage, the only
 barrier everyone agrees upon that is holding the lenders back to lend

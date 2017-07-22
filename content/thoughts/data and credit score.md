@@ -3,7 +3,6 @@ Date: 2017-07-12 20:30
 Tags: thoughts
 Slug: data and credit score
 Author: Feng Xia
-Status: Draft
 
 The first time reading ["Trust"][1] by [Francis Fukuyama][2], I was
 deeply impressed by his distinction that Chinese trust is implied,
@@ -13,6 +12,8 @@ credit score system.
 
 [1]: https://www.amazon.com/Trust-Social-Virtues-Creation-Prosperity/dp/0684825252
 [2]: https://en.wikipedia.org/wiki/Francis_Fukuyama
+
+# Now we have data
 
 With China's economy boom and in particular the ever thirsty
 interest by the mass of any kind of financial leverage, the only
@@ -64,6 +65,8 @@ data (maybe someone else's data, who knows).
 
 [3]: https://en.wikipedia.org/wiki/Sesame_Credit
 
+# Data integrity
+
 This isn't even ironic. This is fucked up. Most common reaction I
 believe is that things will be different if government is running this
 instead of a private commercial entity. And I'll argue that not only
@@ -79,11 +82,11 @@ conscience!? Come on.
 
 But my point isn't about politics at all. The root cause of this is
 not some bad apples who want to outsmart the system to make profit. It
-will always happen. It's human nature. The problem, is <span class="myhighlgiht">people fail to
-understand data itself means nothing, absolutely nothing, if it loses
-integrity</span>. The credit score itself is the icing; the way to
-collect, process, cross-check to verify and validate these data, is
-the core that creates "trust".
+will always happen. It's human nature. The problem, is <span
+class="myhighlgiht">people fail to understand data itself means
+nothing, absolutely nothing, if it loses integrity</span>. The credit
+score itself is the icing; the way to collect, process, cross-check to
+verify and validate these data, is the core that creates "trust".
 
 When clients want to build a system, the only principle he needs to
 understand is **garbage in, garbage out**. System is not smart. Data
@@ -95,6 +98,8 @@ How to achieve that? Defining integrity is the job of human. It is
 domain specific and context sensitive. The analogy is that user agrees
 1 plus 1 equals 2. Then data's job is make sure everywhere there is 1
 plus 1, it flags it green if it equals 2, and flags red otherwise. 
+
+# Trust, but verify
 
 How to guard integrity? Cross checking. I love President Reagan's
 [trust, but verify][5]. How do you know your data is correct? Looking

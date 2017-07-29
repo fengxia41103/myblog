@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: luck
 Author: Feng Xia
 
+<figure class="col l4 m6 s12">
+  <img src="/images/luck.jpg"/>
+</figure>
+
 I was listening to this [talk][1] on Youtube about luck, and that got
 me thinking.
 
@@ -44,9 +48,8 @@ typing and you are reading.
    former as the accepted answer. No! Correlation is by definition
    looking in the rear view mirror! It <span class="myhighlight"> can
    not, will not, should not, and absolutely must not</span>, be used
-   to produce a deterministic next. There is no such a logic. That's
-   the nature of correlation, not something I just want to
-   preach. Therefore, luck can only be **explained** and
+   to produce a deterministic next. There is no such a logic. 
+   Therefore, luck can only be **explained** and
    **theorized**, but not (yet) known beforehand.
 
 But I got curious. So often we say _good luck_ with a sincere heart;
@@ -55,42 +58,54 @@ _lucky_ sometimes. It's a wonderful feeling. Are we powerless in
 mastering our own destiny in this sense? Can we influence its
 trajectory through something like hard work, training, discipline,
 faith, diet, high spirit, good looking, fortune? After all, there are
-just so many things we don't like about our current existence, and we
-all wish to graze the grass on the other hill because they look
-greener. We constantly fight this desire through painfully
+just so many things we don't like about our current existence &mdash;
+the result of a series of _bad lucks_, and we all wish to change our
+luck, to graze the grass on the other hill because they look greener.
+We constantly fight this desire for a better luck through painfully
 self-reminder that we should be happy with what we already have, and
-we label all those thoughts **desire**, **greed**, **immuture**, **做
-**, which all convey a negative feeling that put us to shame. But why
-don't they just go away? why did they come up even? if they are not
-part of us, seems to be there all the time? This is strange, isn't it?
+we label all those thoughts of wanting a change as **desire**,
+**greed**, **immuture**, **做**, which all convey a negative feeling
+that put us to shame. But if the urge of having a better luck
+isn't part of us, why doesn't it just go away? why did it
+come up even? This is strange, isn't it?
 
-The computer model is actually pretty simple. We have a function,
-`result = f(var1, var2, var3......)`, and if only we could count in
-all the variables, and have enough samples to test this function. So
-far we can't have all the variables yet. As have been mentioned, the
-mere existence of this moment counts for just about **everything** it
-ever happened in the past &mdash; didn't turn right at a cross 10
-years ago, well, it eventually leads to me being still alive, today!
-How far fetched it seems! but then, how true it is!
+So if luck is a summary of all the past, I think the computer model is
+actually pretty simple. We have a function, `result = f(var1, var2,
+var3......)`, and if only we could count in all the variables, and
+have enough samples to test this function. So far we can't have all
+the variables yet, because it feels **everything** is related &mdash;
+didn't turn right at a cross 10 years ago, well, it eventually leads
+to me being still alive, today!  How far fetched it seems! but then,
+how true it is!
 
-Life itself is an accumulated decisions. Since we don't have a book
-writing down for each decision we made and what came out it after, we
-already lost track of this record, which in turn makes analysis
-**impossible**. So when people say **luck**, it is really nothing but
-a cherry-picked set of variables one decides to use to support his/her
-statement, nothing more than that!
+Life itself is an accumulated decisions, and the funny thing is that
+we think some carry more weight than others, but the reality is that
+they are all the same! No one has a crystal ball, and no one can turn
+back the clock, so decision is a one way street. Therefore, what you
+choose today makes no difference whatsoever because there is no
+reference! You make a decision, then you move on. Whatever comes out
+of life, is the `result=f(decision 1, decision 2, .... decison
+N)`. Since we don't have a book writing down for each decision we made
+and linking them to what came out it after, we already lost track of
+this record, which in turn makes analysis **impossible**. So when
+people say **luck**, it is really nothing but a cherry-picked set of
+variables one decides to use to support his/her statement, nothing
+more than that!
 
 Therefore, luck, is really in the domain of subjective emotion than
-objective reality. The irony, however, lies when someone who
-believes his success is not due to luck, but some deterministic
-methodology that can be replicated and re-iterated. That's pure
-BS. Just say you are lucky and move on &mdash; lucky is a polite way
-to say you don't know what made you successful, because the truth is,
-you don't. Just don't fool yourself (and many audience, unfortunately)
-that you have a recipe. 
+objective reality. The irony, however, lies when someone believes his
+success is not due to luck, but some deterministic methodology that
+can be replicated and re-iterated. That's pure BS. Just say you are
+lucky and move on &mdash; saying "oh I was just lucky" is a polite way
+to acknowledge the ignorance, which is the only truth. Seriously, can
+you write me this list of variables that are **sufficient** to
+generate the same result!? If you can not, you are just, lucky.  Just
+don't fool yourself (and many audience, unfortunately) that you have a
+recipe. You can have a _theory_, however, and it's up to others to try
+that if they will. But selling your design of success is a lie.
 
-Luck, only exists in the past. It's a representation of subjectively
-picked variables to establish a correlation between the past and a
-result. So in this sense, you can **always feel lucky, and be lucky**,
-if you want to.
+There you have it. Luck, only exists in the past.  It's a
+representation of subjectively picked variables to establish a
+correlation between the past and a result. So in this sense, you can
+**always feel lucky, and be lucky**, if you want to.
 

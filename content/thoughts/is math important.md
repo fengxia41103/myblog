@@ -4,10 +4,6 @@ Tags: thoughts
 Slug: is math important
 Author: Feng Xia
 
-<figure class="col l6 m6 s12">
-  <img src="/images/funny/image008.gif"/>
-</figure>
-
 
 Came across an [article][2] tonight. The argument is actually not new
 &mdash; that US is now in decline and the only **hard fact** that no
@@ -20,8 +16,7 @@ folds:
 
 1. that the education in American public school, in particular, its math
    education, is inferior to those in China.
-   
-2. that US is losing magnetism to smart people &mdash; 
+2. that US is losing magnetism to smart people:
     1. the US policy is becoming less and less friendly,
     2. its research funding is strained,
     3. and their home country is becoming the opposite of a and b.
@@ -43,6 +38,10 @@ ready. Technology is a tool, and will always be a tool. The
 description of a problem, is what matters.
 
 # Question matters
+
+<figure class="col l4 m6 s12">
+  <img src="/images/funny/image008.gif"/>
+</figure>
 
 Think about how you acquire knowledge. Google search engine knows
 practically EVERYTHING. The quality of learning isn't about how much

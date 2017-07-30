@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: marketing
 Author: Feng Xia
 
-Man wasn't that annoying! Listened to this [book][1] on the way the
+Man wasn't that annoying! Listened to this [book][1] on the way to
 outlet yesterday, and the language it used annoyed the shxxt out of
 me. Let me explain why.
 
@@ -26,7 +26,8 @@ class="myhighlight">time</span> &mdash; it is a continuously flow
 forward. No one can stop it; no one can shorten it or expand it; and
 nothing can ignore it. 
 
-So far, so good. Then the talk starts a deep dive into the history of
+So far, so good. Then the talk starts a deep dive into what he thinks
+the successful stories of marketing by quoting history of certain
 marketing and strategies, and that's when it started to annoy me,
 badly.
 
@@ -38,10 +39,10 @@ definition. Here is [one][2]:
 
 [2]: https://baike.baidu.com/item/%E7%A5%96%E5%B8%88%E7%88%B7
 
-> （一）某种技艺的发明创造者。
-> （二）对一行业的形成，有过重大贡献的人。
-> （三）某位历史名人，曾做过某种行业。
-> （四）某为神灵与某一行业有关。
+> * （一）某种技艺的发明创造者。
+> * （二）对一行业的形成，有过重大贡献的人。
+> * （三）某位历史名人，曾做过某种行业。
+> * （四）某为神灵与某一行业有关。
 
 But you see, when you want to make a statement that _a marketing
 strategy is not new_, you can use a supportive evidence by tracing back in
@@ -71,36 +72,43 @@ fool some of the people some of the time.
 
 # Just wrong
 
-Now comes the worst part &mdash; marketing/advertising is neither flashy nor
-noble. It itself is not `高大上`, because it's a line of business
-that, like everyone else, takes a lot of research, hard work, and
-discipline to be successful. I think the underline image of a marketer
-being always the one standing the spot light making some grand
-announcement to his audience (yes, and the talk inevitably used Hitler
-as an example of such image) is just wrong by itself! No, I'm not
-against using Hitler in this context &mdash; he certainly had his way
-to launch propaganda and influence his audience. But his success was
-not rooted in his charm or his voice or his marketing
-strategy. No. The event has a deep rooted historical context traced
-way back beyond the defeat of the WWI. So to me, German or Europe was
-to have a war with or without Hitler as a person. Someone was bound to
-play that role. If the talker ever reads some history of WWII and of
-Hitler, the sentiment of [antisemitism][3] was not a creation of
-Nazi as many (particular my fellow Chinese) have falsely
+Now comes the worst part. First, let me make this clear, whoever
+thinks of marketing as being dressed up every moment (night and day)
+and party party, you shouldn't do this business, at all.
+
+Marketing/advertising is neither flashy nor noble. It itself is not
+`高大上`, because it's a line of business that, like everyone else,
+takes a lot of research, hard work, and discipline to be successful. I
+think the underline image of a marketer being always the one standing
+the spot light making some grand announcement to his audience (yes,
+and the talk inevitably used Hitler as an example of such image) is
+just wrong by itself! 
+
+No, I'm not against using Hitler in this context
+&mdash; he certainly had his way to launch propaganda and influence
+his audience. But his being the tag of this horrifying episode of
+human history was not rooted in his charm or his voice or his
+marketing strategy. No. The event has a deeply rooted historical context
+traced way back beyond the defeat of the WWI. So to me, German or
+Europe was to have a war with or without Hitler. Someone
+was bound to play that role. If the talker ever reads some history of
+WWII and of Hitler, the sentiment of [antisemitism][3] was not a
+creation of Nazi as many (particular my fellow Chinese) have falsely
 thought.  
 
 [3]: https://www.wikiwand.com/en/Antisemitism
 
-So one thing he got it right, is that propaganda is a weapon of
-massive destruction, and that's exactly why I'm totally totally
-against any social propaganda led by the all mighty government
-regardless how wonderful the message may be and how wonderful the
-outcome in the future may be. Whatever it is advertising might lead
-everyone to paradise; but the means to achieve it, the way the message
-is communicated, can be seamlessly used to lead everyone to hell,
-because fundamentally such practice silents independent thinking and
-voice, and that is the worst one can do to himself, both in the scale
-of a society and in the scale of an individual.
+So one thing the talk got it right, is that propaganda is a weapon of
+massive destruction, and that's exactly why <span class="myhighlight">
+I'm totally totally against any social propaganda led by the all
+mighty government regardless how wonderful the message may be and how
+wonderful the outcome in the future may be</span>. Whatever it is
+advertising might lead everyone to paradise; but the means to achieve
+it, the way the message is communicated, can be seamlessly used to
+lead everyone to hell, because fundamentally such practice silents
+independent thinking and voice, and that is the worst one can do to
+himself, both in the scale of a society and in the scale of an
+individual.
 
 # Psychic tricks
 

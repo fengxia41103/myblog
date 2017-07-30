@@ -39,10 +39,10 @@ definition. Here is [one][2]:
 
 [2]: https://baike.baidu.com/item/%E7%A5%96%E5%B8%88%E7%88%B7
 
-> * （一）某种技艺的发明创造者。
-> * （二）对一行业的形成，有过重大贡献的人。
-> * （三）某位历史名人，曾做过某种行业。
-> * （四）某为神灵与某一行业有关。
+> 1. 某种技艺的发明创造者。
+> 2. 对一行业的形成，有过重大贡献的人。
+> 3. 某位历史名人，曾做过某种行业。
+> 4. 某为神灵与某一行业有关。
 
 But you see, when you want to make a statement that _a marketing
 strategy is not new_, you can use a supportive evidence by tracing back in
@@ -70,7 +70,7 @@ This is cheating. This can easily becomes a lie. A grand label doesn't
 make your message any more true than it is. Period. But sadly, it can
 fool some of the people some of the time.
 
-# Just wrong
+# Propaganda
 
 Now comes the worst part. First, let me make this clear, whoever
 thinks of marketing as being dressed up every moment (night and day)
@@ -110,7 +110,11 @@ independent thinking and voice, and that is the worst one can do to
 himself, both in the scale of a society and in the scale of an
 individual.
 
-# Psychic tricks
+# Creating needs
+
+<figure class="col l6 m6 s12">
+  <img src="/images/funny/direct%20marketing.jpg"/>
+</figure>
 
 IMHO, the talk completely misled audience to think that marketing and
 advertising is to manipulate consumer's mind so to make them believe

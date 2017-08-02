@@ -5,6 +5,10 @@ Slug: self-reflection
 Author: Feng Xia
 
 
+<figure class="col l6 m6 s12">
+  <img src="/images/history.jpg"/>
+</figure>
+
 Watching the [Civilisaiton][1] Youtube, what a fantastic topic and
 description of western civilisation! This is quite interesting
 especially with the backdrop of Jared

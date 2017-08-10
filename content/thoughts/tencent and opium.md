@@ -4,6 +4,7 @@ Tags: thoughts
 Slug: tencent and opium
 Author: Feng Xia
 
+
 Listening to [this talk][1] this morning, the thought hit me. How do
 you look at this [game][2]?
 
@@ -11,7 +12,7 @@ you look at this [game][2]?
 [2]: https://www.wikiwand.com/en/King_of_Glory
 
 Games, in my humble opinion, are just, bad. I know it's unfair to say
-so since I have grown out of that addition phase, and every boy/man
+so since I have grown out of that addiction phase, and every boy/man
 will go through that sometime in their life, inevitably. I don't know
 the psyche or chemistry or bio-trigger behind this phenomenon. There
 must be reason, especially a chemical reason. Brain likes it not
@@ -48,12 +49,12 @@ remote enough, and I do mean _remote_ being in both the geographical
 sense and logic sense, it become just another news slip crossing the
 screen.
 
-This is curious then. In human core, we operate on facts, at all. We
-operate on a set of images we believe &rarr; beliefs. These beliefs
-are self-fulfilling. They can be completely contradictory, yet causing
-no hesitation in one's thought or behavior. We don't even realize them
-in most times. We can equally defend them one way or the other. They
-are just equally true.
+This is curious then. In human core, we **do not** operate on facts,
+at all. We operate on a set of images we believe &rarr; beliefs. These
+beliefs are self-fulfilling. They can be completely contradictory, yet
+causing no hesitation in one's thought or behavior. We don't even
+realize them in most times. We can equally defend them one way or the
+other. They are just equally true.
 
 So how do you explain feelings like _shame_, _disappointment_,
 _regret_, _anger_? Aren't they then just a creation of yourself,

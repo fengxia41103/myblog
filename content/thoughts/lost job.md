@@ -74,7 +74,7 @@ knowledge. Computer is really brainless, actually. Unless you tell it
 there is a decision to be made, and these are the `if-else` you need
 to make your decisions based on, it has no idea. So who knows there is
 a decision point, and here are the 4-5 options, and condition to pick
-one over another? &mdassh; someone who possessed this domain
+one over another? &mdash; someone who possessed this domain
 knowledge, be it from experience, from business requirement, from
 management needs, from a genius stroke &mdash; they are all
 **offline** and **domain specific**. <span class="myhighlight">

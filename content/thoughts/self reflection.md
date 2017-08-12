@@ -36,7 +36,7 @@ Indians... there were pure cruelty, absolutely inhumane deeds, against
 animal, against nature, against another human being. It makes your
 heart shaken; if there were God, he must have been on vacation then.
 
-So even the conclusion and the way to state those years are
+So even though the conclusion and the way to state those years are
 one-sided (as I have not seen a black host in the program), the sheer
 act to illustrate  what happened, to ask why that was so, to question what
 impact it made to the advance of society and the deterrence of

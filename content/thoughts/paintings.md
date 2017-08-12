@@ -72,7 +72,8 @@ back. It's not only all there, it wants more, it creates more, it
 empowers you. Beethoven, Mozart, [La bohème][5], love letter, a great
 movie, a portrait... it beholds you, it has its own identity, speaking
 to you, staring at you, and disrupting you. It's a language by its own
-that best describes the scene and conveys an emotion. It has motion,
+that best describes the scene and conveys an emotion, and it does it
+**perfectly**. It has motion,
 has a thought, has a moment, that draws you into it, so you can be
 part of what it is presenting.
 
@@ -90,7 +91,7 @@ high-rise condos!!!????? And how it be **restless** and **resisting**
 when the whole point of residential is about peaceful family life!???
 Isn't this a joke or what!? And the performance arts in a round,
 smooth, harmony looking egg!? NO! Performance arts are energy,
-initiation, burst of force, searching for human soul, touching the
+initiation, burst of force, searching deep in human soul, touching the
 untouchable, speaking the unspeakables! How can they live with
 harmony!!?... I'm angry, I'm about to cry, because they are sooooo
 fake and soo lost the meaning of what the form is for... these, are
@@ -98,8 +99,10 @@ genuine insult on arts.
 
 [6]: https://www.wikiwand.com/en/National_Centre_for_the_Performing_Arts_(China)
 
-<span class="myhighlight">Even barbarians can create beauty. But fake
-shells can never.</span>
+<span class="myhighlight">Diversity creates beauty (how interesting the
+[fearless girl][7] is!). But fake shells can never.</span>
+
+[7]: https://www.wikiwand.com/en/Fearless_Girl
 
 
 

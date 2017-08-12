@@ -105,6 +105,6 @@ So, as long as your job sucks to a degree that it is boring, making
 only reasonable profits, and disgusts many people, your job is safe.
 Of course, here lies the other extreme of the spectrum, that the job
 is challenging to the point that human simply doesn't know how to
-model it or even understand it, say, `write me a awesome novel`,
+model it or even understand it, say, `write me an awesome novel`,
 `play the piano like Mozart did` &mdash; unless you can define
 `awesomeness` and can model `Mozart` style, you are out of luck.

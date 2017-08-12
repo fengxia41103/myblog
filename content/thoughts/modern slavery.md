@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: modern slavery
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/traffic%20god.jpg"/>
+</figure>
+
 I'm convinced now that the number one problem I am annoyed by the
 modern Chinese culture is that it create self-contradictory
 person. They speak in logics however they see fit without being aware
@@ -12,6 +16,8 @@ contradictory. Take it further, they took a one-sided view of history
 in such a self-confidence that they completely fail to realize that what
 they are bragging and broadcasting are exactly the same thing in
 history they vow to be a terrible deed by any measure.
+
+# Trade
 
 A case in point is the popular place such as the [奶奶庙][1]. I think
 the debate of it in the context of pop art or even pioneer art is
@@ -44,7 +50,9 @@ deed in which you believe, you respect and you fear, but the truth is
 they just want both sides of a coin, a mission impossible, as the
 deal.
 
-If we take this even further, it's more entertaining.  If that traffic
+# Slave
+
+If we take this even further, it's quite entertaining.  If that traffic
 Godness casts you a good luck, who is to make up the accident
 statistics? If EVERYONE is now praying for the same Godness, does it
 just eliminate accidents entirely!? What if two pray to two different

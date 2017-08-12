@@ -5,6 +5,10 @@ Slug: art a thought
 Author: Feng Xia
 
 
+<figure class="col l6 m6 s12">
+  <img src="/images/arts.jpg"/>
+</figure>
+
 Finished reading Kenneth Clark's [Civilisation][1]. I can't say I
 actually understand the book, because nearly every item he was talking
 about and describing with passion and logic, I had little idea. I
@@ -17,6 +21,8 @@ the pattern that this word is connected with that word in a sentence,
 and had no idea what this combination means!
 
 [1]: https://www.wikiwand.com/en/Civilisation_(TV_series)
+
+# Art?
 
 Alas! This is terrible. Here I am, reading a classic on
 **civilisation**, yet I do not understand a thing! On the back of my
@@ -50,6 +56,8 @@ they can possess the receiver at the moment of engagement. How
 transforming! So what about these [奶奶庙][2] arts? Aren't they on the
 equal footing as those classics since they also bring a sensation to
 their audience, just on a different spectrum than mine?
+
+# No
 
 But no. I still have to disagree. As liberal as I try, these _objects_
 are vulgar. Same apply to many of the modern Chinese sculptures,
@@ -99,8 +107,8 @@ genuine insult on arts.
 
 [6]: https://www.wikiwand.com/en/National_Centre_for_the_Performing_Arts_(China)
 
-<span class="myhighlight">Diversity creates beauty (how interesting the
-[fearless girl][7] is!). But fake shells can never.</span>
+Diversity creates beauty (how interesting the
+[fearless girl][7] is!). But fake shells can never.
 
 [7]: https://www.wikiwand.com/en/Fearless_Girl
 

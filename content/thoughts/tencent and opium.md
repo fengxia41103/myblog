@@ -5,6 +5,10 @@ Slug: tencent and opium
 Author: Feng Xia
 
 
+<figure class="col l6 m6 s12">
+  <img src="/images/boxer.jpg"/>
+</figure>
+
 Listening to [this talk][1] this morning, the thought hit me. How do
 you look at this [game][2]?
 

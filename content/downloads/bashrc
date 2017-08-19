@@ -134,7 +134,7 @@ export JUJU_REPOSITORY="/home/fengxia/workspace/wss/uhm/dist"
 export LAYER_PATH="/home/fengxia/workspace/wss/uhm/charms"
 export INTERFACE_PATH="/home/fengxia/workspace/wss/uhm/interfaces"
 
-ssh -X fengxia@10.240.43.214
-#ssh -X fengxia@192.168.5.14
+#ssh -X fengxia@10.240.43.214
+ssh -X fengxia@192.168.5.14
 #ssh -C -D 1080 fxia1@lctc-gp2.labs.lenovo.com
 #ssh -C -D 1081 fengxia@10.240.43.74

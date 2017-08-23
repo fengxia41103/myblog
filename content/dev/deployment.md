@@ -3,7 +3,7 @@ Date: 2016-09-09 23:05
 Tags: dev, architecture
 Slug: deployment architecture
 Author: Feng Xia
-Modified: 2017-08-22 21-52
+Modified: 2017-08-22 21:52
 
 Deployment strategy for [system architecture][] is centered around AWS
 services: EC2 for application server, RDS for database, and S3 for

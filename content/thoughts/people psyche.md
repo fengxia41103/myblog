@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: people psyche
 Author: Feng Xia
 
+<figure class="col l4 m4 s12">
+  <img src="/images/slowdown.jpg"/>
+</figure>
+
 Have you observed something that ppl do, and you just wonder *what the
 hell**? Yes, I find human behavior very puzzling. Maybe it's just me
 that is not connected with surroundings and felt isolated. But

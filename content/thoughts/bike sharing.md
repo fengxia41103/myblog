@@ -82,7 +82,7 @@ But, here lie the two things really alarmed me.
 2. [Last mile][1].
 [1]: https://www.wikiwand.com/en/Last_mile_(transportation)
 
-# last mile
+# last mile, and tuk tuk
 
 <figure class="col l5 m5 s12">
   <img src="/images/truth.jpg"/>

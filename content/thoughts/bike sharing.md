@@ -52,7 +52,7 @@ an answer at all:
 Don't you see? It feels good not because it is good (at least not the
 ones I saw), but because they loot without penalty. It's not magic,
 and certainly not **innovation**, it's the same as a gang walking out
-of supermarket without pay &larr; yes, I'm pretty sure anyone in that
+of supermarket without paying &larr; yes, I'm pretty sure anyone in that
 gang felt good, at that moment. <span class="myhighlight">Who
 wouldn't!?</span> Yes, it is a valid business model for sure, and a
 pretty good one, too (think of the ROI! wow!), just don't connect it

@@ -34,6 +34,8 @@ be like, what the heck?
 [2]: https://www.cnbc.com/2017/07/18/bike-sharing-boom-in-china-pedals-to-new-heights.html
 [3]: http://www.scmp.com/news/china/society/article/2106688/shared-folding-stool-service-launched-beijing-over-half-go
 
+# my definitions
+
 So I tried to think of a narrower and clearer definition for **sharing**:
 
 1. you own the resource that you are sharing
@@ -83,3 +85,79 @@ Putting this lens on, you will now see how bullshit all these [China-invented][4
 **sharing hoax** really are.
 
 [4]: https://www.cbsnews.com/news/china-popular-sharing-economy-exploding-didi/
+
+# wiki and quotes
+
+I got curious and read about [sharing economy][1], boy, wasn't I
+impressed! What a wonderful summary of everything I am feeling about
+this topic but failed to express them well! There are a few slips I
+think they hit nails on the head, which I'll be quoting here:
+
+## misnomer
+
+> The Harvard Business Review argues that "sharing economy" is a
+> misnomer, and that the correct word for this activity is "access
+> economy". The authors say, "When "sharing" is market-mediated—when a
+> company is an intermediary between consumers who don't know each
+> other—it is no longer sharing at all. Rather, consumers are paying to
+> access someone else's goods or services."[14] The article goes on to
+> show that companies (such as Uber) who understand this, and whose
+> marketing highlights the financial benefits to participants, are
+> successful, while companies (such as Lyft) whose marketing highlights
+> the social benefits of the service are less successful.
+
+## not a gift economy
+
+> Salon writes that "the sharing economy ... [is] not the Internet
+> 'gift economy' as originally conceived, a utopia in which we all
+> benefit from our voluntary contributions. It's something quite
+> different—the relentless co-optation of the gift economy by market
+> capitalism. The sharing economy, as practiced by Silicon Valley, is
+> a betrayal of the gift economy. The potlatch has been paved over,
+> and replaced with a digital shopping mall."
+
+## driven by job loss
+
+> New York Magazine wrote that the sharing economy has succeeded in
+> large part because the real economy has been
+> struggling. Specifically, in the magazine's view, the sharing
+> economy succeeds because of a depressed labor market, in which "lots
+> of people are trying to fill holes in their income by monetizing
+> their stuff and their labor in creative ways", and that in many
+> cases, people join the sharing economy because they've recently lost
+> a full-time job, including a few cases where the pricing structure
+> of the sharing economy may have made their old jobs less profitable
+> (e.g. full-time taxi drivers who may have switched to Lyft or
+> Uber). The magazine writes that "In almost every case, what compels
+> people to open up their homes and cars to complete strangers is
+> money, not trust. ... Tools that help people trust in the kindness
+> of strangers might be pushing hesitant sharing-economy participants
+> over the threshold to adoption. But what's getting them to the
+> threshold in the first place is a damaged economy, and harmful
+> public policy that has forced millions of people to look to odd jobs
+> for sustenance."
+
+## low labor cost
+
+> Andrew Leonard,[106][107][108] Evgeny Morozov,[109] Bernard
+> Marszalek,[110] Dean Baker,[111][112] and Andrew Keen[113]
+> criticized the for-profit sector of the sharing economy, writing
+> that sharing economy businesses "extract" profits from their given
+> sector by "successfully [making] an end run around the existing
+> costs of doing business" - taxes, regulations, and
+> insurance. Similarly, In the context of online freelancing
+> marketplaces, there have been worries that the sharing economy could
+> result in a 'race to the bottom' in terms or wages and benefits: as
+> millions of new workers from low-income countries come online.
+
+## no magic in trust
+
+> the sharing economy "doesn't build trust" because where it builds
+> new connections, it often "replicates old patterns of privileged
+> access for some, and denial for others".[116] William Alden wrote
+> that "The so-called sharing economy is supposed to offer a new kind
+> of capitalism, one where regular folks, enabled by efficient online
+> platforms, can turn their fallow assets into cash machines ... But
+> the reality is that these markets also tend to attract a class of
+> well-heeled professional operators, who outperform the amateurs—just
+> like the rest of the economy".

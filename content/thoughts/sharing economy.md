@@ -59,17 +59,17 @@ class="myhighlight">what about prostitutes? If it is the oldest
 profession, isn't it also the oldest sharing economy!?</span> If so,
 why we are condemning them but praising these so called innovations?
 
-We should not. I think `sharing` implies a sense of motivated
+We should not. I think sharing implies a sense of motivated
 willingness and pride, that first of all I <span
 class="myhighlight">like this thing</span> &mdash; I'm taking proud of
 my lovely house, thus wanting to have you experience that (after all,
 who wants to just share **crappy** side of his/her stuff). I would
 almost argue that <span class="myhighlight"> you should like it to the
-point you don't want to share, thus making `sharing` such an emotional
+point you don't want to share, thus making sharing such an emotional
 experience, that the challenge to overcome unwillingness and to
 convince youself doing it is the true ingredient that makes sharing
 valuable and noble</span>. Without this emotional pride that you
-invest in it, this whole process, being called `sharing` or not, is
+invest in it, this whole process, being called sharing or not, is
 nothing but another a emotionless, number-matching business
 transaction.
 

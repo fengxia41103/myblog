@@ -161,3 +161,7 @@ think they hit nails on the head, which I'll be quoting here:
 > the reality is that these markets also tend to attract a class of
 > well-heeled professional operators, who outperform the amateurs—just
 > like the rest of the economy".
+
+And finally, an article on [HBR][5].
+
+[5]: https://hbr.org/2015/01/the-sharing-economy-isnt-about-sharing-at-all

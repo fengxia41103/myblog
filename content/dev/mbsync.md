@@ -5,6 +5,11 @@ Slug: mbsync mu4e email
 Author: Feng Xia
 Modified: 2017-09-28 12:14
 
+<figure class="col l3 m3 s12">
+  <img src="/images/funny/email.jpg"
+       class="center-block img-responsive">
+</figure>
+
 After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.

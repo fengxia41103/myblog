@@ -3,6 +3,7 @@ Date: 2017-04-24 10:15
 Tags: dev, emacs
 Slug: mbsync mu4e email
 Author: Feng Xia
+Modified: 2017-09-28 12:14
 
 After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
@@ -59,6 +60,35 @@ RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 </pre>
 
+
+## certs
+
+Whiling setting up corporate one, for which you are likely looking at
+a outlook server on the other end, I ran into an error cert is not
+matching the server's.  To solve this, we actually need to pull down a
+new cert (from the mail server itself) and config `CertificateFile` to
+that file. I followed the steps [here][3].
+
+[3]: https://wiki.archlinux.org/index.php/Isync#Step_.231:_Get_the_certificates
+
+1. Create a bash script, [`get_certs.sh`][4], to facilitate the command line:
+   <pre class="brush:bash;">
+   #!/bin/sh
+   SERVER=${1:-my.server.com}
+   PORT=${2:-993}
+   CERT_FOLDER=${3:-~/certs}
+   openssl s_client -connect ${SERVER}:${PORT} -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'| sed -ne '1,/-END CERTIFICATE-/p' > ${CERT_FOLDER}/${SERVER}.pem
+   </pre>
+
+[4]: https://gist.githubusercontent.com/petRUShka/af96ae25ce8280729b9ea049b929f31d/raw/a79471ce8aee3f6d04049039adf870a53a524f7f/get_certs.sh
+
+2. Create a `~/.cert` directory, then run:
+   <pre class="brush:bash;">
+   sh get_certs.sh some.imap.server port ~/.cert/
+   </pre>
+   
+   Cert file will have a name `some.imap.server.pem`. Use that in `CertificateFile`.
+   
 # Stores
 ## Remote store
 

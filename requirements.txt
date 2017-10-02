@@ -135,7 +135,6 @@ pelican==3.6.3
 pep8==1.5.7
 phonenumbers==6.3.0
 Pillow==2.7.0
-pkg-resources==0.0.0
 pluggy==0.4.0
 ply==3.4
 positional==1.1.1

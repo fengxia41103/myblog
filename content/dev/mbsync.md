@@ -85,11 +85,13 @@ that file. I followed the steps [here][3].
    openssl s_client -connect ${SERVER}:${PORT} -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'| sed -ne '1,/-END CERTIFICATE-/p' > ${CERT_FOLDER}/${SERVER}.pem
    </pre>
 
-[4]: https://gist.githubusercontent.com/petRUShka/af96ae25ce8280729b9ea049b929f31d/raw/a79471ce8aee3f6d04049039adf870a53a524f7f/get_certs.sh
+[4]: {attach}/downloads/emacs/get_certs.sh
 
 2. Create a `~/.cert` directory, then run:
    <pre class="brush:bash;">
    sh get_certs.sh some.imap.server port ~/.cert/
+   eg:
+   sh get_certs.sh outlookae.lenovo.com 993 ~/.cert/
    </pre>
    
    Cert file will have a name `some.imap.server.pem`. Use that in `CertificateFile`.

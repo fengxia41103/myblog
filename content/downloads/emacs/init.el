@@ -1479,8 +1479,8 @@ non-nil; otherwise prompts the user to enter the directory."
 			    (:from-or-to . 25)
 			    (:subject . nil))) 
 
-(setq mu4e-reply-to-address "feng_xia41103@hotmail.com"
-      user-mail-address "feng_xia41103@hotmail.com"
+(setq mu4e-reply-to-address "fxia1@lenovo.com"
+      user-mail-address "fxia1@lenovo.com"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
@@ -1488,6 +1488,15 @@ non-nil; otherwise prompts the user to enter the directory."
       message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
       message-citation-line-function 'message-insert-formatted-citation-line
       mu4e-headers-results-limit 250)
+
+(setq mu4e-compose-signature
+      (concat
+       "Best regards,\n\n"
+       "Feng Xia\n"
+       "Advisory Engineer\n"
+       "Datacenter Group (DCG), Lenovo US\n"
+       "8000 Development Drive, Morrisville, NC 27560\n"
+       "W: http://www.lenovo.com\n"))
 
 
 (require 'smtpmail)
@@ -1501,12 +1510,12 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;       smtpmail-smtp-service 587)
 (setq message-send-mail-function 'smtpmail-send-it
       starttls-use-gnutls t
-      smtpmail-starttls-credentials '(("smtp.live.com" 25 nil nil))
+      smtpmail-starttls-credentials '(("mailae.lenovo.com" 587 nil nil))
       smtpmail-auth-credentials
-      '(("smtp.live.com" 25 "feng_xia41103@hotmail.com" nil))
-      smtpmail-default-smtp-server "smtp.live.com"
-      smtpmail-smtp-server "smtp.live.com"
-      smtpmail-smtp-service 25)
+      '(("mailae.lenovo.com" 587 "fxia1@lenovo.com" nil))
+      smtpmail-default-smtp-server "mailae.lenovo.com"
+      smtpmail-smtp-server "mailae.lenovo.com"
+      smtpmail-smtp-service 587)
 
 (setq message-kill-buffer-on-exit t
       mu4e-sent-messages-behavior 'delete
@@ -1581,11 +1590,11 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;   (setq default-input-method "chinese-pyim")
 ;;   (global-set-key (kbd "C-\\") 'toggle-input-method))
 
-(require 'chinese-fonts-setup)
-;; 让 chinese-fonts-setup 随着 emacs 自动生效。
-;; (chinese-fonts-setup-enable)
+(require 'cnfonts)
+;; 让 cnfonts 随着 Emacs 自动生效。
+;; (cnfonts-enable)
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
-;; (cfs-set-spacemacs-fallback-fonts)
+;; (cnfonts-set-spacemacs-fallback-fonts)
 
 ;; artist
 (use-package 

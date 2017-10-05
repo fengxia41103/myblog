@@ -91,7 +91,8 @@ The symptom is that typing jumps all over the place.
     
 4. Search for `synaptics.conf`. On X1 4th gen, it's located at
    `/usr/share/X11/xorg.conf.d/50-synaptics.conf`. Add two lines to
-   it (alternatively, add them to your `.bashrc` works too):
+   it (alternatively, add the `set-prop` line from step 4 
+   to your `.bashrc` works too):
    <pre class="brush:plain;">
    Section "InputClass"
            Identifier "touchpad catchall"

@@ -85,6 +85,10 @@ The symptom is that typing jumps all over the place.
     solid, `65 70` is hardly responsive. 
     The old values of `25 30` was too sensitive.
     
+    <pre class="brush:plain;">
+    xinput set-prop 11 268 60 65 0
+    </pre>
+    
 4. Search for `synaptics.conf`. On X1 4th gen, it's located at
    `/usr/share/X11/xorg.conf.d/50-synaptics.conf`. Add two lines to
    it (alternatively, add them to your `.bashrc` works too):

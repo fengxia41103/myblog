@@ -212,9 +212,9 @@ Summary: Feng Xia's resum&eacute;
 
     * <span class="myhighlight">Tools</span>: Python, ODOO, Buildbot
     * <span class="myhighlight">PPT</span>: [Linkage 2016-17
-      Technology Roadmap][1] (in Chinese)
+      Technology Roadmap][4] (in Chinese)
 
-[4]: http://fengxia.co/theme/pdf.js-gh-pages/web/viewer.html?file=/downloads/odoo%20roadmap.pdf
+[4]: {attach}/downloads/odoo%20roadmap.pdf
 
 <div class="my-resume-header" id="lean">
   <div class="row">
@@ -241,6 +241,14 @@ Fortune-500 company. Project included designing and developing
 full-stack web and mobile applications which
 replaced three legacy systems.
 
+    * <span class="myhighlight">Tools</span>: Python, ODOO, Buildbot
+    * <span class="myhighlight">Reports (in
+    Chinese)</span>:
+    [晋能集团数据中心建设分析 – 规模和成本][11],
+    [晋能集团云平台建设和使用咨询报告][12].
+
+[11]: {attach}/downloads/jinneng_6001.pdf
+[12]: {attach}/downloads/jinneng_6002.pdf
 
 * Led system architecture design based on SOA technologies. Managed
 evaluation of ESB, BPM and database components.

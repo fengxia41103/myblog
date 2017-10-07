@@ -3,8 +3,6 @@ Date: 2017-01-01 12:00
 Tags: resume
 Slug: resume
 Author: Feng Xia
-Summary: Feng Xia's resum&eacute;
-
 
 ## Summary
 

@@ -40,10 +40,10 @@ Author: Feng Xia
  var OneBox = React.createClass({
    render: function(){
      return(
-       <div className="row">
+       <div className="row center-align">
          <img src={this.props.image.full}
               onClick={this.props.onNext}
-              style={{width:"90vw"}} />
+              style={{maxHeight:"67vh"}} />
 
          { this.props.showMore?
             <div id="showMore"
@@ -82,6 +82,23 @@ Author: Feng Xia
        showMore: true,
        displayList: []
      }
+   },
+   componentDidMount: function(){
+     var that = this;
+     document.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 37:
+                that.onPrev();
+                break;
+            case 38:
+                break;
+            case 39:
+                that.onNext();
+                break;
+            case 40:
+                break;
+            }
+    };
    },
    setImage: function(img){
      this.setState({
@@ -176,4 +193,5 @@ Author: Feng Xia
    <PresentationBox images={images} />,
    document.getElementById("sth")
  );
+ 
 </script>

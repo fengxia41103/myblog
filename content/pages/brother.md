@@ -30,7 +30,7 @@ Author: Feng Xia
      },this);
 
      return (
-       <div>
+       <div className="col l4 m4 s12">
          {imageThumbs}
        </div>
      );
@@ -54,8 +54,7 @@ Author: Feng Xia
                  className="col l8 m8 s12 z-depth-5 responsive-image"/>
 
             <DisplayListBox displayList={this.props.displayList}
-                            onClick={this.props.setImage}
-                            className="col l4 m4 s12"/>
+                            onClick={this.props.setImage} />
          </div>
        </div>
      );

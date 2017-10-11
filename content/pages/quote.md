@@ -49,8 +49,7 @@ Author: Feng Xia
                 className="center-block img-responsive" />
            <figcaption>
              {this.state.quote}
-             <span className="flabel"
-                   onClick={this.setImage}
+             <span onClick={this.setImage}
                    style={{marginLeft:"1em", float:"none"}}>
                <i className={this.state.loading? "fa fa-spinner":"fa fa-angle-right"}
                   style={{paddingLeft:"1em",marginRight:"1em"}}></i>

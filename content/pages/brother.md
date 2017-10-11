@@ -38,6 +38,9 @@ Author: Feng Xia
  });
 
  var OneBox = React.createClass({
+   componentDidMount: function(){
+     j$('.materialboxed').materialbox();  
+   },
    render: function(){
      return(
        <div>
@@ -50,8 +53,7 @@ Author: Feng Xia
 
           <div className="row center-align">
             <img src={this.props.image.full}
-                 onClick={this.props.onNext}
-                 className="col l8 m8 s12 z-depth-5 responsive-image"/>
+                 className="col l8 m8 s12 z-depth-5 materialboxed"/>
 
             <DisplayListBox displayList={this.props.displayList}
                             onClick={this.props.setImage} />
@@ -155,7 +157,7 @@ Author: Feng Xia
    },
    handleUpdate: function(){
      // Always show odd number of photos
-     var MYLENGTH = 15;
+     var MYLENGTH = 11;
      var current = this.state.showing;
      var images = this.props.images;
      var start = Math.max(0,current.key-Math.floor(MYLENGTH/2));
@@ -176,35 +178,35 @@ Author: Feng Xia
      });
    },
    render: function(){
-      var imageFields = this.props.images.map(function(img){
-        return (
-          <ImageField img={img}
-                      onClick={this.handleImageFieldClick}
-                      key={img.key}/>
-        );
-      }, this);
-      return (
-        <div>
-          { this.state.showMore?
-             <OneBox image={this.state.showing}
-                     showMore={this.state.showMore}
-                     onClick={this.toggleShowMore}
-                     onNext={this.onNext}
-                     onPrev={this.onPrev}
-                     displayList={this.state.displayList}
-                     setImage={this.setImage} />:
-                              <div className="my-multicol-3">
-                                {imageFields}
-                              </div>
-          }
-        </div>
-      );
+     var imageFields = this.props.images.map(function(img){
+       return (
+         <ImageField img={img}
+                     onClick={this.handleImageFieldClick}
+                     key={img.key}/>
+       );
+     }, this);
+     return (
+       <div>
+         { this.state.showMore?
+            <OneBox image={this.state.showing}
+                    showMore={this.state.showMore}
+                    onClick={this.toggleShowMore}
+                    onNext={this.onNext}
+                    onPrev={this.onPrev}
+                    displayList={this.state.displayList}
+                    setImage={this.setImage} />:
+                             <div className="my-multicol-3">
+                               {imageFields}
+                             </div>
+         }
+       </div>
+     );
    }
  }); // end of PresentationBox
 
 ReactDOM.render(
-<PresentationBox images={images} />,
- document.getElementById("sth")
+   <PresentationBox images={images} />,
+   document.getElementById("sth")
 );
  
 </script>

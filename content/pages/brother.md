@@ -105,6 +105,7 @@ Author: Feng Xia
      };
 
      // populate display list
+     this.handleUpdate = _.debounce(that._handleUpdate, 1000);
      this.handleUpdate();
    },
    setImage: function(img){
@@ -155,7 +156,7 @@ Author: Feng Xia
 
      this.handleUpdate();
    },
-   handleUpdate: function(){
+   _handleUpdate: function(){
      // Always show odd number of photos
      var MYLENGTH = 11;
      var current = this.state.showing;

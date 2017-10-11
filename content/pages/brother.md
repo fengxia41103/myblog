@@ -40,22 +40,23 @@ Author: Feng Xia
  var OneBox = React.createClass({
    render: function(){
      return(
-       <div className="row center-align">
-         <img src={this.props.image.full}
-              onClick={this.props.onNext}
-              style={{maxHeight:"67vh"}} />
-
+       <div>
          { this.props.showMore?
             <div id="showMore"
                  onClick={this.props.onClick}>
               <i className="fa fa-expand"></i>
-              Show more
-            </div>
-         :null }
+              Show all
+            </div> :null }
 
-         <DisplayListBox displayList={this.props.displayList}
-                         onClick={this.props.setImage}
-                         className="col s12"/>
+          <div className="row center-align">
+            <img src={this.props.image.full}
+                 onClick={this.props.onNext}
+                 className="col l8 m8 s12 z-depth-5 responsive-image"/>
+
+            <DisplayListBox displayList={this.props.displayList}
+                            onClick={this.props.setImage}
+                            className="col l4 m4 s12"/>
+         </div>
        </div>
      );
    }
@@ -66,9 +67,10 @@ Author: Feng Xia
      var img = this.props.img;
 
      return (
-       <div style={{display:"block"}}>
+       <div style={{display:"block"}}
+            className="hoverable">
          <span onClick={this.props.onClick.bind(null,img)}>
-           <img src={img.thumb} width="100%"/>
+           <img src={img.thumb} width="95%"/>
          </span>
        </div>
      );
@@ -85,20 +87,24 @@ Author: Feng Xia
    },
    componentDidMount: function(){
      var that = this;
+
+     // register key event to allow
+     // navigation using arrow keys
      document.onkeydown = function(e) {
-        switch (e.keyCode) {
-            case 37:
-                that.onPrev();
-                break;
-            case 38:
-                break;
-            case 39:
-                that.onNext();
-                break;
-            case 40:
-                break;
-            }
-    };
+       switch (e.keyCode) {
+         case 37:
+           // left arrow key
+           that.onPrev();
+           break;
+         case 39:
+           // right arrow key
+           that.onNext();
+           break;
+       }
+     };
+
+     // populate display list
+     this.handleUpdate();
    },
    setImage: function(img){
      this.setState({
@@ -119,7 +125,7 @@ Author: Feng Xia
    onNext: function(){
      var current = this.state.showing;
      var images = this.props.images;
-     if (current.key == images.length){
+     if (current.key === images.length){
        // Circle back to beginning
        this.setState({
          showing: images[0]
@@ -149,14 +155,22 @@ Author: Feng Xia
      this.handleUpdate();
    },
    handleUpdate: function(){
-     // Always show 11 photos
+     // Always show odd number of photos
+     var MYLENGTH = 15;
      var current = this.state.showing;
      var images = this.props.images;
-     var start = Math.max(0,current.key-3);
-     var end = Math.min(current.key+3,images.length);
+     var start = Math.max(0,current.key-Math.floor(MYLENGTH/2));
+     var end = Math.min(current.key+Math.floor(MYLENGTH/2),images.length-1);
      var tmp = [];
-     for(var i=start-1; i<end;i++){
+     for(var i=start; i<=end;i++){
         tmp.push(images[i]);
+     }
+
+     // if we are at the end of array, rotate back to beginning
+     if (MYLENGTH-tmp.length > 0){
+       for(var i=0; i<(MYLENGTH-tmp.length);i++){
+         tmp.push(images[i]);
+       }
      }
      this.setState({
         displayList: tmp
@@ -180,18 +194,18 @@ Author: Feng Xia
                      onPrev={this.onPrev}
                      displayList={this.state.displayList}
                      setImage={this.setImage} />:
-             <div className="my-multicol-3">
-               {imageFields}
-             </div>
+                              <div className="my-multicol-3">
+                                {imageFields}
+                              </div>
           }
         </div>
       );
-    }
- });
+   }
+ }); // end of PresentationBox
 
- ReactDOM.render(
-   <PresentationBox images={images} />,
-   document.getElementById("sth")
- );
+ReactDOM.render(
+<PresentationBox images={images} />,
+ document.getElementById("sth")
+);
  
 </script>

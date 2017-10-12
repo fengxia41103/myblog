@@ -44,13 +44,13 @@ Format specific information:
     refcount bits: 16
 </pre>
 
-# Resize
+## Resize disk
 
 One caveat caught me is that snapshot using [backing file][3] inherits
 the maximum disk space from its base image. Looking at the output
 above, `virtual size` (`2.2G`) is the maxium disk space this image can
 grow to; `disk size` is just the `.img` file's size on disk when you
-do `ls -lh`. We want to increase base image's disk size and here is
+do `ls -lh`. We want to increase base image's virtual size and here is
 how-to.
 
 [3]: https://wiki.qemu.org/Documentation/CreateSnapshot
@@ -88,14 +88,24 @@ snapshots_. A few useful references to understand this concept
 &mdash; [Advanced snapshots w/ libvirt][4] by
 Redhat, [QEMU snapshot doc][3], and a [blog][5] whose diagram I'm
 copying below which explained well what these snapshots are related.
-In a nutshell, external snapshot keeps a _pointer_ to its base
-image (**backing files**). Any new
-writes will then be applied to the snapshot image, not the backing
-file &rarr; this feels like git commits and branches, isn't it?
+In a nutshell, external snapshot keeps a _pointer_ to its base image
+(**backing files**). Any new writes will then be applied to the
+snapshot image, not the backing file &rarr; this feels like git
+commits and branches, isn't it?
 
 
 [4]: https://kashyapc.fedorapeople.org/virt/infra.next-2015/Advanced-Snapshots-with-libvirt-and-QEMU.pdf
 [5]: http://blog.programster.org/kvm-creating-thinly-provisioned-guests
+
+> An example diagram is shown below in which 3 guests are cloned from a
+> base image, which is then updated, and a 4th guest is then cloned off
+> the updated base image. With all 5 virtual machines, the storage needs
+> is only about 4.4 GB (the size of the base image).An example diagram
+> is shown below in which 3 guests are cloned from a base image, which
+> is then updated, and a 4th guest is then cloned off the updated base
+> image. With all 5 virtual machines, the storage needs is only about
+> 4.4 GB (the size of the base image).
+> 
 
 <figure class="center-align responsive-image">
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -293,9 +303,127 @@ file &rarr; this feels like git commits and branches, isn't it?
   to.</text></switch></g></g></svg>
 </figure>
 
+To create one using backing file:
+
+<pre class="brush:plain;">
+$ qemu-img create -f qcow2 -b resized-orig.img mydev.snap
+</pre>
+
+To verify:
+
+<pre class="brush:plain;">
+(dev) fengxia@fengxia-lenovo:~/workspace/tmp$ qemu-img info mydev.snap 
+image: mydev.snap
+file format: qcow2
+virtual size: 22G (23836229632 bytes)
+disk size: 3.4G
+cluster_size: 65536
+backing file: resized-orig.img <<-- here!
+Format specific information:
+    compat: 1.1
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+</pre>
+
+Then in KVM xml, use `mydev.snap` as your primary disk:
+
+<pre class="brush:xml;">
+<disk type='file' device='disk'>
+  <driver name="qemu" type="qcow2"/>
+  <source file="/home/fengxia/workspace/tmp/mydev.snap"/>
+  <target dev='vda' bus='virtio'/>
+  <alias name='virtio-disk0'/>
+  <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
+</disk>
+</pre>
 
 # cloud-init
 
-Using cloud images,
-however, is tricky, because it doesn't allow user login (SSH only)
-and is expecting a `cloud-init` at boot (see later).
+Using cloud images, however, is tricky, because it doesn't allow user
+login (SSH only) and is expecting a [`cloud-init`][6]. Without it,
+snapshots we made above will boot, but you can't login (tried "ubuntu,
+passw0rd", "ubuntu, ubuntu", "ubuntu, [no password]", none works).
+
+To use [cloud-init][6], we need to create a `user-data` file which
+is actually a `cloud-config` in YAML format. [cloud-init][6]
+can use other [formats][8]. Take a look.
+A minimal version of `cloud-config` is shown below, which allows
+`ubuntu` user login using the `password` value you defined here, eg. `whatever001`.
+
+[6]: http://cloudinit.readthedocs.io/en/latest/
+[7]: http://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html
+[8]: http://cloudinit.readthedocs.io/en/latest/topics/format.html#user-data-script
+
+<pre class="brush:yaml;">
+#cloud-config
+password: whatever001
+chpasswd:
+  expire: False
+ssh_pwauth: True
+</pre>
+
+Now how `cloud-init` works? Essentially you make `user-data` into
+a disk or iso that <span class="myhighlight">can be mounted</span> to
+your VM at boot. Your VM's OS image should have had `cloud-init`
+installed (and configured?) so when it boots it will **search for
+user-data & meta-data**, and run their instructions.
+
+## cloud-init in raw
+
+<pre class="brush:plain;">
+$ cloud-localds -m local my-seed.img my-user-data [my-meta-data]
+</pre>
+
+When using `cloud-localds`, make sure to use `-m local` so to enable
+the [`NoCloud`][7] data source (otherwise, booting will stuck with
+error __url_helper.py[WARNING]: Calling
+'http://169.254.169.254/2009-04-04/meta-data/instance-id failed...__
+because `cloud-init` by default will expect a server somewhere serving
+user-data and meta-data files. `NoCloud` says they are on a local disk).
+
+Example as used in KVM's xml. Make sure `slot=` index is unique,
+and `<target dev=` index is unique.
+
+<pre class="brush:xml;">
+<disk type='file' device='disk'>
+  <driver name='qemu' type='raw'/>
+  <source file='/home/fengxia/workspace/tmp/my-seed.img'/>
+  <backingStore/>
+  <target dev='vdb' bus='virtio'/>
+  <alias name='virtio-disk1'/>
+  <address type='pci'1 domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
+</disk>
+</pre>
+
+## cloud-init in ISO
+<pre class="brush:plain;">
+$ genisoimage --output my-seed.iso -volid cidata -joliet -rock my-user-data [my-meta-data]
+</pre>  
+
+The key here is `-volid` value <span class="myhighlight">must be `cidata`</span>!
+Example KVM xml below. Again, `<target dev=` index should be unique.
+
+<pre class="brush:xml;">
+<disk type='file' device='cdrom'>
+  <source file='/home/fengxia/workspace/tmp/my-seed.iso'/>
+  <target dev='vdb' bus='ide'/>
+  <readonly/>
+</disk>
+</pre>
+
+# Sum it up
+
+So back to our mission &mdash; to use cloud image as base and external
+snapshots as our dev sandbox:
+
+1. Download a cloud image
+2. Resize image
+3. Create a snapshot with backing file
+4. Add `.snap` as a disk in kvm xml
+5. Create `user-data`
+6. Create `seed.img` from user-data 
+7. Add `seed.img` as a disk in kvm xml
+8. `virsh create [your xml]`
+
+Enjoy.

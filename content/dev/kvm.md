@@ -1,6 +1,6 @@
 Title: KVM
 Date: 2017-10-11 14:41
-Tags: dev
+Tags: lenovo
 Slug: kvm
 Author: Feng Xia
 

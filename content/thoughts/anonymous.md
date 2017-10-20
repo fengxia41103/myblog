@@ -4,8 +4,7 @@ Tags: thoughts
 Slug: anonymous
 Author: Feng Xia
 
-
-<div class="slider">
+<div class="slider col s12">
   <ul class="slides">
     <li>
       <img src="/images/Screenshot_20171009-081914.png"/>
@@ -49,6 +48,7 @@ Author: Feng Xia
     <li>
       <img src="/images/Screenshot_20171009-083029.png"/>
     </li>
+  </ul>
 </div>
 
 I don't know why, but ordinary, common people with a sincere attitude

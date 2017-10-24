@@ -6,6 +6,13 @@ Author: Feng Xia
 
 The symptom is that typing jumps all over the place.
 
+# Tune sensitivity
+
+The idea here is to use `xinput` command to tune finger sensitivity
+values so to find a good balance. Also, we are to **disable** touch
+point (the little read dot rubber thingy on Lenovo's laptops) since I
+don't ever use it.
+
 1. `xinput list` to get a list (uses the `ssh -X` if on remote
    machine):
    <pre class="brush:plain;">
@@ -104,3 +111,15 @@ The symptom is that typing jumps all over the place.
 
 Reboot, and verify using `xinput list-props [index]` that new values
 are in use. You should be good now.
+
+# Disable touchpad while typing
+
+Another trick is to _disable_ touchpad while typing. This definitely
+removed the jumpy typing almost completely. However, you have to issue
+this command after running `emacs` for some reason. Otherwise, `emacs`
+will stuck in initialization forever.
+
+<pre class="brush:plain;">
+$ syndaemon -i 0.5 -d -K -R
+</pre>
+

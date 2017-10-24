@@ -252,6 +252,9 @@ replaced three legacy systems.
 evaluation of ESB, BPM and database components.
 
     * <span class="myhighlight">Tools</span>: IBM Rational, MySQL, Java Spring Struts Hibernate, JBoss ESB, Mule ESB, Apache ServiceMix, Activiti BPM
+    * <span class="myhighlight">Reports (in
+    Chinese)</span>: [数据库技术和系统测试简介][13]
+[13]: {attach}/downloads/jinneng_6003.pdf
 
 * Supervised two vendor invitation-for-bids. Responsible for $1.2-million RMB ($200,000 USD) purchase.
 

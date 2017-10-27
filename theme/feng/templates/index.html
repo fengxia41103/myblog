@@ -51,23 +51,25 @@
   {% for article in articles_page.object_list %}
   <div class="row">
     <div class="pin-card z-depth-2">
-      <i class="fa fa-calendar" style="opacity:0.5;"></i>
-      <em>
-        {{ article.date|strftime('%Y-%m-%d')}}
-      </em>
-      <h3>{{ article.title }}</h3>
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;"></i>
+        <em>
+          {{ article.date|strftime('%Y-%m-%d')}}
+        </em>
+        <h3>{{ article.title }}</h3>
 
-      <blockquote>
-        {% if article.tags|tags_contain("lenovo") %}
-        <span class="myhighlight">Copyright @ Lenovo US</span>
-        {% endif %}
-      </blockquote>
+        <blockquote>
+          {% if article.tags|tags_contain("lenovo") %}
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+          {% endif %}
+        </blockquote>
+      </div>
 
-      <p>
+      <div class="col s12">
         {# Dont' use article.content. The content is generated HTML. #}
         {{ article.summary|truncate(600) }}
-      </p>
-      <div style="margin-top: 10px;">
+      </div>
+      <div class="col l4 m4 s12">
         <a class="btn btn-default button" href="{{ article.url }}">
           <i class="fa fa-coffee" style="opacity:0.5;"></i> continue reading
         </a>

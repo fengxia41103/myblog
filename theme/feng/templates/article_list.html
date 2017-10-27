@@ -6,7 +6,6 @@
 
 {% for article in articles_page.object_list %}
 <div class="row">
-
   <div class="col s12">
         <div class="label label-default">
             <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
@@ -24,7 +23,7 @@
             </p>
         </div>
     </div>
-    <div class="right-align">
+    <div class="col s12 right-align">
         <a class="btn wave-effect" href="{{SITEURL}}/{{article.url}}">
             read more
         </a>

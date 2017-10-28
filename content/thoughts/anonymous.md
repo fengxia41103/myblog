@@ -3,6 +3,10 @@ Date: 2017-10-20 10:00
 Tags: thoughts
 Slug: anonymous
 Author: Feng Xia
+Summary: A poor-man's version my loved **La La Land** in which
+    the perpetual theme of love, ambition, losing integrity in the
+    face and name of opportunity. Why can't reality lose, once? 
+
 
 <div class="slider col s12">
   <ul class="slides">

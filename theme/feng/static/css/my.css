@@ -317,7 +317,14 @@ header {
   overflow-x: hidden;
 }
 
-.myhighlight {
+em {
+  text-decoration: underline;
+}
+strong {
+  color: #d52349;
+}
+
+* .myhighlight {
   color: #d52349;
 }
 
@@ -409,32 +416,6 @@ figure img {
   opacity: 0.5;
 }
 
-code {
-  color: #e74c3c;
-  backgrond-color: #f7f7f9;
-  border: 1px solid #e1e1e8;
-  font-size: 90%;
-  border-radius: 4px;
-  padding: 2px 4px;
-}
-
-section.myslides {
-  text-align: left;
-}
-
-section.mycover {
-  background: url("/static/images/background-1684.jpg") no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  color: #efefef;
-  overflow-x: hidden;
-}
-
-.reveal section img {
-  border: none;
-}
 
 .card-content h1,
 .card-content h2,
@@ -447,4 +428,26 @@ section.mycover {
 
 .card {
   min-height: 350px;
+}
+
+/* Reveal tweaks */
+
+.reveal{
+  font-size: 18pt !important;
+}
+
+.reveal * pre {
+  font-family: 'Inconsolata', monospace;
+}
+.reveal section img{
+  border: none;
+  box-shadow: 6px 10px #e8dfe8;
+}
+
+.reveal * .mywhite{
+  color: #efefec;
+}
+
+.reveal * code {
+  font-family: 'Inconsolata', monospace;
 }

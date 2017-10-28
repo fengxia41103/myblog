@@ -5,13 +5,21 @@ from __future__ import unicode_literals
 import sys
 
 AUTHOR = u'Feng Xia'
-SITENAME = u'PY'
+SITENAME = u'PY Consulting'
 #SITEURL = 'http://fengxia.co'
 SITEURL = ''
 
 PATH = 'content'
-STATIC_PATHS = ['images', 'downloads', 'app', 'data']
 
+IGNORE_FILES = ['.#*']
+
+# These folders will be copied to `/output` without pelican modification
+STATIC_PATHS = ['images', 'downloads', 'app', 'data', 'slides']
+
+# must have this to copy `/slides` to output
+# and skip processor complaining about formatting error
+# in .html and .md in this folder
+ARTICLE_EXCLUDES = ['slides']
 TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = u'en'

@@ -46,7 +46,12 @@ quirk here is to enable `ssl` proxy (notice the `https`?)
     </pre>
     
     So the server's ip is `10.175.135.193` and port `17070`.
-   
+
+2. (Optionally), you can change the Juju password here:
+    <pre class="brush:plain;">
+    $ juju change-user-password
+    </pre>
+    
 2. Create `juju.conf` in `/etc/nginx/site-available`. Note that this
    server listens port `443`!
 

@@ -1,0 +1,15 @@
+.reveal * p,
+.reveal * div{
+  font-family: 'Muli', sans-serif;
+  font-size: 0.8em;
+  margin-bottom:20px;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: 'Days One', sans-serif;
+}

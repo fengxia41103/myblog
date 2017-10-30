@@ -8,7 +8,8 @@ Summary: A poor-man's version my loved **La La Land** in which
     face and name of opportunity. Why can't reality lose, once? 
 
 
-<div class="slider col s12">
+<div class="slider col s12"
+    style="min-height:550px;">
   <ul class="slides">
     <li>
       <img src="/images/Screenshot_20171009-081914.png"/>

@@ -81,18 +81,16 @@
    Reveal.initialize({
      controls: true,
      progress: true,
-     history: true,
+     history: false,
      center: true,
-
+     // Display the page number of the current slide
+     slideNumber: true,
+     
      // available themes are in /css/theme
      theme: Reveal.getQueryHash().theme, 
 
      // default/cube/page/concave/zoom/linear/fade/none
      transition: Reveal.getQueryHash().transition || 'fade', 
-
-     // Parallax scrolling
-     // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-     // parallaxBackgroundSize: '2100px 900px',
 
      // Optional libraries used to extend on reveal.js
      dependencies: [

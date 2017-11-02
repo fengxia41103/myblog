@@ -36,7 +36,7 @@
     <strong>Client starts with...</strong>
   </div>
   <figure>
-    <img src="./images/lenovo%20catalog.png"
+    <img data-src="./images/lenovo%20catalog.png"
          height="550px;">
   </figure>
   <i class="fa fa-angle-double-down"></i>
@@ -47,7 +47,7 @@
     <strong>then, add configurations...</strong>
   </div>
   <figure>
-    <img src="./images/lenovo%20configurator.png"
+    <img data-src="./images/lenovo%20configurator.png"
          height="550px"/>
   </figure>
   <i class="fa fa-angle-double-down"></i>
@@ -58,13 +58,13 @@
     <strong>then, Lenovo MFG...</strong>
   </div>
   <figure>
-    <img src="https://drscdn.500px.org/photo/135937995/q%3D80_m%3D1000_k%3D1/v2?webp=true&sig=a9bfbffe2a1d74bbbfdbaea7b4263b55c50123204741011f4421bd9a2b8e7745"
+    <img data-src="https://drscdn.500px.org/photo/135937995/q%3D80_m%3D1000_k%3D1/v2?webp=true&sig=a9bfbffe2a1d74bbbfdbaea7b4263b55c50123204741011f4421bd9a2b8e7745"
          height="300px"
          width="30%"/>
-    <img src="https://drscdn.500px.org/photo/199833393/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=6a47d3ec149bbb62274e389f241e9be47c9cd1fd251a27cb7a59642af2215f1d"
+    <img data-src="https://drscdn.500px.org/photo/199833393/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=6a47d3ec149bbb62274e389f241e9be47c9cd1fd251a27cb7a59642af2215f1d"
          height="300px"
          width="30%"/>
-    <img src="./images/hw_manifest.png"
+    <img data-src="./images/hw_manifest.png"
          height="300px"
          width="30%"/>
   </figure>
@@ -78,11 +78,11 @@
   <figure>
   <iframe width="67%"
           height="400px"
-          src="https://www.youtube.com/embed/PP14X8MXAXA?version=3&autoplay=1&controls=0&loop=1&showinfo=0"
+          data-src="https://www.youtube.com/embed/PP14X8MXAXA?version=3&autoplay=1&controls=0&loop=1&showinfo=0"
           frameborder="0" gesture="media" allowfullscreen></iframe>
   </figure>
   <!-- <figure>
-       <img src="http://i.imgur.com/KzCHMAx.gif">
+       <img data-src="http://i.imgur.com/KzCHMAx.gif">
        </figure> -->
   <i class="fa fa-angle-double-right"></i>
 </section>
@@ -176,12 +176,12 @@ platforms on premise or across clouds.
 5. Simple to execute
 ---
 <figure>
-  <img src="./images/wss%20architecture.png"
+  <img data-src="./images/wss%20architecture.png"
        height="550px">
 </figure>
 ---
 <figure>
-  <img src="./images/wss%20vision.png"
+  <img data-src="./images/wss%20vision.png"
        width="100%">
 </figure>
 <br>
@@ -197,7 +197,7 @@ platforms on premise or across clouds.
 </div>
 
 <figure>
-  <img src="./images/wss%20architecture%20components%201.png"
+  <img data-src="./images/wss%20architecture%20components%201.png"
        height="100%">
 </figure>
 ---
@@ -206,7 +206,7 @@ platforms on premise or across clouds.
 </div>
 <br>
 <figure>
-  <img src="./images/wss%20architecture%20components%202.png"
+  <img data-src="./images/wss%20architecture%20components%202.png"
        height="500px">
 </figure>
 ---
@@ -214,7 +214,7 @@ platforms on premise or across clouds.
 **Unified** multi-layer deployment
 </div>
 <figure>
-  <img src="./images/wss%20architecture%20components%203.png"
+  <img data-src="./images/wss%20architecture%20components%203.png"
        height="550px">
 </figure>
 ---
@@ -245,13 +245,13 @@ platforms on premise or across clouds.
  complex big software topologies.
 </div>
 
-<img src="https://i.ytimg.com/vi/tsou9S6NoDg/maxresdefault.jpg"
+<img data-src="https://i.ytimg.com/vi/tsou9S6NoDg/maxresdefault.jpg"
      height="200px">
 ---
 <div align="left">
 Charms are in **store**
 </div>
-<iframe src="https://jujucharms.com/store"
+<iframe data-src="https://jujucharms.com/store"
         height="550px" width="100%"></iframe>
 ---
 <div align="left">
@@ -371,14 +371,14 @@ machines:
 <div align="left">
 **Managed** in _Juju GUI_
 </div>
-<iframe src="https://jujucharms.com/new/"
+<iframe data-src="https://jujucharms.com/new/"
         height="550px" width="100%"></iframe>
 ---
 <div align="left">
 Example: a deployed Canonical **Openstack**
 </div>
 
-<img src="https://insights.ubuntu.com/wp-content/uploads/7790/jjuju.png">
+<img data-src="https://insights.ubuntu.com/wp-content/uploads/7790/jjuju.png">
 
 Note:
 
@@ -401,7 +401,7 @@ Note:
 ## what we have Today
 
 <a href="https://lenovopress.com/tips1275.pdf">
-  <img src="./images/lcv.png" height="500px">
+  <img data-src="./images/lcv.png" height="500px">
   <i class="fa fa-external-link"></i>
 </a>
 
@@ -425,7 +425,7 @@ Note:
       <i class="fa fa-angle-double-down"></i>
     </ul>
   </div>
-  <iframe src="https://www3.lenovo.com/us/en/data-center/servers/racks/System-x3650-M5/p/77XS7HV7V64"
+  <iframe data-src="https://www3.lenovo.com/us/en/data-center/servers/racks/System-x3650-M5/p/77XS7HV7V64"
         height="550px" width="67%"
         style="float:right;"></iframe>
 </section>
@@ -450,7 +450,7 @@ Note:
 </div>
 <br>
 <section>
-  <iframe src="http://www.lenovofiles.com/3dtours/products/index.html"
+  <iframe data-src="http://www.lenovofiles.com/3dtours/products/index.html"
           height="500px" width="100%"></iframe>
 
 <div align="left">
@@ -583,9 +583,9 @@ def add_system_to_group():
 </section>
 ---
 ## to what we can be 
-<img src="./images/hw%20example.png" height="450px">
+<img data-src="./images/hw%20example.png" height="450px">
 ---
-<iframe src="https://192.168.122.238/gui/"
+<iframe data-src="https://192.168.122.238/gui/"
         height="550px" width="100%"></iframe>
 ---
 # Thank you

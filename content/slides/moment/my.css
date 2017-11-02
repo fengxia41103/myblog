@@ -13,3 +13,10 @@
 .reveal h6 {
   font-family: 'Days One', sans-serif;
 }
+
+* .myhighlight{
+  color: #d52349;
+}
+* .mywhite {
+  color: #efefef;
+}

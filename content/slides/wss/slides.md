@@ -1,5 +1,4 @@
-<section data-background=""
-         align="left">
+<section align="left">
   <h1>
     Workload Solution
     <i class="fa fa-shopping-basket">Store</i>
@@ -14,10 +13,10 @@
 **Agenda**
 </div>
 
-1. Intro of WSS
-2. How to model, differently
-3. Solution architect
-4. Discussion'
+1. Today's challenges
+2. Introduction of Juju & charms
+3. Transform reference architecture
+4. Discussion
 
 ---
 <section data-background="https://drscdn.500px.org/photo/155532687/q%3D80_m%3D2000/v2?webp=true&sig=4122d59c34dde5e01b0a8fd3b10e0330c3b053c27918e55a68464a1937237a34">
@@ -31,7 +30,6 @@
 ---
 **this is how it is being done...**
 ---
-<section>
   <div align="left">
     <strong>Client starts with...</strong>
   </div>
@@ -40,9 +38,7 @@
          height="550px;">
   </figure>
   <i class="fa fa-angle-double-down"></i>
-</section>
-
-<section>
+---
   <div align="left">
     <strong>then, add configurations...</strong>
   </div>
@@ -51,41 +47,36 @@
          height="550px"/>
   </figure>
   <i class="fa fa-angle-double-down"></i>
-</section>
+---
+<div align="left">
+  <strong>then, Lenovo MFG...</strong>
+</div>
+<figure>
+  <img data-src="https://drscdn.500px.org/photo/135937995/q%3D80_m%3D1000_k%3D1/v2?webp=true&sig=a9bfbffe2a1d74bbbfdbaea7b4263b55c50123204741011f4421bd9a2b8e7745"
+       height="300px"
+       width="30%"/>
+  <img data-src="https://drscdn.500px.org/photo/199833393/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=6a47d3ec149bbb62274e389f241e9be47c9cd1fd251a27cb7a59642af2215f1d"
+       height="300px"
+       width="30%"/>
+  <img data-src="./images/hw_manifest.png"
+       height="300px"
+       width="30%"/>
+</figure>
 
-<section>
-  <div align="left">
-    <strong>then, Lenovo MFG...</strong>
-  </div>
-  <figure>
-    <img data-src="https://drscdn.500px.org/photo/135937995/q%3D80_m%3D1000_k%3D1/v2?webp=true&sig=a9bfbffe2a1d74bbbfdbaea7b4263b55c50123204741011f4421bd9a2b8e7745"
-         height="300px"
-         width="30%"/>
-    <img data-src="https://drscdn.500px.org/photo/199833393/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=6a47d3ec149bbb62274e389f241e9be47c9cd1fd251a27cb7a59642af2215f1d"
-         height="300px"
-         width="30%"/>
-    <img data-src="./images/hw_manifest.png"
-         height="300px"
-         width="30%"/>
-  </figure>
-  <i class="fa fa-angle-double-down"></i>
-</section>
+---
+<div align="left">
+  <strong>in reality...</strong>
+</div>
+<!-- <figure> -->
+<!-- <iframe width="67%" -->
+<!--         height="400px" -->
+<!--         data-src="https://www.youtube.com/?version=3&autoplay=1&controls=0&loop=1&showinfo=0" -->
+<!--         frameborder="0" gesture="media" allowfullscreen></iframe> -->
+<!-- </figure> -->
+<figure>
+     <img data-src="http://i.imgur.com/KzCHMAx.gif">
+     </figure>
 
-<section>
-  <div align="left">
-    <strong>in reality...</strong>
-  </div>
-  <figure>
-  <iframe width="67%"
-          height="400px"
-          data-src="https://www.youtube.com/embed/PP14X8MXAXA?version=3&autoplay=1&controls=0&loop=1&showinfo=0"
-          frameborder="0" gesture="media" allowfullscreen></iframe>
-  </figure>
-  <!-- <figure>
-       <img data-src="http://i.imgur.com/KzCHMAx.gif">
-       </figure> -->
-  <i class="fa fa-angle-double-right"></i>
-</section>
 
 Note:
 

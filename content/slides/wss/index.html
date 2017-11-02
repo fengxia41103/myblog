@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Feng's presentations</title>
+    <title>WSS</title>
 
     <meta name="description" content="Feng's presentations">
     <meta name="author" content="feng Xia">
@@ -20,22 +20,17 @@
     <link rel="stylesheet"
           href="/theme/bower_components/reveal.js/css/reveal.css">
     <link rel="stylesheet"
-          href="/theme/bower_components/reveal.js/css/theme/white.css" id="theme">
-
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="/theme/bower_components/reveal.js/lib/css/zenburn.css">
-
-    <link rel="stylesheet"
-          href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
-    <link rel="stylesheet"
-          href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+          href="/theme/bower_components/reveal.js/css/theme/white.css"
+          id="theme">
 
     <!-- My css -->
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata"
+    <link href="https://fonts.googleapis.com/css?family=Days+One|Muli"
           rel="stylesheet">
     <link rel="stylesheet"
           href="/theme/css/my.css">
-
+    <link rel="stylesheet"
+          href="./my.css">
+    
     <!-- fontawesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,20 +56,13 @@
 
   <body>
     <div class="reveal">
-      
-      <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-        <section data-markdown="wss.md"  
+        <section data-markdown="slides.md"  
                  data-separator="^---"
                  data-vertical="^--"
                  data-notes="^Note:"
-                 data-charset="iso-8859-15">
+                 data-charset="utf-8">
         </section>
-        <img src="/images/lenovo.svg" width="100%"/>
-        <span style="font-size:0.3em; float:right;">
-          <i class="fa fa-copyright"></i>
-          2017 Lenovo Internal. All rights reserved.
-        </span>
       </div>
     </div>
 
@@ -82,34 +70,11 @@
 <script src="/theme/bower_components/reveal.js/js/reveal.js"></script>
 
 <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js">
-</script>
-<script type="text/javascript"
-        src="/theme/bower_components/SyntaxHighlighter/scripts/shAutoloader.js">
-</script>
-<script type="text/javascript"
-        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushJScript.js">
-</script>
-<script type="text/javascript"
-        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushYaml.js">
-</script>
-<script type="text/javascript"
-        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
-</script>
-<script type="text/javascript"
-        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPlain.js">
-</script>
-
-<script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js">
 </script>
-
 <script>
  var j$ = jQuery.noConflict();
  j$(document).ready(function(){
-   // syntaxhighlighter
-   SyntaxHighlighter.defaults['toolbar'] = false;
-   SyntaxHighlighter.all();
 
    // Full list of configuration options available here:
    // https://github.com/hakimel/reveal.js#configuration
@@ -120,16 +85,12 @@
      center: true,
      // Display the page number of the current slide
      slideNumber: true,
-
+     
      // available themes are in /css/theme
      theme: Reveal.getQueryHash().theme, 
 
      // default/cube/page/concave/zoom/linear/fade/none
      transition: Reveal.getQueryHash().transition || 'fade', 
-
-     // Parallax scrolling
-     // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-     // parallaxBackgroundSize: '2100px 900px',
 
      // Optional libraries used to extend on reveal.js
      dependencies: [
@@ -167,9 +128,8 @@
        }
      ]
    });
-
-   j$('code').each(function(i, e) {hljs.highlightBlock(e)});
  });
 </script>
+
 </body>
 </html>

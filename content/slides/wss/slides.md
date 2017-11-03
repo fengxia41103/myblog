@@ -580,150 +580,87 @@ Note:
 
 <div class="row">
   <iframe data-src="https://www3.lenovo.com/us/en/data-center/servers/racks/System-x3650-M5/p/77XS7HV7V64"
-          height="550px"
+          height="500px"
           class="col l7 m8 s12">
   </iframe>
   <div class="col l5 m4 s12">
     <img data-src="images/uhm%20code%20file%20structure.png">
   </div>
+RA = HW charms + platform charm + application charms
 </div>
 ---
-<div align="left">
-**Definition** of a charm includes
+Five steps to transform a paper model &rarr; charm model
+
+1. hierarchy &rarr; abstract base model
+2. attributes &rarr; configuration options
+3. data interface &rarr; relations
+4. workflow &rarr; states, hooks
+5. actions &rarr; Ansible playbooks
+
+---
+Take server for example: 1. hierarchy
+<div class="row">
+<iframe data-src="http://www.lenovofiles.com/3dtours/products/index.html"
+        height="500px"
+        width="100%"></iframe>
 </div>
-<br>
-<section>
-  <iframe data-src="http://www.lenovofiles.com/3dtours/products/index.html"
-          height="500px" width="100%"></iframe>
 
-<div align="left">
-  <strong>1. Hierarchy</strong>
-  <br>
-  
-  HW charm follows the same grouping used in Lenovo's HW catalog.
-</div>
-<br>
-<i class="fa fa-angle-double-down"></i>
-</section>
+server &rarr;  mainstream rack servers &rarr; SR630<br>
+We can design a base **charm-server**, then include it in _charm-sr630_
+to inherit base attributes and behaviors.
+---
+Take server for example: 2. configurations
+<pre class="brush:yaml">
+options:
+  # catalog attributes
+  cpu_sockets:
+    type: int
+    default: 2
+    description: ""
+  max_25_disks:
+    type: int
+    default: 12
+    description: ""
+  max_25_disks:
+    type: int
+    default: 6
+    description: ""
 
-<section>
-  <div align="left">
-    <strong>2. Configurations</strong>
-    <br>
+  # reference architecture attributes
+  firmware_policy:
+    type: string
+    default: "policy ID 1231"
+    description: ""
+  config_pattern:
+    type: string
+    default: "config ID 367"
+    description: ""
 
-    Parameters designed to change charm's behavior while keeping the
-    template model stable.  Each is specified of a data type and
-    validation rules.
-  </div>
-  <pre class="brush:yaml">
-  options:
-    uuid:
-      type: string
-      default: ""
-      description: "UUID"
-    machine_type:
-      type: string
-      default: ""
-      description: "MTM"
-    uhm:
-      type: string
-      default: ""
-      description: "UHM specific definitions in YAML"
-  </pre>
-  <br>
-  <i class="fa fa-angle-double-down"></i>
-</section>
+  # orchestration attributes
+  uhm:
+    type: string
+    default: ""
+    description: "Can be a YAML string"
+</pre>
+---
+Take server for example: 3. relations
 
-<section>
-  <div align="left">
-    <strong>3. Data interfaces</strong>
-    <br>
+| from   | to     | data                       |
+|--------|--------|----------------------------|
+| server | rack   | announce server_id         |
+| rack   | server | announce other servers' IP |
+| server | switch | server_ip                  |
+| switch | server | available ports            |
 
-    Determine who can connect **to** and **from**, and
-    what data are passed.
-  </div>
-  
- ```
-class RackProvides(RelationBase):
-    # Every unit connecting will get the same information
-    scope = scopes.UNIT
-    auto_accessors = ['rack_id',
-                      'server_id']
+---
+Take server for example: 4. workflow
 
-    # Use some template magic to declare our relation(s)
-    @hook('{provides:rack-server}-relation-joined')
-    def joined(self):
-        config = hookenv.config()
-        conv = self.conversation()
-        conv.set_remote(data={
-            'rack_id': config['uuid']
-        })
-        self.set_state('{relation_name}.joined')
-  ```
+from rodney
+---
+Take server for example: 5. actions
 
-  <br>
-  <i class="fa fa-angle-double-down"></i>
-</section>
+from rodney
 
-<section>
-  <div align="left">
-    <strong>4. Playbooks</strong>
-    <br>
-    
-    Each charm comes with a set of
-    Ansible playbooks that implement actions when a
-    charm state is reached.
-  </div>
-
-  <pre class="brush:yaml;">
-  # tasks file for lenovo.lxca-uhm
-  - name: Create a resource group for ThingAgile Solution
-    pylxca_module:
-      command_options: create_resourcegroups
-      login_user: "{{ lxca_user }}"
-      login_password: "{{ lxca_password }}"
-      auth_url: "{{ lxca_url }}"
-      name: "{{ name }}"
-      description: "{{ description }}"
-      type: "{{ type }}"
-      solutionVPD: "{{ solutionVPD }}"
-      members: "{{ members }}"
-      criteria: "{{ criteria }}"
-    register: rslt
-    tags:
-      create_resourcegroups
-  </pre>
-  <br>
-  <i class="fa fa-angle-double-down"></i>
-</section>
-
-<section>
-  <div align="left">
-    <strong>5. States</strong>
-    <br>
-
-    A set of handlers of conditions/events/flags
-    of each charm, and condtional dependencies
-    among multiple running instances.
-  </div>
-  
-  <pre>
-    <code>
-@when_not('solution.ready', 'solution.error')
-@when('solution.group.created')
-def add_system_to_group():
-    """Add system to group.
-    """
-    run_uhm(playbook='add_system',
-            tags='add_group_member',
-            current_state='solution.group.created',
-            next_state='solution.system.added',
-            error_state='solution.error')
-
-    </code>
-  </pre>
-  
-</section>
 ---
 ## to what we can be 
 <img data-src="images/hw%20example.png" height="450px">

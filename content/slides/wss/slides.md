@@ -132,7 +132,7 @@ Five challanges
 4. Public and private clouds
 5. Simple to execute
 ---
-WSS stack
+WSS Stack
 <figure style="float:left;width:50%;">
   <img data-src="images/wss%20simplified%20function%20stack.png"
        height="500px"
@@ -159,7 +159,7 @@ WSS stack
   </dl>
 </div>
 ---
-<h6>WSS vision</h6>
+WSS vision
 <figure>
   <img data-src="images/wss%20vision.png"
        style="box-shadow:none;">
@@ -172,45 +172,57 @@ WSS stack
 * Build a vendor/user community
 * Efficient deployment
 ---
+WSS Framework
 <figure>
   <img data-src="images/uhm%20five%20phase.png">
 </figure>
 
-* Activities can be categorized into **fource phases**.
+HW catalog &rarr; solution architect &rarr; ordering &rarr; configuring &rarr; deployment &rarr; monitoring and validation
+
+Note:
+
 * Manifest is a presentation of configurations defined in our data models.
 * Configuration instantiates a model &larr; model is really a template/class.
 * Instantiated model will be applied in orchestration to bring expectation
 into reality.
 ---
+Scope of tools and services
 <figure>
-  <img data-src="images/wss%20architecture.png"
-       height="550px">
+  <img data-src="images/wss%20simplified%20phase.png"
+       style="box-shadow:none;">
 </figure>
+
+Note:
+
+1. Lenovo, client, 3rd party can create their own models
+2. Configurations service to drive **software-defined** objective
 ---
 <div align="right">
-**Unified** solution design
+**Framework details**: solution design
 </div>
 
 <figure>
   <img data-src="images/wss%20architecture%20components%201.png"
-       height="100%">
+       style="box-shadow:none;">
 </figure>
 ---
 <div align="right">
-**Unified** HW & SW configuration
+**Framework details**: configuration
 </div>
 <br>
 <figure>
   <img data-src="images/wss%20architecture%20components%202.png"
-       height="500px">
+       height="550px"
+       style="box-shadow:none;">       
 </figure>
 ---
 <div align="right">
-**Unified** multi-layer deployment
+**Framework details**: deployment, compliance, monitoring
 </div>
 <figure>
   <img data-src="images/wss%20architecture%20components%203.png"
-       height="550px">
+       height="550px"
+       style="box-shadow:none;">       
 </figure>
 ---
 <section data-background="images/wss%20architecture%20components.png">
@@ -232,26 +244,156 @@ into reality.
   </div>
 </section>
 ---
-<div align="left" 
-     class="my-multicol-2">
-  
- <span class="myhighlight">Juju's mission</span> is to provide a
+Juju
+<div class="divider"></div>
+
+<p align="left" >
+ **Juju's mission** is to provide a
  modeling language for users that abstracts the specifics of operating
  complex big software topologies.
-</div>
+</p>
 
 <img data-src="https://i.ytimg.com/vi/tsou9S6NoDg/maxresdefault.jpg"
-     height="200px">
+     width="25%"
+     style="float:left;">
+
+<div style="width:60%;float:right;">
+  <ol>
+    <li>is an orchestrator</li>
+    <li>is [Open source](https://github.com/juju/juju)
+    </li><li>
+      GNU Affero General Public License v3.0, permitting:
+      <ol>
+        <li>Commercial use</li>
+        <li>Modification</li>
+        <li>Distribution</li>
+        <li>Patent use</li>
+        <li>Private use</li>
+      </ol>
+    </li><li>
+      Deploy charms
+    </li><li>
+      **Our customer has a strong interest in it**
+    </li>
+  </ol>
+</div>
+
+Note:
+
+1. recommended charms: 343, community: 1819
+---
+Charms
+<div class="divider"></div>
+<p align="left" >
+  The central mechanism behind Juju is called Charms.
+  <ul>
+    <li>Charms can be written in any programming language that can be executed from the command line.</li>
+    <li>A charm is a collection of:
+      <ol>
+        <li>YAML configuration files</li>
+        <li>"hooks". A hook is a naming convention to install software, start/stop a service, manage relationships with other charms, upgrade charms, scale charms, configure charms, etc.</li>
+        <li>states. A state is a user-defined condition that is evaluated every 5 minutes.</li>
+        <li>Charms can have many properties.</li>
+        <li>Charm helpers allow boiler-plate code to be automatically generated.
+        </li>
+      </ol>
+    </li>
+  </ul>
+</p>
+
+
+<div  align="left">
+**Example**:<br><br>
+  
+databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), openstack (51), applications (75), misc (63), network (11), analytics (7), apache (38), security (4), storage (17) &mdash; **343** recommended ones, **1819** community contributed ones</div>
+
+---
+WSS strategy of using Juju & charms
+<div class="row">
+  <figure class="col l7 m12 s12">
+    <img data-src="images/wss%20orchestration.png"
+         style="box-shadow:none;">
+  </figure>
+  <div align="left"
+       class="col l5 m12 s12">
+    <ul>
+      <li>
+        Three primary types of charms:
+        <ol>
+          <li>HW (Lenovo innovation)</li>
+          <li>software platform (existing)</li>
+          <li>user application (existing)</li>
+        </ol>
+      </li><li>
+        Support both baremetal and _clouds_ by implementing a **provider** &rarr; **give me a machine** by constraints, eg. CPU, mem
+      </li><li>
+        Support premise and public clouds (12 out of box)
+      </li><li>
+        Used as single-layer orchestrator
+      </li>
+    </ul>
+  </div>
+</div>
 ---
 <div align="left">
-Charms are in **store**
+Charms **store**
 </div>
 <iframe data-src="https://jujucharms.com/store"
         height="550px" width="100%"></iframe>
 ---
 <div align="left">
-Charms are **PYTHON code**
+Charm **components**
 </div>
+<figure>
+  <img data-src="images/charm%20components.png"
+       style="box-shadow:none;">
+</figure>
+
+<dl class="my-multicol-2">
+  <dt>YAML data files</dt>
+  <dd>
+    <ol>
+      <li>`config.yaml`: configuration key-value pairs, supporting 4 data types: int, float, string, boolean.</li>
+      <li>`metadata.yaml`: name, description, tag, and **relations**</li>
+      <li>`layer.yaml`: includes other layers and relation interfaces.</li> 
+    </ol>
+  </dd>
+
+  <dt>States</dt>
+  <dd>
+    User defined **flags** that will be evaluated every 5 minutes. A TRUE
+    condition will be executed multiple times.
+  </dd>
+
+  <dt>Hooks</dt>
+  <dd>
+    Hardcoded execution points and invoking sequence.
+  </dd>
+
+  <dt>Relation</dt>
+  <dd>
+    Can one charm exechange data with another? 
+  </dd>
+  
+  <dt>Ansible (actions)</dt>
+  <dd>
+    Can also be other config mgt recipes.
+    These are independently developed and are usable without charms. 
+  </dd>
+
+  <dt>Layesr</dt>
+  <dd>
+    Re-use other existing charm code, eg. utility function.
+  </dd>
+
+  <dt>Dependency packages</dt>
+  <dd>
+    In Python, these will be wheelhouse packages required by
+    the charm scripts.
+  </dd>
+</dl>
+---
+**Example**: charm state script
 
 ```python
 @when_not('solution.ready', 'solution.error')
@@ -269,6 +411,8 @@ def store_manifests():
                 'manifest_path': '/tmp/test.manifest'
             })
 ```
+---
+**Example**: charm relation script
 
 ```PYTHON
 class RackProvides(RelationBase):
@@ -405,25 +549,20 @@ Note:
 1. page 29: server 3650
 ---
 <div align="left">
-  Replace with **charms models <i class="fa fa-battery"></i>**
+  Replace static HW with **charms models <i class="fa fa-battery"></i>**
 </div>
 <br>
 
-<section>
-  <div style="float:right; width:33%;margin-top:20%;">
-    <ul>
-      <li>PDUs</li>
-      <li>Switches</li>
-      <li>Servers</li>
-      <li>Storages</li>
-      <li>...</li>
-      <i class="fa fa-angle-double-down"></i>
-    </ul>
-  </div>
+<div class="row">
   <iframe data-src="https://www3.lenovo.com/us/en/data-center/servers/racks/System-x3650-M5/p/77XS7HV7V64"
-        height="550px" width="67%"
-        style="float:right;"></iframe>
-</section>
+          height="550px"
+          class="col l7 m8 s12">
+  </iframe>
+  <div class="col l5 m4 s12">
+    <img data-src="images/uhm%20code%20file%20structure.png">
+  </div>
+</div>
+---
 
 <section>
 <pre class="brush:plain;">

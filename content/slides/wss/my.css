@@ -1,11 +1,11 @@
-.reveal * p,
-.reveal * div{
+.reveal section p,
+.reveal section div{
   font-family: 'Muli', sans-serif;
   margin-bottom:20px;
   font-size: 0.8em;
 }
 .reveal li {
-  font-size: 0.8em;
+  font-size: 1.0em;
 }
 
 .reveal h1,
@@ -31,4 +31,5 @@
 
 .reveal section dd {
   margin-bottom:20px;
+  font-size: 0.8em;
 }

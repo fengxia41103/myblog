@@ -28,25 +28,23 @@
   </div>
 </section>
 ---
-**this is how it is being done...**
+This is how it is being done today...
 ---
-  <div align="left">
-    <strong>Client starts with...</strong>
-  </div>
-  <figure>
-    <img data-src="./images/lenovo%20catalog.png"
-         height="550px;">
-  </figure>
-  <i class="fa fa-angle-double-down"></i>
+<div align="left">
+  <strong>Client starts with...</strong>
+</div>
+<figure>
+  <img data-src="images/lenovo%20catalog.png"
+       height="550px;">
+</figure>
 ---
-  <div align="left">
-    <strong>then, add configurations...</strong>
-  </div>
-  <figure>
-    <img data-src="./images/lenovo%20configurator.png"
-         height="550px"/>
-  </figure>
-  <i class="fa fa-angle-double-down"></i>
+<div align="left">
+  <strong>then, add configurations...</strong>
+</div>
+<figure>
+  <img data-src="images/lenovo%20configurator.png"
+       height="550px"/>
+</figure>
 ---
 <div align="left">
   <strong>then, Lenovo MFG...</strong>
@@ -58,94 +56,61 @@
   <img data-src="https://drscdn.500px.org/photo/199833393/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=6a47d3ec149bbb62274e389f241e9be47c9cd1fd251a27cb7a59642af2215f1d"
        height="300px"
        width="30%"/>
-  <img data-src="./images/hw_manifest.png"
+  <img data-src="images/hw_manifest.png"
        height="300px"
        width="30%"/>
 </figure>
 
 ---
-<div align="left">
-  <strong>in reality...</strong>
+<figure style="width:50%;float:left;">
+  <img data-src="http://i.imgur.com/KzCHMAx.gif">
+</figure>
+<div align="left"
+    style="width:40%;float:right">
+  Working, but can use an upgrade.<br><br>
+  
+  We have identified **five** areas
+  that WSS aims to bring user an improved
+  experience.
 </div>
-<!-- <figure> -->
-<!-- <iframe width="67%" -->
-<!--         height="400px" -->
-<!--         data-src="https://www.youtube.com/?version=3&autoplay=1&controls=0&loop=1&showinfo=0" -->
-<!--         frameborder="0" gesture="media" allowfullscreen></iframe> -->
-<!-- </figure> -->
-<figure>
-     <img data-src="http://i.imgur.com/KzCHMAx.gif">
-     </figure>
-
 
 Note:
 
 1. https://developers.google.com/youtube/player_parameters
 ---
-**so the challenges lie in...**
----
-**so the challenges lie in...**
+Five challanges
 
-<section>
-<div align="left">
-**1.**
-<br>
+<div align="left"
+     style="color:#cecece;">
+  <div class="fragment highlight-blue">
+    1. Lack of visible _model_ to keep **consistency** from client's
+    design board to delivered solution rack.
 
-Cycle of solution deployment is executed in _weeks_. HW
-misconfiguration is not discovered until late in the game, making
-the process **inefficient** and **unreliable**.
+    Difficult to **validate** configuration vs. expectation.
+  </div>
+  <div class="fragment highlight-blue">
+    2. **Mixed** tools, scripts and manifests hidden in internal processes.
+
+    Domain knowledge is maintained in mixed forms and is **implicit**,
+    putting the business at risk.
+  </div>
+  <div class="fragment highlight-blue">
+    3. Cycle of solution deployment is executed in _weeks_. HW
+    misconfiguration is not discovered until late in the game, making the
+    process **inefficient** and **unreliable**.
+  </div>
+  <div class="fragment highlight-blue">
+    4. No orchestration capability from _HW to SW_ covering "full" stack.
+
+    **End-to-end** is a not only a differentiator, but an **enabler** in
+    product designs that Lenovo can leverage its strength in HW to
+    support wide range of SW with confidence.
+  </div>
+  <div class="fragment highlight-blue">
+    5. Customers desire solutions across multiple **open** and **proprietary**
+    platforms on premise or across clouds.
+  </div>
 </div>
-</section>
-
-<section>
-<div align="left">
-**2.**
-<br>
-
-**Mixed** tools, scripts and manifests hidden in internal processes.
-
-Domain knowledge is maintained in mixed forms and is **implicit**,
-putting the business at risk.
-</div>
-</section>
-
-<section>
-<div align="left">
-**3.**
-<br>
-
-Lack of visible _model_ to keep **consistency** from client's design
-board to delivered solution rack. 
-
-Difficult to **validate** configuration vs. expectation
-</div>
-</section>
-
-<section>
-<div align="left">
-**4.**
-<br>
-
-No orchestration capability from _HW to SW_ covering "full" stack.
-
-**End-to-end** is a not only a differentiator, but an **enabler** in
-product designs that Lenovo can leverage its strength in HW to
-support wide range of SW with confidence.
-</div>
-
-Note:
-LXCA handles OS but nothing beyond (eg. Openstack).
-</section>
-
-<section>
-<div align="left">
-**5.**
-<br>
-
-Customers desire solutions across multiple **open** and **proprietary**
-platforms on premise or across clouds.
-</div>
-</section>
 ---
 <section data-background="https://drscdn.500px.org/photo/138747795/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=20cc685f194e95851ba5ceb3181ca0395d511c07948dd15d884235eb477dcbc6">
   <div style="margin-bottom:140px;">
@@ -160,20 +125,44 @@ platforms on premise or across clouds.
 **Objective**
 </div>
 
-1. **HW** workload modeling
-2. HW and SW deployment using the same models
+1. Unified Hardware Modeling (**UHM** project)
+2. HW and SW deployment using the same technology stack
 3. Multi-platforms
 4. Public and private clouds
 5. Simple to execute
 ---
-<figure>
-  <img data-src="./images/wss%20architecture.png"
-       height="550px">
+What it takes
+<figure style="float:left;width:50%;">
+  <img data-src="images/wss%20simplified%20function%20stack.png"
+       height="500px"
+       style="box-shadow:none;">
+  <figcaption>WSS stack</figcaption>
 </figure>
+<div style="width:45%;float:right;">
+  <dl>
+    <dt>Component modeling</dt>
+    <dd>
+      Each hardware component will be modeled to include both i ts
+      configuration attributes and its how-to methods &rarr;
+      **self-contained** and **self-sufficient**.
+    </dd>
+    <dt>System design</dt>
+    <dd>
+      System is decomposed into **modular** elements allowing design of flexible
+      hierarchy and inheritance.
+    </dd>
+    <dt>Adaptive deployment</dt>
+    <dd>
+      Translate design **blueprint to deployment** executions
+      permitting re-configure a software-defined solution.
+    </dd>
+  </dl>
+</div>
 ---
+<h6>WSS vision</h6>
 <figure>
-  <img data-src="./images/wss%20vision.png"
-       width="100%">
+  <img data-src="images/wss%20vision.png"
+       style="box-shadow:none;">
 </figure>
 <br>
 
@@ -183,12 +172,17 @@ platforms on premise or across clouds.
 * Build a vendor/user community
 * Efficient deployment
 ---
+<figure>
+  <img data-src="images/wss%20architecture.png"
+       height="550px">
+</figure>
+---
 <div align="right">
 **Unified** solution design
 </div>
 
 <figure>
-  <img data-src="./images/wss%20architecture%20components%201.png"
+  <img data-src="images/wss%20architecture%20components%201.png"
        height="100%">
 </figure>
 ---
@@ -197,7 +191,7 @@ platforms on premise or across clouds.
 </div>
 <br>
 <figure>
-  <img data-src="./images/wss%20architecture%20components%202.png"
+  <img data-src="images/wss%20architecture%20components%202.png"
        height="500px">
 </figure>
 ---
@@ -205,11 +199,11 @@ platforms on premise or across clouds.
 **Unified** multi-layer deployment
 </div>
 <figure>
-  <img data-src="./images/wss%20architecture%20components%203.png"
+  <img data-src="images/wss%20architecture%20components%203.png"
        height="550px">
 </figure>
 ---
-<section data-background="./images/wss%20architecture%20components.png">
+<section data-background="images/wss%20architecture%20components.png">
   <div align="left"
        style="margin-bottom:50%;">
     <h4 class="myhighlight">
@@ -392,7 +386,7 @@ Note:
 ## what we have Today
 
 <a href="https://lenovopress.com/tips1275.pdf">
-  <img data-src="./images/lcv.png" height="500px">
+  <img data-src="images/lcv.png" height="500px">
   <i class="fa fa-external-link"></i>
 </a>
 
@@ -574,7 +568,7 @@ def add_system_to_group():
 </section>
 ---
 ## to what we can be 
-<img data-src="./images/hw%20example.png" height="450px">
+<img data-src="images/hw%20example.png" height="450px">
 ---
 <iframe data-src="https://192.168.122.238/gui/"
         height="550px" width="100%"></iframe>

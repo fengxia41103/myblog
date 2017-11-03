@@ -33,3 +33,9 @@
   margin-bottom:20px;
   font-size: 0.8em;
 }
+
+.controls .center{
+  /*required to make reveal.js navigation arror work
+  when we are also importing materialize.css*/
+  text-align: left;
+}

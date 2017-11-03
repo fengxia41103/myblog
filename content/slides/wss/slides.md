@@ -284,62 +284,27 @@ Note:
 ---
 Charms
 <div class="divider"></div>
+
 <p align="left" >
   The central mechanism behind Juju is called Charms.
-  <ul>
-    <li>Charms can be written in any programming language that can be executed from the command line.</li>
-    <li>A charm is a collection of:
-      <ol>
-        <li>YAML configuration files</li>
-        <li>"hooks". A hook is a naming convention to install software, start/stop a service, manage relationships with other charms, upgrade charms, scale charms, configure charms, etc.</li>
-        <li>states. A state is a user-defined condition that is evaluated every 5 minutes.</li>
-        <li>Charms can have many properties.</li>
-        <li>Charm helpers allow boiler-plate code to be automatically generated.
-        </li>
-      </ol>
-    </li>
-  </ul>
+  Charms can be written in any programming language that can be executed from the command line.
 </p>
 
 
-<div  align="left">
+| Concepts  | used for                    |
+|-----------|-----------------------------|
+| hooks     | a hardcoded set of handlers |
+| states    | user defined flags          |
+| relations | data communication          |
+| layer     | model inheritance           |
+| bundle    | deployment batch mode       |
+
+<br>
+
 **Example**:<br><br>
   
-databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), openstack (51), applications (75), misc (63), network (11), analytics (7), apache (38), security (4), storage (17) &mdash; **343** recommended ones, **1819** community contributed ones</div>
+databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), openstack (51), applications (75), misc (63), network (11), analytics (7), apache (38), security (4), storage (17) &mdash; **343** recommended ones, **1819** community contributed ones
 
----
-WSS strategy of using Juju & charms
-<div class="row">
-  <figure class="col l7 m12 s12">
-    <img data-src="images/wss%20orchestration.png"
-         style="box-shadow:none;">
-  </figure>
-  <div align="left"
-       class="col l5 m12 s12">
-    <ul>
-      <li>
-        Three primary types of charms:
-        <ol>
-          <li>HW (Lenovo innovation)</li>
-          <li>software platform (existing)</li>
-          <li>user application (existing)</li>
-        </ol>
-      </li><li>
-        Support both baremetal and _clouds_ by implementing a **provider** &rarr; **give me a machine** by constraints, eg. CPU, mem
-      </li><li>
-        Support premise and public clouds (12 out of box)
-      </li><li>
-        Used as single-layer orchestrator
-      </li>
-    </ul>
-  </div>
-</div>
----
-<div align="left">
-Charms **store**
-</div>
-<iframe data-src="https://jujucharms.com/store"
-        height="550px" width="100%"></iframe>
 ---
 <div align="left">
 Charm **components**
@@ -393,6 +358,53 @@ Charm **components**
   </dd>
 </dl>
 ---
+**Example**: config.yaml
+
+```YAML
+options:
+  mount-size:
+    type: string
+    default: "1U"
+    description: "Rack mount size, 1U/2U"
+  operating-system:
+    type: string
+    default: ""
+    description: "OS to deploy"
+  firmware-update-id:
+    type: string
+    default: ""
+    description: "Firmware update fix ID"
+  configuration-pattern-id:
+    type: string
+    default: ""
+    description: ""
+
+```
+---
+**Example**: metadata.yaml
+
+```YAML
+name: server
+summary: This is a server charm
+maintainer: Feng Xia <fxia1@lenovo.com>
+description: |
+  This is a generic server charm.
+tags:
+  - server
+requires:
+  rack:
+    interface: rack-server
+  switch:
+    interface: switch-server
+```
+---
+**Example**: layer.yaml
+  
+```YAML
+includes: ['layer:endpoint', 'interface:rack-server', 'interface:switch-server']
+repo: hpcgitlab.labs.lenovo.com/WSS/wss.git
+```
+---
 **Example**: charm state script
 
 ```python
@@ -439,23 +451,7 @@ class RackProvides(RelationBase):
     ....
 ```
 ---
-<div align="left">
-**Designed** in _reactive_
-</div>
-<br>
-
-| Concepts  | used for                    |
-|-----------|-----------------------------|
-| hooks     | a hardcoded set of handlers |
-| states    | user defined flags          |
-| relations | data communication          |
-| layer     | model inheritance           |
-| bundle    | deployment batch mode       |
-
----
-<div align="left">
-**Built** to a fixed file structure
-</div>
+**Example**: distribution file structure
 
 <pre class="brush:plain;">
 |-- ansible.cfg
@@ -472,27 +468,18 @@ class RackProvides(RelationBase):
 `-- wheelhouse/         <-- Python dependency libs
 </pre>
 ---
-<div align="left">
-**Deployed** in _charm bundle_
-</div>
-
+**Example**: charm deployment bundle
 <pre class="brush:yaml;">
 series: trusty
 services:
   wordpress:
     charm: "cs:trusty/wordpress-2"
     num_units: 1
-    annotations:
-      "gui-x": "339.5"
-      "gui-y": "-171"
     to:
       - "0"
   mysql:
     charm: "cs:trusty/mysql-26"
     num_units: 1
-    annotations:
-      "gui-x": "79.5"
-      "gui-y": "-142"
     to:
       - "1"
 relations:
@@ -508,8 +495,13 @@ machines:
 </pre>
 ---
 <div align="left">
-**Managed** in _Juju GUI_
+Charms **store**
 </div>
+<iframe data-src="https://jujucharms.com/store"
+        height="550px" width="100%"></iframe>
+---
+Juju GUI/Canvas/Management console
+
 <iframe data-src="https://jujucharms.com/new/"
         height="550px" width="100%"></iframe>
 ---
@@ -527,6 +519,33 @@ Note:
 4. On Ubuntu 16.04, single host: 40min
 </section>
 ---
+WSS strategy of using Juju & charms
+<div class="row">
+  <figure class="col l7 m12 s12">
+    <img data-src="images/wss%20orchestration.png"
+         style="box-shadow:none;">
+  </figure>
+  <div align="left"
+       class="col l5 m12 s12">
+    <ul>
+      <li>
+        Three primary types of charms:
+        <ol>
+          <li>HW (Lenovo innovation)</li>
+          <li>software platform (existing)</li>
+          <li>user application (existing)</li>
+        </ol>
+      </li><li>
+        Support both baremetal and _clouds_ by implementing a **provider** &rarr; **give me a machine** by constraints, eg. CPU, mem
+      </li><li>
+        Support premise and public clouds (12 out of box)
+      </li><li>
+        Used as single-layer orchestrator
+      </li>
+    </ul>
+  </div>
+</div>
+---
 <section data-background="https://drscdn.500px.org/photo/179822321/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=51cdb14b0e0929a01b68133e08caff3d0370f1418ba18be62e5a9c3d193e1ddd">
   <p class="myhighlight">
     A new way to describe
@@ -537,16 +556,22 @@ Note:
   </h1>
 </section>
 ---
-## what we have Today
+what we have Today
 
-<a href="https://lenovopress.com/tips1275.pdf">
-  <img data-src="images/lcv.png" height="500px">
-  <i class="fa fa-external-link"></i>
-</a>
-
+<div class="row">
+  <div class="col l6 m6 s12">
+    <a href="https://lenovopress.com/lp0099.pdf">
+      <img data-src="images/ra.png" height="500px">
+      <i class="fa fa-external-link"></i>
+    </a>
+  </div>
+  <div class="col l6 m6 s12">
+    <img data-src="images/ra%20deployment%20example.png">
+  </div>
+</div>
 
 Note:
-1. page 29: server 3650
+1. page 27: deployment example
 ---
 <div align="left">
   Replace static HW with **charms models <i class="fa fa-battery"></i>**
@@ -562,22 +587,6 @@ Note:
     <img data-src="images/uhm%20code%20file%20structure.png">
   </div>
 </div>
----
-
-<section>
-<pre class="brush:plain;">
-|-- charm-rack          <-- HW charm
-|-- charm-server
-|-- charm-solution
-|-- charm-switch
-|-- layer-ansible       <-- Ansible actions
-|-- layer-basic         <-- OS package installer 
-|-- layer-endpoint      <-- Generic endpoint abstract
-|-- layer-pylxca        <-- BM manager library
-`-- layer-uhm           <-- UHM
-</pre>
-</section>
-
 ---
 <div align="left">
 **Definition** of a charm includes

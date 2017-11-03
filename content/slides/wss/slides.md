@@ -79,6 +79,7 @@ Note:
 1. https://developers.google.com/youtube/player_parameters
 ---
 Five challanges
+<div class="divider"></div>
 
 <div align="left"
      style="color:#cecece;">
@@ -131,12 +132,11 @@ Five challanges
 4. Public and private clouds
 5. Simple to execute
 ---
-What it takes
+WSS stack
 <figure style="float:left;width:50%;">
   <img data-src="images/wss%20simplified%20function%20stack.png"
        height="500px"
        style="box-shadow:none;">
-  <figcaption>WSS stack</figcaption>
 </figure>
 <div style="width:45%;float:right;">
   <dl>
@@ -171,6 +171,16 @@ What it takes
 * Open source &rarr; technology transparency
 * Build a vendor/user community
 * Efficient deployment
+---
+<figure>
+  <img data-src="images/uhm%20five%20phase.png">
+</figure>
+
+* Activities can be categorized into **fource phases**.
+* Manifest is a presentation of configurations defined in our data models.
+* Configuration instantiates a model &larr; model is really a template/class.
+* Instantiated model will be applied in orchestration to bring expectation
+into reality.
 ---
 <figure>
   <img data-src="images/wss%20architecture.png"

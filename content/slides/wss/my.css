@@ -1,8 +1,11 @@
 .reveal * p,
 .reveal * div{
   font-family: 'Muli', sans-serif;
-  font-size: 0.8em;
   margin-bottom:20px;
+  font-size: 0.8em;
+}
+.reveal li {
+  font-size: 0.8em;
 }
 
 .reveal h1,

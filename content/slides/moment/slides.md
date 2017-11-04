@@ -1,5 +1,6 @@
-<section data-background="images/dsc_7768.jpg">
-  <h1 align="left" class="mywhite">
+<section class="row mywhite"
+         data-background="images/dsc_7768.jpg">
+  <h1 align="left">
     Moments
   </h1>
   <br><br>
@@ -19,15 +20,17 @@
   </p>
 </div>
 ---
-<section data-background="images/dsc_1769878.jpg">
-  <h6 align="right">
-    IMP Japan, 2007
+<section class="row"
+         data-background="images/dsc_1769878.jpg">
+  <h6 align="right"
+      class="col offset-s8 s4">
+    Kobe, 2007
   </h6>
 
   <p align="right">
     A hurricane came, rained for two days. Study
     was intense and uninterrupted. It were the days filled with
-    ambition, self-importance, glamour, and hope.
+    ambition, self-importance, glamour, and love.
   </p>
 
 Note:
@@ -44,113 +47,128 @@ Note:
    tranquility, and intimacy, is lingers along.
 </section>
 ---
-<section data-background="images/dsc_6715.jpg">
-  <p align="left"
-     class="mywhite"
-     style="width:33%">
-    Objects, like human, can be ordinary and beautiful
-    at the same pace as long as one cares to look closely.
-  </p>
-  <h6 align="left"
-      class="mywhite"
-      style="margin-bottom:28a0px;">
-    close
-  </h6>
+<section data-background="images/dsc_6715.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col l4 m6 s12">
+    <p>
+      Objects, like human, can be ordinary and beautiful
+      at the same pace as long as one cares to look closely.
+    </p>
+    <h6>close</h6>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_6839.jpg">
-  <p align="right"
-     class="mywhite"
-     style="width:50%;float:right;">
-    Now I know, <br>
-    moon, is far,<br>
-    and meant to be that way,<br>
-    like those I met then lost.</br>
-    Attleboro, MA
-  </p>
+<section data-background="images/dsc_6839.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s6 s6">
+    <p>
+      Now I know, <br>
+      moon, is far,<br>
+      and meant to be that way,<br>
+      like those I met then lost.</br>
+    </p>
+    <h6>Attleboro, MA</h6>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_7814.jpg">
-  <div style="margin-top:50%">
+<section data-background="images/dsc_7814.jpg"
+         class="row">
+  <div class="mybottom">
     76 Thorndike St, #1
     <h6>Cambridge</h6>
   </div>
 </section>
 ---
 <section data-background="images/dsc_8190.jpg">
-  <h6 align="right"
-     style="margin-bottom:70%;">
-  Kobe, Japan
+  <h6 align="right" class="mytop">
+    Kobe
   </h6>
 </section>
 ---
-<section data-background="images/dsc_4640.jpg">
-  <p align="left"
-     style="width:30%"
-     class="mywhite">
-    Hi, you know,
+<section data-background="images/dsc_4640.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s3">
+    You know,
     you never left us,
-    like we never left you.
-  </p>
+    as we never left you.
+  </div>
 </section>
 ---
-<section data-background="images/DSC_8495.jpg">
-  <p align="left"
-     style="width:30%"
-     class="myhighlight">
-    Watching Noah approaching this age, I always wonder how she
-    felt then, and how he would cope with if that happend to me
-    now? I don't know. It's hard.
-  </p>
+<section data-background="images/DSC_8495.jpg"
+         class="row myhighlight">
+  <div align="left"
+       class="col s4">
+    <span class="mywhite">
+      Chicago, 2006
+    </span>
+      Watching Noah approaching this age, I always wonder how she
+      felt then, and how he would cope with if that happend to me
+      now? I don't know. It's hard.
+  </div>
 </section>
 ---
-<section data-background="images/DSC_4042.jpg">
-  <p align="right"
-     class="myhighlight"
-     style="width:30%;float:right;">
-    Don't even know what this flower is. Just like
-    I didn't know about
-    <a href="https://en.wikipedia.org/wiki/Bougainvillea">
-      三角梅</a>
-    back then. She is
-    magically, beautiful.
-  </p>
+<section data-background="images/DSC_4042.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s8 s4 mybottom">
+    <p>
+      As
+      <a href="https://en.wikipedia.org/wiki/Bougainvillea">
+        三角梅</a>, is magically, beautiful.
+    </p>
+  </div>
 </section>
 ---
-<section data-background="images/DSC_6630.jpg">
-  <p align="right"
-     class="mywhite"
-     style="width:30%; float:right;margin-bottom:45%;">
-    First time met Noah's mom to celebrate her birthday
-    at [Finale](http://finaleboston.com/) in
-    Harvard Square 2007.<br><br>
-
-    It's also why, 2012 hurts so much.
-  </p>
+<section data-background="images/DSC_6630.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s8 s4 mytop">
+    <p>
+      First time met Noah's mom to celebrate her birthday
+      at [Finale](http://finaleboston.com/) in
+      Harvard Square 2007.
+    </p>
+    <p>
+      It's also why, 2012 hurts so much.
+    </p>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_5789_001.jpg">
-  <p class="mywhite"
-     style="margin-top:65%;">
+<section data-background="images/dsc_5789_001.jpg"
+         class="row mywhite">
+  <div class="mybottom">
     MIT<br>
-  Harvard bridge, Boston, 2006
-  </p>
+    Harvard bridge, 2006
+  </div>
 </section>
 ---
-<section data-background="images/dsc_4004.jpg">
-  <p align="right"
-     class="myhighlight"
-     style="width:30%;float:right;margin-bottom:45%;">
-    Haven't seen the sparklings before.<br>
-    Haven't seen it since.<br><br>
-
-    Spring at the Charles, Cambridge, 2004
-  </p>
+<section data-background="images/dsc_4004.jpg"
+         class="row myhighlight">
+  <div align="left"
+       class="col s3 mytop">
+    <p>
+    Haven't seen such sparklings before.<br>
+    Haven't seen them since.<br><br>
+    </p>
+    <p>
+      Spring at the Charles, Cambridge, 2004
+    </p>
+  </div>
 </section>
 ---
-<section data-background="images/DSC_8407.jpg">
-  <h6 align="right"
-      class="mywhite">Uncle Tian</h6>
+<section class="row mywhite"
+         data-background="images/DSC_8407.jpg">
+  <div align="right"
+       class="col offset-s8 s4 mybottom">
+    <h6>Uncle Tian</h6>
+    Reading his will while drafting one for dad. It struck
+    me what a noble soul he was. Wish I could have known him
+    better. Thank you for having been in this world, and for
+    having been part of this family. You will be remembered.
+  </div>
 
 Note:
 
@@ -166,114 +184,135 @@ Note:
    journey has been given.
 </section>
 ---
-<section data-background="images/dsc_3302.jpg">
+<section data-background="images/dsc_3302.jpg"
+         class="row">
   <div align="right"
-       style="margin-bottom:70%;">
-    <h6>Cambridge, MA.</h6>
-    Nature, is indeed the best artist, ever.
+       class="col offset-s9 s3 mytop">
+    <span class="myhighlight">Cambridge, MA.</span>
+      Nature, is indeed the best artist, ever.
   </div>
 </section>
 ---
 <section data-background="images/DSC_1238988.jpg">
   <div align="left">
-    <h6>Turtle</h6>
+    <span class="myhighlight">Crystal</span>
     Cambridge, MA
   </div>
 </section>
 ---
-<section data-background="images/dsc_2900.jpg">
-  <div align="right"
-       style="margin-bottom:50%;"
-       class="mywhite">
-    <h6 class="mywhite">Romance</h6>
-    though often agnozing,<br>
-    is simply wonderful.
+<section data-background="images/dsc_2900.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col offset-s8 s4 mytop">
+    <span class="myhighlight">Romance</span><br>
+    Brandon & Yevonne, beautiful couple &mdash; intelligent, fun,
+    nice. I seldomly admire another human being. These two are
+    exceptional.
   </div>
 </section>
 ---
-<section data-background="images/DSC_2006.jpg">
-  <p align="left"
-     style="margin-top:65%"
-     class="mywhite">
+<section data-background="images/DSC_2006.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="mybottom">
     <span class="myhighlight">Anonymous</span>
     <br>
     Summer by the Charles
-  </p>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_6966.jpg">
-  <p style="margin-top:65%;
-            width:30%;
-            float:right;"
-     class="mywhite">
+<section data-background="images/dsc_6966.jpg"
+         class="row mywhite">
+  <div class="col offset-s8 s4 mybottom">
     Cold, winter, evening
+    <h6>Thorndike</h6>
   </p>
 </section>
 ---
-<section data-background="images/dsc_4573.jpg">
-  <div align="left"
-       style="width:30%;float:right;"
-       class="mywhite">
-    <h1 class="mywhite">1812</h1>
-    Canon shot synced with the first rising firework. Bravo!!
+<section data-background="images/dsc_4573.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s8 s4">
+    <span class="myhighlight">July 4th, Boston</span>
+    Nothing is more striking than the moment
+    1812 Overture's canon shot was created
+    in real life by a splendid eye in the sky.
   </div>
 </section>
 ---
-<section data-background="images/dsc_5188.jpg">
+<section data-background="images/dsc_5188.jpg"
+         class="row mywhite">
   <div align="left"
-       style="margin-bottom:65%;float:right;">
-    <h6>
-      Downtown Boston
-    </h6>
-    prior to a summer storm
+       class="col offset-s9 s3 mytop">
+    <span class="myhighlight">Downtown Boston</span>
+     prior to a summer storm
   </div>
 </section>
 ---
-<section data-background="images/dsc_7218.jpg">
+<section data-background="images/dsc_7218.jpg"
+         class="row mywhite">
   <div align="left"
-       class="myhighlight"
-       style="margin-top:65%;">
-    Photo store in
-    <h6 class="mywhite">
+       class="mybottom">
+    <span class="myhighlight">
+      Photo store in
+    </span>
       Kenmore Square
-    </h6>
   </div>
 </section>
 ---
-<section data-background="images/dsc_7944.jpg">
-  <div style="margin-top:65%;">
+<section data-background="images/dsc_7944.jpg"
+         class="row">
+  <div align="right"
+       class="col offset-s8 s4 mybottom">
     <i class="fa fa-envelope-open-o myhighlight"></i>
-    Did you read my emails? When I was flying away...
+    Letters, when I was flying away...
   </div>
 </section>
 ---
-<section data-background="images/dsc_2039.jpg">
+<section data-background="images/dsc_2039.jpg"
+         class="row mywhite">
   <div align="left"
-     class="mywhite"
-     style="margin-bottom:65%;float:right">
-    Summer
-    <h6 class="mywhite">MIT</h6>
+       class="col offset-s8 s4 mytop">
+    <p>
+      Overlooking MIT grad dorms
+      by the Charles in a summer evening after a thunder storm.
+    </p>
+    <h6>Burning sky</h6>
   </div>
 </section>
 ---
-<section data-background="images/dsc_4079.jpg">
+<section data-background="images/dsc_4079.jpg"
+         class="row mywhite">
   <div align="left"
-       class="mywhite"
-       style="margin-bottom:65%;">
-    (晚安，早安) x
-    <h6 class="mywhite">300，000</h6>
+       class="mytop">
+    (晚安，早安) x <span class="myhighlight">300，000</span
   </div>
 </section>
 ---
-<section data-background="images/dsc_2517.jpg">
-  The best reflection I have ever taken.
-  <h6>NYC</h6>
+<section data-background="images/dsc_2517.jpg"
+         class="row mywhite">
+  <div class="col s4">
+    <span class="myhighlight">NYC, 2007</span>
+    reflection
+  </div>
 </section>
 ---
-<section data-background="images/dsc_2620.jpg">
+<section data-background="images/dsc_2620.jpg"
+         class="row mywhite">
+  <div class="mytop">
+    <span class="myhighlight">NYC, 2007</span>
+    reflection
+  </div>
 </section>
 ---
-<section data-background="images/dsc_2715.jpg">
+<section data-background="images/dsc_2715.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s2 mybottom">
+    <span class="myhighlight">NYC, 2007</span>
+    street postcard,
+    and eternal beauty.
+  </div>
 </section>
 ---
 <section data-background="images/dsc_2753.jpg">

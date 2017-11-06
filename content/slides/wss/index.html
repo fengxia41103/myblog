@@ -25,8 +25,13 @@
           href="/theme/bower_components/reveal.js/css/theme/white.css"
           id="theme">
 
+    <link rel="stylesheet"
+          href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
+    <link rel="stylesheet"
+          href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+    
     <!-- My css -->
-    <link href="https://fonts.googleapis.com/css?family=Days+One|Muli"
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Muli"
           rel="stylesheet">
     <link rel="stylesheet"
           href="/theme/css/my.css">
@@ -74,6 +79,39 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js">
 </script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.js">
+</script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shAutoloader.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushXml.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushBash.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushJScript.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPlain.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushYaml.js">
+</script>
+<script type="text/javascript"
+        src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushDiff.js">
+</script>
+
 <script>
  var j$ = jQuery.noConflict();
  j$(document).ready(function(){
@@ -110,12 +148,12 @@
            return !!document.querySelector( '[data-markdown]' );
          }
        },
-       { src: '/theme/bower_components/reveal.js/plugin/highlight/highlight.js',
-         async: true,
-         callback: function() {
-           hljs.initHighlightingOnLoad();
-         }
-       },
+       /* { src: '/theme/bower_components/reveal.js/plugin/highlight/highlight.js',
+        *   async: true,
+        *   callback: function() {
+        *     hljs.initHighlightingOnLoad();
+        *   }
+        * },*/
        { src: '/theme/bower_components/reveal.js/plugin/zoom-js/zoom.js',
          async: true,
          condition: function() {
@@ -130,6 +168,13 @@
        }
      ]
    });
+
+   j$('.materialboxed').materialbox();
+
+   // syntaxhighlighter
+   SyntaxHighlighter.defaults['toolbar'] = false;
+   SyntaxHighlighter.all();
+   
  });
 </script>
 

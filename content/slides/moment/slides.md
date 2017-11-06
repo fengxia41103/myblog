@@ -311,49 +311,92 @@ Note:
        class="col s2 mybottom">
     <span class="myhighlight">NYC, 2007</span>
     street postcard,
-    and eternal beauty.
+    and eternal love.
   </div>
 </section>
 ---
-<section data-background="images/dsc_2753.jpg">
-  <div class="mywhite"
-  style="margin-top:65%;">
-    Manhattan, trip with dad
-    <h6 class="mywhite">NYC, 2007</h6>
+<section data-background="images/dsc_2753.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s6 s6 mytop">
+    <span class="myhighlight">NYC, 2007</span>
+    Manhattan
   </div>
 </section>
+
+Note:
+
+1. trip with dad, thanks for Kok-sean
+making it possible. Stayed in [Waldorf
+Astoria](http://waldorfastoria3.hilton.com/en/hotels/new-york/waldorf-astoria-new-york-NYCWAWA/index.html), and first time
+seeing the Metropolitan Museum, truly amazing.
+
 ---
-<section data-background="images/dsc_5828.jpg">
+<section data-background="images/dsc_5828.jpg"
+         class="row mywhite">
   <div align="left"
-       class="mywhite"
-       style="float:left;margin-top:55%;">
+       class="col s3 1mybottom">
+    <span class="myhighlight">Motto</span>
     "speak softly, and carry a big stick"
-    <h6 class="mywhite">Good</h6>
   </div>
 </section>
 ---
-<section data-background="images/dsc_4364.jpg">
-  <div aligh="right"
-       class="mywhite"
-       style="float:right;width:30%;margin-top:65%;">
-    Spring
-    <h6 class="mywhite">Comm Ave. MA</h6>
+<section data-background="images/dsc_4364.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s8 s4 mybottom">
+    <span class="myhighlight">Spring</span>
+    at Comm av. To me, it only matters
+    with whom I was seeing these. Beauty,
+    is a reflection of what I feel inside.
   </div>
 </section>
 ---
-<section data-background="images/DSC_3953.jpg">
+<section data-background="images/DSC_3953.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s4 mytop">
+    <span class="myhighlight">NYC</span>
+    chinatown. I miss urban life.
+  </div>
 </section>
 ---
-<section data-background="images/DSC_3621.jpg">
+<section data-background="images/DSC_3621.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s4 mybottom">
+    <span class="myhighlight">NYC</span>
+    feels like the [God Father](https://en.wikipedia.org/wiki/The_Godfather).
+    Black and white, always gets me.
+  </div>
 </section>
 ---
-<section data-background="images/dsc_3500.jpg">
+<section data-background="images/dsc_3500.jpg"
+         class="row">
+
+Note:
+
+  Dad took this photo while we were traveling in Spring, NYC. I think
+  it was in April because I was then traveling to Shanghai for IMP at the beginning of May that year. It was a good time. Now looking back, I also wonder whether
+  it was fate, that dad took the favourate portrait for me.
 </section>
 ---
-<section data-background="images/dsc_3744209.jpg">
+<section data-background="images/dsc_3744209.jpg"
+         class="row">
+  <div class="col offset-s9 s3 mytop">
+    My beloved <span class="myhighlight">Boston</span>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_7914.jpg">
+<section data-background="images/dsc_7914.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s3 mytop">
+    <span class="myhighlight">Summer of 2004</span>
+    I used to love this country, this city,
+    this place. Not anymore. The whole pose
+    of being the rising sun turns me off completely.
+  </div>
 </section>
 ---
 <section data-background="images/dsc_9362.jpg">

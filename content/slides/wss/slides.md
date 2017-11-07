@@ -1,15 +1,13 @@
-<section class="row">
-  <h1>
-    Workload Solution
-    <i class="fa fa-shopping-basket">Store</i>
-  </h1>
-  <br>
-  <small align="left"
-      class="myhighlight">
-    by [mhalas@lenovo.com](mailto:mhalas@lenovo.com),
-    [fxia1@lenovo.com](mailto:fxia1@lenovo.com)
+<h1 align="left">
+  Workload Solution
+  <i class="fa fa-shopping-basket">Store</i>
+</h1>
+<br>
+<p align="left">
+  by [mhalas@lenovo.com](mailto:mhalas@lenovo.com),
+  [fxia1@lenovo.com](mailto:fxia1@lenovo.com)
   </small>
-</section>
+</p>
 ---
 <h6>Agenda</h6>
 
@@ -429,21 +427,13 @@ ops (9), openstack (51), applications (75), misc (63), network (11),
 ones
 </p>
 ---
-<h6>Charms **store**</h6>
+<h6>Charms **store** & deployment</h6>
 
-<iframe data-src="https://jujucharms.com/store"
+<iframe data-src="https://jujucharms.com/q/openstack"
         height="550px" width="100%"></iframe>
----
-<h6>Charm deployment method &mdash; **Juju GUI**</h6>
-<iframe data-src="https://jujucharms.com/new/"></iframe>
----
-<h6>**Example**: a deployed Canonical Openstack</h6>
+<div class="divider"></div>
 
-<img data-src="https://insights.ubuntu.com/wp-content/uploads/7790/jjuju.png">
-
-* **4** machines (VM & containers)
-* **16** services
-* **1** click
+**4** machines (VM & containers), **16** services, **1** click
 ---
 <h6>Charm orchestration model</h6>
 <div class="row">
@@ -692,12 +682,13 @@ requires:
 <h6>**Example**: layer.yaml</h6>
 
 <div class="row">
-  <div class="col s8">
-<pre class="brush:yaml">
+  <div class="col s7">
+    <pre class="brush:yaml">
 includes: ['layer:endpoint', 'interface:rack-server', 'interface:switch-server']
 repo: hpcgitlab.labs.lenovo.com/WSS/wss.git
-</pre>
+    </pre>
   </div>
+  <div class="col s1"></div>
   <div align="left" class="col s4">
     Include **layer:** and **interface:**.
   </div>
@@ -707,7 +698,7 @@ repo: hpcgitlab.labs.lenovo.com/WSS/wss.git
 <h6>**Example**: charm state script</h6>
 
 <div class="row">
-  <div class="col s9">
+  <div class="col s7">
 <pre class="brush:python">
 @when_not('solution.ready', 'solution.error')
 @when('solution.config.invalid')
@@ -725,7 +716,8 @@ def store_manifests():
             })
 </pre>
   </div>
-  <div class="col s3">
+  <div class="col s1"></div>
+  <div class="col s4">
     <ol>
       <li>Use when and when_not conditions
         to define execution criteria.</li>
@@ -857,7 +849,7 @@ machines:
 Note:
 1. page 27: deployment example
 ---
-Transform it in **three steps** <i class="fa fa-angle-double-right"></i>
+Transform it in **three steps** <i class="fa fa-hand-o-right"></i>
 ---
 <h6>
   1. Replace static HW & solution with **charms models <i class="fa fa-battery"></i>**
@@ -897,18 +889,18 @@ Transform it in **three steps** <i class="fa fa-angle-double-right"></i>
   </div>
 </div>
 ---
-<h6>3. Enable LXCA integration</h6>
+<h6>3. Enable **BM management** integration</h6>
 <img data-src="images/juju%20cloud%20modeling.png"
      style="box-shadow:none"><br>
-Implement a LXCA provider
+BM manager includes LXCA, MaaS, and others.
 ---
 <h6>static model &rarr; charm model 101</h6>
 
-1. hierarchy &rarr; abstract base model
-2. attributes &rarr; configuration options
-3. data interface &rarr; relations
-4. workflow &rarr; states, hooks
-5. actions &rarr; Ansible playbooks
+1. **hierarchy** &rarr; abstract base model
+2. **attributes** &rarr; configuration options
+3. **data interface** &rarr; relations
+4. **workflow** &rarr; states, hooks
+5. **actions** &rarr; Ansible playbooks
 
 ---
 <h6>
@@ -1029,35 +1021,69 @@ def check_compliance():
   from orchestrator technology.
 </div>
 ---
-<h6>In the end, we get a consistent orchestration</h6>
-<pre class="brush:yaml">
-  systemx3650m5rackserver:
-    to:
-    - '1'
-    charm: trusty/server
-    num_units: 1
-    options:
-      uhm: "lxca:\n  url: http://10.240.43.198/admin/\n  password: passw0rd\n  user:\
-        \ rodney\nendpoints:\n  recovery_password: Passw0rd\n  endpoint_ip:\n  password:\
-        \ passw0rd\n  user: rodney\nplaybooks:\n  apply_firmware:\n    path: playbooks/config/config.yml\n\
-        \    vars: '[immediate,apply]'\n    tags: ''\n  update_policy:\n    path:\
-        \ ''\n    vars:\n    tags: ''\n  post_actions:\n    path: ''\n    vars:\n\
-        \    tags: ''\n  deploy_os:\n    path: ''\n    vars:\n    tags: ''\n  manage_server:\n\
-        \    path: ''\n    vars:\n    tags: ''\n  check_compliance:\n    path: ''\n\
-        \    vars:\n    tags: ''\n  acquire_server:\n    path: ''\n    vars:\n   \
-        \ tags: ''\n  assign_policy:\n    path: playbooks/config/config.yml\n    vars:\
-        \ '[sampletest,SERVER]'\n    tags: ''\n  update_configuration:\n    path:\
-        \ playbooks/config/config.yml\n    vars: '[67,pending,node]'\n    tags: ''\n"
-      mtm: mtm
-      name: System x3650 M5 Rack Server
-      uuid: 331ba112-6a35-48c3-afb0-94da36e1f5bc
-</pre>
+<h6>**example**: reference architecture definition</h6>
 
-Orchestration instructions (manifest/bundle) is then
-**always in sync** with the models throughout the Lenovo processes.
+<img data-src="images/new%20ra.png"
+     style="box-shadow:none">
+
 ---
-<h6>Live demo</h6>
-<iframe data-src="https://192.168.122.238/gui/"
+<h6>**example**: Reference architecture manifest</h6>
+<pre class="brush:js">
+      {
+    "solution": {
+        "lxca": {
+            "lxcaPatchUpdateFieldName": "update.tgz",
+            "version": "2.4"
+        },
+        "compliancepolicies": {
+            "name": "compliance",
+            "rule": []
+        },
+        "manifestversion": "1.1",
+        "hosts": [
+            "bm",
+            "esxi"
+        ],
+        "name": "Lenovo Converged HX Series Nutanix Appliances",
+        "firmwareRepository": {
+            "packFileName": "fixpack.tgz",
+            "updateAccess": "m",
+            "fixId": "fixpack"
+        },
+        "hardware": {
+            "switches": {
+                "machine_type": [
+                    "ThinkSystem NE1072T RackSwitch"
+                ]
+            },
+            "pdus": {
+                "machine_type": [
+                    "00YE443 Universal Rack PDU",
+                    "39Y8941 DPI C13 Enterprise PDU "
+                ]
+            },
+            "racks": {
+                "machine_type": [
+                    "Lenovo 42U 1200mm Deep Rack"
+                ]
+            },
+            "servers": {
+                "machine_type": [
+                    "System x3650 M5 Rack Server",
+                    "System x3550 M5 Rack Server"
+                ]
+            }
+        },
+        "workloads": [
+            "ThinkCloud Openstack",
+            "SAP HANA"
+        ]
+    }
+}
+</pre>
+---
+<h6>**example**: Reference architecture deployment</h6>
+<iframe data-src="https://192.168.122.162/gui/"
         height="550px" width="100%"></iframe>
 ---
 # Thank you

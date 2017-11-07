@@ -78,17 +78,17 @@ This is how it is being done today...
     </p>
   </div>
 </div>
-In our review of the current Lenovo processes,
-we have identified **five** challenges
-that WSS aims to bring user an improved
-experience.
-
 Note:
 
 1. https://developers.google.com/youtube/player_parameters
 ---
 <h6>Five challanges</h6>
-
+<p align="left">
+In our review of the current Lenovo processes,
+we have identified **five** challenges
+that WSS aims to bring user an improved
+experience.
+</p>
 
 <div align="left"
      style="color:#cecece;">
@@ -139,6 +139,19 @@ Note:
 4. Public and private clouds
 5. Simple to execute
 ---
+<h6>WSS vision</h6>
+
+
+* **Battery included <i class="fa fa-battery"></i>**
+* Reduce _lost in translation_
+* Open source &rarr; technology transparency
+* Build a vendor/user community
+* Efficient deployment
+
+<img data-src="images/wss%20vision.png"
+     class="responsive-img materialboxed"
+     style="box-shadow:none;">
+---
 <h6>WSS Stack</h6>
 
 <div class="row">
@@ -151,7 +164,7 @@ Note:
     <dl>
       <dt>Component modeling</dt>
       <dd>
-        Each hardware component will be modeled to include both i ts
+        Each hardware component will be modeled to include both its
         configuration attributes and its how-to methods &rarr;
         **self-contained** and **self-sufficient**.
       </dd>
@@ -168,22 +181,13 @@ Note:
     </dl>
   </div>
 </div>
-
 ---
-<h6>WSS vision</h6>
+<h6>Extended orchestration capability</h6>
 
-
-* **Battery included <i class="fa fa-battery"></i>**
-* Reduce _lost in translation_
-* Open source &rarr; technology transparency
-* Build a vendor/user community
-* Efficient deployment
-
-  <img data-src="images/wss%20vision.png"
-       class="responsive-img materialboxed"
-       style="box-shadow:none;">
+<img data-src="images/hw%20workload%20stack%20diff.png"
+     style="box-shadow:none">
 ---
-<h6>WSS Framework</h6>
+<h6>WSS analysis framework</h6>
 
 <img data-src="images/uhm%20five%20phase.png">
 
@@ -200,7 +204,7 @@ Note:
 * Instantiated model will be applied in orchestration to bring expectation
 into reality.
 ---
-<h6>**Services** to support the **six cores**</h6>
+<h6>WSS Services to support the **six cores**</h6>
 
   <img data-src="images/wss%20simplified%20phase.png"
        style="box-shadow:none;">
@@ -211,7 +215,7 @@ Note:
 2. Configurations service to drive **software-defined** objective
 ---
 
-<h6>**Service flow** to support the six cores (**1**/3)</h6>
+<h6>WSS services (**1**/3)</h6>
 <div class="row">
   <div class="col s9">
     <img data-src="images/wss%20architecture%20components%201.png"
@@ -232,7 +236,7 @@ Note:
   </div>
 </div>
 ---
-<h6>**Service flow** to support the six cores (**2**/3)</h6>
+<h6>WSS services (**2**/3)</h6>
 <div class="row">
   <div class="col s9">
     <img data-src="images/wss%20architecture%20components%202.png"
@@ -250,7 +254,7 @@ Note:
   </div>
 </div>
 ---
-<h6>**Service flow** to support the six cores (**3**/3)</h6>
+<h6>WSS services (**3**/3)</h6>
 <div class="row">
   <div class="col s9">
     <img data-src="images/wss%20architecture%20components%203.png"
@@ -276,7 +280,7 @@ Note:
        style="margin-bottom:50%;">
     <h4 class="myhighlight">
       <i class="fa fa-key"></i>
-      Unified architecture
+      WSS architecture
     </h4>
   </div>
 </section>
@@ -333,7 +337,8 @@ Note:
 
 <div class="row">
   <div class="col s9">
-    <img data-src="images/juju%20model.png">
+    <img data-src="images/juju%20model.png"
+         style="box-shadow:none">
   </div>
   <div class="col s3">
     <p>
@@ -355,49 +360,90 @@ Note:
   </div>
 </div>
 ---
-<h6>Juju deployment model: **LXD model**</h6>
+<h6>Juju resource model: **LXD model**</h6>
 
 <div class="row">
   <div class="col s9">
-    <img data-sr="images/juju%20lxd%20deployment%20setup.png">
+    <img data-src="images/juju%20lxd%20deployment%20setup.png"
+         style="box-shadow:none">
   </div>
-  <div class="col s3">
+  <div align="left"
+       class="col s3">
+    <p>Resource is created **on demand**.</p>
     <ol>
-      <li>Resource is created **on demand**.</li>
       <li>All run within a single VM.</li>
-      <li>LXD network is tricky.</li>
+      <li>Minimal 2 nodes to run a workload &mdash; managment(**M0**) + ...</li>
+      <li>CentOS support is sketchy (<a href="https://github.com/lxc/lxd/issues/2984">1</a>,
+        <a href="https://github.com/aleph-zero/lxd-centos-7#running-a-container">2</a>).
+      </li>
+      <li>Unclear yet how constraints are enforced?</li>
     </ol>
   </div>
 </div>
 
 Note:
 
-is an ideal that resource can be created on the fly, which is observed in juju creating LXD container when deploying workload, eg. openstack base. In the end, we want the entire system appear to operator to have this capability by hiding complexity within the system. 
+is an ideal that resource can be created on the fly, which is observed
+in juju creating LXD container when deploying workload, eg. openstack
+base. In the end, we want the entire system appear to operator to have
+this capability by hiding complexity within the system.
 
 ---
-<h6>Juju deployment model: **MaaS** model</h6>
+<h6>Juju resource model: **MaaS** model</h6>
 
 <div class="row">
-  <div class="col s9">
-    <img data-sr="images/juju%20lxd%20deployment%20setup.png">
+  <div class="col s12">
+    <img data-src="images/juju%20maas%20deployment%20setup.png"
+         style="box-shadow:none">
   </div>
-  <div class="col s3">
+  <div align="left" class="col s12">
+    <p>Resources are **pooled** and selected by constraints.</p>
+    <ol>
+      <li>MaaS must be the **DHCP server** on provision network.</li>
+      <li>Rely on **PXE**.</li>
+      <li>Support CentOS.</li>
+    </ol>
   </div>
 </div>
 ---
 <h6>Charms</h6>
 
 <p align="left" >
+  <i class="fa fa-quote-left"></i>
   The central mechanism behind Juju is called Charms.
   Charms can be written in any programming language that can be executed from the command line.
+  <i class="fa fa-quote-right"></i>
+</p>
+
+<p align="left">
+  **Example**:
 </p>
 <p align="left">
-  **Example**:<br>
-  
-databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), openstack (51), applications (75), misc (63), network (11), analytics (7), apache (38), security (4), storage (17) &mdash; **343** recommended ones, **1819** community contributed ones
+databases (19), app-servers (19), file-servers (16), monitoring (14),
+ops (9), openstack (51), applications (75), misc (63), network (11),
+  analytics (7), apache (38), security (4), storage (17)
 </p>
+<p class="right">
+  <i class="fa fa-hand-o-right"></i>
+  **343** recommended ones, **1819** community contributed
+ones
+</p>
+---
+<h6>Charms **store**</h6>
 
+<iframe data-src="https://jujucharms.com/store"
+        height="550px" width="100%"></iframe>
+---
+<h6>Charm deployment method &mdash; **Juju GUI**</h6>
+<iframe data-src="https://jujucharms.com/new/"></iframe>
+---
+<h6>**Example**: a deployed Canonical Openstack</h6>
 
+<img data-src="https://insights.ubuntu.com/wp-content/uploads/7790/jjuju.png">
+
+* **4** machines (VM & containers)
+* **16** services
+* **1** click
 ---
 <h6>Charm orchestration model</h6>
 <div class="row">
@@ -419,10 +465,10 @@ databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), o
 
 | Concepts  | used for                    |
 |-----------|-----------------------------|
+| layer     | model inheritance           |
 | hooks     | a hardcoded set of handlers |
 | states    | user defined flags          |
 | relations | data communication          |
-| layer     | model inheritance           |
 | bundle    | deployment batch mode       |
 
 ---
@@ -455,7 +501,57 @@ databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), o
 </div>
 
 ---
+<h6>Charm **hooks**</h6>
 
+<div class="row">
+  <div class="col s12">
+    <img data-src="images/charm%20hooks.png"
+         style="box-shadow:none">
+  </div>
+  <div class="col s12">
+    <ol>
+      <li>Hook sequences are
+        **hard-coded** in "juju/worker/uniter/operation/runhook.go".</li>
+      <li>Though being replaced by states, it is still
+      the **engine**.</li>
+    </ol>
+  </div>
+</div>
+---
+<h6>charm **states**</h6>
+
+<div class="row">
+  <div class="col s8">
+    <img data-src="images/charm%20chain%20states.png"
+         style="box-shadow:none">
+  </div>
+  <div class="col s4">
+    <ol>
+      <li>@set_state() to transit from one state to another.</li>
+      <li>States should be viewed as **flags** meaning set_state() or
+        remove_state() does not take affect immediately &rarr; code of
+        a state **can be executed more than once**.</li>
+      <li>States can be split among layers, but not across different charms
+        or different units of the same charm.</li>
+      <li>Names from all included layers have the same namespace.</li>
+    </ol>
+  </div>
+</div>
+---
+<h6>Charm **interfaces**</h6>
+
+<div class="row">
+  <div class="col s12">
+    <img data-src="images/charm%20relation%20and%20interface.png"
+         style="box-shadow:none">
+  </div>
+  <div align="left"
+       class="col s12">
+    One side "provide", the other "require", so that a provided interface
+    can be **reused** by multiple requirers.
+  </div>
+</div>
+---
 <h6>Charm code **components**</h6>
 
 <figure>
@@ -506,6 +602,23 @@ databases (19), app-servers (19), file-servers (16), monitoring (14), ops (9), o
     the charm scripts.
   </dd>
 </dl>
+---
+<h6>**Example**: distribution file structure</h6>
+
+<pre class="brush:plain;">
+|-- ansible.cfg
+|-- bin/
+|-- config.yaml         <-- attributes/config options
+|-- hooks/              <-- hook handlers
+|-- icon.svg
+|-- layer.yaml          <-- charm inheritance
+|-- lib/                <-- utility `.py`
+|-- metadata.yaml       <-- charm relations/interfaces
+|-- playbooks/          <-- playbooks
+|-- reactive/           <-- user defined flags  
+|-- README.md
+`-- wheelhouse/         <-- Python dependency libs
+</pre>
 ---
 <h6>**Example**: config.yaml</h6>
 
@@ -569,6 +682,10 @@ requires:
   </div>
   <div align="left" class="col s4">
     Define relation: **require**  and **provide**.
+    "rack-server" and "switch-server" indicates which
+    code "charm build" will collect and package. For example,
+    "rack-server" will take an interface defined as "rack is providing"
+    and "server is requiring/receiving".
   </div>
 </div>
 
@@ -609,12 +726,19 @@ def store_manifests():
 </pre>
   </div>
   <div class="col s3">
-    Using flags 
+    <ol>
+      <li>Use when and when_not conditions
+        to define execution criteria.</li>
+      <li>Code body can be executed multiple times
+        even with "remove_state" to turn off itself.</li>
+    </ol>
   </div>
 </div>
 ---
 <h6>**Example**: charm relation script</h6>
 
+<div class="row">
+  <div class="col s9">
 <pre class="brush:python">
 class RackProvides(RelationBase):
     # Every unit connecting will get the same information
@@ -639,27 +763,27 @@ class RackProvides(RelationBase):
             conv.set_state('server.counted')
     ....
 </pre>
+  </div>
+  <div class="col s3">
+    <dl>
+      <dt>Four events</dt>
+      <dd>
+        joined, changed, broken, departed
+      </dd>
 
----
-<h6>**Example**: distribution file structure</h6>
+      <dt>Four scopes</dt>
+      <dd>
+        global, unit, subordinate, **cross-model**
+      </dd>
+    </dl>
+  </div>
+</div>
 
-<pre class="brush:plain;">
-|-- ansible.cfg
-|-- bin/
-|-- config.yaml         <-- attributes/config options
-|-- hooks/              <-- hook handlers
-|-- icon.svg
-|-- layer.yaml          <-- charm inheritance
-|-- lib/                <-- utility `.py`
-|-- metadata.yaml       <-- charm relations/interfaces
-|-- playbooks/
-|-- reactive/           <-- user defined flags  
-|-- README.md
-`-- wheelhouse/         <-- Python dependency libs
-</pre>
 ---
 <h6>**Example**: charm deployment bundle</h6>
 
+<div class="row">
+  <div class="col s8">
 <pre class="brush:yaml;">
 series: trusty
 services:
@@ -684,50 +808,28 @@ machines:
     series: trusty
     constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
 </pre>
----
-<h6>Charms **store**</h6>
+  </div>
+  <div class="col s4">
+    <dl>
+      <dt>series</dt>
+      <dd>Default OS version</dd>
 
-<iframe data-src="https://jujucharms.com/store"
-        height="550px" width="100%"></iframe>
----
-<h6>**Juju GUI**/Canvas/Management console</h6>
-<iframe data-src="https://jujucharms.com/new/"></iframe>
----
-<h6>**Example**: a deployed Canonical Openstack</h6>
-
-<img data-src="https://insights.ubuntu.com/wp-content/uploads/7790/jjuju.png">
-
-* **4** machines (VM & containers)
-* **16** services
-* **1** click
-
----
-<h6>WSS strategy of using Juju & charms</h6>
-<div class="row">
-  <figure class="col s9">
-    <img data-src="images/wss%20orchestration.png"
-         style="box-shadow:none;">
-  </figure>
-  <div align="left"
-       class="col s3">
-    <ol>
-      <li>
-        Three primary types of charms:
+      <dt>services</dt>
+      <dd>A list of charms to deploy.
         <ol>
-          <li>HW (Lenovo innovation)</li>
-          <li>software platform (existing)</li>
-          <li>user application (existing)</li>
+          <li>"charm": can be from charm store or from a local repo.</li>
+          <li>"num_units": how many instancs?</li>
+          <li>"to": deployed to which machine?</li>
         </ol>
-      </li><li>
-        Support both baremetal and _clouds_ by implementing a **provider** &rarr; **give me a machine** by constraints, eg. CPU, mem
-      </li><li>
-        Support premise and public clouds (12 out of box)
-      </li><li>
-        Used as single-layer orchestrator
-      </li>
-    </ol>
+      </dd>
+    </dl>
   </div>
 </div>
+---
+<h6>charm **execution**</h6>
+<img data-src="images/charm%20execution.png"
+     style="box-shadow:none;">
+
 ---
 <section data-background="https://drscdn.500px.org/photo/179822321/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=51cdb14b0e0929a01b68133e08caff3d0370f1418ba18be62e5a9c3d193e1ddd">
   <div align="left" class="col s6">
@@ -755,8 +857,10 @@ machines:
 Note:
 1. page 27: deployment example
 ---
+Transform it in **three steps** <i class="fa fa-angle-double-right"></i>
+---
 <h6>
-  Replace static HW with **charms models <i class="fa fa-battery"></i>**
+  1. Replace static HW & solution with **charms models <i class="fa fa-battery"></i>**
 </h6>
 
 <div class="row">
@@ -766,10 +870,39 @@ Note:
   <div class="col l5 m4 s12">
     <img data-src="images/uhm%20code%20file%20structure.png">
   </div>
-RA = HW charms + platform charm + application charms
+</div>
+**RA** = HW charms + platform charm + application charms
 </div>
 ---
-<h6>**Five steps** to transform a paper model &rarr; charm model</h6>
+<h6>2. Replace manual deployment with **model-based** deployment</h6>
+<div class="row">
+  <figure class="col s9">
+    <img data-src="images/wss%20orchestration.png"
+         style="box-shadow:none;">
+  </figure>
+  <div align="left"
+       class="col s3">
+    <ol>
+      <li>
+        Three primary types of charms:
+        <ol>
+          <li>HW (Lenovo innovation)</li>
+          <li>software platform (existing)</li>
+          <li>user application (existing)</li>
+        </ol>
+      </li><li>
+        Support both baremetal and _clouds_ by implementing a **provider** &rarr; **give me a machine**
+      </li>
+    </ol>
+  </div>
+</div>
+---
+<h6>3. Enable LXCA integration</h6>
+<img data-src="images/juju%20cloud%20modeling.png"
+     style="box-shadow:none"><br>
+Implement a LXCA provider
+---
+<h6>static model &rarr; charm model 101</h6>
 
 1. hierarchy &rarr; abstract base model
 2. attributes &rarr; configuration options
@@ -782,21 +915,20 @@ RA = HW charms + platform charm + application charms
   Take server for example: 1. hierarchy
 </h6>
 
-<div class="row">
   <iframe data-src="http://www.lenovofiles.com/3dtours/products/index.html">
   </iframe>
-</div>
 
 <div align="left">
-server &rarr;  mainstream rack servers &rarr; SR630<br>
-We can design a base **charm-server**, then include it in _charm-sr630_
+**Example**: server &rarr;  mainstream rack servers &rarr; SR630<br>
+We can also design a base **charm-server**, then include it in _charm-sr630_
   to inherit base attributes and behaviors.
 </div>
 ---
 <h6>
   Take server for example: 2. configurations
 </h6>
-
+<div class="row">
+  <div class="col s8">
 <pre class="brush:yaml">
 options:
   # catalog attributes
@@ -829,8 +961,17 @@ options:
     default: ""
     description: "Can be a YAML string"
 </pre>
+  </div>
+  <div align="left"
+       class="col s4">
+    Capture user-accessible configurations
+    from each domain in our workflow so this becomes
+    a gold copy of key-value pairs applicable
+    to a specific HW & SW.
+  </div>
+</div>
 ---
-Take server for example: 3. relations
+<h6>Take server for example: 3. relations</h6>
 
 | from   | to     | data                       |
 |--------|--------|----------------------------|
@@ -839,14 +980,22 @@ Take server for example: 3. relations
 | server | switch | server_ip                  |
 | switch | server | available ports            |
 
+<br><br>
+
+1. Define data interface between models independent from hierarchy.
+2. Allow upstream-downstream data and status aggregation.
+3. Make a service **reusable**.
+
 ---
-Take server for example: 4. workflow
+<h6>Take server for example: 4. workflow</h6>
+
 <div class="row">
-  <div class="col s6">
+  <div class="col s12">
     <img data-src="images/endpoint%20states.png"
-         class="materialboxed">
+         class="materialboxed"
+         style="box-shadow:none">
   </div>
-  <div class="col s6">
+  <div class="col s12">
     <pre class="brush:python">
 @when_not('endpoint.ready', 'endpoint.error')
 def check_endpoint():
@@ -870,12 +1019,44 @@ def check_compliance():
 </div>
 
 ---
-Take server for example: 5. actions
+<h6>Take server for example: 5. actions in Ansible playbook</h6>
 
-from rodney
-
+<div class="row">
+  <div class="col s12">
+    <img data-src="images/server%20playbook.png">
+  </div>
+  Define actions in playbook that can be independently executed
+  from orchestrator technology.
+</div>
 ---
-Live demo
+<h6>In the end, we get a consistent orchestration</h6>
+<pre class="brush:yaml">
+  systemx3650m5rackserver:
+    to:
+    - '1'
+    charm: trusty/server
+    num_units: 1
+    options:
+      uhm: "lxca:\n  url: http://10.240.43.198/admin/\n  password: passw0rd\n  user:\
+        \ rodney\nendpoints:\n  recovery_password: Passw0rd\n  endpoint_ip:\n  password:\
+        \ passw0rd\n  user: rodney\nplaybooks:\n  apply_firmware:\n    path: playbooks/config/config.yml\n\
+        \    vars: '[immediate,apply]'\n    tags: ''\n  update_policy:\n    path:\
+        \ ''\n    vars:\n    tags: ''\n  post_actions:\n    path: ''\n    vars:\n\
+        \    tags: ''\n  deploy_os:\n    path: ''\n    vars:\n    tags: ''\n  manage_server:\n\
+        \    path: ''\n    vars:\n    tags: ''\n  check_compliance:\n    path: ''\n\
+        \    vars:\n    tags: ''\n  acquire_server:\n    path: ''\n    vars:\n   \
+        \ tags: ''\n  assign_policy:\n    path: playbooks/config/config.yml\n    vars:\
+        \ '[sampletest,SERVER]'\n    tags: ''\n  update_configuration:\n    path:\
+        \ playbooks/config/config.yml\n    vars: '[67,pending,node]'\n    tags: ''\n"
+      mtm: mtm
+      name: System x3650 M5 Rack Server
+      uuid: 331ba112-6a35-48c3-afb0-94da36e1f5bc
+</pre>
+
+Orchestration instructions (manifest/bundle) is then
+**always in sync** with the models throughout the Lenovo processes.
+---
+<h6>Live demo</h6>
 <iframe data-src="https://192.168.122.238/gui/"
         height="550px" width="100%"></iframe>
 ---

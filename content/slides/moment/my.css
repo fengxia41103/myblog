@@ -18,7 +18,6 @@
 .reveal h5,
 .reveal h6{
   font-family: 'Days One', sans-serif;
-  font-size: 18px !important;
 }
 
 
@@ -48,4 +47,8 @@ section h6.mytop{
 
 section div.mybottom{
   margin-top:50%;
+}
+
+.reveal section strong {
+  font-weight: normal !important;
 }

@@ -225,11 +225,11 @@ Note:
       <li>Existing catalog such as the **digital rack** can be used
         to build HW inventory, grouping, hierarchy.</li>
     
-      <li>Architect can design and determine constraints of a solution model
+      <li>**Architect** can design and determine constraints of a solution model
         including both HW and SW components.</li>
     
       <li>Published models will be available in **solution store**
-        that can be purchased *and configured** by customer.</li>
+        that can be purchased and **configured** by customer.</li>
     </ol>
   </div>
 </div>
@@ -1083,6 +1083,64 @@ def check_compliance():
 </pre>
 ---
 <h6>**example**: Reference architecture deployment</h6>
+<img data-src="images/ra%20bundle%20deployed.png"
+     style="box-shadow:none">
+---
+<h6>**Example**: a new solution manifest</h6>
+<pre class="brush:js">
+      {
+    "solution": {
+        "lxca": {
+            "lxcaPatchUpdateFieldName": "update.tgz",
+            "version": "2.4"
+        },
+        "compliancepolicies": {
+            "name": "compliance",
+            "rule": []
+        },
+        "manifestversion": "1.1",
+        "hosts": [
+            "bm",
+            "esxi"
+        ],
+        "name": "Lenovo Converged HX Series Nutanix Appliances",
+        "firmwareRepository": {
+            "packFileName": "fixpack.tgz",
+            "updateAccess": "m",
+            "fixId": "fixpack"
+        },
+        "hardware": {
+            "switches": {
+                "machine_type": [
+                    "ThinkSystem NE1072T RackSwitch"
+                ]
+            },
+            "pdus": {
+                "machine_type": [
+                    "00YE443 Universal Rack PDU",
+                    "39Y8941 DPI C13 Enterprise PDU "
+                ]
+            },
+            "racks": {
+                "machine_type": [
+                    "Lenovo 42U 1200mm Deep Rack"
+                ]
+            },
+            "servers": {
+                "machine_type": [
+                    "System x3650 M5 Rack Server",
+                    "System x3550 M5 Rack Server"
+                ]
+            }
+        },
+        "workloads": [
+            "ThinkCloud Openstack",
+            "SAP HANA"
+        ]
+    }
+}
+</pre>
+---
 <iframe data-src="https://192.168.122.162/gui/"
         height="550px" width="100%"></iframe>
 ---

@@ -1,8 +1,8 @@
 <section class="row mywhite"
          data-background="images/dsc_7768.jpg">
-  <h1 align="left">
+  <h4 align="left">
     Moments
-  </h1>
+  </h4>
   <br><br>
 </section>
 ---
@@ -22,16 +22,13 @@
 ---
 <section class="row"
          data-background="images/dsc_1769878.jpg">
-  <h6 align="right"
-      class="col offset-s8 s4">
-    Kobe, 2007
-  </h6>
-
-  <p align="right">
+  <div align="right"
+       class="col offset-s4 s8">
+    <h6>Kobe, 2007</h6>
     A hurricane came, rained for two days. Study
     was intense and uninterrupted. It were the days filled with
     ambition, self-importance, glamour, and love.
-  </p>
+  </div>
 
 Note:
 
@@ -126,14 +123,9 @@ Note:
          class="row mywhite">
   <div align="right"
        class="col offset-s8 s4 mytop">
-    <p>
-      First time met Noah's mom to celebrate her birthday
-      at [Finale](http://finaleboston.com/) in
-      Harvard Square 2007.
-    </p>
-    <p>
-      It's also why, 2012 hurts so much.
-    </p>
+    First time met Noah's mom to celebrate her birthday
+    at [Finale](http://finaleboston.com/) in
+    **Harvard Square 2007**.
   </div>
 </section>
 ---
@@ -146,15 +138,11 @@ Note:
 </section>
 ---
 <section data-background="images/dsc_4004.jpg"
-         class="row myhighlight">
+         class="row mywhite">
   <div align="left"
-       class="col s3 mytop">
+       class="col s3 mybottom">
     <p>
-    Haven't seen such sparklings before.<br>
-    Haven't seen them since.<br><br>
-    </p>
-    <p>
-      Spring at the Charles, Cambridge, 2004
+      Sparkling magic at **the Charles Spring 2004**
     </p>
   </div>
 </section>
@@ -188,14 +176,14 @@ Note:
          class="row">
   <div align="right"
        class="col offset-s9 s3 mytop">
-    <span class="myhighlight">Cambridge, MA.</span>
-      Nature, is indeed the best artist, ever.
+    **Cambridge, MA**
+      Nature, is such an amazing painter!
   </div>
 </section>
 ---
 <section data-background="images/DSC_1238988.jpg">
   <div align="left">
-    <span class="myhighlight">Crystal</span>
+    **Crystal**
     Cambridge, MA
   </div>
 </section>
@@ -204,7 +192,7 @@ Note:
          class="row mywhite">
   <div align="left"
        class="col offset-s8 s4 mytop">
-    <span class="myhighlight">Romance</span><br>
+    **Romance**<br>
     Brandon & Yevonne, beautiful couple &mdash; intelligent, fun,
     nice. I seldomly admire another human being. These two are
     exceptional.
@@ -215,7 +203,7 @@ Note:
          class="row mywhite">
   <div align="left"
        class="mybottom">
-    <span class="myhighlight">Anonymous</span>
+    **Anonymous**
     <br>
     Summer by the Charles
   </div>
@@ -223,7 +211,8 @@ Note:
 ---
 <section data-background="images/dsc_6966.jpg"
          class="row mywhite">
-  <div class="col offset-s8 s4 mybottom">
+  <div align="right"
+       class="col offset-s8 s4 mybottom">
     Cold, winter, evening
     <h6>Thorndike</h6>
   </p>
@@ -233,7 +222,7 @@ Note:
          class="row mywhite">
   <div align="right"
        class="col offset-s8 s4">
-    <span class="myhighlight">July 4th, Boston</span>
+    **July 4th** Boston<br>
     Nothing is more striking than the moment
     1812 Overture's canon shot was created
     in real life by a splendid eye in the sky.
@@ -244,7 +233,7 @@ Note:
          class="row mywhite">
   <div align="left"
        class="col offset-s9 s3 mytop">
-    <span class="myhighlight">Downtown Boston</span>
+    **Downtown Boston**
      prior to a summer storm
   </div>
 </section>
@@ -252,11 +241,9 @@ Note:
 <section data-background="images/dsc_7218.jpg"
          class="row mywhite">
   <div align="left"
-       class="mybottom">
-    <span class="myhighlight">
-      Photo store in
-    </span>
-      Kenmore Square
+       class="col s3 mybottom">
+    Indeed, it is the eye behind a camera finds beauty.<br>
+    **Kenmore Square**
   </div>
 </section>
 ---
@@ -273,11 +260,9 @@ Note:
          class="row mywhite">
   <div align="left"
        class="col offset-s8 s4 mytop">
-    <p>
-      Overlooking MIT grad dorms
-      by the Charles in a summer evening after a thunder storm.
-    </p>
-    <h6>Burning sky</h6>
+    What a gorgous evening that summer!
+    Evening is always there, but often than not one
+    does not have the mind and heart to see it.
   </div>
 </section>
 ---
@@ -285,14 +270,14 @@ Note:
          class="row mywhite">
   <div align="left"
        class="mytop">
-    (晚安，早安) x <span class="myhighlight">300，000</span
+    (晚安，早安) x **300，000**
   </div>
 </section>
 ---
 <section data-background="images/dsc_2517.jpg"
          class="row mywhite">
   <div class="col s4">
-    <span class="myhighlight">NYC, 2007</span>
+    **NYC, 2007**
     reflection
   </div>
 </section>
@@ -300,7 +285,7 @@ Note:
 <section data-background="images/dsc_2620.jpg"
          class="row mywhite">
   <div class="mytop">
-    <span class="myhighlight">NYC, 2007</span>
+    **NYC, 2007**
     reflection
   </div>
 </section>
@@ -309,7 +294,7 @@ Note:
          class="row mywhite">
   <div align="left"
        class="col s2 mybottom">
-    <span class="myhighlight">NYC, 2007</span>
+    **NYC, 2007**
     street postcard,
     and eternal love.
   </div>
@@ -319,7 +304,7 @@ Note:
          class="row mywhite">
   <div align="right"
        class="col offset-s6 s6 mytop">
-    <span class="myhighlight">NYC, 2007</span>
+    **NYC, 2007**
     Manhattan
   </div>
 </section>
@@ -336,7 +321,7 @@ seeing the Metropolitan Museum, truly amazing.
          class="row mywhite">
   <div align="left"
        class="col s3 1mybottom">
-    <span class="myhighlight">Motto</span>
+    **Motto**
     "speak softly, and carry a big stick"
   </div>
 </section>
@@ -345,9 +330,9 @@ seeing the Metropolitan Museum, truly amazing.
          class="row mywhite">
   <div align="right"
        class="col offset-s8 s4 mybottom">
-    <span class="myhighlight">Spring</span>
-    at Comm av. To me, it only matters
-    with whom I was seeing these. Beauty,
+    Spring on Comm Ave. To me, it only matters
+    with whom I was seeing these.<br>
+    **Beauty**,
     is a reflection of what I feel inside.
   </div>
 </section>
@@ -356,7 +341,7 @@ seeing the Metropolitan Museum, truly amazing.
          class="row mywhite">
   <div align="left"
        class="col s4 mytop">
-    <span class="myhighlight">NYC</span>
+    **NYC**
     chinatown. I miss urban life.
   </div>
 </section>
@@ -365,26 +350,16 @@ seeing the Metropolitan Museum, truly amazing.
          class="row mywhite">
   <div align="left"
        class="col s4 mybottom">
-    <span class="myhighlight">NYC</span>
+    **NYC**
     feels like the [God Father](https://en.wikipedia.org/wiki/The_Godfather).
     Black and white, always gets me.
   </div>
 </section>
 ---
-<section data-background="images/dsc_3500.jpg"
-         class="row">
-
-Note:
-
-  Dad took this photo while we were traveling in Spring, NYC. I think
-  it was in April because I was then traveling to Shanghai for IMP at the beginning of May that year. It was a good time. Now looking back, I also wonder whether
-  it was fate, that dad took the favourate portrait for me.
-</section>
----
 <section data-background="images/dsc_3744209.jpg"
          class="row">
   <div class="col offset-s9 s3 mytop">
-    My beloved <span class="myhighlight">Boston</span>
+    My beloved **Boston**
   </div>
 </section>
 ---
@@ -392,81 +367,253 @@ Note:
          class="row mywhite">
   <div align="left"
        class="col s3 mytop">
-    <span class="myhighlight">Summer of 2004</span>
+    **Summer of 2004**
     I used to love this country, this city,
     this place. Not anymore. The whole pose
     of being the rising sun turns me off completely.
   </div>
 </section>
 ---
-<section data-background="images/dsc_9362.jpg">
+<section data-background="images/dsc_9362.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s3 mybottom">
+    Night scene of little alley way near 西直门
+    <br>
+    **Winter Beijing 2006**
+  </div>
 </section>
 ---
-<section data-background="images/dsc_3427155.jpg">
+<section data-background="images/dsc_3427155.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col offset-s9 s3 mybottom">
+    Summer **Quincy Market**
+  </div>
 </section>
 ---
-<section data-background="images/dsc_7824.jpg">
+<section data-background="images/dsc_7824.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3">
+    **Past**, always looks peaceful and happy, from now.
+  </div>
 </section>
 ---
-<section data-background="images/dsc_0061.jpg">
+<section data-background="images/dsc_0061.jpg"
+         class="row">
+  <div align="left"
+       class="col s3 mybottom">
+    **Cambridge Galleria** I think
+    I have a thing about window display.
+  </div>
 </section>
 ---
-<section data-background="images/dsc_3224603.jpg">
+<section data-background="images/dsc_3224603.jpg"
+         class="row">
+  <div align="right"
+       class="col offset-s8 s4 mytop">
+    <a href="https://en.wikipedia.org/wiki/Long_Wharf_(Boston)">
+      Boston Long Wharf, summer 2005
+    </a><br>
+    Young, single, free<br>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_5874.jpg">
+<section data-background="images/dsc_5874.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3 mytop">
+    <a href="http://www.m-restaurantgroup.com/mbund/">M on the Bund</a>
+    <br>
+    Definitely THE most expansive meal I have ever had.
+  </div>
 </section>
 ---
-<section data-background="images/dsc_7878.jpg">
+<section data-background="images/dsc_7878.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3 mytop">
+    Old Beijing train station, **Winter 2006**
+  </div>
 </section>
 ---
-<section data-background="images/dsc_3232238.jpg">
+<section data-background="images/dsc_3232238.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3 mybottom">
+    **Random art** found
+    in Long Wharf, summer 2005
+  </div>
 </section>
 ---
-<section data-background="images/dsc_7952.jpg">
+<section data-background="images/dsc_7952.jpg"
+         class="row mywhite">
+  <div class="col s3">
+    Winter Beijing **2006**
+  </div>
 </section>
 ---
-<section data-background="images/dsc_1033.jpg">
+<section data-background="images/dsc_1033.jpg"
+         class="row">
+  <div align="left"
+       class="col s3 mybottom">
+    **Summer 2004**<br>
+    It was a good time
+  </div>
 </section>
 ---
-<section data-background="images/dsc_8813.jpg">
+<section data-background="images/dsc_8813.jpg"
+         class="row mywhite">
+  <div align="left"
+       class="col s3 mybottom">
+    Sorry Ariel, I'm just making fun
+    of you here ~~ **春节 in Beijing 2006**
+  </div>
 </section>
 ---
-<section data-background="images/dsc_0374.jpg">
+<section data-background="images/dsc_0374.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3 mytop">
+    **Boston Acquarium**<br>
+    How pretty!
+  </div>
 </section>
 ---
-<section data-background="images/DSC_1455811211753.JPG">
+<section data-background="images/DSC_1455811211753.JPG"
+         class="row mywhite">
+  <div class="col s12 mybottom">
+    <h6>She & I</h6>
+  </div>
 </section>
 ---
-<section data-background="images/hands.jpg">
+<section data-background="images/hands.jpg"
+         class="row mywhite">
+  <div class="col s12 mybottom">
+    **promise** looks like
+  </div>
 </section>
 ---
-<section data-background="images/me%20and%20noah.jpg">
+<section data-background="images/me%20and%20noah.jpg"
+         class="row">
+  <div class="col s6">
+    and I wish, we would not grow apart.
+  </div>
 </section>
 ---
-<section data-background="images/her.jpg">
+<section data-background="images/DSC_0435.JPG"
+         class="row mywhite">
+  <div align="left"
+       class="col s2 mybottom">
+    <h6>but</h6>
+  </div>
 </section>
 ---
-<section data-background="images/DSC_0435.JPG">
+<section data-background="images/dsc_5104.jpg"
+         class="row mywhite">
+  <div class="col s12 mybottom">
+    **Newbury street** at night<br>
+    Summer 2006
+  </div>
 </section>
 ---
-<section data-background="images/dsc_5104.jpg">
+<section data-background="images/dsc_2998.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3 mytop">
+    **Walking on an early summer day** in Boston
+  </div>
 </section>
 ---
-<section data-background="images/dsc_2998.jpg">
+<section data-background="images/dsc_2496.jpg"
+         class="row myhighlight">
+  <div class="col offset-s10 s2 mybottom">
+    <h6>**NYC** 5th Ave</h6>
+  </div>
 </section>
 ---
-<section data-background="images/dsc_2496.jpg">
+<section data-background="images/DSC_0490.JPG"
+         class="row">
+  <div align="right"
+       class="col offset-s9 s3 mytop">
+    How amazing, the beautiful 皮影 on display
+    at <a href="https://en.wikipedia.org/wiki/Shanxi_Museum">
+    山西博物馆</a>
+  </div>
 </section>
 ---
-<section data-background="images/DSC_0490.JPG">
+<section data-background="images/DSC_0714.JPG"
+         class="row">
+  <div align="right"
+       class="col offset-s10 s2">
+    Outside the Nagoya Science Museum
+    <br>
+    **Winter 2014**
+  </div>
 </section>
 ---
-<section data-background="images/DSC_0714.JPG">
+<section data-background="images/DSC_7269.JPG"
+         class="row mywhite mybottom">
+  <div align="left"
+       class="col s3 mybottom">
+    **2015** standing on the BU bridge
+    and looking over the Charles
+  </div>
 </section>
 ---
-<section data-background="images/DSC_7269.JPG">
+<section data-background="images/IMG_20150701_142416.jpg"
+         class="row">
+  <div align="right"
+       class="col offset-s9 s3">
+    <p>
+      When I'm tire of human and life,
+      I turn to his eyes, and find the lights
+      inside **2015**
+    </p>
+  </div>
 </section>
 ---
-<section data-background="images/IMG_20150701_142416.jpg">
+<section data-background="images/dsc_3500.jpg"
+         class="row">
+
+  <div align="left"
+       class="col offset-s3 s6"
+       style="color:#444;">
+    <p>
+      I like cameras, like looking at nice photos, mine and others'.
+      I always felt a nice shot is to replay the moment and draws you
+      into it as if you were there. It's like writing a music, or a poem,
+      you hope it has that moment of you in it, and someone could
+      echo that feeling and appreciate what you had.
+    </p>
+
+    <p>
+    Now getting older, they always reminded me something, someone,
+      some emotion, an inner dialogue, that I never quit speaking to,
+      as if she were still there, listenning, and found it
+      fascinating.  Time has passed, happiness, joy, agnoy, regret,
+      have all passed. But they don't fade.
+    </p>
+
+    <p>
+      Flipping through them to make this album, I couldn't help
+      feeling how lucky I have been, for having so many beautiful
+      things and people accompanied my life, and entered my world,
+      some close, some distant, some made me smile,
+      some made me cry.
+    </p>
+
+    <p>
+    **Adding them
+      all up, here I am, for better and for worse, I am.**
+    </p>
+
+    <div align="right"
+         class="col offset-s7 s5">
+      &mdash; Feng, Winter 2017
+    </div>
+
+  </div>
+
 </section>

@@ -484,7 +484,7 @@ seeing the Metropolitan Museum, truly amazing.
 <section data-background="images/DSC_1455811211753.JPG"
          class="row mywhite">
   <div class="col s12 mybottom">
-    <h6>She & I</h6>
+    **She** <h6>&</h6> I
   </div>
 </section>
 ---

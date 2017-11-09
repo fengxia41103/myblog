@@ -44,7 +44,7 @@
         {% endif %}
 
         {# article title #}
-        <h1 class="myhighlight">{{ article.title }}</h1>
+        <h3 class="myhighlight">{{ article.title }}</h3>
       </div>
 
 
@@ -102,7 +102,7 @@
 
   {% block related %}
   <div class="container">
-    <h2>Related:</h2>
+    <h3>Related:</h3>
     <div class="row">
       {% for cat,articles in categories %}
       {% if cat == category %}

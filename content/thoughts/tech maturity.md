@@ -10,11 +10,10 @@ Author: Feng Xia
        class="responsive-img">
 </figure>
 
-This notion of _技术已经很成熟_ (it is a [mature technology][1]?
-a well known technology? huh? I don't even know how to translate
-this line.)
-bothers me a LOT! What do you mean
-that? There are loads questions to be clarified, don't you think!?
+This notion of _技术已经很成熟_ (it is a [mature technology][1]?  a
+well known technology? huh? I don't even know how to translate this
+line.)  bothers me a LOT! What do you mean by that? There are loads
+questions to be clarified, don't you think!?
 
 [1]: https://en.wikipedia.org/wiki/Mature_technology
 
@@ -89,9 +88,9 @@ either.
 Not to mention, technology, is really a particular mindset, a view of
 the world and a understanding of the issue, yours against mine. The
 difference is not in which tech stack to use. It's in the way we each
-build a logic, to do analysis, evaluation, and to battle trend wars
-of **devils in the details**, and to make decisions along the
-trial-and-error.
+build a logic, to do analysis, evaluation, and to battle trench wars
+of the old saying of **devils being in the details**,
+and to make decisions along the trial-and-error.
 
 If you have done it yourself, speak with detail and concrete,
 especially, with fear and concern, with identification of risks

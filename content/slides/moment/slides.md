@@ -463,6 +463,14 @@ seeing the Metropolitan Museum, truly amazing.
   </div>
 </section>
 ---
+<section data-background="images/dsc_2998.jpg"
+         class="row mywhite">
+  <div align="right"
+       class="col offset-s9 s3 mytop">
+    **Walking on an early summer day** in Boston
+  </div>
+</section>
+---
 <section data-background="images/dsc_8813.jpg"
          class="row mywhite">
   <div align="left"
@@ -505,9 +513,9 @@ seeing the Metropolitan Museum, truly amazing.
 <section data-background="images/DSC_0435.JPG"
          class="row mywhite">
   <div align="left"
-       class="col s2 mybottom">
-    <h6>But</h6> WT...!? I didn't G-string
-    existed that long time ago! haha....
+       class="col s3 mybottom">
+    **But**.. haha..I didn't know G-string
+    existed that long time ago. Awesome.
   </div>
 </section>
 ---
@@ -516,14 +524,6 @@ seeing the Metropolitan Museum, truly amazing.
   <div class="col s12 mybottom">
     **Newbury street** at night<br>
     Summer 2006
-  </div>
-</section>
----
-<section data-background="images/dsc_2998.jpg"
-         class="row mywhite">
-  <div align="right"
-       class="col offset-s9 s3 mytop">
-    **Walking on an early summer day** in Boston
   </div>
 </section>
 ---

@@ -506,7 +506,8 @@ seeing the Metropolitan Museum, truly amazing.
          class="row mywhite">
   <div align="left"
        class="col s2 mybottom">
-    <h6>but</h6>
+    <h6>But</h6> WT...!? I didn't G-string
+    existed that long time ago! haha....
   </div>
 </section>
 ---
@@ -589,7 +590,7 @@ seeing the Metropolitan Museum, truly amazing.
     </p>
 
     <p>
-    Now getting older, they always reminded me something, someone,
+      Now getting older, they always reminded me something, someone,
       some emotion, an inner dialogue, that I never quit speaking to,
       as if she were still there, listenning, and found it
       fascinating.  Time has passed, happiness, joy, agnoy, regret,

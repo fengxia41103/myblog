@@ -489,10 +489,18 @@ seeing the Metropolitan Museum, truly amazing.
   </div>
 </section>
 ---
+<section data-background="images/dsc_5104.jpg"
+         class="row mywhite">
+  <div class="col s12 mybottom">
+    **Newbury street** at night<br>
+    Summer 2006
+  </div>
+</section>
+---
 <section data-background="images/DSC_1455811211753.JPG"
          class="row mywhite">
   <div class="col s12 mybottom">
-    **She** is an angel
+    **An angel** by my side
   </div>
 </section>
 ---
@@ -507,23 +515,6 @@ seeing the Metropolitan Museum, truly amazing.
          class="row">
   <div class="col s6">
     and I wish, we would not grow apart.
-  </div>
-</section>
----
-<section data-background="images/DSC_0435.JPG"
-         class="row mywhite">
-  <div align="left"
-       class="col s3 mybottom">
-    **But**.. haha..I didn't know G-string
-    existed that long time ago. Awesome.
-  </div>
-</section>
----
-<section data-background="images/dsc_5104.jpg"
-         class="row mywhite">
-  <div class="col s12 mybottom">
-    **Newbury street** at night<br>
-    Summer 2006
   </div>
 </section>
 ---
@@ -575,46 +566,65 @@ seeing the Metropolitan Museum, truly amazing.
   </div>
 </section>
 ---
-<section data-background="images/dsc_3500.jpg"
-         class="row">
+<div align="left"
+     class="col offset-s3 s6"
+     style="color:#444;">
+  <p>
+    I like cameras, like looking at nice photos, mine and others'.
+    I guess in general I just like beautiful things, people, mind.
+    Sometimes you feel they are abundant. Looking around yourself,
+    you see them everywhere, some obvious, some minute and subtle,
+    but they all speak life, speak exquisite beauty.
+  </p>
+  <p>
+    But then, there were times you felt the world around you was ugly,
+    vain, boring, annoying, and little hopeful nor exciting. Time
+    stood still, life itself was blocked, and there was no path in
+    sight going forward. Ice was thick and closing in, and fire was
+    burning out. How dreadful it felt!
+  </p>
+  <p>
+    Picking up photography as a hobby was rather a vanity at the time
+    when there was just an urge to spend $$ on yet another
+    gadget. 2004 Nikon rolled out its D70 and I wanted it, looking
+    forward to a trip to Beijing seeing my girlfriend at the time and
+    showing off, like many many men have done, are doing, and continue
+    doing. I don't regret the move in this hindsight, as it led me to
+    this repository of memories and a mindset to observe things,
+    however ordinary they appear to be, and be able to to discover and
+    appreciate their wonder. I do regret it was driven by a showoff
+    thought and I was picturing more of how to wow people with this
+    equipment rather than the inner side of me. In the end, vanity
+    fades, as it always does and always will. What's frozen on the
+    screen, was a moment that I felt, I sensed, moved me &mdash; it
+    was a reflection of the moment of myself, in time, in space.
+  </p>
+    
+  <p>
+    Flipping through them to make this album, I couldn't help
+    feeling how lucky I have been, for having so many beautiful
+    things and people accompanied my life, and entered my world,
+    some close, some distant, some made me smile,
+    some made me cry.
+  </p>
 
-  <div align="left"
-       class="col offset-s3 s6"
-       style="color:#444;">
-    <p>
-      I like cameras, like looking at nice photos, mine and others'.
-      I always felt a nice shot is to replay the moment and draws you
-      into it as if you were there. It's like writing a music, or a poem,
-      you hope it has that moment of you in it, and someone could
-      echo that feeling and appreciate what you had.
-    </p>
+  <p>
+  **Adding them all up, here I am, for better and for worse, I am.**
+    Wherever you are, whenever you are reading this or never or ever,
+    thank you for giving what you gave me, for being part of my humble
+    life. Memories are eternally beautiful; so are you, in my heart,
+    forever a shining star. If our lives may across again, I remembered you,
+    and wish you would remember me, too.
+  </p>
 
-    <p>
-      Now getting older, they always reminded me something, someone,
-      some emotion, an inner dialogue, that I never quit speaking to,
-      as if she were still there, listenning, and found it
-      fascinating.  Time has passed, happiness, joy, agnoy, regret,
-      have all passed. But they don't fade.
-    </p>
-
-    <p>
-      Flipping through them to make this album, I couldn't help
-      feeling how lucky I have been, for having so many beautiful
-      things and people accompanied my life, and entered my world,
-      some close, some distant, some made me smile,
-      some made me cry.
-    </p>
-
-    <p>
-    **Adding them
-      all up, here I am, for better and for worse, I am.**
-    </p>
-
-    <div align="right"
-         class="col offset-s7 s5">
-      &mdash; Feng, Winter 2017
-    </div>
-
+  <div align="right"
+       class="col offset-s7 s5">
+    &mdash; Love<br>
+    Feng, Winter 2017
   </div>
 
+</div>
+---
+<section data-background="images/dsc_3500.jpg"
+         class="row">
 </section>

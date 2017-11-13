@@ -10,8 +10,9 @@ Author: Feng Xia
     <figcaption>World Snapshot</figcaption>
 </figure>
 
-> * [World Snapshot][]
-[world snapshot]: http://snapshots.world/
+> * [live demo][3], and [github][4]
+[3]: http://snapshots.world/
+[4]: https://github.com/fengxia41103/worldsnapshot
 
 The joy of making graphs in a data-driven web application has been
 the highlight that kept me going from project to project. Once all things
@@ -78,3 +79,4 @@ data acquisition into `AjaxContainer`, data source handling into
 Therefore, we can swap out any of these components, for example, using
 Google chart for graphing, adding a new data source, or
 using [fetch][] instead of `jQuery` for AJAX calls.
+

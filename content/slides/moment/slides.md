@@ -560,7 +560,7 @@ seeing the Metropolitan Museum, truly amazing.
        class="col offset-s9 s3">
     <p>
       When I'm tire of human and life,
-      I turn to his eyes, and find the lights
+      I turn to his eyes, and find lights
       inside **2015**
     </p>
   </div>
@@ -569,6 +569,7 @@ seeing the Metropolitan Museum, truly amazing.
 <div align="left"
      class="col offset-s3 s6"
      style="color:#444;">
+  <h6>Some thoughts</h6>
   <p>
     I like cameras, like looking at nice photos, mine and others'.
     I guess in general I just like beautiful things, people, mind.
@@ -627,4 +628,21 @@ seeing the Metropolitan Museum, truly amazing.
 ---
 <section data-background="images/dsc_3500.jpg"
          class="row">
+  <div align="left"
+       class="col offset-s7 s5 mytop">
+    <h6>
+      <i class="fa fa-copyright"></i> 2017 Feng Xia
+    </h6>
+    <dl>
+      <dt>Email:</dt>
+      <dd>
+        <a href="mailto:feng_xia41103@hotmail.com">feng_xia41103@hotmail.com</a><br></dd>
+
+      <dt>Phone:</dt>
+      <dd>(508) 801-1794</dd>
+
+      <dt>Address:</dt>
+      <dd>**1236** Beacon St., #1, Brookline, MA 02446</dd>
+    </dl>
+  </div>
 </section>

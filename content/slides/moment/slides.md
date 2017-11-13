@@ -1,9 +1,8 @@
 <section class="row mywhite"
          data-background="images/dsc_7768.jpg">
-  <h4 align="left">
-    Moments
-  </h4>
-  <br><br>
+  <div align="left">
+    <h4>Moments</h4>
+  </div>
 </section>
 ---
 <div align="left">

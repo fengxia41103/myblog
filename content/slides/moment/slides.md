@@ -645,8 +645,13 @@ seeing the Metropolitan Museum, truly amazing.
       <dd>**1236** Beacon St., #1, Brookline, MA 02446</dd>
 
       <dt>PDF version:</dt>
-      <dd><a href="/slides/moment/?print-pdf">
-        <i class="fa fa-file-pdf-o"></i></a>
+      <dd>
+        <a href="/slides/moment/?print-pdf">
+          <i class="fa fa-print"></i>
+        </a>
+        <a href="/downloads/moments.pdf">
+          <i class="fa fa-file-pdf-o"></i>
+        </a>
     </dl>
   </div>
 </section>

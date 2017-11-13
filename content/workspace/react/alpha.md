@@ -1,4 +1,4 @@
-Title: AlphaAdvantage SP500 API
+Title: Alpha Advantage SP500 API
 Date: 2017-11-12 19:00
 Slug: alpha sp500
 Category: REACT

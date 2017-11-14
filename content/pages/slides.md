@@ -4,7 +4,7 @@ Slug: slides
 Author: Feng Xia
 
 
-<div class="col s4">
+<div class="col l4 m6 s12">
   <div class="card white darken-1">
     <div class="card-content">
       <span class="card-title myhighlight">Moments</span>

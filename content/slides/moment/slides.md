@@ -269,7 +269,7 @@ Note:
          class="row mywhite">
   <div align="left"
        class="mytop">
-    (晚安，早安) x **300，000**
+    (晚安...早安) x 300,000
   </div>
 </section>
 ---
@@ -449,7 +449,8 @@ seeing the Metropolitan Museum, truly amazing.
 <section data-background="images/dsc_7952.jpg"
          class="row mywhite">
   <div class="col s3">
-    Winter Beijing **2006**
+    **西直门内大街 2007**
+    hosting Todd & Young
   </div>
 </section>
 ---
@@ -457,8 +458,9 @@ seeing the Metropolitan Museum, truly amazing.
          class="row">
   <div align="left"
        class="col s3 mybottom">
-    **Summer 2004**<br>
-    It was a good time
+    **Summer 2004** taken by 陈曦,
+    it was summer of wondering around
+    and 
   </div>
 </section>
 ---

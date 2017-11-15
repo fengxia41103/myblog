@@ -6,17 +6,26 @@
       <i class="fa fa-shopping-basket">Store</i>
     </h1>
   </div>
-  <div align="left"
-       class="col l6 m6 s12 subtitle">
-      **for Solution Architect**
-  </div>
-  <br><br>
-  <div align="left"
+  <div class="col offset-s7 s5">
+    <p align="left"
+         class="col s12 subtitle">
+      **Audience:**<br>
+
+      - Solution Architect
+    </p>
+    <p align="left"
        class="col l6 m6 s6 author">
-    Prepared by:<br>
-    
-    - Miro Halas ([mhalas@lenovo.com](mailto:mhalas@lenovo.com))<br>
-    - Feng Xia ([fxia1@lenovo.com](mailto:fxia1@lenovo.com))
+      **Prepared by:**<br>
+
+      - Miro Halas ([mhalas@lenovo.com](mailto:mhalas@lenovo.com))<br>
+      - Feng Xia ([fxia1@lenovo.com](mailto:fxia1@lenovo.com))
+    </p>
+    <p align="left"
+         class="col s12 subtitle">
+      **Presented on:**<br>
+
+      - 11/2017
+    </p>
   </div>
 </section>
 ---

@@ -1,13 +1,24 @@
-<h1 align="left">
-  Workload Solution
-  <i class="fa fa-shopping-basket">Store</i>
-</h1>
-<br>
-<p align="left">
-  by [mhalas@lenovo.com](mailto:mhalas@lenovo.com),
-  [fxia1@lenovo.com](mailto:fxia1@lenovo.com)
-  </small>
-</p>
+<section class="row">
+  <div align="left"
+       class ="col s12">
+    <h1>
+      Workload Solution
+      <i class="fa fa-shopping-basket">Store</i>
+    </h1>
+  </div>
+  <div align="left"
+       class="col l6 m6 s12 subtitle">
+      **for Solution Architect**
+  </div>
+  <br><br>
+  <div align="left"
+       class="col l6 m6 s6 author">
+    Prepared by:<br>
+    
+    - Miro Halas ([mhalas@lenovo.com](mailto:mhalas@lenovo.com))<br>
+    - Feng Xia ([fxia1@lenovo.com](mailto:fxia1@lenovo.com))
+  </div>
+</section>
 ---
 <h6>Agenda</h6>
 
@@ -151,7 +162,6 @@ experience.
      style="box-shadow:none;">
 ---
 <h6>WSS Stack</h6>
-
 <div class="row">
   <div class="col s7">
     <img data-src="images/wss%20simplified%20function%20stack.png"

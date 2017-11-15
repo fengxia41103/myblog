@@ -62,3 +62,18 @@
 section strong{
   font-weight: normal !important;
 }
+
+
+.copyright{
+  font-size: 6pt !important;
+  color: #cecece;
+  margin-top:70%;
+  float:right;
+}
+
+.subtitle{
+  font-size: 0.6em;
+}
+.author p {
+  font-size: 0.6em;
+}

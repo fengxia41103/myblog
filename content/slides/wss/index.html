@@ -72,7 +72,7 @@
         </section>
         <p align="right" class="copyright">
           <i class="fa fa-copyright"></i>
-          2017 Lenovo Internal
+          2017 Lenovo Internal. All rights reserved.
         </p>
       </div>
     </div>
@@ -136,6 +136,11 @@
      // default/cube/page/concave/zoom/linear/fade/none
      transition: Reveal.getQueryHash().transition || 'fade', 
 
+     menu: {
+       titleSelector: "h1,h2,h3,h4,h5,h6",
+       numbers: true,
+       hideMissingTitles: true
+     },
      // Optional libraries used to extend on reveal.js
      dependencies: [
        { src: '/theme/bower_components/reveal.js/lib/js/classList.js',
@@ -152,12 +157,6 @@
            return !!document.querySelector( '[data-markdown]' );
          }
        },
-       /* { src: '/theme/bower_components/reveal.js/plugin/highlight/highlight.js',
-        *   async: true,
-        *   callback: function() {
-        *     hljs.initHighlightingOnLoad();
-        *   }
-        * },*/
        { src: '/theme/bower_components/reveal.js/plugin/zoom-js/zoom.js',
          async: true,
          condition: function() {
@@ -169,7 +168,10 @@
          condition: function() {
            return !!document.body.classList;
          }
+       },
+       { src: '/theme/bower_components/reveal.js-menu/menu.js',
        }
+       
      ]
    });
 

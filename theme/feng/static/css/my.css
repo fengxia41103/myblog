@@ -171,6 +171,23 @@ h6 {
 
 .flabel:hover {
   border: 1px solid #d52349;
+  background-color: white;
+  color: black;
+}
+
+.flabel a {
+  color: white;
+}
+.flabel:hover a{
+  color: #d52349;
+}
+
+.mypage-index a{
+  color: white;
+}
+
+.mypage-index a:hover{
+  border-bottom: 1px solid white;
 }
 
 .glyphicon-remove:hover,

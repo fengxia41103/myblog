@@ -93,11 +93,11 @@
           {% endblock %}
 
           {# static pages #}
-          <div class="row">
+          <div class="row mypage-index">
             <div class="col s12">
-              <a class="white-text" href="{{SITEURL}}/">Home</a>
+              <a href="{{SITEURL}}/">Home</a>
 	      {% for p in PAGES %}
-              <a class="white-text" href="{{SITEURL}}/{{ p.url }}">
+              <a href="{{SITEURL}}/{{ p.url }}">
                 . {{ p.title }}
               </a>
 	      {% endfor %}

@@ -11,7 +11,7 @@
          class="col s12 subtitle">
       **Audience:**<br>
 
-      - Solution Architect
+      - General
     </p>
     <p align="left"
        class="col l6 m6 s6 author">
@@ -22,19 +22,41 @@
     </p>
     <p align="left"
          class="col s12 subtitle">
-      **Presented on:**<br>
+      **Last updated on:**<br>
 
       - 11/2017
     </p>
   </div>
 </section>
 ---
-<h6>Agenda</h6>
+<h6 class="menu-title">Table of contents</h6>
 
-1. Today's challenges
-2. Introduction of Juju & charms
-3. Transform reference architecture
-4. Discussion
+
+1. Challenges
+3. Key technology
+
+  1. Canonical Juju
+  2. Canonical charms
+
+4. Project
+
+  1. Vision
+  2. Function architecture
+  3. Technology stack
+  4. Build
+  5. Packaging
+  6. Deployment
+  7. Dev
+  10. Testing
+  11. Deliverables
+  12. Roadmap
+  13. Risks
+
+5. Used in
+
+  1. Unified Hardware Manager (UHM)
+  2. VX installer
+
 
 ---
 <section data-background="https://drscdn.500px.org/photo/155532687/q%3D80_m%3D2000/v2?webp=true&sig=4122d59c34dde5e01b0a8fd3b10e0330c3b053c27918e55a68464a1937237a34" class="row">
@@ -50,32 +72,98 @@
 ---
 This is how it is being done today...
 ---
-<h6>Client starts with</h6>
+<h6 class="menu-title">Hardware catalog</h6>
 
-<figure class="center-align">
-  <img data-src="images/lenovo%20catalog.png"
-       class="responsive-img">
-</figure>
+<div class="row">
+  <div class="col l9 m9 s12">
+    <figure class="center-align">
+      <img data-src="images/lenovo%20catalog.png"
+           class="responsive-img">
+    </figure>
+  </div>
+  <div align="left"
+       class="col l3 m3 s12">
+    <p>
+      Hardware and solution in brochure is a **static**
+      model.
+    </p>
+
+    <p>
+      The intelligence of its configuration, management,
+      and application are capture in documents and codes that are
+      designed, developed, and maintained by **different principles
+      that are not transparent to each other**.
+    </p>
+
+    <p>
+      This makes it challenging for prospective user
+      to perceive our HW beyond a "brick & mortar" stereotype.
+    </p>
+  </div>
+</div>
 ---
-<h6>then, add configurations</h6>
+<h6>Reference architecture</h6>
+<div class="row">
+  <div class="col l7 m7 s12">
+    <figure class="center-align">
+      <img data-src="images/ta%20sx%20architecture%20excel.png"
+           class="responsive-img">
+    </figure>
+  </div>
+  <div align="left"
+       class="col l5 m5 s12">
+    <p>
+      Reference architecture is defined in **Excel** and **PDF**.
+    </p>
 
-<figure class="center-align">
-  <img data-src="images/lenovo%20configurator.png">
-</figure>
+    <p>
+      Instructions in such format are meant to be consumed by human
+      operator in downstream operations, which introduce a large range
+      of variations in term of interpretation and operator error,
+    </p>
+
+    <p>
+      Further, design criteria, such as "4-16" of HX3310 of Nutanix
+      appliances for HX PRC offering, is **difficult to enforce** if at all
+      executable.
+    </p>
+  </div>
+</div>
 ---
-<h6>then, Lenovo MFG</h6>
+<h6>Sales configurator</h6>
+<div class="row">
+  <div class="col l9 m9 s12">
+    <figure class="center-align">
+      <img data-src="images/lenovo%20configurator.png">
+    </figure>
+  </div>
+  <div align="left"
+       class="col l3 m3 s12">
+    Configuration option and rule are built-in attributes of
+    HW itself and application design.
+  </div>
+</div>
+---
+<h6>MFG</h6>
+<div class="row">
+  <div class="col l9 m9 s12">
+    <figure class="center-align">
+      <img data-src="images/hw_manifest.png">
+    </figure>
+  </div>
+  <div align="left"
+       class="col l3 m3 s12">
+    <p>
+      Rubber meets the road.
+    </p>
 
-<figure class="row">
-  <img data-src="https://drscdn.500px.org/photo/135937995/q%3D80_m%3D1000_k%3D1/v2?webp=true&sig=a9bfbffe2a1d74bbbfdbaea7b4263b55c50123204741011f4421bd9a2b8e7745"
-       height="300px"
-       width="30%"/>
-  <img data-src="https://drscdn.500px.org/photo/199833393/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=6a47d3ec149bbb62274e389f241e9be47c9cd1fd251a27cb7a59642af2215f1d"
-       height="300px"
-       width="30%"/>
-  <img data-src="images/hw_manifest.png"
-       height="300px"
-       width="30%"/>
-</figure>
+    <ul>
+      <li>Picklisting BOM from order &rarr; HW serial #, uuid, ...</li>
+      <li>Reference design document for instructions and rules.</li>
+      <li>Reconcile them with customer configurations and notes.</li>
+    </ul>
+  </div>
+</div>
 
 ---
 <h6>But</h6>

@@ -349,11 +349,11 @@ to fame and fortune for some, but in the end, as an inheritage of mankind.
 > us take heart from the immortal and inspired words of the great Jean
 > Francois Champollion:
 > 
-> _Egypt is always herself, at all stages in her hitory, always great
+> **Egypt is always herself, at all stages in her hitory, always great
 > and powerful in art and enlightenment. Going backthrough the
 > centuries, we see her always shining with the same brilliance, and the
 > only thing we lack to satisfy our curiosity is a knowledge of the
-> origin and growth of civilization itself.-
+> origin and growth of civilization itself.**
 > 
 > As these pages have shown, at least something has been done to satisfy
 > Champollion's, and our, curiosity.

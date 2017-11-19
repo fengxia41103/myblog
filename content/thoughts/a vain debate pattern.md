@@ -13,7 +13,7 @@ I am amazed, that [财经郎眼][6] I used to enjoy so much which kept me on
 tap with China's economic progress and debates, is nowadays plagued
 with a BS culture and discussion pattern that I have [witnessed][1],
 criticized, hated (no I don't hate this program, just the cliche
-amplified by this 11/6/2017 episode on [新能源车 变革未来][6])
+amplified by this 11/6/2017 episode on [新能源车 变革未来][6].)
 
 [1]: {filename}/thoughts/irresponsible%20response.md
 [6]: https://www.youtube.com/watch?v=VZo8niQdWnE

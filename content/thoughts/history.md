@@ -60,7 +60,7 @@ Further, when western museums were the buyer who drove all the tomb
 robbers and antique traders, the sad reality back then was that local
 folks didn't give a fxxx of all the mummies and monuments. So now fast
 forward 150 years, it is just not reasonable
-to *blame** them for collecting them in the name of `loot`
+to **blame** them for collecting them in the name of `loot`
 or `steal`. Their argument is valid &mdash; the antiques did have a
 better chance to be preserved and to survive, and they did have a
 better vision (if can be called enlightened) of the future than

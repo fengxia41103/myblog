@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: history
 Author: Feng Xia
 
+<figure class="col l6 m8 s12">
+  <img src="/images/funny/sphinx.jpg"/>
+</figure>
+
+
 Reading [The rape of the Nile][1], quite a fascinating book.
 It's rather surprising how recent these events were &mdash;
 we are talking about the mid-19th century, what, about 150 years ago?

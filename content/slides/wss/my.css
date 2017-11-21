@@ -77,3 +77,16 @@ section strong{
 .author p {
   font-size: 0.6em;
 }
+
+section div.mytop,
+section h6.mytop{
+  margin-bottom: 60%;
+}
+
+section div.mybottom{
+  margin-top:50%;
+}
+
+.reveal section img.no-shadow{
+  box-shadow: none;
+}

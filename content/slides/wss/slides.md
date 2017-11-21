@@ -30,35 +30,41 @@
 </section>
 ---
 <h6 class="menu-title">Table of contents</h6>
+<div class="row">
+<ol class="my-multicol-2">
+  <li>Challenges</li>
+  <li>Key technology</li>
+    <ol>
+      <li>Canonical Juju</li>
+      <li>Canonical charms</li>
+    </ol>
+  <li>Used in</li>
+    <ol>
+      <li>Unified Hardware Manager (UHM)</li>
+      <li>VX installer</li>
+    </ol>
 
-
-1. Challenges
-3. Key technology
-
-  1. Canonical Juju
-  2. Canonical charms
-
-4. Project
-
-  1. Vision
-  2. Function architecture
-  3. Technology stack
-  4. Build
-  5. Packaging
-  6. Deployment
-  7. Dev
-  10. Testing
-  11. Deliverables
-  12. Roadmap
-  13. Risks
-
-5. Used in
-
-  1. Unified Hardware Manager (UHM)
-  2. VX installer
-
-
+  <li>Project</li>
+    <ol>
+      <li>Vision</li>
+      <li>Function architecture</li>
+      <li>Technology stack</li>
+      <li>Deployment</li>
+      <li>Build</li>
+      <li>Packaging</li>
+      <li>Dev</li>
+      <li>Testing</li>
+      <li.Deliverables</li>
+      <li>Roadmap & milestones</li>
+      <li>Risks</li>
+      <li>Reviews</li>
+    </ol>
+</ol>
+</div>
 ---
+
+<!-- Section 1: challenges and project background -->
+
 <section data-background="https://drscdn.500px.org/photo/155532687/q%3D80_m%3D2000/v2?webp=true&sig=4122d59c34dde5e01b0a8fd3b10e0330c3b053c27918e55a68464a1937237a34" class="row">
   
   <div align="left"
@@ -118,30 +124,50 @@ This is how it is being done today...
 
     <p>
       Instructions in such format are meant to be consumed by human
-      operator in downstream operations, which introduce a large range
+      operator in downstream operations, which introduce chance
       of variations in term of interpretation and operator error,
     </p>
 
     <p>
-      Further, design criteria, such as "4-16" of HX3310 of Nutanix
-      appliances for HX PRC offering, is **difficult to enforce** if at all
-      executable.
+      Further, design criteria, such as **"4-16" of HX3310 of Nutanix
+      appliances for HX PRC offering**, is difficult to enforce.
     </p>
   </div>
 </div>
 ---
 <h6>Sales configurator</h6>
 <div class="row">
-  <div class="col l9 m9 s12">
+  <div class="col l6 m6 s12">
     <figure class="center-align">
       <img data-src="images/lenovo%20configurator.png">
     </figure>
   </div>
   <div align="left"
-       class="col l3 m3 s12">
-    Configuration option and rule are built-in attributes of
-    HW itself and application design.
+       class="col l6 m6 s12">
+    XML:
+    <pre class="brush:xml">
+<ProductLineItem>
+    <ProductLineNumber>1000</ProductLineNumber>
+    <TransactionType>NEW</TransactionType>
+    <CPUSIUvalue>1</CPUSIUvalue>
+    <ProprietaryGroupIdentifier>1000</ProprietaryGroupIdentifier>
+    <Quantity>3</Quantity>
+    <ProductIdentification>
+        <PartnerProductIdentification>
+            <OrderedProductIdentifier>000000000</OrderedProductIdentifier>
+            <ProprietaryProductIdentifier>8695-AC1</ProprietaryProductIdentifier>
+            <ProductDescription><![CDATA[ Lenovo Converged HX Series 2U ]]></ProductDescription>
+            <ProductTypeCode>Hardware</ProductTypeCode>
+            <ProductIdentifierTypeCode>MTM-FC</ProductIdentifierTypeCode>
+            <ProductName><![CDATA[ Server1 ]]></ProductName>
+        </PartnerProductIdentification>
+    </ProductIdentification>
+</ProductLineItem>
+    </pre>
   </div>
+</div>
+<div align="left">
+  Sales/user configurations are saved in format of XML & CSV (xConfigurator) as shown above on the right. 
 </div>
 ---
 <h6>MFG</h6>
@@ -157,11 +183,12 @@ This is how it is being done today...
       Rubber meets the road.
     </p>
 
-    <ul>
-      <li>Picklisting BOM from order &rarr; HW serial #, uuid, ...</li>
-      <li>Reference design document for instructions and rules.</li>
-      <li>Reconcile them with customer configurations and notes.</li>
-    </ul>
+    <ol>
+      <li>Picklisting BOM to fullfill order &rarr; HW serial #, uuid, ...</li>
+      <li>Instructions for wiring and configuration are **hidden** in reference architecture PDF, sales configurator XML & CSV..</li>
+      <li>Configuring HW, installing OS and SW are largely based on paperware
+        helped by scripts.</li>
+    </ol>
   </div>
 </div>
 
@@ -228,168 +255,9 @@ experience.
   </div>
 </div>
 ---
-<section data-background="https://drscdn.500px.org/photo/138747795/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=20cc685f194e95851ba5ceb3181ca0395d511c07948dd15d884235eb477dcbc6" class="mywhite">
-  <div align="left" class="col s6">
-    Vision of the
-    <h2 class="mywhite">
-      Workload Solution Store
-    </h2>
-  </div>
-</section>
----
-<h6>Objective</h6>
 
-1. Unified Hardware Modeling (**UHM** project)
-2. HW and SW deployment using the same technology stack
-3. Multi-platforms
-4. Public and private clouds
-5. Simple to execute
----
-<h6>WSS vision</h6>
+<!-- Section 2: key technology  -->
 
-
-* **Battery included <i class="fa fa-battery"></i>**
-* Reduce _lost in translation_
-* Open source &rarr; technology transparency
-* Build a vendor/user community
-* Efficient deployment
-
-<img data-src="images/wss%20vision.png"
-     class="responsive-img materialboxed"
-     style="box-shadow:none;">
----
-<h6>WSS Stack</h6>
-<div class="row">
-  <div class="col s7">
-    <img data-src="images/wss%20simplified%20function%20stack.png"
-         class="responsive-img materialboxed"
-         style="box-shadow:none;">
-  </div>
-  <div class="col s5">
-    <dl>
-      <dt>Component modeling</dt>
-      <dd>
-        Each hardware component will be modeled to include both its
-        configuration attributes and its how-to methods &rarr;
-        **self-contained** and **self-sufficient**.
-      </dd>
-      <dt>System design</dt>
-      <dd>
-        System is decomposed into **modular** elements allowing design of flexible
-        hierarchy and inheritance.
-      </dd>
-      <dt>Adaptive deployment</dt>
-      <dd>
-        Translate design **blueprint to deployment** executions
-        permitting re-configure a software-defined solution.
-      </dd>
-    </dl>
-  </div>
-</div>
----
-<h6>Extended orchestration capability</h6>
-
-<img data-src="images/hw%20workload%20stack%20diff.png"
-     style="box-shadow:none">
----
-<h6>WSS analysis framework</h6>
-
-<img data-src="images/uhm%20five%20phase.png">
-
-<div align="left">
-  <i class="fa fa-flag"></i>
-  **Four** phases covering our **six** core processes:<br>
-  HW catalog &rarr; solution architect &rarr; ordering &rarr; configuring &rarr; deployment &rarr; monitoring and validation
-</div>
-
-Note:
-
-* Manifest is a presentation of configurations defined in our data models.
-* Configuration instantiates a model &larr; model is really a template/class.
-* Instantiated model will be applied in orchestration to bring expectation
-into reality.
----
-<h6>WSS Services to support the **six cores**</h6>
-
-  <img data-src="images/wss%20simplified%20phase.png"
-       style="box-shadow:none;">
-
-Note:
-
-1. Lenovo, client, 3rd party can create their own models
-2. Configurations service to drive **software-defined** objective
----
-
-<h6>WSS services (**1**/3)</h6>
-<div class="row">
-  <div class="col s9">
-    <img data-src="images/wss%20architecture%20components%201.png"
-         style="box-shadow:none;">
-  </div>
-  <div align="left"
-       class="col s3">
-    <ol>
-      <li>Existing catalog such as the **digital rack** can be used
-        to build HW inventory, grouping, hierarchy.</li>
-    
-      <li>**Architect** can design and determine constraints of a solution model
-        including both HW and SW components.</li>
-    
-      <li>Published models will be available in **solution store**
-        that can be purchased and **configured** by customer.</li>
-    </ol>
-  </div>
-</div>
----
-<h6>WSS services (**2**/3)</h6>
-<div class="row">
-  <div class="col s9">
-    <img data-src="images/wss%20architecture%20components%202.png"
-         style="box-shadow:none;">
-  </div>
-  <div class="col s3">
-    <ol>
-      <li>**Order manifest** is the BOM.</li>
-      <li>User accessible configuration is controlled.</li>
-      <li>MFG does picking, assembling and packaging.</li>
-      <li>MFG logs BOM fullfillment details into **HW manifest**, eg. serial #.</li>
-      <li>**UHM Configurator** generates orchestrator instructions (manifest/bundle) and
-        validation checklist (compliance).
-    </ol>
-  </div>
-</div>
----
-<h6>WSS services (**3**/3)</h6>
-<div class="row">
-  <div class="col s9">
-    <img data-src="images/wss%20architecture%20components%203.png"
-       style="box-shadow:none;">
-  </div>
-  <div class="col s3">
-    <ol>
-      <li>**Orchestration service** coordinates multi-layer deployment.</li>
-      <li>Each layer includes three elements:
-        <ol>
-          <li>orchestor</li>
-          <li>monitor</li>
-          <li>validator</li>
-        </ol>
-      </li>
-      <li>Technology for each layer can be different.</li>
-    </ol>
-  </div>
-</div>
----
-<section data-background="images/wss%20architecture%20components.png">
-  <div align="left"
-       style="margin-bottom:50%;">
-    <h4 class="myhighlight">
-      <i class="fa fa-key"></i>
-      WSS architecture
-    </h4>
-  </div>
-</section>
----
 <section data-background="https://drscdn.500px.org/photo/167616481/q%3D80_m%3D2000/v2?webp=true&sig=138122848b49e23f21df0191e4ed3ae335fa47d262006cfa77c022b4771f6de9">
   <div align="left" class="col s6">
     Key Technology:
@@ -542,22 +410,6 @@ ones
 
 **4** machines (VM & containers), **16** services, **1** click
 ---
-<h6>Charm orchestration model</h6>
-<div class="row">
-  <div class="col s9">
-    <img data-src="images/juju%20control%20modeling.png"
-    style="box-shadow:none;">
-  </div>
-  <div class="col s3">
-    <ol>
-      <li>Base unit is a **service**.</li>
-      <li>Service can have more than 1 unit to achieve HA.</li>
-      <li>Deployment can be on **BM, VM, and LXD** container.</li>
-      <li>Relation parity</li>
-    </ol>
-  </div>
-</div>
----
 <h6>Charm key concepts</h6>
 
 | Concepts  | used for                    |
@@ -649,7 +501,12 @@ ones
   </div>
 </div>
 ---
-<h6>Charm code **components**</h6>
+<h6>charm **execution**</h6>
+<img data-src="images/charm%20execution.png"
+     style="box-shadow:none;">
+
+---
+<h6>Example: **components** of a built charm</h6>
 
 <figure>
   <img data-src="images/charm%20components.png"
@@ -682,13 +539,12 @@ ones
     Can one charm exechange data with another? 
   </dd>
   
-  <dt>Ansible (actions)</dt>
+  <dt>Action (eg. playbooks)</dt>
   <dd>
-    Can also be other config mgt recipes.
-    These are independently developed and are usable without charms. 
+    These can be independently developed and usable without charms.
   </dd>
 
-  <dt>Layesr</dt>
+  <dt>Layer</dt>
   <dd>
     Re-use other existing charm code, eg. utility function.
   </dd>
@@ -700,235 +556,363 @@ ones
   </dd>
 </dl>
 ---
-<h6>**Example**: distribution file structure</h6>
-
-<pre class="brush:plain;">
-|-- ansible.cfg
-|-- bin/
-|-- config.yaml         <-- attributes/config options
-|-- hooks/              <-- hook handlers
-|-- icon.svg
-|-- layer.yaml          <-- charm inheritance
-|-- lib/                <-- utility `.py`
-|-- metadata.yaml       <-- charm relations/interfaces
-|-- playbooks/          <-- playbooks
-|-- reactive/           <-- user defined flags  
-|-- README.md
-`-- wheelhouse/         <-- Python dependency libs
-</pre>
----
-<h6>**Example**: config.yaml</h6>
-
+<h6>Charm **orchestration model**</h6>
 <div class="row">
-  <div class="col s8">
-<pre class="brush:yaml">
-options:
-  mount-size:
-    type: string
-    default: "1U"
-    description: "Rack mount size, 1U/2U"
-  operating-system:
-    type: string
-    default: ""
-    description: "OS to deploy"
-  firmware-update-id:
-    type: string
-    default: ""
-    description: "Firmware update fix ID"
-  configuration-pattern-id:
-    type: string
-    default: ""
-    description: ""
-</pre>
-  </div>
-  <div class="col s4">
+  <div class="col s3">
     <ol>
-      <li>Config key-value pairs that charm can use
-        to drive its logic.</li>
-      <li>Support **four data types**:
-        <ol>
-          <li>int</li>
-          <li>float</li>
-          <li>boolean</li>
-          <li>string: what about a YAML?</li>
-        </ol>
-      </li>
+      <li>Base unit is a **service**.</li>
+      <li>Service can have more than 1 unit to achieve HA.</li>
+      <li>Deployment can be on **BM, VM, and LXD** container.</li>
+      <li>Relation parity</li>
     </ol>
   </div>
+  <div class="col s9">
+    <img data-src="images/juju%20control%20modeling.png"
+    style="box-shadow:none;">
+  </div>
 </div>
-
 ---
-<h6>**Example**: metadata.yaml</h6>
-
-<div class="row">
-  <div class="col s8">
-<pre class="brush:yaml">
-name: server
-summary: This is a server charm
-maintainer: Feng Xia
-description: |
-  This is a generic server charm.
-tags:
-  - server
-requires:
-  rack:
-    interface: rack-server
-  switch:
-    interface: switch-server
-</pre>
-  </div>
-  <div align="left" class="col s4">
-    Define relation: **require**  and **provide**.
-    "rack-server" and "switch-server" indicates which
-    code "charm build" will collect and package. For example,
-    "rack-server" will take an interface defined as "rack is providing"
-    and "server is requiring/receiving".
-  </div>
-</div>
-
-<h6>**Example**: layer.yaml</h6>
+<h6>Charm **bundle**</h6>
 
 <div class="row">
   <div class="col s7">
     <pre class="brush:yaml">
-includes: ['layer:endpoint', 'interface:rack-server', 'interface:switch-server']
-repo: hpcgitlab.labs.lenovo.com/WSS/wss.git
+series: xenial
+
+machines:
+  '0':
+    series: xenial
+    
+services:
+  ceph-mon:
+    charm: cs:ceph-mon-12
+    num_units: 3
+    options:
+      expected-osd-count: 3
+      source: cloud:xenial-pike
+    to:
+    - lxd:1
+    - lxd:2
+    - lxd:3
+
+relations:
+- - nova-compute:amqp
+  - rabbitmq-server:amqp
+- - neutron-gateway:amqp
+  - rabbitmq-server:amqp
     </pre>
   </div>
-  <div class="col s1"></div>
-  <div align="left" class="col s4">
-    Include **layer:** and **interface:**.
+  <div class="col s5">
+    <dl>
+      <dt>series</dt>
+      <dd>
+        Defautl OS to provision. Can also be overridden by individual _service_.
+      </dd>
+
+      <dt>machines</dt>
+      <dd>
+        Definitions of runtime host environment (aka. machine) who
+        will execute the charm code.
+      </dd>
+
+      <dt>services</dt>
+      <dd>
+        A service &larr; a charm.
+        <ol>
+          <li>**option**: config values</li>
+          <li>**num_units**: number of instances of this service (HA)</li>
+          <li>**to**: in which machine/container these instances will be running </li>
+        </ol>
+      </dd>
+
+      <dt>relations</dt>
+      <dd>
+        Connecting services so they can exchange data when coming online.
+      </dd>
+    </dl>
   </div>
 </div>
 
 ---
-<h6>**Example**: charm state script</h6>
+<!-- Section: project details  -->
 
+<section data-background="https://drscdn.500px.org/photo/138747795/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=20cc685f194e95851ba5ceb3181ca0395d511c07948dd15d884235eb477dcbc6" class="mywhite">
+  <div align="left" class="col s6">
+    Vision of the
+    <h2 class="mywhite">
+      Workload Solution Store
+    </h2>
+  </div>
+</section>
+---
+<h6>WSS Objective</h6>
+
+1. Unified Hardware Modeling (**UHM** project)
+2. HW and SW deployment using the same technology stack
+3. Multi-platforms
+4. Public and private clouds
+5. Simple to execute
+---
+<h6>WSS vision</h6>
+
+
+* **Battery included <i class="fa fa-battery"></i>**
+* Reduce _lost in translation_
+* Open source &rarr; technology transparency
+* Build a vendor/user community
+* Efficient deployment
+
+<img data-src="images/wss%20vision.png"
+     class="responsive-img materialboxed"
+     style="box-shadow:none;">
+---
+<h6>WSS Stack</h6>
 <div class="row">
   <div class="col s7">
-<pre class="brush:python">
-@when_not('solution.ready', 'solution.error')
-@when('solution.config.invalid')
-def store_manifests():
-    """Store manifests.
-    """
-    run_uhm(playbook='store_manifest',
-            tags='manifest',
-            current_state='solution.config.invalid',
-            next_state='solution.manifest.stored',
-            error_state='solution.error',
-            user_vars={
-                'sol_id': 'solution',
-                'manifest_path': '/tmp/test.manifest'
-            })
-</pre>
+    <img data-src="images/wss%20simplified%20function%20stack.png"
+         class="responsive-img materialboxed"
+         style="box-shadow:none;">
   </div>
-  <div class="col s1"></div>
-  <div class="col s4">
+  <div class="col s5">
+    <dl>
+      <dt>Component modeling</dt>
+      <dd>
+        Each hardware component will be modeled to include both its
+        configuration attributes and its how-to methods &rarr;
+        **self-contained** and **self-sufficient**.
+      </dd>
+      <dt>System design</dt>
+      <dd>
+        System is decomposed into **modular** elements allowing design of flexible
+        hierarchy and inheritance.
+      </dd>
+      <dt>Adaptive deployment</dt>
+      <dd>
+        Translate design **blueprint to deployment** executions
+        permitting re-configure a software-defined solution.
+      </dd>
+    </dl>
+  </div>
+</div>
+---
+<h6>Extended orchestration capability</h6>
+
+<img data-src="images/hw%20workload%20stack%20diff.png"
+     style="box-shadow:none">
+---
+<h6>WSS analysis framework</h6>
+
+<img data-src="images/uhm%20five%20phase.png">
+
+<div align="left">
+  <i class="fa fa-flag"></i>
+  **Four** phases covering our **six** core processes:<br>
+  HW catalog &rarr; solution architect &rarr; ordering &rarr; configuring &rarr; deployment &rarr; monitoring and validation
+</div>
+
+Note:
+
+* Manifest is a presentation of configurations defined in our data models.
+* Configuration instantiates a model &larr; model is really a template/class.
+* Instantiated model will be applied in orchestration to bring expectation
+into reality.
+---
+<h6>WSS Services to support the **six cores**</h6>
+
+  <img data-src="images/wss%20simplified%20phase.png"
+       style="box-shadow:none;">
+
+Note:
+
+1. Lenovo, client, 3rd party can create their own models
+2. Configurations service to drive **software-defined** objective
+---
+
+<h6>WSS services (**1**/3)</h6>
+<div class="row">
+  <div class="col s9">
+    <img data-src="images/wss%20architecture%20components%201.png"
+         style="box-shadow:none;">
+  </div>
+  <div align="left"
+       class="col s3">
     <ol>
-      <li>Use when and when_not conditions
-        to define execution criteria.</li>
-      <li>Code body can be executed multiple times
-        even with "remove_state" to turn off itself.</li>
+      <li>Existing catalog such as the **digital rack** can be used
+        to build HW inventory, grouping, hierarchy.</li>
+    
+      <li>**Architect** can design and determine constraints of a solution model
+        including both HW and SW components.</li>
+    
+      <li>Published models will be available in **solution store**
+        that can be purchased and **configured** by customer.</li>
     </ol>
   </div>
 </div>
 ---
-<h6>**Example**: charm relation script</h6>
-
+<h6>WSS services (**2**/3)</h6>
 <div class="row">
   <div class="col s9">
-<pre class="brush:python">
-class RackProvides(RelationBase):
-    # Every unit connecting will get the same information
-    scope = scopes.UNIT
-    auto_accessors = ['rack_id',
-                      'server_id']
-
-    # Use some template magic to declare our relation(s)
-    @hook('{provides:rack-server}-relation-joined')
-    def joined(self):
-        config = hookenv.config()
-        conv = self.conversation()
-        conv.set_remote(data={
-            'rack_id': config['uuid']
-        })
-        self.set_state('{relation_name}.joined')
-
-    @hook('{provides:rack-server}-relation-{changed}')
-    def changed(self):
-        conv = self.conversation()
-        if self.servers():
-            conv.set_state('server.counted')
-    ....
-</pre>
+    <img data-src="images/wss%20architecture%20components%202.png"
+         style="box-shadow:none;">
   </div>
   <div class="col s3">
-    <dl>
-      <dt>Four events</dt>
-      <dd>
-        joined, changed, broken, departed
-      </dd>
-
-      <dt>Four scopes</dt>
-      <dd>
-        global, unit, subordinate, **cross-model**
-      </dd>
-    </dl>
+    <ol>
+      <li>**Order manifest** is the BOM.</li>
+      <li>User accessible configuration is controlled.</li>
+      <li>MFG does picking, assembling and packaging.</li>
+      <li>MFG logs BOM fullfillment details into **HW manifest**, eg. serial #.</li>
+      <li>**UHM Configurator** generates orchestrator instructions (manifest/bundle) and
+        validation checklist (compliance).
+    </ol>
   </div>
 </div>
+---
+<h6>WSS services (**3**/3)</h6>
+<div class="row">
+  <div class="col s9">
+    <img data-src="images/wss%20architecture%20components%203.png"
+       style="box-shadow:none;">
+  </div>
+  <div class="col s3">
+    <ol>
+      <li>**Orchestration service** coordinates multi-layer deployment.</li>
+      <li>Each layer includes three elements:
+        <ol>
+          <li>orchestor</li>
+          <li>monitor</li>
+          <li>validator</li>
+        </ol>
+      </li>
+      <li>Technology for each layer can be different.</li>
+    </ol>
+</div>
+---
+<section data-background="images/wss%20architecture%20components.png">
+  <div align="left"
+       style="margin-bottom:50%;">
+    <h4 class="myhighlight">
+      <i class="fa fa-key"></i>
+      WSS services
+    </h4>
+  </div>
+</section>
+---
+<h6>WSS Project</h6>
+<ol>
+  <li>Vision</li>
+  <li>**Function architecture**</li>
+  <li>Technology stack</li>
+  <li>Deployment</li>
+  <li>Build</li>
+  <li>Packaging</li>
+  <li>Dev</li>
+  <li>Testing</li>
+  <li.Deliverables</li>
+  <li>Roadmap & milestones</li>
+  <li>Risks</li>
+  <li>Reviews</li>
+</ol>
 
 ---
-<h6>**Example**: charm deployment bundle</h6>
+<h6>WSS Function Architecture: **level 1**</h6>
 
 <div class="row">
-  <div class="col s8">
-<pre class="brush:yaml;">
-series: trusty
-services:
-  wordpress:
-    charm: "cs:trusty/wordpress-2"
-    num_units: 1
-    to:
-      - "0"
-  mysql:
-    charm: "cs:trusty/mysql-26"
-    num_units: 1
-    to:
-      - "1"
-relations:
-  - - "wordpress:db"
-    - "mysql:db"
-machines:
-  "0":
-    series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
-  "1":
-    series: trusty
-    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
-</pre>
+  <div align="left"
+       class="col s7">
+    <img data-src="images/wss%20func%20architect%201.png"
+         class="no-shadow">
   </div>
-  <div class="col s4">
+  <div class="col s5">
     <dl>
-      <dt>series</dt>
-      <dd>Default OS version</dd>
-
-      <dt>services</dt>
-      <dd>A list of charms to deploy.
+      <dt>Blueprints</dt>
+      <dd>
         <ol>
-          <li>"charm": can be from charm store or from a local repo.</li>
-          <li>"num_units": how many instancs?</li>
-          <li>"to": deployed to which machine?</li>
+          <li>
+            **hardeware workload**: configure hardware within a
+              hyper-converge rack to establish base line environment
+              such as VLAN, boot sequence.
+          </li>
+          <li>
+            **platform workload**: install OS, agent, and
+            application. Configure system and application to form
+            software-defined platform such as Openstack.
+          </li>
+          <li>
+            **user application workload**: run on top of OS or Openstack
+            type of software-defined platforms.
+          </li>
         </ol>
+        
+      </dd>
+
+      <dt>Orchestration</dt>
+      <dd>
+        <ol>
+          <li>
+            **Description language**: written in plain text that
+              describes state, event, component, relation, parameters
+              for installation and configuration.
+          </li>
+          <li>
+            **Orchestration runtime**: binary that parse blueprint,
+              responds to state change and event, and execute built-in
+              function and custom scripts.
+          </li>
+        </ol>
+      </dd>
+
+      <dt>Platform</dt>
+      <dd>
+        Host environment that supports workload requirements and
+        scales dynamically.
       </dd>
     </dl>
   </div>
 </div>
 ---
-<h6>charm **execution**</h6>
-<img data-src="images/charm%20execution.png"
-     style="box-shadow:none;">
-
+<h6>WSS Function Architecture: **level 2**</h6>
+<div class="row">
+  <div class="col s12">
+    <img data-src="images/wss%20func%20architect%202.png"
+         class="no-shadow">
+  </div>
+</div>
+---
+<h6>Project</h6>
+<ol>
+  <li>Vision</li>
+  <li>Function architecture</li>
+  <li>**Technology stack**</li>
+  <li>Deployment</li>
+  <li>Build</li>
+  <li>Packaging</li>
+  <li>Dev</li>
+  <li>Testing</li>
+  <li.Deliverables</li>
+  <li>Roadmap & milestones</li>
+  <li>Risks</li>
+  <li>Reviews</li>
+</ol>
+---
+<h6>WSS technology stack</h6>
+<div class="row">
+  <div class="col s9">
+    <img data-src="images/wss%20technology%20stack.png"
+         class="no-shadow">
+  </div>
+  <div align="left"
+       class="col s3">
+    <ol>
+      <li>
+        **orange** layers are essential for WSS to work; **gray**
+          layers are optional.
+      </li>
+      <li>
+        Using Ubuntu Trusty as default image.
+      </li>
+    </ol>
+  </div>
+</div>
 ---
 <section data-background="https://drscdn.500px.org/photo/179822321/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=51cdb14b0e0929a01b68133e08caff3d0370f1418ba18be62e5a9c3d193e1ddd">
   <div align="left" class="col s6">
@@ -1248,7 +1232,317 @@ def check_compliance():
 }
 </pre>
 ---
-<iframe data-src="https://192.168.122.162/gui/"
+<!-- Section: Used in  -->
+<section data-background="https://drscdn.500px.org/photo/213498291/q%3D80_m%3D2000/v2?webp=true&sig=d62de998ed188b7f90ff96f35888d92af587baba71c2d3176e08ca4c975b82c8" class="mywhite">
+  <div align="left" class="col s6">
+    <h2 class="mywhite">
+      WSS-based Projects
+    </h2>
+  </div>
+</section>
+
+---
+<h6>Unified Hardware Management (UHM) POC</h6>
+<div class="row">
+  <div class="col s3">
+    Inputs
+  </div>
+  <div class="col s6">
+  </div>
+  <div class="col s3">
+    Outputs
+  </div>
+  <div class="col s12">
+    <img data-src="images/uhm%20poc%201.png"
+         style="box-shadow:none;">
+  </div>
+</div>
+
+<p align="left">
+  **Expected**:<br><br>
+  Using WSS technologies to model 1 rack, 1 switch, and 2 servers, and
+  convert them to pre-defined states, eg. one server is assigned as
+  Windows server, the other for ESXi server, and each has a different
+  firmware version.
+</p>
+---
+<h6>UHM POC using WSS technologies</h6>
+<div class="row">
+  <div class="col s3">
+    Inputs
+  </div>
+  <div class="col s6">
+    Orchestration service
+  </div>
+  <div class="col s3">
+    Outputs
+  </div>
+  <div class="col s12">
+    <img data-src="images/uhm%20poc%202.png"
+         style="box-shadow:none;">
+  </div>
+</div>
+---
+<h6>UHM POC Model design</h6>
+
+<div class="row">
+  <div align="left"
+       class="col s6">
+    1. **Design charms & playbooks**:<br>
+    <img data-src="images/uhm%20charms.png">
+    **Design charm relations**:<br>
+    <img data-src="images/uhm%20relations.png">
+  </div>
+  <div align="left"
+       class="col s6">
+    2. **Make them available in store**:<br>
+    <img data-src="images/uhm%20demo%20juju%20gui%202.png"
+         style="box-shadow:none;">
+  </div>
+</div>
+---
+<h6>UHM POC Orchestration</h6>
+
+<div class="row">
+  <div align="left"
+       class="col s6">
+    3. **Compose an orchestration manifest (bundle)**:<br>
+    <img data-src="images/uhm%20solution%20bundle.png">
+  </div>
+  <div align="left"
+       class="col s6">
+    4. **Created a connected HW resources based on bundle definitions**:<br>
+    <img data-src="images/uhm%20demo%20juju%20gui.png"
+  </div>
+</div>
+---
+<h6>**UHM charm example**: distribution file structure</h6>
+
+<pre class="brush:plain;">
+|-- ansible.cfg
+|-- bin/
+|-- config.yaml         <-- attributes/config options
+|-- hooks/              <-- hook handlers
+|-- icon.svg
+|-- layer.yaml          <-- charm inheritance
+|-- lib/                <-- utility `.py`
+|-- metadata.yaml       <-- charm relations/interfaces
+|-- playbooks/          <-- playbooks
+|-- reactive/           <-- user defined flags  
+|-- README.md
+`-- wheelhouse/         <-- Python dependency libs
+</pre>
+---
+<h6>**UHM charm example**: config.yaml</h6>
+
+<div class="row">
+  <div class="col s8">
+<pre class="brush:yaml">
+options:
+  mount-size:
+    type: string
+    default: "1U"
+    description: "Rack mount size, 1U/2U"
+  operating-system:
+    type: string
+    default: ""
+    description: "OS to deploy"
+  firmware-update-id:
+    type: string
+    default: ""
+    description: "Firmware update fix ID"
+  configuration-pattern-id:
+    type: string
+    default: ""
+    description: ""
+</pre>
+  </div>
+  <div class="col s4">
+    <ol>
+      <li>Config key-value pairs that charm can use
+        to drive its logic.</li>
+      <li>Support **four data types**:
+        <ol>
+          <li>int</li>
+          <li>float</li>
+          <li>boolean</li>
+          <li>string: what about a YAML?</li>
+        </ol>
+      </li>
+    </ol>
+  </div>
+</div>
+
+---
+<h6>**UHM charm example**: metadata.yaml</h6>
+
+<div class="row">
+  <div class="col s8">
+<pre class="brush:yaml">
+name: server
+summary: This is a server charm
+maintainer: Feng Xia
+description: |
+  This is a generic server charm.
+tags:
+  - server
+requires:
+  rack:
+    interface: rack-server
+  switch:
+    interface: switch-server
+</pre>
+  </div>
+  <div align="left" class="col s4">
+    Define relation: **require**  and **provide**.
+    "rack-server" and "switch-server" indicates which
+    code "charm build" will collect and package. For example,
+    "rack-server" will take an interface defined as "rack is providing"
+    and "server is requiring/receiving".
+  </div>
+</div>
+
+<h6>**UHM charm example**: layer.yaml</h6>
+
+<div class="row">
+  <div class="col s7">
+    <pre class="brush:yaml">
+includes: ['layer:endpoint', 'interface:rack-server', 'interface:switch-server']
+repo: hpcgitlab.labs.lenovo.com/WSS/wss.git
+    </pre>
+  </div>
+  <div class="col s1"></div>
+  <div align="left" class="col s4">
+    Include **layer:** and **interface:**.
+  </div>
+</div>
+
+---
+<h6>**UHM charm example**: charm state script</h6>
+
+<div class="row">
+  <div class="col s7">
+<pre class="brush:python">
+@when_not('solution.ready', 'solution.error')
+@when('solution.config.invalid')
+def store_manifests():
+    """Store manifests.
+    """
+    run_uhm(playbook='store_manifest',
+            tags='manifest',
+            current_state='solution.config.invalid',
+            next_state='solution.manifest.stored',
+            error_state='solution.error',
+            user_vars={
+                'sol_id': 'solution',
+                'manifest_path': '/tmp/test.manifest'
+            })
+</pre>
+  </div>
+  <div class="col s1"></div>
+  <div class="col s4">
+    <ol>
+      <li>Use when and when_not conditions
+        to define execution criteria.</li>
+      <li>Code body can be executed multiple times
+        even with "remove_state" to turn off itself.</li>
+    </ol>
+  </div>
+</div>
+---
+<h6>**UHM charm example**: charm relation script</h6>
+
+<div class="row">
+  <div class="col s9">
+<pre class="brush:python">
+class RackProvides(RelationBase):
+    # Every unit connecting will get the same information
+    scope = scopes.UNIT
+    auto_accessors = ['rack_id',
+                      'server_id']
+
+    # Use some template magic to declare our relation(s)
+    @hook('{provides:rack-server}-relation-joined')
+    def joined(self):
+        config = hookenv.config()
+        conv = self.conversation()
+        conv.set_remote(data={
+            'rack_id': config['uuid']
+        })
+        self.set_state('{relation_name}.joined')
+
+    @hook('{provides:rack-server}-relation-{changed}')
+    def changed(self):
+        conv = self.conversation()
+        if self.servers():
+            conv.set_state('server.counted')
+    ....
+</pre>
+  </div>
+  <div class="col s3">
+    <dl>
+      <dt>Four events</dt>
+      <dd>
+        joined, changed, broken, departed
+      </dd>
+
+      <dt>Four scopes</dt>
+      <dd>
+        global, unit, subordinate, **cross-model**
+      </dd>
+    </dl>
+  </div>
+</div>
+
+---
+<h6>**UHM charm example**: charm deployment bundle</h6>
+
+<div class="row">
+  <div class="col s8">
+<pre class="brush:yaml;">
+series: trusty
+services:
+  wordpress:
+    charm: "cs:trusty/wordpress-2"
+    num_units: 1
+    to:
+      - "0"
+  mysql:
+    charm: "cs:trusty/mysql-26"
+    num_units: 1
+    to:
+      - "1"
+relations:
+  - - "wordpress:db"
+    - "mysql:db"
+machines:
+  "0":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+  "1":
+    series: trusty
+    constraints: "arch=amd64 cpu-cores=1 cpu-power=100 mem=1740 root-disk=8192"
+</pre>
+  </div>
+  <div class="col s4">
+    <dl>
+      <dt>series</dt>
+      <dd>Default OS version</dd>
+
+      <dt>services</dt>
+      <dd>A list of charms to deploy.
+        <ol>
+          <li>"charm": can be from charm store or from a local repo.</li>
+          <li>"num_units": how many instancs?</li>
+          <li>"to": deployed to which machine?</li>
+        </ol>
+      </dd>
+    </dl>
+  </div>
+</div>
+---
+<h6>UHM demo (live)</h6>
+<iframe data-src="https://10.240.42.32/gui/"
         height="550px" width="100%"></iframe>
 ---
 # Thank you

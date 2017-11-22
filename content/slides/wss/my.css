@@ -90,3 +90,9 @@ section div.mybottom{
 .reveal section img.no-shadow{
   box-shadow: none;
 }
+
+.reveal * code {
+  font-size: 0.6em;
+  color: #333;
+  background-color: #fff3e0;
+}

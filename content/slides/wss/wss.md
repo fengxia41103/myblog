@@ -158,107 +158,178 @@ Note:
 
 <h6>WSS services (**1**/3)</h6>
 <div class="row">
-  <div class="col s9">
+  <div class="col l7 m7 s12">
     <img data-src="images/wss%20architecture%20components%201.png"
          style="box-shadow:none;">
   </div>
   <div align="left"
-       class="col s3">
-    <ol>
-      <li>Existing catalog such as the **digital rack** can be used
-        to build HW inventory, grouping, hierarchy.</li>
-    
-      <li>**Architect** can design and determine constraints of a solution model
-        including both HW and SW components.</li>
-    
-      <li>Published models will be available in **solution store**
-        that can be purchased and **configured** by customer.</li>
-    </ol>
+       class="col l5 m5 s12">
+    <dl>
+      <dt>Model designer</dt>
+      is a set of tools and scripts that facilitate conversion existing
+      HW and SW artifacts, eg. digital rack, HW catalog, reference architecture,
+      to charm-based models.
+
+      <p>
+        There is no magic here. This is a human process because it requires
+        analysis of **non-structured** data.
+        Common process is analyze &rarr; create abstract model &rarr; create charm.
+      </p>
+
+      </dd>
+
+      <dt>Solution store</dt>
+      is the <a href="https://jujucharms.com/store">Juju charm store</a>
+      or a Lenovo version of it. The idea is to host charm models (as a store)
+      that are specifict to Lenovo and those developed by Lenov partners.
+
+      <p>
+        User can order & configure their orders using store GUI. The output
+        is saved into a **order manifest** format that can be used as BOM.
+      </p>
+      <dd>
+      </dd>
+    </dl>
   </div>
 </div>
 ---
 <h6>WSS services (**2**/3)</h6>
 <div class="row">
-  <div class="col s9">
+  <div class="col l7 m7 s12">
     <img data-src="images/wss%20architecture%20components%202.png"
          style="box-shadow:none;">
+    <dl>
+      <dt>MFG</dt>
+      <dd>
+        <ol>
+          <li>**Order manifest** is the BOM.</li>
+          <li>MFG does picking, assembling and packaging.</li>
+          <li>MFG logs BOM fullfillment details into **HW manifest**, eg. serial #. &rarr; order manifest is the abstract, and HW manifest is an instance of that abstract.</li>
+        </ol>
+      </dd>
+    </dl>
   </div>
-  <div class="col s3">
-    <ol>
-      <li>**Order manifest** is the BOM.</li>
-      <li>User accessible configuration is controlled.</li>
-      <li>MFG does picking, assembling and packaging.</li>
-      <li>MFG logs BOM fullfillment details into **HW manifest**, eg. serial #.</li>
-      <li>**UHM Configurator** generates orchestrator instructions (manifest/bundle) and
-        validation checklist (compliance).
-    </ol>
+  <div class="col l5 m5 s12">
+    <dl>
+      <dt>Configuration serversice</dt>
+      <dd>
+        <ol>
+          <li>
+            Configuration options are **pre-defined** by model designer, eg.
+            setting IP address for a server, or the number of 2.5" disk bay
+            to install.
+          </li>
+          <li>
+            Options are grouped by its **applicable services**, eg. HW configs
+            are directly applicable to MFG, whereas SW configs are meant for orchestration service &rarr; different user role shall have access to his set of
+            configs ONLY.
+
+            <p>
+            For example, server config has the option to pick firmware
+            version, but this is not accessible by user role of a
+            sales order. It is, however, accessible by service, MFG,
+            and orchestrator.
+            </p>
+          </li>
+          <li>
+            It generates two artifacts &rarr; orchestrator instructions
+            (manifest/bundle) & validation checklist (compliance).
+          </li>
+        </ol>
+      </dd>
+    </dl>
   </div>
 </div>
 ---
 <h6>WSS services (**3**/3)</h6>
 <div class="row">
-  <div class="col s9">
+  <div class="col l9 m9 s12">
     <img data-src="images/wss%20architecture%20components%203.png"
        style="box-shadow:none;">
   </div>
-  <div class="col s3">
-    <ol>
-      <li>**Orchestration service** coordinates multi-layer deployment.</li>
-      <li>Each layer includes three elements:
+  <div class="col l3 m3 s12">
+    <dl>
+      <dt>Orchestration service</dt>
+      <dd>
         <ol>
-          <li>orchestor</li>
-          <li>monitor</li>
-          <li>validator</li>
-        </ol>
-      </li>
-      <li>Technology for each layer can be different.</li>
-    </ol>
+          <li>
+            Orchestration service is the core of WSS architecture. All
+            configurations and models are **made to orchestrate**.
+          </li>
+
+          <li>
+            Handling single layer orchestration is
+            easy; handling multi-layer version is hard.
+          </li> 
+          <li>Technology for each layer can be different.</li>
+        </ol>    
+      </dd>
+    </dl>
 </div>
+---
+<h6>WSS services (**3/3) cont.</h6>
+
+<div class="row">
+  <div class="col l7 m7 s12">
+    <img data-src="images/uhm%20orchestrator.png"
+         style="box-shadow:none;">
+  </div>
+  <div class="col l5 m5 s12">
+    <dl>
+      <dt>Single layer orchestrator</dt>
+      (for example: UHM orchestrator)
+      <dd>
+        <ol>
+          <li>
+            **orchestor**(deployment): Juju or its wrapper
+            (if using charm as model). 
+          </li>
+          <li>
+            **baremetal manager**: LXCA
+          </li>
+          <li>
+            **monitor**: is responsible to query orchestrator (or its
+            execution env) for its runtime status, eg. `$ juju status
+            --format json`
+          </li>
+          <li>
+            **validator/compliance**:
+            to match a model's execution vs. its design, eg.
+            how many M3650 servers are configured with firmware
+            version 4.1.0 comparing to the numbers on customer's order?
+          </li>
+        </ol>    
+      </dd>
+    </dl>
+</div>
+  
 ---
 <section data-background="images/wss%20architecture%20components.png">
   <div align="left"
        style="margin-bottom:50%;">
     <h4 class="myhighlight">
       <i class="fa fa-key"></i>
-      WSS services
+      WSS services overview
     </h4>
   </div>
 </section>
 ---
-<h6>WSS Project</h6>
-<div class="row">
-  <div class="col s6">
-<ol>
-  <li>Vision</li>
-  <li>**Function architecture**</li>
-  <li>Technology stack</li>
-  <li>Deployment</li>
-  <li>Build</li>
-  <li>Packaging</li>
-  <li>Dev</li>
-  <li>Testing</li>
-  <li>Deliverables</li>
-  <li>Roadmap & milestones</li>
-  <li>Risks</li>
-  <li>Reviews</li>
-</ol>
-  </div>
-  <div align="left"
-       class="col s6">
-    Function architecture is to describe capabilities the system will
-      support (a common drive of it is a MRD, eg. The system should...)
-      Functions are grouped by their purpose and use (not by
-      their implementation). They focus on the **to-do**, but left
-      blank of inputs and outputs of each action.
-    <p>
-      Level 1 provides a high level view of the system's capability
-      which often becomes natural division of sub-systems, components,
-      and/or services. Level 1-N is a further break-down of each block
-      into finer elements. These elements can then be prioritized
-      based on resource and schedule.
-    </p>
-  </div>
-</div>
+<h6>Function architecture</h6>
+
+
+Function architecture is to describe capabilities the system will
+support (a common drive of it is a MRD, eg. The system
+should...).
+
+Functions are grouped by their purpose and use (not
+by their implementation). They focus on the **to-do**, but left
+blank of inputs and outputs of each action.
+
+Level 1 provides a high level view of the system's capability
+which often becomes natural division of sub-systems, components,
+and/or services. Level 1-N is a further break-down of each block
+into finer elements. These elements can then be prioritized
+based on resource and schedule.
 ---
 <h6>WSS Function Architecture: **level 1**</h6>
 <div class="row">
@@ -276,38 +347,18 @@ Note:
   </div>
 </div>
 ---
-<h6>Project</h6>
-<div class="row">
-  <div class="col s6">
-<ol>
-  <li>Vision</li>
-  <li>Function architecture</li>
-  <li>**Technology stack**</li>
-  <li>Deployment</li>
-  <li>Build</li>
-  <li>Packaging</li>
-  <li>Dev</li>
-  <li>Testing</li>
-  <li>Deliverables</li>
-  <li>Roadmap & milestones</li>
-  <li>Risks</li>
-  <li>Reviews</li>
-</ol>
-  </div>
-  <div align="left"
-       class="col s6">
-    Technology stack describes key technology components, eg.
-    framework, language, environment, and so on, that will be used
-    to construct the system so to provide the functions described in ealier
-    section (Function Architecture).
+<h6>Technology stack</h6>
 
-    <p>
-      Choice of core technology dictates decisions in
-      system deployment, construction of
-      development sandbox, product packaging and distribution.
-    </p>
-  </div>
-</div>
+
+This section describes key technology components, eg.
+framework, language, environment, and so on, that will be used
+to construct the system so to provide the functions described in ealier
+section (Function Architecture).
+
+Choice of core technology dictates decisions in
+system deployment, construction of
+development sandbox, product packaging and distribution.
+</p>
 ---
 <h6>WSS technology stack</h6>
 <div class="row">
@@ -336,40 +387,18 @@ Note:
   </div>
 </div>
 ---
-<h6>Project</h6>
-<div class="row">
-  <div class="col s6">
-<ol>
-  <li>Vision</li>
-  <li>Function architecture</li>
-  <li>Technology stack</li>
-  <li>**Deployment**</li>
-  <li>Build</li>
-  <li>Packaging</li>
-  <li>Dev</li>
-  <li>Testing</li>
-  <li>Deliverables</li>
-  <li>Roadmap & milestones</li>
-  <li>Risks</li>
-  <li>Reviews</li>
-</ol>
-  </div>
-  <div align="left"
-       class="col s6">
-    Deployment architecture illustrates setup and connection of
-    components such as execution environment, network location, and
-    software version. There can be at least three flavors of a
-    deployment: dev, production, and testing.
+<h6>Deployment</h6>
 
-    <p>
-      `Testing` is kept separate because it is often in midway between
-      a full-blown production setup and a deverloper's sandbox. This
-      is especially true for a deployment that calls for hardware and
-      networking whose availability is limited, and for integration of
-      third-party resources.
-    </p>
-  </div>
-</div>
+This section illustrates setup and connection of
+components such as execution environment, network location, and
+software version. There can be at least three flavors of a
+deployment: **dev**, **production**, and **testing**.
+
+`Testing` is kept separate because it is often in midway between
+a full-blown production setup and a deverloper's sandbox. This
+is especially true for a deployment that calls for hardware and
+networking whose availability is limited, and for integration that
+relies on external third-party resources.
 ---
 <h6>WSS deployment: by **single VM**</h6>
 <div class="row">
@@ -404,34 +433,170 @@ Note:
 </div>
 ---
 <h6>WSS deployment: by **containers**</h6>
-    <img data-src="images/wss%20technology%20stack%20prod.png"
-         class="no-shadow">
+<img data-src="images/wss%20technology%20stack%20prod.png"
+     class="no-shadow">
 ---
-<h6>Project</h6>
-<div class="row">
-  <div class="col s6">
-<ol>
-  <li>Vision</li>
-  <li>Function architecture</li>
-  <li>Technology stack</li>
-  <li>Deployment</li>
-  <li>**Build**</li>
-  <li>Packaging</li>
-  <li>Dev</li>
-  <li>Testing</li>
-  <li>Deliverables</li>
-  <li>Roadmap & milestones</li>
-  <li>Risks</li>
-  <li>Reviews</li>
-</ol>
-  </div>
-  <div align="left"
-       class="col s6">
-    Build architecture illustrates a full process to construct a testable
-    product from source/base components.
+<h6>Build</h6>
 
-    <p>
-      There will be two flavors of build process: manual and continuous.
-    </p>
-  </div>
-</div>
+Two ways to build charm:
+
+1. using `charm build` to build a single
+  charm and use its `dist` code as is
+2. using `builder lib`
+    to build in batch mode and replace dist contents post build.
+---
+<h6>WSS build: Default `charm build`</h6>
+
+1. Suitable for development and test of a single charm.
+1. code: [hpcgitlab.labs.lenovo.com/WSS/wss.git][1]
+2. `git clone --recursive` &larr; to fetch submodules
+  1. `layer-basic`
+  2. `layer-ansible`
+3. install `charm-tools` from repo
+3. setup environment variables:
+  1. `LAYER_PATH`: absolute path to charm code
+  2. `INTERFACE_PATH`: absolute path to charm interface code
+  3. `JUJU_REPOSITORY`: absolute path to charm `dist` folder
+4. chang to a charm folder and run `charm build`
+  1. default build uses **Python 3.0** packages (`--series xenial`)
+  2. for Python 2.7, use `--series trusty`
+5. built dist  are in  in `$JUJU_RESPOSITORY/[series]/[charm name]`
+
+
+[1]: http://hpcgitlab.labs.lenovo.com/WSS/wss.git
+---
+<h6>WSS build: **builder lib**</h6>
+
+<pre class="brush:plain">
+usage: build.py [-h] [--series SERIES] [--keep KEEP] [--no-wheelhouse]
+                [--no-playbooks] path/to/charms
+</pre>
+
+1. `builder lib` is developed as a wrapper over `charm build`
+2. it can build multiple charms in **batch** mode
+3. it can take post-build actions on `/dist` by:
+  1. overriding `charms.helper` &larr; for Python 2.7 compatibility
+  2. overriding `layer-basic` files  &larr; for Python 2.7 compatibility
+  3. removing `/dist/.../wheelhouse` to minimize charm dist file size (about 100M less) &larr; when using an image which has dependencies pre-installed
+  4. for separately managed/developed files, eg. playbooks, adding them
+     to each charm's dist
+---
+<h6>Packaging</h6>
+
+There are three types of packaging:
+
+1. **of a single charm**: contains a single charm for distribution
+  1. default `charm build` output
+
+2. **of batch charms**: contains multiple charms
+  1. `build.py` creates `.tar.gz`
+
+3. **of a charm execution env**: 
+
+  1. `qcow2` VM image usable by KVM
+  2. `vdi` VM image used by Virtualbox
+  2. Docker container
+
+---
+<h6>Package: **A single charm**</h6>
+
+Example of a `charm build` result:
+
+<pre class="brush:plain">
+(dev) fengxia@ubuntu:~/workspace/wss/dist/trusty/solution$ ls -lh
+total 72K
+-rw-rw-r-- 1 fengxia fengxia  18K Nov 26 10:00 ansible.cfg
+drwxrwxr-x 2 fengxia fengxia 4.0K Nov 26 09:58 bin
+-rw-rw-r-- 1 fengxia fengxia  939 Nov 26 09:58 config.yaml
+drwxrwxr-x 3 fengxia fengxia 4.0K Nov 26 10:00 hooks
+-rw-rw-r-- 1 fengxia fengxia 7.1K Nov 26 09:57 icon.svg
+-rw-rw-r-- 1 fengxia fengxia  383 Nov 26 09:58 layer.yaml
+drwxrwxr-x 3 fengxia fengxia 4.0K Nov 26 09:58 lib
+-rw-rw-r-- 1 fengxia fengxia  239 Nov 26 09:58 metadata.yaml
+drwxrwxr-x 6 fengxia fengxia 4.0K Nov 26 09:58 playbooks
+drwxrwxr-x 2 fengxia fengxia 4.0K Nov 26 10:00 reactive
+-rw-rw-r-- 1 fengxia fengxia 5.7K Nov 26 09:57 README.md
+drwxrwxr-x 2 fengxia fengxia 4.0K Nov 26 10:00 wheelhouse
+</pre>
+---
+<h6>packaging: **batch charms**</h6>
+
+1. create a batch charm dist
+2. naming convention: `%Y-%m-%d-%H-%M-%S-[random 10-char string].tar.gz`
+2. using `builder.py --keep N` to save the last `N` builds
+4. `builder.py` saves tar balls in `dist/archives`
+
+Exmaple:
+
+<pre class="brush:plain">
+(dev) fengxia@ubuntu:~/workspace/wss/dist/archives$ ls -lh
+total 62M
+-rw-rw-r-- 1 fengxia fengxia 62M Nov 26 10:00 2017-11-26-10-00-29-eyd1c9jba5.tar.gz
+</pre>
+---
+<h6>packaging: **KVM image**</h6>
+
+Export KVM image:
+
+1. Bootstrap KVM using [cloud-image][2] and [cloud-init][3] ([example `user-data`][4])
+2. `virsh list --all` to view VM names
+2. `virsh dumpxml [vm name] > myimage.xml`
+3. save `myimage.xml` and the corresponding `.img` disk image files
+
+[2]: https://cloud-images.ubuntu.com/xenial/
+[3]: http://cloudinit.readthedocs.io/en/latest/
+[4]: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/uhm/vm/my-user-data
+
+Example `myimage.xml` showing the location of disk files:
+<pre class="brush:xml">
+    <disk type='file' device='disk'>
+      <driver name="qemu" type="qcow2"/>
+-->   <source file="/home/fengxia/workspace/tmp/mydev.snap"/> 
+      <target dev='vda' bus='virtio'/>
+      <alias name='virtio-disk0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
+    </disk>
+</pre>
+---
+<h6>packaing: **Virtualbox image**</h6>
+
+1. Bootstrap a VM using Vagrant ([example `vagrantfile`][5])
+2. `vboxmanage list vms` to view VM names
+3. `vboxmanage export [vm name] -o [export name].ova`
+
+Example: 
+<pre class="brush:plain">
+$ vboxmanage export [vm name] -o [export name].ova                                                                  
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+</pre>
+
+[5]: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/uhm/vm/Vagrantfile
+[6]: https://www.virtualbox.org/manual/ch01.html#ovf
+
+Reference: [1][6]
+
+---
+<h6>Packaging: **Docker container**</h6>
+TBD
+---
+<h6>Packaging: VM conversions</h6>
+1. `raw` &rarr; `qcow2`:
+  <pre class="brush:plain">
+  $ qemu-img convert -f raw -O qcow2 image.img image.qcow2
+  </pre>
+2. `vmdk` &rarr; `img`:
+  <pre class="brush:plain">
+  $ qemu-img convert -f vmdk -O raw image.vmdk image.img
+  </pre>
+3. `vmdk` &rarr; `qcow2`:
+  <pre class="brush:plain">
+  $ qemu-img convert -f vmdk -O qcow2 image.vmdk image.qcow2
+  </pre>
+4. `vdi` &rarr; `raw`:
+  <pre class="brush:plain">
+  $ VBoxManage clonehd ~/VirtualBox\ VMs/image.vdi image.img --format raw
+  </pre>
+
+Reference: [1][7]
+
+[7]: https://docs.openstack.org/image-guide/convert-images.html

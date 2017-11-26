@@ -2,11 +2,14 @@
 .reveal section div{
   font-family: 'Muli', sans-serif;
   margin-bottom:16px;
-  font-size: 20px !important;
+  font-size: 18px !important;
+  text-align:left;
 }
+.reveal section dd,
 .reveal li {
-  font-size: 1.0em;
+  font-size: 18px;
 }
+
 
 .reveal h1,
 .reveal h2,

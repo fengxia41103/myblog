@@ -69,6 +69,27 @@ Transform it in **three steps** <i class="fa fa-hand-o-right"></i>
      style="box-shadow:none"><br>
 BM manager includes LXCA, MaaS, and others.
 ---
+<h6>WSS services (**1**/3)</h6>
+<div class="row">
+  <div class="col s9">
+    <img data-src="images/wss%20architecture%20components%201.png"
+         style="box-shadow:none;">
+  </div>
+  <div align="left"
+       class="col s3">
+    <ol>
+      <li>Existing catalog such as the **digital rack** can be used
+        to build HW inventory, grouping, hierarchy.</li>
+    
+      <li>**Architect** can design and determine constraints of a solution model
+        including both HW and SW components.</li>
+    
+      <li>Published models will be available in **solution store**
+        that can be purchased and **configured** by customer.</li>
+    </ol>
+  </div>
+</div>
+---
 <h6>static model &rarr; charm model 101</h6>
 
 1. **hierarchy** &rarr; abstract base model

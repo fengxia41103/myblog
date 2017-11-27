@@ -9,6 +9,26 @@
   </div>
 </section>
 ---
+<h6 class="menu-title">Table of contents</h6>
+
+1. Objectvie & Vision
+2. Architecture & implementation strategy
+  1. function
+  2. technology stack
+  3. deployment
+  4. build
+  5. packaging
+  6. dev
+  7. testing
+  8. distribution
+  9. upgrade
+3. Project management
+  1. deliverables
+  2. roadmap & milestones
+  3. risks
+4. Reviews & reports
+
+---
 <h6>WSS Objective</h6>
 
 1. Unified Hardware Modeling (**UHM** project)
@@ -603,4 +623,108 @@ Reference: [1][7]
 ---
 <h6>Dev</h6>
 
-  
+Your imagination is more imporant than rules...
+
+---
+<h6>Dev: **logistics**</h6>
+
+1. Main: [http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/master][8]
+2. Create a `branch` for your work
+3. Create a `merge request` (pull request) to merge your changes back to
+   `master`
+4. Issues are logged [here][9]
+5. Use Python 2.7 virtualenv for your Python code &rarr; `$ pip install -r requirements.txt` ([requirements.txt][10])
+  1. format **must** be in [pep8 style][14] (use [autopep8][15])
+  2. minimum: **4-space as tab**
+6. Use Juju 2.1+ for local testing (see next page for sandbox)
+7. Good luck
+
+[8]: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/master
+[9]: http://hpcgitlab.labs.lenovo.com/WSS/wss/issues
+[10]: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/master/requirements.txt
+[14]: https://www.python.org/dev/peps/pep-0008/
+[15]: https://pypi.python.org/pypi/autopep8
+
+---
+<h6>Dev: **sandbox**</h6>
+
+Use one of these standard Virtualbox or KVM as your sandbox:
+
+1. Use [Vagrantfile][11] for Virtualbox: `$ vagrant up`
+2. Use [my-user-data][12] for KVM: `$ python startmykvm.py mydev.xml` ([wiki][13])
+
+[11]: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/uhm/vm/Vagrantfile
+[12]: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/uhm/vm/my-user-data
+[13]: http://cowork.us.lenovo.com/teams/openstack/SitePages/KVM%20using%20cloud-init%20and%20backing%20file.aspx
+
+---
+<h6>testing</h6>
+
+Two levels of tests:
+
+1. test of individual component
+2. test as integration of > 1 components
+---
+<h6>individual testing: **charm**</h6>
+
+1. python unit test: TBD
+
+---
+<h6>integration testing: **CI/CD**</h6>
+<div class="row">
+  <div class="col l7 m7 s12">
+    <img data-src="images/wss%20ci.png"
+         class="no-shadow">
+  </div>
+  <div class="col l5 m5 s12">
+    <ol>
+      <li>
+        code: <a href="http://hpcgitlab.labs.lenovo.com/WSS/buildbot">
+        http://hpcgitlab.labs.lenovo.com/WSS/buildbot</a>
+      </li>
+      <li>
+        <a href="https://buildbot.net/">Buildbot</a> instance:
+        <a href="http://10.240.42.52:8010">http://10.240.42.52:8010</a>
+      </li>
+      <li>
+        One master can drive multiple slaves/workers (one per
+        sub/related project).
+      </li>
+      <li>
+        Status is emailed to distribution list &
+        IRC `#lenovo-lctc` (user nick `lctc-buildbot`)
+      </li>
+    </ol>
+
+    <p>
+      Adding a new project to CI takes a few steps
+      (<a href="http://hpcgitlab.labs.lenovo.com/WSS/buildbot/blob/master/README.md">README.md</a>):
+      <ol>
+        <li>Create slave `configuration .py`.</li>
+        <li>Add it to `build-master/master.cfg`.</li>
+        <li>Restart build master: `$ buildbot restart build-master`.</li>
+        <li>
+          Login to buildbot admin web UI to confirm that slave has been
+          added successfully.
+        </li>
+        <li>Force a build to test.</li>
+      </ol>
+    </p>
+
+    <blockquote>
+      Any manual step that you are finding yourself
+      doing more than **enough times**, CI it!
+    </blockquote>
+  </div>
+</div>
+---
+<h6>**integration testing**: Builtbot example</h6>
+
+<img data-src="images/wss%20buildbot%20ci%20example.png"
+     class="no-shadow">
+---
+<h6>Distribution</h6>
+TBD
+---
+<h6>Upgrade</h6>
+TBD

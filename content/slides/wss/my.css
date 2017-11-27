@@ -1,15 +1,26 @@
 .reveal section p,
 .reveal section div{
-  font-family: 'Muli', sans-serif;
   margin-bottom:16px;
-  font-size: 18px !important;
   text-align:left;
 }
+
+.reveal section p,
+.reveal section div,
 .reveal section dd,
-.reveal li {
-  font-size: 18px;
+.reveal li,
+.reveal td
+{
+  font-family: 'Muli', sans-serif;
+  font-size: 16px !important;
 }
 
+.reveal blockquote{
+  width: 100%;
+  border-left: 2px solid #d52349;
+  /* box-shadow: none; */
+  font-size: 14px;
+  font-style: normal;
+}
 
 .reveal h1,
 .reveal h2,
@@ -53,7 +64,6 @@
 
 .reveal section dd {
   margin-bottom:20px;
-  font-size: 0.8em;
 }
 
 .center{

@@ -24,41 +24,19 @@
          class="col s12 subtitle">
       **Last updated on:**<br>
 
-      - 11/2017
+      - 11/27/2017
     </p>
   </div>
 </section>
 ---
 <h6 class="menu-title">Table of contents</h6>
-<div class="row">
-<ol class="my-multicol-2">
-  <li>Challenges</li>
-  <li>Key technology</li>
-    <ol>
-      <li>Canonical Juju</li>
-      <li>Canonical charms</li>
-    </ol>
-  <li>Project</li>
-    <ol>
-      <li>Vision</li>
-      <li>Function architecture</li>
-      <li>Technology stack</li>
-      <li>Deployment</li>
-      <li>Build</li>
-      <li>Packaging</li>
-      <li>Dev</li>
-      <li>Testing</li>
-      <li>Deliverables</li>
-      <li>Roadmap & milestones</li>
-      <li>Risks</li>
-      <li>Reviews</li>
-    </ol>
-  <li>Used in
-    <ol>
-      <li>Unified Hardware Manager (UHM)</li>
-      <li>VX installer</li>
-    </ol>
-  </li>
-</ol>
-</div>
+
+1. Challenges
+2. Key technology
+  1. Canonical Juju (as orchestration engine)
+  2. Canonical charm (as orchestration model syntax)
+3. WSS project
+4. Related projects
+  1. Unified Hardware Management (UHM)
+  2. VX installer
 

@@ -3,12 +3,23 @@
   <div align="left" class="col s6">
     Key Technology:
     <h2>
-      Juju & charms
+      Canonical Juju
     </h2>
   </div>
 </section>
 ---
-<h6>Juju</h6>
+<h6 class="menu-title">Table of contents</h6>
+
+1. Introduction
+2. Key concepts
+2. How Juju executes charm
+3. How Juju manages/requests (platform) resource
+4. Internals
+  1. bootstrap process
+  2. provider
+  3. agent
+---
+<h6>Juju: **introduction**</h6>
 
 <p align="left" >
  **Juju's mission** is to provide a
@@ -47,34 +58,131 @@ Note:
 1. recommended charms: 343, community: 1819
 
 ---
-<h6>Juju orchestration model</h6>
+<h6>Juju key concepts</h6>
 
 <div class="row">
-  <div class="col s9">
-    <img data-src="images/juju%20model.png"
-         style="box-shadow:none">
+  <div class="col l5 m5 s12">
+    <img data-src="images/juju%20conceptual%20model.png"
+         class="no-shadow">
   </div>
-  <div class="col s3">
-    <p>
-      **Clouds** out of the box:
-    </p>
-    <ol>
-      <li>Azure</li>
-      <li>Cloudsigma</li>
-      <li>Amazon EC2</li>
-      <li>GCE</li>
-      <li>Joyent</li>
-      <li>Openstack</li>
-      <li>Rackspace</li>
-      <li>Vsphere</li>
-      <li>Canonical MAAS</li>
-      <li>LXD containers</li>
-      <li>Manual</li>
-    </ol>
+
+  <div class="col l7 m7 s12">
+    <dl>
+      <dt>provider</dt>
+      <dd>
+        Provider is the **driver** that Juju speaks
+        to different clouds/platforms.
+
+        <p>
+          It is **NOT** a plugin system. All providers are
+          compiled into `juju` binary. 
+        </p>
+      </dd>
+      
+      <dt>controller (as `machine-0`)</dt>
+      <dd>
+        A Juju controller is the management node of a Juju cloud
+        environment. In particular, it houses the database and keeps
+        track of all the models in that environment.
+        (<a href="https://jujucharms.com/docs/2.2/controllers">doc</a>)
+
+      </dd>
+
+      <dt>model</dt>
+      <dd>
+        Model hosts configurations that affects Juju (code)
+        execution, eg. agent version, apt mirror
+        (list of <a href="https://jujucharms.com/docs/2.2/models-config">key/value options
+        </a>).
+
+        <p>
+          Two models are created by default per controller &mdash; `controller` and `default`.
+          `controller` is for internal use; all other models can be CRUD.
+        </p>
+      </dd>
+
+      <dt>machine (resource)</dt>
+      <dd>
+        Machine is an abstract of a usable server that has an operating system
+        installed and can be used to deploy software. They are managed by
+        the `machine-0` and are generally selected by <a href="https://jujucharms.com/docs/2.2/reference-constraints">constraints</a>.
+      </dd>
+    </dl>
   </div>
 </div>
 ---
-<h6>Juju resource model: **LXD model**</h6>
+<h6>How Juju executes charm</h6>
+
+1. Agent-based
+2. A command is sent to **one controller** only
+3. You can have multiple controllers active (`$ juju list-controllers`)
+4. Charm is 
+---
+<h6>How Juju executes charm: **model**</h6>
+<img data-src="images/juju%20model.png"
+     style="box-shadow:none">
+
+---
+<h6>How Juju executes charm: **sequence diagram**</h6>
+
+<div class="row">
+  <div class="col l9 m9 s12">
+    <img data-src="images/juju%20charm%20deploy%20sequence.png"
+         class="no-shadow">
+  </div>
+  <div class="col l3 m3 s12">
+    <dl>
+      <dt>machine-0</dt>
+      <dd>
+        Manager node. One per cloud environment. Keep agent states, serve CLI
+        request, and command agents.
+      </dd>
+
+      <dt>agent</dt>
+      <dd>
+        Runtime workload orchestrator. Distributed on each target node.
+      </dd>
+
+      <dt>charm store</dt>
+      <dd>
+        Workload repository. Can be both local & remote.
+      </dd>
+    </dl>
+  </div>
+</div>
+---
+<h6>How Juju executes charm: **supported clouds (platform)**</h6>
+
+<pre class="brush:plain">
+$ juju list-clouds
+</pre>
+
+| Cloud       | Regions | Default         | Type       | Description                  |
+|-------------|---------|-----------------|------------|------------------------------|
+| aws         |      14 | us-east-1       | ec2        | Amazon Web Services          |
+| aws-china   |       1 | cn-north-1      | ec2        | Amazon China                 |
+| aws-gov     |       1 | us-gov-west-1   | ec2        | Amazon (USA Government)      |
+| azure       |      26 | centralus       | azure      | Microsoft Azure              |
+| azure-china |       2 | chinaeast       | azure      | Microsoft Azure China        |
+| cloudsigma  |       5 | hnl             | cloudsigma | CloudSigma Cloud             |
+| google      |       9 | us-east1        | gce        | Google Cloud Platform        |
+| joyent      |       6 | eu-ams-1        | joyent     | Joyent Cloud                 |
+| oracle      |       5 | uscom-central-1 | oracle     | Oracle Compute Cloud Service |
+| rackspace   |       6 | dfw             | rackspace  | Rackspace Cloud              |
+| localhost   |       1 | localhost       | lxd        | LXD Container Hypervisor     |
+---
+<h6>How Juju manages/requests resource</h6>
+<p>
+Two models Juju manages/requests a cloud (platform) resource:
+</p>
+
+1. **On-demand**: Cloud resource is created on the fly, eg. `localhost` (LXD container) cloud has one container (`machine-0`) to begin with. Issuing `$ juju deploy [charm name]` on `localhost` cloud will consequently create more containers as `machine-N`.  
+
+2. **Pre-registered pool**: cloud resource has been created and needs to be
+   registered to Juju's `machine-0` before it can be used, eg. MAAS handles server discovery (via PXE) and OS provision so to put it into `READY` state for Juju's orchestration.
+
+---
+<h6>How Juju manages resource: **LXD model**</h6>
 
 <div class="row">
   <div class="col s9">
@@ -103,7 +211,7 @@ base. In the end, we want the entire system appear to operator to have
 this capability by hiding complexity within the system.
 
 ---
-<h6>Juju resource model: **MaaS** model</h6>
+<h6>How Juju manages resource: **MaaS model**</h6>
 
 <div class="row">
   <div class="col s12">
@@ -115,261 +223,36 @@ this capability by hiding complexity within the system.
     <ol>
       <li>MaaS must be the **DHCP server** on provision network.</li>
       <li>Rely on **PXE**.</li>
-      <li>Support CentOS.</li>
+      <li>Can import and use customized OS image.</li>
     </ol>
   </div>
 </div>
 ---
-<h6>Charms</h6>
+<h6>Juju internals</h6>
 
-<p align="left" >
-  <i class="fa fa-quote-left"></i>
-  The central mechanism behind Juju is called Charms.
-  Charms can be written in any programming language that can be executed from the command line.
-  <i class="fa fa-quote-right"></i>
-</p>
-
-<p align="left">
-  **Example**:
-</p>
-<p align="left">
-databases (19), app-servers (19), file-servers (16), monitoring (14),
-ops (9), openstack (51), applications (75), misc (63), network (11),
-  analytics (7), apache (38), security (4), storage (17)
-</p>
-<p class="right">
-  <i class="fa fa-hand-o-right"></i>
-  **343** recommended ones, **1819** community contributed
-ones
-</p>
----
-<h6>Charms **store** & deployment</h6>
-
-<iframe data-src="https://jujucharms.com/q/openstack"
-        height="550px" width="100%"></iframe>
-<div class="divider"></div>
-
-**4** machines (VM & containers), **16** services, **1** click
----
-<h6>Charm key concepts</h6>
-
-| Concepts  | used for                    |
-|-----------|-----------------------------|
-| layer     | model inheritance           |
-| hooks     | a hardcoded set of handlers |
-| states    | user defined flags          |
-| relations | data communication          |
-| bundle    | deployment batch mode       |
 
 ---
-<h6>Charm **layers**</h6>
-<div class="row">
-  <div class="col s9">
-    <img data-src="images/juju%20charm%20layers.png"
-    style="box-shadow:none;">
-  </div>
-  <div class="col s3">
-    <dl>
-      <dt>Base layer</dt>
-      <dd>
-        Provides foundation service that can be reused.
-      </dd>
+<h6>Juju internals: **bootstrap process**</h6>
+<img data-src="images/juju%20bootstrap%20process.png"
+     class="no-shadow">
 
-      <dt>Interface layer</dt>
-      <dd>
-        Defines service that can be connected to, eg. DB. Parameters
-        are managed by charm; **connection method is determined by the
-        application**.
-      </dd>
+Reference: [v2.0][16]
 
-      <dt>Application layer</dt>
-      <dd>
-        Defines states, hooks and application logics.
-      </dd>
-    </dl>
-  </div>
-</div>
+[16]: https://github.com/juju/juju/tree/2.0
 
 ---
-<h6>Charm **hooks**</h6>
+<h6>Juju internals: **provider**</h6>
+<img data-src="images/juju%20provider.png"
+     class="no-shadow">
 
-<div class="row">
-  <div class="col s12">
-    <img data-src="images/charm%20hooks.png"
-         style="box-shadow:none">
-  </div>
-  <div class="col s12">
-    <ol>
-      <li>Hook sequences are
-        **hard-coded** in "juju/worker/uniter/operation/runhook.go".</li>
-      <li>Though being replaced by states, it is still
-      the **engine**.</li>
-    </ol>
-  </div>
-</div>
+Reference: [v2.0][16]
+
+[16]: https://github.com/juju/juju/tree/2.0
 ---
-<h6>charm **states**</h6>
+<h6>Juju internals: **agent**</h6>
+<img data-src="images/juju%20agent%20overview.png"
+     class="no-shadow">
 
-<div class="row">
-  <div class="col s8">
-    <img data-src="images/charm%20chain%20states.png"
-         style="box-shadow:none">
-  </div>
-  <div class="col s4">
-    <ol>
-      <li>@set_state() to transit from one state to another.</li>
-      <li>States should be viewed as **flags** meaning set_state() or
-        remove_state() does not take affect immediately &rarr; code of
-        a state **can be executed more than once**.</li>
-      <li>States can be split among layers, but not across different charms
-        or different units of the same charm.</li>
-      <li>Names from all included layers have the same namespace.</li>
-    </ol>
-  </div>
-</div>
----
-<h6>Charm **interfaces**</h6>
+Reference: [v2.0][16]
 
-<div class="row">
-  <div class="col s12">
-    <img data-src="images/charm%20relation%20and%20interface.png"
-         style="box-shadow:none">
-  </div>
-  <div align="left"
-       class="col s12">
-    One side "provide", the other "require", so that a provided interface
-    can be **reused** by multiple requirers.
-  </div>
-</div>
----
-<h6>charm **execution**</h6>
-<img data-src="images/charm%20execution.png"
-     style="box-shadow:none;">
-
----
-<h6>Example: **components** of a built charm</h6>
-
-<figure>
-  <img data-src="images/charm%20components.png"
-       style="box-shadow:none;">
-</figure>
-
-<dl class="my-multicol-2">
-  <dt>YAML data files</dt>
-  <dd>
-    <ol>
-      <li>`config.yaml`: configuration key-value pairs, supporting 4 data types: int, float, string, boolean.</li>
-      <li>`metadata.yaml`: name, description, tag, and **relations**</li>
-      <li>`layer.yaml`: includes other layers and relation interfaces.</li> 
-    </ol>
-  </dd>
-
-  <dt>States</dt>
-  <dd>
-    User defined **flags** that will be evaluated every 5 minutes. A TRUE
-    condition will be executed multiple times.
-  </dd>
-
-  <dt>Hooks</dt>
-  <dd>
-    Hardcoded execution points and invoking sequence.
-  </dd>
-
-  <dt>Relation</dt>
-  <dd>
-    Can one charm exechange data with another? 
-  </dd>
-  
-  <dt>Action (eg. playbooks)</dt>
-  <dd>
-    These can be independently developed and usable without charms.
-  </dd>
-
-  <dt>Layer</dt>
-  <dd>
-    Re-use other existing charm code, eg. utility function.
-  </dd>
-
-  <dt>Dependency packages</dt>
-  <dd>
-    In Python, these will be wheelhouse packages required by
-    the charm scripts.
-  </dd>
-</dl>
----
-<h6>Charm **orchestration model**</h6>
-<div class="row">
-  <div class="col s3">
-    <ol>
-      <li>Base unit is a **service**.</li>
-      <li>Service can have more than 1 unit to achieve HA.</li>
-      <li>Deployment can be on **BM, VM, and LXD** container.</li>
-      <li>Relation parity</li>
-    </ol>
-  </div>
-  <div class="col s9">
-    <img data-src="images/juju%20control%20modeling.png"
-    style="box-shadow:none;">
-  </div>
-</div>
----
-<h6>Charm **bundle**</h6>
-
-<div class="row">
-  <div class="col s7">
-    <pre class="brush:yaml">
-series: xenial
-
-machines:
-  '0':
-    series: xenial
-    
-services:
-  ceph-mon:
-    charm: cs:ceph-mon-12
-    num_units: 3
-    options:
-      expected-osd-count: 3
-      source: cloud:xenial-pike
-    to:
-    - lxd:1
-    - lxd:2
-    - lxd:3
-
-relations:
-- - nova-compute:amqp
-  - rabbitmq-server:amqp
-- - neutron-gateway:amqp
-  - rabbitmq-server:amqp
-    </pre>
-  </div>
-  <div class="col s5">
-    <dl>
-      <dt>series</dt>
-      <dd>
-        Defautl OS to provision. Can also be overridden by individual _service_.
-      </dd>
-
-      <dt>machines</dt>
-      <dd>
-        Definitions of runtime host environment (aka. machine) who
-        will execute the charm code.
-      </dd>
-
-      <dt>services</dt>
-      <dd>
-        A service &larr; a charm.
-        <ol>
-          <li>**option**: config values</li>
-          <li>**num_units**: number of instances of this service (HA)</li>
-          <li>**to**: in which machine/container these instances will be running </li>
-        </ol>
-      </dd>
-
-      <dt>relations</dt>
-      <dd>
-        Connecting services so they can exchange data when coming online.
-      </dd>
-    </dl>
-  </div>
-</div>
+[16]: https://github.com/juju/juju/tree/2.0

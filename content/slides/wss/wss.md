@@ -21,6 +21,7 @@
 3. Analysis & design
   1. process framework
   2. core services
+  3. data model
 2. Implementation
   1. function architecture
   2. technology stack
@@ -274,6 +275,7 @@ dynamic migration of containers by k8s. Therefore, it is up to the API of such p
   2. solution Store
   3. configuration service
   4. orchestration service
+3. data model
 ---    
 <h6>WSS: **analysis & design**: **process framework**</h6>
 
@@ -326,11 +328,15 @@ Note:
 
       <dt>Solution store</dt>
       is the <a href="https://jujucharms.com/store">Juju charm store</a>
-      or a Lenovo version of it. The idea is to host charm models (as a store)
-      that are specifict to Lenovo and those developed by Lenov partners.
+      or a Lenovo version of it. The idea is to be app store
+      that are specifict to charm models
+      developed by Lenovo and Lenov partners.
 
       <p>
-        User can order & configure their orders using store GUI. The output
+        User can order either solution (pre-defined group of
+        charm models, eg. ThinkAgile) or individual
+        available model (HW & SW), and can configure
+        their orders using store GUI. The output
         is saved into a **order manifest** format that can be used as BOM.
       </p>
       <dd>
@@ -458,6 +464,9 @@ Note:
     </h4>
   </div>
 </section>
+---
+<h6>WSS: **analysis & design**: **data model**</h6>
+
 ---
 <h6>WSS Implementation</h6>
 

@@ -467,6 +467,9 @@ Note:
 ---
 <h6>WSS: **analysis & design**: **data model**</h6>
 
+<img data-src="images/wss%20data%20model.png"
+     class="no-shadow">
+
 ---
 <h6>WSS Implementation</h6>
 

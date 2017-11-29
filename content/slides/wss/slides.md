@@ -24,7 +24,7 @@
          class="col s12 subtitle">
       **Last updated on:**<br>
 
-      - 11/27/2017
+      - 11/2017
     </p>
   </div>
 </section>

@@ -21,11 +21,10 @@
 ---
 <h6>Juju: **introduction**</h6>
 
-<p align="left" >
- **Juju's mission** is to provide a
- modeling language for users that abstracts the specifics of operating
- complex big software topologies.
-</p>
+>  **Juju's mission** is to provide a
+>  modeling language for users that abstracts the specifics of operating
+>  complex big software topologies.
+>
 
 <div class="row">
   <div class="col s4">
@@ -58,7 +57,7 @@ Note:
 1. recommended charms: 343, community: 1819
 
 ---
-<h6>Juju key concepts</h6>
+<h6>Juju: **key concepts**</h6>
 
 <div class="row">
   <div class="col l5 m5 s12">
@@ -111,19 +110,19 @@ Note:
   </div>
 </div>
 ---
-<h6>How Juju executes charm</h6>
+<h6>Juju: **how to execute a charm**</h6>
 
 1. Agent-based
 2. A command is sent to **one controller** only
 3. You can have multiple controllers active (`$ juju list-controllers`)
-4. Charm is 
+4. Charm is copied to a `machine` in its `/var/lib/juju/agents/[app name]-[machine index]/`
 ---
-<h6>How Juju executes charm: **model**</h6>
+<h6>Juju: **How to execute a charm**: **model**</h6>
 <img data-src="images/juju%20model.png"
      style="box-shadow:none">
 
 ---
-<h6>How Juju executes charm: **sequence diagram**</h6>
+<h6>juju: **How to execute a charm**: **sequence diagram**</h6>
 
 <div class="row">
   <div class="col l9 m9 s12">
@@ -151,7 +150,7 @@ Note:
   </div>
 </div>
 ---
-<h6>How Juju executes charm: **supported clouds (platform)**</h6>
+<h6>Juju: **how to  execute a charm**: **supported clouds (platform)**</h6>
 
 <pre class="brush:plain">
 $ juju list-clouds
@@ -182,7 +181,7 @@ Two models Juju manages/requests a cloud (platform) resource:
    registered to Juju's `machine-0` before it can be used, eg. MAAS handles server discovery (via PXE) and OS provision so to put it into `READY` state for Juju's orchestration.
 
 ---
-<h6>How Juju manages resource: **LXD model**</h6>
+<h6>Juju: **How to get a resource**: **LXD model**</h6>
 
 <div class="row">
   <div class="col s9">
@@ -211,7 +210,7 @@ base. In the end, we want the entire system appear to operator to have
 this capability by hiding complexity within the system.
 
 ---
-<h6>How Juju manages resource: **MaaS model**</h6>
+<h6>juju: **How to get a resource**: **MaaS model**</h6>
 
 <div class="row">
   <div class="col s12">
@@ -230,18 +229,38 @@ this capability by hiding complexity within the system.
 ---
 <h6>Juju internals</h6>
 
+1. bootstrap process
+2. bootstrap finalizer
+3. provider
+4. juju agent
 
 ---
-<h6>Juju internals: **bootstrap process**</h6>
+<h6>Juju: **internals**: **bootstrap process**</h6>
 <img data-src="images/juju%20bootstrap%20process.png"
      class="no-shadow">
 
 Reference: [v2.0][16]
 
 [16]: https://github.com/juju/juju/tree/2.0
-
 ---
-<h6>Juju internals: **provider**</h6>
+<h6>Juju: **internals**: **bootstrap finalizer**</h6>
+
+<div class="row">
+  <div class="col l6 m6 s12">
+<img data-src="images/juju%20common%20BootstrapInstance%20finalizer%20func.png"
+     class="no-shadow">
+  </div>
+  <div class="col l6 m6 s12">
+    <ol>
+      <li>Dir: `/var/lib/juju`</li>
+      <li>Machine identity: `none.txt` </li>
+      <li>Provision done: SSH polling</li>
+      <li>Agent & pkg install: `cloud-init`</li>
+    </ol>
+  </div>
+</div>
+---
+<h6>Juju: **internals**: **provider**</h6>
 <img data-src="images/juju%20provider.png"
      class="no-shadow">
 
@@ -249,7 +268,7 @@ Reference: [v2.0][16]
 
 [16]: https://github.com/juju/juju/tree/2.0
 ---
-<h6>Juju internals: **agent**</h6>
+<h6>Juju: **internals**: **agent**</h6>
 <img data-src="images/juju%20agent%20overview.png"
      class="no-shadow">
 

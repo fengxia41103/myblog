@@ -13,7 +13,7 @@
 ---
 This is how it is being done today...
 ---
-<h6 class="menu-title">Hardware catalog</h6>
+<h6>Lenovo hardware catalog</h6>
 
 <div class="row">
   <div class="col l9 m9 s12">
@@ -43,7 +43,7 @@ This is how it is being done today...
   </div>
 </div>
 ---
-<h6>Reference architecture</h6>
+<h6>Lenovo reference architecture</h6>
 <div class="row">
   <div class="col l7 m7 s12">
     <figure class="center-align">
@@ -70,7 +70,7 @@ This is how it is being done today...
   </div>
 </div>
 ---
-<h6>Sales configurator</h6>
+<h6>Lenovo sales configurator</h6>
 <div class="row">
   <div class="col l6 m6 s12">
     <figure class="center-align">
@@ -105,7 +105,7 @@ This is how it is being done today...
   Sales/user configurations are saved in format of XML & CSV (xConfigurator) as shown above on the right. 
 </div>
 ---
-<h6>MFG</h6>
+<h6>Lenovo MFG</h6>
 <div class="row">
   <div class="col l9 m9 s12">
     <figure class="center-align">
@@ -128,29 +128,7 @@ This is how it is being done today...
 </div>
 
 ---
-<h6>But</h6>
-
-<div class="row">
-  <img data-src="http://i.imgur.com/KzCHMAx.gif"
-       class="responsive-img col s6">
-  <div class="col s5 right"
-       align="left">
-    <p>
-      Like a modern software development,
-      lacking clearly defined interface to carry
-      information from one domain to the next
-      so everyone can build a common knowledge and
-      lingual makes inputs inevitably skewed, mis-interpreted,
-      and mis-used. Making things match
-      then become a **creative** task.
-    </p>
-  </div>
-</div>
-Note:
-
-1. https://developers.google.com/youtube/player_parameters
----
-<h6>Five challanges</h6>
+<h6>Lenovo challenges</h6>
 <p align="left">
 In our review of the current Lenovo processes,
 we have identified **five** challenges
@@ -189,3 +167,11 @@ experience.
     platforms on premise or across clouds.
   </div>
 </div>
+---
+<h6>Question</h6>
+
+Can we build a model-based tool to make these processes
+more consistent and more automated?
+
+
+**Yes, and read on.**

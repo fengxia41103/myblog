@@ -1,4 +1,4 @@
-.reveal section p,
+.reveal section,
 .reveal section div{
   margin-bottom:16px;
   text-align:left;
@@ -14,12 +14,19 @@
   font-size: 16px !important;
 }
 
+.syntaxhighlithger .gutter div,
+.syntaxhighlighter code.python,
+.syntaxhighlighter code.plain{
+  font-size: 16px !important;
+}
+
 .reveal blockquote{
   width: 100%;
   border-left: 2px solid #d52349;
   /* box-shadow: none; */
   font-size: 14px;
   font-style: normal;
+  padding-left: 2em;
 }
 
 .reveal h1,
@@ -105,7 +112,14 @@ section div.mybottom{
 }
 
 .reveal * code {
-  font-size: 0.6em;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.8em;
   color: #333;
   background-color: #fff3e0;
+  padding: 0px 5px;
+  border-radium: 3px;
+}
+
+li.slide-menu-item{
+  font-size: 10px !important;
 }

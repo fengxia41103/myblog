@@ -1,13 +1,17 @@
-<section data-background="https://drscdn.500px.org/photo/179822321/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=51cdb14b0e0929a01b68133e08caff3d0370f1418ba18be62e5a9c3d193e1ddd">
-  <div align="left" class="col s6">
-    A new way to describe
-    <h2>
-      Solution Architecture
-    </h2>
-  </div>
-</section>
+<h6>Redesign of Reference Architecture (RA)</h6>
+
+1. Introduction
+2. Reference Architecture POC
+  1. user story
+  1. WSS strategy
+  3. WSS view of a UHM stack
+  2. charm models
+  3. dev
+  4. testing
+  4. build
+  3. Demo
 ---
-<h6>what we have Today</h6>
+<h6>RA: **intro**</h6>
 
 <div class="row">
   <div class="col l6 m6 s12">

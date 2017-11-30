@@ -115,10 +115,12 @@ section div.mybottom{
 .reveal * code {
   font-family: 'Inconsolata', monospace;
   font-size: 0.8em;
-  color: #333;
-  background-color: #fff3e0;
-  padding: 0px 5px;
-  border-radium: 3px;
+  border-radius: 2px;
+  display: inline-block;
+  color: rgba(164,3,111,1);
+  line-height: 1;
+  padding: 1px 4px 3px;
+  background: rgba(23,42,58,.06);
 }
 
 li.slide-menu-item{

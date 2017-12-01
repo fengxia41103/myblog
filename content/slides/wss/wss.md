@@ -25,9 +25,9 @@
 2. Implementation
   1. function architecture
   2. technology stack
-  3. deployment
   4. build
   5. packaging
+  3. deployment
   6. dev
   7. testing
   8. distribution
@@ -475,9 +475,9 @@ Note:
 
   1. function architecture
   2. technology stack
-  3. deployment
   4. build
   5. packaging
+  3. deployment
   6. dev
   7. testing
   8. distribution
@@ -555,55 +555,6 @@ development sandbox, product packaging and distribution.
     </ol>
   </div>
 </div>
----
-<h6>wss implementation: **Deployment**</h6>
-
-This section illustrates setup and connection of
-components such as execution environment, network location, and
-software version. There can be at least three flavors of a
-deployment: **dev**, **production**, and **testing**.
-
-`Testing` is kept separate because it is often in midway between
-a full-blown production setup and a deverloper's sandbox. This
-is especially true for a deployment that calls for hardware and
-networking whose availability is limited, and for integration that
-relies on external third-party resources.
----
-<h6>WSS implementation: **deployment**:  **in a single VM**</h6>
-<div class="row">
-  <div class="col s8">
-    <img data-src="images/wss%20technology%20stack%20devbox.png"
-         class="no-shadow">
-  </div>
-  <div align="left"
-       class="col s4">
-    <ol>
-      <li>
-        Suitable for dev sandbox.
-      </li>
-      <li>Host environment
-        is based on <a href="https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img">Ubuntu 16.04 AMD64 cloud image</a>.
-      </li>
-      <li>
-        At least two LXC containers are required &mdash; one as Juju
-        controller (aka. machine 0 via `juju bootstrap localhost
-        [controller name]`), and one for charm execution.
-      </li>
-      <li>
-        Helper libs are optional &rarr; charms and bundle can be used
-        as-is without presence of a helper.
-      </li>
-      <li>
-        Charms can be pre-built package ready for use instead from
-        being built from source.
-      </li>
-    </ol>
-  </div>
-</div>
----
-<h6>WSS implementation: **deployment**: **in containers**</h6>
-<img data-src="images/wss%20technology%20stack%20prod.png"
-     class="no-shadow">
 ---
 <h6>wss implementation: **Build**</h6>
 
@@ -769,6 +720,55 @@ TBD
 Reference: [1][7]
 
 [7]: https://docs.openstack.org/image-guide/convert-images.html
+---
+<h6>wss implementation: **Deployment**</h6>
+
+This section illustrates setup and connection of
+components such as execution environment, network location, and
+software version. There can be at least three flavors of a
+deployment: **dev**, **production**, and **testing**.
+
+`Testing` is kept separate because it is often in midway between
+a full-blown production setup and a deverloper's sandbox. This
+is especially true for a deployment that calls for hardware and
+networking whose availability is limited, and for integration that
+relies on external third-party resources.
+---
+<h6>WSS implementation: **deployment**:  **in a single VM**</h6>
+<div class="row">
+  <div class="col s8">
+    <img data-src="images/wss%20technology%20stack%20devbox.png"
+         class="no-shadow">
+  </div>
+  <div align="left"
+       class="col s4">
+    <ol>
+      <li>
+        Suitable for dev sandbox.
+      </li>
+      <li>Host environment
+        is based on <a href="https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img">Ubuntu 16.04 AMD64 cloud image</a>.
+      </li>
+      <li>
+        At least two LXC containers are required &mdash; one as Juju
+        controller (aka. machine 0 via `juju bootstrap localhost
+        [controller name]`), and one for charm execution.
+      </li>
+      <li>
+        Helper libs are optional &rarr; charms and bundle can be used
+        as-is without presence of a helper.
+      </li>
+      <li>
+        Charms can be pre-built package ready for use instead from
+        being built from source.
+      </li>
+    </ol>
+  </div>
+</div>
+---
+<h6>WSS implementation: **deployment**: **in containers**</h6>
+<img data-src="images/wss%20technology%20stack%20prod.png"
+     class="no-shadow">
 ---
 <h6>wss implementation: **Dev**</h6>
 

@@ -6,10 +6,15 @@
   1. WSS strategy
   3. WSS view of a UHM stack
   2. charm models
-  3. dev
-  4. testing
-  4. build
   3. Demo
+3. UHM production
+  7. deployment
+  4. build
+  5. packaging
+  7. testing
+  8. distribution
+  9 upgrade
+
 ---
 <h6>UHM: **concept**</h6>
 

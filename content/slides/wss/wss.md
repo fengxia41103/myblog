@@ -483,6 +483,12 @@ Note:
   8. distribution
   9. upgrade
 ---
+<h6>WSS implementation: A word on TOC</h6>
+
+This TOC represents a framework to view and categorize tasks that are in reality
+inter-linked and inter-dependent. But there must be a "starting point".
+
+---
 <h6>WSS implementation: **Function architecture**</h6>
 
 

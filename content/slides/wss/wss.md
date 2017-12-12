@@ -772,7 +772,7 @@ relies on external third-party resources.
   </div>
 </div>
 ---
-<h6>WSS implementation: **deployment**: **in containers**</h6>
+<h6>WSS implementation : **deployment**: **in containers**</h6>
 <img data-src="images/wss%20technology%20stack%20prod.png"
      class="no-shadow">
 ---

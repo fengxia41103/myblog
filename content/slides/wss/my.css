@@ -126,3 +126,9 @@ section div.mybottom{
 li.slide-menu-item{
   font-size: 10px !important;
 }
+
+.reference {
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+}

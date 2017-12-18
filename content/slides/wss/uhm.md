@@ -1,22 +1,35 @@
 <h6>Unified Hardware Management (UHM)</h6>
 
-1. Introduction
-2. UHM POC
-  1. user story
+1. Intro
+  1. concept
+  2. objective
+  3. definition of done
+3. Analysis & design
+  1. process framework
+  2. core services
+  3. data model
+3. Strategy
   1. WSS strategy
+  1. model of a full stack
+  2. orchestration of a full stack
   3. WSS view of a UHM stack
-  2. charm models
-  3. Demo
-3. UHM production
-  7. deployment
+2. Implementation
+  1. function architecture
+  2. technology stack
   4. build
   5. packaging
+  3. deployment
+  6. dev
   7. testing
   8. distribution
-  9 upgrade
+  9. upgrade
+2. POC
+  1. user story
+  2. charm models
+  3. Demo
 
 ---
-<h6>UHM: **concept**</h6>
+<h6>UHM intro: **concept**</h6>
 
 Using `LXCA` as HW manager to setup hardware (rack, switch, and
 server). For each HW, it takes three steps
@@ -26,6 +39,15 @@ to config it: 1. resource registration; 2, firmware compliance; 3. HW configurat
 <img data-src="images/uhm%20concept.png"
      style="box-shadow:none;">
 
+---
+<h6>UHM intro: **objective**</h6>
+
+TBD
+
+---
+<h6>UHM intro: **definition of done**</h6>
+
+TBD
 ---
 <h6>UHM POC: **user story**</h6>
 <div class="row">

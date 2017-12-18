@@ -837,7 +837,7 @@ Two levels of tests:
   <div class="col l5 m5 s12">
     <ol>
       <li>
-        code: <a href="http://hpcgitlab.labs.lenovo.com/WSS/buildbot">
+        source: <a href="http://hpcgitlab.labs.lenovo.com/WSS/buildbot">
         http://hpcgitlab.labs.lenovo.com/WSS/buildbot</a>
       </li>
       <li>

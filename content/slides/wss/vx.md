@@ -1,8 +1,8 @@
 <h6>VX installer</h6>
 
 1. Intro
-  1. vision
-  2. objectvie
+  1. concept
+  2. objective
   3. definition of done
 3. Analysis & design
   1. process framework
@@ -23,7 +23,7 @@
   9. upgrade
 
 ---
-<h6>VX: **Vision**</h6>
+<h6>VX intro: **concept**</h6>
 
 > VMware vSAN provides enterprise-class software-defined storage  to back a hyper-converged infrastructure.   ThinkAgile VX series combines enterprise grade networking, server storage and VMware virtualization to deliver highly available storage solutions.  Software defined storage enables users to expand storage capacity on demand and automate storage polices based on workload.
 >
@@ -34,7 +34,7 @@
 </span>
 ---
 
-<h6>VX: **Objective**</h6>
+<h6>VX intro: **objective**</h6>
 
 VxInstaller is an application that will enable a user to:
 
@@ -46,7 +46,7 @@ VxInstaller is an application that will enable a user to:
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Architecture
 </footer>
 ---
-<h6>VX: **Definition of done**</h6>
+<h6>VX intro: **definition of done**</h6>
 <div class="row">
   <div class="col s9">
     <img data-src="http://www.storagereview.com/images/StorageReview-VMware-VSAN-Cluster.png"
@@ -72,7 +72,7 @@ VxInstaller is an application that will enable a user to:
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Architecture
 </span>
 ---
-<h6>VX: **analysis & design**: **process framework**</h6>
+<h6>VX analysis & design: **process framework**</h6>
 
 Workflow of using VX installer consists of six steps:
 
@@ -97,7 +97,7 @@ Workflow of using VX installer consists of six steps:
 </span>
 
 ---
-<h6>VX: **analysis & design**: **core services (1/3)**</h6>
+<h6>VX analysis & design: **core services (1/3)**</h6>
 
 <img data-src="images/vx%20simplified%20phase.png"
      class="no-shadow"/>
@@ -110,7 +110,7 @@ Note:
 
 * `post` are for configuration validation, not for orchestration actions
 ---
-<h6>VX: **analysis & design**: **core services**</h6>
+<h6>VX analysis & design: **core services**</h6>
 
 <div class="row">
   <div class="col s8">
@@ -140,7 +140,7 @@ Note:
 </span>
 
 ---
-<h6>VX: **analysis & design**: **core services (2/3)**</h6>
+<h6>VX analysis & design: **core services (2/3)**</h6>
 <div class="row">
   <div class="col s8">
     <img data-src="images/vx%20architecture%20components%202.png"
@@ -182,7 +182,7 @@ Note:
 </span>
 
 ---
-<h6>VX: **analysis & design**: **core services (3/3)**</h6>
+<h6>VX analysis & design: **core services (3/3)**</h6>
 
 <div class="row">
   <div class="col s9">
@@ -212,7 +212,7 @@ Note:
 </span>
 
 ---
-<h6>VX: **analysis & design**: **core services overview**</h6>
+<h6>VX analysis & design: **core services overview**</h6>
 <img data-src="images/vx%20architecture%20components.png"
 class="no-shadow"/>
 
@@ -221,7 +221,7 @@ class="no-shadow"/>
 </span>
 
 ---
-<h6>VX: **analysis & design**: **data model**: **Solution, VCenter**</h6>
+<h6>VX analysis & design: **data model**: **Solution, VCenter**</h6>
 
 <div class="row">
   <div class="col s5">
@@ -254,7 +254,7 @@ class="no-shadow"/>
 </div>
 
 ---
-<h6>VX: **analysis & design**: **data model**: **Datacenter, Cluster**</h6>
+<h6>VX analysis & design: **data model**: **Datacenter, Cluster**</h6>
 
 <div class="row">
   <div class="col s12">
@@ -298,7 +298,7 @@ class="no-shadow"/>
 
 </div>
 ---
-<h6>VX: **analysis & design**: **data model**: **Host**</h6>
+<h6>VX analysis & design: **data model**: **Host**</h6>
 
 <div class="row">
   <div class="col s9">
@@ -332,7 +332,7 @@ class="no-shadow"/>
   </div>
 </div>
 ---
-<h6>VX: **analysis & design**: **Host & networks**</h6>
+<h6>VX analysis & design: **Host & networks**</h6>
 
 <div class="row">
   <div class="col l5 m5 s12">
@@ -384,12 +384,12 @@ class="no-shadow"/>
 </span>
 
 ---
-<h6>VX: **analysis & design**: **data model**: **Host & networks**</h6>
+<h6>VX analysis & design: **data model**: **Host & networks**</h6>
 
 <img data-src="images/vx%203.png"
      class="no-shadow"/>
 ---
-<h6>VX: **analysis & design**: **data model**: **Host & vSan**</h6>
+<h6>VX analysis & design: **data model**: **Host & vSan**</h6>
 
 <div class="row">
   <div class="col s6">
@@ -399,7 +399,7 @@ class="no-shadow"/>
 
   <div class="col s6">
     <p>
-      vSan Requirements:
+      `vSan` requirements:
     </p>
 
     <ol>
@@ -436,7 +436,7 @@ class="no-shadow"/>
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Create+a+VSAN+using+vCenter
 </span>
 ---
-<h6>VX: **analysis & design**: **data model**: **Host & disks**</h6>
+<h6>VX analysis & design: **data model**: **Host & disks**</h6>
 
 <img data-src="images/vx%205.png"
      class="no-shadow"/>
@@ -444,3 +444,237 @@ class="no-shadow"/>
 `host` is the central model that bridges physical server and its disk resources
 to a `vsan` managed by a `vcenter`.
 ---
+
+<h6>VX analysis & design: **data model overview**</h6>
+
+<a href="images/vx.png">
+  <img data-src="images/vx.png"
+       class="no-shadow"/>
+  <br/>
+  <i class="fa fa-external-link"></i>
+  click to enlarge
+</a>
+---
+<h6>VX: **strategy**</h6>
+
+1. WSS view of a VX stack
+2. orchestration of a VX stack
+
+---
+<h6>VX strategy: **WSS view of a VX stack**</h6>
+<div class="row">
+  <div class="col l6 m6 s12">
+    <img data-src="images/wss%20view%20of%20vx%20stack.png"
+         class="no-shadow"/>
+  </div>
+  <div class="col l6 m6 s12">
+    <dl>
+      <dt>blueprints</dt>
+      <dd>
+        Two type of blueprints: HW and application.
+        <ol>
+          <li>
+            **HW blueprints**:
+            <ol>
+              <li>
+                VX assumes UEFI settings of a physical server has been
+                setup accordingly &rarr; HW blueprints will be a **shell**
+                as there is no actual HW-level setup required.
+              </li>
+              <li>
+                Key modeling will be around virtual representation of
+                a server &rarr; `vhost`, and its **logical** groupings
+                such as `vsan`, `cluster`, `datacenter`, and
+                `vcenter`.
+              </li>
+            </ol>
+          </li>
+          <li>
+            **application**: ThinkAgile VX
+          </li>
+      </dd>
+
+      <dt>orchestration</dt>
+      <dd>juju</dd>
+
+      <dt>platform</dt>
+      <dd>
+        Server via `ESXi VCenter Server API`.
+
+        <p>
+          However, we are not using a `vcenter provider` to
+          orhcestrate. Instead, charm model will call Ansible, which
+          in turn calls `vcenter REST api`.
+        </p>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+---
+<h6>VX strategy: **orchestration of a VX stack**</h6>
+
+<div class="row">
+  <div class="col l9 m9 s12">
+    <img data-src="images/vx%20orchestration%20strategy.png"
+         class="no-shadow"/>
+  </div>
+
+  <div class="col l3 m3 s12">
+    <ol>
+      <li>
+        vx orchestration service will receive a JSON/YAML describing a **complete** setup of a `vcenter` and its subordinates.
+      </li>
+      <li>
+        `vx configurator` will map this _description_ into a **single Juju bundle
+        YAML file** in which config values are mapped charm's config YAML,
+        and grouping are mapped to relations.
+      </li>
+      <li>
+        A request to deploy is then **queued** (`task queue`) in a `pub-sub` pattern.
+      </li>
+      <li>
+        `vx deployer` will remove a request from queue and call
+        `python deploy.py [bundle file].yaml`
+      </li>
+      <li>
+        Charm will be executed in LXD container on the same host where `vx deployer` instance is.
+      </li>
+    </ol>
+  </div>
+</div>
+
+---
+<h6>VX Implementation</h6>
+
+1. function architecture
+2. technology stack
+4. build
+3. deployment
+5. packaging
+6. dev
+7. testing
+8. distribution
+9. upgrade
+
+---
+
+<h6>VX implementation: **function architecture**: **level 1**</h6>
+
+<div class="row">
+  <div class="col l9 m9 s12">
+    <img data-src="images/vx%20func%20architect%201.png"
+         class="no-shadow"/>
+  </div>
+  <div class="col l3 m3 s12">
+    <p>
+      Based on <a href="http://10.240.42.32/presentations/wss/#/73">WSS
+      function architecture</a>, VX project will require services in
+      <span style="color:green;"> green</span>.
+    </p>
+
+    <ol>
+      <li>
+        no `baremental management service`: HW will be interfaced via
+        `VCenter Server API`.
+      </li>
+      <li>
+        no `validation service`: `vx` is to orchestrate `vcenter`
+        setup with no capability to verify its execution result (maybe
+        via the same vcenter API?)
+      </li>
+      <li>
+        no `workload management service`: no need for multi-layer
+        deployment and traversing.
+      </li>
+    </ol>
+  </div>
+</div>
+
+
+<span class="reference">
+  Ref: http://10.240.42.32/presentations/wss/#/73
+</span>
+
+---
+<h6>VX implementation: **function architecture**: **level 2**</h6>
+<img data-src="images/vx%20func%20architect%202.png"
+     class="no-shadow"/>
+
+<span class="reference">
+  Ref: http://10.240.42.32/presentations/wss/#/73
+</span>
+---
+
+<h6>VX implementation: **function architecture**: **level 3**</h6>
+
+<img data-src="images/vx%20func%20architect%203.png"
+     class="no-shadow"/>
+---
+<h6>VX implementation: **technology stack**</h6>
+<div class="row">
+  <div class="col s9">
+    <img data-src="images/vx%20technology%20stack.png"
+         class="no-shadow">
+  </div>
+  <div align="left"
+       class="col s3">
+    VX technology stack is mostly
+    covered by <a href="http://10.240.42.32/presentations/wss/#/76">
+    WSS technology stack</a> in which unused components are _grayed out_.
+
+    <p>
+      New to VX:
+    </p>
+    <ol>
+      <li>
+        A _presentation layer_ in `AngularJS`.
+      </li>
+    </ol>
+  </div>
+</div>
+---
+<h6>VX implementation: **technology stack**: **full architecture**</h6>
+
+<img data-src="images/vx%20technology%20stack%20full%20architecture.png"
+     class="no-shadow"/>
+---
+<h6> VX implementation: **build**</h6>
+
+At service level, we have the following services to build:
+
+1. VX configuration service
+1. VX orchestration service
+2. VX resource discovery service
+
+---
+<h6>VX implementation: **build**: **configuration service**</h6>
+
+1. source: cloud/ui-base
+2. build steps:
+
+---
+<h6>VX implementation: **build**: **orchestration service**</h6>
+
+1. source: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/uhm
+2. build charms:
+  1. <a href="http://10.240.42.32/presentations/wss/#/78">single charm</a>
+  2. <a href="http://10.240.42.32/presentations/wss/#/79">batch charms</a>
+
+---
+<h6>VX implementation: **deployment**</h6>
+
+---
+<h6> VX implementation: **packaging**</h6>
+
+---
+<h6>VX implementation: **dev**</h6>
+
+---
+<h6>VX implementation: **testing**</h6>
+
+---
+<h6>VX implementation: **distribution**</h6>
+
+---
+<h6>VX implementation: **upgrade**</h6>

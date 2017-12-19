@@ -656,12 +656,28 @@ At service level, we have the following services to build:
 ---
 <h6>VX implementation: **build**: **orchestration service**</h6>
 
-1. source: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/uhm
+1. source: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/vx
 2. build charms:
-  1. <a href="http://10.240.42.32/presentations/wss/#/78">single charm</a>
-  2. <a href="http://10.240.42.32/presentations/wss/#/79">batch charms</a>
+  1. <a href="http://10.240.42.32/presentations/wss/#/78">build single charm</a>
+  2. using <a href="http://10.240.42.32/presentations/wss/#/79">builder lib</a>
+3. data model backend:
+  1. source: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/vx/backend
+  2. to setup `django`+`uwsgi`+`nginx`: https://github.com/lenovo/workload-solution/wiki/Nginx-Uwsgi-Django-deployment
+    2. `uwsgi` config: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.uwsgi.ini
+    3. run `uwsgi` as system service: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/uwsgi.service
+    4. `nginx` config: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.nginx
+  2. `configurator.lib`: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/configurator.py, `UhmOrchestratorConfigurator`
+
+3. `deployer.lib`: WSS deployer
+4. `vx task consumer`: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/vx/task.py
+5. playbooks: http://hpcgitlab.labs.lenovo.com/WSS/ansible.lenovo-lxca
 
 ---
+<h6>VX implementation: **build**: **resource discovery service**</h6>
+
+TBD
+---
+
 <h6>VX implementation: **deployment**</h6>
 
 ---

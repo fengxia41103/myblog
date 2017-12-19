@@ -1,7 +1,7 @@
-Title: Logic, consistency
+Title: Logic
 Date: 2017-12-19 8:50
 Tags: thoughts
-Slug: logic consistency
+Slug: logic
 Author: Feng Xia
 
 <figure class="col l5 m5 s12">
@@ -55,28 +55,32 @@ just to _catch up_.
 
 **But wait!!! This is what bothers me now**. 
 
-First of all, where is
-the voice of familiar _Chinese charateristics_ now!? Don't people
-always think that their market is so unique (from the rest of world)
-that it expects, deserves, a special treatment, a Chinese version!?
-How come all of sudden what US market is now a benchmark? This isn't
-an isolated case. Taking any marketing PPT when the first couple pages
-talks about an industry, a business model, there is always the logic
-that whatever the 先进国家 has (or had), it represents a self-proven
-projection of what the topic (and PPT author's view) will have. Don't
-you see!? This is completely contradicting to what they will
-**inevitably** derive just a few pages later, now the old cliché 
-that "oh btw, China is different that you just don't understand it as
-well as I do, and there is a new, modified, custom-made version, just
-for China, and look how smart I am, how business savvy I am, and how
-接地气 I am". Give me a fxxx break!!! This is completely BS, and the
-frustration I have is that s/he doesn't realize how BS s/he is being!
-What I'm hearing are two assumptions as the basis of their logic:
+# You can't have both True
+
+First of all, where is the voice of familiar _Chinese charateristics_
+now!? Don't people always think that their market is so unique (from
+the rest of world) that it expects, deserves, a special treatment, a
+Chinese version!?  How come all of sudden what US market is now a
+benchmark? This isn't an isolated case. Taking any marketing PPT when
+the first couple pages talks about an industry, a business model,
+there is always the logic that whatever the 先进国家 has (or had), it
+represents a self-proven projection of what the topic (and PPT
+author's view) will have. Don't you see!? This is completely
+contradicting to what they will **inevitably** derive just a few pages
+later, now the old cliché that "oh btw, China is different that you
+just don't understand it as well as I do, and there is a new,
+modified, custom-made version, just for China, and look how smart I
+am, how business savvy I am, and how接地气 I am". Give me a fxxx
+break!!! This is completely BS, and the frustration I have is that
+s/he doesn't realize how BS s/he is being!  What I'm hearing are two
+assumptions as the basis of their logic:
 
 1. I have an apple, and you have an orange.
 2. Because orange grows 10 lb/piece, my apple will grow to 10 lb/piece, too.
 
 Excuse me!? You can have one of these two points, but not both.
+
+# You can't make projection withiout distinction
 
 Secondly, if the business (model) are indeed the same in core &mdash;
 online or not is just a form, the core of banking, the logic of
@@ -106,21 +110,31 @@ rule.
    
 So what I'm trying to derive from this? is that only the fixed values
 are transportable and can be used in a projection. The variable
-segment requires a delibrate analysis with a point of view and
-framework so to support your opinioin, and it's very much up for
-debate and challenge. But omitting it as if it is a universal
-knowledge without a need of explanation 
-is just a coward action showing that you don't understand it 
-either, and that defeats the whole logic of the my apple will grow to
-10 lb/piece just because their apple grows to that big, too. **No!!**
-If your division of fixed vs. variable is 20%-80%, I would only accept
-that there is 20% of a chance your apple will grow to their size,
-certainly not 100%. Period. You see, this is how logic should be, be
-logical, and be consistent.
+segment requires a delibrate analysis with a **clearly defined point
+of view** (yes, you are required to take a stand so all the analysis
+has a foundation. Otherwise, it's meaningless.) and framework so to
+support your opinion, and like any subjevtive POV it's very much up
+for debate and challenge (but at least it is clear to all that it is a
+subjective POV, not an objective fact, and that is a core
+difference). But omitting it as if it is a universal knowledge without
+a need of explanation is just a coward action showing that you don't
+understand it either, and that defeats the whole logic of the my apple
+will grow to 10 lb/piece just because their apple grows to that big,
+too. **No!!** If your division of fixed vs. variable is 20%-80%, I
+would only accept that there is 20% of a chance your apple will grow
+to their size, certainly not 100%. Period. You see, this is how logic
+should be, be logical, and be consistent.
+
+# Sigh
 
 Too many times now, in too many occasions, and by too many dressed-up
 experts and talk shows, the two contradicting views are being
 presented and mingled to support a single argument, which
-fundamentally is saying "Look, I flip a coin and both faces are up!"
-&mdash; this is indeed impressive (as it's hoping to sound), because
-it is absolutely magical, as it can not logically happen.
+fundamentally is saying:
+
+> "Look, I flip a coin and both faces are up!"
+
+This line is indeed impressive (as its speaker is hoping to sound). As
+a matter of fact, it must be impressive, it has to be impressive,
+because this is absolutely magical! It is absolutely magical because,
+it can not logically happen. That's all.

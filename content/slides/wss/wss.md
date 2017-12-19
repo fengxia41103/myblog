@@ -740,7 +740,7 @@ is especially true for a deployment that calls for hardware and
 networking whose availability is limited, and for integration that
 relies on external third-party resources.
 ---
-<h6>WSS implementation: **deployment**:  **in a single VM**</h6>
+<h6>WSS implementation: **deployment**: **Dev/prod in a single VM**</h6>
 <div class="row">
   <div class="col s8">
     <img data-src="images/wss%20technology%20stack%20devbox.png"
@@ -772,7 +772,7 @@ relies on external third-party resources.
   </div>
 </div>
 ---
-<h6>WSS implementation : **deployment**: **in containers**</h6>
+<h6>WSS implementation : **deployment**: **Prod in containers**</h6>
 <img data-src="images/wss%20technology%20stack%20prod.png"
      class="no-shadow">
 ---

@@ -137,6 +137,8 @@ Note:
 
 <span class="reference">
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Architecture
+  <br/>
+  Ref: http://10.240.42.32/presentations/wss/index.html#/64
 </span>
 
 ---
@@ -179,6 +181,8 @@ Note:
 
 <span class="reference">
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Architecture
+  <br/>
+  Ref: http://10.240.42.32/presentations/wss/index.html#/65
 </span>
 
 ---
@@ -209,6 +213,8 @@ Note:
 
 <span class="reference">
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Architecture
+  <br/>
+  Ref: http://10.240.42.32/presentations/wss/index.html#/67
 </span>
 
 ---
@@ -218,6 +224,8 @@ class="no-shadow"/>
 
 <span class="reference">
   Ref: http://confluence1.labs.lenovo.com:8090/display/TSM/Architecture
+  <br/>
+  Ref: http://10.240.42.32/presentations/wss/index.html#/68
 </span>
 
 ---
@@ -511,6 +519,10 @@ to a `vsan` managed by a `vcenter`.
   </div>
 </div>
 
+<span class="reference">
+  Ref: http://10.240.42.32/presentations/wss/#/54
+</span>
+
 ---
 <h6>VX strategy: **orchestration of a VX stack**</h6>
 
@@ -562,29 +574,27 @@ to a `vsan` managed by a `vcenter`.
 <h6>VX implementation: **function architecture**: **level 1**</h6>
 
 <div class="row">
-  <div class="col l9 m9 s12">
+  <div class="col s9">
     <img data-src="images/vx%20func%20architect%201.png"
          class="no-shadow"/>
   </div>
-  <div class="col l3 m3 s12">
+  <div class="col s3">
     <p>
-      Based on <a href="http://10.240.42.32/presentations/wss/#/73">WSS
-      function architecture</a>, VX project will require services in
-      <span style="color:green;"> green</span>.
+      Unused WSS services are grayed out:
     </p>
 
     <ol>
       <li>
-        no `baremental management service`: HW will be interfaced via
+        baremental management service: HW will be interfaced via
         `VCenter Server API`.
       </li>
       <li>
-        no `validation service`: `vx` is to orchestrate `vcenter`
+        validation service: `vx` is to orchestrate `vcenter`
         setup with no capability to verify its execution result (maybe
         via the same vcenter API?)
       </li>
       <li>
-        no `workload management service`: no need for multi-layer
+        workload management service: no need for multi-layer
         deployment and traversing.
       </li>
     </ol>
@@ -601,8 +611,11 @@ to a `vsan` managed by a `vcenter`.
 <img data-src="images/vx%20func%20architect%202.png"
      class="no-shadow"/>
 
+Consider `ThinkAgile VX` as application because its outcome will not be used
+for further workload deployment.
+
 <span class="reference">
-  Ref: http://10.240.42.32/presentations/wss/#/73
+  Ref: http://10.240.42.32/presentations/wss/#/74
 </span>
 ---
 
@@ -610,6 +623,7 @@ to a `vsan` managed by a `vcenter`.
 
 <img data-src="images/vx%20func%20architect%203.png"
      class="no-shadow"/>
+
 ---
 <h6>VX implementation: **technology stack**</h6>
 <div class="row">
@@ -633,6 +647,10 @@ to a `vsan` managed by a `vcenter`.
     </ol>
   </div>
 </div>
+
+<span class="reference">
+  Ref: http://10.240.42.32/presentations/wss/index.html#/76
+</span>
 ---
 <h6>VX implementation: **technology stack**: **full architecture**</h6>
 
@@ -650,7 +668,7 @@ At service level, we have the following services to build:
 ---
 <h6>VX implementation: **build**: **configuration service**</h6>
 
-1. source: cloud/ui-base
+1. source: https://git.icelab.lenovo.com/cloud/ui-base
 2. build steps:
 
 ---
@@ -658,28 +676,89 @@ At service level, we have the following services to build:
 
 1. source: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/vx
 2. build charms:
-  1. <a href="http://10.240.42.32/presentations/wss/#/78">build single charm</a>
+  1. <a href="http://10.240.42.32/presentations/wss/#/78">build single
+     charm</a>
   2. using <a href="http://10.240.42.32/presentations/wss/#/79">builder lib</a>
 3. data model backend:
   1. source: http://hpcgitlab.labs.lenovo.com/WSS/wss/tree/vx/backend
-  2. to setup `django`+`uwsgi`+`nginx`: https://github.com/lenovo/workload-solution/wiki/Nginx-Uwsgi-Django-deployment
-    2. `uwsgi` config: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.uwsgi.ini
-    3. run `uwsgi` as system service: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/uwsgi.service
-    4. `nginx` config: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.nginx
-  2. `configurator.lib`: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/configurator.py, `UhmOrchestratorConfigurator`
-
+  2. to setup `django`+`uwsgi`+`nginx`:
+     https://github.com/lenovo/workload-solution/wiki/Nginx-Uwsgi-Django-deployment
+  2. `uwsgi`:
+    1. config: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.uwsgi.ini
+    3. run `uwsgi` as system service:
+       http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/uwsgi.service
+  4. `nginx` config:
+       http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.nginx
+  2. `configurator.lib`:
+     http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/configurator.py,
+     `UhmOrchestratorConfigurator`
+3. LXD:
+  1. config:
+     http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/vm/lxd-bridge.default
+  2. LXC image: http://10.240.42.32/vm/gold.tar.gz, using alias
+     `juju/trusty/amd64`
 3. `deployer.lib`: WSS deployer
-4. `vx task consumer`: http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/vx/task.py
+4. `vx task consumer`:
+   http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/vx/task.py
 5. playbooks: http://hpcgitlab.labs.lenovo.com/WSS/ansible.lenovo-lxca
 
+
+<span class="reference">
+Ref: http://10.240.42.32/presentations/wss/index.html#/78
+</span>
 ---
 <h6>VX implementation: **build**: **resource discovery service**</h6>
 
 TBD
 ---
-
 <h6>VX implementation: **deployment**</h6>
 
+Each service has two deployment modes:
+
+1. dev
+2. production
+
+---
+
+<h6>VX implementation: **deployment**: **dev**</h6>
+
+<div class="row">
+  <div class="col s12">
+    <img data-src="images/vx%20deployment%20dev.png"
+         class="no-shadow">
+  </div>
+</div>
+
+<span class="reference">
+  Ref: http://10.240.42.32/presentations/wss/index.html#/88
+</span>
+
+---
+<h6>VX implementation: **deployment**: **prod**</h6>
+
+<div class="row">
+  <div class="col l9 m9 s12">
+    <img data-src="images/vx%20deployment%20prod.png"
+         class="no-shadow"/>
+  </div>
+  <div class="col l3 m3 s12">
+    <ol>
+      <li>
+        Deployed in a single Ubuntu 16.04.
+      </li>
+      <li>
+        Use unix socket `lenovo.sock` to connect `uwsgi` to `nginx`.
+      </li>
+      <li>
+        Database server and RabbitMQ server can be remote, in which case
+        Django `settings.py` needs their IP info.
+      </li>
+      <li>
+        Proxy `juju gui` is optional.
+      </li>
+    </ol>
+  </div>
+</div>
 ---
 <h6> VX implementation: **packaging**</h6>
 

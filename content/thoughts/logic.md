@@ -20,34 +20,33 @@ some kind of online version of a traditional bank, and everybody
 thinks it is going to rock the money industry because now it has
 officially married the crown jewel of this era &mdash; computer
 technology. Of course, the marriage carries an army of buzz word
-ornaments &mdash; AI, big data... the scenario is that by collecting consumer
-data and data crunching, agent shall be able to **improve efficiency**
-dramatically in deciding whether one should get a loan approval or
-not, which, if realized as what they say, is certainly a huge
-advantage over the status quo &mdash; Chinese state-owned
-banks are notorious in treating their customers badly by being low
-efficient and arrogant. From my own experience, both as an
-employee and as a customer, the understanding of what data is and what
-one can do with it is just not there. Yes they collect a huge amount
-of private data, but at the mean time these data are dis-organized,
-arbitrarily designed and decided &mdash; guilty as charged, I was one
-of those who actually designed application form that our loan customer
-has to fill out for dollar amount up to millions (!!), 
-while I had literally zero
-experimental proof of any of those data points could be effective, or even
-correlate in one way or another!? Even worse, the VP of the bank had
-strong opinion of his own so the form also incorporated many of his
-_wishes_ while his only defense is that _it has been used in banking
-industry for years_ or that _he had good experience with it_ &mdash;
-all subjective, all _what I say against yours, and I win because I'm
-the boss_, kind of deal &rarr; so that's how the wheels went. I'm
-super-surprised how well these banks are doing according to their
-official paper, while its internal is such a mess. Oh well.
+ornaments &mdash; AI, big data... the scenario is that by collecting
+consumer data and data crunching, agent shall be able to **improve
+efficiency** dramatically in deciding whether one should get a loan
+approval or not, which, if realized as what they say, is certainly a
+huge advantage over the status quo &mdash; Chinese state-owned banks
+are notorious in treating their customers badly by being low efficient
+and arrogant. From my own experience, both as an employee and as a
+customer, the understanding of what data is and what one can do with
+it is just not there. Yes they collect a huge amount of private data,
+but at the mean time these data are dis-organized, arbitrarily
+designed and decided &mdash; guilty as charged, I was one of those who
+actually designed application form that our loan customer has to fill
+out for dollar amount up to millions (!!), while I had literally zero
+experimental proof of any of those data points could be effective, or
+even correlate in one way or another!? Even worse, the VP of the bank
+had strong opinion of his own so the form also incorporated many of
+his _wishes_ while his only defense is that _it has been used in
+banking industry for years_ or that _he had good experience with it_
+&mdash; all subjective, all _what I say against yours, and I win
+because I'm the boss_, kind of deal &rarr; so that's how the wheels
+went. I'm super-surprised how well these banks are doing according to
+their official paper, while its internal is such a mess. Oh well.
 
 Back to the topic. Universally everybody thought Baidu stepping into
 the financial world is a big news, even as yet another example that
 these tech companies &mdash; Alibaba, Tencent, are transforming
-themselves into something closer to money. Wny? Because the core of
+themselves into something closer to money. Why? Because the core of
 the argument is that by looking at the same type of entity in the US
 market, who has about 10% of all financial transaction volume, China
 has only 0.2% currently &rarr; therefore, we are looking at 50x growth

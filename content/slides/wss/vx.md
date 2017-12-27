@@ -691,7 +691,8 @@ At service level, we have the following services to build:
        http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/backend/deploy/lenovo.nginx
   2. `configurator.lib`:
      http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/configurator.py,
-     `UhmOrchestratorConfigurator`
+`UhmOrchestratorConfigurator`
+  5. to launch vx msg queue: `celery -A lenovo worker -l info`
 3. LXD:
   1. config:
      http://hpcgitlab.labs.lenovo.com/WSS/wss/blob/vx/vm/lxd-bridge.default

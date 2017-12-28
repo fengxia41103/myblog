@@ -58,7 +58,7 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 
 # plugins
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["tipue_search"]
+PLUGINS = ["tipue_search", "extract_toc"]
 
 ##############################
 #

@@ -2,11 +2,6 @@
 
 {% block content %}
 <div style="background-color: #fefefe;">
-{% if article.toc %}
-    <nav class="toc">
-    {{ article.toc }}
-    </nav>
-{% endif %}
   <article class="container" style="padding-top:1em;">
     {% block main_content %}
     <div class="page-header row">

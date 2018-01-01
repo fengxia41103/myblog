@@ -22,10 +22,10 @@ Where should I even start? The topic was about a
 new [Chinese policy][2] that is to obsolete gasoline car and promote
 electric cars. What bugs me is the fact that no one, I mean no one, on
 the show and involved in this discussion said anything about
-**efficiency** of energy conversion. They all stated the easy _opinions_,
-environment protection, green life, obsoleting old technology (and
-really!? who said, or proved, that gasoline car is an old technology?
-Isn't it again stated with an underline assumption
+**efficiency** of energy conversion. They all stated the easy
+_opinions_, environment protection, green life, obsoleting old
+technology (and really!? who said, or proved, that gasoline car is an
+old technology?  Isn't it again stated with an underline assumption
 of [mature technology][3]?), and how we, China, could yet again lead
 the _next wave_ in technology, and automobile has long been seen as
 the symbol of the start of America's industrial dominance &mdash; the

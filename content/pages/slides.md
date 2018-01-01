@@ -18,7 +18,7 @@ Author: Feng Xia
       </figure>
     </div>
     <div class="card-action">
-      <a href="/slides/moment/index.html">
+      <a href="https://fengxia41103.github.io/moment/1236/#/">
         <i class="fa fa-link"></i>slides
       </a>
     </div>

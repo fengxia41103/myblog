@@ -1,8 +1,8 @@
 out_to_x no
 out_to_console yes
-update_interval 1.0
+update_interval 5.0
 total_run_times 0
 use_spacer none
 TEXT
-BAT: ${battery_time} | WIFI: ${addr wlp4s0} | VPN: ${addr tun0} | RAM:${memperc}% | CPU:${cpu}% | FREE:${fs_free_perc}% | DW: ${downspeedf wlp4s0}KiB
+BAT: ${battery_time} ${battery_percent}% | WIFI: ${addr wlp3s0} | VPN: ${addr tun0} | RAM:${memperc}% | CPU:${cpu}% | FREE:${fs_free_perc}% | DW: ${downspeedf wlp4s0}KiB
 

@@ -9,8 +9,8 @@ Author: Feng Xia
 </figure>
 
 
-I am amazed, that [财经郎眼][6] I used to enjoy so much which kept me on
-tap with China's economic progress and debates, is nowadays plagued
+I am amazed, that [财经郎眼][6] I used to enjoy so much which kept me
+on tap with China's economic progress and debates, is nowadays plagued
 with a BS culture and discussion pattern that I have [witnessed][1],
 criticized, hated (no I don't hate this program, just the cliche
 amplified by this 11/6/2017 episode on [新能源车 变革未来][6].)
@@ -55,13 +55,13 @@ it is really a comparison of two super duper complicated industries:
 2. oil + transmission + combustion + engine
 
 So to comprehend the benefit (or con) of either side, one needs to
-consider the whole nine yard of electricity generation from coal, hydraulic
-power, wind, solar, nuclear, to a heated water pump that drives a
-GIANT engine in an power plant, all the way to that little tiny bit
-locked inside your battery, versus a **completely similiar** breakdown
-of technology chain but using, transporting a different material. If
-you ever study high school physics, energy is constant, just different
-form. 
+consider the whole nine yard of electricity generation from coal,
+hydraulic power, wind, solar, nuclear, to a heated water pump that
+drives a GIANT engine in an power plant, all the way to that little
+tiny bit locked inside your battery, versus a **completely similiar**
+breakdown of technology chain but using, transporting a different
+material. If you ever study high school physics, energy is constant,
+just different form.
 
 People are talking about the power stored in battery as if it came for
 free!! Nuts! The electrical power came from somewhere, and there is a
@@ -70,7 +70,7 @@ per watt you pay on your electricity bill, I'm talking about this
 industrial supply chain that convert a raw material to a form that
 will drive the wheels. So really, regardless which material to choose
 from, it's the **efficiency of this chain** matters, not the last link
-of battery! 
+of battery!
 
 > In other words, if you suck in the current chain (which, as matter
 > of fact, is a lot mature than the one you are proposing), then your
@@ -112,25 +112,26 @@ efficiency, science, technology, really, there is one set of physics
 rules that are universally true, and one should continue to challenge
 it, to test it, to gain better understanding of it so to find out when
 it falls short. But having a moral cry with excitement that "look, the
-new Chinese way!", is just fxxxx BS. 
+new Chinese way!", is just fxxxx BS.
 
 [5]: https://en.wikipedia.org/wiki/Gravity_of_Earth
 
 # Be conservative
 
 I have observed this pattern many times over that is crazily prevalent
-in China and its elite circle these days. I call it the **view of being
-a competitor rather than being a contributor**. China elites keep
-thinking in term of a race and competition in which winner takes it
-all. They should instead think how their experiments and trials could
-help to eliminate unknown path and to contribute to the pool of this
-overall interesting, seemingly beneficial, and humanely progressive
-topic. If they truly believe in the future of a wide adoption of this
-technology that can make people's life better, they should be
-extremely critical of its risk and problems, because if you truly care
-about people, you don't see shinning $$ signs or benefits written all
-over, you see how painful and struggling someone's life can be
-affected, and how agonizing that will be to one's soul, to yours.
+in China and its elite circle these days. I call it the **view of
+being a competitor rather than being a contributor**. China elites
+keep thinking in term of a race and competition in which winner takes
+it all. They should instead think how their experiments and trials
+could help to eliminate unknown path and to contribute to the pool of
+this overall interesting, seemingly beneficial, and humanely
+progressive topic. If they truly believe in the future of a wide
+adoption of this technology that can make people's life better, they
+should be extremely critical of its risk and problems, because if you
+truly care about people, you don't see shinning $$ signs or benefits
+written all over, you see how painful and struggling someone's life
+can be affected, and how agonizing that will be to one's soul, to
+yours.
 
 # Leave government alone
 

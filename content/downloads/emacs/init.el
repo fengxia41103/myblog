@@ -701,85 +701,6 @@ and buffers which are visible in other windows are normally skipped."
 (set-face-attribute 'show-paren-match nil 
                     :weight 'extra-bold)
 
-;; Org mode
-(unless (package-installed-p 'org) ;; Make sure the Org package is
-  (package-install 'org))          ;; installed, install it if not
-
-;; Standard key bindings
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-;; I use C-c c to start capture mode
-(global-set-key (kbd "C-c c") 'org-capture)
-
-(setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
-
-(setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "WORKING(k@/!)" "|" "DONE(d@/!)") 
-                                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
-
-(setq org-todo-keyword-faces (quote (("TODO" :foreground "red" 
-                                      :weight bold) 
-                                     ("DONE" :foreground "forest green" 
-                                      :weight bold) 
-                                     ("WAITING" :foreground "orange" 
-                                      :weight bold) 
-                                     ("HOLD" :foreground "magenta" 
-                                      :weight bold) 
-                                     ("CANCELLED" :foreground "forest green" 
-                                      :weight bold) 
-                                     ("WORKING" :foreground "forest green" 
-                                      :weight bold))))
-
-(setq org-use-fast-todo-selection t)
-
-(setq org-todo-state-tags-triggers (quote (("CANCELLED" ("CANCELLED" . t)) 
-                                           ("WAITING" ("WAITING" . t)) 
-                                           ("HOLD" ("WAITING") 
-                                            ("HOLD" . t)) 
-                                           ("TODO" ("WAITING") 
-                                            ("CANCELLED") 
-                                            ("HOLD")) 
-                                           ("NEXT" ("WAITING") 
-                                            ("CANCELLED") 
-                                            ("HOLD")) 
-                                           ("DONE" ("WAITING") 
-                                            ("CANCELLED") 
-                                            ("HOLD")))))
-
-;; Org Capture mode
-(setq org-directory "~/org/")
-(setq org-default-notes-file "~/org/notes.org")
-
-(setq org-capture-templates '(("t" "Todo" entry (file+headline "~/org/todo_mac.org" "Tasks")
-                               "* TODO %?\n %i\n") 
-                              ("n" "Note" entry (file+datetree "~/org/notes_mac.org")
-                               "* NOTE %?\n %i\n ") 
-                              ("o" "Tool" entry (file+datetree "~/org/tools.org")
-                               "* TOOL %?\n %i\n ") 
-                              ("j" "Journal" entry (file+datetree "~/org/journal.org")
-                               "* %?\nEntered on %U\n  %i\n ") 
-                              ("x" "XRv" entry (file+datetree "~/org/xrv.org") "* XRV %?\n %i\n ") 
-                              ("a" "Agile" entry (file+datetree "~/org/agile.org") "* %?\n %i\n ") 
-                              ("s" "Sunstone" entry (file+datetree "~/org/sunstone.org")
-                               "* Sunstone %?\n %i\n ") 
-                              ("d" "Devnet" entry (file+datetree "~/org/devnet.org")
-                               "* Devnet %?\n %i\n ") 
-                              ("p" "Puppet" entry (file+datetree "~/org/puppet.org")
-                               "* PUPPET %?\n %i\n ")))
-
-(setq header-line-format mode-line-format)
-
-(setq org-publish-project-alist '(("org" :base-directory "~/org/" 
-                                   :publishing-directory "/nfs/wwwPeople/fxia1/Notes" 
-                                   :recursive t 
-                                   :section-numbers t 
-                                   :table-of-contents t 
-                                   :publishing-function org-html-publish-to-html 
-                                   :headline-levels 4 ; Just the default for this project.
-                                   :auto-preamble t 
-                                   :style "<link rel=\"stylesheet\"
-                     href=\"../other/mystyle.css\"
-                     type=\"text/css\"/>")))
 
 ;; diplay-theme
 (setq display-theme-mode 1)
@@ -1259,13 +1180,6 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; f3 find
 (use-package 
-  f3 
-
-  :ensure 
-  :config)
-
-;; f3 find
-(use-package 
   py-autopep8 
 
   :ensure 
@@ -1382,9 +1296,127 @@ non-nil; otherwise prompts the user to enter the directory."
 (add-hook 'before-save-hook 'py-isort-before-save)
 (setq py-isort-options '("-sl")) ;; One module per line
 
+;; Org mode
+(use-package 
+  org
+
+  :ensure 
+  :config)
+
 ;; org-mode export
 (eval-after-load "org" 
-  '(require 'ox-md nil t))
+  '(require 'ox-md nil))
+(eval-after-load "org" 
+  '(require 'ox-latex nil t))
+
+;; set maximum indentation for description lists
+(setq org-list-description-max-indent 5)
+
+;; prevent demoting heading also shifting text inside sections
+(setq org-adapt-indentation nil)
+
+;;syntax highlight code blocks
+(setq org-src-fontify-natively t)
+
+;; Standard key bindings
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+(setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
+;;set priority range from A to C with default A
+(setq org-highest-priority ?A)
+(setq org-lowest-priority ?C)
+(setq org-default-priority ?A)
+
+;;set colours for priorities
+(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab"))))
+
+;;open agenda in current window
+(setq org-agenda-window-setup (quote current-window))
+
+;; I use C-c c to start capture mode
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "WORKING(k@/!)" "|" "DONE(d@/!)")
+                                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+
+(setq org-todo-keyword-faces (quote (("TODO" :foreground "red"
+                                      :weight bold)
+                                     ("DONE" :foreground "forest green"
+                                      :weight bold)
+                                     ("WAITING" :foreground "orange"
+                                      :weight bold)
+                                     ("HOLD" :foreground "magenta"
+                                      :weight bold)
+                                     ("CANCELLED" :foreground "forest green"
+                                      :weight bold)
+                                     ("WORKING" :foreground "forest green"
+                                      :weight bold))))
+
+(setq org-use-fast-todo-selection t)
+
+(setq org-todo-state-tags-triggers (quote (("CANCELLED" ("CANCELLED" . t))
+                                           ("WAITING" ("WAITING" . t))
+                                           ("HOLD" ("WAITING")
+                                            ("HOLD" . t))
+                                           ("TODO" ("WAITING")
+                                            ("CANCELLED")
+                                            ("HOLD"))
+                                           ("NEXT" ("WAITING")
+                                            ("CANCELLED")
+                                            ("HOLD"))
+                                           ("DONE" ("WAITING")
+                                            ("CANCELLED")
+                                            1                                            ("HOLD")))))
+
+;; Org Capture mode
+(setq org-directory "~/org/")
+(setq org-default-notes-file "~/org/notes.org")
+
+(setq org-capture-templates '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
+                               "* TODO [#A] %?\n %i\n")
+                              ("n" "Note" entry (file+datetree "~/org/notes.org")
+                               "* NOTE %?\n %i\n ")
+                              ("o" "Tool" entry (file+datetree "~/org/tools.org")
+                               "* TOOL %?\n %i\n ")
+                              ("j" "Journal" entry (file+datetree "~/org/journal.org")
+                               "* %?\nEntered on %U\n  %i\n ")
+                              ))
+
+(setq header-line-format mode-line-format)
+
+(setq org-publish-project-alist '(("org" :base-directory "~/org/"
+                                   :publishing-directory "/nfs/wwwPeople/fxia1/Notes"
+                                   :recursive t
+                                   :section-numbers t
+                                   :table-of-contents t
+                                   :publishing-function org-html-publish-to-html
+                                   :headline-levels 4 ; Just the default for this project.
+                                   :auto-preamble t
+                                   :style "<link rel=\"stylesheet\"
+                     href=\"../other/mystyle.css\"
+                     type=\"text/css\"/>")))
+
+(add-to-list 'org-latex-classes
+             '("fengarticle"
+               "\\documentclass{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{graphicx}
+\\usepackage{longtable}
+\\usepackage{hyperref}
+\\usepackage{natbib}
+\\usepackage{amssymb}
+\\usepackage{amsmath}
+\\usepackage{geometry}
+\\geometry{a4paper,left=2.5cm,top=2cm,right=2.5cm,bottom=2cm,marginparsep=7pt, marginparwidth=.6in}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 ;; web-mode
 (use-package 
@@ -1536,6 +1568,12 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;rename files when moving
 ;;NEEDED FOR MBSYNC
 (setq mu4e-change-filenames-when-moving t)
+
+;;store org-mode links to messages
+(require 'org-mu4e)
+;;store link to message if in header view, not to header query
+(setq org-mu4e-link-query-in-headers-mode nil)
+
 
 ;; ;; chinese-pyim
 ;; (use-package chinese-pyim

@@ -427,3 +427,25 @@ snapshots as our dev sandbox:
 8. `virsh create [your xml]`
 
 Enjoy.
+
+# helper files
+
+1. [my-user-data][9]
+2. [startmykvm.py][10]
+
+[9]: {filename}/downloads/my-user-data
+[10]: {filename}/downloads/startmykvm.py
+
+To start a kvm from scratch. This will download a [16.04 amd64 cloud
+image][11] by default.
+<pre class="brush:bash;">
+$ python startmykvm.py
+</pre>
+
+[11]: https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-arm64-disk1.img
+
+To start a kvm reusing an existing backing file:
+<pre class="brush:bash;">
+$ python startmykvm.py -u my-user-data -b your-backing-file.qcow2
+</pre>
+

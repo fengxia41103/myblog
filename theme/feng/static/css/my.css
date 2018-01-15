@@ -15,7 +15,7 @@ h6 {
   counter-reset: h2;
   border-bottom: 1px solid #cecece;
   font-family: 'Montserrat', sans-serif;
-  font-size: 18px !important;
+  font-size: 1.2em !important;
   color: #634f33;
 }
 
@@ -80,7 +80,8 @@ h6 {
 #article-content h4,
 #article-content h5,
 #article-content h6 {
-  font-size: 1.8em;
+  font-size: 1.0em;
+  border-bottom: 1px solid #cecece;
 }
 
 .my-image-center {

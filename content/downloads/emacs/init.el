@@ -1369,7 +1369,7 @@ non-nil; otherwise prompts the user to enter the directory."
                                             ("HOLD"))
                                            ("DONE" ("WAITING")
                                             ("CANCELLED")
-                                            1                                            ("HOLD")))))
+                                            ("HOLD")))))
 
 ;; Org Capture mode
 (setq org-directory "~/org/")
@@ -1388,7 +1388,7 @@ non-nil; otherwise prompts the user to enter the directory."
 (setq header-line-format mode-line-format)
 
 (setq org-publish-project-alist '(("org" :base-directory "~/org/"
-                                   :publishing-directory "/nfs/wwwPeople/fxia1/Notes"
+                                   :publishing-directory "/home/fengxia/org/published"
                                    :recursive t
                                    :section-numbers t
                                    :table-of-contents t
@@ -1401,22 +1401,62 @@ non-nil; otherwise prompts the user to enter the directory."
 
 (add-to-list 'org-latex-classes
              '("fengarticle"
-               "\\documentclass{article}
+               "\\documentclass[11pt,a4paper]{article}
 \\usepackage[utf8]{inputenc}
-\\usepackage[T1]{fontenc}
+\\usepackage{fontenc}
 \\usepackage{graphicx}
 \\usepackage{longtable}
 \\usepackage{hyperref}
 \\usepackage{natbib}
 \\usepackage{amssymb}
 \\usepackage{amsmath}
+\\usepackage{hyperref}
+\\hypersetup{
+  colorlinks=true, %把紅框框移掉改用字體顏色不同來顯示連結
+  linkcolor=[rgb]{0,0.37,0.53},
+  citecolor=[rgb]{0,0.47,0.68},
+  filecolor=[rgb]{0,0.37,0.53},
+  urlcolor=[rgb]{0,0.37,0.53},
+  pagebackref=true,
+  linktoc=all,}
 \\usepackage{geometry}
-\\geometry{a4paper,left=2.5cm,top=2cm,right=2.5cm,bottom=2cm,marginparsep=7pt, marginparwidth=.6in}"
+%\\geometry{a4paper,left=2.5cm,top=2cm,right=2.5cm,bottom=2cm,marginparsep=7pt, marginparwidth=.6in}"
+               
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(setq org-latex-with-hyperref t)
+;; 把預設的 fontenc 拿掉
+;; 經過測試 XeLaTeX 輸出 PDF 時有 fontenc[T1]的話中文會無法顯示。
+;; hyperref 也拿掉，改從 classes 處就插入，原因見上面 org-latex-with-hyperref 的說明。
+(setq org-latex-default-packages-alist
+      '(("" "hyperref" nil)
+        ("AUTO" "inputenc" t)
+        ("" "fixltx2e" nil)
+        ("" "graphicx" t)
+        ("" "longtable" nil)
+        ("" "float" nil)
+        ("" "wrapfig" nil)
+        ("" "rotating" nil)
+        ("normalem" "ulem" t)
+        ("" "amsmath" t)
+        ("" "textcomp" t)
+        ("" "marvosym" t)
+        ("" "wasysym" t)
+        ("" "multicol" t)  ; 這是我另外加的，因為常需要多欄位文件版面。
+        ("" "amssymb" t)
+        "\\tolerance=1000"))
+;; Use XeLaTeX to export PDF in Org-mode
+(setq org-latex-pdf-process
+      '("xelatex -interaction nonstopmode -output-directory %o %f"
+        "xelatex -interaction nonstopmode -output-directory %o %f"
+        "xelatex -interaction nonstopmode -output-directory %o %f"))
+(setq tex-compile-commands '(("xelatex %r")))
+(setq tex-command "xelatex")
+(setq-default TeX-engine 'xelatex)
 
 ;; web-mode
 (use-package 

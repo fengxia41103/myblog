@@ -53,7 +53,7 @@ _fair_ is a measure of good or bad anyway? who said it must be _fair_?
 If you throw these out, then how does one look at so called
 **history** and opinionate it one way or the other? After all, each
 holds his own life experience as the only foundation he could relate
-and refer to. So it becomes a completely random chance that someone's
+and refer to. So it becomes a completly random chance that someone's
 reference happens to match the one that later gets realized 
 and is labelled as a **human progress**, which then leads them
 standing out as the pioneer and a great mind, while in reality, who
@@ -96,7 +96,7 @@ same. Well, then why do you want to promote that!?
 
 How confusing! I think this whole mess of arguments really lead to the
 problem that there is no _compass_ in my life these days and the line
-between right and wrong is completely blurred (or just disappeared). 
+between right and wrong is completly blurred (or just disappeared). 
 I lost faith in the future, has serious contempt of the present, and
 has a shaky feeling of the past. [Santayana][3] warned that "
 Those who do not learn history are doomed to repeat it." But what you

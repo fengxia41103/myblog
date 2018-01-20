@@ -35,7 +35,7 @@ The woman was certainly not satisfied with the response. However, she
 didn't pursue. Obviously she asked the question because she wanted to
 decide whether she wanted to wait for this dish (if wait time is
 acceptable to her) or switch do a different one. The cashier girl,
-however, was completely content with her response and felt nothing was
+however, was completly content with her response and felt nothing was
 wrong with the conversation. As a matter of fact, this so called <span
 class="myhighlight">chinese ambiguity</span> is highly praised,
 sometimes, by ppl who genuinely feel that's the art of the Chinese

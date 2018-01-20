@@ -63,7 +63,7 @@ mentioned and then quickly labeled with a _good looking_ word ` 祖师爷
 problem of today's Chinese expression &mdash; because it lacks the
 depth of research, or lacks the willingness to convey knowledge, it
 falls back to use these terms **liberally** as a window dresser so to
-make it impressive, but actually vague at best, and completely false
+make it impressive, but actually vague at best, and completly false
 at worst!
 
 This is cheating. This can easily becomes a lie. A grand label doesn't
@@ -116,7 +116,7 @@ individual.
   <img src="/images/funny/direct%20marketing.jpg"/>
 </figure>
 
-IMHO, the talk completely misled audience to think that marketing and
+IMHO, the talk completly misled audience to think that marketing and
 advertising is to manipulate consumer's mind so to make them believe
 they have a need. The example of [orange juice][4] is just
 terrible. It was true; but it is also true that marketer was nothing

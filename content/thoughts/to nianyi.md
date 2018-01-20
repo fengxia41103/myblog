@@ -106,7 +106,7 @@ reality, not the other way around. So what to deter us living in the
 same pattern then? None. I realized that if we go apart, we each will
 start to live our own life, and therefore there is no point to think
 about the ridiculous `saving` we could have achieved otherwise.  How
-slow am I to grasp this idea when it must have been completely obvious
+slow am I to grasp this idea when it must have been completly obvious
 to everyone? I wish this realization could have come earlier, so I
 could have not dragged you along in the last 5 years and caused you
 frustration and agony. I'm sorry. I'm learning, just always too late.

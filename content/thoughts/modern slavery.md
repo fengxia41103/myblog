@@ -13,7 +13,7 @@ modern Chinese culture is that it create self-contradictory
 person. They speak in logics however they see fit without being aware
 of that two points coming out of their mouth are actually
 contradictory. Take it further, they took a one-sided view of history
-in such a self-confidence that they completely fail to realize that what
+in such a self-confidence that they completly fail to realize that what
 they are bragging and broadcasting are exactly the same thing in
 history they vow to be a terrible deed by any measure.
 
@@ -21,7 +21,7 @@ history they vow to be a terrible deed by any measure.
 
 A case in point is the popular place such as the [奶奶庙][1]. I think
 the debate of it in the context of pop art or even pioneer art is
-completely a walk-around. Can people idol these objects? of
+completly a walk-around. Can people idol these objects? of
 course. Can they bring peace and love? Doesn't matter, and to some,
 yes, so be it. Are they arts? Yes. Are they art I like? No. Should I
 respect its right to be there? Yes, as long as I don't go there, and

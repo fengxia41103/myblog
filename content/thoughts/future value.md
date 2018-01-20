@@ -33,7 +33,7 @@ cost than the benefit you can get out of them. A convenient way is
 certainly to borrow from the someone, somewhere, and don't need to pay
 for it. It's free money, isn't it?  **Future** seems to be a perfect
 candidate for this. Nobody has a crystal ball that actually works, but
-everyone has a lot of hope. And what is expectation? it is completely
+everyone has a lot of hope. And what is expectation? it is completly
 subjective, opinionated, and absolutely impossible to validate (until
 it becomes history).  But doesn't the logic smell wrong?  How can you
 get a free lunch without paying a price? and if it's not you who pays

@@ -213,7 +213,7 @@ Now let's drive into a provider's arena and take a look what a provider offers.
 
 Juju's _common_ provider serves as an example for study. It can looked
 as a _standard_ way to provision and configure a node. As a matter of
-fact, some providers uses its `Bootstrap` function completely.
+fact, some providers uses its `Bootstrap` function completly.
 
 ## "common" provisioning & cloud integration
 

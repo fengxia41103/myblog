@@ -58,7 +58,7 @@ So to comprehend the benefit (or con) of either side, one needs to
 consider the whole nine yard of electricity generation from coal,
 hydraulic power, wind, solar, nuclear, to a heated water pump that
 drives a GIANT engine in an power plant, all the way to that little
-tiny bit locked inside your battery, versus a **completely similiar**
+tiny bit locked inside your battery, versus a **completly similiar**
 breakdown of technology chain but using, transporting a different
 material. If you ever study high school physics, energy is constant,
 just different form.

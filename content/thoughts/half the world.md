@@ -27,7 +27,7 @@ articulate and hoped to define the term "East vs. West" &rarr;
 therefore, the convention wisdom of the two terms are not nearly as
 clear as one assumes. On the contrary, they are such a broad brush in
 a social, historical, even geographical context that the line between
-them are completely blurred and up for interpretation by whoever is
+them are completly blurred and up for interpretation by whoever is
 speaking!).  Not that the West was being more civilized, advanced,
 enlightened, knowledgeable, but the East had grown to be primitive
 (the [Korean spade pic][4]),

@@ -129,7 +129,7 @@ saying "Nah, no one has really the control", thus leading to fatalism
 I believe.
 
 Therefore, the only non-frustrating relation one can have is that one
-party is taken as completely **incapable**! A pet, a toddler, or what
+party is taken as completly **incapable**! A pet, a toddler, or what
 men used to view women in an inferior fashion (but this is just
 wrong!).... hmmm, interesting.
 

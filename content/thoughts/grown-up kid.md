@@ -91,7 +91,7 @@ those target, therefore leading to upset.
 
 So with this, I can see that being upset of someone is indeed unfair!
 You are the one doing the extrapolation. How far you care that logic
-is completely up to you. The person who has done something, whether
+is completly up to you. The person who has done something, whether
 good or bad, has no control, but the _perception_ of that act is being
 depending on your degree of extrapolation now. So it is unfair to
 blame at all; you already choose to blame and are only seeking

@@ -76,7 +76,7 @@ name `intnet1`.
   in MAAS configuration.
 
 1. Config subnet `intnet1`. Define it as `192.168.8.x` (This is
-   completely arbitrary. Use whatever network range you want to
+   completly arbitrary. Use whatever network range you want to
    use). Use `ifconfig` to find out interface name that corresponds to
    `intnet1` (a clue: the one that has no IP assigned):
 

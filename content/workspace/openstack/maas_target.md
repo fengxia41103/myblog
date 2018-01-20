@@ -46,7 +46,7 @@ MAAS target goes through a life cycel as shown below:
 
 Once PXE booted, the MAAS server will automatically _enlist_ this
 machine with a _New_ status. This indicates that machine has been
-discovered by MAAS.  The given node name is completely arbitrary, and
+discovered by MAAS.  The given node name is completly arbitrary, and
 it has nothing to do with VM's name.
 
 > If there are multiple targets, the only way to match MAAS node name with a VM
@@ -59,7 +59,7 @@ memory, and disk information of the target. Two important
 configurations to notice:
 
 1. Power type: for our virtual lab, select _Manual_. Otherwise, the
-admin GUI will block you from commissioning completely.
+admin GUI will block you from commissioning completly.
 2. `Retain`: do **NOT** check such checkboxes. The word _retain_ means
 to keep what you have. Therefore, it will skip registering the
 target's disk information. This is super confusing because commission

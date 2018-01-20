@@ -34,7 +34,7 @@ All sites run with the same model by having two offerings:
 independent living 自理 and dependent care 护理. 
 
 Independent care rents a room with one or two beds. Helper is extra
-and completely depending on client's preference. You can either hire
+and completly depending on client's preference. You can either hire
 theirs or bring your own. Costs include rent, helper, food, utility.
 
 Dependent care charge per bed. Helper is mandatory and is depending on
@@ -192,7 +192,7 @@ protecting the patient's space was well observed.
 Also, photo of patient was strictly prohibited. Another plus point.  I
 visited at their lunch time. There were two young girl at desk helping
 three olders, one was being fed by a young girl. The others had no
-trouble eating by themselves. They actually appeared completely
+trouble eating by themselves. They actually appeared completly
 normal. Nurse at frontdesk were also helping at desk which is located
 right in front of the nurse counter. The girls know these patients
 well and can elaborate their features, habits, and often their recent

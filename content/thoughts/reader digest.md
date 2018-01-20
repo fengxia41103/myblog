@@ -54,7 +54,7 @@ litening to my presentation. My view is that their channel of
 information came from my PPT, which truly I feel is just a tunnel view
 of the subject, even though I honestly wasn't having any intention of
 manipulating their perception. But it is inevitable. The slides bear a
-stamp of my perception, and is completely limited to my own way of
+stamp of my perception, and is completly limited to my own way of
 thinking and understanding &mdash; and mine could be well off track
 from what the _truth_ is. But then, with so many projects going on
 and so many new technologies, buzz words, subordinates and daily

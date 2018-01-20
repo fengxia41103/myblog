@@ -115,7 +115,7 @@ are in use. You should be good now.
 # Disable touchpad while typing
 
 Another trick is to _disable_ touchpad while typing. This definitely
-removed the jumpy typing almost completely. However, you have to issue
+removed the jumpy typing almost completly. However, you have to issue
 this command after running `emacs` for some reason. Otherwise, `emacs`
 will stuck in initialization forever.
 

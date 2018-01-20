@@ -51,7 +51,7 @@ get up earlier! The highway is open `24x7`, you know that, right?
 And here is something even more fantastic. Ppl literally step on their
 gas to pass me while I was cruising towards a <span
 class="myhighlight">RED</span> light!? wow, this is just beyond my
-comprehension completely, ultimately, thoroughly. _uh, are you going
+comprehension completly, ultimately, thoroughly. _uh, are you going
 to drive through it?_ I would love to see it. I thought you are in a
 hurry, why stop?... I don't know. They are either blind, or just
 stupid. If passing me gives them pleasure, I guess that's one positive

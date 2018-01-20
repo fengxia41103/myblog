@@ -46,7 +46,7 @@ I never knew the word `brain wash` was invented by the Chinese
 (according to the book author). Nonetheless, I firmly believe the act
 and the thought of braining washing anyone, for however the purpose
 and agenda, is evil. This come from my underline belief that if there
-were one thing that is completely free in this world, it is the
+were one thing that is completly free in this world, it is the
 mind, and to me, guarding its freedom is the last line of defense of
 humanity. That's why I view the way internet is being blocked in China
 as a pure act against humanity and society because it is artificially

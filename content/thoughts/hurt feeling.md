@@ -20,7 +20,7 @@ hand, I think no one can control how another person feels, therefore
 it is simply not sensible to project the result of the perception
 &mdash; you may make the perfect conversation with a golden heart,
 there is simply nothing stop it being perceived as a vicious attack
-with a dark intention. So, does this make it completely unrelated
+with a dark intention. So, does this make it completly unrelated
 between your behavior and others' reactions? In other words, if each
 is responsible for his/her own feelings, do I just get a jail-free
 card to be a jerk? Certainly, it should not be this way.

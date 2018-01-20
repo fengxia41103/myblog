@@ -46,7 +46,7 @@ technology_. There is known implementation of it; there is successful
 case (and failure cases in that matter) of it; there is probably many
 many theories and diagrams about it developed from multiple dimensions
 of viewing angle so to have an _interpretation_ of it; there is so
-called _best practice_ (even this term has been completely **abused**
+called _best practice_ (even this term has been completly **abused**
 in context of a technical discussion) of certain aspects of it derived from accrued
 experience by others who have treaded on this path before and
 attempted a few things here and there while one is easier/harder than

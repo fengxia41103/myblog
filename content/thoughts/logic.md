@@ -64,13 +64,13 @@ benchmark? This isn't an isolated case. Taking any marketing PPT when
 the first couple pages talks about an industry, a business model,
 there is always the logic that whatever the 先进国家 has (or had), it
 represents a self-proven projection of what the topic (and PPT
-author's view) will have. Don't you see!? This is completely
+author's view) will have. Don't you see!? This is completly
 contradicting to what they will **inevitably** derive just a few pages
 later, now the old cliché that "oh btw, China is different that you
 just don't understand it as well as I do, and there is a new,
 modified, custom-made version, just for China, and look how smart I
 am, how business savvy I am, and how接地气 I am". Give me a fxxx
-break!!! This is completely BS, and the frustration I have is that
+break!!! This is completly BS, and the frustration I have is that
 s/he doesn't realize how BS s/he is being!  What I'm hearing are two
 assumptions as the basis of their logic:
 

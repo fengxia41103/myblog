@@ -108,7 +108,7 @@ else:
     looking_good = False;
 </pre>
 
-Here, computer identifies two variables representing two completely
+Here, computer identifies two variables representing two completly
 different dimensions. This is just my simplified view of the world
 when looking at the empror. If you mixed the two in your head, wow,
 it's a Dao, a Zen, a culture, a you-can-only-feel-it abstract, and

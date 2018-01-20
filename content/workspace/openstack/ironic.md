@@ -369,7 +369,7 @@ def prepare_image(self,
                   image_info=None,
                   configdrive=None):
     """Asynchronously prepares specified image on local OS install device.
-    In this case, 'prepare' means make local machine completely ready to
+    In this case, 'prepare' means make local machine completly ready to
     reboot to the image specified by image_info.
     Downloads and writes an image to disk if necessary. Also writes a
     configdrive to disk if the configdrive parameter is specified.

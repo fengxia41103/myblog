@@ -86,7 +86,7 @@ about how to solve a particular function; it's a clear description of
 a problem, thus the question. Once the question is defined, the
 solution becomes possible, and useful.
 
-Therefore, it becomes completely irrelevant when this type of
+Therefore, it becomes completly irrelevant when this type of
 articles are comparing how complex a 3rd grade math is. It is not the
 knowledge that matters; it is the thinking process that matters. <span
 class="myhighlight"> Knowledge in today's world is nothing but fonts

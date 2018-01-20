@@ -37,7 +37,7 @@ In the simplest term, one needs to answer these three questions:
    Program (NBP)**. This is controlled by a boot service. BOOTP can
    provide this service, so is DHCP. This can be as simple as a static
    list mapping client's architecture to a file. But it can also be a
-   very specific so a client can get a completely customized file.
+   very specific so a client can get a completly customized file.
    Also, the file must be in some pre-determined format based on
    client's architecture so the client knows how to execute it.
 3. **How to download the file?**. This is handled by TFTP protocol.

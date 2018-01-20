@@ -13,7 +13,7 @@ prints indicates that ODOO scans through all modules listed on Python
 path and builds a _map_ in memory before dev server starts responding
 to request. Intuitively I suspected such loading practice is causing
 an unnecessary delay.  This aggravates further when ODOO server
-becomes completely unusable if any of the module chokes during this
+becomes completly unusable if any of the module chokes during this
 loading process. But this is too common a scenario during
 development. One consequence of this is that debugging becomes
 difficult. Often enough ODOO doesn't yield useful trace track to help

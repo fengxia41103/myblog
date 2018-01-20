@@ -45,7 +45,7 @@ limiting these is greatly desired.
 
 Strategy we are to present here is to use a custom-built image so that
 it has **all** required package pre-installed. This does not eliminate
-repo-hit completely, but it reduces the necessity of downloading 100+M
+repo-hit completly, but it reduces the necessity of downloading 100+M
 of packages, each time! Package installer (`apt`, `yum`, `pip` ) will
 simply reply _package xyz is already installed_ &mdash; much faster.
 

@@ -55,7 +55,7 @@ screen.
 
 This is curious then. In human core, we **do not** operate on facts,
 at all. We operate on a set of images we believe &rarr; beliefs. These
-beliefs are self-fulfilling. They can be completely contradictory, yet
+beliefs are self-fulfilling. They can be completly contradictory, yet
 causing no hesitation in one's thought or behavior. We don't even
 realize them in most times. We can equally defend them one way or the
 other. They are just equally true.

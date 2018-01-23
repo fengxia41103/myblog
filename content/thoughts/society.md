@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: society
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/diamond.jpg"/>
+</figure>
+
 I have been doing a lot of thinking recently, about human
 society. There are multiple themes in my life and in my thinkings that
 we find them interesting, disturbing, annoying, and saddening. The

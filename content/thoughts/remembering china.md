@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: remembering china
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/bao.jpg"/>
+</figure>
+
 This is a quite fascinating [book][1]. Actually I started to find
 myself always fascinated by early first-person account of China. I
 have this curiosity of what this country was like, and everytime I

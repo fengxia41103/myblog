@@ -10,7 +10,7 @@ Author: Feng Xia
 
 I have been doing a lot of thinking recently, about human
 society. There are multiple themes in my life and in my thinkings that
-we find them interesting, disturbing, annoying, and saddening. The
+I find them interesting, disturbing, annoying, and saddening. The
 more books I'm reading about historical events and views, the more I
 question how a society, or any society, can survive and develop, and
 whether there is a pattern (or lesson to learn from) that propels

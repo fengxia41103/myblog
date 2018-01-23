@@ -21,7 +21,7 @@ of. Listening to NPR makes this feeling stronger all the time &mdash;
 I actually feel sorry for government officials, politicians, and
 advocates who are either in a position to _serve_ the people, and to
 help _all_. It's an illusion that, in my opinion, both wrong and
-impossible. I'm sure how much they really believe in what they are
+impossible. I'm not sure how much they really believe in what they are
 saying and preaching, and they are set out to do. Chances are, I would
 dare to bet, they are feeling the conflicts within themselves all the
 time, that they are not devoted as they show to their cause, but then,
@@ -29,16 +29,18 @@ they are in a position that they have to pretend, not necessarily for
 fame and glory, but for their survival and reconciliation with
 themselves.
 
+# tested
+
 This is sad. Reading the book [Auschwitz][1] made me wonder how deep
 the rabbit hole goes!? It strikes me when the German commando of
-concentration camp questioned how can someone who had not been
-**tested** to be his judge? This is very true I think. If you haven't
+concentration camp questioned how someone who had not been
+**tested** could be his judge? This is very true I think. If you haven't
 been in that situation, you really don't know how much yourself is
 going to change, and how much that toxic environment is going to
 modify your behavior and thinking. For these natiz criminals (this I
 have no doubt that they have done the anti-humanity act not out of
 their excuse of _following the order_, but out of a balanced decision
-of _benefit and cost_ on their personal level &mdash; it could have been
+of _benefit and cost_  &mdash; it could have been
 completly rational at their individual level), at least they have done
 what they have done in those context, and we know how low they had
 been. But because of the extreme characteristics of those act, it
@@ -100,15 +102,24 @@ immediately challenge:
 3. Why yous being _scientific_ is therefore better than [blank, fill
    in whatever you are arguing about]?
    
-Exactly. Science is not a catch-all phrase. It does **implies** a way
+Exactly. Science is not a catch-all phrase. It does **requires** a way
 of thinking (through experiment and quantification), which is being
 highly regarded by current human race. But objectively speaking, it is
 on an equal footing with other views of this world. I think its power
-lies in its much-more-likely-to-be-true predictability than other
-methods on a day-to-day minute-to-minute basis. But when somebody
-claiming his is scientific without addressing the above three
-questions, s/he is lying, abusing this word, and is exactly being
-unscientific.
+lies in two folds, which makes it a implementation (for the time
+being, my life for sure):
+
+1. its **much-more-likely-to-be-true** predictability than other
+  methods on a day-to-day minute-to-minute basis. 
+2. its ability to **uncover more of what we didn't and don't know**,
+  eg. was the earth round, or flat?  how to identify a place on the
+  earth globe (using a
+  tuple of longitude and latitude numbers.)  
+
+
+But when somebody claiming
+his is scientific without addressing the above three questions, he
+is lying, abusing this word, and is exactly being unscientific.
 
 # hate vs. love
 
@@ -121,7 +132,7 @@ describe such a strong feeling**.
 Any human will develop these emotions, and who can really say one
 emotion is _good_ and another is _bad_? I mean, what do you mean by
 calling it good? Any kid will learn these emotions eventually, and
-they exist for a reason. You need all of them to live this life. So
+they exist as a matter of fact. You need all of them to live this life. So
 hate is just another strong emotion that will occur someday.
 
 I think the real difference is at handling these emotions. But again,
@@ -134,22 +145,35 @@ argued to be perfectly valid to exist, but also I challenge why hate
 is a worse feeling than love!? Is it because hate is going to cause
 more harm to oneself and others? This is a good point I can
 accept. But then does it mean how much harm is the criteria to judge?
-Sounds so, then how much harm is ok, or just all or nothing?
-You see, very quickly this logic is running into a subjective domain
-that I don't think anyone has a clue.
+Sounds so, then how much harm is ok, or just any harm is bad? and
+further, harm to whom? What if my hate only harm me? or is there such
+a thing as **an isolated harm, or isolated me**?  You see, very
+quickly this logic is running into a subjective domain that I don't
+think anyone has a clue.
 
 Even further, as we all know the cliche, hate and love are like twins
 &mdash; they feed each other, support each other, and become each
 other! So really, I don't see hate is being bad at all. It is just a
-strong feeling that one needs to handle.
+strong feeling that one needs to handle. But the hard question
+emerges, how to handle!? suppress? limit? encourage? aren't all these
+already based on a pre-conclusion that these are negative, bad,
+therefore should be handled with suppression!?
 
-Now, the way to handle these emotions is really the subject we should
-focus on, and that's also the conversation with Noah &mdash; the
+I don't know. I feel I'm chasing my own tails.
+So the conversation with Noah &mdash; the
 F-word is one way to express that strong feeling you feel, but not the
 only one. The consequence of using it can be a fight. So if you are
 prepared to fight, go with it, the word itself is perfect fine as it
-is, but using it without anticipating the fight that may follow is
-what make the use **bad**.
+is because it expressed your feeling at the moment well (effective),
+message clearly understood (no lost-in-translation), and will have
+the intended result (fight) &mdash; man, if only projects at work can
+be done as such!
+
+
+So I think the trouble really begines when 
+using it without anticipating (or secretly not wanting) 
+the fight that may follow &larr; so again, it's the idea of getting
+the benefit without paying a price makes it a _bad_ word.
 
 See my point?
 

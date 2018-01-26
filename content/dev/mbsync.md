@@ -5,7 +5,7 @@ Slug: mbsync mu4e email
 Author: Feng Xia
 Modified: 2017-09-28 12:14
 
-<figure class="col l3 m3 s12">
+<figure class="col l3 m6 s12">
   <img src="/images/funny/email.jpg"
        class="center-block img-responsive">
 </figure>
@@ -25,7 +25,7 @@ alternatives, then I found [mbsync][2].
 [1]: https://github.com/OfflineIMAP/offlineimap
 [2]: http://isync.sourceforge.net/mbsync.html
 
-Its [man page][2] is worth a read. It looking intimating at first
+Its [man page][2] is worth a read. It looks intimidating at first
 glance, but it isn't really. In a nutshell, it defines three things:
 
 1. <span class="myhighlight">A remote store</span>: this also links to
@@ -91,7 +91,7 @@ that file. I followed the steps [here][3].
    <pre class="brush:bash;">
    sh get_certs.sh some.imap.server port ~/.cert/
    eg:
-   sh get_certs.sh outlookae.lenovo.com 993 ~/.cert/
+   sh get_certs.sh outlookae.<your company>.com 993 ~/.cert/
    </pre>
    
    Cert file will have a name `some.imap.server.pem`. Use that in `CertificateFile`.

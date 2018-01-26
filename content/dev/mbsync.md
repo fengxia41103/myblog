@@ -338,3 +338,73 @@ Channel hotmail-chat
 Channel hotmail-sent
 </pre>
 
+# How to list remote folders
+
+Well, to design your pull, you need to know what is on the remote
+IMAP. It turned out that each IMAP server structures things
+differently, eg. using `Inbox` vs. `INBOX`, how confusing. Helped by
+[this blog][5], it turned out we can _login_ into the IMAP server
+(manually) and investigate what we are looking at:
+
+[5]: https://delog.wordpress.com/2011/05/10/access-imap-server-from-the-command-line-using-openssl/
+
+<pre class="brush:plain;">
+openssl s_client -crlf -connect <your company IMAP server>:993
+</pre>
+
+Once you see something like this `* OK Gimap ready for requests from
+200.199.23.105 o16if3544685ybc.1111`, you are in. There won't be any
+_commandline prompt_, it just sits there. So keep going:
+
+<pre class="brush:plain;">
+tag login user@<company>.com password
+tag LIST "" "*"
+</pre>
+
+Viol la! Look what we have got! 
+
+<pre class="brush:plain;">
+tag login fxia1@<company>.com <password>
+tag OK LOGIN completed.
+tag LIST "" "*"
+* LIST (\HasChildren) "/" Archives
+* LIST (\HasNoChildren) "/" Archives/2017
+* LIST (\HasNoChildren) "/" "Archives/juju mailing list"
+* LIST (\HasNoChildren) "/" Calendar
+* LIST (\HasNoChildren) "/" Contacts
+* LIST (\Marked \HasNoChildren) "/" "Conversation History"
+* LIST (\Marked \HasNoChildren) "/" "Deleted Items"
+* LIST (\HasNoChildren) "/" Drafts
+* LIST (\Marked \HasChildren) "/" INBOX
+* LIST (\HasChildren) "/" INBOX/administration
+* LIST (\HasNoChildren) "/" INBOX/administration/something
+* LIST (\HasNoChildren) "/" INBOX/administration/hr
+* LIST (\HasNoChildren) "/" INBOX/administration/akjd
+* LIST (\HasNoChildren) "/" INBOX/administration/wow
+* LIST (\HasNoChildren) "/" INBOX/administration/workday
+* LIST (\HasChildren) "/" INBOX/Canonical
+* LIST (\HasNoChildren) "/" INBOX/Canonical/juju
+* LIST (\HasNoChildren) "/" "INBOX/home improvement"
+* LIST (\HasNoChildren) "/" INBOX/miro
+* LIST (\HasNoChildren) "/" "INBOX/no need to read"
+* LIST (\HasChildren) "/" INBOX/team
+
+............
+</pre>
+
+So the key to notice here is that this
+IMAP server uses capitalized **INBOX**. Therefore, to pull all
+sub-folders into, we need to setup mbsync as such:
+
+<pre class="brush:plain;">
+Channel your-inbox-sub
+Master :your-remote:"INBOX/" <<-- must match what you saw from server, case-sensitive
+Slave :your-local:inbox/
+Pattern *
+Create Both
+Expunge Both
+SyncState *
+</pre>
+
+Now if you issue `mbsync your-inbox-sub` will pull in all `INBOX` and
+**its subfolders**. Awesome.

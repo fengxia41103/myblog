@@ -349,7 +349,7 @@ differently, eg. using `Inbox` vs. `INBOX`, how confusing. Helped by
 [5]: https://delog.wordpress.com/2011/05/10/access-imap-server-from-the-command-line-using-openssl/
 
 <pre class="brush:plain;">
-openssl s_client -crlf -connect <your company IMAP server>:993
+openssl s_client -crlf -connect [your company IMAP server]:993
 </pre>
 
 Once you see something like this `* OK Gimap ready for requests from
@@ -357,14 +357,14 @@ Once you see something like this `* OK Gimap ready for requests from
 _commandline prompt_, it just sits there. So keep going:
 
 <pre class="brush:plain;">
-tag login user@<company>.com password
+tag login user@company.com password
 tag LIST "" "*"
 </pre>
 
 Viol la! Look what we have got! 
 
 <pre class="brush:plain;">
-tag login fxia1@<company>.com <password>
+tag login fxia1@company.com password
 tag OK LOGIN completed.
 tag LIST "" "*"
 * LIST (\HasChildren) "/" Archives

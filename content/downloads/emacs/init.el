@@ -530,9 +530,6 @@ future."
 ;; make grep-find follow links
 ;; (setq grep-find-command "find . -follow -type f -print0 | xargs -0 -e -P4 grep -n -e ")
 
-;; Make eww default browser
-(setq browse-url-browser-function 'eww-browse-url)
-
 (setq auto-mode-alist (append '(("\\.[CH]$"    . c++-mode) 
                                 ("\\.[ch]pp$"  . c++-mode) 
                                 ("\\.cc$"      . c++-mode) 
@@ -1229,7 +1226,8 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;; w3m browser
 ;;change default browser for 'browse-url'  to w3m
-(setq browse-url-browser-function 'w3m-goto-url-new-session)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome-stable")
 
 ;;change w3m user-agent to android
 (setq w3m-user-agent

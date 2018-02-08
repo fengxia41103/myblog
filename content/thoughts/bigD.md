@@ -3,6 +3,7 @@ Date: 2017-02-04 9:30
 Tags: thoughts
 Slug: the big D
 Author: Feng Xia
+Status: Draft
 
 This has been a long past due as I have been thinking about this for
 the last few days, and have attempted to write a letter a few times,
@@ -34,6 +35,8 @@ could any promise be held to its end anymore? How could I have peace
 with myself after I have betrayed the one thing I dear, and the one
 person I deared, anymore?
 
+<div class="divider"></div>
+
 Hi,
 
 This is a letter I have been wanting to write, for the last few days
@@ -42,7 +45,7 @@ try.
 
 I want to say, I am really really sorry, that it has finally come to
 this. I feel sorry I have let you down, have let Noah down, and is the
-one breaking up a family we have. I am really sorry. One one hand I
+one breaking up a family we have. I am really sorry. On one hand I
 felt it's been long past due, that it should have ended a long time
 ago so the agonies we have experienced in the past few years would not
 have been necessary; on the other hand it never feels a _right_ moment
@@ -77,9 +80,14 @@ than expecting her to be on your side thick or thin unconditionally
 I want to thank you for the years when I was jobless, wondering around
 with a bloated ego but a pathetic understanding of you. I really
 enjoyed the years in MBA, and the days when I felt at the brink of
-fortune and fame. But more and more with each passes, I hate the
-version of me in those days because he was ego-centric, self-importance,
-self-centered, short-tempered, aggressive, and eager to succeed.
+fortune and fame. But more and more with each day passes, I hate the
+version of me in those days because I was ego-centric,
+self-importance, self-centered, short-tempered, aggressive, and greed
+of success to prove myself. Looking back, it is also a double-edged
+sword, that having you and this family made me proud, gave me
+confidence, resulting in an enlarged ego, which in turn led me astray
+&mdash; in the process of building a better life for the ones I cared,
+I lost the ones along the way. 
 
 How pity was I! If you have seen through all these back then, I would
 have to say that you are indeed wiser than I realized, and which makes

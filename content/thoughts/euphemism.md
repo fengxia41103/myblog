@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: euphemism
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/euphemism.jpg"/>
+</figure>
+
+
 Sigh. Life is indeed full of puzzling person and phenomenon that
 annoys me and I found myself always wonder why they do that and what I
 have done to make them act that way (or regardless what I have done

@@ -54,7 +54,7 @@ _saved_.
 [2]: https://www.amazon.com/Why-West-Rules-Now-Patterns/dp/0312611692
 
 Sometimes I truly feel this is probably how it should go, cause life
-certainly is not easy. The there is all the love vows one make to the
+certainly is not easy. Then there are all the love vows one makes to the
 other person that _if not this life, I vow to try again in the next,
 and one following till we are together, then we will never part_. How
 touching! If looking from this Buddha lens, what this vow says is
@@ -75,7 +75,7 @@ quickly as possible so you could join her in that saved land (suppose
 the saved are going to the same place. nirvana? heaven? or even hell?
 does it matter then if your objective is to find that person and be
 with her? even if the place is called hell or whatever, I think it's
-irrelevant.
+irrelevant.)
 
 So here it is, a lovely lovely song. I'll hymn it for you, my love,
 someday, in some life:

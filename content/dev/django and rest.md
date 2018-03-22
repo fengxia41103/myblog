@@ -4,6 +4,12 @@ Tags: dev
 Slug: django to rest
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/funny/the%20art%20of%20programming.jpg"
+       class="center-block img-responsive">
+</figure>
+
+
 I have been building Django based web application for a while now. One
 design/request I get often is a REST API. Once the model data is
 exposed in REST, one can truly build a complete separate frontend

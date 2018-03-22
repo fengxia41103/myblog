@@ -132,3 +132,13 @@ can do with this now?
   </pre>
 
 [4]: http://django-tastypie.readthedocs.io/en/latest/resources.html#flow-through-the-request-response-cycle
+
+**step 5**: enjoy
+
+Now go to `mysite/api/myapp/mymodels` (`mysite/api/myapp/` part is defined
+in "step 1", `mymodels` part is defined in "step 4"), it should show
+the `queryset` (defined in "step 4"). With REST, you can also do
+things like `?format=json` or `?format=yaml`, and `?a_model_field__gt=`
+type of [filtering][5]. Cool huh!?
+
+[5]: http://django-tastypie.readthedocs.io/en/latest/interacting.html

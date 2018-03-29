@@ -69,7 +69,7 @@ anyone want to get cancer? HIV? or hit by a car? or not looking like
 Brad Pitt?.... HIV and Cancer are always the poster child of the
 uncurable disease. But the fact is, more ppl die from some low-profile
 name everyone just shrugs shoulder when hearing them. When was the
-last time you heard somebody talking about [malaria[2]], one thing
+last time you heard somebody talking about [malaria][2], one thing
 made me truly admire what Bill Gates is doing with his fortune and fame!?
 And even talking about kids, I listen to [NPR's report on Myanmar][3],
 young girls at age of 14 are being exploited, by local women and even

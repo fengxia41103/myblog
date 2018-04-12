@@ -67,7 +67,7 @@
 (require 'init-grep)
 (require 'init-uniquify)
 (require 'init-ibuffer)
-(require 'init-flycheck)
+;;; (require 'init-flycheck)
 
 (require 'init-recentf)
 (require 'init-smex)
@@ -872,13 +872,13 @@ non-nil; otherwise prompts the user to enter the directory."
 (defvar cisco-cscope-inited nil 
   "Used to initialize the cisco extension only once.")
 
-;; flycheck
-(use-package 
-  flycheck 
+;; ;; flycheck
+;; (use-package 
+;;   flycheck 
 
-  :ensure 
-  :config(add-hook 'after-init-hook #'global-flycheck-mode) 
-  :config(setq-default flycheck-disabled-checkers '(ruby-rubylint)))
+;;   :ensure 
+;;   :config(add-hook 'after-init-hook #'global-flycheck-mode) 
+;;   :config(setq-default flycheck-disabled-checkers '(ruby-rubylint)))
 
 ;; python-mode
 ;; (use-package python
@@ -1518,7 +1518,7 @@ non-nil; otherwise prompts the user to enter the directory."
 ;; use this for testing
 (setq mu4e-get-mail-command "true")
 
-(setq mu4e-view-prefer-html t)
+;;; (setq mu4e-view-prefer-html t)
 
 ;; use this to sync with mbsync
 (setq mu4e-get-mail-command "mbsync -a")
@@ -1557,7 +1557,7 @@ non-nil; otherwise prompts the user to enter the directory."
                           "http://fengxia.co\n")
       message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
       message-citation-line-function 'message-insert-formatted-citation-line
-      mu4e-headers-results-limit 250)
+      mu4e-headers-results-limit 500)
 
 (setq mu4e-compose-signature
       (concat
@@ -1588,13 +1588,12 @@ non-nil; otherwise prompts the user to enter the directory."
       smtpmail-smtp-service 587)
 
 (setq message-kill-buffer-on-exit t
-      mu4e-sent-messages-behavior 'delete
+      ;; mu4e-sent-messages-behavior 'delete
       mu4e-headers-skip-duplicates t
       mu4e-headers-include-related t
       mail-user-agent 'mu4e-user-agent
-      ;; mu4e-get-mail-command "offlineimap"
       mu4e-get-mail-command "mbsync -a"
-      mu4e-update-interval 3600
+      mu4e-update-interval 300
       mu4e-attachment-dir  "~/Downloads"
       ;;set up queue for offline email
       ;;use mu mkdir  ~/Maildir/queue to set up first
@@ -1602,6 +1601,9 @@ non-nil; otherwise prompts the user to enter the directory."
       smtpmail-queue-dir   "~/Maildir/queue/cur")
 (setq mu4e-html2text-command "html2text -utf8 -width 72")
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
+;; don't keep message buffers around
+(setq message-kill-buffer-on-exit t)
 
 ;;rename files when moving
 ;;NEEDED FOR MBSYNC
@@ -1611,8 +1613,11 @@ non-nil; otherwise prompts the user to enter the directory."
 (require 'org-mu4e)
 ;;store link to message if in header view, not to header query
 (setq org-mu4e-link-query-in-headers-mode nil)
-(define-key mu4e-headers-mode-map (kbd "C-c c") 'org-mu4e-store-and-capture)
-(define-key mu4e-view-mode-map    (kbd "C-c c") 'org-mu4e-store-and-capture)
+;; (define-key mu4e-headers-mode-map (kbd "C-c c") 'org-mu4e-store-and-capture)
+;; (define-key mu4e-view-mode-map    (kbd "C-c c") 'org-mu4e-store-and-capture)
+(setq org-capture-templates
+      '(("t" "todo" entry (file+headline "~/org/tasks.org" "Tasks")
+         "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
 
 ;; chinese-pyim
 (require 'pyim)

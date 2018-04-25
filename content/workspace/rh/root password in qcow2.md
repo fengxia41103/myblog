@@ -23,15 +23,15 @@ and `libguesttools`, then:
    </pre>
    
 2. Modify the image directly:
-   <pre class="brush:plain;">
-   $ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
 
-   ><fs> run
-   ><fs> list-filesystems
-   ><fs> mount /dev/sda1 /
-   ><fs> vi /etc/shadow
-   ><fs> vi /etc/ssh/sshd_config
-   </pre>
+<pre>
+$ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
+><fs> run
+><fs> list-filesystems
+><fs> mount /dev/sda1 /
+><fs> vi /etc/shadow
+><fs> vi /etc/ssh/sshd_config
+</pre>
    
    Now replace the "!!" on line `root:...` with your password, save,
    and `quit` from guetfish terminal. You are done.

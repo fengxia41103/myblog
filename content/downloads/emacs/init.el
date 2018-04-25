@@ -1568,7 +1568,6 @@ non-nil; otherwise prompts the user to enter the directory."
        "8000 Development Drive, Morrisville, NC 27560\n"
        "W: http://www.lenovo.com\n"))
 
-
 (require 'smtpmail)
 ;; (setq message-send-mail-function 'smtpmail-send-it
 ;;       starttls-use-gnutls t
@@ -1577,15 +1576,29 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;       '(("smtp.gmail.com" 587 "fengxia41103@gmail.com" nil))
 ;;       smtpmail-default-smtp-server "smtp.gmail.com"
 ;;       smtpmail-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-service 587)
+;;       smtpmail-auth-credentials (expand-file-name "~/.authinfo")
+;;       smtpmail-smtp-service 587
+;;       starttls-extra-arguments nil
+;;       starttls-gnutls-program "/usr/bin/gnutls-cli"
+;;       starttls-extra-arguments nil
+;;       starttls-use-gnutls t
+;;       )
 (setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-debug-info t
       starttls-use-gnutls t
       smtpmail-starttls-credentials '(("mailae.lenovo.com" 587 nil nil))
       smtpmail-auth-credentials
       '(("mailae.lenovo.com" 587 "fxia1@lenovo.com" nil))
       smtpmail-default-smtp-server "mailae.lenovo.com"
       smtpmail-smtp-server "mailae.lenovo.com"
-      smtpmail-smtp-service 587)
+      smtpmail-smtp-service 587
+      smtpmail-auth-credentials (expand-file-name "~/.authinfo")
+      smtpmail-smtp-service 587
+      starttls-extra-arguments nil
+      starttls-gnutls-program "/usr/bin/gnutls-cli"
+      starttls-extra-arguments nil
+      starttls-use-gnutls t
+      )
 
 (setq message-kill-buffer-on-exit t
       ;; mu4e-sent-messages-behavior 'delete

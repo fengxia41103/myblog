@@ -8,6 +8,37 @@ These notes are based on Satellite 6.3. There are minor difference
 between 6.2 and 6.3. Grasp the concept here, and hopefully you will
 have a good understanding of the Satellite models and procedures.
 
+# Architecture
+
+<img src="/images/rh%20satellite%20overall%20architecture%20official.png"
+     class="col s12">
+
+1. **One** satellite server (master server), and **1+** capsule servers.
+2. The Satellite Server is required to connect to Red Hat
+   Customer Portal &larr; main source of RH packags, errata,
+   Puppet modules.
+3. The Satellite Server organizes the life cycle management by
+   using `organizations` as principal division units &larr; one
+   subscription manifest per org.
+4. `org` &rarr; `location` creates a matrix &rarr; 
+   3 org and 4 location will create `3x4=12` management contexts.
+5. `location` is then tied to a capsule server (isolated).
+6. Info flow: external source &rarr; main server &rarr; capsule
+    server &rarr; managed host.
+
+# Content view
+
+<img src="/images/rh%20satellite%20content%20view.png"
+     class="col s12">
+
+1. `Content Views` are subsets of content from the `Library` (master copy of all contents).
+2. Multiple content views can be applied to one capsule server.
+3. `Content Views` can be combined to create `Composite Content Views`.
+4. Composite view is just a grouping. Individual content view, once
+   updated, shall still be promoted, but the composite shell does not
+   need to be changed. So from its consumer's POV, it sees the change
+   transparently.
+
 # RH subscription model
 
 The center piece of Satellite is RH subscription. This is how
@@ -327,3 +358,5 @@ On client machine:
 [38]: https://www.redhat.com/en/about/subscription-model-faq#?
 [39]: https://access.redhat.com/sites/default/files/video/files/summit2015-lightning_talk-subscription-manager.pdf
 [40]: https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf
+
+[41]: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.3/html/architecture_guide/chap-red_hat_satellite-architecture_guide-introduction_to_red_hat_satellite#sect-Red_Hat_Satellite-Architecture_Guide-Introduction_to_Red_Hat_Satellite-Red_Hat_Satellite_6_System_Architecture

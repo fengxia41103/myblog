@@ -5,6 +5,8 @@ h4,
 h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
+  font-size: 1.2em !important;
+  color: #634f33;
 }
 
 #article-content {
@@ -14,9 +16,6 @@ h6 {
 #article-content h1 {
   counter-reset: h2;
   border-bottom: 1px solid #cecece;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.2em !important;
-  color: #634f33;
 }
 
 #article-content h2 {

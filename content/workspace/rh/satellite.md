@@ -10,9 +10,6 @@ have a good understanding of the Satellite models and procedures.
 
 # Architecture
 
-<img src="/images/rh%20satellite%20overall%20architecture%20official.png"
-     class="col s12">
-
 1. **One** satellite server (master server), and **1+** capsule servers.
 2. The Satellite Server is required to connect to Red Hat
    Customer Portal &larr; main source of RH packags, errata,
@@ -26,10 +23,10 @@ have a good understanding of the Satellite models and procedures.
 6. Info flow: external source &rarr; main server &rarr; capsule
     server &rarr; managed host.
 
-# Content view
-
-<img src="/images/rh%20satellite%20content%20view.png"
+<img src="/images/rh%20satellite%20overall%20architecture%20official.png"
      class="col s12">
+
+# Content view
 
 1. `Content Views` are subsets of content from the `Library` (master copy of all contents).
 2. Multiple content views can be applied to one capsule server.
@@ -38,6 +35,9 @@ have a good understanding of the Satellite models and procedures.
    updated, shall still be promoted, but the composite shell does not
    need to be changed. So from its consumer's POV, it sees the change
    transparently.
+
+<img src="/images/rh%20satellite%20content%20view.png"
+     class="col s12">
 
 # RH subscription model
 

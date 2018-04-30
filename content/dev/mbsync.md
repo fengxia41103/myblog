@@ -408,3 +408,14 @@ SyncState *
 
 Now if you issue `mbsync your-inbox-sub` will pull in all `INBOX` and
 **its subfolders**. Awesome.
+
+# gmail &mdash; less secured
+
+Sending username and pwd to login in Gmail will be blocked. A couple
+things you need to do:
+
+1. Go to `settings` and **enable** IMAP.
+2. Go to https://www.google.com/settings/security/lesssecureapps to
+   enable `Less secured app` setting.
+3. Make sure the folder defined in `Account` section for local store
+   actually exists (`mbsync` will not create `~/Maildir/Hotmail` for you!)

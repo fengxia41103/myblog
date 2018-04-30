@@ -12,7 +12,7 @@ IMAPAccount hotmail
 # Address to connect to
 Host imap.outlook.com
 User feng_xia41103@hotmail.com
-Pass xxxx
+Pass xxx
 UseIMAPS yes
 RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -23,10 +23,33 @@ IMAPAccount gmail
 # Address to connect to
 Host imap.gmail.com
 User fengxia41103@gmail.com
-Pass xxxx
+Pass xxx
 UseIMAPS yes
 RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Gmail account for noah
+IMAPAccount noah
+# Address to connect to
+Host imap.gmail.com
+User noahxiaqq@gmail.com
+Pass xxx
+UseIMAPS yes
+RequireSSL yes
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+
+# Lenovo account
+IMAPAccount lenovo
+# Address to connect to
+Host outlookae.lenovo.com
+User fxia1@lenovo.com
+Pass xxx
+Port 993
+UseTLSv1.2 yes
+UseIMAPS yes
+RequireSSL yes
+CertificateFile /home/fengxia/.cert/outlookae.lenovo.com.pem
 
 ############################################
 #
@@ -55,6 +78,21 @@ MaildirStore hotmail-local
 Path ~/Maildir/Hotmail/
 Inbox ~/Maildir/Hotmail/inbox/
 
+IMAPStore lenovo-remote
+Account lenovo
+
+MaildirStore lenovo-local
+Path ~/Maildir/Lenovo/
+Inbox ~/Maildir/Lenovo/inbox/
+
+IMAPStore noah-remote
+Account noah
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/noah)
+MaildirStore noah-local
+Path ~/Maildir/noah/
+Inbox ~/Maildir/noah/inbox/
+
 ############################################
 #
 #       gmail channels
@@ -73,7 +111,7 @@ Channel gmail-inbox
 Master :gmail-remote:
 Slave :gmail-local:inbox
 Create Both
-#Expunge Both
+Expunge Both
 SyncState *
 
 Channel gmail-trash
@@ -94,14 +132,14 @@ Channel gmail-all
 Master :gmail-remote:"[Gmail]/All Mail"
 Slave :gmail-local:all
 Create Both
-#Expunge Both
+Expunge Both
 SyncState *
 
 Channel gmail-starred
 Master :gmail-remote:"[Gmail]/Starred"
 Slave :gmail-local:starred
 Create Both
-#Expunge Both
+Expunge Both
 SyncState *
 
 
@@ -122,7 +160,7 @@ Channel hotmail-inbox
 Master :hotmail-remote:"Inbox"
 Slave :hotmail-local:inbox
 Create Both
-#Expunge Both
+Expunge Both
 SyncState *
 
 Channel hotmail-inbox-sub
@@ -133,22 +171,89 @@ Create Both
 Expunge Both
 SyncState *
 
-
-Channel hotmail-chat
-Master :hotmail-remote:"cHAT"
-Slave :hotmail-local:chat
-Create Both
-#Expunge Both
-SyncState *
-
 Channel hotmail-sent
 Master :hotmail-remote:"Sent"
 Slave :hotmail-local:sent
 Create Both
-#Expunge Both
+Expunge Both
 SyncState *
 
 
+############################################
+#
+#       lenovo channels
+#
+###########################################
+Channel lenovo-inbox
+Master :lenovo-remote:
+Slave :lenovo-local:inbox
+Create Both
+Expunge Both
+SyncState *
+
+Channel lenovo-inbox-sub
+Master :lenovo-remote:"INBOX/"
+Slave :lenovo-local:inbox/
+Pattern *
+Create Both
+Expunge Both
+SyncState *
+
+Channel lenovo-sent
+Master :lenovo-remote:"Sent"
+Slave :lenovo-local:sent
+Create Both
+Expunge Both
+SyncState *
+
+############################################
+#
+#       noah channels
+#
+###########################################
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+Channel noah-inbox
+Master :noah-remote:
+Slave :noah-local:inbox
+Create Both
+Expunge Both
+SyncState *
+
+Channel noah-trash
+Master :noah-remote:"[Gmail]/Trash"
+Slave :noah-local:trash
+Create Both
+Expunge Both
+SyncState *
+
+Channel noah-sent
+Master :noah-remote:"[Gmail]/Sent Mail"
+Slave :noah-local:sent
+Create Both
+Expunge Both
+SyncState *
+
+Channel noah-all
+Master :noah-remote:"[Gmail]/All Mail"
+Slave :noah-local:all
+Create Both
+Expunge Both
+SyncState *
+
+Channel noah-starred
+Master :noah-remote:"[Gmail]/Starred"
+Slave :noah-local:starred
+Create Both
+Expunge Both
+SyncState *
 
 ############################################
 #
@@ -169,9 +274,20 @@ Channel gmail-sent
 Channel gmail-all
 Channel gmail-starred
 
+Group noah
+Channel noah-trash
+Channel noah-inbox
+Channel noah-sent
+Channel noah-all
+Channel noah-starred
+
 Group hotmail
 Channel hotmail-trash
 Channel hotmail-inbox
 Channel hotmail-inbox-sub
-Channel hotmail-chat
 Channel hotmail-sent
+
+Group lenovo
+Channel lenovo-inbox
+Channel lenovo-inbox-sub
+Channel lenovo-sent

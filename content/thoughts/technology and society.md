@@ -17,20 +17,20 @@ problem at hand and to illustrate my thinkings.
 
 # government knows more than we have imagined
 
-However, while reading the book "Short history the CCP", I got a
-really deep impression that government, after all, is not as ignorant,
-as I, or many others, have imaged. This book, written in 1970s, has a
-quite good understanding of CCP's historical events, its path till the
-writing, its organization, its agenda, and its main players and who
-they are and what they do and have done. What makes it even more
-impressive is that data are collected from official channels, eg. gov
-publishing, party journals, which, in my previouly __biased__ opinion,
-is so crooked and abused that nothing is worth noticing, let alone
-quoting. But author has made a clear case out of these, and have
-illustrated cleared and nicely how the party has formulated its
-strategies to get where it is. It certainly had a critical tone on
-many of the policies, especially it had zero illusion of its
-propaganda and the political objective these tools were used to
+However, while reading the book ["Short history the Chinese
+Communism"][4], I got a really deep impression that government, after
+all, is not as ignorant, as I, or many others, have imaged. This book,
+written in 1970s, has a quite good understanding of CCP's historical
+events, its path till the writing, its organization, its agenda, and
+its main players and who they are and what they do and have done. What
+makes it even more impressive is that data are collected from official
+channels, eg. gov publishing, party journals, which, in my previouly
+__biased__ opinion, is so crooked and abused that nothing is worth
+noticing, let alone quoting. But author has made a clear case out of
+these, and have illustrated cleared and nicely how the party has
+formulated its strategies to get where it is. It certainly had a
+critical tone on many of the policies, especially it had zero illusion
+of its propaganda and the political objective these tools were used to
 achieve. Towards the mid reading, I could almost picture myself being
 a party chief or a country lead who thinks not of picture of
 individual's life, but an impact on a mass scale that effects will be
@@ -41,6 +41,7 @@ it's life, so it's always the case, so if the number is small enough
 and I could sleep well without losing conscience, this will the price
 to pay. Too bad.
 
+[4]: https://www.amazon.com/Short-History-Chinese-Communism-Franklin/dp/0138094187/ref=sr_1_1?ie=UTF8&qid=1525356168&sr=8-1&keywords=short+history+of+the+chinese+communism
 
 This feeling scares me! I start to understand how these people sitting
 on the top of a country/county/province will reason on a

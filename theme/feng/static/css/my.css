@@ -6,10 +6,13 @@ h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
   color: #634f33;
+  font-weight: 120;
+  font-size: 1.5rem;
+  word-wrap: break-word;
 }
 
 #article-content {
-  counter-reset: h1
+  counter-reset: h1;
 }
 
 #article-content h1 {

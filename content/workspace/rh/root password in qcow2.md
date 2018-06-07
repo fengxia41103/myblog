@@ -16,7 +16,7 @@ access &larr; so what the heck!?
 Really ugly solution. Anyway. On a Ubuntu 16.04, install `guestfish`
 and `libguesttools`, then:
 
-1. Create a password to use. Note it is "&mdash;<digit 1>", not a "l"
+1. Create a password to use. Note it is "digit 1", not a "l"
    (as in love):
    
         ```shell

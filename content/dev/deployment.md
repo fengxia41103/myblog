@@ -1,6 +1,6 @@
 Title: Deployment architecture
 Date: 2016-09-09 23:05
-Tags: dev, architecture
+Tags: dev
 Slug: deployment architecture
 Author: Feng Xia
 Modified: 2017-08-22 21:52

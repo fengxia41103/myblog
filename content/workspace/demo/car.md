@@ -4,7 +4,7 @@ Slug: car leasing
 Tags: demo, angular, react
 Author: Feng Xia
 
-<figure class="row">
+<figure class="s12 center">
     <img src="/images/demo_car.png"/>
     <figcaption>Project Car Leasing Calculator</figcaption>
 </figure>
@@ -45,8 +45,8 @@ I know there are many car leasing tutorials, blogs, articles and so
 on. But here I want to present a different approach.  First of all,
 let's turn those maths into diagram:
 
-<figure class="row">
-    <img src="/images/car leasing.png"/ class="img-responsive center">
+<figure class="s12 center">
+    <img src="/images/car leasing.png"/>
     <figcaption>
         How do you get a monthly payment
     </figcaption>
@@ -55,23 +55,23 @@ let's turn those maths into diagram:
 Now it's obvious, two numbers are the key because they determine monthly payment:
 
 1. Financing cost: How much you are borrowing from bank? This is
-determined by how much you can negotiate down the price, how much
-deduction you can get, eg.  down payment, rebates, trade-ins,
-credits. The rest will be the money you owe &rarr; borrowing (or in a
-fancy term, financing).
+   determined by how much you can negotiate down the price, how much
+   deduction you can get, eg.  down payment, rebates, trade-ins,
+   credits. The rest will be the money you owe &rarr; borrowing (or in
+   a fancy term, financing).
 2. Depreciation cost: How much your lease will cost to the car to be
-worth **less** than a new one. This is the actual _car_ that you are
-really paying for.
+   worth **less** than a new one. This is the actual _car_ that you
+   are really paying for.
 
 > Two numbers are the key: financing cost and depreciation cost
 
-Financing cost then links APR (interest rate) because this is
-the amount buyer is borrowing from a financing lender, either
-a bank or the dealer itself. First of all, there is mathematical
-standard to compute this. You need a computer or a calculator
-for this because this is not linear math.
-Second, believe or not, the effect of interest rate is not
-as significant as one thinks, and I'll show you why.
+Financing cost then links APR (interest rate) because this is the
+amount buyer is borrowing from a financing lender, either a bank or
+the dealer itself. First of all, there is mathematical standard to
+compute this. You need a computer or a calculator for this because
+this is not linear math.  Second, believe or not, the effect of
+interest rate is not as significant as one thinks, and I'll show you
+why.
 
 On the other hand, **watch out** for depreciation cost because it is a
 disaster.  There is no standard whatsoever. The best reference is a
@@ -88,10 +88,10 @@ off from the official flyer number, walk away!
 
 ## Math
 
-This is an example by [Edmunds][]. See if you can follow the math
-now after reading the diagram above. Now by looking at this,
-I'm wondering maybe I should have built using this format. It is
-more form-like than a SPA so this can be easier for user to follow:
+This is an example by [Edmunds][]. See if you can follow the math now
+after reading the diagram above. Now by looking at this, I'm wondering
+maybe I should have built using this format. It is more form-like than
+a SPA so this can be easier for user to follow:
 
 <table class="table striped bordered">
   <tbody><tr>
@@ -214,8 +214,8 @@ parent path is a _STATIC_. Oh well.
 
 With the component in place, rendering an `form input` section like this one is a breeze:
 
-<figure class="row">
-    <img src="/images/car_1.png" class="img-responsive center"/>
+<figure class="s12 center">
+    <img src="/images/car_1.png"/>
   ! <figcaption>
         AngularJS Component rendered form inputs
     </figcaption>

@@ -1,6 +1,6 @@
 Title: Bad day
 Date: 2017-10-12 11:10
-Tags: thought
+Tags: thoughts
 Slug: bad day
 Author: Feng Xia
 

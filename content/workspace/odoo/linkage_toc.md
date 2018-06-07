@@ -2,7 +2,7 @@ Title: Linkage environments
 Date: 2016-07-01 23:10
 Modified: 2016-07-19 17:11
 Category: reference
-Tags: internal
+Tags: dev
 Slug: linkage-env-reference
 Author: Feng Xia
 Summary: Linkage internal environment references

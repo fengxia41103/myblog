@@ -1,6 +1,6 @@
 Title: You got mail
 Date: 2017-04-24 10:15
-Tags: dev, emacs
+Tags: dev
 Slug: mbsync mu4e email
 Author: Feng Xia
 Modified: 2018-06-06 11:25

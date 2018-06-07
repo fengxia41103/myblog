@@ -8,7 +8,9 @@ Status: Draft
 
 # Gerrit access
 
-Accessing Gerrit involves setting up user account on the VM server itself and an account on Gerrit. The two are linked via the same SSH public key you will use.
+Accessing Gerrit involves setting up user account on the VM server
+itself and an account on Gerrit. The two are linked via the same SSH
+public key you will use.
 
   > VM server: gerrit.labs.lenovo.come
   

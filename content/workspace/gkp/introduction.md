@@ -23,8 +23,8 @@ An important tool is the `user preference`. Each user can specify her own
 searching criteria so to narrow down from a general search to a more
 customized version.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_2.png" />
+<figure class="s12 center">
+    <img src="/images/gkp_2.png" />
     <figcaption>Set up user preferences</figcaption>
 </figure>
 
@@ -56,25 +56,27 @@ week to resolve limited by the upper limit Google imposed on each API
 account and the initial trial and error time. Drawing the map was
 straightforward using [Google map API] and [marker cluster][].
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_21.png"/>
+<figure class="s12 center">
+    <img  src="/images/gkp_21.png"/>
     <figcaption>Using Google map to browse schools</figcaption>
 </figure>
 
 However, a couple issues with this approach:
 
 1. Computing markers within the view bound was time consuming. This is
-especially so when user has few filtering criteria.  This will result
-in displaying all schools on the map. Zooming in will reduce the
-number of markers. So a potential solution is to set the initial zoom
-large enough to view only a section of the country's territory.
+   especially so when user has few filtering criteria.  This will
+   result in displaying all schools on the map. Zooming in will reduce
+   the number of markers. So a potential solution is to set the
+   initial zoom large enough to view only a section of the country's
+   territory.
 
 2. Some addresses were not resolved or resolved incorrectly. They were
-viewable on Google map itself, but the returned geo code was
-different. It feels like Google uses a better version for his own use
-and serves the rest of us with a lower quality data set. A way to
-resolve this is to check the address with other geo decoding
-services. So I tried Baidu map API. That's when all hell broke loose.
+   viewable on Google map itself, but the returned geo code was
+   different. It feels like Google uses a better version for his own
+   use and serves the rest of us with a lower quality data set. A way
+   to resolve this is to check the address with other geo decoding
+   services. So I tried Baidu map API. That's when all hell broke
+   loose.
 
 First of all, two systems yielded two different geo codes for the same
 school address!  How could this be? Are they having two different GPS
@@ -91,8 +93,8 @@ incompatibility.
 Considering the GFW, I abandoned both maps and back to a simple
 Chart. Map is drawn using [Echarts][].
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_1.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_1.png"/>
     <figcaption>School map using Echarts</figcaption>
 </figure>
 
@@ -116,8 +118,8 @@ within the same state boundary will be grouped along different
 dimensions. Statistics are then computed on the fly to provide quick
 facts.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_3.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_3.png"/>
     <figcaption>School statistics quickview at State level</figcaption>
 </figure>
 
@@ -125,8 +127,8 @@ Each dimension can be drilled down to reveal more stats. Among them,
 two important dimensions are important for a student
 &mdash; Bachelor's vs. Associate program, and tiers.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_4.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_4.png"/>
     <figcaption>School statistics drill down by programs and admission tiers</figcaption>
 </figure>
 
@@ -146,8 +148,8 @@ also the time when elite students get picked by school. For all
 others, they have to make a decision prior to the exam day which tier
 she is going into, and the primary reference is her estimated score.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_5.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_5.png"/>
     <figcaption>School statistics drill down by school types</figcaption>
 </figure>
 
@@ -177,8 +179,8 @@ convenient is it to get to the city from where I live?_ So we decided
 to build a train schedule that will show exactly which train are
 available to take, all stops in between, and the actual time elapse.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_8.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_8.png"/>
     <figcaption>City to city train schedule search engine</figcaption>
 </figure>
 
@@ -190,6 +192,6 @@ flight, train, bus and subway data are matched up.
 # School level
 
 Everything comes down to school level where school specific details
-are laid out to assist prospective students evaluate not only
-the future academic life but also its social life. Read on
-our [part two &mdash; school details]({filename}/workspace/gkp/schools.md).
+are laid out to assist prospective students evaluate not only the
+future academic life but also its social life. Read on our [part two
+&mdash; school details]({filename}/workspace/gkp/schools.md).

@@ -1,6 +1,6 @@
 Title: Crawler, TOR, and be a good web citizen
 Date: 2015-03-04 13:00
-Tags: dev, crawler
+Tags: dev
 Slug: tor crawler
 Author: Feng Xia
 

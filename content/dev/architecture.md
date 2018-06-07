@@ -1,6 +1,6 @@
 Title: General system architecture
 Date: 2016-09-08 21:15
-Tags: dev, architecture
+Tags: dev
 Slug: general system architecture
 Author: Feng Xia
 
@@ -63,9 +63,8 @@ projects. It is divided into four components:
   extraction and system backup.
 
 
-<figure class="row">
-  <img src="/images/system_architecture.png"
-       class="center img-responsive"/>
+<figure class="s12 center">
+  <img src="/images/system_architecture.png"/>
     <figcaption>System architecture diagram</figcaption>
 </figure>
 

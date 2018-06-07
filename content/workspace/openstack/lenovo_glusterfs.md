@@ -127,10 +127,9 @@ $ sudo systemctl enable glusterd
 $ sudo systemctl status glusterd
 ```
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/glusterfs%20status.png" />
-    <figcaption>Install KVM/libvirt packages</figcaption>
+<figure class="s12 center">
+<img     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/glusterfs%20status.png" />
+<figcaption>Install KVM/libvirt packages</figcaption>
 </figure>
 
 # Configure firewall
@@ -143,10 +142,9 @@ $ sudo firewall-cmd --zone=public --add-port=5900-5910/tcp  --permanent
 $ sudo firewall-cmd --reload
 ```
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/firewall.png" />
-    <figcaption>Setup firewall</figcaption>
+<figure class="s12 center">
+<img src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/firewall.png" />
+<figcaption>Setup firewall</figcaption>
 </figure>
 
 # Configure GlusterFS

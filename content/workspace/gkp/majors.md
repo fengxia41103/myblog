@@ -5,36 +5,35 @@ Slug: gkp majors
 Author: Feng Xia
 
 
-In [part one]({filename}/workspace/gkp/introduction.md) and
-[part two]({filename}/workspace/gkp/schools.md), I have introduced
-functions to assist students get to know about the schools
-from multiple aspects. In this article, we will touch upon
-another important factor when going to college &mdash; major.
+In [part one]({filename}/workspace/gkp/introduction.md) and [part
+two]({filename}/workspace/gkp/schools.md), I have introduced functions
+to assist students get to know about the schools from multiple
+aspects. In this article, we will touch upon another important factor
+when going to college &mdash; major.
 
 In China, majors are split into three layers: category, subcategory,
 and majors. Similar to the _state-city-school_ configuration,
 functions at category and subcategory level focus on statistic
-analysis so to offer an overview, where major level contains
-details that are relevant to that particular major which students
-would find useful.
+analysis so to offer an overview, where major level contains details
+that are relevant to that particular major which students would find
+useful.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_major_setup.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_major_setup.png"/>
     <figcaption>Majors are split into 3 layers</figcaption>
 </figure>
 
 According to [document]({attach}/downloads/20121012084054830.pdf)
-published by the [Department of Education][] in 2012,
-there are 12 categories, 92 subcategories and
-506 majors.
+published by the [Department of Education][] in 2012, there are 12
+categories, 92 subcategories and 506 majors.
 
 # Category and subcategory
 
-At this level, focus was to provide statistics which
-is similar to what is done for schools at _State level_.
+At this level, focus was to provide statistics which is similar to
+what is done for schools at _State level_.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_18.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_18.png"/>
     <figcaption>Major category and subcategory</figcaption>
 </figure>
 
@@ -52,8 +51,8 @@ these sites and compile the most recent 50 job posts that matches this
 major.
 
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_19.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_19.png"/>
     <figcaption>Job title cloud</figcaption>
 </figure>
 
@@ -62,8 +61,8 @@ taht shows the job titles used by the industry, and they are further
 grouped into cities so they provide another geo reference for
 students.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_20.png"/>
+<figure class="s12 center">
+    <img  src="/images/gkp_20.png"/>
     <figcaption>Schools grouped by job locations</figcaption>
 </figure>
 

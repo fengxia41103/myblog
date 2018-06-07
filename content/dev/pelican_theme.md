@@ -1,6 +1,6 @@
 Title: DIY Pelican theme
 Date: 2016-09-04 11:00
-Tags: dev, pelican
+Tags: dev
 Slug: pelican theme
 Author: Feng Xia
 

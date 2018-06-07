@@ -1,5 +1,5 @@
 Title: About
-Tags: thought
+Tags: thoughts
 Slug: about
 Author: Feng Xia
 

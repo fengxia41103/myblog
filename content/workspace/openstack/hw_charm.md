@@ -32,9 +32,8 @@ installing application, tweak configurations and so on.
 Along this thought, using ThinkAgile as an example we set off to model
 a **Hardware workload** in charms.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/hw%20workload%20stack%20diff.png" />
+<figure class="s12 center">
+  <img src="/images/hw%20workload%20stack%20diff.png" />
   <figcaption>New system stack with HW workload capability</figcaption>
 </figure>
 
@@ -66,9 +65,8 @@ then contains one-to-many racks. Rack can then include servers, and
 servers are consisted of components such as RAID adapters and
 storages.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/hw%20solution%20tree.png" />
+<figure class="s12 center">
+  <img src="/images/hw%20solution%20tree.png" />
   <figcaption>HW solution hierarchy</figcaption>
 </figure>
 

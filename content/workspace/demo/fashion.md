@@ -4,8 +4,8 @@ Slug: project fashion demo
 Author: Feng Xia
 
 
-<figure class="row">
-    <img src="/images/demo_fashion.png" class="center img-responsive"/>
+<figure class="s12 center">
+    <img src="/images/demo_fashion.png" />
     <figcaption>Project Fashion front page</figcaption>
 </figure>
 

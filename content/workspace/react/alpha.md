@@ -5,9 +5,8 @@ Category: REACT
 Tags: react
 Author: Feng Xia
 
-<figure class="row">
-  <img class="center responsive-img"
-       src="/images/alpha%20advantage%20sp500.png"/>
+<figure class="s12 center">
+  <img src="/images/alpha%20advantage%20sp500.png"/>
     <figcaption>SP500</figcaption>
 </figure>
 
@@ -35,8 +34,7 @@ user selected company symbol, and draw all the data index on a single page.
 The `architecture`/`design` is shown below, and [github code][6].
 [6]: https://github.com/fengxia41103/sp500
 
-<figure class="row">
-  <img class="center responsive-img"
-       src="/images/sp500%20architecture.png"/>
+<figure class="s12 center">
+  <img src="/images/sp500%20architecture.png"/>
   <figcaption>SP500 SPA architecture</figcaption>
 </figure>

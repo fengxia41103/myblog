@@ -16,9 +16,8 @@ We already know hooks are hardcoded. Juju expects certain hooks and
 hook sequence is always executed in an order that is dictated by Juju
 code.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/charm%20hooks.png" />
+<figure class="s12 center">
+  <img src="/images/charm%20hooks.png" />
   <figcaption>Sequence of charm hooks</figcaption>
 </figure>
 

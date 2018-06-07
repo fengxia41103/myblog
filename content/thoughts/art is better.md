@@ -1,6 +1,6 @@
 Title: Art &gt; tech
 Date: 2017-10-07 11:00
-Tags: thought
+Tags: thoughts
 Slug: art is better
 Author: Feng Xia
 

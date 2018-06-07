@@ -1,6 +1,6 @@
 Title: Fashion ERP &mdash; reports
 Date: 2016-06-12 10:00
-Tags: fashion, erp
+Tags: fashion
 Slug: fashion reports
 Author: Feng Xia
 

@@ -1,7 +1,7 @@
 Title: DHS
 Date: 2016-10-12 13:00
 Category: REACT
-Tags: dhs, react
+Tags: demo, react
 Slug: dhs
 Author: Feng Xia
 Status: Draft

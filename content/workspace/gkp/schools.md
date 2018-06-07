@@ -17,9 +17,9 @@ unlimited bookmarks and manage them by _x-out_(remove) it from saved
 list. Convenient.
 
 <figure class="row">
-    <div class="col-md-6">
+    <div class="col s6">
     <img class="img-responsive center" src="/images/gkp_9.png" />
-    </div><div class="col-md-6">
+    </div><div class="col s6">
     <img class="img-responsive center" src="/images/gkp_10.png" />
     </div>
     <figcaption>Bookmark a school</figcaption>
@@ -32,16 +32,16 @@ first page contains an introduction, or a quick view, of the school.
 It contains many meta data that can be extracted to form more data
 dimensions.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_11.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_11.png"/>
     <figcaption>School summary</figcaption>
 </figure>
 
 School detail page expands on top of the introduction. One small feature
 concerning development is that TOC is auto generated.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_12.png"/>
+<figure class="s12 center">
+    <img  src="/images/gkp_12.png"/>
     <figcaption>School wiki</figcaption>
 </figure>
 
@@ -51,8 +51,8 @@ This page lists historical cutoff scores that the school has applied
 in past admissions. GKP has collected over 2,000,000 data records
 between 2010 and 2014 and covering 3,000 schools.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_13.png"/>
+<figure class="s12 center">
+    <img src="/images/gkp_13.png"/>
     <figcaption>School historical cutoff scores</figcaption>
 </figure>
 
@@ -68,8 +68,8 @@ backend engine to tap into popular social media facilities and pull in
 live chat stream at **50,000 new posts per minute**. This gives
 students a rich information on how the campus life is like.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_14.png"/>
+<figure class="s12 center">
+    <img  src="/images/gkp_14.png"/>
     <figcaption>School social media data stream</figcaption>
 </figure>
 
@@ -105,8 +105,8 @@ as simple as scanning the barcode with her phone. It is another unique
 feature that makes acquiring school information as painless as
 possible.
 
-<figure class="row">
-    <img class="img-responsive center" src="/images/gkp_17.png"/>
+<figure class="s12 center">
+    <img  src="/images/gkp_17.png"/>
     <figcaption>School Wechat channels</figcaption>
 </figure>
 

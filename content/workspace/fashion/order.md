@@ -1,6 +1,6 @@
 Title: Fashion ERP &mdash; orders
 Date: 2016-06-06 10:00
-Tags: fashion, erp
+Tags: fashion
 Slug: fashion orders
 Author: Feng Xia
 

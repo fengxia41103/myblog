@@ -1,7 +1,7 @@
 Title: Country health
 Date: 2016-10-15 11:00
 Category: REACT
-Tags: dhs, react
+Tags: demo, react
 Slug: country health
 Author: Feng Xia
 Status: Draft

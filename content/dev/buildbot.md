@@ -1,6 +1,6 @@
 Title: Buildbot continuous integration setup
 Date: 2016-07-20 10:45
-Tags: dev, ci, build
+Tags: dev
 Slug: buildbot
 Author: Feng Xia
 

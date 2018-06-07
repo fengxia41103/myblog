@@ -233,9 +233,9 @@ MAAS admin web is the tool to use for this configuration.
 
     <figure class="row">
       <img src="/images/maas_vlan_config.png"
-           class="s6" />
+           class="col s6" />
       <img src="/images/maas_subnet_config.png"
-           class="s6" />    
+           class="col s6" />    
       <figcaption>MAAS  DHCP config</figcaption>
     </figure>
 

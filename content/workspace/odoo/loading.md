@@ -35,9 +35,8 @@ time.
 Tracing through ODOO boot code, we have illustrated steps 
 of ODOO's loading process in diagram below:
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/odoo8_loading.png" />
+<figure class="s12 center">
+  <img src="/images/odoo8_loading.png" />
   <figcaption>ODOO8 loading sequence</figcaption>
 </figure>
 
@@ -102,9 +101,8 @@ as [Guicorn][] and [uwsgi][].
 [lighthttpd]: http://www.lighttpd.net/
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html#BaseHTTPServer.HTTPServer
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/odoo8_server_run.png" />
+<figure class="s12 center">
+  <img src="/images/odoo8_server_run.png" />
   <figcaption>ODOO8 ThreadedServer</figcaption>
 </figure>
 
@@ -141,9 +139,8 @@ the entire call trace in its memory and knows details of call stack.
 [Pycallgraph]: http://pycallgraph.slowchop.com/en/develop/guide/command_line_usage.html
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html
 
-<figure class="row">
-  <img src="/images/odoo8_loading_callgraph.png"
-       class="img-responsive center"/>
+<figure class="s12 center">
+  <img src="/images/odoo8_loading_callgraph.png"/>
     <figcaption>ODOO 8 loading call trace diagram</figcaption>
 </figure>
 

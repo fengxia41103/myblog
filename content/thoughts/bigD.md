@@ -1,9 +1,9 @@
 Title: Big D
-Date: 2017-02-04 9:30
-Tags: thoughts
+Date: 2018-02-04 9:30
+Tags: thoughts, love
 Slug: the big D
 Author: Feng Xia
-Status: Draft
+Modified: 2018-06-07 15:00
 
 This has been a long past due as I have been thinking about this for
 the last few days, and have attempted to write a letter a few times,

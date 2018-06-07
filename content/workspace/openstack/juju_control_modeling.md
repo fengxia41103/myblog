@@ -20,9 +20,8 @@ terms. Instead of drawing a tree to reflect 1-N relationship, I used
 an outer enclosure which can have multiple of its inner enclosures,
 eg. a bundle can have N charms.
 
-<figure>
-  <img src="/images/juju%20control%20modeling.png"
-       class="center img-responsive" />
+<figure class="s12 center">
+  <img src="/images/juju%20control%20modeling.png"/>
   <figcaption>Juju control models</figcaption>
 </figure>
 
@@ -32,7 +31,7 @@ A few interesting points besides the 1-N relationships.
   eg. Application #2 has two units. This is how one application can be
   scaled out horizontally.
 * One machine, in turn, can host multiple applications, eg. one unit
-  of application #2 and #3 both live on the same machine. 
+  of application #2 and #3 both live on the same machine.
 
 By default, `juju deploy` will call for a new machine for each
 application within the bundle/charm. Of course, there is command flag

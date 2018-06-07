@@ -6,7 +6,8 @@ Author: Feng Xia
 
 
 We have covered Juju's [bootstrap][1] phase. In this article, we will
-continue our research into another important function &mdash; juju deploy.
+continue our research into another important function &mdash; juju
+deploy.
 
 [1]: {filename}/workspace/openstack/juju_cloud_bootstrap.md
 
@@ -21,23 +22,21 @@ to repeat this for development and troubleshooting.
 
 See the process in action:
 
-<figure class="row">
-    <img class="img-responsive center"
-         src="/images/juju%20deploy%20jenkins.gif" />
+<figure class="s12 center">
+    <img src="/images/juju%20deploy%20jenkins.gif" />
     <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
 
 ## Juju + MAAS
 
 We have already covered state machine of [MAAS target node][3]. In the
-context of deploying a charm driven by Juju, we can take a look MAAS internals
-how those states are related.
+context of deploying a charm driven by Juju, we can take a look MAAS
+internals how those states are related.
 
 [3]: {filename}/workspace/openstack/maas_target.md
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -46,10 +45,11 @@ how those states are related.
 This is a more detailed view of juju deploying a charm broken down
 into three steps.
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20deploy%20original.png" />
-    <figcaption>Illustration of a Juju cloud environment before a deployment</figcaption>
+<figure class="s12 center"> 
+    <img src="/images/juju%20deploy%20original.png" />
+    <figcaption>
+        Illustration of a Juju cloud environment before a deployment
+    </figcaption> 
 </figure>
 
 In this environment, we have a CLI controller where we will type in
@@ -66,23 +66,24 @@ job done:
 1. Add the new machine to juju's environment. A juju agent
    (aka. jujud) will be installed. More details are discussed 
    in the next section.
-  ```shell
-  $ juju add-machine ssh://[username]@192.168.8.235
-  ```
+
+        ```shell
+        $ juju add-machine ssh://[username]@192.168.8.235
+        ```
 
 2. Juju state controller (aka. machine-0) will recoganize the new
    machine and register its availability.
 
 3. Issuing a deploy command
-  ```shell
-  $ juju deploy jenkinsn
-  ```
+
+        ```shell
+        $ juju deploy jenkinsn
+        ```
 
 4. Jujud will download [Jenkins charm][2] and execute per its instruction.
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20deploy%20commands.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20deploy%20commands.png" />
     <figcaption>Issuing command to deploy Jenkins</figcaption>
 </figure>
 
@@ -90,9 +91,8 @@ The result, as expected, is that we have now two machines in the
 cloud, each equipped with an application, and both have a jujud
 installed.
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20deploy%20result.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20deploy%20result.png" />
     <figcaption>Deployment result</figcaption>
 </figure>
 
@@ -118,7 +118,7 @@ $ juju add-machine ssh://[username]@192.168.8.235
 What is interesting is to watch the node and figure out what is
 installed by this command.
 
-## /var/lib/juju
+## `/var/lib/juju`
 
 This is the *home* folder for juju &mdash; `/var/lib/juju`.  Remember,
 this folder did not exist prior to the `add-machine` command.
@@ -152,7 +152,7 @@ them. So the challenge is to simulate this configuration process as if
 it were done by juju. It is doable (copy files, create folders and so
 forth), but will be tedious. 
 
-## /etc
+## `/etc`
 
 ```shell
 /etc/apt/apt.conf.d/42-juju-proxy-settings
@@ -169,7 +169,7 @@ You can use the common `service juju-machine-15
 start|stop|restart|status` to manage this service like any
 others. 
 
-## /usr/bin
+## `/usr/bin`
 
 Two binaries appeared, both linked (again) to some files under the
 `/var/lib/juju/` folder.
@@ -183,7 +183,7 @@ lrwxrwxrwx 1 root   root      36 Jan 19 16:47 juju-dumplogs -> /var/lib/juju/too
 lrwxrwxrwx 1 root   root      36 Jan 19 16:47 juju-run -> /var/lib/juju/tools/machine-15/jujud
 ```
 
-## /usr/share
+## `/usr/share`
 
 ```shell
 /usr/share/sosreport/sos/plugins/juju.py
@@ -209,9 +209,10 @@ application which will request only one node) to try.
 Below is an *impressive* capture of the `/var/lib/juju` contents when
 deploying an application, in this case, jenkins.
 
-  > Juju charm is a zip file. You can use command `unzip` to extract
-  > these contents under the `/var/lib/juju/unit-jenkins-1/` folder.
+> Juju charm is a zip file. You can use command `unzip` to extract
+> these contents under the `/var/lib/juju/unit-jenkins-1/` folder.
   
+
 ```shell
 /var/lib/juju
 ├── agents

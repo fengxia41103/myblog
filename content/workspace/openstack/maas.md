@@ -50,9 +50,8 @@ There will be two VMs and one internal network, `intnet1`.
 3. `intnet1`: is a subnet (192.168.8.0/24) that MAAS server will
    live together with its managed nodes (I call them targets).
 
-<figure class="row">
-  <img src="/images/maas_networking_topology.png"
-       class="center img-responsive" />
+<figure class="s12 center">
+  <img src="/images/maas_networking_topology.png"/>
   <figcaption>MAAS Virtualbox lab networking topology</figcaption>
 </figure>
 
@@ -80,14 +79,15 @@ name `intnet1`.
    use). Use `ifconfig` to find out interface name that corresponds to
    `intnet1` (a clue: the one that has no IP assigned):
 
-    ```shell
-    $ nano /etc/network/interfaces
-    auto enp0s9
-    iface enp0s9 inet static
-      address 192.168.8.1
-      netmask 255.255.255.0
-      gateway 192.168.8.1 # this will be setup in MAAS as default gateway!
-    ```
+        ```shell
+        $ nano /etc/network/interfaces
+
+        auto enp0s9
+        iface enp0s9 inet static
+        address 192.168.8.1
+        netmask 255.255.255.0
+        gateway 192.168.8.1 # this will be setup in MAAS as default gateway!
+        ```
 
     At Virtualbox level we have added an interface to this VM using
     `Internal Network`, we need then define this network in VM. Also,
@@ -96,23 +96,26 @@ name `intnet1`.
     road.
 
 2. Install MAAS is simple. Don't bother with other methods.
-    ```shell
-    sudo add-apt-repository ppa:maas/stable
-    sudo apt update
-    sudo apt install maas
-    ```
+
+        ```shell
+        sudo add-apt-repository ppa:maas/stable
+        sudo apt update
+        sudo apt install maas
+        ```
 
 3. Create MAAS admin: 
-    ```shell
-    sudo maas createadmin
-    ```
+
+        ```shell
+        sudo maas createadmin
+        ```
 
 4. Create SSH key and copy content from `~/.ssh/id_rsa.pub`:
-    ```shell
-    mkdir .ssh
-    ssh-keygen -t rsa
-    less ~/.ssh/id_rsa.pub
-    ```
+
+        ```shell
+        mkdir .ssh
+        ssh-keygen -t rsa
+        less ~/.ssh/id_rsa.pub
+        ```
 
 5. Login in `http://localhost:5240/MAAS` using admin created in step
   3, goto user preference (click __user name__).
@@ -121,9 +124,8 @@ name `intnet1`.
   deployment so later you can SSH into these targets without knowing
   the password.
 
-    <figure class="row">
-      <img src="/images/maas%20ssh%20key.png"
-           class="center img-responsive" />
+    <figure class="s12 center">
+      <img src="/images/maas%20ssh%20key.png"/>
       <figcaption>MAAS upload SSH key</figcaption>
     </figure>
 
@@ -133,9 +135,8 @@ name `intnet1`.
     In short, set MAAS default gateway to be the IP of the MAAS
     server, in our case, `192.168.8.1`!
 
-    <figure class="row">
-      <img src="/images/maas%20default%20gateway.png"
-           class="center img-responsive" />
+    <figure class="s12 center">
+      <img src="/images/maas%20default%20gateway.png"/>
       <figcaption>MAAS default gateway</figcaption>
     </figure>
     
@@ -162,15 +163,17 @@ Following the [instructions][4] to enable default port forwarding:
 1. Packet forwarding needs to be enabled in ufw. Two configuration
    files will need to be adjusted, in `/etc/default/ufw` change the
    `DEFAULT_FORWARD_POLICY` to `ACCEPT`:
-   ```shell
-   DEFAULT_FORWARD_POLICY="ACCEPT"
-   ```
+
+        ```shell
+        DEFAULT_FORWARD_POLICY="ACCEPT"
+        ```
 
 2. Then edit `/etc/ufw/sysctl.conf` and uncomment:
-  ```shell
-  net/ipv4/ip_forward=1
-  net/ipv6/conf/default/forwarding=1
-  ```
+
+        ```shell
+        net/ipv4/ip_forward=1
+        net/ipv6/conf/default/forwarding=1
+        ```
   
 ### Firewall policies
 
@@ -180,19 +183,21 @@ Following the [instructions][4] to enable default port forwarding:
 To config MAAS server to route 192.168.8.x subnet traffic to internet
 using UFW is simple. Using `ifconfig` to find the interface name that
 is connected to the internet(NAT), in this example, `enp0s3`:
-    ```shell
-    nano /etc/ufw/before.rules
-    ```
+
+        ```shell
+        nano /etc/ufw/before.rules
+        ```
 
 Paste this at the bottom of the file, **after** the `COMMIT` that has
 already been in that document:
-    ```shell
-    # nat Table rules
-    *nat
-    :POSTROUTING ACCEPT [0:0]
-    -A POSTROUTING -s 192.168.8.0/24 -o enp0s3 -j MASQUERADE
-    COMMIT
-    ```
+
+        ```shell
+        # nat Table rules
+        *nat
+        :POSTROUTING ACCEPT [0:0]
+        -A POSTROUTING -s 192.168.8.0/24 -o enp0s3 -j MASQUERADE
+        COMMIT
+        ```
 
 What this does is to make `enp0s3` as the router for subnet
 192.168.8.x &larr; welcome the internet!
@@ -228,9 +233,9 @@ MAAS admin web is the tool to use for this configuration.
 
     <figure class="row">
       <img src="/images/maas_vlan_config.png"
-           class="center img-responsive" />
+           class="s6" />
       <img src="/images/maas_subnet_config.png"
-           class="center img-responsive" />    
+           class="s6" />    
       <figcaption>MAAS  DHCP config</figcaption>
     </figure>
 
@@ -239,9 +244,8 @@ MAAS admin web is the tool to use for this configuration.
    gateway to 192.168.8.1, which is this server's static IP on this
    subnet.
 
-    <figure class="row">
-      <img src="/images/maas_dhcp_config.png"
-           class="center img-responsive" />
+    <figure class="s12 center">
+      <img src="/images/maas_dhcp_config.png"/>
       <figcaption>MAAS admin DHCP config</figcaption>
     </figure>
 

@@ -6,10 +6,10 @@ Author: Feng Xia
 
 
 The very first command user will encounter is the `juju bootstrap`. It
-createa a special machine &mdash; state controller, `machine-0`, control
-node, etc. &mdash; naming convention aside, it is the brain that
-tracks others nodes in the cloud, applications installed and their
-status. 
+createa a special machine &mdash; state controller, `machine-0`,
+control node, etc. &mdash; naming convention aside, it is the brain
+that tracks others nodes in the cloud, applications installed and
+their status.
 
 # Screencast
 
@@ -20,15 +20,15 @@ go south, what is the minimum to simulate a clean state so we can run
 `juju bootstrap` again as if from scratch. This last point is
 particuarly useful for development and troubleshooting.
 
-<figure class="row">
-    <img class="img-responsive center"
-         src="/images/juju%20bootstrap.gif" />
+<figure class="s12 center">
+    <img src="/images/juju%20bootstrap.gif" />
     <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
 </figure>
 
 
 First thing first, if we have create a cloud or are using a stock
 cloud type:
+
 
 ```shell
 $ juju bootstrap [cloudname] [machine-0 name]
@@ -72,9 +72,8 @@ CLI speaks to a cloud. Each cloud has a different API. Juju provides a
 common bootstrap framework to tie these providers into a common
 process.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/juju%20cloud%20and%20provider.png" />
+<figure class="s12 center">
+  <img src="/images/juju%20cloud%20and%20provider.png" />
     <figcaption>Juju cloud abstraction</figcaption>
 </figure>
 
@@ -146,9 +145,8 @@ environment, machine-0 involves tremendous amount of machinary to go
 live.  In a nutshell, all activities can be categorized into the
 followings:
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/juju%20bootstrap%20overview.png" />
+<figure class="s12 center">
+  <img src="/images/juju%20bootstrap%20overview.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -189,9 +187,8 @@ process located in `juju.juju.environs.Bootstrap` function.
 * <font color="blue">Blue</font>: are clearly Canonical dependent due
   to hard-coded values (eg. simplestream URL).
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/juju%20bootstrap%20process.png" />
+<figure class="s12 center">
+  <img src="/images/juju%20bootstrap%20process.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -224,9 +221,8 @@ here. Once ducks are in line, call a provider's `BootstrapInstance`
 function &larr; and this is the point where underline cloud meets
 Juju.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/juju%20common%20BootstrapInstance.png" />
+<figure class="s12 center">
+  <img src="/images/juju%20common%20BootstrapInstance.png" />
     <figcaption>"common" provider's BootstrapInstance function</figcaption>
 </figure>
 
@@ -477,9 +473,8 @@ In code this step is presented as an "interface" function within the
 `BootstrapInstance`. So it is really part of the provisioning calls.
 However, we are separating it here for discussion purpose.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
+<figure class="s12 center">
+  <img src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
     <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
 </figure>
 

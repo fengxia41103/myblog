@@ -36,9 +36,8 @@ itself down at the end of the boot.
 
 MAAS target goes through a life cycel as shown below:
 
-<figure class="row">
-  <img src="/images/maas_target_life_cycle.png"
-       class="center img-responsive" />
+<figure class="s12 center">
+  <img src="/images/maas_target_life_cycle.png"/>
   <figcaption>MAAS target node life cycle</figcaption>
 </figure>
 
@@ -59,13 +58,14 @@ memory, and disk information of the target. Two important
 configurations to notice:
 
 1. Power type: for our virtual lab, select _Manual_. Otherwise, the
-admin GUI will block you from commissioning completly.
+   admin GUI will block you from commissioning completly.
 2. `Retain`: do **NOT** check such checkboxes. The word _retain_ means
-to keep what you have. Therefore, it will skip registering the
-target's disk information. This is super confusing because commission
-output details will show clearly the disk info. So the commission
-scripts run just fine and pulled everything correctly. It's the MAAS
-logic to ignore these returned values if user has checked _retain_.
+   to keep what you have. Therefore, it will skip registering the
+   target's disk information. This is super confusing because
+   commission output details will show clearly the disk info. So the
+   commission scripts run just fine and pulled everything
+   correctly. It's the MAAS logic to ignore these returned values if
+   user has checked _retain_.
 
 ## READY
 
@@ -88,9 +88,9 @@ Once state switched to _Deployed_, verify by:
 1. Goto _Subnet_ menu on MAAS web admin UI, look up the target's assigned IP address.
 2. Boot up target machine &larr; it will now load from HD instead of PXE!
 
-    ```shell
-    ssh ubuntu@192.168.8.xxx
-    ```
+        ```shell
+        ssh ubuntu@192.168.8.xxx
+        ```
 
     Since deployed image has copied the SSH public key that we have
     created in steps of creating the MAAS server itself and have

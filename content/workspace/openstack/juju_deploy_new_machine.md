@@ -7,13 +7,13 @@ Author: Feng Xia
 
 In [this][1] article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will
-be put on by the deployer.If you recall, there were four steps in 
-a deploy process:
+be put on by the deployer.If you recall, there were four steps in a
+deploy process:
 
 [1]: {filename}/workspace/openstack/juju_deploy_charm.md
 
-1. Add a new machine to the cloud environment. In the [demo][1],
-   we added this machine manually using `juju add-machine` command.
+1. Add a new machine to the cloud environment. In the [demo][1], we
+   added this machine manually using `juju add-machine` command.
 2. Machine-0 recognizes the new node.
 3. CLI issues a deploy command.
 4. Charm gets deployed.
@@ -28,14 +28,13 @@ fly? MAAS provider can almost do just that.
 
 We have briefly touched upon [the MAAS way][1].  By default, Juju
 deploy will request for a new machine unless using the `--to [machine
-number]` flag. While using MAAS it is seen that MAAS will turn a `READY`
-machine into `ALLOCATED` then `DEPLOYING`. Once a Juju agent is installed
-(provisioned), the agent executes application deployment.
+number]` flag. While using MAAS it is seen that MAAS will turn a
+`READY` machine into `ALLOCATED` then `DEPLOYING`. Once a Juju agent
+is installed (provisioned), the agent executes application deployment.
 
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -58,9 +57,8 @@ installed, knows how to speak to the state controller (machine-0), how
 to find and download a charm, and how to use it to deploy an
 application. So just how are agents wired together?
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20agent%20overview.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20agent%20overview.png" />
     <figcaption>High level view of Juju agents in an environment</figcaption>
 </figure>
 
@@ -86,9 +84,8 @@ change. The change(set) essentially has all the information the
 provisioner needs to take an action so to bring machine from state A
 &rarr; state B.
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20machine%200%20state.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20machine%200%20state.png" />
     <figcaption>Machine-0 state & provisioner</figcaption>
 </figure>
 
@@ -142,8 +139,7 @@ them are just think wrapper of next function. The mapping between a
 command to a state is taking place in `state.AddApplication()` which
 I'm highlighting in <font color="green">green</font>.
 
-<figure class="row">
-    <img class="img-responsive center" 
-         src="/images/juju%20deploy%20call%20chain.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20deploy%20call%20chain.png" />
     <figcaption>Illustration of call chain by "juju deploy" command</figcaption>
 </figure>

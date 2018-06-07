@@ -73,14 +73,14 @@ main()
 
 You can diff all of them, and they are all the same! <span
 class="myhighlight">and they are all copies of the
-`hook.template`</span>. The `from charms.layer import basic`
-actually clearly states that these hooks are <span
+`hook.template`</span>. The `from charms.layer import basic` actually
+clearly states that these hooks are <span
 class="myhighlight">**depending**</span> on `layer-basic`. There, is
 why all charms are using it.
 
-This actually gives us a clue to further investigate how
-dependent charms are to `layer-basic`. It turned out not as
-necessary as we thought.
+This actually gives us a clue to further investigate how dependent
+charms are to `layer-basic`. It turned out not as necessary as we
+thought.
 
 # charm build
 
@@ -103,16 +103,16 @@ Ah ha, that's where it is expecting `hook.template`. Following this we have disc
    interesting point is that it doesn't relie on `layer-basic`
    anymore. If you charm has a `/hooks/hook.template`, it will work.
 
-    ```python
-    def plan_interfaces(self, layers, output_files, plan):
-        ......
-        if not meta and layers.get('interfaces'):
-            raise BuildError(
-                'Includes interfaces but no metadata.yaml to bind them')
-        elif self.HOOK_TEMPLATE_FILE not in output_files:
-            raise BuildError('At least one layer must provide %s',
-                             self.HOOK_TEMPLATE_FILE)
-    ```
+        ```python
+        def plan_interfaces(self, layers, output_files, plan):
+          ......
+          if not meta and layers.get('interfaces'):
+              raise BuildError(
+                  'Includes interfaces but no metadata.yaml to bind them')
+          elif self.HOOK_TEMPLATE_FILE not in output_files:
+              raise BuildError('At least one layer must provide %s',
+                               self.HOOK_TEMPLATE_FILE)
+        ```
 
 2. If you didn't define those **must-have** hooks, eg. `install` hook,
 charm build will happily make the dist, but it will fail at run
@@ -123,26 +123,28 @@ to make `proof`, and this will complain if you miss expected hooks
 [3]: https://github.com/juju/charm-tools/issues/325
 
     1. Code expected hooks:
-        ```python
-        lint.check_hook('install', hooks_path, recommended=True)
-        lint.check_hook('start', hooks_path, recommended=True)
-        lint.check_hook('stop', hooks_path, recommended=True)
-        if os.path.exists(os.path.join(charm_path, 'config.yaml')):
-            lint.check_hook('config-changed', hooks_path, recommended=True)
-        else:
-            lint.check_hook('config-changed', hooks_path)
-        ```
+
+                ```python
+                lint.check_hook('install', hooks_path, recommended=True)
+                lint.check_hook('start', hooks_path, recommended=True)
+                lint.check_hook('stop', hooks_path, recommended=True)
+                if os.path.exists(os.path.join(charm_path, 'config.yaml')):
+                    lint.check_hook('config-changed', hooks_path, recommended=True)
+                else:
+                    lint.check_hook('config-changed', hooks_path)
+                ```
 
     2. `charm proof` will catch the missing hooks:
-        ```shell
-        fengxia@fengxia-xenial-dev:~/workspace/wss/charms/charm-pdu$ charm proof
-        I: metadata name (pdu) must match directory name (charm-pdu) exactly for local deployment.
-        W: no copyright file
-        W: no README file
-        I: relation rack has no hooks
-        I: missing recommended hook install
-        I: missing recommended hook start
-        ```
+
+                ```shell
+                fengxia@fengxia-xenial-dev:~/workspace/wss/charms/charm-pdu$ charm proof
+                I: metadata name (pdu) must match directory name (charm-pdu) exactly for local deployment.
+                W: no copyright file
+                W: no README file
+                I: relation rack has no hooks
+                I: missing recommended hook install
+                I: missing recommended hook start
+                ```
 
 If charm is executed, `install` hook will run first, which
 then call two functions from `layer-basic`:
@@ -173,20 +175,20 @@ This function is to setup the host Python environment for charms.
 [5]: http://setuptools.readthedocs.io/en/latest/easy_install.html#configuration-files
 
     In `wheelhouse.txt` file:
-    ```shell
-    pip>=7.0.0,<8.2.0
-    charmhelpers>=0.4.0,<1.0.0
-    charms.reactive>=0.1.0,<2.0.0
-    ```
+
+        ```shell
+        pip>=7.0.0,<8.2.0
+        charmhelpers>=0.4.0,<1.0.0
+        charms.reactive>=0.1.0,<2.0.0
+        ```
     
-3. Install `python-virtualenv` if it is included in
-   `config.yaml`. 
+3. Install `python-virtualenv` if it is included in `config.yaml`.
 
 # `init_config_states`
 
 This is where charms will start using Juju commands (via
-[charmhelpers][6] lib) to set states with Juju controller.
-I'm copying the codes below since they are fairly self-explanatory.
+[charmhelpers][6] lib) to set states with Juju controller.  I'm
+copying the codes below since they are fairly self-explanatory.
 Unlike `bootstrap_charm_deps`, there is no magic file or flag to
 prevent this block executed multiple times. This makes sense since
 each hook can potentially modify charm states, thus run this in each

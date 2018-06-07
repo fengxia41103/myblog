@@ -55,29 +55,40 @@ First, we create a gold copy that has everything pre-installed,
 pre-configured as much as you'd like to:
 
 1. Follow [instruction][2] to launch a standard image:
-    ```shell
-    $ lxc launch ubuntu:14.04 gold
-    ```
+
+        ```shell
+        $ lxc launch ubuntu:14.04 gold
+        ```
+        
 2. SSH to your new container, install system packages:
-    ```shell
-    $ lxc exec gold bash
-    $ apt update
-    $ apt install build-essential libssl-dev libffi-dev python-pip python-dev
-    ```
+
+        ```shell
+        $ lxc exec gold bash
+        $ apt update
+        $ apt install build-essential libssl-dev libffi-dev python-pip python-dev
+        ```
+        
 3. Update user `ubuntu`'s password:
-    ```shell
-    $ passwd ubuntu
-    ```
+
+        ```shell
+        $ passwd ubuntu
+        ```
+        
 4. Enable SSH password authentication:
-    ```shell
-    $ nano /etc/ssh/sshd_config
-    # Change to no to disable tunnelled clear text passwords
-    PasswordAuthentication yes # <-- change to "yes"
-    ```
-5. Upgrade `pip`. This is necessary to install `/wheelhouse` contents properly.
-    ```shell
-    $ pip install pip --upgrade
-    ```
+
+        ```shell
+        $ nano /etc/ssh/sshd_config
+        # Change to no to disable tunnelled clear text passwords
+        PasswordAuthentication yes # <-- change to "yes"
+        ```
+        
+5. Upgrade `pip`. This is necessary to install `/wheelhouse` contents
+   properly.
+   
+        ```shell
+        $ pip install pip --upgrade
+        ```
+
 6. In your charm's dist, there will be a `/wheelhouse` folder, which
    hosts a list of `.gz` files and such. They are python packages
    needed by charm. Since they are packages into each charm, it makes
@@ -86,9 +97,10 @@ pre-configured as much as you'd like to:
 
     Using `scp` and `ubuntu` credential (see step #3) to copy
     `/wheelhouse` to container. Install them:
-     ```shell
-     $ pip install wheelhouse/*
-     ```
+    
+        ```shell
+        $ pip install wheelhouse/*
+        ```
      
 7. Any other customization you have in mind, go ahead with it.
 
@@ -100,31 +112,34 @@ Using the gold image, we are a few command lines away to create a new
 LXD image Juju (2.1+) uses when creating a new machine:
 
 1. Create a snapshot of the `gold` image:
-    ```shell
-    $ lxc snapshot gold
-    ```
+
+        ```shell
+        $ lxc snapshot gold
+        ```
+
 2. To verify snapshot, `lxc info gold`, an example output:
-    ```shell
-    fengxia@local-charmdev:$ lxc info gold
-    Name: gold
-    Remote: unix:/var/lib/lxd/unix.socket
-    Architecture: x86_64
-    Created: 2017/08/30 21:13 UTC
-    Status: Running
-    Type: persistent
-    Profiles: default
-    Pid: 1858
-    Ips:
-      eth0:	inet	10.129.186.150	vethWQ2SSG
-      eth0:	inet6	fe80::216:3eff:fede:5152	vethWQ2SSG
-      lo:	inet	127.0.0.1
-      lo:	inet6	::1
-    Resources:
-      Processes: 15
-      Memory usage:
+
+        ```shell
+        fengxia@local-charmdev:$ lxc info gold
+        Name: gold
+        Remote: unix:/var/lib/lxd/unix.socket
+        Architecture: x86_64
+        Created: 2017/08/30 21:13 UTC
+        Status: Running
+        Type: persistent
+        Profiles: default
+        Pid: 1858
+        Ips:
+        eth0:	inet	10.129.186.150	vethWQ2SSG
+        eth0:	inet6	fe80::216:3eff:fede:5152	vethWQ2SSG
+        lo:	inet	127.0.0.1
+        lo:	inet6	::1
+        Resources:
+        Processes: 15
+        Memory usage:
         Memory (current): 18.14MB
         Memory (peak): 116.85MB
-      Network usage:
+        Network usage:
         eth0:
           Bytes received: 30.95kB
           Bytes sent: 7.24kB
@@ -135,16 +150,19 @@ LXD image Juju (2.1+) uses when creating a new machine:
           Bytes sent: 0B
           Packets received: 0
           Packets sent: 0
-    Snapshots:
-      snap3 (taken at 2017/09/04 00:18 UTC) (stateless)
-    ```
+        Snapshots:
+        snap3 (taken at 2017/09/04 00:18 UTC) (stateless)
+        ```
+
 3. Export snapshot to an image. Note: the [alias format][3] is
-    significant (<span class="myhighlight">"juju/$series/$arch"</span>).
-    ```shell
-    $ lxc publish gold/snap3 --alias juju/trusty/amd64
-    ```
+   significant (`juju/$series/$arch`).
+    
+        ```shell
+        $ lxc publish gold/snap3 --alias juju/trusty/amd64
+        ```
 
 You can verify image by `lxc image list`. A sample output:
+
 ```shell
 fengxia@local-charmdev:~$ lxc image list
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
@@ -171,13 +189,17 @@ orchestration tool.
 The only requirement is to have Juju version 2.1+.
 
 1. (optional) Delete standard LXD image:
-    ```python
-    $ lxc image delete ubuntu-trusty
-    ```
+
+        ```shell
+        $ lxc image delete ubuntu-trusty
+        ```
+        
 2. Update juju to 2.1+:
-    ```python
-    $ sudo snap install juju --classic
-    ```
+
+        ```shell
+        $ sudo snap install juju --classic
+        ```
+        
 3. After upgrading juju, re-bootstrap a controller (`juju bootstrap
    localhost [pick a name]`).
 4. `juju deploy mycharm`: will create a new machine using a local
@@ -191,14 +213,18 @@ If there is other orchestration mechanism outside Juju, we can also
 have it create machines _manually_:
 
 1. Create a new LXD container using the image (or snapshot):
-    ```shell
-    $ lxc launch juju/trusty/amd64 testme && lxc start testme
-    $ lxc copy gold/snap3 testme && lxc start me
-    ```
+
+        ```shell
+        $ lxc launch juju/trusty/amd64 testme && lxc start testme
+        $ lxc copy gold/snap3 testme && lxc start me
+        ```
+        
 2. Add machine to Juju:
-    ```shell
-    $ juju add-machine ssh:ubuntu@[container's ip]
-    ```
+
+        ```shell
+        $ juju add-machine ssh:ubuntu@[container's ip]
+        ```
+        
 3. `juju deploy mycharm --to [machine #]`. Without the `--to`, Juju
    will create a new machine by default. <span class="myhighlight">Be aware.</span>
 

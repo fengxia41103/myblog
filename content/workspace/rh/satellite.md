@@ -127,8 +127,9 @@ if you assign `10 entitlements` to, say `RH Enterprise Linux`
 subscription (which as basic RHEL OS rpms), it will support 10 RHEL
 VM, and your 11th one will fail to do even `yum update`.
 
-<figure class="col s12">
+<figure class="col s12 center">
   <img src="/images/rh%20subscription%20model.png"/>
+  <figcaption>RH subscription model</figcaption>
 </figure>
 
 
@@ -165,10 +166,10 @@ VM, and your 11th one will fail to do even `yum update`.
     There are 2 types of subscriptions to consider: **standard** and
     **instance-based**.
     
-        1. standard: qty `1-N`, and doesn't matter deployment is BM or
-        VM, always consumed 1.
-        2. instance-based: qty `1-N`, BM and VM consumes different
-        amount (see "Entitle accounting" below for more details.)
+    1. standard: qty `1-N`, and doesn't matter deployment is BM or
+    VM, always consumed 1.
+    2. instance-based: qty `1-N`, BM and VM consumes different
+    amount (see "Entitle accounting" below for more details.)
         
 5. Entitlement: essentially a total number that how many clients can
    one subscription allows. For this, we need to do some accounting.
@@ -193,8 +194,7 @@ From [Red Hat Subscription and Entitlement Accounting (pdf)][40]:
 The [pdf][40] has a clear example to describe this. In a nutshell,
 
 ```shell
-entitlements = subscription qty * entitlement qty/sub *
-instance multiplier
+entitlements = subscription qty * entitlement qty/sub * instance multiplier
 ```
 
 <figure class="col s12 center">
@@ -280,7 +280,7 @@ subscription-manager repos --disable=[repo name]
 
 # Register a client to SA server
 
-<figure class="col l6 m12 s12">
+<figure class="col s12 center">
   <img class="img-responsive"
        src="/images/katello%20ca.png" />
   <figcaption>Download `katello ca` from Satellite 6.3 server</figcaption>
@@ -301,7 +301,6 @@ On Satellite UI:
    `katello-ca-consumer-latest.noarch.rpm`.
 
 
-
 On client machine:
 
 1. Make sure it has a host name (hint: `/etc/hosts`, and
@@ -313,18 +312,19 @@ On client machine:
     machine you are to register will be `client1.labs.lenovo.com` with
     IP `192.168.1.200`, simply add two lines in `/etc/hosts`:
 
-    ```shell
-    In /etc/hosts:
-    192.168.1.100 brain4-satellite.labs.lenovo.coom
-    192.168.1.200 client1.labs.lenovo.com
-    ```
+        ```shell
+        In /etc/hosts:
+        192.168.1.100 brain4-satellite.labs.lenovo.coom
+        192.168.1.200 client1.labs.lenovo.com
+        ```
 
     Then restart network services:
-    ```shell
-    systemctl start chronyd
-    systemctl enable chronyd
-    systemctl start rhsmcertd
-    ```
+    
+        ```shell
+        systemctl start chronyd
+        systemctl enable chronyd
+        systemctl start rhsmcertd
+        ```
    
 2. Download `katello-ca...rpm`, eg. `curl -O <link copied above>`
    (Note: it is a capital O as oliver).

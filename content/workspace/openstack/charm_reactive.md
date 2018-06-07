@@ -19,9 +19,8 @@ Hooks give one a dedicated sequence that execution is guaranteed in
 that order and developer can use `@hook` to define a function block
 to run. 
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/charm%20hooks.png" />
+<figure class="s12 center">
+  <img src="/images/charm%20hooks.png" />
   <figcaption>Sequence of charm hooks</figcaption>
 </figure>
 

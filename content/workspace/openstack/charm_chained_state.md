@@ -16,9 +16,8 @@ with three states: `state.1`, `state.2`, and `state.3`. Upon start
 charm kicks off execution of `state.1`, which then transit itself to
 the `state.2`, then to `state.3`, and then loop back to `state.1`.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/charm%20chain%20states.png" />
+<figure class="s6 m6 s12 center">
+  <img src="/images/charm%20chain%20states.png" />
   <figcaption>Charm design pattern: chain states</figcaption>
 </figure>
 
@@ -37,9 +36,8 @@ transition among three states. Top right window `juju status` also
 shows state transitions in **Message** column which is set by
 `set_status` in each state's function block.
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/charm%20chained%20states%20screencast.gif" />
+<figure class="s12 center">
+  <img src="/images/charm%20chained%20states%20screencast.gif" />
   <figcaption>Charm chain states screencast</figcaption>
 </figure>
 
@@ -116,8 +114,8 @@ def state_4():
 
 The result is clear that state machine will come to a halt at this
 blocking call, which would have to be the case since we already know
-how states are being scanned and executed
-from [previous article][1]. All states are cached in a dictionary and
-are scanned in a tight loop per iteration. Thus a blocking call in any
-handler will cause the loop to a halt. Nowhere in code will take a
-signal so this behavior can not be interruptted either.
+how states are being scanned and executed from [previous
+article][1]. All states are cached in a dictionary and are scanned in
+a tight loop per iteration. Thus a blocking call in any handler will
+cause the loop to a halt. Nowhere in code will take a signal so this
+behavior can not be interruptted either.

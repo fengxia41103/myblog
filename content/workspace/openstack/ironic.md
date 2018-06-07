@@ -14,7 +14,7 @@ Openstack services to provision a baremetal &mdash; Keystone to
 generate a token which will be used in all HTTP calls, Neutron to
 provide network/_port_, Ironic itself to manage a _node_, Glance to
 get kernel image, ramdisk image, and actual OS image, and Nova to
-_orchestrate_ these information for Ironic API to consume. 
+_orchestrate_ these information for Ironic API to consume.
 
 
 Ironic [user guide][1] has some good information on basic technology
@@ -34,9 +34,8 @@ to show what "managing baremetal" is actually doing.
 
 # Ironic introduction
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/ironic_design.png" />
+<figure class="s12 center">
+    <img src="/images/ironic_design.png" />
     <figcaption>Ironic design (<a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic">source</a>)</figcaption>
 </figure>
 
@@ -53,9 +52,8 @@ important role in Ironic's workflow: [Ironic Python Agent][7] and
 
 Since it stores meta data in a DB, let's take a look at its DB schema:
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/ironic_db_er.png" />
+<figure class="s12 center">
+    <img src="/images/ironic_db_er.png" />
     <figcaption>Ironic ER diagram</figcaption>
 </figure>
 
@@ -68,19 +66,19 @@ Everything starts with creating a node. Ironic node is an abstract
 representation of a baremetal. Creating a node is simply adding
 certain node's parameters to Ironic DB. The term "enrolling hardware"
 (or enrolling a node) can be used interchangeably because it involves
-no image or system running on the node. Whether
-using [Ironic Python Client][12] to import JSON, or using CLI
-`openstack baremetal node create`, it achieves the same thing &mdash;
-eventually the command chain will call Ironic's API
-endpoint [POST /v1/nodes][13].
+no image or system running on the node. Whether using [Ironic Python
+Client][12] to import JSON, or using CLI `openstack baremetal node
+create`, it achieves the same thing &mdash; eventually the command
+chain will call Ironic's API endpoint [POST /v1/nodes][13].
 
 [12]: https://github.com/openstack/python-ironicclient
 [13]: https://developer.openstack.org/api-ref/baremetal/?expanded=show-v1-api-detail,create-node-detail,delete-node-detail,change-node-power-state-detail,list-attached-vifs-of-a-node-detail,agent-heartbeat-detail#create-node
 [14]: https://developer.openstack.org/api-ref/baremetal/
 
-An example snippet to create node in Devstack is shown below. We will go over
-details of the input arguments in the next section. <font color="red">Note</font>: you must
-specify the `X-OpenStack-Ironic-API-Version` value in HTTP header.
+An example snippet to create node in Devstack is shown below. We will
+go over details of the input arguments in the next section. <font
+color="red">Note</font>: you must specify the
+`X-OpenStack-Ironic-API-Version` value in HTTP header.
 
 ```python
 def create_node(token, chassis, driver_info, instance_info, properties):
@@ -113,24 +111,24 @@ def create_node(token, chassis, driver_info, instance_info, properties):
 > API: [GET v1/nodes/{node_ident}][15]
 [15]: https://developer.openstack.org/api-ref/baremetal/?expanded=show-v1-api-detail,delete-node-detail,change-node-power-state-detail,list-attached-vifs-of-a-node-detail,agent-heartbeat-detail#show-node-details
 
-Unfortunately, Ironic's [API document][14] does not specify which field is
-required. You can _create_ a node without giving it much
+Unfortunately, Ironic's [API document][14] does not specify which
+field is required. You can _create_ a node without giving it much
 information. Again, the creation does nothing besides creating a
 record in Ironic DB. Run `openstack baremetal node show [node_uuid]`
 displays details of a node.
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/ironic_node_show.png" />
+<figure class="s12 center">
+    <img src="/images/ironic_node_show.png" />
     <figcaption>Details of a provisioned node</figcaption>
 </figure>
 
 1. `name` (<font color="red">required</font>): well, a name.
-2. `driver` (<font color="red">required</font>): we will discuss more about Ironic
-   drivers. This defines which Ironic driver to use.
-3. `driver_info` (<font color="red">required</font>): All the metadata required by the driver
-   to manage this Node. List of fields varies between drivers, and can be
-   retrieved from the /v1/drivers/<DRIVER_NAME>/properties resource.
+2. `driver` (<font color="red">required</font>): we will discuss more
+   about Ironic drivers. This defines which Ironic driver to use.
+3. `driver_info` (<font color="red">required</font>): All the metadata
+   required by the driver to manage this Node. List of fields varies
+   between drivers, and can be retrieved from the
+   /v1/drivers/<DRIVER_NAME>/properties resource.
    For example, for `_ipmi` drivers, one needs:   
        + `ipmi_port`
        + `ipmi_username`  in devstack, default to "admin"
@@ -140,28 +138,30 @@ displays details of a node.
        + `deploy_ramdisk`: in devstack, it is "ir-deploy-agent_ipmitool.initramfs"
 
     Example payload:
-    ```shell
-    driver_info = {
-        'ipmi_port': 6230,
-        'ipmi_username': "admin",
-        'deploy_kernel': ir-deploy-agent_ipmitool.kernel UUID,
-        'deploy_ramdisk': ir-deploy-agent_ipmitool.initramfs UUID,
-        'ipmi_address': "10.0.2.15",
-        'ipmi_password': "password"
-    }
-    ```
+    
+        ```shell
+        driver_info = {
+            'ipmi_port': 6230,
+            'ipmi_username': "admin",
+            'deploy_kernel': ir-deploy-agent_ipmitool.kernel UUID,
+            'deploy_ramdisk': ir-deploy-agent_ipmitool.initramfs UUID,
+            'ipmi_address': "10.0.2.15",
+            'ipmi_password': "password"
+        }
+        ```
     
 4. `driver_internal_info` (read-only): this field is not accessible
    via API. Used by driver to store internal information.
-   + `agent_url`: this is the callback URL to the Ironic Python Agent (IPA)
-     running on the node (when an agent ramdisk image is selected). We
-     will cover more of IPA later. The value is filled in when the IPA
-     calls Ironic's `/v1/heartbeat` endpoint.
+   + `agent_url`: this is the callback URL to the Ironic Python Agent
+     (IPA) running on the node (when an agent ramdisk image is
+     selected). We will cover more of IPA later. The value is filled
+     in when the IPA calls Ironic's `/v1/heartbeat` endpoint.
 5. `instance_info`: is populated when the node is
    provisioned. However, user can also set this field through API.
 
     Example payload:
-    ```shell
+    
+        ```shell
         {
            "ramdisk":"1a243f7b-3e96-4140-8408-b82064599cec",
            "kernel":"ef538456-704c-445c-a98b-c081be22ad71",
@@ -191,7 +191,7 @@ displays details of a node.
            "root_mb":10240,
            "swap_mb":0
         }
-    ```
+        ```
 
 6. `properties` (<font color="red">required</font>): Physical
    characteristics of this Node. Populated by ironic-inspector during
@@ -203,15 +203,15 @@ displays details of a node.
 
     Example payload:
 
-    ```shell
-    properties = {
-        'cpus': 1,
-        'memory_mb': 1280,
-        'local_gb': 10,
-        'cpu_arch': 'x86_64',
-        'capabilities': 'memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local'
-    }
-    ```
+        ```shell
+        properties = {
+            'cpus': 1,
+            'memory_mb': 1280,
+            'local_gb': 10,
+            'cpu_arch': 'x86_64',
+            'capabilities': 'memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local'
+        }
+        ```
 
 The rest of the fields are self-explanatory so I'll skip them for now.
 
@@ -219,30 +219,30 @@ The rest of the fields are self-explanatory so I'll skip them for now.
 
 Hardware inventory is to collect characteristics such as the number of
 CPUs, memory size, disk partition, MAC address and so on. There are
-two ways to collect these: out-of-band and
-in-band. In-band inspection involves booting an OS on the target node
-and fetching information directly from it. This process is more
-fragile and time-consuming than the out-of-band inspection, but it is
-not vendor-specific and works across a wide range of hardware.;
-out-of-band, on the other hand, does not involve an OS. Instead,
-information is collected by a built-in BMC controllera on the baremetal box
-and are then queried through the box's IPMI interface.
+two ways to collect these: out-of-band and in-band. In-band inspection
+involves booting an OS on the target node and fetching information
+directly from it. This process is more fragile and time-consuming than
+the out-of-band inspection, but it is not vendor-specific and works
+across a wide range of hardware.; out-of-band, on the other hand, does
+not involve an OS. Instead, information is collected by a built-in BMC
+controllera on the baremetal box and are then queried through the
+box's IPMI interface.
 
 So translate these into Ironic, it has two ways to inventory hardware:
 
 1. IPA's [hardware manager][9] &mdash; in-band only. [IPA][7] is a
    Python client packaged inside a ramdisk that will be run at the
-   beginning of a provisioning process. Hardware manager
-   is part of IPA's capability. They can run together with IPA to
-   collect node information.
+   beginning of a provisioning process. Hardware manager is part of
+   IPA's capability. They can run together with IPA to collect node
+   information.
 2. [Ironic Inspector][8] &mdash; in-band and out-of-band. Inspector is
    a separate service running outside the target node. It exposes a
    set of [API][10]. When caller sends request to its endpoint `POST
    /v1/introspection/<node_indent>`, inspector uses the UUID to
-   extract node's `drive_info` from Ironic DB. With the IPMI credentials
-   it can now query node info from BMC as well controlling its
-   power cycle if it chooses to run a ramdisk
-   as [in-band method][11]. 
+   extract node's `drive_info` from Ironic DB. With the IPMI
+   credentials it can now query node info from BMC as well controlling
+   its power cycle if it chooses to run a ramdisk as [in-band
+   method][11].
 
 [8]: https://docs.openstack.org/developer/ironic/deploy/inspection.html
 [9]: https://docs.openstack.org/developer/ironic-python-agent/#hardware-managers
@@ -258,6 +258,7 @@ how to make them. But I'd like to have an explanation what they are
 and how they are used.
 
 Devstack image list:
+
 ```shell
 +--------------------------------------+------------------------------------+--------+
 | ID                                   | Name                               | Status |
@@ -274,8 +275,9 @@ Devstack image list:
 
 # Ironic deploy method: agent & PXE
 
-Ironic offers two deploy methods: agent ([Ironic Python Agent (IPA)][7]) and
-PXE. The agent-based deploy method came from [Rackspace][32] and was [blueprinted].
+Ironic offers two deploy methods: agent ([Ironic Python Agent
+(IPA)][7]) and PXE. The agent-based deploy method came from
+[Rackspace][32] and was [blueprinted].
 
 [31]: https://blueprints.launchpad.net/ironic/+spec/agent-driver
 [32]: https://journal.paul.querna.org/articles/2014/07/02/putting-teeth-in-our-public-cloud/
@@ -290,12 +292,11 @@ agent knows where the Ironic API is. So it will __lookup__ itself by
 sending Ironic API its MAC address. Ironic will send back the node
 UUID. From that point on, IPA will ping home (hearbeat) periodically
 (using UUID) until Ironic commands it to do something. Part of the
-hearbeat payload is a callback URL, so apparently IPA also exposes a HTTP service
-that Ironic conductor can use for commands.
+hearbeat payload is a callback URL, so apparently IPA also exposes a
+HTTP service that Ironic conductor can use for commands.
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/ironic_ipa_sequence.png" />
+<figure class="s12 center">
+    <img src="/images/ironic_ipa_sequence.png" />
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
 
@@ -304,27 +305,29 @@ Quoting from the [Rackspace OnMetal blog][32]:
 > With IPA the DHCP, PXE and TFTP configurations become the static for
 > all baremetal nodes, reducing complexity. Once running, the Agent
 > sends a heartbeat to the Ironic Conductors with hardware
-> information. Then the Conductors can order the Agent to take different
-> actions. For example in the case of provisioning an instance, the
-> Conductor sends an HTTP POST to prepare_image with the URL for an
-> Image, and the Agent downloads and writes it to disk itself, keeping
-> the Ironic Conductor out of the data plane for an image download. Once
-> the image is written to disk, the Ironic Conductor simply reboots the
-> baremetal node, and it boots from disk, removing a runtime dependency
-> on a DHCP or TFTP server.
+> information. Then the Conductors can order the Agent to take
+> different actions. For example in the case of provisioning an
+> instance, the Conductor sends an HTTP POST to prepare_image with the
+> URL for an Image, and the Agent downloads and writes it to disk
+> itself, keeping the Ironic Conductor out of the data plane for an
+> image download. Once the image is written to disk, the Ironic
+> Conductor simply reboots the baremetal node, and it boots from disk,
+> removing a runtime dependency on a DHCP or TFTP server.
 
 ## Provision process &mdash; Agent
+
 Source by [devananda github][18].
 [18]: https://github.com/devananda/talks/tree/master/images
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" />
+<figure class="s12 center">
+    <img     src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" />
     <figcaption>Ironic deploy &mdash; Agent</figcaption>
 </figure>
 
 The IPA server is implemented using [Python Pecan][41]. The
-long-running process is `IronicPythonAgent` in `ironic_python_agent/agent.py`:
+long-running process is `IronicPythonAgent` in
+`ironic_python_agent/agent.py`:
+
 ```python
 wsgi = simple_server.make_server(
    self.listen_address.hostname,
@@ -345,6 +348,7 @@ if not self.standalone and self.api_url:
 The `heartbeater.start()` is a thread that expects to receive letter
 `'a'` from Ironic and will stop upon receiving `'b'`. IPA also
 implements a RPC using the below syntax:
+
 ```python
 @base.async_command('prepare_image', _validate_image_info)
 def prepare_image(self,
@@ -363,6 +367,7 @@ it is assuming that a block device is available and it will then run a
 disk, it can also write a bootloader (eg. grub2). Then IPA will signal
 Ironic that deploy is all done, and Ironic will go ahead to reboot the
 node &mdash; this then completes the provisioning process.
+
 ```python
 @base.async_command('prepare_image', _validate_image_info)
 def prepare_image(self,
@@ -420,13 +425,14 @@ def prepare_image(self,
 [41]: https://pecan.readthedocs.io/en/latest/
 
 ## Provision process &mdash; PXE
+
 Source by [devananda github][18].
 [18]: https://github.com/devananda/talks/tree/master/images
 
-<figure class="row">
-    <img class="img-responsive center"
+<figure class="row center">
+    <img class="s6"
     src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-1.png?raw=true" />
-    <img class="img-responsive center"
+    <img class="s6"
     src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-2.png?raw=true" />
     <figcaption>Ironic deploy &mdash; PXE</figcaption>
 </figure>
@@ -434,6 +440,7 @@ Source by [devananda github][18].
 # Using NOVA API to create an instance
 
 Using Devstack, the easiest way to start an instance is CLI command.
+
 ```shell
 openstack server create --image 9794e5b3-b3f1-403c-b37a-19c7e07cca4a --flavor baremetal --nic port-id=22d79b92-0848-4053-ad0d-f182d02d01a0 tt1 --debug
 ```
@@ -443,71 +450,73 @@ Where:
 + `--image`: using image UUID. Here we use the `cirros-0.3.4-x86_64-uec`
   image.
 + `--flavor`: using _baremetal_ flavor
-    ```shell
-    +----------------------------+--------------------------------------+
-    | Field                      | Value                                |
-    +----------------------------+--------------------------------------+
-    | OS-FLV-DISABLED:disabled   | False                                |
-    | OS-FLV-EXT-DATA:ephemeral  | 0                                    |
-    | access_project_ids         | None                                 |
-    | disk                       | 10                                   |
-    | id                         | a5178caf-6b3a-49ec-ab47-a6daaf05423e |
-    | name                       | baremetal                            |
-    | os-flavor-access:is_public | True                                 |
-    | properties                 | cpu_arch='x86_64'                    |
-    | ram                        | 1280                                 |
-    | rxtx_factor                | 1.0                                  |
-    | swap                       |                                      |
-    | vcpus                      | 1                                    |
-    +----------------------------+--------------------------------------+
-    ```
-  + `--port`: we create a port on _private_ network using Neutron API
-  `POST /v2.0/ports`.
-    ```python
-    def create_port(token, network):
-      name = randomword(5)
-      # Neutron: create a port
-      url = 'http://%s:9696/v2.0/ports' % DEVSTACK_SERVER
-      headers = {
-          'X-Auth-Token': '%s' % token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-      }
-      payload = {
-          "port": {
-              "name": name,
-              "network_id": network,
-              "admin_state_up": True,
-              "extra_dhcp_opts": [
-                  {
-                      'ip_version': '4',
-                      'opt_name': 'tftp-server',
-                      'opt_value': '10.0.2.15'
-                  }, {
-                      'ip_version': '4',
-                      'opt_name': 'tag:!ipxe,bootfile-name',
-                      'opt_value': 'undionly.kpxe'
-                  }, {
-                      'ip_version': '4',
-                      'opt_name': 'tag:ipxe,bootfile-name',
-                      'opt_value': 'http://10.0.2.15:3928/boot.ipxe'
-                  }, {
-                      'ip_version': '4',
-                      'opt_name': 'server-ip-address',
-                      'opt_value': '10.0.2.15'
-                  }],
-              "binding:vnic_type": "normal",
-              "device_owner": "network:dhcp"
-          }
-      }
-      r = requests.post(
-          url,
-          data=json.dumps(payload),
-          headers=headers
-      )
-      resp = json.loads(r.content)
-    ```
 
+        ```shell
+        +----------------------------+--------------------------------------+
+        | Field                      | Value                                |
+        +----------------------------+--------------------------------------+
+        | OS-FLV-DISABLED:disabled   | False                                |
+        | OS-FLV-EXT-DATA:ephemeral  | 0                                    |
+        | access_project_ids         | None                                 |
+        | disk                       | 10                                   |
+        | id                         | a5178caf-6b3a-49ec-ab47-a6daaf05423e |
+        | name                       | baremetal                            |
+        | os-flavor-access:is_public | True                                 |
+        | properties                 | cpu_arch='x86_64'                    |
+        | ram                        | 1280                                 |
+        | rxtx_factor                | 1.0                                  |
+        | swap                       |                                      |
+        | vcpus                      | 1                                    |
+        +----------------------------+--------------------------------------+
+        ```
+
++ `--port`: we create a port on _private_ network using Neutron API
+  `POST /v2.0/ports`.
+
+        ```python
+        def create_port(token, network):
+          name = randomword(5)
+          # Neutron: create a port
+          url = 'http://%s:9696/v2.0/ports' % DEVSTACK_SERVER
+          headers = {
+              'X-Auth-Token': '%s' % token,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          }
+          payload = {
+              "port": {
+                  "name": name,
+                  "network_id": network,
+                  "admin_state_up": True,
+                  "extra_dhcp_opts": [
+                      {
+                          'ip_version': '4',
+                          'opt_name': 'tftp-server',
+                          'opt_value': '10.0.2.15'
+                      }, {
+                          'ip_version': '4',
+                          'opt_name': 'tag:!ipxe,bootfile-name',
+                          'opt_value': 'undionly.kpxe'
+                      }, {
+                          'ip_version': '4',
+                          'opt_name': 'tag:ipxe,bootfile-name',
+                          'opt_value': 'http://10.0.2.15:3928/boot.ipxe'
+                      }, {
+                          'ip_version': '4',
+                          'opt_name': 'server-ip-address',
+                          'opt_value': '10.0.2.15'
+                      }],
+                  "binding:vnic_type": "normal",
+                  "device_owner": "network:dhcp"
+              }
+          }
+          r = requests.post(
+              url,
+              data=json.dumps(payload),
+              headers=headers
+          )
+          resp = json.loads(r.content)
+        ```
 
 Now let's see how this commands utilizes various API calls:
 
@@ -522,27 +531,27 @@ Now let's see how this commands utilizes various API calls:
 + JSON payload: none
 + Response:
 
-```shell
-{
-"version":{
-      "status":"stable",
-      "updated":"2017-02-22T00:00:00Z",
-      "media-types":[
-         {
-            "base":"application/json",
-            "type":"application/vnd.openstack.identity-v3+json"
-         }
-      ],
-      "id":"v3.8",
-      "links":[
-         {
-            "href":"http://10.0.2.15/identity/v3/",
-            "rel":"self"
-         }
-      ]
-   }
-}
-```
+        ```shell
+        {
+        "version":{
+              "status":"stable",
+              "updated":"2017-02-22T00:00:00Z",
+              "media-types":[
+                 {
+                    "base":"application/json",
+                    "type":"application/vnd.openstack.identity-v3+json"
+                 }
+              ],
+              "id":"v3.8",
+              "links":[
+                 {
+                    "href":"http://10.0.2.15/identity/v3/",
+                    "rel":"self"
+                 }
+              ]
+           }
+        }
+        ```
 
 ## Get security token
 
@@ -556,33 +565,36 @@ We are using "Password authentication with scoped authorization".
 + HTTP header:
     1. Content-Type: `application/json`
 + JSON payload:
-```shell
-{
-   "auth":{
-      "identity":{
-         "methods":[
-            "password"
-         ],
-         "password":{
-            "user":{
-               "domain":{
-                  "name":"Default"
-               },
-               "name":USERNAME,
-               "password":PASSWORD
-            }
-         }
-      },
-      "scope":{
-         "project":{
-            "domain":{
-               "name":"Default"
-            },
-            "name":PROJECT
-         }
-      }
-   }
-}```
+
+        ```shell
+        {
+           "auth":{
+              "identity":{
+                 "methods":[
+                    "password"
+                 ],
+                 "password":{
+                    "user":{
+                       "domain":{
+                          "name":"Default"
+                       },
+                       "name":USERNAME,
+                       "password":PASSWORD
+                    }
+                 }
+              },
+              "scope":{
+                 "project":{
+                    "domain":{
+                       "name":"Default"
+                    },
+                    "name":PROJECT
+                 }
+              }
+           }
+        }
+        ```
+
 + Response: too long to paste. Not important.
 
 

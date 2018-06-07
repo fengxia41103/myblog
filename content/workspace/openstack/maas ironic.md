@@ -40,18 +40,16 @@ remains valid.
    state that a baremetal is not available for use in normal states and needs
    operator intervene.
    
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/baremetal%20lifecycle.png" />
+<figure class="s12 center">
+    <img src="/images/baremetal%20lifecycle.png" />
     <figcaption>General baremetal life cycle</figcaption>
 </figure>
 
 
 # Comparison framework
 
-Using their APIs as reference, we have
-grouped their functions
-into the following subject domains for discussion purpose:
+Using their APIs as reference, we have grouped their functions into
+the following subject domains for discussion purpose:
 
 + minimal setup
 * power
@@ -93,10 +91,9 @@ into the following subject domains for discussion purpose:
 # Power
 
 The minimum capability in managing power includes two aspects:
-querying current power state and set power state.
-Both [Ironic][1] and [MAAS][2] support IPMI
-interface. MAAS's has more vendor centric implementations
-where Ironic's are more general purposed.
+querying current power state and set power state.  Both [Ironic][1]
+and [MAAS][2] support IPMI interface. MAAS's has more vendor centric
+implementations where Ironic's are more general purposed.
 
 [1]: https://wiki.openstack.org/wiki/Ironic/Drivers
 [2]: https://docs.ubuntu.com/maas/2.1/en/installconfig-power-types
@@ -144,8 +141,8 @@ where Ironic's are more general purposed.
 | Using IPMI driver            | n                        | y               |
 | Using vendor specific driver | Mirosoft OCS driver only | vendor passthru |
 
-Except Microsoft OCS driver, MAAS has no support to select
-or change  boot order, even in its IPMI-based drivers.
+Except Microsoft OCS driver, MAAS has no support to select or change
+boot order, even in its IPMI-based drivers.
 
 Ironic, however, supports selecting [boot device][19] using
 `*_ipmitool` drivers. It also has _vendor passthrough_ feature which
@@ -202,12 +199,13 @@ system information:
 6. machine shuts down
 
 
-Ironic, on the other hand, relies on a separate
-setup, [Ironic Inspector][8] to orchestrate this process (see [steps][19] below). The
+Ironic, on the other hand, relies on a separate setup, [Ironic
+Inspector][8] to orchestrate this process (see [steps][19] below). The
 principle is the same that Inspector will acquire credentials to
 manage the node power from Ironic, then using that to PXE rebooting
 the node and load a ramdisk. The difference is, however, that ramdisk
 is not limited to Ubuntu.
+
 [8]:https://docs.openstack.org/developer/ironic-inspector/
 [19]: https://docs.openstack.org/developer/ironic-inspector/workflow.html#state-machine-diagram
 
@@ -240,7 +238,8 @@ relies on helper service, such as Glance, to handle images.
 
 In `src/provisioningservers/drivers/osystem/__init__.py`, MAAS
 categories images into five usages: commissioning, install (regular
-ISO image), xinstall (.tgz of root `/`), diskless(`tgt-admin`) and bootloader. 
+ISO image), xinstall (.tgz of root `/`), diskless(`tgt-admin`) and
+bootloader.
 
 
 MAAS has a fair restricted list of what it supports, where Ironic is
@@ -260,9 +259,9 @@ defaults MAAS supports:
     * Windows Server 2016
     * Windows Nano Server 2016
 
-One can also use MAAS CLI to add _custom_ images to repo, where `name` must in
-format `custom/xxx`. For CentOS, the name must be in format `centos72`
-for example because of MAAS's regex parser.
+One can also use MAAS CLI to add _custom_ images to repo, where `name`
+must in format `custom/xxx`. For CentOS, the name must be in format
+`centos72` for example because of MAAS's regex parser.
 
 ```shell
 maas local boot-resources create name=custom/foo title="Title is not important" architecture=amd64/generic content@=/path/to/your/image
@@ -281,33 +280,35 @@ maas local boot-resources import
 
 
 First of all, both support PXE. This is standard and not much to talk
-about. In term of iSCSI, both has implementation, but with different objectives.
-Ironic conductor([code][11]) will use the SCSI disk to write image data;
-MAAS, on the other hand, uses `tgt-admin` for the job, and
-its objective is to **[re-use][12]** an existing root `/` file system. 
+about. In term of iSCSI, both has implementation, but with different
+objectives.  Ironic conductor([code][11]) will use the SCSI disk to
+write image data; MAAS, on the other hand, uses `tgt-admin` for the
+job, and its objective is to **[re-use][12]** an existing root `/`
+file system.
 
 [11]: https://docs.openstack.org/developer/ironic/_modules/ironic/drivers/modules/iscsi_deploy.html
 [12]: https://blueprints.launchpad.net/maas/+spec/t-cloud-maas-diskless
 
-Second, MAAS lacks the capability to change
-boot order. Therefore, a provisioned server will be seemed 
-_out of management_ from that point on
-because booting from HD is now preferred instead of PXE.
-It solves this chicken-egg problem by installing a default account
-and SSH credential so they can continue management. Instead, Ironic
-can use IPMI driver to set boot device so it does not create
-such artificial user account in the system.
+Second, MAAS lacks the capability to change boot order. Therefore, a
+provisioned server will be seemed _out of management_ from that point
+on because booting from HD is now preferred instead of PXE.  It solves
+this chicken-egg problem by installing a default account and SSH
+credential so they can continue management. Instead, Ironic can use
+IPMI driver to set boot device so it does not create such artificial
+user account in the system.
 
-Third, Ironic has an agent-based deployment method that a
-ramdisk with [IPA][15] installed will be loaded first. Once the agent is
-running, it can take further commands including partitioning
-(`parted`), mounting remote disk (iSCSI), cleaning disk, and write
-OS image to disk.
+Third, Ironic has an agent-based deployment method that a ramdisk with
+[IPA][15] installed will be loaded first. Once the agent is running,
+it can take further commands including partitioning (`parted`),
+mounting remote disk (iSCSI), cleaning disk, and write OS image to
+disk.
+
 [15]: https://docs.openstack.org/developer/ironic-python-agent/
 
 Fourth, post-seed operation. MAAS API can accept a `Base64` encoded
 `user-data` string used by cloud-init in next boot, where Ironic API
 can accept cloud [configdrive][13] string.
+
 [13]: https://developer.openstack.org/api-ref/baremetal/?expanded=change-node-provision-state-detail#change-node-provision-state
 
 
@@ -349,6 +350,7 @@ interface on node. None of these Ironic can do or care.
 
 MAAS API supports CRUD operations for partitions. According to its
 [document][9], it bears a few limitations:
+
 [9]: https://docs.ubuntu.com/maas/2.1/en/installconfig-partitions
 
 * An EFI partition is required to be on the boot disk for UEFI.
@@ -371,9 +373,9 @@ partition image implemented through [IPA][15].
 | cloud configdrive        | n                                        | y      |
 | kernel options           | y                                        | n      |
 
-Both can boot from a custom image (see "Image" for details).
-MAAS provides three more entry points to influence the
-result: commissioning scripts, [kernel option][18], and cloud-init
+Both can boot from a custom image (see "Image" for details).  MAAS
+provides three more entry points to influence the result:
+commissioning scripts, [kernel option][18], and cloud-init
 `user-data`. Commissioning scripts are run to collect server hardware
 information. Kernel options can be either global or per-node based.
 One can also pass on a cloud-init `user-data` string that MAAS will
@@ -381,10 +383,10 @@ use in booting.
  
 [18]: https://docs.ubuntu.com/maas/2.1/en/installconfig-nodes-kernel-boot-options
 
-Similarly, Ironic API accepts cloud configdrive string. Since it can have an
-agent-based deployment, it is also possible to instruct the agent
-to run some commands or scripts. However, there is no method to pass
-in kernel options.
+Similarly, Ironic API accepts cloud configdrive string. Since it can
+have an agent-based deployment, it is also possible to instruct the
+agent to run some commands or scripts. However, there is no method to
+pass in kernel options.
 
 # Server grouping
 
@@ -400,7 +402,9 @@ into `region`. As a matter of fact, MAAS also has a concept of _region
 controller_ which can then manage multiple _rack controller_.
 
 From MAAS [document][16]:
+
 [16]: https://docs.ubuntu.com/maas/2.1/en/intro-concepts#zones
+
 > Zone:
 > A physical zone, or just zone, is an organizational unit that contains
 > nodes where each node is in one, and only one, zone. Later, while in
@@ -432,10 +436,10 @@ is left for other service (eg. NOVA) to handle.
 MAAS has no capability to manipulate an existing network layout. Its
 concept of fabric and space are artificial groupings only. Therefore,
 it has no say in multi-tenant support. In many cases, baremetal
-servers are put on the same network &mdash; provisioning network &mdash; 
-as the MAAS server because that's how MAAS can discover and enlist
-new servers, thus exposing all tenants to each other (see section
-"Minimal setup" for details.)
+servers are put on the same network &mdash; provisioning network
+&mdash; as the MAAS server because that's how MAAS can discover and
+enlist new servers, thus exposing all tenants to each other (see
+section "Minimal setup" for details.)
 
 Ironic has not concept of multi-tenant either. However, it can
 dynamically _bind_ a port to use, where port is then managed by

@@ -430,22 +430,44 @@ Enjoy.
 
 # helper files
 
-1. [my-user-data][9]
-2. [startmykvm.py][10]
+Everything you need is [here][9].To start a kvm from scratch. This
+will download a [16.04 amd64 cloud image][11] by default.
 
-[9]: {filename}/downloads/my-user-data
-[10]: {filename}/downloads/startmykvm.py
+[9]: http://github.com/fengxia41103/dev/kvm
 
-To start a kvm from scratch. This will download a [16.04 amd64 cloud
-image][11] by default.
 ```shell
-$ python startmykvm.py
+$ python startmykvm.py --help
+
+usage: startmykvm.py [-h] [--backing [BACKING]] [--user-data [USER_DATA]]
+                     [--cloudimg [CLOUDIMG]]
+                     [--download-cloudimg [DOWNLOAD_CLOUDIMG]] [--delete]
+                     xml
+
+Create a new KVM for me
+
+positional arguments:
+  xml                   My XML template.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --backing [BACKING], -b [BACKING]
+                        Backfile to use when creating a snapshot.
+  --user-data [USER_DATA], -u [USER_DATA]
+                        Cloud-config user-data file.
+  --cloudimg [CLOUDIMG], -c [CLOUDIMG]
+                        A cloud image file.
+  --download-cloudimg [DOWNLOAD_CLOUDIMG], -d [DOWNLOAD_CLOUDIMG]
+                        URL to download cloud image. The downloaded file will
+                        be deleted at the end of this bootstrap.
+  --delete, -D          Set to delete VM defined in xml.
+
 ```
 
 [11]: https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-arm64-disk1.img
 
 To start a kvm reusing an existing backing file:
+
 ```shell
-$ python startmykvm.py -u my-user-data -b your-backing-file.qcow2
+$ python startmykvm.py -b <backing>.qcow2 mydev.xml
 ```
 

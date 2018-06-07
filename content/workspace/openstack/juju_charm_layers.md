@@ -7,24 +7,23 @@ Author: Feng Xia
 Juju [charms][1] are, charming. It promises a selection of blueprints
 that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
-the charm world to learn its design. 
+the charm world to learn its design.
 
 [1]: https://jujucharms.com/
 
 # Bundle, charm, service, application
 
-Juju [terms][2] can be confusing. Approximately they can be viewed in a
-tree model, where a bundle can have multiple charms, a charm can
+Juju [terms][2] can be confusing. Approximately they can be viewed in
+a tree model, where a bundle can have multiple charms, a charm can
 contain multiple [services][12], a service is composed of one or more
-applications and a group of [relations][4], and 
-a relation, if defined, must be one of the two types:
+applications and a group of [relations][4], and a relation, if
+defined, must be one of the two types:
 
 1. **provide** (eg. I am MySQL and I provide a SQL database relation).
 2. **require** (eg. I'm Mediawiki and I require a SQL database).
 
-<figure class="row">
-  <img class="img-responsive center"
-       src="/images/juju%20control%20modeling.png" />
+<figure class="s12 center">
+  <img src="/images/juju%20control%20modeling.png" />
   <figcaption>Juju control modeling</figcaption>
 </figure>
 
@@ -56,17 +55,16 @@ its logic is following the [reactive pattern][10].
 [5]: https://jujucharms.com/docs/stable/developer-layers#base,-or-runtime,-layers
 [6]: https://jujucharms.com/docs/stable/developer-layers-interfaces
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/juju%20charm%20layers.png" />
+<figure class="s12 center">
+    <img src="/images/juju%20charm%20layers.png" />
     <figcaption>Juju charm layers</figcaption>
 </figure>
 
 ## Hooks and Reactive pattern
 
 Previously, charms are written as a list of [hooks][15] responding to
-events. This is still true because hooks are the actual
-scripts. Any charm supports the following hooks:
+events. This is still true because hooks are the actual scripts. Any
+charm supports the following hooks:
 
 [15]: https://jujucharms.com/docs/2.0/reference-charm-hooks
 
@@ -91,7 +89,7 @@ Hooks run in a paritcular sequence, and that sequence is
 have now a better way to capture this concept using **[States][16]**
 &mdash; [reactive pattern][10].  A charm can define arbitrary state,
 say **foo**. Another layer in the same charm can then uses Python
-decorator, eg. **@when**, **@when_not**, to specify the status of
+decorator, eg. `@when`, `@when_not`, to specify the status of
 **foo**, which then determined whether the function will be
 executed. I suppose the framework itself handles event polling,
 broadcasting and the like.
@@ -125,10 +123,9 @@ if there is a MySQL _provides_ and Wordpress _requires_, Wordpress
 will read from the providing side of configurations needed to make the
 connection.
 
-<figure class="row">
-<img class="img-responsive center"
-src="/images/charm%20relation%20and%20interface.png" />
-<figcaption>Charm relation and interface</figcaption>
+<figure class="s12 center">
+    <img src="/images/charm%20relation%20and%20interface.png" />
+    <figcaption>Charm relation and interface</figcaption>
 </figure>
 
 ### Communication scope
@@ -137,13 +134,13 @@ Interfaces are categorized into three [communication scopes][11]:
 global level, service level, and unit level. Again, they are grouping
 concept, where unit is the atom (and the default level). Multiple
 units can belong to a service level, and everything else goes into
-global level. 
+global level.
 
 [11]: https://jujucharms.com/docs/stable/developer-layers-interfaces#communication-scopes
 
-The communication scope is closely related to
-the [relationship lifecycle][13], where units in the same scope will
-have data broadcasted to them so they will be aware of each other's
+The communication scope is closely related to the [relationship
+lifecycle][13], where units in the same scope will have data
+broadcasted to them so they will be aware of each other's
 state. Therefore, unit level can be used for application that provides
 no relation and has no peer-to-peer need; service level is certainly
 **providing** some type of relation so others can leverage; and global
@@ -201,8 +198,7 @@ This is where the application logics live.
 
 See the process in action:
 
-<figure class="row">
-    <img class="img-responsive center"
-    src="/images/vanilla%20charm%20deploy.gif" />
+<figure class="s12 center">
+    <img src="/images/vanilla%20charm%20deploy.gif" />
     <figcaption>Screencast showing deploying a Vanilla charm</figcaption>
 </figure>

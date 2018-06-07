@@ -22,7 +22,7 @@ to repeat this for development and troubleshooting.
 See the process in action:
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
          src="/images/juju%20deploy%20jenkins.gif" />
     <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
@@ -36,7 +36,7 @@ how those states are related.
 [3]: {filename}/workspace/openstack/maas_target.md
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
@@ -47,7 +47,7 @@ This is a more detailed view of juju deploying a charm broken down
 into three steps.
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20deploy%20original.png" />
     <figcaption>Illustration of a Juju cloud environment before a deployment</figcaption>
 </figure>
@@ -66,22 +66,22 @@ job done:
 1. Add the new machine to juju's environment. A juju agent
    (aka. jujud) will be installed. More details are discussed 
    in the next section.
-  <pre class="brush:plain;">
+  ```shell
   $ juju add-machine ssh://[username]@192.168.8.235
-  </pre>
+  ```
 
 2. Juju state controller (aka. machine-0) will recoganize the new
    machine and register its availability.
 
 3. Issuing a deploy command
-  <pre class="brush:plain;">
+  ```shell
   $ juju deploy jenkinsn
-  </pre>
+  ```
 
 4. Jujud will download [Jenkins charm][2] and execute per its instruction.
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20deploy%20commands.png" />
     <figcaption>Issuing command to deploy Jenkins</figcaption>
 </figure>
@@ -91,7 +91,7 @@ cloud, each equipped with an application, and both have a jujud
 installed.
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20deploy%20result.png" />
     <figcaption>Deployment result</figcaption>
 </figure>
@@ -111,9 +111,9 @@ _whateverusername_. We intentionally avoided using _ubuntu_ as user
 because we know the bootstrap was relying on such an account. Will
 juju complain of its missing? Let's find out.
 
-<pre class="brush:plain;">
+```shell
 $ juju add-machine ssh://[username]@192.168.8.235
-</pre>
+```
 
 What is interesting is to watch the node and figure out what is
 installed by this command.
@@ -123,7 +123,7 @@ installed by this command.
 This is the *home* folder for juju &mdash; `/var/lib/juju`.  Remember,
 this folder did not exist prior to the `add-machine` command.
 
-<pre class="brush:plain;">
+```shell
 /var/lib/juju
 ├── agents
 │   └── machine-15
@@ -141,7 +141,7 @@ this folder did not exist prior to the `add-machine` command.
     └── machine-15 -> 2.0.1.98-xenial-amd64
 
 8 directories, 6 files
-</pre>
+```
 
 Pretty minimum. It designated a machine serial number &mdash; 15. This
 magic number is apparently assigned by machine-0 because only it knows
@@ -154,7 +154,7 @@ forth), but will be tedious.
 
 ## /etc
 
-<pre class="brush:plain;">
+```shell
 /etc/apt/apt.conf.d/42-juju-proxy-settings
 /etc/profile.d/juju-introspection.sh
 /etc/sudoers.d/90-juju-ubuntu
@@ -163,7 +163,7 @@ forth), but will be tedious.
 
 root@192-168-8-235:~# ls -lh /etc/systemd/system | grep juju
 lrwxrwxrwx 1 root root   60 Jan 19 16:47 jujud-machine-15.service -> /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
-</pre>
+```
 
 You can use the common `service juju-machine-15
 start|stop|restart|status` to manage this service like any
@@ -174,21 +174,21 @@ others.
 Two binaries appeared, both linked (again) to some files under the
 `/var/lib/juju/` folder.
 
-<pre class="brush:plain;">
+```shell
 /usr/bin/juju-dumplogs
 /usr/bin/juju-run
 
 root@192-168-8-235:~# ls -lh /usr/bin | grep juju
 lrwxrwxrwx 1 root   root      36 Jan 19 16:47 juju-dumplogs -> /var/lib/juju/tools/machine-15/jujud
 lrwxrwxrwx 1 root   root      36 Jan 19 16:47 juju-run -> /var/lib/juju/tools/machine-15/jujud
-</pre>
+```
 
 ## /usr/share
 
-<pre class="brush:plain;">
+```shell
 /usr/share/sosreport/sos/plugins/juju.py
 /usr/share/sosreport/sos/plugins/\_\_pycache\_\_/juju.cpython-35.pyc
-</pre>
+```
 
 ## /home/ubuntu
 
@@ -196,9 +196,9 @@ So juju's agent install process actually created a user *ubuntu* which
 did not exist before. In `/home/ubuntu/.ssh` folder, a file of
 `authorized_keys`. Um.
 
-<pre class="brush:plain;">
+```shell
 /home/ubuntu/.juju-proxy
-</pre>
+```
 
 # Deploy an application
 
@@ -212,7 +212,7 @@ deploying an application, in this case, jenkins.
   > Juju charm is a zip file. You can use command `unzip` to extract
   > these contents under the `/var/lib/juju/unit-jenkins-1/` folder.
   
-<pre class="brush:plain;">
+```shell
 /var/lib/juju
 ├── agents
 │   ├── machine-15
@@ -455,4 +455,4 @@ deploying an application, in this case, jenkins.
     └── unit-jenkins-1 -> /var/lib/juju/tools/2.0.1.98-xenial-amd64
 
 45 directories, 194 files
-</pre>
+```

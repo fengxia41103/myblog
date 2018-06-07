@@ -38,7 +38,7 @@ MAAS target goes through a life cycel as shown below:
 
 <figure class="row">
   <img src="/images/maas_target_life_cycle.png"
-       class="center-block img-responsive" />
+       class="center img-responsive" />
   <figcaption>MAAS target node life cycle</figcaption>
 </figure>
 
@@ -88,9 +88,9 @@ Once state switched to _Deployed_, verify by:
 1. Goto _Subnet_ menu on MAAS web admin UI, look up the target's assigned IP address.
 2. Boot up target machine &larr; it will now load from HD instead of PXE!
 
-    <pre class="brush:bash;">
+    ```shell
     ssh ubuntu@192.168.8.xxx
-    </pre>
+    ```
 
     Since deployed image has copied the SSH public key that we have
     created in steps of creating the MAAS server itself and have

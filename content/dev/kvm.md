@@ -15,9 +15,9 @@ minimal, fast.
 
 First thing first, get `kvm` and a few tools:
 
-<pre class="brush:plain;">
+```shell
 $ apt kvm libvirt-bin bridge-utils cloud-utils cloud-init libguestfs-tools
-</pre>
+```
 
 # Cloud image
 
@@ -28,7 +28,7 @@ use `qemu-img info [.img]` for `file format:`.
 
 [2]: https://cloud-images.ubuntu.com/releases/16.04/release/
 
-<pre class="brush:plain;">
+```shell
 $ wget [.img url]
 
 To get file format:
@@ -42,7 +42,7 @@ cluster_size: 65536
 Format specific information:
     compat: 0.10
     refcount bits: 16
-</pre>
+```
 
 ## Resize disk
 
@@ -62,24 +62,24 @@ how-to.
    size I want to have, and step 3 is the actual implementation to
    make it a reality.
 
-    <pre class="brush:plain;">
+    ```shell
     $ qemu-img resize orig.img +20G
     $ qemu-img info orig.img <-- confirm new "virtual size"
-    </pre>
+    ```
    
 2. Make a copy:
  
-    <pre class="brush:plain;">
+    ```shell
     $ cp orig.img orig-copy.qcow2
-    </pre>
+    ```
 
 3. Resize disk **inside** the qcow2 image, and save (in this case, we
 save newly expanded image back to `orig.img`, but you can save to any
 file name you want.):
 
-    <pre class="brush:plain;">
+    ```shell
     $ sudo virt-resize --expand /dev/sda1 orig-copy.qcow2 orig.img
-    </pre>
+    ```
 
 # Backing files
 
@@ -305,13 +305,13 @@ commits and branches, isn't it?
 
 To create one using backing file:
 
-<pre class="brush:plain;">
+```shell
 $ qemu-img create -f qcow2 -b resized-orig.img mydev.snap
-</pre>
+```
 
 To verify:
 
-<pre class="brush:plain;">
+```shell
 (dev) fengxia@fengxia-lenovo:~/workspace/tmp$ qemu-img info mydev.snap 
 image: mydev.snap
 file format: qcow2
@@ -324,11 +324,11 @@ Format specific information:
     lazy refcounts: false
     refcount bits: 16
     corrupt: false
-</pre>
+```
 
 Then in KVM xml, use `mydev.snap` as your primary disk:
 
-<pre class="brush:xml;">
+```xml
 <disk type='file' device='disk'>
   <driver name="qemu" type="qcow2"/>
   <source file="/home/fengxia/workspace/tmp/mydev.snap"/>
@@ -336,7 +336,7 @@ Then in KVM xml, use `mydev.snap` as your primary disk:
   <alias name='virtio-disk0'/>
   <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
 </disk>
-</pre>
+```
 
 # cloud-init
 
@@ -355,13 +355,13 @@ A minimal version of `cloud-config` is shown below, which allows
 [7]: http://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html
 [8]: http://cloudinit.readthedocs.io/en/latest/topics/format.html#user-data-script
 
-<pre class="brush:yaml;">
+```yaml
 #cloud-config
 password: whatever001
 chpasswd:
   expire: False
 ssh_pwauth: True
-</pre>
+```
 
 Now how `cloud-init` works? Essentially you make `user-data` into
 a disk or iso that <span class="myhighlight">can be mounted</span> to
@@ -371,9 +371,9 @@ user-data & meta-data**, and run their instructions.
 
 ## cloud-init in raw
 
-<pre class="brush:plain;">
+```shell
 $ cloud-localds -m local my-seed.img my-user-data [my-meta-data]
-</pre>
+```
 
 When using `cloud-localds`, make sure to use `-m local` so to enable
 the [`NoCloud`][7] data source (otherwise, booting will stuck with
@@ -385,7 +385,7 @@ user-data and meta-data files. `NoCloud` says they are on a local disk).
 Example as used in KVM's xml. Make sure `slot=` index is unique,
 and `<target dev=` index is unique.
 
-<pre class="brush:xml;">
+```xml
 <disk type='file' device='disk'>
   <driver name='qemu' type='raw'/>
   <source file='/home/fengxia/workspace/tmp/my-seed.img'/>
@@ -394,23 +394,23 @@ and `<target dev=` index is unique.
   <alias name='virtio-disk1'/>
   <address type='pci'1 domain='0x0000' bus='0x00' slot='0x09' function='0x0'/>
 </disk>
-</pre>
+```
 
 ## cloud-init in ISO
-<pre class="brush:plain;">
+```shell
 $ genisoimage --output my-seed.iso -volid cidata -joliet -rock my-user-data [my-meta-data]
-</pre>  
+```  
 
 The key here is `-volid` value <span class="myhighlight">must be `cidata`</span>!
 Example KVM xml below. Again, `<target dev=` index should be unique.
 
-<pre class="brush:xml;">
+```xml
 <disk type='file' device='cdrom'>
   <source file='/home/fengxia/workspace/tmp/my-seed.iso'/>
   <target dev='vdb' bus='ide'/>
   <readonly/>
 </disk>
-</pre>
+```
 
 # Sum it up
 
@@ -438,14 +438,14 @@ Enjoy.
 
 To start a kvm from scratch. This will download a [16.04 amd64 cloud
 image][11] by default.
-<pre class="brush:bash;">
+```shell
 $ python startmykvm.py
-</pre>
+```
 
 [11]: https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-arm64-disk1.img
 
 To start a kvm reusing an existing backing file:
-<pre class="brush:bash;">
+```shell
 $ python startmykvm.py -u my-user-data -b your-backing-file.qcow2
-</pre>
+```
 

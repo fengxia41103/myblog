@@ -22,7 +22,7 @@ eg. a bundle can have N charms.
 
 <figure>
   <img src="/images/juju%20control%20modeling.png"
-       class="center-block img-responsive" />
+       class="center img-responsive" />
   <figcaption>Juju control models</figcaption>
 </figure>
 

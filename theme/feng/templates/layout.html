@@ -40,12 +40,16 @@
           type="text/css"
           href="/theme/bower_components/tether/dist/css/tether.min.css">
 
-    {# Syntaxhighlighter #}
+    {# highlight.js #}
     <link rel="stylesheet"
-          href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
-    <link rel="stylesheet"
-          href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
 
+    {# Syntaxhighlighter #}
+    <!-- <link rel="stylesheet"
+         href="/theme/bower_components/SyntaxHighlighter/styles/shCoreDefault.css">
+         <link rel="stylesheet"
+         href="/theme/bower_components/SyntaxHighlighter/styles/shThemeDefault.css">
+    -->
     {# google fonts #}
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
           rel="stylesheet">
@@ -222,35 +226,6 @@
             src="/theme/bower_components/lightbox2/dist/js/lightbox.min.js">
     </script>
 
-    {# Syntaxhighlighter #}
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shAutoloader.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPython.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushXml.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushBash.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushJScript.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushPlain.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushYaml.js">
-    </script>
-    <script type="text/javascript"
-            src="/theme/bower_components/SyntaxHighlighter/scripts/shBrushDiff.js">
-    </script>
-
     {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
     <script type="text/javascript"
             src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
@@ -303,6 +278,25 @@
             src="/theme/bower_components/jquery.toc/jquery.toc.js">
     </script>
 
+    {# highlight.js #}
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
     {# application js #}
     <script type="text/javascript">
      var j$ = jQuery.noConflict();
@@ -324,8 +318,12 @@
        });
 
        // syntaxhighlighter
-       SyntaxHighlighter.defaults['toolbar'] = false;
-       SyntaxHighlighter.all();
+       /* SyntaxHighlighter.defaults['toolbar'] = false;
+        * SyntaxHighlighter.all(); */
+      hljs.initHighlightingOnLoad();
+      j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
 
        // tooltips
        j$('[data-toggle="tooltip"]').tooltip();

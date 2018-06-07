@@ -7,7 +7,7 @@ Author: Feng Xia
 
 <figure class="col l8 m8 s12">
   <img src="/images/architecture_joke.jpg"
-       class="center-block img-responsive">
+       class="center img-responsive">
 </figure>
 
 The word "system architect" has been puzzling to me.  I was hired to
@@ -65,7 +65,7 @@ projects. It is divided into four components:
 
 <figure class="row">
   <img src="/images/system_architecture.png"
-       class="center-block img-responsive"/>
+       class="center img-responsive"/>
     <figcaption>System architecture diagram</figcaption>
 </figure>
 

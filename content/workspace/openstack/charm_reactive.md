@@ -20,7 +20,7 @@ that order and developer can use `@hook` to define a function block
 to run. 
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/charm%20hooks.png" />
   <figcaption>Sequence of charm hooks</figcaption>
 </figure>
@@ -66,7 +66,7 @@ file `charm.reactive/charms/reactive/bus.py`. The value `changed` is
 `true` when there are states to monitor (`set(states)` is not empty) and
 there are changes (`data['changes]` is not empty).
 
-<pre class="brush:python;">
+```python
 class StateWatch(object):
     ...
     
@@ -76,7 +76,7 @@ class StateWatch(object):
         iteration = data['iteration']
         changed = bool(set(states) & set(data['changes']))
         return iteration == 0 or changed
-</pre>
+```
 
 What defines the values in `data['changes']`? There are only two
 places to set this value: `set_state(...)` and `remove_state(...)`.
@@ -90,7 +90,7 @@ re-evaluated until it is reset to `false` first.
 > **False->True** (`@when`) or
 > **True->False** (`@when_not`).
 
-<pre class="brush:python;">
+```python
 def set_state(state, value=None):
     """
     Set the given state as active, optionally associating with a relation.
@@ -100,7 +100,7 @@ def set_state(state, value=None):
     if state not in old_states:
         StateWatch.change(state)
 
-</pre>
+```
 
 ## Namespace
 
@@ -115,7 +115,7 @@ information can be found in `charmhelpers/core/unitdata.py` &mdash;
 this is the storage class that is used by charm to store
 states. Clearly the backend is a `sqlite3` database.
 
-<pre class="brush:python;">
+```python
 class Storage(object):
     """Simple key value database for local unit state within charms.
 
@@ -135,14 +135,14 @@ class Storage(object):
         self.conn = sqlite3.connect('%s' % self.db_path)
         self.cursor = self.conn.cursor()
     ....
-</pre>
+```
 
 Function `_init(self)` reveals the table schema in this database
 &mdash; three tables: `kv`,
 `kv_revisions` and `hooks`. `kv` is the primary store as can be seen
 in the `set_state` function above (`unitdata.kv().update(....`).
 
-<pre class="brush:python;">
+```python
 def _init(self):
     self.cursor.execute('''
         create table if not exists kv (
@@ -164,7 +164,7 @@ def _init(self):
            date text
            )''')
     self.conn.commit()
-</pre>
+```
 
 What is not obvious is that each unit has its own DB. Therefore, the
 boundary of states are **per charm unit**. In other words, states are
@@ -184,7 +184,7 @@ two phases: **hooks** and **other**.
 Hooks are run in the `hooks` phase. 
 Registered hook will run its `test()` so this scan will test all hooks.
 
-<pre class="brush:python;">
+```python
 def _test(to_test):
     return list(filter(lambda h: h.test(), to_test))
 
@@ -193,7 +193,7 @@ def _test(to_test):
 unitdata.kv().set('reactive.dispatch.phase', 'hooks')
 hook_handlers = _test(Handler.get_handlers())
 _invoke(hook_handlers)
-</pre>
+```
 
 States are run in the `other` phase.
 The magic number `100` for-loop highlights an underline assumption
@@ -201,7 +201,7 @@ that states can converge within these iterations. Otherwise, state
 watch is reset and will be count from 0 again during next iteration
 &rarr; state effect can then ripple through one single iteration.
 
-<pre class="brush:python;">
+```python
 unitdata.kv().set('reactive.dispatch.phase', 'other')
 for i in range(100):
     StateWatch.iteration(i)
@@ -209,4 +209,4 @@ for i in range(100):
     if not other_handlers:
         break
     _invoke(other_handlers)
-</pre>
+```

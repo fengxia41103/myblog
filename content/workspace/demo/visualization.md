@@ -5,7 +5,7 @@ Tags: demo, react, visualization
 Author: Feng Xia
 
 <figure class="row">
-  <img class="center-block img-responsive"
+  <img class="center img-responsive"
        src="/images/country_1.png"/>
     <figcaption>World Snapshot</figcaption>
 </figure>
@@ -37,9 +37,9 @@ to last month's...
    will block on CORS requests. Using **v2/en** endpoint instead. For example,
    to get a list of country names:
 
-<pre class="brush:javascript">
+```javascript
 var api = "http://api.worldbank.org/v2/en/countries?format=json&per_page=1000";
-</pre>
+```
 
 [data usa]: https://datausa.io/
 [dhs]: http://dhsprogram.com/data/
@@ -68,7 +68,7 @@ Following REACT practice, compoents have been designed to handle both the
 data acquisition through 3rd party API, and ploting using the awesome D3 library:
 
 <figure class="row">
-  <img class="center-block img-responsive"
+  <img class="center img-responsive"
        src="/images/country health.png"/>
     <figcaption>Data visualization SPA architecture</figcaption>
 </figure>

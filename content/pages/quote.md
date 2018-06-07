@@ -46,7 +46,7 @@ Author: Feng Xia
        <div>
          <figure>
            <img src={this.state.img}
-                className="center-block img-responsive" />
+                className="center img-responsive" />
            <figcaption>
              {this.state.quote}
              <span onClick={this.setImage}

@@ -6,7 +6,7 @@ Author: Feng Xia
 
 <figure class="col l6 m6 s12">
   <img src="/images/funny/the%20art%20of%20programming.jpg"
-       class="center-block img-responsive">
+       class="center img-responsive">
 </figure>
 
 
@@ -48,7 +48,7 @@ Anyway. So building a REST can be broken down into 5 steps:
 
 <figure class="col s12">
   <img src="/images/django%20to%20rest.png"
-       class="center-block img-responsive">
+       class="center img-responsive">
 </figure>
 
 
@@ -61,11 +61,11 @@ of capabilities:
 
 [3]: https://github.com/django-tastypie/django-tastypie/blob/master/tastypie/api.py
 
-<pre class="brush:python;">
+```python
 from tastypie.api import Api
 
 v1_api = Api(api_name='v1')
-</pre>
+```
 
 
 **Step 2**: wire URL patterns
@@ -75,7 +75,7 @@ patterns, and this is the beauty of [Tastypie][2]. So all we need to
 do is make these _sub-patterns_ available through URL matching. As
 explained above, we need to wire these into `mysite/urls.py`:
 
-<pre class="brush:python;">
+```python
 from myapp.api import v1_api as myapp_api  <-- the variable we defined
 
 urlpatterns = patterns(
@@ -83,7 +83,7 @@ urlpatterns = patterns(
     url(r'^mysite/api/myapp/',    <-- pattern matching
         include(myapp_api.urls)), <-- sub-pattern handler
 
-</pre>
+```
 
 **Step 3**: define your django DB model
 
@@ -94,7 +94,7 @@ Nothing fancy here. Just the old school of data modeling.
 REST speaks _resources_. Packaging a DB model into a resource is quite
 simple:
 
-<pre class="brush:python;">
+```python
 from tastypie.resources import ModelResource
 
 from myapp.models import MyModel  <-- import DB model
@@ -106,7 +106,7 @@ class MyModelResource(ModelResource):
         queryset = MyModel.objects.all()  <-- data set to display in list
         resource_name = "mymodels" <-- string used in REST url "/mymodels/"
 v1_api.register(MyModelResource())  <-- expose it to URL
-</pre>
+```
 
 This is the simpliest example to make magic happen. What's more you
 can do with this now?
@@ -118,24 +118,25 @@ can do with this now?
    (essentially serializing and de-serializing) before you send data
    to user or taking data from data to DB.
 3. foreign key reverse lookup
-  
-  Django defines reverse lookup by defining a related name in model:
-  <pre class="brush:python;">
-   class Datacenter(BaseModel):
-       pass
-   class Cluster(BaseModel):
-       datacenter = models.ForeignKey("Datacenter",
-                                      related_name="clusters") <-- related_name!
-  </pre>
-  
-  Consequently, `DataCenterResource` reverse lookup to `cluster` will
-  be like this:
-  
-  <pre class="brush:python;">
-  class DatacenterResource(MyModelResource):
-      clusters = fields.ToManyField("vx.api.ClusterResource", <-- FK resource
-                                    attribute="clusters", <-- django related name
-  </pre>
+
+Django defines reverse lookup by defining a related name in model:
+
+```python
+class Datacenter(BaseModel):
+    pass
+class Cluster(BaseModel):
+    datacenter = models.ForeignKey("Datacenter",
+                                   related_name="clusters") <-- related_name!
+```
+
+Consequently, `DataCenterResource` reverse lookup to `cluster` will
+be like this:
+
+```python
+class DatacenterResource(MyModelResource):
+  clusters = fields.ToManyField("vx.api.ClusterResource", <-- FK resource
+                                attribute="clusters", <-- django related name
+```
 
 [4]: http://django-tastypie.readthedocs.io/en/latest/resources.html#flow-through-the-request-response-cycle
 

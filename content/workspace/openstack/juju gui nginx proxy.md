@@ -29,33 +29,33 @@ quirk here is to enable `ssl` proxy (notice the `https`?)
 1. Get SSL cert in `/etc/nginx`. This will create two files in this
    directory: `cert.key` and `cert.crt`.
 
-    <pre class="brush:plain;">
+    ```shell
     $ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
-    </pre>
+    ```
 
 2. In LXD host, use `$ juju gui` to find out its server address and
    port, for example:
 
-    <pre class="brush:plain;">
+    ```shell
     (dev) fengxia@ubuntu:~$ juju gui
     GUI 2.10.2 for model "admin/default" is enabled at:
       https://10.175.135.193:17070/gui/u/admin/default
     Your login credential is:
       username: admin
       password: 049ab8c2284b3b7fa7e87933df18da15
-    </pre>
+    ```
     
     So the server's ip is `10.175.135.193` and port `17070`.
 
 2. (Optionally), you can change the Juju password here:
-    <pre class="brush:plain;">
+    ```shell
     $ juju change-user-password
-    </pre>
+    ```
     
 2. Create `juju.conf` in `/etc/nginx/site-available`. Note that this
    server listens port `443`!
 
-    <pre class="brush:plain;">
+    ```shell
     map $http_upgrade $connection_upgrade {
       default upgrade;
       ''      close;
@@ -86,7 +86,7 @@ quirk here is to enable `ssl` proxy (notice the `https`?)
         proxy_read_timeout 86400;
       }
     }
-    </pre>
+    ```
 
 Reload `$ sudo service nginx reload`, and browse to
 `https://[yourip]/gui`, you shall see the Juju GUI.

@@ -13,7 +13,7 @@ Here is the [config][2] file I'm using.
 
 [2]: {attach}/downloads/spectrwm.conf
 
-<pre class="brush:plain;">
+```shell
 # PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!
 # http://opensource.conformal.com/cgi-bin/man-cgi?spectrwm
 
@@ -100,12 +100,12 @@ quirk[OpenOffice.org 3.1:VCLSalFrame]   = FLOAT
 # EXAMPLE: define firefox program and bind to key
 # program[firefox]      = firefox http://spectrwm.org/
 # bind[firefox]         = MOD+Shift+b
-</pre>
+```
 
 For this to work properly, also install [conky][3] and write
 _.conkyrc_ file:
 
-<pre class="brush:plain;">
+```shell
 out_to_x no
 out_to_console yes
 update_interval 1.0
@@ -113,6 +113,6 @@ total_run_times 0
 use_spacer none
 TEXT
 Up:${uptime_short} |Temp:${acpitemp}C |Batt:${battery_short} |${addr wlan0} |RAM:$memperc% |CPU:${cpu}% | ${downspeedf wlan0}
-</pre>
+```
 
 [3]: https://github.com/brndnmtthws/conky

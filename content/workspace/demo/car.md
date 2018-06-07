@@ -46,7 +46,7 @@ on. But here I want to present a different approach.  First of all,
 let's turn those maths into diagram:
 
 <figure class="row">
-    <img src="/images/car leasing.png"/ class="img-responsive center-block">
+    <img src="/images/car leasing.png"/ class="img-responsive center">
     <figcaption>
         How do you get a monthly payment
     </figcaption>
@@ -174,7 +174,7 @@ input boxes into a component called `myinput`:
 
 [component]: https://docs.angularjs.org/guide/component
 
-<pre class="brush:javascript">
+```javascript
 ]).component('myinput', {
 bindings: {
     label: '@',
@@ -193,14 +193,14 @@ controller: function(){
         this.min = 0;
     }
 }
-</pre>
+```
 
 And the template code `form_input.hh` (shown below). The extension
 `.hh` is chosen because `.html` or `.htm` will be picked up by Pelican
 for page rendering and not copied as static file even though its
 parent path is a _STATIC_. Oh well.
 
-<pre class="brush:xml;">
+```xml
 <div class="row form-group">
   <span class="col-xs-6 col-form-label text-right">[[ $ctrl.label ]]</span>
   <div class="col-xs-5 input-group" style="float:left;">
@@ -210,20 +210,20 @@ parent path is a _STATIC_. Oh well.
     <div class="input-group-addon" ng-show="$ctrl.type=='month'">month</div>
   </div>
 </div>
-</pre>
+```
 
 With the component in place, rendering an `form input` section like this one is a breeze:
 
 <figure class="row">
-    <img src="/images/car_1.png" class="img-responsive center-block"/>
-    <figcaption>
+    <img src="/images/car_1.png" class="img-responsive center"/>
+  ! <figcaption>
         AngularJS Component rendered form inputs
     </figcaption>
 </figure>
 
 To complete this, below shows the file structure:
 
-<pre class="brush:plain;">
+```shell
 ├── app.module.js
 └── car-leasing
     ├── assumption.hh
@@ -233,7 +233,7 @@ To complete this, below shows the file structure:
     ├── piechart.hh
     ├── summary_line_item.hh
     └── var_display.hh
-</pre>
+```
 
 This maps directly to the component structure of this page:
 

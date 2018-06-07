@@ -34,7 +34,7 @@ machine into `ALLOCATED` then `DEPLOYING`. Once a Juju agent is installed
 
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
@@ -59,7 +59,7 @@ to find and download a charm, and how to use it to deploy an
 application. So just how are agents wired together?
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20agent%20overview.png" />
     <figcaption>High level view of Juju agents in an environment</figcaption>
 </figure>
@@ -87,7 +87,7 @@ provisioner needs to take an action so to bring machine from state A
 &rarr; state B.
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20machine%200%20state.png" />
     <figcaption>Machine-0 state & provisioner</figcaption>
 </figure>
@@ -101,7 +101,7 @@ within the `provisionTask` struct, there is a
 another name for provider, where `InstanceBroker` is a provider
 interface! Bingo.
 
-<pre class="brush:bash;">
+```shell
 type provisionerTask struct {
 	controllerUUID             string
 	machineTag                 names.MachineTag
@@ -121,7 +121,7 @@ type provisionerTask struct {
 	// machine id -> machine
 	machines map[string]*apiprovisioner.Machine
 }
-</pre>
+```
 
 ## Call chain, and call to provider
 
@@ -143,7 +143,7 @@ command to a state is taking place in `state.AddApplication()` which
 I'm highlighting in <font color="green">green</font>.
 
 <figure class="row">
-    <img class="img-responsive center-block" 
+    <img class="img-responsive center" 
          src="/images/juju%20deploy%20call%20chain.png" />
     <figcaption>Illustration of call chain by "juju deploy" command</figcaption>
 </figure>

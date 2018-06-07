@@ -35,7 +35,7 @@ to show what "managing baremetal" is actually doing.
 # Ironic introduction
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/ironic_design.png" />
     <figcaption>Ironic design (<a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic">source</a>)</figcaption>
 </figure>
@@ -54,7 +54,7 @@ important role in Ironic's workflow: [Ironic Python Agent][7] and
 Since it stores meta data in a DB, let's take a look at its DB schema:
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/ironic_db_er.png" />
     <figcaption>Ironic ER diagram</figcaption>
 </figure>
@@ -82,7 +82,7 @@ An example snippet to create node in Devstack is shown below. We will go over
 details of the input arguments in the next section. <font color="red">Note</font>: you must
 specify the `X-OpenStack-Ironic-API-Version` value in HTTP header.
 
-<pre class="brush:python;">
+```python
 def create_node(token, chassis, driver_info, instance_info, properties):
     # Ironic API: create a node
     url = 'http://%s:6385/v1/nodes' % DEVSTACK_SERVER
@@ -106,7 +106,7 @@ def create_node(token, chassis, driver_info, instance_info, properties):
         headers=headers
     )
     resp = json.loads(r.content)
-</pre>
+```
 
 ## Node details
 
@@ -120,7 +120,7 @@ record in Ironic DB. Run `openstack baremetal node show [node_uuid]`
 displays details of a node.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/ironic_node_show.png" />
     <figcaption>Details of a provisioned node</figcaption>
 </figure>
@@ -140,7 +140,7 @@ displays details of a node.
        + `deploy_ramdisk`: in devstack, it is "ir-deploy-agent_ipmitool.initramfs"
 
     Example payload:
-    <pre class="brush:plain;">
+    ```shell
     driver_info = {
         'ipmi_port': 6230,
         'ipmi_username': "admin",
@@ -149,7 +149,7 @@ displays details of a node.
         'ipmi_address': "10.0.2.15",
         'ipmi_password': "password"
     }
-    </pre>
+    ```
     
 4. `driver_internal_info` (read-only): this field is not accessible
    via API. Used by driver to store internal information.
@@ -161,7 +161,7 @@ displays details of a node.
    provisioned. However, user can also set this field through API.
 
     Example payload:
-    <pre class="brush:plain;">
+    ```shell
         {
            "ramdisk":"1a243f7b-3e96-4140-8408-b82064599cec",
            "kernel":"ef538456-704c-445c-a98b-c081be22ad71",
@@ -191,7 +191,7 @@ displays details of a node.
            "root_mb":10240,
            "swap_mb":0
         }
-    </pre>
+    ```
 
 6. `properties` (<font color="red">required</font>): Physical
    characteristics of this Node. Populated by ironic-inspector during
@@ -203,7 +203,7 @@ displays details of a node.
 
     Example payload:
 
-    <pre class="brush:plain;">
+    ```shell
     properties = {
         'cpus': 1,
         'memory_mb': 1280,
@@ -211,7 +211,7 @@ displays details of a node.
         'cpu_arch': 'x86_64',
         'capabilities': 'memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local'
     }
-    </pre>
+    ```
 
 The rest of the fields are self-explanatory so I'll skip them for now.
 
@@ -258,7 +258,7 @@ how to make them. But I'd like to have an explanation what they are
 and how they are used.
 
 Devstack image list:
-<pre class="brush:bash;">
+```shell
 +--------------------------------------+------------------------------------+--------+
 | ID                                   | Name                               | Status |
 +--------------------------------------+------------------------------------+--------+
@@ -270,7 +270,7 @@ Devstack image list:
 | 9eb37c5a-3021-4eea-93b7-66922eb89152 | ir-deploy-agent_ipmitool.initramfs | active |
 | 8d255ece-d66c-43a5-8043-5a6ce8bea4f2 | ir-deploy-agent_ipmitool.kernel    | active |
 +--------------------------------------+------------------------------------+--------+
-</pre>
+```
 
 # Ironic deploy method: agent & PXE
 
@@ -294,7 +294,7 @@ hearbeat payload is a callback URL, so apparently IPA also exposes a HTTP servic
 that Ironic conductor can use for commands.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/ironic_ipa_sequence.png" />
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
@@ -318,14 +318,14 @@ Source by [devananda github][18].
 [18]: https://github.com/devananda/talks/tree/master/images
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" />
     <figcaption>Ironic deploy &mdash; Agent</figcaption>
 </figure>
 
 The IPA server is implemented using [Python Pecan][41]. The
 long-running process is `IronicPythonAgent` in `ironic_python_agent/agent.py`:
-<pre class="brush:python;">
+```python
 wsgi = simple_server.make_server(
    self.listen_address.hostname,
    self.listen_address.port,
@@ -340,17 +340,17 @@ except BaseException:
    LOG.exception('shutting down')
 if not self.standalone and self.api_url:
    self.heartbeater.stop()
-</pre>
+```
 
 The `heartbeater.start()` is a thread that expects to receive letter
 `'a'` from Ironic and will stop upon receiving `'b'`. IPA also
 implements a RPC using the below syntax:
-<pre class="brush:python;">
+```python
 @base.async_command('prepare_image', _validate_image_info)
 def prepare_image(self,
                   image_info=None,
                   configdrive=None):
-</pre>
+```
 
 The function `prepare_image` is the key. Ironic's
 `xx-Agent` driver will call POST to IPA's endpoint
@@ -363,7 +363,7 @@ it is assuming that a block device is available and it will then run a
 disk, it can also write a bootloader (eg. grub2). Then IPA will signal
 Ironic that deploy is all done, and Ironic will go ahead to reboot the
 node &mdash; this then completes the provisioning process.
-<pre class="brush:python;">
+```python
 @base.async_command('prepare_image', _validate_image_info)
 def prepare_image(self,
                   image_info=None,
@@ -415,7 +415,7 @@ def prepare_image(self,
                                  self.partition_uuids)
     LOG.info(result_msg)
     return result_msg
-</pre>
+```
 
 [41]: https://pecan.readthedocs.io/en/latest/
 
@@ -424,9 +424,9 @@ Source by [devananda github][18].
 [18]: https://github.com/devananda/talks/tree/master/images
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-1.png?raw=true" />
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-2.png?raw=true" />
     <figcaption>Ironic deploy &mdash; PXE</figcaption>
 </figure>
@@ -434,16 +434,16 @@ Source by [devananda github][18].
 # Using NOVA API to create an instance
 
 Using Devstack, the easiest way to start an instance is CLI command.
-<pre class="brush:bash;">
+```shell
 openstack server create --image 9794e5b3-b3f1-403c-b37a-19c7e07cca4a --flavor baremetal --nic port-id=22d79b92-0848-4053-ad0d-f182d02d01a0 tt1 --debug
-</pre>
+```
 
 Where:
 
 + `--image`: using image UUID. Here we use the `cirros-0.3.4-x86_64-uec`
   image.
 + `--flavor`: using _baremetal_ flavor
-    <pre class="brush:bash;">
+    ```shell
     +----------------------------+--------------------------------------+
     | Field                      | Value                                |
     +----------------------------+--------------------------------------+
@@ -460,10 +460,10 @@ Where:
     | swap                       |                                      |
     | vcpus                      | 1                                    |
     +----------------------------+--------------------------------------+
-    </pre>
+    ```
   + `--port`: we create a port on _private_ network using Neutron API
   `POST /v2.0/ports`.
-    <pre class="brush:python;">
+    ```python
     def create_port(token, network):
       name = randomword(5)
       # Neutron: create a port
@@ -506,7 +506,7 @@ Where:
           headers=headers
       )
       resp = json.loads(r.content)
-    </pre>
+    ```
 
 
 Now let's see how this commands utilizes various API calls:
@@ -521,7 +521,8 @@ Now let's see how this commands utilizes various API calls:
     2. User-Agent: `osc-lib/1.3.0 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;;">
+
+```shell
 {
 "version":{
       "status":"stable",
@@ -541,7 +542,7 @@ Now let's see how this commands utilizes various API calls:
       ]
    }
 }
-</pre>
+```
 
 ## Get security token
 
@@ -555,7 +556,7 @@ We are using "Password authentication with scoped authorization".
 + HTTP header:
     1. Content-Type: `application/json`
 + JSON payload:
-<pre class="brush:bash;">
+```shell
 {
    "auth":{
       "identity":{
@@ -581,7 +582,7 @@ We are using "Password authentication with scoped authorization".
          }
       }
    }
-}</pre>
+}```
 + Response: too long to paste. Not important.
 
 
@@ -600,7 +601,7 @@ We are using "Password authentication with scoped authorization".
     6. Content-Type: `application/octet-stream`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "status":"active",
    "name":"cirros-0.3.4-x86_64-uec",
@@ -625,7 +626,7 @@ We are using "Password authentication with scoped authorization".
    "min_ram":0,
    "schema":"/v2/schemas/image"
 }
-</pre>
+```
 
 ## Get image schema
 Gets a JSON-schema document that represents the various entities
@@ -652,7 +653,7 @@ talked about by the Images v2 API.
     3. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "flavor":{
       "links":[
@@ -677,7 +678,7 @@ talked about by the Images v2 API.
       "OS-FLV-EXT-DATA:ephemeral":0
    }
 }
-</pre>
+```
 
 ## Get port details
 
@@ -691,7 +692,7 @@ talked about by the Images v2 API.
     2. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "port":{
       "status":"DOWN",
@@ -756,7 +757,7 @@ talked about by the Images v2 API.
       "created_at":"2017-03-03T23:01:47Z"
    }
 }
-</pre>
+```
 
 ## Create a NOVA instance based on image and flavor
 
@@ -770,7 +771,7 @@ talked about by the Images v2 API.
     3. Accept: `application/json`
     4. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
 + JSON payload:
-<pre class="brush:bash;">
+```shell
 {
    "server":{
       "name":"tt1",
@@ -785,10 +786,10 @@ talked about by the Images v2 API.
       ]
    }
 }
-</pre>
+```
 
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "server":{
       "security_groups":[
@@ -811,7 +812,7 @@ talked about by the Images v2 API.
       "adminPass":"xvcZ3HXf9Zr4"
    }
 }
-</pre>  
+```  
 
 ## Read NOVA instance details
 
@@ -826,7 +827,7 @@ talked about by the Images v2 API.
     3. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "server":{
       "OS-EXT-STS:task_state":"scheduling",
@@ -888,7 +889,7 @@ talked about by the Images v2 API.
       "config_drive":""
    }
 }
-</pre>
+```
 
 ## Get user image detail
 
@@ -904,7 +905,7 @@ talked about by the Images v2 API.
     6. Content-Type: `application/octet-stream`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "status":"active",
    "name":"cirros-0.3.4-x86_64-uec",
@@ -929,7 +930,7 @@ talked about by the Images v2 API.
    "min_ram":0,
    "schema":"/v2/schemas/image"
 }
-</pre>
+```
 
 ## Get flavor detail
 
@@ -942,7 +943,7 @@ talked about by the Images v2 API.
     3. X-Auth-Token: `ccc5f650029b710c4a3c8f20320afaaed04326f1`
 + JSON payload: none
 + Response:
-<pre class="brush:bash;">
+```shell
 {
    "flavor":{
       "links":[
@@ -967,4 +968,4 @@ talked about by the Images v2 API.
       "OS-FLV-EXT-DATA:ephemeral":0
    }
 }
-</pre>
+```

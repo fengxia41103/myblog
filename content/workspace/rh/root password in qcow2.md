@@ -18,20 +18,20 @@ and `libguesttools`, then:
 
 1. Create a password to use. Note it is "&mdash;<digit 1>", not a "l"
    (as in love):
-   <pre class="brush:plain;">
+   ```shell
    $ openssl passwd -1 natalie
-   </pre>
+   ```
    
 2. Modify the image directly:
 
-<pre>
+```shell
 $ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
 ><fs> run
 ><fs> list-filesystems
 ><fs> mount /dev/sda1 /
 ><fs> vi /etc/shadow
 ><fs> vi /etc/ssh/sshd_config
-</pre>
+```
    
-   Now replace the "!!" on line `root:...` with your password, save,
-   and `quit` from guetfish terminal. You are done.
+Now replace the "!!" on line `root:...` with your password, save,
+and `quit` from guetfish terminal. You are done.

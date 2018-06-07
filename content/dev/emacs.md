@@ -3,7 +3,6 @@ Date: 2017-01-21 11:45
 Tags: dev
 Slug: emacs
 Author: Feng Xia
-Status: Draft
 
 What a wonderful editor!
 
@@ -16,7 +15,7 @@ love with what I have so far.
 
 [1]: {attach}/downloads/emacs/init.el
 
-<pre class="brush:plain;">
+```list
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
 
@@ -1202,6 +1201,6 @@ non-nil; otherwise prompts the user to enter the directory."
    (concat "http://" site)))
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)                          
-</pre>
+```
 
 Happy coding.

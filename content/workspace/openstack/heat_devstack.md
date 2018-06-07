@@ -34,10 +34,10 @@ Devstack takes a long time to stand up. As a newbie, once you have
 created a stack, you also need to issue the following commands in
 devstack VM in order to enable SSH to your new VMs:
 
-<pre class="brush:bash;">
+```shell
 openstack security group rule create --proto icmp --dst-port 0 default
 openstack security group rule create --proto tcp --dst-port 22 default
-</pre>
+```
 
 Again, not that [official document][4] didn't tell you. It's just
 buried deep and hard to find.
@@ -46,7 +46,7 @@ buried deep and hard to find.
 
 Here is the __local.conf__ used:
 
-<pre class="brush:plain;">
+```shell
 #OFFLINE=true
 
 # Credentials
@@ -129,4 +129,4 @@ IMAGE_URL_SITE="http://download.fedoraproject.org"
 IMAGE_URL_PATH="/pub/fedora/linux/releases/25/CloudImages/x86_64/images/"
 IMAGE_URL_FILE="Fedora-Cloud-Base-25-1.3.x86_64.qcow2"
 IMAGE_URLS+=","$IMAGE_URL_SITE$IMAGE_URL_PATH$IMAGE_URL_FILE
-</pre>
+```

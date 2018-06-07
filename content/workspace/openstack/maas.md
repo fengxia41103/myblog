@@ -52,7 +52,7 @@ There will be two VMs and one internal network, `intnet1`.
 
 <figure class="row">
   <img src="/images/maas_networking_topology.png"
-       class="center-block img-responsive" />
+       class="center img-responsive" />
   <figcaption>MAAS Virtualbox lab networking topology</figcaption>
 </figure>
 
@@ -80,14 +80,14 @@ name `intnet1`.
    use). Use `ifconfig` to find out interface name that corresponds to
    `intnet1` (a clue: the one that has no IP assigned):
 
-    <pre class="brush:bash;">
+    ```shell
     $ nano /etc/network/interfaces
     auto enp0s9
     iface enp0s9 inet static
       address 192.168.8.1
       netmask 255.255.255.0
       gateway 192.168.8.1 # this will be setup in MAAS as default gateway!
-    </pre>
+    ```
 
     At Virtualbox level we have added an interface to this VM using
     `Internal Network`, we need then define this network in VM. Also,
@@ -96,23 +96,23 @@ name `intnet1`.
     road.
 
 2. Install MAAS is simple. Don't bother with other methods.
-    <pre class="brush:bash;">
+    ```shell
     sudo add-apt-repository ppa:maas/stable
     sudo apt update
     sudo apt install maas
-    </pre>
+    ```
 
 3. Create MAAS admin: 
-    <pre class="brush:bash;">
+    ```shell
     sudo maas createadmin
-    </pre>
+    ```
 
 4. Create SSH key and copy content from `~/.ssh/id_rsa.pub`:
-    <pre class="brush:bash;">
+    ```shell
     mkdir .ssh
     ssh-keygen -t rsa
     less ~/.ssh/id_rsa.pub
-    </pre>
+    ```
 
 5. Login in `http://localhost:5240/MAAS` using admin created in step
   3, goto user preference (click __user name__).
@@ -123,7 +123,7 @@ name `intnet1`.
 
     <figure class="row">
       <img src="/images/maas%20ssh%20key.png"
-           class="center-block img-responsive" />
+           class="center img-responsive" />
       <figcaption>MAAS upload SSH key</figcaption>
     </figure>
 
@@ -135,7 +135,7 @@ name `intnet1`.
 
     <figure class="row">
       <img src="/images/maas%20default%20gateway.png"
-           class="center-block img-responsive" />
+           class="center img-responsive" />
       <figcaption>MAAS default gateway</figcaption>
     </figure>
     
@@ -162,15 +162,15 @@ Following the [instructions][4] to enable default port forwarding:
 1. Packet forwarding needs to be enabled in ufw. Two configuration
    files will need to be adjusted, in `/etc/default/ufw` change the
    `DEFAULT_FORWARD_POLICY` to `ACCEPT`:
-   <pre class="brush:bash;">
+   ```shell
    DEFAULT_FORWARD_POLICY="ACCEPT"
-   </pre>
+   ```
 
 2. Then edit `/etc/ufw/sysctl.conf` and uncomment:
-  <pre class="brush:bash;">
+  ```shell
   net/ipv4/ip_forward=1
   net/ipv6/conf/default/forwarding=1
-  </pre>
+  ```
   
 ### Firewall policies
 
@@ -180,19 +180,19 @@ Following the [instructions][4] to enable default port forwarding:
 To config MAAS server to route 192.168.8.x subnet traffic to internet
 using UFW is simple. Using `ifconfig` to find the interface name that
 is connected to the internet(NAT), in this example, `enp0s3`:
-    <pre class="brush:bash;">
+    ```shell
     nano /etc/ufw/before.rules
-    </pre>
+    ```
 
 Paste this at the bottom of the file, **after** the `COMMIT` that has
 already been in that document:
-    <pre class="brush:bash;">
+    ```shell
     # nat Table rules
     *nat
     :POSTROUTING ACCEPT [0:0]
     -A POSTROUTING -s 192.168.8.0/24 -o enp0s3 -j MASQUERADE
     COMMIT
-    </pre>
+    ```
 
 What this does is to make `enp0s3` as the router for subnet
 192.168.8.x &larr; welcome the internet!
@@ -228,9 +228,9 @@ MAAS admin web is the tool to use for this configuration.
 
     <figure class="row">
       <img src="/images/maas_vlan_config.png"
-           class="center-block img-responsive" />
+           class="center img-responsive" />
       <img src="/images/maas_subnet_config.png"
-           class="center-block img-responsive" />    
+           class="center img-responsive" />    
       <figcaption>MAAS  DHCP config</figcaption>
     </figure>
 
@@ -241,7 +241,7 @@ MAAS admin web is the tool to use for this configuration.
 
     <figure class="row">
       <img src="/images/maas_dhcp_config.png"
-           class="center-block img-responsive" />
+           class="center img-responsive" />
       <figcaption>MAAS admin DHCP config</figcaption>
     </figure>
 

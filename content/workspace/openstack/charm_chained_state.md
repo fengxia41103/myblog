@@ -17,7 +17,7 @@ charm kicks off execution of `state.1`, which then transit itself to
 the `state.2`, then to `state.3`, and then loop back to `state.1`.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/charm%20chain%20states.png" />
   <figcaption>Charm design pattern: chain states</figcaption>
 </figure>
@@ -38,7 +38,7 @@ shows state transitions in **Message** column which is set by
 `set_status` in each state's function block.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/charm%20chained%20states%20screencast.gif" />
   <figcaption>Charm chain states screencast</figcaption>
 </figure>
@@ -55,17 +55,17 @@ to document (needs reference).
 
 To safely start the whole process, we settled on `@only_once`:
 
-<pre class="brush:python;">
+```python
 @only_once
 def state_0():
     log('something------------------')
-</pre>
+```
 
 ## Chain state pattern
 
 The three primary states follow the same pattern. Using `state.1` for example:
 
-<pre class="brush:python;">
+```python
 @when('state.1')
 def state_1():
     """State.1
@@ -81,7 +81,7 @@ def state_1():
     # state transition
     remove_state('state.1')
     set_state('state.2')
-</pre>
+```
 
 # Multiple states being true
 
@@ -107,12 +107,12 @@ In this test we want to verify whether starting a long running process
 will block charm's state transition. We used `subprocess.check_all` to
 start a blocking call while state 1-3 are kept to loop as designed.
 
-<pre class="brush:python;">
+```python
 def state_4():
     """State4.
     """
     subprocess.check_all("apt update && apt dist-upgrade")
-</pre>
+```
 
 The result is clear that state machine will come to a halt at this
 blocking call, which would have to be the case since we already know

@@ -23,7 +23,7 @@ a relation, if defined, must be one of the two types:
 2. **require** (eg. I'm Mediawiki and I require a SQL database).
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/juju%20control%20modeling.png" />
   <figcaption>Juju control modeling</figcaption>
 </figure>
@@ -57,7 +57,7 @@ its logic is following the [reactive pattern][10].
 [6]: https://jujucharms.com/docs/stable/developer-layers-interfaces
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/juju%20charm%20layers.png" />
     <figcaption>Juju charm layers</figcaption>
 </figure>
@@ -126,7 +126,7 @@ will read from the providing side of configurations needed to make the
 connection.
 
 <figure class="row">
-<img class="img-responsive center-block"
+<img class="img-responsive center"
 src="/images/charm%20relation%20and%20interface.png" />
 <figcaption>Charm relation and interface</figcaption>
 </figure>
@@ -159,17 +159,17 @@ types of relations: _provides_ and _requires_. The provides and
 requires keys defined in metadata.yaml are used to define pairings of
 charms that are likely to be fruitful. Consider mongodb's metadata:
 
-<pre class="brush:bash;">
+```shell
 name: mongodb
 ...
 provides:
   database:
     interface: mongodb
-</pre>
+```
 
 where in another metadata who is on the receiving end of this relation:
 
-<pre class="brush:bash;">
+```shell
 name: my-node-app
 ...
 requires:
@@ -178,7 +178,7 @@ requires:
 provides:
   website:
     interface: http
-</pre>
+```
 
 [14]: https://jujucharms.com/docs/stable/authors-relations
 
@@ -202,7 +202,7 @@ This is where the application logics live.
 See the process in action:
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/vanilla%20charm%20deploy.gif" />
     <figcaption>Screencast showing deploying a Vanilla charm</figcaption>
 </figure>

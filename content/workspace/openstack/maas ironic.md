@@ -41,7 +41,7 @@ remains valid.
    operator intervene.
    
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/baremetal%20lifecycle.png" />
     <figcaption>General baremetal life cycle</figcaption>
 </figure>
@@ -79,12 +79,12 @@ into the following subject domains for discussion purpose:
 
 <div class="my-multicol-2">
 <figure class="col s12">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/maas%20minimum%20setup.png" />
     <figcaption>MAAS minimal setup</figcaption>
 </figure>
 <figure class="col s12">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/ironic%20minimal%20setup.png" />
     <figcaption>Ironic minimal setup</figcaption>
 </figure>
@@ -264,10 +264,10 @@ One can also use MAAS CLI to add _custom_ images to repo, where `name` must in
 format `custom/xxx`. For CentOS, the name must be in format `centos72`
 for example because of MAAS's regex parser.
 
-<pre class="brush:plain;">
+```shell
 maas local boot-resources create name=custom/foo title="Title is not important" architecture=amd64/generic content@=/path/to/your/image
 maas local boot-resources import
-</pre>
+```
 
 # OS provisioning
 

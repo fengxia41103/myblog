@@ -40,7 +40,7 @@ Quickly we wrote down a few on wish list:
 The actual work was pretty straightforward. Follow Pelican official document
 to set up a working directory:
 
-<pre class="brush:bash;">
+```shell
 ├── static
 │   ├── bower_components
 │   ├── css
@@ -56,7 +56,7 @@ to set up a working directory:
     ├── layout.html
     ├── page.html
     └── tag.html
-</pre>
+```
 
 `bower_components` has all the third party libraries.  The key is the
 `layout.html` which is the root template of all others.  Once this is

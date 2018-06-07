@@ -21,7 +21,7 @@ go south, what is the minimum to simulate a clean state so we can run
 particuarly useful for development and troubleshooting.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
          src="/images/juju%20bootstrap.gif" />
     <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
 </figure>
@@ -30,12 +30,12 @@ particuarly useful for development and troubleshooting.
 First thing first, if we have create a cloud or are using a stock
 cloud type:
 
-<pre class="brush:bash;">
+```shell
 $ juju bootstrap [cloudname] [machine-0 name]
 
 for example:
 $ juju bootstrap devx test-1
-</pre>
+```
 
 This will create a state controller (machine-0) that will be the
 management node within juju's cloud environment.
@@ -73,7 +73,7 @@ common bootstrap framework to tie these providers into a common
 process.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/juju%20cloud%20and%20provider.png" />
     <figcaption>Juju cloud abstraction</figcaption>
 </figure>
@@ -111,7 +111,7 @@ some kind of remote API interface for commanding purpose.
 
 To list all supported cloud types:
 
-<pre class="brush:bash;">
+```shell
 $ juju list-clouds
 
 fengxia@ubuntu:~$ ./juju list-clouds
@@ -128,15 +128,15 @@ rackspace          6  dfw            rackspace   Rackspace Cloud
 localhost          1  localhost      lxd         LXD Container Hypervisor
 devmaas            0                 maas        Metal As A Service
 devx               0                 xclarity    Lenovo XClarity
-</pre>
+```
 
 To bootstrap an environment is simple if everything has been setup
 correctly. It is really up to the underline cloud to provide a
 machine, and this is where we are going to analye in further details.
 
-<pre class="brush:bash;">
+```shell
 $ juju bootstrap [cloud type][any name]
-</pre>
+```
 
 # Bootstrap overview
 
@@ -147,7 +147,7 @@ live.  In a nutshell, all activities can be categorized into the
 followings:
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/juju%20bootstrap%20overview.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
@@ -190,7 +190,7 @@ process located in `juju.juju.environs.Bootstrap` function.
   to hard-coded values (eg. simplestream URL).
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/juju%20bootstrap%20process.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
@@ -225,7 +225,7 @@ function &larr; and this is the point where underline cloud meets
 Juju.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/juju%20common%20BootstrapInstance.png" />
     <figcaption>"common" provider's BootstrapInstance function</figcaption>
 </figure>
@@ -237,7 +237,7 @@ What is expected from the cloud? Four things that are all hardware centric:
 3. storage volume
 4. storage volume attachment
 
-<pre class="brush:bash;">
+```shell
 // StartInstanceResult holds the result of an
 // InstanceBroker.StartInstance method call.
 type StartInstanceResult struct {
@@ -267,11 +267,11 @@ type StartInstanceResult struct {
     // volumes that were attached to the started instance.
     VolumeAttachments []storage.VolumeAttachment
 }
-</pre>
+```
 
 ### Hardware characteristics
 
-<pre class="brush:bash;">
+```shell
 // HardwareCharacteristics represents the characteristics of the instance (if known).
 // Attributes that are nil are unknown or not supported.
 type HardwareCharacteristics struct {
@@ -296,11 +296,11 @@ type HardwareCharacteristics struct {
     // AvailabilityZone defines the zone in which the machine resides.
     AvailabilityZone *string `json:"availability-zone,omitempty" yaml:"availabilityzone,omitempty"`
 }
-</pre>
+```
 
 ### Network info
 
-<pre class="brush:bash;">
+```shell
 // InterfaceInfo describes a single network interface available on an
 // instance. For providers that support networks, this will be
 // available at StartInstance() time.
@@ -392,11 +392,11 @@ type InterfaceInfo struct {
     // usually is (one of) the host address(es).
     GatewayAddress Address
 }
-</pre>
+```
 
 ### Storage volume
 
-<pre class="brush:bash;">
+```shell
 // Volume identifies and describes a volume (disk, logical volume, etc.)
 type Volume struct {
     // Name is a unique name assigned by Juju to the volume.
@@ -423,11 +423,11 @@ type VolumeInfo struct {
     // machine to which it is attached.
     Persistent bool
 }
-</pre>
+```
 
 ### Storage volume attachment
 
-<pre class="brush:bash;">
+```shell
 // VolumeAttachment identifies and describes machine-specific volume
 // attachment information, including how the volume is exposed on the
 // machine.
@@ -469,7 +469,7 @@ type VolumeAttachmentInfo struct {
     // ReadOnly signifies whether the volume is read only or writable.
     ReadOnly bool
 }
-</pre>
+```
 
 ## "common" node configuring
 
@@ -478,7 +478,7 @@ In code this step is presented as an "interface" function within the
 However, we are separating it here for discussion purpose.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
     <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
 </figure>
@@ -518,7 +518,7 @@ the underline cloud wants control. The bare minimum (as we have done
 in the simulation, see below) is to rely on default values, `common`
 provider's `Bootstrap` functions, and return a `StartInstanceResult`.
 
-<pre class="brush:bash;">
+```shell
 // For now, we are imitating a successful instance by directly returning a result struct
 var tmpArch string = arch.AMD64
 var tmpMem uint64 = 2000000
@@ -542,7 +542,7 @@ return &environs.StartInstanceResult{
         Volumes:           volumes, // type storage.Volume struct
         VolumeAttachments: volumeAttachments, // type storageVolumeAttachment struct
 }, nil
-</pre>
+```
 
 There are a few topics that are not covered in this article, but need
 to be studied further:

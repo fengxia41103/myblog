@@ -94,7 +94,7 @@ mechanics and electronics human invented, are just tools to make the
 work more efficient. Tools don't crack the code, we do; computer
 doesn't make decisions, the writer of that `if-else` line do.
 
-<pre class="brush:python;">
+```python
 # FACT: is he naked
 if have_clothes_on:
     naked = False;
@@ -106,7 +106,7 @@ if i_like_it:
     looking_good = True;
 else:
     looking_good = False;
-</pre>
+```
 
 Here, computer identifies two variables representing two completly
 different dimensions. This is just my simplified view of the world

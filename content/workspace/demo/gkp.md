@@ -5,7 +5,7 @@ Author: Feng Xia
 
 
 <figure class="row">
-    <img src="/images/demo_gkp.png" class="center-block img-responsive" />
+    <img src="/images/demo_gkp.png" class="center img-responsive" />
     <figcaption>Project GKP frontpage</figcaption>
 </figure>
 

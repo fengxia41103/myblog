@@ -53,7 +53,7 @@ between on-premise `Satellite` source vs. everything else.
 In RHEL, it's easy to find out which source you are pulling these rpms
 from. Look at `/etc/yum.repo.d/redhat.repo`:
 
-<pre class="brush:plain;">
+```shell
 For example:
 [rhel-7-server-openstack-11-devtools-debug-rpms]
 metadata_expire = 86400
@@ -71,7 +71,7 @@ gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 enabled = 0
 sslcacert = /etc/rhsm/ca/redhat-uep.pem
 gpgcheck = 1
-</pre>
+```
 
 You see the `baseurl` points to `cdn.redhat.com`. This is the
 catch-all Redhat source, meaning you are pulling things directly from
@@ -79,7 +79,7 @@ Red Hat.
 
 On a Satellite client, instead, you will something like this:
 
-<pre class="brush:plain;">
+```shell
 [Lenovo_IBB_Lenovo_Yum_Repo_Lenovo_yum_repo_SLES11SP4_Default]
 metadata_expire = 1
 sslclientcert = /etc/pki/entitlement/3451950880933034925.pem
@@ -94,7 +94,7 @@ sslclientkey = /etc/pki/entitlement/3451950880933034925-key.pem
 enabled = 1
 sslcacert = /etc/rhsm/ca/katello-server-ca.pem
 gpgcheck = 0
-</pre>
+```
 
 For this one, `baseurl` is pointing to a Satellite server named
 `brain4-satellite.labs.lenovo.com`. Note that the `.pem` (`sslcacert`)
@@ -192,12 +192,12 @@ From [Red Hat Subscription and Entitlement Accounting (pdf)][40]:
 
 The [pdf][40] has a clear example to describe this. In a nutshell,
 
-<pre class="brush:plain;">
+```shell
 entitlements = subscription qty * entitlement qty/sub *
 instance multiplier
-</pre>
+```
 
-<figure class="col s12 center-block">
+<figure class="col s12 center">
   <img src="/images/rh%20entitlement%20accounting.png"/>
 </figure>
 
@@ -261,19 +261,19 @@ If we change subscriptions in the allocation using Portal (add/remove
 subscriptions), we need to SSH back to Satellite server machine, and
 **refresh manifest**:
 
-<pre class="brush:plain;">
+```shell
 $ hammer subscription refresh-manifest --organization "<org name>"
-</pre>
+```
 
 # Enable/disable repo
 
 See [ref][10]. On Satellite server:
 
-<pre class="brush:plain;">
+```shell
 subscription-manager repos --list
 subscription-manager repos --enable=[repo name]
 subscription-manager repos --disable=[repo name]
-</pre>
+```
 
 [10]: https://access.redhat.com/solutions/265523
 
@@ -313,18 +313,18 @@ On client machine:
     machine you are to register will be `client1.labs.lenovo.com` with
     IP `192.168.1.200`, simply add two lines in `/etc/hosts`:
 
-    <pre class="brush:plain;">
+    ```shell
     In /etc/hosts:
     192.168.1.100 brain4-satellite.labs.lenovo.coom
     192.168.1.200 client1.labs.lenovo.com
-    </pre>
+    ```
 
     Then restart network services:
-    <pre class="brush:plain;">
+    ```shell
     systemctl start chronyd
     systemctl enable chronyd
     systemctl start rhsmcertd
-    </pre>
+    ```
    
 2. Download `katello-ca...rpm`, eg. `curl -O <link copied above>`
    (Note: it is a capital O as oliver).

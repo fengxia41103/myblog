@@ -14,7 +14,7 @@ Author: Feng Xia
       </p>
       <figure>
         <img src="/images/moments.png"
-             class="responsive-img center-block"/>
+             class="responsive-img center"/>
       </figure>
     </div>
     <div class="card-action">

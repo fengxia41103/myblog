@@ -37,7 +37,7 @@ a new function:
    `charmhelpers.fetch.apt_install`. The key issue here is using `ppa`
    which is an **hardcoded** Ubuntu approach.
 
-      <pre class="brush:python;">
+      ```python
       def install_ansible_support(from_ppa=True, ppa_location='ppa:ansible/ansible'):
           if from_ppa:
               charmhelpers.fetch.add_source(ppa_location)
@@ -45,7 +45,7 @@ a new function:
           charmhelpers.fetch.apt_install('ansible')
           with open(ansible_hosts_path, 'w+') as hosts_file:
               hosts_file.write('localhost ansible_connection=local')
-      </pre>
+      ```
 
 2. Helper function to execute. Clearly the approach here is to use
    `subprocess.check_call` which is calling `ansible-playbook` as
@@ -53,7 +53,7 @@ a new function:
    `ansible-playbook` can take which in turn need to be exposed
    through this function &larr; currently it supports `tags` and `extra-vars`.
 
-      <pre class="brush:python;">
+      ```python
       def apply_playbook(playbook, tags=None, extra_vars=None):
           ....
           call = [
@@ -68,7 +68,7 @@ a new function:
               extra = ["%s=%s" % (k, v) for k, v in extra_vars.items()]
               call.extend(['--extra-vars', " ".join(extra)])
           subprocess.check_call(call, env=env)
-      </pre>
+      ```
 
 A nice feature of this library is the implementation of [hooks][3] and
 [actions][4] so that Ansible can answer to `hook` event and can be
@@ -89,7 +89,7 @@ advantage of the [Ansible Python API][6].
    Ubuntu because it misses a few dependencies. Using [layer-basic][7]
    by listing them out in `layer.yaml`:
 
-     <pre class="brush:yaml;">
+     ```yaml
       includes:
         - 'layer:basic'
       options:
@@ -99,7 +99,7 @@ advantage of the [Ansible Python API][6].
             - libssl-dev
             - python
             - python3-dev
-     </pre>
+     ```
 
 [7]: https://github.com/juju-solutions/layer-basic
 
@@ -108,14 +108,14 @@ advantage of the [Ansible Python API][6].
 
 [8]: https://packaging.python.org/discussions/wheel-vs-egg/?highlight=wheel
 
-      <pre class="brush:plain;">
+      ```shell
       ansible==2.2.0
-      </pre>
+      ```
 
 3. `ansible.cfg`. Instead of using a global config, this is local so
    each charm can have its own variation if desired.
 
-      <pre class="brush:plain;">
+      ```shell
       [defaults]
       inventory = ./hosts
       log_path = /var/log/ansible/ansible.log
@@ -124,12 +124,12 @@ advantage of the [Ansible Python API][6].
       [ssh_connection]
       ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s
       control_path = ~/.ansible/cp/ansible-ssh-%%h-%%p-%%r
-      </pre>
+      ```
 
 4. Options. Constructed a class to be the abstraction of Ansible
    options:
 
-      <pre class="brush:python;">
+      ```python
       class Options(object):
           """
           Options class to replace Ansible OptParser
@@ -177,12 +177,12 @@ advantage of the [Ansible Python API][6].
           listtasks=None,
           listtags=[],
           module_path=None
-      </pre>
+      ```
 
 5. Playbook execution. Running it is to use
    Ansible's API call `PlaybookExecutor`.
 
-      <pre class="brush:python;">
+      ```python
       self.pbex = playbook_executor.PlaybookExecutor(
           playbooks=pbs,
           inventory=self.inventory,
@@ -192,7 +192,7 @@ advantage of the [Ansible Python API][6].
           passwords=passwords)
       ....
       self.pbex.run()
-      </pre>
+      ```
 
 # Charm integration
 
@@ -201,15 +201,15 @@ followings:
 
 1. Include layer. In `layer.yaml`:
 
-      <pre class="brush:yaml;">
+      ```yaml
       includes:
         - 'layer:basic'
         - 'layer:myansible'
-      </pre>
+      ```
 
 2. Create a `playbooks` folder and place playbooks here:
 
-      <pre class="brush:plain;">
+      ```shell
       .
       ├── config.yaml
       ├── icon.svg
@@ -219,24 +219,24 @@ followings:
       │   └── test.yaml
       └── reactive
           └── solution.py
-      </pre>
+      ```
 
 3. Using `config.yaml` to pass in playbook for each action that is
    defined in the charm states. For example, define `test.yaml` for an
    action in `state-0`:
 
-      <pre class="brush:yaml;">
+      ```yaml
       options:
         state-0-playbook:
           type: string
           default: "test.yaml"
           description: "Playbook for..."
-      </pre>
+      ```
 
 4. Define the playbook. For example, a _hello world_ that will create
    a file `/tmp/testfile.txt'.
 
-      <pre class="brush:yaml;">
+      ```yaml
       - name: This is a hello-world example
         hosts: 127.0.0.1
         tasks:
@@ -244,7 +244,7 @@ followings:
           copy: content="hello world\n" dest=/tmp/testfile.txt
           tags:
             - sth
-      </pre>
+      ```
 
     Note that `tags` value `sth` must match playbook run call (see
     below).
@@ -252,7 +252,7 @@ followings:
 5. In charm `.py` file, `from charms.layer.task import Runner`, then
    in `state-0` to call given playbook:
 
-      <pre class="brush:python;">
+      ```python
       playbook = config['state-0-playbook']
       runner = Runner(
           tags = 'sth', # <-- must match the tag in the playbook
@@ -265,7 +265,7 @@ followings:
           verbosity = 0
       )
       stats = runner.run()
-      </pre>
+      ```
 
 That's it. Now you can build a charm by including `layer-myansible`
 and run any playbooks in your charm by following this design pattern

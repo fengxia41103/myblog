@@ -156,7 +156,7 @@ job**. A common reasoning is that wealth has been rising, thus making
 leisure a more acceptable life style than a working bee &larr; after
 all, who wants to work if one can get a comfortable life without it!?
 
-<div class="center-block" style="max-width:854px">
+<div class="center" style="max-width:854px">
   <div style="position:relative;height:0;padding-bottom:56.25%">
     <iframe src="https://embed.ted.com/talks/jared_diamond_how_societies_can_grow_old_better"
             width="854" height="480"

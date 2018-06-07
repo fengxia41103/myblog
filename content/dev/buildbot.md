@@ -24,13 +24,14 @@ we can, we opted to buildbot for this purpose.
 
 Create a python virtualenv and use pip is all it takes:
 
-<pre class="brush:bash;">
+```shell
 $ workon build
 $ pip install buildbot
 $ pip install buildbot-slave
-</pre>
+```
 
 For configuration, you can refer to
+
 [buildbot tutorial](http://docs.buildbot.net/current/tutorial/firstrun.html)
 for more details.
 
@@ -71,7 +72,7 @@ adding a new slave only requires two changes:
 
 Sample *master.cfg* is shown here:
 
-<pre class="brush:python;">
+```python
     # -*- python -*-
     # ex: set syntax=python:
 
@@ -174,7 +175,7 @@ Sample *master.cfg* is shown here:
         # this at its default for all but the largest installations.
         'db_url' : "sqlite:///state.sqlite",
     }
-</pre>
+```
 
 A couple notes of master.cfg connfigurations:
 
@@ -188,73 +189,73 @@ and password to buildbot's admin web UI.
 We set up a new configuration for each slave, which corresponds to a project.
 Take *test_gkp* configuration for example:
 
-<pre class="brush:python;">
-    # -*- python -*-
-    # ex: set syntax=python:
+```python
+# -*- python -*-
+# ex: set syntax=python:
 
-    from buildbot.plugins import *
-    from buildbot.plugins import steps
-    from buildbot.plugins import status
+from buildbot.plugins import *
+from buildbot.plugins import steps
+from buildbot.plugins import status
 
-    class MyTarget():
-        def __init__(self):
-            # project configs
-            self.name = 'test-gkp'
+class MyTarget():
+    def __init__(self):
+        # project configs
+        self.name = 'test-gkp'
 
-            project_configs = {
-                'git': 'http://fengxia41103:xxxxxx@github.com/fengxia41103/gkp.git',
-                'git username': 'fengxia41103',
-                'git password': 'xxxxxx',
-                'git source': '~/build-slave/mybuild-%s/build'%self.name,
-                'build name': 'mybuild-%s'%self.name
-            }
+        project_configs = {
+            'git': 'http://fengxia41103:xxxxxx@github.com/fengxia41103/gkp.git',
+            'git username': 'fengxia41103',
+            'git password': 'xxxxxx',
+            'git source': '~/build-slave/mybuild-%s/build'%self.name,
+            'build name': 'mybuild-%s'%self.name
+        }
 
-            self.change_source = changes.GitPoller(
-                project_configs['git'],
-                branch='master',
-                pollinterval=300)
+        self.change_source = changes.GitPoller(
+            project_configs['git'],
+            branch='master',
+            pollinterval=300)
 
-            ####### SCHEDULERS
-            self.scheduler = schedulers.SingleBranchScheduler(
-                name="%s-all"%self.name,
-                change_filter=util.ChangeFilter(branch='master'),
-                treeStableTimer = 300,
-                builderNames=[project_configs['build name']])
-            self.force_scheduler = schedulers.ForceScheduler(
-                name = '%s-force'%self.name,
-                builderNames = [project_configs['build name']])
+        ####### SCHEDULERS
+        self.scheduler = schedulers.SingleBranchScheduler(
+            name="%s-all"%self.name,
+            change_filter=util.ChangeFilter(branch='master'),
+            treeStableTimer = 300,
+            builderNames=[project_configs['build name']])
+        self.force_scheduler = schedulers.ForceScheduler(
+            name = '%s-force'%self.name,
+            builderNames = [project_configs['build name']])
 
-            ####### BUILDERS
-            # The 'builders' list defines the Builders, which tell Buildbot how to perform a build:
-            # what steps, and which slaves can execute them.  Note that any particular build will
-            # only take place on one slave.
-            factory = util.BuildFactory()
+        ####### BUILDERS
+        # The 'builders' list defines the Builders, which tell Buildbot how to perform a build:
+        # what steps, and which slaves can execute them.  Note that any particular build will
+        # only take place on one slave.
+        factory = util.BuildFactory()
 
-            # check out the source
-            get_source = steps.Git(
-                repourl = project_configs['git'],
-                mode='full'
-            )
-            restart_nginx = steps.ShellCommand(
-                command = [
-                    'sudo',
-                    'service',
-                    'nginx',
-                    'restart',
-                ],
-                usePTY = True,
-                description = 'restarting nginx service',
-                descriptionDone = 'nginx reservice has been restarted'
-            )
+        # check out the source
+        get_source = steps.Git(
+            repourl = project_configs['git'],
+            mode='full'
+        )
+        restart_nginx = steps.ShellCommand(
+            command = [
+                'sudo',
+                'service',
+                'nginx',
+                'restart',
+            ],
+            usePTY = True,
+            description = 'restarting nginx service',
+            descriptionDone = 'nginx reservice has been restarted'
+        )
 
-            factory.addStep(get_source)
-            factory.addStep(restart_system_service)
+        factory.addStep(get_source)
+        factory.addStep(restart_system_service)
 
-            self.builder = util.BuilderConfig(
-                name=project_configs['build name'],
-                slavenames=["myslave"],
-                factory=factory)
-</pre>
+        self.builder = util.BuilderConfig(
+            name=project_configs['build name'],
+            slavenames=["myslave"],
+            factory=factory)
+```
 
 ## Add a new project to CI
 

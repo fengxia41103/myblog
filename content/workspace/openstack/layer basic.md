@@ -17,7 +17,7 @@ hook sequence is always executed in an order that is dictated by Juju
 code.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/charm%20hooks.png" />
   <figcaption>Sequence of charm hooks</figcaption>
 </figure>
@@ -25,7 +25,7 @@ code.
 What do we see in hooks? If you run `charm build` and examine the `dist` folder,
 hooks live in `dist/yourcharm/hooks` folder:
 
-<pre class="brush:plain;">
+```shell
 .
 ├── config-changed
 ├── hook.template
@@ -42,14 +42,14 @@ hooks live in `dist/yourcharm/hooks` folder:
 ├── stop
 ├── update-status
 └── upgrade-charm
-</pre>
+```
 
 We know we haven't defined any custom hook code for this charm,
 so how were they generated? Even more interesting is
 that all hooks are strangely **identical**.
 Take `install` hook script for example:
 
-<pre class="brush:python;">
+```python
 #!/usr/bin/env python3
 
 # Load modules from $JUJU_CHARM_DIR/lib
@@ -69,7 +69,7 @@ sys.path.append('lib')
 basic.bootstrap_charm_deps()
 basic.init_config_states()
 main()
-</pre>
+```
 
 You can diff all of them, and they are all the same! <span
 class="myhighlight">and they are all copies of the
@@ -88,13 +88,13 @@ Source of `charm build` is [here][2]. Looking into the charm `Builder` class:
 
 [2]: https://github.com/juju/charm-tools
 
-<pre class="brush:python;">
+```python
 class Builder(object):
     """
     Handle the processing of overrides, implements the policy of BuildConfig
     """
     HOOK_TEMPLATE_FILE = path('hooks/hook.template')
-</pre>
+```
 
 Ah ha, that's where it is expecting `hook.template`. Following this we have discovered the followings:
 
@@ -103,7 +103,7 @@ Ah ha, that's where it is expecting `hook.template`. Following this we have disc
    interesting point is that it doesn't relie on `layer-basic`
    anymore. If you charm has a `/hooks/hook.template`, it will work.
 
-    <pre class="brush:python;">
+    ```python
     def plan_interfaces(self, layers, output_files, plan):
         ......
         if not meta and layers.get('interfaces'):
@@ -112,7 +112,7 @@ Ah ha, that's where it is expecting `hook.template`. Following this we have disc
         elif self.HOOK_TEMPLATE_FILE not in output_files:
             raise BuildError('At least one layer must provide %s',
                              self.HOOK_TEMPLATE_FILE)
-    </pre>
+    ```
 
 2. If you didn't define those **must-have** hooks, eg. `install` hook,
 charm build will happily make the dist, but it will fail at run
@@ -123,7 +123,7 @@ to make `proof`, and this will complain if you miss expected hooks
 [3]: https://github.com/juju/charm-tools/issues/325
 
     1. Code expected hooks:
-        <pre class="brush:python;">
+        ```python
         lint.check_hook('install', hooks_path, recommended=True)
         lint.check_hook('start', hooks_path, recommended=True)
         lint.check_hook('stop', hooks_path, recommended=True)
@@ -131,10 +131,10 @@ to make `proof`, and this will complain if you miss expected hooks
             lint.check_hook('config-changed', hooks_path, recommended=True)
         else:
             lint.check_hook('config-changed', hooks_path)
-        </pre>
+        ```
 
     2. `charm proof` will catch the missing hooks:
-        <pre class="brush:plain;">
+        ```shell
         fengxia@fengxia-xenial-dev:~/workspace/wss/charms/charm-pdu$ charm proof
         I: metadata name (pdu) must match directory name (charm-pdu) exactly for local deployment.
         W: no copyright file
@@ -142,7 +142,7 @@ to make `proof`, and this will complain if you miss expected hooks
         I: relation rack has no hooks
         I: missing recommended hook install
         I: missing recommended hook start
-        </pre>
+        ```
 
 If charm is executed, `install` hook will run first, which
 then call two functions from `layer-basic`:
@@ -173,11 +173,11 @@ This function is to setup the host Python environment for charms.
 [5]: http://setuptools.readthedocs.io/en/latest/easy_install.html#configuration-files
 
     In `wheelhouse.txt` file:
-    <pre class="brush:plain;">
+    ```shell
     pip>=7.0.0,<8.2.0
     charmhelpers>=0.4.0,<1.0.0
     charms.reactive>=0.1.0,<2.0.0
-    </pre>
+    ```
     
 3. Install `python-virtualenv` if it is included in
    `config.yaml`. 
@@ -194,7 +194,7 @@ hook is necessary.
 
 [6]: https://pythonhosted.org/charmhelpers/
 
-<pre class="brush:python;">
+```python
 def init_config_states():
     import yaml
     from charmhelpers.core import hookenv
@@ -228,7 +228,7 @@ def clear_config_states():
         remove_state('config.set.{}'.format(opt))
         remove_state('config.default.{}'.format(opt))
     unitdata.kv().flush()
-</pre>
+```
 
 # Conclusion
 

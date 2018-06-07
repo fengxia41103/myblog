@@ -12,7 +12,7 @@ Summary: Building a prototype is a must-have for any new project
 
 <figure class="col l6 m6 s12">
   <img src="/images/20150930_transporter.png"
-       class="img-responsive center-block"/>
+       class="img-responsive center"/>
 </figure>
 
 I believe in the power of prototypes.  That is to say, I want to see

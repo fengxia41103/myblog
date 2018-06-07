@@ -13,7 +13,7 @@ Take `__init__.py` in [`charmhelpers/charmhelpers`][1] for example:
 
 [1]: https://pythonhosted.org/charmhelpers/
 
-<pre class="brush:python;">
+```python
 try:
     import six  # flake8: noqa
 except ImportError:
@@ -22,7 +22,7 @@ except ImportError:
     else:
         subprocess.check_call(['apt-get', 'install', '-y', 'python3-six'])
     import six  # flake8: noqa
-</pre>
+```
 
 Command line `apt-get` is a clue, isn't it? There are many such
 hardcoded lines who shout out that Ubuntu is the way to go, and of
@@ -39,14 +39,14 @@ Python27. We enabled `EPEL-RELEASE` repo, but then
 charm install gave us an error `no module yum found`. The call is made
 in `charmhelpers/fetch.centos.py`, and python34 has no `yum` module!
 
-<pre class="brush:python;">
+```python
 import yum
-</pre>
+```
 
 And trace it one step further, it came from
 `charm-helpers/charmhelpers/fetch/__init__.py`:
 
-<pre class="brush:python;">
+```python
 if __platform__ == "ubuntu":
     apt_cache = fetch.apt_cache
     apt_install = fetch.install
@@ -59,7 +59,7 @@ if __platform__ == "ubuntu":
     get_upstream_version = fetch.get_upstream_version
 elif __platform__ == "centos":
     yum_search = fetch.yum_search
-</pre>
+```
 
 Here we are making a mapping between defined function definitions and
 the function names that will be used in other places in the
@@ -68,7 +68,7 @@ to Ubuntu's. So yes, `import yum` is just the tip of the iceberg,
 execution will break anywhere `apt_` is called. Take `apt_install` for
 example, here is a search result where this function is expected:
 
-<pre class="brush:plain;">
+```shell
 -*- mode: grep; default-directory: "~/workspace/wss/hack/charmhelpers-0.15.0/" -*-
 Grep started at Sat May 27 22:32:10
 
@@ -194,7 +194,7 @@ find . -type d \( -path \*/SCCS -o -path \*/RCS -o -path \*/CVS -o -path \*/MCVS
 ./tests/fetch/test_fetch.py:857:        fetch.apt_install(packages, options, fatal=True)
 
 Grep finished (matches found) at Sat May 27 22:32:10
-</pre>
+```
 
 Enough proof that default charms will break. Let's see how to fix it.
 
@@ -215,13 +215,13 @@ This can be broken down to the following steps:
 If you run `charm build` and search `python3` in dist folder, the
 first offender are hooks:
 
-<pre class="brush:python;">
+```python
 #!/usr/bin/env python3
 
 change to:
 
 #!/usr/bin/env python
-</pre>
+```
 
 The root cause is actually the `hook.template`, which is used in a
 copy-paste fashion to create the list of default hooks if user didn't
@@ -232,7 +232,7 @@ always be created!
 
 Update Python search path used in **all** hooks:
 
-<pre class="brush:python;">
+```python
 # Load modules from $JUJU_CHARM_DIR/lib
 import sys
 sys.path.append('lib')
@@ -243,7 +243,7 @@ change to:
 import sys
 import os
 sys.path.append(os.path.join(os.getcwd(),'lib'))
-</pre>
+```
 
 Btw, don't be fooled by the comment line __$JUJU_CHARM_DIR__,
 there isn't one. Otherwise, there is no need to
@@ -254,7 +254,7 @@ make this change.
 Update `charmhelpers/fetch/__init__.py` to add CentOS function
 mappings:
 
-<pre class="brush:python;">
+```python
 if __platform__ == "ubuntu":
     apt_cache = fetch.apt_cache
     apt_install = fetch.install
@@ -274,14 +274,14 @@ elif __platform__ == "centos":
     apt_update = fetch.update
     apt_purge = fetch.purge
     apt_cache = fetch.yum_search
-</pre>
+```
 
 ## `RelationBase` in `charms.reactive`
 
 Update `class RelationBase` in
 `charms.reactive/charms/reactive/relations.py`:
 
-<pre class="brush:python;">
+```python
 class RelationBase(object, metaclass=AutoAccessors):
     """
     The base class for all relation implementations.
@@ -291,7 +291,7 @@ change to:
 
 class RelationBase(object):
     __metaclass__=AutoAccessors
-</pre>
+```
 
 ## `layer-basic`
 
@@ -304,19 +304,19 @@ work around the issues to make Python2 charms.
 
 Diff file list:
 
-<pre class="brush:plain;">
+```shell
 Files layer-basic/bin/layer_option
 Only in /home/fengxia/workspace/wss/charms/layer-basic/lib/charms: __init__.py
 Files layer-basic/lib/charms/layer/basic.py 
 Files layer-basic/lib/charms/layer/execd.py
-</pre>
+```
 
 ### `sys.path` in `layer_option`
 
 Update `layer-basic/bin/layer-optioin`. This is the same change made
 in hooks.
 
-<pre class="brush:python;">
+```python
 import sys
 sys.path.append('lib')
 
@@ -325,7 +325,7 @@ change to:
 import sys
 import os
 sys.path.append(os.path.join(os.getcwd(),'lib'))
-</pre>
+```
 
 
 ### Python import path
@@ -351,7 +351,7 @@ package functions to mapped version.
 [3]: https://github.com/juju-solutions/layer-basic/issues/98
 [4]: https://github.com/juju-solutions/layer-basic/issues/97
 
-<pre class="brush:diff;">
+```diff
 6a7
 > import platform
 51,56c52,77
@@ -443,13 +443,13 @@ package functions to mapped version.
 >            '--assumeyes',
 >            'install']
 > 	
-</pre>
+```
 
 ### `execd.py`
 
 A formatting error?
 
-<pre class="brush:plain;">
+```shell
 17a18
 > from __future__ import print_function
 114,115c115
@@ -457,7 +457,7 @@ A formatting error?
 <                   file=stderr)
 ---
 >             print("ERROR ({}) running {}".format(e.returncode, e.cmd),file=stderr)
-</pre>
+```
 
 # How to build
 

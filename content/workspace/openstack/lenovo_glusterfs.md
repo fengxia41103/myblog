@@ -40,7 +40,7 @@ with the machines by their host name. If you have a DNS server, add
 additional entries for all CIMP ndoes. Alternatively, you'll need to add
 the machines to `/etc/hosts` on all nodes (`cimp-node2` shown below):
 
-<pre class="brush:plain;">
+```shell
 # cat /etc/hosts
 
 127.0.0.1   cimp-node2 localhost localhost.localdomain localhost4 localhost4.localdomain4
@@ -48,7 +48,7 @@ the machines to `/etc/hosts` on all nodes (`cimp-node2` shown below):
 192.0.23.1 cimp-node1
 192.0.23.2 cimp-node2
 192.0.23.3 cimp-node3
-</pre>
+```
 
 We can now verify the setup by `ping cimp-node[x]`.
 
@@ -63,7 +63,7 @@ to install all the packages.
 
 [1]: http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/Lenovo%20ThinkAgile%20Ceph/rpms.tar​ 
 
-<pre class="brush:plain;">
+```shell
 attr-2.4.46-12.el7.x86_64.rpm
 epel-release-latest-7.noarch.rpm
 glusterfs-3.8.7-1.el7.x86_64.rpm
@@ -94,41 +94,41 @@ rpcbind-0.2.0-38.el7.x86_64.rpm
 sysstat-10.1.5-7.el7.x86_64.rpm
 tcp_wrappers-7.6-77.el7.x86_64.rpm
 userspace-rcu-0.7.16-1.el7.x86_64.rpm​
-</pre>
+```
 
 After the installation, use the following command to verify:
 
-<pre class="brush:plain;">
+```shell
 $ gluster --version
 
 glusterfs 3.8.7 built on Dec 14 2016 04:49:31
 Repository revision: git://git.gluster.com/glusterfs.git
 ...
-</pre>
+```
 
 # Install KVM/Libvirt package
 
 > Execute for each node.
 
-<pre class="brush:plain;">
+```shell
 $ sudo yum update
 $ sudo yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer
-</pre>
+```
 
 # Install KVM/Libvirt package
 
 > Execute for each node.
 
-<pre class="brush:plain;">
+```shell
 $ sudo systemctl start libvirtd
 $ sudo  systemctl enable libvirtd
 $ sudo systemctl start glusterd
 $ sudo systemctl enable glusterd
 $ sudo systemctl status glusterd
-</pre>
+```
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/glusterfs%20status.png" />
     <figcaption>Install KVM/libvirt packages</figcaption>
 </figure>
@@ -137,14 +137,14 @@ $ sudo systemctl status glusterd
 
 > Execute for each node.
 
-<pre class="brush:plain;">
+```shell
 $ sudo firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp --add-port=38465-38469/tcp --add-port=24007-24008/tcp --add-port=631/tcp --add-port=111/udp --add-port=963/udp --add-port=49152-49251/tcp  --permanent
 $ sudo firewall-cmd --zone=public --add-port=5900-5910/tcp  --permanent
 $ sudo firewall-cmd --reload
-</pre>
+```
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/firewall.png" />
     <figcaption>Setup firewall</figcaption>
 </figure>
@@ -155,12 +155,12 @@ $ sudo firewall-cmd --reload
 
 > Execute for each node.
 
-<pre class="brush:plain;">
+```shell
 $ sudo pvcreate /dev/sdb2
 $ sudo vgcreate vg_gluster /dev/sdb2
 $ sudo lvcreate -l 100%FREE -n brick-img vg_gluster
 $ sudo mkfs.xfs /dev/vg_gluster/brick-img
-</pre>
+```
 
 Note: alternatively you can use `lvcreate -L 1000G` switch if the
 known free space is exactly 1000G. However, if nodes were
@@ -168,7 +168,7 @@ partititioned differently, it is easier to use the `-l 100%FREE`
 (lower case "L") switch, which will take all the free space available to create a new logic volume `brick-img`. Snapshot below actually shows both commands, where `-L 1000G` failed with error `insufficient free space`.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/configure%20glusterfs.png"/>
     <figcaption>Create logic volume used by Glusterfs</figcaption>
 </figure>
@@ -177,27 +177,27 @@ After configure the brick, use `lsblk` command to verify it. The
 output should look similar to the following:
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/verify%20logical%20volume.png"/>
     <figcaption>Verify logical volume</figcaption>
 </figure>
 
 Then, mount the brick to a directory:
 
-<pre class="brush:plain;">
+```shell
 $ sudo mkdir –p /var/brick-img
 $ sudo  mount /dev/vg_gluster/brick-img /var/brick-img
-</pre>
+```
 
 To make this mount persistent, add the following line in the `/etc/fstab`:
 
-<pre class="brush:plain;">
+```shell
 /dev/vg_gluster/brick-img /var/brick-img            xfs defaults 0 0
-</pre>
+```
 
 Check the mount point:
 
-<pre class="brush:plain;">
+```shell
 $ sudo mount -a && mount
 sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
 proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
@@ -206,21 +206,21 @@ proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
 
 tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=52761800k,mode=700,uid=1000,gid=1000)
 /dev/mapper/vg_gluster-brick--img on /var/brick-img type xfs (rw,relatime,attr2,inode64,noquota)
-</pre>
+```
 
 
 ## Configure trusted pool
 
 > Execute on `cimp-node1`
 
-<pre class="brush:plain;">
+```shell
 $ gluster peer probe cimp-node2
 $ gluster peer probe cimp-node3
 $ gluster peer status
-</pre>
+```
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/gluster%20peer%20status.png"/>
     <figcaption>Configure trusted pool</figcaption>
 </figure>
@@ -229,14 +229,14 @@ $ gluster peer status
 
 > Execute on `cimp-node1`
 
-<pre class="brush:plain;">
+```shell
 $ sudo gluster volume create vol-1 replica 3 cimp-node1:/var/brick-img/running cimp-node2:/var/brick-img/running cimp-node3:/var/brick-img/running
 $ sudo gluster volume start vol-1
-</pre>
+```
 
 Confirm the Gluster volume running:
 
-<pre class="brush:plain;">
+```shell
 [root@cimp-node1 ~]# gluster volume info all
 Volume Name: vol-1
 Type: Replicate
@@ -253,7 +253,7 @@ Options Reconfigured:
 transport.address-family: inet
 performance.readdir-ahead: on
 nfs.disable: on
-</pre>
+```
 
 ## Use the GlusterFS volume as a shared storage pool
 
@@ -266,27 +266,27 @@ host name index, eg. `cimp-node2`.
 Create a new directory as a place holder of all the VM images and
 snapshots that requires GlusterFS as the backend storage pool.
 
-<pre class="brush:plain;">
+```shell
 $ sudo mkdir -p /var/images/running
-</pre>
+```
 
 Then, mount the GlusterFS volume to the new directory:
 
-<pre class="brush:plain;">
+```shell
 $ sudo mount -t glusterfs cimp-node1:/vol-1 /var/images/running
-</pre>
+```
 
 To make the mount persistent, the mount entry should be added to `/etc/fstab`:
 
-<pre class="brush:plain;">
+```shell
 cimp-node1:vol-1  /var/images/running glusterfs defaults,_netdev 0 0
-</pre>
+```
  
 Finally, enable `virt_use_fusefs`:
 
-<pre class="brush:plain;">
+```shell
 $ sudo setsebool -P virt_use_fusefs 1
-</pre>
+```
 
 ## Modify default logging configuration
 
@@ -295,11 +295,11 @@ $ sudo setsebool -P virt_use_fusefs 1
 Modify the following configuration at `/etc/logrotate.d/glusterfs` 
 to keep 4 weeks backlog only.
 
-<pre class="brush:plain;">
+```shell
 $ nano /etc/logrotate.d/glusterfs
 
 rotate 52 --> rotate 4
-</pre>
+```
 
 # Testing and troubleshooting
 
@@ -309,7 +309,7 @@ make sure it replicates automatically to all the other CIMP nodes.
 
 If the directory is read-only, it usually indicates the GlusterFS cluster is not formed either because of networking connection issues or firewall issue.
 
-<pre class="brush:plain;">
+```shell
 [root@cimp-node1 ~]# gluster peer status
 Number of Peers: 2
 
@@ -320,13 +320,13 @@ State: Peer in Cluster (Connected)
 Hostname: cimp-node3
 Uuid: 31c93891-45da-4162-a27a-63ac87903304
 State: Peer in Cluster (Connected)
-</pre>
+```
 
 If all the gluster peers are connected, but the problem is still persistent, you should look into the firewall rules to make sure the port required by the gluster operation is open.
 
 As a reference, the followings are the firewall ports enabled on my setup:
 
-<pre class="brush:plain;">
+```shell
 Chain IN_public_allow (1 references)
 
 target     prot opt source               destination
@@ -343,4 +343,4 @@ ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:nfs ctstat
 ACCEPT     udp  --  anywhere             anywhere             udp dpt:sunrpc ctstate NEW
 ACCEPT     udp  --  anywhere             anywhere             udp dpt:963 ctstate NEW
 ACCEPT     tcp  --  anywhere             anywhere             tcp dpts:49152:49251 ctstate NEW
-</pre>
+```

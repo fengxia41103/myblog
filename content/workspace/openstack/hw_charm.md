@@ -33,7 +33,7 @@ Along this thought, using ThinkAgile as an example we set off to model
 a **Hardware workload** in charms.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/hw%20workload%20stack%20diff.png" />
   <figcaption>New system stack with HW workload capability</figcaption>
 </figure>
@@ -67,7 +67,7 @@ servers are consisted of components such as RAID adapters and
 storages.
 
 <figure class="row">
-  <img class="img-responsive center-block"
+  <img class="img-responsive center"
        src="/images/hw%20solution%20tree.png" />
   <figcaption>HW solution hierarchy</figcaption>
 </figure>
@@ -103,7 +103,7 @@ them into one directory.
    with the deployment, but has no meaning in HW workload currently. 
 
 
-<pre class="brush:plain;">
+```shell
 .
 ├── deps
 │   ├── interface
@@ -134,7 +134,7 @@ them into one directory.
 │   └── charm-switch-meraki-ms425
 ├── README.md
 └── thinkagile.yaml
-</pre>
+```
 
 ## Environment variables
 
@@ -164,7 +164,7 @@ adequate. So typing `$ charm` will hang without giving you a clue of
 what is going wrong.
 
 To compile a charm, for exampe `charm-switch`:
-<pre class="brush:bash;">
+```shell
 $ cd $LAYER_PATH/charm-server
 $ charm build
 ....
@@ -172,7 +172,7 @@ build: Composing into /home/fengxia/workspace/hwcharm/dist
 build: Destination charm directory: /home/fengxia/workspace/hwcharm/dist/trusty/switch
 build: Processing layer: layer:basic
 build: Processing layer: switch
-</pre>
+```
 
 The `Destination charm directory` is the directory defined by
 environment variable `JUJU_REPOSITORY`.
@@ -182,7 +182,7 @@ environment variable `JUJU_REPOSITORY`.
 Defining a HW charm is like defining any other charms. The basic code
 structure is shown below (using `charm-switch` as an example):
 
-<pre class="brush:plain;">
+```shell
 .
 ├── config.yaml        <-- configuration options
 ├── icon.svg           <-- application icon
@@ -192,7 +192,7 @@ structure is shown below (using `charm-switch` as an example):
 │   └── switch.py      <-- application logics
 └── templates
     └── switch_config  <-- jinja2 template for configs
-</pre>
+```
 
 ## config.yaml
 
@@ -201,7 +201,7 @@ command and through Juju GUI. For example, here we define a few switch
 attributes: `size`, `speed`, `os`, `cooling-orientation`... Charm
 supports four `type`: boolean, string, int and float.
 
-<pre class="brush:yaml">
+```yaml
 options:
   size:
     type: string
@@ -227,14 +227,14 @@ options:
     type: string
     default: "http://10.0.240.43/server/configuration/"
     description: "Server configuration file URL"
-</pre>
+```
 
 ## metadata.yaml - relation hierarchy
 
 This file defines the charm name, and more importantly, its `relation`
 with other charms as in the `provides` and `requires` section.
 
-<pre class="brush:yaml;">
+```yaml
 name: switch
 summary: This is a switch charm.
 maintainer: Feng Xia <fxia1@lenovo.com>
@@ -247,7 +247,7 @@ provides:
     interface: rack-switch
   server:
     interface: switch-server
-</pre>
+```
 
 1. <span class="myhighlight">name</span>: `charm build` will create a
    folder named `switch` in `JUJU_REPOSITORY/trusty` directory. Can
@@ -273,12 +273,12 @@ Each charm is defined as a `layer` in charm's term. So here one can
   on Juju GUI all configs defined in both the parent and the children
   are visible.
 
-<pre class="brush:yaml;">
+```yaml
 repo: git@github.com:xyz/xyz.git
 includes:
   - 'layer:basic'
   - 'layer:other-charm
-</pre>
+```
 
 ## Interface - charm relations
 
@@ -288,12 +288,12 @@ interfaces in `metadata.yaml` earlier using `requires/provides`. In
 this section we will see how to define an interface. Using interface
 `rack-pdu` for example:
 
-<pre class="brush:plain;">
+```shell
 rack-pdu
 ├── interface.yaml
 ├── provides.py    <-- code for interface provider
 └── requires.py    <-- code for interface consumer
-</pre>
+```
 
 ## interface.yaml
 
@@ -301,12 +301,12 @@ rack-pdu
    used in `metadata.yaml`, not the folder name.
 2. repo: will generate a warning, but no harm.
 
-<pre class="brush:yaml;">
+```yaml
 name: rack-pdu
 summary: Rack to PDU interface
 version: 1
 repo: https://git.launchpad.net/whatever/
-</pre>
+```
 
 # Deploy charm
 
@@ -329,7 +329,7 @@ Setup a sandbox
 Deploy a single charm. Charm name is the folder name in
 `$JUJU_REPOSITORY/trusty`.
 
-<pre class="brush:plain;">
+```shell
 $ juju deploy $JUJU_REPOSITORY/trusty/[charm name]
 
 fengxia@local-charmdev:~/juju deploy $JUJU_REPOSITORY/trusty/pdu --series trusty --debug
@@ -344,7 +344,7 @@ fengxia@local-charmdev:~/juju deploy $JUJU_REPOSITORY/trusty/pdu --series trusty
 11:14:00 DEBUG httpbakery client.go:246 } -> error <nil>
 11:14:00 INFO  cmd cmd.go:129 Deploying charm "local:trusty/pdu-0".
 11:14:00 INFO  cmd supercommand.go:467 command finished
-</pre>
+```
 
 ## bundle
 
@@ -364,7 +364,7 @@ their relations.
 4. <span class="myhighlight">relations</span>: list of relations to
    connect charms.
 
-<pre class="brush:yaml;">
+```yaml
 machines:
   "1":
     constraints: "mem=2G"
@@ -389,7 +389,7 @@ relations:
   # rack to PDU relation
   - - "rack:pdu" # require first, app name:required interface name
     - "pdu:rack" # provide 2nd, app name:provides interface name
-</pre>
+```
 
 ### relations
 
@@ -402,28 +402,28 @@ general connection between two entities. In the bundle example above,
 we first define an interface in `$INTERFACE_PATH` called
 `rack-pdu`. Then in rack's `metadata.yaml` we define:
 
-<pre class="brush:yaml;">
+```yaml
 requires:
   pdu:                   <-- can be any name
     interface: rack-pdu  <-- must be a valid interface!
-</pre>
+```
 
 and correspondingly in pdu's `metadata.yaml` we define:
 
-<pre class="brush:yaml;">
+```yaml
 provides:
   rack:                  <-- can be any name
     interface: rack-pdu
-</pre>
+```
 
 Then in bundle, we define the followings:
 
-<pre class="brush:yaml;">
+```yaml
 relations:
   # rack to PDU relation
   - - "rack:pdu" # require first, charm name:required interface name
     - "pdu:rack" # provide 2nd, charm name:provides interface name
-</pre>
+```
 
 where:
 1. first one must be a `require` relation. Format `charm name:interface

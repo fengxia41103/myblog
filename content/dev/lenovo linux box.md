@@ -26,39 +26,40 @@ Most importantly, you need VPN.
 
     1. first password: your regular domain login pwd
     2. second one: OTP
-   
-    If works, you should see something like this:
-    <pre class="brush:plain;">
-    root@fengxia-lenovo:~# openconnect -u fxia1 webvpn.us.lenovo.com
-    POST https://webvpn.us.lenovo.com/
-    Attempting to connect to server 104.232.254.247:443
-    SSL negotiation with webvpn.us.lenovo.com
-    Connected to HTTPS on webvpn.us.lenovo.com
-    Got HTTP response: HTTP/1.0 302 Object Moved
-    GET https://webvpn.us.lenovo.com/
-    Attempting to connect to server 104.232.254.247:443
-    SSL negotiation with webvpn.us.lenovo.com
-    Connected to HTTPS on webvpn.us.lenovo.com
-    Got HTTP response: HTTP/1.0 302 Object Moved
-    GET https://webvpn.us.lenovo.com/+webvpn+/index.html
-    SSL negotiation with webvpn.us.lenovo.com
-    Connected to HTTPS on webvpn.us.lenovo.com
-    Please enter your username and password.
-    Password:
-    Password:
-    POST https://webvpn.us.lenovo.com/+webvpn+/index.html
-    Got CONNECT response: HTTP/1.1 200 OK
-    CSTP connected. DPD 30, Keepalive 30
-    Connected tun0 as 10.38.102.28, using SSL
-    Established DTLS connection (using GnuTLS). Ciphersuite (DTLS0.9)-(RSA)-(AES-256-CBC)-(SHA1).
-    </pre>
 
-    A list of VPN servers:
+If works, you should see something like this:
 
-       - `webvpn.cn.lenovo.com`   for China user
-       - `webvpn.hk.lenovo.com`   for AP region user
-       - `webvpn.us.lenovo.com`   for AG region user
-       - `webvpn.sk.lenovo.com`   for EMEA user​    
+```shell
+root@fengxia-lenovo:~# openconnect -u fxia1 webvpn.us.lenovo.com
+POST https://webvpn.us.lenovo.com/
+Attempting to connect to server 104.232.254.247:443
+SSL negotiation with webvpn.us.lenovo.com
+Connected to HTTPS on webvpn.us.lenovo.com
+Got HTTP response: HTTP/1.0 302 Object Moved
+GET https://webvpn.us.lenovo.com/
+Attempting to connect to server 104.232.254.247:443
+SSL negotiation with webvpn.us.lenovo.com
+Connected to HTTPS on webvpn.us.lenovo.com
+Got HTTP response: HTTP/1.0 302 Object Moved
+GET https://webvpn.us.lenovo.com/+webvpn+/index.html
+SSL negotiation with webvpn.us.lenovo.com
+Connected to HTTPS on webvpn.us.lenovo.com
+Please enter your username and password.
+Password:
+Password:
+POST https://webvpn.us.lenovo.com/+webvpn+/index.html
+Got CONNECT response: HTTP/1.1 200 OK
+CSTP connected. DPD 30, Keepalive 30
+Connected tun0 as 10.38.102.28, using SSL
+Established DTLS connection (using GnuTLS). Ciphersuite (DTLS0.9)-(RSA)-(AES-256-CBC)-(SHA1).
+```
+
+A list of VPN servers:
+
+   - `webvpn.cn.lenovo.com`   for China user
+   - `webvpn.hk.lenovo.com`   for AP region user
+   - `webvpn.us.lenovo.com`   for AG region user
+   - `webvpn.sk.lenovo.com`   for EMEA user​    
 
 # Email
 

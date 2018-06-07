@@ -26,7 +26,7 @@ it is available for further software installation.
 In the simplest term, one needs to answer these three questions:
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/baremetal%20provisioning%20intro.png" />
     <figcaption>Minimal setup for baremetal provisioning</figcaption>
 </figure>
@@ -64,7 +64,7 @@ From its [spec][5], we can derive a sequence diagram shown below:
 [5]: https://tools.ietf.org/html/rfc951
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/bootp%20sequence.png" />
     <figcaption>BOOTP sequence diagram</figcaption>
 </figure>
@@ -77,7 +77,7 @@ for its information, it will get the same result. Below shows the
 format of a BOOTP data packet. This same format in both directions.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/bootp%20packet%20format.png" />
     <figcaption>BOOTP data packet</figcaption>
 </figure>
@@ -88,7 +88,7 @@ used. Below shows a simplified DHCP cycles ([source][6]):
 [6]: http://facweb.cs.depaul.edu/cwhite/TDC%20365/BOOTP%20and%20DHCP.ppt
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/dhcp%20sequence.png" />
     <figcaption>Simplified DHCP sequence diagram</figcaption>
 </figure>
@@ -122,7 +122,7 @@ The [spec][4] has nice illustration of the data formats so I'll copy &
 paste them here for reference:
 
 TFTP data packet formats:
-<pre class="brush:plain;">
+```shell
    Type   Op #     Format without header
    ----   ----     --------------------
           2 bytes    string   1 byte     string   1 byte
@@ -141,10 +141,10 @@ TFTP data packet formats:
           ----------------------------------------
    ERROR | 05    |  ErrorCode |   ErrMsg   |   0  |
           ----------------------------------------
-</pre>
+```
 
 OP codes:
-<pre class="brush:plain;">
+```shell
 opcode  operation
 -----   ---------
   1     Read request (RRQ)
@@ -152,10 +152,10 @@ opcode  operation
   3     Data (DATA)
   4     Acknowledgment (ACK)
   5     Error (ERROR)
-</pre>
+```
 
 Error codes:
-<pre class="brush:plain;">
+```shell
 Value     Meaning
 -----     -------
 0         Not defined, see error message (if any).
@@ -166,7 +166,7 @@ Value     Meaning
 5         Unknown transfer ID.
 6         File already exists.
 7         No such user.
-</pre>
+```
 
 Additionally, server always listens to a pre-known port (known as **transfer
 identifier**) to begin with. In its first returning data packet, it can
@@ -176,7 +176,7 @@ client will then only accept packets bearing this port number.
 However, client has not such default. Since client is to initialize
 the contact, it's free to tell the server which port it uses.
 UDP header format:
-<pre class="brush:plain;">
+```shell
     0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -184,7 +184,7 @@ UDP header format:
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |            Length             |           Checksum            |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-</pre>
+```
 
 where the values of fields are:
 
@@ -196,7 +196,7 @@ where the values of fields are:
   here.)  Field contains zero if unused.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/tftp%20sequence.png" />
     <figcaption>TFTP sequence diagram</figcaption>
 </figure>
@@ -232,7 +232,7 @@ services to make a PXE working:
    services co-existed. It is up to the client to choose. According to
    the [spec][1], PXE 2.1 supports the following client architectures:
 
-    <pre class="brush:plain;">
+    ```shell
         Type   Architecture Name
         ----   -----------------
         0    Intel x86PC
@@ -245,7 +245,7 @@ services to make a PXE working:
         7    EFI BC
         8    EFI Xscale
         9    EFI x86-64
-    </pre>
+    ```
 
 3. **TFTP service**: The actual server that will serve the NBP file for
    client to download.
@@ -253,7 +253,7 @@ services to make a PXE working:
 [3]: https://tools.ietf.org/html/rfc4578
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/pxe%20boot%20sequence.png" />
     <figcaption>PXE boot sequence diagram</figcaption>
 </figure>
@@ -415,7 +415,7 @@ hardware? Two techniques come into play: **Split ROM** architecture and
 architecture.
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/pxe%20option%20rom%20split%20architecture.png" />
     <figcaption>PXE Option ROM split architecture</figcaption>
 </figure>
@@ -455,7 +455,7 @@ the [PXE Spec][1] has a nice diagram showing the details behind the scene
 from BIOS to a PXE:
 
 <figure class="row">
-    <img class="img-responsive center-block"
+    <img class="img-responsive center"
     src="/images/pxe%20IPL.svg" />
     <figcaption>PXE IPL (from power on to PXE)</figcaption>
 </figure>

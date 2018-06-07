@@ -12,9 +12,8 @@ a simple crawler using the [Python urllib](https://docs.python.org/2/library/url
 or building upon some more sophisticate tool like
 [Scrapy](http://doc.scrapy.org/en/latest/intro/tutorial.html).
 
-<figure class="row">
-  <img src="/images/regular_expressions.png"
-       class="img-responsive center-block"/>
+<figure class="s12 center">
+  <img src="/images/regular_expressions.png"/>
   <figcaption>Fun with regular expression</figcaption>
 </figure>
 
@@ -34,7 +33,7 @@ in multiprocessing mode. Target was a public site run
 by a small startup firm, which by rumor consisted mostly of
 developers, too. So we took this on almost like an arm race.
 
-<pre class="brush: python;">
+```python
 from urllib3 import PoolManager, Retry, Timeout, ProxyManager
 
 class PlainUtility():
@@ -57,7 +56,7 @@ class PlainUtility():
             return r.data
         else:
             self.logger.error('status %s' % r.status)
-</pre>
+```
 
 We kicked off the crawler in multiprocessing mode (between 200-300
 subprocesses) and sat back to watch data pouring in, until
@@ -106,7 +105,7 @@ First layer added to our stack is to use
 serve request. Further, because TOR service is a socket proxy, not a
 HTTP proxy, we installed another layer, [privoxy](https://www.privoxy.org/) in between to connect the two.
 
-<pre class="brush:python;">
+```python
 class TorUtility():
 
     def __init__(self):
@@ -163,7 +162,7 @@ class TorUtility():
     def current_ip(self):
         return self.request(self.ip_url)
 
-</pre>
+```
 
 Now, with the help of the TOR, we are browsing
 internet with *anonymity*. TOR maintains a pool
@@ -179,7 +178,7 @@ The key to config the TOR was to enable `ControlPort` and set up `HashedControlP
 The password would be used when sending request to the local TOR service such as renewing a connection. TOR
 service would in turn pass that on to TOR network on our behalf.
 
-<pre class="brush:bash;">
+```shell
 In /etc/tor/torrc:
 
 ## The port on which Tor will listen for local connections from Tor
@@ -189,7 +188,7 @@ ControlPort 9051
 ## If you enable the controlport, be sure to enable one of these
 ## authentication methods, to prevent attackers from accessing it.
 HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
-</pre>
+```
 
 Password is created using [TOR commandline](https://www.torproject.org/docs/tor-manual.html.en).
 
@@ -199,10 +198,10 @@ In `/etc/privoxy/config`, we set up a receiving port and a forwarding port.
 Forwarding port was set to 9050 as that's the default listening port by
 the TOR service.
 
-<pre class="brush:bash;">
+```shell
 listen-address  localhost:8118
 forward-socks5   /   127.0.0.1:9050
-</pre>
+```
 
 # Phantom
 
@@ -213,7 +212,7 @@ is no different from a real user.
 Tapped into our experience with automated web testing, [PhantomJS](http://phantomjs.org/)
 and [Selenium](http://www.seleniumhq.org/) were a natural choice for the job.
 
-<pre class="brush:python;">
+```python
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -252,7 +251,7 @@ class SeleniumUtility():
 
     def __del__(self):
         self.agent.quit()
-</pre>
+```
 
 At this point, the stack has blown quite a bit from a native Python urllib
 to now **Python+Java+Javascript** and a third party web proxy tool.
@@ -265,8 +264,7 @@ to that.
 
 After all the tweaks, the final design of my crawler comes down to this:
 
-<figure class="row">
-  <img class="center-block img-responsive"
-       src="/images/crawler.jpg"/>
+<figure class="s12 center">
+  <img src="/images/crawler.jpg"/>
   <figcaption>Crawler architecture</figcaption>
 </figure>

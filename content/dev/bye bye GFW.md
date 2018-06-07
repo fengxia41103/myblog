@@ -44,7 +44,7 @@ how to punch a hole and stay connected with life:
     2. Set up as shown below:
 
     <figure class="row">
-        <img class="img-responsive center-block"
+        <img class="img-responsive center"
              src="/images/firefox%20manual%20proxy.png" />
         <figcaption>Firefox manual proxy setup</figcaption>
     </figure>

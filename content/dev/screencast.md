@@ -88,6 +88,15 @@ ogv &rarr; mp4 conversion sometimes leaves the first few seconds with
 a terrible looking patchy greens. I suspect it is caused my switching
 desktop in spectrwm.
 
+An example from a demo:
+
+<video width="100%" height="100%" controls="controls">
+  <source src="/images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" />
+  Your browser does not support the video tag.
+  /* instead of the last line you could also add the flash player*/
+</video>
+
+
 # byzanz-record
 
 [man page][4]. Great for producing animated `gif`:

@@ -1,16 +1,17 @@
-Title: Switches
+Title: Network switch
 Date: 2018-06-08 14:00
 Tags: lenovo
 Slug: switches
 Author: Feng Xia
 
-Switch is a gold mine. You will need (ip, username, pwd) to get to it,
+[Network switch][5] is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is [pexpect][1], but even that gives you
 jinx sometimes when each switch can return you some random garbages
 once a while that makes `session.expect("your regex pattern")` to time
 out and you don't know why.
 
 [1]: https://pexpect.readthedocs.io/en/stable/
+[5]: https://en.wikipedia.org/wiki/Network_switch
 
 # enos vs. cnos
 

@@ -49,7 +49,7 @@ giving me a false impression and leading me astray, often with a
 deliberate intention of such false effect as the outcome! Isn't this
 trickery or what!?
 
-[2]: {filename}/irresponsible%20response.md
+[2]: {filename}/thoughts/irresponsible%20response.md
 
 I really enjoyed her words on history because she stated clearly the
 words she meant, and her stands on things she discussed. See, this is

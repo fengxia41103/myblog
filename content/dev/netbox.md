@@ -3,6 +3,7 @@ Date: 2018-06-06 14:00
 Tags: dev
 Slug: netbox
 Author: Feng Xia
+Status: Draft
 
 # Background
 

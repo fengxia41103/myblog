@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: euphemism
 Author: Feng Xia
 
-<figure class="col l6 m6 s12">
+<figure class="col l6 m6 s12 center">
   <img src="/images/euphemism.jpg"/>
 </figure>
 

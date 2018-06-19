@@ -204,6 +204,10 @@ NOTE: System dump exists in FLASH.
 RS G8272>
 ```
 
+Before we go further on how we are doing it, there is one important
+catch: **switch may not allow multiple SSH session**! Therefore, it's
+much better to share a session instead of each task opens its own.
+
 Using [`pexpect`][1] is tedious, rigid (as it expects a certain
 sequence in text output from remote device, so randomly shown alert
 messages are the worst offender.), but it works.
@@ -217,10 +221,14 @@ messages are the worst offender.), but it works.
 4. Send `en\n` to put this login session into a superuser mode. I
    think this is optional because the login user may already be
    configured to be a super user.
-5. Send `no console\n` to turn off alerts! This is
-   important. Otherwise switch will throw at you all kinds of
+5. For Enos, Send `no console\n` to turn off alerts. **This is
+   important**. Otherwise switch will throw at you all kinds of
    messages, such as topology changed, detected logged in from IP
    (actually that's you!). Anyway, just a best practice.
+
+I have to say that after so many tries, there isn't a reliable way to
+handle login session with confidence.
+
 
 # MAC table
 

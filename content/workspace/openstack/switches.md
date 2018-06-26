@@ -3,6 +3,7 @@ Date: 2018-06-08 14:00
 Tags: lenovo
 Slug: switches
 Author: Feng Xia
+Modified: 2018-06-25 14:10
 
 [Network switch][5] is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is [pexpect][1], but even that gives you
@@ -375,7 +376,7 @@ Each switch port represents an interface that has:
 
 Example output:
 
-```
+```shell
 RS G8272>show lldp port
 LLDP Port Info
 -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -389,7 +390,7 @@ Port    MAC address       MTU  PortEnabled AdminStatus RxChange TrapNotify
 
 Example output:
 
-```
+```shell
 LCTC-R1U37-SW>display lldp interface all
 Interface Name: Ethernet1/1
 --------------
@@ -438,4 +439,161 @@ Interface mgmt0
 Automatic policy provisioning is disabled on this interface
 ```
 
+# Setup LACP
+
+## ENOS
+
+Official application guide is [here][2].
+
+1. enter super user mode: `en`
+2. enter config terminal: `config terminal`
+3. key number can be any integer, default to the port number.
+
+```shell
+interface port <port>
+lacp mode active
+lacp key <key>
+vlag adminkey <key> enable
+```
+
+To examine LACP setup: `show lacp info`. Example output is, for
+example, when enabled port 17 (while server side is not configured
+yet, thus showing as _suspended_):
+
+```shell
+LCTC-R1U39-SW(config-if)#show lacp info
+port    mode    adminkey  operkey   selected   prio  aggr  trunk  status  minlinks
+----------------------------------------------------------------------------------
+1       off            1        1     no      32768    --     --    --        1
+17      active        17       17  suspended  32768    --     --   down       1
+```
+### link two ENOS switches
+
+You need two ports on each switch to enable VLAG.
+
+On each switch:
+
+1. set STP: `spanning­tree mode pvrst`
+2. remove existing ISL key if we are setting a new key: `no vlag isl adminkey`
+
+On each port on this switch:
+
+1. set trunk mode: `switchport mode trunk`
+2. set allowed vlan: `switchport trunk allow vlan <1,2,3,4...>`
+1. set LACP mode active: `lacp mode active`
+2. set LACP key: `lacp key <key>` (the same key for all ports).
+  1. to remove an existing key: `default lacp key`. **Note** that this
+     will succeed if you have removed ISL key first!
+
+Then on each switch:
+
+1. set to the same `vlag tier-id <id>`.
+2. set `vlag isl adminkey <key>`. This key **must be
+   the same** as the LACP keys.
+5. set `vlag hlthchk peer-ip <ip>` to the other switch's IP.
+6. enable vlag globally &larr; `vlag enable`
+
+Example from `show running-config`:
+
+```shell
+interface port 45
+
+        lacp mode active
+
+        lacp key 100
+
+!
+
+interface port 46
+
+        lacp mode active
+
+        lacp key 100
+
+vlag enable
+vlag tier-id 222
+vlag hlthchk peer-ip 10.240.43.54
+vlag isl adminkey 100
+```
+
+## CNOS
+
+## Link two ports on the same switch
+
+It's called `aggregation-group` (see [manual][1]). 
+
+First thing fir, enter so called "config" mode:
+
+```shell
+NOS version 10.3.2.0 LENOVO G8272, Wed Mar 29 12:20:39 PDT 2017
+LCTC-R1U37-SW>en
+LCTC-R1U37-SW#config
+Enter configuration commands, one per line.  End with CNTL/Z.
+LCTC-R1U37-SW(config)#
+```
+
+First, create and setup an `aggregation-group` (note that CLI uses `port-aggregation`!):
+
+1. Create aggregation group: `interface port-aggregation <1-4096>`.
+2. Set this LAG port to trunk mode: `bridge-port mode trunk`.
+3. Assign allowed vlans: `bridge-port trunk allowed
+   vlan <comma delimiter list>`, eg. `1-19,100-109,3999`.
+   
+Second, set up the port you want to add to this aggregation:
+
+1. Select port to config: `interface ethernet 1/<port>`, eg. `1/17`
+   to select port #17.
+3. Set port in trunk mode: `bridge-port mode trunk`
+2. Remove native vlan from port: `no bridge-port trunk native vlan`
+   &larr; this is super important. Otherwise, `aggregation-group <id>
+   mode on` will complain of `MISMATCH VLAN`.
+4. Assign proper list of allowed vlans: **use the same VLAN list as above!**
+4. Add interface to aggregation group: `aggregation-group <id> mode
+   active`.
+   
+To check status: `display interface port-aggregation <1-4096>` (or
+`display lacp internal info all`). Example output:
+
+```shell
+LCTC-R1U37-SW>display interface port-aggregation 1
+Interface po1
+  Hardware is AGGREGATE  Current HW addr: a48c.db34.b203
+  Physical:(not set)  Logical:(not set)
+  index 100001 metric 1 MTU 1500 Bandwidth 20000000 Kbit
+  Port Mode is trunk
+  <UP,BROADCAST,MULTICAST>
+  VRF Binding: Not bound
+  Members in this port-aggregation: 
+    Ethernet1/1, Ethernet1/17 <----------------------------- bond ports!
+  lacp suspend-individual  admin: Individual
+  Last clearing of "display interface" counters never 
+  30 seconds input rate 1127679 bits/sec, 140959 bytes/sec, 151 packets/sec 
+  30 seconds output rate 547359 bits/sec, 68419 bytes/sec, 325 packets/sec 
+  Load-Interval #2: 5 minute (300 seconds) 
+     input rate 9484929 bps, 1001 pps; output rate 16114524 bps, 1761 pps 
+  RX 
+    0 unicast packets  0 multicast packets  0 broadcast packets 
+    0 input packets  0 bytes 
+    0 jumbo packets  0 storm suppression packets 
+    0 giants  0 input error  0 short frame  0 overrun  0 underrun 
+    0 watchdog  0 if down drop 
+    0 input with dribble  0 input discard(includes ACL drops) 
+    0 Rx pause 
+  TX 
+    0 unicast packets  0 multicast packets  0 broadcast packets 
+    0 output packets  0 bytes 
+    0 jumbo packets 
+    0 output errors  0 collision  0 deferred  0 late collision 
+    0 lost carrier  0 no carrier  0 babble 
+    0 Tx pause 
+  0 interface resets 
+
+Automatic policy provisioning is disabled on this interface
+```
+
 Have fun w/ switches ~~
+
+
+[1]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-1.pdf
+
+[2]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8052.doc/G8052_AG_8-4_rev2.pdf

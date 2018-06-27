@@ -1323,14 +1323,18 @@ non-nil; otherwise prompts the user to enter the directory."
 
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 ;;set priority range from A to C with default A
-(setq org-highest-priority ?A)
-(setq org-lowest-priority ?C)
-(setq org-default-priority ?A)
+(setq org-highest-priority ?H)
+(setq org-lowest-priority ?L)
+(setq org-default-priority ?H)
+
+;; closing item
+(setq org-log-done 'time)
+(setq org-log-done 'note)
 
 ;;set colours for priorities
-(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
-                           (?B . (:foreground "LightSteelBlue"))
-                           (?C . (:foreground "OliveDrab"))))
+(setq org-priority-faces '((?H . (:foreground "#F00" :weight bold))
+                           (?M . (:foreground "LightSteelBlue"))
+                           (?L . (:foreground "OliveDrab"))))
 
 ;;open agenda in current window
 (setq org-agenda-window-setup (quote current-window))
@@ -1590,8 +1594,6 @@ non-nil; otherwise prompts the user to enter the directory."
       smtpmail-auth-credentials
       '(("mailae.lenovo.com" 587 "fxia1@lenovo.com" nil))
       smtpmail-default-smtp-server "mailae.lenovo.com"
-      smtpmail-smtp-server "mailae.lenovo.com"
-      smtpmail-smtp-service 587
       smtpmail-auth-credentials (expand-file-name "~/.authinfo")
       smtpmail-smtp-service 587
       starttls-extra-arguments nil
@@ -1606,11 +1608,11 @@ non-nil; otherwise prompts the user to enter the directory."
       mu4e-headers-include-related t
       mail-user-agent 'mu4e-user-agent
       mu4e-get-mail-command "mbsync -a"
-      mu4e-update-interval 300
+      mu4e-update-interval 300 ;; update every 5 min
       mu4e-attachment-dir  "~/Downloads"
       ;;set up queue for offline email
       ;;use mu mkdir  ~/Maildir/queue to set up first
-      smtpmail-queue-mail  nil
+      smtpmail-queue-mail  nil ;; queue sent mail
       smtpmail-queue-dir   "~/Maildir/queue/cur")
 (setq mu4e-html2text-command "html2text -utf8 -width 72")
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)

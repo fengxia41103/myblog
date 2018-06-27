@@ -518,7 +518,7 @@ vlag isl adminkey 100
 
 ## CNOS
 
-## Link two ports on the same switch
+### Link two ports on the same switch
 
 It's called `aggregation-group` (see [manual][1]). 
 
@@ -538,7 +538,8 @@ First, create and setup an `aggregation-group` (note that CLI uses `port-aggrega
 2. Set this LAG port to trunk mode: `bridge-port mode trunk`.
 3. Assign allowed vlans: `bridge-port trunk allowed
    vlan <comma delimiter list>`, eg. `1-19,100-109,3999`.
-   
+4. `exit` &larr; so you can select other things to config.
+
 Second, set up the port you want to add to this aggregation:
 
 1. Select port to config: `interface ethernet 1/<port>`, eg. `1/17`
@@ -547,10 +548,12 @@ Second, set up the port you want to add to this aggregation:
 2. Remove native vlan from port: `no bridge-port trunk native vlan`
    &larr; this is super important. Otherwise, `aggregation-group <id>
    mode on` will complain of `MISMATCH VLAN`.
-4. Assign proper list of allowed vlans: **use the same VLAN list as above!**
+4. Assign proper list of allowed vlans: `bridge-port trunk allow vlan
+   ...` &larr; **use the same VLAN list as above!**
 4. Add interface to aggregation group: `aggregation-group <id> mode
    active`.
-   
+5. `exit` &larr; so you can select another port to run this config.
+
 To check status: `display interface port-aggregation <1-4096>` (or
 `display lacp internal info all`). Example output:
 

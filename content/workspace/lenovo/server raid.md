@@ -10,7 +10,7 @@ to config disks into RAID.
 
 CLI manual is [here][1].
 
-```
+```shell
 usage:
     storage -config vol -option [-options] -target target_id
 options:
@@ -47,6 +47,7 @@ options:
 # View RAID controller
 
 First, get controller to use:
+
 ```shell
 system> storage -list controllers
 ctrl[9]				ServeRAID M1215(PCI Slot 9)	
@@ -55,16 +56,17 @@ ctrl[9]				ServeRAID M1215(PCI Slot 9)
 # View disks
 
 Second, list disks and select disks to use:
+
 ```shell
 system> storage -list drives
-disk[9-0]			Drive 0									
-disk[9-1]			Drive 1									
-disk[9-2]			Drive 2									
-disk[9-3]			Drive 3									
-disk[9-4]			Drive 4									
-disk[9-5]			Drive 5									
-disk[9-6]			Drive 6									
-disk[9-7]			Drive 7									
+disk[9-0]			Drive 0
+disk[9-1]			Drive 1
+disk[9-2]			Drive 2
+disk[9-3]			Drive 3
+disk[9-4]			Drive 4
+disk[9-5]			Drive 5
+disk[9-6]			Drive 6
+disk[9-7]			Drive 7
 system> storage -show disk[9-0] info
 Product Name: INTEL SSDSC2BA100G3 
 State: Online
@@ -92,7 +94,7 @@ Part No.:
 
 Third, config RAID. 
 
-# RAID 0
+## RAID 0
 
 will use the following configs:
 
@@ -100,6 +102,8 @@ will use the following configs:
 system> storage -config vol -add -R 1 -D disk[9-0]:disk[9-1] -N OS -w 1 -r 2 -i 0 -a 0 -d 0 -f 0 -target ctrl[9]
 ok
 ```
+
+## RAID 5
 
 To create RAID 5 with 6 disks:
 
@@ -115,8 +119,8 @@ To verify created RAID volumes:
 
 ```shell
 system> storage -list volumes
-vol[9-0]			OS									
-vol[9-1]			gluster									
+vol[9-0]			OS
+vol[9-1]			gluster
 system> storage -show vol[9-1] info
 Name: gluster
 Status: Optimal
@@ -134,8 +138,11 @@ Background Initialization: Enable
 # To reset RAID configs
 
 To wipe controller configs:
+
 ```shell
 system> storage -config ctrl -clrcfg -target ctrl[9]
 ```
+
+Have fun~~
 
 [1]: http://systemx.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.sysx.imm2.doc%2Fnn1iv_c_server_mgmt_local_storage.html

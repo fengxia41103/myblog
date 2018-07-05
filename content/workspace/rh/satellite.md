@@ -335,6 +335,36 @@ On client machine:
 6. Go to Satellite UI `hosts/content hosts`, you should see this
    machine's host name.
 
+# How contents are used
+
+It is actually quite confusing how to use it. I think the biggest
+pitfall is the mixed use of `product`, `sub`, `repo` on different
+page:
+
+1. For content view, you are to select by `repo` &larr; same product
+   can have two versions of the same "thing", eg. RedHat OpenStack
+   product can have two repos: `Red Hat OpenStack Platform 13 for RHEL
+   7 RPMs x86_64` (OSP 13), and `Red Hat OpenStack Platform 10 for
+   RHEL 7 RPMs x86_64 7Server` (OSP 10) at the same time! But from
+   OSP's POV, these two version are **not compatible**!
+2. For environment, you don't get to choose either content view or
+   repo. You get whatever content views give you, and each environment
+   can have N content views.
+3. For activation key, you are to add by `subsctiption`, and you can
+   **manually** enable/disable by repo. So following the OSP example above, if
+   you have added both OSP 10 and OSP 13 to the same content view,
+   then this key, which is a (content view, env) combo, will inherit
+   both repos. Well, you can then go in to disable one, but that is
+   hard to manage, don't you think. **It's better you separate them in
+   content view first.**
+
+<figure class="col s12 center">
+  <img class="img-responsive"
+       src="/images/rh%20satellite%20content%20hiearchy.png" />
+  <figcaption>Satellite content hierarchy</figcaption>
+</figure>
+
+
 # See also
 
 1. [`hammer` cheatsheet][30]

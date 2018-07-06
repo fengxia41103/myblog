@@ -1,6 +1,6 @@
 Title: China witness
 Date: 2018-07-02 13:54
-Tags: thought
+Tags: thoughts
 Slug: china witness
 Author: Feng Xia
 

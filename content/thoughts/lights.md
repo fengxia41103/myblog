@@ -5,6 +5,7 @@ Slug: lights
 Author: Feng Xia
 
 
+
 Walking out from a shadow after a morning gym session, my eyes were
 blinded, for a while, as if I was walking across a border between two
 worlds, a new life? a re-birth? It felt good, when the summer heat hit
@@ -41,7 +42,9 @@ nowhere to be found.
 Only lights, evening sunset, through the front door, filled room with
 a lullaby, 我最亲爱的人, 你在哪儿?
 
-<iframe width="100%" height="500"
-src="https://www.youtube.com/embed/VpZJNKi5EYs" frameborder="0"
-allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<video width="100%" height="100%" controls="controls">
+  <source src="/images/shifou.webm" type="video/webm" />
+  Your browser does not support the video tag.
+  /* instead of the last line you could also add the flash player*/
+</video>
 

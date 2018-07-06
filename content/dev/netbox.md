@@ -289,4 +289,4 @@ role = models.ForeignKey(
 
 [1]: {filename}/thoughts/capability%20model.md
 [2]: http://netbox.readthedocs.io/en/latest/
-[3]: {filename}/workspace/openstack/switches.md
+[3]: {filename}/workspace/lenovo/switches.md

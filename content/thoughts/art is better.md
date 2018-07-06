@@ -26,12 +26,12 @@ director's first film, [Whipsplash][2], was done in 3. What am I
 trying to say? is that whenever I was hearing the piano theme of La la
 land, I felt deeply moved as if the sweet and bitter memory came into
 life, dancing, starting at me, asking me to rejoin it and to relive
-it. **That, is magical.** I can't help thinking that with
-that much budget, how many technology projects I have witnessed or
-heard that had flushed down the drain, and the same
-budget that produced music, literature, choreography, film, that has
-touched your inner self with a timeless effect? Wouldn't that be a
-better way to spend and to invest? 
+it. **That, is magical.** I can't help thinking that with that much
+budget, how many technology projects I have witnessed or heard that
+had flushed down the drain, and the same budget that produced music,
+literature, choreography, film, that has touched your inner self with
+a timeless effect? Wouldn't that be a better way to spend and to
+invest?
 
 [2]: https://en.wikipedia.org/wiki/Whiplash_(2014_film)
 
@@ -44,10 +44,11 @@ colorful, soooo different from anything else in that room &mdash; even
 as an engineer I couldn't help wondering how he did it, or even
 perceived this, view!? You know, countless times at work I felt down
 not because how hard the task was, but how **thoughtless** sometimes I
-felt towards the problem, yes, it is just scary when you find yourself 
-having no mental picture of a path to even try, the feeling of a dead end.
-So here are these arts, speak to you with their own life, touches your
-soul, disturb an ebb that feel so remote, yet so real, so you.
+felt towards the problem, yes, it is just scary when you find yourself
+having no mental picture of a path to even try, the feeling of a dead
+end.  So here are these arts, speak to you with their own life,
+touches your soul, disturb an ebb that feel so remote, yet so real, so
+you.
 
 Maybe, art is a greater form than hi-tech, and being an artist who can
 write and produce these timeless pieces, is a greater mind. The piano

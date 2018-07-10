@@ -11,8 +11,6 @@ jinx sometimes when each switch can return you some random garbages
 once a while that makes `session.expect("your regex pattern")` to time
 out and you don't know why.
 
-[1]: https://pexpect.readthedocs.io/en/stable/
-[5]: https://en.wikipedia.org/wiki/Network_switch
 
 # enos vs. cnos
 
@@ -23,11 +21,6 @@ are all closely looked like Cisco's [IOS][2], but different.
 2. [ENOS commands][4] (Googling `enos manual` shows Lenovo switch
    types, eg. G8272. So I guess the term is applicable on a model basis.)
 
-[2]:     https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html
-
-[3]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8332.doc/CNOS_QS_10-3.pdf
-
-[4]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf
 
 Anyway, the biggest difference to be aware is that CNOS device uses `display`
 whicle ENOS device uses `show`. To get a list of commands available:
@@ -597,7 +590,9 @@ Automatic policy provisioning is disabled on this interface
 Have fun w/ switches ~~
 
 
-[1]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-1.pdf
 
-[2]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8052.doc/G8052_AG_8-4_rev2.pdf
-
+[1]: https://pexpect.readthedocs.io/en/stable/
+[2]:     https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html
+[3]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf
+[4]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf
+[5]: https://en.wikipedia.org/wiki/Network_switch

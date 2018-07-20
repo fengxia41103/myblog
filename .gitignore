@@ -1,6 +1,7 @@
 # emacs
 [.#]*
 *.autosave
+bower_components/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

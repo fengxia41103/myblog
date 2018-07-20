@@ -123,25 +123,28 @@ Author: Feng Xia
   </div>
 </div>
 
-* Key member of Lenovo Open Cloud project. Involved in key decision of
-  architecture and technology stack. Hands on experience with
-  RedHat subscription management, Satellite, Ansible Tower,
-  RHHI. Wrote scripts to automate deployment and 
-  configuration of Satellite.
+* Lenovo Open Cloud product. Team lead of its Platform and CICD.
+  Drove overall network design and architecture decision. Developed
+  pyhton scrips and playbooks to automate RHHI setup from baremetal.
+  Admin of RedHat subscription management, Satellite,
+  Ansible Tower and RHHI.
   
     - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
       RHEL 7 server cloud image, kvm
-    - **Notes**: [Config Lenovo switches ENOS & CNOS][16],
-      [Config RAID][17]
+    - **Sample writings**: [RH Satellite][19], [Config Lenovo switches ENOS & CNOS][16],
+      [Config Lenovo server to RAID][17] 
 
-* Improved Netbox DCIM to monitor network topology of Lenovo
-  switch and server by collecting live configurations and stats using
-  Ansible, Telnet, and server's BMC interface.
-  
+* Forked [Netbox][18] by Digital Ocean. Main developer to redesign its
+  model and add to its function so it is used as central management
+  tool in Lenovo labs.  New functions include scanning and draw live
+  network topology through collection of LLDP and MAC address table
+  data. Developed script to speak to Lenovo switch via telnet, BMC via
+  SSH, and server OS via Ansible.
+
     - **Tools**: Django, Celery, Redis, Postgresql, Ansible, pexpect
-    - **Demo**: [view for details][15]
-    
-* Designed architecture for _VX Installer_ project, which automates
+    - **Sample writings**: [Netbox design][15]
+
+* Designed architecture of _VX Installer_ product, which automates
   deployment and configuration of VMWare VSan infrastructure w/ Lenovo
   server.
 
@@ -154,7 +157,7 @@ Author: Feng Xia
   Lenovo application deployment.
     - **Tools**: Openstack, Ironic, Juju, MaaS, Canonical charms,
       Python, LXD, KVM, Virtualbox
-    - **Sample research**: [MAAS lab][5], Juju charm's [reactive
+    - **Sample writings**: [MAAS lab][5], Juju charm's [reactive
       framework][6], introduction of [Openstack Ironic][8] and
       comparison analysis of [Ironic vs. MAAS][9], technologies used
       in [baremetal provisioining][7]
@@ -220,7 +223,7 @@ Author: Feng Xia
   system. Authored the company’s “_2016-17 Technology Roadmap_”.
 
     * **Tools**: Python, ODOO, Buildbot
-    * **PPT**: [Linkage 2016-17 Technology Roadmap][4] (in Chinese)
+    * **Sample writings**: [Linkage 2016-17 Technology Roadmap][4] (in Chinese)
 
 
 <div class="my-resume-header" id="lean">
@@ -564,3 +567,5 @@ evaluation of ESB, BPM and database components.
 [15]: {filename}/dev/netbox.md
 [16]: {filename}/workspace/lenovo/switches.md
 [17]: {filename}/workspace/lenovo/server%20raid.md
+[18]: https://github.com/lenovo/netbox
+[19]: {filename}/workspace/rh/satellite.md

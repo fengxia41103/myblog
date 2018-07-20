@@ -76,28 +76,32 @@ that file. I followed the steps [here][3].
 
 [3]: https://wiki.archlinux.org/index.php/Isync#Step_.231:_Get_the_certificates
 
-1. Create a bash script, [`get_certs.sh`][4], to facilitate the command line:
-   ```shell
-   #!/bin/sh
-   SERVER=${1:-my.server.com}
-   PORT=${2:-993}
-   CERT_FOLDER=${3:-~/certs}
-   openssl s_client -connect ${SERVER}:${PORT} -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'| sed -ne '1,/-END CERTIFICATE-/p' > ${CERT_FOLDER}/${SERVER}.pem
-   ```
+1. Create a bash script, [`get_certs.sh`][4], to facilitate the
+   command line:
+   
+        ```shell
+        #!/bin/sh
+        SERVER=${1:-my.server.com}
+        PORT=${2:-993}
+        CERT_FOLDER=${3:-~/certs}
+        openssl s_client -connect ${SERVER}:${PORT} -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'| sed -ne '1,/-END CERTIFICATE-/p' > ${CERT_FOLDER}/${SERVER}.pem
+        ```
 
 [4]: {attach}/downloads/emacs/get_certs.sh
 
 2. Create a `~/.cert` directory, then run:
-   ```shell
-   sh get_certs.sh some.imap.server port ~/.cert/
-   eg:
-   sh get_certs.sh outlookae.<your company>.com 993 ~/.cert/
-   ```
+
+        ```shell
+        sh get_certs.sh some.imap.server port ~/.cert/
+        eg:
+        sh get_certs.sh outlookae.<your company>.com 993 ~/.cert/
+        ```
    
    Cert file will have a name `some.imap.server.pem`. Use that in
    `CertificateFile`.
    
 Alternatively, run the cmd manually:
+
 ```shell
 $ openssl s_client -connect <your server.com>:993
 

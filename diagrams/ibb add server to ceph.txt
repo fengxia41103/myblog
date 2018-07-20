@@ -1,0 +1,31 @@
+@startuml
+
+actor Admin
+participant Tower
+participant LXCA
+participant BMC
+participant Satellite
+participant Netbox
+participant Dashboard
+participant Server
+
+== PHASE 1: DISCOVERY ==
+Admin -> Netbox: activate a server by assigning it a rack position, or manually trigger a discovery
+Netbox -> Tower: scan_for_server(network x.x.x.x)
+Tower -> LXCA: scan_server(network x.x.x.x)
+LXCA -> BMC: discovery servers on network x.x.x.x
+LXCA -> Tower: discovered list[server(ip, uuid)]
+Tower -> Netbox: server_id = identify_this_server(server_ip, server_uuid)
+Tower -> Netbox: get_server_role(server_id)
+Tower -> Netbox: get_server_configs(server_id). This includes config pattern, OS to use, and such.
+
+== PHASE 2: CONFIG & PROVISIONING ==
+Tower -> LXCA: manage(server_id)
+Tower -> LXCA: config_server(server_id). This includes firmware, bios, etc..
+Tower -> LXCA: provision_os(server_id)
+
+== PHASE 3: HANDOFF TO ITS MANAGER ==
+Tower -> Dashboard: do_your_magic((ip, root, pwd))
+Dashboard -> Server: I am managing you now!
+
+@enduml

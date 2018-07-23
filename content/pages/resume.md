@@ -125,9 +125,9 @@ Modified: 2018-07-23 12:04
     <strong>System administration</strong>
   </td><td class="row">
     <span class="col l3 m4 s6">Salesforce</span>
-    <span class="col l3 m4 s6">Satellite</span>
-    <span class="col l3 m4 s6">RHHI</span>
-    <span class="col l3 m4 s6">Ansible Tower</span>
+    <span class="col l3 m4 s6">RedHat Satellite</span>
+    <span class="col l3 m4 s6">RedHat RHHI</span>
+    <span class="col l3 m4 s6">Redhat Ansible Tower</span>
     <span class="col l3 m4 s6">AWS</span>
   </td></tr>
 
@@ -170,14 +170,14 @@ Modified: 2018-07-23 12:04
 </div>
 
 * `Lenovo Open Cloud` product. Drove overall network
-  design. Developed pyhton scrips and playbooks to automate RH
-  Satellite deployment and configuration. Led deveopment of playbooks
+  design. Developed Python scrips and playbooks to automate RH
+  Satellite deployment and configuration. Led development of playbooks
   to automate RHHI deployment on baremetal.
 
     - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
-                 RHEL 7 server cloud image, kvm
+                 RHEL 7 server cloud image, KVM/virsh
     - **Sample writings**: 
-        1. [Config Lenovo switches ENOS & CNOS][16],
+        1. [ Config Lenovo switches ENOS & CNOS][16]
         2. [Config Lenovo server to RAID][17]
         3. [RH Satellite][19]
 
@@ -241,6 +241,7 @@ Modified: 2018-07-23 12:04
     - **Tools**: Django, Bootstrap, jQuery, Cordova, AngularJS, AWS,
                  uWSGI, Nginx
     - **Demo**: [view project Fashion for details][1]
+    - **Source**: [github][20]
 
 
 * `GKP` project. Designed a web reference tool assisting Chinese
@@ -248,11 +249,11 @@ Modified: 2018-07-23 12:04
   about 3,383 colleges and universities, 1,663 majors, two million
   historical exam records and 50,000 lines per minute live chat stream.
 
-    * **Tools**: Django, Bootstrap, Redis, Google map API, Baidu map
+    - **Tools**: Django, Bootstrap, Redis, Google map API, Baidu map
                  API, Baidu Echarts, TOR API, Privoxy, AWS, uWSGI,
                  Nginx
-    * **Demo**: [view project GKP for details][2]
-
+    - **Demo**: [view project GKP for details][2]
+    - **Source**: [github][21]
 
 * `Stock analysis` project. Developed an open-source web application that
   runs stock trading simulation with step-by-step transaction
@@ -261,14 +262,14 @@ Modified: 2018-07-23 12:04
   puts CPU intense computation to background processed by
   multithreading consumer.
 
-    * **Tools**: Django, Bootstrap, Redis, Highcharts, AWS, uWSGI, Nginx
-    * **Demo**: [view project Stock for details][3]
-
+    - **Tools**: Django, Bootstrap, Redis, Highcharts, AWS, uWSGI, Nginx
+    - **Demo**: [view project Stock for details][3]
+    - **Source**: [github][22]
 
 * `Linkage` project. Linkage Ltd. is a Chinese start-up software company
   specializing ODOO module development. Built ODOO’s continuous
   integration (CI) server. Customized ODOO inventory management
-  system. Authored the company’s “_2016-17 Technology Roadmap_”.
+  system. Authored the company’s “2016-17 Technology Roadmap”.
 
     * **Tools**: Python, ODOO, Buildbot
     * **Sample writings**: [Linkage 2016-17 Technology Roadmap][4] (in Chinese)
@@ -618,4 +619,6 @@ evaluation of ESB, BPM and database components.
 [17]: {filename}/workspace/lenovo/server%20raid.md
 [18]: https://github.com/lenovo/netbox
 [19]: {filename}/workspace/rh/satellite.md
-
+[20]: https://github.com/fengxia41103/fashion
+[21]: https://github.com/fengxia41103/gkp
+[22]: https://github.com/fengxia41103/jk

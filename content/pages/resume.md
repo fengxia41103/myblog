@@ -6,13 +6,13 @@ Author: Feng Xia
 
 ## Summary
 
-* Passionate Python developer for over 15 years.
-* Love building Django apps.
+* Python developer since 1998.
+* Can deliver any web application from napkin design to Django POC in 72 hours.
 * Full-stack capable.
 * Welcome challenging problem.
 * Have a high standard in work quality.
-* Salesforce advocate.
-* <span class="myhighlight">Also available in</span>:
+* SalesForce advocate.
+* **Also available in**:
 <a href="https://www.linkedin.com/in/fengxia41103">
   <i class="fa fa-linkedin-square"></i>
   LinkedIn
@@ -29,75 +29,120 @@ Author: Feng Xia
 ## Skills
 
 <table class="bordered striped">
+  
   <tr><td>
     <strong>Software development</strong>
   </td><td class="row">
-      <span class="col l3 m4 s6">Python</span>
-      <span class="col l3 m4 s6">Django</span>
-      <span class="col l3 m4 s6">Bootstrap</span>
-      <span class="col l3 m4 s6">CSS, JS, HTML</span>
-      <span class="col l3 m4 s6">jQuery</span>
-      <span class="col l3 m4 s6">ODOO</span>
-      <span class="col l3 m4 s6">SQL</span>
-      <span class="col l3 m4 s6">Salesforce APEX</span>
-      <span class="col l3 m4 s6">Cordova</span>
-      <span class="col l3 m4 s6">Google app engine</span>
-      <span class="col l3 m4 s6">C</span>
-      <span class="col l3 m4 s6">Git</span>
-      <span class="col l3 m4 s6">SVN</span>
-      <span class="col l3 m4 s6">Bower</span>
-      <span class="col l3 m4 s6">Yeoman</span>
-      <span class="col l3 m4 s6">Jira</span>
+    <span class="col l3 m4 s6">Python</span>
+    <span class="col l3 m4 s6">C</span>
+    <span class="col l3 m4 s6">ODOO/OpenERP</span>
+    <span class="col l3 m4 s6">SQL</span>
+    <span class="col l3 m4 s6">Salesforce APEX</span>
+    <span class="col l3 m4 s6">Cordova</span>
+    <span class="col l3 m4 s6">Google app engine</span>
+    <span class="col l3 m4 s6">Git</span>
+    <span class="col l3 m4 s6">SVN</span>
+    <span class="col l3 m4 s6">Bower</span>
+    <span class="col l3 m4 s6">Yeoman</span>
+    <span class="col l3 m4 s6">Jira</span>
   </td></tr>
+  
+  <tr><td>
+    <strong>Web application</strong>
+  </td><td class="row">
+    <span class="col l3 m4 s6">Django</span>
+    <span class="col l3 m4 s6">Ansible</span>
+    <span class="col l3 m4 s6">ReactJS</span>
+    <span class="col l3 m4 s6">AngularJS</span>
+    <span class="col l3 m4 s6">jQuery</span>
+    <span class="col l3 m4 s6">Materialize</span>
+    <span class="col l3 m4 s6">Bootstrap</span>
+    <span class="col l3 m4 s6">Jinja2</span>
+    <span class="col l3 m4 s6">Pelican</span>
+  </td>
+  </tr>
+  
+  <tr><td>
+    <strong>Data visualization</strong>
+  </td><td class="row">
+    <span class="col l3 m4 s6">Graphviz</span>
+    <span class="col l3 m4 s6">Cytoscape.js</span>
+    <span class="col l3 m4 s6">netjsongraph.js</span>
+    <span class="col l3 m4 s6">D3plus</span>
+    <span class="col l3 m4 s6">Highchart</span>
+    <span class="col l3 m4 s6">Google chart</span>
+    <span class="col l3 m4 s6">MetricsGraphics</span>
+    <span class="col l3 m4 s6">chart.js</span>
+    <span class="col l3 m4 s6">Plotly.js</span>
+    <span class="col l3 m4 s6">dygraphs</span>
+  </td>
+  </tr>
 
   <tr><td>
     <strong>QA</strong>
   </td><td class="row">
-      <span class="col l3 m4 s6">Selenium</span>
-      <span class="col l3 m4 s6">HP LoadRunner</span>
-      <span class="col l3 m4 s6">SonarQube</span>
-      <span class="col l3 m4 s6">Cucumber</span>
-      <span class="col l3 m4 s6">Redmine</span>
-      <span class="col l3 m4 s6">Bugzilla</span>
+    <span class="col l3 m4 s6">Selenium</span>
+    <span class="col l3 m4 s6">HP LoadRunner</span>
+    <span class="col l3 m4 s6">SonarQube</span>
+    <span class="col l3 m4 s6">Cucumber</span>
+    <span class="col l3 m4 s6">Redmine</span>
+    <span class="col l3 m4 s6">Bugzilla</span>
+  </td></tr>
+
+  <tr><td>
+    <strong>System design</strong>
+  </td><td class="row">
+    <span class="col l3 m4 s6">pencil & paper</span>
+    <span class="col l3 m4 s6">UML</span>
+    <span class="col l3 m4 s6">PlantUML</span>
+    <span class="col l3 m4 s6">Dia</span>
+    <span class="col l3 m4 s6">Visio</span>
   </td></tr>
 
   <tr><td>
     <strong>System deployment</strong>
   </td><td class="row">
-      <span class="col l3 m4 s6">Amazon EC2,RDS,S3</span>
-      <span class="col l3 m4 s6">uWSGI</span>
-      <span class="col l3 m4 s6">Nginx</span>
-      <span class="col l3 m4 s6">Apache</span>
-      <span class="col l3 m4 s6">Builtbot</span>
-      <span class="col l3 m4 s6">Fabric</span>
+    <span class="col l3 m4 s6">Amazon EC2,RDS,S3</span>
+    <span class="col l3 m4 s6">uWSGI</span>
+    <span class="col l3 m4 s6">Nginx</span>
+    <span class="col l3 m4 s6">Apache</span>
+    <span class="col l3 m4 s6">Builtbot</span>
+    <span class="col l3 m4 s6">Fabric</span>
   </td></tr>
 
   <tr><td>
     <strong>System monitoring</strong>
   </td><td class="row">
-      <span class="col l3 m4 s6">InfluxDB</span>
-      <span class="col l3 m4 s6">Grafana</span>
-      <span class="col l3 m4 s6">Cacti</span>
-      <span class="col l3 m4 s6">Nagios</span>
+    <span class="col l3 m4 s6">ELK stack</span>
+    <span class="col l3 m4 s6">InfluxDB</span>
+    <span class="col l3 m4 s6">Grafana</span>
+    <span class="col l3 m4 s6">Cacti</span>
+    <span class="col l3 m4 s6">Nagios</span>
   </td></tr>
 
   <tr><td>
     <strong>System administration</strong>
   </td><td class="row">
-      <span class="col l3 m4 s6">Salesforce</span>
-      <span class="col l3 m4 s6">AWS</span>
-      <span class="col l3 m4 s6">Ubuntu Spannux</span>
+    <span class="col l3 m4 s6">Salesforce</span>
+    <span class="col l3 m4 s6">Satellite</span>
+    <span class="col l3 m4 s6">RHHI</span>
+    <span class="col l3 m4 s6">Ansible Tower</span>
+    <span class="col l3 m4 s6">AWS</span>
   </td></tr>
 
   <tr><td>
-    <strong>Administrative tasks</strong>
+    <strong>Documentation</strong>
   </td><td class="row">
-      <span class="col l3 m4 s6">LaTex</span>
-      <span class="col l3 m4 s6">Word</span>
-      <span class="col l3 m4 s6">Powerpoint</span>
-      <span class="col l3 m4 s6">Excel</span>
-      <span class="col l3 m4 s6">MS Project</span>
-      <span class="col l3 m4 s6">Taskjuggler</span>
+    <span class="col l3 m4 s6">LaTex</span>
+    <span class="col l3 m4 s6">Markdown</span>
+    <span class="col l3 m4 s6">reveal.js</span>
+    <span class="col l3 m4 s6">Confluence</span>
+    <span class="col l3 m4 s6">Org mode</span>
+    <span class="col l3 m4 s6">Word</span>
+    <span class="col l3 m4 s6">Powerpoint</span>
+    <span class="col l3 m4 s6">Excel</span>
+    <span class="col l3 m4 s6">MS Project</span>
+    <span class="col l3 m4 s6">Taskjuggler</span>
   </td></tr>
 </table>
 
@@ -123,23 +168,27 @@ Author: Feng Xia
   </div>
 </div>
 
+* Admin knowledge of RedHat subscription management, Satellite,
+  Ansible Tower and RHHI.
+
+    - **Sample writings**: [RH Satellite][19]
+    
 * Lenovo Open Cloud product. Team lead of its Platform and CICD.
   Drove overall network design and architecture decision. Developed
   pyhton scrips and playbooks to automate RHHI setup from baremetal.
-  Admin of RedHat subscription management, Satellite,
-  Ansible Tower and RHHI.
   
     - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
       RHEL 7 server cloud image, kvm
-    - **Sample writings**: [RH Satellite][19], [Config Lenovo switches ENOS & CNOS][16],
+    - **Sample writings**: [Config Lenovo switches ENOS & CNOS][16],
       [Config Lenovo server to RAID][17] 
 
-* Forked [Netbox][18] by Digital Ocean. Main developer to redesign its
-  model and add to its function so it is used as central management
-  tool in Lenovo labs.  New functions include scanning and draw live
-  network topology through collection of LLDP and MAC address table
-  data. Developed script to speak to Lenovo switch via telnet, BMC via
-  SSH, and server OS via Ansible.
+* Forked [Netbox][18] by Digital Ocean. Sole developer to retrofit its
+  models and add function so that it was used as central management
+  tool of Lenovo LCTC labs.  Extend Netbox architecture to include
+  Redis for async task. Script switch and server scanning to pull a
+  list of information, such as LLDP neighbors and switch MAC address
+  table, and draw topology of server-switch & switch-switch physical
+  connections. Scripts in [github][18].
 
     - **Tools**: Django, Celery, Redis, Postgresql, Ansible, pexpect
     - **Sample writings**: [Netbox design][15]
@@ -569,3 +618,4 @@ evaluation of ESB, BPM and database components.
 [17]: {filename}/workspace/lenovo/server%20raid.md
 [18]: https://github.com/lenovo/netbox
 [19]: {filename}/workspace/rh/satellite.md
+

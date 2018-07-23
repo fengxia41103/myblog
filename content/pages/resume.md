@@ -3,6 +3,7 @@ Date: 2017-01-01 12:00
 Tags: resume
 Slug: resume
 Author: Feng Xia
+Modified: 2018-07-23 12:04
 
 ## Summary
 
@@ -168,48 +169,46 @@ Author: Feng Xia
   </div>
 </div>
 
-* Admin knowledge of RedHat subscription management, Satellite,
-  Ansible Tower and RHHI.
+* `Lenovo Open Cloud` product. Drove overall network
+  design. Developed pyhton scrips and playbooks to automate RH
+  Satellite deployment and configuration. Led deveopment of playbooks
+  to automate RHHI deployment on baremetal.
 
-    - **Sample writings**: [RH Satellite][19]
-    
-* Lenovo Open Cloud product. Team lead of its Platform and CICD.
-  Drove overall network design and architecture decision. Developed
-  pyhton scrips and playbooks to automate RHHI setup from baremetal.
-  
     - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
-      RHEL 7 server cloud image, kvm
-    - **Sample writings**: [Config Lenovo switches ENOS & CNOS][16],
-      [Config Lenovo server to RAID][17] 
+                 RHEL 7 server cloud image, kvm
+    - **Sample writings**: 
+        1. [Config Lenovo switches ENOS & CNOS][16],
+        2. [Config Lenovo server to RAID][17]
+        3. [RH Satellite][19]
 
-* Forked [Netbox][18] by Digital Ocean. Sole developer to retrofit its
-  models and add function so that it was used as central management
-  tool of Lenovo LCTC labs.  Extend Netbox architecture to include
-  Redis for async task. Script switch and server scanning to pull a
-  list of information, such as LLDP neighbors and switch MAC address
-  table, and draw topology of server-switch & switch-switch physical
-  connections. Scripts in [github][18].
+* `Lenovo Open Cloud` product.  Forked [Netbox][18] by Digital
+  Ocean. Retrofit its models and added functions to make it data
+  center planning and orchestration tool.  Extended Netbox
+  architecture to include Redis for async task. Scripted switch and
+  server scanning to draw topology of server-switch & switch-switch
+  physical connections. Source code in [github][18].
 
     - **Tools**: Django, Celery, Redis, Postgresql, Ansible, pexpect
     - **Sample writings**: [Netbox design][15]
 
-* Designed architecture of _VX Installer_ product, which automates
-  deployment and configuration of VMWare VSan infrastructure w/ Lenovo
-  server.
+* `VX Installer` product. Designed system architecture. Coded Django
+  backend and RESTful API.
 
-    - **Tools**: Django, Celery, Redis, Ansible, Canonical charms, Docker
+    - **Tools**: Django, Tastypie, Celery, Redis, Ansible, Canonical charms, Docker
     - **PPT**: Architecture of [VX Installer][14]
     
-* Led _Workload Solution_ project evaluating service orchestration
-  technologies and developing Lenovo's core competence in automating
-  rack configuration, baremetal provisioning, Openstack and
-  Lenovo application deployment.
+* `Workload Solution Store` project. Evaluated service orchestration
+  technologies and developed Lenovo's core competence in automating
+  baremetal provisioning.
+
     - **Tools**: Openstack, Ironic, Juju, MaaS, Canonical charms,
-      Python, LXD, KVM, Virtualbox
-    - **Sample writings**: [MAAS lab][5], Juju charm's [reactive
-      framework][6], introduction of [Openstack Ironic][8] and
-      comparison analysis of [Ironic vs. MAAS][9], technologies used
-      in [baremetal provisioining][7]
+                 Python, LXD, KVM, Virtualbox
+    - **Sample writings**: 
+        1. [MAAS lab][5]
+        2. Juju charm's [reactive framework][6]
+        3. introduction of [Openstack Ironic][8]
+        4. comparison analysis of [Ironic vs. MAAS][9]
+        5. technologies used in [baremetal provisioining][7]
 
 
 <div class="my-resume-header" id="py-consulting">
@@ -233,29 +232,29 @@ Author: Feng Xia
 </div>
 
 
-* __Wei Fashion Group project__. Wei Fashion Group is an international
+* `Wei Fashion Group` project. Wei Fashion Group is an international
   fashion product trading company. Designed and built an inventory
   management and order tracking system in four weeks. Developed
   Android prototype in two weeks. Played a key role in setting up its
   Shenzhen subsidiary. Invited as feature speaker by "_2016 Jiuzhou
   e-Commerce Convention_" on Dec 8th, 2015, Shenzhen, China.
-    - **Tools**: Django, Bootstrap,
-      jQuery, Cordova, AngularJS, AWS, uWSGI, Nginx
+    - **Tools**: Django, Bootstrap, jQuery, Cordova, AngularJS, AWS,
+                 uWSGI, Nginx
     - **Demo**: [view project Fashion for details][1]
 
 
-* __GKP project__. Designed a web reference tool assisting Chinese
+* `GKP` project. Designed a web reference tool assisting Chinese
   high school graduate selecting domestic colleges. Featuring information
   about 3,383 colleges and universities, 1,663 majors, two million
   historical exam records and 50,000 lines per minute live chat stream.
 
-    * **Tools**: Django, Bootstrap,
-      Redis, Google map API, Baidu map API, Baidu Echarts, TOR API,
-      Privoxy, AWS, uWSGI, Nginx
+    * **Tools**: Django, Bootstrap, Redis, Google map API, Baidu map
+                 API, Baidu Echarts, TOR API, Privoxy, AWS, uWSGI,
+                 Nginx
     * **Demo**: [view project GKP for details][2]
 
 
-* __Stock project__. Developed an open-source web application that
+* `Stock analysis` project. Developed an open-source web application that
   runs stock trading simulation with step-by-step transaction
   trace. User can test strategy and view comparisons with actual
   S&P500 daily data and China’s S&P500 equivalent. Asynchronous design
@@ -266,7 +265,7 @@ Author: Feng Xia
     * **Demo**: [view project Stock for details][3]
 
 
-* __Linkage project__. Linkage Ltd. is a Chinese start-up software company
+* `Linkage` project. Linkage Ltd. is a Chinese start-up software company
   specializing ODOO module development. Built ODOO’s continuous
   integration (CI) server. Customized ODOO inventory management
   system. Authored the company’s “_2016-17 Technology Roadmap_”.
@@ -301,15 +300,16 @@ Author: Feng Xia
   systems.
 
     * **Tools**: Python, ODOO, Buildbot
-    * **Reports (in Chinese)**: [晋能集团数据中心建设分析 – 规模和成本][11],
-    [晋能集团云平台建设和使用咨询报告][12].
+    * **Reports (in Chinese)**: 
+        1. [晋能集团数据中心建设分析 – 规模和成本][11]
+        2. [晋能集团云平台建设和使用咨询报告][12]
 
 
 * Led system architecture design based on SOA technologies. Managed
 evaluation of ESB, BPM and database components.
 
-    * **Tools**: IBM Rational, MySQL, Java Spring Struts Hibernate, 
-      JBoss ESB, Mule ESB, Apache ServiceMix, Activiti BPM
+    * **Tools**: IBM Rational, MySQL, Java Spring Struts Hibernate,
+                 JBoss ESB, Mule ESB, Apache ServiceMix, Activiti BPM
     * **Reports (in Chinese)**: [数据库技术和系统测试简介][13]
 
 * Supervised two vendor invitation-for-bids. Responsible for
@@ -379,7 +379,7 @@ evaluation of ESB, BPM and database components.
   Cordova, HTML5 and jQuery Mobile.
 
     * **Tools**: Cordova, HTML5, jQuery mobile, Google map API, AT&T
-      yellow page API
+                 yellow page API
 
 * Built user-acceptance-test(UAT) library using Python-Selenium,
   reducing one UAT cycle from 40-man-hour to less than 2 hours.
@@ -411,7 +411,7 @@ evaluation of ESB, BPM and database components.
   purchase of a software system. Managed system implementation,
   customization, training and administration.
 
-    * **Tools</span>: Word, Powerpoint, Project
+    * **Tools**: Word, Powerpoint, Project
 
 * Setup Business Analysis team from ground up. Created report
   templates and analysis framework. Analysis results were the basis of

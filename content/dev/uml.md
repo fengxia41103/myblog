@@ -4,6 +4,12 @@ Tags: dev
 Slug: uml
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="/images/practical%20uml.png"
+       class="responsive-image">
+</figure>
+
+
 Finally [a book on UML][1] that makes sense to me (and is short enough
 so I was willing to read it, in one morning). All contents can be
 divided into two milestones:
@@ -12,7 +18,7 @@ divided into two milestones:
 
 ## problems
 
-Any description of the what the client is trying to do or what they
+Any description of what the client is trying to do or what they
 want. There is no restriction at all. What comes out of it are:
 
 1. requirement

@@ -1,11 +1,13 @@
 @startuml
 
+autonumber "<font color=red><b>Message 00:"
+
 actor Launchpad
-participant Tower
-participant LXCA
+participant "Runtime Service" as Tower
+participant "OS Deployment Service" as LXCA
 participant BMC
-participant Satellite
-participant Netbox
+participant "Software Repository Service" as Satellite
+participant "Inventory Service" as Netbox
 
 == PHASE 1: DISCOVERY ==
 LXCA -> BMC: discovery servers on network x.x.x.x

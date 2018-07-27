@@ -471,7 +471,9 @@ On each switch:
 
 On each port on this switch:
 
+1. select port: `interface port <1-52>`
 1. set trunk mode: `switchport mode trunk`
+1. set native vlan: `switchport trunk native vlan <1-4094>`
 2. set allowed vlan: `switchport trunk allow vlan <1,2,3,4...>`
 1. set LACP mode active: `lacp mode active`
 2. set LACP key: `lacp key <key>` (the same key for all ports).

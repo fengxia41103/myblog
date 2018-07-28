@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: say no
 Author: Feng Xia
 
-<figure class="col l6 m6 s12 center-align">
+<figure class="col l6 m6 s12 center">
   <img src="/images/funny/weekend%20life.png"/>
 </figure>
 

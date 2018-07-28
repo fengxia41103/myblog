@@ -1,7 +1,7 @@
 Title: Prototype needed
 Date: 2016-09-01 15:10
 Category: thoughts
-Tags: thoughts, dev, design
+Tags: dev, design
 Slug: thoughts-on-prototype
 Author: Feng Xia
 Summary: Building a prototype is a must-have for any new project
@@ -10,9 +10,9 @@ Summary: Building a prototype is a must-have for any new project
     common platform for client and developers to communicate while they
     are looking at the same thing.
 
-<figure class="col l6 m6 s12">
+<figure class="col l6 m6 s12 center">
   <img src="/images/20150930_transporter.png"
-       class="img-responsive center"/>
+       class="img-responsive"/>
 </figure>
 
 I believe in the power of prototypes.  That is to say, I want to see

@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: moment of quietness
 Author: Feng Xia
 
-<figure class="col s12 center-align">
+<figure class="col s12 center">
   <img src="/images/buliaoqing.jpeg" style="width:50vw;"/>
 </figure>
 

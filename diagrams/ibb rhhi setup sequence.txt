@@ -3,7 +3,8 @@
 autonumber "<font color=red><b>Message 00:"
 
 actor Launchpad
-participant "Runtime Service" as Tower
+participant "Automation Service" as Tower
+participant "Runtime Service" as RHHI
 participant "OS Deployment Service" as LXCA
 participant BMC
 participant "Software Repository Service" as Satellite
@@ -19,9 +20,11 @@ Tower -> Netbox: get_server_configs(server_id). This includes config pattern, OS
 == PHASE 2: CONFIG & PROVISIONING ==
 Tower -> LXCA: manage(server_id)
 Tower -> LXCA: config_server(server_id). This includes firmware, bios, etc..
+
+== PHASE 3: OS ==
 Tower -> LXCA: provision_os(server_id)
 
-== PHASE 3: HANDOFF TO ITS MANAGER ==
+== PHASE 4: HANDOFF TO ITS MANAGER ==
 Tower -> Tower: deploy RHV
 Tower -> Tower: config RHV
 Tower -> Tower: validate RHV

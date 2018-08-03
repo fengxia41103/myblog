@@ -3,7 +3,7 @@ Date: 2018-06-06 14:00
 Tags: dev, lenovo
 Slug: netbox
 Author: Feng Xia
-
+Modified: 2018-08-01 21:50
 
 [Netbox][2] is a nice level 1 tool (for levels, see [capability model][1]).
 But we need more. Managing a lab or a rack is more than level 1. On

@@ -8,62 +8,61 @@ Author: Feng Xia
   <img src="/images/diamond.jpg"/>
 </figure>
 
-I have been doing a lot of thinking recently, about human
+I  have   been  doing  a   lot  of  thinking  recently,   about  human
 society. There are multiple themes in my life and in my thinkings that
-I find them interesting, disturbing, annoying, and saddening. The
-more books I'm reading about historical events and views, the more I
-question how a society, or any society, can survive and develop, and
-whether there is a pattern (or lesson to learn from) that propels
+I find them interesting, disturbing, annoying, and saddening. The more
+books  I'm reading  about  historical  events and  views,  the more  I
+question how a  society, or any society, can survive  and develop, and
+whether there  is a  pattern (or  lesson to  learn from)  that propels
 their initiation, growth, and declination?
 
 I don't know. Human society is messy. That's the only word I can think
-of. Listening to NPR makes this feeling stronger all the time &mdash;
-I actually feel sorry for government officials, politicians, and
-advocates who are either in a position to _serve_ the people, and to
-help _all_. It's an illusion that, in my opinion, both wrong and
+of. Listening to NPR makes this  feeling stronger all the time &mdash;
+I  actually  feel sorry  for  government  officials, politicians,  and
+advocates who are  either in a position to _serve_  the people, and to
+help  _all_. It's  an illusion  that, in  my opinion,  both wrong  and
 impossible. I'm not sure how much they really believe in what they are
 saying and preaching, and they are set out to do. Chances are, I would
-dare to bet, they are feeling the conflicts within themselves all the
+dare to bet, they are feeling  the conflicts within themselves all the
 time, that they are not devoted as they show to their cause, but then,
-they are in a position that they have to pretend, not necessarily for
-fame and glory, but for their survival and reconciliation with
+they are in a position that  they have to pretend, not necessarily for
+fame  and  glory,  but  for their  survival  and  reconciliation  with
 themselves.
 
 # tested
 
-This is sad. Reading the book [Auschwitz][1] made me wonder how deep
-the rabbit hole goes!? It strikes me when the German commando of
-concentration camp questioned how someone who had not been
-**tested** could be his judge? This is very true I think. If you haven't
-been in that situation, you really don't know how much yourself is
-going to change, and how much that toxic environment is going to
-modify your behavior and thinking. For these natiz criminals (this I
-have no doubt that they have done the anti-humanity act not out of
-their excuse of _following the order_, but out of a balanced decision
-of _benefit and cost_  &mdash; it could have been
-completly rational at their individual level), at least they have done
-what they have done in those context, and we know how low they had
-been. But because of the extreme characteristics of those act, it
-should also raise
-a question mark on the head of everyone else who is being judgmental
-of being right or  wrong.
+This is sad.  Reading the book [Auschwitz][1] made me  wonder how deep
+the  rabbit hole  goes!? It  strikes me  when the  German commando  of
+concentration camp questioned how someone  who had not been **tested**
+could be his judge? This is very  true I think. If you haven't been in
+that situation,  you really don't know  how much yourself is  going to
+change, and  how much that toxic  environment is going to  modify your
+behavior and thinking. For these natiz criminals (this I have no doubt
+that they have  done the anti-humanity act not out  of their excuse of
+_following the order_, but out of  a balanced decision of _benefit and
+cost_  &mdash;  it  could  have   been  completly  rational  at  their
+individual level),  at least  they have  done what  they have  done in
+those context, and we  know how low they had been.  But because of the
+extreme characteristics of those act,  it should also raise a question
+mark on  the head of  everyone else who  is being judgmental  of being
+right or wrong.
 
 [1]: https://www.amazon.com/Auschwitz-New-History-Laurence-Rees-ebook/dp/B004OA64GG/ref=sr_1_3?s=books&ie=UTF8&qid=1516726556&sr=1-3&keywords=auschwitz
 
 I know there were many great examples and people who did not fall into
 the low in the same overall circumstances. But do they then serve as a
-proof of human strength? I mean, how much can we generalize these
+proof of  human strength?  I mean,  how much  can we  generalize these
 attributes against the ugly ones? What I see is an alarming pattern of
-people who submit themselves to the oppression as a majority's
-choice, this echoes the same question I asked 小舅 about why people
-didn't revolt during the Culture Revolution. I don't know what is the
-theory behind this, but it has been demonstrated over and over and
-over in Holocust of any form, and which could only mean that this
-reaction and mechanism is a built-in part of human &rarr; so as long as
-you and me are human, we own this attribute, and will **inevitably**
-at mercy of its effect. But how to interpret heroes and heroic acts in
-those times then? They were human, too. Why didn't they suffer from
-these built-ins?
+people who submit themselves to the oppression as a majority's choice,
+this echoes  the same question  I asked  小舅 about why  people didn't
+revolt during the Culture Revolution. I  don't know what is the theory
+behind this,  but it has been  demonstrated over and over  and over in
+Holocust of any form, and which could only mean that this reaction and
+mechanism is a built-in part of human  &rarr; so as long as you and me
+are human, we own this attribute,  and will **inevitably** at mercy of
+its effect. But how to interpret heroes and heroic acts in those times
+then?  They  were  human,  too.  Why didn't  they  suffer  from  these
+built-ins?
 
 I don't know. I wonder whether it is again a trick of labeling that I
 have been debating with myself recently (a lot). You see, we take a

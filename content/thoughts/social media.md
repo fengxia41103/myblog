@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: social media
 Author: Feng Xia
 
+<figure class="col l7 m7 s12">
+  <img src="/images/facebook.png"/>
+</figure>
+
 The recent downfall of Facebook stock and its data privacy fiasco have
 been spectacular, and saddening. People are talking about data privacy
 as if it is an evil just releases from Gene's bottle, and of course,
@@ -56,11 +60,6 @@ attention, which unfortunately has not been given by media, by public,
 by private citizen, by everyone whose reference of daily life and
 meaning is being changed by them.
 
-There are three aspects I'm feeling disturbed the most:
-
-1. Collapse of time
-2. Prisoner of stereotyping of me.
-3. Who am I vs. who are you
 
 # torturing yourself
 
@@ -132,9 +131,10 @@ simply have no such capacity to create that much caring and love that
 can drive and support the type of **anxious-of-your-response**
 pattern! We just can't, and will not.
 
-Therefore, bringing such an anxiety on yourself is completly rootless,
-and can only be viewed as a sign of poor judgement of yourself, your
-social networking participants, and the word `relationship` in general.
+> Therefore, bringing such an anxiety on yourself is completly rootless,
+> and can only be viewed as a sign of poor judgement of yourself, your
+> social networking participants, and the word `relationship` in general.
+>
 
 # slowing down your brain
 
@@ -152,10 +152,11 @@ you, no one yet I know of is willingly to be called "slow", or
 "stupid", and we often laugh at animals such as Dash (Zootopia)
 because he reacts slooooooooowly!
 
-Then why the heck you want to slow down your brain by forcing it to
-context switching every 20 seconds!!!!????
-
-Isn't this, stupid, or what!?
+> Then why the heck you want to slow down your brain by forcing it to
+> context switching every 20 seconds!!!!????
+> 
+> Isn't this, stupid, or what!?
+>
 
 # prisoner of diversity
 
@@ -193,19 +194,19 @@ converging, willingly and unknowingly, thus our outputs will also
 converge, which re-inforces **the legitimacy of those choices given to
 us, not chosen by us**.
 
-If you enjoy anxiety, this is actually something worth feeling anxious
-about &mdash; that we are losing not only the ability to choose, but
-the options to choose from. In today's social networking high, we are
-feeling not too few, but too many choices. But if not careful, this
-exactly fact is driving us into the other extreme, that we will still
-have more than ever to choose from, just they are becoming the same!!
+> If you enjoy anxiety, this is actually something worth feeling anxious
+> about &mdash; that we are losing not only the ability to choose, but
+> the options to choose from. In today's social networking high, we are
+> feeling not too few, but too many choices. But if not careful, this
+> exactly fact is driving us into the other extreme, that we will still
+> have more than ever to choose from, just they are becoming the same!!
+> 
+> Remember Ford's T-model? that we can make it any color you want, as
+> long as it is black.
+> 
+> Wow.
+> 
 
-Remember Ford's T-model? that we can make it any color you want, as
-long as it is black.
-
-Wow.
-
-[1]: https://en.wikipedia.org/wiki/Context_switch
 
 # who am I, and who are you
 
@@ -257,21 +258,16 @@ here &mdash; this actually feels right, because we have all know that
 no one is perfect, and some will even take this further to state that
 no one is perfect for you... haha.... 
 
-Well, so when I talk you next time, or work with you, or having a
-coffee, which part of you am I talking to? looking at? having a
-relationship with? Do I even need to ask or confirm or request that a
-particular side of you is the one I want to talk to, to love, to care?
-and even with such possibility, what if you disagree, but willing to
-give me the "I love fashion" side of you to be with my "let go for a
-movie" side of me!? Is this a mismatch? or just fine?
+> Well, so when I talk you next time, or work with you, or having a
+> coffee, which part of you am I talking to? looking at? having a
+> relationship with? Do I even need to ask or confirm or request that a
+> particular side of you is the one I want to talk to, to love, to care?
+> and even with such possibility, what if you disagree, but willing to
+> give me the "I love fashion" side of you to be with my "let go for a
+> movie" side of me!? Is this a mismatch? or just fine?
+> 
 
-How interesting! But one thing I think is in trouble for sure, is that
-I love you as who you are, the entirety of you, for better and for
-worse. I would say, forget about the for better and for worse
-part. You don't know even who that person is anymore, and nor of
-yourself. Then whom are we talking about, at all!? When social
-networking overcomes physical distance, it creates an identity
-confusion, that communication itself has become easier in its means,
-but less assuring in its subjects. 
 
-That's just, weird. 
+This is just, weird. 
+
+[1]: https://en.wikipedia.org/wiki/Context_switch

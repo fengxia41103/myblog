@@ -64,12 +64,12 @@ its effect. But how to interpret heroes and heroic acts in those times
 then?  They  were  human,  too.  Why didn't  they  suffer  from  these
 built-ins?
 
-I don't know. I wonder whether it is again a trick of labeling that I
-have been debating with myself recently (a lot). You see, we take a
-certain type of act as being heroic, while viewing others as
-criminal. But what is the criteria to judge them? Law? isn't law also
-written by a bunch human? then who says their opinions should be the
-_law_? To that matter, there are many words I start to question (but
+I don't know. I wonder whether it  is again a trick of labeling that I
+have been  debating with myself recently  (a lot). You see,  we take a
+certain  type  of  act  as  being  heroic,  while  viewing  others  as
+criminal. But what is the criteria  to judge them? Law? isn't law also
+written by a  bunch human? then who says their  opinions should be the
+_law_? To that  matter, there are many words I  start to question (but
 no answer yet):
 
 1. science

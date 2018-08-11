@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: social media
 Author: Feng Xia
 
-<figure class="col l7 m7 s12">
+<figure class="col l8 m8 s12">
   <img src="/images/facebook.png"/>
 </figure>
 

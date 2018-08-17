@@ -3,7 +3,7 @@ Date: 2018-06-08 14:00
 Tags: lenovo
 Slug: switches
 Author: Feng Xia
-Modified: 2018-06-25 14:10
+Modified: 2018-08-17 11:15
 
 [Network switch][5] is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is [pexpect][1], but even that gives you
@@ -585,6 +585,147 @@ Interface po1
     0 lost carrier  0 no carrier  0 babble 
     0 Tx pause 
   0 interface resets 
+
+Automatic policy provisioning is disabled on this interface
+```
+
+# config a port's VLAN
+
+There are 3 things we are interested in setting a switch port:
+
+1. **mode**: two choices &mdash; `trunk` vs. `access`. In `trunk`
+   mode, you can then set `allowed vlans`; in `access` mode, this port
+   allows only ONE vlan, and that is its native vlan (see next).
+2. **native vlan**: also called `untagged vlan` (in Netbox, for example)
+3. **allowed vlans**: this is a list of VLAN ids that can flow through
+   this port. In order to set this, `mode` must be in `trunk` mode.
+
+## ENOS
+
+To set configs in `trunk` mode:
+
+```shell
+en  <-- enable admin mode
+config terminal  <-- to enter config mode
+interface port <port id>  <-- to select the port to config
+
+switchport mode trunk
+switchport trunk allow vlan <1,2,3...>
+switchport trunk native vlan <vlan id>
+```
+
+**Note**: you must set the native vlan last, and also must be sure
+that native vlan id is also part of the allowed vlans. For example, if
+we are to set native vlan to 1, and current allowed is "2,3,4,5", it
+will fail because 1 is not part of "2,3,4,5". Instead, you should set
+allowed to "1,2,3,4,5" first, then set native to 1.
+
+To set in `access` mode &rarr; `allowed vlan` is applicable anymore!
+
+```
+en
+config terminal
+interface port <port id>
+swithport mode access
+switchport access vlan <vlan id>
+```
+
+### check port config
+
+Use `show interface port <port id>`. Example output:
+
+```shell
+LCTC-R1U39-SW#show interface port 10
+Current port 10 configuration: enabled, PVID/Native-VLAN 19, Tagging/Trunk-mode
+    ErrDisable recovery enabled
+    Switch port
+    STP: non-edge, auto link-type, global loop guard
+    The Unicast storm control currently turned off
+    The Multicast storm control currently turned off
+    The Broadcast storm control currently turned off
+    802.1p priority: 0
+    DSCP remarking for port: disabled
+    BPDU guard: disabled
+    Static trunk distribution: disabled
+    Flood blocking: disabled
+    MAC address notification: disabled
+    Tag ingress check skipping: disabled
+    Tag egress check skipping: disabled
+    L2 Learning: enabled
+    ACL Port config is empty
+    UDLD: disabled, mode normal
+    OAM: disabled, mode active
+    EVB Profile: 0
+    Reflective Relay is configured off
+    DHCP Snooping trust disable, limit rate: none
+    Openflow: disabled
+    VLANs: 2-4,6,8-19
+    Private-VLAN: disabled
+
+
+Current Port 10 Gig link configuration:
+    speed 10/100/1000, mode auto, fctl none, auto on
+```
+
+
+## CNOS
+
+Quite similar to ENOS commands. To set in `trunk` mode:
+
+```shell
+en <-- enable admin mode
+configure <-- to enter config mode
+interface ethernet 1/<port id>  <-- select port to config
+bridge-port mode trunk
+bridge-port trunk allowed vlan <1,2,3...>
+bridge-port trunk native vlan <vlan id>
+```
+
+To set in `access` mode:
+```shell
+en <-- enable admin mode
+configure <-- to enter config mode
+interface ethernet 1/<port id>  <-- select port to config
+bridge-port mode access
+bridge-port access vlan <vlan id>
+```
+
+### check port config
+
+Use `display interface ethernet 1/<port id>`. Example output:
+```shell
+LCTC-R1U37-SW(config-if)#display interface ethernet 1/10
+Interface Ethernet1/10
+  Hardware is Ethernet  Current HW addr: a48c.db34.b20c
+  Physical:a48c.db34.b20c  Logical:(not set)
+  index 410100 metric 1 MTU 9216 Bandwidth 10000000 Kbit
+  Port Mode is trunk
+  <UP,BROADCAST,RUNNING,ALLMULTI,MULTICAST>
+  VRF Binding: Not bound
+  Speed 10000 Mb/s Duplex full
+  lacp suspend-individual  admin: Individual - oper: Individual
+  Last link flapped 05:30:14 
+  Last clearing of "display interface" counters 05:30:14 
+  30 seconds input rate 0 bits/sec, 0 bytes/sec, 0 packets/sec 
+  30 seconds output rate 54779 bits/sec, 6847 bytes/sec, 74 packets/sec 
+  Load-Interval #2: 5 minute (300 seconds) 
+     input rate 0 bps, 0 pps; output rate 52657 bps, 71 pps 
+  RX 
+    0 unicast packets  0 multicast packets  0 broadcast packets 
+    0 input packets  0 bytes 
+    0 jumbo packets  0 storm suppression packets 
+    0 giants  0 input error  0 short frame  0 overrun  0 underrun 
+    0 watchdog  0 if down drop 
+    0 input with dribble  0 input discard(includes ACL drops) 
+    0 Rx pause 
+  TX 
+    2084 unicast packets  1082832 multicast packets  320046 broadcast packets 
+    1404962 output packets  126644641 bytes 
+    0 jumbo packets 
+    0 output errors  0 collision  0 deferred  0 late collision 
+    0 lost carrier  0 no carrier  0 babble 
+    0 Tx pause 
+  645 interface resets 
 
 Automatic policy provisioning is disabled on this interface
 ```

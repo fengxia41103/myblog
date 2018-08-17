@@ -3,9 +3,9 @@ Date: 2016-09-08 21:15
 Tags: dev
 Slug: general system architecture
 Author: Feng Xia
+Modified: 2018-08-17
 
-
-<figure class="col l8 m8 s12">
+<figure class="col l5 m5 s12">
   <img src="/images/architecture_joke.jpg"
        class="center img-responsive">
 </figure>

@@ -18,7 +18,7 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'init-benchmarking) ;; Measure startup time
 
-(defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
+(defconst *spell-check-support-enabled* t) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
 
 ;;----------------------------------------------------------------------------
@@ -240,7 +240,7 @@
 (defun save-current-kbd-macro-to-dot-emacs (name) 
   "Save the current macro as named function definition inside
 your initialization file so you can reuse it anytime in the
-future." 
+future."
   (interactive "Save Macro as: ") 
   (name-last-kbd-macro name) 
   (save-excursion (find-file-literally user-init-file) 
@@ -423,7 +423,7 @@ future."
 
 
 ;; Is this now removed by default?
-(menu-bar-mode 1)
+(menu-bar-mode -1)
 
 ;; Get rid of slow tool-bar - adding back in to see what 24.4 does
 (tool-bar-mode -1)
@@ -491,7 +491,6 @@ future."
 (transient-mark-mode 1)
 
 ;; Respond to the system clipboard
-;;(setq x-select-enable-clipboard t)
 (setq select-enable-clipboard t)
 
 ;; Want line number and column?
@@ -502,7 +501,6 @@ future."
 
 ;; Emacs could care less what character your file ends with.
 (setq require-final-newline t)
-
 (setq size-indication-mode t)
 
 ;; Pgup/dn will return exactly to the starting point.
@@ -663,9 +661,7 @@ and buffers which are visible in other windows are normally skipped."
   (eval 
    `(defadvice ,command (after indent-region activate) 
       (and (not current-prefix-arg) 
-           (member major-mode '(emacs-lisp-mode lisp-mode clojure-mode    scheme-mode haskell-mode
-                                                ruby-mode rspec-mode c-mode          c++-mode
-                                                objc-mode       latex-mode plain-tex-mode)) 
+           (member major-mode '(emacs-lisp-mode python-mode lisp-mode clojure-mode scheme-mode haskell-mode ruby-mode rspec-mode c-mode c++-mode  objc-mode latex-mode plain-tex-mode)) 
            (let ((mark-even-if-inactive transient-mark-mode)) 
              (indent-region (region-beginning) 
                             (region-end) nil))))))
@@ -1175,7 +1171,7 @@ non-nil; otherwise prompts the user to enter the directory."
   :ensure 
   :config)
 
-;; f3 find
+;; python autopep8
 (use-package 
   py-autopep8 
 
@@ -1572,6 +1568,12 @@ non-nil; otherwise prompts the user to enter the directory."
        "8000 Development Drive, Morrisville, NC 27560\n"
        "W: http://www.lenovo.com\n"))
 
+;; save attachment to my desktop (this can also be a function)
+(setq mu4e-attachment-dir "~/Downloads")
+
+;; attempt to show images when viewing messages
+(setq mu4e-view-show-images t)
+
 (require 'smtpmail)
 ;; (setq message-send-mail-function 'smtpmail-send-it
 ;;       starttls-use-gnutls t
@@ -1628,8 +1630,8 @@ non-nil; otherwise prompts the user to enter the directory."
 (require 'org-mu4e)
 ;;store link to message if in header view, not to header query
 (setq org-mu4e-link-query-in-headers-mode nil)
-;; (define-key mu4e-headers-mode-map (kbd "C-c c") 'org-mu4e-store-and-capture)
-;; (define-key mu4e-view-mode-map    (kbd "C-c c") 'org-mu4e-store-and-capture)
+(define-key mu4e-headers-mode-map (kbd "C-c c") 'org-mu4e-store-and-capture)
+(define-key mu4e-view-mode-map    (kbd "C-c c") 'org-mu4e-store-and-capture)
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/org/tasks.org" "Tasks")
          "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))

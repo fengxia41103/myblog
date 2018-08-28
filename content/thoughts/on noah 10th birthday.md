@@ -32,12 +32,12 @@ can do about it.
 I told Noah many times that there are many things I can help him with,
 but there is one thing nobody can give him more, and that is time. I
 was saying so to get him some sense of time. But it is true. Time
-flies, life is life a summer, with a flash, the summer of life is
+flies, life is like a summer, with a flash, the summer of life is
 gone. I start to feel the age, start to see that the summer of my life
 is at its end, and it does feel rather sad. Then, here is Noah, double
 digit now, and this summer has felt really short. People say time
 starts to accelerate once kids are growing up. If only, that mine
-would stand still, the let theirs go by as quickly as they will,
+would stand still, then let theirs go by as quickly as they will,
 turning 10 is a big deal I think, because he is now a teen, and he
 starts to have a lot of thought of him own these day.
 

@@ -112,7 +112,7 @@ I'm criticizing here!? No. I trust them, exactly because all these
 writings are in tone and in spirit of **do not trust**!
 
 Yes, if you can't be as angry and as annoying as I am, take Reagan's
-word for a starter at least:"Trust, but verify".
+word for a starter at least:"**Trust, but verify**".
 
 
 [1]: {filename}/thoughts/data%20digit.md

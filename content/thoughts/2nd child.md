@@ -1,5 +1,5 @@
 Title: 2nd Child Policy
-Date: 2018-09-20 19:19
+Date: 2018-09-13 19:19
 Tags: thoughts
 Slug: 2nd child policy
 Author: Feng Xia
@@ -15,9 +15,9 @@ this makes me very angry.
 
 The talk is about China's new policy to encourage having more than one
 child, and these people talked about possible ways to turn the tide of
-China's declining population. Sigh. But this is truly sad sad sad in
-multiple ways and it is totally disgusting, misleading, wrong, just
-morally wrong, technically wrong, politically wrong, and absolutely
+China's declining population.  Sigh. But this is truly sad  sad sad in
+multiple ways  and it is  totally disgusting, misleading,  wrong, just
+morally wrong,  technically wrong,  politically wrong,  and absolutely
 against humanity!
 
 # 180 turn

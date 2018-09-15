@@ -351,9 +351,6 @@ header {
   overflow-x: hidden;
 }
 
-em {
-  text-decoration: underline;
-}
 strong {
   color: #d52349;
 }
@@ -391,17 +388,21 @@ article {
   counter-reset: figures;
 }
 
-figure {
+img+em{
+  display: block;
+}
+
+figure, img+em {
   counter-increment: figures;
 }
 
-figcaption {
+figcaption, img+em {
   margin-bottom: 1em;
   color: #545454;
   text-align: center;
 }
 
-figcaption:before {
+figcaption:before, img+em:before {
   content: 'Fig.' counter(figures) ': ';
 }
 

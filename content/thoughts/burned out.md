@@ -17,17 +17,17 @@ no clue of what to do w/ it.
 
 I miss Dad, miss her, miss the days I was happy, miss when Noah was
 little, miss biking around the Charles and watch the sunset, miss the
-moment we were sitting on top 南山 that evening, watching the city
-lights and breathing the summer breeze, miss the time I was sitting on
-the rail overseeing the unnamed bay in Kobe, while everyone was
-packing in excitement and in sadness of leaving, miss the time Elaine
-introduced me this beautiful song then which till today I know not the
-name nor the singer, but its tune by heart, miss the mini karaoke in
-Shenzhen's arcade when she sang a song while I was listening, miss the
-minutes I was leaning on Ray's tomb in this cold winter day, just him
-and I, I played my music, which I know he would laugh at me again if
-he were there, yet it was a music in the all yard, sunny, cold, winter
-day, so out of tune, so out of place, so warm, lively, and peace.
+moment we were sitting on top of 南山 that evening, watching the city
+lights and breathing the summer breeze, miss the time in Sanyo center
+overseeing the unnamed bay in Kobe, what a wonder ocean is! miss the
+time Elaine introduced me this beautiful song then which till today I
+know not the name nor the singer, but its tune by heart, miss the mini
+karaoke in Shenzhen's arcade when she sang a song while I was
+listening, miss the minutes I was leaning on Ray's tomb in this cold
+winter day, just him and I, I played my music, which I know he would
+laugh at me again if he were there, yet it was a music in the all
+yard, sunny, cold, winter day, so out of tune, so out of place, so
+warm, lively, and peace.
 
 I feel sad, maybe it's just depression again. It comes in waves. On
 some days it was bad, then hope and happiness kicked in in others, and

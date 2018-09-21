@@ -1,6 +1,6 @@
 ---
+mainfont: WenQuanYi Micro Hei Mono
 header-includes: |
-    \usepackage{fancyhdr}
     \usepackage{dashrule}
     \usepackage{setspace}
     \singlespacing
@@ -57,10 +57,7 @@ Documentation
 
 # Experience
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Advisory Engineer} \hfill 11/2016 - present  
-Lenovo US \hfill RTP, NC  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Advisory Engineer, Lenovo US, 11/2016 - present
 
 * `Lenovo Open Cloud` product. Drove overall network
   design. Developed Python scrips and playbooks to automate RH
@@ -103,10 +100,7 @@ Lenovo US \hfill RTP, NC
         4. comparison analysis of [Ironic vs. MAAS][9]
         5. technologies used in [baremetal provisioining][7]
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Founder, Consultant} \hfill 01/2015 - 11/2016  
-PY Consulting \hfill Raleigh, NC  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Founder & Consultant, PY Consulting, 01/2015 - 11/2016
 
 * `Wei Fashion Group` project. Wei Fashion Group is an international
   fashion product trading company. Designed and built an inventory
@@ -150,10 +144,7 @@ PY Consulting \hfill Raleigh, NC
     * **Tools**: Python, ODOO, Buildbot
     * **Sample writings**: [Linkage 2016-17 Technology Roadmap][4] (in Chinese)
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Director} \hfill 11/2013 - 01/2015  
-Beijing Lean Strategy Consulting Group \hfill Beijing, China  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Director, Beijing Lean Strategy Consulting Group, 11/2013 - 01/2015
 
 * Responsible for a $3-million fixed-bid software contract. Client is
   a Fortune-500 company. Project included designing and developing
@@ -166,7 +157,7 @@ Beijing Lean Strategy Consulting Group \hfill Beijing, China
         2. [晋能集团云平台建设和使用咨询报告][12]
 
 
-* Led system architecture design based on SOA technologies. Managed
+* Design system architecture using SOA technologies. Managed
   evaluation of ESB, BPM and database components.
 
     * **Tools**: IBM Rational, MySQL, Java Spring Struts Hibernate,
@@ -192,35 +183,24 @@ Beijing Lean Strategy Consulting Group \hfill Beijing, China
 * Setup a local service team. Screened hundreds of resume and
   interviewed nearly one hundred candidates.
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Project Manager} \hfill 07/2010 - 11/2013  
-CrunchTime! Information Technology \hfill Boston, MA  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Project Manager, CrunchTime! Information Technology, 07/2010 - 11/2013
+
+**Tools**: Salesforce APEX, Visualforce, Jira, MS Project, Taskjuggler
 
 * Provided technical support to client on administrating our ERP
   product. Initiated statement-of-work(SOW) and followed it through
   development, user-acceptance-test(UAT) and deployment.
-
-    * **Tools**: Jira, MS Project, Taskjuggler
-
 * Played a key role in pre-sales to Yum!China, Yum!’s most profitable
   branch at the time. Analyzed over 600 pages of requirements covering
   operation of fourteen departments. Worked closely with CEO and
   Yum!’s senior executives to outline deal structure. Participated in
   all key decisions regarding this deal.
-
 * In charge of administrating Salesforce production instance,
   including setting up workflows, triggers, approval processes, a
   customer portal and a vendor portal.
-
-    * **Tools**: Salesforce APEX
-
 * Customized Salesforce Customer Portal using APEX, Visualforce and
   jQuery. The portal won Bronze in the “2011 Steve Awards for Sales &
   Customer Service”.
-
-    * **Tools**: Salesforce APEX, Visualforce, jQuery, CSS
-
 * Built the company's first mobile application prototype using
   Cordova, HTML5 and jQuery Mobile.
 
@@ -232,71 +212,42 @@ CrunchTime! Information Technology \hfill Boston, MA
 
     * **Tools**: Python, Selenium webdriver, Django
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Business Manager} \hfill 04/2009 - 04/2010  
-China Everbright Bank \hfill Beijing, China  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Business Manager, China Everbright Bank, 04/2009 - 04/2010
+**Tools**: Word, Powerpoint, Project
 
 * Supervised two vendor invitation-for-bids. In charge of a $2-million
   purchase of a software system. Managed system implementation,
   customization, training and administration.
-
-    * **Tools**: Word, Powerpoint, Project
-
 * Setup Business Analysis team from ground up. Created report
   templates and analysis framework. Analysis results were the basis of
   two loans of substantial amount.
-
 * Led team to create drafts of contracts, business policies, workflows
   and training materials.
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Team Lead} \hfill 04/2004 - 05/2007  
-Bit9 Inc. (Carbon Black) \hfill Cambridge, MA  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Team Lead, Bit 9 Inc. (Carbon Black), 04/2004 - 05/2007
 
+**Tools**: NT kernel, Python, Graphviz, VC++, rootkits, VMWare
+    
 * Led a breakthrough in endpoint application control product, which
   played a key role in winning Bit9 a $6-million B-round led by
   Kleiner Perkins.
-
-    * **Tools**: NT kernel, Python, Graphviz
-
 * Member of Bit9's SaaS team. Built the world's largest Windows binary
   repository at the time featuring four billion data records. Wrote
   C++ parser for Windows binary PE formats.
 
-    * **Tools**: VC++
+## Senior Engineer, Instron Corp., 07/1998 - 04/2004
 
-* Hands on experience with undocumented NT kernel data structures and rootkits.
-
-    * **Tools**: NT kernel, rootkits, VMWare
-
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Senior Engineer} \hfill 07/1998 - 04/2004  
-Instron Corp. \hfill Canton, MA  
-\hdashrule{\textwidth}{1pt}{1pt}
+**Tools**: RTOS, C, VB, PLC, Python
 
 * Developed embedded controller of Instron’s impact tester line (9250HV).
-
-    * **Tools**: RTOS, C, Python
-
 * Developed embedded controller of two million-dollar projects. Led
   system training. 　　
-
-    * **Tools**: RTOS, C, PLC
-
 * Initiated a new product line -- closed-loop Brinell hardness tester.
-
-    * **Tools**: RTPS, C, VB
-
 * Assisted in training the company’s first Chinese R&D team.
 
 # Education
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{MBA} \hfill 04/2007 - 09/2008  
-Boston University \hfill Boston, MA  
-\hdashrule{\textwidth}{1pt}{1pt}
+## MBA, Boston University, 04/2007 - 09/2008
 
 * **Major**: International Management Program
 * GPA: 3.75/4.0
@@ -304,10 +255,7 @@ Boston University \hfill Boston, MA
 * "Certificate of International Management Program"
 * 2nd place in the "13th Annual Net Impact Case Competition"
 
-\hdashrule{\textwidth}{1pt}{1pt}
-\textbf{Master of Science} \hfill 09/1995 - 05/1997  
-Ohio University \hfill Athens, OH  
-\hdashrule{\textwidth}{1pt}{1pt}
+## Master of Science, Ohio University, 09/1995 - 05/1997
 
 * **Major**: Power System Automation
 * GPA: 3.15/4.0

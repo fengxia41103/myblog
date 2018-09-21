@@ -305,8 +305,8 @@ Modified: 2018-07-23 12:04
         2. [晋能集团云平台建设和使用咨询报告][12]
 
 
-* Led system architecture design based on SOA technologies. Managed
-evaluation of ESB, BPM and database components.
+* Design system architecture using SOA technologies. Managed
+  evaluation of ESB, BPM and database components.
 
     * **Tools**: IBM Rational, MySQL, Java Spring Struts Hibernate,
                  JBoss ESB, Mule ESB, Apache ServiceMix, Activiti BPM

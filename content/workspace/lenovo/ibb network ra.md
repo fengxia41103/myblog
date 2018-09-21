@@ -5,6 +5,18 @@ Slug: ibb network design
 Author: Feng Xia
 Status: Draft
 
+---
+title: IBB Network Reference Architecture
+author: Feng Xia
+header-includes: |
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhead[CO,CE]{This is fancy}
+    \fancyfoot[CO,CE]{So is this}
+    \fancyfoot[LE,RO]{\thepage}
+abstract: IBB network reference architecture.
+---
+
 # Abstract
 
 The purpose of this document is to provide guidelines and

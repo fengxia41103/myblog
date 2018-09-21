@@ -19,7 +19,7 @@ STATIC_PATHS = ["images", "downloads", "app", "data", "slides"]
 # must have this to copy `/slides` to output
 # and skip processor complaining about formatting error
 # in .html and .md in this folder
-ARTICLE_EXCLUDES = ["slides"]
+ARTICLE_EXCLUDES = ["slides", "downloads", "images", "data"]
 TIMEZONE = "America/New_York"
 
 DEFAULT_LANG = u"en"

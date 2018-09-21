@@ -1,6 +1,5 @@
 Title: Resum&eacute;
 Date: 2017-01-01 12:00
-Tags: resume
 Slug: resume
 Author: Feng Xia
 Modified: 2018-07-23 12:04
@@ -153,7 +152,7 @@ Modified: 2018-07-23 12:04
   <div class="row">
     <div class="text-left col l6 m6 s6">
       Advisory Engineer<br />
-      <span style="opacity:0.5;">Lenovo</span>
+      <span style="opacity:0.5;">Lenovo US</span>
     </div>
     <div class="text-right col l5 m5 s5">
       <i class="fa fa-calendar"></i>

@@ -1,5 +1,5 @@
 ---
-mainfont: WenQuanYi Micro Hei Mono
+mainfont: Noto Sans CJK SC
 header-includes: |
     \usepackage{dashrule}
     \usepackage{setspace}

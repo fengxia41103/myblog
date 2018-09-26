@@ -515,7 +515,7 @@ vlag isl adminkey 100
 
 ### Link two ports on the same switch
 
-It's called `aggregation-group` (see [manual][1]). 
+It's called `aggregation-group` (see [manual][3]). 
 
 First thing fir, enter so called "config" mode:
 

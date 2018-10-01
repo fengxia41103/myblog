@@ -117,17 +117,21 @@ large deployment.[^rhhi-requirements]
 
 ### RAID controller
 
-![M5210 RAID Controller][m5210 image]
+![ThinkSystem RAID 930-8i RAID Controller][930 image]
 
-Platform server is recommended to use one M5210 RAID
-controller per SR650 server. The ServeRAID M5210 and M5210e SAS/SATA
-Controllers are high performance 12 Gb SAS controllers for internal
-disk storage. They are part of the ServeRAID M Series family that
-offers a complete server storage solution consisting of RAID
-controllers, cache/flash modules, energy packs, and software feature
-upgrades in an ultra-flexible offerings structure.
+The ThinkSystem RAID 930 family of internal 12 Gbps SAS RAID
+controllers are high-performance RAID-on-chip (ROC) adapters. These
+adapters support RAID levels 0/1/10/5/50/6/60 as well as JBOD, and
+include an extensive list of RAS and management features.
 
-For more information, see [product guide][m5210 product guide].
+The family is comprised of four adapters:
+
+1. The ThinkSystem RAID 930-4i supports up to four internal SAS and SATA drives
+2. The ThinkSystem RAID 930-8i supports up to eight internal SAS and SATA drives
+3. The ThinkSystem RAID 930-16i supports up to 16 internal SAS and SATA drives
+4. The ThinkSystem RAID 930-24i supports up to 24 internal SAS and SATA drives
+
+For more information, see [product guide][930 guide].
 
 ### Disk configurations
 
@@ -204,6 +208,12 @@ the services they provide:
 
 ## Platform services
 
+Platform services provide administrative functions to support
+operation of the Open Cloud. This includes management of software life
+cycle, automation, list of artifacts such as ISO images and qcow
+images, and new server discovery.
+
+
 ### Runtime service
 
 Built upon [Red Hat Hyperconverged Infrastructure (RHHI-V)][rhhi]. It
@@ -219,16 +229,16 @@ of other Lenovo Open Cloud services.
 
 See [product guide][rhhi guide] for details.
 
-### Software repository service
+### Software repository & life cycle management service
 
 Built upon [Red Hat Satellite][satellite]. All Open Cloud servers are
 registered to this service, who then is responsible to manage
-life cycle of RHEL and Red Hat software products that are deployed in
-LOC.
+life cycle of:
 
-Further, it is integrated with Lenovo repositories so you have access
-to Lenovo release, update, patch, etc. It is also managing `.iso` and
-`qcow2` images, which are used by VM creation and server provisioning.
+1. RHEL and Red Hat software products that are deployed in the Open Cloud.
+2. Release, update, patch of Lenovo software products.
+3. `.iso` and `qcow2` images, which are used by VM creation and server
+   provisioning.
 
 ![Red Hat Satellite Architecture][satellite architecture]
 
@@ -268,9 +278,9 @@ extending Ceph cluster or adding an Openstack compute node.
 
 See [product guide][confluent] for details.
 
-### Inventory service
+### Inventory planning service
 
-### OS deployment service
+### Server config & OS deployment service
 
 ### OS image service
 
@@ -286,7 +296,7 @@ See [product guide][confluent] for details.
 
 # Network Design
 
-![Lenovo Open Cloud Network Overview][network overview]{.col .s12}
+![Lenovo Open Cloud Network Overview][network overview]
 
 LOC networks can be viewed in three groups whereas:
 
@@ -297,7 +307,7 @@ LOC networks can be viewed in three groups whereas:
 
 ## Conventions
 
-Hardware can break. It is important to keep it in mind when designing
+Hardware can break. It is important to keep this in mind when designing
 a network connection. In this architecture we have followed these
 conventions:
 
@@ -305,6 +315,9 @@ conventions:
 2. Except BMC connection, server to switch connections are paired.
     1. Each pair connect to separate NICs on the server at north bound, 
        and separate switch at south bound.
+
+This then requires matching configuration on the switch using LACP,
+and on the server using **active-active** [`bonding`][bonding].
 
 ## Connection To Upstream
 
@@ -315,13 +328,16 @@ gateway, access to RH CDN.
 
 ## Platform networks
 
-![Lenovo Open Cloud Platform Networks][platform network]{.col .s12}
+Platform networks are designed to offer performance and high
+availability. In a nutshell, it is recommended to separate
+
+![Lenovo Open Cloud Platform Network Overview][platform network]
 
 
 ### Platform VLANs
 
 In order to support LOC functions, a list of VLANs are defined as
-shown below. VLAN index/schema are examples of a test deployment. Your
+shown below. VLAN index/schema are examples of a deployment. Your
 environment can be different. In the following sections we will go
 over these logical networks in detail, and in section "Implementation
 Worksheet" we also provide a tool to map these VLANs to your environment.
@@ -357,41 +373,59 @@ OS provisioning
   because operating system image can be large, thus its loading to
   server can have negative impact on shared traffics.
   
-  VM management
-  : is to access RHHI virtual machines. This supports both the Open
-    Cloud services and VM workloads. Later we will see that it's also
-    advised to dedicate a NIC for this same purpose.
+VM management
+: is to access RHHI virtual machines. This supports both the Open
+  Cloud services and VM workloads. Later we will see that it's also
+  advised to dedicate a NIC for this same purpose.
+
+| Network                     | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
+| --------------------------- | ----- | ------------------  | ---------- | ------ | --------------- | -------------- |
+| Campus                      | 1     | 10.240.x.x[^campus] | 10         |        | static          | 10.240.x.1     |
+| BMC                         | 2     | 192.168.2.x         | 254        | /24    | static          | 192.168.2.1    |
+| Physical server management  | 3     | 192.168.3.x         | 254        | /24    | static          | 192.168.3.1    |
+| OS provisioning             | 10    | 192.168.10.x        | 3/6/9      | /24    | static          | 192.168.10.1   |
+| OVIRT management            | 100   | 192.168.100.x       | 3/6/9      | /29    | static          | 192.168.100.1  |
+| glusterFS                   | 400   | 192.168.40.x        | 3/6/9      | /29    | static          | 192.168.40.1   |
+| VM management               | 600   | 192.168.60.x        | 11         | /28    | static          | 192.168.60.1   |
 
 Table: Platform Network VLANs
 
-| Network                      |   VLAN |           Subnet | Addresses   | Mask   | Static / DHCP   |         Gateway |
-| :--------------------------- | :----- | :--------------- | :---------- | ------ | --------------- | :-------------- |
-| Campus                       |      1 |   **10.240.x.x** | 10          |        | static          |      10.240.x.1 |
-| BMC                          |      2 |      192.168.2.x | 254         | /24    | static          |     192.168.2.1 |
-| Physical server management   |      3 |      192.168.3.x | 254         | /24    | static          |     192.168.3.1 |
-| OS provisioning              |     10 |     192.168.10.x | 3/6/9       | /24    | static          |    192.168.10.1 |
-| OVIRT management             |    100 |    192.168.100.x | 3/6/9       | /29    | static          |   192.168.100.1 |
-| glusterFS                    |    400 |     192.168.40.x | 3/6/9       | /29    | static          |    192.168.40.1 |
-| VM management                |    600 |     192.168.60.x | 11          | /28    | static          |    192.168.60.1 |
+### Platform services to VLAN mapping
 
+| Platform Services                           | 1 | 2 | 3 | 10 | 100 | 400 | 600 |
+|---------------------------------------------|---|---|---|----|-----|-----|-----|
+| Runtime                                     | x |   |   |    | x   |     |     |
+| Software repository & life cycle management | x |   | x |    |     |     | x   |
+| Automation                                  | x |   | x | x  |     |     | x   |
+| Server config & OS deployment               | x | x |   | x  |     |     |     |
+| Inventory planning                          | x | x |   | x  |     |     | x   |
+| Discovery                                   | x | x |   | x  |     |     | x   |
+| OS image                                    |   |   |   |    |     |     |     |
+| Configure & Automation repository service   |   |   |   |    |     |     |     |
 
+Table: Platform Services to VLANs mapping
 
-### Platform server's NIC to VLAN mapping
+### Platform VLAN to server's NIC mapping
 
-Table: Platform server NIC to VLAN mapping
+Beside BMC port, each server has minimal two 1Gb ports and four 10Gb
+ports. Interfaces are paired to form an active-active bonding interface on
+Platform server. Optionally, we can also create a network bridge on
+top of a bonding interface. A sample configuration is shown below:
 
-| Network                    | VLAN | BMC | 2 x 1G | 2 x 10G | 2 x 10G |
-|:---------------------------|:-----|:---:|:------:|:-------:|:-------:|
-| Campus                     | 1    |     | x      |         |         |
-| BMC                        | 2    | x   |        |         |         |
-| Physical server management | 3    |     | x      |         |         |
-| OS provisioning            | 10   |     | x      |         |         |
-| OVIRT management           | 100  |     | x      |         |         |
-| glusterFS                  | 400  |     |        | x       |         |
-| VM management              | 600  |     |        |         | x       |
+| Network                    | VLAN | BMC | 2 x 1G  | 2 x 10G | 2 x 10G | Bond | Bridge     |
+|----------------------------|------|:---:|:-------:|:-------:|:-------:|------|------------|
+| Campus                     | 1    |     | x       |         |         | 0    | management |
+| BMC                        | 2    | x   |         |         |         | n/a  | n/a        |
+| Physical server management | 3    |     | x       |         |         | 0    | management |
+| OS provisioning            | 10   |     | x[^v10] |         |         | n/a  |            |
+| OVIRT management           | 100  |     | x       |         |         | 0    | management |
+| glusterFS                  | 400  |     |         | x       |         | 1    | storage    |
+| VM management              | 600  |     |         |         | x       | 2    | workloads  |
 
-### Configure Platform server network interfaces
+Table: Platform VLAN to server's NIC mapping
 
+![Lenovo Open Cloud Plaform Server Network Interfaces][platform server
+vlan]
 
 
 ## Storage networks
@@ -476,6 +510,17 @@ following the network designs laid out in previous sections. In the
 following sections we will use this schema to demonstrate switch
 port configurations.
 
+
+| Port | 1G switch       | 1G switch       | 10G switch      | 10G switch      |
+|------|-----------------|-----------------|-----------------|-----------------|
+| 1    | server 1 BMC    |                 | server 1 bond 1 | server 1 bond 1 |
+| 2    | server 2 BMC    |                 | server 2 bond 1 | server 2 bond 1 |
+| 3    | server 3 BMC    |                 | server 3 bond 1 | server 3 bond 1 |
+| 17   | server 1 bond 0 | server 1 bond 0 |                 |                 |
+| 18   | server 2 bond 0 | server 2 bond 0 |                 |                 |
+| 19   | server 3 bond 0 | server 3 bond 0 |                 |                 |
+|      |                 |                 |                 |                 |
+
 #### Platform server switch port configurations
 
 ### Storage servers
@@ -504,6 +549,7 @@ BOM matrix without $$.
 [overall architecture]: ../../images/ibb/ibb%20overall%20architecture.png
 [network overview]: ../../images/ibb/ibb%20network%20design%20overview.png
 [platform network]: ../../images/ibb/ibb%20platform%20brain%20workloads%20network.png
+[platform server vlan]: ../../images/ibb/ibb%20platform%20server%20vlan.png
 [storage network]: ../../images/ibb/ibb%20ceph%20network%20design.png
 [cloud network]: ../../images/ibb/ibb%20cloud%20network%20design.png
 [rhhi]: https://access.redhat.com/products/red-hat-hyperconverged-infrastructure
@@ -516,9 +562,9 @@ BOM matrix without $$.
     INFRASTRUCTURE]( https://access.redhat.com/documentation/en-us/red_hat_hyperconverged_infrastructure/1.0/html/deploying_red_hat_hyperconverged_infrastructure/rhhi-requirements)
     for details.
 
-[m5210 product guide]: https://lenovopress.com/tips1069-serveraid-m5210-sas-sata-controller
+[930 guide]: https://lenovopress.com/lp0652-thinksystem-raid-930-series-internal-raid-adapters
+[930 image]: https://lenovopress.com/assets/images/LP0652/ThinkSystem%20RAID%20930-8i.jpg
 
-[m5210 image]: https://lenovopress.com/assets/images/tips1069/0.113E.jpg
 [g8052 guide]: https://lenovopress.com/tips1270-lenovo-rackswitch-g8052
 [g8272 guide]: https://lenovopress.com/tips1267-lenovo-rackswitch-g8272
 [rhhi architecture]: https://access.redhat.com/webassets/avalon/d/Red_Hat_Hyperconverged_Infrastructure-1.1-Deploying_Red_Hat_Hyperconverged_Infrastructure-en-US/images/e5db77222a6a4c3ee0c6dacc001b3603/rhhi-pod.png
@@ -532,3 +578,9 @@ BOM matrix without $$.
 [tower guide]: https://access.redhat.com/products/ansible-tower-red-hat
 
 [confluent]: https://hpc.lenovo.com/users/documentation/confluentdisco.html
+[bonding]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/s2-networkscripts-interfaces-chan
+
+[^campus]: This is an example subnet.
+[^v10]: Bonding provisioning network is optional because loading an
+    operating system is not a frequent event.
+

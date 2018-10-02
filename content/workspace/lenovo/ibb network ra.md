@@ -6,7 +6,7 @@ Author: Feng Xia
 Status: Draft
 
 ---
-documentclass: article
+documentclass: report
 papersize: a4
 fontsize: 10pt
 mainfont: Ubuntu
@@ -16,7 +16,6 @@ geometry: margin=1in
 toc: true
 toc-depth: 4
 lof: true
-lot: true
 title: Lenov Open Cloud Network Reference Architecture
 author: Feng Xia
 header-includes: |
@@ -27,35 +26,116 @@ header-includes: |
   \usepackage{dashrule}
   \usepackage{setspace}
   \onehalfspacing
+abstract: |
+  Lenovo Open Cloud consists of a list of physical servers (aka. nodes)
+  and virtual machines (VMs). This reference environment provides a
+  comprehensive example demonstrating how to set up networks to connect
+  these servers and VMs together.
 ---
 
-# Abstract
+# Introduction
 
-The purpose of this document is to provide guidelines and
-considerations for setting up Lenovo Open Cloud (aka. LOC) networks.
+The target audience for this Reference Architecture (RA) is system
+administrators or system architects. Some experience with Red Hat
+implementation of virtualization, shared storage, and OpenStack is
+helpful, but it is not required.
 
-# Executive Summary
+Technology evolves fast. We have seen the wave of hardware
+virtualization in both server space and in personal computing. Then
+came cloud computing, in which infrastructure becomes even more
+abstract and remote to end user than ever before. Instead of being
+viewed as brick and mortar, server, storage, networking are
+**resources** that can be requested, leased for a period of time, paid
+per use, and releases when done &mdash; all through nothing but an
+online account and a credit card. The flexibility of this model and
+the feeling that resource pool can be extended boundlessly has both lowered
+barrier of entry of new application growing from zero to infinity with
+little sweat, and elevated requirement on the design, implementation,
+and operation of such infrastructure 
 
-Lenovo Open Cloud consists of a list of physical servers (aka. nodes)
-and virtual machines (VMs). This reference environment provides a
-comprehensive example demonstrating how to set up networks to connect
-these servers and VMs together.
+Further more,  along the trail  of technology evolution,  business has
+been left with an army of legacy systems which were designed and built
+on  a technology  stack  that  was adequate  then,  but  not in  trend
+now.  Millions have  been  invested, millions  of  users are  probably
+depending  on  the continuity  of  service,  and many  developers  and
+operators were  trained and are  given the responsibility  to maintain
+such stack. It is neither feasible to  cut the cord just because a new
+technology becomes the  talk of the day, nor advisable  to continue as
+before  without  taking  advantage  of   what  new  tools  can  bring.
+Therefore, it is  not only desirable, but in our  opinion essential to
+have an  infrastruture that is  both flexible and balanced  &mdash; it
+must support  a broad  range of  user and  application by  providing a
+platform that has  a rich mix of building blocks  which, first of all,
+covers common needs out of box, such as keeping an operating system up
+to  date via  patch,  update  and hotfix,  while  maintaining an  open
+architecture to extend both horizontally in term of resource (compute,
+storage, networking), and vertically (application stack).
+
+It is with this in mind that Leonov Open Cloud is designed to combine
+the best of technologies in the market today into a coherent user
+experience while all the following users will feel at home:
+
+1. **VM users**: Open Cloud supports hardware virtualization in its
+   core. Traditional virtual machines users and applications can be
+   migrated onto the platform while minimizing dependency on underline
+   hardware environment.
+
+2. **Cloud users**: Open Cloud provides on-premise cloud computing
+   environment based on OpenStack, the leading cloud operating
+   system. 
+   
+3. **Container users**: Devops have continuously pushed the boundary
+   to merge development and production into a single, consistent
+   experience that what developer uses as a `sandbox` should be
+   identical as what can be used in production. By doing so not only
+   we will eliminate the necessity to maintain multiple stacks
+   catering for different environments &mdash; a typical setup will be
+   one for development, one for testing, and one for production, but
+   minimize chance of incompatibility and bugs due to difference
+   between two environments.
+
+This RA describes the system architecture for the Lenovo Open Cloud
+Platform based on Lenovo ThinkSystem servers and Lenovo network
+switches. It provides detail of the hardware requirements to support
+various node roles and the corresponding configuration of the
+systems. It also describes the network architecture and details for
+the switch configurations. The hardware bill of materials is provided
+for all required components to build the Open Cloud cluster. An
+example deployment is used to show how to prepare, provision, deploy,
+and manage the Open Cloud on Lenovo ThinkSystem servers and Lenovo
+network switches.
+
+# Business problem and business value
+
+## Business problem
+
+## Business value
+
+# Architecture Overview
+
+Lenovo Open Cloud has two sets of clusters: `management cluster` and
+`workload cluster`. Workload cluster refers to applications
+directly interfacing with end user. Management cluster refers to
+applications that manage and provide Open Cloud services.
+
+![Lenovo Open Cloud Architecture][overall architecture]
+
+Management cluster includes a `platform foundation layer` and four groups of
+service.
+
+Platform foundation
+: Foundation layer includes 3-, 6-, or 9- servers depending on
+  configuration, storage disks inside server, two 1Gb switches, and
+  two 10Gb switches. It supports virtual machines on top of Red Hat
+  Virtualization. Storage uses a Gluster FS cluster that spans across
+  all servers. 
+
+# Hardware
 
 Lenovo Open Cloud is a highly configurable system. From the point of
 view of physical servers, LOC can be deployed on a 6-server or
 9-server configuration.  In this document we will use a 9-server
 configuration as example.
-
-# Architecture Overview
-
-![Lenovo Open Cloud Architecture][overall architecture]
-
-Lenovo Open Cloud has two sets of clusters: `management cluster` and
-`workload cluster`. Workload cluster refers to applications
-directly interfacing with end user. Management cluster refers to
-applications that manage and provide Open Cloud services. 
-
-# Hardware
 
 ## Platform servers
 
@@ -220,8 +300,6 @@ Built upon [Red Hat Hyperconverged Infrastructure (RHHI-V)][rhhi]. It
 supports virtual machine users out of box, and is the foundation
 of other Lenovo Open Cloud services. 
 
-![RHHI Single Cluster Architecture][rhhi architecture]
-
 > RHHI integrates Red Hat Virtualization (RHV) and Red Hat Gluster
 > Storage (RHGS). RHHI for Virtualization provides open-source,
 > centrally administered, and cost-effective integrated compute and
@@ -239,8 +317,6 @@ life cycle of:
 2. Release, update, patch of Lenovo software products.
 3. `.iso` and `qcow2` images, which are used by VM creation and server
    provisioning.
-
-![Red Hat Satellite Architecture][satellite architecture]
 
 > Satellite is an on-premise alternative to trying to download all of
 > your content from the Red Hat content delivery network or managing
@@ -288,7 +364,7 @@ See [product guide][confluent] for details.
 
 ## Storage services
 
-### Ceph
+### Ceph capacity management
 
 
 ## Cloud services
@@ -326,21 +402,15 @@ upstream &rarr; what is required from upstream, eg. dhcp, dns,
 gateway, access to RH CDN.
 
 
-## Platform networks
-
-Platform networks are designed to offer performance and high
-availability. In a nutshell, it is recommended to separate
+## Platform networks {#platform}
 
 ![Lenovo Open Cloud Platform Network Overview][platform network]
 
-
-### Platform VLANs
-
-In order to support LOC functions, a list of VLANs are defined as
-shown below. VLAN index/schema are examples of a deployment. Your
-environment can be different. In the following sections we will go
-over these logical networks in detail, and in section "Implementation
-Worksheet" we also provide a tool to map these VLANs to your environment.
+Platform networks are designed to offer performance and high
+availability. For illustration purpose we are to separate networks by
+their function so to highlight some design considerations. It is
+possible to merge these to fewer networks, or to reuse existing ones
+for the purpose. For this use section "VLAN Mapping Worksheet". 
 
 Campus
 : `campus` network is a name for public access. This is the network
@@ -378,6 +448,7 @@ VM management
   Cloud services and VM workloads. Later we will see that it's also
   advised to dedicate a NIC for this same purpose.
 
+
 | Network                     | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
 | --------------------------- | ----- | ------------------  | ---------- | ------ | --------------- | -------------- |
 | Campus                      | 1     | 10.240.x.x[^campus] | 10         |        | static          | 10.240.x.1     |
@@ -388,9 +459,8 @@ VM management
 | glusterFS                   | 400   | 192.168.40.x        | 3/6/9      | /29    | static          | 192.168.40.1   |
 | VM management               | 600   | 192.168.60.x        | 11         | /28    | static          | 192.168.60.1   |
 
-Table: Platform Network VLANs
-
 ### Platform services to VLAN mapping
+
 
 | Platform Services                           | 1 | 2 | 3 | 10 | 100 | 400 | 600 |
 |---------------------------------------------|---|---|---|----|-----|-----|-----|
@@ -403,14 +473,16 @@ Table: Platform Network VLANs
 | OS image                                    |   |   |   |    |     |     |     |
 | Configure & Automation repository service   |   |   |   |    |     |     |     |
 
-Table: Platform Services to VLANs mapping
+![Lenovo Open Cloud Plaform Service Network Interfaces][platform
+service vlan]
 
 ### Platform VLAN to server's NIC mapping
 
-Beside BMC port, each server has minimal two 1Gb ports and four 10Gb
-ports. Interfaces are paired to form an active-active bonding interface on
-Platform server. Optionally, we can also create a network bridge on
-top of a bonding interface. A sample configuration is shown below:
+Besides BMC port, each server has  minimal two 1Gb ports and four 10Gb
+ports.  Interfaces  are  paired   to  form  an  active-active  bonding
+interface on Platform server. Optionally, we can also create a network
+bridge on top of a bonding  interface. A sample configuration is shown
+below:
 
 | Network                    | VLAN | BMC | 2 x 1G  | 2 x 10G | 2 x 10G | Bond | Bridge     |
 |----------------------------|------|:---:|:-------:|:-------:|:-------:|------|------------|
@@ -422,17 +494,30 @@ top of a bonding interface. A sample configuration is shown below:
 | glusterFS                  | 400  |     |         | x       |         | 1    | storage    |
 | VM management              | 600  |     |         |         | x       | 2    | workloads  |
 
-Table: Platform VLAN to server's NIC mapping
-
 ![Lenovo Open Cloud Plaform Server Network Interfaces][platform server
 vlan]
 
 
+### Platform server's NIC to switch mapping
+
+| Server Side | Switch port mode | Switch port native VLAN | Switch port tagged VLAN |
+|-------------|------------------|-------------------------|-------------------------|
+| BMC         | access           | 2                       | n/a                     |
+| 2 x 1G      | trunk            | 10                      | 1,3,10,100              |
+| 2 x 10G     | access           | 400                     | n/a                     |
+| 2 x 10G     | trunk            | 600                     | 600                     |
+
+![Lenovo Open Cloud Plaform Server to Switch][platform switch config]
+
 ## Storage networks
 
-![Lenovo Open Cloud Storage Networks][storage network]{.col .s12}
+![Lenovo Open Cloud Storage Networks][storage network]
 
-### Storage VLANs
+Lenovo Open Cloud supports Ceph storage backend. A storage backend can
+be shared among multiple workloads and platforms, such as OpenStack.
+Three new networks are added to [Platform Network](#platform) for Ceph
+function while leveraging [platform services](#platform services) 
+to support Storage hardware and software workloads.
 
 Ceph management
 : is communication between Ceph dashboard and Ceph nodes, e.g. RPC, transferring zabbix monitoring data.
@@ -443,7 +528,6 @@ Ceph storage public
 Ceph cluster private
 : Ceph private data transferring, e.g. rebalancing.
 
-Table; Storage Network VLANs
 
 | Network              | VLAN | Subnet         | Addresses | Mask | Static / DHCP | Gateway        |
 |----------------------|------|----------------|-----------|------|---------------|----------------|
@@ -452,21 +536,34 @@ Table; Storage Network VLANs
 | Ceph cluster private | 40x  | 192.168.4<C>.x | 254       | /24  | static        | 192.168.4<C>.1 |
 
 
-### Storage server's NIC to VLAN mapping
+### Storage services to VLAN mapping
 
-Table: Storage server NIC to VLAN mapping
+| Storage Services    | 1 | 30 | 600 |
+|---------------------|---|----|-----|
+| Capacity management | x | x  | x   |
 
-| Network              | VLAN | BMC | 2 x 1G | 2 x 10G | 2 x 10G |
-|----------------------|------|:---:|:------:|:-------:|:-------:|
-| BMC                  | 2    | x   |        |         |         |
-| Ceph management      | 30   |     | x      |         |         |
-| Ceph storage public  | 30x  |     |        | x       |         |
-| Ceph cluster private | 40x  |     |        |         | x       |
+### Storage VLAN to server's NIC mapping
 
+| Network              | VLAN | BMC | 2 x 1G | 2 x 10G | 2 x 10G | Bond | Bridge            |
+|----------------------|------|:---:|:------:|:-------:|:-------:|------|-------------------|
+| BMC                  | 2    | x   |        |         |         | n/a  | n/a               |
+| Ceph management      | 30   |     | x      |         |         | 0    | management        |
+| Ceph storage public  | 30x  |     |        | x       |         |      | public data path  |
+| Ceph cluster private | 40x  |     |        |         | x       |      | private data path |
 
-### Configure Storage server network interfaces
+![Lenovo Open Cloud Storage Server Network Interfaces][storage server
+vlan]
 
+### Storage server's NIC to switch mapping
 
+| Server Side | Switch port mode | Switch port native VLAN | Switch port tagged VLAN |
+|-------------|------------------|-------------------------|-------------------------|
+| BMC         | access           | 2                       | n/a                     |
+| 2 x 1G      | trunk            | 10                      | 3,10,30                 |
+| 2 x 10G     | access           | 30x                     | n/a                     |
+| 2 x 10G     | access           | 40x                     | n/a                     |
+
+![Lenovo Open Cloud Storage Server to Switch][storage switch config]
 
 ## Cloud networks
 
@@ -543,14 +640,32 @@ Simplified version covers server & switch at high level should be fine.
 
 ## Software BOM
 
-BOM matrix without $$.
+### 6-server, HCI deployment, 3 year premium
 
+| SKU       | Product                                                           | Qty |
+|-----------|-------------------------------------------------------------------|-----|
+| RS00139F3 | Red Hat Hyperconverged Infrastructure for Virtualization (RHHI-V) | 1   |
+| MCT3305F3 | Red Hat Ansible Tower                                             | 1   |
+| MCT2981F3 | Red Hat Openstack Platform (w/o Guest) with Smart Management      | 4   |
+| MCT2979F3 | Red Hat OpenStack Platform with Smart Management & Guests         | 3   |
+| RS00036F3 | Red Hat Ceph Storage                                              | 1   |
+| RS00031F3 | Smart Management                                                  | 3   |
+| MCT2838F3 | Cloudforms                                                        | 1   |
+| MCT3474F3 | Red Hat Insights                                                  | 1   |
+
+Table: Software BOM, 6-server, HCI deployment, 3 year premium
 
 [overall architecture]: ../../images/ibb/ibb%20overall%20architecture.png
 [network overview]: ../../images/ibb/ibb%20network%20design%20overview.png
 [platform network]: ../../images/ibb/ibb%20platform%20brain%20workloads%20network.png
 [platform server vlan]: ../../images/ibb/ibb%20platform%20server%20vlan.png
+[platform service vlan]: ../../images/ibb/ibb%20platform%20service%20vlan.png
+[platform switch config]: ../../images/ibb/ibb%20platform%20switch%20config.png
+
 [storage network]: ../../images/ibb/ibb%20ceph%20network%20design.png
+[storage server vlan]: ../../images/ibb/ibb%20storage%20server%20vlan.png
+[storage switch config]: ../../images/ibb/ibb%20storage%20switch%20config.png
+
 [cloud network]: ../../images/ibb/ibb%20cloud%20network%20design.png
 [rhhi]: https://access.redhat.com/products/red-hat-hyperconverged-infrastructure
 [sr650]: https://www.lenovo.com/us/en/data-center/servers/racks/ThinkSystem-SR650/p/77XX7SRSR65
@@ -567,11 +682,9 @@ BOM matrix without $$.
 
 [g8052 guide]: https://lenovopress.com/tips1270-lenovo-rackswitch-g8052
 [g8272 guide]: https://lenovopress.com/tips1267-lenovo-rackswitch-g8272
-[rhhi architecture]: https://access.redhat.com/webassets/avalon/d/Red_Hat_Hyperconverged_Infrastructure-1.1-Deploying_Red_Hat_Hyperconverged_Infrastructure-en-US/images/e5db77222a6a4c3ee0c6dacc001b3603/rhhi-pod.png
 [rhhi guide]: https://access.redhat.com/documentation/en-us/red_hat_hyperconverged_infrastructure/1.1/
 
 [satellite]: https://access.redhat.com/products/red-hat-satellite
-[satellite architecture]: https://access.redhat.com/sites/default/files/prima/satellite_architecture_diagram_352601_0715_jcs_arch-overview.png
 [satellite guide]: https://access.redhat.com/products/red-hat-satellite/
 
 [tower]: https://access.redhat.com/products/ansible-tower-red-hat

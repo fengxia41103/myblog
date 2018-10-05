@@ -91,7 +91,7 @@ reasoning and sometimes pure lies, life itself becomes a burning hell.
 
 Then, when love strikes, when a picture of her and a life with her
 dangling in front of my mind, life is wonderful. So I think the
-argument is indeed correct &mash; that human is defined by its
+argument is indeed correct &mdash; that human is defined by its
 capacity to imagine, not by its capacity to take facts. Old people
 don't have less life because they are old, but because they know more,
 they see more reality, and they put less weight to imagine. Not that

@@ -384,7 +384,7 @@ upstream &rarr; what is required from upstream, eg. dhcp, dns,
 gateway, access to RH CDN.
 
 
-## Platform networks {#platform}
+## Platform networks {#platform-network}
 
 ![Lenovo Open Cloud Platform Network Overview][platform network]
 
@@ -479,7 +479,7 @@ below:
 ![Lenovo Open Cloud Plaform Server Network Interfaces][platform server
 vlan]
 
-### Platform server's NIC to switch mapping{#platform switch mapping}
+### Platform server's NIC to switch mapping {#platform-switch-mapping}
 
 To comply with [convention](#convention), Open Cloud uses two G8052
 (1Gb) switches and two G8272 (10Gb) switches to support high
@@ -506,9 +506,14 @@ created per server:
 ![Lenovo Open Cloud Plaform Server to Switch][platform switch
 config]
 
-See [Platform Cabling Schema](#platform cabling) and [Platform Switch
-Configuration](#platform switch configuration) for an example of
-platform to switch cabling and port configurations.
+To implement this design takes three steps:
+
+1. Cable server to switch: see [Platform Server Cabling Schema](#platform-cabling)
+2. Switch port configuration: see [Platform Server's Switch
+   Configuration](#platform-switch-configuration) for an example of
+   platform to switch cabling and port configurations.
+3. Server network interface configuration: see [Platform Server
+   Network Interface Configuration](#platform-server-network-interface).
 
 ## Storage networks
 
@@ -516,7 +521,7 @@ platform to switch cabling and port configurations.
 
 Lenovo Open Cloud supports Ceph storage backend. A storage backend can
 be shared among multiple workloads and platforms, such as OpenStack.
-Three new networks are added to [Platform Network](#platform) for Ceph
+Three new networks are added to [Platform Network](#platform-network) for Ceph
 function while leveraging [platform services](#platform services) 
 to support Storage hardware and software workloads.
 
@@ -568,7 +573,7 @@ vlan]
 
 ## Cloud networks
 
-![Lenovo Open Cloud Cloud Networks][cloud network]{.col .s12}
+![Lenovo Open Cloud Cloud Networks][cloud network]
 
 ### Cloud VLANs
 
@@ -592,17 +597,17 @@ There are two aspects of switch configurations:
    other server to switch connections are in pairs.
 
 
-## switch to switch 
+## Switch to Switch 
 
 ### cable schema
 
 ### port configurations
 
-## switch to server
+## Server to Switch
 
 ### Platform servers 
 
-#### Platform server to switch  cable schema {#platform cabling}
+#### Platform server to switch  cable schema (#platform-cabling)
 
 Each environment is different. Here we present an example cable schema
 following the network designs laid out in previous sections. In the
@@ -624,10 +629,10 @@ port configurations.
 
 Table: Platform server to switch schema in a 3-server configuration
 
-#### Platform server switch port configurations {#platform switch configuration}
+#### Platform server switch port configurations {#platform-switch-configuration}
 
 There are multiple methods to apply switch port configurations, see
-[Switch Port Configuration Methods](#switch method) for details. Here
+[Switch Port Configuration Methods](#switch-config-method) for details. Here
 we show an example using switch CLI directly.
 
 ##### To enter switch config mode
@@ -732,11 +737,76 @@ In switch's admin terminal:
 #### Cloud server to switch  cable schema
 #### Cloud server switch port configurations
 
+# Configure Server Network Interfaces {#config-server-network-interface}
+
+## Platform Server Network Interfaces {#platform-server-network-interface}
+
+As defined in [Platform Networks](#platform-network), Platform servers
+will be configured with three bonding interfaces:
+
+- `bond 0`: `eno1` and `eno2`
+- `bond 1`: `1F0` and `2F0`
+- `bond 2`: `1F1` and `2F1`
+
+**Note** that the name of these interfaces, eg. `eno1`, `1F0`, can
+vary depending on the slot the NIC card and the server side ports you
+choose to cable with switch. You can use the [Implementation
+Worksheet](#questionnaire) to create a mapping between your
+environment and this design.
+
+We will use `bond 0` for example to show steps needed to create a
+bonding interface on a Platform server running RHEL 7.5.  We will
+highlight options and values that are important for Lenovo Open Cloud.
+For general information, you can further refer to [Red Hat Enterprise
+Linux 7 Networking Guide][rhel bonding].
+
+On each Platform servers:
+
+1. Go to `/etc/sysconfig/network-scripts/`.
+1. Create networking config file `ifcfg-bond0`. Replace `IPADDR`,
+   `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
+   
+        ```shell
+        DEVICE=bond0
+        BONDING_OPTS='mode=4'
+        ONBOOT=yes
+        BOOTPROTO=none
+        IPADDR=10.240.41.231
+        NETMASK=255.255.252.0
+        GATEWAY=10.240.40.1
+        DNS1=10.240.0.10
+        ```
+
+   1. `DEVICE`: must be named `bond0`.
+   2. `BONDING_OPTS`: set to mode 4 "active-active". Refer to [Red Hat
+      Enterprise Linux 7 USING CHANNEL BONDING][rhel bonding mode]
+      for more information of bonding modes and their implications.
+
+1. Create `ifcfg-eno1`:
+
+        ```shell
+        DEVICE=eno1
+        MASTER=bond0
+        SLAVE=yes
+        ONBOOT=yes
+        ```
+
+2. Create `ifcfg-eno2`:
+
+        ```shell
+        DEVICE=eno2
+        MASTER=bond0
+        SLAVE=yes
+        ONBOOT=yes
+        ```
+
 # Configure Virtual Machines network interfaces
 
 # Appendix
 
-## Implementation Worksheet (questioinnaire)
+## Implementation Worksheet (questioinnaire) {#questionnaire}
+
+1. map server interface name --> ifcfg- files
 
 ## Hardware BOM
 
@@ -759,7 +829,7 @@ Simplified version covers server & switch at high level should be fine.
 
 Table: Software BOM, 6-server, HCI deployment, 3 year premium
 
-## Configure Lenovo Switch Port {#switch config methods}
+## Configure Lenovo Switch Port {#switch-config-methods}
 
 There are two ways to configure port on a Lenovo switch &mdash; using
 switch CLI, or using a Lenovo utility. 
@@ -845,3 +915,8 @@ guide][g8272].
     for BMC connections on 1Gb switches.
 
 [g8272]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf
+
+[rhel bonding]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/ch-configure_network_bonding#sec-Bond-Understanding_the_Default_Behavior_of_Master_and_Slave_Interfaces
+
+[rhel bonding mode]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-using_channel_bonding
+

@@ -2,12 +2,12 @@
 documentclass: report
 fontsize: 11pt
 geometry: margin=1in
-mainfont: Ubuntu
 linkstyle: slanted
-linkcolor: blue
+linkcolor: #d52349
 toc: true
 toc-depth: 4
 lof: true
+lot: true
 header-includes: |
   \usepackage{fancyhdr}
   \pagestyle{fancy}
@@ -16,7 +16,6 @@ header-includes: |
   \usepackage{dashrule}
   \usepackage{setspace}
   \onehalfspacing
-  \usepackage{csquotes}
 
   \usepackage{multicol}
   \usepackage{xspace}

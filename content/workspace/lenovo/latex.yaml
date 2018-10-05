@@ -1,0 +1,35 @@
+---
+documentclass: report
+fontsize: 11pt
+geometry: margin=1in
+mainfont: Ubuntu
+linkstyle: slanted
+linkcolor: blue
+toc: true
+toc-depth: 4
+lof: true
+header-includes: |
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyfoot[CO,CE]{Lenovo Open Cloud Network Reference Architecture}
+  \fancyfoot[LE,RO]{\thepage}
+  \usepackage{dashrule}
+  \usepackage{setspace}
+  \onehalfspacing
+  \usepackage{csquotes}
+
+  \usepackage{multicol}
+  \usepackage{xspace}
+  \usepackage{quotchap}
+  \usepackage{subfig}
+  \usepackage{parskip}
+  \usepackage{pifont}
+  \usepackage{graphicx}
+  \usepackage{float}
+  \usepackage{pdfpages}
+  \usepackage{rotating}
+
+  \definecolor{quotationcolour}{HTML}{F0F0F0}
+  \definecolor{quotationmarkcolour}{HTML}{1F3F81}
+
+---

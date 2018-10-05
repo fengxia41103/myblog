@@ -6,26 +6,8 @@ Author: Feng Xia
 Status: Draft
 
 ---
-documentclass: report
-papersize: a4
-fontsize: 10pt
-mainfont: Ubuntu
-linkstyle: slanted
-linkcolor: blue
-geometry: margin=1in
-toc: true
-toc-depth: 4
-lof: true
 title: Lenov Open Cloud Network Reference Architecture
-author: Feng Xia
-header-includes: |
-  \usepackage{fancyhdr}
-  \pagestyle{fancy}
-  \fancyfoot[CO,CE]{Lenovo Open Cloud Network Reference Architecture}
-  \fancyfoot[LE,RO]{\thepage}
-  \usepackage{dashrule}
-  \usepackage{setspace}
-  \onehalfspacing
+author: IBB Platform Team
 abstract: |
   Lenovo Open Cloud consists of a list of physical servers (aka. nodes)
   and virtual machines (VMs). This reference environment provides a
@@ -381,7 +363,7 @@ LOC networks can be viewed in three groups whereas:
    networks to handle Ceph data storage traffic and Ceph management functions.
 3. **cloud network**: 
 
-## Conventions
+## Conventions {#convention}
 
 Hardware can break. It is important to keep this in mind when designing
 a network connection. In this architecture we have followed these
@@ -463,7 +445,7 @@ VM management
 
 
 | Platform Services                           | 1 | 2 | 3 | 10 | 100 | 400 | 600 |
-|---------------------------------------------|---|---|---|----|-----|-----|-----|
+|---------------------------------------------|:-:|:-:|:-:|:--:|:---:|:---:|:---:|
 | Runtime                                     | x |   |   |    | x   |     |     |
 | Software repository & life cycle management | x |   | x |    |     |     | x   |
 | Automation                                  | x |   | x | x  |     |     | x   |
@@ -497,17 +479,36 @@ below:
 ![Lenovo Open Cloud Plaform Server Network Interfaces][platform server
 vlan]
 
+### Platform server's NIC to switch mapping{#platform switch mapping}
 
-### Platform server's NIC to switch mapping
+To comply with [convention](#convention), Open Cloud uses two G8052
+(1Gb) switches and two G8272 (10Gb) switches to support high
+throughput and fault tolerance. Table below shows switch port
+configurations including `mode`, `native VLAN` (aka. untagged VLAN),
+`tagged VLAN` (aka. allowed VLANs):
 
-| Server Side | Switch port mode | Switch port native VLAN | Switch port tagged VLAN |
-|-------------|------------------|-------------------------|-------------------------|
-| BMC         | access           | 2                       | n/a                     |
-| 2 x 1G      | trunk            | 10                      | 1,3,10,100              |
-| 2 x 10G     | access           | 400                     | n/a                     |
-| 2 x 10G     | trunk            | 600                     | 600                     |
+On the server side, each server has minimal two 1Gb ports (for
+example, `eno1` and `eno2`) and four 10Gb ports (for example, `1F0`,
+`1F1`, `2F0`, `2F1`). Once provisioned three bond interfaces will be
+created per server:
 
-![Lenovo Open Cloud Plaform Server to Switch][platform switch config]
+- `bond 0`: `eno1` and `eno2`
+- `bond 1`: `1F0` and `2F0`
+- `bond 2`: `1F1` and `2F1`
+
+| Server NIC | Server Bond | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------+-------------+---------------+-------------+-------------+-------------|
+| BMC        | n/a         | n/a           | access      |           2 | n/a         |
+| 2 x 1G     | bond 0      | management    | trunk       |          10 | 1,3,10,100  |
+| 2 x 10G    | bond 1      | storage       | access      |         400 | n/a         |
+| 2 x 10G    | bond 2      | workloads     | trunk       |         600 | 600         |
+
+![Lenovo Open Cloud Plaform Server to Switch][platform switch
+config]
+
+See [Platform Cabling Schema](#platform cabling) and [Platform Switch
+Configuration](#platform switch configuration) for an example of
+platform to switch cabling and port configurations.
 
 ## Storage networks
 
@@ -594,31 +595,134 @@ There are two aspects of switch configurations:
 ## switch to switch 
 
 ### cable schema
+
 ### port configurations
 
 ## switch to server
 
-### Platform servers
+### Platform servers 
 
-#### Platform server to switch  cable schema
+#### Platform server to switch  cable schema {#platform cabling}
 
 Each environment is different. Here we present an example cable schema
 following the network designs laid out in previous sections. In the
-following sections we will use this schema to demonstrate switch
+following sections we will use this schema[^schema] to demonstrate switch
 port configurations.
 
 
-| Port | 1G switch       | 1G switch       | 10G switch      | 10G switch      |
-|------|-----------------|-----------------|-----------------|-----------------|
-| 1    | server 1 BMC    |                 | server 1 bond 1 | server 1 bond 1 |
-| 2    | server 2 BMC    |                 | server 2 bond 1 | server 2 bond 1 |
-| 3    | server 3 BMC    |                 | server 3 bond 1 | server 3 bond 1 |
-| 17   | server 1 bond 0 | server 1 bond 0 |                 |                 |
-| 18   | server 2 bond 0 | server 2 bond 0 |                 |                 |
-| 19   | server 3 bond 0 | server 3 bond 0 |                 |                 |
-|      |                 |                 |                 |                 |
+| Port | G8052 (1Gb)         | G8052 (1Gb)         | G8272 (10Gb)       | G8272 (10Gb)       |
+|------|---------------------|---------------------|--------------------|--------------------|
+| 1    | server 1 BMC        | <reserved for BMC>  | server 1 storage   | server 1 storage   |
+| 2    | server 2 BMC        |                     | server 2 storage   | server 2 storage   |
+| 3    | server 3 BMC        |                     | server 3 storage   | server 3 storage   |
+| 4    |                     |                     | server 1 workloads | server 1 workloads |
+| 5    |                     |                     | server 2 workloads | server 2 workloads |
+| 6    |                     |                     | server 3 workloads | server 3 workloads |
+| 17   | server 1 management | server 1 management |                    |                    |
+| 18   | server 2 management | server 2 management |                    |                    |
+| 19   | server 3 management | server 3 management |                    |                    |
 
-#### Platform server switch port configurations
+Table: Platform server to switch schema in a 3-server configuration
+
+#### Platform server switch port configurations {#platform switch configuration}
+
+There are multiple methods to apply switch port configurations, see
+[Switch Port Configuration Methods](#switch method) for details. Here
+we show an example using switch CLI directly.
+
+##### To enter switch config mode
+
+In terminal, telnet to either G8052 or G8272 Lenovo switch, and enter
+config mode by enabling `admin mode`:
+
+```shell
+# en <-- enable admin mode
+# configure <-- to enter config mode
+```
+
+The rest of port configurations can only be applied when in `config
+mode`.
+
+##### Platform server BMC connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| BMC        | n/a           | access      | 2           | n/a         |
+
+Table: Platform server BMC connection switch port config
+
+To configure BMC connections, using G8052 port 1 for example.
+Replace `1/1` with `1/2` for port 2, and `1/3` for port 3.
+
+In switch admin terminal:
+
+```shell
+# interface ethernet 1/1
+# bridge-port mode access
+# bridge-port access vlan 2
+```
+
+##### Platform server `management` connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| 2 x 1G     | management    | trunk       | 10          | 1,3,10,100  |
+
+Table: Platform server `management` connection switch port config
+
+To configure connections used for `management`(`bond 0`), using G8052
+port 17 for example. Apply the same configuration to port 17, 18 and
+19 on both G8052 switches.
+
+In switch's admin terminal:
+
+```shell
+# interface ethernet 1/17
+# bridge-port mode trunk
+# bridge-port trunk allowed vlan 1,3,10,100
+# bridge-port trunk native vlan 10
+```
+
+##### `storage` connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| 2 x 10G    | storage       | access      | 400         | n/a         |
+
+Table: Platform server `storage` connection switch port config
+
+To configure connections used for `storage`(`bond 1`), using G8272
+port 1 for example. Apply the same configuration to port 1,2,3 on both
+G8272 switches.
+
+In switch's admin terminal:
+
+```shell
+# interface ethernet 1/1
+# bridge-port mode access
+# bridge-port access vlan 400
+```
+
+##### `workloads` connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| 2 x 10G    | workloads     | trunk       | 600         | 600         |
+
+Table: Platform server `workloads` connection switch port config
+
+To configure connections used for `workloads`(`bond 2`), using G8272
+port 4 for example. Apply the same configuration to port 4,5,6 on both
+G8272 switches.
+
+In switch's admin terminal:
+
+```shell
+# interface ethernet 1/4
+# bridge-port mode trunk
+# bridge-port trunk allowed vlan 600
+# bridge-port trunk native vlan 600
+```
 
 ### Storage servers
 #### Storage server to switch  cable schema
@@ -654,6 +758,46 @@ Simplified version covers server & switch at high level should be fine.
 | MCT3474F3 | Red Hat Insights                                                  | 1   |
 
 Table: Software BOM, 6-server, HCI deployment, 3 year premium
+
+## Configure Lenovo Switch Port {#switch config methods}
+
+There are two ways to configure port on a Lenovo switch &mdash; using
+switch CLI, or using a Lenovo utility. 
+
+### method 1: using switch CLI
+
+Using switch CLI has always the choice of network admin.  You can find
+more information of these command in the [G8272 application
+guide][g8272].
+
+1. Open a telnet session to the switch. Default login is username
+   `admin` and password `admin`.
+
+        ```shell
+        $ telnet  10.240.41.51 <-- switch IP
+        ```
+
+2. Once in the switch admin terminal
+   1. enter config mode: `en` then `configure`
+   2. select the port to config: `interface ethernet 1/<port id>`
+   3. set mode to `trunk`: `bridge-port mode trunk`
+   4. set allowed vlans: `bridge-port trunk allowed vlan
+      <1,2,3..>`. Allowed vlans can be a comma delimited value list.
+   5. last, set native vlan: `bridge-port trunk native vlan <vlan
+      id>`. **Note** that native VLAN must also be included in the
+      `allowed vlan` list.
+     
+   Example:
+
+        ```shell
+        # en <-- enable admin mode
+        # configure <-- to enter config mode
+        # interface ethernet 1/<port id>  <-- select port to config
+        # bridge-port mode trunk
+        # bridge-port trunk allowed vlan <1,2,3...>
+        # bridge-port trunk native vlan <vlan id>
+        ```
+
 
 [overall architecture]: ../../images/ibb/ibb%20overall%20architecture.png
 [network overview]: ../../images/ibb/ibb%20network%20design%20overview.png
@@ -697,3 +841,7 @@ Table: Software BOM, 6-server, HCI deployment, 3 year premium
 [^v10]: Bonding provisioning network is optional because loading an
     operating system is not a frequent event.
 
+[^schema]: In this layout, we follow a practice of reserving port 1-17
+    for BMC connections on 1Gb switches.
+
+[g8272]: http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf

@@ -2,75 +2,101 @@ Title: About
 Tags: thoughts
 Slug: about
 Author: Feng Xia
-
-
-PY Consulting was founded in 2015 by a group of friends who share a
-passion of technology and want to provide quality service to our
-customers. We are specialized in building <span class="myhighlight">
-prototypes of data-driven web application</span> using Python Django
-framework and Material front end. Our key advantage is to achieve a
-quick turn around from perceiving a concept to having a usable sandbox
-environment. A typical cycle runs between 2 to 4 weeks, and in most
-cases, your system will be up and running within one week.
-
+Modified: 2018-10-06 10:40
 
 <figure class="col l6 m6 s12">
   <img src="/images/funny/wtf-code.png"/>
 </figure>
 
 
-From experience, we have come to realize that most _customers_ have a
-fairly broad idea of what the solution will be like. Often enough they
-have a certain _technology_ in mind they prefer to use. However, such
-preference can be distracting.
+I started PY Consulting in 2015, hoping to advocate the value of POC
+(proof-of-concent). I have done quite a few projects, both in my
+leisure and as a real product, with satisfactory results measured by a
+view point of technology. Yet, I have not found the sweet spot to
+convince its business value.
 
+It has been a crusade to preach the important of POC, and why every
+project, every business, every application, should have, will have,
+and must have. There is no doubt in my mind, and I'm speaking this as
+a practitioner, that technologies are so complex these days that
+seeing a pretty web UI gives non-programmer an illusion that these can
+be had in a matter of days, weeks, if not hours, or even, instantly.
 
-First of all, engineers are hired to create a solution for you. It is
-key that they could _internalize_ the problem first before forming
-an implementation strategy.  Customer proposing a particular
-technology is a good starting point by indicating their preference. It
-is equally important to keep an open mind and be ready to discuss and
-try alternative ways. Instead of hang up on which library or
-programming language to use, focus on the problem &mdash; business
-process, user roles, organizational layout, responsibility chart,
-hidden assumptions, domain knowledge and constraints, management
-expectation &mdash; only after the problem has been well understood
-could one picks _the right tool_ for the job.
+On the one hand, this illusion is true, justified. Toolsets have been
+developed in thousands to facilitate numerous path of
+implementation. Anything, any use case, one can think of, has a
+solution, readily canned solution, out there. How convenient!
+Therefore, it is no surprise that business side takes technology _for
+granted_ as if it is commodity one buys off the shelf. And indeed the
+technologies promote such a perception that not only technology and
+its product, but the worker (aka. IT people) are nothing but a product
+ready to buy at the expanse of a sum on credit card or payroll &rarr;
+just slide, violla, it's done.
 
+But on the other, this is completly untrue. Not only it is not true, I
+would even argue that this is exactly the wrong approach, wrong
+attitude, wrong perception of technology. What you see on shelf is a
+shrink wrapped product implemented by engineers who designed, wrote
+code, tested, and delivered, as a canned solution of, some
+problem. But it will be completly false to think that by using a
+credit card is an easy, quick, taking-a-minute-only to solve your
+problem, whatever it is. This isn't a shopping experience like others
+you do in life. The gap lies in a hidden fact that when you shop, say,
+grocery, you have an understanding of your problem, and a knowledge of
+your solution &larr; you know you want to eat cereal, and you
+have knowledge what cereal is, and you have even preference of which
+cereal you want (flavor, brand, degree of crunchiness). These are the
+actual foundation to make your solution, in this example buying
+grocery, so effective. This pattern applies to all other shoppings you
+do. It is this hidden knowledge that you have (but not necessarily
+communicated to anyone else) is making buying off the shelf product a
+valid solution. 
 
-Secondly, each technology has pros and cons. This is a given.  We have
-overcome quite some challenging learning curves and have become
-skillful of certain toolsets, but they may not include the cool buzz
-word everyone is talking about. In software design and development,
-having a shallow knowledge a hot topic is easy; having sufficient
-experience and insight to create a robust and efficient overall system
-is hard. Knowing alphabet doesn't mean one can write a novel. System
-nowadays requires a sound knowledge of the entire stack, which covers
-at least half dozen languages &mdash; `CSS`, `JS` and `HTML` for frontend,
-`Python/Ruby/Javascript/Java/Go/.net` for backend, and `SQL/XML/JSON/YAML`
-for data persistence. Each of them has different syntax, style rules,
-process to compile, build, test, and deploy. Not to mention for each
-task there are another half dozen frameworks and libraries written in
-that language to choose from. This chain can go on and on and on. I
-always believe knowing your tool well is more important than using the
-"best" tool half-baked.
+Now imagine you don't know these. There are zillion tools, products
+you can buy, but it will futile to state that any can satisfy you,
+because, the problem is not defined. This is exactly the gap when
+business approaches technology while not analyzing its own problem
+first, or not communicating this list of attributes (brand, flavor,
+crunchiness of a cereal) to your evaluation. Then, what to buy!? These
+tools and products will never replace the analysis and the matrix of
+attributes. 
 
+Here comes in the value of POC. POC is a technique to manifest
+attributes and capture your preference in as short an iteration as
+possible. Nothing beats have the capability to visualize, to interact
+(even in an emulator), your own thoughts mapped right in front of
+you. However the manifest might be further from ideal, it gives you a
+starting point to criticize, to correct, and to progressively
+summarize the business objective, assumptions, and the characteristics
+that matter to the user and stakeholders. POC is not solution; rather,
+it is a method, like methods adopted in science research, to give you
+a path to remove noise, identify fallacy, and moving inches by inches
+towards, facts and truth. 
 
-So do us a favor,  check out the samples we have produced in the
-past and documents that illustrated our design methdology and
-toolchain, then decide whether our __toolset__ and __mindset__ fit
-your preference.
+In this process, therefore, developer is the one who understands the
+tools and the process, and is a translator to map a knowledge from
+your mind, from business lingual, from other artifacts, into a clearly
+defined abstract (aka. models), that is traceable, ready for review,
+ready for test, ready for change, while maintaining a hold of
+consistency that is only achievable by means of technology. Such
+capacity of consistency and clarity is exactly the value that a POC
+offers. So either yourself is a scientist and has figured out (and
+better written out so others can understand), or you adopt a method
+that can get to the bottom of it, there is no third option exist.
 
-We are constantly building up our toolbox with new technologies, new
-tricks, best practices and such. But at the mean time, we are stubborn
-old timers. We want to be convinced by a __real__ case in which our
-existing toolbox can not handle the challenge _gracefully_ anymore
-&mdash; we think this is the only way to evaluate how switching to a
-new tool would help, by how much, what made the difference, and in
-what situation it becomes useful.
+I have listed some [demo showcases][1] which I built over the last
+couple years while talking to various entrepreneurs who held a good
+idea and eager to bring it forward. I had the pleasure to understand
+their business case, and put them together using a technology stack I
+feel confident to take them further if they choose. All these have
+been written in a matter of 24 hours when the first iteration was
+complete, in which the UI you see, and the data models standing behind
+to support the case, have mostly done. It will be an exaggeration that
+24 hour is all you need; but it is close. 
 
+Again, it is the process, and the capability to understand the problem
+and to map them into a technical solution that I'm advocating, not a
+product or a technology that I'm investing in. If you like this idea,
+then we should talk; if not, good luck.
 
-We believe this is how we could deliver quality to our customer
-&mdash; if going to a war, do you want to be with somebody who shoots
-a bull's eye with a WWII rifle?  or someone who can operate a 21-st
-century cutting-edge weapon but can not aim well?
+[1]: /category/demo.html

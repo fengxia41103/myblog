@@ -10,7 +10,7 @@ Modified: 2018-10-06 10:40
 
 
 I started PY Consulting in 2015, hoping to advocate the value of POC
-(proof-of-concent). I have done quite a few projects, both in my
+(proof-of-concept). I have done quite a few projects, both in my
 leisure and as a real product, with satisfactory results measured by a
 view point of technology. Yet, I have not found the sweet spot to
 convince its business value.

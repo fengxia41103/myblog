@@ -6,7 +6,7 @@ Author: Feng Xia
 Status: Draft
 
 ---
-title: Lenov Open Cloud Network Reference Architecture
+title: Lenov Open Cloud Platform Network Reference Architecture
 author: IBB Platform Team
 abstract: |
   Lenovo Open Cloud consists of a list of physical servers (aka. nodes)
@@ -268,7 +268,7 @@ the services they provide:
    provides capability to manage Ceph cluster up to xx.
 3. **Cloud services**: Cloud is built upon Red Hat Openstack.
 
-## Platform services
+## Platform services {#platform-services}
 
 Platform services provide administrative functions to support
 operation of the Open Cloud. This includes management of software life
@@ -352,18 +352,9 @@ See [product guide][confluent] for details.
 ## Cloud services
 ### Openstack
 
-# Network Design
+# Platform Network Design {#platform-network}
 
-![Lenovo Open Cloud Network Overview][network overview]
-
-LOC networks can be viewed in three groups whereas:
-
-1. **platform network**: to support platform services.
-2. **storage network**: built on top of platform network with added
-   networks to handle Ceph data storage traffic and Ceph management functions.
-3. **cloud network**: 
-
-## Conventions {#convention}
+## Design Conventions {#convention}
 
 Hardware can break. It is important to keep this in mind when designing
 a network connection. In this architecture we have followed these
@@ -377,14 +368,48 @@ conventions:
 This then requires matching configuration on the switch using LACP,
 and on the server using **active-active** [`bonding`][bonding].
 
+## Network Overview
+
+![Lenovo Open Cloud Network Overview][network overview]
+
+On the high level, LOC networks can be viewed in three groups &mdash;
+platform network, storage network, and cloud network. In the following
+sections, we will discuss the network design to support **Platform**
+hardware and services. We will follow these steps to help user
+understand the design and highlight considerations we recommend to
+take in implementation:
+
+1. Define networks by its function: this defines the purpose of this
+   network, thus clarifying its characteristics such as load, latency,
+   space, etc..
+4. Map network/VLANs to server's network interface: this defines how
+   server side interfaces will be configured to support these
+   networks.
+5. Map server's networking interface to switch: this defines the
+   connection between server and switch, thus the switch side
+   configurations including port mode, vLAG, native vlan, and untagged
+   vlans.
+6. Cabling schema: this defines switch port assignments, which server
+   port is to be connected to which switch and which port.
+7. Configure switches: this shows how to apply switch side
+   configurations to Lenovo G8052 and Lenovo G8072 switches.
+8. Configure server network interfaces: this shows configuration files
+   used to create network interfaces on the server with RHEL
+   7.5
+2. Map services to network/VLAN: this defines networks that are needed
+   to each Platform service.
+3. Configure service VM: this defines configuration steps used to
+   prepare each Platform service instance to be in compliance with
+   this network design.
+
+
 ## Connection To Upstream
 
 Showing switch topology within IBB as well as how it is connected to
 upstream &rarr; what is required from upstream, eg. dhcp, dns,
 gateway, access to RH CDN.
 
-
-## Platform networks {#platform-network}
+## Define Platform Networks
 
 ![Lenovo Open Cloud Platform Network Overview][platform network]
 
@@ -392,7 +417,8 @@ Platform networks are designed to offer performance and high
 availability. For illustration purpose we are to separate networks by
 their function so to highlight some design considerations. It is
 possible to merge these to fewer networks, or to reuse existing ones
-for the purpose. For this use section "VLAN Mapping Worksheet". 
+for the purpose. See [Implementation Worksheet](#questionnaire) for
+details.
 
 Campus
 : `campus` network is a name for public access. This is the network
@@ -430,6 +456,12 @@ VM management
   Cloud services and VM workloads. Later we will see that it's also
   advised to dedicate a NIC for this same purpose.
 
+One convention we follow is to assign networks with private spaces,
+eg. `192.168.x.x`, defined in [RFC 1918][rfc 1918] whenever
+possible. This makes this environment self-contained, and you can
+gradually open it up by routing or other network methods to expose
+service and access.
+
 
 | Network                     | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
 | --------------------------- | ----- | ------------------  | ---------- | ------ | --------------- | -------------- |
@@ -441,81 +473,349 @@ VM management
 | glusterFS                   | 400   | 192.168.40.x        | 3/6/9      | /29    | static          | 192.168.40.1   |
 | VM management               | 600   | 192.168.60.x        | 11         | /28    | static          | 192.168.60.1   |
 
-### Platform services to VLAN mapping
+Table: Platform Network Defintions
 
+## Map VLAN to Server NIC {#platform-vlan-to-nic}
+
+First, we are to map VLAN to server network interfaces.  Besides BMC
+port, each server has minimal two 1Gb ports and four 10Gb ports.
+Interfaces are paired to form an `active-active` bonding interface on
+Platform server. We will also create a network bridge on top of a
+bonding interface:
+
+| Network                    | VLAN | BMC | 2 x 1G | 2 x 10G | 2 x 10G | Bond | Bridge     |
+|----------------------------|------|:---:|:------:|:-------:|:-------:|------|------------|
+| Campus                     | 1    |     | x      |         |         | 0    | management |
+| BMC                        | 2    | x   |        |         |         | n/a  | n/a        |
+| Physical server management | 3    |     | x      |         |         | 0    | management |
+| OS provisioning            | 10   |     | x      |         |         | 0    | management |
+| OVIRT management           | 100  |     | x      |         |         | 0    | management |
+| glusterFS                  | 400  |     |        | x       |         | 1    | storage    |
+| VM management              | 600  |     |        |         | x       | 2    | workloads  |
+
+Table: Platform VLAN to Server's NIC Mapping
+
+![Lenovo Open Cloud Plaform Server Network Interfaces][platform server
+vlan]
+
+## Map Server NIC to Switch {#platform-nic-to-switch}
+
+Next, we are to map connection between server's network interface to
+switch connections.
+
+By [convention](#convention), Open Cloud uses two G8052 (1Gb) switches
+and two G8272 (10Gb) switches to support high throughput and fault
+tolerance. Table below shows switch port configurations including
+`mode`, `native VLAN` (aka. untagged VLAN), `tagged VLAN`
+(aka. allowed VLANs):
+
+On the server side, each server has minimal two 1Gb ports (for
+example, `eno1` and `eno2`) and four 10Gb ports (for example, `1F0`,
+`1F1`, `2F0`, `2F1`). Once provisioned three bond interfaces and three
+bridge intefaces will be created per server:
+
+
+| Server NIC | Server Bond | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|-------------|---------------|-------------|-------------|-------------|
+| BMC        | n/a         | n/a           | access      | 2           | n/a         |
+| eno1, eno2 | bond 0      | management    | trunk       | 10          | 1,3,10,100  |
+| 1F0, 2F0   | bond 1      | storage       | access      | 400         | n/a         |
+| 1F1, 2F1   | bond 2      | workloads     | trunk       | 600         | 600         |
+
+Table: Platform Server NIC to Switch Mapping
+
+![Lenovo Open Cloud Plaform Server to Switch][platform switch config]
+
+## Define Cable Schema {#platform-cabling}
+
+Each environment is different. Here we present an example cable schema
+following the network designs laid out in previous sections. In the
+following sections we will use this schema[^schema] to demonstrate switch
+port configurations.
+
+We have opted to reserve port 1-16 on two G8052 switches for BMC
+connections of all servers in this example. We found it easier to
+locate them physically on the switch for troubleshooting purpose
+considering OOB connections are essential to manage server. However,
+your management style may call a different approach.
+
+| Port | G8052 (1Gb)   | G8052 (1Gb)   | G8272 (10Gb) | G8272 (10Gb) |
+|------|---------------|---------------|--------------|--------------|
+| 1    | server 1 BMC  |               | server 1 1F0 | server 1 2F0 |
+| 2    | server 2 BMC  |               | server 2 1F0 | server 2 2F0 |
+| 3    | server 3 BMC  |               | server 3 1F0 | server 3 2F0 |
+| 4    |               |               | server 1 1F1 | server 1 2F1 |
+| 5    |               |               | server 2 1F1 | server 2 2F1 |
+| 6    |               |               | server 3 1F1 | server 3 2F1 |
+| 17   | server 1 eno1 | server 1 eno2 |              |              |
+| 18   | server 2 eno1 | server 2 eno2 |              |              |
+| 19   | server 3 eno1 | server 3 eno2 |              |              |
+
+Table: Platform server to switch schema in a 3-server configuration
+
+## Configure Switch Ports {#platform-switch-configuration}
+
+There are multiple methods to apply switch port configurations, see
+[Switch Port Configuration Methods](#switch-config-method) for details. Here
+we show an example using switch CLI directly.
+
+By referencing the server side connections which are grouped by
+function into BMC, management, storage and workloads, we can also
+group switch ports into these four categories since each group
+share the same configuration.
+
+
+### Enter config mode
+
+In terminal, telnet to either G8052 or G8272 Lenovo switch, and enter
+config mode by enabling `admin mode`:
+
+```shell
+# en <-- enable admin mode
+# configure <-- to enter config mode
+```
+
+The rest of port configurations can only be applied when in `config
+mode`.
+
+### Configure BMC connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| BMC        | n/a           | access      | 2           | n/a         |
+
+Table: Platform server BMC connection switch port config
+
+To configure BMC connections, using G8052 port 1 for example.
+Replace `1/1` with `1/2` for port 2, and `1/3` for port 3.
+
+In switch admin terminal:
+
+```shell
+# interface ethernet 1/1
+# bridge-port mode access
+# bridge-port access vlan 2
+```
+
+### Configure `management` connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| 2 x 1G     | management    | trunk       | 10          | 1,3,10,100  |
+
+Table: Platform server `management` connection switch port config
+
+To configure connections used for `management`(`bond 0`), using G8052
+port 17 for example. Apply the same configuration to port 17, 18 and
+19 on both G8052 switches.
+
+In switch's admin terminal:
+
+```shell
+# interface ethernet 1/17
+# bridge-port mode trunk
+# bridge-port trunk allowed vlan 1,3,10,100
+# bridge-port trunk native vlan 10
+```
+
+### Configure `storage` connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| 2 x 10G    | storage       | access      | 400         | n/a         |
+
+Table: Platform server `storage` connection switch port config
+
+To configure connections used for `storage`(`bond 1`), using G8272
+port 1 for example. Apply the same configuration to port 1,2,3 on both
+G8272 switches.
+
+In switch's admin terminal:
+
+```shell
+# interface ethernet 1/1
+# bridge-port mode access
+# bridge-port access vlan 400
+```
+
+### Configure `workloads` connections
+
+| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|---------------|-------------|-------------|-------------|
+| 2 x 10G    | workloads     | trunk       | 600         | 600         |
+
+Table: Platform server `workloads` connection switch port config
+
+To configure connections used for `workloads`(`bond 2`), using G8272
+port 4 for example. Apply the same configuration to port 4,5,6 on both
+G8272 switches.
+
+In switch's admin terminal:
+
+```shell
+# interface ethernet 1/4
+# bridge-port mode trunk
+# bridge-port trunk allowed vlan 600
+# bridge-port trunk native vlan 600
+```
+
+## Configure Server Interfaces
+
+As defined in [Platform Networks](#platform-network), Platform servers
+will be configured with three bonding interfaces and three bridges:
+
+| Server Interface | Bond   | Bridge     |
+|------------------|--------|------------|
+| eno1, eno2       | bond 0 | management |
+| 1F0, 2F0         | bond 1 | storage    |
+| 1F1, 2F1         | bond 2 | workloads  |
+
+**Note** that the name of these interfaces, eg. `eno1`, `1F0`, can
+vary depending on the slot the NIC card and the server side ports you
+choose to cable with switch. You can use the [Implementation
+Worksheet](#questionnaire) to create a mapping between your
+environment and this design.
+
+### Configure Bonding Interface
+
+![Platform Server Network Interface][platform server interface]
+
+We will use `bond 0` for example to show steps needed to create a
+bonding interface on a Platform server running RHEL 7.5.  We will
+highlight options and values that are important for Lenovo Open Cloud.
+For general information, you can further refer to [Red Hat Enterprise
+Linux 7 Networking Guide][rhel bonding].
+
+
+On each Platform servers:
+
+1. Go to `/etc/sysconfig/network-scripts/`.
+2. Create networking config file `ifcfg-bond0`. Replace `IPADDR`,
+   `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
+
+
+        ```shell
+        DEVICE=bond0
+        BONDING_OPTS='mode=4'
+        ONBOOT=yes
+        BOOTPROTO=none
+        DEFROUTE=no
+        IPADDR=10.240.41.231
+        NETMASK=255.255.252.0
+        GATEWAY=10.240.40.1
+        DNS1=10.240.0.10
+        ```
+
+   1. `DEVICE`: must be named `bond0`.
+   2. `BONDING_OPTS`: 
+      1. mode=4: set to **active-active**. This is consistent with
+         switch ports who are bonded in vLAG. Refer to [Red Hat Enterprise
+         Linux 7 USING CHANNEL BONDING][rhel bonding mode] for more
+         information of bonding modes and their implications.
+      2. miimon=100: enable MII monitoring.
+   3. `DEFROUTE`: must be `no`.
+   
+3. Create `ifcfg-eno1`:
+
+        ```shell
+        DEVICE=eno1
+        MASTER=bond0
+        SLAVE=yes
+        ONBOOT=yes
+        DEFROUTE=no
+        ```
+
+4. Create `ifcfg-eno2`:
+
+        ```shell
+        DEVICE=eno2
+        MASTER=bond0
+        SLAVE=yes
+        ONBOOT=yes
+        DEFROUTE=no
+        ```
+
+5. `systemctl network restart` to take effect.
+
+6. use `ip a` to verify that interfaces are up and running.
+
+### Create Bridge Interface
+
+| Network                    | Bridge     | Bond | VLAN |
+|----------------------------+------------+------+------|
+| Campus                     | management |    0 |    1 |
+| Physical server management | management |    0 |    3 |
+| OS provisioning            | management |    0 |   10 |
+| OVIRT management           | management |    0 |  100 |
+| glusterFS                  | storage    |    1 |  400 |
+| VM management              | workloads  |    2 |  600 |
+
+
+Below we will use `OS provisioning` network for example. It is
+assigned VLAN 10, and should run on `management` bridge that binds to
+`bond0`.
+
+1. Go to `/etc/sysconfig/network-scripts/`.
+2. Create networking config file `ifcfg-management`. Replace `IPADDR`,
+   `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
+
+        ```shell
+        DEVICE=management
+        TYPE=Bridge
+        DELAY=0
+        STP=off
+        ONBOOT=yes
+        MTU=1500
+        DEFROUTE=no
+        NM_CONTROLLED=no
+        IPV6INIT=no
+        ```
+3. Create `ifcfg-bond0.10` that represents `OS provisioning` network
+   which is assigned to VLAN 10, and will run on `bond0`:
+
+        ```shell
+        DEVICE=bond0.10 
+        VLAN=yes
+        BRIDGE=management 
+        ONBOOT=yes
+        MTU=1500
+        DEFROUTE=no
+        NM_CONTROLLED=no
+        IPV6INIT=no
+        ```
+   1. `DEVICE`: in format of `<bond name>.<vlan number>`.
+   2. `BRIDGE`: name of the bridge, in this case `management`.
+
+4. `systemctl network restart` to take effect.
+5. use `ip a` to verify that interfaces are up and running.
+
+## Map Services to VLAN
+
+Platform services are VMs running on RHV. Based on the VLANs we have
+defined in previous section, we are to map these services to VLANs
+based on the functions the service will provide.
 
 | Platform Services                           | 1 | 2 | 3 | 10 | 100 | 400 | 600 |
 |---------------------------------------------|:-:|:-:|:-:|:--:|:---:|:---:|:---:|
 | Runtime                                     | x |   |   |    | x   |     |     |
 | Software repository & life cycle management | x |   | x |    |     |     | x   |
-| Automation                                  | x |   | x | x  |     |     | x   |
-| Server config & OS deployment               | x | x |   | x  |     |     |     |
-| Inventory planning                          | x | x |   | x  |     |     | x   |
+| Automation                                  | x |   | x |    |     |     | x   |
+| Server config & OS deployment               |   | x |   | x  |     |     |     |
+| Inventory planning                          | x | x |   |    |     |     | x   |
 | Discovery                                   | x | x |   | x  |     |     | x   |
 | OS image                                    |   |   |   |    |     |     |     |
 | Configure & Automation repository service   |   |   |   |    |     |     |     |
 
+Table: Platform Services to VLAN Mapping
+
 ![Lenovo Open Cloud Plaform Service Network Interfaces][platform
 service vlan]
 
-### Platform VLAN to server's NIC mapping
+## Configure VM Interfaces
 
-Besides BMC port, each server has  minimal two 1Gb ports and four 10Gb
-ports.  Interfaces  are  paired   to  form  an  active-active  bonding
-interface on Platform server. Optionally, we can also create a network
-bridge on top of a bonding  interface. A sample configuration is shown
-below:
 
-| Network                    | VLAN | BMC | 2 x 1G  | 2 x 10G | 2 x 10G | Bond | Bridge     |
-|----------------------------|------|:---:|:-------:|:-------:|:-------:|------|------------|
-| Campus                     | 1    |     | x       |         |         | 0    | management |
-| BMC                        | 2    | x   |         |         |         | n/a  | n/a        |
-| Physical server management | 3    |     | x       |         |         | 0    | management |
-| OS provisioning            | 10   |     | x[^v10] |         |         | n/a  |            |
-| OVIRT management           | 100  |     | x       |         |         | 0    | management |
-| glusterFS                  | 400  |     |         | x       |         | 1    | storage    |
-| VM management              | 600  |     |         |         | x       | 2    | workloads  |
 
-![Lenovo Open Cloud Plaform Server Network Interfaces][platform server
-vlan]
-
-### Platform server's NIC to switch mapping {#platform-switch-mapping}
-
-To comply with [convention](#convention), Open Cloud uses two G8052
-(1Gb) switches and two G8272 (10Gb) switches to support high
-throughput and fault tolerance. Table below shows switch port
-configurations including `mode`, `native VLAN` (aka. untagged VLAN),
-`tagged VLAN` (aka. allowed VLANs):
-
-On the server side, each server has minimal two 1Gb ports (for
-example, `eno1` and `eno2`) and four 10Gb ports (for example, `1F0`,
-`1F1`, `2F0`, `2F1`). Once provisioned three bond interfaces will be
-created per server:
-
-- `bond 0`: `eno1` and `eno2`
-- `bond 1`: `1F0` and `2F0`
-- `bond 2`: `1F1` and `2F1`
-
-| Server NIC | Server Bond | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------+-------------+---------------+-------------+-------------+-------------|
-| BMC        | n/a         | n/a           | access      |           2 | n/a         |
-| 2 x 1G     | bond 0      | management    | trunk       |          10 | 1,3,10,100  |
-| 2 x 10G    | bond 1      | storage       | access      |         400 | n/a         |
-| 2 x 10G    | bond 2      | workloads     | trunk       |         600 | 600         |
-
-![Lenovo Open Cloud Plaform Server to Switch][platform switch
-config]
-
-To implement this design takes three steps:
-
-1. Cable server to switch: see [Platform Server Cabling Schema](#platform-cabling)
-2. Switch port configuration: see [Platform Server's Switch
-   Configuration](#platform-switch-configuration) for an example of
-   platform to switch cabling and port configurations.
-3. Server network interface configuration: see [Platform Server
-   Network Interface Configuration](#platform-server-network-interface).
-
-## Storage networks
+# Storage networks
 
 ![Lenovo Open Cloud Storage Networks][storage network]
 
@@ -542,25 +842,25 @@ Ceph cluster private
 | Ceph cluster private | 40x  | 192.168.4<C>.x | 254       | /24  | static        | 192.168.4<C>.1 |
 
 
-### Storage services to VLAN mapping
+## Storage services to VLAN mapping
 
 | Storage Services    | 1 | 30 | 600 |
 |---------------------|---|----|-----|
 | Capacity management | x | x  | x   |
 
-### Storage VLAN to server's NIC mapping
+## Storage VLAN to server's NIC mapping
 
 | Network              | VLAN | BMC | 2 x 1G | 2 x 10G | 2 x 10G | Bond | Bridge            |
-|----------------------|------|:---:|:------:|:-------:|:-------:|------|-------------------|
-| BMC                  | 2    | x   |        |         |         | n/a  | n/a               |
-| Ceph management      | 30   |     | x      |         |         | 0    | management        |
-| Ceph storage public  | 30x  |     |        | x       |         |      | public data path  |
-| Ceph cluster private | 40x  |     |        |         | x       |      | private data path |
+|----------------------+------+-----+--------+---------+---------+------+-------------------|
+| BMC                  |    2 | x   |        |         |         |  n/a | n/a               |
+| Ceph management      |   30 |     | x      |         |         |    0 | management        |
+| Ceph storage public  |  30x |     |        | x       |         |    1 | public data path  |
+| Ceph cluster private |  40x |     |        |         | x       |    2 | private data path |
 
 ![Lenovo Open Cloud Storage Server Network Interfaces][storage server
 vlan]
 
-### Storage server's NIC to switch mapping
+## Storage server's NIC to switch mapping
 
 | Server Side | Switch port mode | Switch port native VLAN | Switch port tagged VLAN |
 |-------------|------------------|-------------------------|-------------------------|
@@ -571,240 +871,68 @@ vlan]
 
 ![Lenovo Open Cloud Storage Server to Switch][storage switch config]
 
-## Cloud networks
+# Cloud networks
 
 ![Lenovo Open Cloud Cloud Networks][cloud network]
 
-### Cloud VLANs
-
-### Cloud server's NIC to VLAN mapping
-
-### Configure Cloud server network interfaces
-
-
-# Configure Switches
-
-There are two aspects of switch configurations:
-
-1. **inter switch connections**: switch are connected to form a
-   topology allowing data traffic between Lenovo Open Cloud
-   environment and its host environments, and between LOC switches
-   within the LOC itself. All switches are paired for high
-   availability.
-2. **server connections**: are connections between server and
-   switch. Except out-of-band connection which has only one connection
-   between a server and a switch, thus does not have redundancy, all
-   other server to switch connections are in pairs.
-
-
-## Switch to Switch 
-
-### cable schema
-
-### port configurations
-
-## Server to Switch
-
-### Platform servers 
-
-#### Platform server to switch  cable schema (#platform-cabling)
-
-Each environment is different. Here we present an example cable schema
-following the network designs laid out in previous sections. In the
-following sections we will use this schema[^schema] to demonstrate switch
-port configurations.
-
-
-| Port | G8052 (1Gb)         | G8052 (1Gb)         | G8272 (10Gb)       | G8272 (10Gb)       |
-|------|---------------------|---------------------|--------------------|--------------------|
-| 1    | server 1 BMC        | <reserved for BMC>  | server 1 storage   | server 1 storage   |
-| 2    | server 2 BMC        |                     | server 2 storage   | server 2 storage   |
-| 3    | server 3 BMC        |                     | server 3 storage   | server 3 storage   |
-| 4    |                     |                     | server 1 workloads | server 1 workloads |
-| 5    |                     |                     | server 2 workloads | server 2 workloads |
-| 6    |                     |                     | server 3 workloads | server 3 workloads |
-| 17   | server 1 management | server 1 management |                    |                    |
-| 18   | server 2 management | server 2 management |                    |                    |
-| 19   | server 3 management | server 3 management |                    |                    |
-
-Table: Platform server to switch schema in a 3-server configuration
-
-#### Platform server switch port configurations {#platform-switch-configuration}
-
-There are multiple methods to apply switch port configurations, see
-[Switch Port Configuration Methods](#switch-config-method) for details. Here
-we show an example using switch CLI directly.
-
-##### To enter switch config mode
-
-In terminal, telnet to either G8052 or G8272 Lenovo switch, and enter
-config mode by enabling `admin mode`:
-
-```shell
-# en <-- enable admin mode
-# configure <-- to enter config mode
-```
-
-The rest of port configurations can only be applied when in `config
-mode`.
-
-##### Platform server BMC connections
-
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| BMC        | n/a           | access      | 2           | n/a         |
-
-Table: Platform server BMC connection switch port config
-
-To configure BMC connections, using G8052 port 1 for example.
-Replace `1/1` with `1/2` for port 2, and `1/3` for port 3.
-
-In switch admin terminal:
-
-```shell
-# interface ethernet 1/1
-# bridge-port mode access
-# bridge-port access vlan 2
-```
-
-##### Platform server `management` connections
-
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| 2 x 1G     | management    | trunk       | 10          | 1,3,10,100  |
-
-Table: Platform server `management` connection switch port config
-
-To configure connections used for `management`(`bond 0`), using G8052
-port 17 for example. Apply the same configuration to port 17, 18 and
-19 on both G8052 switches.
-
-In switch's admin terminal:
-
-```shell
-# interface ethernet 1/17
-# bridge-port mode trunk
-# bridge-port trunk allowed vlan 1,3,10,100
-# bridge-port trunk native vlan 10
-```
-
-##### `storage` connections
-
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| 2 x 10G    | storage       | access      | 400         | n/a         |
-
-Table: Platform server `storage` connection switch port config
-
-To configure connections used for `storage`(`bond 1`), using G8272
-port 1 for example. Apply the same configuration to port 1,2,3 on both
-G8272 switches.
-
-In switch's admin terminal:
-
-```shell
-# interface ethernet 1/1
-# bridge-port mode access
-# bridge-port access vlan 400
-```
-
-##### `workloads` connections
-
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| 2 x 10G    | workloads     | trunk       | 600         | 600         |
-
-Table: Platform server `workloads` connection switch port config
-
-To configure connections used for `workloads`(`bond 2`), using G8272
-port 4 for example. Apply the same configuration to port 4,5,6 on both
-G8272 switches.
-
-In switch's admin terminal:
-
-```shell
-# interface ethernet 1/4
-# bridge-port mode trunk
-# bridge-port trunk allowed vlan 600
-# bridge-port trunk native vlan 600
-```
-
-### Storage servers
-#### Storage server to switch  cable schema
-#### Storage server switch port configurations
-
-### Cloud servers
-#### Cloud server to switch  cable schema
-#### Cloud server switch port configurations
-
-# Configure Server Network Interfaces {#config-server-network-interface}
-
-## Platform Server Network Interfaces {#platform-server-network-interface}
-
-As defined in [Platform Networks](#platform-network), Platform servers
-will be configured with three bonding interfaces:
-
-- `bond 0`: `eno1` and `eno2`
-- `bond 1`: `1F0` and `2F0`
-- `bond 2`: `1F1` and `2F1`
-
-**Note** that the name of these interfaces, eg. `eno1`, `1F0`, can
-vary depending on the slot the NIC card and the server side ports you
-choose to cable with switch. You can use the [Implementation
-Worksheet](#questionnaire) to create a mapping between your
-environment and this design.
-
-We will use `bond 0` for example to show steps needed to create a
-bonding interface on a Platform server running RHEL 7.5.  We will
-highlight options and values that are important for Lenovo Open Cloud.
-For general information, you can further refer to [Red Hat Enterprise
-Linux 7 Networking Guide][rhel bonding].
-
-On each Platform servers:
-
-1. Go to `/etc/sysconfig/network-scripts/`.
-1. Create networking config file `ifcfg-bond0`. Replace `IPADDR`,
-   `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
-   
-        ```shell
-        DEVICE=bond0
-        BONDING_OPTS='mode=4'
-        ONBOOT=yes
-        BOOTPROTO=none
-        IPADDR=10.240.41.231
-        NETMASK=255.255.252.0
-        GATEWAY=10.240.40.1
-        DNS1=10.240.0.10
-        ```
-
-   1. `DEVICE`: must be named `bond0`.
-   2. `BONDING_OPTS`: set to mode 4 "active-active". Refer to [Red Hat
-      Enterprise Linux 7 USING CHANNEL BONDING][rhel bonding mode]
-      for more information of bonding modes and their implications.
-
-1. Create `ifcfg-eno1`:
-
-        ```shell
-        DEVICE=eno1
-        MASTER=bond0
-        SLAVE=yes
-        ONBOOT=yes
-        ```
-
-2. Create `ifcfg-eno2`:
-
-        ```shell
-        DEVICE=eno2
-        MASTER=bond0
-        SLAVE=yes
-        ONBOOT=yes
-        ```
-
-# Configure Virtual Machines network interfaces
 
 # Appendix
 
 ## Implementation Worksheet (questioinnaire) {#questionnaire}
+
+Implementation worksheets are tools to map Open Cloud infrastructure
+to your environment.
+
+
+### Switches
+
+| Switches          | Type | Qty |            | Model | Firmware      |
+|-------------------|------|-----|------------|-------|---------------|
+| management switch | 1Gb  | 2   | suggested: | G8052 | 8.3.3 ENOS    |
+|                   |      |     | your env:  |       |               |
+|-------------------|------|-----|------------|-------|---------------|
+| access switch     | 10Gb | 2   | suggested  | G8272 | 10.3.3.0 CNOS |
+|                   |      |     | your env:  |       |               |
+
+Table: Implementation Worksheet - Switch
+
+### Networks
+
+In order for Lenovo Open Cloud functions to work as designed, it is important to map
+your network environment to meet requirements presented by suggested
+values.
+
+For example, `Campus` network represents a public network used by
+users to access Open Cloud web portals, and by admins to manage server
+and/or IBB services remotely. Its default VLAN tag is `1`. If your
+environment uses a different VLAN schema, fill in your tag number in
+the cell below the default value one.
+
+
+| Network          |            | VLAN | Subnet        | Mask | Gateway       | Static/DHCP |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| Campus           | suggested: | 1    | n/a           | n/a  | n/a           | Static      |
+|                  | your env:  |      |               |      |               |             |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| IMM              | suggested: | 2    | 192.168.2.x   | /24  | 192.168.2.1   | Static      |
+|                  | your env:  |      |               |      |               |             |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| OVIRT mgt        | suggested: | 100  | 192.168.100.x | /29  | 192.168.100.1 | Static      |
+|                  | your env:  |      |               |      |               |             |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| OS deployment    | suggested: | 10   | 192.168.10.x  | /27  | 192.168.10.1  | Static      |
+|                  | your env:  |      |               |      |               |             |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| Internal storage | suggested: | 400  | 192.168.40.x  | /29  | 192.168.40.x  | Static      |
+|                  | your env:  |      |               |      |               |             |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| Server mgt       | suggested: | 3    | 192.168.3.x   | /27  | 192.168.3.1   | Static      |
+|                  | your env:  |      |               |      |               |             |
+|------------------|------------|------|---------------|------|---------------|-------------|
+| VM mgt           | suggested: | 600  | 192.168.60.x  | /28  | 192.168.60.1  | Static      |
+|                  | your env:  |      |               |      |               |             |
+
+Table: Implementation Worksheet &mdash; Networks
 
 1. map server interface name --> ifcfg- files
 
@@ -828,6 +956,21 @@ Simplified version covers server & switch at high level should be fine.
 | MCT3474F3 | Red Hat Insights                                                  | 1   |
 
 Table: Software BOM, 6-server, HCI deployment, 3 year premium
+
+## Cable Schema
+
+| Port | G8052 (1Gb)   | G8052 (1Gb)   | G8272 (10Gb) | G8272 (10Gb) |
+|------|---------------|---------------|--------------|--------------|
+| 1    | server 1 BMC  |               | server 1 1F0 | server 1 2F0 |
+| 2    | server 2 BMC  |               | server 2 1F0 | server 2 2F0 |
+| 3    | server 3 BMC  |               | server 3 1F0 | server 3 2F0 |
+| 4    |               |               | server 1 1F1 | server 1 2F1 |
+| 5    |               |               | server 2 1F1 | server 2 2F1 |
+| 6    |               |               | server 3 1F1 | server 3 2F1 |
+| 17   | server 1 eno1 | server 1 eno2 |              |              |
+| 18   | server 2 eno1 | server 2 eno2 |              |              |
+| 19   | server 3 eno1 | server 3 eno2 |              |              |
+
 
 ## Configure Lenovo Switch Port {#switch-config-methods}
 
@@ -875,6 +1018,7 @@ guide][g8272].
 [platform server vlan]: ../../images/ibb/ibb%20platform%20server%20vlan.png
 [platform service vlan]: ../../images/ibb/ibb%20platform%20service%20vlan.png
 [platform switch config]: ../../images/ibb/ibb%20platform%20switch%20config.png
+[platform server interface]: ../../images/ibb/ibb%20platform%20server%20network%20interfaces.png 
 
 [storage network]: ../../images/ibb/ibb%20ceph%20network%20design.png
 [storage server vlan]: ../../images/ibb/ibb%20storage%20server%20vlan.png
@@ -908,8 +1052,6 @@ guide][g8272].
 [bonding]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/s2-networkscripts-interfaces-chan
 
 [^campus]: This is an example subnet.
-[^v10]: Bonding provisioning network is optional because loading an
-    operating system is not a frequent event.
 
 [^schema]: In this layout, we follow a practice of reserving port 1-17
     for BMC connections on 1Gb switches.
@@ -919,4 +1061,6 @@ guide][g8272].
 [rhel bonding]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/ch-configure_network_bonding#sec-Bond-Understanding_the_Default_Behavior_of_Master_and_Slave_Interfaces
 
 [rhel bonding mode]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-using_channel_bonding
+
+[rfc 1918]: https://tools.ietf.org/html/rfc1918
 

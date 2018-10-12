@@ -30,28 +30,28 @@ viewed as brick and mortar, server, storage, networking are
 **resources** that can be requested, leased for a period of time, paid
 per use, and releases when done &mdash; all through nothing but an
 online account and a credit card. The flexibility of this model and
-the feeling that resource pool can be extended boundlessly has both lowered
-barrier of entry of new application growing from zero to infinity with
-little sweat, and elevated requirement on the design, implementation,
-and operation of such infrastructure 
+the feeling that resource pool can be extended boundlessly has both
+lowered barrier of entry of new application growing from zero to
+infinity with little sweat, and elevated requirement on the design,
+implementation, and operation of such infrastructure
 
-Further more,  along the trail  of technology evolution,  business has
+Further more, along the trail of technology evolution, business has
 been left with an army of legacy systems which were designed and built
-on  a technology  stack  that  was adequate  then,  but  not in  trend
-now.  Millions have  been  invested, millions  of  users are  probably
-depending  on  the continuity  of  service,  and many  developers  and
-operators were  trained and are  given the responsibility  to maintain
-such stack. It is neither feasible to  cut the cord just because a new
-technology becomes the  talk of the day, nor advisable  to continue as
-before  without  taking  advantage  of   what  new  tools  can  bring.
-Therefore, it is  not only desirable, but in our  opinion essential to
-have an  infrastruture that is  both flexible and balanced  &mdash; it
-must support  a broad  range of  user and  application by  providing a
-platform that has  a rich mix of building blocks  which, first of all,
-covers common needs out of box, such as keeping an operating system up
-to  date via  patch,  update  and hotfix,  while  maintaining an  open
-architecture to extend both horizontally in term of resource (compute,
-storage, networking), and vertically (application stack).
+on a technology stack that was adequate then, but not in trend now.
+Millions have been invested, millions of users are probably depending
+on the continuity of service, and many developers and operators were
+trained and are given the responsibility to maintain such stack. It is
+neither feasible to cut the cord just because a new technology becomes
+the talk of the day, nor advisable to continue as before without
+taking advantage of what new tools can bring.  Therefore, it is not
+only desirable, but in our opinion essential to have an infrastruture
+that is both flexible and balanced &mdash; it must support a broad
+range of user and application by providing a platform that has a rich
+mix of building blocks which, first of all, covers common needs out of
+box, such as keeping an operating system up to date via patch, update
+and hotfix, while maintaining an open architecture to extend both
+horizontally in term of resource (compute, storage, networking), and
+vertically (application stack).
 
 It is with this in mind that Leonov Open Cloud is designed to combine
 the best of technologies in the market today into a coherent user
@@ -344,29 +344,36 @@ See [product guide][confluent] for details.
 
 ### Configure & Automation repository service
 
+### Launchpad
+
 ## Storage services
 
 ### Ceph capacity management
 
 
 ## Cloud services
-### Openstack
+
+### Cloud management
+
+### Brain controllers
 
 # Platform Network Design {#platform-network}
 
 ## Design Conventions {#convention}
 
-Hardware can break. It is important to keep this in mind when designing
-a network connection. In this architecture we have followed these
-conventions:
+There is endless possibility to design a network.  In this
+architecture we recommend the following conventions for best practice:
 
 1. Inter switch connections are paired.
 2. Except BMC connection, server to switch connections are paired.
     1. Each pair connect to separate NICs on the server at north bound, 
        and separate switch at south bound.
 
-This then requires matching configuration on the switch using LACP,
-and on the server using **active-active** [`bonding`][bonding].
+   This then requires matching configuration on the switch using LACP,
+   and on the server using **active-active** [`bonding`][bonding].
+3. Separate management traffic from data traffic whenever possible.
+4. Improve network isolation by assigning private IP space to internal
+   only networks whenever possible.
 
 ## Network Overview
 
@@ -409,7 +416,7 @@ Showing switch topology within IBB as well as how it is connected to
 upstream &rarr; what is required from upstream, eg. dhcp, dns,
 gateway, access to RH CDN.
 
-## Define Platform Networks
+## Define Platform Logical Networks
 
 ![Lenovo Open Cloud Platform Network Overview][platform network]
 
@@ -445,7 +452,7 @@ Physical server management
 : is to support traffic of `In-Band` managerial tasks, eg. `ssh` to a
   server. 
 
-OS provisioning
+RHHI provisioning
 : is to support data traffic of installing OS on a physical
   server. Separating this to its own network is a best practice
   because operating system image can be large, thus its loading to
@@ -463,35 +470,37 @@ gradually open it up by routing or other network methods to expose
 service and access.
 
 
-| Network                     | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
+| Logical Network             | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
 | --------------------------- | ----- | ------------------  | ---------- | ------ | --------------- | -------------- |
 | Campus                      | 1     | 10.240.x.x[^campus] | 10         |        | static          | 10.240.x.1     |
 | BMC                         | 2     | 192.168.2.x         | 254        | /24    | static          | 192.168.2.1    |
 | Physical server management  | 3     | 192.168.3.x         | 254        | /24    | static          | 192.168.3.1    |
-| OS provisioning             | 10    | 192.168.10.x        | 3/6/9      | /24    | static          | 192.168.10.1   |
+| RHHI provisioning           | 10    | 192.168.10.x        | 3/6/9      | /24    | static          | 192.168.10.1   |
 | OVIRT management            | 100   | 192.168.100.x       | 3/6/9      | /29    | static          | 192.168.100.1  |
 | glusterFS                   | 400   | 192.168.40.x        | 3/6/9      | /29    | static          | 192.168.40.1   |
 | VM management               | 600   | 192.168.60.x        | 11         | /28    | static          | 192.168.60.1   |
 
-Table: Platform Network Defintions
+Table: Platform Logical Network Defintions
 
 ## Map VLAN to Server NIC {#platform-vlan-to-nic}
 
 First, we are to map VLAN to server network interfaces.  Besides BMC
 port, each server has minimal two 1Gb ports and four 10Gb ports.
 Interfaces are paired to form an `active-active` bonding interface on
-Platform server. We will also create a network bridge on top of a
-bonding interface:
+Platform server. A RHHI network profile is created for each logical
+network, which in turn creates a bridge on RHHI server with the same
+name.
 
-| Network                    | VLAN | BMC | 2 x 1G | 2 x 10G | 2 x 10G | Bond | Bridge     |
-|----------------------------|------|:---:|:------:|:-------:|:-------:|------|------------|
-| Campus                     | 1    |     | x      |         |         | 0    | management |
-| BMC                        | 2    | x   |        |         |         | n/a  | n/a        |
-| Physical server management | 3    |     | x      |         |         | 0    | management |
-| OS provisioning            | 10   |     | x      |         |         | 0    | management |
-| OVIRT management           | 100  |     | x      |         |         | 0    | management |
-| glusterFS                  | 400  |     |        | x       |         | 1    | storage    |
-| VM management              | 600  |     |        |         | x       | 2    | workloads  |
+| Logical Network            | VLAN | RHHI Network  | Bond | BMC | 2 x 1G | 2 x 10G | 2 x 10G |
+|----------------------------+------+---------------+------+-----+--------+---------+---------|
+| Campus                     |    1 | Campus        |    0 |     | x      |         |         |
+| BMC                        |    2 | n/a           |  n/a | x   |        |         |         |
+| Physical server management |    3 | PhysicalMgmt  |    0 |     | x      |         |         |
+| RHHI provisioning            |   10 | RHHIProvision |    0 |     | x      |         |         |
+| OVIRT management           |  100 | ovirtmgmt     |    0 |     | x      |         |         |
+| glusterFS                  |  400 | gluster       |    1 |     |        | x       |         |
+| VM management              |  600 | VMMgmt        |    2 |     |        |         | x       |
+
 
 Table: Platform VLAN to Server's NIC Mapping
 
@@ -503,11 +512,11 @@ vlan]
 Next, we are to map connection between server's network interface to
 switch connections.
 
-By [convention](#convention), Open Cloud uses two G8052 (1Gb) switches
-and two G8272 (10Gb) switches to support high throughput and fault
-tolerance. Table below shows switch port configurations including
-`mode`, `native VLAN` (aka. untagged VLAN), `tagged VLAN`
-(aka. allowed VLANs):
+By [convention](#convention), in order to achieve high availability of
+connections, Open Cloud uses two G8052 (1Gb) switches and two G8272
+(10Gb) switches to gain redundancy. Table below shows switch port
+configurations including `mode`, `native VLAN` (aka. untagged VLAN),
+and `tagged VLAN` (aka. allowed VLANs):
 
 On the server side, each server has minimal two 1Gb ports (for
 example, `eno1` and `eno2`) and four 10Gb ports (for example, `1F0`,
@@ -515,12 +524,12 @@ example, `eno1` and `eno2`) and four 10Gb ports (for example, `1F0`,
 bridge intefaces will be created per server:
 
 
-| Server NIC | Server Bond | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|-------------|---------------|-------------|-------------|-------------|
-| BMC        | n/a         | n/a           | access      | 2           | n/a         |
-| eno1, eno2 | bond 0      | management    | trunk       | 10          | 1,3,10,100  |
-| 1F0, 2F0   | bond 1      | storage       | access      | 400         | n/a         |
-| 1F1, 2F1   | bond 2      | workloads     | trunk       | 600         | 600         |
+| Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
+|------------+-------------+-------------+-------------+-------------|
+| BMC        | n/a         | access      |           2 | n/a         |
+| eno1, eno2 | bond 0      | trunk       |          10 | 1,3,10,100  |
+| 1F0, 2F0   | bond 1      | access      |         400 | n/a         |
+| 1F1, 2F1   | bond 2      | trunk       |         600 | 600         |
 
 Table: Platform Server NIC to Switch Mapping
 
@@ -580,7 +589,7 @@ mode`.
 
 ### Configure BMC connections
 
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
+| Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
 |------------|---------------|-------------|-------------|-------------|
 | BMC        | n/a           | access      | 2           | n/a         |
 
@@ -597,17 +606,24 @@ In switch admin terminal:
 # bridge-port access vlan 2
 ```
 
-### Configure `management` connections
+### Configure `bond 0` connections
 
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| 2 x 1G     | management    | trunk       | 10          | 1,3,10,100  |
+In general, `bond 0` is the connection for management traffic. These
+type of traffics are typically low frequency and requiring low
+bandwidth. To support Platform services, this interface will include
+`Campus` network (VLAN 1), `Physical server management` network (VLAN
+3), `RHHI provisioning` network (VLAN 10), and `ovirt management`
+network (VLAN 100).
 
+| Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|-------------|-------------|-------------|-------------|
+| 2 x 1G     | bond 0      | trunk       | 10          | 1,3,10,100  |
+    
 Table: Platform server `management` connection switch port config
 
-To configure connections used for `management`(`bond 0`), using G8052
-port 17 for example. Apply the same configuration to port 17, 18 and
-19 on both G8052 switches.
+To configure connections used for `bond 0`, using G8052 port 17 for
+example. Apply the same configuration to port 17, 18 and 19 on both
+G8052 switches according to the [cable schema](#platform-cabling).
 
 In switch's admin terminal:
 
@@ -618,17 +634,24 @@ In switch's admin terminal:
 # bridge-port trunk native vlan 10
 ```
 
-### Configure `storage` connections
+**Note** that setting `native vlan` after `allowed vlan` is advised,
+because the native vlan must also be included as an _allowed_
+vlan. Otherwise, CLI will fail with an error.
 
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| 2 x 10G    | storage       | access      | 400         | n/a         |
+### Configure `bond 1` connections
 
-Table: Platform server `storage` connection switch port config
+Platform server's `bond 1` interface is designed to handle data
+traffic to the Gluster file system of RHHI. 
 
-To configure connections used for `storage`(`bond 1`), using G8272
-port 1 for example. Apply the same configuration to port 1,2,3 on both
-G8272 switches.
+| Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|-------------|-------------|-------------|-------------|
+| 2 x 10G    | bond 1      | access      | 400         | n/a         |
+
+Table: Platform server `bond 1` connection switch port config
+
+To configure connections used for `bond 1`, using G8272 port 1 for
+example. Apply the same configuration to port 1,2,3 on both G8272
+switches according to the [cable schema](#platform-cabling).
 
 In switch's admin terminal:
 
@@ -638,11 +661,15 @@ In switch's admin terminal:
 # bridge-port access vlan 400
 ```
 
-### Configure `workloads` connections
+### Configure `bond 2` connections
 
-| Server NIC | Server Bridge | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| 2 x 10G    | workloads     | trunk       | 600         | 600         |
+Platform server's `bond 2` is designed to support traffic generated by
+additional storage deployment such as Ceph, and cloud deployment such
+as OpenStack. 
+
+| Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
+|------------|-------------|-------------|-------------|-------------|
+| 2 x 10G    | bond 2      | trunk       | 600         | 600         |
 
 Table: Platform server `workloads` connection switch port config
 
@@ -662,13 +689,13 @@ In switch's admin terminal:
 ## Configure Server Interfaces
 
 As defined in [Platform Networks](#platform-network), Platform servers
-will be configured with three bonding interfaces and three bridges:
+will be configured with three bonding interfaces and a list of bridges:
 
-| Server Interface | Bond   | Bridge     |
-|------------------|--------|------------|
-| eno1, eno2       | bond 0 | management |
-| 1F0, 2F0         | bond 1 | storage    |
-| 1F1, 2F1         | bond 2 | workloads  |
+| Server Physical Interface | Bond Interface | Bridges                                        |
+|---------------------------|----------------|------------------------------------------------|
+| eno1, eno2                | bond 0         | Campus,ovirtmgmt,PhysicalMgmt,RHHIProvisioning |
+| 1F0, 2F0                  | bond 1         | gluster                                        |
+| 1F1, 2F1                  | bond 2         | VMMgmt                                         |
 
 **Note** that the name of these interfaces, eg. `eno1`, `1F0`, can
 vary depending on the slot the NIC card and the server side ports you
@@ -705,8 +732,9 @@ On each Platform servers:
         GATEWAY=10.240.40.1
         DNS1=10.240.0.10
         ```
-
-   1. `DEVICE`: must be named `bond0`.
+   Note:
+   
+   1. `DEVICE`: name of the bonding interface, in this example, `bond0`.
    2. `BONDING_OPTS`: 
       1. mode=4: set to **active-active**. This is consistent with
          switch ports who are bonded in vLAG. Refer to [Red Hat Enterprise
@@ -724,6 +752,9 @@ On each Platform servers:
         ONBOOT=yes
         DEFROUTE=no
         ```
+   Note:
+   1. Here we setup a master-slave between the physical NIC interface
+      `eno1` (as slave) and bonding interface `bond0` (as master).
 
 4. Create `ifcfg-eno2`:
 
@@ -741,26 +772,44 @@ On each Platform servers:
 
 ### Create Bridge Interface
 
-| Network                    | Bridge     | Bond | VLAN |
-|----------------------------+------------+------+------|
-| Campus                     | management |    0 |    1 |
-| Physical server management | management |    0 |    3 |
-| OS provisioning            | management |    0 |   10 |
-| OVIRT management           | management |    0 |  100 |
-| glusterFS                  | storage    |    1 |  400 |
-| VM management              | workloads  |    2 |  600 |
+| Network                    | Bridge Name      | Bond Interface | VLAN |
+|----------------------------|------------------|----------------|------|
+| Campus                     | Campus           | 0              | 1    |
+| Physical server management | PhysicalMgmt     | 0              | 3    |
+| RHHI provisioning          | RHHIProvisioning | 0              | 10   |
+| OVIRT management           | ovirt            | 0              | 100  |
+| glusterFS                  | gluster          | 1              | 400  |
+| VM management              | VMMgmt           | 2              | 600  |
 
+We will setup bridge interfaces using the RHV Administrator Portal. 
 
-Below we will use `OS provisioning` network for example. It is
-assigned VLAN 10, and should run on `management` bridge that binds to
-`bond0`.
+1. Login Admin portal and select `System > Network`.
+
+![View RHV Network List](../../images/ibb/setup%20rhhi%20network.png)
+
+2. Click `New` to create a new network, or `Edit` to modify an
+   existing one.
+   
+![Create New RHV
+Network](../../images/ibb/setup%20rhhi%20network%20name.png)
+
+3. Set VLAN.
+
+![Setup RHV Network
+VLAN](../../images/ibb/setup%20rhhi%20network%20vlan.png)
+
+4. Link to a bonding interface.
+
+![Link RHV Network to a bonding interface](../../images/ibb)
+
+To view 
 
 1. Go to `/etc/sysconfig/network-scripts/`.
 2. Create networking config file `ifcfg-management`. Replace `IPADDR`,
    `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
 
         ```shell
-        DEVICE=management
+        DEVICE=PhysicalMgmt
         TYPE=Bridge
         DELAY=0
         STP=off
@@ -770,21 +819,26 @@ assigned VLAN 10, and should run on `management` bridge that binds to
         NM_CONTROLLED=no
         IPV6INIT=no
         ```
-3. Create `ifcfg-bond0.10` that represents `OS provisioning` network
-   which is assigned to VLAN 10, and will run on `bond0`:
+3. Create `ifcfg-bond0.3` that represents `Physical server management` network
+   which is assigned to VLAN 3, and will run on `bond0`:
 
         ```shell
-        DEVICE=bond0.10 
+        DEVICE=bond0.3 
         VLAN=yes
-        BRIDGE=management 
+        BRIDGE=PhysicalMgmt 
         ONBOOT=yes
         MTU=1500
         DEFROUTE=no
         NM_CONTROLLED=no
         IPV6INIT=no
         ```
-   1. `DEVICE`: in format of `<bond name>.<vlan number>`.
-   2. `BRIDGE`: name of the bridge, in this case `management`.
+   Note:
+   
+   1. `DEVICE`: to define a VLAN on an interface, both the filename
+      and `DEVICE` should be set in format of `<interface name>.<vlan
+      number>`.
+   2. `BRIDGE`: name of the bridge, in this case `PhysicalMgmt`, that
+      this bond interface will be connected to.
 
 4. `systemctl network restart` to take effect.
 5. use `ip a` to verify that interfaces are up and running.
@@ -800,11 +854,13 @@ based on the functions the service will provide.
 | Runtime                                     | x |   |   |    | x   |     |     |
 | Software repository & life cycle management | x |   | x |    |     |     | x   |
 | Automation                                  | x |   | x |    |     |     | x   |
-| Server config & OS deployment               |   | x |   | x  |     |     |     |
+| Server config & OS deployment               | x | x |   | x  |     |     |     |
 | Inventory planning                          | x | x |   |    |     |     | x   |
-| Discovery                                   | x | x |   | x  |     |     | x   |
+| Discovery                                   |   | x |   | x  |     |     | x   |
 | OS image                                    |   |   |   |    |     |     |     |
 | Configure & Automation repository service   |   |   |   |    |     |     |     |
+| Launchpad                                   | x |   | x |    |     |     | x   |
+
 
 Table: Platform Services to VLAN Mapping
 
@@ -817,36 +873,58 @@ service vlan]
 
 # Storage networks
 
+Lenovo Open Cloud supports Ceph storage backend. A storage backend can
+be shared among multiple workloads and platforms, such as an OpenStack
+on-premise cloud. By deploying Ceph on top of Open Cloud Platform, we
+can also share common services and networks. 
+
 ![Lenovo Open Cloud Storage Networks][storage network]
 
-Lenovo Open Cloud supports Ceph storage backend. A storage backend can
-be shared among multiple workloads and platforms, such as OpenStack.
-Three new networks are added to [Platform Network](#platform-network) for Ceph
-function while leveraging [platform services](#platform services) 
-to support Storage hardware and software workloads.
+## Ceph Specific Networks
+
+Ceph itself adds three new networks &mdash; Ceph management, Ceph
+storage public, and Ceph cluster private.
 
 Ceph management
 : is communication between Ceph dashboard and Ceph nodes, e.g. RPC, transferring zabbix monitoring data.
 
 Ceph storage public
-: Data transferring between OpenStack nodes (both controller nodes and compute nodes) and Ceph nodes.
+: data traffic by workloads who will use Ceph as storage backend, also
+  known as `front-side`.
 
 Ceph cluster private
-: Ceph private data transferring, e.g. rebalancing.
+: Ceph private data traffic such as used in data rebalancing, also
+  known as `back-side`.
 
-
-| Network              | VLAN | Subnet         | Addresses | Mask | Static / DHCP | Gateway        |
+| Logical Network      | VLAN | Subnet         | Addresses | Mask | Static / DHCP | Gateway        |
 |----------------------|------|----------------|-----------|------|---------------|----------------|
 | Ceph management      | 30   | 192.168.30.x   | 254       | /24  | static        | 192.168.30.1   |
 | Ceph storage public  | 30x  | 192.168.3<C>.x | 254       | /24  | static        | 192.168.3<C>.1 |
 | Ceph cluster private | 40x  | 192.168.4<C>.x | 254       | /24  | static        | 192.168.4<C>.1 |
 
+Table: Storage Logical Network Definition
 
-## Storage services to VLAN mapping
+## Shared Platform networks
 
-| Storage Services    | 1 | 30 | 600 |
-|---------------------|---|----|-----|
-| Capacity management | x | x  | x   |
+To manage Storage physical servers, we will connect them to three
+existing Platform networks &mdash; `BMC` (VLAN 2) for OOB management
+and node discovery, `RHHI Provisioning` (VLAN 10) for server OS
+provisioning, and `Physical server management` (VLAN 3) for general
+admin tasks such as SSH access.
+
+In addition, to support `Storage capacity service`, which is the main
+management tool of Storage deployed on Platform, we also need `Campus`
+(VLAN 1) for accessing its UI,  and `VM general management` (VLAN 600).
+
+| Logical Network             | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
+| --------------------------- | ----- | ------------------  | ---------- | ------ | --------------- | -------------- |
+| Campus                      | 1     | 10.240.x.x[^campus] | 10         |        | static          | 10.240.x.1     |
+| BMC                         | 2     | 192.168.2.x         | 254        | /24    | static          | 192.168.2.1    |
+| Physical server management  | 3     | 192.168.3.x         | 254        | /24    | static          | 192.168.3.1    |
+| RHHI provisioning           | 10    | 192.168.10.x        | 3/6/9      | /24    | static          | 192.168.10.1   |
+| VM management               | 600   | 192.168.60.x        | 11         | /28    | static          | 192.168.60.1   |
+
+Table: Platform logical networks shared with Storage
 
 ## Storage VLAN to server's NIC mapping
 
@@ -870,6 +948,14 @@ vlan]
 | 2 x 10G     | access           | 40x                     | n/a                     |
 
 ![Lenovo Open Cloud Storage Server to Switch][storage switch config]
+
+## Storage services to VLAN mapping
+
+| Storage Services    | 1 | 30 | 600 |
+|---------------------|---|----|-----|
+| Capacity management | x | x  | x   |
+
+
 
 # Cloud networks
 

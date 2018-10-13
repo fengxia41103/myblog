@@ -15,7 +15,7 @@ Status: Draft
  var Summary = React.createClass({
    render: function(){
      var divStyle = {
-       backgroundColor: "#337ab7",
+       backgroundColor: "#333",
        padding: "1em",
        color: "#efefef",
        marginBottom:"1em"
@@ -50,10 +50,10 @@ Status: Draft
 
      return (
        <div className="col s6">
-         <span className="col s6">
+         <label className="col s6">
            {this.props.label}
-         </span>
-         <div className="col s6">
+         </label>
+         <div className="col s6 myValue">
            {dollar}
            <span className={negativeHighlight}>
              {this.props.value.toFixed(2)}

@@ -89,6 +89,19 @@ h6 {
   border-bottom: 1px solid #cecece;
 }
 
+#sth h2,
+#sth h3,
+#sth h4,
+#sth h5,
+#sth h6 {
+  border-bottom: none;
+  color: #039BE5;
+}
+
+#sth .myValue{
+  border-bottom: 1px dashed #d52349;
+}
+
 #article-content a{
     border-bottom: 1px dashed #ea6153;
     -webkit-transition: all .5s;

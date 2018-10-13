@@ -1,14 +1,11 @@
 // Define the 'carLeasing' module
-angular.
-module('carLeasing', [])
-  .
-controller('CarLeasingController', ['$scope',
+angular.module('carLeasing', [])
+.controller('CarLeasingController', ['$scope',
     function($scope) {
       var vm = $scope;
       var finance = new Finance();
 
       // constants
-
       vm.example_msrp = 18881;
       vm.example_residue = 13270;
       vm.msrp = 25375;
@@ -65,9 +62,19 @@ controller('CarLeasingController', ['$scope',
           }];
         });
 
+
       // Official lease example
       vm.$watchGroup(['example_msrp', 'example_residue'],
-        function() {
+        function(newVals, oldVals) {
+          // for some STRANGE reason, these two values can be "undefined"
+          // even initialized values were fine.
+          if (typeof vm.example_msrp === "undefined"){
+            vm.example_msrp = 18881;
+          }
+          if (typeof vm.example_residue === "undefined"){
+            vm.example_residue = 13270;
+          }
+
           vm.residue = vm.example_residue / vm.example_msrp * 100;
           vm.residue = parseFloat(vm.residue.toFixed(2));
 

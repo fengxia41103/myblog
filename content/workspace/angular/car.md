@@ -2,7 +2,6 @@ Title: Car leasing calculator Angular
 Date: 2016-09-25 13:00
 Slug: car leasing calculator angular
 Category: Angular
-Tags: angular
 Author: Feng Xia
 Status: draft
 
@@ -14,36 +13,34 @@ Status: draft
 </script>
 
 <div ng-app="fengApp"
-     ng-controller="CarLeasingController">
-  <div class="row"
-       style="background-color:#337ab7;
-              padding: 1em;
-              color:#efefef;
-              margin-bottom:1em;">
+     ng-controller="CarLeasingController"
+     id="sth">
+  <div class="row mySummary">
     <h4 class="page-header nocount">Summary</h4>
     <div class="divider"></div>
-      <summary label="Total lease"
-               model="lease_after_tax"
-               type="$"></summary>
-      <summary label="Monthly payment"
-               model="monthly_lease_payment_after_tax"
-               type="$"></summary>
-      <summary label="APR"
-               model="apr"
-               type="%"></summary>
-      <summary label="Term"
-               model="term"
-               type="month"
-               precision="0"></summary>
-      <summary label="Cost of ownership"
-               model="cost_of_ownership"
-               type="$"></summary>
-      <summary label="Drive off cost"
-               model="upfront_cost"
-               type="$"></summary>
-      <summary label="Last payment/refund"
-               model="lease_end_cost"
-               type="$"></summary>
+    <br />
+    <summary label="Total lease"
+             model="lease_after_tax"
+             type="$"></summary>
+    <summary label="Monthly payment"
+             model="monthly_lease_payment_after_tax"
+             type="$"></summary>
+    <summary label="APR"
+             model="apr"
+             type="%"></summary>
+    <summary label="Term"
+             model="term"
+             type="month"
+             precision="0"></summary>
+    <summary label="Cost of ownership"
+             model="cost_of_ownership"
+             type="$"></summary>
+    <summary label="Drive off cost"
+             model="upfront_cost"
+             type="$"></summary>
+    <summary label="Last payment/refund"
+             model="lease_end_cost"
+             type="$"></summary>
   </div>
 
   <div class="row">

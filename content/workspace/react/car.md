@@ -14,13 +14,6 @@ Status: Draft
 
  var Summary = React.createClass({
    render: function(){
-     var divStyle = {
-       backgroundColor: "#333",
-       padding: "1em",
-       color: "#efefef",
-       marginBottom:"1em"
-     };
-
      var summaryNodes = this.props.data.map(function(summary) {
        return (
          <SummaryValueDisplay key={summary.label} {...summary} />
@@ -28,7 +21,7 @@ Status: Draft
      });
 
      return (
-       <div className="row" style={divStyle}>
+       <div className="row mySummary">
          <h4 className="page-header nocount">Summary</h4>
          <div className="divider"></div>
          <br />

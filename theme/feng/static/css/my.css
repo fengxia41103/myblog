@@ -95,11 +95,17 @@ h6 {
 #sth h5,
 #sth h6 {
   border-bottom: none;
-  color: #039BE5;
 }
 
 #sth .myValue{
   border-bottom: 1px dashed #d52349;
+}
+
+#sth .mySummary {
+  background-color:#333;
+  padding: 1em;
+  color:#efefef;
+  margin-bottom:1em;
 }
 
 #article-content a{

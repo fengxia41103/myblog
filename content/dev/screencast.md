@@ -3,6 +3,7 @@ Date: 2018-06-06 21:00
 Tags: dev, lenovo
 Slug: screencast
 Author: Feng Xia
+Summary: Introduce tools to create screencast.
 
 <video width="100%" height="100%" controls="controls">
   <source src="/images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" />

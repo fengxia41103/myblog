@@ -3,7 +3,6 @@ Date: 2016-03-06 9:00
 Slug: project fashion demo
 Author: Feng Xia
 
-
 <figure class="s12 center">
     <img src="/images/demo_fashion.png" />
     <figcaption>Project Fashion front page</figcaption>
@@ -12,19 +11,18 @@ Author: Feng Xia
 > * [Demo][1]
 > * Login: (demo, demopassword)
 
-Project Fashion is built to support daily business
-of an international trading company who specializes
- fashion products. Main functions of the application
-include
-product management, customer and vendor database,
-order management (both sales and purchase), and inventory management.
+Project Fashion is built to support daily business of an international
+trading company who specializes fashion products. Main functions of
+the application include product management, customer and vendor
+database, order management (both sales and purchase), and inventory
+management.
 
 The company is based in US with two subsidiaries in mainland China.
 Its challenges lied in multiple folds. First, orders and updates are emailed
 back and forth which is error prone and can be quickly out of sync with
 reality. Second, operation becomes
 unaccountable when critical data points are missing, eg. who made
-the last modification of a sales order? Third, vendors are operating
+the last modification 2of a sales order? Third, vendors are operating
 in Europe and North America time zones while the company's customers
 are in China. The time difference and geographical separation between
 the two ends make information flow difficult without a centrally maintained

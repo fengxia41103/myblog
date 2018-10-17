@@ -15,7 +15,7 @@ this makes me very angry.
 
 The talk is about China's new policy to encourage having more than one
 child, and these people talked about possible ways to turn the tide of
-China's declining population.  Sigh. But this is truly sad  sad sad in
+China's declining population.  Sigh. But this is truly sad sad sad in
 multiple ways  and it is  totally disgusting, misleading,  wrong, just
 morally wrong,  technically wrong,  politically wrong,  and absolutely
 against humanity!
@@ -47,9 +47,9 @@ this talk even dare to stand up to challenge authority with this
 question:"So, were we wrong in the past!? If so, shouldn't you
 apologize!?"
 
-Talking about 知识份子的良心! Sigh.... this is total bullshit! total
-disgust! totally purely, wrong!.. You know, with such pattern
-unchallenged, such decision making unchanged, un-reviewed,
+Talking about 知识份子的良心, which I see none! Sigh.... this is total
+bullshit! total disgust! totally purely, wrong!.. You know, with such
+pattern unchallenged, such decision making unchanged, un-reviewed,
 un-criticized, un-punished, we are letting our own life to be
 manipulated, and eventually, to be crushed.
 
@@ -70,9 +70,9 @@ civilized, be westernized, be modern, fall in such a stupidity!!! This
 is outrageous! Pure insanity!
 
 Stop preaching "do this for your country"!!! No, I don't want to give
-birth to my child because I'm doing so for the country! No. I can do
-it for love, for a sexual need, for my own reason of any kind, but the
-last thing on my mind when I have sex is to be patriotic!
+birth to my child because it is mainstream! No. I can do it for love,
+for a sexual need, for my own reason of any kind, but the last thing
+on my mind when I have sex is to be patriotic!
 
 How bizzare it is!! How dare you to ask me to do so!?
 
@@ -82,16 +82,18 @@ What they don't realize, and this truly saddens me and scares me, is
 that this argument is paving the way to a humanity disaster. Here is
 how this logic will unfold.
 
-First of all, this is total discrimination against age, old people. I
-have long debated with myself that from an engineer's point of view to
-optimize efficiency and maximize social progress, I, if were a
-dictator, would have a policy to eliminate the old as soon as his/her
-contribution is less than his/her cost &larr; but I could never bring
-myself to agree with such conclusion. This is wrong, even logically I
-think it is correct, but morally, humanely, personally, it is WRONG
-WRONG WRONG! So can we be alarmed by a so called **aging society**,
-which ironically has been on this path for the last 30+ years, and yet
-as if they are suddenly waking up from a dream, and immediately into a
+First of all, this is total discrimination against age, against old
+people. I have long debated with myself that from an engineer's point
+of view to optimize efficiency and maximize social progress, I, if
+were a dictator, would have a policy to eliminate the elders as soon
+as his/her contribution is less than his/her cost &larr; but I could
+never bring myself to agree with such conclusion. This is wrong, even
+logically I think it is correct, but morally, humanely, personally, it
+is WRONG WRONG WRONG! 
+
+We must be alarmed by the name **aging society**, which ironically has
+been on this path for the last 30+ years, and yet as if everybody is
+suddenly waking up from a dream, and switching immediately into a
 panic mode! Demographics can neither be increased in a short term, nor
 decreased in a short term. Period. Again, what we should have
 questioned is why China has been ignoring this long-term trend all
@@ -112,14 +114,15 @@ and burn in blood, and it doesn't really care whose blood it takes.
 Second, when talking about policy to **encourage birth**, it is
 inevitably leading to a social view of some group being preferred to
 others. If, as one of the expert said "for example, letting coastal
-residents to...", it is nothing but a one step away from what we have
-all learned in class, in TV, in any book of WWII, that "Jewish people
-are inferior to.. thus..." &larr; you know what this is!? This is
-fascism, is racial discrimination, and can only be ended with war,
-with terrible social and human cost. **How can anyone in today's
-civilization say such a thing without feeling shame!!??** geeee.... if
-only these people take a step back and read what I have just said,
-they will realize how terrible himself/herself has just sounded! 
+residents to..." (essentially enjoying a previlege of a kind), it is
+nothing but a one step away from what we have all learned in class, in
+TV, in any book of WWII, that "<blank> people are inferior
+race... thus..." &larr; you know what this is!? This is fascism, is
+racial discrimination, and can only be ended with war, with terrible
+social and human cost. **How can anyone in today's civilization say
+such a thing without feeling shame!!??** geeee.... if only these
+people take a step back and read what I have just said, they will
+realize how terrible himself/herself has just sounded!
 
 # self-conflicting
 
@@ -128,37 +131,46 @@ argument, that people don't want to have more kids because:
 
 1. People with good education don't like to have babies because, it
    will lower their quality of life
-2. People who have good lie don't like to have babies because, it will
+2. People who have good life don't like to have babies because, it will
    lower their quality of life.
 
 Well well well. Now let me ask you this: **do you wish your kid to
 have a good/better life than yours? and do you wish them to have
 good/better education?** I have yet to meet a single parent who says
 No to this. Well, then, following the initial logic, doesn't this mean
-that the next generation will have less babies even, because they will
-have a better education & better life!?
+that the next generation will have less babies because, they will have
+a better education & better life than their parents'!?
 
 So, if our goal is to reverse this population trend, it seems to me
 the logical step should be **to lower education and to lower quality
-life** for next generation, so that they will be willing to give more
-birth!
+life** of our next generation, so that they will be willing to give more
+birth! Now, people, will you still be _patriotic_?
 
 You see, this is a completely conflicting logic that they are stating
 without thinking over how this will unfold. And honestly, let's be
 straight here:
 
-High education & life quality is not in negative relation with child
-birth. On the contrary, parents want their kids to have a good
-life. So it is super important that the society in the future, in the
-next 25 years when my son grows up, is in a good shape. I want to do
-my part, not only for my own sake, but also for Noah to have a good
-time. I think this is what every parent wishes (at least the
-responsible ones). Education makes people criticize more, challenges
-status quo more, thus having less confidence in a rosy future for the
-next 25 year. I think this is actually why many don't want to have
-kids. Further, they certainly don't think they want to make a child so
-to be patriotic. I'm sure that's the last thing on their mind when
-they were having sex.
+High education & life quality is not in negative correlation with
+child birth. On the contrary, parents wanting their kids to have a
+good life is a great thing. (Speaking for any parents), it is super
+important that the society in the future, in the next 25 years when my
+son grows up, is in a good shape. I want to do my part, not only for
+my own sake, but also for Noah to have a good life. That, is a strong
+motivation, to be a good citizen, to be a good person (role model) in
+life, and to make a new generation of intelligence, of knowledge, and
+of kindness. 
+
+Education makes people criticize more, challenges status quo more,
+thus having less confidence in a rosy future for the next 25 year if
+things are let be without checks. I think this is actually why many of
+those who has received high education don't want to have kids &larr;
+not that they have less sexual drive, but they have a deeper
+understanding of things, of human, of society, of what the next 25
+years may be like, and a stronger will to determine his/her own life,
+and a stronger feeling of responsibility when there is a
+child. Therefore, education is not the enemy of child birth, nor the
+cause of decline of population.
+
 
 So really, people. **This logic can not be true!** It's an urban
 myth at most. Stop quoting it for your statement. It, in my view, is
@@ -208,7 +220,7 @@ greatly. I'm seeing it unfold in front of my eyes.
 
 But mostly, I worry about Siqi. She has a full life ahead of her. I
 will regret dearly if she were caught in such turmoil someday. I wish
-I could have saved her from going through this; I wish I could be
+I could have helped her from going through this; I wish I could be
 there if the tide comes to her; I wish I could bring her to safety, or
 at least, peddle the boat for her, so she will be ok.
 

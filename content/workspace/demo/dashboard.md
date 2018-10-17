@@ -1,4 +1,4 @@
-Title: Project SPA Dashboard
+Title: SPA: a cofiguration Dashboard
 Date: 2018-10-15 21:43
 Slug: project spa dashboard demo
 Author: Feng Xia

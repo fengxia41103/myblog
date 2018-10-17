@@ -5,8 +5,8 @@ Slug: mbsync mu4e email
 Author: Feng Xia
 Modified: 2018-06-06 11:25
 
-<figure class="col l3 m6 s12">
-  <img src="/images/funny/email.jpg"
+<figure class="col l5 m6 s12">
+  <img src="/images/hahn.png"
        class="center img-responsive">
 </figure>
 

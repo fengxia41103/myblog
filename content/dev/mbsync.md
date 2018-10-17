@@ -28,16 +28,14 @@ alternatives, then I found [mbsync][2].
 Its [man page][2] is worth a read. It looks intimidating at first
 glance, but it isn't really. In a nutshell, it defines three things:
 
-1. <span class="myhighlight">A remote store</span>: this also links to
-   an **Account**, which of course
-   holds your email credentials.
-2. <span class="myhighlight">A local store</span>: this defines local
-   file structure where you want to
-   emails to be downloaded to.
-3. <span class="myhighlight">A channel</span>: a link that connects
-   the a remote store with a local store.
+1. **A remote store**: this also links to an **Account**, which of
+   course holds your email credentials.
+2. **A local store**: this defines local file structure where you want
+   to emails to be downloaded to.
+3. **A channel**: a link that connects the a remote store with a local
+   store.
    
-<figure class="col l12 m12 s12">
+<figure class="col s12">
   <img src="/images/mbsync.png"
        class="center img-responsive">
   <figcaption>mbsync components</figcaption>
@@ -47,8 +45,8 @@ glance, but it isn't really. In a nutshell, it defines three things:
 
 **Acount** sections define your email accounts:
 
-1. for <span class="myhighlight">hotmail</span>: `imap.outlook.com`
-2. for <span class="myhighlight">gmail</span>:`imap.gmail.com`
+1. for hotmail: `imap.outlook.com`
+2. for gmail:`imap.gmail.com`
 
 ```shell
 # Hotmail account
@@ -165,7 +163,7 @@ Account gmail # <-- the account name defined in Account section
 ## Local store
 
 Don't quite understand this one. Default local maildir is set to
-`~/Maildir` (seems to be the defaul).
+`~/Maildir` (seems to be the default).
 
 ```shell
 MaildirStore gmail-local
@@ -207,7 +205,7 @@ Follow these steps to set up your local folders:
 2. Create these folders: `~/Maildir`, `~/Maildir/Hotmail`, and
    `~/Maildir/Gmail`.
 3. Run command `mbsync -a`, sit back, and watch your remote emails got
-pull down and backed up locally.
+   pull down and backed up locally.
 4. Clear old index `rm -r ~/.mu`.
 5. Run `mu index` to index local emails.
 

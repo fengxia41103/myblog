@@ -65,7 +65,7 @@ projects. It is divided into four components:
 
 <figure class="s12 center">
   <img src="/images/system%20architecture.png"/>
-    <figcaption>System architecture diagram</figcaption>
+    <figcaption>Feng's system architecture diagram</figcaption>
 </figure>
 
 The beauty of this architecture is that message queue becomes a

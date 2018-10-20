@@ -229,11 +229,11 @@ buffers help keep traffic moving, while the hot-swap redundant power
 supplies and fans (along with numerous high-availability features)
 help provide high availability for business sensitive traffic.
 
-The RackSwitch G8272 (as shown in Figure 13) is ideal for latency
+The RackSwitch G8272 (as shown in Figure 4.3) is ideal for latency
 sensitive applications, such as high-performance computing clusters,
 financial applications and NFV deployments. In addition to 10 Gb
 Ethernet (GbE) and 40 GbE connections, the G8272 can use 1 GbE
-connections.
+connections (need the Photoelectric conversion module).
 
 For more information, see [product guide][g8272 guide].
 
@@ -276,6 +276,8 @@ cycle, automation, list of artifacts such as ISO images and qcow
 images, and new server discovery.
 
 
+![Platform services overview][platform services overview]
+
 ### Runtime service
 
 Built upon [Red Hat Hyperconverged Infrastructure (RHHI-V)][rhhi]. It
@@ -291,14 +293,7 @@ See [product guide][rhhi guide] for details.
 
 ### Software repository & life cycle management service
 
-Built upon [Red Hat Satellite][satellite]. All Open Cloud servers are
-registered to this service, who then is responsible to manage
-life cycle of:
-
-1. RHEL and Red Hat software products that are deployed in the Open Cloud.
-2. Release, update, patch of Lenovo software products.
-3. `.iso` and `qcow2` images, which are used by VM creation and server
-   provisioning.
+Built upon [Red Hat Satellite][satellite]:
 
 > Satellite is an on-premise alternative to trying to download all of
 > your content from the Red Hat content delivery network or managing
@@ -315,11 +310,27 @@ life cycle of:
 > the central Satellite Server.
 > 
 
-See [product guide][satellite guide] for details.
+See [Red Hat Product Guide][satellite guide] for details.
+
+
+All Open Cloud physical servers and Lenovo installed virtual machines
+are registered to this service. If you are using the Open Cloud
+Automation service to create new virtual machine, it will
+register itself to this repo service in order to receive Red Hat
+product updates.
+
+By default, the repo services offers three environments:
+
+1. **development**:
+2. **QA**:
+3. **production**:
+
+By default, new virtual machine will register to `development`
+environment, thus having access to the latest packages and fixes.  
 
 ### Automation service
 
-Build upon [Red Hat Ansible Tower][tower]. It is the single point of
+Built upon [Red Hat Ansible Tower][tower]. It is the single point of
 contact to manage servers and VMs using ansible playbooks.
 
 Lenovo Open Cloud is shipped with a list of pre-defined automations
@@ -329,7 +340,7 @@ See [product guide][tower guide] for details.
 
 ### Discovery service
 
-Build upon [Lenovo Confluent][confluent]. It continuously monitors
+Built upon [Lenovo Confluent][confluent]. It continuously monitors
 network for new Lenovo server and switch. Once identified, the new
 hardware can be enlisted by other Open Cloud services, such as
 extending Ceph cluster or adding an Openstack compute node.
@@ -337,6 +348,7 @@ extending Ceph cluster or adding an Openstack compute node.
 See [product guide][confluent] for details.
 
 ### Inventory planning service
+
 
 ### Server config & OS deployment service
 
@@ -362,33 +374,40 @@ See [product guide][confluent] for details.
 ## Design Conventions {#convention}
 
 There is endless possibility to design a network.  In this
-architecture we recommend the following conventions for best practice:
+architecture we recommend the following conventions as best
+practice:
 
-1. Inter switch connections are paired.
-2. Except BMC connection, server to switch connections are paired.
-    1. Each pair connect to separate NICs on the server at north bound, 
-       and separate switch at south bound.
+1. Data center switches follow a `spine-leaf` topology.
+2. Switch to switch connections are always paired for redundancy.
+3. Except BMC connection, server to switch connections are always
+   paired. In addition, each pair should connect to separate NICs on
+   the server at north bound, and separate switch at south bound.
 
-   This then requires matching configuration on the switch using LACP,
-   and on the server using **active-active** [`bonding`][bonding].
+    ![Server-Switch network convention][]
+
+   This requires matching configuration on the switch using LACP, and
+   on the server using **active-active** [`bonding`][bonding]. Both we
+   will demonstrate how to create in the following sections.
 3. Separate management traffic from data traffic whenever possible.
 4. Improve network isolation by assigning private IP space to internal
-   only networks whenever possible.
+   only traffic whenever possible.
 
 ## Network Overview
 
 ![Lenovo Open Cloud Network Overview][network overview]
 
-On the high level, LOC networks can be viewed in three groups &mdash;
-platform network, storage network, and cloud network. In the following
-sections, we will discuss the network design to support **Platform**
-hardware and services. We will follow these steps to help user
-understand the design and highlight considerations we recommend to
-take in implementation:
+On the high level, the Open Cloud networks can be viewed in three
+groups &mdash; platform network, storage network, and cloud
+network. In the following sections, we will discuss the network design
+to support **Platform** hardware and services. We will follow these
+steps to help user understand the design and highlight considerations
+we recommend to take in implementation:
 
-1. Define networks by its function: this defines the purpose of this
-   network, thus clarifying its characteristics such as load, latency,
-   space, etc..
+1. Define logical networks by its function: this defines the purpose
+   of this network, thus clarifying its characteristics such as load,
+   latency, space, etc..
+2. Assign VLAN to logical networks: in theory, each logical network is
+   assigned a unique VLAN schema. 
 4. Map network/VLANs to server's network interface: this defines how
    server side interfaces will be configured to support these
    networks.
@@ -456,18 +475,18 @@ RHHI provisioning
 : is to support data traffic of installing OS on a physical
   server. Separating this to its own network is a best practice
   because operating system image can be large, thus its loading to
-  server can have negative impact on shared traffics.
+  server will affect other tenants.
   
 VM management
 : is to access RHHI virtual machines. This supports both the Open
   Cloud services and VM workloads. Later we will see that it's also
   advised to dedicate a NIC for this same purpose.
 
-One convention we follow is to assign networks with private spaces,
-eg. `192.168.x.x`, defined in [RFC 1918][rfc 1918] whenever
-possible. This makes this environment self-contained, and you can
-gradually open it up by routing or other network methods to expose
-service and access.
+As a convention, we assign networks that only support _Open Cloud
+private traffics_ with private spaces, eg. `192.168.x.x`, defined in
+[RFC 1918][rfc 1918] whenever possible. This makes this environment
+self-contained, and you can gradually open it up by routing or other
+network methods to expose service and access.
 
 
 | Logical Network             | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
@@ -543,10 +562,9 @@ following sections we will use this schema[^schema] to demonstrate switch
 port configurations.
 
 We have opted to reserve port 1-16 on two G8052 switches for BMC
-connections of all servers in this example. We found it easier to
-locate them physically on the switch for troubleshooting purpose
-considering OOB connections are essential to manage server. However,
-your management style may call a different approach.
+connections of all servers within this rack. From experience we found
+this setup easier for troubleshooting BMC connections on the
+switch. However, your management style may call a different approach.
 
 | Port | G8052 (1Gb)   | G8052 (1Gb)   | G8272 (10Gb) | G8272 (10Gb) |
 |------|---------------|---------------|--------------|--------------|
@@ -566,44 +584,73 @@ Table: Platform server to switch schema in a 3-server configuration
 
 There are multiple methods to apply switch port configurations, see
 [Switch Port Configuration Methods](#switch-config-method) for details. Here
-we show an example using switch CLI directly.
+we take the two connections to port `17` of G8052 switches for example
+and walk through switch side configurations using switch CLI directly.
 
-By referencing the server side connections which are grouped by
-function into BMC, management, storage and workloads, we can also
-group switch ports into these four categories since each group
-share the same configuration.
+In general, the workflow will be:
 
+1. Login in switch as `admin` user.
+2. Enter `config` mode.
+3. Select the port to configure.
+4. Apply settings.
+5. `exit` config mode. This then allows you to select another port
+   without leaving the `config` mode.
 
-### Enter config mode
+### Login to switch
 
-In terminal, telnet to either G8052 or G8272 Lenovo switch, and enter
-config mode by enabling `admin mode`:
+Lenovo G8052 switch allows telnet access by default. Use the switch
+IP, for example, `10.240.43.51`, default admin user `admin` and
+default admin password `admin`:
 
 ```shell
-# en <-- enable admin mode
-# configure <-- to enter config mode
+$ telnet 10.240.43.51                   
+Trying 10.240.43.51...
+Connected to 10.240.43.51.
+Escape character is '^]'.
+
+Lenovo RackSwitch G8052.
+
+
+Enter login username: admin <-- admin user name
+Enter login password:       <-- admin user password
+
+G8052>
 ```
+
+**Note** that prompt `G8052>` shown above is depending on the switch
+name, in this example, `G8052`. This value is configurable. Thus your
+terminal prompt may look different.
+
+### Enter config mode
 
 The rest of port configurations can only be applied when in `config
 mode`.
 
+```shell
+G8052> en <-- enable admin mode
+G8052> configure <-- to enter config mode
+```
+
 ### Configure BMC connections
 
 | Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
-|------------|---------------|-------------|-------------|-------------|
-| BMC        | n/a           | access      | 2           | n/a         |
+|------------|-------------|-------------|-------------|-------------|
+| BMC        | n/a         | access      | 2           | n/a         |
 
 Table: Platform server BMC connection switch port config
 
-To configure BMC connections, using G8052 port 1 for example.
-Replace `1/1` with `1/2` for port 2, and `1/3` for port 3.
+To configure BMC connections, using G8052 port 1 for example:
 
-In switch admin terminal:
+1. select the port to config: replace `1/1` with `1/2` for port 2, and `1/3` for port 3.
+2. set port mode: `access`
+3. set native vlan: `2`
+
+Example:
 
 ```shell
-# interface ethernet 1/1
-# bridge-port mode access
-# bridge-port access vlan 2
+G8052> interface ethernet 1/1 <-- select port
+G8052> bridge-port mode access <-- set mode
+G8052> bridge-port access vlan 2 <-- set native vlan
 ```
 
 ### Configure `bond 0` connections
@@ -625,18 +672,18 @@ To configure connections used for `bond 0`, using G8052 port 17 for
 example. Apply the same configuration to port 17, 18 and 19 on both
 G8052 switches according to the [cable schema](#platform-cabling).
 
-In switch's admin terminal:
+Example:
 
 ```shell
-# interface ethernet 1/17
-# bridge-port mode trunk
-# bridge-port trunk allowed vlan 1,3,10,100
-# bridge-port trunk native vlan 10
+G8052> interface ethernet 1/17
+G8052> bridge-port mode trunk
+G8052> bridge-port trunk allowed vlan 1,3,10,100 <-- set tagged vlans
+G8052> bridge-port trunk native vlan 10 <-- set native vlan
 ```
 
-**Note** that setting `native vlan` after `allowed vlan` is advised,
-because the native vlan must also be included as an _allowed_
-vlan. Otherwise, CLI will fail with an error.
+**Note** that you must set `native vlan` after `allowed vlan`, because
+the native vlan must also be included as an _allowed_ vlan. Otherwise,
+CLI will fail with error.
 
 ### Configure `bond 1` connections
 
@@ -653,12 +700,12 @@ To configure connections used for `bond 1`, using G8272 port 1 for
 example. Apply the same configuration to port 1,2,3 on both G8272
 switches according to the [cable schema](#platform-cabling).
 
-In switch's admin terminal:
+Example:
 
 ```shell
-# interface ethernet 1/1
-# bridge-port mode access
-# bridge-port access vlan 400
+G8272> interface ethernet 1/1
+G8272> bridge-port mode access
+G8272> bridge-port access vlan 400
 ```
 
 ### Configure `bond 2` connections
@@ -673,23 +720,31 @@ as OpenStack.
 
 Table: Platform server `workloads` connection switch port config
 
-To configure connections used for `workloads`(`bond 2`), using G8272
-port 4 for example. Apply the same configuration to port 4,5,6 on both
-G8272 switches.
+To configure connections used for `bond 2`, using G8272 port 4 for
+example. Apply the same configuration to port 4,5,6 on both G8272
+switches according to the [cable schema](#platform-cabling).
 
-In switch's admin terminal:
+Example:
 
 ```shell
-# interface ethernet 1/4
-# bridge-port mode trunk
-# bridge-port trunk allowed vlan 600
-# bridge-port trunk native vlan 600
+G8272> interface ethernet 1/4
+G8272> bridge-port mode trunk
+G8272> bridge-port trunk allowed vlan 600
+G8272> bridge-port trunk native vlan 600
 ```
+
+**Note** that this may appear strange that we are using `trunk` mode
+even though there is only one vlan &mdash; VLAN 600. The mode is
+necessary when we add Open Cloud's storage services and cloud services
+to the stack. 
 
 ## Configure Server Interfaces
 
-As defined in [Platform Networks](#platform-network), Platform servers
-will be configured with three bonding interfaces and a list of bridges:
+
+Platform servers have at least two 1Gb ports and four 10Gb ports.  As
+defined in [Platform Networks](#platform-network), Platform servers
+will be configured with three bonding interfaces and a list of
+bridges:
 
 | Server Physical Interface | Bond Interface | Bridges                                        |
 |---------------------------|----------------|------------------------------------------------|
@@ -697,28 +752,35 @@ will be configured with three bonding interfaces and a list of bridges:
 | 1F0, 2F0                  | bond 1         | gluster                                        |
 | 1F1, 2F1                  | bond 2         | VMMgmt                                         |
 
-**Note** that the name of these interfaces, eg. `eno1`, `1F0`, can
-vary depending on the slot the NIC card and the server side ports you
-choose to cable with switch. You can use the [Implementation
-Worksheet](#questionnaire) to create a mapping between your
-environment and this design.
+**Note** that the name of these interfaces, eg. `eno1` for the _first_
+1Gb port, and `1F0` for the _first_ 10Gb port, are assigned by
+operating system. These names, however, are depending on various
+factors such as the slot the NIC card, and naming convention the
+operating system follows.  Therefore, they are presented here for
+illustration purpose. Please contact Lenovo Sales for assistance of
+your hardware configuration. 
+
+Further, the ports you choose to cable to switch can also be different
+from the example [cable schema](#platform-cabling). Use the
+[Implementation Worksheet](#questionnaire) to create a mapping between
+your environment and this example.
 
 ### Configure Bonding Interface
 
-![Platform Server Network Interface][platform server interface]
+![Example of Platform server bonding interface and their switch connections][platform server interface]
 
-We will use `bond 0` for example to show steps needed to create a
-bonding interface on a Platform server running RHEL 7.5.  We will
-highlight options and values that are important for Lenovo Open Cloud.
-For general information, you can further refer to [Red Hat Enterprise
-Linux 7 Networking Guide][rhel bonding].
+We will use `bond 0` for example to show steps to create a bonding
+interface on a Platform server running RHEL 7.5.  We will highlight
+options and values that are important for Lenovo Open Cloud.  For
+general information of bonding interface, please refer to [Red Hat
+Enterprise Linux 7 Networking Guide][rhel bonding].
 
 
 On each Platform servers:
 
 1. Go to `/etc/sysconfig/network-scripts/`.
 2. Create networking config file `ifcfg-bond0`. Replace `IPADDR`,
-   `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
+   `NETMASK`, `GATEWAY`, and `DNS1` values with your values:
 
 
         ```shell
@@ -736,11 +798,11 @@ On each Platform servers:
    
    1. `DEVICE`: name of the bonding interface, in this example, `bond0`.
    2. `BONDING_OPTS`: 
-      1. mode=4: set to **active-active**. This is consistent with
+      1. `mode=4`: set to **active-active**. This is consistent with
          switch ports who are bonded in vLAG. Refer to [Red Hat Enterprise
          Linux 7 USING CHANNEL BONDING][rhel bonding mode] for more
          information of bonding modes and their implications.
-      2. miimon=100: enable MII monitoring.
+      2. `miimon=100`: enable MII monitoring.
    3. `DEFROUTE`: must be `no`.
    
 3. Create `ifcfg-eno1`:
@@ -756,7 +818,7 @@ On each Platform servers:
    1. Here we setup a master-slave between the physical NIC interface
       `eno1` (as slave) and bonding interface `bond0` (as master).
 
-4. Create `ifcfg-eno2`:
+4. Similar to `eno1` bonding, create `ifcfg-eno2`:
 
         ```shell
         DEVICE=eno2
@@ -766,47 +828,62 @@ On each Platform servers:
         DEFROUTE=no
         ```
 
-5. `systemctl network restart` to take effect.
+5. Restart network service to take effect: `systemctl network restart`.
 
-6. use `ip a` to verify that interfaces are up and running.
+6. Use `ip a` to verify that three interfaces are up and running
+   &mdash: `eno1`, `eno2`, and `bond0`.
 
 ### Create Bridge Interface
 
-| Network                    | Bridge Name      | Bond Interface | VLAN |
-|----------------------------|------------------|----------------|------|
-| Campus                     | Campus           | 0              | 1    |
-| Physical server management | PhysicalMgmt     | 0              | 3    |
-| RHHI provisioning          | RHHIProvisioning | 0              | 10   |
-| OVIRT management           | ovirt            | 0              | 100  |
-| glusterFS                  | gluster          | 1              | 400  |
-| VM management              | VMMgmt           | 2              | 600  |
+Virtual bridge is a flexible way to create multiple interfaces that
+can be tied to a physical or another virtual interface. On Open Cloud
+Platform, we build virtual bridges on top of bonding interface to
+serve two purposes:
 
-We will setup bridge interfaces using the RHV Administrator Portal. 
+1. Further isolate networks by their function.
+2. Ease of maintenance since user can add and remove user-defined
+   networks as virtual bridges freely through Open Cloud Automation
+   service, or through the RHV Administrator Portal.
+
+| Logical Network            | Bridge Name      | Bond Interface | Supporting VLAN |
+|----------------------------|------------------|----------------|-----------------|
+| Campus                     | Campus           | 0              | 1               |
+| Physical server management | PhysicalMgmt     | 0              | 3               |
+| RHHI provisioning          | RHHIProvisioning | 0              | 10              |
+| OVIRT management           | ovirtmgmt        | 0              | 100             |
+| glusterFS                  | gluster          | 1              | 400             |
+| VM management              | VMMgmt           | 2              | 600             |
+
+Table: Platform server bridge interfaces
+
+In this example, we will setup bridge interfaces using the RHV Administrator Portal:
 
 1. Login Admin portal and select `System > Network`.
 
 ![View RHV Network List](../../images/ibb/setup%20rhhi%20network.png)
 
 2. Click `New` to create a new network, or `Edit` to modify an
-   existing one.
+   existing one. This will in turn create a virtual bridge on the
+   host. In this example, `PhysicalMgmt`:
    
 ![Create New RHV
 Network](../../images/ibb/setup%20rhhi%20network%20name.png)
 
-3. Set VLAN.
+3. Set VLAN. Only one VLAN can be associated with one bridge interface.
 
 ![Setup RHV Network
 VLAN](../../images/ibb/setup%20rhhi%20network%20vlan.png)
 
-4. Link to a bonding interface.
+4. Link the bridge to a bonding interface.
 
 ![Link RHV Network to a bonding interface](../../images/ibb)
 
-To view 
+To view the resulting bridge interface configurations created by the
+Admin Portal:
 
+1. Login into any Platform server.
 1. Go to `/etc/sysconfig/network-scripts/`.
-2. Create networking config file `ifcfg-management`. Replace `IPADDR`,
-   `NETMASK`, `GATEWAY`, and `DNS1` values with yours.
+2. Check `ifcfg-PhysicalMgmt`:
 
         ```shell
         DEVICE=PhysicalMgmt
@@ -819,8 +896,13 @@ To view
         NM_CONTROLLED=no
         IPV6INIT=no
         ```
-3. Create `ifcfg-bond0.3` that represents `Physical server management` network
-   which is assigned to VLAN 3, and will run on `bond0`:
+   Note:
+   
+   1. `DEVICE`: bridge interface name, in this case, `PhysicalMgmt`.
+   2. `TYPE`: must be `Bridge`.
+   
+3. Check `ifcfg-bond0.3` that links bridge `PhysicalMgmt` to `bond0`,
+   and supports VLAN `3`:
 
         ```shell
         DEVICE=bond0.3 
@@ -838,10 +920,7 @@ To view
       and `DEVICE` should be set in format of `<interface name>.<vlan
       number>`.
    2. `BRIDGE`: name of the bridge, in this case `PhysicalMgmt`, that
-      this bond interface will be connected to.
-
-4. `systemctl network restart` to take effect.
-5. use `ip a` to verify that interfaces are up and running.
+      this bonding interface is connected to.
 
 ## Map Services to VLAN
 
@@ -1100,11 +1179,16 @@ guide][g8272].
 
 [overall architecture]: ../../images/ibb/ibb%20overall%20architecture.png
 [network overview]: ../../images/ibb/ibb%20network%20design%20overview.png
+[platform services overview]: ../../images/ibb/ibb%20platform%20services%20overview.png
+
+[Server-Switch network convention]: ../../images/ibb/ibb%20network%20server%20to%20switch%20convention.png
+
 [platform network]: ../../images/ibb/ibb%20platform%20brain%20workloads%20network.png
 [platform server vlan]: ../../images/ibb/ibb%20platform%20server%20vlan.png
 [platform service vlan]: ../../images/ibb/ibb%20platform%20service%20vlan.png
 [platform switch config]: ../../images/ibb/ibb%20platform%20switch%20config.png
 [platform server interface]: ../../images/ibb/ibb%20platform%20server%20network%20interfaces.png 
+
 
 [storage network]: ../../images/ibb/ibb%20ceph%20network%20design.png
 [storage server vlan]: ../../images/ibb/ibb%20storage%20server%20vlan.png

@@ -62,20 +62,21 @@ inevitably, left a mark on our breakdown, one smartly chose another
 man better than what I could give her, and one spoiled me with her
 love and beauty to put me back on my feet.
 
-I am the lucky one. I always had wonderful women in my life, from
-the first girl I met, to you, to siqi. I couldn't help now facing the
-harsh reality that it must have been me who have disappointed you
-all, by not being wise when I need to, not being
-sensitive when I need to, not being respectful, or forceful, or
-independent, or mature, or any of the adjectives that woman wishes in
-a man, when it should have been there.
+I am the lucky one. I always had wonderful women in my life, from the
+first girl I met, to you, to siqi. I couldn't help now facing the
+harsh reality that it must have been me who have disappointed you all,
+by not being wise when I need to, not being sensitive when I need to,
+not being respectful, or forceful, or independent, or mature, or any
+of the adjectives that woman wishes in a man, when it should have been
+there.
 
 Sometimes I thought of those blant riches who claim not to marry until
 he has enough money to give his woman comfort and style. I still can't
-bring myself to approve this view. But I see its merit now &mdash;
-it is better, more responsible I think, to provide your loved one such things,
-than expecting her to be on your side thick or thin unconditionally
-&mdash; it's an idealistic version of love life, but not life itself.
+bring myself to approve this view. But I see its merit now &mdash; it
+is better, more responsible I think, to provide your loved one such
+things, than expecting her to be on your side thick or thin
+unconditionally &mdash; it's an idealistic version of love life, but
+not life itself.
 
 I want to thank you for the years when I was jobless, wondering around
 with a bloated ego but a pathetic understanding of you. I really
@@ -87,7 +88,7 @@ of success to prove myself. Looking back, it is also a double-edged
 sword, that having you and this family made me proud, gave me
 confidence, resulting in an enlarged ego, which in turn led me astray
 &mdash; in the process of building a better life for the ones I cared,
-I lost the ones along the way. 
+I lost the ones along the way.
 
 How pity was I! If you have seen through all these back then, I would
 have to say that you are indeed wiser than I realized, and which makes

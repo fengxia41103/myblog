@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: early morning
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="/images/her.jpg"/>
+</figure>
+
 I'm getting used to getting up early to feed them. But I still can't
 get used to not thinking of you, when I'm awake, when I'm lying there
 in an early winter morning like this. Where are you?
@@ -45,4 +49,4 @@ to balance, and that's what they are &mdash; these memories, these
 moments when I see them like a movie playing in my head, scene by
 scene, over and over and over, is what keep me warm, keep me sane. 
 
-Darkness is all over me; you, are, light.
+Darkness is all over me; you, gave me light.

@@ -311,11 +311,9 @@
 	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
        });
 
-       // syntaxhighlighter
-       /* SyntaxHighlighter.defaults['toolbar'] = false;
-        * SyntaxHighlighter.all(); */
-      hljs.initHighlightingOnLoad();
-      j$('pre').each(function(i, block) {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
          hljs.highlightBlock(block);
        });
 

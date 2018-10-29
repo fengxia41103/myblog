@@ -12,9 +12,8 @@ IMAPAccount hotmail
 # Address to connect to
 Host imap.outlook.com
 User feng_xia41103@hotmail.com
-Pass xxx
-UseIMAPS yes
-RequireSSL yes
+Pass xxxx
+SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 
@@ -23,9 +22,8 @@ IMAPAccount gmail
 # Address to connect to
 Host imap.gmail.com
 User fengxia41103@gmail.com
-Pass xxx
-UseIMAPS yes
-RequireSSL yes
+Pass xxxx
+SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # Gmail account for noah
@@ -33,9 +31,8 @@ IMAPAccount noah
 # Address to connect to
 Host imap.gmail.com
 User noahxiaqq@gmail.com
-Pass xxx
-UseIMAPS yes
-RequireSSL yes
+Pass xxxx
+SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 
@@ -44,12 +41,11 @@ IMAPAccount lenovo
 # Address to connect to
 Host outlookae.lenovo.com
 User fxia1@lenovo.com
-Pass xxx
+Pass xxxx
 Port 993
-UseTLSv1.2 yes
-UseIMAPS yes
-RequireSSL yes
+SSLType IMAPS
 CertificateFile /home/fengxia/.cert/outlookae.lenovo.com.pem
+
 
 ############################################
 #
@@ -70,13 +66,16 @@ Account gmail
 MaildirStore gmail-local
 Path ~/Maildir/Gmail/
 Inbox ~/Maildir/Gmail/inbox/
+Subfolders Verbatim
 
 IMAPStore hotmail-remote
 Account hotmail
 
+
 MaildirStore hotmail-local
 Path ~/Maildir/Hotmail/
 Inbox ~/Maildir/Hotmail/inbox/
+Subfolders Verbatim
 
 IMAPStore lenovo-remote
 Account lenovo
@@ -84,6 +83,7 @@ Account lenovo
 MaildirStore lenovo-local
 Path ~/Maildir/Lenovo/
 Inbox ~/Maildir/Lenovo/inbox/
+Subfolders Verbatim
 
 IMAPStore noah-remote
 Account noah
@@ -92,6 +92,7 @@ Account noah
 MaildirStore noah-local
 Path ~/Maildir/noah/
 Inbox ~/Maildir/noah/inbox/
+Subfolders Verbatim
 
 ############################################
 #
@@ -107,40 +108,53 @@ Inbox ~/Maildir/noah/inbox/
 # 1 "*" TO MATCH EVERYTHING
 # 2 "!DIR" TO EXCLUDE "DIR"
 # 3 "DIR" TO MATCH DIR
+
 Channel gmail-inbox
 Master :gmail-remote:
 Slave :gmail-local:inbox
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
 
 Channel gmail-trash
 Master :gmail-remote:"[Gmail]/Trash"
 Slave :gmail-local:trash
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
 
 Channel gmail-sent
 Master :gmail-remote:"[Gmail]/Sent Mail"
 Slave :gmail-local:sent
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
 
 Channel gmail-all
 Master :gmail-remote:"[Gmail]/All Mail"
 Slave :gmail-local:all
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel gmail-starred
 Master :gmail-remote:"[Gmail]/Starred"
 Slave :gmail-local:starred
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 
 ############################################
@@ -153,30 +167,42 @@ Channel hotmail-trash
 Master :hotmail-remote:"Trash"
 Slave :hotmail-local:trash
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel hotmail-inbox
 Master :hotmail-remote:"Inbox"
 Slave :hotmail-local:inbox
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel hotmail-inbox-sub
 Master :hotmail-remote:"Inbox/"
 Slave :hotmail-local:inbox/
 Pattern *
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel hotmail-sent
 Master :hotmail-remote:"Sent"
 Slave :hotmail-local:sent
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 
 ############################################
@@ -188,23 +214,32 @@ Channel lenovo-inbox
 Master :lenovo-remote:
 Slave :lenovo-local:inbox
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel lenovo-inbox-sub
 Master :lenovo-remote:"INBOX/"
 Slave :lenovo-local:inbox/
 Pattern *
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel lenovo-sent
 Master :lenovo-remote:"Sent"
 Slave :lenovo-local:sent
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 ############################################
 #
@@ -224,36 +259,51 @@ Channel noah-inbox
 Master :noah-remote:
 Slave :noah-local:inbox
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel noah-trash
 Master :noah-remote:"[Gmail]/Trash"
 Slave :noah-local:trash
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel noah-sent
 Master :noah-remote:"[Gmail]/Sent Mail"
 Slave :noah-local:sent
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel noah-all
 Master :noah-remote:"[Gmail]/All Mail"
 Slave :noah-local:all
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 Channel noah-starred
 Master :noah-remote:"[Gmail]/Starred"
 Slave :noah-local:starred
 Create Both
+Remove Both
 Expunge Both
+CopyArrivalDate yes
 SyncState *
+
 
 ############################################
 #

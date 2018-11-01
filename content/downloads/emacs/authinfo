@@ -3,3 +3,5 @@ machine smtp.gmail.com login fengxia41103 port 587 password xxx
 #machine smtp.gmail.com login fengxia41103@gmail.com port 25 password xxx
 machine smtp.live.com login feng_xia41103@hotmail.com port 587 password xxx
 machine smtp.live.com login feng_xia41103@hotmail.com port 25 password xxx
+machine outlookae.lenovo.com login fxia1 port 25 password xxx
+

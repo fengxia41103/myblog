@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: dictator
 Author: Feng Xia
 
-<figure class="col s12">
+<figure class="col l6 m6 s12">
   <img src="/images/hahn.png"/>
 </figure>
 

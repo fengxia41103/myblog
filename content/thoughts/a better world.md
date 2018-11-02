@@ -83,8 +83,8 @@ opinion** by the author, wouldn't it!?
 
 I don't know. The more I think about human society, about what is
 good, what is right, the more I start to question whether there is a
-**truth** that is irrelevant from our interpretation, or everything is
-just a human imagination. Take the dollar for example. We all know
+**truth** that is irrelevant from our interpretation, or [everything is
+just a human imagination][2]. Take the dollar for example. We all know
 that paper money is nothing but, a piece of paper. But then, is gold
 really better than this paper!? Not really. It has not so called
 **intrinsic value** either. It is just a material, a carrier, that
@@ -117,3 +117,4 @@ develop, will demonstrate, will endure.
 Is this good? bad? better? or worse?
 
 [1]: https://en.wikipedia.org/wiki/Great_Sioux_War_of_1876
+[2]: {filename}/thoughts/imagination%20is%20life.md

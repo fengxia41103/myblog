@@ -17,6 +17,7 @@ header-includes: |
   \usepackage{setspace}
   \onehalfspacing
 
+
   \usepackage{multicol}
   \usepackage{xspace}
   \usepackage{quotchap}

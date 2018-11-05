@@ -26,13 +26,13 @@ Technology evolves fast. We have seen the wave of hardware
 virtualization in both server space and in personal computing. Then
 came cloud computing, in which infrastructure becomes even more
 abstract and remote to end user than ever before. Instead of being
-viewed as brick and mortar, server, storage, networking are
+viewed as brick and mortar, server, storage and networking are
 **resources** that can be requested, leased for a period of time, paid
-per use, and releases when done &mdash; all through nothing but an
+per use, and released when done &mdash; all through nothing but an
 online account and a credit card. The flexibility of this model and
-the feeling that resource pool can be extended boundlessly has both
-lowered barrier of entry of new application growing from zero to
-infinity with little sweat, and elevated requirement on the design,
+the feeling that resource pools can be extended boundlessly has both
+lowered the barrier of entry of new applications growing from zero to
+infinity with little sweat, and elevated requirements on the design,
 implementation, and operation of such infrastructure
 
 Further more, along the trail of technology evolution, business has
@@ -40,37 +40,37 @@ been left with an army of legacy systems which were designed and built
 on a technology stack that was adequate then, but not in trend now.
 Millions have been invested, millions of users are probably depending
 on the continuity of service, and many developers and operators were
-trained and are given the responsibility to maintain such stack. It is
+trained and are given the responsibility to maintain such stacks. It is
 neither feasible to cut the cord just because a new technology becomes
 the talk of the day, nor advisable to continue as before without
 taking advantage of what new tools can bring.  Therefore, it is not
 only desirable, but in our opinion essential to have an infrastruture
 that is both flexible and balanced &mdash; it must support a broad
-range of user and application by providing a platform that has a rich
-mix of building blocks which, first of all, covers common needs out of
+range of users and applications by providing a platform that has a rich
+mix of building blocks which, first of all, covers common needs out of the
 box, such as keeping an operating system up to date via patch, update
 and hotfix, while maintaining an open architecture to extend both
 horizontally in term of resource (compute, storage, networking), and
 vertically (application stack).
 
-It is with this in mind that Leonov Open Cloud is designed to combine
+It is with this in mind that Lenovo Open Cloud is designed to combine
 the best of technologies in the market today into a coherent user
 experience while all the following users will feel at home:
 
 1. **VM users**: Open Cloud supports hardware virtualization in its
-   core. Traditional virtual machines users and applications can be
-   migrated onto the platform while minimizing dependency on underline
+   core. Traditional virtual machine users and applications can be
+   migrated onto the platform while minimizing dependency on underlying
    hardware environment.
 
 2. **Cloud users**: Open Cloud provides on-premise cloud computing
-   environment based on OpenStack, the leading cloud operating
-   system. 
-   
+   environments based on OpenStack, the leading cloud operating
+   system.
+
 3. **Container users**: Devops have continuously pushed the boundary
    to merge development and production into a single, consistent
-   experience that what developer uses as a `sandbox` should be
-   identical as what can be used in production. By doing so not only
-   we will eliminate the necessity to maintain multiple stacks
+   experience that developers use as a `sandbox` should be
+   identical to what can be used in production. By doing so not only
+   will we eliminate the necessity to maintain multiple stacks
    catering for different environments &mdash; a typical setup will be
    one for development, one for testing, and one for production, but
    minimize chance of incompatibility and bugs due to difference
@@ -78,7 +78,7 @@ experience while all the following users will feel at home:
 
 This RA describes the system architecture for the Lenovo Open Cloud
 Platform based on Lenovo ThinkSystem servers and Lenovo network
-switches. It provides detail of the hardware requirements to support
+switches. It provides details of the hardware requirements to support
 various node roles and the corresponding configuration of the
 systems. It also describes the network architecture and details for
 the switch configurations. The hardware bill of materials is provided
@@ -97,7 +97,7 @@ network switches.
 
 Lenovo Open Cloud has two sets of clusters: `management cluster` and
 `workload cluster`. Workload cluster refers to applications
-directly interfacing with end user. Management cluster refers to
+directly interfacing with the end user. Management cluster refers to
 applications that manage and provide Open Cloud services.
 
 ![Lenovo Open Cloud Architecture][overall architecture]
@@ -107,14 +107,14 @@ service.
 
 Platform foundation
 : Foundation layer includes 3-, 6-, or 9- servers depending on
-  configuration, storage disks inside server, two 1Gb switches, and
+  configuration, storage disks inside the servers, two 1Gb switches, and
   two 10Gb switches. It supports virtual machines on top of Red Hat
   Virtualization. Storage uses a Gluster FS cluster that spans across
-  all servers. 
+  all servers.
 
 # Hardware
 
-Lenovo Open Cloud is a highly configurable system. From the point of
+Lenovo Open Cloud (LOC) is a highly configurable system. From the point of
 view of physical servers, LOC can be deployed on a 6-server or
 9-server configuration.  In this document we will use a 9-server
 configuration as example.
@@ -132,7 +132,7 @@ SAS/SATA HDDs/SSDs and NVMe SSDs in the same drive bays. Four
 direct-connect NVMe ports on the motherboard provide ultra-fast
 read/writes with NVMe drives and reduce costs by eliminating PCIe
 switch adapters. Plus, storage can be tiered for greater application
-performance, to provide the most cost-effective solution. 
+performance, to provide the most cost-effective solution.
 
 Combined with the Intel® Xeon® Scalable processors product family, the
 Lenovo ThinkSystem SR650 server offers a high density combination of
@@ -208,6 +208,17 @@ recommend the following in each SR650 server:
 
 Total Size for Gluster: `3 * 8 * 2TB = 48TB`.
 
+For system configurations that don't include external block or object storage (e.g.
+a smaller deployment for supporting NFV workloads) it is necessary to add two
+additional disks as backing for object storage.
+
+| Type    | Position        | Number | Size  | RAID  | Purpose          |
+|---------|-----------------|--------|-------|-------|------------------|
+| SSD     | Front backplane | 2      | 800GB | RAID1 | Operating system |
+| SSD     | Front backplane | 2      | 128GB | RAID1 | LVM cache        |
+| SAS HDD | Rear backplane  | 8      | 2TB   | RAID6 | Glusterfs        |
+| SAS HDD | Rear backplane  | 2      | 2TB   | RAID1 | Object Storage   |
+
 ## Network Switches
 
 The following sections describe the Top-of-Rack (ToR) switches used in
@@ -264,15 +275,15 @@ the services they provide:
 1. **Platform services**: Platform services are built upon [Red Hat
     Hyperconverged Infrastructure (RHHI)][rhhi]. It provides LOC core
     services each deployed in one or more virtual machines.
-2. **Storage services**: Storage services are built upon Ceph. It
-   provides capability to manage Ceph cluster up to xx.
-3. **Cloud services**: Cloud is built upon Red Hat Openstack.
+2. **Storage services**: Storage services are built upon Red Hat Ceph Storage
+    (RHCS).  It provides the capability to manage a Ceph cluster up to xx.
+3. **Cloud services**: Cloud is built upon Red Hat Openstack Platform.
 
 ## Platform services {#platform-services}
 
 Platform services provide administrative functions to support
 operation of the Open Cloud. This includes management of software life
-cycle, automation, list of artifacts such as ISO images and qcow
+cycle, automation, storage of artifacts such as ISO images and qcow
 images, and new server discovery.
 
 
@@ -281,8 +292,8 @@ images, and new server discovery.
 ### Runtime service
 
 Built upon [Red Hat Hyperconverged Infrastructure (RHHI-V)][rhhi]. It
-supports virtual machine users out of box, and is the foundation
-of other Lenovo Open Cloud services. 
+supports virtual machine users out of the box, and is the foundation
+of other Lenovo Open Cloud services.
 
 > RHHI integrates Red Hat Virtualization (RHV) and Red Hat Gluster
 > Storage (RHGS). RHHI for Virtualization provides open-source,
@@ -299,16 +310,16 @@ Built upon [Red Hat Satellite][satellite]:
 > your content from the Red Hat content delivery network or managing
 > your subscriptions through the Customer Portal. From a performance
 > side, it reduces hits to your network bandwidth because local systems
-> can download everything they need locally; from a security side, it
+> can download everything they need locally; from a security standpoint, it
 > can limit the risks of malicious content or access, even enabling
 > entirely disconnected environments.
-> 
+>
 > Satellite is composed of a centralized Satellite Server. Depending on
 > your data center setup, organization design, and geographic locations,
 > you can have local Capsule Servers, which are proxies that locally
 > manage content and obtain subscription, registration, and content from
 > the central Satellite Server.
-> 
+>
 
 See [Red Hat Product Guide][satellite guide] for details.
 
@@ -319,13 +330,13 @@ Automation service to create new virtual machine, it will
 register itself to this repo service in order to receive Red Hat
 product updates.
 
-By default, the repo services offers three environments:
+By default, the repo services offer three environments:
 
 1. **development**:
 2. **QA**:
 3. **production**:
 
-By default, new virtual machine will register to `development`
+By default, new virtual machines will register to a `development`
 environment, thus having access to the latest packages and fixes.  
 
 ### Automation service
@@ -333,22 +344,35 @@ environment, thus having access to the latest packages and fixes.
 Built upon [Red Hat Ansible Tower][tower]. It is the single point of
 contact to manage servers and VMs using ansible playbooks.
 
-Lenovo Open Cloud is shipped with a list of pre-defined automations
+Lenovo Open Cloud is shipped with a list of pre-defined automation
 that makes managing the infrastructure easy and efficient.
 
 See [product guide][tower guide] for details.
 
 ### Discovery service
 
-Built upon [Lenovo Confluent][confluent]. It continuously monitors
-network for new Lenovo server and switch. Once identified, the new
-hardware can be enlisted by other Open Cloud services, such as
-extending Ceph cluster or adding an Openstack compute node.
+Built upon [Lenovo Confluent][confluent], this service is
+aimed at continuously monitoring network for new Lenovo servers
+and switches. This service is incorporated as one of the platform
+services using ansible playbooks. The service closely integrates
+with the Inventory planning service, to update newly discovered and
+existing device hardware information. Once the hardware is identified,
+it can be enlisted by other Open Cloud services. For instance, the
+hardware can be utilized to extend the Ceph cluster or to add an Openstack
+compute node.
 
 See [product guide][confluent] for details.
 
 ### Inventory planning service
 
+Inventory planning service, as the name suggests, is aimed at keeping
+track of hardware inventory. This service is built upon the network
+management tool, [Netbox][netbox]. The service is considered the
+source of truth of all hardware. It can be used to manage the end-to-end
+lifecycle of the hardware - right from discovery, maintaining up-to-date
+meta information, utilization/deallocation by other Cloud services etc.
+
+See [product guide][netbox] for details.
 
 ### Server config & OS deployment service
 
@@ -400,14 +424,14 @@ On the high level, the Open Cloud networks can be viewed in three
 groups &mdash; platform network, storage network, and cloud
 network. In the following sections, we will discuss the network design
 to support **Platform** hardware and services. We will follow these
-steps to help user understand the design and highlight considerations
+steps to help the user understand the design and highlight considerations
 we recommend to take in implementation:
 
-1. Define logical networks by its function: this defines the purpose
+1. Define logical networks by their function: this defines the purpose
    of this network, thus clarifying its characteristics such as load,
    latency, space, etc..
 2. Assign VLAN to logical networks: in theory, each logical network is
-   assigned a unique VLAN schema. 
+   assigned a unique VLAN schema.
 4. Map network/VLANs to server's network interface: this defines how
    server side interfaces will be configured to support these
    networks.
@@ -453,7 +477,7 @@ Campus
 
 BMC
 : also called `Out-of-Band` (OOB) management network. It connects to a
-  dedicated management port on physical server that is separated from
+  dedicated management port on a physical server that is separated from
   data ports.
 
 ovirt management
@@ -466,17 +490,17 @@ glusterFS
   backend of Open Cloud Platform. For example, in a 6-server
   configuration, three platform servers will form a 3-node gluster
   cluster.
-  
+
 Physical server management
 : is to support traffic of `In-Band` managerial tasks, eg. `ssh` to a
-  server. 
+  server.
 
 RHHI provisioning
-: is to support data traffic of installing OS on a physical
+: is to support data traffic of installing the OS on a physical
   server. Separating this to its own network is a best practice
-  because operating system image can be large, thus its loading to
-  server will affect other tenants.
-  
+  because operating system images can be large, thus it loading to
+  a server can affect other tenants.
+
 VM management
 : is to access RHHI virtual machines. This supports both the Open
   Cloud services and VM workloads. Later we will see that it's also
@@ -504,9 +528,9 @@ Table: Platform Logical Network Defintions
 ## Map VLAN to Server NIC {#platform-vlan-to-nic}
 
 First, we are to map VLAN to server network interfaces.  Besides BMC
-port, each server has minimal two 1Gb ports and four 10Gb ports.
+port, each server has a minimum of two 1Gb ports and four 10Gb ports.
 Interfaces are paired to form an `active-active` bonding interface on
-Platform server. A RHHI network profile is created for each logical
+the Platform server. A RHHI network profile is created for each logical
 network, which in turn creates a bridge on RHHI server with the same
 name.
 
@@ -515,7 +539,7 @@ name.
 | Campus                     |    1 | Campus        |    0 |     | x      |         |         |
 | BMC                        |    2 | n/a           |  n/a | x   |        |         |         |
 | Physical server management |    3 | PhysicalMgmt  |    0 |     | x      |         |         |
-| RHHI provisioning            |   10 | RHHIProvision |    0 |     | x      |         |         |
+| RHHI provisioning          |   10 | RHHIProvision |    0 |     | x      |         |         |
 | OVIRT management           |  100 | ovirtmgmt     |    0 |     | x      |         |         |
 | glusterFS                  |  400 | gluster       |    1 |     |        | x       |         |
 | VM management              |  600 | VMMgmt        |    2 |     |        |         | x       |
@@ -537,10 +561,10 @@ connections, Open Cloud uses two G8052 (1Gb) switches and two G8272
 configurations including `mode`, `native VLAN` (aka. untagged VLAN),
 and `tagged VLAN` (aka. allowed VLANs):
 
-On the server side, each server has minimal two 1Gb ports (for
+On the server side, each server has a minimum of  two 1Gb ports (for
 example, `eno1` and `eno2`) and four 10Gb ports (for example, `1F0`,
 `1F1`, `2F0`, `2F1`). Once provisioned three bond interfaces and three
-bridge intefaces will be created per server:
+bridge interfaces will be created per server:
 
 
 | Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
@@ -561,7 +585,7 @@ following the network designs laid out in previous sections. In the
 following sections we will use this schema[^schema] to demonstrate switch
 port configurations.
 
-We have opted to reserve port 1-16 on two G8052 switches for BMC
+We have opted to reserve port 1-16 on two G8052 switches for the BMC
 connections of all servers within this rack. From experience we found
 this setup easier for troubleshooting BMC connections on the
 switch. However, your management style may call a different approach.
@@ -589,7 +613,7 @@ and walk through switch side configurations using switch CLI directly.
 
 In general, the workflow will be:
 
-1. Login in switch as `admin` user.
+1. Login in to the switch as `admin` user.
 2. Enter `config` mode.
 3. Select the port to configure.
 4. Apply settings.
@@ -655,8 +679,8 @@ G8052> bridge-port access vlan 2 <-- set native vlan
 
 ### Configure `bond 0` connections
 
-In general, `bond 0` is the connection for management traffic. These
-type of traffics are typically low frequency and requiring low
+In general, `bond 0` is the connection for management traffic. This
+type of traffic is typically low frequency and requiring low
 bandwidth. To support Platform services, this interface will include
 `Campus` network (VLAN 1), `Physical server management` network (VLAN
 3), `RHHI provisioning` network (VLAN 10), and `ovirt management`
@@ -665,7 +689,7 @@ network (VLAN 100).
 | Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
 |------------|-------------|-------------|-------------|-------------|
 | 2 x 1G     | bond 0      | trunk       | 10          | 1,3,10,100  |
-    
+
 Table: Platform server `management` connection switch port config
 
 To configure connections used for `bond 0`, using G8052 port 17 for
@@ -688,7 +712,7 @@ CLI will fail with error.
 ### Configure `bond 1` connections
 
 Platform server's `bond 1` interface is designed to handle data
-traffic to the Gluster file system of RHHI. 
+traffic to the Gluster file system of RHHI.
 
 | Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
 |------------|-------------|-------------|-------------|-------------|
@@ -712,7 +736,7 @@ G8272> bridge-port access vlan 400
 
 Platform server's `bond 2` is designed to support traffic generated by
 additional storage deployment such as Ceph, and cloud deployment such
-as OpenStack. 
+as OpenStack.
 
 | Server NIC | Server Bond | Switch Mode | Native VLAN | Tagged VLAN |
 |------------|-------------|-------------|-------------|-------------|
@@ -736,7 +760,7 @@ G8272> bridge-port trunk native vlan 600
 **Note** that this may appear strange that we are using `trunk` mode
 even though there is only one vlan &mdash; VLAN 600. The mode is
 necessary when we add Open Cloud's storage services and cloud services
-to the stack. 
+to the stack.
 
 ## Configure Server Interfaces
 
@@ -753,14 +777,14 @@ bridges:
 | 1F1, 2F1                  | bond 2         | VMMgmt                                         |
 
 **Note** that the name of these interfaces, eg. `eno1` for the _first_
-1Gb port, and `1F0` for the _first_ 10Gb port, are assigned by
+1Gb port, and `1F0` for the _first_ 10Gb port, are assigned by the
 operating system. These names, however, are depending on various
 factors such as the slot the NIC card, and naming convention the
 operating system follows.  Therefore, they are presented here for
-illustration purpose. Please contact Lenovo Sales for assistance of
-your hardware configuration. 
+illustration purpose. Please contact Lenovo Sales for assistance with
+your hardware configuration.
 
-Further, the ports you choose to cable to switch can also be different
+Further, the ports you choose to cable to the switch can also be different
 from the example [cable schema](#platform-cabling). Use the
 [Implementation Worksheet](#questionnaire) to create a mapping between
 your environment and this example.
@@ -795,16 +819,16 @@ On each Platform servers:
         DNS1=10.240.0.10
         ```
    Note:
-   
+
    1. `DEVICE`: name of the bonding interface, in this example, `bond0`.
-   2. `BONDING_OPTS`: 
+   2. `BONDING_OPTS`:
       1. `mode=4`: set to **active-active**. This is consistent with
          switch ports who are bonded in vLAG. Refer to [Red Hat Enterprise
          Linux 7 USING CHANNEL BONDING][rhel bonding mode] for more
          information of bonding modes and their implications.
       2. `miimon=100`: enable MII monitoring.
    3. `DEFROUTE`: must be `no`.
-   
+
 3. Create `ifcfg-eno1`:
 
         ```shell
@@ -828,7 +852,7 @@ On each Platform servers:
         DEFROUTE=no
         ```
 
-5. Restart network service to take effect: `systemctl network restart`.
+5. Restart the network service to take effect: `systemctl network restart`.
 
 6. Use `ip a` to verify that three interfaces are up and running
    &mdash: `eno1`, `eno2`, and `bond0`.
@@ -837,12 +861,12 @@ On each Platform servers:
 
 Virtual bridge is a flexible way to create multiple interfaces that
 can be tied to a physical or another virtual interface. On Open Cloud
-Platform, we build virtual bridges on top of bonding interface to
+Platform, we build virtual bridges on top of the bonding interface to
 serve two purposes:
 
 1. Further isolate networks by their function.
-2. Ease of maintenance since user can add and remove user-defined
-   networks as virtual bridges freely through Open Cloud Automation
+2. Ease of maintenance since users can add and remove user-defined
+   networks as virtual bridges freely through the Open Cloud Automation
    service, or through the RHV Administrator Portal.
 
 | Logical Network            | Bridge Name      | Bond Interface | Supporting VLAN |
@@ -860,23 +884,23 @@ In this example, we will setup bridge interfaces using the RHV Administrator Por
 
 1. Login Admin portal and select `System > Network`.
 
-![View RHV Network List](../../images/ibb/setup%20rhhi%20network.png)
+![View RHV Network List](../diagrams/setup%20rhhi%20network.png)
 
 2. Click `New` to create a new network, or `Edit` to modify an
    existing one. This will in turn create a virtual bridge on the
    host. In this example, `PhysicalMgmt`:
-   
+
 ![Create New RHV
-Network](../../images/ibb/setup%20rhhi%20network%20name.png)
+Network](../diagrams/setup%20rhhi%20network%20name.png)
 
 3. Set VLAN. Only one VLAN can be associated with one bridge interface.
 
 ![Setup RHV Network
-VLAN](../../images/ibb/setup%20rhhi%20network%20vlan.png)
+VLAN](../diagrams/setup%20rhhi%20network%20vlan.png)
 
 4. Link the bridge to a bonding interface.
 
-![Link RHV Network to a bonding interface](../../images/ibb)
+![Link RHV Network to a bonding interface](../diagrams)
 
 To view the resulting bridge interface configurations created by the
 Admin Portal:
@@ -897,17 +921,17 @@ Admin Portal:
         IPV6INIT=no
         ```
    Note:
-   
+
    1. `DEVICE`: bridge interface name, in this case, `PhysicalMgmt`.
    2. `TYPE`: must be `Bridge`.
-   
+
 3. Check `ifcfg-bond0.3` that links bridge `PhysicalMgmt` to `bond0`,
    and supports VLAN `3`:
 
         ```shell
-        DEVICE=bond0.3 
+        DEVICE=bond0.3
         VLAN=yes
-        BRIDGE=PhysicalMgmt 
+        BRIDGE=PhysicalMgmt
         ONBOOT=yes
         MTU=1500
         DEFROUTE=no
@@ -915,7 +939,7 @@ Admin Portal:
         IPV6INIT=no
         ```
    Note:
-   
+
    1. `DEVICE`: to define a VLAN on an interface, both the filename
       and `DEVICE` should be set in format of `<interface name>.<vlan
       number>`.
@@ -925,7 +949,7 @@ Admin Portal:
 ## Map Services to VLAN
 
 Platform services are VMs running on RHV. Based on the VLANs we have
-defined in previous section, we are to map these services to VLANs
+defined in the previous section, we are to map these services to VLANs
 based on the functions the service will provide.
 
 | Platform Services                           | 1 | 2 | 3 | 10 | 100 | 400 | 600 |
@@ -955,7 +979,7 @@ service vlan]
 Lenovo Open Cloud supports Ceph storage backend. A storage backend can
 be shared among multiple workloads and platforms, such as an OpenStack
 on-premise cloud. By deploying Ceph on top of Open Cloud Platform, we
-can also share common services and networks. 
+can also share common services and networks.
 
 ![Lenovo Open Cloud Storage Networks][storage network]
 
@@ -964,11 +988,13 @@ can also share common services and networks.
 Ceph itself adds three new networks &mdash; Ceph management, Ceph
 storage public, and Ceph cluster private.
 
+*Note:  These networks are not necessary for smaller deployments not including Ceph.*
+
 Ceph management
-: is communication between Ceph dashboard and Ceph nodes, e.g. RPC, transferring zabbix monitoring data.
+: is communication between Ceph dashboard and Ceph nodes, e.g. RPC and transferring zabbix monitoring data.
 
 Ceph storage public
-: data traffic by workloads who will use Ceph as storage backend, also
+: data traffic by workloads who will use Ceph as their storage backend, also
   known as `front-side`.
 
 Ceph cluster private
@@ -991,8 +1017,8 @@ and node discovery, `RHHI Provisioning` (VLAN 10) for server OS
 provisioning, and `Physical server management` (VLAN 3) for general
 admin tasks such as SSH access.
 
-In addition, to support `Storage capacity service`, which is the main
-management tool of Storage deployed on Platform, we also need `Campus`
+In addition, to supporting the `Storage capacity service`, which is the main
+management tool of Storage deployed on Open Cloud Platform, we also need `Campus`
 (VLAN 1) for accessing its UI,  and `VM general management` (VLAN 600).
 
 | Logical Network             | VLAN  | Subnet              | Addresses  | Mask   | Static / DHCP   | Gateway        |
@@ -1140,11 +1166,11 @@ Table: Software BOM, 6-server, HCI deployment, 3 year premium
 ## Configure Lenovo Switch Port {#switch-config-methods}
 
 There are two ways to configure port on a Lenovo switch &mdash; using
-switch CLI, or using a Lenovo utility. 
+switch CLI, or using a Lenovo utility.
 
 ### method 1: using switch CLI
 
-Using switch CLI has always the choice of network admin.  You can find
+Using switch CLI is often the choice for network admins.  You can find
 more information of these command in the [G8272 application
 guide][g8272].
 
@@ -1164,7 +1190,7 @@ guide][g8272].
    5. last, set native vlan: `bridge-port trunk native vlan <vlan
       id>`. **Note** that native VLAN must also be included in the
       `allowed vlan` list.
-     
+
    Example:
 
         ```shell
@@ -1177,24 +1203,24 @@ guide][g8272].
         ```
 
 
-[overall architecture]: ../../images/ibb/ibb%20overall%20architecture.png
-[network overview]: ../../images/ibb/ibb%20network%20design%20overview.png
-[platform services overview]: ../../images/ibb/ibb%20platform%20services%20overview.png
+[overall architecture]: ../diagrams/ibb%20overall%20architecture.png
+[network overview]: ../diagrams/ibb%20network%20design%20overview.png
+[platform services overview]: ../diagrams/ibb%20platform%20services%20overview.png
 
-[Server-Switch network convention]: ../../images/ibb/ibb%20network%20server%20to%20switch%20convention.png
+[Server-Switch network convention]: ../diagrams/ibb%20network%20server%20to%20switch%20convention.png
 
-[platform network]: ../../images/ibb/ibb%20platform%20brain%20workloads%20network.png
-[platform server vlan]: ../../images/ibb/ibb%20platform%20server%20vlan.png
-[platform service vlan]: ../../images/ibb/ibb%20platform%20service%20vlan.png
-[platform switch config]: ../../images/ibb/ibb%20platform%20switch%20config.png
-[platform server interface]: ../../images/ibb/ibb%20platform%20server%20network%20interfaces.png 
+[platform network]: ../diagrams/ibb%20platform%20brain%20workloads%20network.png
+[platform server vlan]: ../diagrams/ibb%20platform%20server%20vlan.png
+[platform service vlan]: ../diagrams/ibb%20platform%20service%20vlan.png
+[platform switch config]: ../diagrams/ibb%20platform%20switch%20config.png
+[platform server interface]: ../diagrams/ibb%20platform%20server%20network%20interfaces.png
 
 
-[storage network]: ../../images/ibb/ibb%20ceph%20network%20design.png
-[storage server vlan]: ../../images/ibb/ibb%20storage%20server%20vlan.png
-[storage switch config]: ../../images/ibb/ibb%20storage%20switch%20config.png
+[storage network]: ../diagrams/ibb%20ceph%20network%20design.png
+[storage server vlan]: ../diagrams/ibb%20storage%20server%20vlan.png
+[storage switch config]: ../diagrams/ibb%20storage%20switch%20config.png
 
-[cloud network]: ../../images/ibb/ibb%20cloud%20network%20design.png
+[cloud network]: ../diagrams/ibb%20cloud%20network%20design.png
 [rhhi]: https://access.redhat.com/products/red-hat-hyperconverged-infrastructure
 [sr650]: https://www.lenovo.com/us/en/data-center/servers/racks/ThinkSystem-SR650/p/77XX7SRSR65
 [sr650 image]: https://www.lenovo.com/medias/lenovo-servers-rack-thinksystem-sr650-subseries-gallery-1.jpg?context=bWFzdGVyfHJvb3R8MjQzNzV8aW1hZ2UvanBlZ3xoMjIvaGFhLzk0OTEwNDMwNTc2OTQuanBnfDUxZTdjYmYyZmRlODc1MWFkMGE0M2I3NGNhZTZhNWJjNWY5NDA0NGU4NDk5Y2M5NDY4MTlkYjJkZjA0MjEzNTM
@@ -1219,6 +1245,7 @@ guide][g8272].
 [tower guide]: https://access.redhat.com/products/ansible-tower-red-hat
 
 [confluent]: https://hpc.lenovo.com/users/documentation/confluentdisco.html
+[netbox]: https://netbox.readthedocs.io/en/stable/
 [bonding]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/s2-networkscripts-interfaces-chan
 
 [^campus]: This is an example subnet.
@@ -1233,4 +1260,3 @@ guide][g8272].
 [rhel bonding mode]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-using_channel_bonding
 
 [rfc 1918]: https://tools.ietf.org/html/rfc1918
-

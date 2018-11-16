@@ -13,15 +13,15 @@ played truth or dare. Noah dared, a girl, to `rape`..... geee.. I was
 totally speechless and didn't even understand where he could have
 picked up that concept. Teacher said she felt this is a topic she
 should leave to parents to talk him about... so he and I had a talk on
-the say to Kumon.
+the way to Kumon.
 
 The good things is that he admitted he said so, not like before that
 he would try to get out of it by denying or finding other excuses
 like "but the other kid started it". So where did he get that idea? He
 said I told him that!!.. what!? How? where? .. "you remember the movie
-we watches yesterday?" "which movie!?" "The Japanese samurai movie."
+we watched yesterday?" "which movie!?" "The Japanese samurai movie."
 "Samurai movie?.... oh, you mean, the one in which that guy killed
-someone for a girl, and he then attached that girl?...." "yes"
+someone for a girl, and he then attacked that girl?...." "yes"
 
 Oh mine mine.... so he is referring to this movie &mdash; [Satan's
 Sword: The Dragon God (1960)- Raizō Ichikawa][1], in which a young
@@ -79,7 +79,7 @@ any time... so there I have it, an ANY-case, that, is always bad.
 
 So you can try to fish out a counter example for the sake of
 argument. But I think once it comes to a judgment, because it is
-entire and solely subjective, it becomes irrelevant whether it is a
+entirely and solely subjective, it becomes irrelevant whether it is a
 generalization &rarr; I think it is wrong, therefore it is wrong.
 
 But the reverse is true, also &rarr; I think it is right, therefore it

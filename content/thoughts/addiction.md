@@ -5,6 +5,10 @@ Slug: addiction
 Author: Feng Xia
 
 
+<figure class="col l5 m6 s12">
+  <img src="/images/understand%20fashion.jpg"/>
+</figure>
+
 What is an addiction then!? and why is this word negative!? I
 think when we talk about this word, the implied message logic is that
 _it is bad because it puts a person into an **extreme** condition,

@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: domain knowledge
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/world%20domination.jpg"/>
+</figure>
+
+
 What is a domain knowledge? Domain knowledge implies a knowing of a
 specific area of knowledge, like plumber knows plumbing. It's quite
 easy to picture that everyone, or should say every profession, is a

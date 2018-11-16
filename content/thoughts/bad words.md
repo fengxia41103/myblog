@@ -23,7 +23,8 @@ we watches yesterday?" "which movie!?" "The Japanese samurai movie."
 "Samurai movie?.... oh, you mean, the one in which that guy killed
 someone for a girl, and he then attached that girl?...." "yes"
 
-Oh mine mine.... so he is referring to this movie, in which a young
+Oh mine mine.... so he is referring to this movie &mdash; [Satan's
+Sword: The Dragon God (1960)- Raizō Ichikawa][1], in which a young
 Samurai was traveling, and met a girl who fell in love with him. She
 had a pursuer who was rather a psycho. He hired a rouge who owned a
 gun to ambush this samurai on his way, and abducted her to a
@@ -92,3 +93,5 @@ writer's or the investigator's conclusion, thus is also subjective!?
 
 This can't be good. But I don't see a way out of this strange loop. A
 sunny day today. Life is indeed, strange.
+
+[1]: https://www.youtube.com/watch?v=MdIm_i5vAzU

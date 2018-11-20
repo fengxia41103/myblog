@@ -1,0 +1,55 @@
+@startuml
+autonumber "<font color=red><b>Message 00:"
+
+actor Admin
+
+box "Platform Services" #F5F5F5
+  participant "Automation Service" as Tower
+  participant "Inventory Service" as Netbox
+end box
+
+box "Storage Resources & Services" #42A5F5
+  participant "Storage Capacity Management Service" as Dashboard
+  collections Servers #ff6a00
+end box
+
+
+== PHASE 1: PRE-DEFINE SERVER ROLE ==
+
+Admin -> Netbox: server_role_id = define_server_role()
+Admin -> Netbox: setup_role_configs(server_role_id)
+Admin -> Tower: workflow_id = setup_workflow(server_role_id)
+Admin -> Netbox: setup_server_role_workflow(server_role_id, workflow_id)
+
+== PHASE 2: PRE-DEFINE SERVER ==
+
+Admin -> Netbox: server_id = register_server(server_uuid, bmc_credentials)
+Netbox -> Admin: server_id_by_inventory_service
+Admin -> Netbox: assign_role(server_id, role_id)
+
+
+== PHASE 3: DISCOVER SERVER ==
+
+group see "IBB discovery service sequence"
+  |||
+  ... discovery & register server w/ inventory service ...
+  |||
+end
+
+== PHASE 4: CONFIG & PROVISION SERVER ==
+
+group see "IBB uhm sequence"
+  |||
+  ... config & provision server ...
+  |||
+end
+
+
+== PHASE 5: HANDOFF TO STORAGE MANAGER ==
+
+Tower -> Dashboard: do_your_magic(ip, root, pwd)
+Dashboard -> Servers: I am managing you now!
+Dashboard -> Tower: dashboard_server_id
+Tower -> Netbox: update_server_info(dashboard_server_id)
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+
+autonumber "<font color=red><b>Message 00:"
+
+actor Admin
+
+box "Platform Services" #F5F5F5
+  participant "Discovery Service" as Discovery
+  participant "Automation Service" as Tower
+  participant "Inventory Service" as Inventory
+end box
+
+collections Servers #ff6a00
+
+Discovery -> Discovery: scan_for_hardware(network x.x.x.x)
+note left
+    Admin sends a request to the service either triggering it manually or
+    programmatically to start a scan of a network for new hardware.
+end note
+
+Admin --> Servers: power on/join monitored BMC network
+...till next discovery iteration...
+note left
+    The servie will identify all supported Lenovo servers and
+    switches.
+end note
+
+
+Discovery -> Tower: identify_hardware([(hw_ip, hw_uuid, hw_meta),])
+
+loop all discovered hardware
+    Tower -> Inventory: identify_hardware(hw_uuid, hw_meta)
+    note right
+        Discovery Service will call Inventory Service to check whether a
+        server has been registered.
+    end note
+
+    Inventory -> Inventory: check_hardware([hw_uuid, hw_meta])
+
+    alt hardware already defined
+        Inventory -> Tower: inventory_server_id
+        note right
+            If yes, it will send meta info to Inventory Service to update device
+            data.
+        end note
+    else hardware is new
+        Tower -> Inventory: register_new_hw(hw_uuid, hw_meta)
+        Inventory -> Tower: inventory_server_id
+        note right
+            If not, a new device resource will be created by Inventory
+            Service.
+        end note
+    end
+
+    Tower -> Discovery: tell_me_more_of(server_id)
+    Discovery -> Tower: server_meta
+    Tower -> Inventory: update_server(inventory_server_id, server_meta)
+end
+
+
+@enduml

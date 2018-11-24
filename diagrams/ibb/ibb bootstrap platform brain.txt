@@ -1,0 +1,128 @@
+@startuml
+autonumber "<font color=red><b>Message 00:"
+
+actor Admin
+
+box "Bootstrap Services" #F48FBE
+  participant "Bootstrap Tower" as Tower
+  participant "Bootstrap LXCA" as LXCA
+  participant "Bootstrap Satellite" as Satellite
+  participant "Bootstrap Git Config" as Config
+  participant "Bootstrap Image" as Image
+  participant "Bootstrap JELK" as jelk
+end box
+
+box "Platform Services" #f5f5f5
+  participant "Runtime Service" as Runtime
+  participant "Software Repository Service" as brain_satellite
+  participant "Config Repo Service" as brain_config
+  participant "Automation Service" as brain_tower
+  participant "Compliance Service" as brain_compliance
+  participant "OS Image Service" as brain_image
+  participant "OS Deployment Service" as brain_lxca
+  participant "Inventory Service" as brain_inventory
+  participant "Discovery Service" as brain_discovery
+end box
+
+== PHASE 1: Bootstrap Runtime Service ==
+
+Admin -> Config: browse and select config source
+Admin -> Tower: set_project_config(git_source, branch, commit, tag)
+Admin -> Tower: deploy_runtime_service()
+
+' Same sequence as end-to-end, but using bootstrap services
+group see "IBB rhhi setup sequence"
+  |||
+  ... using Bootstrap services: LXCA, Satellite, config repo, OS repo...
+  |||
+end
+Tower -> jelk: run_runtime_validations(brain_runtime)
+
+== PHASE 2.1: Bootstrap Platform Satellite ==
+
+' Setup brain satellite as software source
+Tower -> Runtime: deploy_platform_satellite()
+Tower -> jelk: run_satellite_validations(brain_satellite)
+
+loop Brain servers
+  Tower -> Satellite: unregister_brain_server_from_bootstrap()
+  Tower -> brain_satellite: register_brain_server_to_platform_satellite()
+end
+
+== PHASE 2.2: Bootstrap Platform Config Repo ==
+
+' Setup brain git repo
+Tower -> Runtime: deploy_platform_git_repo()
+Tower -> brain_config: sync_config_to_platform_git()
+Tower -> jelk: run_config_repo_validations(brain_config_repo)
+
+== PHASE 2.3: Bootstrap Platform Tower ==
+
+' Setup brain tower
+Tower -> Runtime: deploy_platform_tower()
+Tower -> brain_tower: setup_playbook_source_to_platform_git()
+Tower -> jelk: run_tower_validations(brain_tower)
+
+== PHASE 2.4: Bootstrap Platform Compliance ==
+
+' Setup brain JELK
+Tower -> Runtime: deploy_platform_compliance()
+
+' Use brain Tower and brain JELK to validate services up to this point!
+Tower -> brain_tower: validate_brain_compliance()
+brain_tower -> brain_compliance: run_compliance_validations(brain_tower)
+
+Tower -> brain_tower: validate_brain_satellite()
+brain_tower -> brain_satellite: run_satellite__validations(brain_satellite)
+
+Tower -> brain_tower: validate_brain_tower()
+brain_tower -> brain_compliance: run_tower_validations(brain_tower)
+
+== PHASE 2.5: Bootstrap Platform OS Image Repo ==
+
+' Setup brain OS images
+Tower -> Runtime: deploy_platform_os_image_repo()
+Tower -> brain_image: sync_images_to_platform_image_repo()
+Tower -> brain_satellite: sync_images_to_platform_satellite()
+Tower -> brain_tower: validate_brain_image_repo()
+brain_tower -> brain_compliance:run_image_repo_validations(brain_image_repo)
+
+== PHASE 2.6: Bootstrap Platform LXCA ==
+
+' Setup brain lxca
+Tower -> Runtime: deploy_platform_lxca()
+Tower -> brain_lxca: sync_images_to_platform_lxca()
+Tower -> brain_tower: validate_brain_lxca()
+brain_tower -> brain_compliance: run_lxca_validations(brain_lxca)
+
+== PHASE 2.7: Bootstrap Platform Inventory ==
+
+' Setup brain inventory service
+Tower -> Runtime: deploy_platform_inventory_service()
+loop Brain servers
+  Tower -> brain_inventory: register_brain_server_to_platform_inventory()
+  Tower -> brain_inventory: setup_brain_server_role_configs_by_platform_git()
+end
+Tower -> brain_tower: validate_brain_inventory()
+brain_tower -> brain_compliance: run_inventory_validations(brain_inventory)
+
+' Setup planned inventory
+Tower -> brain_inventory: sync_planned_inventory_from_platform_git()
+loop Planned inventory
+  Tower -> brain_inventory: setup_role_based_configs_by_platform_git()
+end
+
+== PHASE 2.8: Bootstrap Platform Discovery ==
+
+' Setup brain discovery service
+Tower -> Runtime: deploy_platform_discovery_service()
+Tower -> brain_tower: validate_brain_discovery()
+brain_tower -> brain_compliance: run_discovery_validations(brain_discovery)
+
+Tower -> brain_inventory: discover_and_update_inventory()
+loop New discovered servers
+  brain_inventory -> brain_tower: run_planned_automation(server_info)
+end
+
+
+@enduml

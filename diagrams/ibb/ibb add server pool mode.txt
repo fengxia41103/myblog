@@ -1,0 +1,73 @@
+@startuml
+autonumber "<font color=red><b>Message 00:"
+
+actor Admin
+
+box "Platform Services" #F5F5F5
+  participant "Automation Service" as Tower
+  participant "Inventory Service" as Netbox
+end box
+
+box "Storage Resources & Services" #42A5F5
+  participant "Storage Capacity Management Service" as Dashboard
+  collections Servers #ff6a00
+end box
+
+== PHASE 1: DISCOVER SERVER ==
+
+group see "IBB discovery service sequence"
+  |||
+  ... discovery & register server w/ inventory service ...
+  |||
+end
+note right
+  This takes place independently from adding server.
+end note
+
+== PHASE 2: UPDATE SERVER STATUS ==
+
+alt selec manually
+  Admin -> Netbox: update_server_status()
+  loop all storage servers
+    Netbox -> Dashboard: get_server_availability(server_uuid)
+    Dashboard -> Netbox: update_server_status(in_use = TRUE|FALSE)
+  end
+else select by constraints
+  Tower -> Netbox: update_server_status()
+  loop all storage servers
+    Netbox -> Dashboard: get_server_availability(server_uuid)
+    Dashboard -> Netbox: update_server_status(in_use = TRUE|FALSE)
+  end
+end
+
+== PHASE 3: SELECT FROM A POOL ==
+
+alt select manually
+  Netbox -> Admin: list of `available` servers
+  Admin -> Netbox: assign a server `available` pool to a `Role`
+else select by constraints
+  Tower -> Netbox: filter_by_constraints(constraints[])
+  Netbox -> Tower: [inventory_server_id,]
+  Tower -> Netbox: get_roles()
+  Netbox -> Tower: [(role_id, role_name)]
+  Tower -> Netbox: assign_server_to(inventory_server_id, role_id)
+end
+
+== PHASE 4: CONFIG & PROVISION SERVER ==
+
+group same as "Pre-defined mode PHASE 4"
+  |||
+  ... config & provision server ...
+  |||
+end
+
+
+== PHASE 5: HANDOFF TO STORAGE MANAGER ==
+
+group same as "Pre-defined mode PHASE 5"
+  |||
+  ... config & provision server ...
+  |||
+end
+
+@enduml

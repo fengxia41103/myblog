@@ -8,8 +8,6 @@ Author: Feng Xia
   <img src="/images/china%20birth%20rate.png"/>
 </figure>
 
-
-
 [This][1] has to be the most disturbing talk I have ever heard so far, and
 this makes me very angry.
 

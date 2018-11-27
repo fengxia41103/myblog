@@ -24,7 +24,7 @@ box "Platform Services" #f5f5f5
   participant "Discovery Service" as brain_discovery
 end box
 
-== PHASE 1: Bootstrap Runtime Service ==
+== PHASE 0-4: Bootstrap Runtime Service ==
 
 Admin -> Config: browse and select config source
 Admin -> Tower: set_project_config(git_source, branch, commit, tag)
@@ -38,7 +38,7 @@ group see "IBB rhhi setup sequence"
 end
 Tower -> jelk: run_runtime_validations(brain_runtime)
 
-== PHASE 2.1: Bootstrap Platform Satellite ==
+== PHASE 5.1: Bootstrap Platform Satellite ==
 
 ' Setup brain satellite as software source
 Tower -> Runtime: deploy_platform_satellite()
@@ -49,21 +49,21 @@ loop Brain servers
   Tower -> brain_satellite: register_brain_server_to_platform_satellite()
 end
 
-== PHASE 2.2: Bootstrap Platform Config Repo ==
+== PHASE 5.2: Bootstrap Platform Config Repo ==
 
 ' Setup brain git repo
 Tower -> Runtime: deploy_platform_git_repo()
 Tower -> brain_config: sync_config_to_platform_git()
 Tower -> jelk: run_config_repo_validations(brain_config_repo)
 
-== PHASE 2.3: Bootstrap Platform Tower ==
+== PHASE 5.3: Bootstrap Platform Tower ==
 
 ' Setup brain tower
 Tower -> Runtime: deploy_platform_tower()
 Tower -> brain_tower: setup_playbook_source_to_platform_git()
 Tower -> jelk: run_tower_validations(brain_tower)
 
-== PHASE 2.4: Bootstrap Platform Compliance ==
+== PHASE 5.4: Bootstrap Platform Compliance ==
 
 ' Setup brain JELK
 Tower -> Runtime: deploy_platform_compliance()
@@ -78,7 +78,7 @@ brain_tower -> brain_satellite: run_satellite__validations(brain_satellite)
 Tower -> brain_tower: validate_brain_tower()
 brain_tower -> brain_compliance: run_tower_validations(brain_tower)
 
-== PHASE 2.5: Bootstrap Platform OS Image Repo ==
+== PHASE 5.5: Bootstrap Platform OS Image Repo ==
 
 ' Setup brain OS images
 Tower -> Runtime: deploy_platform_os_image_repo()
@@ -87,7 +87,7 @@ Tower -> brain_satellite: sync_images_to_platform_satellite()
 Tower -> brain_tower: validate_brain_image_repo()
 brain_tower -> brain_compliance:run_image_repo_validations(brain_image_repo)
 
-== PHASE 2.6: Bootstrap Platform LXCA ==
+== PHASE 5.6: Bootstrap Platform LXCA ==
 
 ' Setup brain lxca
 Tower -> Runtime: deploy_platform_lxca()
@@ -95,7 +95,7 @@ Tower -> brain_lxca: sync_images_to_platform_lxca()
 Tower -> brain_tower: validate_brain_lxca()
 brain_tower -> brain_compliance: run_lxca_validations(brain_lxca)
 
-== PHASE 2.7: Bootstrap Platform Inventory ==
+== PHASE 5.7: Bootstrap Platform Inventory ==
 
 ' Setup brain inventory service
 Tower -> Runtime: deploy_platform_inventory_service()
@@ -112,7 +112,7 @@ loop Planned inventory
   Tower -> brain_inventory: setup_role_based_configs_by_platform_git()
 end
 
-== PHASE 2.8: Bootstrap Platform Discovery ==
+== PHASE 5.8: Bootstrap Platform Discovery ==
 
 ' Setup brain discovery service
 Tower -> Runtime: deploy_platform_discovery_service()

@@ -8,13 +8,14 @@ box "Platform Services"
   participant "Automation Service" as Tower
   participant "OS Deployment Service" as LXCA
   participant "Software Repository Service" as Satellite
+  participant "Config Repo Service" as Config
 end box
 
 collections Servers #ff6a00
 
 == PHASE 1: Register resource ==
 
-Netbox -> Tower: apply_workflow(inventory_server_id, workflow_id)
+Admin -> Tower: apply_workflow(inventory_server_id, workflow_id)
 Tower -> Netbox: get_server_bmc_info(inventory_server_id)
 Netbox -> Tower: (bmc_ip, bmc_credentials)
 Tower -> LXCA: manage(bmc_ip, bmc_credentials)
@@ -22,25 +23,61 @@ LXCA -> Tower: `hw_mgt_server_id` if successful; NULL if failed.
 
 == PHASE 2: Apply HW configs ==
 
-Tower -> Netbox: get_server_configs(inventory_server_id)
-Netbox -> Tower: `hw_configs`
-Tower -> LXCA: config_server(hw_mgt_server_id, hw_configs).
+alt role based
+  Tower -> Netbox: get_server_role(inventory_server_id)
+  Netbox -> Tower: server_role
+  Tower -> Config: get_server_configs(server_role)
+  Config -> Tower: role based `hw_configs`
+  note left: configs is determined by `device role`
+
+  Tower -> LXCA: config_server(hw_mgt_server_id, hw_configs).
+
+else UUID based
+  Tower -> Config: get_server_configs(uuid)
+  Config -> Tower: UUID based `hw_configs`
+  note left: configs is determined by device `UUID`
+
+  Tower -> LXCA: config_server(uuid, hw_configs).
+end
+
 LXCA -> Servers: apply_configs(hw_configs)
 LXCA -> Tower: config result `TRUE|FALSE`
 
 == PHASE 3: PROVISION OS ==
 
-Tower -> Netbox: get_server_os(inventory_server_id)
-Netbox -> Tower: os_configs
-Tower -> LXCA: provision_os(hw_mgt_server_id, os_configs)
+alt role base
+  Tower -> Netbox: get_server_role(inventory_server_id)
+  Netbox -> Tower: server_role
+  Tower -> Config: get_server_os(server_role)
+  Config -> Tower: role based `os_configs`
+  Tower -> LXCA: provision_os(hw_mgt_server_id, os_configs)
+  LXCA -> Servers: provision_os(hw_mgt_server_id, os_configs)
+  LXCA -> Tower: provision result `TRUE|FALSE`
+  Tower -> Netbox: update_server_ssh_info(ip, username, pwd)
+
+else UUID based
+  Tower -> Config: get_server_os(uuid)
+  Config -> Tower: UUID based `os_configs`
+  Tower -> LXCA: provision_os(uuid, os_configs)
+end
+
 LXCA -> Servers: provision_os(hw_mgt_server_id, os_configs)
 LXCA -> Tower: provision result `TRUE|FALSE`
-Tower -> Netbox: update_server_ssh_info(ip, username, pwd).
+Tower -> Netbox: update_server_ssh_info(ip, username, pwd)
 
 == PHASE 4: REGISTER TO SOFTWARE REPO ==
 
-Tower -> Netbox: get_server_repo_key(inventory_server_id)
-Netbox -> Tower: repo_service_key_name
-Tower -> Satellite: register_server_to_repo(key_name)
+alt role based
+  Tower -> Netbox: get_server_role(inventory_server_id)
+  Netbox -> Tower: server_role
+  Tower -> Config: get_server_repo_key(server_role)
+  Config -> Tower: role based `repo_service_key_name`
+
+else UUID based
+  Tower -> Config: get_server_repo_key(uuid)
+  Config -> Tower: UUID based `repo_service_key_name`
+end
+
+Tower -> Satellite: register_server_to_repo(repo_service_key_name)
 
 @enduml

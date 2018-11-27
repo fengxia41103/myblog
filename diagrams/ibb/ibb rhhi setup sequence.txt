@@ -2,59 +2,69 @@
 
 autonumber "<font color=red><b>Message 00:"
 
-actor "Workload User" as User
+actor "Platform User" as User
 actor "Hardware Owner" as Owner
-actor Launchpad
-participant "Automation Service" as Tower
-participant "Runtime Service" as RHHI
-participant "Discovery Service" as Discovery
-participant "Server Management Service" as LXCA
-participant "OS Deployment Service" as Provisioning
-participant "Inventory Service" as Netbox
-participant "Service registry" as Registry
-collections Servers #ff6a00
-participant Workload #8bc34a
+
+box "Bootstrap Services" #F48FBE
+  actor "Bootstrap Launchpad" as Launchpad
+  participant "Bootstrap Tower" as Tower
+  participant "Bootstrap LXCA" as LXCA
+  participant "Bootstrap Satellite" as Satellite
+  participant "Bootstrap Git Config" as Config
+  participant "Bootstrap Image" as Image
+  participant "Bootstrap JELK" as jelk
+end box
+
+
+box "Platform Resources & Services" #42A5F5
+  participant "Runtime Service" as RHHI
+  participant "Platform Workloads" as Workload #8bc34a
+  collections Servers #ff6a00
+end box
 
 == PHASE 0: PLAN & HOOKUP SERVER  ==
 
 Owner -> Servers: collect & build hardware inventory
-Owner -> Netbox: plan/design for its use, and assign configs
 Owner -> Servers: cabling based on a design
-Owner -> Launchpad: trigger to kickoff
 
-== PHASE 1: DISCOVER SERVER ==
+== PHASE 1: DISCOVER SERVER (optional) ==
 
-Launchpad -> Discovery: scan for new hardware
-Discovery -> Servers: discovery servers on network x.x.x.x
-Discovery -> Tower: discovered list[server(ip, uuid)]
-Tower -> Netbox: server_id = identify_this_server(server_ip, server_uuid)
-Tower -> Netbox: get_server_role(server_id)
-Tower -> Netbox: get_server_configs(server_id). This includes config pattern, OS to use, and such.
+group see "IBB discovery service sequence"
+  |||
+  ... discovery & register server w/ inventory service ...
+  |||
+end
 
 == PHASE 2: PREPARE SERVER ==
-Tower -> LXCA: manage(server_id)
-LXCA -> Servers: bring server under management
-Tower -> LXCA: config_server(server_id). This includes firmware, bios,etc..
-LXCA -> Servers: apply config patterns
-LXCA -> Tower: ready for provisioning
+
+group see "IBB uhm sequence"
+  |||
+  ... config & provision server ...
+  |||
+end
 
 == PHASE 3: PROVISION SERVER ==
-Tower -> Provisioning: provision_os(server_id)
-Provisioning -> Servers: install OS
-Provisioning -> Tower: ready for workload
+
+group see "IBB uhm sequence"
+  |||
+  ... config & provision server ...
+  |||
+end
 
 == PHASE 4: DEPLOY RHHI ==
 
-Tower -> Servers: deploy RHHI
-Tower -> RHHI: config RHHI
-Tower -> RHHI: validate RHHI
 
-== PHASE 5: DEPLOY BRAIN WORKLOAD ==
+Launchpad -> Servers: deploy RHHI
+Launchpad -> RHHI: config RHHI
+Launchpad -> RHHI: validate RHHI
 
-Tower -> RHHI: deploy workload
-Tower -> Workload: config workload
-Tower -> Workload: validate workload
-Workload -> Registry: workload is ready
+== PHASE 5: DEPLOY BRAIN WORKLOADS ==
+
+loop Brain workloads
+  Launchpad -> RHHI: deploy workload
+  Launchpad -> Workload: config workload
+  Launchpad -> Workload: validate workload
+end
 
 == PHASE 6: USE BRAIN WORKLOAD ==
 

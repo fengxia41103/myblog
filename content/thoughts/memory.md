@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: memory
 Author: Feng Xia
 
+<figure class="col l8 m8 center">
+  <img src="/images/cute%20cat.png"/>
+</figure>
+
+
 Walking on the road this morning. Chilly early winter day. Rained for
 the last two days (or really just on and off of yesterday), and
 temperature has dropped to the point that I feel the winter smell.

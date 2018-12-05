@@ -1,0 +1,64 @@
+@startuml
+autonumber "<font color=red><b>Message 00:"
+
+actor Admin
+
+box "Platform Services" #f5f5f5
+  participant "Automation Service" as brain_tower
+  participant "Config Repo Service" as brain_config
+  participant "Inventory Service" as brain_inventory
+  participant "Lanuchpad" as brain_launchpad
+  participant "Runtime Service" as Runtime
+  participant "Software Repository Service" as brain_satellite
+  participant "Compliance Service" as brain_compliance
+  participant "OS Image Service" as brain_image
+  participant "OS Deployment Service" as brain_lxca
+  participant "Discovery Service" as brain_discovery
+end box
+
+== PHASE 6.1: Create configuration from template ==
+
+Admin -> brain_config: get_storage_config_template(config_id)
+note right
+    Folder in config repo is `for_platform_users/configuration/templates`
+end note
+
+
+brain_config -> Admin: storage_configuration_template
+Admin -> Admin: config_intance = create_config_instance(storage_configuration_template, [custom_vals])
+
+Admin -> brain_config: save_config_instance(config_intance)
+note right
+    Folder in config repo is `for_platform_users/configuration/instances`
+end note
+
+== PHASE 6.2: Acquire eligible Platform resources ==
+brain_tower -> brain_inventory: get_inventory_resource(config_intance)
+brain_inventory -> brain_tower: eligible resources JSON or FAIL
+brain_tower -> brain_tower: update_config_intance(resources JSON, config_intance)
+brain_tower -> brain_config: save_config_instance(config_intance)
+brain_tower -> brain_tower: update_tower(config_intance)
+
+== PHASE 6.3: Build storage ==
+
+' See [Cloud automation breakdown and dependencies] for configuration matrix
+
+group see "Storage build by configuration"
+  |||
+  ... build storage of a configuration using Platform services, eg. LXCA, Satellite ...
+  |||
+end
+
+== PHASE 6.4: Update storage service interface ==
+
+brain_tower -> brain_config: get_storage_service_template(config_id)
+brain_config -> brain_tower: storage_service_template
+brain_tower -> brain_tower: config_instance = create_config_instance(storage_service_template, [storage instance vals])
+
+brain_tower -> brain_config: save_config_instance(config_intance)
+note right
+    Folder in config repo is `for_storage_users/configuration/instances`
+end note
+
+
+@enduml

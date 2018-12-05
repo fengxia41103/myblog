@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 
-<figure class="col l8 m8 center">
+<figure class="col l8 m8 s12">
   <img src="/images/lost%20in%20translation.png"/>
 </figure>
 

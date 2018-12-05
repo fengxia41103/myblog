@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: memory
 Author: Feng Xia
 
-<figure class="col l8 m8 center">
+<figure class="col l10 m10 s12">
   <img src="/images/cute%20cat.png"/>
 </figure>
 

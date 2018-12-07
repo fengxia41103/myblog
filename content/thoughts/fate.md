@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: fate
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="/images/change%20management.gif"/>
+</figure>
+
 Another raining winter day. Walking out from airbnb, ran into an old
 man carrying a garbage bag, a rain coat with a big cut open on the
 back. What caught my attention was his black sneakers &mdash; washed

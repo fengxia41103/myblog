@@ -22,7 +22,7 @@ I don't know. This is indeed a strange city. Maybe taking a walk in
 the morning does give you more to think about, to feel about, and to
 have something to talk about. Sitting here at Starbucks early morning,
 while everybody rushes in and out to get their dose, and xmas song in
-the background, should I feel tired to home, where they are looking
+the background, should I feel tied to home, where they are looking
 forward to the upcoming holiday? But I can't feel that at all. This
 empty table, like this empty space, is only giving a replay of the
 mornings we were sitting together, also at Starbucks, sometimes

@@ -33,7 +33,7 @@ through this, the life that I'm being through &larr; it's not fun,
 it's a matter of fact, that I have to take care, have to deal with,
 have to figure out. But you, you have full life ahead of you. You
 should be trouble free, worry free, burden free, just fly, fly w/ all
-you want, fly high, fly w/ being dragged down.
+you want, fly high, fly w/o being dragged down.
 
 I want you to have this life, not a gift of any kind, but what you
 deserve, and what you should have. That's a young life I can't give

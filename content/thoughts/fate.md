@@ -50,7 +50,7 @@ with no one's &mdash; everyone has a mess in life that s/he is having
 a headache to deal with, just that you don't know, until you are close
 enough with that person, and his/hers problem becomes, yours, like
 caring for aging parents, like caring for young kids, like education,
-like career, or healthy, or old boyfriend girlfriend... you just dont'
+like career, or health, or old boyfriend girlfriend... you just dont'
 know, until you have to deal with.
 
 It's hard. I wonder whether this old man has ever wondered that his

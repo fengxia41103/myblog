@@ -79,7 +79,7 @@ free bike)? Didn't I made you the billionaire? Everything you had was
 because of, me, me me! Thus, when I am now angry (because I felt I was
 cheated), I am simply taking away what I had given you, the piece that
 was belong to me, and (who knows, maybe can walk away w/ something
-more &mdah; what an opportunist animal mobs really are!) &mdash; but
+more &mdash; what an opportunist animal mobs really are!) &mdash; but
 again, let me make sure, that I'm the victim, I have always been
 innocent, and I have never been wrong.
 
@@ -119,7 +119,7 @@ sign we should look for, to foster, to hope, so that the aggregation
 of mobs(= society) is a becoming better, is that there are many many
 many many different voices who argue, who fight, who disagree, who
 challenge, who is not convinced, who always feel the others' decision
-is, questionable..... that, will a sign, that the people are now,
+is, questionable..... that, will be a good sign, that the people are now,
 smarter, and safer, to deal with.
 
 The common mistake to make, is that you like to fool foolish people,

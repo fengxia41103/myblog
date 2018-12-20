@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: mobs
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="/images/seoul2.jpg"/>
+</figure>
+
 The news of Ofo is really a good one. I wonder when human (well, human
 is really a big word, because this is generalizing to all the walking
 lives on this planent, so I should really refine this statement to,

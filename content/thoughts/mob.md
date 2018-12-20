@@ -133,4 +133,4 @@ yourself.**
 
 [3]: https://www.youtube.com/watch?v=u-FlWZ1BOcA
 [2]: https://www.imdb.com/title/tt0441773/
-[1]: {filename}/thought/sharing%20economy.md
+[1]: {filename}/thoughts/sharing%20economy.md

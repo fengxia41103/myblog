@@ -95,12 +95,10 @@
 
     {# Dont' use article.content. The content is generated HTML. #}
     {{ article.summary|truncate(600) }}
-    <div class="col l4 m4 s12">
-      <a class="btn btn-default button" href="{{ article.url }}">
-        <i class="fa fa-coffee" style="opacity:0.5;"></i>
-        continue reading
-      </a>
-    </div>
+    <a class="btn btn-default button" href="{{ article.url }}">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
   </div>
   {% endfor %}
 

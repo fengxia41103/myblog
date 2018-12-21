@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import sys
 
 AUTHOR = u"Feng Xia"
-SITENAME = u"40's Dilemma"
+SITENAME = u"Be Care Free'"
 #SITEURL = "http://fengxia.co"
 SITEURL = ""
 

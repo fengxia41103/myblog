@@ -75,7 +75,7 @@ Therefore, it is only natural that one has a framework, even
 implicitly, because one must have one to operate. Yet, the ability to
 recognize your own framework, and be able or willing to present it, is
 the difference. This probably can be argued as how much one
-understands oneself. Self-reflection brings not a piece of mind, but a
+understands oneself. Self-reflection brings not only a peace of mind, but a
 depressing view of oneself &mdash; how limited one is! how
 un-intelligent one is! But intelligence don't change unless one sees
 where it is (otherwise, one doesn't even have a reference to compare

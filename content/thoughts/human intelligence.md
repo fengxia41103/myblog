@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: human intellignece
 Author: Feng Xia
 
+<figure class="col l8 m8 s12 right">
+  <img src="/images/old%20korean.jpg"/>
+</figure>
+
+
 What in incredible [paper][1]! This says so much computer and
 artificial intelligence than any of the popular talks. 
 

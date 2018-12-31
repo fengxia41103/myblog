@@ -79,7 +79,7 @@
 
   {% for article in articles_page.object_list %}
   <div class="pin-card z-depth-2 row">
-    <div class="col s12">
+    <div>
       <i class="fa fa-calendar" style="opacity:0.5;"></i>
       <em>
         {{ article.date|strftime('%Y-%m-%d')}}

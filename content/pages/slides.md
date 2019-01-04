@@ -46,4 +46,25 @@ Author: Feng Xia
   </div>
 </div>
 
+<div class="col l4 m6 s12">
+  <div class="card white darken-1">
+    <div class="card-content">
+      <span class="card-title myhighlight">WSS</span>
+      <p>
+      Lenovo Workload Solution Store project based on Canonical Juju
+      and Charms technology.
+      </p>
+      <figure>
+        <img src="/images/wss.png"
+             class="responsive-img center"/>
+      </figure>
+    </div>
+    <div class="card-action">
+      <a href="https://fengxia41103.github.io/moment/wss/">
+        <i class="fa fa-link"></i>slides
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- 2. [workload solution store](/slides/wss/index.html) -->

@@ -4,8 +4,8 @@ Tags: thoughts
 Slug: turning a cycle
 Author: Feng Xia
 
-<figure class="col l5 m5 s12">
-  <img src="/images/funny/sperm.jpg"/>
+<figure class="col s12">
+  <img src="/images/ankor%20wat.jpg"/>
 </figure>
 
 

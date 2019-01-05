@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: watching clouds
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="/images/korea%20addidas.png"/>
+</figure>
+
+
 When was the last time I watched clouds floating by? when was the last
 time you watched clouds floating by?
 

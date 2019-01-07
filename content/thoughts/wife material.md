@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: wife material
 Author: Feng Xia
 
+<figure class="col l8 m8 s12">
+  <img src="/images/Kim-Tae-Ri.jpg"/>
+</figure>
+
 Traveling reveals one thing to me. I don't know whether this is unique
 to me, or it is common to many people, guys especially. I start to
 realize that, regardless which space I am in, let's say, in a shuttle

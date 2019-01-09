@@ -6,11 +6,12 @@ Modified: 2018-07-23 12:04
 
 ## Summary
 
-* Python developer since 1998.
-* Can deliver any web application from napkin design to Django POC in 72 hours.
+* Python dev since 1998.
+* MBA, and delivered million $ software project w/ success.
+* Build any web application from napkin design to Django POC in 72 hours.
 * Full-stack capable.
 * Welcome challenging problem.
-* Have a high standard in work quality.
+* Have a high standard in work quality (see work samples below).
 * SalesForce advocate.
 * **Also available in**:
 <a href="https://www.linkedin.com/in/fengxia41103">

@@ -62,7 +62,7 @@ feel sad, probably so are you, and we will see each other how much
 life has changed us, and yet, how little these patients have changed
 &mdash; in physics, they say the total mass in this universe is a
 constant. I wonder maybe love is, also, that by giving away so much by
-you, the people here are kept from being empty. 
+you, the people here are kept from becoming empty. 
 
 Thank you for letting us stay and being part of this.
 

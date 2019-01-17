@@ -12,8 +12,10 @@ IMAPAccount hotmail
 # Address to connect to
 Host imap.outlook.com
 User feng_xia41103@hotmail.com
-Pass xxxx
+Pass xxx
 SSLType IMAPS
+#UseIMAPS yes
+#RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 
@@ -22,8 +24,11 @@ IMAPAccount gmail
 # Address to connect to
 Host imap.gmail.com
 User fengxia41103@gmail.com
-Pass xxxx
+Pass xxx
 SSLType IMAPS
+SSLVersions TLSv1.1 # required to work around gmail SNI
+#UseIMAPS yes
+#RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # Gmail account for noah
@@ -31,8 +36,10 @@ IMAPAccount noah
 # Address to connect to
 Host imap.gmail.com
 User noahxiaqq@gmail.com
-Pass xxxx
+Pass xxx
 SSLType IMAPS
+#UseIMAPS yes
+#RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 
@@ -41,7 +48,7 @@ IMAPAccount lenovo
 # Address to connect to
 Host outlookae.lenovo.com
 User fxia1@lenovo.com
-Pass xxxx
+Pass xxx
 Port 993
 SSLType IMAPS
 CertificateFile /home/fengxia/.cert/outlookae.lenovo.com.pem

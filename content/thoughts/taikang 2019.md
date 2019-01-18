@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: taikang 2019
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="/images/taikang.jpg"/>
+</figure>
+
+
 Dear friends of the 19th floor,
 
 At time of departing, there is always something come to mind that I

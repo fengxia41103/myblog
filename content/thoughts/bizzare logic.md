@@ -63,3 +63,6 @@ listening_!?
 
 Isn't this, bizzare, or what!?
 
+PS. Surprisingly, I have written about [logic][1] already.
+
+[1]: {filename}/thoughts/logic.md

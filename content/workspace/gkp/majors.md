@@ -1,5 +1,5 @@
 Title: GKP &mdash; major details
-Date: 2015-09-012 19:00
+Date: 2015-09-12 19:00
 Tags: gkp
 Slug: gkp majors
 Author: Feng Xia

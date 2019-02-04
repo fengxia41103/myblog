@@ -20,21 +20,22 @@ instead of a young fella, and the place is still running, even with a
 taste of similar food, similar decoration, a few more photos that ppl
 can recognize the link between then and now, a trace of heritage.
 
-Doesn't this description remind you the well-known
-play, [Teahouse 茶馆][1]? The backdrop of the play was a turmoil era
-in the Chinese history when the world was experiencing the WWI and
-WWII. Many were lost, disrupted, changed. In the play, the teahouse
-was passed down from generation to generation, business as usual, ppl
-all know each other, and time seemed stopped. Then, it all went down
-when the war started, the era changed, the ppl fought to survive, and
-the ugly and the beauty went upside down. What makes me think now is,
-isn't it a sign of maturity and stability, thus an overall prosperity
-for the society, that the existence of such a lasting heritage
-represents? But then, isn't change inevitable so it's fruitless to
-fight against it? Isn't stopping the clock a scare?
+Doesn't this description remind you the well-known play, [Teahouse 茶
+馆][1]? The backdrop of the play was a turmoil era in the Chinese
+history when the world was experiencing the WWI and WWII. Many were
+lost, disrupted, changed. In the play, the teahouse was passed down
+from generation to generation, business as usual, ppl all know each
+other, and time seemed stopped. Then, it all went down when the war
+started, the era changed, the ppl fought to survive, and the ugly and
+the beauty went upside down. What makes me think now is, isn't it a
+sign of maturity and stability, thus an overall prosperity for the
+society, that the existence of such a lasting heritage represents? But
+then, isn't change inevitable so it's fruitless to fight against it?
+Isn't stopping the clock a scare?
 
 [1]: https://zh.wikipedia.org/wiki/茶馆_(话剧)
 
 I don't know. People in change are longing for stability; people in
 stability are longing for a change. This applies to marriage, to jobs,
-to a life style, to even a dress code and a fashion. What do we want then?
+to a life style, to even a dress code and a fashion. What do we want
+then?

@@ -1,6 +1,6 @@
 Title: Moment of quietness
 Date: 2018-05-25 16:00
-Tags: thoughts
+Tags: love
 Slug: moment of quietness
 Author: Feng Xia
 

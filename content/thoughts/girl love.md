@@ -35,8 +35,8 @@ by side, they don't necessarily talk. They hang out together, stroll
 together, usually with at least one of them married to the stupid
 smart phone. Isn't this sad!?
 
-However, the women didn't look said. They looked quite content. So
-they are satisfied with the setup, the husband, the kid, the life? I
+However, the women didn't look sad. They looked quite content. So they
+are satisfied with the setup, the husband, the kid, the life? I
 couldn't tell. One thing strikes me is that since they accepted the
 guy to bear a child, the guy **was** quite acceptable. Therefore, the
 urban legend and social trend of women having trouble to find a mate

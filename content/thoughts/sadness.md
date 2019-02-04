@@ -1,6 +1,6 @@
 Title: Sadness
 Date: 2018-04-27 13:00
-Tags: thoughts
+Tags: love
 Slug: sadness
 Author: Feng Xia
 

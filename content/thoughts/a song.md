@@ -1,6 +1,6 @@
 Title: A song
 Date: 2018-02-22 9:30
-Tags: thoughts
+Tags: love
 Slug: a song
 Author: Feng Xia
 

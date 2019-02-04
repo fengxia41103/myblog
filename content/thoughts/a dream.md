@@ -1,6 +1,6 @@
 Title: A dream
 Date: 2018-07-20 10:33
-Tags: thoughts
+Tags: love
 Slug: a dream
 Author: Feng Xia
 

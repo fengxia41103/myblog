@@ -1,6 +1,6 @@
 Title: Love till past
 Date: 2017-06-03 8:20
-Tags: thoughts
+Tags: love
 Slug: love till past
 Author: Feng Xia
 

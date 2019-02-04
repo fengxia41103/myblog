@@ -1,6 +1,6 @@
 Title: Turning a cycle
 Date: 2019-01-02 09:25
-Tags: thoughts
+Tags: love
 Slug: turning a cycle
 Author: Feng Xia
 

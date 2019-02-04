@@ -1,6 +1,6 @@
 Title: Sound of silence
 Date: 2017-05-31 7:45
-Tags: thoughts
+Tags: love
 Slug: sound of silence
 Author: Feng Xia
 

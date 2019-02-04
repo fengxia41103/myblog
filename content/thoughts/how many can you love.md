@@ -1,6 +1,6 @@
 Title: How many can one love
 Date: 2018-05-14 11:30
-Tags: thoughts
+Tags: love
 Slug: how many can one love
 Author: Feng Xia
 

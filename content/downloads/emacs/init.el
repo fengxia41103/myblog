@@ -1575,33 +1575,18 @@ non-nil; otherwise prompts the user to enter the directory."
 (setq mu4e-view-show-images t)
 
 (require 'smtpmail)
-;; (setq message-send-mail-function 'smtpmail-send-it
-;;       starttls-use-gnutls t
-;;       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-;;       smtpmail-auth-credentials
-;;       '(("smtp.gmail.com" 587 "fengxia41103@gmail.com" nil))
-;;       smtpmail-default-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-server "smtp.gmail.com"
-;;       smtpmail-auth-credentials (expand-file-name "~/.authinfo")
-;;       smtpmail-smtp-service 587
-;;       starttls-extra-arguments nil
-;;       starttls-gnutls-program "/usr/bin/gnutls-cli"
-;;       starttls-extra-arguments nil
-;;       starttls-use-gnutls t
-;;       )
-(setq message-send-mail-function 'smtpmail-send-it
+(setq send-mail-function 'smtpmail-send-it
+      user-mail-address "fxia1@lenovo.com"
       smtpmail-debug-info t
-      starttls-use-gnutls t
-      smtpmail-starttls-credentials '(("mailae.lenovo.com" 587 nil nil))
-      smtpmail-auth-credentials
-      '(("mailae.lenovo.com" 587 "fxia1@lenovo.com" nil))
-      smtpmail-default-smtp-server "mailae.lenovo.com"
+      smtpmail-smtp-user "fengxia41103"
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 "fengxia41103" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
       smtpmail-auth-credentials (expand-file-name "~/.authinfo")
       smtpmail-smtp-service 587
-      starttls-extra-arguments nil
+      smtpmail-stream-type nil
+      starttls-use-gnutls t
       starttls-gnutls-program "/usr/bin/gnutls-cli"
       starttls-extra-arguments nil
-      starttls-use-gnutls t
       )
 
 (setq message-kill-buffer-on-exit t
@@ -1699,6 +1684,13 @@ non-nil; otherwise prompts the user to enter the directory."
 
   :ensure 
   :config)
+
+;; window resizing shortcuts
+
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

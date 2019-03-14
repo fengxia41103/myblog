@@ -75,6 +75,5 @@ figure it out, but too smart to be content with ignorance.
 It's the dilemma of me &mdash; caught in between, not alive, not
 dead. 
 
-[1]:
-https://venturebeat.com/2019/03/13/google-killed-2-3-billion-bad-ads-in-2018-down-28-from-2017/
+[1]: https://venturebeat.com/2019/03/13/google-killed-2-3-billion-bad-ads-in-2018-down-28-from-2017/
 [2]: https://en.wikipedia.org/wiki/Don%27t_be_evil

@@ -3,6 +3,9 @@ Date: 2017-05-27 10:00
 Tags: lenovo
 Slug: python2 charm
 Author: Feng Xia
+Summary: Charm is based on Python 3 while RHEL/CentOS7 ships
+Python 2. So we dived into charm code to see which feature is blocking
+on P2 so we can run charms in CentOS.
 
 Why do we want to build Python2 charms? Charms are claimed to built
 for Python3. However, the catch is that charms are also built for

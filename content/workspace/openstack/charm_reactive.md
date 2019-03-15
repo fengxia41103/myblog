@@ -3,7 +3,10 @@ Date: 2017-04-24 14:00
 Tags: lenovo
 Slug: juju charm reactive
 Author: Feng Xia
-
+Modified: 2019-03-15
+Summary: Charm's reactive framework is the core of charm design and
+execution. This article is to dive into its source code in order to
+understand its execution logic and design philosophy.
 
 In this article we will study charm's [reactive][1] framework to get a
 firm understanding of what they mean by writing an reactive charm.

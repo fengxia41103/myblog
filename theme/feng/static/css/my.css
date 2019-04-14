@@ -551,3 +551,15 @@ video {
 .iframe-container-4x3 {
   padding-top: 75%;
 }
+
+.page-footer {
+  background-color: #f5f5f5;
+}
+
+.page-footer .footer-copyright {
+  color: black;
+}
+
+.mybottom-25 {
+  margin-top: 25%;
+}

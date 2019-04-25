@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam monochrome true
+skinparam usecase {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Helvetica
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+actor user as "Lenovo Open Cloud User"
+
+user --> (Build an OpenStack as on-premise cloud)
+user --> (Build a Kubernetes to manage container workloads)
+user --> (Build a Ceph cluster as centralized storage backend)
+user --> (Create virtual machines on a hypervisor cluster)
+
+
+@enduml

@@ -13,6 +13,7 @@ Author: Feng Xia
 it for the last six months now writing a reference architecture
 document for work. Here is some tips of how I'm using it.
 
+
 # doc header
 
 Things that are specific to that document. This, thus, is context

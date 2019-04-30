@@ -1328,7 +1328,7 @@ non-nil; otherwise prompts the user to enter the directory."
 (setq org-log-done 'note)
 
 ;;set colours for priorities
-(setq org-priority-faces '((?H . (:foreground "#F00" :weight bold))
+(setq org-priority-faces '((?H . (:foreground "#D52349" :weight bold))
                            (?M . (:foreground "LightSteelBlue"))
                            (?L . (:foreground "OliveDrab"))))
 
@@ -1691,6 +1691,38 @@ non-nil; otherwise prompts the user to enter the directory."
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+
+;; RefTex
+
+;; reftex in markdown mode
+
+;; if this isn't already set in your .emacs
+(setq reftex-default-bibliography '("/home/fengxia/myblog/content/downloads/pandoc/feng.bib"))
+
+;; define markdown citation formats
+(defvar markdown-cite-format)
+(setq markdown-cite-format
+      '(
+        (?\C-m . "[@%l]")
+        (?p . "[@%l]")
+        (?t . "@%l")
+        )
+      )
+
+;; wrap reftex-citation with local variables for markdown format
+(defun markdown-reftex-citation ()
+  (interactive)
+  (let ((reftex-cite-format markdown-cite-format)
+        (reftex-cite-key-separator "; @"))
+    (reftex-citation)))
+
+;; bind modified reftex-citation to C-c[, without enabling reftex-mode
+;; https://www.gnu.org/software/auctex/manual/reftex/Citations-Outside-LaTeX.html#SEC31
+(add-hook
+ 'markdown-mode-hook
+ (lambda ()
+   (define-key markdown-mode-map "\C-c[" 'markdown-reftex-citation)))
 
 (message "Emacs is ready to do thy bidding, Master %s!" current-user)
 

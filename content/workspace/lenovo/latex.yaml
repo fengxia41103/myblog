@@ -28,7 +28,7 @@ header-includes: |
   \usepackage{float}
   \usepackage{pdfpages}
   \usepackage{rotating}
-
+  \usepackage{quotchap}
   \definecolor{quotationcolour}{HTML}{F0F0F0}
   \definecolor{quotationmarkcolour}{HTML}{1F3F81}
 

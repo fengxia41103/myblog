@@ -14,7 +14,7 @@ skinparam usecase {
   ArrowFontColor #777777
 }
 
-actor user as "LOC RHHI User"
+actor user as "RHHI User"
 
 (Create a virtual machine) as create_vm
 (Deploy application in the virtual machine) as deploy_to_vm

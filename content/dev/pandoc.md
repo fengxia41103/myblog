@@ -127,6 +127,47 @@ your doc is a snap, and it looks, beautiful!
   <figcaption>Example of .bib result in PDF</figcaption>
 </figure>
 
+## emacs + RefTex
+
+Found it [here][8]:
+
+```lisp
+;; reftex in markdown mode
+
+;; if this isn't already set in your .emacs
+(setq reftex-default-bibliography '("/path/to/library.bib"))
+
+;; define markdown citation formats
+(defvar markdown-cite-format)
+(setq markdown-cite-format
+      '(
+        (?\C-m . "[@%l]")
+        (?p . "[@%l]")
+        (?t . "@%l")
+        )
+      )
+
+;; wrap reftex-citation with local variables for markdown format
+(defun markdown-reftex-citation ()
+  (interactive)
+  (let ((reftex-cite-format markdown-cite-format)
+        (reftex-cite-key-separator "; @"))
+    (reftex-citation)))
+
+;; bind modified reftex-citation to C-c[, without enabling reftex-mode
+;; https://www.gnu.org/software/auctex/manual/reftex/Citations-Outside-LaTeX.html#SEC31
+(add-hook
+ 'markdown-mode-hook
+ (lambda ()
+   (define-key markdown-mode-map "\C-c[" 'markdown-reftex-citation)))
+```
+
+Once restarted emacs, use `C-c[` then `C-M` to select a citation
+style, and type in a regex, eg. `redhat-` and ENTER. Viola, a list of
+matched entries to select, and ENTER again &rarr;
+`[@redhat-rhhi-guide]`. Nice ~~
+
+
 ## Styles
 
 Wow, I never knew there are so many styles to choose from. The list
@@ -223,3 +264,4 @@ up, if ever.
 [5]: /downloads/pandoc/Makefile
 [6]: https://github.com/citation-style-language/styles
 [7]: https://github.com/citation-style-language/styles/blob/master/ieee-with-url.csl
+[8]: https://gist.github.com/kleinschmidt/5ab0d3c423a7ee013a2c01b3919b009a#file-reftex-markdown-el

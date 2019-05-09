@@ -14,7 +14,7 @@ skinparam usecase {
   ArrowFontColor #777777
 }
 
-actor user as "Lenovo Open Cloud User"
+actor user as "User"
 
 user --> (Build an OpenStack as on-premise cloud)
 user --> (Build a Kubernetes to manage container workloads)

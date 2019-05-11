@@ -169,10 +169,23 @@ Modified: 2018-07-23 12:04
   </div>
 </div>
 
-* `Lenovo Open Cloud` product. Drove overall network
-  design. Developed Python scrips and playbooks to automate RH
-  Satellite deployment and configuration. Led development of playbooks
-  to automate RHHI deployment on baremetal.
+* Author of the `Lenovo Open Cloud` reference architecture and `Red
+  Hat Hyperverged Infrastructure for Virtalization` reference
+  architecture. Published on 5/5/2019.
+  
+    - **Tools**: Pandoc, Markdown, BibTex, XeLaTex, GNU make, CSS
+    - **Sample writing**:
+        1. Lenovo Open Cloud Reference Architecture: [pretty
+           draft in PDF][23], [official version][25]
+        2. Red Hat Hyperconverged Infrastructure for Virtualization
+           Reference Architecture: [pretty draft in PDF][24], [official
+           version][26]
+      
+* `Lenovo Open Cloud` product. Led overall design of the product
+  including architecture, service implementation, CICD. Developed
+  playbooks and Python scripts automating RHHI deployment on
+  baremetal. Same design has gained strong interests in multiple
+  Lenovo high profile projects.
 
     - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
                  RHEL 7 server cloud image, KVM/virsh
@@ -622,3 +635,7 @@ Modified: 2018-07-23 12:04
 [20]: https://github.com/fengxia41103/fashion
 [21]: https://github.com/fengxia41103/gkp
 [22]: https://github.com/fengxia41103/jk
+[23]: {filename}/downloads/ibb%20rhhi%20ra.pdf
+[24]: {filename}/downloads/loc%20ra.pdf
+[25]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
+[26]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture

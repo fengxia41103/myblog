@@ -40,9 +40,9 @@ figured out why, that including a ":" in the title string will mess
 up export to PDF. The symptom you will see is that all your
 reference in `.bib` will not be found!!
   
-# Latex setting
+# LaTex setting
 
-A universal setting to latex export. This is additional to the Latex
+A universal setting to latex export. This is additional to the LaTex
 template file I use. Supposedly I can set all these in the template
 also.
    
@@ -103,17 +103,17 @@ header-includes:
 
 ```
 
-# Latex template
+# LaTex template
 
-A massive Latex writing that will be used to generate Latex and
+A massive LaTex writing that will be used to generate LaTex and
 PDF. As of writing, there are two templates I like:
 1. [eisvogel.tex][2], found [here][4].
 2. [feng.tex][3], modified based on `eisvogel`, and modified to my favourate
    title page.
 
-# Bibtex
+# BibTex
 
-Lesson learned, though late, is still useful, is the Bibtex. **Don't
+Lesson learned, though late, is still useful, is the BibTex. **Don't
 be lazy** by using direct Markdown links to reference as hyperlink
 &larr; it doesn't cut it. Instead, use the `.bib`, it's much better,
 and is **incremental**, meaning your collection will grow, and it
@@ -126,6 +126,8 @@ your doc is a snap, and it looks, beautiful!
   <img src="/images/bibliography.png"/>
   <figcaption>Example of .bib result in PDF</figcaption>
 </figure>
+
+Use the [MIT's guide][9] for format references.
 
 ## emacs + RefTex
 
@@ -232,7 +234,7 @@ Quite simple: write &rarr; make <whatever> &rarr; view &rarr; repeat.
 The pain, comes in when you need **collaboration** &mdash; ppl insist
 to use DOC and change tracking. Unbelievable. I think the biggest
 curse I have had in my professional training, is that I was introduced
-to the Latex so early that I simply could not stand the WORD, which
+to the LaTex so early that I simply could not stand the WORD, which
 makes me the super minority in corporate world. I have been battling
 this all my career. I thought pandoc is gonna save the day, since I'm
 now dealing with _technical_ people now.
@@ -265,3 +267,4 @@ up, if ever.
 [6]: https://github.com/citation-style-language/styles
 [7]: https://github.com/citation-style-language/styles/blob/master/ieee-with-url.csl
 [8]: https://gist.github.com/kleinschmidt/5ab0d3c423a7ee013a2c01b3919b009a#file-reftex-markdown-el
+[9]: http://web.mit.edu/rsi/www/pdfs/bibtex-format.pdf

@@ -4,6 +4,13 @@ Tags: thoughts
 Slug: reflection on technology
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="/images/stanislav%20petrov.jpg"/>
+  <figcaption>
+  Stanislav Petrov
+  </figcaption>
+</figure>
+
 
 [This][1], is an excellent topic, excellent!! I love it. 
 

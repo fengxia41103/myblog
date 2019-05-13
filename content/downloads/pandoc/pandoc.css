@@ -16,13 +16,14 @@ body {
   line-height: 1.7;
   padding: 1em;
   margin: auto;
-  max-width: 42em;
+  max-width: 70%;
   background: #fefefe;
 }
 
 a {
-  color: #0645ad;
-  text-decoration: none;
+  border-bottom: 1px dashed #ea6153;
+  -webkit-transition: all .5s;
+  transition: all .5s;
 }
 
 a:visited {
@@ -82,6 +83,7 @@ h4, h5, h6 {
 
 h1 {
   font-size: 2.5em;
+  border-bottom: 1px solid #cecece;
 }
 
 h2 {
@@ -250,6 +252,17 @@ table td {
   text-align: center;
 }
 
+code {
+  font-family: 'Inconsolata', monospace;
+  /* font-size: 0.8em; */
+  border-radius: 2px;
+  display: inline-block;
+  color: rgba(164,3,111,1);
+  line-height: 1;
+  padding: 1px 4px 3px;
+  background: rgba(23,42,58,.06);
+}
+
 @media only screen and (min-width: 480px) {
   body {
     font-size: 14px;
@@ -274,8 +287,8 @@ table td {
   }
 
   a, a:visited {
-       text-decoration: underline;
-     }
+    text-decoration: underline;
+  }
 
   hr {
     height: 1px;
@@ -292,8 +305,8 @@ table td {
   }
 
   .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
-                                               content: "";
-                                             }
+    content: "";
+  }
 
   pre, blockquote {
     border: 1px solid #999;
@@ -311,11 +324,11 @@ table td {
 
   @page :left {
     margin: 15mm 20mm 15mm 10mm;
-  }
+}
 
   @page :right {
     margin: 15mm 10mm 15mm 20mm;
-  }
+}
 
   p, h2, h3 {
     orphans: 3;

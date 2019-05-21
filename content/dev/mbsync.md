@@ -3,7 +3,7 @@ Date: 2017-04-24 10:15
 Tags: dev
 Slug: mbsync mu4e email
 Author: Feng Xia
-Modified: 2018-06-06 11:25
+Modified: 2019-05-21 10:27
 
 <figure class="col l5 m6 s12">
   <img src="/images/hahn.png"
@@ -472,3 +472,27 @@ things you need to do:
    enable `Less secured app` setting.
 3. Make sure the folder defined in `Account` section for local store
    actually exists (`mbsync` will not create `~/Maildir/Hotmail` for you!)
+
+# Outlook webmail
+
+Working outlook/exchange server is tough. The company's server changes
+configuration all the time, and it completly messed up w/ IMAP login
+when one server allows `PLAIN` while another requires `NTLM`, and so
+on. It has been a nightmare, because it worked for weeks, months, and
+will suddenly decided to stop working, and you don't get emails
+anymore! Fall back is Thunderbird, but then, once you are used to
+`mu4e`, going back to anything looked like outlook is a pain.
+
+Finally, here is a savior,
+[davmail](http://davmail.sourceforge.net/). It works a gateway between
+your computer and outlook web mail (aka. OWA &mdash; outlook web
+access). So you can now point your `mbsync` to a local port (default
+`1143`, and davmail will route mbsync's IMAP requests to the remote
+OWA server, nice!
+
+
+<figure class="col s12">
+  <img src="/images/mbsync%20setup.png"
+       class="center img-responsive">
+  <figcaption>My mbsync setup for retrieving and sending mails</figcaption>
+</figure>

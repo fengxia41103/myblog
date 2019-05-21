@@ -12,10 +12,8 @@ IMAPAccount hotmail
 # Address to connect to
 Host imap.outlook.com
 User feng_xia41103@hotmail.com
-Pass xxx
+Pass XXX
 SSLType IMAPS
-#UseIMAPS yes
-#RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 
@@ -24,11 +22,8 @@ IMAPAccount gmail
 # Address to connect to
 Host imap.gmail.com
 User fengxia41103@gmail.com
-Pass xxx
+Pass XXX
 SSLType IMAPS
-SSLVersions TLSv1.1 # required to work around gmail SNI
-#UseIMAPS yes
-#RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # Gmail account for noah
@@ -36,23 +31,19 @@ IMAPAccount noah
 # Address to connect to
 Host imap.gmail.com
 User noahxiaqq@gmail.com
-Pass xxx
+Pass XXX
 SSLType IMAPS
-#UseIMAPS yes
-#RequireSSL yes
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 
-# Lenovo account
 IMAPAccount lenovo
 # Address to connect to
-Host outlookae.lenovo.com
-User fxia1@lenovo.com
-Pass xxx
-Port 993
-SSLType IMAPS
-CertificateFile /home/fengxia/.cert/outlookae.lenovo.com.pem
-
+Host localhost # using davmail as gateway
+User XXX
+Pass XXX
+Port 1143
+SSLType None
+AuthMech LOGIN
 
 ############################################
 #
@@ -69,7 +60,7 @@ CertificateFile /home/fengxia/.cert/outlookae.lenovo.com.pem
 IMAPStore gmail-remote
 Account gmail
 
-# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/Gmail)
 MaildirStore gmail-local
 Path ~/Maildir/Gmail/
 Inbox ~/Maildir/Gmail/inbox/
@@ -228,9 +219,9 @@ SyncState *
 
 
 Channel lenovo-inbox-sub
-Master :lenovo-remote:"INBOX/"
+Master :lenovo-remote:"INBOX"
 Slave :lenovo-local:inbox/
-Pattern *
+Patterns *
 Create Both
 Remove Both
 Expunge Both
@@ -241,6 +232,7 @@ SyncState *
 Channel lenovo-sent
 Master :lenovo-remote:"Sent"
 Slave :lenovo-local:sent
+Patterns *
 Create Both
 Remove Both
 Expunge Both

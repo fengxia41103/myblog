@@ -490,9 +490,21 @@ access). So you can now point your `mbsync` to a local port (default
 `1143`, and davmail will route mbsync's IMAP requests to the remote
 OWA server, nice!
 
-
 <figure class="col s12">
   <img src="/images/mbsync%20setup.png"
        class="center img-responsive">
   <figcaption>My mbsync setup for retrieving and sending mails</figcaption>
 </figure>
+
+The `mbsync` config is quite straightforward:
+
+```bash
+
+IMAPAccount company-name
+Host localhost <-- using davmail as gateway
+User xxx
+Pass xxx
+Port 1143 <-- default davmail IMAP port
+SSLType None
+AuthMech LOGIN
+```

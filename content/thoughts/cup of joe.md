@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: cup of joe
 Author: Feng Xia
 
-<div class="col s6" style="margin-right: 2em;">
+<div class="col l6 m6 s12" style="margin-right: 2em;">
 <video width="100%" height="100%" controls="controls">
   <source src="/images/firework.mp4 "
           type="video/mp4" />

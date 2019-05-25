@@ -4,6 +4,15 @@ Tags: thoughts
 Slug: cup of joe
 Author: Feng Xia
 
+<div class="col s6" style="margin-right: 2em;">
+<video width="100%" height="100%" controls="controls">
+  <source src="/images/firework.mp4 "
+          type="video/mp4" />
+  Your browser does not support the video tag.
+  /* instead of the last line you could also add the flash player*/
+</video>
+</div>
+
 I like this place, like the smell of roasted coffee beans, like the
 fragrance that left in your mouth after a sip, that you will never
 find in Starbucks regardless how expansive a flavor you order, like

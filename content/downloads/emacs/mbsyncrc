@@ -209,14 +209,14 @@ SyncState *
 #
 ###########################################
 Channel lenovo-inbox
-Master :lenovo-remote:
+Master :lenovo-remote:"INBOX"
 Slave :lenovo-local:inbox
+Patterns *
 Create Both
 Remove Both
 Expunge Both
 CopyArrivalDate yes
 SyncState *
-
 
 Channel lenovo-inbox-sub
 Master :lenovo-remote:"INBOX"

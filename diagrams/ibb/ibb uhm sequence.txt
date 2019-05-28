@@ -45,7 +45,7 @@ LXCA -> Tower: config result `TRUE|FALSE`
 
 == PHASE 3: PROVISION OS ==
 
-alt role base
+alt role based
   Tower -> Netbox: get_server_role(inventory_server_id)
   Netbox -> Tower: server_role
   Tower -> Config: get_server_os(server_role)

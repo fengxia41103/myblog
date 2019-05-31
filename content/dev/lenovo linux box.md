@@ -18,11 +18,11 @@ Linux installed.
 
 Most importantly, you need VPN.
 
-1. Go to `otp.lenovo.com` to register your phone number.
-2. Install `Lenovo OTP` from your app store.
-3. Keep `Lenovo OTP` app running so you can see the active OTP.
+1. Go to `otp.company.com` to register your phone number.
+2. Install `Company OTP` from your app store.
+3. Keep `Company OTP` app running so you can see the active OTP.
 4. `apt install openconnect screen`
-5. In a screen, `sudo openconnect -u [username] webvpn.us.lenovo.com`
+5. In a screen, `sudo openconnect -u [username] webvpn.us.company.com`
 
     1. first password: your regular domain login pwd
     2. second one: OTP
@@ -30,24 +30,24 @@ Most importantly, you need VPN.
 If works, you should see something like this:
 
 ```shell
-root@fengxia-lenovo:~# openconnect -u fxia1 webvpn.us.lenovo.com
-POST https://webvpn.us.lenovo.com/
+root@fengxia-company:~# openconnect -u fxia1 webvpn.us.company.com
+POST https://webvpn.us.company.com/
 Attempting to connect to server 104.232.254.247:443
-SSL negotiation with webvpn.us.lenovo.com
-Connected to HTTPS on webvpn.us.lenovo.com
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
 Got HTTP response: HTTP/1.0 302 Object Moved
-GET https://webvpn.us.lenovo.com/
+GET https://webvpn.us.company.com/
 Attempting to connect to server 104.232.254.247:443
-SSL negotiation with webvpn.us.lenovo.com
-Connected to HTTPS on webvpn.us.lenovo.com
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
 Got HTTP response: HTTP/1.0 302 Object Moved
-GET https://webvpn.us.lenovo.com/+webvpn+/index.html
-SSL negotiation with webvpn.us.lenovo.com
-Connected to HTTPS on webvpn.us.lenovo.com
+GET https://webvpn.us.company.com/+webvpn+/index.html
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
 Please enter your username and password.
 Password:
 Password:
-POST https://webvpn.us.lenovo.com/+webvpn+/index.html
+POST https://webvpn.us.company.com/+webvpn+/index.html
 Got CONNECT response: HTTP/1.1 200 OK
 CSTP connected. DPD 30, Keepalive 30
 Connected tun0 as 10.38.102.28, using SSL
@@ -56,10 +56,10 @@ Established DTLS connection (using GnuTLS). Ciphersuite (DTLS0.9)-(RSA)-(AES-256
 
 A list of VPN servers:
 
-   - `webvpn.cn.lenovo.com`   for China user
-   - `webvpn.hk.lenovo.com`   for AP region user
-   - `webvpn.us.lenovo.com`   for AG region user
-   - `webvpn.sk.lenovo.com`   for EMEA user​    
+   - `webvpn.cn.company.com`   for China user
+   - `webvpn.hk.company.com`   for AP region user
+   - `webvpn.us.company.com`   for AG region user
+   - `webvpn.sk.company.com`   for EMEA user​    
 
 # Email
 
@@ -68,14 +68,14 @@ other clients.
 
 Incoming (IMAP) settings:
 
-   1. server: `outlookae.lenovo.com`, port `993`
+   1. server: `outlookae.company.com`, port `993`
    2. username: your domain login, eg. `fxia1`
    3. connection security: `SSL/TLS`
    4. authentication method: `Normal password`
 
 Outgoing (SMTP) settings:
 
-   1. server: `mailae.lenovo.com`, port `587`
+   1. server: `mailae.company.com`, port `587`
    2. connection security: `STARTTLS`
    3. authentication method: `NTLM`
    4. username: domain login
@@ -98,7 +98,7 @@ Follow [instructions][2] to install `pidgin pidgin-sipe`:
 Create a new account with these settings:
 
    1. protocol: `Office Communicator`
-   2. username: `you@lenovo.com`
+   2. username: `you@company.com`
    3. password: domain password
    4. connection type: `Auto`
    5. user agent: `UCCAPI/16.0.6001.1073 OC/16.0.6001.1073 (Skype for Business)`

@@ -29,7 +29,7 @@ header-includes: |
 * Welcome challenging problem.
 * Have a high standard in work quality.
 * SalesForce advocate.
-* **Also available in**: [linkedin][101], [PDF][102], [Word][103]
+* **Also available in**: [linkedin][101], [PDF][102].
 
 # Skills
 
@@ -285,7 +285,6 @@ Documentation
 
 [101]: https://www.linkedin.com/in/fengxia41103
 [102]: http://fengxia.co/downloads/resume.pdf
-[103]: http://fengxia.co/downloads/resume.doc
 
 [1]: http://fengxia.co/project%20fashion%20demo.html
 [2]: http://fengxia.co/project%20gkp%20demo.html

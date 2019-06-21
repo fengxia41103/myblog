@@ -22,10 +22,6 @@ Modified: 2018-07-23 12:04
   <i class="fa fa-file-pdf-o"></i>
   PDF
 </a>
-<a href="/downloads/resume.doc">
-  <i class="fa fa-file-word-o"></i>
-  Word
-</a>
 
 ## Skills
 

@@ -11,7 +11,7 @@ titlepage: true
 titlepage-color: "FFFFFF"
 titlepage-text-color: "5C68C0"
 titlepage-rule-color: "5C68C0"
-logo: "../diagrams/lenovo.png"
+logo: "fire.png"
 toc: true
 toc-depth: 5
 toc-own-page: true
@@ -24,7 +24,6 @@ header-includes:
   - \usepackage{parskip}
   - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
   - \lstset{breaklines=true}
-  - \lstset{language=[Motorola68k]Assembler}
   - \lstset{basicstyle=\small\ttfamily}
   - \lstset{extendedchars=true}
   - \lstset{tabsize=2}
@@ -35,5 +34,6 @@ header-includes:
   - \lstset{framesep=4pt}
   - \lstset{numbers=left}
   - \lstset{numberstyle=\tiny\ttfamily}
-  - \lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+  -
+    \lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
 ---

@@ -1,5 +1,5 @@
 # Latex template
-LATEX_TEMPLATE := lenovo.tex
+LATEX_TEMPLATE := feng.tex
 LATEX_CONFIG := latex.yaml
 
 # Links to images, and bibtex reference section header
@@ -18,11 +18,10 @@ COMMON_FLAGS = 	--number-sections \
 	--from markdown \
 	--highlight-style pygments \
 	--filter pandoc-fignos \
-	--filter mermaid-filter \
 	-M date="`date "+%B %e, %Y"`" \
 	--filter pandoc-citeproc \
 	--csl $(CSL) \
-	--toc \
+	--toc
 
 HTML_FLAGS = $(COMMON_FLAGS) \
 	--standalone \
@@ -55,10 +54,18 @@ loc_ra_pdf := loc\ ra.pdf
 loc_ra_docx := loc\ ra.docx
 loc_ra_html := loc\ ra.html
 
-rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
-loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
+# resume source and target
+resume_md := resume.md
+resume_pdf := resume.pdf
+resume_doc := resume.doc
+RESUME_INPUTS = $(resume_md)
+
+
+
 all: rhhi_ra loc_ra
 
+# generate RHHI RA
+rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
 	pandoc $(RHHI_RA_INPUTS) \
@@ -75,6 +82,9 @@ rhhi_ra_docx: $(RHHI_RA_INPUTS) $(LATEX_CONFIG)
 	-o $(rhhi_ra_docx) \
 	$(DOCX_FLAGS)
 
+# generate LOC RA
+loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
+
 loc_ra_html: $(LOC_RA_INPUTS)
 	pandoc $(LOC_RA_INPUTS) \
 	-o $(loc_ra_html) \
@@ -88,6 +98,18 @@ loc_ra_pdf: $(LOC_RA_INPUTS) $(LATEX_CONFIG)
 loc_ra_docx: $(LOC_RA_INPUTS) $(LATEX_CONFIG)
 	pandoc $(LATEX_CONFIG) $(LOC_RA_INPUTS) \
 	-o $(loc_ra_docx) \
+	$(DOCX_FLAGS)
+
+# generate resume
+resume_pdf: $(RESUME_INPUTS)
+	pandoc $(RESUME_INPUTS) \
+	-o ../$(resume_pdf) \
+	--pdf-engine xelatex \
+	--number-sections
+
+resume_doc: $(RESUME_INPUTS)
+	pandoc $(RESUME_INPUTS) \
+	-o ../$(resume_doc) \
 	$(DOCX_FLAGS)
 
 clean:

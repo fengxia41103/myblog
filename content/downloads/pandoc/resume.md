@@ -1,15 +1,25 @@
 ---
 mainfont: Noto Sans CJK SC
+titlepage: false
+papersize: a4
+fontsize: 12pt
+linkstyle: slanted
+urlcolor: blue
+linkstyle: slanted
 header-includes: |
     \usepackage{dashrule}
     \usepackage{setspace}
     \singlespacing
+    \usepackage{parskip}
+    \usepackage{fancyhdr}
+    \fancyhead[LO,LE]{
+        \textbf{Feng Xia}\\
+        \url{github.com/fengxia41103}}
+    \fancyhead[RO,RE]{
+        (508) 801-1794\\
+        fengxia41103@gmail.com}
+    \pagestyle{fancy}
 ---
-
-
-\textbf{Feng Xia} \hfill (508) 801-1794  
-http://fengxia.co \hfill fengxia41103@gmail.com  
-\hdashrule{\textwidth}{1pt}{}
 
 # Summary
 
@@ -57,7 +67,19 @@ Documentation
 
 # Experience
 
-## Advisory Engineer, Lenovo US, 11/2016 - present
+## Advisory Engineer, Lenovo US \hfill 11/2016 - present
+
+* Author of the `Lenovo Open Cloud` reference architecture and `Red
+  Hat Hyperverged Infrastructure for Virtalization` reference
+  architecture. Published on 5/5/2019.
+  
+    - **Tools**: Pandoc, Markdown, BibTex, XeLaTex, GNU make, CSS
+    - **Sample writing**:
+        1. Lenovo Open Cloud Reference Architecture: [pretty
+           draft in PDF][23], [official version][25]
+        2. Red Hat Hyperconverged Infrastructure for Virtualization
+           Reference Architecture: [pretty draft in PDF][24], [official
+           version][26]
 
 * `Lenovo Open Cloud` product. Drove overall network
   design. Developed Python scrips and playbooks to automate RH
@@ -274,9 +296,9 @@ Documentation
 [7]: http://fengxia.co/baremetal%20provisioning.html
 [8]: http://fengxia.co/ironic%20intro.html
 [9]: http://fengxia.co/maas%20and%20ironic.html
-[11]: http://fengxia.co/downloads/jinneng_6001.pdf
-[12]: http://fengxia.co/downloads/jinneng_6002.pdf
-[13]: http://fengxia.co/downloads/jinneng_6003.pdf
+[11]: http://fengxia.co/pages/jinneng_6001.pdf
+[12]: http://fengxia.co/pages/jinneng_6002.pdf
+[13]: http://fengxia.co/pages/jinneng_6003.pdf
 [14]: https://fengxia41103.github.io/moment/wss/vx.html
 [15]: http://fengxia.co/netbox.html
 [16]: http://fengxia.co/switches.html
@@ -286,3 +308,7 @@ Documentation
 [20]: https://github.com/fengxia41103/fashion
 [21]: https://github.com/fengxia41103/gkp
 [22]: https://github.com/fengxia41103/jk
+[23]: http://fengxia.co/downloads/ibb%20rhhi%20ra.pdf
+[24]: http://fengxia.co/downloads/loc%20ra.pdf
+[25]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
+[26]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture

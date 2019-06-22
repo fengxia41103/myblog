@@ -87,5 +87,5 @@ occisions, I only saw pretended smartness, which, I have a word,
 
 [1]: https://www.salon.com/2019/05/12/silicon-valley-makes-everything-worse-four-industries-that-big-tech-has-ruined/
 
-[2]: {filename}/what%20does%20it%20bring.md
-[3]: {filename}/social%20media.md
+[2]: {filename}/thoughts/what%20does%20it%20bring.md
+[3]: {filename}/thoughts/social%20media.md

@@ -104,8 +104,7 @@ loc_ra_docx: $(LOC_RA_INPUTS) $(LATEX_CONFIG)
 resume_pdf: $(RESUME_INPUTS)
 	pandoc $(RESUME_INPUTS) \
 	-o ../$(resume_pdf) \
-	--pdf-engine xelatex \
-	--number-sections
+	--pdf-engine xelatex
 
 resume_doc: $(RESUME_INPUTS)
 	pandoc $(RESUME_INPUTS) \

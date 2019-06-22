@@ -176,4 +176,4 @@ Huawei is fine, and can be fine. It will only start to fail, if itself
 is believing the lie it is feeding the public. And for the upcoming
 uproar of chips and operating systems, see my [other one][1].
 
-[1]: {filename}/thoughts/operating%20systems.md
+[1]: {filename}/thoughts/operating%20system.md

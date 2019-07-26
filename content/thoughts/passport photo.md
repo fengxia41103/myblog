@@ -3,7 +3,7 @@ Date: 2019-06-23 18:59
 Tags: thoughts
 Slug: make passport photo in gimp
 Author: Feng Xia
-
+Modified: 2019-07-05 21:15
 
 <figure class="col l5 m5 s12">
   <img src="/images/temperature.jpg"/>
@@ -42,29 +42,40 @@ Steps is straightforward:
    
 5. Crop (`r`) to a roughly square shape &rarr; this is the step you
    can position your head in the way that passport photo wants &mdash;
-   so much for the head room, show some shoulders... don't worry if
-   it's not mathematically square, just approximation is fine.
-   
+   so much for the head room, show some shoulders:
+
+    There is a tiny reading at the right bottom of the window when you
+    resize the crop overlap, eg. `0.98:1`, so you are aiming for `1:1`
+    to be square. Don't worry if it's not mathematically square, just
+    approximation is fine.
+
 6. Some math ([reference][2]). Measure (`m`) from the top of your
    head/hair to the bottom of your chin &rarr; 1172 pixels, for
    example &rarr; resolution of the new photo = `1172/1.1875 = 987
    (pixels/in)`.
-   
+
 7. Create a new image:
     * size: 6 x 4 in
     * Under `Advanced`, resolution to `987` (see step above) &larr;
       ignore the warning that you are creating some 200+M file. It's ok.
-    
+
 8. `Image` &rarr; [Configure grid][3], sec to 2x2 in, and `view` to show
    grid. Tried grid offset to 10px, can't see the difference.
-   
+
 9. Select ALL of the cropped new photo (step #4), copy and paste, six
    times, in the grids. You see the result now.
-   
+
+10. Grid line won't print. Use `Filters > Render > Pattern > Grid` to
+    add an exact grid line overlay (will be printed as a light gray
+    line, perfect!):
+     1. width: `1 px`
+     2. spacing: `2 in`
+     3. offset: `10 px`
+
 10. Save the `.xcf` file (as source), and export to a JPG.
 
 Now just find a place and print a 4x6. Done, done, done!!
-   
+
 [1]: https://docs.gimp.org/en/gimp-tool-iscissors.html
 [2]: http://www.robotgeek.org/articles/passport_tutorial/tutorial.html
 [3]: https://docs.gimp.org/2.10/en/gimp-image-configure-grid.html

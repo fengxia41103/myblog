@@ -113,8 +113,8 @@ China's achievement is based on an accumulation of all the wisdoms and
 trial-and-errors that other countries have done, including some
 humanity disasters this world has seen, I'm thinking about Russia's
 social experiment... this is the same when any kid disregard the
-effort the family, friends, parents, teachers, society have put in to
-make his success, and simply say "look how hard I have worked, and
+effort of the family, friends, parents, teachers, society have put in
+to make his success, and simply say "look how hard I have worked, and
 therefore I deserve everything I have" ... this is not only naive,
 this is purely irresponsible and selfish. Period.
 
@@ -193,8 +193,8 @@ a traison &larr; isn't this ideological!?
 
 Last but not the least, it's fine to feel proud of yourself, but it is
 not fine to look down your peers/competitors/losers, especially when
-the word used is **文明 (civilization)**! No, China is the only
-civilization that still beats and kicks and feeling lively. All
+the word used is **文明 (civilization)**! No, China is **not** the
+only civilization that still beats and kicks and feeling lively. All
 these long-life civilizations &mdash; Greek, Indian, or Slavonic, or
 Russian, or Native Indian, are just as wonderful and amazing as any,
 and **they are not dead!!** What an arrogant view when he thinks only

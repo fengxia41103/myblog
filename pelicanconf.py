@@ -60,6 +60,9 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["tipue_search"]
 
+# output
+OUTPUT_PATH = 'docs/'
+
 ##############################
 #
 # Custom filters

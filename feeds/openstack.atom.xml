@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="http://fengxia.co/" rel="alternate"></link><link href="http://fengxia.co/feeds/openstack.atom.xml" rel="self"></link><id>http://fengxia.co/</id><updated>2019-03-15T00:00:00-04:00</updated><entry><title>Juju GUI nginx proxy</title><link href="http://fengxia.co/juju%20gui%20nginx%20proxy.html" rel="alternate"></link><published>2017-10-22T22:21:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-10-22:juju gui nginx proxy.html</id><summary type="html">&lt;p&gt;In &lt;a href="http://fengxia.co/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/openstack.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-03-15T00:00:00-04:00</updated><entry><title>Juju GUI nginx proxy</title><link href="https://fengxia41103.github.io/myblog/juju%20gui%20nginx%20proxy.html" rel="alternate"></link><published>2017-10-22T22:21:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-22:myblog/juju gui nginx proxy.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
 enough with &lt;code&gt;$ juju gui&lt;/code&gt; from juju host; 
@@ -90,7 +90,7 @@ $ juju change-user-password
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Reload &lt;code&gt;$ sudo service nginx reload&lt;/code&gt;, and browse to
-&lt;code&gt;https://[yourip]/gui&lt;/code&gt;, you shall see the Juju GUI.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju local LXD</title><link href="http://fengxia.co/juju%20local%20LXD.html" rel="alternate"></link><published>2017-09-06T13:21:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-09-06:juju local LXD.html</id><summary type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
+&lt;code&gt;https://[yourip]/gui&lt;/code&gt;, you shall see the Juju GUI.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju local LXD</title><link href="https://fengxia41103.github.io/myblog/juju%20local%20LXD.html" rel="alternate"></link><published>2017-09-06T13:21:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-09-06:myblog/juju local LXD.html</id><summary type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
 development for a while, you know making a one line of code change,
 deploying charm, then wait to see the &lt;em&gt;new&lt;/em&gt; code got executed &amp;larr;
@@ -347,7 +347,7 @@ $ juju model-config enable-os-upgrade&lt;span class="o"&gt;=&lt;/span&gt;&lt;spa
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1&gt;Comparison results&lt;/h1&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm Ansible integration</title><link href="http://fengxia.co/charm%20ansible%20integration.html" rel="alternate"></link><published>2017-07-06T13:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-07-06:charm ansible integration.html</id><summary type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
+&lt;h1&gt;Comparison results&lt;/h1&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm Ansible integration</title><link href="https://fengxia41103.github.io/myblog/charm%20ansible%20integration.html" rel="alternate"></link><published>2017-07-06T13:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-07-06:myblog/charm ansible integration.html</id><summary type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.&lt;/p&gt;
@@ -626,7 +626,7 @@ stats = runner.run()
 &lt;/ol&gt;
 &lt;p&gt;That's it. Now you can build a charm by including &lt;code&gt;layer-myansible&lt;/code&gt;
 and run any playbooks in your charm by following this design pattern
-while taking full advantage of the &lt;a href="http://docs.ansible.com/ansible/dev_guide/developing_api.html"&gt;Ansible Python API&lt;/a&gt;. Beautiful.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm layer-basic</title><link href="http://fengxia.co/charm%20layer-basic.html" rel="alternate"></link><published>2017-05-29T09:22:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-05-29:charm layer-basic.html</id><summary type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
+while taking full advantage of the &lt;a href="http://docs.ansible.com/ansible/dev_guide/developing_api.html"&gt;Ansible Python API&lt;/a&gt;. Beautiful.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm layer-basic</title><link href="https://fengxia41103.github.io/myblog/charm%20layer-basic.html" rel="alternate"></link><published>2017-05-29T09:22:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-05-29:myblog/charm layer-basic.html</id><summary type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
 charm needs to include it? In this article we will take a look
 at its code base to decipher this mystery.&lt;/p&gt;
 &lt;h1&gt;Hooks&lt;/h1&gt;
@@ -852,9 +852,9 @@ hook is necessary.&lt;/p&gt;
 the entry point to call preinstall scripts, to setup the host Python
 environment and to initialize charm states. It has many hardcoded
 lines for using &lt;code&gt;apt-get&lt;/code&gt; CLI and expecting an Ubuntu
-environment. These have been addressed somewhat in &lt;a href="http://fengxia.co/python2 charm.html"&gt;python2 charm&lt;/a&gt;.
+environment. These have been addressed somewhat in &lt;a href="https://fengxia41103.github.io/myblog/python2 charm.html"&gt;python2 charm&lt;/a&gt;.
 Going forward, the code base can use some work to support host other
-than Ubuntu and Python2 instead of 3.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm Python2</title><link href="http://fengxia.co/python2%20charm.html" rel="alternate"></link><published>2017-05-27T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-05-27:python2 charm.html</id><summary type="html">&lt;p&gt;Python 2. So we dived into charm code to see which feature is blocking
+than Ubuntu and Python2 instead of 3.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm Python2</title><link href="https://fengxia41103.github.io/myblog/python2%20charm.html" rel="alternate"></link><published>2017-05-27T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-05-27:myblog/python2 charm.html</id><summary type="html">&lt;p&gt;Python 2. So we dived into charm code to see which feature is blocking
 on P2 so we can run charms in CentOS.&lt;/p&gt;
 &lt;p&gt;Why do we want to build Python2 charms? Charms are claimed to built
 for Python3. However, the catch is that charms are also built for
@@ -1125,7 +1125,7 @@ mappings:&lt;/p&gt;
 
 
 &lt;h2&gt;&lt;code&gt;layer-basic&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/juju-solutions/layer-basic"&gt;layer-basic&lt;/a&gt; is inherited in all charms. We will have a &lt;a href="http://fengxia.co/charm layer-basic.html"&gt;separate
+&lt;p&gt;&lt;a href="https://github.com/juju-solutions/layer-basic"&gt;layer-basic&lt;/a&gt; is inherited in all charms. We will have a &lt;a href="https://fengxia41103.github.io/myblog/charm layer-basic.html"&gt;separate
 analysis&lt;/a&gt; on this lib alone. For now, let's take it for granted and
 work around the issues to make Python2 charms.&lt;/p&gt;
 &lt;p&gt;Diff file list:&lt;/p&gt;
@@ -1283,7 +1283,7 @@ package functions to mapped version.&lt;/p&gt;
 &lt;li&gt;Copy &lt;code&gt;wss/hack/hooks&lt;/code&gt; to &lt;code&gt;dist/.../hooks&lt;/code&gt;. However, if you have
    customized hooks, you need to make modifications manually. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Have fun with CentOS.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm Reactive</title><link href="http://fengxia.co/juju%20charm%20reactive.html" rel="alternate"></link><published>2019-03-15T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-04-24:juju charm reactive.html</id><summary type="html">&lt;p&gt;execution. This article is to dive into its source code in order to
+&lt;p&gt;Have fun with CentOS.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm Reactive</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20reactive.html" rel="alternate"></link><published>2019-03-15T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/juju charm reactive.html</id><summary type="html">&lt;p&gt;execution. This article is to dive into its source code in order to
 understand its execution logic and design philosophy.&lt;/p&gt;
 &lt;p&gt;In this article we will study charm's &lt;a href="https://pythonhosted.org/charms.reactive/"&gt;reactive&lt;/a&gt; framework to get a
 firm understanding of what they mean by writing an reactive charm.&lt;/p&gt;
@@ -1475,7 +1475,7 @@ watch is reset and will be count from 0 again during next iteration
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;other_handlers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="k"&gt;break&lt;/span&gt;
     &lt;span class="n"&gt;_invoke&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;other_handlers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm chained states</title><link href="http://fengxia.co/juju%20charm%20chained%20states.html" rel="alternate"></link><published>2017-04-24T13:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-04-24:juju charm chained states.html</id><summary type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm chained states</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20chained%20states.html" rel="alternate"></link><published>2017-04-24T13:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/juju charm chained states.html</id><summary type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
 charm. Chained states is essentially mirroring a pattern of any sequential
 execution in a workflow. Potentially each execution block can also
 have conditions to set the next state, even though this type of knowledge
@@ -1547,7 +1547,7 @@ to document (needs reference).&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If we set multiple states &lt;code&gt;true&lt;/code&gt;, will they be executed in parallel?&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;From &lt;a href="http://fengxia.co/juju charm reactive.html"&gt;previous article&lt;/a&gt; on state execution, we can already see that
+&lt;p&gt;From &lt;a href="https://fengxia41103.github.io/myblog/juju charm reactive.html"&gt;previous article&lt;/a&gt; on state execution, we can already see that
 states are first saved in a dictionary and then scanned by
 iterator. Therefore, there is no parallel computing built in the charm
 execution mechanism. Further, execution order of two states have no
@@ -1573,11 +1573,11 @@ start a blocking call while state 1-3 are kept to loop as designed.&lt;/p&gt;
 
 &lt;p&gt;The result is clear that state machine will come to a halt at this
 blocking call, which would have to be the case since we already know
-how states are being scanned and executed from &lt;a href="http://fengxia.co/juju charm reactive.html"&gt;previous
+how states are being scanned and executed from &lt;a href="https://fengxia41103.github.io/myblog/juju charm reactive.html"&gt;previous
 article&lt;/a&gt;. All states are cached in a dictionary and are scanned in
 a tight loop per iteration. Thus a blocking call in any handler will
 cause the loop to a halt. Nowhere in code will take a signal so this
-behavior can not be interruptted either.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>MAAS vs. Ironic</title><link href="http://fengxia.co/maas%20and%20ironic.html" rel="alternate"></link><published>2017-03-30T10:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-03-30:maas and ironic.html</id><summary type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
+behavior can not be interruptted either.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>MAAS vs. Ironic</title><link href="https://fengxia41103.github.io/myblog/maas%20and%20ironic.html" rel="alternate"></link><published>2017-03-30T10:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-30:myblog/maas and ironic.html</id><summary type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires
@@ -2325,7 +2325,7 @@ section "Minimal setup" for details.)&lt;/p&gt;
 &lt;p&gt;Ironic has not concept of multi-tenant either. However, it can
 dynamically &lt;em&gt;bind&lt;/em&gt; a port to use, where port is then managed by
 service such as Neutron. This leaves Ironic not suffering from the
-same risk that MAAS setup may have.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Baremetal provisioning</title><link href="http://fengxia.co/baremetal%20provisioning.html" rel="alternate"></link><published>2017-03-22T15:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-03-22:baremetal provisioning.html</id><summary type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
+same risk that MAAS setup may have.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Baremetal provisioning</title><link href="https://fengxia41103.github.io/myblog/baremetal%20provisioning.html" rel="alternate"></link><published>2017-03-22T15:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-22:myblog/baremetal provisioning.html</id><summary type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
 point in life. It is easy to perceive inserting a disk or USB key to
 make this happen because the OS files are &lt;em&gt;there&lt;/em&gt;. A fancier version
 is to boot from network using PXE boot option, which seems like a
@@ -2724,7 +2724,7 @@ behind the scene from BIOS to a PXE:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
     &lt;img src="/images/pxe%20IPL.svg" /&gt;
     &lt;figcaption&gt;PXE IPL (from power on to PXE)&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Openstack Ironic</title><link href="http://fengxia.co/ironic%20intro.html" rel="alternate"></link><published>2017-03-15T22:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-03-15:ironic intro.html</id><summary type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
+&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Openstack Ironic</title><link href="https://fengxia41103.github.io/myblog/ironic%20intro.html" rel="alternate"></link><published>2017-03-15T22:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-15:myblog/ironic intro.html</id><summary type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &amp;mdash; start an instance on demand, then build those
 REST requests into Juju provider code. After playing with Ironic API
@@ -3685,7 +3685,7 @@ talked about by the Images v2 API.&lt;/p&gt;
       &lt;span class="s2"&gt;&amp;quot;OS-FLV-EXT-DATA:ephemeral&amp;quot;&lt;/span&gt;:0
    &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Introduction of Juju charms</title><link href="http://fengxia.co/juju%20charm%20layers.html" rel="alternate"></link><published>2017-02-28T17:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-02-28:juju charm layers.html</id><summary type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Introduction of Juju charms</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20layers.html" rel="alternate"></link><published>2017-02-28T17:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-28:myblog/juju charm layers.html</id><summary type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
 that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
 the charm world to learn its design.&lt;/p&gt;
@@ -3831,12 +3831,12 @@ is how charm build can pull in dependencies of other charms/layers.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
     &lt;img src="/images/vanilla%20charm%20deploy.gif" /&gt;
     &lt;figcaption&gt;Screencast showing deploying a Vanilla charm&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju deploy and Provider</title><link href="http://fengxia.co/juju%20deploy%20provider.html" rel="alternate"></link><published>2017-02-08T14:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-02-08:juju deploy provider.html</id><summary type="html">&lt;p&gt;In &lt;a href="http://fengxia.co/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
+&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju deploy and Provider</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy%20provider.html" rel="alternate"></link><published>2017-02-08T14:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-08:myblog/juju deploy provider.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will
 be put on by the deployer.If you recall, there were four steps in a
 deploy process:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Add a new machine to the cloud environment. In the &lt;a href="http://fengxia.co/juju deploy.html"&gt;demo&lt;/a&gt;, we
+&lt;li&gt;Add a new machine to the cloud environment. In the &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;demo&lt;/a&gt;, we
    added this machine manually using &lt;code&gt;juju add-machine&lt;/code&gt; command.&lt;/li&gt;
 &lt;li&gt;Machine-0 recognizes the new node.&lt;/li&gt;
 &lt;li&gt;CLI issues a deploy command.&lt;/li&gt;
@@ -3847,7 +3847,7 @@ machine prior to the deploy command. Wouldn't it be better if the
 command will signal the cloud provider to create a new machine on the
 fly? MAAS provider can almost do just that.&lt;/p&gt;
 &lt;h1&gt;MAAS way of a deploy&lt;/h1&gt;
-&lt;p&gt;We have briefly touched upon &lt;a href="http://fengxia.co/juju deploy.html"&gt;the MAAS way&lt;/a&gt;.  By default, Juju
+&lt;p&gt;We have briefly touched upon &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;the MAAS way&lt;/a&gt;.  By default, Juju
 deploy will request for a new machine unless using the &lt;code&gt;--to [machine
 number]&lt;/code&gt; flag. While using MAAS it is seen that MAAS will turn a
 &lt;code&gt;READY&lt;/code&gt; machine into &lt;code&gt;ALLOCATED&lt;/code&gt; then &lt;code&gt;DEPLOYING&lt;/code&gt;. Once a Juju agent
@@ -3861,7 +3861,7 @@ is installed (provisioned), the agent executes application deployment.&lt;/p&gt;
 &lt;p&gt;We know machine-0 will call MAAS's REST API to kick off the machine
 provisioning process. But we do not know which API endpoint it is
 using, and who is the caller inside machine-0 that makes this call.
-&lt;a href="http://fengxia.co/juju deploy.html"&gt;Priviously&lt;/a&gt; we have analyzed this process from the outside &amp;mdash;
+&lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;Priviously&lt;/a&gt; we have analyzed this process from the outside &amp;mdash;
 files generated, states changed, application installed. Here we will
 look into the code to understand how these steps take place.&lt;/p&gt;
 &lt;h2&gt;Overview of the agent&lt;/h2&gt;
@@ -3947,7 +3947,7 @@ I'm highlighting in &lt;font color="green"&gt;green&lt;/font&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
     &lt;img src="/images/juju%20deploy%20call%20chain.png" /&gt;
     &lt;figcaption&gt;Illustration of call chain by "juju deploy" command&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm deployment</title><link href="http://fengxia.co/juju%20deploy.html" rel="alternate"></link><published>2017-01-19T15:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-01-19:juju deploy.html</id><summary type="html">&lt;p&gt;We have covered Juju's &lt;a href="http://fengxia.co/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
+&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm deployment</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy.html" rel="alternate"></link><published>2017-01-19T15:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-19:myblog/juju deploy.html</id><summary type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
 continue our research into another important function &amp;mdash; juju
 deploy.&lt;/p&gt;
 &lt;p&gt;Deploy will command a node to pull down requested charm and install
@@ -3963,7 +3963,7 @@ to repeat this for development and troubleshooting.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;h2&gt;Juju + MAAS&lt;/h2&gt;
-&lt;p&gt;We have already covered state machine of &lt;a href="http://fengxia.co/maas target.html"&gt;MAAS target node&lt;/a&gt;. In the
+&lt;p&gt;We have already covered state machine of &lt;a href="https://fengxia41103.github.io/myblog/maas target.html"&gt;MAAS target node&lt;/a&gt;. In the
 context of deploying a charm driven by Juju, we can take a look MAAS
 internals how those states are related.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
@@ -4371,7 +4371,7 @@ these contents under the &lt;code&gt;/var/lib/juju/unit-jenkins-1/&lt;/code&gt; 
     └── unit-jenkins-1 -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64
 
 &lt;span class="m"&gt;45&lt;/span&gt; directories, &lt;span class="m"&gt;194&lt;/span&gt; files
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju bootstrap process</title><link href="http://fengxia.co/juju%20bootstrap.html" rel="alternate"></link><published>2017-01-11T17:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-01-11:juju bootstrap.html</id><summary type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju bootstrap process</title><link href="https://fengxia41103.github.io/myblog/juju%20bootstrap.html" rel="alternate"></link><published>2017-01-11T17:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-11:myblog/juju bootstrap.html</id><summary type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
 createa a special machine &amp;mdash; state controller, &lt;code&gt;machine-0&lt;/code&gt;,
 control node, etc. &amp;mdash; naming convention aside, it is the brain
 that tracks others nodes in the cloud, applications installed and
@@ -4886,7 +4886,7 @@ how one communicates with jujud. What capability does it have? Who is
 providing that in Juju's environment? How it may be affected by other
 network design/configuration?&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Well, stay tuned.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm model</title><link href="http://fengxia.co/juju%20charm%20model.html" rel="alternate"></link><published>2017-01-03T10:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-01-03:juju charm model.html</id><summary type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
+&lt;p&gt;Well, stay tuned.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm model</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20model.html" rel="alternate"></link><published>2017-01-03T10:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-03:myblog/juju charm model.html</id><summary type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of
 them makes sense after a while. Its &lt;a href="https://jujucharms.com/docs/2.0/glossary"&gt;terminology&lt;/a&gt; page helps on
@@ -4912,7 +4912,7 @@ eg. a bundle can have N charms.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;By default, &lt;code&gt;juju deploy&lt;/code&gt; will call for a new machine for each
 application within the bundle/charm. Of course, there is command flag
-to switch that so you can specify which machine is to be used.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Targets in MAAS lab</title><link href="http://fengxia.co/maas%20target.html" rel="alternate"></link><published>2016-12-09T22:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-12-09:maas target.html</id><summary type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
+to switch that so you can specify which machine is to be used.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Targets in MAAS lab</title><link href="https://fengxia41103.github.io/myblog/maas%20target.html" rel="alternate"></link><published>2016-12-09T22:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-12-09:myblog/maas target.html</id><summary type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
 node is simple.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;All nodes must be on the same &lt;strong&gt;192.168.8.0/24&lt;/strong&gt; subnet, and
@@ -5009,7 +5009,7 @@ taget has to be PXE-booted in order to be managed by the MAAS server.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;MAAS sever can not manage a deployed target unless it PXE boots.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;If released and disk erased, the node becomes &lt;em&gt;READY&lt;/em&gt;, again.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Setup a MAAS Virtualbox lab</title><link href="http://fengxia.co/maas%20virtualbox.html" rel="alternate"></link><published>2016-12-08T10:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-12-08:maas virtualbox.html</id><summary type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
+&lt;p&gt;If released and disk erased, the node becomes &lt;em&gt;READY&lt;/em&gt;, again.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Setup a MAAS Virtualbox lab</title><link href="https://fengxia41103.github.io/myblog/maas%20virtualbox.html" rel="alternate"></link><published>2016-12-08T10:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-12-08:myblog/maas virtualbox.html</id><summary type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
 life by putting an OS on it. Working together with &lt;a href="https://www.ubuntu.com/cloud/juju"&gt;Juju&lt;/a&gt;, they can
 setup a cluster of applications quite quickly. Think of them as a
 package manage like Ubuntu's &lt;code&gt;apt-get&lt;/code&gt;, but in the context of a
@@ -5253,5 +5253,5 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;We have done the hard part &amp;mdash; setting up the MAAS server. In our
-&lt;a href="http://fengxia.co/maas target.html"&gt;next article&lt;/a&gt;, I'll show you what MAAS can do for fun &amp;rarr;
+&lt;a href="https://fengxia41103.github.io/myblog/maas target.html"&gt;next article&lt;/a&gt;, I'll show you what MAAS can do for fun &amp;rarr;
 brining up a bare metal machine to life. Stay tuned.&lt;/p&gt;</summary><category term="lenovo"></category></entry></feed>

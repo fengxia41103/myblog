@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="http://fengxia.co/" rel="alternate"></link><link href="http://fengxia.co/feeds/react.atom.xml" rel="self"></link><id>http://fengxia.co/</id><updated>2017-11-12T19:00:00-05:00</updated><entry><title>Alpha Advantage SP500 API</title><link href="http://fengxia.co/alpha%20sp500.html" rel="alternate"></link><published>2017-11-12T19:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-11-12:alpha sp500.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/react.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2017-11-12T19:00:00-05:00</updated><entry><title>Alpha Advantage SP500 API</title><link href="https://fengxia41103.github.io/myblog/alpha%20sp500.html" rel="alternate"></link><published>2017-11-12T19:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-11-12:myblog/alpha sp500.html</id><summary type="html">&lt;figure class="s12 center"&gt;
   &lt;img src="/images/alpha%20advantage%20sp500.png"/&gt;
     &lt;figcaption&gt;SP500&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -9,7 +9,7 @@ free finance API is &lt;a href="https://forums.yahoo.net/t5/Yahoo-Finance-help/I
 to get daily quotes so to reestablish the data stream? Well, as a the
 beauty of free market, someone is always up to the service if there is
 a demand. So I ended up using &lt;a href="https://www.alphavantage.co/documentation/"&gt;Alpha Advantage API&lt;/a&gt; for a change.&lt;/p&gt;
-&lt;p&gt;Tagging on top the &lt;a href="http://fengxia.co/data visualization.html"&gt;World Snapshot&lt;/a&gt; project, this one is
+&lt;p&gt;Tagging on top the &lt;a href="https://fengxia41103.github.io/myblog/data visualization.html"&gt;World Snapshot&lt;/a&gt; project, this one is
 essentially a graph browser that takes the API data stream based on
 user selected company symbol, and draw all the data index on a single page.&lt;/p&gt;
 &lt;blockquote&gt;

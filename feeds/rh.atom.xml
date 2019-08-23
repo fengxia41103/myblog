@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="http://fengxia.co/" rel="alternate"></link><link href="http://fengxia.co/feeds/rh.atom.xml" rel="self"></link><id>http://fengxia.co/</id><updated>2018-07-19T22:40:00-04:00</updated><entry><title>Use RHEL server qcow2 as sandbox</title><link href="http://fengxia.co/use%20rhel%20server%20qcow2%20as%20sandbox.html" rel="alternate"></link><published>2018-07-19T22:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-04-16:use rhel server qcow2 as sandbox.html</id><summary type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/rh.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-07-19T22:40:00-04:00</updated><entry><title>Use RHEL server qcow2 as sandbox</title><link href="https://fengxia41103.github.io/myblog/use%20rhel%20server%20qcow2%20as%20sandbox.html" rel="alternate"></link><published>2018-07-19T22:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-16:myblog/use rhel server qcow2 as sandbox.html</id><summary type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
 &lt;a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software"&gt;here&lt;/a&gt;). This image has disabled root password, and disabled SSH
 access &amp;larr; so what the heck!?&lt;/p&gt;
 &lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
@@ -83,7 +83,7 @@ cloud_init_modules:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now &lt;code&gt;quit&lt;/code&gt; from guetfish terminal. You are done.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Satellite</title><link href="http://fengxia.co/satellite.html" rel="alternate"></link><published>2018-04-15T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-04-15:satellite.html</id><summary type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
+&lt;p&gt;Now &lt;code&gt;quit&lt;/code&gt; from guetfish terminal. You are done.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Satellite</title><link href="https://fengxia41103.github.io/myblog/satellite.html" rel="alternate"></link><published>2018-04-15T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-15:myblog/satellite.html</id><summary type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
 between 6.2 and 6.3. Grasp the concept here, and hopefully you will
 have a good understanding of the Satellite models and procedures.&lt;/p&gt;
 &lt;h1&gt;Architecture&lt;/h1&gt;

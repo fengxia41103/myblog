@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="http://fengxia.co/" rel="alternate"></link><link href="http://fengxia.co/feeds/fashion.atom.xml" rel="self"></link><id>http://fengxia.co/</id><updated>2016-06-12T10:00:00-04:00</updated><entry><title>Fashion ERP — reports</title><link href="http://fengxia.co/fashion%20reports.html" rel="alternate"></link><published>2016-06-12T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-06-12:fashion reports.html</id><summary type="html">&lt;p&gt;In &lt;a href="http://fengxia.co/fashion introduction.html"&gt;part one&lt;/a&gt; and
-&lt;a href="http://fengxia.co/fashion orders.html"&gt;part two&lt;/a&gt;, we have
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/fashion.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2016-06-12T10:00:00-04:00</updated><entry><title>Fashion ERP — reports</title><link href="https://fengxia41103.github.io/myblog/fashion%20reports.html" rel="alternate"></link><published>2016-06-12T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-12:myblog/fashion reports.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; and
+&lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;part two&lt;/a&gt;, we have
 reviewed inventory management and order management. Their functions
 are meant for operator to book-keep information of daily operations.
 Once these data points have been captured, the power of the application
@@ -91,7 +91,7 @@ we are maintaining a relationship with our peers.&lt;/p&gt;
       &lt;img class="center img-responsive" src="/images/fashion_25.png"&gt;
     &lt;/div&gt;&lt;/div&gt;
     &lt;figcaption&gt;Customer AR and vendor AP report&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="fashion"></category></entry><entry><title>Fashion ERP — orders</title><link href="http://fengxia.co/fashion%20orders.html" rel="alternate"></link><published>2016-06-06T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-06-06:fashion orders.html</id><summary type="html">&lt;p&gt;In &lt;a href="http://fengxia.co/fashion introduction.html"&gt;part one&lt;/a&gt; I have
+&lt;/figure&gt;</summary><category term="fashion"></category></entry><entry><title>Fashion ERP — orders</title><link href="https://fengxia41103.github.io/myblog/fashion%20orders.html" rel="alternate"></link><published>2016-06-06T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-06:myblog/fashion orders.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
 shown the design and function behind Product and Inventory management.
 In this article I'll talk about orders.&lt;/p&gt;
 &lt;p&gt;Sales order and purchase order are like two sides of the same coin.
@@ -329,10 +329,10 @@ list, &lt;em&gt;"Available In"&lt;/em&gt;, so this information is captured:&lt;/
 &lt;/figure&gt;
 
 &lt;p&gt;In this article, I have covered sales order and purchase order.  They
-are the core of the company's operation.  In &lt;a href="http://fengxia.co/fashion reports.html"&gt;part
+are the core of the company's operation.  In &lt;a href="https://fengxia41103.github.io/myblog/fashion reports.html"&gt;part
 three&lt;/a&gt;, we will get to the
 exciting part of the application where all these data points will be
-utilized to drive a better operation.&lt;/p&gt;</summary><category term="fashion"></category></entry><entry><title>Fashion ERP — introduction</title><link href="http://fengxia.co/fashion%20introduction.html" rel="alternate"></link><published>2016-06-02T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-06-02:fashion introduction.html</id><summary type="html">&lt;p&gt;Project Fashion is an ERP system built from ground up based on
+utilized to drive a better operation.&lt;/p&gt;</summary><category term="fashion"></category></entry><entry><title>Fashion ERP — introduction</title><link href="https://fengxia41103.github.io/myblog/fashion%20introduction.html" rel="alternate"></link><published>2016-06-02T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-02:myblog/fashion introduction.html</id><summary type="html">&lt;p&gt;Project Fashion is an ERP system built from ground up based on
 operations in an international trading company who has a specialty in
 fashion products. Each season there are between 10 and 20 vendors and
 a few thousand new SKUs. Most vendors roll out new designs twice per
@@ -464,7 +464,7 @@ size information for reference.&lt;/p&gt;
     &lt;figcaption&gt;Physical inventory user mode&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;So far I have covered Product and Inventory functions.  In &lt;a href="http://fengxia.co/fashion orders.html"&gt;part
+&lt;p&gt;So far I have covered Product and Inventory functions.  In &lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;part
 two&lt;/a&gt;, I will dive into the core
 of this application to talk about how we will handle sales orders and
 purchase orders.&lt;/p&gt;</summary><category term="fashion"></category></entry></feed>

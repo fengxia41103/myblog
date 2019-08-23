@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="http://fengxia.co/" rel="alternate"></link><link href="http://fengxia.co/feeds/dev.atom.xml" rel="self"></link><id>http://fengxia.co/</id><updated>2019-07-03T14:15:00-04:00</updated><entry><title>ECMAScript</title><link href="http://fengxia.co/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2019-07-03:ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-07-03T14:15:00-04:00</updated><entry><title>ECMAScript</title><link href="https://fengxia41103.github.io/myblog/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-03:myblog/ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
 &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="/images/ecmascript%20relationship.png"/&gt;
@@ -128,7 +128,7 @@ and start to make sense, hopefully.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://bytearcher.com/articles/es6-vs-es2015-name/"&gt;ES6 vs ES2015 - What to call a JavaScript version?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://auth0.com/blog/javascript-module-systems-showdown/"&gt;JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://scotch.io/tutorials/javascript-transpilers-what-they-are-why-we-need-them"&gt;avaScript Transpilers: What They Are &amp;amp; Why We Need Them&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>Dev structure</title><link href="http://fengxia.co/dev%20structure.html" rel="alternate"></link><published>2019-06-24T14:06:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2019-06-24:dev structure.html</id><summary type="html">&lt;figure class="col l5 m5 s12"&gt;
+&lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>Dev structure</title><link href="https://fengxia41103.github.io/myblog/dev%20structure.html" rel="alternate"></link><published>2019-06-24T14:06:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-06-24:myblog/dev structure.html</id><summary type="html">&lt;figure class="col l5 m5 s12"&gt;
   &lt;img src="/images/moses.jpg"/&gt;
   &lt;figcaption&gt;If the Bible story happens today&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -182,7 +182,7 @@ backend &amp;mdash; the &lt;code&gt;backend&lt;/code&gt; is showing more levels 
 &lt;p&gt;The key is to compose a design/component view so that we can
 categorize work into component, which also speaks of key
 technology/implementation. Until this is identified, we can say for
-sure we don't have 100% coverage of this code base yet.&lt;/p&gt;</summary><category term="thoughts"></category></entry><entry><title>Pandoc workflow</title><link href="http://fengxia.co/pandoc%20workflow.html" rel="alternate"></link><published>2019-04-30T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2019-04-30:pandoc workflow.html</id><summary type="html">&lt;figure class="col s12"&gt;
+sure we don't have 100% coverage of this code base yet.&lt;/p&gt;</summary><category term="thoughts"></category></entry><entry><title>Pandoc workflow</title><link href="https://fengxia41103.github.io/myblog/pandoc%20workflow.html" rel="alternate"></link><published>2019-04-30T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-30:myblog/pandoc workflow.html</id><summary type="html">&lt;figure class="col s12"&gt;
   &lt;img src="/images/peppa.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -402,7 +402,7 @@ the two things:&lt;/p&gt;
 &lt;p&gt;Good luck.&lt;/p&gt;
 &lt;p&gt;I give up this battle now at this point. Like teaching a kid &amp;mdash;
 you can't really teach them. You just have to wait for them to grow
-up, if ever. &lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Browser proxy</title><link href="http://fengxia.co/browser%20proxy.html" rel="alternate"></link><published>2019-04-23T14:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2019-04-23:browser proxy.html</id><summary type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
+up, if ever. &lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Browser proxy</title><link href="https://fengxia41103.github.io/myblog/browser%20proxy.html" rel="alternate"></link><published>2019-04-23T14:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-23:myblog/browser proxy.html</id><summary type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
 machine (B). If we can SSH from A&amp;rarr;B, we can reroute browser
 traffic from A to B, much quicker than X-windows.&lt;/p&gt;
 &lt;figure class="col l4 m4 s12"&gt;
@@ -454,7 +454,7 @@ be available from all interfaces.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;This is it. Then anything on this browser will be routed to localhost
-port 8080, which by the &lt;code&gt;ssh&lt;/code&gt;, will be forwarded to B.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Reveal slides</title><link href="http://fengxia.co/reveal%20slides.html" rel="alternate"></link><published>2018-11-27T09:26:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-11-27:reveal slides.html</id><summary type="html">&lt;div class="iframe-container"&gt;
+port 8080, which by the &lt;code&gt;ssh&lt;/code&gt;, will be forwarded to B.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Reveal slides</title><link href="https://fengxia41103.github.io/myblog/reveal%20slides.html" rel="alternate"></link><published>2018-11-27T09:26:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-11-27:myblog/reveal slides.html</id><summary type="html">&lt;div class="iframe-container"&gt;
   &lt;iframe src="https://fengxia41103.github.io/moment/1236/"
           allowfullscreen&gt;&lt;/iframe&gt;
 
@@ -539,7 +539,7 @@ present them in different combinations based on audience.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;You can follow the &lt;a href="https://github.com/hakimel/reveal.js#pdf-export"&gt;official guide&lt;/a&gt; by &lt;code&gt;reveal.js&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Or, using the &lt;a href="https://github.com/astefanutti/decktape"&gt;desktape&lt;/a&gt;: &lt;code&gt;decktape reveal &amp;lt;url&amp;gt; &amp;lt;filename&amp;gt;.pdf&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>UML</title><link href="http://fengxia.co/uml.html" rel="alternate"></link><published>2018-07-24T12:03:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-07-24:uml.html</id><summary type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
+&lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>UML</title><link href="https://fengxia41103.github.io/myblog/uml.html" rel="alternate"></link><published>2018-07-24T12:03:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-07-24:myblog/uml.html</id><summary type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
 so I was willing to read it, in one morning). &lt;/p&gt;
 &lt;h1&gt;Milestone 1: requirement review&lt;/h1&gt;
 &lt;p&gt;Everything starts with an analysis of the problem at hand. One thing
@@ -754,7 +754,7 @@ beer cans out the window of his pickup truck.
 &lt;li&gt;domain models &amp;amp; relationships&lt;/li&gt;
 &lt;li&gt;basic course use case diagram&lt;/li&gt;
 &lt;li&gt;requirements&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="dev"></category></entry><entry><title>Screencast</title><link href="http://fengxia.co/screencast.html" rel="alternate"></link><published>2018-06-06T21:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-06-06:screencast.html</id><summary type="html">&lt;video width="100%" height="100%" controls="controls"&gt;
+&lt;/ol&gt;</summary><category term="dev"></category></entry><entry><title>Screencast</title><link href="https://fengxia41103.github.io/myblog/screencast.html" rel="alternate"></link><published>2018-06-06T21:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:myblog/screencast.html</id><summary type="html">&lt;video width="100%" height="100%" controls="controls"&gt;
   &lt;source src="/images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" /&gt;
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/
@@ -864,7 +864,7 @@ Application Options:
 
 &lt;p&gt;The two mostly useful are &lt;code&gt;-d&lt;/code&gt; (duration) and &lt;code&gt;--delay=SECS&lt;/code&gt; for a
 delay. Duration is a trial-and-error iteration since usually I don't
-know how long the screencast will run. &lt;/p&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Netbox revised</title><link href="http://fengxia.co/netbox.html" rel="alternate"></link><published>2018-08-01T21:50:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-06-06:netbox.html</id><summary type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="http://fengxia.co/capability model.html"&gt;capability model&lt;/a&gt;).
+know how long the screencast will run. &lt;/p&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Netbox revised</title><link href="https://fengxia41103.github.io/myblog/netbox.html" rel="alternate"></link><published>2018-08-01T21:50:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:myblog/netbox.html</id><summary type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
 But we need more. Managing a lab or a rack is more than level 1. On
 top of all these, we talk about automation, which implies capabilities
 at least to level 4. Therefore, we used Netbox code as a starting
@@ -893,7 +893,7 @@ equiped with both views and produce a &lt;strong&gt;diff&lt;/strong&gt; &amp;rar
 are relying on an experienced operator to know where to look; in the
 future this diff view highlights it, color-codes it, for anyone who
 wants to look, anytime, and no devop expertise required.&lt;/p&gt;
-&lt;p&gt;If you have read &lt;a href="http://fengxia.co/capability model.html"&gt;system capability model&lt;/a&gt;, you must have
+&lt;p&gt;If you have read &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;system capability model&lt;/a&gt;, you must have
 identified that this is a capability approach. This shifts the focus
 of management from bookkeeping to knowledge automation. The goal is
 not to eliminate human factor, but to alleviate waste of their
@@ -942,7 +942,7 @@ Netbox's way to control password in a later section). Further, we use
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;linux&lt;/code&gt;: SSH&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Lenovo ENOS/CNOS&lt;/code&gt;: these are Lenovo switch operating systems, and
-   access method is Telnet (see &lt;a href="http://fengxia.co/switches.html"&gt;Network switch&lt;/a&gt; for details.)&lt;/li&gt;
+   access method is Telnet (see &lt;a href="https://fengxia41103.github.io/myblog/switches.html"&gt;Network switch&lt;/a&gt; for details.)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="row center"&gt;
     &lt;img src="/images/netbox%20device%20section%201.png"
@@ -1108,7 +1108,7 @@ mounted facing back so that cables can access its port.&lt;/p&gt;
     &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;racks&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;on_delete&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTECT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Django to REST</title><link href="http://fengxia.co/django%20to%20rest.html" rel="alternate"></link><published>2018-03-22T08:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2018-03-22:django to rest.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Django to REST</title><link href="https://fengxia41103.github.io/myblog/django%20to%20rest.html" rel="alternate"></link><published>2018-03-22T08:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-03-22:myblog/django to rest.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="/images/funny/the%20art%20of%20programming.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -1223,7 +1223,7 @@ be like this:&lt;/p&gt;
 in "step 1", &lt;code&gt;mymodels&lt;/code&gt; part is defined in "step 4"), it should show
 the &lt;code&gt;queryset&lt;/code&gt; (defined in "step 4"). With REST, you can also do
 things like &lt;code&gt;?format=json&lt;/code&gt; or &lt;code&gt;?format=yaml&lt;/code&gt;, and &lt;code&gt;?a_model_field__gt=&lt;/code&gt;
-type of &lt;a href="http://django-tastypie.readthedocs.io/en/latest/interacting.html"&gt;filtering&lt;/a&gt;. Cool huh!?&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>KVM</title><link href="http://fengxia.co/kvm.html" rel="alternate"></link><published>2017-10-11T14:41:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-10-11:kvm.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
+type of &lt;a href="http://django-tastypie.readthedocs.io/en/latest/interacting.html"&gt;filtering&lt;/a&gt;. Cool huh!?&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>KVM</title><link href="https://fengxia41103.github.io/myblog/kvm.html" rel="alternate"></link><published>2017-10-11T14:41:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-11:myblog/kvm.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
 I want to have is a local dev that I can copy &amp;amp; paste from some base
 image in case I forgot to take a snapshot at milestone. This way I
 feel comfortable to stand up a sandbox, try out crazy things, then
@@ -1644,7 +1644,7 @@ optional arguments:
 
 &lt;p&gt;To start a kvm reusing an existing backing file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python startmykvm.py -b &amp;lt;backing&amp;gt;.qcow2 mydev.xml
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Sensitive touchpad</title><link href="http://fengxia.co/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-10-04:sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
 &lt;h1&gt;Tune sensitivity&lt;/h1&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
@@ -1774,7 +1774,7 @@ removed the jumpy typing almost completly. However, you have to issue
 this command after running &lt;code&gt;emacs&lt;/code&gt; for some reason. Otherwise, &lt;code&gt;emacs&lt;/code&gt;
 will stuck in initialization forever.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ syndaemon -i 0.5 -d -K -R
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Bye Bye GFW</title><link href="http://fengxia.co/bye%20bye%20gfw.html" rel="alternate"></link><published>2017-04-30T22:53:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-04-30:bye bye gfw.html</id><summary type="html">&lt;figure class="col l3 m3 s12"&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Bye Bye GFW</title><link href="https://fengxia41103.github.io/myblog/bye%20bye%20gfw.html" rel="alternate"></link><published>2017-04-30T22:53:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-30:myblog/bye bye gfw.html</id><summary type="html">&lt;figure class="col l3 m3 s12"&gt;
   &lt;img src="/images/funny/gfw.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -1820,7 +1820,7 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 &lt;p&gt;Restart firefox, then go to &lt;code&gt;http://www.google.com&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Welcome back to the world.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>You got mail</title><link href="http://fengxia.co/mbsync%20mu4e%20email.html" rel="alternate"></link><published>2019-05-21T10:27:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-04-24:mbsync mu4e email.html</id><summary type="html">&lt;figure class="col l5 m6 s12"&gt;
+&lt;p&gt;Welcome back to the world.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>You got mail</title><link href="https://fengxia41103.github.io/myblog/mbsync%20mu4e%20email.html" rel="alternate"></link><published>2019-05-21T10:27:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/mbsync mu4e email.html</id><summary type="html">&lt;figure class="col l5 m6 s12"&gt;
   &lt;img src="/images/hahn.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -1880,7 +1880,7 @@ new cert (from the mail server itself) and config &lt;code&gt;CertificateFile&lt
 that file. I followed the steps &lt;a href="https://wiki.archlinux.org/index.php/Isync#Step_.231:_Get_the_certificates"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Create a bash script, &lt;a href="http://fengxia.co/get_certs.sh"&gt;&lt;code&gt;get_certs.sh&lt;/code&gt;&lt;/a&gt;, to facilitate the
+&lt;p&gt;Create a bash script, &lt;a href="https://fengxia41103.github.io/myblog/get_certs.sh"&gt;&lt;code&gt;get_certs.sh&lt;/code&gt;&lt;/a&gt;, to facilitate the
    command line:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;```&lt;/span&gt;&lt;span class="s s-Atom"&gt;shell&lt;/span&gt;
 &lt;span class="c1"&gt;#!/bin/sh&lt;/span&gt;
@@ -2291,11 +2291,11 @@ Pass xxx
 Port &lt;span class="m"&gt;1143&lt;/span&gt; &amp;lt;-- default davmail IMAP port
 SSLType None
 AuthMech LOGIN
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Emacs</title><link href="http://fengxia.co/emacs.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-01-21:emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it
 can do so much beyond text editing. Still on the learning curve to get
 a grasp of what it can do in my daily development workflow. Here is to
-document the &lt;a href="http://fengxia.co/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's a work in progress of
+document the &lt;a href="https://fengxia41103.github.io/myblog/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's a work in progress of
 course since I'm updating it all the time. Nonetheless, I'm already in
 love with what I have so far.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;;;;&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;bootstraps&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;which&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;divided&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt;
@@ -3486,9 +3486,9 @@ love with what I have so far.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Happy coding.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Spectrwm</title><link href="http://fengxia.co/spectrwm.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2017-01-21:spectrwm.html</id><summary type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
+&lt;p&gt;Happy coding.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Spectrwm</title><link href="https://fengxia41103.github.io/myblog/spectrwm.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/spectrwm.html</id><summary type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. &lt;/p&gt;
-&lt;p&gt;Here is the &lt;a href="http://fengxia.co/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
+&lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;
 &lt;span class="c1"&gt;# http://opensource.conformal.com/cgi-bin/man-cgi?spectrwm&lt;/span&gt;
 
@@ -3587,7 +3587,7 @@ total_run_times 0
 use_spacer none
 TEXT
 Up:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;uptime_short&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;Temp:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;acpitemp&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;C &lt;span class="p"&gt;|&lt;/span&gt;Batt:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;battery_short&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;addr&lt;/span&gt;&lt;span class="p"&gt; wlan0&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;RAM:&lt;span class="nv"&gt;$memperc&lt;/span&gt;% &lt;span class="p"&gt;|&lt;/span&gt;CPU:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cpu&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;% &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;downspeedf&lt;/span&gt;&lt;span class="p"&gt; wlan0&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Deployment architecture</title><link href="http://fengxia.co/deployment%20architecture.html" rel="alternate"></link><published>2017-08-22T21:52:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-09-09:deployment architecture.html</id><summary type="html">&lt;p&gt;Deployment strategy for &lt;a href="http://fengxia.co/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Deployment architecture</title><link href="https://fengxia41103.github.io/myblog/deployment%20architecture.html" rel="alternate"></link><published>2017-08-22T21:52:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-09:myblog/deployment architecture.html</id><summary type="html">&lt;p&gt;Deployment strategy for &lt;a href="https://fengxia41103.github.io/myblog/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
 services: EC2 for application server, RDS for database, and S3 for
 static files and media files.  AWS does have message service as
 well. But to maintain a fair level of portability, I am not using
@@ -3618,7 +3618,7 @@ Use AWS to save myself from building these essential infrastructure
 so that I could focus on writing application code to solve
 client's real problems. Service such as &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt; and &lt;a href="https://cloud.google.com/appengine/"&gt;GAE&lt;/a&gt;
 are even more hands-off if the application architecture
-can fit into their platform.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>General system architecture</title><link href="http://fengxia.co/general%20system%20architecture.html" rel="alternate"></link><published>2018-10-17T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-09-08:general system architecture.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+can fit into their platform.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>General system architecture</title><link href="https://fengxia41103.github.io/myblog/general%20system%20architecture.html" rel="alternate"></link><published>2018-10-17T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-08:myblog/general system architecture.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="/images/architecture_joke.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -3700,7 +3700,7 @@ nature (I say it is synchronous in the sense of that a Django's native
 process will receive and process view request without interrupt or
 callback.  Django &lt;a href="https://docs.djangoproject.com/en/1.10/topics/signals/"&gt;signals&lt;/a&gt; are asynchronous,
 however.) where a long running code section could bring the entire
-application to halt.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>DIY Pelican theme</title><link href="http://fengxia.co/pelican%20theme.html" rel="alternate"></link><published>2016-09-04T11:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-09-04:pelican theme.html</id><summary type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is
+application to halt.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>DIY Pelican theme</title><link href="https://fengxia41103.github.io/myblog/pelican%20theme.html" rel="alternate"></link><published>2016-09-04T11:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-04:myblog/pelican theme.html</id><summary type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is
 definitely a winner for our blog site. But like any software engineer
 who hold a high standard to his work, I got turned off by
 all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.
@@ -3714,7 +3714,7 @@ we need.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The design must be based on &lt;a href="http://getbootstrap.com/components/"&gt;Bootstrap&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Includes &lt;a href="http://fontawesome.io/icons/"&gt;Fontawesome&lt;/a&gt;, &lt;a href="https://datatables.net/"&gt;Datatable&lt;/a&gt;, &lt;a href="http://lokeshdhakar.com/projects/lightbox2/"&gt;Lightbox2&lt;/a&gt;, and &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/"&gt;SyntaxHighlighter&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Reuse elements I have designed for &lt;a href="http://fengxia.co/category/demo.html"&gt;showcases&lt;/a&gt;, such as layout, CSS and images.&lt;/li&gt;
+&lt;li&gt;Reuse elements I have designed for &lt;a href="https://fengxia41103.github.io/myblog/category/demo.html"&gt;showcases&lt;/a&gt;, such as layout, CSS and images.&lt;/li&gt;
 &lt;li&gt;Colors we like: &lt;font color="#337ab7"&gt;blue(#337ab7)&lt;/font&gt; and &lt;span class="myhighlight"&gt;red(#d52349)&lt;/span&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fonts.google.com/"&gt;Google fonts&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -3742,7 +3742,7 @@ to set up a working directory:&lt;/p&gt;
 &lt;code&gt;layout.html&lt;/code&gt; which is the root template of all others.  Once this is
 set up, creating an individual page is simple. Just replace the &lt;code&gt;{%
 block content %}&lt;/code&gt; with relevant content and you are done.  &lt;/p&gt;
-&lt;p&gt;Like what you see? Roll up your sleeves and make a new theme. 1,2,3, Go!&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Buildbot continuous integration setup</title><link href="http://fengxia.co/buildbot.html" rel="alternate"></link><published>2016-07-20T10:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2016-07-20:buildbot.html</id><summary type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
+&lt;p&gt;Like what you see? Roll up your sleeves and make a new theme. 1,2,3, Go!&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Buildbot continuous integration setup</title><link href="https://fengxia41103.github.io/myblog/buildbot.html" rel="alternate"></link><published>2016-07-20T10:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-07-20:myblog/buildbot.html</id><summary type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
 the path between a verbal or written requirement, and an actionable
 application that reflects an implementation of this requirement. Therefore,
 it becomes crucial to set up an CI environment not only to facilitate
@@ -3995,7 +3995,7 @@ immediately in test environment.&lt;/p&gt;
 &lt;h1&gt;Build master admin&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://fengxia.co:8011"&gt;Build master&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="dev"></category></entry><entry><title>Crawler, TOR, and be a good web citizen</title><link href="http://fengxia.co/tor%20crawler.html" rel="alternate"></link><published>2015-03-04T13:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia.co,2015-03-04:tor crawler.html</id><summary type="html">&lt;p&gt;Many projects I have done involved harvesting data from
+&lt;/ul&gt;</summary><category term="dev"></category></entry><entry><title>Crawler, TOR, and be a good web citizen</title><link href="https://fengxia41103.github.io/myblog/tor%20crawler.html" rel="alternate"></link><published>2015-03-04T13:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-03-04:myblog/tor crawler.html</id><summary type="html">&lt;p&gt;Many projects I have done involved harvesting data from
 public sites. Data crawling is an exciting business. On one hand, it
 is easy to develop a crawler these days. In the Python world,
 plenty tutorials will show you how to build

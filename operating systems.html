@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2019-01-13
+
+
+        <a class="wave-effect" href="category/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <a class="wave-effect" href="tag/thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+
+        <h1 class="myhighlight">Operating systems</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <figure class="col l8 m8 s12">
+  <img src="/images/funny/dilbert%20software.jpg"/>
+</figure>
+
+<p>Let me talk about OS. This has been an annoying topic recently due to
+the ZTE fiasco, which to me is a running joke on its own &mdash; <a href="https://money.cnn.com/2018/06/22/news/companies/zte-us-fine-trade-case/index.html">one
+billion dollar fine</a>, and we got nothing but a bunch of BS articles
+circulating on in wechat that arouses nationalistic sentiments with
+conspiracy theory, but nothing else.</p>
+<p>The common focus point of these arguments are two things &mdash; OS,
+and CPU. When they talk about CPU, as if there is only one maker
+called Intel, and if only China could have developed its own CPU, the
+threat is over. Well, this is a totally ignorant assumption because,
+first of all, Intel is just one of many CPU manufacturers, where is
+AMD, where is GPU, do they even know what type of workloads are now
+running on what hardware? There are army of these chips, each designed
+for its specific purpose. The CPU you can buy at Micro Center is but a
+tiny tip of an iceberg, it's a general purpose at best, and even this
+I would suspect that it is not &mdash; every design has a tradeoff,
+say performance vs. power consumption, or footprint vs. cost,
+therefore it is not <strong>general purpose</strong> at all in these senses. It can
+be called a general purpose to its workload, but only means that it's
+<strong>mediocore</strong> for all workloads, and is not tweaked for any &mdash;
+everybody gets 60 out of 100, but forget about a 100/100. Well, then,
+I would ask these BS authors, is this really what you are asking for?
+is this the state you think that will save this country!? I don't
+think you even know what you are talking about.</p>
+<p>Not to mention, when we talk about chips, which is a <strong>broad</strong> word,
+like <strong>IT</strong>, that covers more than one industry, not more than one
+company! There are micro controllers (Motorola), DSP (TI), FPGA
+(Xilinx), SOC, and god knows how many other such programmable embedded
+thing we are actually using daily even in our life &mdash; just look
+around, there is microwave oven, refrig, TV remote control, AC, car
+radio, your phone, smart watch, now even smart home devices... all
+these, are programmed with some software, so that it has a certain
+application logic to react to a human input. None of these, is running
+on an Intel CPU. So there you have it, I cease my case on CPU.</p>
+<p>Now, let's look at operating system. Again, the same logic fallacy is
+seen here &mdash; there are <a href="https://en.wikipedia.org/wiki/List_of_operating_systems">an army of operating systems out
+there</a>. If you look up the word "cloud joke", the number one
+popular comic is: <strong>"Cloud is mostly made of Linux servers"</strong>, get it?
+China has attempted RedFlag Linux back in 2000, when I was really
+impressed by it because it used a Windows-like desktop management UI
+so laptop vendors at 中关村 can sell their thing without infringing
+Microsoft's IP. At that time it was even bragged that government is to
+move to this platform so to become independent from MS &larr; doesn't
+this sound familiar now!? </p>
+<p>The difficulty of operating system is not a technical one at all. If
+you look the list above, you will be surprised to think how all these
+can all work, and many you haven't even heard of &larr; no offense,
+let me just ask you this, have you used BSD? or Solaris? ... well,
+these are not only in broad use, but is super powerful, and in many
+technical ways superior to MS Win. Period. So pls, stop talking about
+OS as if you know. You know nothing.</p>
+<p>If there is one OS you should care about, then it is not MS at
+all. Linux is the king on the Internet, and it's open source! So don't
+even bother inventing your own, you will be quite impressive if only
+you could understand and keep up w/ Linux core itself! RedFlag tried
+it, and failed probably, so go for it, it's a lot harder than writing
+those BS articles!</p>
+<p>Further, the challenge of OS is not even technical, but purely
+business &mdash; operating system is responsible to provide a base for
+hardware-to-software interface. The key is how compatible an OS is
+with gazillion of hardware varieties and vendors out there. Let's say
+you have just invented your own super OS, will my PCI audio card work?
+and wifi module? and camera? and even memory, some data bus, USB,
+bluetooth, when I plug in my USB microphone for gaming, will it be
+recognized and work? and my HP printer?.... the list goes on and on
+and on. People dont realize, when his/her computer works so
+effortlessly that all these peripherals work magically, is the result
+of a tremendous collaboration between OS maker and hardware vendors --
+hardware vendor will have <strong>no incentive whatsoever</strong> to write a
+driver for your OS unless your OS is popular. Then, alternatively, you
+will have to write your own!</p>
+<p>So, have you written USB drivers before? are you ready to commit time,
+resource, $$ to cover, say 100 hardwares you see in popular laptops?
+If even leveraging an existing open source one, such as Linux, has
+failed, then I would say it's hard pressed to make me believe you can
+pull off without even realizing the task ahead! If we take all these
+development as a whole and give it a score of 100, I would say writing
+OS is like 10%, or even 5%, while the rest are about making it
+compatible with hardware <strong>your OS needs to support</strong>. That, honestly,
+is not only technically hard, but simply impossible business wise! If
+only China owns every single hardware piece in that computer, and
+enforce these vendors to write code to support your OS, I can best
+your OS will flop. Period. And I bet you haven't thought of the risk
+if this even became true &mdash; if you build a machine like this,
+then you have to drag this entire vertical chain over to keep up with
+all these other development industry is rolling out constantly &mdash;
+new protocol, new bus strategy, new hardware new software, new data
+format, so on and on and on.. you will be left in dust sooner than you
+think!</p>
+<p>People, please, stop talking about things you don't know, and
+definitely stop dressing it in such a nationalist tone. This doesn't
+help to fix the issue. Instead, do your homework, learn your code,
+think hard and <strong>pay as much to</strong> <a href="http://fengxia.co/details.html">details</a> as possible. This is
+the only way to become good, if you are good, and lucky.</p>
+<p>Everything else, is just BS.</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-08-21
+            </div>
+
+            <h5 class="card-title">
+              Boston and other thoughts
+            </h5>
+
+            <p>
+              <figure class="col l8 m8 s12">
+  <img src="/images/such%20a%20beauty.jpg"/>
+</figure>
+
+<p>Trip to Boston was nice, especially when I saw old friends &mdash;
+uncle Tam, Eddy, Bob, Doc Shen and his parents. Not that it brought
+back many memories, but to...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/boston and other thoughts.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-30
+            </div>
+
+            <h5 class="card-title">
+              Ulaanbaatar
+            </h5>
+
+            <p>
+              <p>Who said it first, that the difference between human and other animals
+is that human can <strong>make belief</strong>, that we can imagine things, a
+scenario, a life, that does not exist. Therefore we invented arts,
+movies, music, literature &larr;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ulaanbaatar.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-24
+            </div>
+
+            <h5 class="card-title">
+              People
+            </h5>
+
+            <p>
+              <figure class="col s12">
+  <img src="/images/bunny%20not%20happy.jpg"/>
+</figure>
+
+<p>What is people? I thought I had it figured out, but now I start to
+wonder whether I'm witnessing another make-belief episode in the human
+history when an abstract...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/people.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

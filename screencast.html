@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2018-06-06
+
+
+        <a class="wave-effect" href="category/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+
+        <a class="wave-effect" href="tag/dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Screencast</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <video width="100%" height="100%" controls="controls">
+  <source src="/images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" />
+  Your browser does not support the video tag.
+  /* instead of the last line you could also add the flash player*/
+</video>
+
+<p>There are time that I need to create screencasts:</p>
+<ol>
+<li>CLI</li>
+<li>Good video quality</li>
+<li>Can convert to mp4</li>
+</ol>
+<p>After a few tries I find a couple ones I like.</p>
+<h1>recordmydesktop</h1>
+<p><a href="http://recordmydesktop.sourceforge.net/about.php">source</a> &amp; <a href="https://linux.die.net/man/1/recordmydesktop">man page</a>. Great for producing video formats:</p>
+<div class="highlight"><pre><span></span>$ sudo apt install recordmydesktop ffmpeg
+$ recordmydesktop -o &lt;f1&gt;.ogv
+$ ffmpeg -i &lt;f1&gt;.ogv -vcodec libx264 -strict -4 -ss <span class="m">5</span> &lt;f2&gt;.mp4
+
+Usage: recordmydesktop <span class="o">[</span>OPTIONS<span class="o">]</span>^filename
+
+Generic Options
+  -h, --help                              Print this <span class="nb">help</span> and exit.
+      --version                           Print program version and exit.
+      --print-config                      Print info about options selected during compilation and exit.
+
+Image Options
+      --windowid<span class="o">=</span>id_of_window             id of window to be recorded.
+      --display<span class="o">=</span>DISPLAY                   Display to connect to.
+  -x, --x<span class="o">=</span>N&gt;<span class="o">=</span><span class="m">0</span>                            Offset in x direction.
+  -y, --x<span class="o">=</span>N&gt;<span class="o">=</span><span class="m">0</span>                            Offset in y direction.
+      --width<span class="o">=</span>N&gt;0                         Width of recorded window.
+      --height<span class="o">=</span>N&gt;0                        Height of recorded window.
+      --dummy-cursor<span class="o">=</span>color                Color of the dummy cursor <span class="o">[</span>black<span class="p">|</span>white<span class="o">]</span>
+      --no-cursor                         Disable drawing of the cursor.
+      --no-shared                         Disable usage of MIT-shared memory extension<span class="o">(</span>Not Recommended!<span class="o">)</span>.
+      --full-shots                        Take full screenshot at every frame<span class="o">(</span>Not recomended!<span class="o">)</span>.
+      --follow-mouse                      Makes the capture area follow the mouse cursor. Autoenables --full-shots.
+      --quick-subsampling                 Do subsampling of the chroma planes by discarding, not averaging.
+      --fps<span class="o">=</span>N<span class="o">(</span>number&gt;0.0<span class="o">)</span>                 A positive number denoting desired framerate.
+
+Sound Options
+      --channels<span class="o">=</span>N                        A positive number denoting desired sound channels in recording.
+      --freq<span class="o">=</span>N                            A positive number denoting desired sound frequency.
+      --buffer-size<span class="o">=</span>N                     A positive number denoting the desired sound buffer size <span class="o">(</span>in frames,when
+                                          using ALSA or OSS<span class="o">)</span>
+      --ring-buffer-size<span class="o">=</span>N                A float number denoting the desired ring buffer size <span class="o">(</span>in seconds,when using
+                                          JACK only<span class="o">)</span>.
+      --device<span class="o">=</span>SOUND_DEVICE               Sound device<span class="o">(</span>default default<span class="o">)</span>.
+      --use-jack<span class="o">=</span>port1 port2... portn     Record audio from the specified list of space-separated jack ports.
+      --no-sound                          Do not record sound.
+
+Encoding Options
+      --on-the-fly-encoding               Encode the audio-video data, <span class="k">while</span> recording.
+      --v_quality<span class="o">=</span>n                       A number from <span class="m">0</span> to <span class="m">63</span> <span class="k">for</span> desired encoded video quality<span class="o">(</span>default 63<span class="o">)</span>.
+      --v_bitrate<span class="o">=</span>n                       A number from <span class="m">0</span> to <span class="m">2000000</span> <span class="k">for</span> desired encoded video bitrate<span class="o">(</span>default 0<span class="o">)</span>.
+      --s_quality<span class="o">=</span>n                       Desired audio quality<span class="o">(</span>-1 to 10<span class="o">)</span>.
+
+Misc Options
+      --rescue<span class="o">=</span>path_to_data               Encode data from a previous, crashed, session.
+      --no-wm-check                       Do not try to detect the window manager<span class="o">(</span>and <span class="nb">set</span> options according to it<span class="o">)</span>
+      --no-frame                          Don not show the frame that visualizes the recorded area.
+      --pause-shortcut<span class="o">=</span>MOD+KEY            Shortcut that will be used <span class="k">for</span> <span class="o">(</span>un<span class="o">)</span>pausing <span class="o">(</span>default Control+Mod1+p<span class="o">)</span>.
+      --stop-shortcut<span class="o">=</span>MOD+KEY             Shortcut that will be used to stop the recording <span class="o">(</span>default Control+Mod1+s<span class="o">)</span>.
+      --compress-cache                    Image data are cached with light compression.
+      --workdir<span class="o">=</span>DIR                       Location where a temporary directory will be created to hold project
+                                          files<span class="o">(</span>default <span class="nv">$HOME</span><span class="o">)</span>.
+      --delay<span class="o">=</span>n<span class="o">[</span>H<span class="p">|</span>h<span class="p">|</span>M<span class="p">|</span>m<span class="o">]</span>                  Number of secs<span class="o">(</span>default<span class="o">)</span>,minutes or hours before capture starts<span class="o">(</span>number can
+                                          be float<span class="o">)</span>
+      --overwrite                         If there is already a file with the same name, delete it <span class="o">(</span>default is to add
+                                          a number postfix to the new one<span class="o">)</span>.
+  -o, --output<span class="o">=</span>filename                   Name of recorded video<span class="o">(</span>default out.ogv<span class="o">)</span>.
+
+    If no other options are specified, filename can be given without the -o switch.
+</pre></div>
+
+
+<p>Note that <code>-ss 5</code> is to skip the beginning 5 seconds. For some reason,
+ogv &rarr; mp4 conversion sometimes leaves the first few seconds with
+a terrible looking patchy greens. I suspect it is caused my switching
+desktop in spectrwm.</p>
+<h1>byzanz-record</h1>
+<p><a href="https://linux.die.net/man/1/byzanz-record">man page</a>. Great for producing animated <code>gif</code>:</p>
+<div class="highlight"><pre><span></span>$ sudo apt insteall byzanz-record
+
+Usage:
+  byzanz-record <span class="o">[</span>OPTION...<span class="o">]</span> record your current desktop session
+
+Help Options:
+  -?, --help               Show <span class="nb">help</span> options
+  --help-all               Show all <span class="nb">help</span> options
+  --help-gtk               Show GTK+ Options
+
+Application Options:
+  -d, --duration<span class="o">=</span>SECS      Duration of animation <span class="o">(</span>default: <span class="m">10</span> seconds<span class="o">)</span>
+  -e, --exec<span class="o">=</span>COMMAND       Command to execute and <span class="nb">time</span>
+  --delay<span class="o">=</span>SECS             Delay before start <span class="o">(</span>default: <span class="m">1</span> second<span class="o">)</span>
+  -c, --cursor             Record mouse cursor
+  -a, --audio              Record audio
+  -x, --x<span class="o">=</span>PIXEL            X coordinate of rectangle to record
+  -y, --y<span class="o">=</span>PIXEL            Y coordinate of rectangle to record
+  -w, --width<span class="o">=</span>PIXEL        Width of recording rectangle
+  -h, --height<span class="o">=</span>PIXEL       Height of recording rectangle
+  -v, --verbose            Be verbose
+  --display<span class="o">=</span>DISPLAY        X display to use
+</pre></div>
+
+
+<p>The two mostly useful are <code>-d</code> (duration) and <code>--delay=SECS</code> for a
+delay. Duration is a trial-and-error iteration since usually I don't
+know how long the screencast will run. </p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-03
+            </div>
+
+            <h5 class="card-title">
+              ECMAScript
+            </h5>
+
+            <p>
+              <p>Isn't this confusing &mdash; <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, ES6, Javascript,
+<a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ecmascript.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-06-24
+            </div>
+
+            <h5 class="card-title">
+              Dev structure
+            </h5>
+
+            <p>
+              <figure class="col l5 m5 s12">
+  <img src="/images/moses.jpg"/>
+  <figcaption>If the Bible story happens today</figcaption>
+</figure>
+
+<p>This is a common question any team/project will have to address
+&mdash; how to structure the knowledge we know of...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/dev structure.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-04-30
+            </div>
+
+            <h5 class="card-title">
+              Pandoc workflow
+            </h5>
+
+            <p>
+              <figure class="col s12">
+  <img src="/images/peppa.jpg"/>
+</figure>
+
+<p><a href="https://pandoc.org/MANUAL.html">Pandoc</a> is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/pandoc workflow.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

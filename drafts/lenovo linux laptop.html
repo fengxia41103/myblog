@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-10-04
+
+
+        <a class="wave-effect" href="category/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Linux laptop</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>Instructions to get Ubuntu 16.04 (or any Linux) as your laptop OS.</p>
+<h1>Install Linux</h1>
+<p>You can do a dual boot or just wipe the whole disk. Window's boot
+manager will interfere, somehow, which I don't remember the details
+anymore. Google it. Eventually it will work. The rest assumes you have
+Linux installed.</p>
+<h1>VPN</h1>
+<p>Most importantly, you need VPN.</p>
+<ol>
+<li>Go to <code>otp.company.com</code> to register your phone number.</li>
+<li>Install <code>Company OTP</code> from your app store.</li>
+<li>Keep <code>Company OTP</code> app running so you can see the active OTP.</li>
+<li><code>apt install openconnect screen</code></li>
+<li>
+<p>In a screen, <code>sudo openconnect -u [username] webvpn.us.company.com</code></p>
+<ol>
+<li>first password: your regular domain login pwd</li>
+<li>second one: OTP</li>
+</ol>
+</li>
+</ol>
+<p>If works, you should see something like this:</p>
+<div class="highlight"><pre><span></span>root@fengxia-company:~# openconnect -u fxia1 webvpn.us.company.com
+POST https://webvpn.us.company.com/
+Attempting to connect to server 104.232.254.247:443
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Got HTTP response: HTTP/1.0 <span class="m">302</span> Object Moved
+GET https://webvpn.us.company.com/
+Attempting to connect to server 104.232.254.247:443
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Got HTTP response: HTTP/1.0 <span class="m">302</span> Object Moved
+GET https://webvpn.us.company.com/+webvpn+/index.html
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Please enter your username and password.
+Password:
+Password:
+POST https://webvpn.us.company.com/+webvpn+/index.html
+Got CONNECT response: HTTP/1.1 <span class="m">200</span> OK
+CSTP connected. DPD 30, Keepalive 30
+Connected tun0 as 10.38.102.28, using SSL
+Established DTLS connection <span class="o">(</span>using GnuTLS<span class="o">)</span>. Ciphersuite <span class="o">(</span>DTLS0.9<span class="o">)</span>-<span class="o">(</span>RSA<span class="o">)</span>-<span class="o">(</span>AES-256-CBC<span class="o">)</span>-<span class="o">(</span>SHA1<span class="o">)</span>.
+</pre></div>
+
+
+<p>A list of VPN servers:</p>
+<ul>
+<li><code>webvpn.cn.company.com</code>   for China user</li>
+<li><code>webvpn.hk.company.com</code>   for AP region user</li>
+<li><code>webvpn.us.company.com</code>   for AG region user</li>
+<li><code>webvpn.sk.company.com</code>   for EMEA user​    </li>
+</ul>
+<h1>Email</h1>
+<p>These settings work for Thunderbird. Terminology may be different for
+other clients.</p>
+<p>Incoming (IMAP) settings:</p>
+<ol>
+<li>server: <code>outlookae.company.com</code>, port <code>993</code></li>
+<li>username: your domain login, eg. <code>fxia1</code></li>
+<li>connection security: <code>SSL/TLS</code></li>
+<li>authentication method: <code>Normal password</code></li>
+</ol>
+<p>Outgoing (SMTP) settings:</p>
+<ol>
+<li>server: <code>mailae.company.com</code>, port <code>587</code></li>
+<li>connection security: <code>STARTTLS</code></li>
+<li>authentication method: <code>NTLM</code></li>
+<li>username: domain login</li>
+</ol>
+<h1>Lync</h1>
+<p>A couple options: <a href="https://www.skype.com/en/download-skype/skype-for-computer/">skype for business</a>, <a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa">pidgin-sipe</a>.</p>
+<h2>pidgin</h2>
+<p>Follow <a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa">instructions</a> to install <code>pidgin pidgin-sipe</code>:</p>
+<ol>
+<li>add ppa: <code>add-apt-repository ppa:sipe-collab/ppa</code></li>
+<li><code>apt update &amp;&amp; apt install pidgin pidgin-sipe</code></li>
+<li><code>snap install remmina</code> </li>
+</ol>
+<p>Create a new account with these settings:</p>
+<ol>
+<li>protocol: <code>Office Communicator</code></li>
+<li>username: <code>you@company.com</code></li>
+<li>password: domain password</li>
+<li>connection type: <code>Auto</code></li>
+<li>user agent: <code>UCCAPI/16.0.6001.1073 OC/16.0.6001.1073 (Skype for Business)</code></li>
+<li>authentication scheme: <code>NTLM</code></li>
+<li>remote desktop client: <code>remmina</code> (or <code>xfreerdp</code>)</li>
+</ol>
+<p>Leave everything else as default/blank.</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-03
+            </div>
+
+            <h5 class="card-title">
+              ECMAScript
+            </h5>
+
+            <p>
+              <p>Isn't this confusing &mdash; <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, ES6, Javascript,
+<a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ecmascript.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-06-24
+            </div>
+
+            <h5 class="card-title">
+              Dev structure
+            </h5>
+
+            <p>
+              <figure class="col l5 m5 s12">
+  <img src="/images/moses.jpg"/>
+  <figcaption>If the Bible story happens today</figcaption>
+</figure>
+
+<p>This is a common question any team/project will have to address
+&mdash; how to structure the knowledge we know of...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/dev structure.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-04-30
+            </div>
+
+            <h5 class="card-title">
+              Pandoc workflow
+            </h5>
+
+            <p>
+              <figure class="col s12">
+  <img src="/images/peppa.jpg"/>
+</figure>
+
+<p><a href="https://pandoc.org/MANUAL.html">Pandoc</a> is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/pandoc workflow.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

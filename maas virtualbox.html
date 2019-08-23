@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2016-12-08
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Setup a MAAS Virtualbox lab</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>Canonical <a href="http://maas.io/">MAAS</a> is a deployment tool that can give a bare metal
+life by putting an OS on it. Working together with <a href="https://www.ubuntu.com/cloud/juju">Juju</a>, they can
+setup a cluster of applications quite quickly. Think of them as a
+package manage like Ubuntu's <code>apt-get</code>, but in the context of a
+cloud. Interesting.</p>
+<p>This article shows how to setup a virtual lab so one can play with
+these two tools and get a sense of what they do. The whole setup is
+based on Virtualbox. One thing I found out the hard way is that
+despite their nice looking website and rather recent project history,
+there is no single document that can bring this environment live from
+A to Z. All official documents have out-of-date commands here and
+there which made following them useless. I consulted countless blogs,
+posts, chasing down bugs (or I thought they were bugs), and finally
+when everything works, it became so obvious and simple. Hopefully this
+article will shorten this journey for readers and they can have this
+environment easily.</p>
+<h1>Baseline environment</h1>
+<p><strong>Virtualbox 5.1.10 and its extension pack</strong>. I could not verify why
+this particular version worked. I had 5.1.8 and the first
+successful trial occurred after I upgraded to 5.1.10. Was that a
+coincidence? Without being able to reproduce this, I am merely
+documenting what I have.</p>
+<h1>Network topology</h1>
+<p>Getting network configurations right is the key for success. The
+biggest <strong>gotcha</strong> is that MAAS server <strong>must</strong> be the DHCP server on
+its managing subnet! The official document talks about "if there is an
+existing DHCP, points it to the MAAS server", huh? I never figured
+that out, so don't listen to that.</p>
+<p>There will be two VMs and one internal network, <code>intnet1</code>.</p>
+<ol>
+<li><strong>VM #1</strong>: is the MAAS server. Use Xenial 16.04 desktop image.</li>
+<li><strong>VM #2</strong>: is an emulated BM.</li>
+<li><code>intnet1</code>: is a subnet (192.168.8.0/24) that MAAS server will
+   live together with its managed nodes (I call them targets).</li>
+</ol>
+<figure class="s12 center">
+  <img src="/images/maas_networking_topology.png"/>
+  <figcaption>MAAS Virtualbox lab networking topology</figcaption>
+</figure>
+
+<h1>Setup instructions</h1>
+<p>Personally I dislike those step-by-step instructions because first of
+all, it is intimidating; secondly, each environment is a bit
+different, so how confident user will feel to duplicate other's
+success? Not much. I'll explain thoughts and lessons learned along the
+way. I think that is more useful even from the point that Google may
+pick up a few words here and will help others if they search.</p>
+<h2>Install MAAS server, admin account, subnet</h2>
+<p>MAAS server uses Ubuntu 16.04 Xenial image. Setup the
+networking to have two interfaces &mdash; one uses default NAT so you
+have internet access, while the other uses <strong>Internal Network</strong> with
+name <code>intnet1</code>.</p>
+<blockquote>
+<p>Defining the subnet managed by MAAS server is the most imporant step
+  in MAAS configuration.</p>
+</blockquote>
+<ol>
+<li>
+<p>Config subnet <code>intnet1</code>. Define it as <code>192.168.8.x</code> (This is
+   completly arbitrary. Use whatever network range you want to
+   use). Use <code>ifconfig</code> to find out interface name that corresponds to
+   <code>intnet1</code> (a clue: the one that has no IP assigned):</p>
+<div class="highlight"><pre><span></span>```shell
+$ nano /etc/network/interfaces
+
+auto enp0s9
+iface enp0s9 inet static
+address 192.168.8.1
+netmask 255.255.255.0
+gateway 192.168.8.1 # this will be setup in MAAS as default gateway!
+```
+</pre></div>
+
+
+<p>At Virtualbox level we have added an interface to this VM using
+<code>Internal Network</code>, we need then define this network in VM. Also,
+defining this before installing MAAS will have MAAS installer pick
+up this subnet automatically so to save some manual work down the
+road.</p>
+</li>
+<li>
+<p>Install MAAS is simple. Don't bother with other methods.</p>
+<div class="highlight"><pre><span></span>```shell
+sudo add-apt-repository ppa:maas/stable
+sudo apt update
+sudo apt install maas
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Create MAAS admin: </p>
+<div class="highlight"><pre><span></span>```shell
+sudo maas createadmin
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Create SSH key and copy content from <code>~/.ssh/id_rsa.pub</code>:</p>
+<div class="highlight"><pre><span></span>```shell
+mkdir .ssh
+ssh-keygen -t rsa
+less ~/.ssh/id_rsa.pub
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Login in <code>http://localhost:5240/MAAS</code> using admin created in step
+  3, goto user preference (click <strong>user name</strong>).
+  select <code>upload</code> and paste step 4's content into the text box. This is
+  the public key that will be copied to each MAAS target at
+  deployment so later you can SSH into these targets without knowing
+  the password.</p>
+<p><figure class="s12 center">
+  <img src="/images/maas%20ssh%20key.png"/>
+  <figcaption>MAAS upload SSH key</figcaption>
+</figure></p>
+</li>
+<li>
+<p>Setup MAAS gateway. This was actually asked when installing MAAS
+    server. But I missed this and ended up spending 5 days debugging a
+    <em>strange</em> issue where provisioned node can not ping outside world.
+    In short, set MAAS default gateway to be the IP of the MAAS
+    server, in our case, <code>192.168.8.1</code>!</p>
+<p><figure class="s12 center">
+  <img src="/images/maas%20default%20gateway.png"/>
+  <figcaption>MAAS default gateway</figcaption>
+</figure></p>
+</li>
+</ol>
+<p>At this point, the MAAS server is installed and user can login the web
+admin console. Next, setup firewall rules on MAAS server so it can be
+the router for managed subnet.</p>
+<h2>MAAS server firewall rules</h2>
+<p>Install <a href="https://help.ubuntu.com/community/UFW">UFW</a>. UFW is infinitely easier to use than iptables. Making
+the MAAS server as a router is necessary because targets, once
+acquired an OS, will need internet access in order to APT other
+things. (If using real metal server, the server can be connected to
+multiple VLANs among which one is providing internet access.)</p>
+<h3>Masquerading</h3>
+<p>Following the <a href="https://help.ubuntu.com/lts/serverguide/firewall.html">instructions</a> to enable default port forwarding:</p>
+<ol>
+<li>
+<p>Packet forwarding needs to be enabled in ufw. Two configuration
+   files will need to be adjusted, in <code>/etc/default/ufw</code> change the
+   <code>DEFAULT_FORWARD_POLICY</code> to <code>ACCEPT</code>:</p>
+<div class="highlight"><pre><span></span>```shell
+DEFAULT_FORWARD_POLICY=&quot;ACCEPT&quot;
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Then edit <code>/etc/ufw/sysctl.conf</code> and uncomment:</p>
+<div class="highlight"><pre><span></span>```shell
+net/ipv4/ip_forward=1
+net/ipv6/conf/default/forwarding=1
+```
+</pre></div>
+
+
+</li>
+</ol>
+<h3>Firewall policies</h3>
+<blockquote>
+<p>Enabling UFW will deny all access (except the current ssh
+session). So before anything, allow port 22!</p>
+</blockquote>
+<p>To config MAAS server to route 192.168.8.x subnet traffic to internet
+using UFW is simple. Using <code>ifconfig</code> to find the interface name that
+is connected to the internet(NAT), in this example, <code>enp0s3</code>:</p>
+<div class="highlight"><pre><span></span>    ```shell
+    nano /etc/ufw/before.rules
+    ```
+</pre></div>
+
+
+<p>Paste this at the bottom of the file, <strong>after</strong> the <code>COMMIT</code> that has
+already been in that document:</p>
+<div class="highlight"><pre><span></span>    ```shell
+    # nat Table rules
+    *nat
+    :POSTROUTING ACCEPT [0:0]
+    -A POSTROUTING -s 192.168.8.0/24 -o enp0s3 -j MASQUERADE
+    COMMIT
+    ```
+</pre></div>
+
+
+<p>What this does is to make <code>enp0s3</code> as the router for subnet
+192.168.8.x &larr; welcome the internet!</p>
+<h3>Ports</h3>
+<p><a href="https://help.ubuntu.com/community/UFW">UFW</a> will erect a firewall that blocks everything by default! We
+have poked holes for port 22 to allow SSH. More need to be done:</p>
+<ol>
+<li>Allow http 80: ufw allow http</li>
+<li>Allow ping: ufw allow 53</li>
+<li>Allow region controller API port: 5240</li>
+<li>Allow Bootp server and client: 67, 68</li>
+<li>Allow Img service: 5248</li>
+<li>Allow tftp: 69, 5244</li>
+<li>Allow domain service: 5246</li>
+<li>Allow rndc service: 5247</li>
+<li>Allow iscsi: 3260</li>
+<li>Allow ntp: 123</li>
+<li>Allow MAAS bootstrap sever: 8000</li>
+</ol>
+<p>Finally, <code>sudo ufw enable</code>. Our GFW is up.</p>
+<h2>MAAS as DHCP server</h2>
+<blockquote>
+<p>As I have mentioned, the MAAS server node <strong>must</strong> be the DHCP
+server on subnet 192.168.8.x. No exception!</p>
+</blockquote>
+<p>MAAS admin web is the tool to use for this configuration. </p>
+<ol>
+<li>
+<p>Login into <code>http://192.168.8.1/MAAS/</code>, goto <code>Subnets</code> and select
+   the <code>VLAN</code> &larr; this is how you can turn on DHCP on a subnet:</p>
+<p><figure class="row">
+  <img src="/images/maas_vlan_config.png"
+       class="col s6" />
+  <img src="/images/maas_subnet_config.png"
+       class="col s6" />  <br />
+  <figcaption>MAAS  DHCP config</figcaption>
+</figure></p>
+</li>
+<li>
+<p>Click <code>Vlan</code> column on <code>192.168.8.0/24</code> subnet row to get to the
+   Vlan configuration page. <code>Take action</code> to enable DHCP. Change the
+   gateway to 192.168.8.1, which is this server's static IP on this
+   subnet.</p>
+<p><figure class="s12 center">
+  <img src="/images/maas_dhcp_config.png"/>
+  <figcaption>MAAS admin DHCP config</figcaption>
+</figure></p>
+</li>
+</ol>
+<p>We have done the hard part &mdash; setting up the MAAS server. In our
+<a href="http://fengxia.co/maas target.html">next article</a>, I'll show you what MAAS can do for fun &rarr;
+brining up a bare metal machine to life. Stay tuned.</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-09-06
+            </div>
+
+            <h5 class="card-title">
+              Juju local LXD
+            </h5>
+
+            <p>
+              <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju local LXD.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

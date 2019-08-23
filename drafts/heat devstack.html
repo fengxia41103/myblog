@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-02-27
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Devstack & Heat</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>Setting up <a href="https://wiki.openstack.org/wiki/Heat">Heat</a> with <a href="https://docs.openstack.org/developer/devstack/">Openstack Devstack</a> is straightforward
+once user realizes that the official <a href="https://docs.openstack.org/developer/heat/getting_started/on_devstack.html">instructions</a> is not
+up to date. In the doc there are two ways to enable Heat service:</p>
+<ol>
+<li>
+<p>Enable as a service:</p>
+<div class="highlight"><pre><span></span><span class="k">[[local|localrc]]</span>
+
+<span class="c1"># Enable heat services</span>
+<span class="err">enable_service</span> <span class="err">h-eng</span> <span class="err">h-api</span> <span class="err">h-api-cfn</span> <span class="err">h-api-cw</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Enable as a plugin:</p>
+<div class="highlight"><pre><span></span><span class="k">[[local|localrc]]</span>
+
+<span class="c1">#Enable heat plugin</span>
+<span class="err">enable_plugin</span> <span class="err">heat</span> <span class="err">https://git.openstack.org/openstack/heat</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>The gotcha is that <strong>do not use both</strong>! As a matter of fact, for newer
+devstack, the only method that works is the plugin.</p>
+<p>Devstack takes a long time to stand up. As a newbie, once you have
+created a stack, you also need to issue the following commands in
+devstack VM in order to enable SSH to your new VMs:</p>
+<div class="highlight"><pre><span></span>openstack security group rule create --proto icmp --dst-port <span class="m">0</span> default
+openstack security group rule create --proto tcp --dst-port <span class="m">22</span> default
+</pre></div>
+
+
+<p>Again, not that <a href="https://docs.openstack.org/developer/devstack/networking.html">official document</a> didn't tell you. It's just
+buried deep and hard to find.</p>
+<p>Here is the <strong>local.conf</strong> used:</p>
+<div class="highlight"><pre><span></span><span class="c1">#OFFLINE=true</span>
+
+<span class="c1"># Credentials</span>
+<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">DATABASE_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">RABBIT_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">SERVICE_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">SERVICE_TOKEN</span><span class="o">=</span>natalie
+<span class="nv">SWIFT_HASH</span><span class="o">=</span>natalie
+<span class="nv">SWIFT_TEMPURL_KEY</span><span class="o">=</span>natalie
+
+
+<span class="c1"># Enable Ironic plugin</span>
+enable_plugin ironic git://git.openstack.org/openstack/ironic
+
+<span class="c1"># Enable Neutron which is required by Ironic and disable nova-network.</span>
+disable_service n-net
+disable_service n-novnc
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
+​
+<span class="c1"># Enable Swift for agent_* drivers</span>
+enable_service s-proxy
+enable_service s-object
+enable_service s-container
+enable_service s-account
+
+<span class="c1"># Swift temp URL&#39;s are required for agent_* drivers.</span>
+<span class="nv">SWIFT_ENABLE_TEMPURLS</span><span class="o">=</span>True
+
+<span class="c1"># Create 3 virtual machines to pose as Ironic&#39;s baremetal nodes.</span>
+<span class="nv">IRONIC_VM_COUNT</span><span class="o">=</span>3
+<span class="nv">IRONIC_VM_SSH_PORT</span><span class="o">=</span>22
+<span class="nv">IRONIC_BAREMETAL_BASIC_OPS</span><span class="o">=</span>True
+<span class="nv">DEFAULT_INSTANCE_TYPE</span><span class="o">=</span>baremetal
+
+<span class="c1"># Enable Ironic drivers.</span>
+<span class="nv">IRONIC_ENABLED_DRIVERS</span><span class="o">=</span>fake,agent_ssh,agent_ipmitool,pxe_ssh,pxe_ipmitool
+
+<span class="c1"># Change this to alter the default driver for nodes created by devstack.</span>
+<span class="c1"># This driver should be in the enabled list above.</span>
+<span class="nv">IRONIC_DEPLOY_DRIVER</span><span class="o">=</span>agent_ipmitool
+
+<span class="c1"># The parameters below represent the minimum possible values to create</span>
+<span class="c1"># functional nodes.</span>
+<span class="nv">IRONIC_VM_SPECS_RAM</span><span class="o">=</span>1280
+<span class="nv">IRONIC_VM_SPECS_DISK</span><span class="o">=</span>10
+
+<span class="c1"># Size of the ephemeral partition in GB. Use 0 for no ephemeral partition.</span>
+<span class="nv">IRONIC_VM_EPHEMERAL_DISK</span><span class="o">=</span>0
+
+<span class="c1"># To build your own IPA ramdisk from source, set this to True</span>
+<span class="nv">IRONIC_BUILD_DEPLOY_RAMDISK</span><span class="o">=</span>False
+
+<span class="nv">VIRT_DRIVER</span><span class="o">=</span>ironic
+
+<span class="c1"># By default, DevStack creates a 10.0.0.0/24 network for instances.</span>
+<span class="c1"># If this overlaps with the hosts network, you may adjust with the</span>
+<span class="c1"># following.</span>
+<span class="nv">NETWORK_GATEWAY</span><span class="o">=</span>10.1.0.1
+<span class="nv">FIXED_RANGE</span><span class="o">=</span>10.1.0.0/24
+<span class="nv">FIXED_NETWORK_SIZE</span><span class="o">=</span>256
+
+<span class="c1"># Log all output to files</span>
+<span class="nv">LOGFILE</span><span class="o">=</span>/tmp/devstack.log
+<span class="nv">LOGDIR</span><span class="o">=</span><span class="nv">$HOME</span>/logs
+<span class="nv">IRONIC_VM_LOG_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/ironic-bm-logs
+
+<span class="o">[[</span>local<span class="p">|</span>localrc<span class="o">]]</span>
+<span class="c1">#Enable heat services</span>
+<span class="c1">#enable_service h-eng h-api h-api-cfn h-api-cw</span>
+<span class="c1">#Enable heat plugin</span>
+enable_plugin heat https://git.openstack.org/openstack/heat
+ENABLED_SERVICES+<span class="o">=</span>,heat,h-api,h-api-cfn,h-api-cw,h-eng
+<span class="nv">IMAGE_URL_SITE</span><span class="o">=</span><span class="s2">&quot;http://download.fedoraproject.org&quot;</span>
+<span class="nv">IMAGE_URL_PATH</span><span class="o">=</span><span class="s2">&quot;/pub/fedora/linux/releases/25/CloudImages/x86_64/images/&quot;</span>
+<span class="nv">IMAGE_URL_FILE</span><span class="o">=</span><span class="s2">&quot;Fedora-Cloud-Base-25-1.3.x86_64.qcow2&quot;</span>
+IMAGE_URLS+<span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="nv">$IMAGE_URL_SITE$IMAGE_URL_PATH$IMAGE_URL_FILE</span>
+</pre></div>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-09-06
+            </div>
+
+            <h5 class="card-title">
+              Juju local LXD
+            </h5>
+
+            <p>
+              <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju local LXD.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

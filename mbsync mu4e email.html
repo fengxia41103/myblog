@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-04-24
+
+
+        <a class="wave-effect" href="category/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+
+        <a class="wave-effect" href="tag/dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+
+        <h1 class="myhighlight">You got mail</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <figure class="col l5 m6 s12">
+  <img src="/images/hahn.png"
+       class="center img-responsive">
+</figure>
+
+<p>After becoming an Emacs user for the last few months, I acquired a
+burning desire to migrate as much as my daily text editing activities
+into Emacs environment, in particular, emails.</p>
+<p>Having tried <a href="https://github.com/OfflineIMAP/offlineimap">offlineimap</a> for a bit, I ended up battling its
+configuration to make it work (sort of) with Hotmail's IMAP. Gmail
+worked flawlessly, but boy, Microsoft, get a grip. No wonder hotmail
+is dying. But in the end I'm just one guy who holds on something
+linking my youth days, for sentimental purpose. So without being able
+to win the battle with offlineimap, I started searching for
+alternatives, then I found <a href="http://isync.sourceforge.net/mbsync.html">mbsync</a>.</p>
+<p>Its <a href="http://isync.sourceforge.net/mbsync.html">man page</a> is worth a read. It looks intimidating at first
+glance, but it isn't really. In a nutshell, it defines three things:</p>
+<ol>
+<li><strong>A remote store</strong>: this also links to an <strong>Account</strong>, which of
+   course holds your email credentials.</li>
+<li><strong>A local store</strong>: this defines local file structure where you want
+   to emails to be downloaded to.</li>
+<li><strong>A channel</strong>: a link that connects the a remote store with a local
+   store.</li>
+</ol>
+<figure class="col s12">
+  <img src="/images/mbsync.png"
+       class="center img-responsive">
+  <figcaption>mbsync components</figcaption>
+</figure>
+
+<h1>Account</h1>
+<p><strong>Acount</strong> sections define your email accounts:</p>
+<ol>
+<li>for hotmail: <code>imap.outlook.com</code></li>
+<li>for gmail:<code>imap.gmail.com</code></li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># Hotmail account</span>
+IMAPAccount hotmail <span class="c1"># &lt;-- user defined name</span>
+Host imap.outlook.com <span class="c1"># or imap.gmail.com</span>
+User yours email address
+Pass xxxx
+
+<span class="c1"># These settings work for both gmail and hotmail</span>
+UseIMAPS yes
+RequireSSL yes
+
+<span class="c1"># This might be Ubuntu 16.04 specific</span>
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+</pre></div>
+
+
+<h2>certs</h2>
+<p>Whiling setting up corporate one, for which you are likely looking at
+a outlook server on the other end, I ran into an error cert is not
+matching the server's.  To solve this, we actually need to pull down a
+new cert (from the mail server itself) and config <code>CertificateFile</code> to
+that file. I followed the steps <a href="https://wiki.archlinux.org/index.php/Isync#Step_.231:_Get_the_certificates">here</a>.</p>
+<ol>
+<li>
+<p>Create a bash script, <a href="http://fengxia.co/get_certs.sh"><code>get_certs.sh</code></a>, to facilitate the
+   command line:</p>
+<div class="highlight"><pre><span></span><span class="err">```</span><span class="s s-Atom">shell</span>
+<span class="c1">#!/bin/sh</span>
+<span class="nv">SERVER</span><span class="s s-Atom">=</span><span class="err">$</span><span class="p">{</span><span class="mi">1</span><span class="p">:-</span><span class="s s-Atom">my</span><span class="p">.</span><span class="s s-Atom">server</span><span class="p">.</span><span class="s s-Atom">com</span><span class="p">}</span>
+<span class="nv">PORT</span><span class="s s-Atom">=</span><span class="err">$</span><span class="p">{</span><span class="mi">2</span><span class="p">:-</span><span class="mi">993</span><span class="p">}</span>
+<span class="nv">CERT_FOLDER</span><span class="s s-Atom">=</span><span class="err">$</span><span class="p">{</span><span class="mi">3</span><span class="p">:-</span><span class="s s-Atom">~/certs</span><span class="p">}</span>
+<span class="s s-Atom">openssl</span> <span class="s s-Atom">s_client</span> <span class="o">-</span><span class="s s-Atom">connect</span> <span class="err">$</span><span class="p">{</span><span class="nv">SERVER</span><span class="p">}</span><span class="s s-Atom">:</span><span class="err">$</span><span class="p">{</span><span class="nv">PORT</span><span class="p">}</span> <span class="o">-</span><span class="s s-Atom">showcerts</span> <span class="mi">2</span><span class="s s-Atom">&gt;&amp;</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="o">/</span><span class="s s-Atom">dev</span><span class="o">/</span><span class="s s-Atom">null</span> <span class="p">|</span> <span class="s s-Atom">sed</span> <span class="o">-</span><span class="s s-Atom">ne</span> <span class="s s-Atom">&#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39;</span><span class="p">|</span> <span class="s s-Atom">sed</span> <span class="o">-</span><span class="s s-Atom">ne</span> <span class="s s-Atom">&#39;1,/-END CERTIFICATE-/p&#39;</span> <span class="o">&gt;</span> <span class="err">$</span><span class="p">{</span><span class="nv">CERT_FOLDER</span><span class="p">}</span><span class="s s-Atom">/</span><span class="err">$</span><span class="p">{</span><span class="nv">SERVER</span><span class="p">}.</span><span class="s s-Atom">pem</span>
+<span class="err">```</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Create a <code>~/.cert</code> directory, then run:</p>
+<div class="highlight"><pre><span></span>```shell
+sh get_certs.sh some.imap.server port ~/.cert/
+eg:
+sh get_certs.sh outlookae.&lt;your company&gt;.com 993 ~/.cert/
+```
+</pre></div>
+
+
+</li>
+</ol>
+<p>Cert file will have a name <code>some.imap.server.pem</code>. Use that in
+   <code>CertificateFile</code>.</p>
+<p>Alternatively, run the cmd manually:</p>
+<div class="highlight"><pre><span></span>$ openssl s_client -connect &lt;your server.com&gt;:993
+
+Example output:
+
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIGljCCBX6gAwIBAgIQCdcdxK7NPHWJoI9zDG7qUDANBgkqhkiG9w0BAQsFADBe
+MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+d3cuZGlnaWNlcnQuY29tMR0wGwYDVQQDExRHZW9UcnVzdCBSU0EgQ0EgMjAxODAe
+Fw0xODA0MjgwMDAwMDBaFw0xODEwMTcxMjAwMDBaMG4xCzAJBgNVBAYTAkNOMRAw
+DgYDVQQIEwdiZWlqaW5nMRAwDgYDVQQHEwdiZWlqaW5nMSEwHwYDVQQKExhMZW5v
+dm8gKEJlaWppbmcpIExpbWl0ZWQxGDAWBgNVBAMTD21haWwubGVub3ZvLmNvbTCC
+ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIX5GrFQTPLxep6rWrvqUmX3
++qHCVQYZDE7lXGvI+cqZSRXeYH5PE3BHoH/45u620lYvu9zcKCImeyS8klZi8ZX9
+5KxFlssl6qn8kiCx/pEZbwy1XXquvIplqvCG5SN074736Pin1X1w6mSujItAdXhh
+2S959hg+Vdu//b6EktMVUq1smmjtG9V4YMXPtL5Dhf744AGuuFLTMmtuJxrajQQ/
+1LOI7VVgu99KLuJ4p6zpNv4Oqx9YVZE8n9iJbBBVql60VQ7nWJBTx0tMoK6S0h/B
+FUdsbk3L3GV4RRGBPfj0NC4+zRLjzzvzFRePhjizBWOCAaQfkK96nw+QLXz6lT0C
+AwEAAaOCAz4wggM6MB8GA1UdIwQYMBaAFJBY/7CcdahRVHex7fKjQxY4nmzFMB0G
+A1UdDgQWBBTjHVASVMSS5vbUq7OaL/aZsWOMMjCBsAYDVR0RBIGoMIGlgg9tYWls
+Lmxlbm92by5jb22CEW1haWx1cy5sZW5vdm8uY29tghlhdXRvZGlzY292ZXIubW90
+b3JvbGEuY29tggxtb3Rvcm9sYS5jb22CEW1haWxhcC5sZW5vdm8uY29tghFtYWls
+YWUubGVub3ZvLmNvbYIXYXV0b2Rpc2NvdmVyLm5lY3AuY28uanCCF2F1dG9kaXNj
+b3Zlci5sZW5vdm8uY29tMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEF
+BQcDAQYIKwYBBQUHAwIwPwYDVR0fBDgwNjA0oDKgMIYuaHR0cDovL2NkcDEuZGln
+aWNlcnQuY29tL0dlb1RydXN0UlNBQ0EyMDE4LmNybDBMBgNVHSAERTBDMDcGCWCG
+SAGG/WwBATAqMCgGCCsGAQUFBwIBFhxodHRwczovL3d3dy5kaWdpY2VydC5jb20v
+Q1BTMAgGBmeBDAECAjB0BggrBgEFBQcBAQRoMGYwJQYIKwYBBQUHMAGGGWh0dHA6
+Ly9vY3NwMS5kaWdpY2VydC5jb20wPQYIKwYBBQUHMAKGMWh0dHA6Ly9jYWNlcnRz
+Lmdlb3RydXN0LmNvbS9HZW9UcnVzdFJTQUNBMjAxOC5jcnQwCQYDVR0TBAIwADCC
+AQQGCisGAQQB1nkCBAIEgfUEgfIA8AB1ALvZ37wfinG1k5Qjl6qSe0c4V5UKq1Lo
+GpCWZDaOHtGFAAABYwr7gWoAAAQDAEYwRAIgBBogB6jO59BheNJs2iCL8xYZdXqW
+JbP+6WTrHLptQ3wCIDZZzf0bwPNfn+nJQFf16tui94evPkb2OQysfro8lVLzAHcA
+b1N2rDHwMRnYmQCkURX/dxUcEdkCwQApBo2yCJo32RMAAAFjCvuCVQAABAMASDBG
+AiEA/1ncX/FX8by4rQDg5uyIXTciZBcZoySzQ1gZl9kTNggCIQCfaCniFF4cdTMK
+SXCfffl3N5AwuMyr/Js35+o4dRsffjANBgkqhkiG9w0BAQsFAAOCAQEAeMf6y/dz
+oEuQNV4EEdH/afHX/3Ttr9uuJ9TER7kQas5ri9e1KjZy37LpgotyspufHHPp/X2S
+D5hltCLxiQg98ZOybtBeiCixKB3MTDxtGDWdYg6MfDMYx+tLeqEBLuDJ3DKg6vtj
+EK6wbkJbt+fEWUz/dWVqOf/Z/ZfpFXvmKVGplxxNLJVowl2RJhXzW6XXg22ZsOXi
+FB2e/JTWHrUyZAyStDDuce/BmmRMImlvCo0LdWGx5hu0ggnAq6MSOJu/m5CyVOuc
++jXvW64RwfzUVMnfCgly9pf3wkINeRQDHVtn7pnbg0fIk1xPgT5YOOrjSXZK7xwT
+<span class="nv">h4Dw9xNfks5zyQ</span><span class="o">==</span>
+-----END CERTIFICATE-----
+</pre></div>
+
+
+<p>Then copy and paste it to <code>.cert/&lt;your cert file&gt;.pem</code>.</p>
+<h1>Stores</h1>
+<h2>Remote store</h2>
+<p>Use <code>IMAPStore</code> to pair email account with a remote. The name of
+remote store is user defined.</p>
+<div class="highlight"><pre><span></span>IMAPStore gmail-remote <span class="c1"># &lt;-- user defined name</span>
+Account gmail <span class="c1"># &lt;-- the account name defined in Account section</span>
+</pre></div>
+
+
+<h2>Local store</h2>
+<p>Don't quite understand this one. Default local maildir is set to
+<code>~/Maildir</code> (seems to be the default).</p>
+<div class="highlight"><pre><span></span>MaildirStore gmail-local
+Path ~/Maildir/Gmail/
+Inbox ~/Maildir/Gmail/inbox/
+</pre></div>
+
+
+<h1>Channels</h1>
+<p>Defines a channel to link a <code>remote store</code> with a <code>local store</code>:</p>
+<div class="highlight"><pre><span></span>Channel gmail-inbox
+Master :gmail-remote: <span class="c1"># &lt;-- remote store</span>
+Slave :gmail-local:inbox <span class="c1"># &lt;-- local dir</span>
+Create Both
+Expunge Both
+SyncState *
+</pre></div>
+
+
+<h1>Groups</h1>
+<p>This is just a batch command mode where you group a list of <code>channels</code> into
+one blog which can then be evoked using command line <code>mbsync group-name-xyz</code>:</p>
+<div class="highlight"><pre><span></span>Group gmail
+Channel gmail-trash
+Channel gmail-inbox
+Channel gmail-sent
+Channel gmail-all
+Channel gmail-starred
+</pre></div>
+
+
+<h1>mbsync config</h1>
+<p>Follow these steps to set up your local folders:</p>
+<ol>
+<li>Copy and paste this config to <code>~/.mbsyncrc</code>.</li>
+<li>Create these folders: <code>~/Maildir</code>, <code>~/Maildir/Hotmail</code>, and
+   <code>~/Maildir/Gmail</code>.</li>
+<li>Run command <code>mbsync -a</code>, sit back, and watch your remote emails got
+   pull down and backed up locally.</li>
+<li>Clear old index <code>rm -r ~/.mu</code>.</li>
+<li>Run <code>mu index</code> to index local emails.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># mbsyncrc based on</span>
+<span class="c1"># http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html</span>
+<span class="c1"># ACCOUNT INFORMATION</span>
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1">#       Accounts</span>
+<span class="c1">#</span>
+<span class="c1">###########################################</span>
+<span class="c1"># Hotmail account</span>
+IMAPAccount hotmail
+<span class="c1"># Address to connect to</span>
+Host imap.outlook.com
+User yours@hotmail.com
+Pass xxxx
+UseIMAPS yes
+RequireSSL yes
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+
+<span class="c1"># Gmail account</span>
+IMAPAccount gmail
+<span class="c1"># Address to connect to</span>
+Host imap.gmail.com
+User yours@gmail.com
+Pass xxxx
+UseIMAPS yes
+RequireSSL yes
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1">#       IMAP stores</span>
+<span class="c1">#</span>
+<span class="c1">###########################################</span>
+
+<span class="c1"># THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE</span>
+<span class="c1"># - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE</span>
+<span class="c1">#   SPECIFICATION OF AN IMAP ACCOUNT)</span>
+<span class="c1"># - THE LOCAL STORAGE IS WHERE WE STORE THE EMAIL ON OUR COMPUTER</span>
+
+<span class="c1"># REMOTE STORAGE (USE THE IMAP ACCOUNT SPECIFIED ABOVE)</span>
+IMAPStore gmail-remote
+Account gmail
+
+<span class="c1"># LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)</span>
+MaildirStore gmail-local
+Path ~/Maildir/Gmail/
+Inbox ~/Maildir/Gmail/inbox/
+
+IMAPStore hotmail-remote
+Account hotmail
+
+MaildirStore hotmail-local
+Path ~/Maildir/Hotmail/
+Inbox ~/Maildir/Hotmail/inbox/
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1">#       gmail channels</span>
+<span class="c1">#</span>
+<span class="c1">###########################################</span>
+
+<span class="c1"># CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS</span>
+<span class="c1">#</span>
+<span class="c1"># CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl</span>
+<span class="c1"># FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:</span>
+<span class="c1">#</span>
+<span class="c1"># 1 &quot;*&quot; TO MATCH EVERYTHING</span>
+<span class="c1"># 2 &quot;!DIR&quot; TO EXCLUDE &quot;DIR&quot;</span>
+<span class="c1"># 3 &quot;DIR&quot; TO MATCH DIR</span>
+Channel gmail-inbox
+Master :gmail-remote:
+Slave :gmail-local:inbox
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-trash
+Master :gmail-remote:<span class="s2">&quot;[Gmail]/Trash&quot;</span>
+Slave :gmail-local:trash
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-all
+Master :gmail-remote:<span class="s2">&quot;[Gmail]/All Mail&quot;</span>
+Slave :gmail-local:all
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-sent
+Master :gmail-remote:<span class="s2">&quot;[Gmail]/Sent Mail&quot;</span>
+Slave :gmail-local:sent
+Create Both
+Expunge Both
+SyncState *
+
+Channel gmail-allChannel gmail-starred
+Master :gmail-remote:<span class="s2">&quot;[Gmail]/Starred&quot;</span>
+Slave :gmail-local:starred
+Create Both
+Expunge Both
+SyncState *
+
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1">#       hotmail channels</span>
+<span class="c1">#</span>
+<span class="c1">###########################################</span>
+
+Channel hotmail-trash
+Master :hotmail-remote:<span class="s2">&quot;Trash&quot;</span>
+Slave :hotmail-local:trash
+Create Both
+Expunge Both
+SyncState *
+
+Channel hotmail-inbox
+Master :hotmail-remote:<span class="s2">&quot;Inbox&quot;</span>
+Slave :hotmail-local:inbox
+Create Both
+Expunge Both
+SyncState *
+
+<span class="c1"># This will pull subfolders in /Inbox/</span>
+<span class="c1"># and create &quot;.sth&quot; for each subdir</span>
+Channel hotmail-inbox-sub
+Master :hotmail-remote:<span class="s2">&quot;Inbox/&quot;</span>
+Slave :hotmail-local:inbox/
+Pattern *
+Create Both
+Expunge Both
+SyncState *
+
+
+Channel hotmail-chat
+Master :hotmail-remote:<span class="s2">&quot;cHAT&quot;</span>
+Slave :hotmail-local:chat
+Create Both
+Expunge Both
+SyncState *
+
+Channel hotmail-sent
+Master :hotmail-remote:<span class="s2">&quot;Sent&quot;</span>
+Slave :hotmail-local:sent
+Create Both
+Expunge Both
+SyncState *
+
+
+
+<span class="c1">############################################</span>
+<span class="c1">#</span>
+<span class="c1">#       groups -- they are batch commands</span>
+<span class="c1">#</span>
+<span class="c1">###########################################</span>
+
+<span class="c1"># GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE</span>
+<span class="c1"># MBSYNC ON A GROUP TO SYNC ALL CHANNELS</span>
+<span class="c1">#</span>
+<span class="c1"># FOR INSTANCE: &quot;mbsync hotmail&quot; GETS MAIL FROM</span>
+<span class="c1"># &quot;hotmail-inbox&quot;, &quot;hotmail-sent&quot;, and &quot;hotmail-trash&quot;</span>
+
+Group gmail
+Channel gmail-trash
+Channel gmail-inbox
+Channel gmail-sent
+Channel gmail-all
+Channel gmail-starred
+
+Group hotmail
+Channel hotmail-trash
+Channel hotmail-inbox
+Channel hotmail-inbox-sub
+Channel hotmail-chat
+Channel hotmail-sent
+</pre></div>
+
+
+<h1>How to list remote folders</h1>
+<p>Well, to design your pull, you need to know what is on the remote
+IMAP. It turned out that each IMAP server structures things
+differently, eg. using <code>Inbox</code> vs. <code>INBOX</code>, how confusing. Helped by
+<a href="https://delog.wordpress.com/2011/05/10/access-imap-server-from-the-command-line-using-openssl/">this blog</a>, it turned out we can <em>login</em> into the IMAP server
+(manually) and investigate what we are looking at:</p>
+<div class="highlight"><pre><span></span>openssl s_client -crlf -connect <span class="o">[</span>your company IMAP server<span class="o">]</span>:993
+</pre></div>
+
+
+<p>Once you see something like this <code>* OK Gimap ready for requests from
+200.199.23.105 o16if3544685ybc.1111</code>, you are in. There won't be any
+<em>commandline prompt</em>, it just sits there. So keep going:</p>
+<div class="highlight"><pre><span></span>tag login user@company.com password
+tag LIST <span class="s2">&quot;&quot;</span> <span class="s2">&quot;*&quot;</span>
+</pre></div>
+
+
+<p>Viol la! Look what we have got! </p>
+<div class="highlight"><pre><span></span>tag login fxia1@company.com password
+tag OK LOGIN completed.
+tag LIST <span class="s2">&quot;&quot;</span> <span class="s2">&quot;*&quot;</span>
+* LIST <span class="o">(</span><span class="se">\H</span>asChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> Archives
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> Archives/2017
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;Archives/juju mailing list&quot;</span>
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> Calendar
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> Contacts
+* LIST <span class="o">(</span><span class="se">\M</span>arked <span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;Conversation History&quot;</span>
+* LIST <span class="o">(</span><span class="se">\M</span>arked <span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;Deleted Items&quot;</span>
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> Drafts
+* LIST <span class="o">(</span><span class="se">\M</span>arked <span class="se">\H</span>asChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX
+* LIST <span class="o">(</span><span class="se">\H</span>asChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/administration
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/administration/something
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/administration/hr
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/administration/akjd
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/administration/wow
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/administration/workday
+* LIST <span class="o">(</span><span class="se">\H</span>asChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/Canonical
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/Canonical/juju
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;INBOX/home improvement&quot;</span>
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/miro
+* LIST <span class="o">(</span><span class="se">\H</span>asNoChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> <span class="s2">&quot;INBOX/no need to read&quot;</span>
+* LIST <span class="o">(</span><span class="se">\H</span>asChildren<span class="o">)</span> <span class="s2">&quot;/&quot;</span> INBOX/team
+
+............
+</pre></div>
+
+
+<p>So the key to notice here is that this
+IMAP server uses capitalized <strong>INBOX</strong>. Therefore, to pull all
+sub-folders into, we need to setup mbsync as such:</p>
+<div class="highlight"><pre><span></span>Channel your-inbox-sub
+Master :your-remote:<span class="s2">&quot;INBOX/&quot;</span> &lt;&lt;-- must match what you saw from server, <span class="k">case</span>-sensitive
+Slave :your-local:inbox/
+Pattern *
+Create Both
+Expunge Both
+SyncState *
+</pre></div>
+
+
+<p>Now if you issue <code>mbsync your-inbox-sub</code> will pull in all <code>INBOX</code> and
+<strong>its subfolders</strong>. Awesome.</p>
+<h1>gmail &mdash; less secured</h1>
+<p>Sending username and pwd to login in Gmail will be blocked. A couple
+things you need to do:</p>
+<ol>
+<li>Go to <code>settings</code> and <strong>enable</strong> IMAP.</li>
+<li>Go to https://www.google.com/settings/security/lesssecureapps to
+   enable <code>Less secured app</code> setting.</li>
+<li>Make sure the folder defined in <code>Account</code> section for local store
+   actually exists (<code>mbsync</code> will not create <code>~/Maildir/Hotmail</code> for you!)</li>
+</ol>
+<h1>Outlook webmail</h1>
+<p>Working outlook/exchange server is tough. The company's server changes
+configuration all the time, and it completly messed up w/ IMAP login
+when one server allows <code>PLAIN</code> while another requires <code>NTLM</code>, and so
+on. It has been a nightmare, because it worked for weeks, months, and
+will suddenly decided to stop working, and you don't get emails
+anymore! Fall back is Thunderbird, but then, once you are used to
+<code>mu4e</code>, going back to anything looked like outlook is a pain.</p>
+<p>Finally, here is a savior,
+<a href="http://davmail.sourceforge.net/">davmail</a>. It works a gateway between
+your computer and outlook web mail (aka. OWA &mdash; outlook web
+access). So you can now point your <code>mbsync</code> to a local port (default
+<code>1143</code>, and davmail will route mbsync's IMAP requests to the remote
+OWA server, nice!</p>
+<figure class="col s12">
+  <img src="/images/mbsync%20setup.png"
+       class="center img-responsive">
+  <figcaption>My mbsync setup for retrieving and sending mails</figcaption>
+</figure>
+
+<p>The <code>mbsync</code> config is quite straightforward:</p>
+<div class="highlight"><pre><span></span>IMAPAccount company-name
+Host localhost &lt;-- using davmail as gateway
+User xxx
+Pass xxx
+Port <span class="m">1143</span> &lt;-- default davmail IMAP port
+SSLType None
+AuthMech LOGIN
+</pre></div>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-03
+            </div>
+
+            <h5 class="card-title">
+              ECMAScript
+            </h5>
+
+            <p>
+              <p>Isn't this confusing &mdash; <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, ES6, Javascript,
+<a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ecmascript.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-06-24
+            </div>
+
+            <h5 class="card-title">
+              Dev structure
+            </h5>
+
+            <p>
+              <figure class="col l5 m5 s12">
+  <img src="/images/moses.jpg"/>
+  <figcaption>If the Bible story happens today</figcaption>
+</figure>
+
+<p>This is a common question any team/project will have to address
+&mdash; how to structure the knowledge we know of...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/dev structure.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-04-30
+            </div>
+
+            <h5 class="card-title">
+              Pandoc workflow
+            </h5>
+
+            <p>
+              <figure class="col s12">
+  <img src="/images/peppa.jpg"/>
+</figure>
+
+<p><a href="https://pandoc.org/MANUAL.html">Pandoc</a> is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/pandoc workflow.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

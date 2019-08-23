@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2018-11-16
+
+
+        <a class="wave-effect" href="category/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">IBB brain shutdown procedure</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>This document describes procedure to shutdown an IBB brain instance.</p>
+<h1>Shutdown procedure</h1>
+<ol>
+<li>
+<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
+</li>
+<li>
+<p>Put the cluster in <strong>global maintenance mode</strong> by login any brain
+   server, and <code>hosted-engine --set-maintenance --mode=global</code>. </p>
+<p>To verify, login in a brain node and <code>hosted-engine --vm-status</code>:</p>
+<div class="highlight"><pre><span></span>```shell
+[root@lmorlct0207brain3 ~]# hosted-engine --vm-status
+
+!! Cluster is in GLOBAL MAINTENANCE mode !!
+
+--== Host 1 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : lmorlct0203brain3.labs.lenovo.com
+Host ID                            : 1
+Engine status                      : {&quot;health&quot;: &quot;good&quot;, &quot;vm&quot;: &quot;up&quot;, &quot;detail&quot;: &quot;up&quot;}
+Score                              : 3400
+stopped                            : False
+Local maintenance                  : False
+crc32                              : 8eb75a80
+local_conf_timestamp               : 3249288
+Host timestamp                     : 3249287
+Extra metadata (valid at timestamp):
+    metadata_parse_version=1
+    metadata_feature_version=1
+    timestamp=3249287 (Fri Nov 16 15:57:39 2018)
+    host-id=1
+    score=3400
+    vm_conf_refresh_time=3249288 (Fri Nov 16 15:57:40 2018)
+    conf_on_shared_storage=True
+    maintenance=False
+    state=GlobalMaintenance
+    stopped=False
+
+--== Host 2 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : 10.240.41.235
+Host ID                            : 2
+Engine status                      : {&quot;reason&quot;: &quot;vm not running on this host&quot;, &quot;health&quot;: &quot;bad&quot;, &quot;vm&quot;: &quot;down&quot;, &quot;detail&quot;: &quot;unknown&quot;}
+Score                              : 3400
+stopped                            : False
+Local maintenance                  : False
+crc32                              : 3711533b
+local_conf_timestamp               : 3249303
+Host timestamp                     : 3249303
+Extra metadata (valid at timestamp):
+    metadata_parse_version=1
+    metadata_feature_version=1
+    timestamp=3249303 (Fri Nov 16 15:57:33 2018)
+    host-id=2
+    score=3400
+    vm_conf_refresh_time=3249303 (Fri Nov 16 15:57:33 2018)
+    conf_on_shared_storage=True
+    maintenance=False
+    state=GlobalMaintenance
+    stopped=False
+
+--== Host 3 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : 10.240.41.236
+Host ID                            : 3
+Engine status                      : {&quot;reason&quot;: &quot;vm not running on this host&quot;, &quot;health&quot;: &quot;bad&quot;, &quot;vm&quot;: &quot;down&quot;, &quot;detail&quot;: &quot;unknown&quot;}
+Score                              : 3400
+stopped                            : False
+Local maintenance                  : False
+crc32                              : b05b67cb
+local_conf_timestamp               : 3249295
+Host timestamp                     : 3249295
+Extra metadata (valid at timestamp):
+    metadata_parse_version=1
+    metadata_feature_version=1
+    timestamp=3249295 (Fri Nov 16 15:57:42 2018)
+    host-id=3
+    score=3400
+    vm_conf_refresh_time=3249295 (Fri Nov 16 15:57:42 2018)
+    conf_on_shared_storage=True
+    maintenance=False
+    state=GlobalMaintenance
+    stopped=False
+
+!! Cluster is in GLOBAL MAINTENANCE mode !!   
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>On RHV admin portal, go to <code>Data Center/Storage</code> tab, select a
+   storage domain and click <code>maintenance</code> on menu bar, or right-click
+   then select <code>maintenance</code>.</p>
+<ul>
+<li>
+<p><strong>Note</strong> that you will not be able shutdown the one that
+  hosted-engine is using (usually named <code>master</code> or
+  <code>hosted_storage</code>) by mistake because software will prevents you
+  with an error.</p>
+</li>
+<li>
+<p><strong>Note</strong> that this step can take some time as storage goes
+  through <code>locked</code> &rarr; <code>preparing maintenance</code> &rarr;
+  <code>maintenance</code>:</p>
+</li>
+</ul>
+<p><figure class="col s12">
+  <img src="/images/ibb/shutdown%20rhv%20storage%20domain.png"/>
+</figure></p>
+</li>
+<li>
+<p>Shutdown <code>hosted-engine</code> VM.</p>
+</li>
+<li>
+<p>Shutdown the hosted-engine's storage (should be the only one left), eg. <code>master</code>.</p>
+</li>
+<li>
+<p>SSH to each brain node and shutdown ovirt HA:</p>
+</li>
+<li>
+<p>shutdown ovirt HA agent: <code>systemctl  stop ovirt-ha-agent</code></p>
+</li>
+<li>
+<p>shutdown ovirt HA broker: <code>systemctl  stop ovirt-ha-broker</code></p>
+</li>
+<li>
+<p>On any brain node, disconnect RHV from its storage: <code>hosted-engine
+   --disconnect-storage</code></p>
+</li>
+<li>
+<p>SSH to each brain and stop gluster volumes:</p>
+</li>
+<li>
+<p>get volume list: <code>gluster volume list</code></p>
+</li>
+<li>
+<p>stop one: <code>gluster volume stop &lt;volume name&gt;</code></p>
+<p><figure class="col s12">
+  <img src="/images/ibb/shutdown%20gluster%20volume.png"/>
+</figure></p>
+</li>
+<li>
+<p>Power off brain nodes.</p>
+</li>
+</ol>
+<h1>Bringup procedure</h1>
+<ol>
+<li>
+<p>Login any brain node and start gluster volumes. Order is not important.</p>
+<div class="highlight"><pre><span></span>```shell
+$ gluster volume start data
+$ gluster volume start engine
+$ gluster volume start vmstore
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify <code>gluster volume status</code>. You should see all bricks.</p>
+<div class="highlight"><pre><span></span>```shell
+[root@lmorlct0203brain3 ~]# gluster volume status
+Status of volume: data
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick 172.24.0.234:/gluster_bricks/data/dat
+a                                           49152     0          Y       5582 
+Brick 172.24.0.235:/gluster_bricks/data/dat
+a                                           49152     0          Y       1816 
+Brick 172.24.0.236:/gluster_bricks/data/dat
+a                                           49152     0          Y       47247
+NFS Server on localhost                     N/A       N/A        N       N/A  
+Self-heal Daemon on localhost               N/A       N/A        Y       6074 
+NFS Server on 172.24.0.236                  N/A       N/A        N       N/A  
+Self-heal Daemon on 172.24.0.236            N/A       N/A        Y       47654
+NFS Server on 172.24.0.235                  N/A       N/A        N       N/A  
+Self-heal Daemon on 172.24.0.235            N/A       N/A        Y       2257
+
+Task Status of Volume data
+------------------------------------------------------------------------------
+There are no active volume tasks
+
+Status of volume: engine
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick 172.24.0.234:/gluster_bricks/engine/e
+ngine                                       49153     0          Y       5785 
+Brick 172.24.0.235:/gluster_bricks/engine/e
+ngine                                       49153     0          Y       2006 
+Brick 172.24.0.236:/gluster_bricks/engine/e
+ngine                                       49153     0          Y       47414
+NFS Server on localhost                     N/A       N/A        N       N/A  
+Self-heal Daemon on localhost               N/A       N/A        Y       6074 
+NFS Server on 172.24.0.235                  N/A       N/A        N       N/A  
+Self-heal Daemon on 172.24.0.235            N/A       N/A        Y       2257 
+NFS Server on 172.24.0.236                  N/A       N/A        N       N/A  
+Self-heal Daemon on 172.24.0.236            N/A       N/A        Y       47654
+
+Task Status of Volume engine
+------------------------------------------------------------------------------
+There are no active volume tasks
+
+Status of volume: vmstore
+Gluster process                             TCP Port  RDMA Port  Online  Pid
+------------------------------------------------------------------------------
+Brick 172.24.0.234:/gluster_bricks/vmstore/
+vmstore                                     49154     0          Y       6030 
+Brick 172.24.0.235:/gluster_bricks/vmstore/
+vmstore                                     49154     0          Y       2103 
+Brick 172.24.0.236:/gluster_bricks/vmstore/
+vmstore                                     49154     0          Y       47496
+NFS Server on localhost                     N/A       N/A        N       N/A  
+Self-heal Daemon on localhost               N/A       N/A        Y       6074 
+NFS Server on 172.24.0.235                  N/A       N/A        N       N/A  
+Self-heal Daemon on 172.24.0.235            N/A       N/A        Y       2257 
+NFS Server on 172.24.0.236                  N/A       N/A        N       N/A  
+Self-heal Daemon on 172.24.0.236            N/A       N/A        Y       47654
+
+Task Status of Volume vmstore
+------------------------------------------------------------------------------
+There are no active volume tasks
+
+```
+</pre></div>
+
+
+<ol>
+<li>
+<p>On any brain, use <code>hosted-engine --vm-start</code> to start the hosted
+   engine VM.</p>
+</li>
+<li>
+<p>If there is an error &mdash; <code>VM is not present</code>,  then switch
+   to a different host and give the command. One of the three brain
+   node shall be able to start the engine.</p>
+</li>
+<li>Use <code>hosted-engine --vm-status</code> to check engine status.</li>
+<li>The hosted-engine will come up in <strong>global maintenance</strong> mode.</li>
+</ol>
+</li>
+<li>
+<p>Login in the RHV admin portal, select <code>System &amp;rarr; Storage</code>, the
+   domain of hosted-engine, eg. <code>hosted-storage</code> should be in green,
+   and all others are in maintenance mode (a lock symbol) or down (red
+   down arrow).</p>
+<ol>
+<li>Activate the domain that has <code>(Master)</code> tag on <code>Data Center</code> tab
+   below the storage list pane.</li>
+<li>Once <code>(Master)</code> domain started, activated other domains. Order
+   is unimportant.</li>
+<li>Starting storage can take a while.</li>
+</ol>
+<p><figure class="col s12">
+  <img src="/images/ibb/rhhi%20activate%20domain.png"/>
+</figure></p>
+</li>
+<li>
+<p>Remove global maintenance mode: <code>hosted-engine --set-maintenance
+   --mode=none</code>.</p>
+</li>
+<li>
+<p>Starting VMs you need, and you are back to business.</p>
+</li>
+</ol>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-02
+            </div>
+
+            <h5 class="card-title">
+              JSP to Angular
+            </h5>
+
+            <p>
+              <p>Man, don't I dislike Java!</p>
+<h1>how to angular</h1>
+<p>Top level controller is <code>mwc</code>, and is linked at the root <code>&lt;html&gt;</code>:</p>
+<div class="highlight"><pre><span></span>./WEB-INF/jsp/administration.jsp:5:&lt;html...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/jsp to angular.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2018-06-27
+            </div>
+
+            <h5 class="card-title">
+              Server RAID
+            </h5>
+
+            <p>
+              <p>If you are like me who dislikes any GUI and mouse clicks, CLI via a
+SSH session to IMM is a fun way to get things done. This one shows how
+to config disks into RAID.</p>
+<p>CLI manual is <a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/server raid.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

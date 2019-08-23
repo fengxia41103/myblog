@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-04-25
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">HW workload charms</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>In this article we will introduce the HW workload charms and how to
+build them. <strong>What is a HW workload?</strong> In orchestration space we can
+divide technologies into two categories: description language and
+orchestration runtime. Description language defines a particular set
+of syntax, keywords and format that one uses to <strong>describe</strong> a
+workload, and runtime is the binaries that consumes the template (or
+blueprints) and execute instructions. With this context, we can view
+charms as the workload template in which one uses <em>states</em> that a
+workload should observe, and Juju binaries, including its CLI and juju
+agent, provide the runtime environment to monitor and act upon those
+states.</p>
+<p>So far charms have been used to describe software workload both in the
+level of software application (eg. MySql) and the level of platform
+(eg. Openstack). The underline assumption is that a supporting layer
+pre-exist, such as an operating system or a platform (thinking of
+Openstack or hypervisors). Extending on this concept, we ask ourselves
+whether we can utilize the same Juju &amp; Charm framework to support
+deployment of infrastructures? If assuming the infrastructure can be
+<strong>software-defined</strong>, once the wires are all done and
+hardwares are installed, what's left to do is really falling into the
+same pattern as deploying a software application -- installing OS,
+installing application, tweak configurations and so on.</p>
+<p>Along this thought, using ThinkAgile as an example we set off to model
+a <strong>Hardware workload</strong> in charms.</p>
+<figure class="s12 center">
+  <img src="/images/hw%20workload%20stack%20diff.png" />
+  <figcaption>New system stack with HW workload capability</figcaption>
+</figure>
+
+<h1>Vision</h1>
+<blockquote>
+<p>Utilizing charm technology and its toolsets to model a hardware
+<strong>solution</strong> and components and to a achieve a seamless deployment
+from design board and a configured system with full automation. </p>
+</blockquote>
+<p>As an example, we are to design a solution that consists of the
+following hardwares. Using the charm tools we will be not only model
+the solution, but to make the deployment based on this configuration
+so to acquire a complete software-defined system.</p>
+<figure class="row">
+  <img class="col s7"
+       src="/images/hw%20workload%20deploy%20example.png" />
+  <img class="col s5"
+       src="/images/hw%20workload%20deploy%20example%20components.png" />
+  <figcaption class="col s12">HW workloads</figcaption>
+</figure>
+
+<h1>Model</h1>
+<p>In an over simplified form, we view a system such as ThinkAgile in a tree
+model, where the top level is a <strong>solution</strong>, say ThinkAgile, which
+then contains one-to-many racks. Rack can then include servers, and
+servers are consisted of components such as RAID adapters and
+storages.</p>
+<figure class="s12 center">
+  <img src="/images/hw%20solution%20tree.png" />
+  <figcaption>HW solution hierarchy</figcaption>
+</figure>
+
+<p>Each of these entities (rack, server, and so on) can have
+configuration options (attributes), and to execute these
+configurations there will be actions. So if we arrive to the point
+that we define a switch with its attributes and a set of actions so
+that it can be configured based on a pre-defined blueprint, we shall
+be able to wire these entities together to achieve higher complexity
+&mdash; like building legos!</p>
+<h1>Charm dev</h1>
+<p>In this section we'll go over the code layout that implement this
+model in charm terms. </p>
+<h2>Code layout</h2>
+<p>The code can really live in any folder (we can wire them using
+environment variables, see below). But here we suggest to put all of
+them into one directory.</p>
+<ol>
+<li><span class="myhighlight">interfaces</span>: relation interface
+   code. This is the mechanism to signal between charms and between
+   charm units since <code>state</code> do not go across unit boundary.</li>
+<li><span class="myhighlight">charms</span>: charm code. Each subfolder can
+   be compiled into a charm (see "Compiling charms" section for
+   details).</li>
+<li><span class="dist">dist</span>: built charms live here. Subfolder
+   <code>trusty</code> is defined in charm build <code>--series</code>. This is significant
+   in software application where one determines the OS compatibility
+   with the deployment, but has no meaning in HW workload currently. </li>
+</ol>
+<div class="highlight"><pre><span></span>.
+├── deps
+│   ├── interface
+│   └── layer
+├── dist
+│   ├── deps
+│   └── trusty
+├── interfaces
+│   ├── rack-pdu
+│   ├── rack-switch
+│   ├── raid-server
+│   ├── server-rack
+│   ├── storage-server
+│   └── switch-server
+├── charms
+│   ├── charm-chain-state
+│   ├── charm-pdu
+│   ├── charm-rack
+│   ├── charm-raid
+│   ├── charm-raid-cisco-p345
+│   ├── charm-raid-dell-h330
+│   ├── charm-server
+│   ├── charm-server-3550
+│   ├── charm-server-3650
+│   ├── charm-storage
+│   ├── charm-switch
+│   ├── charm-switch-dell-n2048p
+│   └── charm-switch-meraki-ms425
+├── README.md
+└── thinkagile.yaml
+</pre></div>
+
+
+<h2>Environment variables</h2>
+<p>Correspondingly, we define three environment variables, each points to
+a folder above:</p>
+<ol>
+<li><code>LAYER_PATH</code> &rarr; <code>./charms</code>, where charm/layer code resides.</li>
+<li><code>INTERFACE_PATH</code> &rarr; <code>./interfaces</code>, where interface code
+   resides.</li>
+<li><code>JUJU_REPOSITORY</code> &rarr; <code>./dist</code>, where ready-to-deploy charms reside.</li>
+</ol>
+<h2>Compiling charms</h2>
+<p>Compiling a charm refers to using a Canonical developed Python tool,
+<code>charm-tools</code>(<a href="https://jujucharms.com/docs/1.24/authors-charm-metadata">source</a>), to assemble charm and its dependent libs
+and so on into a single <em>charm</em> so that juju can then be used to
+deploy it to a target machine.</p>
+<p>Two ways to install <code>charm-tools</code>:
+1. <code>apt get charm-tools</code> (if on Ubuntu), or
+2. <code>pip install charm-tools</code>, preferred since then you can use Python
+   virtualenv.</p>
+<p>Be warned that the installed <code>charm</code> has a poor CLI interface &mdash;
+it doesn't have <code>--help</code> nor error message if the parameters are not
+adequate. So typing <code>$ charm</code> will hang without giving you a clue of
+what is going wrong.</p>
+<p>To compile a charm, for exampe <code>charm-switch</code>:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> <span class="nv">$LAYER_PATH</span>/charm-server
+$ charm build
+....
+build: Composing into /home/fengxia/workspace/hwcharm/dist
+build: Destination charm directory: /home/fengxia/workspace/hwcharm/dist/trusty/switch
+build: Processing layer: layer:basic
+build: Processing layer: switch
+</pre></div>
+
+
+<p>The <code>Destination charm directory</code> is the directory defined by
+environment variable <code>JUJU_REPOSITORY</code>.</p>
+<h1>A HW charm</h1>
+<p>Defining a HW charm is like defining any other charms. The basic code
+structure is shown below (using <code>charm-switch</code> as an example):</p>
+<div class="highlight"><pre><span></span>.
+├── config.yaml        &lt;-- configuration options
+├── icon.svg           &lt;-- application icon
+├── layer.yaml         &lt;-- charm inheritance
+├── metadata.yaml      &lt;-- charm name, relations
+├── reactive          
+│   └── switch.py      &lt;-- application logics
+└── templates
+    └── switch_config  &lt;-- jinja2 template <span class="k">for</span> configs
+</pre></div>
+
+
+<h2>config.yaml</h2>
+<p>The file holds configuration variables that can then be set using juju
+command and through Juju GUI. For example, here we define a few switch
+attributes: <code>size</code>, <code>speed</code>, <code>os</code>, <code>cooling-orientation</code>... Charm
+supports four <code>type</code>: boolean, string, int and float.</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">size</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;1U&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">descriptioin</span><span class="p p-Indicator">:</span> <span class="s">&quot;1U/2U&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">speed</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;1G&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;1G/10G&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">cooling-orientation</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;Horizontal&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Horizontal/Vertical&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">os</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;ENOS&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;ENOS/CNOS&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">port-config-json</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Por</span><span class="nv"> </span><span class="s">config</span><span class="nv"> </span><span class="s">JSON&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">configuration-url</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;http://10.0.240.43/server/configuration/&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Server</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">URL&quot;</span>
+</pre></div>
+
+
+<h2>metadata.yaml - relation hierarchy</h2>
+<p>This file defines the charm name, and more importantly, its <code>relation</code>
+with other charms as in the <code>provides</code> and <code>requires</code> section.</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">switch</span>
+<span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">This is a switch charm.</span>
+<span class="l l-Scalar l-Scalar-Plain">maintainer</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Feng Xia &lt;fxia1@lenovo.com&gt;</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+  <span class="no">A generic switch charm.</span>
+<span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">switch</span>
+<span class="l l-Scalar l-Scalar-Plain">provides</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">rack</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-switch</span>
+  <span class="l l-Scalar l-Scalar-Plain">server</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">switch-server</span>
+</pre></div>
+
+
+<ol>
+<li><span class="myhighlight">name</span>: <code>charm build</code> will create a
+   folder named <code>switch</code> in <code>JUJU_REPOSITORY/trusty</code> directory. Can
+   use <code>$ juju deploy $JUJU_REPOSITORY/trusty/switch</code> to deploy.</li>
+<li><span class="myhighlight">tags</span>: arbitrary. Canonical charm
+   store has a <a href="https://jujucharms.com/docs/1.24/authors-charm-metadata">list</a> but if we are using these charm local, they become
+   irrelevant.</li>
+<li><span class="myhighlight">provides/requires</span>: <code>interface:</code>
+   must be a valid interface defined in <code>$INTERFACE_PATH</code>. The name
+   <code>rack</code> and <code>server</code> can be anything. They will be later be used in
+   bundle file (see "Bundle" section).</li>
+</ol>
+<h2>layer.yaml - charm inheritance</h2>
+<p>Each charm is defined as a <code>layer</code> in charm's term. So here one can
+<strong>inherit</strong> other charms using <code>includes</code> syntax. </p>
+<ol>
+<li><code>layer:basic</code> <strong>must</strong> be included! It defines some basic package
+   installation, eg. Python binaries and its virtualenv. </li>
+<li>Configs from <em>included</em> charms will be pulled into the new charm so
+  on Juju GUI all configs defined in both the parent and the children
+  are visible.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">git@github.com:xyz/xyz.git</span>
+<span class="l l-Scalar l-Scalar-Plain">includes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;layer:basic&#39;</span>
+  <span class="p p-Indicator">-</span> <span class="s">&#39;layer:other-charm</span>
+</pre></div>
+
+
+<h2>Interface - charm relations</h2>
+<p>Charm interface is used in our modeling to define entity-to-entity
+relation, such as linking rack to PDU. We have seen how to use these
+interfaces in <code>metadata.yaml</code> earlier using <code>requires/provides</code>. In
+this section we will see how to define an interface. Using interface
+<code>rack-pdu</code> for example:</p>
+<div class="highlight"><pre><span></span>rack-pdu
+├── interface.yaml
+├── provides.py    &lt;-- code <span class="k">for</span> interface provider
+└── requires.py    &lt;-- code <span class="k">for</span> interface consumer
+</pre></div>
+
+
+<h2>interface.yaml</h2>
+<ol>
+<li><span class="myhighlight">name</span>: is the actual interface name
+   used in <code>metadata.yaml</code>, not the folder name.</li>
+<li>repo: will generate a warning, but no harm.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu</span>
+<span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Rack to PDU interface</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://git.launchpad.net/whatever/</span>
+</pre></div>
+
+
+<h1>Deploy charm</h1>
+<p>We will cover two ways to deploy charms &mdash; deploy a single charm,
+or using a bundle (batch mode). </p>
+<p>Setup a sandbox</p>
+<ol>
+<li>Get a Ubuntu 16.04 VM, install Juju per this <a href="https://jujucharms.com/docs/stable/getting-started">instruction</a>.</li>
+<li><code>$ juju bootstrap lxd lxd-test</code> to bootstrap a LXD based juju
+   environment.</li>
+<li>To run a juju gui, <code>$ juju gui</code>. This should bring up a brower with
+   the GUI.<ol>
+<li>To login, you need to change the admin password: $ juju
+   change-user-password`.</li>
+<li>In GUI, username: <code>Admin</code>, password: see previous step.</li>
+</ol>
+</li>
+</ol>
+<p>Deploy a single charm. Charm name is the folder name in
+<code>$JUJU_REPOSITORY/trusty</code>.</p>
+<div class="highlight"><pre><span></span>$ juju deploy <span class="nv">$JUJU_REPOSITORY</span>/trusty/<span class="o">[</span>charm name<span class="o">]</span>
+
+fengxia@local-charmdev:~/juju deploy <span class="nv">$JUJU_REPOSITORY</span>/trusty/pdu --series trusty --debug
+11:13:59 INFO  juju.cmd supercommand.go:63 running juju <span class="o">[</span>2.0.1.97 gc go1.6<span class="o">]</span>
+11:13:59 DEBUG juju.cmd supercommand.go:64   args: <span class="o">[]</span>string<span class="o">{</span><span class="s2">&quot;/home/fengxia/juju&quot;</span>, <span class="s2">&quot;deploy&quot;</span>, <span class="s2">&quot;/home/fengxia/workspace/hwcharm/dist/trusty/pdu&quot;</span>, <span class="s2">&quot;--series&quot;</span>, <span class="s2">&quot;trusty&quot;</span>, <span class="s2">&quot;--debug&quot;</span><span class="o">}</span>
+11:13:59 INFO  juju.juju api.go:72 connecting to API addresses: <span class="o">[</span>10.129.186.203:17070<span class="o">]</span>
+11:13:59 INFO  juju.api apiclient.go:530 dialing <span class="s2">&quot;wss://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/api&quot;</span>
+11:13:59 INFO  juju.api apiclient.go:466 connection established to <span class="s2">&quot;wss://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/api&quot;</span>
+11:13:59 DEBUG juju.juju api.go:263 API hostnames unchanged - not resolving
+11:13:59 DEBUG juju.cmd.juju.application deploy.go:768 cannot interpret as <span class="nb">local</span> bundle: <span class="nb">read</span> /home/fengxia/workspace/hwcharm/dist/trusty/pdu: is a directory
+11:13:59 DEBUG httpbakery client.go:244 client <span class="k">do</span> POST https://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/charms?revision<span class="o">=</span>0<span class="p">&amp;</span><span class="nv">schema</span><span class="o">=</span>local<span class="p">&amp;</span><span class="nv">series</span><span class="o">=</span>trusty <span class="o">{</span>
+11:14:00 DEBUG httpbakery client.go:246 <span class="o">}</span> -&gt; error &lt;nil&gt;
+11:14:00 INFO  cmd cmd.go:129 Deploying charm <span class="s2">&quot;local:trusty/pdu-0&quot;</span>.
+11:14:00 INFO  cmd supercommand.go:467 <span class="nb">command</span> finished
+</pre></div>
+
+
+<h2>bundle</h2>
+<p>Charm bundle is a template to batch deploying of multiple charms and
+their relations. </p>
+<ol>
+<li><span class="myhighlight">machines</span>: section to define
+  machines that are being requested to run the workload.</li>
+<li><span class="myhighlight">services</span>: list of charms to
+   deploy.</li>
+<li><span class="myhighlight">series</span>: default OS series for a
+   new machine.<ol>
+<li><code>charm</code>: relative path to charm artifacts</li>
+<li><code>num_units</code>: how many charm instances to deploy</li>
+<li><code>to</code>: can designate a machine ID for this charm</li>
+<li><code>annotations</code>: coordinates for Juju GUI</li>
+</ol>
+</li>
+<li><span class="myhighlight">relations</span>: list of relations to
+   connect charms.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">machines</span><span class="p p-Indicator">:</span>
+  <span class="s">&quot;1&quot;</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">constraints</span><span class="p p-Indicator">:</span> <span class="s">&quot;mem=2G&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">series</span><span class="p p-Indicator">:</span> <span class="s">&quot;xenial&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+  <span class="c1"># 42U default rack</span>
+  <span class="l l-Scalar l-Scalar-Plain">rack</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">charm</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">./dist/trusty/rack</span>
+    <span class="l l-Scalar l-Scalar-Plain">num_units</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="l l-Scalar l-Scalar-Plain">annotations</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">gui-x</span><span class="p p-Indicator">:</span> <span class="s">&quot;300&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">gui-y</span><span class="p p-Indicator">:</span> <span class="s">&quot;300&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">to</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;1&quot;</span>
+
+<span class="c1"># default series, n/a in modeling</span>
+<span class="l l-Scalar l-Scalar-Plain">series</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
+
+<span class="c1"># relations</span>
+<span class="l l-Scalar l-Scalar-Plain">relations</span><span class="p p-Indicator">:</span>
+  <span class="c1"># rack to PDU relation</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="s">&quot;rack:pdu&quot;</span> <span class="c1"># require first, app name:required interface name</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;pdu:rack&quot;</span> <span class="c1"># provide 2nd, app name:provides interface name</span>
+</pre></div>
+
+
+<h3>relations</h3>
+<p>Definition of <em>relations</em> is confusing at beginning. For software
+applications it is less so because <code>provides</code> will offer a service,
+eg. http and DB, and <code>requires</code> will consume it.</p>
+<p>In HW workload we are borrowing this term to illustrate a rather
+general connection between two entities. In the bundle example above,
+we first define an interface in <code>$INTERFACE_PATH</code> called
+<code>rack-pdu</code>. Then in rack's <code>metadata.yaml</code> we define:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requires</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">pdu</span><span class="p p-Indicator">:</span>                   <span class="l l-Scalar l-Scalar-Plain">&lt;-- can be any name</span>
+    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu  &lt;-- must be a valid interface!</span>
+</pre></div>
+
+
+<p>and correspondingly in pdu's <code>metadata.yaml</code> we define:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">provides</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">rack</span><span class="p p-Indicator">:</span>                  <span class="l l-Scalar l-Scalar-Plain">&lt;-- can be any name</span>
+    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu</span>
+</pre></div>
+
+
+<p>Then in bundle, we define the followings:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">relations</span><span class="p p-Indicator">:</span>
+  <span class="c1"># rack to PDU relation</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="s">&quot;rack:pdu&quot;</span> <span class="c1"># require first, charm name:required interface name</span>
+    <span class="p p-Indicator">-</span> <span class="s">&quot;pdu:rack&quot;</span> <span class="c1"># provide 2nd, charm name:provides interface name</span>
+</pre></div>
+
+
+<p>where:
+1. first one must be a <code>require</code> relation. Format <code>charm name:interface
+   name</code>. Since rack is <em>requiring</em> in this case, the charm name is
+   <code>rack</code> (as seen in the <code>Services</code> section), and relation name is
+   what's defined in rack's <code>metadata.yaml</code>.
+2. Similarly, the second one is the <code>provide</code> relation. Same format
+   and naming.</p>
+<p>With these set, one can deploy a bundle using <code>$ juju deploy
+bundle.yaml</code> and watch the charms get deployed.</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-09-06
+            </div>
+
+            <h5 class="card-title">
+              Juju local LXD
+            </h5>
+
+            <p>
+              <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju local LXD.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

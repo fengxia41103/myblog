@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-04-12
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Enable GlusterFS and Virtualization on CIMP</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <blockquote>
+<p>Pre-requirement:</p>
+<p>All the CIMP nodes have CentOS  installed with basic packages;
+All the CIMP nodes have logical networks configured, and each of them can reach to others via Internal management network;
+All the CIMP nodes have a disk partition configured on /dev/sdb2</p>
+</blockquote>
+<p>In order to support high availability (HA) feature for control plane
+applications, we decided to use GlusterFS to provide file system
+HA. With the help of GlusterFS, we can support live-migration of VMs
+from one CIMP node to another. GlusterFS also helps to replicate the
+snapshots of VMs to othe CIMP nodes, so that no data loss is expected
+even one CIMP node is down.</p>
+<p>Running on CIMP nodes, Openstack Controller VMs already protected with
+HA mechanism build on Pacemaker. Thus, there is little benefit to
+provide file system level HA for Openstack Controller VMs. So
+Openstack Controller images are stored on <code>/var/controller/running</code>
+directory, which is not mounted to glusterFS.</p>
+<p>Roller and XClarity don't have any native HA feature implemented. The
+proposed design is to store Roller and XClarity running image on
+GlusterFS cluster, e.g. <code>/var/images/running</code>. All the snapshots will
+be stored on this directory also. The rest of this document will
+further explain how to setup GlusterFS.</p>
+<h1>Configure Communication Between Nodes</h1>
+<p>Confirm that you can <code>ping</code> all the CIMP nodes using their IP,
+eg. <code>192.0.23.1</code>.  Setup hostname resolution or DNS for all the CIMP
+nodes as shown below.  Now we need to make sure we can communicate
+with the machines by their host name. If you have a DNS server, add
+additional entries for all CIMP ndoes. Alternatively, you'll need to add
+the machines to <code>/etc/hosts</code> on all nodes (<code>cimp-node2</code> shown below):</p>
+<div class="highlight"><pre><span></span><span class="c1"># cat /etc/hosts</span>
+
+127.0.0.1   cimp-node2 localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         cimp-node2 localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.0.23.1 cimp-node1
+192.0.23.2 cimp-node2
+192.0.23.3 cimp-node3
+</pre></div>
+
+
+<p>We can now verify the setup by <code>ping cimp-node[x]</code>.</p>
+<h1>Install GlusterFS package</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<p>GlusterFS version <code>3.8.7</code> is recommended for ThinkAgile CIMP nodes. To
+install GlusterFS, download the compressed file of the following RPMs
+from <a href="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/Lenovo%20ThinkAgile%20Ceph/rpms.tar​">rpm files</a> to <code>/tmp</code> directory and run <code>yum install *.rpm</code> 
+to install all the packages.</p>
+<div class="highlight"><pre><span></span>attr-2.4.46-12.el7.x86_64.rpm
+epel-release-latest-7.noarch.rpm
+glusterfs-3.8.7-1.el7.x86_64.rpm
+glusterfs-api-3.8.7-1.el7.x86_64.rpm
+glusterfs-cli-3.8.7-1.el7.x86_64.rpm
+glusterfs-client-xlators-3.8.7-1.el7.x86_64.rpm
+glusterfs-fuse-3.8.7-1.el7.x86_64.rpm
+glusterfs-libs-3.8.7-1.el7.x86_64.rpm
+glusterfs-server-3.8.7-1.el7.x86_64.rpm
+gssproxy-0.4.1-13.el7.x86_64.rpm
+keyutils-1.5.8-3.el7.x86_64.rpm
+libbasicobjects-0.1.1-27.el7.x86_64.rpm
+libcollection-0.6.2-27.el7.x86_64.rpm
+libevent-2.0.21-4.el7.x86_64.rpm
+libini_config-1.3.0-27.el7.x86_64.rpm
+libnfsidmap-0.25-15.el7.x86_64.rpm
+libpath_utils-0.2.1-27.el7.x86_64.rpm
+libref_array-0.1.5-27.el7.x86_64.rpm
+libtalloc-2.1.6-1.el7.x86_64.rpm
+libtevent-0.9.28-1.el7.x86_64.rpm
+libtirpc-0.2.4-0.8.el7.x86_64.rpm
+libverto-tevent-0.2.5-4.el7.x86_64.rpm
+nfs-utils-1.3.0-0.33.el7_3.x86_64.rpm
+psmisc-22.20-11.el7.x86_64.rpm
+quota-4.01-14.el7.x86_64.rpm
+quota-nls-4.01-14.el7.noarch.rpm
+rpcbind-0.2.0-38.el7.x86_64.rpm
+sysstat-10.1.5-7.el7.x86_64.rpm
+tcp_wrappers-7.6-77.el7.x86_64.rpm
+userspace-rcu-0.7.16-1.el7.x86_64.rpm​
+</pre></div>
+
+
+<p>After the installation, use the following command to verify:</p>
+<div class="highlight"><pre><span></span>$ gluster --version
+
+glusterfs 3.8.7 built on Dec <span class="m">14</span> <span class="m">2016</span> 04:49:31
+Repository revision: git://git.gluster.com/glusterfs.git
+...
+</pre></div>
+
+
+<h1>Install KVM/Libvirt package</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span>$ sudo yum update
+$ sudo yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer
+</pre></div>
+
+
+<h1>Install KVM/Libvirt package</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span>$ sudo systemctl start libvirtd
+$ sudo  systemctl <span class="nb">enable</span> libvirtd
+$ sudo systemctl start glusterd
+$ sudo systemctl <span class="nb">enable</span> glusterd
+$ sudo systemctl status glusterd
+</pre></div>
+
+
+<figure class="s12 center">
+<img     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/glusterfs%20status.png" />
+<figcaption>Install KVM/libvirt packages</figcaption>
+</figure>
+
+<h1>Configure firewall</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>111/tcp --add-port<span class="o">=</span>139/tcp --add-port<span class="o">=</span>445/tcp --add-port<span class="o">=</span>965/tcp --add-port<span class="o">=</span>2049/tcp --add-port<span class="o">=</span>38465-38469/tcp --add-port<span class="o">=</span>24007-24008/tcp --add-port<span class="o">=</span>631/tcp --add-port<span class="o">=</span>111/udp --add-port<span class="o">=</span>963/udp --add-port<span class="o">=</span>49152-49251/tcp  --permanent
+$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>5900-5910/tcp  --permanent
+$ sudo firewall-cmd --reload
+</pre></div>
+
+
+<figure class="s12 center">
+<img src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/firewall.png" />
+<figcaption>Setup firewall</figcaption>
+</figure>
+
+<h1>Configure GlusterFS</h1>
+<h2>Build GlusterFS brick</h2>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span>$ sudo pvcreate /dev/sdb2
+$ sudo vgcreate vg_gluster /dev/sdb2
+$ sudo lvcreate -l 100%FREE -n brick-img vg_gluster
+$ sudo mkfs.xfs /dev/vg_gluster/brick-img
+</pre></div>
+
+
+<p>Note: alternatively you can use <code>lvcreate -L 1000G</code> switch if the
+known free space is exactly 1000G. However, if nodes were
+partititioned differently, it is easier to use the <code>-l 100%FREE</code>
+(lower case "L") switch, which will take all the free space available to create a new logic volume <code>brick-img</code>. Snapshot below actually shows both commands, where <code>-L 1000G</code> failed with error <code>insufficient free space</code>.</p>
+<figure class="row">
+    <img class="img-responsive center"
+    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/configure%20glusterfs.png"/>
+    <figcaption>Create logic volume used by Glusterfs</figcaption>
+</figure>
+
+<p>After configure the brick, use <code>lsblk</code> command to verify it. The
+output should look similar to the following:</p>
+<figure class="row">
+    <img class="img-responsive center"
+    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/verify%20logical%20volume.png"/>
+    <figcaption>Verify logical volume</figcaption>
+</figure>
+
+<p>Then, mount the brick to a directory:</p>
+<div class="highlight"><pre><span></span>$ sudo mkdir –p /var/brick-img
+$ sudo  mount /dev/vg_gluster/brick-img /var/brick-img
+</pre></div>
+
+
+<p>To make this mount persistent, add the following line in the <code>/etc/fstab</code>:</p>
+<div class="highlight"><pre><span></span>/dev/vg_gluster/brick-img /var/brick-img            xfs defaults <span class="m">0</span> 0
+</pre></div>
+
+
+<p>Check the mount point:</p>
+<div class="highlight"><pre><span></span>$ sudo mount -a <span class="o">&amp;&amp;</span> mount
+sysfs on /sys <span class="nb">type</span> sysfs <span class="o">(</span>rw,nosuid,nodev,noexec,relatime<span class="o">)</span>
+proc on /proc <span class="nb">type</span> proc <span class="o">(</span>rw,nosuid,nodev,noexec,relatime<span class="o">)</span>
+
+...
+
+tmpfs on /run/user/1000 <span class="nb">type</span> tmpfs <span class="o">(</span>rw,nosuid,nodev,relatime,size<span class="o">=</span>52761800k,mode<span class="o">=</span>700,uid<span class="o">=</span>1000,gid<span class="o">=</span>1000<span class="o">)</span>
+/dev/mapper/vg_gluster-brick--img on /var/brick-img <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+</pre></div>
+
+
+<h2>Configure trusted pool</h2>
+<blockquote>
+<p>Execute on <code>cimp-node1</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span>$ gluster peer probe cimp-node2
+$ gluster peer probe cimp-node3
+$ gluster peer status
+</pre></div>
+
+
+<figure class="row">
+    <img class="img-responsive center"
+    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/gluster%20peer%20status.png"/>
+    <figcaption>Configure trusted pool</figcaption>
+</figure>
+
+<h2>Create GlusterFS volume</h2>
+<blockquote>
+<p>Execute on <code>cimp-node1</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span>$ sudo gluster volume create vol-1 replica <span class="m">3</span> cimp-node1:/var/brick-img/running cimp-node2:/var/brick-img/running cimp-node3:/var/brick-img/running
+$ sudo gluster volume start vol-1
+</pre></div>
+
+
+<p>Confirm the Gluster volume running:</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>root@cimp-node1 ~<span class="o">]</span><span class="c1"># gluster volume info all</span>
+Volume Name: vol-1
+Type: Replicate
+Volume ID: e2adeb6c-e0ac-4696-8d9f-940536a6f525
+Status: Started
+Snapshot Count: 0
+Number of Bricks: <span class="m">1</span> x <span class="nv">3</span> <span class="o">=</span> 3
+Transport-type: tcp
+Bricks:
+Brick1: cimp-node1:/var/brick-img/running
+Brick2: cimp-node2:/var/brick-img/running
+Brick3: cimp-node3:/var/brick-img/running
+Options Reconfigured:
+transport.address-family: inet
+performance.readdir-ahead: on
+nfs.disable: on
+</pre></div>
+
+
+<h2>Use the GlusterFS volume as a shared storage pool</h2>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<p>The following commands are using <code>cimp-node1</code> as example.  They should
+be executed on each CIMP node by replacing <code>cimp-node[x]</code> with proper
+host name index, eg. <code>cimp-node2</code>.</p>
+<p>Create a new directory as a place holder of all the VM images and
+snapshots that requires GlusterFS as the backend storage pool.</p>
+<div class="highlight"><pre><span></span>$ sudo mkdir -p /var/images/running
+</pre></div>
+
+
+<p>Then, mount the GlusterFS volume to the new directory:</p>
+<div class="highlight"><pre><span></span>$ sudo mount -t glusterfs cimp-node1:/vol-1 /var/images/running
+</pre></div>
+
+
+<p>To make the mount persistent, the mount entry should be added to <code>/etc/fstab</code>:</p>
+<div class="highlight"><pre><span></span>cimp-node1:vol-1  /var/images/running glusterfs defaults,_netdev <span class="m">0</span> 0
+</pre></div>
+
+
+<p>Finally, enable <code>virt_use_fusefs</code>:</p>
+<div class="highlight"><pre><span></span>$ sudo setsebool -P virt_use_fusefs 1
+</pre></div>
+
+
+<h2>Modify default logging configuration</h2>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<p>Modify the following configuration at <code>/etc/logrotate.d/glusterfs</code> 
+to keep 4 weeks backlog only.</p>
+<div class="highlight"><pre><span></span>$ nano /etc/logrotate.d/glusterfs
+
+rotate <span class="m">52</span> --&gt; rotate 4
+</pre></div>
+
+
+<h1>Testing and troubleshooting</h1>
+<p>Test the GlusterFS setup by writing a new file to the 
+<code>/var/imags/running</code> from one CIMP node, and 
+make sure it replicates automatically to all the other CIMP nodes.</p>
+<p>If the directory is read-only, it usually indicates the GlusterFS cluster is not formed either because of networking connection issues or firewall issue.</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>root@cimp-node1 ~<span class="o">]</span><span class="c1"># gluster peer status</span>
+Number of Peers: 2
+
+Hostname: cimp-node2
+Uuid: c20929dd-3ef1-432f-8d51-ca61ac74f9b2
+State: Peer in Cluster <span class="o">(</span>Connected<span class="o">)</span>
+
+Hostname: cimp-node3
+Uuid: 31c93891-45da-4162-a27a-63ac87903304
+State: Peer in Cluster <span class="o">(</span>Connected<span class="o">)</span>
+</pre></div>
+
+
+<p>If all the gluster peers are connected, but the problem is still persistent, you should look into the firewall rules to make sure the port required by the gluster operation is open.</p>
+<p>As a reference, the followings are the firewall ports enabled on my setup:</p>
+<div class="highlight"><pre><span></span>Chain IN_public_allow <span class="o">(</span><span class="m">1</span> references<span class="o">)</span>
+
+target     prot opt <span class="nb">source</span>               destination
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:ssh ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpts:24007:24008 ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:netbios-ssn ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpts:38465:38469 ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:ipp ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpts:rfb:cm ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:965 ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:sunrpc ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:microsoft-ds ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:nfs ctstate NEW
+ACCEPT     udp  --  anywhere             anywhere             udp dpt:sunrpc ctstate NEW
+ACCEPT     udp  --  anywhere             anywhere             udp dpt:963 ctstate NEW
+ACCEPT     tcp  --  anywhere             anywhere             tcp dpts:49152:49251 ctstate NEW
+</pre></div>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-09-06
+            </div>
+
+            <h5 class="card-title">
+              Juju local LXD
+            </h5>
+
+            <p>
+              <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju local LXD.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

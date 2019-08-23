@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-02-28
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Introduction of Juju charms</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>Juju <a href="https://jujucharms.com/">charms</a> are, charming. It promises a selection of blueprints
+that hold magic to make an application deployment easy. But devils are
+in the details, as always the case. In this article we will walk in
+the charm world to learn its design.</p>
+<h1>Bundle, charm, service, application</h1>
+<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can be confusing. Approximately they can be viewed in
+a tree model, where a bundle can have multiple charms, a charm can
+contain multiple <a href="https://jujucharms.com/docs/2.0/authors-subordinate-services">services</a>, a service is composed of one or more
+applications and a group of <a href="https://jujucharms.com/docs/1.24/charms-relations">relations</a>, and a relation, if
+defined, must be one of the two types:</p>
+<ol>
+<li><strong>provide</strong> (eg. I am MySQL and I provide a SQL database relation).</li>
+<li><strong>require</strong> (eg. I'm Mediawiki and I require a SQL database).</li>
+</ol>
+<figure class="s12 center">
+  <img src="/images/juju%20control%20modeling.png" />
+  <figcaption>Juju control modeling</figcaption>
+</figure>
+
+<p>In term of deployment, a service can be deployed to more than one
+machine so as to achieve HA; a machine can also have more than one
+services. Here we use the term machine broadly because it can also be
+a single LXD container, so in this case there can be many containers
+in a single VM, and many VMs on a single physical <em>machine</em>.</p>
+<h1>Charm and layers</h1>
+<p>How does a charm describe an application and its relations then? The
+anwser is: <strong>layers</strong>. A charm is built from three layers:
+<a href="https://jujucharms.com/docs/stable/developer-layers#base,-or-runtime,-layers">basic/runtime layer</a>, <a href="https://jujucharms.com/docs/stable/developer-layers-interfaces">interface layer</a>, and charm layer. Basic
+layer is like a library &mdash; common parts that many applications
+can use without conflicts. Thing like DB services, HTTP server,
+storage should belong to this category. Interface layer is an abstract
+of what a charm exposes for consumption. Case in point will be any
+database charm, who should always define an interface to exchange DB
+login credentials and ports. Charm layer is application specific, and
+its logic is following the <a href="https://pythonhosted.org/charms.reactive/">reactive pattern</a>.</p>
+<figure class="s12 center">
+    <img src="/images/juju%20charm%20layers.png" />
+    <figcaption>Juju charm layers</figcaption>
+</figure>
+
+<h2>Hooks and Reactive pattern</h2>
+<p>Previously, charms are written as a list of <a href="http://interfaces.juju.solutions/">hooks</a> responding to
+events. This is still true because hooks are the actual scripts. Any
+charm supports the following hooks:</p>
+<ol>
+<li>install</li>
+<li>config-changed</li>
+<li>start</li>
+<li>upgrade-charm</li>
+<li>stop</li>
+<li>update-status</li>
+<li>leader-elected</li>
+<li>leader-settings-changed</li>
+</ol>
+<p>For each <code>relation</code> defined, there are four <em>relation hooks</em>:</p>
+<ol>
+<li>[name]-relation-joined</li>
+<li>[name]-relation-changed</li>
+<li>[name]-relation-departed</li>
+<li>[name]-relation-broken</li>
+</ol>
+<p>Hooks run in a paritcular sequence, and that sequence is
+<strong>hardcoded</strong>.  This is terrible. So instead of individual hooks, we
+have now a better way to capture this concept using <strong><a href="https://jujucharms.com/docs/stable/developer-layers#states">States</a></strong>
+&mdash; <a href="https://pythonhosted.org/charms.reactive/">reactive pattern</a>.  A charm can define arbitrary state,
+say <strong>foo</strong>. Another layer in the same charm can then uses Python
+decorator, eg. <code>@when</code>, <code>@when_not</code>, to specify the status of
+<strong>foo</strong>, which then determined whether the function will be
+executed. I suppose the framework itself handles event polling,
+broadcasting and the like.</p>
+<blockquote>
+<p>State has a namespace per charm per unit. Therefore, states do not
+go across unit boundary, nor charm boundary.
+For states between charms/units, use <code>interface</code>.</p>
+</blockquote>
+<h2>Basic/runtime layer</h2>
+<p>There are two ways to construct basic layer: use an existing one, such
+as the <a href="https://github.com/johnsca/apache-php">apache-php</a>, or use the <a href="http://github.com/juju-solutions/layer-basic">basic layer</a> template to write
+your own. Don't forget to check out these existing <a href="https://github.com/juju-solutions">runtime layers</a>
+for reuse. <em>Note</em>: which one can be reused, and which one can not? I
+don't see any document to distinguish this.</p>
+<h2>Interface layer</h2>
+<p><a href="https://jujucharms.com/docs/stable/developer-layers-interfaces">Interface layer</a> defines both the <em>provides</em> and the <em>requires</em>.
+One thing to remember is that relation does not define the actual
+connection at all! What it does is to pass along configurations
+&mdash; IP address, port, user name, password, and such. For example,
+if there is a MySQL <em>provides</em> and Wordpress <em>requires</em>, Wordpress
+will read from the providing side of configurations needed to make the
+connection.</p>
+<figure class="s12 center">
+    <img src="/images/charm%20relation%20and%20interface.png" />
+    <figcaption>Charm relation and interface</figcaption>
+</figure>
+
+<h3>Communication scope</h3>
+<p>Interfaces are categorized into three <a href="https://jujucharms.com/docs/stable/developer-layers-interfaces#communication-scopes">communication scopes</a>:
+global level, service level, and unit level. Again, they are grouping
+concept, where unit is the atom (and the default level). Multiple
+units can belong to a service level, and everything else goes into
+global level.</p>
+<p>The communication scope is closely related to the <a href="https://jujucharms.com/docs/2.0/authors-relations-in-depth">relationship
+lifecycle</a>, where units in the same scope will have data
+broadcasted to them so they will be aware of each other's
+state. Therefore, unit level can be used for application that provides
+no relation and has no peer-to-peer need; service level is certainly
+<strong>providing</strong> some type of relation so others can leverage; and global
+is just a catch-all scope.</p>
+<h3>Relation and Interface</h3>
+<p>So how does relation and interface come into play? Declaring relation
+is a strong statement. As we have already mentioned, there are two
+types of relations: <em>provides</em> and <em>requires</em>. The provides and
+requires keys defined in metadata.yaml are used to define pairings of
+charms that are likely to be fruitful. Consider mongodb's metadata:</p>
+<div class="highlight"><pre><span></span>name: mongodb
+...
+provides:
+  database:
+    interface: mongodb
+</pre></div>
+
+
+<p>where in another metadata who is on the receiving end of this relation:</p>
+<div class="highlight"><pre><span></span>name: my-node-app
+...
+requires:
+  database:
+    interface: mongodb
+provides:
+  website:
+    interface: http
+</pre></div>
+
+
+<p>The word <strong>database</strong> is the relation name. There is no restriction to
+it except it can not be <em>juju</em> or <em>jujud</em>. Relation name serves as a
+grouping because each relation can have more than one interface.</p>
+<p>The interface name, <em>mongodb</em>, is important, since it is being used to
+look up an existing <a href="http://interfaces.juju.solutions/">relation registry</a> for a match. I think this
+is how charm build can pull in dependencies of other charms/layers.</p>
+<h2>Charm layer</h2>
+<p>This is where the application logics live.</p>
+<h1>Screencast</h1>
+<p>See the process in action:</p>
+<figure class="s12 center">
+    <img src="/images/vanilla%20charm%20deploy.gif" />
+    <figcaption>Screencast showing deploying a Vanilla charm</figcaption>
+</figure>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-09-06
+            </div>
+
+            <h5 class="card-title">
+              Juju local LXD
+            </h5>
+
+            <p>
+              <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju local LXD.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

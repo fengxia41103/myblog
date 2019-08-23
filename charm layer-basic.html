@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-05-29
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Charm layer-basic</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>Have you ever wondered what <a href="https://github.com/juju-solutions/layer-basic.git">layer-basic</a> is for? and why every
+charm needs to include it? In this article we will take a look
+at its code base to decipher this mystery.</p>
+<h1>Hooks</h1>
+<p>We already know hooks are hardcoded. Juju expects certain hooks and
+hook sequence is always executed in an order that is dictated by Juju
+code.</p>
+<figure class="s12 center">
+  <img src="/images/charm%20hooks.png" />
+  <figcaption>Sequence of charm hooks</figcaption>
+</figure>
+
+<p>What do we see in hooks? If you run <code>charm build</code> and examine the <code>dist</code> folder,
+hooks live in <code>dist/yourcharm/hooks</code> folder:</p>
+<div class="highlight"><pre><span></span>.
+├── config-changed
+├── hook.template
+├── install
+├── leader-elected
+├── leader-settings-changed
+├── relations
+│   └── rack-pdu
+│       ├── __init__.py
+│       ├── interface.yaml
+│       ├── provides.py
+│       └── requires.py
+├── start
+├── stop
+├── update-status
+└── upgrade-charm
+</pre></div>
+
+
+<p>We know we haven't defined any custom hook code for this charm,
+so how were they generated? Even more interesting is
+that all hooks are strangely <strong>identical</strong>.
+Take <code>install</code> hook script for example:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="c1"># Load modules from $JUJU_CHARM_DIR/lib</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">charms.layer</span> <span class="kn">import</span> <span class="n">basic</span>
+
+<span class="c1"># This will load and run the appropriate @hook and other decorated</span>
+<span class="c1"># handlers from $JUJU_CHARM_DIR/reactive, $JUJU_CHARM_DIR/hooks/reactive,</span>
+<span class="c1"># and $JUJU_CHARM_DIR/hooks/relations.</span>
+<span class="c1">#</span>
+<span class="c1"># See https://jujucharms.com/docs/stable/authors-charm-building</span>
+<span class="c1"># for more information on this pattern.</span>
+
+<span class="kn">from</span> <span class="nn">charms.reactive</span> <span class="kn">import</span> <span class="n">main</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;lib&#39;</span><span class="p">)</span>
+<span class="n">basic</span><span class="o">.</span><span class="n">bootstrap_charm_deps</span><span class="p">()</span>
+<span class="n">basic</span><span class="o">.</span><span class="n">init_config_states</span><span class="p">()</span>
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>You can diff all of them, and they are all the same! <span
+class="myhighlight">and they are all copies of the
+<code>hook.template</code></span>. The <code>from charms.layer import basic</code> actually
+clearly states that these hooks are <span
+class="myhighlight"><strong>depending</strong></span> on <code>layer-basic</code>. There, is
+why all charms are using it.</p>
+<p>This actually gives us a clue to further investigate how dependent
+charms are to <code>layer-basic</code>. It turned out not as necessary as we
+thought.</p>
+<h1>charm build</h1>
+<p>Source of <code>charm build</code> is <a href="https://github.com/juju/charm-tools">here</a>. Looking into the charm <code>Builder</code> class:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle the processing of overrides, implements the policy of BuildConfig</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">HOOK_TEMPLATE_FILE</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="s1">&#39;hooks/hook.template&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Ah ha, that's where it is expecting <code>hook.template</code>. Following this we have discovered the followings:</p>
+<ol>
+<li>
+<p>Relatioin hooks and storage hooks are dynamically generated. For
+   this to work, <strong>at least one layer must provide</strong> <code>hook.template</code>. The
+   interesting point is that it doesn't relie on <code>layer-basic</code>
+   anymore. If you charm has a <code>/hooks/hook.template</code>, it will work.</p>
+<div class="highlight"><pre><span></span>```python
+def plan_interfaces(self, layers, output_files, plan):
+  ......
+  if not meta and layers.get(&#39;interfaces&#39;):
+      raise BuildError(
+          &#39;Includes interfaces but no metadata.yaml to bind them&#39;)
+  elif self.HOOK_TEMPLATE_FILE not in output_files:
+      raise BuildError(&#39;At least one layer must provide %s&#39;,
+                       self.HOOK_TEMPLATE_FILE)
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>If you didn't define those <strong>must-have</strong> hooks, eg. <code>install</code> hook,
+charm build will happily make the dist, but it will fail at run
+time. What is happening!? It turned out <code>charm</code> binary has an option
+to make <code>proof</code>, and this will complain if you miss expected hooks
+(<a href="https://github.com/juju/charm-tools/issues/325">bug #325</a>), but the proof isn't part of the <code>charm build</code> process.</p>
+<ol>
+<li>
+<p>Code expected hooks:</p>
+<div class="highlight"><pre><span></span>    ```python
+    lint.check_hook(&#39;install&#39;, hooks_path, recommended=True)
+    lint.check_hook(&#39;start&#39;, hooks_path, recommended=True)
+    lint.check_hook(&#39;stop&#39;, hooks_path, recommended=True)
+    if os.path.exists(os.path.join(charm_path, &#39;config.yaml&#39;)):
+        lint.check_hook(&#39;config-changed&#39;, hooks_path, recommended=True)
+    else:
+        lint.check_hook(&#39;config-changed&#39;, hooks_path)
+    ```
+</pre></div>
+
+
+</li>
+<li>
+<p><code>charm proof</code> will catch the missing hooks:</p>
+<div class="highlight"><pre><span></span>    ```shell
+    fengxia@fengxia-xenial-dev:~/workspace/wss/charms/charm-pdu$ charm proof
+    I: metadata name (pdu) must match directory name (charm-pdu) exactly for local deployment.
+    W: no copyright file
+    W: no README file
+    I: relation rack has no hooks
+    I: missing recommended hook install
+    I: missing recommended hook start
+    ```
+</pre></div>
+
+
+</li>
+</ol>
+</li>
+</ol>
+<p>If charm is executed, <code>install</code> hook will run first, which
+then call two functions from <code>layer-basic</code>:</p>
+<ol>
+<li><code>basic.bootstrap_charm_deps()</code></li>
+<li><code>basic.init_config_states()</code></li>
+</ol>
+<p>Let's take a look them respectively.</p>
+<h1><code>boostrap_charm_deps</code></h1>
+<p>This function is to setup the host Python environment for charms.</p>
+<ol>
+<li>
+<p><code>charm-pre-install</code>: execute any nested file named <code>charm-pre-install</code>
+   under an <code>exec.d</code> folder. It uses <code>check_call</code> so any script will work.
+   Once the script has been executed without error, a hidden file
+   <code>.{}_{}.done'.format(module_name, submodule_name))</code> will be created so
+   the same preinstall script will only run ONCE &rarr; this is the
+   way to make the execution only once regardless the sequence of
+   hooks. Therefore whoever runs it once will write this file as
+   breadcrumb for others to check.</p>
+</li>
+<li>
+<p>Install packages in <code>wheelhouse</code> folder. Again, if this has run,
+   a hidden file <code>wheelhouse/.bootstrapped</code> is created so all these
+   packages are installed ONCE (reference: <a href="https://docs.python.org/3/install/index.html#inst-config-files">distutils</a>, <a href="http://setuptools.readthedocs.io/en/latest/easy_install.html#configuration-files">easy_install</a>).</p>
+<p>In <code>wheelhouse.txt</code> file:</p>
+<div class="highlight"><pre><span></span>```shell
+pip&gt;=7.0.0,&lt;8.2.0
+charmhelpers&gt;=0.4.0,&lt;1.0.0
+charms.reactive&gt;=0.1.0,&lt;2.0.0
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Install <code>python-virtualenv</code> if it is included in <code>config.yaml</code>.</p>
+</li>
+</ol>
+<h1><code>init_config_states</code></h1>
+<p>This is where charms will start using Juju commands (via
+<a href="https://pythonhosted.org/charmhelpers/">charmhelpers</a> lib) to set states with Juju controller.  I'm
+copying the codes below since they are fairly self-explanatory.
+Unlike <code>bootstrap_charm_deps</code>, there is no magic file or flag to
+prevent this block executed multiple times. This makes sense since
+each hook can potentially modify charm states, thus run this in each
+hook is necessary.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init_config_states</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">yaml</span>
+    <span class="kn">from</span> <span class="nn">charmhelpers.core</span> <span class="kn">import</span> <span class="n">hookenv</span>
+    <span class="kn">from</span> <span class="nn">charms.reactive</span> <span class="kn">import</span> <span class="n">set_state</span>
+    <span class="kn">from</span> <span class="nn">charms.reactive</span> <span class="kn">import</span> <span class="n">toggle_state</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">hookenv</span><span class="o">.</span><span class="n">config</span><span class="p">()</span>
+    <span class="n">config_defaults</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">config_defs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">config_yaml</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hookenv</span><span class="o">.</span><span class="n">charm_dir</span><span class="p">(),</span> <span class="s1">&#39;config.yaml&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_yaml</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_yaml</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">config_defs</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;options&#39;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">config_defaults</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+                               <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config_defs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">config_defs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">changed</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+            <span class="n">set_state</span><span class="p">(</span><span class="s1">&#39;config.changed&#39;</span><span class="p">)</span>
+            <span class="n">set_state</span><span class="p">(</span><span class="s1">&#39;config.changed.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+        <span class="n">toggle_state</span><span class="p">(</span><span class="s1">&#39;config.set.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+        <span class="n">toggle_state</span><span class="p">(</span><span class="s1">&#39;config.default.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">),</span>
+                     <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="o">==</span> <span class="n">config_defaults</span><span class="p">[</span><span class="n">opt</span><span class="p">])</span>
+    <span class="n">hookenv</span><span class="o">.</span><span class="n">atexit</span><span class="p">(</span><span class="n">clear_config_states</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">clear_config_states</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">charmhelpers.core</span> <span class="kn">import</span> <span class="n">hookenv</span><span class="p">,</span> <span class="n">unitdata</span>
+    <span class="kn">from</span> <span class="nn">charms.reactive</span> <span class="kn">import</span> <span class="n">remove_state</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">hookenv</span><span class="o">.</span><span class="n">config</span><span class="p">()</span>
+    <span class="n">remove_state</span><span class="p">(</span><span class="s1">&#39;config.changed&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">remove_state</span><span class="p">(</span><span class="s1">&#39;config.changed.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+        <span class="n">remove_state</span><span class="p">(</span><span class="s1">&#39;config.set.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+        <span class="n">remove_state</span><span class="p">(</span><span class="s1">&#39;config.default.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
+    <span class="n">unitdata</span><span class="o">.</span><span class="n">kv</span><span class="p">()</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</pre></div>
+
+
+<h1>Conclusion</h1>
+<p><code>layer-basic</code> is the foundation of charm building because it provides
+the entry point to call preinstall scripts, to setup the host Python
+environment and to initialize charm states. It has many hardcoded
+lines for using <code>apt-get</code> CLI and expecting an Ubuntu
+environment. These have been addressed somewhat in <a href="http://fengxia.co/python2 charm.html">python2 charm</a>.
+Going forward, the code base can use some work to support host other
+than Ubuntu and Python2 instead of 3.</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-09-06
+            </div>
+
+            <h5 class="card-title">
+              Juju local LXD
+            </h5>
+
+            <p>
+              <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju local LXD.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

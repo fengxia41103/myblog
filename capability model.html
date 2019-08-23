@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2018-06-12
+
+
+        <a class="wave-effect" href="category/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <a class="wave-effect" href="tag/dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+
+        <h1 class="myhighlight">System capability model</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <p>Ah, <a href="https://en.wikipedia.org/wiki/Data_center_infrastructure_management">DCIM</a>. Infrastructure needs to be managed, but then, what does
+it mean? Borrowing from wiki, a view can be:</p>
+<ol>
+<li>Asset Management</li>
+<li>Network connectivity Management</li>
+<li>Environment Management</li>
+<li>Energy Management</li>
+<li>Change Management and</li>
+<li>Capacity Management</li>
+<li>Computational Fluid Dynamics (CFD) Integration[17]</li>
+</ol>
+<p>This type of view is based on an attribute of object that we are
+managing &mdash; serial number is logged in asset management,
+utilization is likely in energy management, and how full the rack is
+falls in capacity management, and so on.</p>
+<h1>View of attributes</h1>
+<p>However, I think such a view is inadequate because it artificially
+break an attribute into multiple systems, thus creating a boundary
+and possibility that the same attribute may not present, or not
+defined in an agree-ed way, thus its data and meaning becomes a
+conflict rather than an added-value. The situation becomes even worse
+when certain aspect of this attribute is a moving target,
+eg. interface changes a name, or VLAN gets re-named. Are these
+networking management? or asset management?</p>
+<p>To give an example: what does it mean when a server is <em>under
+management</em>? First is to inventory (model, serial #,
+components...). But this is certainly not sufficient. What's the
+<em>state</em> of it? (firmware version, BIOS settings). Then, reading these
+and display them leads to the next step -- can we update them? Now
+this is LXCA and its alternatives. But this leads to more, because
+server <em>state</em> is meaningful only to whoever is using it
+(workloads).... on top of these, a deployment involving multiple
+servers will have a shutdown or bootup sequence which may call for a
+specific order because of data dependency &larr; don't shutdown
+storage server before all its <em>writers</em> have been turned off.</p>
+<p>Therefore, managing a server will inevitably involve multiple
+attributes at the same time, thus it must be a vertical view that cuts
+through all the services mentioned above. In other words, previously
+we extract a list of attributes from an object and build a system 
+based on commonality of their meaning, eg. we put all serial numbers
+into a system called "asset management", all fan speed and heat
+assumption into a "energy management" system, and so on.
+But such approach will always result in overlapping
+presentation of the same object in multiple domains, which then
+leads to a turf war that each fights over
+whose reference is <em>more true than others</em>. A band-aid concept then is
+brought up to build a <a href="https://en.wikipedia.org/wiki/Master_data_management">MDM</a>, a place where all different references
+are reconcilled so to have a consistency and authority. But then, any
+secondary presentation of a data leads to a load of questions such as
+data synchronization, data integrity, and whether MDM is a receiver of
+first-line system, or the source for them? </p>
+<p>It should not be that way.</p>
+<h1>A capability model</h1>
+<p>Instead, I am proposing a different approach. Take any attribute you
+would like to <em>management</em>, I would define its management using a
+model of <strong>five levels of capabilities</strong> (see below). The higher the
+level of capability we implement, the more control we have over that
+attribute, and having control is just another term for management.</p>
+<figure class="col s12 center">
+  <img src="/images/my%20capability%20model.png"/>
+  <figcaption>Five levels of capabilities</figcaption>
+</figure>
+
+<h2>level 1: inventory</h2>
+<p>This is capability of bookkeeping, such as an inventory of hardware as
+seen in vanilla netbox. The distinguished character of data is that
+they are static &mdash; serial number, UUID, and the like. Some data
+are changed over time, such as rack position, but the frequency of its
+change justifies it to be fully capable of a manual update.</p>
+<p>Acceptable strategy:</p>
+<ol>
+<li>manual, or import</li>
+<li>auto &larr; discovery <a href="https://github.com/xcat2/confluent/">confluent</a></li>
+</ol>
+<h2>level 2: reality, and/or, design</h2>
+<p>These two go hand-in-hand, and I'll explain why so.</p>
+<p>Reality is referring to a form of <strong>passive read</strong> to collect
+information &mdash; meta of a system, network traffic, interface name,
+power state, host name, MAC address. It provides data to form a view
+of <strong>what we actually have</strong>.</p>
+<blockquote>
+<p>Remember, in a machine world, if it can read once, it can read
+continuously for many many times.</p>
+</blockquote>
+<p>If one can describe a reality, the same syntax shall be able to
+describe also a <strong>design</strong> &mdash; an expectation of what we want to
+have.</p>
+<p>In any software-defined scheme, we can easily relate to a set of
+<em>configuration values</em> as the design, while their effects represent
+the reality &mdash; I want to set host name to be "xyz", well, so what
+is its name as of this moment? or in a programming language context,
+reality is the <code>get</code> while design is the <code>set</code>.</p>
+<p>But one curious thing of this level is that these two capabilities are
+not both required! You can have a way to read reality, but may have no
+way to match it to a design. For example, <a href="https://www.elastic.co/products/logstash"><code>logdash</code></a>, is a reality
+tool, not a design tool. Then there is Visio, PPT, Word, that you can
+write all about your design, and they will not do anything to convert
+your text to a line of code or a configured system.</p>
+<p>Acceptable strategy:</p>
+<ol>
+<li>For monitoring, auto ONLY (manual is meaningless).</li>
+</ol>
+<h2>level 3: diff</h2>
+<p><strong>Diff = reality - design</strong>.  If you have ever been in a brainstorm
+session of new idea, this is what got most people execited about,
+because it quickly leads to: customer configurable threshold, and
+<strong>alerts</strong>. Now everybody is picturing a buzzing text message, or at
+least an email, to alert an admin in the middle of a night when <strong>a
+diff exceeds a threshold</strong> &larr; it feels empowering, intelligent,
+and machine like.</p>
+<p>But this is a lot harder than many would like to believe. The
+challenge lies in the detail of the <strong>design</strong> &larr; what consists of
+your design? what are the indexes? values? definition of done? Few
+people are good at describing what they want in an upfront
+fashion. Often enough it becomes a guess game, while either both
+parties enjoy, or one gets completly annoyed and frustrated.</p>
+<blockquote>
+<p>You: I want to buy a ticket.
+Agent: where are you going?
+You: Raleigh, NC.
+Agent: here it is.
+You: But it's no good.
+Agent: What do you mean?
+You: It's not a United Airline flight.
+Agent: Oh, np. Here is a UA ticket.
+You: No good.
+Agent: Why?
+You: It's a morning flight!
+Agent: What would you prefer?
+.....</p>
+</blockquote>
+<p>Challenge is in the hand of designer &mdash; how well can s/he list
+out a list of preferences, and how important they are... if you have
+written software requirements, you know most, if not all projects, die
+right here.</p>
+<p>Acceptable strategy:</p>
+<ol>
+<li>auto (manual is meaningless).</li>
+</ol>
+<h2>level 4: design &rarr; reality</h2>
+<p>As soon as one can monitor and validate (level 3 capabilities), the
+next logical step is to <strong>make design into reality</strong>. This at least
+takes care of Day 0 deployment. It requires:</p>
+<ol>
+<li>a syntax to describe design, </li>
+<li>a tool to convert it into executable instructions, </li>
+<li>a monitoring service/agent to read where we are</li>
+<li>a validation/diff to know how far are we from destination</li>
+</ol>
+<p>To user, this is what they will call a <code>state</code> &mdash; they give you a
+wish list, and you are the genie in a bottle.</p>
+<p>Acceptable strategy:</p>
+<ol>
+<li>paper instruction</li>
+<li>some level of automation</li>
+<li>many orchestration tools all claim to achieve this with zero pains.</li>
+</ol>
+<h2>level 5: diff &rarr; design</h2>
+<p>If level 4 gets your design to a reality on day 1, then system will
+inevitably drift and diff from design over time. Alert is nice, but
+self-correction is better.</p>
+<p>Different from design &rarr; reality, diff is essentially a moving
+target. Unlike design which is a static set of expectations, diff can
+expose a value on one has thought about. Thus a capability to bring
+diff back into designed state is a challenge.</p>
+<p>Acceptable strategy:</p>
+<ol>
+<li>Full re-build: wipe it clean and re-build as if new.</li>
+<li>Incremental correction.</li>
+<li>Hybrid: this is the hardest one, also the most likely approach,
+   because it involves a decision of when we should just wipe it clean
+   and rebuild, and when a correction is preferred.</li>
+</ol>
+<h1>An exercise</h1>
+<p>Let's try it with managing a server. </p>
+<figure class="col s12 center">
+  <img src="/images/netbox%20device.png"/>
+  <figcaption>Example: netbox device model</figcaption>  
+</figure>
+
+<p><strong>Filling a value to each and every attribute field does not make the
+server managed</strong>. Instead, we should examine one attribute at a time. Take
+<code>primary_ip4</code> attribute for example:</p>
+<ol>
+<li>level 1: can we document/inventory its value?</li>
+<li>level 2: <ol>
+<li>reality: can we discover IP and match it with a server?</li>
+<li>design: can we define an IP for a server before this IP actually
+  exists?</li>
+</ol>
+</li>
+<li>level 3: can we audit and sound an alarm if there is a diff?</li>
+<li>level 4: can we command this server to obtain a pre-defined IP?</li>
+<li>level 5: if diff is detected, can we do sonmething to re-obtain the original IP
+   besides sounding an alarm?</li>
+</ol>
+<p>In Netbox, this capability stops at level 1. It can inventory, but has
+no discovery capability, no design capability, thus having no level
+3-5 capabilities either. Therefore, the IP attribute of a
+server in Netbox is managed at Level 1, if that satisfies your requirement.</p>
+<h1>Conclusion</h1>
+<p>There is no silver bullet. View, framework, paradigm, these are just
+convenient words, labels, jargons, or BS-es. Attribute is often real
+and concrete &mdash; a rack position, a serial number;
+but its management is ambiguous. However, following a vertical view
+in term of these capabilities, we can at least create five
+placeholders for each and every, thing, that you want to call to
+manage, and ask to fill these blanks before claiming it is managed
+just because it is in a "management system".</p>
+<p>My 2 cents.</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-08-21
+            </div>
+
+            <h5 class="card-title">
+              Boston and other thoughts
+            </h5>
+
+            <p>
+              <figure class="col l8 m8 s12">
+  <img src="/images/such%20a%20beauty.jpg"/>
+</figure>
+
+<p>Trip to Boston was nice, especially when I saw old friends &mdash;
+uncle Tam, Eddy, Bob, Doc Shen and his parents. Not that it brought
+back many memories, but to...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/boston and other thoughts.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-30
+            </div>
+
+            <h5 class="card-title">
+              Ulaanbaatar
+            </h5>
+
+            <p>
+              <p>Who said it first, that the difference between human and other animals
+is that human can <strong>make belief</strong>, that we can imagine things, a
+scenario, a life, that does not exist. Therefore we invented arts,
+movies, music, literature &larr;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ulaanbaatar.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-24
+            </div>
+
+            <h5 class="card-title">
+              People
+            </h5>
+
+            <p>
+              <figure class="col s12">
+  <img src="/images/bunny%20not%20happy.jpg"/>
+</figure>
+
+<p>What is people? I thought I had it figured out, but now I start to
+wonder whether I'm witnessing another make-belief episode in the human
+history when an abstract...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/people.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2019-04-30
+
+
+        <a class="wave-effect" href="category/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+
+        <a class="wave-effect" href="tag/dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+
+        <h1 class="myhighlight">Pandoc workflow</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <figure class="col s12">
+  <img src="/images/peppa.jpg"/>
+</figure>
+
+<p><a href="https://pandoc.org/MANUAL.html">Pandoc</a> is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some tips of how I'm using it.</p>
+<h1>doc header</h1>
+<p>Things that are specific to that document. This, thus, is context
+sensitive &mdash; <code>title</code>, <code>subtitle</code>, <code>author</code>, <code>bibliography</code>,
+<code>abstract</code>, <code>keywords</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Open Cloud  Reference Architecture</span>
+<span class="l l-Scalar l-Scalar-Plain">subtitle</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Version 1.0</span>
+<span class="l l-Scalar l-Scalar-Plain">author</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Feng Xia</span>
+
+<span class="l l-Scalar l-Scalar-Plain">bibliography</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">feng.bib</span>
+<span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">Open Cloud</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">abstract</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+
+  <span class="no">Anything goes here.</span>
+</pre></div>
+
+
+<p>One catch is semicolon in <code>title</code>! Unbelievably, which I haven't
+figured out why, that including a ":" in the title string will mess
+up export to PDF. The symptom you will see is that all your
+reference in <code>.bib</code> will not be found!!</p>
+<h1>LaTex setting</h1>
+<p>A universal setting to latex export. This is additional to the LaTex
+template file I use. Supposedly I can set all these in the template
+also.</p>
+<p>But if I'm using multiple template, this can be looked as the common
+settings for all the PDF I write.</p>
+<p>Here is <a href="/downloads/pandoc/latex.yaml">current version</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">documentclass</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">scrreprt</span>
+<span class="l l-Scalar l-Scalar-Plain">papersize</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a4</span>
+<span class="l l-Scalar l-Scalar-Plain">mainfont</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Ubuntu</span>
+<span class="l l-Scalar l-Scalar-Plain">monofont</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DejaVu Sans Condensed</span>
+<span class="l l-Scalar l-Scalar-Plain">fontsize</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">12pt</span>
+<span class="l l-Scalar l-Scalar-Plain">geometry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">margin=1in</span>
+<span class="l l-Scalar l-Scalar-Plain">linkstyle</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">slanted</span>
+<span class="l l-Scalar l-Scalar-Plain">linkcolor</span><span class="p p-Indicator">:</span> <span class="c1">#d52349</span>
+<span class="l l-Scalar l-Scalar-Plain">titlepage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="l l-Scalar l-Scalar-Plain">titlepage-color</span><span class="p p-Indicator">:</span> <span class="s">&quot;FFFFFF&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">titlepage-text-color</span><span class="p p-Indicator">:</span> <span class="s">&quot;5C68C0&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">titlepage-rule-color</span><span class="p p-Indicator">:</span> <span class="s">&quot;5C68C0&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">logo</span><span class="p p-Indicator">:</span> <span class="s">&quot;../diagrams/company-logo.png&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">toc</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="l l-Scalar l-Scalar-Plain">toc-depth</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="l l-Scalar l-Scalar-Plain">toc-own-page</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="l l-Scalar l-Scalar-Plain">lof</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="l l-Scalar l-Scalar-Plain">lot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="l l-Scalar l-Scalar-Plain">link-citations</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="l l-Scalar l-Scalar-Plain">header-includes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\usepackage{quotchap}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\usepackage{fvextra}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\usepackage{parskip}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\usepackage{fancyhdr}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\pagestyle{fancy}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\fancyhead{}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\fancyfoot{}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\fancyhead[L]{\leftmark}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\fancyhead[R]{\today}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\fancyfoot[R]{\thepage}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\renewcommand{\headrulewidth}{0.4pt}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{breaklines=true}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{language=[Motorola68k]Assembler}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{basicstyle=\small\ttfamily}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{extendedchars=true}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{tabsize=2}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{columns=fixed}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{showstringspaces=false}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{frame=trbl}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{frameround=tttt}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{framesep=4pt}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{numbers=left}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{numberstyle=\tiny\ttfamily}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">\lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}</span>
+<span class="nn">---</span>
+</pre></div>
+
+
+<h1>LaTex template</h1>
+<p>A massive LaTex writing that will be used to generate LaTex and
+PDF. As of writing, there are two templates I like:
+1. <a href="/downloads/pandoc/eisvogel.tex">eisvogel.tex</a>, found <a href="https://github.com/Wandmalfarbe/pandoc-latex-template/blob/master/eisvogel.tex">here</a>.
+2. <a href="/downloads/pandoc/feng.tex">feng.tex</a>, modified based on <code>eisvogel</code>, and modified to my favourate
+   title page.</p>
+<h1>BibTex</h1>
+<p>Lesson learned, though late, is still useful, is the BibTex. <strong>Don't
+be lazy</strong> by using direct Markdown links to reference as hyperlink
+&larr; it doesn't cut it. Instead, use the <code>.bib</code>, it's much better,
+and is <strong>incremental</strong>, meaning your collection will grow, and it
+benefits to any follow up docs you will write and want to use the same
+source for reference! and to generate a bibliography now at the end of
+your doc is a snap, and it looks, beautiful!</p>
+<figure class="col l6 m6 s12">
+  <img src="/images/bibliography.png"/>
+  <figcaption>Example of .bib result in PDF</figcaption>
+</figure>
+
+<p>Use the <a href="http://web.mit.edu/rsi/www/pdfs/bibtex-format.pdf">MIT's guide</a> for format references.</p>
+<h2>emacs + RefTex</h2>
+<p>Found it <a href="https://gist.github.com/kleinschmidt/5ab0d3c423a7ee013a2c01b3919b009a#file-reftex-markdown-el">here</a>:</p>
+<div class="highlight"><pre><span></span><span class="c1">;; reftex in markdown mode</span>
+
+<span class="c1">;; if this isn&#39;t already set in your .emacs</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">reftex-default-bibliography</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;/path/to/library.bib&quot;</span><span class="p">))</span>
+
+<span class="c1">;; define markdown citation formats</span>
+<span class="p">(</span><span class="nb">defvar</span> <span class="nv">markdown-cite-format</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">markdown-cite-format</span>
+      <span class="o">&#39;</span><span class="p">(</span>
+        <span class="p">(</span><span class="nv">?\C-m</span> <span class="o">.</span> <span class="s">&quot;[@%l]&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">?p</span> <span class="o">.</span> <span class="s">&quot;[@%l]&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">?t</span> <span class="o">.</span> <span class="s">&quot;@%l&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+
+<span class="c1">;; wrap reftex-citation with local variables for markdown format</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">markdown-reftex-citation</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">reftex-cite-format</span> <span class="nv">markdown-cite-format</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">reftex-cite-key-separator</span> <span class="s">&quot;; @&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">reftex-citation</span><span class="p">)))</span>
+
+<span class="c1">;; bind modified reftex-citation to C-c[, without enabling reftex-mode</span>
+<span class="c1">;; https://www.gnu.org/software/auctex/manual/reftex/Citations-Outside-LaTeX.html#SEC31</span>
+<span class="p">(</span><span class="nv">add-hook</span>
+ <span class="ss">&#39;markdown-mode-hook</span>
+ <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+   <span class="p">(</span><span class="nv">define-key</span> <span class="nv">markdown-mode-map</span> <span class="s">&quot;\C-c[&quot;</span> <span class="ss">&#39;markdown-reftex-citation</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>Once restarted emacs, use <code>C-c[</code> then <code>C-M</code> to select a citation
+style, and type in a regex, eg. <code>redhat-</code> and ENTER. Viola, a list of
+matched entries to select, and ENTER again &rarr;
+<code>[@redhat-rhhi-guide]</code>. Nice ~~</p>
+<h2>Styles</h2>
+<p>Wow, I never knew there are so many styles to choose from. The list
+I'm going by is <a href="https://github.com/citation-style-language/styles">here</a>. For web URLs, I found the <a href="https://github.com/citation-style-language/styles/blob/master/ieee-with-url.csl">ieee with
+url</a> is the only one that works.</p>
+<p>The biggest problem I see, is that web page does not have date (well,
+I guess they do, probably in its meta section, but I didn't bother to
+look into it). So other styles will render it as "Red Hat, n.d" &rarr;
+<code>n.d</code> for "no date"? Doesn't look nice.</p>
+<h1>Makefile</h1>
+<p>I can't remember all the pandoc CLI switches. Use <code>make</code> to compile
+multiple versions in one bang. Here is <a href="/downloads/pandoc/Makefile">current version</a>.</p>
+<p>Define macros at the beginning:</p>
+<div class="highlight"><pre><span></span><span class="nv">latex_template</span> <span class="o">:=</span> feng.tex
+<span class="nv">rhhi_ra_pdf</span> <span class="o">:=</span> feng<span class="se">\ </span>ra.pdf <span class="c1"># espace white space!</span>
+<span class="nv">rhhi_ra_md</span> <span class="o">:=</span> feng<span class="se">\ </span>ra.md
+</pre></div>
+
+
+<p>To compile to PDF:</p>
+<div class="highlight"><pre><span></span>pandoc latex.yaml <span class="k">$(</span>rhhi_ra_md<span class="k">)</span> <span class="se">\</span>
+    --number-sections <span class="se">\</span>
+    --from markdown <span class="se">\</span>
+    -o <span class="k">$(</span>rhhi_ra_pdf<span class="k">)</span> <span class="se">\</span>
+    --highlight-style pygments <span class="se">\</span>
+    --filter pandoc-fignos <span class="se">\</span>
+    --listings <span class="se">\</span>
+    --pdf-engine xelatex <span class="se">\</span>
+    --template <span class="k">$(</span>latex_template<span class="k">)</span> <span class="se">\</span>
+    -M <span class="nv">date</span><span class="o">=</span><span class="s2">&quot;`date &quot;</span>+%B %e, %Y<span class="s2">&quot;`&quot;</span> <span class="se">\</span>
+    --filter pandoc-citeproc <span class="se">\</span>
+    --csl <span class="k">$(</span>csl<span class="k">)</span>
+</pre></div>
+
+
+<p>To compile to DOCX:</p>
+<div class="highlight"><pre><span></span>pandoc <span class="k">$(</span>rhhi_ra_md<span class="k">)</span> <span class="se">\</span>
+    --from markdown <span class="se">\</span>
+    -o <span class="k">$(</span>rhhi_ra_docx<span class="k">)</span> <span class="se">\</span>
+    --highlight-style pygments <span class="se">\</span>
+    --filter pandoc-fignos <span class="se">\</span>
+    --listings <span class="se">\</span>
+    --columns <span class="m">10</span> <span class="se">\</span>
+    --filter pandoc-citeproc <span class="se">\</span>
+    --csl <span class="k">$(</span>csl<span class="k">)</span>
+</pre></div>
+
+
+<h1>Workflow</h1>
+<p>Quite simple: write &rarr; make <whatever> &rarr; view &rarr; repeat.</p>
+<h2>Cursed by WORD, and coworkers</h2>
+<p>The pain, comes in when you need <strong>collaboration</strong> &mdash; ppl insist
+to use DOC and change tracking. Unbelievable. I think the biggest
+curse I have had in my professional training, is that I was introduced
+to the LaTex so early that I simply could not stand the WORD, which
+makes me the super minority in corporate world. I have been battling
+this all my career. I thought pandoc is gonna save the day, since I'm
+now dealing with <em>technical</em> people now.</p>
+<p>No avail. When it comes down to writing a <em>paper</em>, this generation, is
+trained to think of WORD, only. You see emails with attachment, and
+filename with a timestamp "_0409", then "_0410" as the next version
+&mdash; for me who uses SVN then git as the life line of work, this,
+is purely disaster &larr; <strong>every single time</strong>, somebody will do one
+the two things:</p>
+<ol>
+<li>
+<p>Forgot to change the filename after an edit, thus now we have two
+   files of the same name, but different contents.</p>
+</li>
+<li>
+<p>Forgot to send out the latest, review the latest, for, oh well, how
+   would s/he know which is the latest!!? The convention is, of
+   course, the last email attachment you received.</p>
+</li>
+</ol>
+<p>Good luck.</p>
+<p>I give up this battle now at this point. Like teaching a kid &mdash;
+you can't really teach them. You just have to wait for them to grow
+up, if ever. </p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-03
+            </div>
+
+            <h5 class="card-title">
+              ECMAScript
+            </h5>
+
+            <p>
+              <p>Isn't this confusing &mdash; <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, ES6, Javascript,
+<a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ecmascript.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-06-24
+            </div>
+
+            <h5 class="card-title">
+              Dev structure
+            </h5>
+
+            <p>
+              <figure class="col l5 m5 s12">
+  <img src="/images/moses.jpg"/>
+  <figcaption>If the Bible story happens today</figcaption>
+</figure>
+
+<p>This is a common question any team/project will have to address
+&mdash; how to structure the knowledge we know of...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/dev structure.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

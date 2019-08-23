@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div class="container center-block">
+
+
+<div class="row">
+  <ul class="pagination">
+    
+    <li class="wave-effect">
+      <a href="http://fengxia.co/index5.html">
+        <i class="fa fa-angle-left"></i>
+      </a>
+    </li>
+
+
+    <li  class="">
+      <a href="http://fengxia.co/index.html">
+        1</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index2.html">
+        2</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index3.html">
+        3</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index4.html">
+        4</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index5.html">
+        5</a>
+    </li>
+
+    <li  class="active">
+      <a href="http://fengxia.co/index6.html">
+        6</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index7.html">
+        7</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index8.html">
+        8</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index9.html">
+        9</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index10.html">
+        10</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index11.html">
+        11</a>
+    </li>
+
+    <li class="wave-effect">
+      <a href="http://fengxia.co/index7.html">
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-04-16
+      </em>
+      <h3>Use RHEL server qcow2 as sandbox</h3>
+
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+    </div>
+
+    <p>The closest thing RHEL has to a cloud image is a qcow (download from
+<a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software">here</a>). This image has disabled root password, and disabled SSH
+access &larr; so what the heck!?</p>
+<h1>Method 1: modify image directly</h1>
+<p>Really ugly solution. Anyway. On a Ubuntu 16.04, install <code>guestfish</code>
+and <code>libguesttools</code>, then:</p>
+<h2>create root ...</h2>
+    <a class="btn btn-default button" href="use rhel server qcow2 as sandbox.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-04-15
+      </em>
+      <h3>Satellite</h3>
+
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+    </div>
+
+    <p>These notes are based on Satellite 6.3. There are minor difference
+between 6.2 and 6.3. Grasp the concept here, and hopefully you will
+have a good understanding of the Satellite models and procedures.</p>
+<h1>Architecture</h1>
+<ol>
+<li><strong>One</strong> satellite server (master server), and <strong>1+</strong> capsule servers.</li>
+<li>The Satellite Server is ...</li></ol>
+    <a class="btn btn-default button" href="satellite.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-04-09
+      </em>
+      <h3>Integrity</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <p>From 4th grade class weekly message of 4/8/2018:</p>
+<blockquote>
+<p>Positivity Project News:</p>
+<p>Starting Monday, we will begin learning about integrity. This is
+doing the right thing when nobody is watching. People with integrity
+practice what they preach and maintain a consistent pattern of
+behavior aligned with their values. They ...</p></blockquote>
+    <a class="btn btn-default button" href="integrity.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-03-23
+      </em>
+      <h3>Too little sympathy, too much generalization</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/the%20general%20problem.png"/>
+</figure>
+
+<p>Noah is a taking social intelligence course. A conversation gets me
+thinking, what is to measure a social intelligence? My observation of
+kids (and adults, too) is that we need <strong>sympathy</strong> &mdash; the
+feeling that your action will affect others in this or that way, and
+the uncomfort the others display ...</p>
+    <a class="btn btn-default button" href="sympathy.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-03-22
+      </em>
+      <h3>Django to REST</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/funny/the%20art%20of%20programming.jpg"
+       class="center img-responsive">
+</figure>
+
+<p>I have been building Django based web application for a while now. One
+design/request I get often is a REST API. Once the model data is
+exposed in REST, one can truly build a complete separate frontend ...</p>
+    <a class="btn btn-default button" href="django to rest.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-03-06
+      </em>
+      <h3>Moving, and a big trip</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/funny/moving.jpg"/>
+</figure>
+
+<p>The past weekend was the big moving day. Things actually went pretty
+well, except the morning pick up of U-Haul. What a terrible customer
+service they had! Well, it started with my fault really by forgetting
+to bring my driver license. Nonetheless, the only service was not
+helpful &larr; and it ...</p>
+    <a class="btn btn-default button" href="moving.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-02-22
+      </em>
+      <h3>A song</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <p>It's a morning that you are touched, by a song. Quite out of nowhere
+when I was just flipping through Youtube trying to find something to
+watch. Then there was <a href="https://www.youtube.com/watch?v=MZqdlZ3juJI">this movie</a>, I probably have watched it
+before. I can't remember when now. I don't even recall ...</p>
+    <a class="btn btn-default button" href="a song.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-02-15
+      </em>
+      <h3>Science disease</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <p>Another Chinese new year. But what came to my mind this morning was
+something quite peculiar, if not irrelevant to the scene &mdash; what
+is science, or being scientific? Noah is taking some <em>science</em> class
+on rock and mineral, and I have just written about
+<a href="http://fengxia.co/euphemism.html">euphemism</a>. This word, science, has been ...</p>
+    <a class="btn btn-default button" href="science.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-02-14
+      </em>
+      <h3>To Nianyi</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <p>Hi,</p>
+<p>Haven't been a while since I wrote you anything. I'm listening to this
+movie while working, and felt I have something to say to you.</p>
+<p>I want to say I'm sorry, sorry for being such a ass recently, for not
+speaking to you much these days ...</p>
+    <a class="btn btn-default button" href="to nianyi.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-02-08
+      </em>
+      <h3>euphemism</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12 center">
+  <img src="/images/euphemism.jpg"/>
+</figure>
+
+<p>Sigh. Life is indeed full of puzzling person and phenomenon that
+annoys me and I found myself always wonder why they do that and what I
+have done to make them act that way (or regardless what I have done
+and do, they are just like that). Why?</p>
+<p>The new ...</p>
+    <a class="btn btn-default button" href="euphemism.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-02-04
+      </em>
+      <h3>Big D</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <p>This has been a long past due as I have been thinking about this for
+the last few days, and have attempted to write a letter a few times,
+but always not feeling the <em>feel</em>, and when the feel was there I was
+usually busy running around for things that ...</p>
+    <a class="btn btn-default button" href="the big D.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-27
+      </em>
+      <h3>Class</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col s12">
+  <img src="/images/mary%20poppins.jpg"/>
+</figure>
+
+<p>I have to say, I haven't read an entertaining book as <a href="https://www.amazon.com/Paul-Fussell-American-1983-10-16-Hardcover/dp/B0197PAO4U/ref=la_B000AQ6OIQ_1_17?s=books&amp;ie=UTF8&amp;qid=1517092280&amp;sr=1-17&amp;refinements=p_82%3AB000AQ6OIQ">Class</a> for a
+long time. This book is just stimulating, fun, and sharp. It actually
+hurts. It describes sooo accurately of what I feel about many
+aspects/signals in life that I come off with a much clearer ...</p>
+    <a class="btn btn-default button" href="class.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-23
+      </em>
+      <h3>Society</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/diamond.jpg"/>
+</figure>
+
+<p>I  have   been  doing  a   lot  of  thinking  recently,   about  human
+society. There are multiple themes in my life and in my thinkings that
+I find them interesting, disturbing, annoying, and saddening. The more
+books  I'm reading  about  historical  events and  views,  the more  I
+question how a  society ...</p>
+    <a class="btn btn-default button" href="society.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-19
+      </em>
+      <h3>Remembering China</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/bao.jpg"/>
+</figure>
+
+<p>This is a quite fascinating <a href="https://www.amazon.com/Remembering-China-1935-1945-MVP-Exner/dp/0898231701">book</a>. Actually I started to find
+myself always fascinated by early first-person account of China. I
+have this curiosity of what this country was like, and everytime I
+read a book like I always found myself keep thinking how similar
+peopel then to people now ...</p>
+    <a class="btn btn-default button" href="remembering china.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-18
+      </em>
+      <h3>Reader digest life</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <blockquote>
+<p>Teacher: If you have 10 chocolate cakes and someone asks for 2, how
+  many do you have left?
+Me: 10.
+Teacher: Okay, well what if someone forcibly takes two of the cakes,
+  how many would you have left then?
+Me: 10, and a dead body.
+</p>
+</blockquote>
+<p>This thought has been haunting ...</p>
+    <a class="btn btn-default button" href="reader digest life.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-17
+      </em>
+      <h3>Best yoda lines</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <p>Noah wrote a sheet he titled <code>best yoda line from the clone
+war</code>. It's both philisophical, sophisticated, and cute. He has also
+said quite a few things recently that shocked me.</p>
+<h1>Episode 1: taking a trip</h1>
+<blockquote>
+<p>Me: do you want to go on a trip with me?
+Noah: No ...</p></blockquote>
+    <a class="btn btn-default button" href="best yoda line.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-09
+      </em>
+      <h3>A minor upset</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/funny/interview.png"/>
+</figure>
+
+<p>I think, well, actually not that I think, I feel, I feel it with me,
+that I have grown very much impatient with Noah's mom now. This is
+really sad. I think there is something up to her life recently, too
+&mdash; she was not being patient with Noah, actually ...</p>
+    <a class="btn btn-default button" href="grownup kid.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-07
+      </em>
+      <h3>Age and maturity</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/funny/fatal.jpg"/>
+</figure>
+
+<p>I admire youth. It is a wonderful treasure to have since there is
+nothing you did to have it, and nothing you can do to retain it. You
+have it when you have it, then it's gone. But youth is also an awful
+curse since you are cast into ...</p>
+    <a class="btn btn-default button" href="age and maturity.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2018-01-01
+      </em>
+      <h3>Half the world</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col l6 m6 s12">
+  <img src="/images/e13-857.jpg"/>
+</figure>
+
+<p>Indeed a fascinating book, <a href="https://www.gutenberg.org/files/29546/29546-h/29546-h.htm">Where half the world is waking up</a> by
+[Clarence Poe], a person born in North Carolina writing about China,
+Japan, Korea and India in the year of 1911. What a view he had!?</p>
+<p>Certainly I got to learn about what these countries were like &mdash;
+more backwards ...</p>
+    <a class="btn btn-default button" href="half the world.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
+        2017-12-24
+      </em>
+      <h3>Mind</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col s12">
+  <img src="/images/mirrors%20edge.jpg"/>
+</figure>
+
+<p>Got a book and it is truly disturbing, <a href="https://www.amazon.com/Rape-Mind-Psychology-Menticide-Brainwashing/dp/1614277877">Rape of the Mind</a>. So the
+mind manipulation has been developed to the point that is highly
+refined, highly <code>scientific</code> (you know I always have reserve about
+this particular word this days), highly systematic, and highly
+predictable. And this is the really ...</p>
+    <a class="btn btn-default button" href="mind.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+
+
+
+<div class="row">
+  <ul class="pagination">
+    
+    <li class="wave-effect">
+      <a href="http://fengxia.co/index5.html">
+        <i class="fa fa-angle-left"></i>
+      </a>
+    </li>
+
+
+    <li  class="">
+      <a href="http://fengxia.co/index.html">
+        1</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index2.html">
+        2</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index3.html">
+        3</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index4.html">
+        4</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index5.html">
+        5</a>
+    </li>
+
+    <li  class="active">
+      <a href="http://fengxia.co/index6.html">
+        6</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index7.html">
+        7</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index8.html">
+        8</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index9.html">
+        9</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index10.html">
+        10</a>
+    </li>
+
+    <li  class="">
+      <a href="http://fengxia.co/index11.html">
+        11</a>
+    </li>
+
+    <li class="wave-effect">
+      <a href="http://fengxia.co/index7.html">
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+</div>
+
+
+
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+<script type="text/javascript">
+ var j$ = jQuery.noConflict();
+
+ j$(document).ready(function(){
+   j$("header").css("min-height","100vh");
+ });
+</script>
+  </body>
+
+</html>

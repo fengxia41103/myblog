@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2018-06-08
+
+
+        <a class="wave-effect" href="category/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Network switch</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p><a href="https://en.wikipedia.org/wiki/Network_switch">Network switch</a> is a gold mine. You will need (ip, username, pwd) to get to it,
+using Telnet(!). Your friend is <a href="https://pexpect.readthedocs.io/en/stable/">pexpect</a>, but even that gives you
+jinx sometimes when each switch can return you some random garbages
+once a while that makes <code>session.expect("your regex pattern")</code> to time
+out and you don't know why.</p>
+<h1>enos vs. cnos</h1>
+<p>Not much to say. These are two switch OS seen on Lenovo switches. They
+are all closely looked like Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html">IOS</a>, but different. </p>
+<ol>
+<li><a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf">CNOS manual</a></li>
+<li><a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf">ENOS commands</a> (Googling <code>enos manual</code> shows Lenovo switch
+   types, eg. G8272. So I guess the term is applicable on a model basis.)</li>
+</ol>
+<p>Anyway, the biggest difference to be aware is that CNOS device uses <code>display</code>
+while ENOS device uses <code>show</code>. To get a list of commands available:</p>
+<ol>
+<li>
+<p>CNOS: <code>display ?</code></p>
+<div class="highlight"><pre><span></span>```shell
+LCTC-R1U37-SW&gt;display ?
+  aaa               AAA Model
+  access            access parameters
+  access-lists      List IP access lists
+  arp               IP ARP table
+  banner            Show current motd banner message
+  bfd               Bidirectional Forwarding Detection (BFD)
+  bgp               Border Gateway Protocol (BGP)
+  cee               Converged Enhanced Ethernet
+  class-map         Class map entry
+  cli               Show CLI tree of current mode
+  dbg               Debugging functions
+  dot1q-tunnel      Display dot1q tunnel
+  env               Show environment
+  errdisable        Error disable information
+  hardware          Show hardware information
+  hostname          Hostname
+  interface         Interface status and configuration
+  inventory         Show inventory
+  ip                Configure ip features
+  ipv6              Internet Protocol version 6 (IPv6)
+  lacp              Show LACP information
+  license           FoD license
+  lldp              Show LLDP information
+  logging           Logging configuration and data
+  mac               MAC
+  monitor           Show Ethernet SPAN information
+  npa               Network Policy Agent
+  ntp               Network time protocol
+  policy-map        Policy Map Entry
+  port-aggregation  Port aggregation interface
+  privilege         Show current privilege level
+  queuing           Egress Queuing Information
+  radius-server     Specify a RADIUS server
+  restApi           RestApi
+  rib               RIB
+  role              Show role configuration
+  router-id         Router ID
+  routing           Display routing information
+  running-config    Running system information
+  snmp              Snmp service
+  spanning-tree     Show spanning tree information
+  ssh               Ssh
+  statistics        Statistics
+  switchname        Display switch name
+  sys-info          show sys-info
+  system            System-related show commands
+  tacacs-server     Display tacacs configuration
+  tech-support      Show router technical information
+  telnet            Telnet
+  user-account      User Account Management
+  users             Display information about terminal lines
+  vdm               Display Virtual Domain Manager Information
+  version           Display NOS version
+  virtual-machine   Display virtual machine
+  vlag              VLAG - Virtual Link Aggregator
+  vlan              Display VLAN information
+  vnetworks         Display virtual networks
+  vrrp              Show vrrp information
+  zerotouch         Display zerotouch parameters
+
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>ENOS: <code>show ?</code></p>
+<div class="highlight"><pre><span></span>```shell
+RS G8272&gt;show ?
+Show running system information
+  access-control     Show access control 
+  arp                IP ARP table
+  boot               Show boot configuration
+  cee                Show CEE Information
+  clock              Display current switch date and time
+  counters           Show all statistics
+  custom-dst         Show custom DST configuration
+  dcbx               Show DCBX information
+  dot1x              Show 802.1x configuration
+  ecp                Show Edge Contrl Protocol (ECP) information
+  environment        Show running environment
+  errdisable         Show Errdisable information
+  etherchannel       Show etherchannel
+  failover           Show failover state
+  fcalias            Show fc-alias configurations per vlan
+  fcf                Display details of FCF
+  fcns               Show commands for Name Server
+  fcoe               Show FCOE Information
+  fcs                Show commands for Fabric Configuration Server
+  fdmi               Show commands for FDMI
+  flogi              Show FLOGI database
+  history            Show the session command history
+  hotlinks           Show Hot Links configuration
+  https              Show HTTPS related information
+  ikev2              Show IKEv2 configuration
+  information-dump   Show all information
+  interface          Show interface configuration and information
+  ip                 Show IP information
+  ipsec              Show IPsec information
+  ipv6               Show IPv6 information
+  lacp               Show LACP configuration
+  layer2             Show all layer 2 related configuration and information
+  layer3             Show all layer 3 related configuration and information
+  line               Line information
+  lldp               Show LLDP configuration and information
+  logging            Show syslog configuration and messages
+  mac-address-table  Show MAC forwarding table
+  microburst         Show microburst statistics.
+  mp                 Show management processor specific statistics
+  ntp                Show NTP information and statistics
+  nwv                Show Networking Virtualization Information
+  oam                Show OAM information
+  openflow           Show Openflow configuration and status
+  pki                Display the host certificate
+  port-mirroring     Show port mirroring configuration
+  PortChannel        Show PortChannel
+  processes          Show management processor specific statistics
+  protocol-vlan      Show protocol VLAN configuration
+  ptp                Show PTP informations
+  qos                Show quality of service
+  rmon               Show current RMON configuration
+  route-map          Show route map configuration
+  rscn               Show commands for RSCN
+  scheduler          Show scheduler configuration 
+  script             Show installed scripts
+  script-log         Show script logs
+  sflow              Show sflow information
+  snmp-server        Show SNMP server information and statistics
+  software-key       Show software licensing keys
+  spanning-tree      Show spanning tree topology
+  ssh-clienthostkey  Show SFTP/SSH host keys
+  ssh-clientpubkey   Show SSH client public key
+  sys-info           Show general system information
+  terminal-length    Show current terminal length
+  transceiver        Show Port Transceiver status
+  trustpoint         Show trustpoint in CA store
+  udld               Show UDLD dump
+  ufp                Show UFP feature information
+  user               Currently logged in users
+  version            Show system version
+  virt               Show virtual machine
+  vlag               Show vLAG configuration and statistics
+  vlan               Show VLAN configuration and status
+  who                Currently logged in users
+  zone               Show zone configurations per vlan
+  zoneset            Show zoneset configurations per vlan
+```
+</pre></div>
+
+
+</li>
+</ol>
+<h1>login</h1>
+<p>A typical login session looks like this:</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>dev<span class="o">)</span> fengxia@fengxia-lenovo:~$ telnet 10.240.43.29
+Trying 10.240.43.29...
+Connected to 10.240.43.29.
+Escape character is <span class="s1">&#39;^]&#39;</span>.
+
+Lenovo RackSwitch G8272.
+
+
+Enter login username: admin
+Enter login password: 
+------------------------------------------------------------------
+NOTE: System dump exists in FLASH.
+      The dump was saved at 18:44:14 Wed Apr 11, 2018.
+      Use <span class="s1">&#39;copy flash-dump&#39;</span> to extract the dumps <span class="k">for</span> analysis and
+      <span class="s1">&#39;clear flash-dump&#39;</span> to clear the FLASH region.
+------------------------------------------------------------------
+RS G8272&gt;
+</pre></div>
+
+
+<p>Before we go further on how we are doing it, there is one important
+catch: <strong>switch may not allow multiple SSH session</strong>! Therefore, it's
+much better to share a session instead of each task opens its own.</p>
+<p>Using <a href="https://pexpect.readthedocs.io/en/stable/"><code>pexpect</code></a> is tedious, rigid (as it expects a certain
+sequence in text output from remote device, so randomly shown alert
+messages are the worst offender.), but it works.</p>
+<ol>
+<li>Telnet to IP.</li>
+<li>Enter username and pwd. <strong>Note</strong> that sometimes it will skip asking
+   username and will only require password. </li>
+<li>Once you logged in, you may be greeted by a prompt, eg <code>RS G8272&gt;</code>,
+   the only reliable piece is the "&gt;", the rest can change because it
+   is just a switch name.</li>
+<li>Send <code>en\n</code> to put this login session into a superuser mode. I
+   think this is optional because the login user may already be
+   configured to be a super user.</li>
+<li>For Enos, Send <code>no console\n</code> to turn off alerts. <strong>This is
+   important</strong>. Otherwise switch will throw at you all kinds of
+   messages, such as topology changed, detected logged in from IP
+   (actually that's you!). Anyway, just a best practice.</li>
+</ol>
+<p>I have to say that after so many tries, there isn't a reliable way to
+handle login session with confidence.</p>
+<h1>MAC table</h1>
+<p>Commands to use:</p>
+<ol>
+<li>ENOS: <code>show mac</code></li>
+<li>CNOS: <code>display mac address-table</code></li>
+</ol>
+<blockquote>
+<p>MAC table is saying: I see this <code>MAC</code> on <code>VLAN</code> on <code>port #</code>.</p>
+</blockquote>
+<p>MAC address table is the core of a switch &mdash; all the MACs it has
+learned by seeing it from a traffic. </p>
+<p>These MACs, however, are not necessarily from a device you know of!
+For example, a traffic from some external device flowing through this
+switch will certainly show up in this table with its MAC, but we have
+no way to derive information of the device who owns this MAC (a
+switch? a server? a router?). Further, MAC table changes ALL THE
+TIME. It is built up from traffic, thus its contents only reflects
+what this switch has seen (based on its update algorithm). We use it
+as a exhaustive list (everything this switch knows of), and relying to
+match with other meta, eg. I found this MAC to be an interface in this
+server, to connect the dots. <strong>This is the key of constructing a reality
+view of a physical topology</strong>.</p>
+<p>So from a traffic, we can capture:</p>
+<ol>
+<li>MAC of the source. Again, we know the MAC, but don't know who owns
+   it.</li>
+<li>VLAN id.</li>
+<li>Port number.</li>
+</ol>
+<h2>ENOS</h2>
+<p>Example of output:</p>
+<div class="highlight"><pre><span></span>RS G8272&gt;show mac
+Mac address Aging Time: <span class="m">300</span> 
+
+     MAC address       VLAN     Port    Trnk  State  Permanent  Openflow
+  -----------------  --------  -------  ----  -----  ---------  --------
+  00:00:0c:9f:f0:2f       <span class="m">1</span>    <span class="m">48</span>             FWD                  N    
+  00:00:0c:9f:f0:46     <span class="m">100</span>    <span class="m">48</span>             FWD                  N    
+</pre></div>
+
+
+<h2>CNOS</h2>
+<p>Example of output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display mac address-table
+ VLAN     MAC Address     Type      Ports 
+  -----+----------------+---------+-----------------------+
+  <span class="m">1</span>      0000.0c9f.f02f   dynamic   Ethernet1/54 
+  <span class="m">1</span>      0001.7302.5c96   dynamic   Ethernet1/54 
+</pre></div>
+
+
+<h1>switch name</h1>
+<p>Get switch name (if there is one, oh well). </p>
+<ol>
+<li>ENOS: <code>show run</code></li>
+<li>CNOS: <code>display run</code></li>
+</ol>
+<p>In both cases, search for pattern <code>hostname\s(?P&lt;hostname&gt;.*)</code> in
+<code>re.MULTILINE</code> mode. If there is no match, then the switch's hostname
+has not been set.</p>
+<h1>switch neighbors</h1>
+<ol>
+<li>ENOS: <code>show lldp remote-device</code></li>
+<li>CNOS: <code>display lldp neighbors</code></li>
+</ol>
+<p>This is an interesting one. Switch-to-switch links (we are talking
+about physical cable connections from A port to B port) can be pulled
+from a switch &larr; they refer to devices connected to a switch
+<strong>neighbors</strong>. This information is the foundation to draw a (physical)
+network topology such as:</p>
+<figure class="s12 center">
+    <img src="/images/switch%20network%20topology.png"/>
+    <figcaption>Example of a switch-switch topology</figcaption>
+</figure>
+
+<h2>ENOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span>RS G8272#show lldp remote-device
+LLDP Remote Devices Information
+Legend<span class="o">(</span>possible values in DMAC column<span class="o">)</span> :
+NB   - Nearest Bridge          - 01-80-C2-00-00-0E
+NnTB - Nearest non-TPMR Bridge - 01-80-C2-00-00-03
+NCB  - Nearest Customer Bridge - 01-80-C2-00-00-00
+Total number of current entries: 19
+
+LocalPort <span class="p">|</span> Index <span class="p">|</span> Remote Chassis ID         <span class="p">|</span> Remote Port          <span class="p">|</span> Remote System Name            <span class="p">|</span> DMAC     
+----------<span class="p">|</span>-------<span class="p">|</span>---------------------------<span class="p">|</span>----------------------<span class="p">|</span>-------------------------------<span class="p">|</span>---------
+<span class="m">1</span>         <span class="p">|</span> <span class="m">5</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ef a5         <span class="p">|</span> 68-05-ca-62-ef-a5    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">2</span>         <span class="p">|</span> <span class="m">4</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ef a4         <span class="p">|</span> 68-05-ca-62-ef-a4    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">3</span>         <span class="p">|</span> <span class="m">6</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ee 7d         <span class="p">|</span> 68-05-ca-62-ee-7d    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">4</span>         <span class="p">|</span> <span class="m">7</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ee 7c         <span class="p">|</span> 68-05-ca-62-ee-7c    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">5</span>         <span class="p">|</span> <span class="m">8</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> f3 fd         <span class="p">|</span> 68-05-ca-62-f3-fd    <span class="p">|</span>                               <span class="p">|</span> NB 
+</pre></div>
+
+
+<h2>CNOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display lldp neighbors
+Capability codes:
+  <span class="o">(</span>R<span class="o">)</span> Router, <span class="o">(</span>B<span class="o">)</span> Bridge, <span class="o">(</span>T<span class="o">)</span> Telephone, <span class="o">(</span>C<span class="o">)</span> DOCSIS Cable Device
+  <span class="o">(</span>W<span class="o">)</span> WLAN Access Point, <span class="o">(</span>P<span class="o">)</span> Repeater, <span class="o">(</span>S<span class="o">)</span> Station, <span class="o">(</span>O<span class="o">)</span> Other
+Device ID            Local Intf      Hold-time  Capability  Port ID        
+                     Ethernet1/7     <span class="m">120</span>                                   
+LCTC-R1U39-SW        Ethernet1/48    <span class="m">120</span>        BR          XGE4           
+LCTC-R3U38-SW        Ethernet1/54    <span class="m">120</span>        BR          <span class="m">1</span>              
+LCTC-R1U39-SW        mgmt0           <span class="m">120</span>        BR          <span class="m">47</span>             
+
+Total entries displayed: 4
+</pre></div>
+
+
+<h1>switch port list</h1>
+<ol>
+<li>ENOS: <code>show lldp port</code></li>
+<li>CNOS: <code>display lldp interface all</code></li>
+</ol>
+<p>Each switch port represents an interface that has:</p>
+<ol>
+<li>A port number &mdash; in nearl all cases they are an <code>int</code>, but
+   switch management port can be in string such as <code>mgmt0</code> (I don't
+   think there is convention/default here.) So we need to treat this
+   value as <code>string</code>.</li>
+<li>A MAC. <blockquote>
+<p>Internally, MAC is normalized to format <code>AA:BB:CC</code> &larr; all capital</p>
+</blockquote>
+</li>
+<li><code>vlan</code> ID.</li>
+</ol>
+<h2>ENOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span>RS G8272&gt;show lldp port
+LLDP Port Info
+-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Port    MAC address       MTU  PortEnabled AdminStatus RxChange <span class="nv">TrapNotify</span>
+<span class="o">=======</span> <span class="o">=================</span> <span class="o">====</span> <span class="o">===========</span> <span class="o">===========</span> <span class="o">========</span> <span class="o">==========</span>
+<span class="m">1</span>       a4:8c:db:9b:01:00 <span class="m">9216</span> enabled     tx_rx       no       disabled 
+<span class="m">2</span>       a4:8c:db:9b:01:00 <span class="m">9216</span> enabled     tx_rx       no       disabled 
+</pre></div>
+
+
+<h2>CNOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display lldp interface all
+Interface Name: Ethernet1/1
+--------------
+Interface Information 
+ Enable <span class="o">(</span>tx/rx/trap<span class="o">)</span>: Y/Y/N   Port Mac address: a4:8c:db:34:b2:03
+
+Interface Name: Ethernet1/2
+--------------
+Interface Information 
+ Enable <span class="o">(</span>tx/rx/trap<span class="o">)</span>: Y/Y/N   Port Mac address: a4:8c:db:34:b2:04
+
+Interface Name: mgmt0
+--------------
+Interface Information 
+ Enable <span class="o">(</span>tx/rx/trap<span class="o">)</span>: Y/Y/N   Port Mac address: a4:8c:db:34:b2:00
+</pre></div>
+
+
+<h3>management port</h3>
+<p>In CNOS, you can get management port directly (name, MAC) by using
+<code>display interface mgmt 0</code>:</p>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;  display interface mgmt 0
+Interface mgmt0
+  Hardware is Management Ethernet  Current HW addr: a48c.db34.b200
+  Physical:a48c.db34.b200  Logical:(not set)
+  index 3 metric 1 MTU 1500 Bandwidth 1000000 Kbit
+  no bridge-port
+  arp ageing timeout 1500
+  &lt;UP,BROADCAST,RUNNING,ALLMULTI,MULTICAST&gt;
+  VRF Binding: Associated with management
+  Speed 1000 Mb/s Duplex full
+  IPV6 DHCP IA-NA client is enabled.
+  inet 10.240.41.147/22 broadcast 10.240.43.255
+  inet6 fe80::a68c:dbff:fe34:b200/64
+  RX 
+    0 input packets 18446744073706907944 unicast packets 3025224 multicast packets 
+    2693333 broadcast packets 910620066 bytes 
+  TX 
+    84138 output packets 39832 unicast packets 44276 multicast packets 
+    30 broadcast packets 9839336 bytes 
+
+Automatic policy provisioning is disabled on this interface
+</pre></div>
+
+
+<h1>config a port's VLAN</h1>
+<p>There are 3 things we are interested in setting a switch port:</p>
+<ol>
+<li><strong>mode</strong>: two choices &mdash; <code>trunk</code> vs. <code>access</code>. In <code>trunk</code>
+   mode, you can then set <code>allowed vlans</code>; in <code>access</code> mode, this port
+   allows only ONE vlan, and that is its native vlan (see next).</li>
+<li><strong>native vlan</strong>: also called <code>untagged vlan</code> (in Netbox, for example)</li>
+<li><strong>allowed vlans</strong>: this is a list of VLAN ids that can flow through
+   this port. In order to set this, <code>mode</code> must be in <code>trunk</code> mode.</li>
+</ol>
+<h2>ENOS</h2>
+<p>To set configs in <code>trunk</code> mode:</p>
+<div class="highlight"><pre><span></span>en  &lt;-- <span class="nb">enable</span> admin mode
+config terminal  &lt;-- to enter config mode
+interface port &lt;port id&gt;  &lt;-- to <span class="k">select</span> the port to config
+
+switchport mode trunk
+switchport trunk allow vlan &lt;1,2,3...&gt;
+switchport trunk native vlan &lt;vlan id&gt;
+</pre></div>
+
+
+<p><strong>Note</strong>: you must set the native vlan last, and also must be sure
+that native vlan id is also part of the allowed vlans. For example, if
+we are to set native vlan to 1, and current allowed is "2,3,4,5", it
+will fail because 1 is not part of "2,3,4,5". Instead, you should set
+allowed to "1,2,3,4,5" first, then set native to 1.</p>
+<p>To set in <code>access</code> mode &rarr; <code>allowed vlan</code> is applicable anymore!</p>
+<div class="highlight"><pre><span></span>en
+config terminal
+interface port &lt;port id&gt;
+swithport mode access
+switchport access vlan &lt;vlan id&gt;
+</pre></div>
+
+
+<h3>check port config</h3>
+<p>Use <code>show interface port &lt;port id&gt;</code>. Example output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U39-SW#show interface port 10
+Current port <span class="m">10</span> configuration: enabled, PVID/Native-VLAN 19, Tagging/Trunk-mode
+    ErrDisable recovery enabled
+    Switch port
+    STP: non-edge, auto link-type, global loop guard
+    The Unicast storm control currently turned off
+    The Multicast storm control currently turned off
+    The Broadcast storm control currently turned off
+    802.1p priority: 0
+    DSCP remarking <span class="k">for</span> port: disabled
+    BPDU guard: disabled
+    Static trunk distribution: disabled
+    Flood blocking: disabled
+    MAC address notification: disabled
+    Tag ingress check skipping: disabled
+    Tag egress check skipping: disabled
+    L2 Learning: enabled
+    ACL Port config is empty
+    UDLD: disabled, mode normal
+    OAM: disabled, mode active
+    EVB Profile: 0
+    Reflective Relay is configured off
+    DHCP Snooping trust disable, limit rate: none
+    Openflow: disabled
+    VLANs: 2-4,6,8-19
+    Private-VLAN: disabled
+
+
+Current Port <span class="m">10</span> Gig link configuration:
+    speed 10/100/1000, mode auto, fctl none, auto on
+</pre></div>
+
+
+<h2>CNOS</h2>
+<p>Quite similar to ENOS commands. To set in <code>trunk</code> mode:</p>
+<div class="highlight"><pre><span></span>en &lt;-- <span class="nb">enable</span> admin mode
+configure &lt;-- to enter config mode
+interface ethernet 1/&lt;port id&gt;  &lt;-- <span class="k">select</span> port to config
+bridge-port mode trunk
+bridge-port trunk allowed vlan &lt;1,2,3...&gt;
+bridge-port trunk native vlan &lt;vlan id&gt;
+</pre></div>
+
+
+<p>To set in <code>access</code> mode:</p>
+<div class="highlight"><pre><span></span>en &lt;-- <span class="nb">enable</span> admin mode
+configure &lt;-- to enter config mode
+interface ethernet 1/&lt;port id&gt;  &lt;-- <span class="k">select</span> port to config
+bridge-port mode access
+bridge-port access vlan &lt;vlan id&gt;
+</pre></div>
+
+
+<h3>check port config</h3>
+<p>Use <code>display interface ethernet 1/&lt;port id&gt;</code>. Example output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#display interface ethernet 1/10</span>
+Interface Ethernet1/10
+  Hardware is Ethernet  Current HW addr: a48c.db34.b20c
+  Physical:a48c.db34.b20c  Logical:<span class="o">(</span>not <span class="nb">set</span><span class="o">)</span>
+  index <span class="m">410100</span> metric <span class="m">1</span> MTU <span class="m">9216</span> Bandwidth <span class="m">10000000</span> Kbit
+  Port Mode is trunk
+  &lt;UP,BROADCAST,RUNNING,ALLMULTI,MULTICAST&gt;
+  VRF Binding: Not bound
+  Speed <span class="m">10000</span> Mb/s Duplex full
+  lacp suspend-individual  admin: Individual - oper: Individual
+  Last link flapped 05:30:14 
+  Last clearing of <span class="s2">&quot;display interface&quot;</span> counters 05:30:14 
+  <span class="m">30</span> seconds input rate <span class="m">0</span> bits/sec, <span class="m">0</span> bytes/sec, <span class="m">0</span> packets/sec 
+  <span class="m">30</span> seconds output rate <span class="m">54779</span> bits/sec, <span class="m">6847</span> bytes/sec, <span class="m">74</span> packets/sec 
+  Load-Interval <span class="c1">#2: 5 minute (300 seconds) </span>
+     input rate <span class="m">0</span> bps, <span class="m">0</span> pps<span class="p">;</span> output rate <span class="m">52657</span> bps, <span class="m">71</span> pps 
+  RX 
+    <span class="m">0</span> unicast packets  <span class="m">0</span> multicast packets  <span class="m">0</span> broadcast packets 
+    <span class="m">0</span> input packets  <span class="m">0</span> bytes 
+    <span class="m">0</span> jumbo packets  <span class="m">0</span> storm suppression packets 
+    <span class="m">0</span> giants  <span class="m">0</span> input error  <span class="m">0</span> short frame  <span class="m">0</span> overrun  <span class="m">0</span> underrun 
+    <span class="m">0</span> watchdog  <span class="m">0</span> <span class="k">if</span> down drop 
+    <span class="m">0</span> input with dribble  <span class="m">0</span> input discard<span class="o">(</span>includes ACL drops<span class="o">)</span> 
+    <span class="m">0</span> Rx pause 
+  TX 
+    <span class="m">2084</span> unicast packets  <span class="m">1082832</span> multicast packets  <span class="m">320046</span> broadcast packets 
+    <span class="m">1404962</span> output packets  <span class="m">126644641</span> bytes 
+    <span class="m">0</span> jumbo packets 
+    <span class="m">0</span> output errors  <span class="m">0</span> collision  <span class="m">0</span> deferred  <span class="m">0</span> late collision 
+    <span class="m">0</span> lost carrier  <span class="m">0</span> no carrier  <span class="m">0</span> babble 
+    <span class="m">0</span> Tx pause 
+  <span class="m">645</span> interface resets 
+
+Automatic policy provisioning is disabled on this interface
+</pre></div>
+
+
+<h1>Setup LACP</h1>
+<h2>ENOS</h2>
+<p>Official application guide is <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html">here</a>.</p>
+<h3>enter config mode</h3>
+<p>First thing first, enter so called "config" mode:</p>
+<ol>
+<li>enter super user mode: <code>en</code></li>
+<li>enter config terminal: <code>config terminal</code></li>
+</ol>
+<div class="highlight"><pre><span></span>NOS version 10.3.2.0 LENOVO G8272, Wed Mar <span class="m">29</span> 12:20:39 PDT 2017
+LCTC-R1U37-SW&gt;en
+LCTC-R1U37-SW#config
+Enter configuration commands, one per line.  End with CNTL/Z.
+LCTC-R1U37-SW<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
+</pre></div>
+
+
+<h3>show LACP settings</h3>
+<p>To examine LACP setup: <code>show lacp info</code>. Example output is, for
+example, when enabled port 17 (while server side is not configured
+yet, thus showing as <em>suspended</em>):</p>
+<div class="highlight"><pre><span></span>LCTC-R1U39-SW<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#show lacp info</span>
+port    mode    adminkey  operkey   selected   prio  aggr  trunk  status  minlinks
+----------------------------------------------------------------------------------
+<span class="m">1</span>       off            <span class="m">1</span>        <span class="m">1</span>     no      <span class="m">32768</span>    --     --    --        1
+<span class="m">17</span>      active        <span class="m">17</span>       <span class="m">17</span>  suspended  <span class="m">32768</span>    --     --   down       1
+</pre></div>
+
+
+<h3>link two ENOS switches</h3>
+<p>You need two ports on each switch to enable VLAG.</p>
+<p>On each switch:</p>
+<ol>
+<li>set STP: <code>spanning­tree mode pvrst</code></li>
+<li>remove existing ISL key if we are setting a new key: <code>no vlag isl adminkey</code></li>
+</ol>
+<p>On each port on this switch:</p>
+<ol>
+<li>select port: <code>interface port &lt;1-52&gt;</code></li>
+<li>set trunk mode: <code>switchport mode trunk</code></li>
+<li>set native vlan: <code>switchport trunk native vlan &lt;1-4094&gt;</code></li>
+<li>set allowed vlan: <code>switchport trunk allow vlan &lt;1,2,3,4...&gt;</code></li>
+<li>set LACP mode active: <code>lacp mode active</code></li>
+<li>set LACP key: <code>lacp key &lt;key&gt;</code> (the same key for all ports).</li>
+<li>to remove an existing key: <code>default lacp key</code>. <strong>Note</strong> that this
+     will succeed if you have removed ISL key first!</li>
+</ol>
+<p>Then on each switch:</p>
+<ol>
+<li>set to the same <code>vlag tier-id &lt;id&gt;</code>.</li>
+<li>set <code>vlag isl adminkey &lt;key&gt;</code>. This key <strong>must be
+   the same</strong> as the LACP keys.</li>
+<li>set <code>vlag hlthchk peer-ip &lt;ip&gt;</code> to the other switch's IP.</li>
+<li>enable vlag globally &larr; <code>vlag enable</code></li>
+</ol>
+<p>Example from <code>show running-config</code>:</p>
+<div class="highlight"><pre><span></span>interface port 45
+
+        lacp mode active
+
+        lacp key 100
+
+!
+
+interface port 46
+
+        lacp mode active
+
+        lacp key 100
+
+vlag <span class="nb">enable</span>
+vlag tier-id 222
+vlag hlthchk peer-ip 10.240.43.54
+vlag isl adminkey 100
+</pre></div>
+
+
+<h3>Link two ports on the same switch</h3>
+<p>There is another way to bind ports together. In ENOS world, it's
+called <code>PortChannel</code> (in CNOS it's called <code>port-aggregation</code>, see
+section next). See <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_AG_8-4.pdf">manual</a> page 178.</p>
+<ol>
+<li>Remove existing portchannel: <code>no portchannel &lt;id&gt;</code></li>
+<li>Select interface: <code>interface port &lt;id&gt;</code></li>
+<li>Setup each port that will be inlcuded in this bind. According to
+   <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_AG_8-4.pdf">manual</a>, all ports must have identical settings. This makes sense:</li>
+<li>mode: <code>switchport mode trunk</code> &larr; I think it must be trunk</li>
+<li>allowed vlans: <code>switchport trunk allow vlan &lt;1,2,3,4..&gt;</code></li>
+<li>native vlan: <code>switchport trunk native vlan &lt;id&gt;</code></li>
+<li>Add to bind: <code>portchannel &lt;channel id&gt; port &lt;port list 1,2,3,4&gt;</code></li>
+<li>Enable: <code>portchannel &lt;channel id&gt; enable</code></li>
+</ol>
+<h2>CNOS</h2>
+<h3>Link two ports on the same switch</h3>
+<p>It's called <code>aggregation-group</code> (see <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf">manual</a>). </p>
+<p>First, create and setup an <code>aggregation-group</code> (note that CLI uses <code>port-aggregation</code>!):</p>
+<ol>
+<li>Create aggregation group: <code>interface port-aggregation &lt;1-4096&gt;</code>.</li>
+<li>Set this LAG port to trunk mode: <code>bridge-port mode trunk</code>.</li>
+<li>Assign allowed vlans: <code>bridge-port trunk allowed
+   vlan &lt;comma delimiter list&gt;</code>, eg. <code>1-19,100-109,3999</code>.</li>
+<li><code>exit</code> &larr; so you can select other things to config.</li>
+</ol>
+<p>Second, set up the port you want to add to this aggregation:</p>
+<ol>
+<li>Select port to config: <code>interface ethernet 1/&lt;port&gt;</code>, eg. <code>1/17</code>
+   to select port #17.</li>
+<li>Set port in trunk mode: <code>bridge-port mode trunk</code></li>
+<li>Remove native vlan from port: <code>no bridge-port trunk native vlan</code>
+   &larr; this is super important. Otherwise, <code>aggregation-group &lt;id&gt;
+   mode on</code> will complain of <code>MISMATCH VLAN</code>.</li>
+<li>Assign proper list of allowed vlans: <code>bridge-port trunk allow vlan
+   ...</code> &larr; <strong>use the same VLAN list as above!</strong></li>
+<li>Add interface to aggregation group: <code>aggregation-group &lt;id&gt; mode
+   active</code>.</li>
+<li><code>exit</code> &larr; so you can select another port to run this config.</li>
+</ol>
+<p>To check status: <code>display interface port-aggregation &lt;1-4096&gt;</code> (or
+<code>display lacp internal info all</code>). Example output:</p>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display interface port-aggregation 1
+Interface po1
+  Hardware is AGGREGATE  Current HW addr: a48c.db34.b203
+  Physical:<span class="o">(</span>not <span class="nb">set</span><span class="o">)</span>  Logical:<span class="o">(</span>not <span class="nb">set</span><span class="o">)</span>
+  index <span class="m">100001</span> metric <span class="m">1</span> MTU <span class="m">1500</span> Bandwidth <span class="m">20000000</span> Kbit
+  Port Mode is trunk
+  &lt;UP,BROADCAST,MULTICAST&gt;
+  VRF Binding: Not bound
+  Members in this port-aggregation: 
+    Ethernet1/1, Ethernet1/17 &lt;----------------------------- bond ports!
+  lacp suspend-individual  admin: Individual
+  Last clearing of <span class="s2">&quot;display interface&quot;</span> counters never 
+  <span class="m">30</span> seconds input rate <span class="m">1127679</span> bits/sec, <span class="m">140959</span> bytes/sec, <span class="m">151</span> packets/sec 
+  <span class="m">30</span> seconds output rate <span class="m">547359</span> bits/sec, <span class="m">68419</span> bytes/sec, <span class="m">325</span> packets/sec 
+  Load-Interval <span class="c1">#2: 5 minute (300 seconds) </span>
+     input rate <span class="m">9484929</span> bps, <span class="m">1001</span> pps<span class="p">;</span> output rate <span class="m">16114524</span> bps, <span class="m">1761</span> pps 
+  RX 
+    <span class="m">0</span> unicast packets  <span class="m">0</span> multicast packets  <span class="m">0</span> broadcast packets 
+    <span class="m">0</span> input packets  <span class="m">0</span> bytes 
+    <span class="m">0</span> jumbo packets  <span class="m">0</span> storm suppression packets 
+    <span class="m">0</span> giants  <span class="m">0</span> input error  <span class="m">0</span> short frame  <span class="m">0</span> overrun  <span class="m">0</span> underrun 
+    <span class="m">0</span> watchdog  <span class="m">0</span> <span class="k">if</span> down drop 
+    <span class="m">0</span> input with dribble  <span class="m">0</span> input discard<span class="o">(</span>includes ACL drops<span class="o">)</span> 
+    <span class="m">0</span> Rx pause 
+  TX 
+    <span class="m">0</span> unicast packets  <span class="m">0</span> multicast packets  <span class="m">0</span> broadcast packets 
+    <span class="m">0</span> output packets  <span class="m">0</span> bytes 
+    <span class="m">0</span> jumbo packets 
+    <span class="m">0</span> output errors  <span class="m">0</span> collision  <span class="m">0</span> deferred  <span class="m">0</span> late collision 
+    <span class="m">0</span> lost carrier  <span class="m">0</span> no carrier  <span class="m">0</span> babble 
+    <span class="m">0</span> Tx pause 
+  <span class="m">0</span> interface resets 
+
+Automatic policy provisioning is disabled on this interface
+</pre></div>
+
+
+<p>Have fun w/ switches ~~</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-02
+            </div>
+
+            <h5 class="card-title">
+              JSP to Angular
+            </h5>
+
+            <p>
+              <p>Man, don't I dislike Java!</p>
+<h1>how to angular</h1>
+<p>Top level controller is <code>mwc</code>, and is linked at the root <code>&lt;html&gt;</code>:</p>
+<div class="highlight"><pre><span></span>./WEB-INF/jsp/administration.jsp:5:&lt;html...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/jsp to angular.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2018-11-16
+            </div>
+
+            <h5 class="card-title">
+              IBB brain shutdown procedure
+            </h5>
+
+            <p>
+              <p>This document describes procedure to shutdown an IBB brain instance.</p>
+<h1>Shutdown procedure</h1>
+<ol>
+<li>
+<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
+</li>
+<li>
+<p>Put the cluster in...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ibb brain shutdown procedure.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2018-06-27
+            </div>
+
+            <h5 class="card-title">
+              Server RAID
+            </h5>
+
+            <p>
+              <p>If you are like me who dislikes any GUI and mouse clicks, CLI via a
+SSH session to IMM is a fun way to get things done. This one shows how
+to config disks into RAID.</p>
+<p>CLI manual is <a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/server raid.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2017-09-06
+
+
+        <a class="wave-effect" href="category/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+
+        <a class="wave-effect" href="tag/lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+
+        <h1 class="myhighlight">Juju local LXD</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
+        </blockquote>
+        <p>
+          <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code change,
+deploying charm, then wait to see the <em>new</em> code got executed &larr;
+it's good 5-10 minutes per cycle. These add up quickly when you are in
+the middle of churning out code to get your ideas written. Not to
+mention creating a new <code>machine</code> is 2x slower, and bootstraping a new
+controller is even worse. I had experience in Shanghai sitting 30+
+minutes for a new controller due to the location's unreliable
+connections, and sometimes it just failed w/ a timeout. </p>
+<p>What to do? The goal is to create a way to reduce this trial-error
+cycle as much as possible so to speed up code development.</p>
+<h1>Challenge</h1>
+<p>If you watch <code>juju debug-log</code> while it deploys a charm, you start to
+realize that there are roughly seven steps:</p>
+<ol>
+<li>creating a container (will discuss <code>--to</code> switch later)</li>
+<li>update/upgrade the new container</li>
+<li>provisioning container with Juju agent</li>
+<li>installing charm software. This itself includes:</li>
+<li>transfering charm files to container</li>
+<li>installing <code>/wheelhouse</code> packages</li>
+<li>run charm's <code>hooks/install</code> to kick of charm code</li>
+</ol>
+<p>The last step is what we care about, the rest are there to construct a
+runtime environment for charm code. So, can we eliminate them or
+reduce them?</p>
+<p>Also, the most time consuming pieces are when Juju/agent is hitting
+a remote repo for system update or package installation. Therefore,
+limiting these is greatly desired.</p>
+<h1>Remedy</h1>
+<p>Strategy we are to present here is to use a custom-built image so that
+it has <strong>all</strong> required package pre-installed. This does not eliminate
+repo-hit completly, but it reduces the necessity of downloading 100+M
+of packages, each time! Package installer (<code>apt</code>, <code>yum</code>, <code>pip</code> ) will
+simply reply <em>package xyz is already installed</em> &mdash; much faster.</p>
+<h2>create a gold image</h2>
+<p>First, we create a gold copy that has everything pre-installed,
+pre-configured as much as you'd like to:</p>
+<ol>
+<li>
+<p>Follow <a href="https://insights.ubuntu.com/2016/03/22/lxd-2-0-your-first-lxd-container/">instruction</a> to launch a standard image:</p>
+<div class="highlight"><pre><span></span>```shell
+$ lxc launch ubuntu:14.04 gold
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>SSH to your new container, install system packages:</p>
+<div class="highlight"><pre><span></span>```shell
+$ lxc exec gold bash
+$ apt update
+$ apt install build-essential libssl-dev libffi-dev python-pip python-dev
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Update user <code>ubuntu</code>'s password:</p>
+<div class="highlight"><pre><span></span>```shell
+$ passwd ubuntu
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Enable SSH password authentication:</p>
+<div class="highlight"><pre><span></span>```shell
+$ nano /etc/ssh/sshd_config
+# Change to no to disable tunnelled clear text passwords
+PasswordAuthentication yes # &lt;-- change to &quot;yes&quot;
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Upgrade <code>pip</code>. This is necessary to install <code>/wheelhouse</code> contents
+   properly.</p>
+<div class="highlight"><pre><span></span>```shell
+$ pip install pip --upgrade
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>In your charm's dist, there will be a <code>/wheelhouse</code> folder, which
+   hosts a list of <code>.gz</code> files and such. They are python packages
+   needed by charm. Since they are packages into each charm, it makes
+   file transfer to container slower, and installing them is rather
+   redundant if a container is hosting multiple charms.</p>
+<p>Using <code>scp</code> and <code>ubuntu</code> credential (see step #3) to copy
+<code>/wheelhouse</code> to container. Install them:</p>
+<div class="highlight"><pre><span></span>```shell
+$ pip install wheelhouse/*
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Any other customization you have in mind, go ahead with it.</p>
+</li>
+</ol>
+<h2>create an image for Juju</h2>
+<p>Using the gold image, we are a few command lines away to create a new
+LXD image Juju (2.1+) uses when creating a new machine:</p>
+<ol>
+<li>
+<p>Create a snapshot of the <code>gold</code> image:</p>
+<div class="highlight"><pre><span></span>```shell
+$ lxc snapshot gold
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>To verify snapshot, <code>lxc info gold</code>, an example output:</p>
+<div class="highlight"><pre><span></span>```shell
+fengxia@local-charmdev:$ lxc info gold
+Name: gold
+Remote: unix:/var/lib/lxd/unix.socket
+Architecture: x86_64
+Created: 2017/08/30 21:13 UTC
+Status: Running
+Type: persistent
+Profiles: default
+Pid: 1858
+Ips:
+eth0:   inet    10.129.186.150  vethWQ2SSG
+eth0:   inet6   fe80::216:3eff:fede:5152    vethWQ2SSG
+lo: inet    127.0.0.1
+lo: inet6   ::1
+Resources:
+Processes: 15
+Memory usage:
+Memory (current): 18.14MB
+Memory (peak): 116.85MB
+Network usage:
+eth0:
+  Bytes received: 30.95kB
+  Bytes sent: 7.24kB
+  Packets received: 286
+  Packets sent: 64
+lo:
+  Bytes received: 0B
+  Bytes sent: 0B
+  Packets received: 0
+  Packets sent: 0
+Snapshots:
+snap3 (taken at 2017/09/04 00:18 UTC) (stateless)
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Export snapshot to an image. Note: the <a href="https://bugs.launchpad.net/juju/+bug/1650651">alias format</a> is
+   significant (<code>juju/$series/$arch</code>).</p>
+<div class="highlight"><pre><span></span>```shell
+$ lxc publish gold/snap3 --alias juju/trusty/amd64
+```
+</pre></div>
+
+
+</li>
+</ol>
+<p>You can verify image by <code>lxc image list</code>. A sample output:</p>
+<div class="highlight"><pre><span></span>fengxia@local-charmdev:~$ lxc image list
++------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
+<span class="p">|</span>         ALIAS          <span class="p">|</span> FINGERPRINT  <span class="p">|</span> PUBLIC <span class="p">|</span>                  DESCRIPTION                  <span class="p">|</span>  ARCH  <span class="p">|</span>   SIZE   <span class="p">|</span>         UPLOAD DATE          <span class="p">|</span>
++------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
+<span class="p">|</span> juju/trusty/amd64      <span class="p">|</span> b95d3291e3ae <span class="p">|</span> no     <span class="p">|</span>                                               <span class="p">|</span> x86_64 <span class="p">|</span> 377.03MB <span class="p">|</span> Sep 6, <span class="m">2017</span> at 2:10pm <span class="o">(</span>UTC<span class="o">)</span>  <span class="p">|</span>
++------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
+<span class="p">|</span> ubuntu-xenial <span class="o">(</span><span class="m">1</span> more<span class="o">)</span> <span class="p">|</span> 58f90cbf6892 <span class="p">|</span> no     <span class="p">|</span> ubuntu 16.04 LTS amd64 <span class="o">(</span>release<span class="o">)</span> <span class="o">(</span>20170815.1<span class="o">)</span> <span class="p">|</span> x86_64 <span class="p">|</span> 154.11MB <span class="p">|</span> Aug 17, <span class="m">2017</span> at 4:19pm <span class="o">(</span>UTC<span class="o">)</span> <span class="p">|</span>
++------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
+</pre></div>
+
+
+<h1>To use gold image</h1>
+<p>There are two ways to use the gold copy &mdash; either have Juju
+automatically use this image for new machine (requires Juju v2.1+), or
+create machines <strong>manually</strong>, for example, via an external
+orchestration tool.</p>
+<h2>Juju uses gold image</h2>
+<p>The only requirement is to have Juju version 2.1+.</p>
+<ol>
+<li>
+<p>(optional) Delete standard LXD image:</p>
+<div class="highlight"><pre><span></span>```shell
+$ lxc image delete ubuntu-trusty
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Update juju to 2.1+:</p>
+<div class="highlight"><pre><span></span>```shell
+$ sudo snap install juju --classic
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>After upgrading juju, re-bootstrap a controller (<code>juju bootstrap
+   localhost [pick a name]</code>).</p>
+</li>
+<li><code>juju deploy mycharm</code>: will create a new machine using a local
+   image w/ alias <code>juju/trusty/amd64</code> for new machine. This can be
+   verified by <code>watch -n 1 lxc image list</code> to monitor whether it will
+   still download a stock image.</li>
+</ol>
+<h2>add machine manually</h2>
+<p>If there is other orchestration mechanism outside Juju, we can also
+have it create machines <em>manually</em>:</p>
+<ol>
+<li>
+<p>Create a new LXD container using the image (or snapshot):</p>
+<div class="highlight"><pre><span></span>```shell
+$ lxc launch juju/trusty/amd64 testme &amp;&amp; lxc start testme
+$ lxc copy gold/snap3 testme &amp;&amp; lxc start me
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Add machine to Juju:</p>
+<div class="highlight"><pre><span></span>```shell
+$ juju add-machine ssh:ubuntu@[container&#39;s ip]
+```
+</pre></div>
+
+
+</li>
+<li>
+<p><code>juju deploy mycharm --to [machine #]</code>. Without the <code>--to</code>, Juju
+   will create a new machine by default. <span class="myhighlight">Be aware.</span></p>
+</li>
+</ol>
+<h1>No more update</h1>
+<p>To speed up the machine even further, we need to disable system
+update (on by default) so newly created machine (by Juju) will not hit
+repo for system updates.</p>
+<div class="highlight"><pre><span></span>$ juju model-config enable-os-refresh-update<span class="o">=</span><span class="nb">false</span>
+$ juju model-config enable-os-upgrade<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+
+
+<h1>Comparison results</h1>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-10-22
+            </div>
+
+            <h5 class="card-title">
+              Juju GUI nginx proxy
+            </h5>
+
+            <p>
+              <p>In <a href="http://fengxia.co/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host;...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/juju gui nginx proxy.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-07-06
+            </div>
+
+            <h5 class="card-title">
+              Charm Ansible integration
+            </h5>
+
+            <p>
+              <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/charm ansible integration.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

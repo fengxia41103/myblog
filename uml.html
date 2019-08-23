@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2018-07-24
+
+
+        <a class="wave-effect" href="category/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+
+        <a class="wave-effect" href="tag/dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+
+        <h1 class="myhighlight">UML</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <p>Finally <a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745">a book on UML</a> that makes sense to me (and is short enough
+so I was willing to read it, in one morning). </p>
+<h1>Milestone 1: requirement review</h1>
+<p>Everything starts with an analysis of the problem at hand. One thing
+learned and I'd like to clarify is <code>requirement</code> &mdash;
+it is a set of <strong>constraints</strong> (thus the word <code>must</code>,
+<code>should</code>). Requirements often cause confusion as they are taken as the
+system's objectives &rarr; in essence they are, but they are measured
+as a set of <strong>conditions</strong> that the system will have to <strong>behave
+within boundary</strong>. Thus, viewing them as the <strong>law for your
+design</strong>, it's a valid test to your test, but your design
+can come in many forms, and that's where engineering has some fun.</p>
+<p>So it becomes clear &amp; natural that design and implementation are like
+people living in society &rarr; his behavior is completly boxed by law
+he has to obey, that's the minimal.  Anything that no law permits nor
+prohibits (functions that links to no requirements), well, is just to
+keep the developers happy.</p>
+<figure class="col s12 center">
+  <img src="/images/practical%20uml%20problem%20domain.png"
+       class="responsive-image">
+  <figcaption>Problem domain</figcaption>
+</figure>
+
+<h2>problems</h2>
+<p>Any description of what the client is trying to do or what they
+want. There is no restriction at all. What comes out of it are:</p>
+<ol>
+<li>requirement</li>
+<li>domain modeling</li>
+</ol>
+<h2>requirement</h2>
+<ol>
+<li>Uses <strong>shall</strong>, <strong>must</strong>.</li>
+<li>Have a N-N mapping to use case &rarr; traceability from requirement
+   &rarr; design &rarr; code &rarr; test.</li>
+<li>Many ways to cut it: functional requirement, data requirement,
+   performance requirement, and so on.</li>
+</ol>
+<blockquote>
+<ul>
+<li>A use case describes a unit of behavior.</li>
+<li>Requirements describe the laws that govern that behavior.</li>
+<li>Functions are the individual actions that occur within that behavior.
+</li>
+</ul>
+</blockquote>
+<h2>domain modeling</h2>
+<p>Quite similar to ERD from Django graph. The difference is that it
+doesn't yet care attributes or methods, and they are not necessarily
+translated 1-1 into a DB table.</p>
+<ol>
+<li>Pick out the <code>nouns</code> &rarr; domain models</li>
+<li>
+<p>Formulating 3 relationships:</p>
+<ol>
+<li>generalization: parent &rarr; children class</li>
+<li>aggregation: roll up, eg. <code>DailyRecord</code> &rarr; <code>MonthlyRecord</code></li>
+<li>association: the closest understanding I can get is to describe
+   the many-to-many relationships.</li>
+</ol>
+</li>
+</ol>
+<h2>use case</h2>
+<p>This is the soul of UML (or at least for this book) since everything
+derives from it.</p>
+<ol>
+<li>Inputs: domain models &amp; requirements.</li>
+<li>Two types: <ol>
+<li>basic course of action</li>
+<li>alternative course of action &rarr; thus we can cover any
+   exceptions we need to handle.</li>
+</ol>
+</li>
+<li>Go expansive on case statement. We want to derive two things out of
+   it:<ol>
+<li>actor</li>
+<li>domain objects</li>
+</ol>
+</li>
+<li>What helps &larr; visual and mockup user experience:<ol>
+<li>GUI prototyping</li>
+<li>write a user manual in use case statement, or reverse
+   engineering case statements from a legacy user manual</li>
+<li>wire frame, or any kind of GUI mockup</li>
+</ol>
+</li>
+<li>Ask:<ol>
+<li>what happens &rarr; then &rarr; then.... use the word <code>invokes</code>
+   and <code>precedes</code>.</li>
+<li>what else can happen? &rarr; alternative course</li>
+</ol>
+</li>
+<li>Being thorough is key</li>
+</ol>
+<p>Once you have done so called analysis, you reach the first milestone
+&mdash; requirement review. That's when client should sign off to
+recognize these set of <code>use case</code> do represent what they want to do.</p>
+<h1>Milestone 2: design review</h1>
+<p>With a set of use cases, we can break them down into design
+elements. This book talks in context of OOD, thus words like <code>model</code>
+and <code>object</code> are essentially a <strong>CLASS</strong> in code. We don't have to be
+bound by this. Instead, taking <code>model</code> as an abstract &mdash; it can
+be a database table, or a service &mdash; it's just a representation
+of a logical element that describes our view of breaking down the
+initial problem into a set of items who interacts with each other. </p>
+<figure class="col s12">
+  <img src="/images/practical%20uml%20solution%20domain.png"
+       class="responsive-image">
+  <figcaption>How problem domain works w/ solution domain</figcaption>
+</figure>
+
+<h2>robustness diagrams</h2>
+<figure class="col l3 m4 s6 right">
+<img src="https://docs.oracle.com/cd/E13214_01/wli/docs92/bestpract/wwimages/robustnessanalysisrules.gif"
+       class="center responsive-image">
+</figure>
+
+<p>Robustness diagram is optional. It is the transition
+from problem domain &rarr; solution domain because it starts to speak
+using design language, not natural English (as in use case) anymore.</p>
+<p>Robustness diagram is essentially a MVC framework. This is optional in
+the sense that this is a transition between problem domain to solution
+domain.</p>
+<ol>
+<li>Three types of objects:<ol>
+<li>boundary obj &larr; interface, UI falls in this category &rarr;
+   the <code>V</code></li>
+<li>entity obj &rarr; can result in more domain models &rarr; the <code>M</code></li>
+<li>control obj &rarr; will be translated to helper models, methods
+   &rarr; the <code>C</code></li>
+</ol>
+</li>
+<li>One diagram per use case</li>
+<li>The good thing about robustness diagram is, there is strict rule of
+   what is allowed:<ol>
+<li>Actor can talk only to boundary objects.</li>
+<li>Boundary objects can talk only to controllers and actors.</li>
+<li>Entity objects can also talk only to controllers.</li>
+<li>Controllers can talk to both boundary objects and controllers,
+   but not to actors.</li>
+</ol>
+</li>
+</ol>
+<h2>sequence diagram</h2>
+<p>This is where the solution domain starts. Sequence diagram represents
+detailed design.</p>
+<ol>
+<li>Per use case &larr; both basic course and alternative course, try
+   to fit them to the same diagram.</li>
+<li>On the side of sequence, note which use case it is for &rarr;
+   traceability.</li>
+<li>We will end up with a list of <code>classes</code> and <code>methods</code>.<ol>
+<li>allocation methods to class &larr; design pattern, eg. class
+   factory vs. iterator</li>
+</ol>
+</li>
+</ol>
+<h2>state diagram</h2>
+<ol>
+<li>Per class from sequence diagram, but cherry pick the important ones
+   &larr; if it has only two states (on/off), don't bother.</li>
+<li>Three types of events:<ol>
+<li>entry: do this when you <strong>enter this state</strong></li>
+<li>exit: do this when you <strong>leave this state</strong></li>
+<li>do: do this when you are <strong>at this state</strong></li>
+<li>"guard": condition (True/False)</li>
+</ol>
+</li>
+</ol>
+<h1>Milestones 3 &amp; 4: development and UAT</h1>
+<p>UML doesn't address development. For completeness I'm adding two more
+milestones here:</p>
+<ol>
+<li>dev: topics such as test case fall into this place.</li>
+<li>release: the only thing matters is the <strong>UAT</strong>, which should come
+   straightly from use cases. </li>
+</ol>
+<p>Here I also want to highlight the <strong>separation between development tool
+ from test tool</strong> &rarr; programming your solution in Python does not
+ dictate you to test in Python. If you look at the two type of
+ test cases, I think unit test (whitebox) is tightly determined by
+ implementation details &rarr; how thorough I traverse code paths
+ (those <code>if-else</code>). It's often a matter of convenience to write them
+ in the same language because the language itself offers a toolset for
+ the purse, for example, Python's unit test framework.</p>
+<p>But <code>blackbox</code> cases have not such restriction &mdash; performance
+ test can well be done using a tool that has no relevance with Python
+ whatsoever because it only concerns <code>use case</code> which represents
+ <code>requirements</code>! Therefore, these tests are what UAT is about. The
+ whitebox tests, on the other hand, are for management purpose so you
+ can have control of quality.</p>
+<p>Now, this separation of purse is not to support that quality is just
+ for the internal use as long as UAT passes. In practice, use cases (=
+ requirements) are simply not possible to address all qualities. Again
+ going back the analogy of requirement being the law you obey in daily
+ life, law often tells you what not to do, but does not tell you what
+ you should do &larr; you can always live a despicable life but being
+ a lawful citizen at the same time.</p>
+<figure class="col s12">
+  <img src="/images/practical%20uml.png"
+       class="responsive-image">
+  <figcaption>A complete view of the framework</figcaption>
+</figure>
+
+<h1>Exercise</h1>
+<blockquote>
+<p>We have a cowboy named Bill Bob, who is driving down the road at 80
+miles an hour while drinking beer, scratching, and tossing the empty
+beer cans out the window of his pickup truck.
+</p>
+</blockquote>
+<ol>
+<li>domain models &amp; relationships</li>
+<li>basic course use case diagram</li>
+<li>requirements</li>
+</ol>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-07-03
+            </div>
+
+            <h5 class="card-title">
+              ECMAScript
+            </h5>
+
+            <p>
+              <p>Isn't this confusing &mdash; <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, ES6, Javascript,
+<a...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/ecmascript.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-06-24
+            </div>
+
+            <h5 class="card-title">
+              Dev structure
+            </h5>
+
+            <p>
+              <figure class="col l5 m5 s12">
+  <img src="/images/moses.jpg"/>
+  <figcaption>If the Bible story happens today</figcaption>
+</figure>
+
+<p>This is a common question any team/project will have to address
+&mdash; how to structure the knowledge we know of...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/dev structure.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-04-30
+            </div>
+
+            <h5 class="card-title">
+              Pandoc workflow
+            </h5>
+
+            <p>
+              <figure class="col s12">
+  <img src="/images/peppa.jpg"/>
+</figure>
+
+<p><a href="https://pandoc.org/MANUAL.html">Pandoc</a> is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/pandoc workflow.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

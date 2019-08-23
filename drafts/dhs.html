@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/theme/js/html5shiv.min.js"></script>
+    <script src="/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free'</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="http://fengxia.co/" class="white-text">Be Care Free'</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="http://fengxia.co/">Home</a>
+              <a href="http://fengxia.co/pages/about.html">
+                . About
+              </a>
+              <a href="http://fengxia.co/pages/lei.html">
+                . 夏雷
+              </a>
+              <a href="http://fengxia.co/pages/project euler.html">
+                . Project Euler
+              </a>
+              <a href="http://fengxia.co/pages/quote.html">
+                . Quote
+              </a>
+              <a href="http://fengxia.co/pages/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="http://fengxia.co/pages/search.html">
+                . Search
+              </a>
+              <a href="http://fengxia.co/pages/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2016-10-12
+
+
+        <a class="wave-effect" href="category/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+
+        <a class="wave-effect" href="tag/demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a class="wave-effect" href="tag/react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+
+        <h1 class="myhighlight">DHS</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <div id="dhs"></div>
+
+<script type="text/babel">
+
+var FormInput = React.createClass({
+    handleChange: function(event) {
+        var text = event.target.value;
+        this.props.onChange(this.props.id, text);
+    },
+    render: function(){
+        var inputStyle = {
+            float: "left"
+        };
+
+        return (
+            <div className="row form-group my-nobreak">
+                <span className="col-xs-6 col-form-label text-right">
+                    {this.props.label}
+                </span>
+                <div className="col-xs-5 input-group" style={inputStyle}>
+                    <input type="text" className="form-control"
+                        value={this.props.value}
+                        onChange={this.handleChange}/>
+                </div>
+            </div>
+        );
+    }
+});
+
+var FormHeader = React.createClass({
+    handleClick: function(event) {
+        this.props.handleClick();
+    },
+    render: function(){
+        var switchClass = classNames("fa", {
+            "fa-angle-double-up": this.props.showFields,
+            "fa-angle-double-down": !this.props.showFields
+        });
+
+        return (
+            <div className="row my-resume-header" onClick={this.handleClick}>
+                <div className="col-md-11">
+                    <h4>{this.props.title}</h4>
+                </div>
+                <div  className="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+                    <br />
+                    <i className={switchClass}></i>
+                </div>
+            </div>
+        );
+    }
+});
+
+var FormBox = React.createClass({
+    getInitialState: function(){
+        return {
+            showFields: true
+        };
+    },
+    handleClick: function(){
+        this.setState({
+            showFields: !this.state.showFields, // toggle
+        });
+    },
+    render: function(){
+        // Input fields
+        var formFields = [];
+        if (typeof this.props.data.fields != "undefined"){
+            formFields = this.props.data.fields.map(function(field) {
+                // This is the magic line to make the state update
+                // in sync with parent's state
+                field.onChange = this.props.onChange;
+
+                field.id = field.name;
+                return <FormInput key={field.label} {...field} />
+            }, this);
+        }
+        var fields = this.state.showFields?
+            <div className="my-multicol-2">{formFields}</div>: null;
+
+        // Render
+        return (
+            <div>
+                <FormHeader title={this.props.data.title} showFields={this.state.showFields} handleClick={this.handleClick} />
+                <button className="btn btn-default"
+                    onClick={this.props.onRedraw}>Graph</button>
+                {fields}
+            </div>
+        );
+    }
+});
+
+var D3GraphContainer = React.createClass({
+    getInitialState: function(){
+        return {
+            title: "",
+            data: [], // graph data
+            dataId: null,
+            redrawCounter: 0
+        }
+    },
+    handleRedraw:function(){
+        var that = this;
+        var queries = this.props.data;
+        var baseUrl = "http://api.dhsprogram.com/rest/dhs/v4/data?";
+        var tmp = [];
+        for (var key in queries){
+            var val = queries[key].value;
+            if (val && (val.length > 0)){
+                tmp.push(key + "=" + val);
+            }
+        }
+        var apiUrl = baseUrl+tmp.join("&");
+        console.log(apiUrl);
+
+        // Get data
+        j$.ajax({
+            url: apiUrl,
+            dataType: "json",
+            method: "GET",
+            success: function(resp){
+                if ((typeof resp != "undefined") && resp){
+                    that.setState({
+                        title: resp.Data[0].Indicator,
+                        data: resp.Data,
+                        dataId: resp.Data[0].IndicatorOrder,
+                        redrawCounter: that.props.redraw
+                    });
+                }
+            } // end of success
+        });
+    },
+    render: function(){
+        if (this.props.redraw > this.state.redrawCounter){
+            this.handleRedraw();
+        }
+        return (
+            <div>
+                {this.state.dataId?
+                    <D3Graph id={this.state.dataId}
+                        data={this.state.data}
+                        title={this.state.title} />
+                    :null}
+            </div>
+        );
+    }
+});
+
+var D3Graph = React.createClass({
+    getInitialState: function(){
+        return {
+            id: "DHS"+this.props.id,
+            prevData: [],
+            viz: null
+        }
+    },
+    cleanData:function(data){
+        var tmp = data.slice();
+        for (var i = 0; i<data.length; i++){
+            tmp[i].SurveyYear = "" + tmp[i].SurveyYear;
+        }
+        return tmp;
+    },
+    makeViz: function(data){
+        this.setState({
+            viz: d3plus.viz().container("#"+this.state.id)
+            .data(this.cleanData(data))
+            .type("bar")
+            .id("CountryName")
+            .color("CountryName")
+            .text("CountryName")
+            .y("Value")
+            .x("SurveyYear")
+            //.shape({
+            //    "interpolate": "basis"  // takes accepted values to change interpolation type
+            //})
+            .draw()
+        });
+        this.debounceUpdate = _.debounce(function(data){
+            this.state.viz.data(this.cleanData(data));
+            this.state.viz.draw();
+
+            // Save data
+            this.setState({
+                prevData: data
+            });
+        }, 500);
+    },
+    componentDidMount: function(){
+        this.setState({
+            prevData: this.props.data
+        });
+        this.makeViz(this.props.data);
+    },
+    render: function(){
+        if (this.state.viz && !_.isEqual(this.state.prevData, this.props.data)){
+            this.debounceUpdate(this.props.data);
+        }
+
+        return (
+            <figure id={this.state.id} style={{minHeight:"500px"}}>
+                <figcaption>{this.props.title}</figcaption>
+            </figure>
+        );
+    }
+});
+
+var DhsBox = React.createClass({
+    getInitialState: function(){
+        return {
+            "countryIds": {
+                label: "Country IDs",
+                value: "KE"
+            },
+            "indicatorIds": {
+                label: "Indicator IDs",
+                value: "FE_FRTR_W_TFR"
+            },
+            "breakdown": {
+                label: "Breakdown level",
+                value: null
+            },
+            "surveyIds": {
+                label: "Survey IDs",
+                value: null
+            },
+            "surveyYear": {
+                label: "Survey Year",
+                value: null
+            },
+            counter: {
+                redraw: 0
+            }
+        }; // end of initial state
+    },
+    getFields: function(pickList){
+        var tmpList = [];
+        for (var i=0; i<pickList.length; i++){
+            var tmp = this.state[pickList[i]];
+            tmp.name = pickList[i];
+
+            if ((typeof tmp.value  == "undefined") || (!tmp.value)){
+                tmp.value = ""; // default input value
+            }
+            tmpList.push(tmp);
+        }
+        return tmpList;
+    },
+    handleFieldChange: function(fieldId, value) {
+        var newState = this.state[fieldId];
+        newState.value = value;
+        this.setState(newState);
+    },
+    handleRedraw: function(){
+        var currentRedrawCounter = this.state.counter.redraw;
+        this.setState({
+            counter: {
+                redraw: currentRedrawCounter+1 // increment counter
+            }
+        });
+    },
+    render: function(){
+        var helper = {
+            getFields: this.getFields
+        };
+        var dhsForm = {
+            title: "DHS data set",
+            fields: helper.getFields(["countryIds", "indicatorIds", "surveyYear"])
+        };
+        return (
+            <div>
+                <FormBox data={dhsForm}
+                    onChange={this.handleFieldChange}
+                    onRedraw={this.handleRedraw}
+                />
+                <D3GraphContainer
+                    data={this.state}
+                    redraw={this.state.counter.redraw}
+                />
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(
+    <DhsBox />,
+    document.getElementById("dhs")
+);
+</script>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="author/feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2017-11-12
+            </div>
+
+            <h5 class="card-title">
+              Alpha Advantage SP500 API
+            </h5>
+
+            <p>
+              <figure class="s12 center">
+  <img src="/images/alpha%20advantage%20sp500.png"/>
+    <figcaption>SP500</figcaption>
+</figure>
+
+<p>While fixing my <a href="https://github.com/fengxia41103/jk">stock project</a>, I hit a road block, that Yahoo's 
+free...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="http://fengxia.co/alpha sp500.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="http://fengxia.co/category/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/category/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/category/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/category/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/category/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/category/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/category/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="http://fengxia.co/category/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="http://fengxia.co/category/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="http://fengxia.co/category/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="http://fengxia.co/tag/lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="http://fengxia.co/tag/love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="http://fengxia.co/tag/family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="http://fengxia.co/tag/demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="http://fengxia.co/tag/dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="http://fengxia.co/tag/react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="http://fengxia.co/tag/gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="http://fengxia.co/tag/fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="http://fengxia.co/tag/design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="http://fengxia.co/tag/odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="http://fengxia.co/tag/angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="http://fengxia.co/tag/thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

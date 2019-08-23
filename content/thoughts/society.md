@@ -5,7 +5,7 @@ Slug: society
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/diamond.jpg"/>
+  <img src="{{SITEURL}}/images/diamond.jpg"/>
 </figure>
 
 I  have   been  doing  a   lot  of  thinking  recently,   about  human

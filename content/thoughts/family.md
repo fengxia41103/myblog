@@ -5,7 +5,7 @@ Slug: family info
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/family.jpg"/>
+  <img src="{{SITEURL}}/images/funny/family.jpg"/>
 </figure>
 
 # 爷爷，奶奶，幸福邨，夏炽宇（九弟）

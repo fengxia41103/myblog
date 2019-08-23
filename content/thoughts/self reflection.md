@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l6 m6 s12">
-  <img src="/images/history.jpg"/>
+  <img src="{{SITEURL}}/images/history.jpg"/>
 </figure>
 
 Watching the [Civilisaiton][1] Youtube, what a fantastic topic and

@@ -5,7 +5,7 @@ Slug: taikang 2019
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/taikang.jpg"/>
+  <img src="{{SITEURL}}/images/taikang.jpg"/>
 </figure>
 
 

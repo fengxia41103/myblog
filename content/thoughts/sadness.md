@@ -5,7 +5,7 @@ Slug: sadness
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/xindong.png"/>
+  <img src="{{SITEURL}}/images/xindong.png"/>
 </figure>
 
 Yao Han introduced me to this [movie][1], at the time when we first

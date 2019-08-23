@@ -5,7 +5,7 @@ Slug: emotion
 Author: Feng Xia
 
 <figure class="col l7 m7 s12">
-  <img src="/images/reddit%20cat.jpg"/>
+  <img src="{{SITEURL}}/images/reddit%20cat.jpg"/>
 </figure>
 
 

@@ -5,7 +5,7 @@ Slug: not feeling well today
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/kiki.png"/>
+  <img src="{{SITEURL}}/images/kiki.png"/>
 </figure>
 
 But this screenshot from [kiki][1] brightens my day ~~

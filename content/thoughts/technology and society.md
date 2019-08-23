@@ -5,7 +5,7 @@ Slug: technology and society
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/fuji.jpg"/>
+  <img src="{{SITEURL}}/images/fuji.jpg"/>
 </figure>
 
 

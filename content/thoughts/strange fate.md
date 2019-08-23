@@ -5,7 +5,7 @@ Slug: strange fate
 Author: Feng Xia
 
 <figure class="col s12">
-    <img src="/images/country%20life.jpg"/>
+    <img src="{{SITEURL}}/images/country%20life.jpg"/>
 </figure>
 
 Have you had this feeling before? that something is off, and things

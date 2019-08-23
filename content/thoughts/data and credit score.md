@@ -16,7 +16,7 @@ credit score system.
 # Now we have data
 
 <figure class="col l8 m12 s12 center">
-  <img src="/images/data%20and%20love.png"/>
+  <img src="{{SITEURL}}/images/data%20and%20love.png"/>
 </figure>
 
 With China's economy boom and in particular the ever thirsty

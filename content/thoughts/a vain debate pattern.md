@@ -5,7 +5,7 @@ Slug: a vain debate pattern
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/electric%20car.jpg"/>
+  <img src="{{SITEURL}}/images/funny/electric%20car.jpg"/>
 </figure>
 
 

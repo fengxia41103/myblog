@@ -5,7 +5,7 @@ Slug: early morning
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/zhu%20wawa.jpg"/>
+  <img src="{{SITEURL}}/images/zhu%20wawa.jpg"/>
 </figure>
 
 I'm getting used to getting up early to feed them. But I still can't

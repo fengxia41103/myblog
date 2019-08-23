@@ -5,7 +5,7 @@ Slug: venezuela
 Author: Feng Xia
 
 <figure class="col l5 m5 s12">
-  <img src="/images/miracles.jpg"/>
+  <img src="{{SITEURL}}/images/miracles.jpg"/>
 </figure>
 
 A country I only know by its name, Venezuela. Yet it's on the NPR news

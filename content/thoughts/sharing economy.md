@@ -5,7 +5,7 @@ Slug: sharing economy
 Author: Feng Xia
 
 <figure class="col l4 m4 s12">
-  <img src="/images/bike.gif"/>
+  <img src="{{SITEURL}}/images/bike.gif"/>
 </figure>
 
 [Sharing economy][1] is hot. Looking around, one can't help feeling

@@ -5,7 +5,7 @@ Slug: reflection on technology
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/stanislav%20petrov.jpg"/>
+  <img src="{{SITEURL}}/images/stanislav%20petrov.jpg"/>
   <figcaption>
   Stanislav Petrov
   </figcaption>

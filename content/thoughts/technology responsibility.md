@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l5 m5 s12">
-  <img src="/images/funny/adam-eve-cartoon-cholesterol.jpg"/>
+  <img src="{{SITEURL}}/images/funny/adam-eve-cartoon-cholesterol.jpg"/>
 </figure>
 
 

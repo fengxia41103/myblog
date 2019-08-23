@@ -5,7 +5,7 @@ Slug: plagarism
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/ring.jpg"/>
+  <img src="{{SITEURL}}/images/ring.jpg"/>
 </figure>
 
 

@@ -7,14 +7,15 @@ import sys
 AUTHOR = u"Feng Xia"
 SITENAME = u"Be Care Free'"
 #SITEURL = "http://fengxia.co"
-SITEURL = ""
+SITEURL = "https://fengxia41103.github.io/myblog/"
 
 PATH = "content"
 
 IGNORE_FILES = ["[.#].*"]
 
 # These folders will be copied to `/output` without pelican modification
-STATIC_PATHS = ["images", "downloads", "app", "data", "slides"]
+STATIC_PATHS = ["images", "downloads", "app", "data", "slides"]  # "extra/CNAME"
+# EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'}, }
 
 # must have this to copy `/slides` to output
 # and skip processor complaining about formatting error
@@ -46,7 +47,7 @@ DEFAULT_PAGINATION = 20
 
 
 # Theme
-THEME = "feng"
+THEME = "theme/feng"
 EMAIL_ADDRESS = "feng_xia41103@hotmail.com"
 GITHUB_ADDRESS = "http://github.com/fengxia41103"
 LINKEDIN_ADDRESS = "https://www.linkedin.com/in/fengxia41103"
@@ -60,8 +61,6 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["tipue_search"]
 
-# output
-OUTPUT_PATH = 'docs/'
 
 ##############################
 #

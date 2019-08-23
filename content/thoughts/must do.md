@@ -5,7 +5,7 @@ Slug: must do
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/no%20children.png"/>
+  <img src="{{SITEURL}}/images/no%20children.png"/>
 </figure>
 
 I just had a thought &mdash; many mid-age women claim that they feel

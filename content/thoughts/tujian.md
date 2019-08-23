@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col s12">
-  <img src="/images/tokyo%20girl.png"/>
+  <img src="{{SITEURL}}/images/tokyo%20girl.png"/>
 </figure>
 
 

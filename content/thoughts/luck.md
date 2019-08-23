@@ -5,7 +5,7 @@ Slug: luck
 Author: Feng Xia
 
 <figure class="col l4 m6 s12">
-  <img src="/images/luck.jpg"/>
+  <img src="{{SITEURL}}/images/luck.jpg"/>
 </figure>
 
 I was listening to this [talk][1] on Youtube about luck, and that got

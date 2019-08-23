@@ -5,7 +5,7 @@ Slug: sympathy
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/the%20general%20problem.png"/>
+  <img src="{{SITEURL}}/images/the%20general%20problem.png"/>
 </figure>
 
 

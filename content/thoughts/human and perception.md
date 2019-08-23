@@ -5,7 +5,7 @@ Slug: human and perception
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/anxiety.jpg"/>
+  <img src="{{SITEURL}}/images/anxiety.jpg"/>
 </figure>
 
 

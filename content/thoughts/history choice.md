@@ -5,7 +5,7 @@ Slug: history choice
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/chinese%20selfie.jpg"/>
+  <img src="{{SITEURL}}/images/chinese%20selfie.jpg"/>
 </figure>
 
 This is a tough one, actually, because the topic is really deep. In

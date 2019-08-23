@@ -5,7 +5,7 @@ Slug: memory
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="/images/cute%20cat.png"/>
+  <img src="{{SITEURL}}/images/cute%20cat.png"/>
 </figure>
 
 

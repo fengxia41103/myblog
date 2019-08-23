@@ -5,7 +5,7 @@ Slug: wife material
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="/images/Kim-Tae-Ri.jpg"/>
+  <img src="{{SITEURL}}/images/Kim-Tae-Ri.jpg"/>
 </figure>
 
 Traveling reveals one thing to me. I don't know whether this is unique

@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l6 m6 s12">
-  <img src="/images/arts.jpg"/>
+  <img src="{{SITEURL}}/images/arts.jpg"/>
 </figure>
 
 Finished reading Kenneth Clark's [Civilisation][1]. I can't say I

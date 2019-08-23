@@ -5,7 +5,7 @@ Slug: life like a turtle
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/beijing.jpg"/>
+  <img src="{{SITEURL}}/images/beijing.jpg"/>
 </figure>
 
 Walking back from gym a moment ago, passing the 奈何桥 I was always

@@ -5,7 +5,7 @@ Slug: moving
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/moving.jpg"/>
+  <img src="{{SITEURL}}/images/funny/moving.jpg"/>
 </figure>
 
 

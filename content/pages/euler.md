@@ -521,17 +521,17 @@ the first 10,000 of them for a quick analysis surprisingly reveals
 that they are quite `linear` with small jigzags but not much.
 
 <figure class="col s12 center">
-  <img src="/downloads/euler/ten_thousand_primes.png"
+  <img src="../downloads/euler/ten_thousand_primes.png"
        class="responsive-image">
   <figcaption>First 10,000 primes</figcaption>
 </figure>
 <figure class="col s12 center">
-  <img src="/downloads/euler/one_hundred_primes.png"
+  <img src="../downloads/euler/one_hundred_primes.png"
        class="responsive-image">
   <figcaption>First 100 primes</figcaption>
 </figure>
 <figure class="col s12 center">
-  <img src="/downloads/euler/ten_thousand_primes_analysis.png"
+  <img src="../downloads/euler/ten_thousand_primes_analysis.png"
        class="responsive-image">
   <figcaption>9,900th-10,000th primes</figcaption>
 </figure>
@@ -1420,7 +1420,7 @@ def chain(n):
 > right corner.
 > 
 > <figure class="col s12 center">
->   <img src="/downloads/euler/P015.gif"
+>   <img src="../downloads/euler/P015.gif"
 >        class="responsive-image">
 > </figure>
 > 
@@ -2173,7 +2173,7 @@ times of *n*.
 
 [Question](https://projecteuler.net/problem=27):
 
-![](/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
+![]({filename}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
 
 -   problem space: `|a| < 1000 and |b| < 1000`
 -   test criteria: n*n+a*n+b, n=0,1.... is prime?
@@ -2363,7 +2363,7 @@ with the growing number of digits anymore. So **problem space is
 max-ed at 199999**!
 
 ![Max by digits vs. Max from sum() of 5th power of each
-digits](/downloads/euler/Euler_p30.png "Max by digits vs. Max from
+digits]({filename}/downloads/euler/Euler_p30.png "Max by digits vs. Max from
 sum() of 5th power of each digits"){.col .s12}
 
 
@@ -2397,7 +2397,7 @@ def main():
 > 
 > </div>
 
-![PE overview](/downloads/euler/031_overview.pdf "PE overview")
+![PE overview]({filename}/downloads/euler/031_overview.pdf "PE overview")
 
 -   problem space: max number of `1p(=200) * max of
     2p(=100)`.... &mdash; it's a large number, but does represent the
@@ -2456,7 +2456,7 @@ def main():
 ```
 
 ![Dynamic programming on coin change
-problem](/downloads/euler/Dyn_prog.pdf "Dynamic programming on coin change problem")
+problem]({filename}/downloads/euler/Dyn_prog.pdf "Dynamic programming on coin change problem")
 
 This led me to Google for solution (not being cheap, but eager to be
 enlightened), I came across a [great
@@ -2925,7 +2925,7 @@ def main():
   [palindromic](https://en.wikipedia.org/wiki/Palindromic_number)?
 
 ![Overview posted in PE
-threads](/downloads/euler/036_overview.pdf "Overview posted in PE threads")
+threads]({filename}/downloads/euler/036_overview.pdf "Overview posted in PE threads")
 
 A palindromic number is **symmetrical**. A more mathematical
 description can be found
@@ -3397,7 +3397,7 @@ def main():
 > we form a word value. For example, the word value for SKY is 19 +
 > 11 + 25 = 55 = <i>t</i><sub>10</sub>. If the word value is a
 > triangle number then we shall call the word a triangle word.</p>
-> <p>Using [P042 words.txt](/downloads/euler/P042%20words.txt), a 16K
+> <p>Using [P042 words.txt]({filename}/downloads/euler/P042%20words.txt), a 16K
 > text file containing nearly two-thousand common English words, how
 > many are triangle words?</p>
 
@@ -4103,7 +4103,7 @@ Taking this a bit further, I searched benchmark vs. count to analyze
 how quickly this relationship will converge. To my surprise it is
 quite linear!
 
-![](/downloads/euler/P53.png){.col .s12}
+![]({filename}/downloads/euler/P53.png){.col .s12}
 
 ---
 
@@ -4807,7 +4807,7 @@ This approach is messy.
 I know this is not `clever`. But I failed to see a hard test criteria
 to know that decoded message is correct.
 
-![](/downloads/euler/P59.png){.col .l6 .m6 .s12}
+![]({filename}/downloads/euler/P59.png){.col .l6 .m6 .s12}
 
 ## method 2
 
@@ -4964,7 +4964,7 @@ def method_1():
 Graph below shows that the length of candidate list grows almost
 `linearly` with the growing of primes generated.
 
-![](/downloads/euler/P60.png){.col .s12}
+![]({filename}/downloads/euler/P60.png){.col .s12}
 
 When stopped at break condition, we had two pairs:
 

@@ -3397,7 +3397,7 @@ def main():
 > we form a word value. For example, the word value for SKY is 19 +
 > 11 + 25 = 55 = <i>t</i><sub>10</sub>. If the word value is a
 > triangle number then we shall call the word a triangle word.</p>
-> <p>Using [P042 words.txt]({filename}/downloads/euler/P042%20words.txt), a 16K
+> <p>Using [P042 words.txt]({filename}/downloads/euler/P042_words.txt), a 16K
 > text file containing nearly two-thousand common English words, how
 > many are triangle words?</p>
 

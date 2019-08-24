@@ -263,7 +263,7 @@ civilization knowing there is zero risk of going back in time, if they
 love it so much! &lt;strong&gt;This is the definition of 叶公好龙, isn't it!?&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 05 Jul 2019 13:41:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-07-05:myblog/i dont think so.html</guid><category>thoughts</category></item><item><title>ECMAScript</title><link>https://fengxia41103.github.io/myblog/ecmascript.html</link><description>&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
 &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/ecmascript%20relationship.png"/&gt;
+  &lt;img src="images/ecmascript%20relationship.png"/&gt;
   &lt;figcaption&gt;Feng's view of how these confusing Javascript words are
   linked together&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -902,7 +902,7 @@ to mention all the broken hearts from regular loves!)...&lt;/p&gt;
 &lt;p&gt;I don't know. Something is terribly wrong with this world, with the
 state of human, with myself. Just that I don't know what it is, why it
 is so, and what change is needed &amp;rarr; such a sense of being powerless.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 26 Jun 2019 09:29:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-06-26:myblog/venezuela.html</guid><category>thoughts</category></item><item><title>Dev structure</title><link>https://fengxia41103.github.io/myblog/dev%20structure.html</link><description>&lt;figure class="col l5 m5 s12"&gt;
-  &lt;img src="/images/moses.jpg"/&gt;
+  &lt;img src="images/moses.jpg"/&gt;
   &lt;figcaption&gt;If the Bible story happens today&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1819,7 +1819,7 @@ so real, that, one can only cope with, when it hits, and wish to come
 out, alive. Honestly, sometimes, I wish, I will never come out,
 because missing someone again, for one day, is worse than being alive.&lt;/p&gt;
 &lt;p&gt;Don't you think?&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 02 May 2019 09:13:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-05-02:myblog/emotion.html</guid><category>thoughts</category></item><item><title>Pandoc workflow</title><link>https://fengxia41103.github.io/myblog/pandoc%20workflow.html</link><description>&lt;figure class="col s12"&gt;
-  &lt;img src="/images/peppa.jpg"/&gt;
+  &lt;img src="images/peppa.jpg"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;a href="https://pandoc.org/MANUAL.html"&gt;Pandoc&lt;/a&gt; is awesome. I have been using
@@ -1919,7 +1919,7 @@ benefits to any follow up docs you will write and want to use the same
 source for reference! and to generate a bibliography now at the end of
 your doc is a snap, and it looks, beautiful!&lt;/p&gt;
 &lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/bibliography.png"/&gt;
+  &lt;img src="images/bibliography.png"/&gt;
   &lt;figcaption&gt;Example of .bib result in PDF&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2120,7 +2120,7 @@ into this mess again.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.o
 machine (B). If we can SSH from A&amp;rarr;B, we can reroute browser
 traffic from A to B, much quicker than X-windows.&lt;/p&gt;
 &lt;figure class="col l4 m4 s12"&gt;
-  &lt;img src="/images/browser%20proxy.png"
+  &lt;img src="images/browser%20proxy.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -2162,7 +2162,7 @@ be available from all interfaces.&lt;/p&gt;
      &lt;code&gt;127.0.0.1&lt;/code&gt; are listed. We want to use &lt;code&gt;localhost&lt;/code&gt;!&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/browser%20proxy%20firefox%20setting.png"
+  &lt;img src="images/browser%20proxy%20firefox%20setting.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;Setting up proxy in Firefox&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -4756,7 +4756,7 @@ Extra metadata (valid at timestamp):
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;figure class="col s12"&gt;
-  &lt;img src="/images/ibb/shutdown%20rhv%20storage%20domain.png"/&gt;
+  &lt;img src="images/ibb/shutdown%20rhv%20storage%20domain.png"/&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -4787,7 +4787,7 @@ Extra metadata (valid at timestamp):
 &lt;li&gt;
 &lt;p&gt;stop one: &lt;code&gt;gluster volume stop &amp;lt;volume name&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;figure class="col s12"&gt;
-  &lt;img src="/images/ibb/shutdown%20gluster%20volume.png"/&gt;
+  &lt;img src="images/ibb/shutdown%20gluster%20volume.png"/&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -4902,7 +4902,7 @@ There are no active volume tasks
 &lt;li&gt;Starting storage can take a while.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;figure class="col s12"&gt;
-  &lt;img src="/images/ibb/rhhi%20activate%20domain.png"/&gt;
+  &lt;img src="images/ibb/rhhi%20activate%20domain.png"/&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -5350,7 +5350,7 @@ to balance, and that's what they are &amp;mdash; these memories, these
 moments when I see them like a movie playing in my head, scene by
 scene, over and over and over, is what keep me warm, keep me sane. &lt;/p&gt;
 &lt;p&gt;Darkness is all over me; you, gave me light.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Mon, 29 Oct 2018 04:32:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2018-10-29:myblog/early morning.html</guid><category>love</category></item><item><title>SPA: a cofiguration Dashboard</title><link>https://fengxia41103.github.io/myblog/project%20spa%20dashboard%20demo.html</link><description>&lt;figure class="s12 center"&gt;
-    &lt;img src="/images/spa%20dashboard%20demo.png" /&gt;
+    &lt;img src="images/spa%20dashboard%20demo.png" /&gt;
     &lt;figcaption&gt;Project SPA Dashboard demo&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -5367,7 +5367,7 @@ deployed on a RHHI instance. Previously we have maintained a table
 (shown below) of URLs to these services since VM's IP and hostname are
 pre-determined. &lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ibb%20rack%201%20cheatsheet.png" /&gt;
+    &lt;img src="images/ibb%20rack%201%20cheatsheet.png" /&gt;
     &lt;figcaption&gt;IBB example cheatsheet&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -5446,7 +5446,7 @@ thus eliminating manual maintenance of a static wiki page.&lt;/p&gt;
 configs, and map them to individual section for display. The overall
 architecture is shown below:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/SPA%20dashboard%20design.png" /&gt;
+    &lt;img src="images/SPA%20dashboard%20design.png" /&gt;
     &lt;figcaption&gt;SPA Dashboard Design&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -6835,7 +6835,7 @@ he has to obey, that's the minimal.  Anything that no law permits nor
 prohibits (functions that links to no requirements), well, is just to
 keep the developers happy.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="/images/practical%20uml%20problem%20domain.png"
+  &lt;img src="images/practical%20uml%20problem%20domain.png"
        class="responsive-image"&gt;
   &lt;figcaption&gt;Problem domain&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -6923,7 +6923,7 @@ be a database table, or a service &amp;mdash; it's just a representation
 of a logical element that describes our view of breaking down the
 initial problem into a set of items who interacts with each other. &lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/practical%20uml%20solution%20domain.png"
+  &lt;img src="images/practical%20uml%20solution%20domain.png"
        class="responsive-image"&gt;
   &lt;figcaption&gt;How problem domain works w/ solution domain&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -7016,7 +7016,7 @@ milestones here:&lt;/p&gt;
  you should do &amp;larr; you can always live a despicable life but being
  a lawful citizen at the same time.&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/practical%20uml.png"
+  &lt;img src="images/practical%20uml.png"
        class="responsive-image"&gt;
   &lt;figcaption&gt;A complete view of the framework&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -8209,7 +8209,7 @@ from a switch &amp;larr; they refer to devices connected to a switch
 &lt;strong&gt;neighbors&lt;/strong&gt;. This information is the foundation to draw a (physical)
 network topology such as:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/switch%20network%20topology.png"/&gt;
+    &lt;img src="images/switch%20network%20topology.png"/&gt;
     &lt;figcaption&gt;Example of a switch-switch topology&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8613,7 +8613,7 @@ Automatic policy provisioning is disabled on this interface
 
 
 &lt;p&gt;Have fun w/ switches ~~&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 04 Oct 2018 11:15:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2018-06-08:myblog/switches.html</guid><category>lenovo</category></item><item><title>Screencast</title><link>https://fengxia41103.github.io/myblog/screencast.html</link><description>&lt;video width="100%" height="100%" controls="controls"&gt;
-  &lt;source src="/images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" /&gt;
+  &lt;source src="images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" /&gt;
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/
 &lt;/video&gt;
@@ -8768,7 +8768,7 @@ connected to a switch port (via a cable).&lt;/p&gt;
 physical device such as server and switch. This makes sense as the
 primary physical asset of a data center are certainly these devices. &lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20list.png"/&gt;
+    &lt;img src="images/netbox%20device%20list.png"/&gt;
     &lt;figcaption&gt;Example list of devices&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8788,7 +8788,7 @@ are two important flags that will affect how a device can be used:&lt;/p&gt;
    (we model BMC controller as a bay device inside a server).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20devicetype%20list.png"/&gt;
+    &lt;img src="images/netbox%20devicetype%20list.png"/&gt;
     &lt;figcaption&gt;Example list of device types&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8803,9 +8803,9 @@ Netbox's way to control password in a later section). Further, we use
    access method is Telnet (see &lt;a href="https://fengxia41103.github.io/myblog/switches.html"&gt;Network switch&lt;/a&gt; for details.)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="row center"&gt;
-    &lt;img src="/images/netbox%20device%20section%201.png"
+    &lt;img src="images/netbox%20device%20section%201.png"
         class="col s6"/&gt;
-    &lt;img src="/images/netbox%20device%20section%202.png"
+    &lt;img src="images/netbox%20device%20section%202.png"
         class="col s6"/&gt;
     &lt;figcaption&gt;Device IP &amp; credential. A device can have multiple
     IP address but only one primary IP4 &amp; IP6. It can also
@@ -8817,7 +8817,7 @@ Netbox's way to control password in a later section). Further, we use
 &lt;p&gt;A device whose device type sets &lt;code&gt;is_network_device=True&lt;/code&gt; can be linked
 to an &lt;code&gt;Interface&lt;/code&gt;, and an interface can be linked to an IP address.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20interface.png"/&gt;
+    &lt;img src="images/netbox%20device%20interface.png"/&gt;
     &lt;figcaption&gt;Device interfaces&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8865,7 +8865,7 @@ to describe a network topology:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20topology.png"/&gt;
+    &lt;img src="images/netbox%20device%20topology.png"/&gt;
     &lt;figcaption&gt;Example device view of a topology&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8874,7 +8874,7 @@ to describe a network topology:&lt;/p&gt;
 &lt;code&gt;parent-children&lt;/code&gt; relationship. One use case of this relationship is
 to register BMC controller as a bay device inside a server:&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20bay%20device.png"/&gt;
+    &lt;img src="images/netbox%20device%20bay%20device.png"/&gt;
     &lt;figcaption&gt;Device bay&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8892,7 +8892,7 @@ to register BMC controller as a bay device inside a server:&lt;/p&gt;
 &lt;p&gt;In Netbox this is only a convenience for navigation. However
 we can extend this idea using other definitions.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20related%20devices.png"/&gt;
+    &lt;img src="images/netbox%20device%20related%20devices.png"/&gt;
     &lt;figcaption&gt;Related devices&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -8944,7 +8944,7 @@ allowing two devices in the same slot &amp;mdash; one facing the front,
 and one facing the back. Also, it is common that top-of-rack switch is
 mounted facing back so that cables can access its port.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20rack.png"/&gt;
+    &lt;img src="images/netbox%20rack.png"/&gt;
     &lt;figcaption&gt;Example of a rack&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -9690,7 +9690,7 @@ have a good understanding of the Satellite models and procedures.&lt;/p&gt;
 &lt;li&gt;Info flow: external source &amp;rarr; main server &amp;rarr; capsule
     server &amp;rarr; managed host.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src="/images/rh%20satellite%20overall%20architecture%20official.png"
+&lt;p&gt;&lt;img src="images/rh%20satellite%20overall%20architecture%20official.png"
      class="col s12"&gt;&lt;/p&gt;
 &lt;h1&gt;Content view&lt;/h1&gt;
 &lt;ol&gt;
@@ -9702,7 +9702,7 @@ have a good understanding of the Satellite models and procedures.&lt;/p&gt;
    need to be changed. So from its consumer's POV, it sees the change
    transparently.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src="/images/rh%20satellite%20content%20view.png"
+&lt;p&gt;&lt;img src="images/rh%20satellite%20content%20view.png"
      class="col s12"&gt;&lt;/p&gt;
 &lt;h1&gt;RH subscription model&lt;/h1&gt;
 &lt;p&gt;The center piece of Satellite is RH subscription. This is how
@@ -9779,7 +9779,7 @@ if you assign &lt;code&gt;10 entitlements&lt;/code&gt; to, say &lt;code&gt;RH En
 subscription (which as basic RHEL OS rpms), it will support 10 RHEL
 VM, and your 11th one will fail to do even &lt;code&gt;yum update&lt;/code&gt;.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="/images/rh%20subscription%20model.png"/&gt;
+  &lt;img src="images/rh%20subscription%20model.png"/&gt;
   &lt;figcaption&gt;RH subscription model&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -9848,7 +9848,7 @@ end-system to access content stores.&lt;/p&gt;
 
 
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="/images/rh%20entitlement%20accounting.png"/&gt;
+  &lt;img src="images/rh%20entitlement%20accounting.png"/&gt;
 &lt;/figure&gt;
 
 &lt;h3&gt;how many we are using&lt;/h3&gt;
@@ -9920,7 +9920,7 @@ subscription-manager repos --disable&lt;span class="o"&gt;=[&lt;/span&gt;repo na
 &lt;h1&gt;Register a client to SA server&lt;/h1&gt;
 &lt;figure class="col s12 center"&gt;
   &lt;img class="img-responsive"
-       src="/images/katello%20ca.png" /&gt;
+       src="images/katello%20ca.png" /&gt;
   &lt;figcaption&gt;Download `katello ca` from Satellite 6.3 server&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -9999,7 +9999,7 @@ page:&lt;/p&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12 center"&gt;
   &lt;img class="img-responsive"
-       src="/images/rh%20satellite%20content%20hiearchy.png" /&gt;
+       src="images/rh%20satellite%20content%20hiearchy.png" /&gt;
   &lt;figcaption&gt;Satellite content hierarchy&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -10185,7 +10185,7 @@ clue.&lt;/p&gt;
 least we should feel sad when others are sad, feel sorry when others
 suffer, and try to understand how our acts will affect others,
 intentionally or not. That's all.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 23 Mar 2018 11:30:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2018-03-23:myblog/sympathy.html</guid><category>thoughts</category></item><item><title>Django to REST</title><link>https://fengxia41103.github.io/myblog/django%20to%20rest.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/funny/the%20art%20of%20programming.jpg"
+  &lt;img src="images/funny/the%20art%20of%20programming.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -10219,7 +10219,7 @@ of the match before handing URL to &lt;code&gt;myapp/urls.py&lt;/code&gt; to mat
 &lt;strong&gt;further&lt;/strong&gt;. So it's a matter of matching order.&lt;/p&gt;
 &lt;p&gt;Anyway. So building a REST can be broken down into 5 steps:&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/django%20to%20rest.png"
+  &lt;img src="images/django%20to%20rest.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -12170,7 +12170,7 @@ stage for me... well, then I already know you will point a finger to
 the government also when it doesn't work. It's just convenient, and
 honestly, you didn't believe this so called &lt;em&gt;great stuff&lt;/em&gt; yourself
 either, you just want to profit off others' belief. Shame.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 14 Nov 2017 12:30:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-11-14:myblog/a vain debate pattern.html</guid><category>thoughts</category></item><item><title>Alpha Advantage SP500 API</title><link>https://fengxia41103.github.io/myblog/alpha%20sp500.html</link><description>&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/alpha%20advantage%20sp500.png"/&gt;
+  &lt;img src="images/alpha%20advantage%20sp500.png"/&gt;
     &lt;figcaption&gt;SP500&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -12187,7 +12187,7 @@ user selected company symbol, and draw all the data index on a single page.&lt;/
 &lt;/blockquote&gt;
 &lt;p&gt;The &lt;code&gt;architecture&lt;/code&gt;/&lt;code&gt;design&lt;/code&gt; is shown below, and &lt;a href="https://github.com/fengxia41103/sp500"&gt;github code&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/sp500%20architecture.png"/&gt;
+  &lt;img src="images/sp500%20architecture.png"/&gt;
   &lt;figcaption&gt;SP500 SPA architecture&lt;/figcaption&gt;
 &lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sun, 12 Nov 2017 19:00:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-11-12:myblog/alpha sp500.html</guid><category>react</category></item><item><title>A mature technology</title><link>https://fengxia41103.github.io/myblog/mature%20tech.html</link><description>&lt;figure class="col s12"&gt;
   &lt;img src="images/a%20cute%20cat.jpg"
@@ -12672,7 +12672,7 @@ the LXD and launch firefox. &lt;/p&gt;
 &lt;p&gt;Another option is to use &lt;a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/"&gt;&lt;code&gt;nginx&lt;/code&gt; to proxy&lt;/a&gt; the GUI service. The
 quirk here is to enable &lt;code&gt;ssl&lt;/code&gt; proxy (notice the &lt;code&gt;https&lt;/code&gt;?)&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="/images/juju%20gui%20nginx.png"/&gt;
+  &lt;img src="images/juju%20gui%20nginx.png"/&gt;
   &lt;figcaption&gt;Juju GUI with Nginx proxy&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -15753,7 +15753,7 @@ at its code base to decipher this mystery.&lt;/p&gt;
 hook sequence is always executed in an order that is dictated by Juju
 code.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/charm%20hooks.png" /&gt;
+  &lt;img src="images/charm%20hooks.png" /&gt;
   &lt;figcaption&gt;Sequence of charm hooks&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -17728,7 +17728,7 @@ becomes the reason of its end.&lt;/p&gt;
 only way to go through it is to forget, to look back, to write, to
 cry.&lt;/p&gt;
 &lt;p&gt;I'm scared now. I cant do this anymore. La la land, pls let me go.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sun, 30 Apr 2017 23:57:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-04-30:myblog/la la land.html</guid><category>love</category></item><item><title>Bye Bye GFW</title><link>https://fengxia41103.github.io/myblog/bye%20bye%20gfw.html</link><description>&lt;figure class="col l3 m3 s12"&gt;
-  &lt;img src="/images/funny/gfw.jpg"/&gt;
+  &lt;img src="images/funny/gfw.jpg"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;The GFW is nothing but an anti-humanity instance that blocks knowledge
@@ -17765,7 +17765,7 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 &lt;li&gt;Set up as shown below:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;figure class="s12 center"
-    &lt;img src="/images/firefox%20manual%20proxy.png" /&gt;
+    &lt;img src="images/firefox%20manual%20proxy.png" /&gt;
     &lt;figcaption&gt;Firefox manual proxy setup&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -17786,7 +17786,7 @@ Definition: &lt;code&gt;charm.reactive/charms/reactive/decorators.py&lt;/code&gt
 that order and developer can use &lt;code&gt;@hook&lt;/code&gt; to define a function block
 to run. &lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/charm%20hooks.png" /&gt;
+  &lt;img src="images/charm%20hooks.png" /&gt;
   &lt;figcaption&gt;Sequence of charm hooks&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -17976,7 +17976,7 @@ with three states: &lt;code&gt;state.1&lt;/code&gt;, &lt;code&gt;state.2&lt;/cod
 charm kicks off execution of &lt;code&gt;state.1&lt;/code&gt;, which then transit itself to
 the &lt;code&gt;state.2&lt;/code&gt;, then to &lt;code&gt;state.3&lt;/code&gt;, and then loop back to &lt;code&gt;state.1&lt;/code&gt;.&lt;/p&gt;
 &lt;figure class="s6 m6 s12 center"&gt;
-  &lt;img src="/images/charm%20chain%20states.png" /&gt;
+  &lt;img src="images/charm%20chain%20states.png" /&gt;
   &lt;figcaption&gt;Charm design pattern: chain states&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -17994,7 +17994,7 @@ transition among three states. Top right window &lt;code&gt;juju status&lt;/code
 shows state transitions in &lt;strong&gt;Message&lt;/strong&gt; column which is set by
 &lt;code&gt;set_status&lt;/code&gt; in each state's function block.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/charm%20chained%20states%20screencast.gif" /&gt;
+  &lt;img src="images/charm%20chained%20states%20screencast.gif" /&gt;
   &lt;figcaption&gt;Charm chain states screencast&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -18068,7 +18068,7 @@ article&lt;/a&gt;. All states are cached in a dictionary and are scanned in
 a tight loop per iteration. Thus a blocking call in any handler will
 cause the loop to a halt. Nowhere in code will take a signal so this
 behavior can not be interruptted either.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Mon, 24 Apr 2017 13:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-04-24:myblog/juju charm chained states.html</guid><category>lenovo</category></item><item><title>You got mail</title><link>https://fengxia41103.github.io/myblog/mbsync%20mu4e%20email.html</link><description>&lt;figure class="col l5 m6 s12"&gt;
-  &lt;img src="/images/hahn.png"
+  &lt;img src="images/hahn.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -18093,7 +18093,7 @@ glance, but it isn't really. In a nutshell, it defines three things:&lt;/p&gt;
    store.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/mbsync.png"
+  &lt;img src="images/mbsync.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;mbsync components&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -18525,7 +18525,7 @@ access). So you can now point your &lt;code&gt;mbsync&lt;/code&gt; to a local po
 &lt;code&gt;1143&lt;/code&gt;, and davmail will route mbsync's IMAP requests to the remote
 OWA server, nice!&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/mbsync%20setup.png"
+  &lt;img src="images/mbsync%20setup.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;My mbsync setup for retrieving and sending mails&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -18574,7 +18574,7 @@ remains valid. &lt;/p&gt;
    operator intervene.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/baremetal%20lifecycle.png" /&gt;
+    &lt;img src="images/baremetal%20lifecycle.png" /&gt;
     &lt;figcaption&gt;General baremetal life cycle&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -18640,12 +18640,12 @@ the following subject domains for discussion purpose:&lt;/p&gt;
 &lt;div class="my-multicol-2"&gt;
 &lt;figure class="col s12"&gt;
     &lt;img class="img-responsive center"
-    src="/images/maas%20minimum%20setup.png" /&gt;
+    src="images/maas%20minimum%20setup.png" /&gt;
     &lt;figcaption&gt;MAAS minimal setup&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;figure class="col s12"&gt;
     &lt;img class="img-responsive center"
-    src="/images/ironic%20minimal%20setup.png" /&gt;
+    src="images/ironic%20minimal%20setup.png" /&gt;
     &lt;figcaption&gt;Ironic minimal setup&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/div&gt;
@@ -19303,7 +19303,7 @@ an operating system or hypervisor on a baremetal so it is available
 for further software installation.  In the simplest term, one needs to
 answer these three questions:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/baremetal%20provisioning%20intro.png" /&gt;
+    &lt;img src="images/baremetal%20provisioning%20intro.png" /&gt;
     &lt;figcaption&gt;Minimal setup for baremetal provisioning&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19335,7 +19335,7 @@ function simultaneously in the same network.  BOOTP is about &lt;font
 color="blue"&gt;address determination and bootfile selection&lt;/font&gt;.
 From its &lt;a href="https://tools.ietf.org/html/rfc951"&gt;spec&lt;/a&gt;, we can derive a sequence diagram shown below:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/bootp%20sequence.png" /&gt;
+    &lt;img src="images/bootp%20sequence.png" /&gt;
     &lt;figcaption&gt;BOOTP sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19346,7 +19346,7 @@ above is actually a plain text file). Therefore, everytime client asks
 for its information, it will get the same result. Below shows the
 format of a BOOTP data packet. This same format in both directions.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/bootp%20packet%20format.png" /&gt;
+    &lt;img src="images/bootp%20packet%20format.png" /&gt;
     &lt;figcaption&gt;BOOTP data packet&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19354,7 +19354,7 @@ format of a BOOTP data packet. This same format in both directions.&lt;/p&gt;
 reason. Same ports (67 on the server side &amp;amp; 68 on the client side) are
 used. Below shows a simplified DHCP cycles (&lt;a href="http://facweb.cs.depaul.edu/cwhite/TDC%20365/BOOTP%20and%20DHCP.ppt"&gt;source&lt;/a&gt;):&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/dhcp%20sequence.png" /&gt;
+    &lt;img src="images/dhcp%20sequence.png" /&gt;
     &lt;figcaption&gt;Simplified DHCP sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19453,7 +19453,7 @@ UDP header format:&lt;/p&gt;
   here.)  Field contains zero if unused.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/tftp%20sequence.png" /&gt;
+    &lt;img src="images/tftp%20sequence.png" /&gt;
     &lt;figcaption&gt;TFTP sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19507,7 +19507,7 @@ Type   Architecture Name
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/pxe%20boot%20sequence.png" /&gt;
+    &lt;img src="images/pxe%20boot%20sequence.png" /&gt;
     &lt;figcaption&gt;PXE boot sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19647,7 +19647,7 @@ hardware? Two techniques come into play: &lt;strong&gt;Split ROM&lt;/strong&gt; 
 and &lt;strong&gt;UNDI&lt;/strong&gt;. We will cover UNDI separately. Here, let's look at the
 split architecture.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/pxe%20option%20rom%20split%20architecture.png" /&gt;
+    &lt;img src="images/pxe%20option%20rom%20split%20architecture.png" /&gt;
     &lt;figcaption&gt;PXE Option ROM split architecture&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19683,7 +19683,7 @@ more network interfaces. The three Option ROMs are:&lt;/p&gt;
 Page 77 in the &lt;a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf"&gt;PXE Spec&lt;/a&gt; has a nice diagram showing the details
 behind the scene from BIOS to a PXE:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/pxe%20IPL.svg" /&gt;
+    &lt;img src="images/pxe%20IPL.svg" /&gt;
     &lt;figcaption&gt;PXE IPL (from power on to PXE)&lt;/figcaption&gt;
 &lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 22 Mar 2017 15:45:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-03-22:myblog/baremetal provisioning.html</guid><category>lenovo</category></item><item><title>Openstack Ironic</title><link>https://fengxia41103.github.io/myblog/ironic%20intro.html</link><description>&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju
@@ -19705,7 +19705,7 @@ Ironic. In particular, I'd like to illustrate a few Ironic internals
 to show what "managing baremetal" is actually doing.&lt;/p&gt;
 &lt;h1&gt;Ironic introduction&lt;/h1&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_design.png" /&gt;
+    &lt;img src="images/ironic_design.png" /&gt;
     &lt;figcaption&gt;Ironic design (&lt;a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic"&gt;source&lt;/a&gt;)&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19721,7 +19721,7 @@ important role in Ironic's workflow: &lt;a href="https://docs.openstack.org/deve
 &lt;a href="https://docs.openstack.org/developer/ironic/deploy/inspection.html"&gt;Ironic Inspector&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Since it stores meta data in a DB, let's take a look at its DB schema:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_db_er.png" /&gt;
+    &lt;img src="images/ironic_db_er.png" /&gt;
     &lt;figcaption&gt;Ironic ER diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19777,7 +19777,7 @@ information. Again, the creation does nothing besides creating a
 record in Ironic DB. Run &lt;code&gt;openstack baremetal node show [node_uuid]&lt;/code&gt;
 displays details of a node.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_node_show.png" /&gt;
+    &lt;img src="images/ironic_node_show.png" /&gt;
     &lt;figcaption&gt;Details of a provisioned node&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19945,7 +19945,7 @@ UUID. From that point on, IPA will ping home (hearbeat) periodically
 hearbeat payload is a callback URL, so apparently IPA also exposes a
 HTTP service that Ironic conductor can use for commands.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_ipa_sequence.png" /&gt;
+    &lt;img src="images/ironic_ipa_sequence.png" /&gt;
     &lt;figcaption&gt;Ironic Python Agent (IPA) sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -19966,7 +19966,7 @@ removing a runtime dependency on a DHCP or TFTP server.&lt;/p&gt;
 &lt;h2&gt;Provision process &amp;mdash; Agent&lt;/h2&gt;
 &lt;p&gt;Source by &lt;a href="https://github.com/devananda/talks/tree/master/images"&gt;devananda github&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img     src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" /&gt;
+    &lt;img     src="https://github.com/devananda/talks/blob/masterimages/deploy_with_agent.png?raw=true" /&gt;
     &lt;figcaption&gt;Ironic deploy &amp;mdash; Agent&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20069,9 +20069,9 @@ node &amp;mdash; this then completes the provisioning process.&lt;/p&gt;
 &lt;p&gt;Source by &lt;a href="https://github.com/devananda/talks/tree/master/images"&gt;devananda github&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="row center"&gt;
     &lt;img class="s6"
-    src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-1.png?raw=true" /&gt;
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-1.png?raw=true" /&gt;
     &lt;img class="s6"
-    src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-2.png?raw=true" /&gt;
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-2.png?raw=true" /&gt;
     &lt;figcaption&gt;Ironic deploy &amp;mdash; PXE&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20252,7 +20252,7 @@ We are using "Password authentication with scoped authorization".&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: &lt;code&gt;Glance&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Endpoint: &lt;code&gt;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;HTTP header:&lt;ol&gt;
 &lt;li&gt;Accept-Encoding: &lt;code&gt;gzip, deflate&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;*/*&lt;/code&gt;&lt;/li&gt;
@@ -20277,12 +20277,12 @@ We are using "Password authentication with scoped authorization".&lt;/p&gt;
    &lt;span class="s2"&gt;&amp;quot;disk_format&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;ami&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;2017-03-03T22:38:58Z&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;visibility&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;public&amp;quot;&lt;/span&gt;,
-   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;min_disk&amp;quot;&lt;/span&gt;:0,
    &lt;span class="s2"&gt;&amp;quot;protected&amp;quot;&lt;/span&gt;:false,
    &lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;size&amp;quot;&lt;/span&gt;:25165824,
-   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;checksum&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;eb9139e4942121f22bbc2afc0400b2a4&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;owner&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;3b2594f2569542f694ff346a6db7fa1e&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;virtual_size&amp;quot;&lt;/span&gt;:null,
@@ -20519,7 +20519,7 @@ talked about by the Images v2 API.&lt;/p&gt;
          &lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
          &lt;span class="s2"&gt;&amp;quot;links&amp;quot;&lt;/span&gt;:&lt;span class="o"&gt;[&lt;/span&gt;
             &lt;span class="o"&gt;{&lt;/span&gt;
-               &lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;http://10.0.2.15:8774/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
+               &lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;http://10.0.2.15:8774images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
                &lt;span class="s2"&gt;&amp;quot;rel&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;bookmark&amp;quot;&lt;/span&gt;
             &lt;span class="o"&gt;}&lt;/span&gt;
          &lt;span class="o"&gt;]&lt;/span&gt;
@@ -20568,7 +20568,7 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Glance&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Endpoint: &lt;code&gt;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;HTTP header:&lt;ol&gt;
 &lt;li&gt;Accept-Encoding: &lt;code&gt;gzip, deflate&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;*/*&lt;/code&gt;&lt;/li&gt;
@@ -20593,12 +20593,12 @@ talked about by the Images v2 API.&lt;/p&gt;
    &lt;span class="s2"&gt;&amp;quot;disk_format&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;ami&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;2017-03-03T22:38:58Z&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;visibility&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;public&amp;quot;&lt;/span&gt;,
-   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;min_disk&amp;quot;&lt;/span&gt;:0,
    &lt;span class="s2"&gt;&amp;quot;protected&amp;quot;&lt;/span&gt;:false,
    &lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;size&amp;quot;&lt;/span&gt;:25165824,
-   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;checksum&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;eb9139e4942121f22bbc2afc0400b2a4&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;owner&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;3b2594f2569542f694ff346a6db7fa1e&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;virtual_size&amp;quot;&lt;/span&gt;:null,
@@ -20661,7 +20661,7 @@ defined, must be one of the two types:&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;require&lt;/strong&gt; (eg. I'm Mediawiki and I require a SQL database).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20control%20modeling.png" /&gt;
+  &lt;img src="images/juju%20control%20modeling.png" /&gt;
   &lt;figcaption&gt;Juju control modeling&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20682,7 +20682,7 @@ database charm, who should always define an interface to exchange DB
 login credentials and ports. Charm layer is application specific, and
 its logic is following the &lt;a href="https://pythonhosted.org/charms.reactive/"&gt;reactive pattern&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20charm%20layers.png" /&gt;
+    &lt;img src="images/juju%20charm%20layers.png" /&gt;
     &lt;figcaption&gt;Juju charm layers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20736,7 +20736,7 @@ if there is a MySQL &lt;em&gt;provides&lt;/em&gt; and Wordpress &lt;em&gt;requir
 will read from the providing side of configurations needed to make the
 connection.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/charm%20relation%20and%20interface.png" /&gt;
+    &lt;img src="images/charm%20relation%20and%20interface.png" /&gt;
     &lt;figcaption&gt;Charm relation and interface&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20790,7 +20790,7 @@ is how charm build can pull in dependencies of other charms/layers.&lt;/p&gt;
 &lt;h1&gt;Screencast&lt;/h1&gt;
 &lt;p&gt;See the process in action:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/vanilla%20charm%20deploy.gif" /&gt;
+    &lt;img src="images/vanilla%20charm%20deploy.gif" /&gt;
     &lt;figcaption&gt;Screencast showing deploying a Vanilla charm&lt;/figcaption&gt;
 &lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 28 Feb 2017 17:00:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-02-28:myblog/juju charm layers.html</guid><category>lenovo</category></item><item><title>Juju deploy and Provider</title><link>https://fengxia41103.github.io/myblog/juju%20deploy%20provider.html</link><description>&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will
@@ -20814,7 +20814,7 @@ number]&lt;/code&gt; flag. While using MAAS it is seen that MAAS will turn a
 &lt;code&gt;READY&lt;/code&gt; machine into &lt;code&gt;ALLOCATED&lt;/code&gt; then &lt;code&gt;DEPLOYING&lt;/code&gt;. Once a Juju agent
 is installed (provisioned), the agent executes application deployment.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
+    &lt;img src="images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
     &lt;figcaption&gt;MAAS target node state diagram during Juju deploy process&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20832,7 +20832,7 @@ installed, knows how to speak to the state controller (machine-0), how
 to find and download a charm, and how to use it to deploy an
 application. So just how are agents wired together?&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20agent%20overview.png" /&gt;
+    &lt;img src="images/juju%20agent%20overview.png" /&gt;
     &lt;figcaption&gt;High level view of Juju agents in an environment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20855,7 +20855,7 @@ change. The change(set) essentially has all the information the
 provisioner needs to take an action so to bring machine from state A
 &amp;rarr; state B.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20machine%200%20state.png" /&gt;
+    &lt;img src="images/juju%20machine%200%20state.png" /&gt;
     &lt;figcaption&gt;Machine-0 state &amp; provisioner&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -20906,7 +20906,7 @@ them are just think wrapper of next function. The mapping between a
 command to a state is taking place in &lt;code&gt;state.AddApplication()&lt;/code&gt; which
 I'm highlighting in &lt;font color="green"&gt;green&lt;/font&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20call%20chain.png" /&gt;
+    &lt;img src="images/juju%20deploy%20call%20chain.png" /&gt;
     &lt;figcaption&gt;Illustration of call chain by "juju deploy" command&lt;/figcaption&gt;
 &lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 08 Feb 2017 14:00:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-02-08:myblog/juju deploy provider.html</guid><category>lenovo</category></item><item><title>Emacs</title><link>https://fengxia41103.github.io/myblog/emacs.html</link><description>&lt;p&gt;What a wonderful editor!&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it
@@ -22215,7 +22215,7 @@ to repeat this for development and troubleshooting.&lt;/p&gt;
 &lt;h1&gt;Screencast&lt;/h1&gt;
 &lt;p&gt;See the process in action:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20jenkins.gif" /&gt;
+    &lt;img src="images/juju%20deploy%20jenkins.gif" /&gt;
     &lt;figcaption&gt;Screencast of juju deploying Jenkins&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22224,7 +22224,7 @@ to repeat this for development and troubleshooting.&lt;/p&gt;
 context of deploying a charm driven by Juju, we can take a look MAAS
 internals how those states are related.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
+    &lt;img src="images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
     &lt;figcaption&gt;MAAS target node state diagram during Juju deploy process&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22232,7 +22232,7 @@ internals how those states are related.&lt;/p&gt;
 &lt;p&gt;This is a more detailed view of juju deploying a charm broken down
 into three steps.&lt;/p&gt;
 &lt;figure class="s12 center"&gt; 
-    &lt;img src="/images/juju%20deploy%20original.png" /&gt;
+    &lt;img src="images/juju%20deploy%20original.png" /&gt;
     &lt;figcaption&gt;
         Illustration of a Juju cloud environment before a deployment
     &lt;/figcaption&gt; 
@@ -22275,7 +22275,7 @@ $ juju deploy jenkinsn
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20commands.png" /&gt;
+    &lt;img src="images/juju%20deploy%20commands.png" /&gt;
     &lt;figcaption&gt;Issuing command to deploy Jenkins&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22283,7 +22283,7 @@ $ juju deploy jenkinsn
 cloud, each equipped with an application, and both have a jujud
 installed.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20result.png" /&gt;
+    &lt;img src="images/juju%20deploy%20result.png" /&gt;
     &lt;figcaption&gt;Deployment result&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22641,7 +22641,7 @@ go south, what is the minimum to simulate a clean state so we can run
 &lt;code&gt;juju bootstrap&lt;/code&gt; again as if from scratch. This last point is
 particuarly useful for development and troubleshooting.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20bootstrap.gif" /&gt;
+    &lt;img src="images/juju%20bootstrap.gif" /&gt;
     &lt;figcaption&gt;Screencast of juju bootstraping a cloud environment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22682,7 +22682,7 @@ CLI speaks to a cloud. Each cloud has a different API. Juju provides a
 common bootstrap framework to tie these providers into a common
 process.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20cloud%20and%20provider.png" /&gt;
+  &lt;img src="images/juju%20cloud%20and%20provider.png" /&gt;
     &lt;figcaption&gt;Juju cloud abstraction&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22746,7 +22746,7 @@ environment, machine-0 involves tremendous amount of machinary to go
 live.  In a nutshell, all activities can be categorized into the
 followings:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20bootstrap%20overview.png" /&gt;
+  &lt;img src="images/juju%20bootstrap%20overview.png" /&gt;
     &lt;figcaption&gt;Juju bootstrap framework&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22791,7 +22791,7 @@ process located in &lt;code&gt;juju.juju.environs.Bootstrap&lt;/code&gt; functio
   to hard-coded values (eg. simplestream URL).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20bootstrap%20process.png" /&gt;
+  &lt;img src="images/juju%20bootstrap%20process.png" /&gt;
     &lt;figcaption&gt;Juju bootstrap framework&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22817,7 +22817,7 @@ here. Once ducks are in line, call a provider's &lt;code&gt;BootstrapInstance&lt
 function &amp;larr; and this is the point where underline cloud meets
 Juju.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20common%20BootstrapInstance.png" /&gt;
+  &lt;img src="images/juju%20common%20BootstrapInstance.png" /&gt;
     &lt;figcaption&gt;"common" provider's BootstrapInstance function&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23063,7 +23063,7 @@ Juju.&lt;/p&gt;
 &lt;code&gt;BootstrapInstance&lt;/code&gt;. So it is really part of the provisioning calls.
 However, we are separating it here for discussion purpose.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" /&gt;
+  &lt;img src="images/juju%20common%20BootstrapInstance%20finalizer%20func.png" /&gt;
     &lt;figcaption&gt;"common" provider's BootstrapInstance finalizer function&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23155,7 +23155,7 @@ terms. Instead of drawing a tree to reflect 1-N relationship, I used
 an outer enclosure which can have multiple of its inner enclosures,
 eg. a bundle can have N charms.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20control%20modeling.png"/&gt;
+  &lt;img src="images/juju%20control%20modeling.png"/&gt;
   &lt;figcaption&gt;Juju control models&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23202,7 +23202,7 @@ itself down at the end of the boot.&lt;/p&gt;
 &lt;h1&gt;MAAS machine life cycle&lt;/h1&gt;
 &lt;p&gt;MAAS target goes through a life cycel as shown below:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas_target_life_cycle.png"/&gt;
+  &lt;img src="images/maas_target_life_cycle.png"/&gt;
   &lt;figcaption&gt;MAAS target node life cycle&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23302,7 +23302,7 @@ that out, so don't listen to that.&lt;/p&gt;
    live together with its managed nodes (I call them targets).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas_networking_topology.png"/&gt;
+  &lt;img src="images/maas_networking_topology.png"/&gt;
   &lt;figcaption&gt;MAAS Virtualbox lab networking topology&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23385,7 +23385,7 @@ less ~/.ssh/id_rsa.pub
   deployment so later you can SSH into these targets without knowing
   the password.&lt;/p&gt;
 &lt;p&gt;&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas%20ssh%20key.png"/&gt;
+  &lt;img src="images/maas%20ssh%20key.png"/&gt;
   &lt;figcaption&gt;MAAS upload SSH key&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -23396,7 +23396,7 @@ less ~/.ssh/id_rsa.pub
     In short, set MAAS default gateway to be the IP of the MAAS
     server, in our case, &lt;code&gt;192.168.8.1&lt;/code&gt;!&lt;/p&gt;
 &lt;p&gt;&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas%20default%20gateway.png"/&gt;
+  &lt;img src="images/maas%20default%20gateway.png"/&gt;
   &lt;figcaption&gt;MAAS default gateway&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -23491,9 +23491,9 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
 &lt;p&gt;Login into &lt;code&gt;http://192.168.8.1/MAAS/&lt;/code&gt;, goto &lt;code&gt;Subnets&lt;/code&gt; and select
    the &lt;code&gt;VLAN&lt;/code&gt; &amp;larr; this is how you can turn on DHCP on a subnet:&lt;/p&gt;
 &lt;p&gt;&lt;figure class="row"&gt;
-  &lt;img src="/images/maas_vlan_config.png"
+  &lt;img src="images/maas_vlan_config.png"
        class="col s6" /&gt;
-  &lt;img src="/images/maas_subnet_config.png"
+  &lt;img src="images/maas_subnet_config.png"
        class="col s6" /&gt;  &lt;br /&gt;
   &lt;figcaption&gt;MAAS  DHCP config&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
@@ -23504,7 +23504,7 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
    gateway to 192.168.8.1, which is this server's static IP on this
    subnet.&lt;/p&gt;
 &lt;p&gt;&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas_dhcp_config.png"/&gt;
+  &lt;img src="images/maas_dhcp_config.png"/&gt;
   &lt;figcaption&gt;MAAS admin DHCP config&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -23512,7 +23512,7 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
 &lt;p&gt;We have done the hard part &amp;mdash; setting up the MAAS server. In our
 &lt;a href="https://fengxia41103.github.io/myblog/maas target.html"&gt;next article&lt;/a&gt;, I'll show you what MAAS can do for fun &amp;rarr;
 brining up a bare metal machine to life. Stay tuned.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 08 Dec 2016 10:45:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2016-12-08:myblog/maas virtualbox.html</guid><category>lenovo</category></item><item><title>SPA: World Snapshot</title><link>https://fengxia41103.github.io/myblog/data%20visualization.html</link><description>&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/country_1.png"/&gt;
+  &lt;img src="images/country_1.png"/&gt;
     &lt;figcaption&gt;World Snapshot&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23557,7 +23557,7 @@ department B, sales of this month dropped comparing to last month's...&lt;/p&gt;
 &lt;p&gt;Following REACT practice, compoents have been designed to handle both the
 data acquisition through 3rd party API, and ploting using the awesome D3 library:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/country health.png"/&gt;
+  &lt;img src="images/country health.png"/&gt;
     &lt;figcaption&gt;Data visualization SPA architecture&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23566,7 +23566,7 @@ source handling into &lt;code&gt;DataSourceContainer&lt;/code&gt; and graphing i
 &lt;code&gt;GraphFactoryContainer&lt;/code&gt;.  Therefore, we can swap out any of these
 components, for example, using Google chart for graphing, adding a new
 data source, or using &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt; instead of &lt;code&gt;jQuery&lt;/code&gt; for AJAX calls.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 15 Oct 2016 22:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2016-10-15:myblog/data visualization.html</guid><category>demo</category><category>react</category></item><item><title>SPA: car leasing calculator</title><link>https://fengxia41103.github.io/myblog/car%20leasing.html</link><description>&lt;figure class="s12 center"&gt;
-    &lt;img src="/images/demo_car.png"/&gt;
+    &lt;img src="images/demo_car.png"/&gt;
     &lt;figcaption&gt;Project Car Leasing Calculator&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23597,7 +23597,7 @@ which!?&lt;/p&gt;
 on. But here I want to present a different approach.  First of all,
 let's turn those maths into diagram:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/car leasing.png"/&gt;
+    &lt;img src="images/car leasing.png"/&gt;
     &lt;figcaption&gt;
         How do you get a monthly payment
     &lt;/figcaption&gt;
@@ -23755,7 +23755,7 @@ parent path is a &lt;em&gt;STATIC&lt;/em&gt;. Oh well.&lt;/p&gt;
 
 &lt;p&gt;With the component in place, rendering an &lt;code&gt;form input&lt;/code&gt; section like this one is a breeze:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/car_1.png"/&gt;
+    &lt;img src="images/car_1.png"/&gt;
   ! &lt;figcaption&gt;
         AngularJS Component rendered form inputs
     &lt;/figcaption&gt;
@@ -23865,7 +23865,7 @@ quirks that make it a real pain when migrating to another service
 provider or platform later on. I have not run into such problem with
 AWS, but would like to keep options open.&lt;/p&gt;
 &lt;figure class="col l12 m12 s12"&gt;
-  &lt;img src="/images/deployment_architecture.png"
+  &lt;img src="images/deployment_architecture.png"
   &lt;figcaption&gt;Deployment architecture&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -23885,7 +23885,7 @@ so that I could focus on writing application code to solve
 client's real problems. Service such as &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt; and &lt;a href="https://cloud.google.com/appengine/"&gt;GAE&lt;/a&gt;
 are even more hands-off if the application architecture
 can fit into their platform.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 22 Aug 2017 21:52:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2016-09-09:myblog/deployment architecture.html</guid><category>dev</category></item><item><title>General system architecture</title><link>https://fengxia41103.github.io/myblog/general%20system%20architecture.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/architecture_joke.jpg"
+  &lt;img src="images/architecture_joke.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -23946,7 +23946,7 @@ projects. It is divided into four components:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/system%20architecture.png"/&gt;
+  &lt;img src="images/system%20architecture.png"/&gt;
     &lt;figcaption&gt;Feng's system architecture diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24118,7 +24118,7 @@ time.&lt;/p&gt;
 &lt;p&gt;Tracing through ODOO boot code, we have illustrated steps 
 of ODOO's loading process in diagram below:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/odoo8_loading.png" /&gt;
+  &lt;img src="images/odoo8_loading.png" /&gt;
   &lt;figcaption&gt;ODOO8 loading sequence&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24170,7 +24170,7 @@ is comparing to some well known names &amp;mdash; &lt;a href="http://nginx.org/"
 &lt;a href="https://httpd.apache.org/"&gt;Apache&lt;/a&gt;, &lt;a href="http://www.lighttpd.net/"&gt;lighthttpd&lt;/a&gt;, or even further, WSGI servers such
 as &lt;a href="http://gunicorn.org/"&gt;Guicorn&lt;/a&gt; and &lt;a href="http://uwsgi-docs.readthedocs.io/en/latest/"&gt;uwsgi&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/odoo8_server_run.png" /&gt;
+  &lt;img src="images/odoo8_server_run.png" /&gt;
   &lt;figcaption&gt;ODOO8 ThreadedServer&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24199,7 +24199,7 @@ monitor its runtime stack, in which case language such as Python
 shines due its interpreting nature.  The Python GIL will keep track
 the entire call trace in its memory and knows details of call stack.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/odoo8_loading_callgraph.png"/&gt;
+  &lt;img src="images/odoo8_loading_callgraph.png"/&gt;
     &lt;figcaption&gt;ODOO 8 loading call trace diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24514,7 +24514,7 @@ shines in term of data analysis and reporting.&lt;/p&gt;
 &lt;p&gt;Knowing the top seller is the most important thing for any business.
 The report is compiled from sales orders to show which product is high in demand.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_19.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_19.png"&gt;
     &lt;figcaption&gt;Top seller report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24532,7 +24532,7 @@ price or the vendor cost of product. It can be a simple typo, but
 can also be an indicator of wrong strategy.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_20.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_20.png"&gt;
     &lt;figcaption&gt;Most profitable product report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24543,7 +24543,7 @@ and top purchased should always deserve a further analysis in order to
 ensure that your business is not just piling up inventory without
 an exit plan.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_21.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_21.png"&gt;
     &lt;figcaption&gt;Top purchased product report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24555,7 +24555,7 @@ that the order fails to fulfill properly. However, it does not
 distinguish between an order that has zero fulfillment rate and the
 ones that are in-progress.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_22.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_22.png"&gt;
     &lt;figcaption&gt;Top sales order by QTY balance report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24568,7 +24568,7 @@ fulfillment. That's usually the case when filing return and filing
 fulfillment form are handled by two groups of people who are not
 synchronized.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_23.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_23.png"&gt;
     &lt;figcaption&gt;Top sales order in-progress fulfills report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24579,9 +24579,9 @@ we are maintaining a relationship with our peers.&lt;/p&gt;
 &lt;figure&gt;
   &lt;div class="row"&gt;
     &lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="/images/fashion_24.png"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_24.png"&gt;
     &lt;/div&gt;&lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="/images/fashion_25.png"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_25.png"&gt;
     &lt;/div&gt;&lt;/div&gt;
     &lt;figcaption&gt;Customer AR and vendor AP report&lt;/figcaption&gt;
 &lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sun, 12 Jun 2016 10:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2016-06-12:myblog/fashion reports.html</guid><category>fashion</category></item><item><title>Fashion ERP — orders</title><link>https://fengxia41103.github.io/myblog/fashion%20orders.html</link><description>&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
@@ -24608,7 +24608,7 @@ tracks all the above activities. The ratio between the two is
 expecting, either by original products or replacement or any other
 forms of settlement in between.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/order life cycle.png"&gt;
+    &lt;img class="center img-responsive" src="images/order life cycle.png"&gt;
     &lt;figcaption&gt;Order life cycle&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24639,9 +24639,9 @@ through traditional shopping cart method.&lt;/p&gt;
 &lt;figure&gt;
   &lt;div class="row"&gt;
     &lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="/images/fashion_7.png"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_7.png"&gt;
     &lt;/div&gt;&lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="/images/fashion_8.png"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_8.png"&gt;
     &lt;/div&gt;&lt;/div&gt;
     &lt;figcaption&gt;
       One can use a quick way or shopping cart to create a sales order
@@ -24653,14 +24653,14 @@ through traditional shopping cart method.&lt;/p&gt;
 quantity and sum, the application offers a dropdown that user can
 easily view a broken-down detail by each vendor.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_9.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_9.png"&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Order details are grouped by vendor also. Each vendor tab has details
 of products on order. At the bottom of tab, the application computes
 a &lt;em&gt;total qty&lt;/em&gt; and &lt;em&gt;total value&lt;/em&gt; for that vendor.&lt;/p&gt;
 &lt;figure&gt;
-  &lt;img class="center img-responsive" src="/images/fashion_10.png"&gt;
+  &lt;img class="center img-responsive" src="images/fashion_10.png"&gt;
   &lt;figcaption&gt;Order detail tabs are a set of shopping basket, one per vendor&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24676,7 +24676,7 @@ damage.&lt;/p&gt;
 &lt;p&gt;fulfill rate = count of fulfilled item / total number of items&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;figure&gt;
-  &lt;img class="center img-responsive" src="/images/fashion_11.png"&gt;
+  &lt;img class="center img-responsive" src="images/fashion_11.png"&gt;
   &lt;figcaption&gt;Create an order fulfillment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24692,7 +24692,7 @@ that the application is expecting. This is the &lt;em&gt;theoretical&lt;/em&gt; 
 a line time, and the addition of all received fulfillment will be the
 &lt;em&gt;actual&lt;/em&gt;.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_12.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_12.png"&gt;
     &lt;figcaption&gt;Fulfillment summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24715,7 +24715,7 @@ an order. This contrasts to the approach where return is checked
 against inventory regardless how that product got into the inventory
 at the first place.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_16.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_16.png"&gt;
     &lt;figcaption&gt;Return a product&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24729,7 +24729,7 @@ deducted from the current &lt;em&gt;account payable&lt;/em&gt; so buyer owes les
 to the return.&lt;/p&gt;
 &lt;h1&gt;Make a payment&lt;/h1&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_13.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_13.png"&gt;
     &lt;figcaption&gt;Make a payment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24738,7 +24738,7 @@ now it provides a function to register a payment against an order.
 Also, user can finalize a payment by &lt;em&gt;reviewing&lt;/em&gt; it. This in effect
 locks down the payment so it is not editable anymore.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_14.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_14.png"&gt;
     &lt;figcaption&gt;Review a payment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24760,7 +24760,7 @@ a sales order into multiple purchase orders, one per vendor.
 These orders will then be tracked individually for fulfillment, payment
 and so forth.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_15.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_15.png"&gt;
     &lt;figcaption&gt;Keep purchase orders in sync with sales order in drop shipping&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24797,7 +24797,7 @@ She also runs a wholesale business in which purchase and sales have no
 such strong bound. Thus the application will leave the SO-PO reference
 optional.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_17.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_17.png"&gt;
     &lt;figcaption&gt;Purchase order summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24817,7 +24817,7 @@ list, &lt;em&gt;"Available In"&lt;/em&gt;, so this information is captured:&lt;/
 &lt;li&gt;&lt;span class="myhighlight"&gt;Jan - Dec&lt;/span&gt;: calendar month. Its year is implied.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="/images/fashion_18.png"&gt;
+    &lt;img class="center img-responsive" src="images/fashion_18.png"&gt;
     &lt;figcaption&gt;Purchase order line item availability&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24864,7 +24864,7 @@ manage its product.  The more detailed it is, the more accurate the
 rest of the operations can be, but also the more work to set it up
 initially.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/fashion_1.png"&gt;
+    &lt;img src="images/fashion_1.png"&gt;
     &lt;figcaption&gt;For staffs, search by filter&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24879,7 +24879,7 @@ vendor, season, name and style's serial number, instead of seeing it
 physically. Therefore, to staffs filtering by these attributes will be
 more efficient.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/fashion_3.png"&gt;
+    &lt;img src="images/fashion_3.png"&gt;
     &lt;figcaption&gt;For customers, browse/search by season and vendor&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24898,7 +24898,7 @@ be rolled up to location level and company level. There is also a
 common setup of &lt;em&gt;region&lt;/em&gt; or &lt;em&gt;district&lt;/em&gt; level that is between company
 and location. It is not implemented but can be added easily.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/fashion_2.png"&gt;
+    &lt;img  src="images/fashion_2.png"&gt;
     &lt;figcaption&gt;Inventory structure diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24934,7 +24934,7 @@ page, user can select from a list of storages to do the
 counting. Season and vendor list within each storage are derived from
 products in that storage by the application automatically.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/fashion_4.png"&gt;
+    &lt;img  src="images/fashion_4.png"&gt;
     &lt;figcaption&gt;Select location and vendor to count&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24946,14 +24946,14 @@ ones having a non-zero count will be highlighted and saved later.
 However, it is possible that a product has been sold out. So to handle
 this special case we use a &lt;em&gt;star&lt;/em&gt; to indicate this situation.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/fashion_5.png"&gt;
+    &lt;img  src="images/fashion_5.png"&gt;
     &lt;figcaption&gt;Physical inventory admin mode&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;User mode removes product details from the view, leaving only product SKU and
 size information for reference.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/fashion_6.png"&gt;
+    &lt;img  src="images/fashion_6.png"&gt;
     &lt;figcaption&gt;Physical inventory user mode&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -24961,7 +24961,7 @@ size information for reference.&lt;/p&gt;
 two&lt;/a&gt;, I will dive into the core
 of this application to talk about how we will handle sales orders and
 purchase orders.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 02 Jun 2016 10:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2016-06-02:myblog/fashion introduction.html</guid><category>fashion</category></item><item><title>Project Fashion Demo</title><link>https://fengxia41103.github.io/myblog/project%20fashion%20demo.html</link><description>&lt;figure class="s12 center"&gt;
-    &lt;img src="/images/demo_fashion.png" /&gt;
+    &lt;img src="images/demo_fashion.png" /&gt;
     &lt;figcaption&gt;Project Fashion front page&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25009,7 +25009,7 @@ analysis so to offer an overview, where major level contains details
 that are relevant to that particular major which students would find
 useful.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_major_setup.png"/&gt;
+    &lt;img src="images/gkp_major_setup.png"/&gt;
     &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25020,7 +25020,7 @@ categories, 92 subcategories and 506 majors.&lt;/p&gt;
 &lt;p&gt;At this level, focus was to provide statistics which is similar to
 what is done for schools at &lt;em&gt;State level&lt;/em&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_18.png"/&gt;
+    &lt;img src="images/gkp_18.png"/&gt;
     &lt;figcaption&gt;Major category and subcategory&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25033,7 +25033,7 @@ popular job posting sites. Dynamically the application will query
 these sites and compile the most recent 50 job posts that matches this
 major.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_19.png"/&gt;
+    &lt;img src="images/gkp_19.png"/&gt;
     &lt;figcaption&gt;Job title cloud&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25042,7 +25042,7 @@ taht shows the job titles used by the industry, and they are further
 grouped into cities so they provide another geo reference for
 students.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_20.png"/&gt;
+    &lt;img  src="images/gkp_20.png"/&gt;
     &lt;figcaption&gt;Schools grouped by job locations&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25062,9 +25062,9 @@ unlimited bookmarks and manage them by &lt;em&gt;x-out&lt;/em&gt;(remove) it fro
 list. Convenient.&lt;/p&gt;
 &lt;figure class="row"&gt;
     &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_9.png" /&gt;
+    &lt;img class="img-responsive center" src="images/gkp_9.png" /&gt;
     &lt;/div&gt;&lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_10.png" /&gt;
+    &lt;img class="img-responsive center" src="images/gkp_10.png" /&gt;
     &lt;/div&gt;
     &lt;figcaption&gt;Bookmark a school&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -25075,14 +25075,14 @@ first page contains an introduction, or a quick view, of the school.
 It contains many meta data that can be extracted to form more data
 dimensions.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_11.png"/&gt;
+    &lt;img src="images/gkp_11.png"/&gt;
     &lt;figcaption&gt;School summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;School detail page expands on top of the introduction. One small feature
 concerning development is that TOC is auto generated.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_12.png"/&gt;
+    &lt;img  src="images/gkp_12.png"/&gt;
     &lt;figcaption&gt;School wiki&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25091,7 +25091,7 @@ concerning development is that TOC is auto generated.&lt;/p&gt;
 in past admissions. GKP has collected over 2,000,000 data records
 between 2010 and 2014 and covering 3,000 schools.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_13.png"/&gt;
+    &lt;img src="images/gkp_13.png"/&gt;
     &lt;figcaption&gt;School historical cutoff scores&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25105,7 +25105,7 @@ backend engine to tap into popular social media facilities and pull in
 live chat stream at &lt;strong&gt;50,000 new posts per minute&lt;/strong&gt;. This gives
 students a rich information on how the campus life is like.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_14.png"/&gt;
+    &lt;img  src="images/gkp_14.png"/&gt;
     &lt;figcaption&gt;School social media data stream&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25117,9 +25117,9 @@ viewed (thus indicating more popularity), the higher priority the page
 has in term of receiving the next update.&lt;/p&gt;
 &lt;figure class="row"&gt;
   &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_15.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_15.png"/&gt;
   &lt;/div&gt;&lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_16.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_16.png"/&gt;
   &lt;/div&gt;
   &lt;figcaption&gt;Social media keyword cloud and news ticker&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -25138,7 +25138,7 @@ as simple as scanning the barcode with her phone. It is another unique
 feature that makes acquiring school information as painless as
 possible.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_17.png"/&gt;
+    &lt;img  src="images/gkp_17.png"/&gt;
     &lt;figcaption&gt;School Wechat channels&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25165,7 +25165,7 @@ approached each problem with the solution you are currently seeing.&lt;/p&gt;
 searching criteria so to narrow down from a general search to a more
 customized version.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_2.png" /&gt;
+    &lt;img src="images/gkp_2.png" /&gt;
     &lt;figcaption&gt;Set up user preferences&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25192,7 +25192,7 @@ week to resolve limited by the upper limit Google imposed on each API
 account and the initial trial and error time. Drawing the map was
 straightforward using &lt;a href="https://developers.google.com/maps/documentation/javascript/tutorial"&gt;Google map API&lt;/a&gt; and &lt;a href="https://github.com/googlemaps/js-marker-clusterer"&gt;marker cluster&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_21.png"/&gt;
+    &lt;img  src="images/gkp_21.png"/&gt;
     &lt;figcaption&gt;Using Google map to browse schools&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25229,7 +25229,7 @@ incompatibility.&lt;/p&gt;
 &lt;p&gt;Considering the GFW, I abandoned both maps and back to a simple
 Chart. Map is drawn using &lt;a href="https://ecomfe.github.io/echarts/index-en.html"&gt;Echarts&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_1.png"/&gt;
+    &lt;img src="images/gkp_1.png"/&gt;
     &lt;figcaption&gt;School map using Echarts&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25246,7 +25246,7 @@ within the same state boundary will be grouped along different
 dimensions. Statistics are then computed on the fly to provide quick
 facts.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_3.png"/&gt;
+    &lt;img src="images/gkp_3.png"/&gt;
     &lt;figcaption&gt;School statistics quickview at State level&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25254,7 +25254,7 @@ facts.&lt;/p&gt;
 two important dimensions are important for a student
 &amp;mdash; Bachelor's vs. Associate program, and tiers.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_4.png"/&gt;
+    &lt;img src="images/gkp_4.png"/&gt;
     &lt;figcaption&gt;School statistics drill down by programs and admission tiers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25273,7 +25273,7 @@ also the time when elite students get picked by school. For all
 others, they have to make a decision prior to the exam day which tier
 she is going into, and the primary reference is her estimated score.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_5.png"/&gt;
+    &lt;img src="images/gkp_5.png"/&gt;
     &lt;figcaption&gt;School statistics drill down by school types&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25287,10 +25287,10 @@ matching city name to a wiki page and parse the page for imported data
 bits.&lt;/p&gt;
 &lt;figure class="row"&gt;
   &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_6.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_6.png"/&gt;
   &lt;/div&gt;
   &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_7.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_7.png"/&gt;
   &lt;/div&gt;
   &lt;figcaption&gt;City wiki&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -25300,7 +25300,7 @@ convenient is it to get to the city from where I live?&lt;/em&gt; So we decided
 to build a train schedule that will show exactly which train are
 available to take, all stops in between, and the actual time elapse.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_8.png"/&gt;
+    &lt;img src="images/gkp_8.png"/&gt;
     &lt;figcaption&gt;City to city train schedule search engine&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25313,7 +25313,7 @@ flight, train, bus and subway data are matched up.&lt;/p&gt;
 are laid out to assist prospective students evaluate not only the
 future academic life but also its social life. Read on our &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part two
 &amp;mdash; school details&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 04 Sep 2015 10:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2015-09-04:myblog/gkp introduction.html</guid><category>gkp</category></item><item><title>Project Stock Backtesting Demo</title><link>https://fengxia41103.github.io/myblog/project%20stock%20demo.html</link><description>&lt;figure class="s12 center"&gt;
-    &lt;img src="/images/demo_jk.png"/&gt;
+    &lt;img src="images/demo_jk.png"/&gt;
     &lt;figcaption&gt;Project Stock frontpage&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25338,7 +25338,7 @@ for a replay.&lt;/p&gt;
 yet.  The good news is that we now have a framework that can host much
 more data set and strategies, and running data set in this scale is
 fun.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 06 Aug 2015 15:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2015-08-06:myblog/project stock demo.html</guid></item><item><title>Project GKP Demo</title><link>https://fengxia41103.github.io/myblog/project%20gkp%20demo.html</link><description>&lt;figure class="s12 center"&gt;
-    &lt;img src="/images/demo_gkp.png"/&gt;
+    &lt;img src="images/demo_gkp.png"/&gt;
     &lt;figcaption&gt;Project GKP frontpage&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25390,7 +25390,7 @@ a simple crawler using the &lt;a href="https://docs.python.org/2/library/urllib.
 or building upon some more sophisticate tool like
 &lt;a href="http://doc.scrapy.org/en/latest/intro/tutorial.html"&gt;Scrapy&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/regular_expressions.png"/&gt;
+  &lt;img src="images/regular_expressions.png"/&gt;
   &lt;figcaption&gt;Fun with regular expression&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -25617,6 +25617,6 @@ to that.&lt;/p&gt;
 &lt;h1&gt;Final design&lt;/h1&gt;
 &lt;p&gt;After all the tweaks, the final design of my crawler comes down to this:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/crawler.jpg"/&gt;
+  &lt;img src="images/crawler.jpg"/&gt;
   &lt;figcaption&gt;Crawler architecture&lt;/figcaption&gt;
 &lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 04 Mar 2015 13:00:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2015-03-04:myblog/tor crawler.html</guid><category>dev</category></item></channel></rss>

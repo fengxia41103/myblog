@@ -9,7 +9,7 @@ the LXD and launch firefox. &lt;/p&gt;
 &lt;p&gt;Another option is to use &lt;a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/"&gt;&lt;code&gt;nginx&lt;/code&gt; to proxy&lt;/a&gt; the GUI service. The
 quirk here is to enable &lt;code&gt;ssl&lt;/code&gt; proxy (notice the &lt;code&gt;https&lt;/code&gt;?)&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="/images/juju%20gui%20nginx.png"/&gt;
+  &lt;img src="images/juju%20gui%20nginx.png"/&gt;
   &lt;figcaption&gt;Juju GUI with Nginx proxy&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -634,7 +634,7 @@ at its code base to decipher this mystery.&lt;/p&gt;
 hook sequence is always executed in an order that is dictated by Juju
 code.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/charm%20hooks.png" /&gt;
+  &lt;img src="images/charm%20hooks.png" /&gt;
   &lt;figcaption&gt;Sequence of charm hooks&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1296,7 +1296,7 @@ Definition: &lt;code&gt;charm.reactive/charms/reactive/decorators.py&lt;/code&gt
 that order and developer can use &lt;code&gt;@hook&lt;/code&gt; to define a function block
 to run. &lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/charm%20hooks.png" /&gt;
+  &lt;img src="images/charm%20hooks.png" /&gt;
   &lt;figcaption&gt;Sequence of charm hooks&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1486,7 +1486,7 @@ with three states: &lt;code&gt;state.1&lt;/code&gt;, &lt;code&gt;state.2&lt;/cod
 charm kicks off execution of &lt;code&gt;state.1&lt;/code&gt;, which then transit itself to
 the &lt;code&gt;state.2&lt;/code&gt;, then to &lt;code&gt;state.3&lt;/code&gt;, and then loop back to &lt;code&gt;state.1&lt;/code&gt;.&lt;/p&gt;
 &lt;figure class="s6 m6 s12 center"&gt;
-  &lt;img src="/images/charm%20chain%20states.png" /&gt;
+  &lt;img src="images/charm%20chain%20states.png" /&gt;
   &lt;figcaption&gt;Charm design pattern: chain states&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1504,7 +1504,7 @@ transition among three states. Top right window &lt;code&gt;juju status&lt;/code
 shows state transitions in &lt;strong&gt;Message&lt;/strong&gt; column which is set by
 &lt;code&gt;set_status&lt;/code&gt; in each state's function block.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/charm%20chained%20states%20screencast.gif" /&gt;
+  &lt;img src="images/charm%20chained%20states%20screencast.gif" /&gt;
   &lt;figcaption&gt;Charm chain states screencast&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1613,7 +1613,7 @@ remains valid. &lt;/p&gt;
    operator intervene.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/baremetal%20lifecycle.png" /&gt;
+    &lt;img src="images/baremetal%20lifecycle.png" /&gt;
     &lt;figcaption&gt;General baremetal life cycle&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1679,12 +1679,12 @@ the following subject domains for discussion purpose:&lt;/p&gt;
 &lt;div class="my-multicol-2"&gt;
 &lt;figure class="col s12"&gt;
     &lt;img class="img-responsive center"
-    src="/images/maas%20minimum%20setup.png" /&gt;
+    src="images/maas%20minimum%20setup.png" /&gt;
     &lt;figcaption&gt;MAAS minimal setup&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;figure class="col s12"&gt;
     &lt;img class="img-responsive center"
-    src="/images/ironic%20minimal%20setup.png" /&gt;
+    src="images/ironic%20minimal%20setup.png" /&gt;
     &lt;figcaption&gt;Ironic minimal setup&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/div&gt;
@@ -2342,7 +2342,7 @@ an operating system or hypervisor on a baremetal so it is available
 for further software installation.  In the simplest term, one needs to
 answer these three questions:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/baremetal%20provisioning%20intro.png" /&gt;
+    &lt;img src="images/baremetal%20provisioning%20intro.png" /&gt;
     &lt;figcaption&gt;Minimal setup for baremetal provisioning&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2374,7 +2374,7 @@ function simultaneously in the same network.  BOOTP is about &lt;font
 color="blue"&gt;address determination and bootfile selection&lt;/font&gt;.
 From its &lt;a href="https://tools.ietf.org/html/rfc951"&gt;spec&lt;/a&gt;, we can derive a sequence diagram shown below:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/bootp%20sequence.png" /&gt;
+    &lt;img src="images/bootp%20sequence.png" /&gt;
     &lt;figcaption&gt;BOOTP sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2385,7 +2385,7 @@ above is actually a plain text file). Therefore, everytime client asks
 for its information, it will get the same result. Below shows the
 format of a BOOTP data packet. This same format in both directions.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/bootp%20packet%20format.png" /&gt;
+    &lt;img src="images/bootp%20packet%20format.png" /&gt;
     &lt;figcaption&gt;BOOTP data packet&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2393,7 +2393,7 @@ format of a BOOTP data packet. This same format in both directions.&lt;/p&gt;
 reason. Same ports (67 on the server side &amp;amp; 68 on the client side) are
 used. Below shows a simplified DHCP cycles (&lt;a href="http://facweb.cs.depaul.edu/cwhite/TDC%20365/BOOTP%20and%20DHCP.ppt"&gt;source&lt;/a&gt;):&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/dhcp%20sequence.png" /&gt;
+    &lt;img src="images/dhcp%20sequence.png" /&gt;
     &lt;figcaption&gt;Simplified DHCP sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2492,7 +2492,7 @@ UDP header format:&lt;/p&gt;
   here.)  Field contains zero if unused.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/tftp%20sequence.png" /&gt;
+    &lt;img src="images/tftp%20sequence.png" /&gt;
     &lt;figcaption&gt;TFTP sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2546,7 +2546,7 @@ Type   Architecture Name
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/pxe%20boot%20sequence.png" /&gt;
+    &lt;img src="images/pxe%20boot%20sequence.png" /&gt;
     &lt;figcaption&gt;PXE boot sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2686,7 +2686,7 @@ hardware? Two techniques come into play: &lt;strong&gt;Split ROM&lt;/strong&gt; 
 and &lt;strong&gt;UNDI&lt;/strong&gt;. We will cover UNDI separately. Here, let's look at the
 split architecture.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/pxe%20option%20rom%20split%20architecture.png" /&gt;
+    &lt;img src="images/pxe%20option%20rom%20split%20architecture.png" /&gt;
     &lt;figcaption&gt;PXE Option ROM split architecture&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2722,7 +2722,7 @@ more network interfaces. The three Option ROMs are:&lt;/p&gt;
 Page 77 in the &lt;a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf"&gt;PXE Spec&lt;/a&gt; has a nice diagram showing the details
 behind the scene from BIOS to a PXE:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/pxe%20IPL.svg" /&gt;
+    &lt;img src="images/pxe%20IPL.svg" /&gt;
     &lt;figcaption&gt;PXE IPL (from power on to PXE)&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Openstack Ironic</title><link href="https://fengxia41103.github.io/myblog/ironic%20intro.html" rel="alternate"></link><published>2017-03-15T22:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-15:myblog/ironic intro.html</id><summary type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju
@@ -2744,7 +2744,7 @@ Ironic. In particular, I'd like to illustrate a few Ironic internals
 to show what "managing baremetal" is actually doing.&lt;/p&gt;
 &lt;h1&gt;Ironic introduction&lt;/h1&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_design.png" /&gt;
+    &lt;img src="images/ironic_design.png" /&gt;
     &lt;figcaption&gt;Ironic design (&lt;a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic"&gt;source&lt;/a&gt;)&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2760,7 +2760,7 @@ important role in Ironic's workflow: &lt;a href="https://docs.openstack.org/deve
 &lt;a href="https://docs.openstack.org/developer/ironic/deploy/inspection.html"&gt;Ironic Inspector&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Since it stores meta data in a DB, let's take a look at its DB schema:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_db_er.png" /&gt;
+    &lt;img src="images/ironic_db_er.png" /&gt;
     &lt;figcaption&gt;Ironic ER diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2816,7 +2816,7 @@ information. Again, the creation does nothing besides creating a
 record in Ironic DB. Run &lt;code&gt;openstack baremetal node show [node_uuid]&lt;/code&gt;
 displays details of a node.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_node_show.png" /&gt;
+    &lt;img src="images/ironic_node_show.png" /&gt;
     &lt;figcaption&gt;Details of a provisioned node&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -2984,7 +2984,7 @@ UUID. From that point on, IPA will ping home (hearbeat) periodically
 hearbeat payload is a callback URL, so apparently IPA also exposes a
 HTTP service that Ironic conductor can use for commands.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/ironic_ipa_sequence.png" /&gt;
+    &lt;img src="images/ironic_ipa_sequence.png" /&gt;
     &lt;figcaption&gt;Ironic Python Agent (IPA) sequence diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3005,7 +3005,7 @@ removing a runtime dependency on a DHCP or TFTP server.&lt;/p&gt;
 &lt;h2&gt;Provision process &amp;mdash; Agent&lt;/h2&gt;
 &lt;p&gt;Source by &lt;a href="https://github.com/devananda/talks/tree/master/images"&gt;devananda github&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img     src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" /&gt;
+    &lt;img     src="https://github.com/devananda/talks/blob/masterimages/deploy_with_agent.png?raw=true" /&gt;
     &lt;figcaption&gt;Ironic deploy &amp;mdash; Agent&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3108,9 +3108,9 @@ node &amp;mdash; this then completes the provisioning process.&lt;/p&gt;
 &lt;p&gt;Source by &lt;a href="https://github.com/devananda/talks/tree/master/images"&gt;devananda github&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="row center"&gt;
     &lt;img class="s6"
-    src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-1.png?raw=true" /&gt;
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-1.png?raw=true" /&gt;
     &lt;img class="s6"
-    src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-2.png?raw=true" /&gt;
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-2.png?raw=true" /&gt;
     &lt;figcaption&gt;Ironic deploy &amp;mdash; PXE&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3291,7 +3291,7 @@ We are using "Password authentication with scoped authorization".&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: &lt;code&gt;Glance&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Endpoint: &lt;code&gt;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;HTTP header:&lt;ol&gt;
 &lt;li&gt;Accept-Encoding: &lt;code&gt;gzip, deflate&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;*/*&lt;/code&gt;&lt;/li&gt;
@@ -3316,12 +3316,12 @@ We are using "Password authentication with scoped authorization".&lt;/p&gt;
    &lt;span class="s2"&gt;&amp;quot;disk_format&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;ami&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;2017-03-03T22:38:58Z&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;visibility&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;public&amp;quot;&lt;/span&gt;,
-   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;min_disk&amp;quot;&lt;/span&gt;:0,
    &lt;span class="s2"&gt;&amp;quot;protected&amp;quot;&lt;/span&gt;:false,
    &lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;size&amp;quot;&lt;/span&gt;:25165824,
-   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;checksum&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;eb9139e4942121f22bbc2afc0400b2a4&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;owner&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;3b2594f2569542f694ff346a6db7fa1e&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;virtual_size&amp;quot;&lt;/span&gt;:null,
@@ -3558,7 +3558,7 @@ talked about by the Images v2 API.&lt;/p&gt;
          &lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
          &lt;span class="s2"&gt;&amp;quot;links&amp;quot;&lt;/span&gt;:&lt;span class="o"&gt;[&lt;/span&gt;
             &lt;span class="o"&gt;{&lt;/span&gt;
-               &lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;http://10.0.2.15:8774/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
+               &lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;http://10.0.2.15:8774images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
                &lt;span class="s2"&gt;&amp;quot;rel&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;bookmark&amp;quot;&lt;/span&gt;
             &lt;span class="o"&gt;}&lt;/span&gt;
          &lt;span class="o"&gt;]&lt;/span&gt;
@@ -3607,7 +3607,7 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Glance&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Endpoint: &lt;code&gt;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;HTTP header:&lt;ol&gt;
 &lt;li&gt;Accept-Encoding: &lt;code&gt;gzip, deflate&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;*/*&lt;/code&gt;&lt;/li&gt;
@@ -3632,12 +3632,12 @@ talked about by the Images v2 API.&lt;/p&gt;
    &lt;span class="s2"&gt;&amp;quot;disk_format&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;ami&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;2017-03-03T22:38:58Z&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;visibility&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;public&amp;quot;&lt;/span&gt;,
-   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;min_disk&amp;quot;&lt;/span&gt;:0,
    &lt;span class="s2"&gt;&amp;quot;protected&amp;quot;&lt;/span&gt;:false,
    &lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;size&amp;quot;&lt;/span&gt;:25165824,
-   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
+   &lt;span class="s2"&gt;&amp;quot;file&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;checksum&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;eb9139e4942121f22bbc2afc0400b2a4&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;owner&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;3b2594f2569542f694ff346a6db7fa1e&amp;quot;&lt;/span&gt;,
    &lt;span class="s2"&gt;&amp;quot;virtual_size&amp;quot;&lt;/span&gt;:null,
@@ -3700,7 +3700,7 @@ defined, must be one of the two types:&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;require&lt;/strong&gt; (eg. I'm Mediawiki and I require a SQL database).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20control%20modeling.png" /&gt;
+  &lt;img src="images/juju%20control%20modeling.png" /&gt;
   &lt;figcaption&gt;Juju control modeling&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3721,7 +3721,7 @@ database charm, who should always define an interface to exchange DB
 login credentials and ports. Charm layer is application specific, and
 its logic is following the &lt;a href="https://pythonhosted.org/charms.reactive/"&gt;reactive pattern&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20charm%20layers.png" /&gt;
+    &lt;img src="images/juju%20charm%20layers.png" /&gt;
     &lt;figcaption&gt;Juju charm layers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3775,7 +3775,7 @@ if there is a MySQL &lt;em&gt;provides&lt;/em&gt; and Wordpress &lt;em&gt;requir
 will read from the providing side of configurations needed to make the
 connection.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/charm%20relation%20and%20interface.png" /&gt;
+    &lt;img src="images/charm%20relation%20and%20interface.png" /&gt;
     &lt;figcaption&gt;Charm relation and interface&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3829,7 +3829,7 @@ is how charm build can pull in dependencies of other charms/layers.&lt;/p&gt;
 &lt;h1&gt;Screencast&lt;/h1&gt;
 &lt;p&gt;See the process in action:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/vanilla%20charm%20deploy.gif" /&gt;
+    &lt;img src="images/vanilla%20charm%20deploy.gif" /&gt;
     &lt;figcaption&gt;Screencast showing deploying a Vanilla charm&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju deploy and Provider</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy%20provider.html" rel="alternate"></link><published>2017-02-08T14:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-08:myblog/juju deploy provider.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will
@@ -3853,7 +3853,7 @@ number]&lt;/code&gt; flag. While using MAAS it is seen that MAAS will turn a
 &lt;code&gt;READY&lt;/code&gt; machine into &lt;code&gt;ALLOCATED&lt;/code&gt; then &lt;code&gt;DEPLOYING&lt;/code&gt;. Once a Juju agent
 is installed (provisioned), the agent executes application deployment.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
+    &lt;img src="images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
     &lt;figcaption&gt;MAAS target node state diagram during Juju deploy process&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3871,7 +3871,7 @@ installed, knows how to speak to the state controller (machine-0), how
 to find and download a charm, and how to use it to deploy an
 application. So just how are agents wired together?&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20agent%20overview.png" /&gt;
+    &lt;img src="images/juju%20agent%20overview.png" /&gt;
     &lt;figcaption&gt;High level view of Juju agents in an environment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3894,7 +3894,7 @@ change. The change(set) essentially has all the information the
 provisioner needs to take an action so to bring machine from state A
 &amp;rarr; state B.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20machine%200%20state.png" /&gt;
+    &lt;img src="images/juju%20machine%200%20state.png" /&gt;
     &lt;figcaption&gt;Machine-0 state &amp; provisioner&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3945,7 +3945,7 @@ them are just think wrapper of next function. The mapping between a
 command to a state is taking place in &lt;code&gt;state.AddApplication()&lt;/code&gt; which
 I'm highlighting in &lt;font color="green"&gt;green&lt;/font&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20call%20chain.png" /&gt;
+    &lt;img src="images/juju%20deploy%20call%20chain.png" /&gt;
     &lt;figcaption&gt;Illustration of call chain by "juju deploy" command&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm deployment</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy.html" rel="alternate"></link><published>2017-01-19T15:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-19:myblog/juju deploy.html</id><summary type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
 continue our research into another important function &amp;mdash; juju
@@ -3958,7 +3958,7 @@ to repeat this for development and troubleshooting.&lt;/p&gt;
 &lt;h1&gt;Screencast&lt;/h1&gt;
 &lt;p&gt;See the process in action:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20jenkins.gif" /&gt;
+    &lt;img src="images/juju%20deploy%20jenkins.gif" /&gt;
     &lt;figcaption&gt;Screencast of juju deploying Jenkins&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3967,7 +3967,7 @@ to repeat this for development and troubleshooting.&lt;/p&gt;
 context of deploying a charm driven by Juju, we can take a look MAAS
 internals how those states are related.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
+    &lt;img src="images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
     &lt;figcaption&gt;MAAS target node state diagram during Juju deploy process&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3975,7 +3975,7 @@ internals how those states are related.&lt;/p&gt;
 &lt;p&gt;This is a more detailed view of juju deploying a charm broken down
 into three steps.&lt;/p&gt;
 &lt;figure class="s12 center"&gt; 
-    &lt;img src="/images/juju%20deploy%20original.png" /&gt;
+    &lt;img src="images/juju%20deploy%20original.png" /&gt;
     &lt;figcaption&gt;
         Illustration of a Juju cloud environment before a deployment
     &lt;/figcaption&gt; 
@@ -4018,7 +4018,7 @@ $ juju deploy jenkinsn
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20commands.png" /&gt;
+    &lt;img src="images/juju%20deploy%20commands.png" /&gt;
     &lt;figcaption&gt;Issuing command to deploy Jenkins&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4026,7 +4026,7 @@ $ juju deploy jenkinsn
 cloud, each equipped with an application, and both have a jujud
 installed.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20deploy%20result.png" /&gt;
+    &lt;img src="images/juju%20deploy%20result.png" /&gt;
     &lt;figcaption&gt;Deployment result&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4384,7 +4384,7 @@ go south, what is the minimum to simulate a clean state so we can run
 &lt;code&gt;juju bootstrap&lt;/code&gt; again as if from scratch. This last point is
 particuarly useful for development and troubleshooting.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/juju%20bootstrap.gif" /&gt;
+    &lt;img src="images/juju%20bootstrap.gif" /&gt;
     &lt;figcaption&gt;Screencast of juju bootstraping a cloud environment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4425,7 +4425,7 @@ CLI speaks to a cloud. Each cloud has a different API. Juju provides a
 common bootstrap framework to tie these providers into a common
 process.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20cloud%20and%20provider.png" /&gt;
+  &lt;img src="images/juju%20cloud%20and%20provider.png" /&gt;
     &lt;figcaption&gt;Juju cloud abstraction&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4489,7 +4489,7 @@ environment, machine-0 involves tremendous amount of machinary to go
 live.  In a nutshell, all activities can be categorized into the
 followings:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20bootstrap%20overview.png" /&gt;
+  &lt;img src="images/juju%20bootstrap%20overview.png" /&gt;
     &lt;figcaption&gt;Juju bootstrap framework&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4534,7 +4534,7 @@ process located in &lt;code&gt;juju.juju.environs.Bootstrap&lt;/code&gt; functio
   to hard-coded values (eg. simplestream URL).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20bootstrap%20process.png" /&gt;
+  &lt;img src="images/juju%20bootstrap%20process.png" /&gt;
     &lt;figcaption&gt;Juju bootstrap framework&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4560,7 +4560,7 @@ here. Once ducks are in line, call a provider's &lt;code&gt;BootstrapInstance&lt
 function &amp;larr; and this is the point where underline cloud meets
 Juju.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20common%20BootstrapInstance.png" /&gt;
+  &lt;img src="images/juju%20common%20BootstrapInstance.png" /&gt;
     &lt;figcaption&gt;"common" provider's BootstrapInstance function&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4806,7 +4806,7 @@ Juju.&lt;/p&gt;
 &lt;code&gt;BootstrapInstance&lt;/code&gt;. So it is really part of the provisioning calls.
 However, we are separating it here for discussion purpose.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" /&gt;
+  &lt;img src="images/juju%20common%20BootstrapInstance%20finalizer%20func.png" /&gt;
     &lt;figcaption&gt;"common" provider's BootstrapInstance finalizer function&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4898,7 +4898,7 @@ terms. Instead of drawing a tree to reflect 1-N relationship, I used
 an outer enclosure which can have multiple of its inner enclosures,
 eg. a bundle can have N charms.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/juju%20control%20modeling.png"/&gt;
+  &lt;img src="images/juju%20control%20modeling.png"/&gt;
   &lt;figcaption&gt;Juju control models&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -4945,7 +4945,7 @@ itself down at the end of the boot.&lt;/p&gt;
 &lt;h1&gt;MAAS machine life cycle&lt;/h1&gt;
 &lt;p&gt;MAAS target goes through a life cycel as shown below:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas_target_life_cycle.png"/&gt;
+  &lt;img src="images/maas_target_life_cycle.png"/&gt;
   &lt;figcaption&gt;MAAS target node life cycle&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -5045,7 +5045,7 @@ that out, so don't listen to that.&lt;/p&gt;
    live together with its managed nodes (I call them targets).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas_networking_topology.png"/&gt;
+  &lt;img src="images/maas_networking_topology.png"/&gt;
   &lt;figcaption&gt;MAAS Virtualbox lab networking topology&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -5128,7 +5128,7 @@ less ~/.ssh/id_rsa.pub
   deployment so later you can SSH into these targets without knowing
   the password.&lt;/p&gt;
 &lt;p&gt;&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas%20ssh%20key.png"/&gt;
+  &lt;img src="images/maas%20ssh%20key.png"/&gt;
   &lt;figcaption&gt;MAAS upload SSH key&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -5139,7 +5139,7 @@ less ~/.ssh/id_rsa.pub
     In short, set MAAS default gateway to be the IP of the MAAS
     server, in our case, &lt;code&gt;192.168.8.1&lt;/code&gt;!&lt;/p&gt;
 &lt;p&gt;&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas%20default%20gateway.png"/&gt;
+  &lt;img src="images/maas%20default%20gateway.png"/&gt;
   &lt;figcaption&gt;MAAS default gateway&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -5234,9 +5234,9 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
 &lt;p&gt;Login into &lt;code&gt;http://192.168.8.1/MAAS/&lt;/code&gt;, goto &lt;code&gt;Subnets&lt;/code&gt; and select
    the &lt;code&gt;VLAN&lt;/code&gt; &amp;larr; this is how you can turn on DHCP on a subnet:&lt;/p&gt;
 &lt;p&gt;&lt;figure class="row"&gt;
-  &lt;img src="/images/maas_vlan_config.png"
+  &lt;img src="images/maas_vlan_config.png"
        class="col s6" /&gt;
-  &lt;img src="/images/maas_subnet_config.png"
+  &lt;img src="images/maas_subnet_config.png"
        class="col s6" /&gt;  &lt;br /&gt;
   &lt;figcaption&gt;MAAS  DHCP config&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
@@ -5247,7 +5247,7 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
    gateway to 192.168.8.1, which is this server's static IP on this
    subnet.&lt;/p&gt;
 &lt;p&gt;&lt;figure class="s12 center"&gt;
-  &lt;img src="/images/maas_dhcp_config.png"/&gt;
+  &lt;img src="images/maas_dhcp_config.png"/&gt;
   &lt;figcaption&gt;MAAS admin DHCP config&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;

@@ -153,7 +153,7 @@ Openstack Controller images are stored on <code>/var/controller/running</code>
 directory, which is not mounted to glusterFS.</p>
 <p>Roller and XClarity don't have any native HA feature implemented. The
 proposed design is to store Roller and XClarity running image on
-GlusterFS cluster, e.g. <code>/var/images/running</code>. All the snapshots will
+GlusterFS cluster, e.g. <code>/varimages/running</code>. All the snapshots will
 be stored on this directory also. The rest of this document will
 further explain how to setup GlusterFS.</p>
 <h1>Configure Communication Between Nodes</h1>
@@ -372,17 +372,17 @@ be executed on each CIMP node by replacing <code>cimp-node[x]</code> with proper
 host name index, eg. <code>cimp-node2</code>.</p>
 <p>Create a new directory as a place holder of all the VM images and
 snapshots that requires GlusterFS as the backend storage pool.</p>
-<div class="highlight"><pre><span></span>$ sudo mkdir -p /var/images/running
+<div class="highlight"><pre><span></span>$ sudo mkdir -p /varimages/running
 </pre></div>
 
 
 <p>Then, mount the GlusterFS volume to the new directory:</p>
-<div class="highlight"><pre><span></span>$ sudo mount -t glusterfs cimp-node1:/vol-1 /var/images/running
+<div class="highlight"><pre><span></span>$ sudo mount -t glusterfs cimp-node1:/vol-1 /varimages/running
 </pre></div>
 
 
 <p>To make the mount persistent, the mount entry should be added to <code>/etc/fstab</code>:</p>
-<div class="highlight"><pre><span></span>cimp-node1:vol-1  /var/images/running glusterfs defaults,_netdev <span class="m">0</span> 0
+<div class="highlight"><pre><span></span>cimp-node1:vol-1  /varimages/running glusterfs defaults,_netdev <span class="m">0</span> 0
 </pre></div>
 
 

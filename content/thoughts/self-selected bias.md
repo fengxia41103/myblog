@@ -5,7 +5,7 @@ Slug: self-selected bias
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/beautiful%20stare.jpg"/>
+  <img src="images/beautiful%20stare.jpg"/>
 </figure>
 
 

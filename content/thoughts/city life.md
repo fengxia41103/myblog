@@ -5,7 +5,7 @@ Slug: city life
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/prospective.jpg"/>
+  <img src="images/prospective.jpg"/>
 </figure>
 
 I find it curious. Listening to a sentimental talk show on the Netease

@@ -5,7 +5,7 @@ Slug: teahouse
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/funny/an-inconvenient-truth.jpg"/>
+  <img src="images/funny/an-inconvenient-truth.jpg"/>
 </figure>
 
 This is an interesting thought. I am listening to this talk show about

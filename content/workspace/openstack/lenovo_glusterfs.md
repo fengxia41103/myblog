@@ -27,7 +27,7 @@ directory, which is not mounted to glusterFS.
 
 Roller and XClarity don't have any native HA feature implemented. The
 proposed design is to store Roller and XClarity running image on
-GlusterFS cluster, e.g. `/var/images/running`. All the snapshots will
+GlusterFS cluster, e.g. `/varimages/running`. All the snapshots will
 be stored on this directory also. The rest of this document will
 further explain how to setup GlusterFS.
 
@@ -265,19 +265,19 @@ Create a new directory as a place holder of all the VM images and
 snapshots that requires GlusterFS as the backend storage pool.
 
 ```shell
-$ sudo mkdir -p /var/images/running
+$ sudo mkdir -p /varimages/running
 ```
 
 Then, mount the GlusterFS volume to the new directory:
 
 ```shell
-$ sudo mount -t glusterfs cimp-node1:/vol-1 /var/images/running
+$ sudo mount -t glusterfs cimp-node1:/vol-1 /varimages/running
 ```
 
 To make the mount persistent, the mount entry should be added to `/etc/fstab`:
 
 ```shell
-cimp-node1:vol-1  /var/images/running glusterfs defaults,_netdev 0 0
+cimp-node1:vol-1  /varimages/running glusterfs defaults,_netdev 0 0
 ```
  
 Finally, enable `virt_use_fusefs`:

@@ -5,7 +5,7 @@ Slug: ten years
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/metro%2010%20years.jpg"/>
+  <img src="images/metro%2010%20years.jpg"/>
 </figure>
 
 I'm scared. I had an uneasy sleep last night, worrying about a lot of

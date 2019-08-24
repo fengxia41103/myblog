@@ -5,7 +5,7 @@ Slug: time
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/reddit%20cat%20portrait.jpg"/>
+  <img src="images/reddit%20cat%20portrait.jpg"/>
 </figure>
 
 Time is indeed relative. 

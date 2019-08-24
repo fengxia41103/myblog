@@ -35,7 +35,7 @@ to show what "managing baremetal" is actually doing.
 # Ironic introduction
 
 <figure class="s12 center">
-    <img src="/images/ironic_design.png" />
+    <img src="images/ironic_design.png" />
     <figcaption>Ironic design (<a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic">source</a>)</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ important role in Ironic's workflow: [Ironic Python Agent][7] and
 Since it stores meta data in a DB, let's take a look at its DB schema:
 
 <figure class="s12 center">
-    <img src="/images/ironic_db_er.png" />
+    <img src="images/ironic_db_er.png" />
     <figcaption>Ironic ER diagram</figcaption>
 </figure>
 
@@ -118,7 +118,7 @@ record in Ironic DB. Run `openstack baremetal node show [node_uuid]`
 displays details of a node.
 
 <figure class="s12 center">
-    <img src="/images/ironic_node_show.png" />
+    <img src="images/ironic_node_show.png" />
     <figcaption>Details of a provisioned node</figcaption>
 </figure>
 
@@ -296,7 +296,7 @@ hearbeat payload is a callback URL, so apparently IPA also exposes a
 HTTP service that Ironic conductor can use for commands.
 
 <figure class="s12 center">
-    <img src="/images/ironic_ipa_sequence.png" />
+    <img src="images/ironic_ipa_sequence.png" />
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
 
@@ -320,7 +320,7 @@ Source by [devananda github][18].
 [18]: https://github.com/devananda/talks/tree/master/images
 
 <figure class="s12 center">
-    <img     src="https://github.com/devananda/talks/blob/master/images/deploy_with_agent.png?raw=true" />
+    <img     src="https://github.com/devananda/talks/blob/masterimages/deploy_with_agent.png?raw=true" />
     <figcaption>Ironic deploy &mdash; Agent</figcaption>
 </figure>
 
@@ -431,9 +431,9 @@ Source by [devananda github][18].
 
 <figure class="row center">
     <img class="s6"
-    src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-1.png?raw=true" />
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-1.png?raw=true" />
     <img class="s6"
-    src="https://github.com/devananda/talks/blob/master/images/pxe-deploy-2.png?raw=true" />
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-2.png?raw=true" />
     <figcaption>Ironic deploy &mdash; PXE</figcaption>
 </figure>
 
@@ -602,7 +602,7 @@ We are using "Password authentication with scoped authorization".
 
 + Service: `Glance`
 + Method: `GET`
-+ Endpoint: `/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a` ([ref][23])
++ Endpoint: `/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a` ([ref][23])
 [23]: https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details
 + HTTP header:
     1. Accept-Encoding: `gzip, deflate`
@@ -626,12 +626,12 @@ We are using "Password authentication with scoped authorization".
    "disk_format":"ami",
    "updated_at":"2017-03-03T22:38:58Z",
    "visibility":"public",
-   "self":"/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+   "self":"/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
    "min_disk":0,
    "protected":false,
    "id":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
    "size":25165824,
-   "file":"/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file",
+   "file":"/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file",
    "checksum":"eb9139e4942121f22bbc2afc0400b2a4",
    "owner":"3b2594f2569542f694ff346a6db7fa1e",
    "virtual_size":null,
@@ -859,7 +859,7 @@ talked about by the Images v2 API.
          "id":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
          "links":[
             {
-               "href":"http://10.0.2.15:8774/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+               "href":"http://10.0.2.15:8774images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
                "rel":"bookmark"
             }
          ]
@@ -907,7 +907,7 @@ talked about by the Images v2 API.
 
 + Service: Glance
 + Method: `GET`
-+ Endpoint: `/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a` ([ref][23])
++ Endpoint: `/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a` ([ref][23])
 + HTTP header:
     1. Accept-Encoding: `gzip, deflate`
     2. Accept: `*/*`
@@ -930,12 +930,12 @@ talked about by the Images v2 API.
    "disk_format":"ami",
    "updated_at":"2017-03-03T22:38:58Z",
    "visibility":"public",
-   "self":"/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
+   "self":"/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
    "min_disk":0,
    "protected":false,
    "id":"9794e5b3-b3f1-403c-b37a-19c7e07cca4a",
    "size":25165824,
-   "file":"/v2/images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file",
+   "file":"/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file",
    "checksum":"eb9139e4942121f22bbc2afc0400b2a4",
    "owner":"3b2594f2569542f694ff346a6db7fa1e",
    "virtual_size":null,

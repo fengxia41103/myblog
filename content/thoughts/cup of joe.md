@@ -6,7 +6,7 @@ Author: Feng Xia
 
 <div class="col l6 m6 s12" style="margin-right: 2em;">
 <video width="100%" height="100%" controls="controls">
-  <source src="{{SITEURL}}/images/firework.mp4 "
+  <source src="images/firework.mp4 "
           type="video/mp4" />
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/

@@ -5,7 +5,7 @@ Author: Feng Xia
 Modified: 2018-10-06 10:40
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/wtf-code.png"/>
+  <img src="images/funny/wtf-code.png"/>
 </figure>
 
 

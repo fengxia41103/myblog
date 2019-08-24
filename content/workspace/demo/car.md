@@ -5,7 +5,7 @@ Tags: demo, angular, react
 Author: Feng Xia
 
 <figure class="s12 center">
-    <img src="/images/demo_car.png"/>
+    <img src="images/demo_car.png"/>
     <figcaption>Project Car Leasing Calculator</figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ on. But here I want to present a different approach.  First of all,
 let's turn those maths into diagram:
 
 <figure class="s12 center">
-    <img src="/images/car leasing.png"/>
+    <img src="images/car leasing.png"/>
     <figcaption>
         How do you get a monthly payment
     </figcaption>
@@ -215,7 +215,7 @@ parent path is a _STATIC_. Oh well.
 With the component in place, rendering an `form input` section like this one is a breeze:
 
 <figure class="s12 center">
-    <img src="/images/car_1.png"/>
+    <img src="images/car_1.png"/>
   ! <figcaption>
         AngularJS Component rendered form inputs
     </figcaption>

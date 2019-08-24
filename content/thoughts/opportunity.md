@@ -5,7 +5,7 @@ Slug: opportunity
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/annoying%20yearbook.png"/>
+  <img src="images/annoying%20yearbook.png"/>
   <figcaption>Found this on Reddit. China and all your patriotic
   supporters, don't take this view. It's annoying, and will not make
   you strong.</figcaption>

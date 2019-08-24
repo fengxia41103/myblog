@@ -5,7 +5,7 @@ Slug: modern slavery
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/traffic%20god.jpg"/>
+  <img src="images/traffic%20god.jpg"/>
 </figure>
 
 I'm convinced now that the number one problem I am annoyed by the

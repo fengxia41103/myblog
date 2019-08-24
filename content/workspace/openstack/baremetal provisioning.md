@@ -26,7 +26,7 @@ for further software installation.  In the simplest term, one needs to
 answer these three questions:
 
 <figure class="s12 center">
-    <img src="/images/baremetal%20provisioning%20intro.png" />
+    <img src="images/baremetal%20provisioning%20intro.png" />
     <figcaption>Minimal setup for baremetal provisioning</figcaption>
 </figure>
 
@@ -63,7 +63,7 @@ From its [spec][5], we can derive a sequence diagram shown below:
 [5]: https://tools.ietf.org/html/rfc951
 
 <figure class="s12 center">
-    <img src="/images/bootp%20sequence.png" />
+    <img src="images/bootp%20sequence.png" />
     <figcaption>BOOTP sequence diagram</figcaption>
 </figure>
 
@@ -75,7 +75,7 @@ for its information, it will get the same result. Below shows the
 format of a BOOTP data packet. This same format in both directions.
 
 <figure class="s12 center">
-    <img src="/images/bootp%20packet%20format.png" />
+    <img src="images/bootp%20packet%20format.png" />
     <figcaption>BOOTP data packet</figcaption>
 </figure>
 
@@ -86,7 +86,7 @@ used. Below shows a simplified DHCP cycles ([source][6]):
 [6]: http://facweb.cs.depaul.edu/cwhite/TDC%20365/BOOTP%20and%20DHCP.ppt
 
 <figure class="s12 center">
-    <img src="/images/dhcp%20sequence.png" />
+    <img src="images/dhcp%20sequence.png" />
     <figcaption>Simplified DHCP sequence diagram</figcaption>
 </figure>
 
@@ -198,7 +198,7 @@ where the values of fields are:
   here.)  Field contains zero if unused.
 
 <figure class="s12 center">
-    <img src="/images/tftp%20sequence.png" />
+    <img src="images/tftp%20sequence.png" />
     <figcaption>TFTP sequence diagram</figcaption>
 </figure>
 
@@ -254,7 +254,7 @@ services to make a PXE working:
 [3]: https://tools.ietf.org/html/rfc4578
 
 <figure class="s12 center">
-    <img src="/images/pxe%20boot%20sequence.png" />
+    <img src="images/pxe%20boot%20sequence.png" />
     <figcaption>PXE boot sequence diagram</figcaption>
 </figure>
 
@@ -424,7 +424,7 @@ and **UNDI**. We will cover UNDI separately. Here, let's look at the
 split architecture.
 
 <figure class="s12 center">
-    <img src="/images/pxe%20option%20rom%20split%20architecture.png" />
+    <img src="images/pxe%20option%20rom%20split%20architecture.png" />
     <figcaption>PXE Option ROM split architecture</figcaption>
 </figure>
 
@@ -462,7 +462,7 @@ Page 77 in the [PXE Spec][1] has a nice diagram showing the details
 behind the scene from BIOS to a PXE:
 
 <figure class="s12 center">
-    <img src="/images/pxe%20IPL.svg" />
+    <img src="images/pxe%20IPL.svg" />
     <figcaption>PXE IPL (from power on to PXE)</figcaption>
 </figure>
 

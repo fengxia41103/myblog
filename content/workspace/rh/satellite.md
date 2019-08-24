@@ -23,7 +23,7 @@ have a good understanding of the Satellite models and procedures.
 6. Info flow: external source &rarr; main server &rarr; capsule
     server &rarr; managed host.
 
-<img src="/images/rh%20satellite%20overall%20architecture%20official.png"
+<img src="images/rh%20satellite%20overall%20architecture%20official.png"
      class="col s12">
 
 # Content view
@@ -36,7 +36,7 @@ have a good understanding of the Satellite models and procedures.
    need to be changed. So from its consumer's POV, it sees the change
    transparently.
 
-<img src="/images/rh%20satellite%20content%20view.png"
+<img src="images/rh%20satellite%20content%20view.png"
      class="col s12">
 
 # RH subscription model
@@ -128,7 +128,7 @@ subscription (which as basic RHEL OS rpms), it will support 10 RHEL
 VM, and your 11th one will fail to do even `yum update`.
 
 <figure class="col s12 center">
-  <img src="/images/rh%20subscription%20model.png"/>
+  <img src="images/rh%20subscription%20model.png"/>
   <figcaption>RH subscription model</figcaption>
 </figure>
 
@@ -198,7 +198,7 @@ entitlements = subscription qty * entitlement qty/sub * instance multiplier
 ```
 
 <figure class="col s12 center">
-  <img src="/images/rh%20entitlement%20accounting.png"/>
+  <img src="images/rh%20entitlement%20accounting.png"/>
 </figure>
 
 ### how many we are using
@@ -282,7 +282,7 @@ subscription-manager repos --disable=[repo name]
 
 <figure class="col s12 center">
   <img class="img-responsive"
-       src="/images/katello%20ca.png" />
+       src="images/katello%20ca.png" />
   <figcaption>Download `katello ca` from Satellite 6.3 server</figcaption>
 </figure>
 
@@ -360,7 +360,7 @@ page:
 
 <figure class="col s12 center">
   <img class="img-responsive"
-       src="/images/rh%20satellite%20content%20hiearchy.png" />
+       src="images/rh%20satellite%20content%20hiearchy.png" />
   <figcaption>Satellite content hierarchy</figcaption>
 </figure>
 

@@ -5,7 +5,7 @@ Slug: rain rain rain
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/our%20love%20story.jpg"/>
+  <img src="images/our%20love%20story.jpg"/>
 </figure>
 
 Rain, rain, rain. Not quite actually. It's cloudy, misty, and is about

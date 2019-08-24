@@ -5,7 +5,7 @@ Slug: human grouping
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/chairman%20mao.jpg"/>
+  <img src="images/chairman%20mao.jpg"/>
 </figure>
 
 How curious! Human, I do mean the general population whom I observe in

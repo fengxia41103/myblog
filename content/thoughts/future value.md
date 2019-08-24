@@ -5,7 +5,7 @@ Slug: future value
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/funny/kickoff.jpg"/>
+  <img src="images/funny/kickoff.jpg"/>
 </figure>
 
 I was thinking about [future value][1] this morning. Why? because I
@@ -141,7 +141,7 @@ one is to going to keep it that long, but the image matters.
 # Marketing time
 
 <figure class="col l4 m4 s12">
-  <img src="{{SITEURL}}/images/funny/direct%20marketing.jpg"/>
+  <img src="images/funny/direct%20marketing.jpg"/>
 </figure>
 
 

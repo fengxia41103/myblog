@@ -5,7 +5,7 @@ Slug: i dont think so
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/dinasaur.jpg"/>
+  <img src="images/dinasaur.jpg"/>
 </figure>
 
 

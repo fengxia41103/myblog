@@ -22,7 +22,7 @@ From 4th grade class weekly message of 4/8/2018:
 Well said, isn't it?
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/integrity.jpg"/>
+  <img src="images/integrity.jpg"/>
 </figure>
 
 

@@ -5,7 +5,7 @@ Slug: half the world
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/e13-857.jpg"/>
+  <img src="images/e13-857.jpg"/>
 </figure>
 
 

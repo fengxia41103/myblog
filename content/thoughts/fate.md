@@ -5,7 +5,7 @@ Slug: fate
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/change%20management.gif"/>
+  <img src="images/change%20management.gif"/>
 </figure>
 
 Another raining winter day. Walking out from airbnb, ran into an old

@@ -5,7 +5,7 @@ Slug: remembering china
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/bao.jpg"/>
+  <img src="images/bao.jpg"/>
 </figure>
 
 This is a quite fascinating [book][1]. Actually I started to find

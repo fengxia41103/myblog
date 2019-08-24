@@ -17,7 +17,7 @@ charm kicks off execution of `state.1`, which then transit itself to
 the `state.2`, then to `state.3`, and then loop back to `state.1`.
 
 <figure class="s6 m6 s12 center">
-  <img src="/images/charm%20chain%20states.png" />
+  <img src="images/charm%20chain%20states.png" />
   <figcaption>Charm design pattern: chain states</figcaption>
 </figure>
 
@@ -37,7 +37,7 @@ shows state transitions in **Message** column which is set by
 `set_status` in each state's function block.
 
 <figure class="s12 center">
-  <img src="/images/charm%20chained%20states%20screencast.gif" />
+  <img src="images/charm%20chained%20states%20screencast.gif" />
   <figcaption>Charm chain states screencast</figcaption>
 </figure>
 

@@ -51,7 +51,7 @@ There will be two VMs and one internal network, `intnet1`.
    live together with its managed nodes (I call them targets).
 
 <figure class="s12 center">
-  <img src="/images/maas_networking_topology.png"/>
+  <img src="images/maas_networking_topology.png"/>
   <figcaption>MAAS Virtualbox lab networking topology</figcaption>
 </figure>
 
@@ -125,7 +125,7 @@ name `intnet1`.
   the password.
 
     <figure class="s12 center">
-      <img src="/images/maas%20ssh%20key.png"/>
+      <img src="images/maas%20ssh%20key.png"/>
       <figcaption>MAAS upload SSH key</figcaption>
     </figure>
 
@@ -136,7 +136,7 @@ name `intnet1`.
     server, in our case, `192.168.8.1`!
 
     <figure class="s12 center">
-      <img src="/images/maas%20default%20gateway.png"/>
+      <img src="images/maas%20default%20gateway.png"/>
       <figcaption>MAAS default gateway</figcaption>
     </figure>
     
@@ -232,9 +232,9 @@ MAAS admin web is the tool to use for this configuration.
    the `VLAN` &larr; this is how you can turn on DHCP on a subnet:
 
     <figure class="row">
-      <img src="/images/maas_vlan_config.png"
+      <img src="images/maas_vlan_config.png"
            class="col s6" />
-      <img src="/images/maas_subnet_config.png"
+      <img src="images/maas_subnet_config.png"
            class="col s6" />    
       <figcaption>MAAS  DHCP config</figcaption>
     </figure>
@@ -245,7 +245,7 @@ MAAS admin web is the tool to use for this configuration.
    subnet.
 
     <figure class="s12 center">
-      <img src="/images/maas_dhcp_config.png"/>
+      <img src="images/maas_dhcp_config.png"/>
       <figcaption>MAAS admin DHCP config</figcaption>
     </figure>
 

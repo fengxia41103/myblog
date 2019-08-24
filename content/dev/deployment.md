@@ -19,7 +19,7 @@ AWS, but would like to keep options open.
 
 
 <figure class="col l12 m12 s12">
-  <img src="/images/deployment_architecture.png"
+  <img src="images/deployment_architecture.png"
   <figcaption>Deployment architecture</figcaption>
 </figure>
 

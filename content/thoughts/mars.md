@@ -5,7 +5,7 @@ Slug: mars
 Author: Feng Xia
 
 <video width="100%" height="100%" controls="controls">
-  <source src="{{SITEURL}}/images/bird%20fly.mp4 "
+  <source src="images/bird%20fly.mp4 "
           type="video/mp4" />
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/

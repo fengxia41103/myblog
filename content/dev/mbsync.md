@@ -6,7 +6,7 @@ Author: Feng Xia
 Modified: 2019-05-21 10:27
 
 <figure class="col l5 m6 s12">
-  <img src="/images/hahn.png"
+  <img src="images/hahn.png"
        class="center img-responsive">
 </figure>
 
@@ -36,7 +36,7 @@ glance, but it isn't really. In a nutshell, it defines three things:
    store.
    
 <figure class="col s12">
-  <img src="/images/mbsync.png"
+  <img src="images/mbsync.png"
        class="center img-responsive">
   <figcaption>mbsync components</figcaption>
 </figure>
@@ -491,7 +491,7 @@ access). So you can now point your `mbsync` to a local port (default
 OWA server, nice!
 
 <figure class="col s12">
-  <img src="/images/mbsync%20setup.png"
+  <img src="images/mbsync%20setup.png"
        class="center img-responsive">
   <figcaption>My mbsync setup for retrieving and sending mails</figcaption>
 </figure>

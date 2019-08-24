@@ -48,7 +48,7 @@ Step 4. Setup Gerrit user. Browse _http://gerrit.labs.lenovo.com:8080_.
 2. If you already have one, click _Sign in with a Launchpad ID_.
   
 <figure class="row">
-    <img class="img-responsive center" src="/images/gerrit%20openid%20ubuntu%20redirect.png" />
+    <img class="img-responsive center" src="images/gerrit%20openid%20ubuntu%20redirect.png" />
     <figcaption>Gerrit OpenID login Ubuntu redirect</figcaption>
 </figure>
 
@@ -57,14 +57,14 @@ Step 5. Set up a Gerrit user name (eg. "*demouser*"). In Gerrit, go to user sett
   > 2. It doesn't have to be the same as your VM's user name.
   
 <figure class="row">
-    <img class="img-responsive center" src="/images/gerrit%20user%20setting%20username.png" />
+    <img class="img-responsive center" src="images/gerrit%20user%20setting%20username.png" />
     <figcaption>Setup Gerrit user name</figcaption>
 </figure>
 
 Step 6. Setup SSH access. Als on user setting, paste in the content of _id\_rsa.pub_ from step 2.
 
 <figure class="row">
-    <img class="img-responsive center" src="/images/gerrit%20user%20setting%20ssh%20key.png" />
+    <img class="img-responsive center" src="images/gerrit%20user%20setting%20ssh%20key.png" />
     <figcaption>Setup Gerrit user SSH public key</figcaption>
 </figure>
 

@@ -23,7 +23,7 @@ to repeat this for development and troubleshooting.
 See the process in action:
 
 <figure class="s12 center">
-    <img src="/images/juju%20deploy%20jenkins.gif" />
+    <img src="images/juju%20deploy%20jenkins.gif" />
     <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
 
@@ -36,7 +36,7 @@ internals how those states are related.
 [3]: {filename}/workspace/openstack/maas_target.md
 
 <figure class="s12 center">
-    <img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ This is a more detailed view of juju deploying a charm broken down
 into three steps.
 
 <figure class="s12 center"> 
-    <img src="/images/juju%20deploy%20original.png" />
+    <img src="images/juju%20deploy%20original.png" />
     <figcaption>
         Illustration of a Juju cloud environment before a deployment
     </figcaption> 
@@ -83,7 +83,7 @@ job done:
 4. Jujud will download [Jenkins charm][2] and execute per its instruction.
 
 <figure class="s12 center">
-    <img src="/images/juju%20deploy%20commands.png" />
+    <img src="images/juju%20deploy%20commands.png" />
     <figcaption>Issuing command to deploy Jenkins</figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ cloud, each equipped with an application, and both have a jujud
 installed.
 
 <figure class="s12 center">
-    <img src="/images/juju%20deploy%20result.png" />
+    <img src="images/juju%20deploy%20result.png" />
     <figcaption>Deployment result</figcaption>
 </figure>
 

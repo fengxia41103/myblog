@@ -5,7 +5,7 @@ Slug: waste of mind
 Author: Feng Xia
 
 <figure class="col l3 m6 s12">
-  <img src="{{SITEURL}}/images/boomerang.png"/>
+  <img src="images/boomerang.png"/>
 </figure>
 
 

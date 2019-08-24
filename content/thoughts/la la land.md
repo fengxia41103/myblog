@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l4 m4 s12">
-  <img src="{{SITEURL}}/images/funny/love.png"/>
+  <img src="images/funny/love.png"/>
 </figure>
 
 

@@ -41,7 +41,7 @@ remains valid.
    operator intervene.
    
 <figure class="s12 center">
-    <img src="/images/baremetal%20lifecycle.png" />
+    <img src="images/baremetal%20lifecycle.png" />
     <figcaption>General baremetal life cycle</figcaption>
 </figure>
 
@@ -78,12 +78,12 @@ the following subject domains for discussion purpose:
 <div class="my-multicol-2">
 <figure class="col s12">
     <img class="img-responsive center"
-    src="/images/maas%20minimum%20setup.png" />
+    src="images/maas%20minimum%20setup.png" />
     <figcaption>MAAS minimal setup</figcaption>
 </figure>
 <figure class="col s12">
     <img class="img-responsive center"
-    src="/images/ironic%20minimal%20setup.png" />
+    src="images/ironic%20minimal%20setup.png" />
     <figcaption>Ironic minimal setup</figcaption>
 </figure>
 </div>

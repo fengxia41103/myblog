@@ -5,7 +5,7 @@ Slug: class
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/mary%20poppins.jpg"/>
+  <img src="images/mary%20poppins.jpg"/>
 </figure>
 
 

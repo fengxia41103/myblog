@@ -5,7 +5,7 @@ Slug: total happiness
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="{{SITEURL}}/images/japanese%20manchuko%20immigrant.png"/>
+  <img src="images/japanese%20manchuko%20immigrant.png"/>
 </figure>
 
 

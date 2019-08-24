@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/boxer.jpg"/>
+  <img src="images/boxer.jpg"/>
 </figure>
 
 Listening to [this talk][1] this morning, the thought hit me. How do

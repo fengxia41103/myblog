@@ -5,7 +5,7 @@ Slug: girl love
 Author: Feng Xia
 
 <figure class="col l4 m4 s12">
-  <img src="{{SITEURL}}/images/funny/bookcover.jpg"/>
+  <img src="images/funny/bookcover.jpg"/>
 </figure>
 
 Watching all the little kids running around at this public square in

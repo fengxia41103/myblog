@@ -34,7 +34,7 @@ is installed (provisioned), the agent executes application deployment.
 
 
 <figure class="s12 center">
-    <img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -58,7 +58,7 @@ to find and download a charm, and how to use it to deploy an
 application. So just how are agents wired together?
 
 <figure class="s12 center">
-    <img src="/images/juju%20agent%20overview.png" />
+    <img src="images/juju%20agent%20overview.png" />
     <figcaption>High level view of Juju agents in an environment</figcaption>
 </figure>
 
@@ -85,7 +85,7 @@ provisioner needs to take an action so to bring machine from state A
 &rarr; state B.
 
 <figure class="s12 center">
-    <img src="/images/juju%20machine%200%20state.png" />
+    <img src="images/juju%20machine%200%20state.png" />
     <figcaption>Machine-0 state & provisioner</figcaption>
 </figure>
 
@@ -140,6 +140,6 @@ command to a state is taking place in `state.AddApplication()` which
 I'm highlighting in <font color="green">green</font>.
 
 <figure class="s12 center">
-    <img src="/images/juju%20deploy%20call%20chain.png" />
+    <img src="images/juju%20deploy%20call%20chain.png" />
     <figcaption>Illustration of call chain by "juju deploy" command</figcaption>
 </figure>

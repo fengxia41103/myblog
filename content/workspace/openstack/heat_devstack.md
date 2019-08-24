@@ -126,7 +126,7 @@ IRONIC_VM_LOG_DIR=$HOME/ironic-bm-logs
 enable_plugin heat https://git.openstack.org/openstack/heat
 ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
 IMAGE_URL_SITE="http://download.fedoraproject.org"
-IMAGE_URL_PATH="/pub/fedora/linux/releases/25/CloudImages/x86_64/images/"
+IMAGE_URL_PATH="/pub/fedora/linux/releases/25/CloudImages/x86_64images/"
 IMAGE_URL_FILE="Fedora-Cloud-Base-25-1.3.x86_64.qcow2"
 IMAGE_URLS+=","$IMAGE_URL_SITE$IMAGE_URL_PATH$IMAGE_URL_FILE
 ```

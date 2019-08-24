@@ -5,7 +5,7 @@ Slug: nursing home evaluation
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/funny/stress.jpg"/>
+  <img src="images/funny/stress.jpg"/>
 </figure>
 
 

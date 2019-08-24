@@ -18,9 +18,9 @@ list. Convenient.
 
 <figure class="row">
     <div class="col s6">
-    <img class="img-responsive center" src="/images/gkp_9.png" />
+    <img class="img-responsive center" src="images/gkp_9.png" />
     </div><div class="col s6">
-    <img class="img-responsive center" src="/images/gkp_10.png" />
+    <img class="img-responsive center" src="images/gkp_10.png" />
     </div>
     <figcaption>Bookmark a school</figcaption>
 </figure>
@@ -33,7 +33,7 @@ It contains many meta data that can be extracted to form more data
 dimensions.
 
 <figure class="s12 center">
-    <img src="/images/gkp_11.png"/>
+    <img src="images/gkp_11.png"/>
     <figcaption>School summary</figcaption>
 </figure>
 
@@ -41,7 +41,7 @@ School detail page expands on top of the introduction. One small feature
 concerning development is that TOC is auto generated.
 
 <figure class="s12 center">
-    <img  src="/images/gkp_12.png"/>
+    <img  src="images/gkp_12.png"/>
     <figcaption>School wiki</figcaption>
 </figure>
 
@@ -52,7 +52,7 @@ in past admissions. GKP has collected over 2,000,000 data records
 between 2010 and 2014 and covering 3,000 schools.
 
 <figure class="s12 center">
-    <img src="/images/gkp_13.png"/>
+    <img src="images/gkp_13.png"/>
     <figcaption>School historical cutoff scores</figcaption>
 </figure>
 
@@ -69,7 +69,7 @@ live chat stream at **50,000 new posts per minute**. This gives
 students a rich information on how the campus life is like.
 
 <figure class="s12 center">
-    <img  src="/images/gkp_14.png"/>
+    <img  src="images/gkp_14.png"/>
     <figcaption>School social media data stream</figcaption>
 </figure>
 
@@ -82,9 +82,9 @@ has in term of receiving the next update.
 
 <figure class="row">
   <div class="col s6">
-    <img class="img-responsive center" src="/images/gkp_15.png"/>
+    <img class="img-responsive center" src="images/gkp_15.png"/>
   </div><div class="col s6">
-    <img class="img-responsive center" src="/images/gkp_16.png"/>
+    <img class="img-responsive center" src="images/gkp_16.png"/>
   </div>
   <figcaption>Social media keyword cloud and news ticker</figcaption>
 </figure>
@@ -106,7 +106,7 @@ feature that makes acquiring school information as painless as
 possible.
 
 <figure class="s12 center">
-    <img  src="/images/gkp_17.png"/>
+    <img  src="images/gkp_17.png"/>
     <figcaption>School Wechat channels</figcaption>
 </figure>
 

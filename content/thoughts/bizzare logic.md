@@ -5,7 +5,7 @@ Slug: bizzare logic
 Author: Feng Xia
 
 <figure class="col l5 m5 s12">
-  <img src="{{SITEURL}}/images/funny/short%20staff.jpg"/>
+  <img src="images/funny/short%20staff.jpg"/>
 </figure>
 
 U want know some bizzare logic? Here is one, from a terrible

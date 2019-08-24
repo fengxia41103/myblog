@@ -5,7 +5,7 @@ Slug: china nationalism
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/funny/glory.jpg"/>
+  <img src="images/funny/glory.jpg"/>
 </figure>
 
 

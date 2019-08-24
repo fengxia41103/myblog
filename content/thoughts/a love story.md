@@ -5,7 +5,7 @@ Slug: a love story
 Author: Feng Xia
 
 <figure class="col l5 m5 s12">
-  <img src="{{SITEURL}}/images/romance%20in%20tibet.jpg"/>
+  <img src="images/romance%20in%20tibet.jpg"/>
 </figure>
 
 

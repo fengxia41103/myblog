@@ -5,7 +5,7 @@ Slug: color
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="{{SITEURL}}/images/funny/color.png"/>
+  <img src="images/funny/color.png"/>
 </figure>
 
 

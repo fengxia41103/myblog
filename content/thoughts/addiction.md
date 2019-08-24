@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l5 m6 s12">
-  <img src="{{SITEURL}}/images/understand%20fashion.jpg"/>
+  <img src="images/understand%20fashion.jpg"/>
 </figure>
 
 What is an addiction then!? and why is this word negative!? I

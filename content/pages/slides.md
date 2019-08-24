@@ -13,7 +13,7 @@ Author: Feng Xia
         I cherish and wish to re-live.
       </p>
       <figure>
-        <img src="images/moments.png"
+        <img src="../images/moments.png"
              class="responsive-img center"/>
       </figure>
     </div>
@@ -34,7 +34,7 @@ Author: Feng Xia
       functions and new models.
       </p>
       <figure>
-        <img src="images/netbox.png"
+        <img src="../images/netbox.png"
              class="responsive-img center"/>
       </figure>
     </div>
@@ -55,7 +55,7 @@ Author: Feng Xia
       and Charms technology.
       </p>
       <figure>
-        <img src="images/wss.png"
+        <img src="../images/wss.png"
              class="responsive-img center"/>
       </figure>
     </div>

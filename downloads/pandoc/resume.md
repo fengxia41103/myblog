@@ -80,9 +80,9 @@ Documentation
 
 Lenovo US, Advisory Engineer
 
-* Author of the `Lenovo Open Cloud` reference architecture and `Red
-  Hat Hyperverged Infrastructure for Virtalization` reference
-  architecture. Published on 5/5/2019.
+* Author of the `Lenovo Open Cloud` reference
+  architecture and `Red Hat Hyperverged Infrastructure for
+  Virtalization` reference architecture. Published on 5/5/2019.
   
     - **Tools**: Pandoc, Markdown, BibTex, XeLaTex, GNU make, CSS
     - **Sample writing**:
@@ -92,7 +92,7 @@ Lenovo US, Advisory Engineer
            Reference Architecture: [pretty draft in PDF][24], [official
            version][26]
 
-* `Lenovo Open Cloud` product. Drove overall network
+* Architect of the `Lenovo Open Cloud` product. Drove overall network
   design. Developed Python scrips and playbooks to automate RH
   Satellite deployment and configuration. Led development of playbooks
   to automate RHHI deployment on baremetal.
@@ -104,12 +104,13 @@ Lenovo US, Advisory Engineer
         2. [Config Lenovo server to RAID][17]
         3. [RH Satellite][19]
 
-* `Lenovo Open Cloud` product.  Forked [Netbox][18] by Digital
-  Ocean. Retrofit its models and added functions to make it data
-  center planning and orchestration tool.  Extended Netbox
-  architecture to include Redis for async task. Scripted switch and
-  server scanning to draw topology of server-switch & switch-switch
-  physical connections. Source code in [github][18].
+* Core developer of the `Lenovo Open Cloud` product.  Forked
+  [Netbox][18] by Digital Ocean. Retrofit its models and added
+  functions to make it data center planning and orchestration tool.
+  Extended Netbox architecture to include Redis for async
+  task. Scripted switch and server scanning to draw topology of
+  server-switch & switch-switch physical connections. Source code in
+  [github][18].
 
     - **Tools**: Django, Celery, Redis, Postgresql, Ansible, pexpect
     - **Sample writings**: [Netbox design][15]

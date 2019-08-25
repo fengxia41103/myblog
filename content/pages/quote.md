@@ -27,7 +27,10 @@ Author: Feng Xia
      var that = this;
      var min = 1, max = 1743; // 1743 is from manual testing
      var id = Math.floor(Math.random()*(max-min)+min);
-     var apiUrl = "http://dynamic.xkcd.com/api-0/jsonp/comic/"+id;
+     
+     // NOTE: must use `https` if using github page, which is
+     // served in https (is a setting option, however).
+     var apiUrl = "https://dynamic.xkcd.com/api-0/jsonp/comic/"+id;
      j$.ajax({
        url: apiUrl,
        dataType:"jsonp",

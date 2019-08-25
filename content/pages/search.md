@@ -12,7 +12,11 @@ Author: Feng Xia
 
  var ItemBox = React.createClass({
    render: function(){
-     var url = "/"+this.props.url;
+   
+     // this is absolute path already!
+     var url = this.props.url;
+     
+     
      return (
        <div className="section">
          <div className="row">

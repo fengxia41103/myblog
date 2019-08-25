@@ -5,10 +5,10 @@ Author: Feng Xia
 Status: draft
 
 <script type="text/javascript"
-        src="/app/app.module.js">
+        src="../app/app.module.js">
 </script>
 <script type="text/javascript"
-        src="/app/car-leasing/car-leasing.module.js">
+        src="../app/car-leasing/car-leasing.module.js">
 </script>
 
 <div ng-app="fengApp"

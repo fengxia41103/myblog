@@ -64,3 +64,6 @@ target/
 
 # sensitive configs
 production_envvars.py
+
+# ignore /plugins
+plugins/

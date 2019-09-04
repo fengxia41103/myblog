@@ -66,6 +66,25 @@ with `feng-` so that HTHM parser will pick up any tags with this
 prefix, and identify inside which HTML tree this is being used, thus
 formulating a hierarchy. 
 
+# utility
+
+Script is maintained [here][6]. 
+
+
+1. `pip install click lxml`
+2. to create `.md`: `python code_analysis.py build-doc --manual-data webapp.json --dump-md-to webapp.md --template-header header.md`
+
+    This will parse `webapp.json` as an input, and merge w/ machine
+    scanned version created by `walk` the code tree for all `.ts` and
+    `.html` files.
+
+    The merged data set will be written back to `webapp.json`, and create
+    a Pandoc version of `webapp.md` ready for conversion to `.html` and
+    other formats.
+
+3. to find missing screenshots: `check-screenshots --data <data>.json`
+
+
 # example doc
 
 Once you piece these together, you can get a really impressive doc by
@@ -82,3 +101,4 @@ All in all, take a look [this sample][5] and enjoy ~~
 [3]: https://github.com/americanexpress/jest-image-snapshot
 [4]: {filename}/dev/pandoc.md
 [5]: {filename}/downloads/webapp.pdf
+[6]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/analyze_angular_1x.py

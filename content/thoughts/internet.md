@@ -1,0 +1,163 @@
+Title: Internet
+Date: 2019-09-01 17:47
+Tags: thoughts
+Slug: internet
+Author: Feng Xia
+Modified: 2019-09-04 08:20
+
+<figure class="col s12">
+  <img src="images/anime%20guitar%20and%20girl.jpg"/>
+</figure>
+
+
+I started this article a few days, but didn't finish it. A few mixed
+thoughts have been lingering around my mind for quite some. But they
+are rather elusive &mdash; they come and go, and on the moment when I
+felt them, I was always busy with something else. Then by the time I
+sat down to write, I couldn't think of them anymore. So let me try
+them again.
+
+
+This is a topic I have long been writing, that I think the internet is
+in trouble.
+
+What's the value of the Internet these days? I used to think, and I
+think most people will take it as the No. 1 value of the Internet, is
+that it has made information (**not knowledge, and leave alone truth,
+fact, reality, those kind of words**) readily available at your finger
+tip. But then, we do have to ask, what is the use of information? The
+answer will be, it depends &mdash; certainly an information of the
+a sale going on in a McDonald's next door will not help you in any way
+when your son is sick and you need to figure out how to get him to a
+Doctor. I mean, measured by a particular moment, the value of
+information is depending on the _prioritized need at that moment_
+&mdash; you might still find the sale useful cause you also think of
+your lunch or a snack for your son on the way to the
+hospital. However, it is less useful because seeing a Doctor has
+higher priority.
+
+It's on this usefulness of information that people would think of the
+Internet as a tool. But I think there are two issues here.
+
+First, assuming that the information is 100% _accurate_ and _whole_ &mdash;
+meaning it is true to the extent anyone on this earth can possibly
+perceive to include, and what is included is as correct as anyone on
+this earth can possibly validate. Even so, the degree of the
+usefulness varies tremendously from case to case. Let me try to rank
+the _causes_ of such variation:
+
+1. How the question is formulated. I'm a firm believer of garbage in,
+   garbage out. I often say that Google may have everything you will
+   ever want to know. How much yo*u are getting out it is solely
+   depending on your question &rarr; the more pinpointed your question
+   is, the more likely you will find search results _helpful_ to
+   answer your question.
+   
+2. How well is the information relating to your question. An easy
+   example will be those double-meaning words &mdash; the speaker may
+   not even be aware of its ambiguity while the question is
+   asked. Then, how could the Internet respond well?
+   
+3. How well can the receiver use the feedbacks. This is completely a
+   personal trait, and is what makes one a good/bad
+   engineer/student/person, and so on.
+   
+It's the point #2 that I want to elaborate further, and is what I mean
+by the degradation of the Internet's value. Reading over the articles
+circulating in the friendship circle has long taught us that it will
+be a nonsense to believe everything the Internet presents to us. One
+can argue that **objetive info** such as a selling price of a product
+you searched from Google or Amazon is reliable, while a personal
+relationship of a movie star with whom and whom is nothing but
+gossips. But, **how do you know?** In other words, what makes that
+price info not a gossip (if we let these words, "info" and "gossip",
+bear the distinction of a "accurate/truthful info"
+vs. "untruthful/inaccurate info")?
+
+By a sheer logic, I would not think there is such a measure/criteria
+at all one can utilize to identify one from another (well, one could
+also argue that each person is himself the measure, which is also true
+in a day-to-day sense), because there is nothing objective about the
+target (these info) and the act (to distinguish them). Everything in
+this discussion is purely, subjective. And once we agree that they are
+in the subjective sphere, all bets are off &mdash; I can say whatever
+I want, and you can hear whatever you like &mdash; it's a fair game
+for all, and **unfair** for all, too.
+
+Then, what's the value of the Internet anymore than other information
+channels we have &mdash; your eyes, ears, newspapers, TVs, pamphlets,
+bibles or any other book, lecture by your professor or by your
+parents, a tale, a piece of _history_ &mdash; Internet is just another
+channel, grantedly much more efficient, and also much more **free**
+because it does not obey geo boundary, thus is transcending not only
+geo bounds, but social bounds, custom bounds, ideological bounds
+&rarr; and why so!? how so!? Why can't, say, an internationally
+distributed newspaper, achieve the same effect (let's leave out
+censorship out to simplify the discussion)? One difference I can think
+of is that those medias are produced by a single entity, the owner
+company of that media, while whatever is circulating on the Internet
+is taken to be generated by an unknown entity, a group of unknown
+entities. But apparently, these anonymous authors didn't make the
+material any more credible than those known authors. As a matter of
+fact, the contrary is becoming true, that people are more and more
+believing those **official channels** (and the worst example is to
+quote government releases as the ultimate source of truth) more than a
+piece you pick up on the Internet. So, the democracy feature of the
+Internet's information flow is actually working against itself by
+making it less and less valuable as an information source!
+
+Efficiency. Yes, the Internet still holds this edge due to its
+underline technology, which, by [my own argument][1], meets one of the
+three criteria to determine whether technology is an improvement over
+the old ways of doing things. But the efficiency itself is neutral
+&larr; it accelerate the distribution of good and bad in an equally
+fashion, with the equal power, and by nature will make no distinction
+whatsoever, and even if it can do such thing, we don't want it to,
+either &mdash; because the fundamental question isn't whether it can
+or can not, but by what measure it makes such judgement!? Isn't this
+nature of assisting both the _good_ and _bad_ causing the
+[confusion][2] what we are experiencing in the social medias? Yes, but
+only part of it. Here is another issue.
+
+If you have used ebay and has followed its growth, you would see the
+pattern that small players get **crowded out of this space** gradually
+and surely because they simply do not have the same level of resources
+to play against big players. On the Internet, if its business is a
+channel to propogate bits, its authors would eventually follow this
+pattern to concentrate onto a few (and they are still measured in
+millions at least) power houses &mdash; it's a shout game, and whoever
+owns the largest microphone and the biggest antenna, win. Receivers
+will be drowned in this game by the flood of information his/her brain
+needs to process before that **subjective measure** can make a choice
+&larr; if we take the brain capacity as finite (`capacity/daily = number of
+bits processed by secons * waking hours * 3600`), then the producer
+can surely saturate this capacity, thus making it useless, meaning it
+will either stop to function totally, or seeing the **error** rate
+shoot up. We are already witness this phenomenon in the Facebook
+debate. I believe this is also how propaganda works in general. Like a
+Truman's world, **how can you tell it's constructed when your info
+inputs are all constructed**!? and to this extent, **does it matter
+whether you live in a matrix**?
+
+This ia very pessimistic view. This pattern isn't new, and is being
+played out again and again and again. I start to wonder whether there
+is a name for such pattern, and what its solution is in a social
+context? If looking up how people discussed the effect of, newspaper,
+or the radio, and the TV, I'm sure I'll find these exact same
+arguments, just swapping out the words to Internet, viola, don't they
+sound familiar!?
+
+So I take those as an example, it does give us a peace of mind &mdash;
+that the human society didn't collapse, war was not caused by having
+radio or TV, marriage didn't become happier or unhappier, life in
+general did become more diverse and dimensional, more entertaining,
+and these stimulation translated to more creative mind (in both good
+and bad), which, I still believe, is the ultimate good thing &rarr; so
+far, the only thing limitless is the outcome of human mind. What if it
+comes up something, good!?
+
+Peace.
+
+[1]: {filename}/thoughtsreflection%20on%20technology.md
+[2]: {filename}/thoughts/social%20media.md
+ 

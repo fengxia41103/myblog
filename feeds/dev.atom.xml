@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-07-03T14:15:00-04:00</updated><entry><title>ECMAScript</title><link href="https://fengxia41103.github.io/myblog/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-03:myblog/ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-09-01T17:58:00-04:00</updated><entry><title>Analyzing Angular 1.x code</title><link href="https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html" rel="alternate"></link><published>2019-09-01T17:58:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/analyzing angular 1x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+but it didn't work for Angular 1.x code. &lt;/p&gt;
+&lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
+because everyone on the team, including UI devs, can only engage a
+discussion using the visual (the rendered look) &amp;mdash; so far, I
+haven't been able to develop the capability to &lt;em&gt;see&lt;/em&gt; how it will look
+like by just staring at code.&lt;/p&gt;
+&lt;p&gt;This issue gets compounded when components are calling each other
+&amp;mdash; some pages are calling all kinds of components, and these
+components are in turn used in all sorts of &lt;em&gt;parent&lt;/em&gt; pages. This
+presents an issue how to knows its effect when, say, I'm taking a task
+to change this component? Without such a cross reference, I'm
+completely in the dark. Think about this, if component A is used in 3
+places, we should have 3 test cases just to be sure it doesn't break
+the visual.&lt;/p&gt;
+&lt;p&gt;This leads me to a google search and I think the term for what I'm
+thinking is &lt;a href="https://storybook.js.org/docs/testing/automated-visual-testing/"&gt;visual regression&lt;/a&gt;. I'm surprised to see how new this
+concept appears to be by looking at how young a few mentioned
+libraries/services are. Maybe I'm just behind the curve. Nonetheless,
+here I am, and I'm catching up, fast.&lt;/p&gt;
+&lt;p&gt;For now, I haven't figured out how to capture component's rendered
+look automatically. &lt;a href="https://github.com/americanexpress/jest-image-snapshot"&gt;jest-image-snapshot&lt;/a&gt; mentions of saving
+snapshot in some dir &amp;mdash; maybe I can use this to get a snapshot of
+component. But it's saving them for future comparison purpose, which
+I'm not ready yet to embark this level of testing. So keep the notes
+here for now.&lt;/p&gt;
+&lt;p&gt;My way is extremely hacky because I'm going to parse &lt;code&gt;.ts&lt;/code&gt; file using
+Python regex. So embrace yourself.&lt;/p&gt;
+&lt;h1&gt;how to find module definition&lt;/h1&gt;
+&lt;p&gt;Module is the core grouping method in Angular:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;export .... module('module.name')&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export .... angular.module('module.name')&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Pretty straightforward, two variations.&lt;/p&gt;
+&lt;h1&gt;how to find component definition&lt;/h1&gt;
+&lt;p&gt;Component is messy. Just how many ways one can define a component?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;export const A: IComponentOptions&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;class A implements ng.IOnInit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;class A implements angular.IOnInit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export class A&lt;/code&gt;, just a plain class&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export const A = {&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;component hierarchy&lt;/h1&gt;
+&lt;p&gt;Strategy of getting component call chain is to parse HTML file. This
+relies on a certain naming convention, eg. all your tags are prefixed
+with &lt;code&gt;feng-&lt;/code&gt; so that HTHM parser will pick up any tags with this
+prefix, and identify inside which HTML tree this is being used, thus
+formulating a hierarchy. &lt;/p&gt;
+&lt;h1&gt;utility&lt;/h1&gt;
+&lt;p&gt;Script is maintained &lt;a href="https://github.com/fengxia41103/dev/blob/master/code%20analysis/analyze_angular_1x.py"&gt;here&lt;/a&gt;. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;pip install click lxml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;to create &lt;code&gt;.md&lt;/code&gt;: &lt;code&gt;python code_analysis.py build-doc --manual-data webapp.json --dump-md-to webapp.md --template-header header.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This will parse &lt;code&gt;webapp.json&lt;/code&gt; as an input, and merge w/ machine
+scanned version created by &lt;code&gt;walk&lt;/code&gt; the code tree for all &lt;code&gt;.ts&lt;/code&gt; and
+&lt;code&gt;.html&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;The merged data set will be written back to &lt;code&gt;webapp.json&lt;/code&gt;, and create
+a Pandoc version of &lt;code&gt;webapp.md&lt;/code&gt; ready for conversion to &lt;code&gt;.html&lt;/code&gt; and
+other formats.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;to find missing screenshots: &lt;code&gt;check-screenshots --data &amp;lt;data&amp;gt;.json&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;example doc&lt;/h1&gt;
+&lt;p&gt;Once you piece these together, you can get a really impressive doc by
+producing a Pandoc &lt;code&gt;.md&lt;/code&gt;. Also, you can dump data into &lt;code&gt;.json&lt;/code&gt; or
+&lt;code&gt;.yml&lt;/code&gt; for machine parsing and to incorporate manual generated data
+such as screenshot (as of writing 9/4/2019, we are relying on human to
+take screenshot by painfully finding the component rendered in a
+browser).&lt;/p&gt;
+&lt;p&gt;All in all, take a look &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</summary><category term="angular"></category><category term="lenovo"></category></entry><entry><title>ECMAScript</title><link href="https://fengxia41103.github.io/myblog/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-03:myblog/ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
 &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="images/ecmascript%20relationship.png"/&gt;

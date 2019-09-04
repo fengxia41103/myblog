@@ -1,5 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-08-26T10:28:00-04:00</updated><entry><title>Nagasaki</title><link href="https://fengxia41103.github.io/myblog/nagasaki.html" rel="alternate"></link><published>2019-08-26T10:28:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-08-26:myblog/nagasaki.html</id><summary type="html">&lt;div class="col s12" style="margin-right: 2em;"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-09-04T08:20:00-04:00</updated><entry><title>Analyzing Angular 1.x code</title><link href="https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html" rel="alternate"></link><published>2019-09-01T17:58:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/analyzing angular 1x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+but it didn't work for Angular 1.x code. &lt;/p&gt;
+&lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
+because everyone on the team, including UI devs, can only engage a
+discussion using the visual (the rendered look) &amp;mdash; so far, I
+haven't been able to develop the capability to &lt;em&gt;see&lt;/em&gt; how it will look
+like by just staring at code.&lt;/p&gt;
+&lt;p&gt;This issue gets compounded when components are calling each other
+&amp;mdash; some pages are calling all kinds of components, and these
+components are in turn used in all sorts of &lt;em&gt;parent&lt;/em&gt; pages. This
+presents an issue how to knows its effect when, say, I'm taking a task
+to change this component? Without such a cross reference, I'm
+completely in the dark. Think about this, if component A is used in 3
+places, we should have 3 test cases just to be sure it doesn't break
+the visual.&lt;/p&gt;
+&lt;p&gt;This leads me to a google search and I think the term for what I'm
+thinking is &lt;a href="https://storybook.js.org/docs/testing/automated-visual-testing/"&gt;visual regression&lt;/a&gt;. I'm surprised to see how new this
+concept appears to be by looking at how young a few mentioned
+libraries/services are. Maybe I'm just behind the curve. Nonetheless,
+here I am, and I'm catching up, fast.&lt;/p&gt;
+&lt;p&gt;For now, I haven't figured out how to capture component's rendered
+look automatically. &lt;a href="https://github.com/americanexpress/jest-image-snapshot"&gt;jest-image-snapshot&lt;/a&gt; mentions of saving
+snapshot in some dir &amp;mdash; maybe I can use this to get a snapshot of
+component. But it's saving them for future comparison purpose, which
+I'm not ready yet to embark this level of testing. So keep the notes
+here for now.&lt;/p&gt;
+&lt;p&gt;My way is extremely hacky because I'm going to parse &lt;code&gt;.ts&lt;/code&gt; file using
+Python regex. So embrace yourself.&lt;/p&gt;
+&lt;h1&gt;how to find module definition&lt;/h1&gt;
+&lt;p&gt;Module is the core grouping method in Angular:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;export .... module('module.name')&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export .... angular.module('module.name')&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Pretty straightforward, two variations.&lt;/p&gt;
+&lt;h1&gt;how to find component definition&lt;/h1&gt;
+&lt;p&gt;Component is messy. Just how many ways one can define a component?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;export const A: IComponentOptions&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;class A implements ng.IOnInit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;class A implements angular.IOnInit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export class A&lt;/code&gt;, just a plain class&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;export const A = {&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;component hierarchy&lt;/h1&gt;
+&lt;p&gt;Strategy of getting component call chain is to parse HTML file. This
+relies on a certain naming convention, eg. all your tags are prefixed
+with &lt;code&gt;feng-&lt;/code&gt; so that HTHM parser will pick up any tags with this
+prefix, and identify inside which HTML tree this is being used, thus
+formulating a hierarchy. &lt;/p&gt;
+&lt;h1&gt;utility&lt;/h1&gt;
+&lt;p&gt;Script is maintained &lt;a href="https://github.com/fengxia41103/dev/blob/master/code%20analysis/analyze_angular_1x.py"&gt;here&lt;/a&gt;. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;pip install click lxml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;to create &lt;code&gt;.md&lt;/code&gt;: &lt;code&gt;python code_analysis.py build-doc --manual-data webapp.json --dump-md-to webapp.md --template-header header.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This will parse &lt;code&gt;webapp.json&lt;/code&gt; as an input, and merge w/ machine
+scanned version created by &lt;code&gt;walk&lt;/code&gt; the code tree for all &lt;code&gt;.ts&lt;/code&gt; and
+&lt;code&gt;.html&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;The merged data set will be written back to &lt;code&gt;webapp.json&lt;/code&gt;, and create
+a Pandoc version of &lt;code&gt;webapp.md&lt;/code&gt; ready for conversion to &lt;code&gt;.html&lt;/code&gt; and
+other formats.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;to find missing screenshots: &lt;code&gt;check-screenshots --data &amp;lt;data&amp;gt;.json&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;example doc&lt;/h1&gt;
+&lt;p&gt;Once you piece these together, you can get a really impressive doc by
+producing a Pandoc &lt;code&gt;.md&lt;/code&gt;. Also, you can dump data into &lt;code&gt;.json&lt;/code&gt; or
+&lt;code&gt;.yml&lt;/code&gt; for machine parsing and to incorporate manual generated data
+such as screenshot (as of writing 9/4/2019, we are relying on human to
+take screenshot by painfully finding the component rendered in a
+browser).&lt;/p&gt;
+&lt;p&gt;All in all, take a look &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</summary><category term="angular"></category><category term="lenovo"></category></entry><entry><title>Internet</title><link href="https://fengxia41103.github.io/myblog/internet.html" rel="alternate"></link><published>2019-09-04T08:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/internet.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/anime%20guitar%20and%20girl.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I started this article a few days, but didn't finish it. A few mixed
+thoughts have been lingering around my mind for quite some. But they
+are rather elusive &amp;mdash; they come and go, and on the moment when I
+felt them, I was always busy with something else. Then by the time I
+sat down to write, I couldn't think of them anymore. So let me try
+them again.&lt;/p&gt;
+&lt;p&gt;This is a topic I have long been writing, that I think the internet is
+in trouble.&lt;/p&gt;
+&lt;p&gt;What's the value of the Internet these days? I used to think, and I
+think most people will take it as the No. 1 value of the Internet, is
+that it has made information (&lt;strong&gt;not knowledge, and leave alone truth,
+fact, reality, those kind of words&lt;/strong&gt;) readily available at your finger
+tip. But then, we do have to ask, what is the use of information? The
+answer will be, it depends &amp;mdash; certainly an information of the
+a sale going on in a McDonald's next door will not help you in any way
+when your son is sick and you need to figure out how to get him to a
+Doctor. I mean, measured by a particular moment, the value of
+information is depending on the &lt;em&gt;prioritized need at that moment&lt;/em&gt;
+&amp;mdash; you might still find the sale useful cause you also think of
+your lunch or a snack for your son on the way to the
+hospital. However, it is less useful because seeing a Doctor has
+higher priority.&lt;/p&gt;
+&lt;p&gt;It's on this usefulness of information that people would think of the
+Internet as a tool. But I think there are two issues here.&lt;/p&gt;
+&lt;p&gt;First, assuming that the information is 100% &lt;em&gt;accurate&lt;/em&gt; and &lt;em&gt;whole&lt;/em&gt; &amp;mdash;
+meaning it is true to the extent anyone on this earth can possibly
+perceive to include, and what is included is as correct as anyone on
+this earth can possibly validate. Even so, the degree of the
+usefulness varies tremendously from case to case. Let me try to rank
+the &lt;em&gt;causes&lt;/em&gt; of such variation:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;How the question is formulated. I'm a firm believer of garbage in,
+   garbage out. I often say that Google may have everything you will
+   ever want to know. How much yo*u are getting out it is solely
+   depending on your question &amp;rarr; the more pinpointed your question
+   is, the more likely you will find search results &lt;em&gt;helpful&lt;/em&gt; to
+   answer your question.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How well is the information relating to your question. An easy
+   example will be those double-meaning words &amp;mdash; the speaker may
+   not even be aware of its ambiguity while the question is
+   asked. Then, how could the Internet respond well?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How well can the receiver use the feedbacks. This is completely a
+   personal trait, and is what makes one a good/bad
+   engineer/student/person, and so on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It's the point #2 that I want to elaborate further, and is what I mean
+by the degradation of the Internet's value. Reading over the articles
+circulating in the friendship circle has long taught us that it will
+be a nonsense to believe everything the Internet presents to us. One
+can argue that &lt;strong&gt;objetive info&lt;/strong&gt; such as a selling price of a product
+you searched from Google or Amazon is reliable, while a personal
+relationship of a movie star with whom and whom is nothing but
+gossips. But, &lt;strong&gt;how do you know?&lt;/strong&gt; In other words, what makes that
+price info not a gossip (if we let these words, "info" and "gossip",
+bear the distinction of a "accurate/truthful info"
+vs. "untruthful/inaccurate info")?&lt;/p&gt;
+&lt;p&gt;By a sheer logic, I would not think there is such a measure/criteria
+at all one can utilize to identify one from another (well, one could
+also argue that each person is himself the measure, which is also true
+in a day-to-day sense), because there is nothing objective about the
+target (these info) and the act (to distinguish them). Everything in
+this discussion is purely, subjective. And once we agree that they are
+in the subjective sphere, all bets are off &amp;mdash; I can say whatever
+I want, and you can hear whatever you like &amp;mdash; it's a fair game
+for all, and &lt;strong&gt;unfair&lt;/strong&gt; for all, too.&lt;/p&gt;
+&lt;p&gt;Then, what's the value of the Internet anymore than other information
+channels we have &amp;mdash; your eyes, ears, newspapers, TVs, pamphlets,
+bibles or any other book, lecture by your professor or by your
+parents, a tale, a piece of &lt;em&gt;history&lt;/em&gt; &amp;mdash; Internet is just another
+channel, grantedly much more efficient, and also much more &lt;strong&gt;free&lt;/strong&gt;
+because it does not obey geo boundary, thus is transcending not only
+geo bounds, but social bounds, custom bounds, ideological bounds
+&amp;rarr; and why so!? how so!? Why can't, say, an internationally
+distributed newspaper, achieve the same effect (let's leave out
+censorship out to simplify the discussion)? One difference I can think
+of is that those medias are produced by a single entity, the owner
+company of that media, while whatever is circulating on the Internet
+is taken to be generated by an unknown entity, a group of unknown
+entities. But apparently, these anonymous authors didn't make the
+material any more credible than those known authors. As a matter of
+fact, the contrary is becoming true, that people are more and more
+believing those &lt;strong&gt;official channels&lt;/strong&gt; (and the worst example is to
+quote government releases as the ultimate source of truth) more than a
+piece you pick up on the Internet. So, the democracy feature of the
+Internet's information flow is actually working against itself by
+making it less and less valuable as an information source!&lt;/p&gt;
+&lt;p&gt;Efficiency. Yes, the Internet still holds this edge due to its
+underline technology, which, by &lt;a href="{filename}/thoughtsreflection%20on%20technology.md"&gt;my own argument&lt;/a&gt;, meets one of the
+three criteria to determine whether technology is an improvement over
+the old ways of doing things. But the efficiency itself is neutral
+&amp;larr; it accelerate the distribution of good and bad in an equally
+fashion, with the equal power, and by nature will make no distinction
+whatsoever, and even if it can do such thing, we don't want it to,
+either &amp;mdash; because the fundamental question isn't whether it can
+or can not, but by what measure it makes such judgement!? Isn't this
+nature of assisting both the &lt;em&gt;good&lt;/em&gt; and &lt;em&gt;bad&lt;/em&gt; causing the
+&lt;a href="https://fengxia41103.github.io/myblog/social media.html"&gt;confusion&lt;/a&gt; what we are experiencing in the social medias? Yes, but
+only part of it. Here is another issue.&lt;/p&gt;
+&lt;p&gt;If you have used ebay and has followed its growth, you would see the
+pattern that small players get &lt;strong&gt;crowded out of this space&lt;/strong&gt; gradually
+and surely because they simply do not have the same level of resources
+to play against big players. On the Internet, if its business is a
+channel to propogate bits, its authors would eventually follow this
+pattern to concentrate onto a few (and they are still measured in
+millions at least) power houses &amp;mdash; it's a shout game, and whoever
+owns the largest microphone and the biggest antenna, win. Receivers
+will be drowned in this game by the flood of information his/her brain
+needs to process before that &lt;strong&gt;subjective measure&lt;/strong&gt; can make a choice
+&amp;larr; if we take the brain capacity as finite (&lt;code&gt;capacity/daily = number of
+bits processed by secons * waking hours * 3600&lt;/code&gt;), then the producer
+can surely saturate this capacity, thus making it useless, meaning it
+will either stop to function totally, or seeing the &lt;strong&gt;error&lt;/strong&gt; rate
+shoot up. We are already witness this phenomenon in the Facebook
+debate. I believe this is also how propaganda works in general. Like a
+Truman's world, &lt;strong&gt;how can you tell it's constructed when your info
+inputs are all constructed&lt;/strong&gt;!? and to this extent, &lt;strong&gt;does it matter
+whether you live in a matrix&lt;/strong&gt;?&lt;/p&gt;
+&lt;p&gt;This ia very pessimistic view. This pattern isn't new, and is being
+played out again and again and again. I start to wonder whether there
+is a name for such pattern, and what its solution is in a social
+context? If looking up how people discussed the effect of, newspaper,
+or the radio, and the TV, I'm sure I'll find these exact same
+arguments, just swapping out the words to Internet, viola, don't they
+sound familiar!?&lt;/p&gt;
+&lt;p&gt;So I take those as an example, it does give us a peace of mind &amp;mdash;
+that the human society didn't collapse, war was not caused by having
+radio or TV, marriage didn't become happier or unhappier, life in
+general did become more diverse and dimensional, more entertaining,
+and these stimulation translated to more creative mind (in both good
+and bad), which, I still believe, is the ultimate good thing &amp;rarr; so
+far, the only thing limitless is the outcome of human mind. What if it
+comes up something, good!?&lt;/p&gt;
+&lt;p&gt;Peace.&lt;/p&gt;</summary><category term="thoughts"></category></entry><entry><title>Nagasaki</title><link href="https://fengxia41103.github.io/myblog/nagasaki.html" rel="alternate"></link><published>2019-08-26T10:28:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-08-26:myblog/nagasaki.html</id><summary type="html">&lt;div class="col s12" style="margin-right: 2em;"&gt;
 &lt;video width="100%" height="100%" controls="controls"&gt;
   &lt;source src="images/noah%20at%20mit.mp4 "
           type="video/mp4" /&gt;

@@ -58,13 +58,27 @@ Component is messy. Just how many ways one can define a component?
 4. `export class A`, just a plain class
 5. `export const A = {`
 
-
-
-
 # component hierarchy
 
-Strategy of getting component call chain is to parse HTML file.
+Strategy of getting component call chain is to parse HTML file. This
+relies on a certain naming convention, eg. all your tags are prefixed
+with `feng-` so that HTHM parser will pick up any tags with this
+prefix, and identify inside which HTML tree this is being used, thus
+formulating a hierarchy. 
+
+# example doc
+
+Once you piece these together, you can get a really impressive doc by
+producing a Pandoc `.md`. Also, you can dump data into `.json` or
+`.yml` for machine parsing and to incorporate manual generated data
+such as screenshot (as of writing 9/4/2019, we are relying on human to
+take screenshot by painfully finding the component rendered in a
+browser).
+
+All in all, take a look [this sample][5] and enjoy ~~
 
 [1]: https://github.com/compodoc/compodoc
 [2]: https://storybook.js.org/docs/testing/automated-visual-testing/
 [3]: https://github.com/americanexpress/jest-image-snapshot
+[4]: {filename}/dev/pandoc.md
+[5]: {filename}/downloads/webapp.pdf

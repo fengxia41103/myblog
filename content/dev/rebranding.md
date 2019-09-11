@@ -1,6 +1,6 @@
 Title: Rebranding
 Date: 2019-09-11 16:15
-Tags: dev
+Tags: lenovo
 Slug: rebranding
 Author: Feng Xia
 
@@ -50,11 +50,15 @@ python fancy_string_search.py check-brand-reference \
   --no-split-target \
   ~/workspace/myblog
 ```
-   
-<hr />
 
-Below is an example output (in `.md` format):
+# example
 
+Below is an example output (in [pandoc][2] .md format):
+
+```markdown
+---
+title: Rebranding Analysis Report
+---
 
 # Search criteria
 
@@ -63,7 +67,8 @@ Below is an example output (in `.md` format):
     - /home/fengxia/workspace/myblog
 
 - matching key words: 
-    - whatever
+    - cliche
+    - gmail
 
 - include extensions: 
     - .md
@@ -126,201 +131,101 @@ Below is an example output (in `.md` format):
 
 They seem to be some reference to externals such as URLs. Need a value to swap.
 
+1. `[Gmail]/Starred`
+
+1. `[Gmail]/All Mail`
+
+1. `[Gmail]/Trash`
+
+1. `[Gmail]/Sent Mail`
+
 ### AWS S3
 
 
 ## Emails
 
 
+1. `yours@gmail.com`
+
+1. `NARENDRA REDDY <bugbounty10378@gmail.com`
+
 # Files skipped
 
-# Matched by "whatever"
+# Matched by "cliche"
 
 
 ## File type: ".md":
 
-- /home/fengxia/workspace/myblog/content/dev/browser proxy.md
-
-    1. on line #42: `3. `SOCKS Host` to `localhost`, and port to `8080` (whatever the`
-- /home/fengxia/workspace/myblog/content/dev/django and rest.md
-
-    1. on line #16: `using things like Angular, react, and whatever you fancy. I have tried`
-- /home/fengxia/workspace/myblog/content/dev/kvm.md
-
-    1. on line #352: ``ubuntu` user login using the `password` value you defined here, eg. `whatever001`.`
-
-    2. on line #360: `password: whatever001`
-- /home/fengxia/workspace/myblog/content/dev/pandoc.md
-
-    1. on line #230: `Quite simple: write &rarr; make <whatever> &rarr; view &rarr; repeat.`
 - /home/fengxia/workspace/myblog/content/dev/rebranding.md
 
-    1. on line #17: `find a string `whatever` (old brand), replace it w/ `feng` (new`
-- /home/fengxia/workspace/myblog/content/pages/about.md
+    1. on line #66: `- cliche`
 
-    1. on line #43: `problem, whatever it is. This isn't a shopping experience like others`
-- /home/fengxia/workspace/myblog/content/thoughts/a song.md
+    2. on line #139: `# Matched by "cliche"`
 
-    1. on line #79: `with her? even if the place is called hell or whatever, I think it's`
-- /home/fengxia/workspace/myblog/content/thoughts/accelerated anonymity.md
+    3. on line #146: `1. on line #15: `criticized, hated (no I don't hate this program, just the cliche``
 
-    1. on line #26: `really, just whatever image I want to project of myself, that's the`
-- /home/fengxia/workspace/myblog/content/thoughts/age and maturity.md
+    4. on line #149: `1. on line #70: `be. This may sound like a cliche, typical middle age crisis, poor guy.``
 
-    1. on line #58: `center of a person's universe, and being appreciated for whatever you`
-- /home/fengxia/workspace/myblog/content/thoughts/ai.md
+    5. on line #152: `1. on line #68: `traditional political cliches. But now, I feel he is a total disaster,``
 
-    1. on line #77: `so called deep learning or AI or whatever fancy words you know, this`
-- /home/fengxia/workspace/myblog/content/thoughts/another friday.md
+    6. on line #155: `1. on line #96: `The fundamental law here is the cliche that **there is no free``
 
-    1. on line #38: `whatever the reason they looked totally crappy on the camera's`
-- /home/fengxia/workspace/myblog/content/thoughts/bad day.md
+    7. on line #158: `1. on line #33: `frustrated, even hatred. This can't be just a myth, a cliche that``
 
-    1. on line #17: `whatever life has it for me, trash me to the ground, and better just`
-- /home/fengxia/workspace/myblog/content/thoughts/bizzare logic.md
+    8. on line #161: `1. on line #16: `It's a cliche when people talk about luck, and someone gets lucky, or``
 
-    1. on line #57: `Honestly, I really think everything, good or bad or whatever, is`
-- /home/fengxia/workspace/myblog/content/thoughts/boston and other thoughts.md
+    9. on line #164: `1. on line #32: `again, which is often a cliche to my education and my generation, when``
 
-    1. on line #61: `by, watching the people go by, watching myself, whatever is left of`
-- /home/fengxia/workspace/myblog/content/thoughts/china witness.md
+    10. on line #167: `1. on line #105: `matter, let's just use the cliche name, **progress**... then, what are``
 
-    1. on line #150: `> myself. Whatever were they were thinking of, hanging a picture of a`
-- /home/fengxia/workspace/myblog/content/thoughts/class.md
+    11. on line #170: `1. on line #17: `On one hand, the cliche is always that mid-age is a tough time because``
 
-    1. on line #84: `So, call it whatever you want, and feel free to agree or disagree this`
-- /home/fengxia/workspace/myblog/content/thoughts/data digit.md
+    12. on line #173: `1. on line #52: `becoming a cliche, and are being used freely without clarification nor``
 
-    1. on line #46: `data,  one  says  "Bob  whatever"   and  the  other  says  "William`
+    13. on line #176: `1. on line #153: `Even further, as we all know the cliche, hate and love are like twins``
 
-    2. on line #47: `whatever", are these two the  same person!? and what reference/clue`
-- /home/fengxia/workspace/myblog/content/thoughts/dictator.md
+    14. on line #179: `1. on line #91: `cliche in love scene, that if your relationships always go sore in the``
 
-    1. on line #38: `whatever it is, questionable also? What about other words, probably`
-- /home/fengxia/workspace/myblog/content/thoughts/generalization.md
+    15. on line #182: `1. on line #105: `it is an everyday cliche to have wifi and iPhone, but back to 500``
+- /home/fengxia/workspace/myblog/content/thoughts/a vain debate pattern.md
 
-    1. on line #99: `based on race, gender, education, family tie, whatever (and these are`
-- /home/fengxia/workspace/myblog/content/thoughts/history.md
+    1. on line #15: `criticized, hated (no I don't hate this program, just the cliche`
+- /home/fengxia/workspace/myblog/content/thoughts/city.md
 
-    1. on line #116: `they are named, mummy, gold, or whatever.`
-- /home/fengxia/workspace/myblog/content/thoughts/human grouping.md
+    1. on line #70: `be. This may sound like a cliche, typical middle age crisis, poor guy.`
+- /home/fengxia/workspace/myblog/content/thoughts/law.md
 
-    1. on line #23: `reality is, this person, your idol, do not know you, and whatever s/he`
+    1. on line #68: `traditional political cliches. But now, I feel he is a total disaster,`
+- /home/fengxia/workspace/myblog/content/thoughts/lost job.md
 
-    2. on line #55: `and good luck and whatever! We are so uncomfortable with ourselves`
-- /home/fengxia/workspace/myblog/content/thoughts/hurt feeling.md
+    1. on line #96: `The fundamental law here is the cliche that **there is no free`
+- /home/fengxia/workspace/myblog/content/thoughts/love life.md
 
-    1. on line #30: `sad, or whatever, no one else can. If not, it becomes a scary thing,`
-- /home/fengxia/workspace/myblog/content/thoughts/innovation.md
-
-    1. on line #46: ``google`, `BAT`, `R`, `AI`...  Whatever the problem is, or even the`
-
-    2. on line #160: `whatever their coding language is, they can all do the same thing, and`
-- /home/fengxia/workspace/myblog/content/thoughts/internet.md
-
-    1. on line #83: `in the subjective sphere, all bets are off &mdash; I can say whatever`
-
-    2. on line #84: `I want, and you can hear whatever you like &mdash; it's a fair game`
-
-    3. on line #98: `company of that media, while whatever is circulating on the Internet`
-- /home/fengxia/workspace/myblog/content/thoughts/irresponsible response.md
-
-    1. on line #89: `warned you, so whatever you end up with is not my responsibility`
-- /home/fengxia/workspace/myblog/content/thoughts/logic.md
+    1. on line #33: `frustrated, even hatred. This can't be just a myth, a cliche that`
 - /home/fengxia/workspace/myblog/content/thoughts/luck.md
 
-    1. on line #29: `result, whatever it may be, pleasant or horrible.`
+    1. on line #16: `It's a cliche when people talk about luck, and someone gets lucky, or`
+- /home/fengxia/workspace/myblog/content/thoughts/mind.md
 
-    2. on line #86: `reference! You make a decision, then you move on. Whatever comes out`
-- /home/fengxia/workspace/myblog/content/thoughts/marketing.md
+    1. on line #32: `again, which is often a cliche to my education and my generation, when`
+- /home/fengxia/workspace/myblog/content/thoughts/mob.md
 
-    1. on line #105: `wonderful the outcome in the future may be</span>. Whatever it is`
-- /home/fengxia/workspace/myblog/content/thoughts/moment of quietness.md
-
-    1. on line #35: `girlfriend, or just a one-night-stand. Whatever, there is a song, that`
-- /home/fengxia/workspace/myblog/content/thoughts/moving.md
-
-    1. on line #69: `expect. Whatever it may be, I am just hoping I can stay true, to`
+    1. on line #105: `matter, let's just use the cliche name, **progress**... then, what are`
 - /home/fengxia/workspace/myblog/content/thoughts/must do.md
 
-    1. on line #108: `(what-is-happiness kind of talk).... whatever it is called, I want to`
-- /home/fengxia/workspace/myblog/content/thoughts/ordinary.md
+    1. on line #17: `On one hand, the cliche is always that mid-age is a tough time because`
+- /home/fengxia/workspace/myblog/content/thoughts/reflection on technology.md
 
-    1. on line #68: `whatever is happening, I will be on your side.`
-- /home/fengxia/workspace/myblog/content/thoughts/plagarism.md
-
-    1. on line #45: `essentially, whatever the virtue to make a good human being, is what`
-- /home/fengxia/workspace/myblog/content/thoughts/reader digest.md
-
-    1. on line #46: `than I am, so his/her view and summary of the book/article/whatever`
-- /home/fengxia/workspace/myblog/content/thoughts/say no.md
-
-    1. on line #45: `to difficult times, if you decide it is worthwhile, for whatever`
-- /home/fengxia/workspace/myblog/content/thoughts/science.md
-
-    1. on line #142: `for themselves whatever their agenda is. **Science is a view, and as`
-- /home/fengxia/workspace/myblog/content/thoughts/self-disciplined.md
-
-    1. on line #56: `it police, or whatever you want, but that doesn't change the nature of`
-- /home/fengxia/workspace/myblog/content/thoughts/self-esteem.md
-
-    1. on line #37: `wrinkle, or weight, or whatever that may be bothering you, the`
-- /home/fengxia/workspace/myblog/content/thoughts/self-selected bias.md
-
-    1. on line #65: `weaker and weaker, for whatever reason. Someone's had died down long`
-- /home/fengxia/workspace/myblog/content/thoughts/silence.md
-
-    1. on line #50: `them would pull out the iphone (or whatever) and.. and there is no`
-
-    2. on line #66: `to touch or kiss him? but then his wife (or gf, or whatever) has a`
-
-    3. on line #102: `gift or present or handbags or roses or whatever?`
-- /home/fengxia/workspace/myblog/content/thoughts/social media.md
-
-    1. on line #118: `much!? I know one, and you probably have, whatever, a few, a`
-
-    2. on line #221: `man or whatever, another who enjoys computer, another who loves`
+    1. on line #52: `becoming a cliche, and are being used freely without clarification nor`
 - /home/fengxia/workspace/myblog/content/thoughts/society.md
 
-    1. on line #91: `take-for-granted attitude that science is better than (whatever your`
+    1. on line #153: `Even further, as we all know the cliche, hate and love are like twins`
+- /home/fengxia/workspace/myblog/content/thoughts/technology responsibility.md
 
-    2. on line #102: `in whatever you are arguing about]?`
-- /home/fengxia/workspace/myblog/content/thoughts/strange fate.md
-
-    1. on line #51: `this `bugbounty10378` guy, for whatever purpose (but honestly, doesn't`
-- /home/fengxia/workspace/myblog/content/thoughts/tears.md
-
-    1. on line #38: `that I wanted to stop it, to stop whatever that caused her`
+    1. on line #91: `cliche in love scene, that if your relationships always go sore in the`
 - /home/fengxia/workspace/myblog/content/thoughts/the wrong elite.md
 
-    1. on line #66: `blood.. that's totally fine, which also makes the whatever derived`
-
-    2. on line #78: `countries or ppl or whatever, wouldn't you then draw the opposite`
-
-    3. on line #170: `people are an unity, therefore whatever technology US has developed is`
-- /home/fengxia/workspace/myblog/content/thoughts/to nianyi.md
-
-    1. on line #56: `doing, and I made the choices without regret. So whatever they lead`
-- /home/fengxia/workspace/myblog/content/thoughts/too much trust.md
-- /home/fengxia/workspace/myblog/content/thoughts/turtle.md
-
-    1. on line #37: `on the road or drive by your ex- whatever, or a clothes that makes you`
-
-    2. on line #73: `smoke break, or a coffee break, so the turtle is taking its **whatever`
-- /home/fengxia/workspace/myblog/content/workspace/openstack/hw_charm.md
-
-    1. on line #306: `repo: https://git.launchpad.net/whatever/`
-- /home/fengxia/workspace/myblog/content/workspace/openstack/juju_deploy_charm.md
-
-    1. on line #16: `whatever needed based the charm's instruction. As the bootstrap`
-
-    2. on line #110: `_whateverusername_. We intentionally avoided using _ubuntu_ as user`
-- /home/fengxia/workspace/myblog/content/workspace/openstack/maas.md
-
-    1. on line #78: `completly arbitrary. Use whatever network range you want to`
-- /home/fengxia/workspace/myblog/content/workspace/rh/satellite.md
-
-    1. on line #351: `repo. You get whatever content views give you, and each environment`
+    1. on line #105: `it is an everyday cliche to have wifi and iPhone, but back to 500`
 
 ## Is a reference
 
@@ -334,8 +239,149 @@ None
 
 None
 
-<hr />
+# Matched by "gmail"
+
+
+## File type: ".md":
+
+- /home/fengxia/workspace/myblog/content/dev/mbsync.md
+
+    1. on line #18: `configuration to make it work (sort of) with Hotmail's IMAP. Gmail`
+
+    2. on line #49: `2. for gmail:`imap.gmail.com``
+
+    3. on line #54: `Host imap.outlook.com # or imap.gmail.com`
+
+    4. on line #58: `# These settings work for both gmail and hotmail`
+
+    5. on line #159: `IMAPStore gmail-remote # <-- user defined name`
+
+    6. on line #160: `Account gmail # <-- the account name defined in Account section`
+
+    7. on line #169: `MaildirStore gmail-local`
+
+    8. on line #170: `Path ~/Maildir/Gmail/`
+
+    9. on line #171: `Inbox ~/Maildir/Gmail/inbox/`
+
+    10. on line #178: `Channel gmail-inbox`
+
+    11. on line #179: `Master :gmail-remote: # <-- remote store`
+
+    12. on line #180: `Slave :gmail-local:inbox # <-- local dir`
+
+    13. on line #192: `Group gmail`
+
+    14. on line #193: `Channel gmail-trash`
+
+    15. on line #194: `Channel gmail-inbox`
+
+    16. on line #195: `Channel gmail-sent`
+
+    17. on line #196: `Channel gmail-all`
+
+    18. on line #197: `Channel gmail-starred`
+
+    19. on line #206: ``~/Maildir/Gmail`.`
+
+    20. on line #233: `# Gmail account`
+
+    21. on line #234: `IMAPAccount gmail`
+
+    22. on line #236: `Host imap.gmail.com`
+
+    23. on line #237: `User yours@gmail.com`
+
+    24. on line #255: `IMAPStore gmail-remote`
+
+    25. on line #256: `Account gmail`
+
+    26. on line #258: `# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)`
+
+    27. on line #259: `MaildirStore gmail-local`
+
+    28. on line #260: `Path ~/Maildir/Gmail/`
+
+    29. on line #261: `Inbox ~/Maildir/Gmail/inbox/`
+
+    30. on line #272: `#       gmail channels`
+
+    31. on line #284: `Channel gmail-inbox`
+
+    32. on line #285: `Master :gmail-remote:`
+
+    33. on line #286: `Slave :gmail-local:inbox`
+
+    34. on line #291: `Channel gmail-trash`
+
+    35. on line #292: `Master :gmail-remote:"[Gmail]/Trash"`
+
+    36. on line #293: `Slave :gmail-local:trash`
+
+    37. on line #298: `Channel gmail-all`
+
+    38. on line #299: `Master :gmail-remote:"[Gmail]/All Mail"`
+
+    39. on line #300: `Slave :gmail-local:all`
+
+    40. on line #305: `Channel gmail-sent`
+
+    41. on line #306: `Master :gmail-remote:"[Gmail]/Sent Mail"`
+
+    42. on line #307: `Slave :gmail-local:sent`
+
+    43. on line #312: `Channel gmail-allChannel gmail-starred`
+
+    44. on line #313: `Master :gmail-remote:"[Gmail]/Starred"`
+
+    45. on line #314: `Slave :gmail-local:starred`
+
+    46. on line #379: `Group gmail`
+
+    47. on line #380: `Channel gmail-trash`
+
+    48. on line #381: `Channel gmail-inbox`
+
+    49. on line #382: `Channel gmail-sent`
+
+    50. on line #383: `Channel gmail-all`
+
+    51. on line #384: `Channel gmail-starred`
+
+    52. on line #465: `# gmail &mdash; less secured`
+
+    53. on line #467: `Sending username and pwd to login in Gmail will be blocked. A couple`
+- /home/fengxia/workspace/myblog/content/thoughts/strange fate.md
+
+    1. on line #26: `KANDULA.VENKATA NARENDRA REDDY <bugbounty10378@gmail.com>`
+
+## Is a reference
+
+We think they are file reference or URL link. Changing a value needs cross check.
+
+- /home/fengxia/workspace/myblog/content/dev/mbsync.md
+
+    1. on line #292: `Master :gmail-remote:"[Gmail]/Trash"`
+
+    2. on line #299: `Master :gmail-remote:"[Gmail]/All Mail"`
+
+    3. on line #306: `Master :gmail-remote:"[Gmail]/Sent Mail"`
+
+    4. on line #313: `Master :gmail-remote:"[Gmail]/Starred"`
+
+## Is an email address
+
+- /home/fengxia/workspace/myblog/content/dev/mbsync.md
+
+    1. on line #237: `User yours@gmail.com`
+- /home/fengxia/workspace/myblog/content/thoughts/strange fate.md
+
+    1. on line #26: `KANDULA.VENKATA NARENDRA REDDY <bugbounty10378@gmail.com>`
+
+```
 
 Pretty cool, huh!?
 
+
 [1]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py
+[2]: {filename}/dev/pandoc.md

@@ -47,453 +47,333 @@ brand).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;hr /&gt;
+&lt;h1&gt;example&lt;/h1&gt;
+&lt;p&gt;Below is an example output (in &lt;a href="https://fengxia41103.github.io/myblog/pandoc workflow.html"&gt;pandoc&lt;/a&gt; .md format):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;---&lt;/span&gt;
+&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;Rebranding&lt;/span&gt; &lt;span class="nt"&gt;Analysis&lt;/span&gt; &lt;span class="nt"&gt;Report&lt;/span&gt;
+&lt;span class="nt"&gt;---&lt;/span&gt;
 
-&lt;p&gt;Below is an example output (in &lt;code&gt;.md&lt;/code&gt; format):&lt;/p&gt;
-&lt;h1&gt;Search criteria&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;root folder: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;/home/fengxia/workspace/myblog&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;matching key words: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;whatever&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;include extensions: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;.md&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;exclude extensions: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;.&lt;/li&gt;
-&lt;li&gt;.bz2&lt;/li&gt;
-&lt;li&gt;.tar.gz&lt;/li&gt;
-&lt;li&gt;.bz&lt;/li&gt;
-&lt;li&gt;.gz&lt;/li&gt;
-&lt;li&gt;.xz&lt;/li&gt;
-&lt;li&gt;.ico&lt;/li&gt;
-&lt;li&gt;.png&lt;/li&gt;
-&lt;li&gt;.jpg&lt;/li&gt;
-&lt;li&gt;.pdf&lt;/li&gt;
-&lt;li&gt;.dia&lt;/li&gt;
-&lt;li&gt;.db&lt;/li&gt;
-&lt;li&gt;.exe&lt;/li&gt;
-&lt;li&gt;.war&lt;/li&gt;
-&lt;li&gt;.rpm&lt;/li&gt;
-&lt;li&gt;.sasldb&lt;/li&gt;
-&lt;li&gt;.der&lt;/li&gt;
-&lt;li&gt;.p12&lt;/li&gt;
-&lt;li&gt;.jar&lt;/li&gt;
-&lt;li&gt;.mmdb&lt;/li&gt;
-&lt;li&gt;.bak&lt;/li&gt;
-&lt;li&gt;.yml_example&lt;/li&gt;
-&lt;li&gt;.properties&lt;/li&gt;
-&lt;li&gt;.docx&lt;/li&gt;
-&lt;li&gt;.doc&lt;/li&gt;
-&lt;li&gt;.spec&lt;/li&gt;
-&lt;li&gt;.pyc&lt;/li&gt;
-&lt;li&gt;.jpeg&lt;/li&gt;
-&lt;li&gt;.mp4&lt;/li&gt;
-&lt;li&gt;.gif&lt;/li&gt;
-&lt;li&gt;.webm&lt;/li&gt;
-&lt;li&gt;.autosave&lt;/li&gt;
-&lt;li&gt;.ttf&lt;/li&gt;
-&lt;li&gt;.svg&lt;/li&gt;
-&lt;li&gt;.gzip&lt;/li&gt;
-&lt;li&gt;.woff&lt;/li&gt;
-&lt;li&gt;.eot&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;exclude folder patterns: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;node_modules&lt;/li&gt;
-&lt;li&gt;fonts&lt;/li&gt;
-&lt;li&gt;contrib&lt;/li&gt;
-&lt;li&gt;.git&lt;/li&gt;
-&lt;li&gt;doc&lt;/li&gt;
-&lt;li&gt;output&lt;/li&gt;
-&lt;li&gt;bower_components&lt;/li&gt;
-&lt;li&gt;plugins&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;exclude string patterns: &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;Swap needed&lt;/h1&gt;
-&lt;h2&gt;External references&lt;/h2&gt;
-&lt;p&gt;They seem to be some reference to externals such as URLs. Need a value to swap.&lt;/p&gt;
-&lt;h3&gt;AWS S3&lt;/h3&gt;
-&lt;h2&gt;Emails&lt;/h2&gt;
-&lt;h1&gt;Files skipped&lt;/h1&gt;
-&lt;h1&gt;Matched by "whatever"&lt;/h1&gt;
-&lt;h2&gt;File type: ".md":&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/dev/browser proxy.md&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;on line #42: &lt;code&gt;3.&lt;/code&gt;SOCKS Host&lt;code&gt;to&lt;/code&gt;localhost&lt;code&gt;, and port to&lt;/code&gt;8080&lt;code&gt;(whatever the&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/dev/django and rest.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #16: &lt;code&gt;using things like Angular, react, and whatever you fancy. I have tried&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/dev/kvm.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #352: &lt;code&gt;`ubuntu&lt;/code&gt; user login using the &lt;code&gt;password&lt;/code&gt; value you defined here, eg. &lt;code&gt;whatever001&lt;/code&gt;.`&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #360: &lt;code&gt;password: whatever001&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/dev/pandoc.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #230: &lt;code&gt;Quite simple: write &amp;amp;rarr; make &amp;lt;whatever&amp;gt; &amp;amp;rarr; view &amp;amp;rarr; repeat.&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/dev/rebranding.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #17: &lt;code&gt;find a string&lt;/code&gt;whatever&lt;code&gt;(old brand), replace it w/&lt;/code&gt;feng&lt;code&gt;(new&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/pages/about.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #43: &lt;code&gt;problem, whatever it is. This isn't a shopping experience like others&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/a song.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #79: &lt;code&gt;with her? even if the place is called hell or whatever, I think it's&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/accelerated anonymity.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #26: &lt;code&gt;really, just whatever image I want to project of myself, that's the&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/age and maturity.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #58: &lt;code&gt;center of a person's universe, and being appreciated for whatever you&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/ai.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #77: &lt;code&gt;so called deep learning or AI or whatever fancy words you know, this&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/another friday.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #38: &lt;code&gt;whatever the reason they looked totally crappy on the camera's&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/bad day.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #17: &lt;code&gt;whatever life has it for me, trash me to the ground, and better just&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/bizzare logic.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #57: &lt;code&gt;Honestly, I really think everything, good or bad or whatever, is&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/boston and other thoughts.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #61: &lt;code&gt;by, watching the people go by, watching myself, whatever is left of&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/china witness.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #150: &lt;code&gt;&amp;gt; myself. Whatever were they were thinking of, hanging a picture of a&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/class.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #84: &lt;code&gt;So, call it whatever you want, and feel free to agree or disagree this&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/data digit.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #46: &lt;code&gt;data,  one  says  "Bob  whatever"   and  the  other  says  "William&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #47: &lt;code&gt;whatever", are these two the  same person!? and what reference/clue&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/dictator.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #38: &lt;code&gt;whatever it is, questionable also? What about other words, probably&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/generalization.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #99: &lt;code&gt;based on race, gender, education, family tie, whatever (and these are&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/history.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #116: &lt;code&gt;they are named, mummy, gold, or whatever.&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/human grouping.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #23: &lt;code&gt;reality is, this person, your idol, do not know you, and whatever s/he&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #55: &lt;code&gt;and good luck and whatever! We are so uncomfortable with ourselves&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/hurt feeling.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #30: &lt;code&gt;sad, or whatever, no one else can. If not, it becomes a scary thing,&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/innovation.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #46: &lt;code&gt;`google&lt;/code&gt;, &lt;code&gt;BAT&lt;/code&gt;, &lt;code&gt;R&lt;/code&gt;, &lt;code&gt;AI&lt;/code&gt;...  Whatever the problem is, or even the`&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #160: &lt;code&gt;whatever their coding language is, they can all do the same thing, and&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/internet.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #83: &lt;code&gt;in the subjective sphere, all bets are off &amp;amp;mdash; I can say whatever&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #84: &lt;code&gt;I want, and you can hear whatever you like &amp;amp;mdash; it's a fair game&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #98: &lt;code&gt;company of that media, while whatever is circulating on the Internet&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/irresponsible response.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #89: &lt;code&gt;warned you, so whatever you end up with is not my responsibility&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;/home/fengxia/workspace/myblog/content/thoughts/logic.md&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/luck.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #29: &lt;code&gt;result, whatever it may be, pleasant or horrible.&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #86: &lt;code&gt;reference! You make a decision, then you move on. Whatever comes out&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/marketing.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #105: &lt;code&gt;wonderful the outcome in the future may be&amp;lt;/span&amp;gt;. Whatever it is&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/moment of quietness.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #35: &lt;code&gt;girlfriend, or just a one-night-stand. Whatever, there is a song, that&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/moving.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #69: &lt;code&gt;expect. Whatever it may be, I am just hoping I can stay true, to&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/must do.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #108: &lt;code&gt;(what-is-happiness kind of talk).... whatever it is called, I want to&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/ordinary.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #68: &lt;code&gt;whatever is happening, I will be on your side.&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/plagarism.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #45: &lt;code&gt;essentially, whatever the virtue to make a good human being, is what&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/reader digest.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #46: &lt;code&gt;than I am, so his/her view and summary of the book/article/whatever&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/say no.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #45: &lt;code&gt;to difficult times, if you decide it is worthwhile, for whatever&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/science.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #142: &lt;code&gt;for themselves whatever their agenda is. **Science is a view, and as&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/self-disciplined.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #56: &lt;code&gt;it police, or whatever you want, but that doesn't change the nature of&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/self-esteem.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #37: &lt;code&gt;wrinkle, or weight, or whatever that may be bothering you, the&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/self-selected bias.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #65: &lt;code&gt;weaker and weaker, for whatever reason. Someone's had died down long&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/silence.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #50: &lt;code&gt;them would pull out the iphone (or whatever) and.. and there is no&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #66: &lt;code&gt;to touch or kiss him? but then his wife (or gf, or whatever) has a&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #102: &lt;code&gt;gift or present or handbags or roses or whatever?&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/social media.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #118: &lt;code&gt;much!? I know one, and you probably have, whatever, a few, a&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #221: &lt;code&gt;man or whatever, another who enjoys computer, another who loves&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/society.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #91: &lt;code&gt;take-for-granted attitude that science is better than (whatever your&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #102: &lt;code&gt;in whatever you are arguing about]?&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/strange fate.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #51: &lt;code&gt;this&lt;/code&gt;bugbounty10378&lt;code&gt;guy, for whatever purpose (but honestly, doesn't&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/tears.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #38: &lt;code&gt;that I wanted to stop it, to stop whatever that caused her&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/the wrong elite.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #66: &lt;code&gt;blood.. that's totally fine, which also makes the whatever derived&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #78: &lt;code&gt;countries or ppl or whatever, wouldn't you then draw the opposite&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #170: &lt;code&gt;people are an unity, therefore whatever technology US has developed is&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/to nianyi.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #56: &lt;code&gt;doing, and I made the choices without regret. So whatever they lead&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;/home/fengxia/workspace/myblog/content/thoughts/too much trust.md&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/thoughts/turtle.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #37: &lt;code&gt;on the road or drive by your ex- whatever, or a clothes that makes you&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #73: &lt;code&gt;smoke break, or a coffee break, so the turtle is taking its **whatever&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/workspace/openstack/hw_charm.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #306: &lt;code&gt;repo: https://git.launchpad.net/whatever/&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/workspace/openstack/juju_deploy_charm.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #16: &lt;code&gt;whatever needed based the charm's instruction. As the bootstrap&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #110: &lt;code&gt;_whateverusername_. We intentionally avoided using _ubuntu_ as user&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/workspace/openstack/maas.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #78: &lt;code&gt;completly arbitrary. Use whatever network range you want to&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;/home/fengxia/workspace/myblog/content/workspace/rh/satellite.md&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;on line #351: &lt;code&gt;repo. You get whatever content views give you, and each environment&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Is a reference&lt;/h2&gt;
-&lt;p&gt;We think they are file reference or URL link. Changing a value needs cross check.&lt;/p&gt;
-&lt;p&gt;None&lt;/p&gt;
-&lt;h2&gt;Is an email address&lt;/h2&gt;
-&lt;p&gt;None&lt;/p&gt;
-&lt;hr /&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Search&lt;/span&gt; &lt;span class="nt"&gt;criteria&lt;/span&gt;
 
-&lt;p&gt;Pretty cool, huh!?&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 11 Sep 2019 16:15:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-09-11:myblog/rebranding.html</guid><category>dev</category></item><item><title>Analyzing Angular 1.x code</title><link>https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html</link><description>&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;root&lt;/span&gt; &lt;span class="nt"&gt;folder&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;matching&lt;/span&gt; &lt;span class="nt"&gt;key&lt;/span&gt; &lt;span class="nt"&gt;words&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;include&lt;/span&gt; &lt;span class="nt"&gt;extensions&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.md&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;exclude&lt;/span&gt; &lt;span class="nt"&gt;extensions&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.bz2&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.tar.gz&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.bz&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.gz&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.xz&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.ico&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.png&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.jpg&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.pdf&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.dia&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.db&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.exe&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.war&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.rpm&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.sasldb&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.der&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.p12&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.jar&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.mmdb&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.bak&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.yml_example&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.properties&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.docx&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.doc&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.spec&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.pyc&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.jpeg&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.mp4&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.gif&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.webm&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.autosave&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.ttf&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.svg&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.gzip&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.woff&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.eot&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;exclude&lt;/span&gt; &lt;span class="nt"&gt;folder&lt;/span&gt; &lt;span class="nt"&gt;patterns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;node_modules&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;fonts&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;contrib&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nc"&gt;.git&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;doc&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;output&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;bower_components&lt;/span&gt;
+    &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;plugins&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;exclude&lt;/span&gt; &lt;span class="nt"&gt;string&lt;/span&gt; &lt;span class="nt"&gt;patterns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Swap&lt;/span&gt; &lt;span class="nt"&gt;needed&lt;/span&gt;
+
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;External&lt;/span&gt; &lt;span class="nt"&gt;references&lt;/span&gt;
+
+&lt;span class="nt"&gt;They&lt;/span&gt; &lt;span class="nt"&gt;seem&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;be&lt;/span&gt; &lt;span class="nt"&gt;some&lt;/span&gt; &lt;span class="nt"&gt;reference&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;externals&lt;/span&gt; &lt;span class="nt"&gt;such&lt;/span&gt; &lt;span class="nt"&gt;as&lt;/span&gt; &lt;span class="nt"&gt;URLs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;Need&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;value&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;swap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Starred&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;All&lt;/span&gt; &lt;span class="nt"&gt;Mail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Trash&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Sent&lt;/span&gt; &lt;span class="nt"&gt;Mail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="err"&gt;###&lt;/span&gt; &lt;span class="nt"&gt;AWS&lt;/span&gt; &lt;span class="nt"&gt;S3&lt;/span&gt;
+
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;Emails&lt;/span&gt;
+
+
+&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;yours&lt;/span&gt;&lt;span class="k"&gt;@gmail&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;NARENDRA&lt;/span&gt; &lt;span class="nt"&gt;REDDY&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;bugbounty10378&lt;/span&gt;&lt;span class="k"&gt;@gmail&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Files&lt;/span&gt; &lt;span class="nt"&gt;skipped&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Matched&lt;/span&gt; &lt;span class="nt"&gt;by&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;cliche&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;File&lt;/span&gt; &lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;rebranding&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#66&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#139&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`#&lt;/span&gt; &lt;span class="nt"&gt;Matched&lt;/span&gt; &lt;span class="nt"&gt;by&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;cliche&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#146&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#15&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;criticized&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;hated&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;no&lt;/span&gt; &lt;span class="nt"&gt;I&lt;/span&gt; &lt;span class="nt"&gt;don&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;t hate this program, just the cliche``&lt;/span&gt;
+
+&lt;span class="s1"&gt;    4. on line #149: `1. on line #70: `be. This may sound like a cliche, typical middle age crisis, poor guy.``&lt;/span&gt;
+
+&lt;span class="s1"&gt;    5. on line #152: `1. on line #68: `traditional political cliches. But now, I feel he is a total disaster,``&lt;/span&gt;
+
+&lt;span class="s1"&gt;    6. on line #155: `1. on line #96: `The fundamental law here is the cliche that **there is no free``&lt;/span&gt;
+
+&lt;span class="s1"&gt;    7. on line #158: `1. on line #33: `frustrated, even hatred. This can&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;t&lt;/span&gt; &lt;span class="nt"&gt;be&lt;/span&gt; &lt;span class="nt"&gt;just&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;myth&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;that&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#161&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#16&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;It&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s a cliche when people talk about luck, and someone gets lucky, or``&lt;/span&gt;
+
+&lt;span class="s1"&gt;    9. on line #164: `1. on line #32: `again, which is often a cliche to my education and my generation, when``&lt;/span&gt;
+
+&lt;span class="s1"&gt;    10. on line #167: `1. on line #105: `matter, let&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;s&lt;/span&gt; &lt;span class="nt"&gt;just&lt;/span&gt; &lt;span class="nt"&gt;use&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nt"&gt;progress&lt;/span&gt;&lt;span class="o"&gt;**...&lt;/span&gt; &lt;span class="nt"&gt;then&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;what&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;11&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#170&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#17&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;On&lt;/span&gt; &lt;span class="nt"&gt;one&lt;/span&gt; &lt;span class="nt"&gt;hand&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;always&lt;/span&gt; &lt;span class="nt"&gt;that&lt;/span&gt; &lt;span class="nt"&gt;mid-age&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;tough&lt;/span&gt; &lt;span class="nt"&gt;time&lt;/span&gt; &lt;span class="nt"&gt;because&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#173&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#52&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;becoming&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt; &lt;span class="nt"&gt;being&lt;/span&gt; &lt;span class="nt"&gt;used&lt;/span&gt; &lt;span class="nt"&gt;freely&lt;/span&gt; &lt;span class="nt"&gt;without&lt;/span&gt; &lt;span class="nt"&gt;clarification&lt;/span&gt; &lt;span class="nt"&gt;nor&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;13&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#176&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#153&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Even&lt;/span&gt; &lt;span class="nt"&gt;further&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;as&lt;/span&gt; &lt;span class="nt"&gt;we&lt;/span&gt; &lt;span class="nt"&gt;all&lt;/span&gt; &lt;span class="nt"&gt;know&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;hate&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;love&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt; &lt;span class="nt"&gt;like&lt;/span&gt; &lt;span class="nt"&gt;twins&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;14&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#179&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#91&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;love&lt;/span&gt; &lt;span class="nt"&gt;scene&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;that&lt;/span&gt; &lt;span class="nt"&gt;if&lt;/span&gt; &lt;span class="nt"&gt;your&lt;/span&gt; &lt;span class="nt"&gt;relationships&lt;/span&gt; &lt;span class="nt"&gt;always&lt;/span&gt; &lt;span class="nt"&gt;go&lt;/span&gt; &lt;span class="nt"&gt;sore&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;15&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#182&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#105&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;it&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;an&lt;/span&gt; &lt;span class="nt"&gt;everyday&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;have&lt;/span&gt; &lt;span class="nt"&gt;wifi&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;iPhone&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;but&lt;/span&gt; &lt;span class="nt"&gt;back&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;500&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;vain&lt;/span&gt; &lt;span class="nt"&gt;debate&lt;/span&gt; &lt;span class="nt"&gt;pattern&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#15&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;criticized&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;hated&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;no&lt;/span&gt; &lt;span class="nt"&gt;I&lt;/span&gt; &lt;span class="nt"&gt;don&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;t hate this program, just the cliche`&lt;/span&gt;
+&lt;span class="s1"&gt;- /home/fengxia/workspace/myblog/content/thoughts/city.md&lt;/span&gt;
+
+&lt;span class="s1"&gt;    1. on line #70: `be. This may sound like a cliche, typical middle age crisis, poor guy.`&lt;/span&gt;
+&lt;span class="s1"&gt;- /home/fengxia/workspace/myblog/content/thoughts/law.md&lt;/span&gt;
+
+&lt;span class="s1"&gt;    1. on line #68: `traditional political cliches. But now, I feel he is a total disaster,`&lt;/span&gt;
+&lt;span class="s1"&gt;- /home/fengxia/workspace/myblog/content/thoughts/lost job.md&lt;/span&gt;
+
+&lt;span class="s1"&gt;    1. on line #96: `The fundamental law here is the cliche that **there is no free`&lt;/span&gt;
+&lt;span class="s1"&gt;- /home/fengxia/workspace/myblog/content/thoughts/love life.md&lt;/span&gt;
+
+&lt;span class="s1"&gt;    1. on line #33: `frustrated, even hatred. This can&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;t&lt;/span&gt; &lt;span class="nt"&gt;be&lt;/span&gt; &lt;span class="nt"&gt;just&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;myth&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;that&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;luck&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#16&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;It&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s a cliche when people talk about luck, and someone gets lucky, or`&lt;/span&gt;
+&lt;span class="s1"&gt;- /home/fengxia/workspace/myblog/content/thoughts/mind.md&lt;/span&gt;
+
+&lt;span class="s1"&gt;    1. on line #32: `again, which is often a cliche to my education and my generation, when`&lt;/span&gt;
+&lt;span class="s1"&gt;- /home/fengxia/workspace/myblog/content/thoughts/mob.md&lt;/span&gt;
+
+&lt;span class="s1"&gt;    1. on line #105: `matter, let&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;s&lt;/span&gt; &lt;span class="nt"&gt;just&lt;/span&gt; &lt;span class="nt"&gt;use&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nt"&gt;progress&lt;/span&gt;&lt;span class="o"&gt;**...&lt;/span&gt; &lt;span class="nt"&gt;then&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;what&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;must&lt;/span&gt; &lt;span class="nt"&gt;do&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#17&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;On&lt;/span&gt; &lt;span class="nt"&gt;one&lt;/span&gt; &lt;span class="nt"&gt;hand&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;always&lt;/span&gt; &lt;span class="nt"&gt;that&lt;/span&gt; &lt;span class="nt"&gt;mid-age&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;tough&lt;/span&gt; &lt;span class="nt"&gt;time&lt;/span&gt; &lt;span class="nt"&gt;because&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;reflection&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;technology&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#52&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;becoming&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt; &lt;span class="nt"&gt;being&lt;/span&gt; &lt;span class="nt"&gt;used&lt;/span&gt; &lt;span class="nt"&gt;freely&lt;/span&gt; &lt;span class="nt"&gt;without&lt;/span&gt; &lt;span class="nt"&gt;clarification&lt;/span&gt; &lt;span class="nt"&gt;nor&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;society&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#153&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Even&lt;/span&gt; &lt;span class="nt"&gt;further&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;as&lt;/span&gt; &lt;span class="nt"&gt;we&lt;/span&gt; &lt;span class="nt"&gt;all&lt;/span&gt; &lt;span class="nt"&gt;know&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;hate&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;love&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt; &lt;span class="nt"&gt;like&lt;/span&gt; &lt;span class="nt"&gt;twins&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;technology&lt;/span&gt; &lt;span class="nt"&gt;responsibility&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#91&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;love&lt;/span&gt; &lt;span class="nt"&gt;scene&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;that&lt;/span&gt; &lt;span class="nt"&gt;if&lt;/span&gt; &lt;span class="nt"&gt;your&lt;/span&gt; &lt;span class="nt"&gt;relationships&lt;/span&gt; &lt;span class="nt"&gt;always&lt;/span&gt; &lt;span class="nt"&gt;go&lt;/span&gt; &lt;span class="nt"&gt;sore&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;wrong&lt;/span&gt; &lt;span class="nt"&gt;elite&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#105&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;it&lt;/span&gt; &lt;span class="nt"&gt;is&lt;/span&gt; &lt;span class="nt"&gt;an&lt;/span&gt; &lt;span class="nt"&gt;everyday&lt;/span&gt; &lt;span class="nt"&gt;cliche&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;have&lt;/span&gt; &lt;span class="nt"&gt;wifi&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;iPhone&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;but&lt;/span&gt; &lt;span class="nt"&gt;back&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;500&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;Is&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;reference&lt;/span&gt;
+
+&lt;span class="nt"&gt;We&lt;/span&gt; &lt;span class="nt"&gt;think&lt;/span&gt; &lt;span class="nt"&gt;they&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt; &lt;span class="nt"&gt;file&lt;/span&gt; &lt;span class="nt"&gt;reference&lt;/span&gt; &lt;span class="nt"&gt;or&lt;/span&gt; &lt;span class="nt"&gt;URL&lt;/span&gt; &lt;span class="nt"&gt;link&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;Changing&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;value&lt;/span&gt; &lt;span class="nt"&gt;needs&lt;/span&gt; &lt;span class="nt"&gt;cross&lt;/span&gt; &lt;span class="nt"&gt;check&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+
+&lt;span class="nt"&gt;None&lt;/span&gt;
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;Is&lt;/span&gt; &lt;span class="nt"&gt;an&lt;/span&gt; &lt;span class="nt"&gt;email&lt;/span&gt; &lt;span class="nt"&gt;address&lt;/span&gt;
+
+
+&lt;span class="nt"&gt;None&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Matched&lt;/span&gt; &lt;span class="nt"&gt;by&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;gmail&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;File&lt;/span&gt; &lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;mbsync&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#18&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;configuration&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;make&lt;/span&gt; &lt;span class="nt"&gt;it&lt;/span&gt; &lt;span class="nt"&gt;work&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;sort&lt;/span&gt; &lt;span class="nt"&gt;of&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nt"&gt;with&lt;/span&gt; &lt;span class="nt"&gt;Hotmail&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;s&lt;/span&gt; &lt;span class="nt"&gt;IMAP&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;Gmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#49&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;for&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;imap&lt;/span&gt;&lt;span class="nc"&gt;.gmail.com&lt;/span&gt;&lt;span class="err"&gt;``&lt;/span&gt;
+
+    &lt;span class="nt"&gt;3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#54&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Host&lt;/span&gt; &lt;span class="nt"&gt;imap&lt;/span&gt;&lt;span class="nc"&gt;.outlook.com&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;or&lt;/span&gt; &lt;span class="nt"&gt;imap&lt;/span&gt;&lt;span class="nc"&gt;.gmail.com&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#58&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`#&lt;/span&gt; &lt;span class="nt"&gt;These&lt;/span&gt; &lt;span class="nt"&gt;settings&lt;/span&gt; &lt;span class="nt"&gt;work&lt;/span&gt; &lt;span class="nt"&gt;for&lt;/span&gt; &lt;span class="nt"&gt;both&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;hotmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#159&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;IMAPStore&lt;/span&gt; &lt;span class="nt"&gt;gmail-remote&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;--&lt;/span&gt; &lt;span class="nt"&gt;user&lt;/span&gt; &lt;span class="nt"&gt;defined&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;6&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#160&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Account&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;--&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;account&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt; &lt;span class="nt"&gt;defined&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;Account&lt;/span&gt; &lt;span class="nt"&gt;section&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#169&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;MaildirStore&lt;/span&gt; &lt;span class="nt"&gt;gmail-local&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#170&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Path&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;Maildir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Gmail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;9&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#171&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Inbox&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;Maildir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Gmail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;inbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;10&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#178&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-inbox&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;11&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#179&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;--&lt;/span&gt; &lt;span class="nt"&gt;remote&lt;/span&gt; &lt;span class="nt"&gt;store&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;12&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#180&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Slave&lt;/span&gt; &lt;span class="nd"&gt;:gmail-local:inbox&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;--&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt; &lt;span class="nt"&gt;dir&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;13&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#192&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Group&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;14&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#193&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-trash&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;15&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#194&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-inbox&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;16&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#195&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-sent&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;17&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#196&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-all&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;18&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#197&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-starred&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;19&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#206&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;``&lt;/span&gt;&lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;Maildir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Gmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;20&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#233&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`#&lt;/span&gt; &lt;span class="nt"&gt;Gmail&lt;/span&gt; &lt;span class="nt"&gt;account&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;21&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#234&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;IMAPAccount&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;22&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#236&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Host&lt;/span&gt; &lt;span class="nt"&gt;imap&lt;/span&gt;&lt;span class="nc"&gt;.gmail.com&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;23&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#237&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;User&lt;/span&gt; &lt;span class="nt"&gt;yours&lt;/span&gt;&lt;span class="k"&gt;@gmail&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;24&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#255&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;IMAPStore&lt;/span&gt; &lt;span class="nt"&gt;gmail-remote&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;25&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#256&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Account&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;26&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#258&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`#&lt;/span&gt; &lt;span class="nt"&gt;LOCAL&lt;/span&gt; &lt;span class="nt"&gt;STORAGE&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;CREATE&lt;/span&gt; &lt;span class="nt"&gt;DIRECTORIES&lt;/span&gt; &lt;span class="nt"&gt;with&lt;/span&gt; &lt;span class="nt"&gt;mkdir&lt;/span&gt; &lt;span class="nt"&gt;-p&lt;/span&gt; &lt;span class="nt"&gt;Maildir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;gmail&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;27&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#259&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;MaildirStore&lt;/span&gt; &lt;span class="nt"&gt;gmail-local&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;28&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#260&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Path&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;Maildir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Gmail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;29&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#261&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Inbox&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;Maildir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;Gmail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;inbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;30&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#272&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`#&lt;/span&gt;       &lt;span class="nt"&gt;gmail&lt;/span&gt; &lt;span class="nt"&gt;channels&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;31&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#284&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-inbox&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;32&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#285&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;33&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#286&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Slave&lt;/span&gt; &lt;span class="nd"&gt;:gmail-local:inbox&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;34&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#291&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-trash&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;35&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#292&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/Trash&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;36&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#293&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Slave&lt;/span&gt; &lt;span class="nd"&gt;:gmail-local:trash&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;37&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#298&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-all&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;38&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#299&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/All Mail&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;39&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#300&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Slave&lt;/span&gt; &lt;span class="nd"&gt;:gmail-local:all&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;40&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#305&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-sent&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;41&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#306&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/Sent Mail&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;42&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#307&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Slave&lt;/span&gt; &lt;span class="nd"&gt;:gmail-local:sent&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;43&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#312&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-allChannel&lt;/span&gt; &lt;span class="nt"&gt;gmail-starred&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;44&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#313&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/Starred&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;45&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#314&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Slave&lt;/span&gt; &lt;span class="nd"&gt;:gmail-local:starred&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;46&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#379&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Group&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;47&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#380&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-trash&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;48&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#381&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-inbox&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;49&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#382&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-sent&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;50&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#383&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-all&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;51&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#384&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Channel&lt;/span&gt; &lt;span class="nt"&gt;gmail-starred&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;52&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#465&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`#&lt;/span&gt; &lt;span class="nt"&gt;gmail&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nt"&gt;mdash&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nt"&gt;less&lt;/span&gt; &lt;span class="nt"&gt;secured&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;53&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#467&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Sending&lt;/span&gt; &lt;span class="nt"&gt;username&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;pwd&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;login&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;Gmail&lt;/span&gt; &lt;span class="nt"&gt;will&lt;/span&gt; &lt;span class="nt"&gt;be&lt;/span&gt; &lt;span class="nt"&gt;blocked&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;A&lt;/span&gt; &lt;span class="nt"&gt;couple&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;strange&lt;/span&gt; &lt;span class="nt"&gt;fate&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#26&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;KANDULA&lt;/span&gt;&lt;span class="nc"&gt;.VENKATA&lt;/span&gt; &lt;span class="nt"&gt;NARENDRA&lt;/span&gt; &lt;span class="nt"&gt;REDDY&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;bugbounty10378&lt;/span&gt;&lt;span class="k"&gt;@gmail&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;Is&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;reference&lt;/span&gt;
+
+&lt;span class="nt"&gt;We&lt;/span&gt; &lt;span class="nt"&gt;think&lt;/span&gt; &lt;span class="nt"&gt;they&lt;/span&gt; &lt;span class="nt"&gt;are&lt;/span&gt; &lt;span class="nt"&gt;file&lt;/span&gt; &lt;span class="nt"&gt;reference&lt;/span&gt; &lt;span class="nt"&gt;or&lt;/span&gt; &lt;span class="nt"&gt;URL&lt;/span&gt; &lt;span class="nt"&gt;link&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;Changing&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="nt"&gt;value&lt;/span&gt; &lt;span class="nt"&gt;needs&lt;/span&gt; &lt;span class="nt"&gt;cross&lt;/span&gt; &lt;span class="nt"&gt;check&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;mbsync&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#292&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/Trash&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#299&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/All Mail&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#306&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/Sent Mail&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+    &lt;span class="nt"&gt;4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#313&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;Master&lt;/span&gt; &lt;span class="nd"&gt;:gmail-remote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Gmail&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="s2"&gt;/Starred&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+
+&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="nt"&gt;Is&lt;/span&gt; &lt;span class="nt"&gt;an&lt;/span&gt; &lt;span class="nt"&gt;email&lt;/span&gt; &lt;span class="nt"&gt;address&lt;/span&gt;
+
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;mbsync&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#237&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;User&lt;/span&gt; &lt;span class="nt"&gt;yours&lt;/span&gt;&lt;span class="k"&gt;@gmail&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;fengxia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;workspace&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;myblog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;thoughts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;strange&lt;/span&gt; &lt;span class="nt"&gt;fate&lt;/span&gt;&lt;span class="nc"&gt;.md&lt;/span&gt;
+
+    &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nn"&gt;#26&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nt"&gt;KANDULA&lt;/span&gt;&lt;span class="nc"&gt;.VENKATA&lt;/span&gt; &lt;span class="nt"&gt;NARENDRA&lt;/span&gt; &lt;span class="nt"&gt;REDDY&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;bugbounty10378&lt;/span&gt;&lt;span class="k"&gt;@gmail&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pretty cool, huh!?&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 11 Sep 2019 16:15:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-09-11:myblog/rebranding.html</guid><category>lenovo</category></item><item><title>Analyzing Angular 1.x code</title><link>https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html</link><description>&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
 but it didn't work for Angular 1.x code. &lt;/p&gt;
 &lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
 because everyone on the team, including UI devs, can only engage a

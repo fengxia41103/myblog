@@ -1,5 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/thoughts.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-09-04T08:20:00-04:00</updated><entry><title>Internet</title><link href="https://fengxia41103.github.io/myblog/internet.html" rel="alternate"></link><published>2019-09-04T08:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/internet.html</id><summary type="html">&lt;figure class="col s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/thoughts.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-09-13T09:23:00-04:00</updated><entry><title>Emotional AI</title><link href="https://fengxia41103.github.io/myblog/emotional%20ai.html" rel="alternate"></link><published>2019-09-13T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-13:myblog/emotional ai.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/classic%20beauty.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;While at gym, the thought just came to me, that all the talks about AI
+have been about how it will obsolete human and jobs, how much
+acceleration it travels in term of cracking the challenges we throw at
+it/them, therefore how much we will be behind once the AI train passes
+us &amp;mdash; louder, louder, louder.. and it's, gone! and we will never
+catch up again, ever. Then the world will be dominated by AI and its
+creations (robots?), and human, likely will become slaves, or like in
+the Matrix, some sort of utilitarian object, fertilizer, maybe.&lt;/p&gt;
+&lt;p&gt;Then, the talks inevitably lead to gaps that AI can not yet do, and
+even argue that they will never able to. Two common threads &amp;mdash;
+language, and emotion.&lt;/p&gt;
+&lt;p&gt;Language that there are too much subtlety in our conversation (and the
+Chinese especially think they are the master of such, in their eyes,
+arts, in my eyes, annoyance, see my elaboration on &lt;a href="https://fengxia41103.github.io/myblog/irresponsible response.html"&gt;irresponsible
+response&lt;/a&gt;), that AI/computer is yet to understand that much depth
+&amp;mdash; Siri and its siblings are essentially a converter with the
+Google search engine standing behind as the backend &amp;larr; they
+convert audio into a string, POST to the search engine, and read back
+the results.&lt;/p&gt;
+&lt;p&gt;Then, the culprit of human dignity always ends on emotion &amp;mdash;
+AI/computer is viewed as an autistic kid, the rain man, they are super
+smart, good at math, but they have no emotion. Too bad, therefore,
+they can't become human, they will never match human, because emotion
+is the crown jewel of human activity such as music, art, reading a
+book, falling in love, dream, hope, imagination (the book I was
+reading in Ray's ICU was about how human can develop intelligence, and
+the root argument is that emotion is the enabler for a human to
+develop those cold-blood capabilities &amp;mdash; logic, critical
+thinking, and so on.) Since human emotion are &lt;em&gt;too complex&lt;/em&gt; to be
+modeled, therefore AI can't yet, and unlikely ever will, develop such,
+what should we call it, skill? trait?... anyway, so they won't never
+have emotion, thus human still wins (at least it will be a 1:1
+replacement).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Not only in my &lt;a href="{filename}/thoughts/ai.MD"&gt;AI&lt;/a&gt;, I have described two ways to measure a duck:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;they quack in the same way a duck does &amp;rarr; open mouth, vibrate
+   vocal chord in frequency ABC, inhale, and so on and on..., or&lt;/li&gt;
+&lt;li&gt;they make a sound, however they generate them, but it came out like
+   a quack.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you can't tell the result, does the process to get there matter?
+But also, I think there is another gap in this discussion that so far
+no one has ever touched up &amp;mdash; if AI acquires human emotion (let's
+just take to the extreme, not even human like, but human identical!),
+what will they be!? This, becomes interesting.&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h1&gt;unreliable&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;The No.1 advantage of computer isn't even its processing power &amp;mdash;
+it's its predictability!&lt;/strong&gt; It can crunch the number as fast as it
+will. It will still be competely useless if the same inputs generate
+different results every single run! &lt;/p&gt;
+&lt;p&gt;So, what will emotion do to it? I think everyone can answer this
+pretty easily. Every one of us is a human, and we are emotional. By
+being emotional, we have good days and bad days. Asking a colleague or
+a manager to review your work is a hit or miss if this person is, say,
+super emotional (well, the extreme case of an emotional person will be
+some insanity, isn't it!?). That's exactly why we take the pain to
+codify the thoughts into computer program, into some software
+controlled mechanics, so that its move, its decision making, and its
+results, are &lt;strong&gt;predictable&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Therefore, will an emotional AI still be, as powerful and almighty as
+we are now imagining? It will be powerful in the sense of its sheer
+processing power. But it can't be a good thing at all, because it's
+like giving Trump the nuclear weapon launch code and he can send them
+off anytime he wants &amp;mdash; on a bad morning he might just do it! So
+it will like living  w/ a emotional God, or, to ask anyone who is
+still hanging on  in an unhappy marriage, it's just, misery.&lt;/p&gt;
+&lt;h1&gt;philosophy&lt;/h1&gt;
+&lt;p&gt;Now, when a group of these emotional AIs get together, do they form a
+community just like we do? do they then also bump into each other like
+neighbours living in a crowded compound? Even better, do they then
+develop the same confusion and frustration, thus producing philosophy?
+What about happiness? that's a kind of emotion, isn't it? and Love? Oh
+mine, that must be a slipper slop that no one has the answer.&lt;/p&gt;
+&lt;p&gt;So this world of emotional AI can go on and on, and the more you think
+of it, the more you will imagine that they will behave, live, co-live,
+very much like what we are doing, in a different scales and different
+styles, maybe, but the fundamental questions, the philosophical
+questions, that human have been developing since Socrates and onwards,
+will inevitably become the same challenge for them... hmmm, I will be
+curious to see whether their super brain can create some super
+philosophy or philosophers, what will that be like?&lt;/p&gt;
+&lt;p&gt;Anyway. I don't think emotion is the last line of defense of human
+against these machines. On the contrary, following this train of
+thought, it's more of a poison pill that you want the AI to actively
+swallow, so you blunt their No.1 value proposition &amp;mdash;
+predictability, bring them down the same level of emotional turmoils
+we are experience, and lead them into the infinite thinking process of
+philosophy and, even religion... what a fun!&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;I'll be using the word &lt;code&gt;AI&lt;/code&gt; and &lt;code&gt;computer&lt;/code&gt; interchangeably.  &amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary><category term="thoughts"></category></entry><entry><title>Internet</title><link href="https://fengxia41103.github.io/myblog/internet.html" rel="alternate"></link><published>2019-09-04T08:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/internet.html</id><summary type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/anime%20guitar%20and%20girl.jpg"/&gt;
 &lt;/figure&gt;
 

@@ -2739,7 +2739,15 @@ Pass xxx
 Port &lt;span class="m"&gt;1143&lt;/span&gt; &amp;lt;-- default davmail IMAP port
 SSLType None
 AuthMech LOGIN
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; settings:&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/davmail.png"
+       class="center img-responsive"&gt;
+  &lt;figcaption&gt;davmail settings&lt;/figcaption&gt;
+&lt;/figure&gt;</summary><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it
 can do so much beyond text editing. Still on the learning curve to get
 a grasp of what it can do in my daily development workflow. Here is to

@@ -19325,7 +19325,15 @@ Pass xxx
 Port &lt;span class="m"&gt;1143&lt;/span&gt; &amp;lt;-- default davmail IMAP port
 SSLType None
 AuthMech LOGIN
-&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 21 May 2019 10:27:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-04-24:myblog/mbsync mu4e email.html</guid><category>dev</category></item><item><title>MAAS vs. Ironic</title><link>https://fengxia41103.github.io/myblog/maas%20and%20ironic.html</link><description>&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; settings:&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/davmail.png"
+       class="center img-responsive"&gt;
+  &lt;figcaption&gt;davmail settings&lt;/figcaption&gt;
+&lt;/figure&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 21 May 2019 10:27:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-04-24:myblog/mbsync mu4e email.html</guid><category>dev</category></item><item><title>MAAS vs. Ironic</title><link>https://fengxia41103.github.io/myblog/maas%20and%20ironic.html</link><description>&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires

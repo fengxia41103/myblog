@@ -508,3 +508,12 @@ Port 1143 <-- default davmail IMAP port
 SSLType None
 AuthMech LOGIN
 ```
+
+and here is the `davmail` settings:
+
+<figure class="col s12">
+  <img src="images/davmail.png"
+       class="center img-responsive">
+  <figcaption>davmail settings</figcaption>
+</figure>
+

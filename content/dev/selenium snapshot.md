@@ -5,7 +5,7 @@ Slug: snapshot selenium
 Author: Feng Xia
 
 
-In my previous notes on analyzing Angular 1.x code, I have stuck at
+In my previous notes on [analyzing Angular 1.x code][1], I have stuck at
 how to create snapshots of rendered components for my documentation
 purpose. In the manual data file `.json`, I allowed an entry to plug
 in snapshot file taken by human testers. As an example, the code below

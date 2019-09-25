@@ -3,6 +3,7 @@ Date: 2019-09-01 17:58
 Tags: angular, lenovo
 Slug: analyzing angular 1x
 Author: Feng Xia
+Modified: 2019-09-25 10:33
 
 [Compodoc][1] can generate component hierarchy diagrams, call chains,
 but it didn't work for Angular 1.x code. 
@@ -28,8 +29,7 @@ concept appears to be by looking at how young a few mentioned
 libraries/services are. Maybe I'm just behind the curve. Nonetheless,
 here I am, and I'm catching up, fast.
 
-For now, I haven't figured out how to capture component's rendered
-look automatically. [jest-image-snapshot][3] mentions of saving
+[jest-image-snapshot][3] mentions of saving
 snapshot in some dir &mdash; maybe I can use this to get a snapshot of
 component. But it's saving them for future comparison purpose, which
 I'm not ready yet to embark this level of testing. So keep the notes

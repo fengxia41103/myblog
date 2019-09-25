@@ -107,7 +107,7 @@
 
       <div class="col s12">
         <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-        2019-04-23
+        2019-09-25
 
 
         <a class="wave-effect" href="category/dev.html">
@@ -120,7 +120,7 @@
           dev
         </a>
 
-        <h1 class="myhighlight">Browser proxy</h1>
+        <h1 class="myhighlight">Snapshot anything w/ Selenium</h1>
       </div>
 
 
@@ -133,59 +133,185 @@
         <blockquote>
         </blockquote>
         <p>
-          <p>This is a common trick. Say we have local machine (A), and a remote
-machine (B). If we can SSH from A&rarr;B, we can reroute browser
-traffic from A to B, much quicker than X-windows.</p>
-<figure class="col l4 m4 s12">
-  <img src="images/browser%20proxy.png"
-       class="center img-responsive">
-</figure>
-
+          <p>In my previous notes on analyzing Angular 1.x code, I have stuck at
+how to create snapshots of rendered components for my documentation
+purpose. In the manual data file <code>.json</code>, I allowed an entry to plug
+in snapshot file taken by human testers. As an example, the code below
+shows a block documenting:</p>
 <ol>
-<li>
-<p>On A, <code>ssh -vv -ND 8080 root@&lt;B's IP&gt;</code>, then SSH login.</p>
-<ol>
-<li><code>-N</code>: Do not execute a remote command.  This is useful for
-   just forwarding ports.`</li>
-<li>
-<p><code>-D [bind_address:]port</code>:</p>
-<p>Specifies a local “dynamic” application-level port forwarding.  This works by
-allocating a socket to listen to port on the local side, optionally bound to
-the specified bind_address.  Whenever a connection is made to this port, the
-connection is forwarded over the secure channel, and the application protocol
-is then used to determine where to connect to from the remote machine.  Cur‐
-rently the SOCKS4 and SOCKS5 protocols are supported, and ssh will act as a
-SOCKS server.  Only root can forward privileged ports.  Dynamic port forward‐
-ings can also be specified in the configuration file.</p>
-<p>IPv6 addresses can be specified by enclosing the address in square brackets.
-Only the superuser can forward privileged ports.  By default, the local port
-is bound in accordance with the GatewayPorts setting.  However, an explicit
-bind_address may be used to bind the connection to a specific address.  The
-bind_address of “localhost” indicates that the listening port be bound for
-local use only, while an empty address or ‘*’ indicates that the port should
-be available from all interfaces.</p>
-</li>
+<li>module: <code>mwc.mapping</code></li>
+<li>its components as a LIST, and each has a key <code>screenshot</code> that is a
+   path to the snapshot file.</li>
 </ol>
-</li>
-<li>
-<p>On A, open Firefox, and setup proxy as shown below:</p>
-</li>
-<li>Goto <code>Preferences/networking settings</code>.</li>
-<li><code>Manual proxy configuration</code></li>
-<li><code>SOCKS Host</code> to <code>localhost</code>, and port to <code>8080</code> (whatever the
-     port you set above).</li>
-<li>Select <code>socks v5</code>.</li>
-<li>Clear <code>No proxy for</code>, because sometimes <code>localhost</code> and
-     <code>127.0.0.1</code> are listed. We want to use <code>localhost</code>!</li>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;components&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;source file&quot;</span><span class="p">:</span> <span class="s2">&quot;../app/topology/components/mappings.component.ts&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc-mappings&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;screenshot&quot;</span><span class="p">:</span> <span class="s2">&quot;./screenshots/mwc-mappings.png&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;used by&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;using&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;mwc-create-flash-pool-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-flash-pool-actions-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-create-migration-zone-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-migration-zone-actions-button&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;MappingsComponent&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc.mappings&quot;</span>
+<span class="p">}</span><span class="err">,</span>
+</pre></div>
+
+
+<p>Well, this gets me going to create the <a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf">example doc</a>, but to have
+human hunting down screenshots always give me a fishy feeling &mdash;
+you know how deeply I do not trust human to be <strong>exhaustive</strong> and
+<strong>deterministic</strong> &mdash; on a good day or w/ a capable person, yes,
+you get a pretty satisfactory result, but even then, it's no guarantee
+his/her next day's delivery will be the same. Not to mention,
+executing a task such as "finding all the HTML tag matching this
+pattern, and take a screenshot of it, and save it here, and update the
+file here..." is tedious, boring, and no fun &larr; I would hate to do
+something like this, not even for once, certainly not for 10th time or
+daily. Computer can do this, a lot better, quicker. After all, the
+component has been written and computer is rendering it for human to
+look at, then why can't computer just capture the <em>look</em> of it
+automatically?</p>
+<p>Of course it can. The idea is this:</p>
+<ol>
+<li>Use Selenium to launch a browser.</li>
+<li>Use XPATH to select the element(s) you want.</li>
+<li>Enumerate through the element, determine where to save the file
+   &mdash; file path, file name convention.</li>
+<li><code>element.snapshot(file_path)</code> will write to <code>file_path</code> onto the file system.</li>
 </ol>
 <figure class="col s12">
-  <img src="images/browser%20proxy%20firefox%20setting.png"
-       class="center img-responsive">
-  <figcaption>Setting up proxy in Firefox</figcaption>
+  <img src="images/selenium%20snapshot.gif"/>
 </figure>
 
-<p>This is it. Then anything on this browser will be routed to localhost
-port 8080, which by the <code>ssh</code>, will be forwarded to B.</p>
+<p>Window on the right hand side is monitoring folder on the file system
+  for screenshots. It starts w/ an empty directory. Window on the top
+  left is the terminal where you will see printout from the script
+  when it finds the interested element and takes its snapshot,
+  eg. <code>smile: mwc-support-mode-modal</code>. Window on the bottom left is
+  the browser window launched by Selenium which gives you an idea how
+  the computer is working. The browser is shown only for demo
+  purpose. It can be turned into <strong>headless</strong> mode.</p>
+<h1>context</h1>
+<p>One thing of taking snapshot is to provide a context to viewer &mdash;
+in which page/panel/container this component is being used. Believe or
+not, some components I'm dealing w/ is nothing but a small green dot
+(see below)! Therefore, it will be pretty useless if I'm just giving
+you an image of itself. </p>
+<figure class="col s12">
+  <img src="images/mwc-network-hardware-status-icon.png"/>
+  <figcaption>
+  Example of an element becoming much more meaningful when given a
+  context than only by itself.
+  </figcaption>
+</figure>
+
+<p>On the other hand, by taking the snapshot of a <em>higher</em> level element
+and use a RED square to highlight your target, you have a context of
+its usage. The trick is to use the <code>ancestor</code> axes in XPATH. Say we
+are to search any HTML tag starts with <code>feng</code>: <code>target_xpath =
+"*[starts-with(local-name(), 'feng-')]"</code>, then I want to find its
+context matching the same HTML tag pattern: <code>ancestor_xpath =
+"ancestor::%s[position()=1]" % target_xpath</code>.</p>
+<h2>snapshot in a context</h2>
+<p>Taking snapshot to illustrate a context thus taking two steps:</p>
+<ol>
+<li>Take a snapshot of the context element, eg. an ancestor, and save
+   the file.</li>
+<li>Open this file, and using Python Image Library to draw a rectangle
+   using the <code>location</code> and <code>size</code> of your target element.</li>
+</ol>
+<p>Example of a code snippet is shown below. <strong>Note</strong> that you must adjust the
+element <code>c</code> location based on the ancestor's because once we took a
+snapshot of the ancestor, its origin becomes the new <code>(0,0)</code>.</p>
+<div class="highlight"><pre><span></span><span class="c1"># looking for the first ancestor matching the xpath</span>
+<span class="n">ancestor_xpath</span> <span class="o">=</span> <span class="s2">&quot;ancestor::</span><span class="si">%s</span><span class="s2">[position()=1]&quot;</span> <span class="o">%</span> <span class="n">context</span>
+<span class="n">ancestors</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">ancestor_xpath</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">ancestors</span><span class="p">:</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ancestors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># take snapshot of the ancestor</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_take_snapshot</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># draw a red rectangle around this component</span>
+    <span class="k">with</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
+        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">])</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">])</span>
+        <span class="n">draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span>
+            <span class="p">[(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)],</span>
+            <span class="n">outline</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">draw</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_take_snapshot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>dropdown menu</h1>
+<p>Dropdown is tricky. You don't see the dropdown menu unless user
+clicks. However, like the green dot example above, it's not meaningful
+you only show the trigger because many times it's only an icon (not
+even a button w/ text!). So depending on how dropdown is being
+implemented in your code, you have to think of a way to <em>open</em> the
+dropdown, and take a snapshot of it <strong>together w/ its trigger</strong>:</p>
+<figure class="col l6 m6 s12">
+  <img src="images/mwc-network-controller-actions-button.png"/>
+  <figcaption>
+
+  An example of dropdown menu whose trigger is only a small icon. Thus
+  by programmatically open the dropdown, we can take a snapshot of the
+  menu and the trigger together, giving it a context.
+
+  </figcaption>
+</figure>
+
+<h1>modal dialog</h1>
+<figure class="col l6 m6 s12">
+  <img src="images/mwc-host-enable-maintenance-mode-modal.png"/>
+  <figcaption>
+
+  An example of modal dialog half-rendered when we don't wait for its visibility.
+
+  </figcaption>
+</figure>
+
+<p>Modals are evil! There are many challenges:</p>
+<ol>
+<li>We need to identify it's trigger pattern &larr; what can trigger a
+   modal to appear. In many cases the modal trigger code is already attached
+   to DOM, but is invisible. So XPATH can pick them up, but
+   <code>element.click()</code> will fail. Instead, use the brute force way to
+   click: <code>driver.execute_script("arguments[0].click();", element)</code>.</li>
+<li>Modal dialog takes time to become <em>present</em> in DOM and <em>visible</em>. You have
+   to wait for both. Waiting only for presence will give a snapshot
+   that the modal is half gray-ed out because it is still in the
+   process of rendering &larr; this is the difference between a human
+   and a computer &mdash; computer can take the snapshot much quicker
+   than human can even though the element is not yet _humanly visible
+   (but is already perfectly valid because it has attached to DOM!).</li>
+<li>Modal is often used to prompt user for an action with common option
+   of <em>do sth</em> or <strong>cancel</strong>. In our snapshot effort, I don't want to
+   change anything in the application, but only for the loop of a
+   modal. Thus, we should trigger it to appear, and <strong>always click the CANCEL</strong>!</li>
+</ol>
+<p>We deliberately ignore Modal's context because a popup usually takes
+over the entire screen asset (w/ a gray-ed out background over the
+original page), thus is viewed as a stand-alone entity anyway. And
+another good news &mdash; modal can not be nested. Thus, we are only
+dealing one at a time (if we religiously clicked the CANCEL each time!).</p>
         </p>
 
         <p>
@@ -222,34 +348,6 @@ port 8080, which by the <code>ssh</code>, will be forwarded to B.</p>
   <div class="container">
     <h3>Related:</h3>
     <div class="row">
-      <div class="col l4 m6 s12">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text row">
-            <div>
-              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-              2019-09-25
-            </div>
-
-            <h5 class="card-title">
-              Snapshot anything w/ Selenium
-            </h5>
-
-            <p>
-              <p>In my previous notes on analyzing Angular 1.x code, I have stuck at
-how to create snapshots of rendered components for my documentation
-purpose. In the manual data file <code>.json</code>, I allowed an entry to plug
-in snapshot file taken by human...
-            </p>
-
-            <div class="card-action">
-              <a class="flabel wave-effect"
-                 href="https://fengxia41103.github.io/myblog/snapshot selenium.html">
-                read more
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="col l4 m6 s12">
         <div class="card blue-grey darken-1">
           <div class="card-content white-text row">

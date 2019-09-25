@@ -1,5 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-09-13T09:23:00-04:00</updated><entry><title>Emotional AI</title><link href="https://fengxia41103.github.io/myblog/emotional%20ai.html" rel="alternate"></link><published>2019-09-13T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-13:myblog/emotional ai.html</id><summary type="html">&lt;figure class="col l7 m7 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-09-25T10:35:00-04:00</updated><entry><title>Snapshot anything w/ Selenium</title><link href="https://fengxia41103.github.io/myblog/snapshot%20selenium.html" rel="alternate"></link><published>2019-09-25T10:35:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-25:myblog/snapshot selenium.html</id><summary type="html">&lt;p&gt;In my previous notes on analyzing Angular 1.x code, I have stuck at
+how to create snapshots of rendered components for my documentation
+purpose. In the manual data file &lt;code&gt;.json&lt;/code&gt;, I allowed an entry to plug
+in snapshot file taken by human testers. As an example, the code below
+shows a block documenting:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;module: &lt;code&gt;mwc.mapping&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;its components as a LIST, and each has a key &lt;code&gt;screenshot&lt;/code&gt; that is a
+   path to the snapshot file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;quot;components&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;source file&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;../app/topology/components/mappings.component.ts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mwc-mappings&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;screenshot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;./screenshots/mwc-mappings.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;used by&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;using&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-create-flash-pool-button&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-flash-pool-actions-button&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-create-migration-zone-button&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-migration-zone-actions-button&amp;quot;&lt;/span&gt;
+      &lt;span class="p"&gt;],&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;class&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;MappingsComponent&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mwc.mappings&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Well, this gets me going to create the &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;example doc&lt;/a&gt;, but to have
+human hunting down screenshots always give me a fishy feeling &amp;mdash;
+you know how deeply I do not trust human to be &lt;strong&gt;exhaustive&lt;/strong&gt; and
+&lt;strong&gt;deterministic&lt;/strong&gt; &amp;mdash; on a good day or w/ a capable person, yes,
+you get a pretty satisfactory result, but even then, it's no guarantee
+his/her next day's delivery will be the same. Not to mention,
+executing a task such as "finding all the HTML tag matching this
+pattern, and take a screenshot of it, and save it here, and update the
+file here..." is tedious, boring, and no fun &amp;larr; I would hate to do
+something like this, not even for once, certainly not for 10th time or
+daily. Computer can do this, a lot better, quicker. After all, the
+component has been written and computer is rendering it for human to
+look at, then why can't computer just capture the &lt;em&gt;look&lt;/em&gt; of it
+automatically?&lt;/p&gt;
+&lt;p&gt;Of course it can. The idea is this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Use Selenium to launch a browser.&lt;/li&gt;
+&lt;li&gt;Use XPATH to select the element(s) you want.&lt;/li&gt;
+&lt;li&gt;Enumerate through the element, determine where to save the file
+   &amp;mdash; file path, file name convention.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;element.snapshot(file_path)&lt;/code&gt; will write to &lt;code&gt;file_path&lt;/code&gt; onto the file system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/selenium%20snapshot.gif"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Window on the right hand side is monitoring folder on the file system
+  for screenshots. It starts w/ an empty directory. Window on the top
+  left is the terminal where you will see printout from the script
+  when it finds the interested element and takes its snapshot,
+  eg. &lt;code&gt;smile: mwc-support-mode-modal&lt;/code&gt;. Window on the bottom left is
+  the browser window launched by Selenium which gives you an idea how
+  the computer is working. The browser is shown only for demo
+  purpose. It can be turned into &lt;strong&gt;headless&lt;/strong&gt; mode.&lt;/p&gt;
+&lt;h1&gt;context&lt;/h1&gt;
+&lt;p&gt;One thing of taking snapshot is to provide a context to viewer &amp;mdash;
+in which page/panel/container this component is being used. Believe or
+not, some components I'm dealing w/ is nothing but a small green dot
+(see below)! Therefore, it will be pretty useless if I'm just giving
+you an image of itself. &lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/mwc-network-hardware-status-icon.png"/&gt;
+  &lt;figcaption&gt;
+  Example of an element becoming much more meaningful when given a
+  context than only by itself.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;On the other hand, by taking the snapshot of a &lt;em&gt;higher&lt;/em&gt; level element
+and use a RED square to highlight your target, you have a context of
+its usage. The trick is to use the &lt;code&gt;ancestor&lt;/code&gt; axes in XPATH. Say we
+are to search any HTML tag starts with &lt;code&gt;feng&lt;/code&gt;: &lt;code&gt;target_xpath =
+"*[starts-with(local-name(), 'feng-')]"&lt;/code&gt;, then I want to find its
+context matching the same HTML tag pattern: &lt;code&gt;ancestor_xpath =
+"ancestor::%s[position()=1]" % target_xpath&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;snapshot in a context&lt;/h2&gt;
+&lt;p&gt;Taking snapshot to illustrate a context thus taking two steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Take a snapshot of the context element, eg. an ancestor, and save
+   the file.&lt;/li&gt;
+&lt;li&gt;Open this file, and using Python Image Library to draw a rectangle
+   using the &lt;code&gt;location&lt;/code&gt; and &lt;code&gt;size&lt;/code&gt; of your target element.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Example of a code snippet is shown below. &lt;strong&gt;Note&lt;/strong&gt; that you must adjust the
+element &lt;code&gt;c&lt;/code&gt; location based on the ancestor's because once we took a
+snapshot of the ancestor, its origin becomes the new &lt;code&gt;(0,0)&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# looking for the first ancestor matching the xpath&lt;/span&gt;
+&lt;span class="n"&gt;ancestor_xpath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ancestor::&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;[position()=1]&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;
+&lt;span class="n"&gt;ancestors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_elements_by_xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ancestor_xpath&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ancestors&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;parent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ancestors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# take snapshot of the ancestor&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_take_snapshot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;continue&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# draw a red rectangle around this component&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;draw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ImageDraw&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Draw&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;x1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;y1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;y&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;x2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;width&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;y2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;height&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;draw&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rectangle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;x1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y2&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt;
+            &lt;span class="n"&gt;outline&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;del&lt;/span&gt; &lt;span class="n"&gt;draw&lt;/span&gt;
+        &lt;span class="n"&gt;im&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_take_snapshot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;dropdown menu&lt;/h1&gt;
+&lt;p&gt;Dropdown is tricky. You don't see the dropdown menu unless user
+clicks. However, like the green dot example above, it's not meaningful
+you only show the trigger because many times it's only an icon (not
+even a button w/ text!). So depending on how dropdown is being
+implemented in your code, you have to think of a way to &lt;em&gt;open&lt;/em&gt; the
+dropdown, and take a snapshot of it &lt;strong&gt;together w/ its trigger&lt;/strong&gt;:&lt;/p&gt;
+&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/mwc-network-controller-actions-button.png"/&gt;
+  &lt;figcaption&gt;
+
+  An example of dropdown menu whose trigger is only a small icon. Thus
+  by programmatically open the dropdown, we can take a snapshot of the
+  menu and the trigger together, giving it a context.
+
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;modal dialog&lt;/h1&gt;
+&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/mwc-host-enable-maintenance-mode-modal.png"/&gt;
+  &lt;figcaption&gt;
+
+  An example of modal dialog half-rendered when we don't wait for its visibility.
+
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Modals are evil! There are many challenges:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We need to identify it's trigger pattern &amp;larr; what can trigger a
+   modal to appear. In many cases the modal trigger code is already attached
+   to DOM, but is invisible. So XPATH can pick them up, but
+   &lt;code&gt;element.click()&lt;/code&gt; will fail. Instead, use the brute force way to
+   click: &lt;code&gt;driver.execute_script("arguments[0].click();", element)&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Modal dialog takes time to become &lt;em&gt;present&lt;/em&gt; in DOM and &lt;em&gt;visible&lt;/em&gt;. You have
+   to wait for both. Waiting only for presence will give a snapshot
+   that the modal is half gray-ed out because it is still in the
+   process of rendering &amp;larr; this is the difference between a human
+   and a computer &amp;mdash; computer can take the snapshot much quicker
+   than human can even though the element is not yet _humanly visible
+   (but is already perfectly valid because it has attached to DOM!).&lt;/li&gt;
+&lt;li&gt;Modal is often used to prompt user for an action with common option
+   of &lt;em&gt;do sth&lt;/em&gt; or &lt;strong&gt;cancel&lt;/strong&gt;. In our snapshot effort, I don't want to
+   change anything in the application, but only for the loop of a
+   modal. Thus, we should trigger it to appear, and &lt;strong&gt;always click the CANCEL&lt;/strong&gt;!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We deliberately ignore Modal's context because a popup usually takes
+over the entire screen asset (w/ a gray-ed out background over the
+original page), thus is viewed as a stand-alone entity anyway. And
+another good news &amp;mdash; modal can not be nested. Thus, we are only
+dealing one at a time (if we religiously clicked the CANCEL each time!).&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Emotional AI</title><link href="https://fengxia41103.github.io/myblog/emotional%20ai.html" rel="alternate"></link><published>2019-09-13T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-13:myblog/emotional ai.html</id><summary type="html">&lt;figure class="col l7 m7 s12"&gt;
   &lt;img src="images/classic%20beauty.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -473,7 +651,7 @@ brand).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Pretty cool, huh!?&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Analyzing Angular 1.x code</title><link href="https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html" rel="alternate"></link><published>2019-09-01T17:58:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/analyzing angular 1x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+&lt;p&gt;Pretty cool, huh!?&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Analyzing Angular 1.x code</title><link href="https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html" rel="alternate"></link><published>2019-09-25T10:33:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/analyzing angular 1x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
 but it didn't work for Angular 1.x code. &lt;/p&gt;
 &lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
 because everyone on the team, including UI devs, can only engage a
@@ -493,8 +671,7 @@ thinking is &lt;a href="https://storybook.js.org/docs/testing/automated-visual-t
 concept appears to be by looking at how young a few mentioned
 libraries/services are. Maybe I'm just behind the curve. Nonetheless,
 here I am, and I'm catching up, fast.&lt;/p&gt;
-&lt;p&gt;For now, I haven't figured out how to capture component's rendered
-look automatically. &lt;a href="https://github.com/americanexpress/jest-image-snapshot"&gt;jest-image-snapshot&lt;/a&gt; mentions of saving
+&lt;p&gt;&lt;a href="https://github.com/americanexpress/jest-image-snapshot"&gt;jest-image-snapshot&lt;/a&gt; mentions of saving
 snapshot in some dir &amp;mdash; maybe I can use this to get a snapshot of
 component. But it's saving them for future comparison purpose, which
 I'm not ready yet to embark this level of testing. So keep the notes

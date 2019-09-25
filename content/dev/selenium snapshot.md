@@ -200,6 +200,10 @@ original page), thus is viewed as a stand-alone entity anyway. And
 another good news &mdash; modal can not be nested. Thus, we are only
 dealing one at a time (if we religiously clicked the CANCEL each time!).
 
+# code
+
+Script is [here][3].
+
 [1]: {filename}/dev/analyze%20angular%201x.md
 [2]: {filename}/downloads/webapp.pdf
-
+[3]: https://github.com/fengxia41103/dev/tree/master/snapshot

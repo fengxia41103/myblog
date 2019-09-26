@@ -156,7 +156,7 @@ number]</code> flag. While using MAAS it is seen that MAAS will turn a
 <code>READY</code> machine into <code>ALLOCATED</code> then <code>DEPLOYING</code>. Once a Juju agent
 is installed (provisioned), the agent executes application deployment.</p>
 <figure class="s12 center">
-    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <img src="/images/juju%20deploy%20target%20node%20state%20diagram.png" />
     <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
 </figure>
 
@@ -174,7 +174,7 @@ installed, knows how to speak to the state controller (machine-0), how
 to find and download a charm, and how to use it to deploy an
 application. So just how are agents wired together?</p>
 <figure class="s12 center">
-    <img src="images/juju%20agent%20overview.png" />
+    <img src="/images/juju%20agent%20overview.png" />
     <figcaption>High level view of Juju agents in an environment</figcaption>
 </figure>
 
@@ -197,7 +197,7 @@ change. The change(set) essentially has all the information the
 provisioner needs to take an action so to bring machine from state A
 &rarr; state B.</p>
 <figure class="s12 center">
-    <img src="images/juju%20machine%200%20state.png" />
+    <img src="/images/juju%20machine%200%20state.png" />
     <figcaption>Machine-0 state & provisioner</figcaption>
 </figure>
 
@@ -248,7 +248,7 @@ them are just think wrapper of next function. The mapping between a
 command to a state is taking place in <code>state.AddApplication()</code> which
 I'm highlighting in <font color="green">green</font>.</p>
 <figure class="s12 center">
-    <img src="images/juju%20deploy%20call%20chain.png" />
+    <img src="/images/juju%20deploy%20call%20chain.png" />
     <figcaption>Illustration of call chain by "juju deploy" command</figcaption>
 </figure>
         </p>

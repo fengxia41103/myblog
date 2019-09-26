@@ -101,7 +101,7 @@ have a good understanding of the Satellite models and procedures.&lt;/p&gt;
 &lt;li&gt;Info flow: external source &amp;rarr; main server &amp;rarr; capsule
     server &amp;rarr; managed host.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src="images/rh%20satellite%20overall%20architecture%20official.png"
+&lt;p&gt;&lt;img src="/images/rh%20satellite%20overall%20architecture%20official.png"
      class="col s12"&gt;&lt;/p&gt;
 &lt;h1&gt;Content view&lt;/h1&gt;
 &lt;ol&gt;
@@ -113,7 +113,7 @@ have a good understanding of the Satellite models and procedures.&lt;/p&gt;
    need to be changed. So from its consumer's POV, it sees the change
    transparently.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src="images/rh%20satellite%20content%20view.png"
+&lt;p&gt;&lt;img src="/images/rh%20satellite%20content%20view.png"
      class="col s12"&gt;&lt;/p&gt;
 &lt;h1&gt;RH subscription model&lt;/h1&gt;
 &lt;p&gt;The center piece of Satellite is RH subscription. This is how
@@ -190,7 +190,7 @@ if you assign &lt;code&gt;10 entitlements&lt;/code&gt; to, say &lt;code&gt;RH En
 subscription (which as basic RHEL OS rpms), it will support 10 RHEL
 VM, and your 11th one will fail to do even &lt;code&gt;yum update&lt;/code&gt;.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="images/rh%20subscription%20model.png"/&gt;
+  &lt;img src="/images/rh%20subscription%20model.png"/&gt;
   &lt;figcaption&gt;RH subscription model&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -259,7 +259,7 @@ end-system to access content stores.&lt;/p&gt;
 
 
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="images/rh%20entitlement%20accounting.png"/&gt;
+  &lt;img src="/images/rh%20entitlement%20accounting.png"/&gt;
 &lt;/figure&gt;
 
 &lt;h3&gt;how many we are using&lt;/h3&gt;
@@ -331,7 +331,7 @@ subscription-manager repos --disable&lt;span class="o"&gt;=[&lt;/span&gt;repo na
 &lt;h1&gt;Register a client to SA server&lt;/h1&gt;
 &lt;figure class="col s12 center"&gt;
   &lt;img class="img-responsive"
-       src="images/katello%20ca.png" /&gt;
+       src="/images/katello%20ca.png" /&gt;
   &lt;figcaption&gt;Download `katello ca` from Satellite 6.3 server&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -410,7 +410,7 @@ page:&lt;/p&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12 center"&gt;
   &lt;img class="img-responsive"
-       src="images/rh%20satellite%20content%20hiearchy.png" /&gt;
+       src="/images/rh%20satellite%20content%20hiearchy.png" /&gt;
   &lt;figcaption&gt;Satellite content hierarchy&lt;/figcaption&gt;
 &lt;/figure&gt;
 

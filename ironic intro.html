@@ -154,7 +154,7 @@ Ironic. In particular, I'd like to illustrate a few Ironic internals
 to show what "managing baremetal" is actually doing.</p>
 <h1>Ironic introduction</h1>
 <figure class="s12 center">
-    <img src="images/ironic_design.png" />
+    <img src="/images/ironic_design.png" />
     <figcaption>Ironic design (<a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic">source</a>)</figcaption>
 </figure>
 
@@ -170,7 +170,7 @@ important role in Ironic's workflow: <a href="https://docs.openstack.org/develop
 <a href="https://docs.openstack.org/developer/ironic/deploy/inspection.html">Ironic Inspector</a>.</p>
 <p>Since it stores meta data in a DB, let's take a look at its DB schema:</p>
 <figure class="s12 center">
-    <img src="images/ironic_db_er.png" />
+    <img src="/images/ironic_db_er.png" />
     <figcaption>Ironic ER diagram</figcaption>
 </figure>
 
@@ -226,7 +226,7 @@ information. Again, the creation does nothing besides creating a
 record in Ironic DB. Run <code>openstack baremetal node show [node_uuid]</code>
 displays details of a node.</p>
 <figure class="s12 center">
-    <img src="images/ironic_node_show.png" />
+    <img src="/images/ironic_node_show.png" />
     <figcaption>Details of a provisioned node</figcaption>
 </figure>
 
@@ -394,7 +394,7 @@ UUID. From that point on, IPA will ping home (hearbeat) periodically
 hearbeat payload is a callback URL, so apparently IPA also exposes a
 HTTP service that Ironic conductor can use for commands.</p>
 <figure class="s12 center">
-    <img src="images/ironic_ipa_sequence.png" />
+    <img src="/images/ironic_ipa_sequence.png" />
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
 

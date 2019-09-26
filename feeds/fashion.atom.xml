@@ -21,7 +21,7 @@ shines in term of data analysis and reporting.&lt;/p&gt;
 &lt;p&gt;Knowing the top seller is the most important thing for any business.
 The report is compiled from sales orders to show which product is high in demand.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_19.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_19.png"&gt;
     &lt;figcaption&gt;Top seller report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -39,7 +39,7 @@ price or the vendor cost of product. It can be a simple typo, but
 can also be an indicator of wrong strategy.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_20.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_20.png"&gt;
     &lt;figcaption&gt;Most profitable product report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -50,7 +50,7 @@ and top purchased should always deserve a further analysis in order to
 ensure that your business is not just piling up inventory without
 an exit plan.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_21.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_21.png"&gt;
     &lt;figcaption&gt;Top purchased product report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -62,7 +62,7 @@ that the order fails to fulfill properly. However, it does not
 distinguish between an order that has zero fulfillment rate and the
 ones that are in-progress.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_22.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_22.png"&gt;
     &lt;figcaption&gt;Top sales order by QTY balance report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -75,7 +75,7 @@ fulfillment. That's usually the case when filing return and filing
 fulfillment form are handled by two groups of people who are not
 synchronized.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_23.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_23.png"&gt;
     &lt;figcaption&gt;Top sales order in-progress fulfills report&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -86,9 +86,9 @@ we are maintaining a relationship with our peers.&lt;/p&gt;
 &lt;figure&gt;
   &lt;div class="row"&gt;
     &lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="images/fashion_24.png"&gt;
+      &lt;img class="center img-responsive" src="/images/fashion_24.png"&gt;
     &lt;/div&gt;&lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="images/fashion_25.png"&gt;
+      &lt;img class="center img-responsive" src="/images/fashion_25.png"&gt;
     &lt;/div&gt;&lt;/div&gt;
     &lt;figcaption&gt;Customer AR and vendor AP report&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="fashion"></category></entry><entry><title>Fashion ERP — orders</title><link href="https://fengxia41103.github.io/myblog/fashion%20orders.html" rel="alternate"></link><published>2016-06-06T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-06:myblog/fashion orders.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
@@ -115,7 +115,7 @@ tracks all the above activities. The ratio between the two is
 expecting, either by original products or replacement or any other
 forms of settlement in between.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/order life cycle.png"&gt;
+    &lt;img class="center img-responsive" src="/images/order life cycle.png"&gt;
     &lt;figcaption&gt;Order life cycle&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -146,9 +146,9 @@ through traditional shopping cart method.&lt;/p&gt;
 &lt;figure&gt;
   &lt;div class="row"&gt;
     &lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="images/fashion_7.png"&gt;
+      &lt;img class="center img-responsive" src="/images/fashion_7.png"&gt;
     &lt;/div&gt;&lt;div class="col s6"&gt;
-      &lt;img class="center img-responsive" src="images/fashion_8.png"&gt;
+      &lt;img class="center img-responsive" src="/images/fashion_8.png"&gt;
     &lt;/div&gt;&lt;/div&gt;
     &lt;figcaption&gt;
       One can use a quick way or shopping cart to create a sales order
@@ -160,14 +160,14 @@ through traditional shopping cart method.&lt;/p&gt;
 quantity and sum, the application offers a dropdown that user can
 easily view a broken-down detail by each vendor.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_9.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_9.png"&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Order details are grouped by vendor also. Each vendor tab has details
 of products on order. At the bottom of tab, the application computes
 a &lt;em&gt;total qty&lt;/em&gt; and &lt;em&gt;total value&lt;/em&gt; for that vendor.&lt;/p&gt;
 &lt;figure&gt;
-  &lt;img class="center img-responsive" src="images/fashion_10.png"&gt;
+  &lt;img class="center img-responsive" src="/images/fashion_10.png"&gt;
   &lt;figcaption&gt;Order detail tabs are a set of shopping basket, one per vendor&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -183,7 +183,7 @@ damage.&lt;/p&gt;
 &lt;p&gt;fulfill rate = count of fulfilled item / total number of items&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;figure&gt;
-  &lt;img class="center img-responsive" src="images/fashion_11.png"&gt;
+  &lt;img class="center img-responsive" src="/images/fashion_11.png"&gt;
   &lt;figcaption&gt;Create an order fulfillment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -199,7 +199,7 @@ that the application is expecting. This is the &lt;em&gt;theoretical&lt;/em&gt; 
 a line time, and the addition of all received fulfillment will be the
 &lt;em&gt;actual&lt;/em&gt;.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_12.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_12.png"&gt;
     &lt;figcaption&gt;Fulfillment summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -222,7 +222,7 @@ an order. This contrasts to the approach where return is checked
 against inventory regardless how that product got into the inventory
 at the first place.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_16.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_16.png"&gt;
     &lt;figcaption&gt;Return a product&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -236,7 +236,7 @@ deducted from the current &lt;em&gt;account payable&lt;/em&gt; so buyer owes les
 to the return.&lt;/p&gt;
 &lt;h1&gt;Make a payment&lt;/h1&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_13.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_13.png"&gt;
     &lt;figcaption&gt;Make a payment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -245,7 +245,7 @@ now it provides a function to register a payment against an order.
 Also, user can finalize a payment by &lt;em&gt;reviewing&lt;/em&gt; it. This in effect
 locks down the payment so it is not editable anymore.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_14.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_14.png"&gt;
     &lt;figcaption&gt;Review a payment&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -267,7 +267,7 @@ a sales order into multiple purchase orders, one per vendor.
 These orders will then be tracked individually for fulfillment, payment
 and so forth.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_15.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_15.png"&gt;
     &lt;figcaption&gt;Keep purchase orders in sync with sales order in drop shipping&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -304,7 +304,7 @@ She also runs a wholesale business in which purchase and sales have no
 such strong bound. Thus the application will leave the SO-PO reference
 optional.&lt;/p&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_17.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_17.png"&gt;
     &lt;figcaption&gt;Purchase order summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -324,7 +324,7 @@ list, &lt;em&gt;"Available In"&lt;/em&gt;, so this information is captured:&lt;/
 &lt;li&gt;&lt;span class="myhighlight"&gt;Jan - Dec&lt;/span&gt;: calendar month. Its year is implied.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure&gt;
-    &lt;img class="center img-responsive" src="images/fashion_18.png"&gt;
+    &lt;img class="center img-responsive" src="/images/fashion_18.png"&gt;
     &lt;figcaption&gt;Purchase order line item availability&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -371,7 +371,7 @@ manage its product.  The more detailed it is, the more accurate the
 rest of the operations can be, but also the more work to set it up
 initially.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="images/fashion_1.png"&gt;
+    &lt;img src="/images/fashion_1.png"&gt;
     &lt;figcaption&gt;For staffs, search by filter&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -386,7 +386,7 @@ vendor, season, name and style's serial number, instead of seeing it
 physically. Therefore, to staffs filtering by these attributes will be
 more efficient.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="images/fashion_3.png"&gt;
+    &lt;img src="/images/fashion_3.png"&gt;
     &lt;figcaption&gt;For customers, browse/search by season and vendor&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -405,7 +405,7 @@ be rolled up to location level and company level. There is also a
 common setup of &lt;em&gt;region&lt;/em&gt; or &lt;em&gt;district&lt;/em&gt; level that is between company
 and location. It is not implemented but can be added easily.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="images/fashion_2.png"&gt;
+    &lt;img  src="/images/fashion_2.png"&gt;
     &lt;figcaption&gt;Inventory structure diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -441,7 +441,7 @@ page, user can select from a list of storages to do the
 counting. Season and vendor list within each storage are derived from
 products in that storage by the application automatically.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="images/fashion_4.png"&gt;
+    &lt;img  src="/images/fashion_4.png"&gt;
     &lt;figcaption&gt;Select location and vendor to count&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -453,14 +453,14 @@ ones having a non-zero count will be highlighted and saved later.
 However, it is possible that a product has been sold out. So to handle
 this special case we use a &lt;em&gt;star&lt;/em&gt; to indicate this situation.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="images/fashion_5.png"&gt;
+    &lt;img  src="/images/fashion_5.png"&gt;
     &lt;figcaption&gt;Physical inventory admin mode&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;User mode removes product details from the view, leaving only product SKU and
 size information for reference.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="images/fashion_6.png"&gt;
+    &lt;img  src="/images/fashion_6.png"&gt;
     &lt;figcaption&gt;Physical inventory user mode&lt;/figcaption&gt;
 &lt;/figure&gt;
 

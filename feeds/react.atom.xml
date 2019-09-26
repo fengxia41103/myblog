@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/react.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2017-11-12T19:00:00-05:00</updated><entry><title>Alpha Advantage SP500 API</title><link href="https://fengxia41103.github.io/myblog/alpha%20sp500.html" rel="alternate"></link><published>2017-11-12T19:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-11-12:myblog/alpha sp500.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-  &lt;img src="images/alpha%20advantage%20sp500.png"/&gt;
+  &lt;img src="/images/alpha%20advantage%20sp500.png"/&gt;
     &lt;figcaption&gt;SP500&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -17,6 +17,6 @@ user selected company symbol, and draw all the data index on a single page.&lt;/
 &lt;/blockquote&gt;
 &lt;p&gt;The &lt;code&gt;architecture&lt;/code&gt;/&lt;code&gt;design&lt;/code&gt; is shown below, and &lt;a href="https://github.com/fengxia41103/sp500"&gt;github code&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="images/sp500%20architecture.png"/&gt;
+  &lt;img src="/images/sp500%20architecture.png"/&gt;
   &lt;figcaption&gt;SP500 SPA architecture&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="react"></category></entry></feed>

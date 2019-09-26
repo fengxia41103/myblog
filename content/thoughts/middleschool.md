@@ -4,9 +4,11 @@ Tags: thoughts
 Slug: middleschool
 Author: Feng Xia
 
+
 <figure class="col l6 m6 s12">
   <img src="/images/car%20hitting%20pole.jpg"/>
 </figure>
+
 
 Watching Noah to do homework these days is like watching paint dry
 &mdash; a true challenge of patience, and the result is often very

@@ -7,11 +7,12 @@ import sys
 AUTHOR = u"Feng Xia"
 SITENAME = u"Be Care Free'"
 #SITEURL = "http://fengxia.co"
-SITEURL = "https://fengxia41103.github.io/myblog/"
+# SITEURL = "https://fengxia41103.github.io/myblog/"
+SITEURL = ""
 
 PATH = "content"
 
-IGNORE_FILES = ["[.#].*"]
+IGNORE_FILES = ["\.#.*"]
 
 # These folders will be copied to `/output` without pelican modification
 STATIC_PATHS = ["images", "downloads", "app", "data", "slides"]  # "extra/CNAME"
@@ -60,7 +61,6 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 # plugins
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["tipue_search"]
-
 
 ##############################
 #

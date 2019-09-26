@@ -115,6 +115,6 @@ philosophy and, even religion... what a fun!
 
 
 [1]: {filename}/thoughts/irresponsible%20response.md
-[2]: {filename}/thoughts/ai.MD
+[2]: {filename}/thoughts/ai.md
 
 [^1]: I'll be using the word `AI` and `computer` interchangeably.  

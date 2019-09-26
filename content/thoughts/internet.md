@@ -158,6 +158,6 @@ comes up something, good!?
 
 Peace.
 
-[1]: {filename}/thoughtsreflection%20on%20technology.md
+[1]: {filename}/thoughts/reflection%20on%20technology.md
 [2]: {filename}/thoughts/social%20media.md
  

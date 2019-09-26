@@ -5,7 +5,7 @@ Slug: sound of silence
 Author: Feng Xia
 
 <figure class="col l4 m4 s12">
-  <img src="images/funny/life%20kick.jpg"/>
+  <img src="/images/funny/life%20kick.jpg"/>
 </figure>
 
 What is everybody looking for? Identity? I see people in the middle of

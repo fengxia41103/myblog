@@ -36,7 +36,7 @@ Tracing through ODOO boot code, we have illustrated steps
 of ODOO's loading process in diagram below:
 
 <figure class="s12 center">
-  <img src="images/odoo8_loading.png" />
+  <img src="/images/odoo8_loading.png" />
   <figcaption>ODOO8 loading sequence</figcaption>
 </figure>
 
@@ -102,7 +102,7 @@ as [Guicorn][] and [uwsgi][].
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html#BaseHTTPServer.HTTPServer
 
 <figure class="s12 center">
-  <img src="images/odoo8_server_run.png" />
+  <img src="/images/odoo8_server_run.png" />
   <figcaption>ODOO8 ThreadedServer</figcaption>
 </figure>
 
@@ -140,7 +140,7 @@ the entire call trace in its memory and knows details of call stack.
 [HTTPServer]: https://docs.python.org/2/library/basehttpserver.html
 
 <figure class="s12 center">
-  <img src="images/odoo8_loading_callgraph.png"/>
+  <img src="/images/odoo8_loading_callgraph.png"/>
     <figcaption>ODOO 8 loading call trace diagram</figcaption>
 </figure>
 

@@ -119,7 +119,7 @@ This document describes procedure to shutdown an IBB brain instance.
       `maintenance`:
 
     <figure class="col s12">
-      <img src="images/ibb/shutdown%20rhv%20storage%20domain.png"/>
+      <img src="/images/ibb/shutdown%20rhv%20storage%20domain.png"/>
     </figure>
 
 4. Shutdown `hosted-engine` VM.
@@ -140,7 +140,7 @@ This document describes procedure to shutdown an IBB brain instance.
    2. stop one: `gluster volume stop <volume name>`
 
     <figure class="col s12">
-      <img src="images/ibb/shutdown%20gluster%20volume.png"/>
+      <img src="/images/ibb/shutdown%20gluster%20volume.png"/>
     </figure>
 
 9. Power off brain nodes.
@@ -242,7 +242,7 @@ This document describes procedure to shutdown an IBB brain instance.
     3. Starting storage can take a while.
 
     <figure class="col s12">
-      <img src="images/ibb/rhhi%20activate%20domain.png"/>
+      <img src="/images/ibb/rhhi%20activate%20domain.png"/>
     </figure>
 
 5. Remove global maintenance mode: `hosted-engine --set-maintenance

@@ -5,7 +5,7 @@ Slug: irresponsible response
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/funny/prime.png"/>
+  <img src="/images/funny/prime.png"/>
 </figure>
 
 
@@ -66,7 +66,7 @@ back to the woman and put her brain on a spin now:
 # The pattern
 
 <figure class="col l4 m4 s12">
-  <img src="images/funny/blame.jpg"/>
+  <img src="/images/funny/blame.jpg"/>
 </figure>
 
 By the end of the day, she still doesn't know how long she will wait,

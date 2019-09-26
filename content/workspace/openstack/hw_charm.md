@@ -33,7 +33,7 @@ Along this thought, using ThinkAgile as an example we set off to model
 a **Hardware workload** in charms.
 
 <figure class="s12 center">
-  <img src="images/hw%20workload%20stack%20diff.png" />
+  <img src="/images/hw%20workload%20stack%20diff.png" />
   <figcaption>New system stack with HW workload capability</figcaption>
 </figure>
 
@@ -51,9 +51,9 @@ so to acquire a complete software-defined system.
 
 <figure class="row">
   <img class="col s7"
-       src="images/hw%20workload%20deploy%20example.png" />
+       src="/images/hw%20workload%20deploy%20example.png" />
   <img class="col s5"
-       src="images/hw%20workload%20deploy%20example%20components.png" />
+       src="/images/hw%20workload%20deploy%20example%20components.png" />
   <figcaption class="col s12">HW workloads</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ servers are consisted of components such as RAID adapters and
 storages.
 
 <figure class="s12 center">
-  <img src="images/hw%20solution%20tree.png" />
+  <img src="/images/hw%20solution%20tree.png" />
   <figcaption>HW solution hierarchy</figcaption>
 </figure>
 

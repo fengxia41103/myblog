@@ -5,7 +5,7 @@ Slug: operating systems
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="images/funny/dilbert%20software.jpg"/>
+  <img src="/images/funny/dilbert%20software.jpg"/>
 </figure>
 
 Let me talk about OS. This has been an annoying topic recently due to

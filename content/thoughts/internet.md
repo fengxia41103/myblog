@@ -6,7 +6,7 @@ Author: Feng Xia
 Modified: 2019-09-04 08:20
 
 <figure class="col s12">
-  <img src="images/anime%20guitar%20and%20girl.jpg"/>
+  <img src="/images/anime%20guitar%20and%20girl.jpg"/>
 </figure>
 
 

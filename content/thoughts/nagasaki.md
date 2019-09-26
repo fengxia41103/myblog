@@ -6,7 +6,7 @@ Author: Feng Xia
 
 <div class="col s12" style="margin-right: 2em;">
 <video width="100%" height="100%" controls="controls">
-  <source src="images/noah%20at%20mit.mp4 "
+  <source src="/images/noah%20at%20mit.mp4 "
           type="video/mp4" />
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/

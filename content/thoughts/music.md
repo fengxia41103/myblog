@@ -5,7 +5,7 @@ Slug: music
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/shanqiu.png"/>
+  <img src="/images/shanqiu.png"/>
 </figure>
 
 There is magic in music. There is.

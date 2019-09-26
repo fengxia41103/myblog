@@ -5,7 +5,7 @@ Slug: details
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/fire%20on%20the%20plain.png"/>
+  <img src="/images/fire%20on%20the%20plain.png"/>
 </figure>
 
 Devils are indeed in details. Watching a Japanese movie [Fire on the

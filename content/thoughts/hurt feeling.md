@@ -5,7 +5,7 @@ Slug: hurt feelings
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/stock-photo-14009067.jpg"/>
+  <img src="/images/stock-photo-14009067.jpg"/>
 </figure>
 
 This is a tough one, really, cause I have been puzzled by this topic

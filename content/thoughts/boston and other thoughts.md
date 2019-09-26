@@ -5,7 +5,7 @@ Slug: boston and other thoughts
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="images/such%20a%20beauty.jpg"/>
+  <img src="/images/such%20a%20beauty.jpg"/>
 </figure>
 
 Trip to Boston was nice, especially when I saw old friends &mdash;

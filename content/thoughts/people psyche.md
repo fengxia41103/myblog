@@ -5,7 +5,7 @@ Slug: people psyche
 Author: Feng Xia
 
 <figure class="col l4 m4 s12">
-  <img src="images/slowdown.jpg"/>
+  <img src="/images/slowdown.jpg"/>
 </figure>
 
 Have you observed something that ppl do, and you just wonder *what the

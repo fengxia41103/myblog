@@ -6,7 +6,7 @@ Tags: react
 Author: Feng Xia
 
 <figure class="s12 center">
-  <img src="images/alpha%20advantage%20sp500.png"/>
+  <img src="/images/alpha%20advantage%20sp500.png"/>
     <figcaption>SP500</figcaption>
 </figure>
 
@@ -35,6 +35,6 @@ The `architecture`/`design` is shown below, and [github code][6].
 [6]: https://github.com/fengxia41103/sp500
 
 <figure class="s12 center">
-  <img src="images/sp500%20architecture.png"/>
+  <img src="/images/sp500%20architecture.png"/>
   <figcaption>SP500 SPA architecture</figcaption>
 </figure>

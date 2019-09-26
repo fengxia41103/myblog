@@ -5,7 +5,7 @@ Slug: watching clouds
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/korea%20addidas.png"/>
+  <img src="/images/korea%20addidas.png"/>
 </figure>
 
 

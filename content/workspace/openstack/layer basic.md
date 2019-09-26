@@ -17,7 +17,7 @@ hook sequence is always executed in an order that is dictated by Juju
 code.
 
 <figure class="s12 center">
-  <img src="images/charm%20hooks.png" />
+  <img src="/images/charm%20hooks.png" />
   <figcaption>Sequence of charm hooks</figcaption>
 </figure>
 

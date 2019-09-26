@@ -5,7 +5,7 @@ Slug: the wrong elite
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/cat%20viewed%20from%20below.jpg"/>
+  <img src="/images/cat%20viewed%20from%20below.jpg"/>
 </figure>
 
 

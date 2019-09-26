@@ -5,7 +5,7 @@ Slug: pandoc workflow
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/peppa.jpg"/>
+  <img src="/images/peppa.jpg"/>
 </figure>
 
 
@@ -123,7 +123,7 @@ your doc is a snap, and it looks, beautiful!
 
 
 <figure class="col l6 m6 s12">
-  <img src="images/bibliography.png"/>
+  <img src="/images/bibliography.png"/>
   <figcaption>Example of .bib result in PDF</figcaption>
 </figure>
 

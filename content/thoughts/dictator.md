@@ -5,7 +5,7 @@ Slug: dictator
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/hahn.png"/>
+  <img src="/images/hahn.png"/>
 </figure>
 
 Here is a really interesting conversation with Noah. We have been

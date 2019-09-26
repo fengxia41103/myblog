@@ -27,7 +27,7 @@ innovation wave.
 # Pls, stop "buzzing"
 
 <figure class="col l6 m6 s12">
-  <img src="images/funny/startup.jpg"/>
+  <img src="/images/funny/startup.jpg"/>
 </figure>
 
 First, loading buzz words is not innovation.  These days just walking
@@ -198,7 +198,7 @@ who takes innovation seriously.
 # Disruptive, not
 
 <figure class="col l6 m6 s12">
-  <img src="images/funny/disruptive.jpg"/>
+  <img src="/images/funny/disruptive.jpg"/>
 </figure>
 
 A byproduct of China's economy miracle is an impatience to realize a

@@ -9,7 +9,7 @@ machine (B). If we can SSH from A&rarr;B, we can reroute browser
 traffic from A to B, much quicker than X-windows.
 
 <figure class="col l4 m4 s12">
-  <img src="images/browser%20proxy.png"
+  <img src="/images/browser%20proxy.png"
        class="center img-responsive">
 </figure>
 
@@ -46,7 +46,7 @@ traffic from A to B, much quicker than X-windows.
      `127.0.0.1` are listed. We want to use `localhost`!
  
 <figure class="col s12">
-  <img src="images/browser%20proxy%20firefox%20setting.png"
+  <img src="/images/browser%20proxy%20firefox%20setting.png"
        class="center img-responsive">
   <figcaption>Setting up proxy in Firefox</figcaption>
 </figure>

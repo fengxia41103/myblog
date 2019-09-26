@@ -5,7 +5,7 @@ Slug: logic
 Author: Feng Xia
 
 <figure class="col l5 m5 s12">
-  <img src="images/logic.png"/>
+  <img src="/images/logic.png"/>
 </figure>
 
 

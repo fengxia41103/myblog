@@ -5,7 +5,7 @@ Slug: forget someone
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/bunny2.jpg"/>
+  <img src="/images/bunny2.jpg"/>
 </figure>
 
 Forget someone, is hard.

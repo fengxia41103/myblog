@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col l4 m4 s12">
-  <img src="images/funny/pointers.png"/>
+  <img src="/images/funny/pointers.png"/>
 </figure>
 
 # Irrelevant
@@ -49,7 +49,7 @@ the way through to generate those instructions that make the CPU
 [4]: https://github.com/twisted/twisted
 
 <figure class="col l4 m4 s12">
-  <img src="images/funny/1519232-geek_poke02.jpg"/>
+  <img src="/images/funny/1519232-geek_poke02.jpg"/>
 </figure>
 
 

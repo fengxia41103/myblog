@@ -5,7 +5,7 @@ Slug: people
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/bunny%20not%20happy.jpg"/>
+  <img src="/images/bunny%20not%20happy.jpg"/>
 </figure>
 
 What is people? I thought I had it figured out, but now I start to

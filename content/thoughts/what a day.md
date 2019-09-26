@@ -5,7 +5,7 @@ Slug: what a day
 Author: Feng Xia
 
 <figure class="col l4 m4 s12">
-  <img src="images/funny/depression.jpg"/>
+  <img src="/images/funny/depression.jpg"/>
 </figure>
 
 I was sitting in this underground little food court, breathing the

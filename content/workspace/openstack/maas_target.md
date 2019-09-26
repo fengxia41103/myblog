@@ -37,7 +37,7 @@ itself down at the end of the boot.
 MAAS target goes through a life cycel as shown below:
 
 <figure class="s12 center">
-  <img src="images/maas_target_life_cycle.png"/>
+  <img src="/images/maas_target_life_cycle.png"/>
   <figcaption>MAAS target node life cycle</figcaption>
 </figure>
 

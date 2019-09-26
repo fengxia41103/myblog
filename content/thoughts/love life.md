@@ -6,7 +6,7 @@ Author: Feng Xia
 
 <figure>
   <img class="col l6 m6 s12"
-       src="images/snoopy.png">
+       src="/images/snoopy.png">
 </figure>
 
 I'm in the middle of this mid-life crisis, I guess, which prompted me
@@ -65,7 +65,7 @@ how it goes.
 
 <figure>
   <img class="col s12"
-       src="images/love%20life%20phase%201.png">
+       src="/images/love%20life%20phase%201.png">
   <figcaption>Love life, phase 1</figcaption>
 </figure>
 
@@ -108,7 +108,7 @@ The down spiral, sigh.
 
 <figure>
   <img class="col s12"
-       src="images/love%20life%20phase%202.png">
+       src="/images/love%20life%20phase%202.png">
   <figcaption>Love life, phase 1</figcaption>
 </figure>
 

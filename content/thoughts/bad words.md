@@ -5,7 +5,7 @@ Slug: bad words
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/social%20norm.jpg"/>
+  <img src="/images/social%20norm.jpg"/>
 </figure>
 
 So Noah's school called yesterday. During lunch the kids at his table

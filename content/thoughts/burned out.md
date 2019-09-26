@@ -5,7 +5,7 @@ Slug: burned out
 Author: Feng Xia
 
 <figure class="col l4 m4 s12">
-  <img src="images/summer%20school.jpg"/>
+  <img src="/images/summer%20school.jpg"/>
 </figure>
 
 I feel caught in a turmoil the last couple weeks that I had to deliver

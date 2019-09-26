@@ -43,7 +43,7 @@ Only lights, evening sunset, through the front door, filled room with
 a lullaby, 我最亲爱的人, 你在哪儿?
 
 <video width="100%" height="100%" controls="controls">
-  <source src="images/shifou.webm" type="video/webm" />
+  <source src="/images/shifou.webm" type="video/webm" />
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/
 </video>

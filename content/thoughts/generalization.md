@@ -5,7 +5,7 @@ Slug: generalization
 Author: Feng Xia
 
 <figure class="col s12 center">
-  <img src="images/simpson.jpg"/>
+  <img src="/images/simpson.jpg"/>
 </figure>
 
 I have been thinking, is generalization good, or bad, or inevitable? I

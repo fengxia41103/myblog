@@ -5,7 +5,7 @@ Slug: people watching
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/seoul.jpg"/>
+  <img src="/images/seoul.jpg"/>
 </figure>
 
 

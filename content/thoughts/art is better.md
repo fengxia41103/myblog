@@ -5,7 +5,7 @@ Slug: art is better
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/lalaland.jpg"/>
+  <img src="/images/lalaland.jpg"/>
 </figure>
 
 

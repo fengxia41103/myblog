@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col s12">
-  <img src="images/cat%20evolution%20timeline.jpg"/>
+  <img src="/images/cat%20evolution%20timeline.jpg"/>
 </figure>
 
 It has been a fascinating thought to me &mdash; is human the only

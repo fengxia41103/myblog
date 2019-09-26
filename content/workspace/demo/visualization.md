@@ -5,7 +5,7 @@ Tags: demo, react
 Author: Feng Xia
 
 <figure class="s12 center">
-  <img src="images/country_1.png"/>
+  <img src="/images/country_1.png"/>
     <figcaption>World Snapshot</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ Following REACT practice, compoents have been designed to handle both the
 data acquisition through 3rd party API, and ploting using the awesome D3 library:
 
 <figure class="s12 center">
-  <img src="images/country health.png"/>
+  <img src="/images/country health.png"/>
     <figcaption>Data visualization SPA architecture</figcaption>
 </figure>
 

@@ -5,7 +5,7 @@ Slug: domain knowledge
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/world%20domination.jpg"/>
+  <img src="/images/world%20domination.jpg"/>
 </figure>
 
 

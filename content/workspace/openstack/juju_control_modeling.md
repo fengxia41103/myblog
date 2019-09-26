@@ -21,7 +21,7 @@ an outer enclosure which can have multiple of its inner enclosures,
 eg. a bundle can have N charms.
 
 <figure class="s12 center">
-  <img src="images/juju%20control%20modeling.png"/>
+  <img src="/images/juju%20control%20modeling.png"/>
   <figcaption>Juju control models</figcaption>
 </figure>
 

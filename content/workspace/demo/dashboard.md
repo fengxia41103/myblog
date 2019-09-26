@@ -5,7 +5,7 @@ Author: Feng Xia
 Tags: lenovo
 
 <figure class="s12 center">
-    <img src="images/spa%20dashboard%20demo.png" />
+    <img src="/images/spa%20dashboard%20demo.png" />
     <figcaption>Project SPA Dashboard demo</figcaption>
 </figure>
 
@@ -21,7 +21,7 @@ pre-determined.
 
 
 <figure class="s12 center">
-    <img src="images/ibb%20rack%201%20cheatsheet.png" />
+    <img src="/images/ibb%20rack%201%20cheatsheet.png" />
     <figcaption>IBB example cheatsheet</figcaption>
 </figure>
 
@@ -105,7 +105,7 @@ configs, and map them to individual section for display. The overall
 architecture is shown below:
 
 <figure class="s12 center">
-    <img src="images/SPA%20dashboard%20design.png" />
+    <img src="/images/SPA%20dashboard%20design.png" />
     <figcaption>SPA Dashboard Design</figcaption>
 </figure>
 

@@ -125,7 +125,7 @@ cost. No escape, always true.
 
   
 <figure class="col s12">
-  <img src="images/snapshot%20population.png"/>
+  <img src="/images/snapshot%20population.png"/>
 </figure>
 
 Here is a good news &rarr; there is hope!  If you live in <code>middle

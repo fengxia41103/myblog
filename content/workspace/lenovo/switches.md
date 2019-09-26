@@ -306,7 +306,7 @@ from a switch &larr; they refer to devices connected to a switch
 network topology such as:
 
 <figure class="s12 center">
-    <img src="images/switch%20network%20topology.png"/>
+    <img src="/images/switch%20network%20topology.png"/>
     <figcaption>Example of a switch-switch topology</figcaption>
 </figure>
 

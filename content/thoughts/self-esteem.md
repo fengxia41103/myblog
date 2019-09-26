@@ -5,7 +5,7 @@ Slug: self-esteem
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/kid%20feeling%20sad.jpg"/>
+  <img src="/images/kid%20feeling%20sad.jpg"/>
 </figure>
 
 I start to understand now, better perhaps, than before, that what

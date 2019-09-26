@@ -13,7 +13,7 @@ or building upon some more sophisticate tool like
 [Scrapy](http://doc.scrapy.org/en/latest/intro/tutorial.html).
 
 <figure class="s12 center">
-  <img src="images/regular_expressions.png"/>
+  <img src="/images/regular_expressions.png"/>
   <figcaption>Fun with regular expression</figcaption>
 </figure>
 
@@ -265,6 +265,6 @@ to that.
 After all the tweaks, the final design of my crawler comes down to this:
 
 <figure class="s12 center">
-  <img src="images/crawler.jpg"/>
+  <img src="/images/crawler.jpg"/>
   <figcaption>Crawler architecture</figcaption>
 </figure>

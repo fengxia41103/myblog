@@ -28,7 +28,7 @@ prohibits (functions that links to no requirements), well, is just to
 keep the developers happy.
 
 <figure class="col s12 center">
-  <img src="images/practical%20uml%20problem%20domain.png"
+  <img src="/images/practical%20uml%20problem%20domain.png"
        class="responsive-image">
   <figcaption>Problem domain</figcaption>
 </figure>
@@ -111,7 +111,7 @@ of a logical element that describes our view of breaking down the
 initial problem into a set of items who interacts with each other. 
 
 <figure class="col s12">
-  <img src="images/practical%20uml%20solution%20domain.png"
+  <img src="/images/practical%20uml%20solution%20domain.png"
        class="responsive-image">
   <figcaption>How problem domain works w/ solution domain</figcaption>
 </figure>
@@ -204,7 +204,7 @@ milestones here:
  a lawful citizen at the same time.
 
 <figure class="col s12">
-  <img src="images/practical%20uml.png"
+  <img src="/images/practical%20uml.png"
        class="responsive-image">
   <figcaption>A complete view of the framework</figcaption>
 </figure>

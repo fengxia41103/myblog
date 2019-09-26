@@ -40,7 +40,7 @@ description of a problem, is what matters.
 # Question matters
 
 <figure class="col l4 m6 s12">
-  <img src="images/funny/image008.gif"/>
+  <img src="/images/funny/image008.gif"/>
 </figure>
 
 Think about how you acquire knowledge. Google search engine knows

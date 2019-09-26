@@ -5,7 +5,7 @@ Slug: emotional ai
 Author: Feng Xia
 
 <figure class="col l7 m7 s12">
-  <img src="images/classic%20beauty.jpg"/>
+  <img src="/images/classic%20beauty.jpg"/>
 </figure>
 
 

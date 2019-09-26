@@ -5,7 +5,7 @@ Slug: hard to listen
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/insert%20brain.png"/>
+  <img src="/images/insert%20brain.png"/>
 </figure>
 
 

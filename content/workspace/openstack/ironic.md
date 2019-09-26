@@ -35,7 +35,7 @@ to show what "managing baremetal" is actually doing.
 # Ironic introduction
 
 <figure class="s12 center">
-    <img src="images/ironic_design.png" />
+    <img src="/images/ironic_design.png" />
     <figcaption>Ironic design (<a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic">source</a>)</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ important role in Ironic's workflow: [Ironic Python Agent][7] and
 Since it stores meta data in a DB, let's take a look at its DB schema:
 
 <figure class="s12 center">
-    <img src="images/ironic_db_er.png" />
+    <img src="/images/ironic_db_er.png" />
     <figcaption>Ironic ER diagram</figcaption>
 </figure>
 
@@ -118,7 +118,7 @@ record in Ironic DB. Run `openstack baremetal node show [node_uuid]`
 displays details of a node.
 
 <figure class="s12 center">
-    <img src="images/ironic_node_show.png" />
+    <img src="/images/ironic_node_show.png" />
     <figcaption>Details of a provisioned node</figcaption>
 </figure>
 
@@ -296,7 +296,7 @@ hearbeat payload is a callback URL, so apparently IPA also exposes a
 HTTP service that Ironic conductor can use for commands.
 
 <figure class="s12 center">
-    <img src="images/ironic_ipa_sequence.png" />
+    <img src="/images/ironic_ipa_sequence.png" />
     <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
 </figure>
 

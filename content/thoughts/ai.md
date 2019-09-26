@@ -5,7 +5,7 @@ Slug: ai
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="images/funny/empror%20clothes.jpg"/>
+  <img src="/images/funny/empror%20clothes.jpg"/>
 </figure>
 
 

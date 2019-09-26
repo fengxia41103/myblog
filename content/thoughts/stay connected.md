@@ -5,7 +5,7 @@ Slug: stay connected
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/fanghua.jpeg"/>
+  <img src="/images/fanghua.jpeg"/>
 </figure>
 
 

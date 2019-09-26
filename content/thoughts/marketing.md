@@ -113,7 +113,7 @@ individual.
 # Creating needs
 
 <figure class="col l6 m6 s12">
-  <img src="images/funny/direct%20marketing.jpg"/>
+  <img src="/images/funny/direct%20marketing.jpg"/>
 </figure>
 
 IMHO, the talk completly misled audience to think that marketing and

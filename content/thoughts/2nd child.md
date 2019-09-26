@@ -5,7 +5,7 @@ Slug: 2nd child policy
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/china%20birth%20rate.png"/>
+  <img src="/images/china%20birth%20rate.png"/>
 </figure>
 
 [This][1] has to be the most disturbing talk I have ever heard so far, and

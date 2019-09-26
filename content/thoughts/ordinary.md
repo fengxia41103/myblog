@@ -5,7 +5,7 @@ Slug: ordinary
 Author: Feng Xia
 
 <figure class="col l7 m7 s12">
-  <img src="images/midaying.jpg"/>
+  <img src="/images/midaying.jpg"/>
 </figure>
 
 Have you had a funny feeling on someday, that something is happening,

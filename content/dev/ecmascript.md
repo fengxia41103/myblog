@@ -8,7 +8,7 @@ Isn't this confusing &mdash; [ECMAScript][1], [ES2015][2], ES6, Javascript,
 [JScript][3], [CoffeeScript][4], [TypeScript][5]... what the heck!?
 
 <figure class="col s12">
-  <img src="images/ecmascript%20relationship.png"/>
+  <img src="/images/ecmascript%20relationship.png"/>
   <figcaption>Feng's view of how these confusing Javascript words are
   linked together</figcaption>
 </figure>

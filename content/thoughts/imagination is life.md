@@ -5,7 +5,7 @@ Slug: imagination is life
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="images/casablanca.jpg"/>
+  <img src="/images/casablanca.jpg"/>
 </figure>
 
 

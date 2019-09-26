@@ -5,7 +5,7 @@ Slug: city
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/her.jpg"/>
+  <img src="/images/her.jpg"/>
 </figure>
 
 What makes a city? what makes a **good city**? I wonder.

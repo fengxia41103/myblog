@@ -5,7 +5,7 @@ Slug: turning a cycle
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/ankor%20wat.jpg"/>
+  <img src="images/ankor%20wat.jpg"/>
 </figure>
 
 

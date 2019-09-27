@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col s12">
-  <img src="/images/love%20in%20nyc.jpg"/>
+  <img src="images/love%20in%20nyc.jpg"/>
 </figure>
 
 I had a dream, as vivid as it can be, that I was walking next to

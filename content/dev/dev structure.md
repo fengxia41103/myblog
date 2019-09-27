@@ -5,7 +5,7 @@ Slug: dev structure
 Author: Feng Xia
 
 <figure class="col l5 m5 s12">
-  <img src="/images/moses.jpg"/>
+  <img src="images/moses.jpg"/>
   <figcaption>If the Bible story happens today</figcaption>
 </figure>
 

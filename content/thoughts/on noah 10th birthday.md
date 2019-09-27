@@ -5,7 +5,7 @@ Slug: on noah 10th birthday
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/bunny.jpg"/>
+  <img src="images/bunny.jpg"/>
 </figure>
 
 

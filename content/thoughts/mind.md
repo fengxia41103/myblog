@@ -5,7 +5,7 @@ Slug: mind
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/mirrors%20edge.jpg"/>
+  <img src="images/mirrors%20edge.jpg"/>
 </figure>
 
 

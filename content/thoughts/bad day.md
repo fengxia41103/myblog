@@ -5,7 +5,7 @@ Slug: bad day
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/hemlet.jpg"
+  <img src="images/hemlet.jpg"
        class="responsive-image">
 </figure>
 

@@ -23,7 +23,7 @@ to get there:
 1. `M-x find-grep-dired`
 2. `Find-grep (directory)`: is to select the root folder for the scan
 3. `Find-grep (grep regexp)`: is the regex for the string pattern you
-   are searching, eg. `"/images/` is to find anything starts with a
+   are searching, eg. `"images/` is to find anything starts with a
    double quote sign and `images/` after &larr; in my attempt to
    change image from relative path to absolute path.
 4. A new buffer will open w/ the list of files that contains a match.

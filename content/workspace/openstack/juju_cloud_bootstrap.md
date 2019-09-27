@@ -21,7 +21,7 @@ go south, what is the minimum to simulate a clean state so we can run
 particuarly useful for development and troubleshooting.
 
 <figure class="s12 center">
-    <img src="/images/juju%20bootstrap.gif" />
+    <img src="images/juju%20bootstrap.gif" />
     <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ common bootstrap framework to tie these providers into a common
 process.
 
 <figure class="s12 center">
-  <img src="/images/juju%20cloud%20and%20provider.png" />
+  <img src="images/juju%20cloud%20and%20provider.png" />
     <figcaption>Juju cloud abstraction</figcaption>
 </figure>
 
@@ -146,7 +146,7 @@ live.  In a nutshell, all activities can be categorized into the
 followings:
 
 <figure class="s12 center">
-  <img src="/images/juju%20bootstrap%20overview.png" />
+  <img src="images/juju%20bootstrap%20overview.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -188,7 +188,7 @@ process located in `juju.juju.environs.Bootstrap` function.
   to hard-coded values (eg. simplestream URL).
 
 <figure class="s12 center">
-  <img src="/images/juju%20bootstrap%20process.png" />
+  <img src="images/juju%20bootstrap%20process.png" />
     <figcaption>Juju bootstrap framework</figcaption>
 </figure>
 
@@ -222,7 +222,7 @@ function &larr; and this is the point where underline cloud meets
 Juju.
 
 <figure class="s12 center">
-  <img src="/images/juju%20common%20BootstrapInstance.png" />
+  <img src="images/juju%20common%20BootstrapInstance.png" />
     <figcaption>"common" provider's BootstrapInstance function</figcaption>
 </figure>
 
@@ -474,7 +474,7 @@ In code this step is presented as an "interface" function within the
 However, we are separating it here for discussion purpose.
 
 <figure class="s12 center">
-  <img src="/images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
+  <img src="images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
     <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
 </figure>
 

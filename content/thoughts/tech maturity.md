@@ -6,7 +6,7 @@ Author: Feng Xia
 
 
 <figure class="col s12">
-  <img src="/images/a%20cute%20cat.jpg"
+  <img src="images/a%20cute%20cat.jpg"
        class="responsive-img">
 </figure>
 

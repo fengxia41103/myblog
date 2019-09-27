@@ -5,7 +5,7 @@ Slug: django to rest
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/the%20art%20of%20programming.jpg"
+  <img src="images/funny/the%20art%20of%20programming.jpg"
        class="center img-responsive">
 </figure>
 
@@ -47,7 +47,7 @@ of the match before handing URL to `myapp/urls.py` to match
 Anyway. So building a REST can be broken down into 5 steps:
 
 <figure class="col s12">
-  <img src="/images/django%20to%20rest.png"
+  <img src="images/django%20to%20rest.png"
        class="center img-responsive">
 </figure>
 

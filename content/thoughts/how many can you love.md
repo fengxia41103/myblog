@@ -5,7 +5,7 @@ Slug: how many can one love
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/birthday.jpg"/>
+  <img src="images/birthday.jpg"/>
 </figure>
 
 Train is an interesting, amazing thing. Never thought I will be

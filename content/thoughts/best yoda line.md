@@ -76,7 +76,7 @@ I was conjuring up something _funny_, but before I said it:
 # Noah's yoda lines
 
 <figure class="col l6 m6 s12">
-  <img src="/images/yoda%20line.jpg"/>
+  <img src="images/yoda%20line.jpg"/>
 </figure>
 
 1. Fear is the path to the dark side

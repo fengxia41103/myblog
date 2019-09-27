@@ -5,7 +5,7 @@ Slug: mobs
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/seoul2.jpg"/>
+  <img src="images/seoul2.jpg"/>
 </figure>
 
 The news of Ofo is really a good one. I wonder when human (well, human

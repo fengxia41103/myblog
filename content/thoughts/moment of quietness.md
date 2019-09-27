@@ -5,7 +5,7 @@ Slug: moment of quietness
 Author: Feng Xia
 
 <figure class="col s12 center">
-  <img src="/images/buliaoqing.jpeg" style="width:50vw;"/>
+  <img src="images/buliaoqing.jpeg" style="width:50vw;"/>
 </figure>
 
 It's quiet here. Office is deserted due to the upcoming long

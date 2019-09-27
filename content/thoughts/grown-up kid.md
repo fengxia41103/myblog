@@ -5,7 +5,7 @@ Slug: grownup kid
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/interview.png"/>
+  <img src="images/funny/interview.png"/>
 </figure>
 
 I think, well, actually not that I think, I feel, I feel it with me,

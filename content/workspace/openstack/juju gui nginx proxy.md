@@ -21,7 +21,7 @@ quirk here is to enable `ssl` proxy (notice the `https`?)
 [2]: https://www.nginx.com/resources/admin-guide/reverse-proxy/
 
 <figure class="col s12 center">
-  <img src="/images/juju%20gui%20nginx.png"/>
+  <img src="images/juju%20gui%20nginx.png"/>
   <figcaption>Juju GUI with Nginx proxy</figcaption>
 </figure>
 

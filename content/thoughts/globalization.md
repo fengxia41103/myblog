@@ -5,7 +5,7 @@ Slug: globalization
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/defragment.jpg"/>
+  <img src="images/defragment.jpg"/>
 </figure>
 
 

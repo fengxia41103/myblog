@@ -12,46 +12,46 @@ Summary: A poor-man's version my loved **La La Land** in which
     style="min-height:550px;">
   <ul class="slides">
     <li>
-      <img src="/images/Screenshot_20171009-081914.png"/>
+      <img src="images/Screenshot_20171009-081914.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082702.png"/>
+      <img src="images/Screenshot_20171009-082702.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082712.png"/>
+      <img src="images/Screenshot_20171009-082712.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082731.png"/>
+      <img src="images/Screenshot_20171009-082731.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082819.png"/>
+      <img src="images/Screenshot_20171009-082819.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082845.png"/>
+      <img src="images/Screenshot_20171009-082845.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082855.png"/>
+      <img src="images/Screenshot_20171009-082855.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082909.png"/>
+      <img src="images/Screenshot_20171009-082909.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082918.png"/>
+      <img src="images/Screenshot_20171009-082918.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082938.png"/>
+      <img src="images/Screenshot_20171009-082938.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-082951.png"/>
+      <img src="images/Screenshot_20171009-082951.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-083001.png"/>
+      <img src="images/Screenshot_20171009-083001.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-083008.png"/>
+      <img src="images/Screenshot_20171009-083008.png"/>
     </li>
     <li>
-      <img src="/images/Screenshot_20171009-083029.png"/>
+      <img src="images/Screenshot_20171009-083029.png"/>
     </li>
   </ul>
 </div>

@@ -5,7 +5,7 @@ Slug: tears
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/catching%20star.jpg"/>
+  <img src="images/catching%20star.jpg"/>
   <figcaption>Caught a full bag of stars. Last time I had this moment
   was in 2004 just before I was leaving for Beijing. Fourteen years later,
   there they are again, glittering, haven't changed.</figcaption>

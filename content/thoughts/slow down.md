@@ -5,7 +5,7 @@ Slug: slow down
 Author: Feng Xia
 
 <figure class="col l3 m4 s12">
-  <img src="/images/cat%20lives.jpg"/>
+  <img src="images/cat%20lives.jpg"/>
 </figure>
 
 

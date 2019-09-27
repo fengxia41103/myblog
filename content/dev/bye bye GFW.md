@@ -5,7 +5,7 @@ Slug: bye bye gfw
 Author: Feng Xia
 
 <figure class="col l3 m3 s12">
-  <img src="/images/funny/gfw.jpg"/>
+  <img src="images/funny/gfw.jpg"/>
 </figure>
 
 
@@ -44,7 +44,7 @@ how to punch a hole and stay connected with life:
     2. Set up as shown below:
 
     <figure class="s12 center"
-        <img src="/images/firefox%20manual%20proxy.png" />
+        <img src="images/firefox%20manual%20proxy.png" />
         <figcaption>Firefox manual proxy setup</figcaption>
     </figure>
     

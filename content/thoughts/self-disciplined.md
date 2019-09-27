@@ -5,7 +5,7 @@ Slug: self-disciplined
 Author: Feng Xia
 
 <figure class="col l7 m7 s12">
-  <img src="/images/alice%20rabbit%20hole.jpg"/>
+  <img src="images/alice%20rabbit%20hole.jpg"/>
 </figure>
 
 

@@ -62,6 +62,16 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["tipue_search"]
 
+# make a flat structure
+PAGE_URL = '{slug}.html'
+PAGE_SAVE_AS = '{slug}.html'
+AUTHOR_URL = '{slug}.html'
+AUTHOR_SAVE_AS = '{slug}.html'
+CATEGORY_URL = '{slug}.html'
+CATEGORY_SAVE_AS = '{slug}.html'
+TAG_URL = '{slug}.html'
+TAG_SAVE_AS = '{slug}.html'
+
 ##############################
 #
 # Custom filters

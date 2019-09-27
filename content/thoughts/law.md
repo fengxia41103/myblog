@@ -5,7 +5,7 @@ Slug: law
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/russian%20poster.jpg"/>
+  <img src="images/russian%20poster.jpg"/>
 </figure>
 
 

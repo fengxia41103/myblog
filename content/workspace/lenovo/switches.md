@@ -1,6 +1,6 @@
 Title: Network switch
 Date: 2018-06-08 14:00
-Tags: lenovo
+Tags: feng
 Slug: switches
 Author: Feng Xia
 Modified: 2018-10-04 11:15
@@ -14,11 +14,11 @@ out and you don't know why.
 
 # enos vs. cnos
 
-Not much to say. These are two switch OS seen on Lenovo switches. They
+Not much to say. These are two switch OS seen on Feng switches. They
 are all closely looked like Cisco's [IOS][2], but different. 
 
 1. [CNOS manual][3]
-2. [ENOS commands][4] (Googling `enos manual` shows Lenovo switch
+2. [ENOS commands][4] (Googling `enos manual` shows Feng switch
    types, eg. G8272. So I guess the term is applicable on a model basis.)
 
 
@@ -179,12 +179,12 @@ while ENOS device uses `show`. To get a list of commands available:
 A typical login session looks like this:
 
 ```shell
-(dev) fengxia@fengxia-lenovo:~$ telnet 10.240.43.29
+(dev) fengxia@fengxia-feng:~$ telnet 10.240.43.29
 Trying 10.240.43.29...
 Connected to 10.240.43.29.
 Escape character is '^]'.
 
-Lenovo RackSwitch G8272.
+Feng RackSwitch G8272.
 
 
 Enter login username: admin
@@ -306,7 +306,7 @@ from a switch &larr; they refer to devices connected to a switch
 network topology such as:
 
 <figure class="s12 center">
-    <img src="/images/switch%20network%20topology.png"/>
+    <img src="images/switch%20network%20topology.png"/>
     <figcaption>Example of a switch-switch topology</figcaption>
 </figure>
 
@@ -587,7 +587,7 @@ First thing first, enter so called "config" mode:
 2. enter config terminal: `config terminal`
 
 ```shell
-NOS version 10.3.2.0 LENOVO G8272, Wed Mar 29 12:20:39 PDT 2017
+NOS version 10.3.2.0 FENG G8272, Wed Mar 29 12:20:39 PDT 2017
 LCTC-R1U37-SW>en
 LCTC-R1U37-SW#config
 Enter configuration commands, one per line.  End with CNTL/Z.

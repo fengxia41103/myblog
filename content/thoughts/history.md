@@ -5,7 +5,7 @@ Slug: history
 Author: Feng Xia
 
 <figure class="col l6 m8 s12">
-  <img src="/images/funny/sphinx.jpg"/>
+  <img src="images/funny/sphinx.jpg"/>
 </figure>
 
 

@@ -48,7 +48,7 @@ rest of the operations can be, but also the more work to set it up
 initially.
 
 <figure class="s12 center">
-    <img src="/images/fashion_1.png">
+    <img src="images/fashion_1.png">
     <figcaption>For staffs, search by filter</figcaption>
 </figure>
 
@@ -65,7 +65,7 @@ more efficient.
 
 
 <figure class="s12 center">
-    <img src="/images/fashion_3.png">
+    <img src="images/fashion_3.png">
     <figcaption>For customers, browse/search by season and vendor</figcaption>
 </figure>
 
@@ -90,7 +90,7 @@ common setup of _region_ or _district_ level that is between company
 and location. It is not implemented but can be added easily.
 
 <figure class="s12 center">
-    <img  src="/images/fashion_2.png">
+    <img  src="images/fashion_2.png">
     <figcaption>Inventory structure diagram</figcaption>
 </figure>
 
@@ -128,7 +128,7 @@ counting. Season and vendor list within each storage are derived from
 products in that storage by the application automatically.
 
 <figure class="s12 center">
-    <img  src="/images/fashion_4.png">
+    <img  src="images/fashion_4.png">
     <figcaption>Select location and vendor to count</figcaption>
 </figure>
 
@@ -141,7 +141,7 @@ However, it is possible that a product has been sold out. So to handle
 this special case we use a _star_ to indicate this situation.
 
 <figure class="s12 center">
-    <img  src="/images/fashion_5.png">
+    <img  src="images/fashion_5.png">
     <figcaption>Physical inventory admin mode</figcaption>
 </figure>
 
@@ -149,7 +149,7 @@ User mode removes product details from the view, leaving only product SKU and
 size information for reference.
 
 <figure class="s12 center">
-    <img  src="/images/fashion_6.png">
+    <img  src="images/fashion_6.png">
     <figcaption>Physical inventory user mode</figcaption>
 </figure>
 

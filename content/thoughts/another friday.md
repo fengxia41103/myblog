@@ -5,7 +5,7 @@ Slug: another friday
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="/images/incredibles%202.jpg"/>
+  <img src="images/incredibles%202.jpg"/>
 </figure>
 
 

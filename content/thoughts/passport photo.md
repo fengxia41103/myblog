@@ -6,7 +6,7 @@ Author: Feng Xia
 Modified: 2019-07-05 21:15
 
 <figure class="col l5 m5 s12">
-  <img src="/images/temperature.jpg"/>
+  <img src="images/temperature.jpg"/>
 </figure>
 
 

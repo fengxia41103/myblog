@@ -5,7 +5,7 @@ Slug: hurricane
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/japan%20poster.jpg"/>
+  <img src="images/japan%20poster.jpg"/>
 </figure>
 
 

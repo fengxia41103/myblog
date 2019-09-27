@@ -5,7 +5,7 @@ Slug: lost jobs
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/robot%20replace%20human.jpg"/>
+  <img src="images/robot%20replace%20human.jpg"/>
 </figure>
 
 These days, everywhere you turn, there is talk about AI, and one

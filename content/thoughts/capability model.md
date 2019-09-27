@@ -75,7 +75,7 @@ attribute, and having control is just another term for management.
 
 
 <figure class="col s12 center">
-  <img src="/images/my%20capability%20model.png"/>
+  <img src="images/my%20capability%20model.png"/>
   <figcaption>Five levels of capabilities</figcaption>
 </figure>
 
@@ -212,7 +212,7 @@ Acceptable strategy:
 Let's try it with managing a server. 
 
 <figure class="col s12 center">
-  <img src="/images/netbox%20device.png"/>
+  <img src="images/netbox%20device.png"/>
   <figcaption>Example: netbox device model</figcaption>  
 </figure>
 

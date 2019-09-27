@@ -5,7 +5,7 @@ Slug: finite anxiety
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/cat-body-language.jpg"/>
+  <img src="images/cat-body-language.jpg"/>
 </figure>
 
 

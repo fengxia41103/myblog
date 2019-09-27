@@ -4,7 +4,7 @@ Slug: mid night
 Author: Feng Xia
 
 <figure class="col l6 m12 s12">
-  <img src="/images/missing%20you.png"/>
+  <img src="images/missing%20you.png"/>
 </figure>
 
 Since coming back from Spring Break trip, my body and mind have been

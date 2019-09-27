@@ -11,7 +11,7 @@ Summary: Building a prototype is a must-have for any new project
     are looking at the same thing.
 
 <figure class="col l6 m6 s12 center">
-  <img src="/images/20150930_transporter.png"
+  <img src="images/20150930_transporter.png"
        class="img-responsive"/>
 </figure>
 

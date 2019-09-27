@@ -13,8 +13,8 @@ Author: Feng Xia
    var name = pad.substring(0, pad.length - str.length) + str;
    images.push({
      key: i,
-     thumb: "../images/memory/"+name+"-small.jpg",
-     full: "../images/memory/"+name+".jpg"
+     thumb: "/images/memory/"+name+"-small.jpg",
+     full: "/images/memory/"+name+".jpg"
    });
  }
 

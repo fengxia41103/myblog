@@ -5,7 +5,7 @@ Slug: age and maturity
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/fatal.jpg"/>
+  <img src="images/funny/fatal.jpg"/>
 </figure>
 
 

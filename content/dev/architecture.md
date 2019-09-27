@@ -6,7 +6,7 @@ Author: Feng Xia
 Modified: 2018-10-17
 
 <figure class="col l6 m6 s12">
-  <img src="/images/architecture_joke.jpg"
+  <img src="images/architecture_joke.jpg"
        class="center img-responsive">
 </figure>
 
@@ -64,7 +64,7 @@ projects. It is divided into four components:
 
 
 <figure class="s12 center">
-  <img src="/images/system%20architecture.png"/>
+  <img src="images/system%20architecture.png"/>
     <figcaption>Feng's system architecture diagram</figcaption>
 </figure>
 

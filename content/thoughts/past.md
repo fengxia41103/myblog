@@ -5,7 +5,7 @@ Slug: love till past
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/pastlove.jpg"/>
+  <img src="images/funny/pastlove.jpg"/>
 </figure>
 
 很多人都i知道，浪漫的爱情里，两个人都怕时间太短，都说要长相守，两不忘。

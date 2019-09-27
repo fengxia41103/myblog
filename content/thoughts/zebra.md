@@ -5,7 +5,7 @@ Slug: zebra line
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/beatles.jpg"/>
+  <img src="images/beatles.jpg"/>
 </figure>
 
 Walking on the street in SH, I just realized what is wrong with this

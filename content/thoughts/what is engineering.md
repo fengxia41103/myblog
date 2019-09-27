@@ -5,7 +5,7 @@ Slug: what is engineering
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/raise%20a%20bug.png"/>
+  <img src="images/raise%20a%20bug.png"/>
 </figure>
 
 I have been thinking, and probably being pissed off at the current

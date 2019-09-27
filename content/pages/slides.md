@@ -13,7 +13,7 @@ Author: Feng Xia
         I cherish and wish to re-live.
       </p>
       <figure>
-        <img src="../images/moments.png"
+        <img src="images/moments.png"
              class="responsive-img center"/>
       </figure>
     </div>
@@ -34,7 +34,7 @@ Author: Feng Xia
       functions and new models.
       </p>
       <figure>
-        <img src="../images/netbox.png"
+        <img src="images/netbox.png"
              class="responsive-img center"/>
       </figure>
     </div>
@@ -51,11 +51,11 @@ Author: Feng Xia
     <div class="card-content">
       <span class="card-title myhighlight">WSS</span>
       <p>
-      Lenovo Workload Solution Store project based on Canonical Juju
+      Workload Solution Store project based on Canonical Juju
       and Charms technology.
       </p>
       <figure>
-        <img src="../images/wss.png"
+        <img src="images/wss.png"
              class="responsive-img center"/>
       </figure>
     </div>

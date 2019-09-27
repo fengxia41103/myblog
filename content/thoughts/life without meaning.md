@@ -5,7 +5,7 @@ Slug: life without meaning
 Author: Feng Xia
 
 <figure class="col l6 m6 s12">
-  <img src="/images/pinup.jpg"/>
+  <img src="images/pinup.jpg"/>
 </figure>
 
 

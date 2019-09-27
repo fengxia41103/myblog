@@ -5,7 +5,7 @@ Slug: frustration
 Author: Feng Xia
 
 <figure class="col l7 m7 s12">
-  <img src="/images/funny/automation.png"/>
+  <img src="images/funny/automation.png"/>
 </figure>
 
 

@@ -61,7 +61,7 @@ Of course it can. The idea is this:
 4. `element.snapshot(file_path)` will write to `file_path` onto the file system.
 
 <figure class="col s12">
-  <img src="/images/selenium%20snapshot.gif"/>
+  <img src="images/selenium%20snapshot.gif"/>
 </figure>
 
 Window on the right hand side is monitoring folder on the file system
@@ -84,7 +84,7 @@ you an image of itself.
 
 
 <figure class="col s12">
-  <img src="/images/mwc-network-hardware-status-icon.png"/>
+  <img src="images/mwc-network-hardware-status-icon.png"/>
   <figcaption>
   Example of an element becoming much more meaningful when given a
   context than only by itself.
@@ -153,7 +153,7 @@ implemented in your code, you have to think of a way to _open_ the
 dropdown, and take a snapshot of it **together w/ its trigger**:
 
 <figure class="col l6 m6 s12">
-  <img src="/images/mwc-network-controller-actions-button.png"/>
+  <img src="images/mwc-network-controller-actions-button.png"/>
   <figcaption>
   
   An example of dropdown menu whose trigger is only a small icon. Thus
@@ -166,7 +166,7 @@ dropdown, and take a snapshot of it **together w/ its trigger**:
 # modal dialog
 
 <figure class="col l6 m6 s12">
-  <img src="/images/mwc-host-enable-maintenance-mode-modal.png"/>
+  <img src="images/mwc-host-enable-maintenance-mode-modal.png"/>
   <figcaption>
   
   An example of modal dialog half-rendered when we don't wait for its visibility.

@@ -5,7 +5,7 @@ Slug: social media
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="/images/facebook.png"/>
+  <img src="images/facebook.png"/>
 </figure>
 
 The recent downfall of Facebook stock and its data privacy fiasco have

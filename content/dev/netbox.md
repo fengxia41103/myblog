@@ -61,7 +61,7 @@ physical device such as server and switch. This makes sense as the
 primary physical asset of a data center are certainly these devices. 
 
 <figure class="col s12 center">
-    <img src="/images/netbox%20device%20list.png"/>
+    <img src="images/netbox%20device%20list.png"/>
     <figcaption>Example list of devices</figcaption>
 </figure>
 
@@ -86,7 +86,7 @@ are two important flags that will affect how a device can be used:
    (we model BMC controller as a bay device inside a server).
 
 <figure class="col s12 center">
-    <img src="/images/netbox%20devicetype%20list.png"/>
+    <img src="images/netbox%20devicetype%20list.png"/>
     <figcaption>Example list of device types</figcaption>
 </figure>
 
@@ -103,9 +103,9 @@ Netbox's way to control password in a later section). Further, we use
    access method is Telnet (see [Network switch][3] for details.)
 
 <figure class="row center">
-    <img src="/images/netbox%20device%20section%201.png"
+    <img src="images/netbox%20device%20section%201.png"
         class="col s6"/>
-    <img src="/images/netbox%20device%20section%202.png"
+    <img src="images/netbox%20device%20section%202.png"
         class="col s6"/>
     <figcaption>Device IP & credential. A device can have multiple
     IP address but only one primary IP4 & IP6. It can also
@@ -119,7 +119,7 @@ A device whose device type sets `is_network_device=True` can be linked
 to an `Interface`, and an interface can be linked to an IP address.
 
 <figure class="col s12 center">
-    <img src="/images/netbox%20device%20interface.png"/>
+    <img src="images/netbox%20device%20interface.png"/>
     <figcaption>Device interfaces</figcaption>
 </figure>
 
@@ -167,7 +167,7 @@ In the example topology diagram below, we see:
     2. `ens4f1` is connected to port 18 of another switch (`R1U37`).
 
 <figure class="col s12 center">
-    <img src="/images/netbox%20device%20topology.png"/>
+    <img src="images/netbox%20device%20topology.png"/>
     <figcaption>Example device view of a topology</figcaption>
 </figure>
 
@@ -180,7 +180,7 @@ A device can have device bays, which essentially forms a
 to register BMC controller as a bay device inside a server:
 
 <figure class="col s12 center">
-    <img src="/images/netbox%20device%20bay%20device.png"/>
+    <img src="images/netbox%20device%20bay%20device.png"/>
     <figcaption>Device bay</figcaption>
 </figure>
 
@@ -200,7 +200,7 @@ In Netbox this is only a convenience for navigation. However
 we can extend this idea using other definitions.
 
 <figure class="col s12 center">
-    <img src="/images/netbox%20device%20related%20devices.png"/>
+    <img src="images/netbox%20device%20related%20devices.png"/>
     <figcaption>Related devices</figcaption>
 </figure>
 
@@ -258,7 +258,7 @@ mounted facing back so that cables can access its port.
    
    
 <figure class="col s12 center">
-    <img src="/images/netbox%20rack.png"/>
+    <img src="images/netbox%20rack.png"/>
     <figcaption>Example of a rack</figcaption>
 </figure>
 

@@ -3297,16 +3297,14 @@ nature (I say it is synchronous in the sense of that a Django's native
 process will receive and process view request without interrupt or
 callback.  Django &lt;a href="https://docs.djangoproject.com/en/1.10/topics/signals/"&gt;signals&lt;/a&gt; are asynchronous,
 however.) where a long running code section could bring the entire
-application to halt.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>DIY Pelican theme</title><link href="https://fengxia41103.github.io/myblog/pelican%20theme.html" rel="alternate"></link><published>2016-09-04T11:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-04:myblog/pelican theme.html</id><summary type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is
-definitely a winner for our blog site. But like any software engineer
-who hold a high standard to his work, I got turned off by
-all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.
-"Ugly", "Where is the document?", "Why my translation is not shown?", I felt
-running in a maze where there were reflections of exit everywhere, but none
-was real. "Well, if it's in Python, we can make one." Solution is that simple.
-Besides, we love &lt;a href="http://jinja.pocoo.org/docs/dev/"&gt;Jinja2&lt;/a&gt; template systems,
-and Pelican has spelled out &lt;a href="http://docs.getpelican.com/en/3.6.3/themes.html#templates-and-variables"&gt;everything&lt;/a&gt;
-we need.&lt;/p&gt;
+application to halt.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>DIY Pelican theme</title><link href="https://fengxia41103.github.io/myblog/pelican%20theme.html" rel="alternate"></link><published>2016-09-04T11:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-04:myblog/pelican theme.html</id><summary type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is definitely a winner for our blog
+site. But like any software engineer who hold a high standard to his
+work, I got turned off by all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.  "Ugly",
+"Where is the document?", "Why my translation is not shown?", I felt
+running in a maze where there were reflections of exit everywhere, but
+none was real. "Well, if it's in Python, we can make one." Solution is
+that simple.  Besides, we love &lt;a href="http://jinja.pocoo.org/docs/dev/"&gt;Jinja2&lt;/a&gt; template systems, and
+Pelican has spelled out &lt;a href="http://docs.getpelican.com/en/3.6.3/themes.html#templates-and-variables"&gt;everything&lt;/a&gt; we need.&lt;/p&gt;
 &lt;p&gt;Quickly we wrote down a few on wish list:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The design must be based on &lt;a href="http://getbootstrap.com/components/"&gt;Bootstrap&lt;/a&gt;&lt;/li&gt;

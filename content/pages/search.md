@@ -59,7 +59,7 @@ Author: Feng Xia
      
      // TODO: this is a hardcoded path to this `.json`.
      // Should be resolved by SITEURL.
-     fetch("/tipuesearch_content.json")
+     fetch("tipuesearch_content.json")
        .then(function(resp){
          return resp.json();
        }).then(function(json){

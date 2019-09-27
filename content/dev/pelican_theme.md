@@ -4,16 +4,14 @@ Tags: dev
 Slug: pelican theme
 Author: Feng Xia
 
-As a Python house, [Pelican][] is
-definitely a winner for our blog site. But like any software engineer
-who hold a high standard to his work, I got turned off by
-all the [available themes][].
-"Ugly", "Where is the document?", "Why my translation is not shown?", I felt
-running in a maze where there were reflections of exit everywhere, but none
-was real. "Well, if it's in Python, we can make one." Solution is that simple.
-Besides, we love [Jinja2][] template systems,
-and Pelican has spelled out [everything][]
-we need.
+As a Python house, [Pelican][] is definitely a winner for our blog
+site. But like any software engineer who hold a high standard to his
+work, I got turned off by all the [available themes][].  "Ugly",
+"Where is the document?", "Why my translation is not shown?", I felt
+running in a maze where there were reflections of exit everywhere, but
+none was real. "Well, if it's in Python, we can make one." Solution is
+that simple.  Besides, we love [Jinja2][] template systems, and
+Pelican has spelled out [everything][] we need.
 
 [pelican]: http://blog.getpelican.com
 [available themes]: http://www.pelicanthemes.com/)

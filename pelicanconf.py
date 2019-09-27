@@ -69,8 +69,8 @@ AUTHOR_URL = '{slug}.html'
 AUTHOR_SAVE_AS = '{slug}.html'
 CATEGORY_URL = '{slug}.html'
 CATEGORY_SAVE_AS = '{slug}.html'
-TAG_URL = '{slug}.html'
-TAG_SAVE_AS = '{slug}.html'
+TAG_URL = 'tag-{slug}.html'
+TAG_SAVE_AS = 'tag-{slug}.html'
 
 ##############################
 #

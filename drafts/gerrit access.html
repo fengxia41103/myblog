@@ -73,25 +73,25 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/pages/about.html">
+              <a href="https://fengxia41103.github.io/myblog/about.html">
                 . About
               </a>
-              <a href="https://fengxia41103.github.io/myblog/pages/lei.html">
+              <a href="https://fengxia41103.github.io/myblog/lei.html">
                 . 夏雷
               </a>
-              <a href="https://fengxia41103.github.io/myblog/pages/project euler.html">
+              <a href="https://fengxia41103.github.io/myblog/project euler.html">
                 . Project Euler
               </a>
-              <a href="https://fengxia41103.github.io/myblog/pages/quote.html">
+              <a href="https://fengxia41103.github.io/myblog/quote.html">
                 . Quote
               </a>
-              <a href="https://fengxia41103.github.io/myblog/pages/resume.html">
+              <a href="https://fengxia41103.github.io/myblog/resume.html">
                 . Resum&eacute;
               </a>
-              <a href="https://fengxia41103.github.io/myblog/pages/search.html">
+              <a href="https://fengxia41103.github.io/myblog/search.html">
                 . Search
               </a>
-              <a href="https://fengxia41103.github.io/myblog/pages/slides.html">
+              <a href="https://fengxia41103.github.io/myblog/slides.html">
                 . Impression
               </a>
             </div>
@@ -110,12 +110,12 @@
         2017-01-12
 
 
-        <a class="wave-effect" href="category/openstack.html">
+        <a class="wave-effect" href="openstack.html">
           <i class="fa fa-folder-open-o"></i>
           openstack
         </a>
 
-        <a class="wave-effect" href="tag/lenovo.html">
+        <a class="wave-effect" href="tag-lenovo.html">
           <i class="fa fa-tag"></i>
           lenovo
         </a>
@@ -141,36 +141,36 @@ public key you will use.</p>
 <blockquote>
 <p>VM server: gerrit.labs.lenovo.come</p>
 </blockquote>
-<p>Step 1. Create a VM user account: login VM server (username: <em>lenovo</em>, password: <em>lenovo</em>)</p>
-<div class="highlight"><pre><span></span>$ sudo -i --&gt; password: lenovo
+<p>Step 1. Create a VM user account: login VM server (username: <em>feng</em>, password: <em>feng</em>)</p>
+<div class="highlight"><pre><span></span>$ sudo -i --&gt; password: feng
 $ useradd -m <span class="o">[</span>user name<span class="o">]</span> --&gt; create user and home directory
 $ passwd <span class="o">[</span>user name<span class="o">]</span> --&gt; change user password
 
 Logout and test:
-$ ssh <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.lenovo.com
+$ ssh <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.feng.com
 </pre></div>
 
 
 <p>Step 2. Create a <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">SSH public key</a>. You can first look in <em>~/.ssh/</em> for <em>id_rsa.pub</em> file. If it exists, you already have a public key to use.</p>
 <p>Step 3. Copy the key file to VM server.</p>
-<div class="highlight"><pre><span></span>$ scp ~/.ssh/id_rsa.pub <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.lenovo.com:
+<div class="highlight"><pre><span></span>$ scp ~/.ssh/id_rsa.pub <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.feng.com:
 
 Logon to the VM server:
 $ touch ~/.ssh/authorized_keys
 $ cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
 
 Logout and test:
-$ ssh <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.lenovo.com
+$ ssh <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.feng.com
 </pre></div>
 
 
-<p>Step 4. Setup Gerrit user. Browse <em>http://gerrit.labs.lenovo.com:8080</em>. </p>
+<p>Step 4. Setup Gerrit user. Browse <em>http://gerrit.labs.feng.com:8080</em>. </p>
 <ol>
 <li>If you don't have an OpenID, follow the link at the bottom to *Get OpenID".</li>
 <li>If you already have one, click <em>Sign in with a Launchpad ID</em>.</li>
 </ol>
 <figure class="row">
-    <img class="img-responsive center" src="/images/gerrit%20openid%20ubuntu%20redirect.png" />
+    <img class="img-responsive center" src="images/gerrit%20openid%20ubuntu%20redirect.png" />
     <figcaption>Gerrit OpenID login Ubuntu redirect</figcaption>
 </figure>
 
@@ -182,32 +182,32 @@ $ ssh <span class="o">[</span>user name<span class="o">]</span>@gerrit.labs.leno
 </ol>
 </blockquote>
 <figure class="row">
-    <img class="img-responsive center" src="/images/gerrit%20user%20setting%20username.png" />
+    <img class="img-responsive center" src="images/gerrit%20user%20setting%20username.png" />
     <figcaption>Setup Gerrit user name</figcaption>
 </figure>
 
 <p>Step 6. Setup SSH access. Als on user setting, paste in the content of <em>id_rsa.pub</em> from step 2.</p>
 <figure class="row">
-    <img class="img-responsive center" src="/images/gerrit%20user%20setting%20ssh%20key.png" />
+    <img class="img-responsive center" src="images/gerrit%20user%20setting%20ssh%20key.png" />
     <figcaption>Setup Gerrit user SSH public key</figcaption>
 </figure>
 
 <div class="highlight"><pre><span></span>Test Gerrit user setup:
 
-$ ssh -p <span class="m">29418</span> <span class="o">[</span>gerrit user name, eg. demouser<span class="o">]</span>@gerrit.labs.lenovo.com gerrit ls-projects
+$ ssh -p <span class="m">29418</span> <span class="o">[</span>gerrit user name, eg. demouser<span class="o">]</span>@gerrit.labs.feng.com gerrit ls-projects
 </pre></div>
 
 
 <p>If you get an error, add <em>-oKexAlgorithms=+diffie-hellman-group1-sha1</em> per <a href="https://www.openssh.com/legacy.html">OpenSSH</a> instruction.</p>
 <div class="highlight"><pre><span></span>Unable to negotiate with 10.240.43.177 port 29418: no matching key exchange method found. Their offer: diffie-hellman-group1-sha1
 
-$ ssh -p <span class="m">29418</span> -oKexAlgorithms<span class="o">=</span>+diffie-hellman-group1-sha1 fengxia41103@gerrit.labs.lenovo.com ....
+$ ssh -p <span class="m">29418</span> -oKexAlgorithms<span class="o">=</span>+diffie-hellman-group1-sha1 fengxia41103@gerrit.labs.feng.com ....
 </pre></div>
         </p>
 
         <p>
           &mdash; by
-          <a href="author/feng-xia.html">Feng Xia</a>
+          <a href="feng-xia.html">Feng Xia</a>
         </p>
 
         <div id="disqus_thread"></div>
@@ -335,93 +335,97 @@ of coding in charm's Python files.</p>
       <div class="container">
 	<div class="row">
           <h5>Categories:</h5>
-          <a href="https://fengxia41103.github.io/myblog/category/demo.html">
+          <a href="https://fengxia41103.github.io/myblog/demo.html">
             <i class="fa fa-folder-open-o"></i>
             demo
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/dev.html">
+          <a href="https://fengxia41103.github.io/myblog/dev.html">
             <i class="fa fa-folder-open-o"></i>
             dev
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/fashion.html">
+          <a href="https://fengxia41103.github.io/myblog/fashion.html">
             <i class="fa fa-folder-open-o"></i>
             fashion
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/gkp.html">
+          <a href="https://fengxia41103.github.io/myblog/gkp.html">
             <i class="fa fa-folder-open-o"></i>
             gkp
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/lenovo.html">
+          <a href="https://fengxia41103.github.io/myblog/lenovo.html">
             <i class="fa fa-folder-open-o"></i>
             lenovo
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/odoo.html">
+          <a href="https://fengxia41103.github.io/myblog/odoo.html">
             <i class="fa fa-folder-open-o"></i>
             odoo
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/openstack.html">
+          <a href="https://fengxia41103.github.io/myblog/openstack.html">
             <i class="fa fa-folder-open-o"></i>
             openstack
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/react.html">
+          <a href="https://fengxia41103.github.io/myblog/react.html">
             <i class="fa fa-folder-open-o"></i>
             REACT
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/rh.html">
+          <a href="https://fengxia41103.github.io/myblog/rh.html">
             <i class="fa fa-folder-open-o"></i>
             rh
           </a>
-          <a href="https://fengxia41103.github.io/myblog/category/thoughts.html">
+          <a href="https://fengxia41103.github.io/myblog/thoughts.html">
             <i class="fa fa-folder-open-o"></i>
             thoughts
           </a>
 
           <h5>Tags:</h5>
-          <a href="https://fengxia41103.github.io/myblog/tag/lenovo.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+            <i class="fa fa-tag"></i>
+            feng
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
             <i class="fa fa-tag"></i>
             lenovo
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/love.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-love.html">
             <i class="fa fa-tag"></i>
             love
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/family.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-family.html">
             <i class="fa fa-tag"></i>
             family
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/demo.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
             <i class="fa fa-tag"></i>
             demo
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/dev.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
             <i class="fa fa-tag"></i>
             dev
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/react.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-react.html">
             <i class="fa fa-tag"></i>
             react
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/gkp.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
             <i class="fa fa-tag"></i>
             gkp
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/fashion.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
             <i class="fa fa-tag"></i>
             fashion
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/design.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-design.html">
             <i class="fa fa-tag"></i>
             design
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/odoo.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
             <i class="fa fa-tag"></i>
             odoo
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/angular.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
             <i class="fa fa-tag"></i>
             angular
           </a>
-          <a href="https://fengxia41103.github.io/myblog/tag/thoughts.html">
+          <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
             <i class="fa fa-tag"></i>
             thoughts
           </a>

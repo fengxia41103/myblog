@@ -53,7 +53,7 @@ automatically?&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;element.snapshot(file_path)&lt;/code&gt; will write to &lt;code&gt;file_path&lt;/code&gt; onto the file system.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/selenium%20snapshot.gif"/&gt;
+  &lt;img src="images/selenium%20snapshot.gif"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Window on the right hand side is monitoring folder on the file system
@@ -71,7 +71,7 @@ not, some components I'm dealing w/ is nothing but a small green dot
 (see below)! Therefore, it will be pretty useless if I'm just giving
 you an image of itself. &lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/mwc-network-hardware-status-icon.png"/&gt;
+  &lt;img src="images/mwc-network-hardware-status-icon.png"/&gt;
   &lt;figcaption&gt;
   Example of an element becoming much more meaningful when given a
   context than only by itself.
@@ -134,7 +134,7 @@ even a button w/ text!). So depending on how dropdown is being
 implemented in your code, you have to think of a way to &lt;em&gt;open&lt;/em&gt; the
 dropdown, and take a snapshot of it &lt;strong&gt;together w/ its trigger&lt;/strong&gt;:&lt;/p&gt;
 &lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/mwc-network-controller-actions-button.png"/&gt;
+  &lt;img src="images/mwc-network-controller-actions-button.png"/&gt;
   &lt;figcaption&gt;
 
   An example of dropdown menu whose trigger is only a small icon. Thus
@@ -146,7 +146,7 @@ dropdown, and take a snapshot of it &lt;strong&gt;together w/ its trigger&lt;/st
 
 &lt;h1&gt;modal dialog&lt;/h1&gt;
 &lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/mwc-host-enable-maintenance-mode-modal.png"/&gt;
+  &lt;img src="images/mwc-host-enable-maintenance-mode-modal.png"/&gt;
   &lt;figcaption&gt;
 
   An example of modal dialog half-rendered when we don't wait for its visibility.
@@ -629,7 +629,7 @@ browser).&lt;/p&gt;
 &lt;p&gt;All in all, take a look &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</summary><category term="angular"></category><category term="lenovo"></category></entry><entry><title>ECMAScript</title><link href="https://fengxia41103.github.io/myblog/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-03:myblog/ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
 &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/ecmascript%20relationship.png"/&gt;
+  &lt;img src="images/ecmascript%20relationship.png"/&gt;
   &lt;figcaption&gt;Feng's view of how these confusing Javascript words are
   linked together&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -756,7 +756,7 @@ and start to make sense, hopefully.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://auth0.com/blog/javascript-module-systems-showdown/"&gt;JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://scotch.io/tutorials/javascript-transpilers-what-they-are-why-we-need-them"&gt;avaScript Transpilers: What They Are &amp;amp; Why We Need Them&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>Dev structure</title><link href="https://fengxia41103.github.io/myblog/dev%20structure.html" rel="alternate"></link><published>2019-06-24T14:06:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-06-24:myblog/dev structure.html</id><summary type="html">&lt;figure class="col l5 m5 s12"&gt;
-  &lt;img src="/images/moses.jpg"/&gt;
+  &lt;img src="images/moses.jpg"/&gt;
   &lt;figcaption&gt;If the Bible story happens today&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -810,7 +810,7 @@ backend &amp;mdash; the &lt;code&gt;backend&lt;/code&gt; is showing more levels 
 categorize work into component, which also speaks of key
 technology/implementation. Until this is identified, we can say for
 sure we don't have 100% coverage of this code base yet.&lt;/p&gt;</summary><category term="thoughts"></category></entry><entry><title>Pandoc workflow</title><link href="https://fengxia41103.github.io/myblog/pandoc%20workflow.html" rel="alternate"></link><published>2019-04-30T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-30:myblog/pandoc workflow.html</id><summary type="html">&lt;figure class="col s12"&gt;
-  &lt;img src="/images/peppa.jpg"/&gt;
+  &lt;img src="images/peppa.jpg"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;a href="https://pandoc.org/MANUAL.html"&gt;Pandoc&lt;/a&gt; is awesome. I have been using
@@ -910,7 +910,7 @@ benefits to any follow up docs you will write and want to use the same
 source for reference! and to generate a bibliography now at the end of
 your doc is a snap, and it looks, beautiful!&lt;/p&gt;
 &lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/bibliography.png"/&gt;
+  &lt;img src="images/bibliography.png"/&gt;
   &lt;figcaption&gt;Example of .bib result in PDF&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1033,7 +1033,7 @@ up, if ever. &lt;/p&gt;</summary><category term="dev"></category></entry><entry>
 machine (B). If we can SSH from A&amp;rarr;B, we can reroute browser
 traffic from A to B, much quicker than X-windows.&lt;/p&gt;
 &lt;figure class="col l4 m4 s12"&gt;
-  &lt;img src="/images/browser%20proxy.png"
+  &lt;img src="images/browser%20proxy.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -1075,7 +1075,7 @@ be available from all interfaces.&lt;/p&gt;
      &lt;code&gt;127.0.0.1&lt;/code&gt; are listed. We want to use &lt;code&gt;localhost&lt;/code&gt;!&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/browser%20proxy%20firefox%20setting.png"
+  &lt;img src="images/browser%20proxy%20firefox%20setting.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;Setting up proxy in Firefox&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1184,7 +1184,7 @@ he has to obey, that's the minimal.  Anything that no law permits nor
 prohibits (functions that links to no requirements), well, is just to
 keep the developers happy.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-  &lt;img src="/images/practical%20uml%20problem%20domain.png"
+  &lt;img src="images/practical%20uml%20problem%20domain.png"
        class="responsive-image"&gt;
   &lt;figcaption&gt;Problem domain&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1272,7 +1272,7 @@ be a database table, or a service &amp;mdash; it's just a representation
 of a logical element that describes our view of breaking down the
 initial problem into a set of items who interacts with each other. &lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/practical%20uml%20solution%20domain.png"
+  &lt;img src="images/practical%20uml%20solution%20domain.png"
        class="responsive-image"&gt;
   &lt;figcaption&gt;How problem domain works w/ solution domain&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1365,7 +1365,7 @@ milestones here:&lt;/p&gt;
  you should do &amp;larr; you can always live a despicable life but being
  a lawful citizen at the same time.&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/practical%20uml.png"
+  &lt;img src="images/practical%20uml.png"
        class="responsive-image"&gt;
   &lt;figcaption&gt;A complete view of the framework&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1382,7 +1382,7 @@ beer cans out the window of his pickup truck.
 &lt;li&gt;basic course use case diagram&lt;/li&gt;
 &lt;li&gt;requirements&lt;/li&gt;
 &lt;/ol&gt;</summary><category term="dev"></category></entry><entry><title>Screencast</title><link href="https://fengxia41103.github.io/myblog/screencast.html" rel="alternate"></link><published>2018-06-06T21:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:myblog/screencast.html</id><summary type="html">&lt;video width="100%" height="100%" controls="controls"&gt;
-  &lt;source src="/images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" /&gt;
+  &lt;source src="images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" /&gt;
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/
 &lt;/video&gt;
@@ -1537,7 +1537,7 @@ connected to a switch port (via a cable).&lt;/p&gt;
 physical device such as server and switch. This makes sense as the
 primary physical asset of a data center are certainly these devices. &lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20list.png"/&gt;
+    &lt;img src="images/netbox%20device%20list.png"/&gt;
     &lt;figcaption&gt;Example list of devices&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1557,7 +1557,7 @@ are two important flags that will affect how a device can be used:&lt;/p&gt;
    (we model BMC controller as a bay device inside a server).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20devicetype%20list.png"/&gt;
+    &lt;img src="images/netbox%20devicetype%20list.png"/&gt;
     &lt;figcaption&gt;Example list of device types&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1572,9 +1572,9 @@ Netbox's way to control password in a later section). Further, we use
    access method is Telnet (see &lt;a href="https://fengxia41103.github.io/myblog/switches.html"&gt;Network switch&lt;/a&gt; for details.)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="row center"&gt;
-    &lt;img src="/images/netbox%20device%20section%201.png"
+    &lt;img src="images/netbox%20device%20section%201.png"
         class="col s6"/&gt;
-    &lt;img src="/images/netbox%20device%20section%202.png"
+    &lt;img src="images/netbox%20device%20section%202.png"
         class="col s6"/&gt;
     &lt;figcaption&gt;Device IP &amp; credential. A device can have multiple
     IP address but only one primary IP4 &amp; IP6. It can also
@@ -1586,7 +1586,7 @@ Netbox's way to control password in a later section). Further, we use
 &lt;p&gt;A device whose device type sets &lt;code&gt;is_network_device=True&lt;/code&gt; can be linked
 to an &lt;code&gt;Interface&lt;/code&gt;, and an interface can be linked to an IP address.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20interface.png"/&gt;
+    &lt;img src="images/netbox%20device%20interface.png"/&gt;
     &lt;figcaption&gt;Device interfaces&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1634,7 +1634,7 @@ to describe a network topology:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20topology.png"/&gt;
+    &lt;img src="images/netbox%20device%20topology.png"/&gt;
     &lt;figcaption&gt;Example device view of a topology&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1643,7 +1643,7 @@ to describe a network topology:&lt;/p&gt;
 &lt;code&gt;parent-children&lt;/code&gt; relationship. One use case of this relationship is
 to register BMC controller as a bay device inside a server:&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20bay%20device.png"/&gt;
+    &lt;img src="images/netbox%20device%20bay%20device.png"/&gt;
     &lt;figcaption&gt;Device bay&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1661,7 +1661,7 @@ to register BMC controller as a bay device inside a server:&lt;/p&gt;
 &lt;p&gt;In Netbox this is only a convenience for navigation. However
 we can extend this idea using other definitions.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20device%20related%20devices.png"/&gt;
+    &lt;img src="images/netbox%20device%20related%20devices.png"/&gt;
     &lt;figcaption&gt;Related devices&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1713,7 +1713,7 @@ allowing two devices in the same slot &amp;mdash; one facing the front,
 and one facing the back. Also, it is common that top-of-rack switch is
 mounted facing back so that cables can access its port.&lt;/p&gt;
 &lt;figure class="col s12 center"&gt;
-    &lt;img src="/images/netbox%20rack.png"/&gt;
+    &lt;img src="images/netbox%20rack.png"/&gt;
     &lt;figcaption&gt;Example of a rack&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1736,7 +1736,7 @@ mounted facing back so that cables can access its port.&lt;/p&gt;
     &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;on_delete&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTECT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Django to REST</title><link href="https://fengxia41103.github.io/myblog/django%20to%20rest.html" rel="alternate"></link><published>2018-03-22T08:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-03-22:myblog/django to rest.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/funny/the%20art%20of%20programming.jpg"
+  &lt;img src="images/funny/the%20art%20of%20programming.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -1770,7 +1770,7 @@ of the match before handing URL to &lt;code&gt;myapp/urls.py&lt;/code&gt; to mat
 &lt;strong&gt;further&lt;/strong&gt;. So it's a matter of matching order.&lt;/p&gt;
 &lt;p&gt;Anyway. So building a REST can be broken down into 5 steps:&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/django%20to%20rest.png"
+  &lt;img src="images/django%20to%20rest.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -2402,7 +2402,7 @@ this command after running &lt;code&gt;emacs&lt;/code&gt; for some reason. Other
 will stuck in initialization forever.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ syndaemon -i 0.5 -d -K -R
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Bye Bye GFW</title><link href="https://fengxia41103.github.io/myblog/bye%20bye%20gfw.html" rel="alternate"></link><published>2017-04-30T22:53:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-30:myblog/bye bye gfw.html</id><summary type="html">&lt;figure class="col l3 m3 s12"&gt;
-  &lt;img src="/images/funny/gfw.jpg"/&gt;
+  &lt;img src="images/funny/gfw.jpg"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;The GFW is nothing but an anti-humanity instance that blocks knowledge
@@ -2439,7 +2439,7 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 &lt;li&gt;Set up as shown below:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;figure class="s12 center"
-    &lt;img src="/images/firefox%20manual%20proxy.png" /&gt;
+    &lt;img src="images/firefox%20manual%20proxy.png" /&gt;
     &lt;figcaption&gt;Firefox manual proxy setup&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -2448,7 +2448,7 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Welcome back to the world.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>You got mail</title><link href="https://fengxia41103.github.io/myblog/mbsync%20mu4e%20email.html" rel="alternate"></link><published>2019-05-21T10:27:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/mbsync mu4e email.html</id><summary type="html">&lt;figure class="col l5 m6 s12"&gt;
-  &lt;img src="/images/hahn.png"
+  &lt;img src="images/hahn.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -2473,7 +2473,7 @@ glance, but it isn't really. In a nutshell, it defines three things:&lt;/p&gt;
    store.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/mbsync.png"
+  &lt;img src="images/mbsync.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;mbsync components&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -2905,7 +2905,7 @@ access). So you can now point your &lt;code&gt;mbsync&lt;/code&gt; to a local po
 &lt;code&gt;1143&lt;/code&gt;, and davmail will route mbsync's IMAP requests to the remote
 OWA server, nice!&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/mbsync%20setup.png"
+  &lt;img src="images/mbsync%20setup.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;My mbsync setup for retrieving and sending mails&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -2923,7 +2923,7 @@ AuthMech LOGIN
 
 &lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; settings:&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="/images/davmail.png"
+  &lt;img src="images/davmail.png"
        class="center img-responsive"&gt;
   &lt;figcaption&gt;davmail settings&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2019-09-26T13:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
@@ -2941,7 +2941,7 @@ to get there:&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;M-x find-grep-dired&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Find-grep (directory)&lt;/code&gt;: is to select the root folder for the scan&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Find-grep (grep regexp)&lt;/code&gt;: is the regex for the string pattern you
-   are searching, eg. &lt;code&gt;"/images/&lt;/code&gt; is to find anything starts with a
+   are searching, eg. &lt;code&gt;"images/&lt;/code&gt; is to find anything starts with a
    double quote sign and &lt;code&gt;images/&lt;/code&gt; after &amp;larr; in my attempt to
    change image from relative path to absolute path.&lt;/li&gt;
 &lt;li&gt;A new buffer will open w/ the list of files that contains a match.&lt;/li&gt;
@@ -3196,7 +3196,7 @@ quirks that make it a real pain when migrating to another service
 provider or platform later on. I have not run into such problem with
 AWS, but would like to keep options open.&lt;/p&gt;
 &lt;figure class="col l12 m12 s12"&gt;
-  &lt;img src="/images/deployment_architecture.png"
+  &lt;img src="images/deployment_architecture.png"
   &lt;figcaption&gt;Deployment architecture&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3216,7 +3216,7 @@ so that I could focus on writing application code to solve
 client's real problems. Service such as &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt; and &lt;a href="https://cloud.google.com/appengine/"&gt;GAE&lt;/a&gt;
 are even more hands-off if the application architecture
 can fit into their platform.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>General system architecture</title><link href="https://fengxia41103.github.io/myblog/general%20system%20architecture.html" rel="alternate"></link><published>2018-10-17T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-08:myblog/general system architecture.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
-  &lt;img src="/images/architecture_joke.jpg"
+  &lt;img src="images/architecture_joke.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
 
@@ -3277,7 +3277,7 @@ projects. It is divided into four components:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/system%20architecture.png"/&gt;
+  &lt;img src="images/system%20architecture.png"/&gt;
     &lt;figcaption&gt;Feng's system architecture diagram&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3311,7 +3311,7 @@ we need.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The design must be based on &lt;a href="http://getbootstrap.com/components/"&gt;Bootstrap&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Includes &lt;a href="http://fontawesome.io/icons/"&gt;Fontawesome&lt;/a&gt;, &lt;a href="https://datatables.net/"&gt;Datatable&lt;/a&gt;, &lt;a href="http://lokeshdhakar.com/projects/lightbox2/"&gt;Lightbox2&lt;/a&gt;, and &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/"&gt;SyntaxHighlighter&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Reuse elements I have designed for &lt;a href="https://fengxia41103.github.io/myblog/category/demo.html"&gt;showcases&lt;/a&gt;, such as layout, CSS and images.&lt;/li&gt;
+&lt;li&gt;Reuse elements I have designed for &lt;a href="https://fengxia41103.github.io/myblog/demo.html"&gt;showcases&lt;/a&gt;, such as layout, CSS and images.&lt;/li&gt;
 &lt;li&gt;Colors we like: &lt;font color="#337ab7"&gt;blue(#337ab7)&lt;/font&gt; and &lt;span class="myhighlight"&gt;red(#d52349)&lt;/span&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fonts.google.com/"&gt;Google fonts&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -3600,7 +3600,7 @@ a simple crawler using the &lt;a href="https://docs.python.org/2/library/urllib.
 or building upon some more sophisticate tool like
 &lt;a href="http://doc.scrapy.org/en/latest/intro/tutorial.html"&gt;Scrapy&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/regular_expressions.png"/&gt;
+  &lt;img src="images/regular_expressions.png"/&gt;
   &lt;figcaption&gt;Fun with regular expression&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -3827,6 +3827,6 @@ to that.&lt;/p&gt;
 &lt;h1&gt;Final design&lt;/h1&gt;
 &lt;p&gt;After all the tweaks, the final design of my crawler comes down to this:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-  &lt;img src="/images/crawler.jpg"/&gt;
+  &lt;img src="images/crawler.jpg"/&gt;
   &lt;figcaption&gt;Crawler architecture&lt;/figcaption&gt;
 &lt;/figure&gt;</summary><category term="dev"></category></entry></feed>

@@ -186,7 +186,7 @@ Extra metadata (valid at timestamp):
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;figure class="col s12"&gt;
-  &lt;img src="/images/ibb/shutdown%20rhv%20storage%20domain.png"/&gt;
+  &lt;img src="images/ibb/shutdown%20rhv%20storage%20domain.png"/&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -217,7 +217,7 @@ Extra metadata (valid at timestamp):
 &lt;li&gt;
 &lt;p&gt;stop one: &lt;code&gt;gluster volume stop &amp;lt;volume name&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;figure class="col s12"&gt;
-  &lt;img src="/images/ibb/shutdown%20gluster%20volume.png"/&gt;
+  &lt;img src="images/ibb/shutdown%20gluster%20volume.png"/&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -332,7 +332,7 @@ There are no active volume tasks
 &lt;li&gt;Starting storage can take a while.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;figure class="col s12"&gt;
-  &lt;img src="/images/ibb/rhhi%20activate%20domain.png"/&gt;
+  &lt;img src="images/ibb/rhhi%20activate%20domain.png"/&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -470,11 +470,11 @@ jinx sometimes when each switch can return you some random garbages
 once a while that makes &lt;code&gt;session.expect("your regex pattern")&lt;/code&gt; to time
 out and you don't know why.&lt;/p&gt;
 &lt;h1&gt;enos vs. cnos&lt;/h1&gt;
-&lt;p&gt;Not much to say. These are two switch OS seen on Lenovo switches. They
+&lt;p&gt;Not much to say. These are two switch OS seen on Feng switches. They
 are all closely looked like Cisco's &lt;a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html"&gt;IOS&lt;/a&gt;, but different. &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf"&gt;CNOS manual&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf"&gt;ENOS commands&lt;/a&gt; (Googling &lt;code&gt;enos manual&lt;/code&gt; shows Lenovo switch
+&lt;li&gt;&lt;a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf"&gt;ENOS commands&lt;/a&gt; (Googling &lt;code&gt;enos manual&lt;/code&gt; shows Feng switch
    types, eg. G8272. So I guess the term is applicable on a model basis.)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Anyway, the biggest difference to be aware is that CNOS device uses &lt;code&gt;display&lt;/code&gt;
@@ -638,12 +638,12 @@ Show running system information
 &lt;/ol&gt;
 &lt;h1&gt;login&lt;/h1&gt;
 &lt;p&gt;A typical login session looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;dev&lt;span class="o"&gt;)&lt;/span&gt; fengxia@fengxia-lenovo:~$ telnet 10.240.43.29
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;dev&lt;span class="o"&gt;)&lt;/span&gt; fengxia@fengxia-feng:~$ telnet 10.240.43.29
 Trying 10.240.43.29...
 Connected to 10.240.43.29.
 Escape character is &lt;span class="s1"&gt;&amp;#39;^]&amp;#39;&lt;/span&gt;.
 
-Lenovo RackSwitch G8272.
+Feng RackSwitch G8272.
 
 
 Enter login username: admin
@@ -752,7 +752,7 @@ from a switch &amp;larr; they refer to devices connected to a switch
 &lt;strong&gt;neighbors&lt;/strong&gt;. This information is the foundation to draw a (physical)
 network topology such as:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/switch%20network%20topology.png"/&gt;
+    &lt;img src="images/switch%20network%20topology.png"/&gt;
     &lt;figcaption&gt;Example of a switch-switch topology&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -1008,7 +1008,7 @@ Automatic policy provisioning is disabled on this interface
 &lt;li&gt;enter super user mode: &lt;code&gt;en&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;enter config terminal: &lt;code&gt;config terminal&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;NOS version 10.3.2.0 LENOVO G8272, Wed Mar &lt;span class="m"&gt;29&lt;/span&gt; 12:20:39 PDT 2017
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;NOS version 10.3.2.0 FENG G8272, Wed Mar &lt;span class="m"&gt;29&lt;/span&gt; 12:20:39 PDT 2017
 LCTC-R1U37-SW&amp;gt;en
 LCTC-R1U37-SW#config
 Enter configuration commands, one per line.  End with CNTL/Z.
@@ -1155,4 +1155,4 @@ Automatic policy provisioning is disabled on this interface
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Have fun w/ switches ~~&lt;/p&gt;</summary><category term="lenovo"></category></entry></feed>
+&lt;p&gt;Have fun w/ switches ~~&lt;/p&gt;</summary><category term="feng"></category></entry></feed>

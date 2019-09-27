@@ -11,7 +11,7 @@ analysis so to offer an overview, where major level contains details
 that are relevant to that particular major which students would find
 useful.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_major_setup.png"/&gt;
+    &lt;img src="images/gkp_major_setup.png"/&gt;
     &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -22,7 +22,7 @@ categories, 92 subcategories and 506 majors.&lt;/p&gt;
 &lt;p&gt;At this level, focus was to provide statistics which is similar to
 what is done for schools at &lt;em&gt;State level&lt;/em&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_18.png"/&gt;
+    &lt;img src="images/gkp_18.png"/&gt;
     &lt;figcaption&gt;Major category and subcategory&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -35,7 +35,7 @@ popular job posting sites. Dynamically the application will query
 these sites and compile the most recent 50 job posts that matches this
 major.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_19.png"/&gt;
+    &lt;img src="images/gkp_19.png"/&gt;
     &lt;figcaption&gt;Job title cloud&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -44,7 +44,7 @@ taht shows the job titles used by the industry, and they are further
 grouped into cities so they provide another geo reference for
 students.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_20.png"/&gt;
+    &lt;img  src="images/gkp_20.png"/&gt;
     &lt;figcaption&gt;Schools grouped by job locations&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -64,9 +64,9 @@ unlimited bookmarks and manage them by &lt;em&gt;x-out&lt;/em&gt;(remove) it fro
 list. Convenient.&lt;/p&gt;
 &lt;figure class="row"&gt;
     &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_9.png" /&gt;
+    &lt;img class="img-responsive center" src="images/gkp_9.png" /&gt;
     &lt;/div&gt;&lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_10.png" /&gt;
+    &lt;img class="img-responsive center" src="images/gkp_10.png" /&gt;
     &lt;/div&gt;
     &lt;figcaption&gt;Bookmark a school&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -77,14 +77,14 @@ first page contains an introduction, or a quick view, of the school.
 It contains many meta data that can be extracted to form more data
 dimensions.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_11.png"/&gt;
+    &lt;img src="images/gkp_11.png"/&gt;
     &lt;figcaption&gt;School summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;School detail page expands on top of the introduction. One small feature
 concerning development is that TOC is auto generated.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_12.png"/&gt;
+    &lt;img  src="images/gkp_12.png"/&gt;
     &lt;figcaption&gt;School wiki&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -93,7 +93,7 @@ concerning development is that TOC is auto generated.&lt;/p&gt;
 in past admissions. GKP has collected over 2,000,000 data records
 between 2010 and 2014 and covering 3,000 schools.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_13.png"/&gt;
+    &lt;img src="images/gkp_13.png"/&gt;
     &lt;figcaption&gt;School historical cutoff scores&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -107,7 +107,7 @@ backend engine to tap into popular social media facilities and pull in
 live chat stream at &lt;strong&gt;50,000 new posts per minute&lt;/strong&gt;. This gives
 students a rich information on how the campus life is like.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_14.png"/&gt;
+    &lt;img  src="images/gkp_14.png"/&gt;
     &lt;figcaption&gt;School social media data stream&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -119,9 +119,9 @@ viewed (thus indicating more popularity), the higher priority the page
 has in term of receiving the next update.&lt;/p&gt;
 &lt;figure class="row"&gt;
   &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_15.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_15.png"/&gt;
   &lt;/div&gt;&lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_16.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_16.png"/&gt;
   &lt;/div&gt;
   &lt;figcaption&gt;Social media keyword cloud and news ticker&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -140,7 +140,7 @@ as simple as scanning the barcode with her phone. It is another unique
 feature that makes acquiring school information as painless as
 possible.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_17.png"/&gt;
+    &lt;img  src="images/gkp_17.png"/&gt;
     &lt;figcaption&gt;School Wechat channels&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -167,7 +167,7 @@ approached each problem with the solution you are currently seeing.&lt;/p&gt;
 searching criteria so to narrow down from a general search to a more
 customized version.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_2.png" /&gt;
+    &lt;img src="images/gkp_2.png" /&gt;
     &lt;figcaption&gt;Set up user preferences&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -194,7 +194,7 @@ week to resolve limited by the upper limit Google imposed on each API
 account and the initial trial and error time. Drawing the map was
 straightforward using &lt;a href="https://developers.google.com/maps/documentation/javascript/tutorial"&gt;Google map API&lt;/a&gt; and &lt;a href="https://github.com/googlemaps/js-marker-clusterer"&gt;marker cluster&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img  src="/images/gkp_21.png"/&gt;
+    &lt;img  src="images/gkp_21.png"/&gt;
     &lt;figcaption&gt;Using Google map to browse schools&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -231,7 +231,7 @@ incompatibility.&lt;/p&gt;
 &lt;p&gt;Considering the GFW, I abandoned both maps and back to a simple
 Chart. Map is drawn using &lt;a href="https://ecomfe.github.io/echarts/index-en.html"&gt;Echarts&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_1.png"/&gt;
+    &lt;img src="images/gkp_1.png"/&gt;
     &lt;figcaption&gt;School map using Echarts&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -248,7 +248,7 @@ within the same state boundary will be grouped along different
 dimensions. Statistics are then computed on the fly to provide quick
 facts.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_3.png"/&gt;
+    &lt;img src="images/gkp_3.png"/&gt;
     &lt;figcaption&gt;School statistics quickview at State level&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -256,7 +256,7 @@ facts.&lt;/p&gt;
 two important dimensions are important for a student
 &amp;mdash; Bachelor's vs. Associate program, and tiers.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_4.png"/&gt;
+    &lt;img src="images/gkp_4.png"/&gt;
     &lt;figcaption&gt;School statistics drill down by programs and admission tiers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -275,7 +275,7 @@ also the time when elite students get picked by school. For all
 others, they have to make a decision prior to the exam day which tier
 she is going into, and the primary reference is her estimated score.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_5.png"/&gt;
+    &lt;img src="images/gkp_5.png"/&gt;
     &lt;figcaption&gt;School statistics drill down by school types&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -289,10 +289,10 @@ matching city name to a wiki page and parse the page for imported data
 bits.&lt;/p&gt;
 &lt;figure class="row"&gt;
   &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_6.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_6.png"/&gt;
   &lt;/div&gt;
   &lt;div class="col s6"&gt;
-    &lt;img class="img-responsive center" src="/images/gkp_7.png"/&gt;
+    &lt;img class="img-responsive center" src="images/gkp_7.png"/&gt;
   &lt;/div&gt;
   &lt;figcaption&gt;City wiki&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -302,7 +302,7 @@ convenient is it to get to the city from where I live?&lt;/em&gt; So we decided
 to build a train schedule that will show exactly which train are
 available to take, all stops in between, and the actual time elapse.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
-    &lt;img src="/images/gkp_8.png"/&gt;
+    &lt;img src="images/gkp_8.png"/&gt;
     &lt;figcaption&gt;City to city train schedule search engine&lt;/figcaption&gt;
 &lt;/figure&gt;
 

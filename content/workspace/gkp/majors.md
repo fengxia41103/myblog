@@ -23,7 +23,7 @@ useful.
     <figcaption>Majors are split into 3 layers</figcaption>
 </figure>
 
-According to [document]({attach}/downloads/20121012084054830.pdf)
+According to [document]({static}/downloads/20121012084054830.pdf)
 published by the [Department of Education][] in 2012, there are 12
 categories, 92 subcategories and 506 majors.
 

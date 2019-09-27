@@ -165,5 +165,5 @@ manage the list.
 
 Happy coding.
 
-[1]: {attach}/downloads/emacs/init.el
+[1]: {static}/downloads/emacs/init.el
 [2]: {filename}/dev/mbsync.md

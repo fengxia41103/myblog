@@ -205,5 +205,5 @@ dealing one at a time (if we religiously clicked the CANCEL each time!).
 Script is [here][3].
 
 [1]: {filename}/dev/analyze%20angular%201x.md
-[2]: {filename}/downloads/webapp.pdf
+[2]: {static}/downloads/webapp.pdf
 [3]: https://github.com/fengxia41103/dev/tree/master/snapshot

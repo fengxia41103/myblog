@@ -100,5 +100,5 @@ All in all, take a look [this sample][5] and enjoy ~~
 [2]: https://storybook.js.org/docs/testing/automated-visual-testing/
 [3]: https://github.com/americanexpress/jest-image-snapshot
 [4]: {filename}/dev/pandoc.md
-[5]: {filename}/downloads/webapp.pdf
+[5]: {static}/downloads/webapp.pdf
 [6]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/analyze_angular_1x.py

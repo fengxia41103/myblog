@@ -85,7 +85,7 @@ that file. I followed the steps [here][3].
         openssl s_client -connect ${SERVER}:${PORT} -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'| sed -ne '1,/-END CERTIFICATE-/p' > ${CERT_FOLDER}/${SERVER}.pem
         ```
 
-[4]: {attach}/downloads/emacs/get_certs.sh
+[4]: {static}/downloads/emacs/get_certs.sh
 
 2. Create a `~/.cert` directory, then run:
 

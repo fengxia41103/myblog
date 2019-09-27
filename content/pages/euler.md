@@ -7,67 +7,67 @@ Modified: 2018-07-29 21:00
 ---
 # Code
 
-[1]({filename}/downloads/euler/p1.py)
-[2]({filename}/downloads/euler/p2.py)
-[3]({filename}/downloads/euler/p3.py)
-[4]({filename}/downloads/euler/p4.py)
-[5]({filename}/downloads/euler/p5.py)
-[6]({filename}/downloads/euler/p6.py)
-[7]({filename}/downloads/euler/p7.py)
-[8]({filename}/downloads/euler/p8.py)
-[9]({filename}/downloads/euler/p9.py)
-[10]({filename}/downloads/euler/p10.py)
-[11]({filename}/downloads/euler/p11.py)
-[12]({filename}/downloads/euler/p12.py)
-[13]({filename}/downloads/euler/p13.py)
-[14]({filename}/downloads/euler/p14.py)
-[15]({filename}/downloads/euler/p15.py)
-[16]({filename}/downloads/euler/p16.py)
-[17]({filename}/downloads/euler/p17.py)
-[18]({filename}/downloads/euler/p18.py)
-[19]({filename}/downloads/euler/p19.py)
-[20]({filename}/downloads/euler/p20.py)
-[21]({filename}/downloads/euler/p21.py)
-[22]({filename}/downloads/euler/p22.py)
-[23]({filename}/downloads/euler/p23.py)
-[24]({filename}/downloads/euler/p24.py)
-[25]({filename}/downloads/euler/p25.py)
-[26]({filename}/downloads/euler/p26.py)
-[27]({filename}/downloads/euler/p27.py)
-[28]({filename}/downloads/euler/p28.py)
-[29]({filename}/downloads/euler/p29.py)
-[30]({filename}/downloads/euler/p30.py)
-[31]({filename}/downloads/euler/p31.py)
-[32]({filename}/downloads/euler/p32.py)
-[33]({filename}/downloads/euler/p33.py)
-[34]({filename}/downloads/euler/p34.py)
-[35]({filename}/downloads/euler/p35.py)
-[36]({filename}/downloads/euler/p36.py)
-[37]({filename}/downloads/euler/p37.py)
-[38]({filename}/downloads/euler/p38.py)
-[39]({filename}/downloads/euler/p39.py)
-[40]({filename}/downloads/euler/p40.py)
-[41]({filename}/downloads/euler/p41.py)
-[42]({filename}/downloads/euler/p42.py)
-[43]({filename}/downloads/euler/p43.py)
-[44]({filename}/downloads/euler/p44.py)
-[45]({filename}/downloads/euler/p45.py)
-[46]({filename}/downloads/euler/p46.py)
-[47]({filename}/downloads/euler/p47.py)
-[48]({filename}/downloads/euler/p48.py)
-[49]({filename}/downloads/euler/p49.py)
-[50]({filename}/downloads/euler/p50.py)
-[51]({filename}/downloads/euler/p51.py)
-[52]({filename}/downloads/euler/p52.py)
-[53]({filename}/downloads/euler/p53.py)
-[54]({filename}/downloads/euler/p54.py)
-[55]({filename}/downloads/euler/p55.py)
-[56]({filename}/downloads/euler/p56.py)
-[57]({filename}/downloads/euler/p57.py)
-[58]({filename}/downloads/euler/p58.py)
-[59]({filename}/downloads/euler/p59.py)
-[60]({filename}/downloads/euler/p60.py)
-[61]({filename}/downloads/euler/p61.py)
+[1]({static}/downloads/euler/p1.py)
+[2]({static}/downloads/euler/p2.py)
+[3]({static}/downloads/euler/p3.py)
+[4]({static}/downloads/euler/p4.py)
+[5]({static}/downloads/euler/p5.py)
+[6]({static}/downloads/euler/p6.py)
+[7]({static}/downloads/euler/p7.py)
+[8]({static}/downloads/euler/p8.py)
+[9]({static}/downloads/euler/p9.py)
+[10]({static}/downloads/euler/p10.py)
+[11]({static}/downloads/euler/p11.py)
+[12]({static}/downloads/euler/p12.py)
+[13]({static}/downloads/euler/p13.py)
+[14]({static}/downloads/euler/p14.py)
+[15]({static}/downloads/euler/p15.py)
+[16]({static}/downloads/euler/p16.py)
+[17]({static}/downloads/euler/p17.py)
+[18]({static}/downloads/euler/p18.py)
+[19]({static}/downloads/euler/p19.py)
+[20]({static}/downloads/euler/p20.py)
+[21]({static}/downloads/euler/p21.py)
+[22]({static}/downloads/euler/p22.py)
+[23]({static}/downloads/euler/p23.py)
+[24]({static}/downloads/euler/p24.py)
+[25]({static}/downloads/euler/p25.py)
+[26]({static}/downloads/euler/p26.py)
+[27]({static}/downloads/euler/p27.py)
+[28]({static}/downloads/euler/p28.py)
+[29]({static}/downloads/euler/p29.py)
+[30]({static}/downloads/euler/p30.py)
+[31]({static}/downloads/euler/p31.py)
+[32]({static}/downloads/euler/p32.py)
+[33]({static}/downloads/euler/p33.py)
+[34]({static}/downloads/euler/p34.py)
+[35]({static}/downloads/euler/p35.py)
+[36]({static}/downloads/euler/p36.py)
+[37]({static}/downloads/euler/p37.py)
+[38]({static}/downloads/euler/p38.py)
+[39]({static}/downloads/euler/p39.py)
+[40]({static}/downloads/euler/p40.py)
+[41]({static}/downloads/euler/p41.py)
+[42]({static}/downloads/euler/p42.py)
+[43]({static}/downloads/euler/p43.py)
+[44]({static}/downloads/euler/p44.py)
+[45]({static}/downloads/euler/p45.py)
+[46]({static}/downloads/euler/p46.py)
+[47]({static}/downloads/euler/p47.py)
+[48]({static}/downloads/euler/p48.py)
+[49]({static}/downloads/euler/p49.py)
+[50]({static}/downloads/euler/p50.py)
+[51]({static}/downloads/euler/p51.py)
+[52]({static}/downloads/euler/p52.py)
+[53]({static}/downloads/euler/p53.py)
+[54]({static}/downloads/euler/p54.py)
+[55]({static}/downloads/euler/p55.py)
+[56]({static}/downloads/euler/p56.py)
+[57]({static}/downloads/euler/p57.py)
+[58]({static}/downloads/euler/p58.py)
+[59]({static}/downloads/euler/p59.py)
+[60]({static}/downloads/euler/p60.py)
+[61]({static}/downloads/euler/p61.py)
 
 ---
 # problem 1 {#problem1}
@@ -2173,7 +2173,7 @@ times of *n*.
 
 [Question](https://projecteuler.net/problem=27):
 
-![]({filename}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
+![]({static}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
 
 -   problem space: `|a| < 1000 and |b| < 1000`
 -   test criteria: n*n+a*n+b, n=0,1.... is prime?
@@ -2363,7 +2363,7 @@ with the growing number of digits anymore. So **problem space is
 max-ed at 199999**!
 
 ![Max by digits vs. Max from sum() of 5th power of each
-digits]({filename}/downloads/euler/Euler_p30.png "Max by digits vs. Max from
+digits]({static}/downloads/euler/Euler_p30.png "Max by digits vs. Max from
 sum() of 5th power of each digits"){.col .s12}
 
 
@@ -2397,7 +2397,7 @@ def main():
 > 
 > </div>
 
-![PE overview]({filename}/downloads/euler/031_overview.pdf "PE overview")
+![PE overview]({static}/downloads/euler/031_overview.pdf "PE overview")
 
 -   problem space: max number of `1p(=200) * max of
     2p(=100)`.... &mdash; it's a large number, but does represent the
@@ -2456,7 +2456,7 @@ def main():
 ```
 
 ![Dynamic programming on coin change
-problem]({filename}/downloads/euler/Dyn_prog.pdf "Dynamic programming on coin change problem")
+problem]({static}/downloads/euler/Dyn_prog.pdf "Dynamic programming on coin change problem")
 
 This led me to Google for solution (not being cheap, but eager to be
 enlightened), I came across a [great
@@ -2925,7 +2925,7 @@ def main():
   [palindromic](https://en.wikipedia.org/wiki/Palindromic_number)?
 
 ![Overview posted in PE
-threads]({filename}/downloads/euler/036_overview.pdf "Overview posted in PE threads")
+threads]({static}/downloads/euler/036_overview.pdf "Overview posted in PE threads")
 
 A palindromic number is **symmetrical**. A more mathematical
 description can be found
@@ -3397,7 +3397,7 @@ def main():
 > we form a word value. For example, the word value for SKY is 19 +
 > 11 + 25 = 55 = <i>t</i><sub>10</sub>. If the word value is a
 > triangle number then we shall call the word a triangle word.</p>
-> <p>Using [P042 words.txt]({filename}/downloads/euler/P042_words.txt), a 16K
+> <p>Using [P042 words.txt]({static}/downloads/euler/P042_words.txt), a 16K
 > text file containing nearly two-thousand common English words, how
 > many are triangle words?</p>
 
@@ -4103,7 +4103,7 @@ Taking this a bit further, I searched benchmark vs. count to analyze
 how quickly this relationship will converge. To my surprise it is
 quite linear!
 
-![]({filename}/downloads/euler/P53.png){.col .s12}
+![]({static}/downloads/euler/P53.png){.col .s12}
 
 ---
 
@@ -4807,7 +4807,7 @@ This approach is messy.
 I know this is not `clever`. But I failed to see a hard test criteria
 to know that decoded message is correct.
 
-![]({filename}/downloads/euler/P59.png){.col .l6 .m6 .s12}
+![]({static}/downloads/euler/P59.png){.col .l6 .m6 .s12}
 
 ## method 2
 
@@ -4964,7 +4964,7 @@ def method_1():
 Graph below shows that the length of candidate list grows almost
 `linearly` with the growing of primes generated.
 
-![]({filename}/downloads/euler/P60.png){.col .s12}
+![]({static}/downloads/euler/P60.png){.col .s12}
 
 When stopped at break condition, we had two pairs:
 

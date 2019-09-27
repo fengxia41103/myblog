@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -275,37 +254,37 @@ driver_info = {
 <p><code>instance_info</code>: is populated when the node is
    provisioned. However, user can also set this field through API.</p>
 <p>Example payload:</p>
-<div class="highlight"><pre><span></span>```shell
-{
-   &quot;ramdisk&quot;:&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;,
-   &quot;kernel&quot;:&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;,
-   &quot;image_source&quot;:&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;,
-   &quot;ephemeral_gb&quot;:0,
-   &quot;image_properties&quot;:{
-      &quot;kernel_id&quot;:&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;,
-      &quot;ramdisk_id&quot;:&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;,
-      &quot;virtual_size&quot;:null
-   },
-   &quot;preserve_ephemeral&quot;:false,
-   &quot;ephemeral_mb&quot;:0,
-   &quot;local_gb&quot;:&quot;10&quot;,
-   &quot;image_disk_format&quot;:&quot;ami&quot;,
-   &quot;image_checksum&quot;:&quot;eb9139e4942121f22bbc2afc0400b2a4&quot;,
-   &quot;nova_host_id&quot;:&quot;devstack&quot;,
-   &quot;ephemeral_format&quot;:null,
-   &quot;root_gb&quot;:&quot;10&quot;,
-   &quot;display_name&quot;:&quot;tt1&quot;,
-   &quot;configdrive&quot;:null,
-   &quot;image_type&quot;:&quot;partition&quot;,
-   &quot;image_tags&quot;:[
-   ],
-   &quot;memory_mb&quot;:&quot;1280&quot;,
-   &quot;vcpus&quot;:&quot;1&quot;,           &quot;image_url&quot;:&quot;http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&amp;temp_url_expires=1488585783&quot;,
-   &quot;image_container_format&quot;:&quot;ami&quot;,
-   &quot;root_mb&quot;:10240,
-   &quot;swap_mb&quot;:0
-}
-```
+<div class="highlight"><pre><span></span><span class="err">```</span><span class="nt">shell</span>
+<span class="p">{</span>
+   <span class="err">&quot;ramdisk&quot;:&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;,</span>
+   <span class="err">&quot;kernel&quot;:&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;,</span>
+   <span class="err">&quot;image_source&quot;:&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;,</span>
+   <span class="err">&quot;ephemeral_gb&quot;:0,</span>
+   <span class="err">&quot;image_properties&quot;:{</span>
+      <span class="err">&quot;kernel_id&quot;:&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;,</span>
+      <span class="err">&quot;ramdisk_id&quot;:&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;,</span>
+      <span class="err">&quot;virtual_size&quot;:null</span>
+   <span class="p">}</span><span class="o">,</span>
+   <span class="s2">&quot;preserve_ephemeral&quot;</span><span class="p">:</span><span class="nd">false</span><span class="o">,</span>
+   <span class="s2">&quot;ephemeral_mb&quot;</span><span class="p">:</span><span class="nd">0</span><span class="o">,</span>
+   <span class="s2">&quot;local_gb&quot;</span><span class="o">:</span><span class="s2">&quot;10&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;image_disk_format&quot;</span><span class="o">:</span><span class="s2">&quot;ami&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;image_checksum&quot;</span><span class="o">:</span><span class="s2">&quot;eb9139e4942121f22bbc2afc0400b2a4&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;nova_host_id&quot;</span><span class="o">:</span><span class="s2">&quot;devstack&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;ephemeral_format&quot;</span><span class="p">:</span><span class="nd">null</span><span class="o">,</span>
+   <span class="s2">&quot;root_gb&quot;</span><span class="o">:</span><span class="s2">&quot;10&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;display_name&quot;</span><span class="o">:</span><span class="s2">&quot;tt1&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;configdrive&quot;</span><span class="p">:</span><span class="nd">null</span><span class="o">,</span>
+   <span class="s2">&quot;image_type&quot;</span><span class="o">:</span><span class="s2">&quot;partition&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;image_tags&quot;</span><span class="o">:</span><span class="cp">[</span>
+   <span class="cp">]</span><span class="o">,</span>
+   <span class="s2">&quot;memory_mb&quot;</span><span class="o">:</span><span class="s2">&quot;1280&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;vcpus&quot;</span><span class="o">:</span><span class="s2">&quot;1&quot;</span><span class="o">,</span>           <span class="s2">&quot;image_url&quot;</span><span class="o">:</span><span class="s2">&quot;http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&amp;amp;temp_url_expires=1488585783&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;image_container_format&quot;</span><span class="o">:</span><span class="s2">&quot;ami&quot;</span><span class="o">,</span>
+   <span class="s2">&quot;root_mb&quot;</span><span class="p">:</span><span class="nd">10240</span><span class="o">,</span>
+   <span class="s2">&quot;swap_mb&quot;</span><span class="p">:</span><span class="nd">0</span>
+<span class="err">}</span>
+<span class="err">```</span>
 </pre></div>
 
 
@@ -654,8 +633,12 @@ We are using "Password authentication with scoped authorization".</p>
 <ul>
 <li>Service: Keystone</li>
 <li>Method: <code>POST</code></li>
-<li>Endpoint: <code>/identity/v3/auth/tokens</code> (<a href="https://developer.openstack.org/api-ref/identity/v3/?expanded=password-authentication-with-scoped-authorization-detail#password-authentication-with-scoped-authorization">ref</a>)</li>
-<li>HTTP header:<ol>
+<li>
+<p>Endpoint: <code>/identity/v3/auth/tokens</code> (<a href="https://developer.openstack.org/api-ref/identity/v3/?expanded=password-authentication-with-scoped-authorization-detail#password-authentication-with-scoped-authorization">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header:</p>
+<ol>
 <li>Content-Type: <code>application/json</code></li>
 </ol>
 </li>
@@ -701,8 +684,12 @@ We are using "Password authentication with scoped authorization".</p>
 <ul>
 <li>Service: <code>Glance</code></li>
 <li>Method: <code>GET</code></li>
-<li>Endpoint: <code>/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details">ref</a>)</li>
-<li>HTTP header:<ol>
+<li>
+<p>Endpoint: <code>/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header:</p>
+<ol>
 <li>Accept-Encoding: <code>gzip, deflate</code></li>
 <li>Accept: <code>*/*</code></li>
 <li>User-Agent: <code>python-glanceclient</code></li>
@@ -747,8 +734,12 @@ talked about by the Images v2 API.</p>
 <ul>
 <li>Service: Glance</li>
 <li>Method: <code>GET</code></li>
-<li>Endpoint: <code>/v2/schemas/images</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-images-schema-detail#show-images-schema">ref</a>)</li>
-<li>HTTP header: none</li>
+<li>
+<p>Endpoint: <code>/v2/schemas/images</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-images-schema-detail#show-images-schema">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header: none</p>
+</li>
 <li>JSON payload: none</li>
 <li>Response: too long to paste.</li>
 </ul>
@@ -756,9 +747,13 @@ talked about by the Images v2 API.</p>
 <ul>
 <li>Service: Nova</li>
 <li>Method: <code>GET</code></li>
-<li>Endpoint: <code>/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e</code>
-  (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details">ref</a>)</li>
-<li>HTTP header:<ol>
+<li>
+<p>Endpoint: <code>/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e</code>
+  (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header:</p>
+<ol>
 <li>User-Agent: <code>python-novaclient</code></li>
 <li>Accept: <code>application/json</code></li>
 <li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
@@ -798,9 +793,13 @@ talked about by the Images v2 API.</p>
 <ul>
 <li>Service: Neutron</li>
 <li>Method: <code>GET</code></li>
-<li>Endpoint: <code>/v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0</code>
-(<a href="https://developer.openstack.org/api-ref/networking/v2/?expanded=show-port-details-detail#show-port-details">ref</a>)</li>
-<li>HTTP header:<ol>
+<li>
+<p>Endpoint: <code>/v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0</code>
+(<a href="https://developer.openstack.org/api-ref/networking/v2/?expanded=show-port-details-detail#show-port-details">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header:</p>
+<ol>
 <li>User-Agent: <code>openstacksdk/0.9.13 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12</code></li>
 <li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
 </ol>
@@ -879,8 +878,12 @@ talked about by the Images v2 API.</p>
 <ul>
 <li>Service: Nova</li>
 <li>Method: <code>POST</code></li>
-<li>Endpoint: <code>/v2.1/servers</code> (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,create-server-detail#create-server">ref</a>)</li>
-<li>HTTP header:<ol>
+<li>
+<p>Endpoint: <code>/v2.1/servers</code> (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,create-server-detail#create-server">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header:</p>
+<ol>
 <li>User-Agent: <code>python-novaclient</code></li>
 <li>Content-Type: <code>application/json</code></li>
 <li>Accept: <code>application/json</code></li>
@@ -938,9 +941,13 @@ talked about by the Images v2 API.</p>
 <ul>
 <li>Service: Nova</li>
 <li>Method: <code>GET</code></li>
-<li>Endpoint: <code>/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6</code>
-  (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,show-server-details-detail#show-server-details">ref</a>)</li>
-<li>HTTP header:<ol>
+<li>
+<p>Endpoint: <code>/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6</code>
+  (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,show-server-details-detail#show-server-details">ref</a>)</p>
+</li>
+<li>
+<p>HTTP header:</p>
+<ol>
 <li>User-Agent: <code>python-novaclient</code></li>
 <li>Accept: <code>application/json</code></li>
 <li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>

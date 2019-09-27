@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -247,11 +226,11 @@ this folder did not exist prior to the <code>add-machine</code> command.</p>
 │       └── jujud-machine-15.service
 ├── locks
 └── tools
-    ├── 2.0.1.98-xenial-amd64
+    ├── <span class="m">2</span>.0.1.98-xenial-amd64
     │   ├── downloaded-tools.txt
     │   ├── FORCE-VERSION
     │   └── jujud
-    └── machine-15 -&gt; 2.0.1.98-xenial-amd64
+    └── machine-15 -&gt; <span class="m">2</span>.0.1.98-xenial-amd64
 
 <span class="m">8</span> directories, <span class="m">6</span> files
 </pre></div>
@@ -273,7 +252,7 @@ forth), but will be tedious. </p>
 /etc/systemd/system/multi-user.target.wants/jujud-machine-15.service
 
 root@192-168-8-235:~# ls -lh /etc/systemd/system <span class="p">|</span> grep juju
-lrwxrwxrwx <span class="m">1</span> root root   <span class="m">60</span> Jan <span class="m">19</span> 16:47 jujud-machine-15.service -&gt; /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
+lrwxrwxrwx <span class="m">1</span> root root   <span class="m">60</span> Jan <span class="m">19</span> <span class="m">16</span>:47 jujud-machine-15.service -&gt; /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
 </pre></div>
 
 
@@ -287,8 +266,8 @@ others. </p>
 /usr/bin/juju-run
 
 root@192-168-8-235:~# ls -lh /usr/bin <span class="p">|</span> grep juju
-lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> 16:47 juju-dumplogs -&gt; /var/lib/juju/tools/machine-15/jujud
-lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> 16:47 juju-run -&gt; /var/lib/juju/tools/machine-15/jujud
+lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> <span class="m">16</span>:47 juju-dumplogs -&gt; /var/lib/juju/tools/machine-15/jujud
+lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> <span class="m">16</span>:47 juju-run -&gt; /var/lib/juju/tools/machine-15/jujud
 </pre></div>
 
 
@@ -452,14 +431,14 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
 │       │   ├── templates
 │       │   │   └── jenkins-config.xml
 │       │   ├── tests
-│       │   │   ├── 01-trusty-basic
-│       │   │   ├── 01-xenial-basic
-│       │   │   ├── 02-trusty-website
-│       │   │   ├── 02-xenial-website
-│       │   │   ├── 03-trusty-slave
-│       │   │   ├── 03-xenial-slave
-│       │   │   ├── 04-trusty-external
-│       │   │   ├── 04-xenial-external
+│       │   │   ├── <span class="m">01</span>-trusty-basic
+│       │   │   ├── <span class="m">01</span>-xenial-basic
+│       │   │   ├── <span class="m">02</span>-trusty-website
+│       │   │   ├── <span class="m">02</span>-xenial-website
+│       │   │   ├── <span class="m">03</span>-trusty-slave
+│       │   │   ├── <span class="m">03</span>-xenial-slave
+│       │   │   ├── <span class="m">04</span>-trusty-external
+│       │   │   ├── <span class="m">04</span>-xenial-external
 │       │   │   ├── basic.py
 │       │   │   ├── deployment.py
 │       │   │   ├── external.py
@@ -521,7 +500,7 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
 ├── meter-status.yaml
 ├── metricspool
 └── tools
-    ├── 2.0.1.98-xenial-amd64
+    ├── <span class="m">2</span>.0.1.98-xenial-amd64
     │   ├── action-fail -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── action-get -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── action-set -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
@@ -554,7 +533,7 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
     │   ├── storage-get -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── storage-list -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   └── unit-get -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
-    ├── machine-15 -&gt; 2.0.1.98-xenial-amd64
+    ├── machine-15 -&gt; <span class="m">2</span>.0.1.98-xenial-amd64
     └── unit-jenkins-1 -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64
 
 <span class="m">45</span> directories, <span class="m">194</span> files

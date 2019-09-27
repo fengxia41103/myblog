@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -197,8 +176,8 @@ there are changes (<code>data['changes]</code> is not empty).</p>
     <span class="o">...</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">watch</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">watcher</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_get</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">watch</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">watcher</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get</span><span class="p">()</span>
         <span class="n">iteration</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span>
         <span class="n">changed</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">states</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;changes&#39;</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">changed</span>
@@ -246,7 +225,7 @@ states. Clearly the backend is a <code>sqlite3</code> database.</p>
 <span class="sd">    To support dicts, lists, integer, floats, and booleans values</span>
 <span class="sd">    are automatically json encoded/decoded.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span> <span class="o">=</span> <span class="n">path</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="s1">&#39;UNIT_STATE_DB&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>

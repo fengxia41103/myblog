@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -235,16 +214,16 @@ ansible==2.2.0
 <li>
 <p><code>ansible.cfg</code>. Instead of using a global config, this is local so
    each charm can have its own variation if desired.</p>
-<div class="highlight"><pre><span></span><span class="x">```shell</span>
-<span class="x">[defaults]</span>
-<span class="x">inventory = ./hosts</span>
-<span class="x">log_path = /var/log/ansible/ansible.log</span>
-<span class="x">remote_tmp = </span><span class="p">$</span><span class="nv">HOME</span><span class="x">/.ansible/tmp</span>
-<span class="x">local_tmp = </span><span class="p">$</span><span class="nv">HOME</span><span class="x">/.ansible/tmp</span>
-<span class="x">[ssh_connection]</span>
-<span class="x">ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s</span>
-<span class="x">control_path = ~/.ansible/cp/ansible-ssh-%%h-%%p-%%r</span>
-<span class="x">```</span>
+<div class="highlight"><pre><span></span>```shell
+[defaults]
+inventory = ./hosts
+log_path = /var/log/ansible/ansible.log
+remote_tmp = $HOME/.ansible/tmp
+local_tmp = $HOME/.ansible/tmp
+[ssh_connection]
+ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s
+control_path = ~/.ansible/cp/ansible-ssh-%%h-%%p-%%r
+```
 </pre></div>
 
 
@@ -252,55 +231,55 @@ ansible==2.2.0
 <li>
 <p>Options. Constructed a class to be the abstraction of Ansible
    options:</p>
-<div class="highlight"><pre><span></span>```python
-class Options(object):
-    &quot;&quot;&quot;
-    Options class to replace Ansible OptParser
-    &quot;&quot;&quot;
-    ....
-    verbosity=None,
-    inventory=None,
-    listhosts=None,
-    subset=None,
-    module_paths=None,
-    extra_vars=None,
-    forks=None,
-    ask_vault_pass=None,
-    vault_password_files=None,
-    new_vault_password_file=None,
-    output_file=None,
-    tags=None,
-    skip_tags=[],
-    one_line=None,
-    tree=None,
-    ask_sudo_pass=None,
-    ask_su_pass=None,
-    sudo=None,
-    sudo_user=None,
-    become=None,
-    become_method=None,
-    become_user=None,
-    become_ask_pass=None,
-    ask_pass=None,
-    private_key_file=None,
-    remote_user=None,
-    connection=None,
-    timeout=None,
-    ssh_common_args=None,
-    sftp_extra_args=None,
-    scp_extra_args=None,
-    ssh_extra_args=None,
-    poll_interval=None,
-    seconds=None,
-    check=None,
-    syntax=None,
-    diff=None,
-    force_handlers=None,
-    flush_cache=None,
-    listtasks=None,
-    listtags=[],
-    module_path=None
-```
+<div class="highlight"><pre><span></span><span class="sb">```python</span>
+<span class="sb">class Options(object):</span>
+<span class="sb">    &quot;&quot;&quot;</span>
+<span class="sb">    Options class to replace Ansible OptParser</span>
+<span class="sb">    &quot;&quot;&quot;</span>
+<span class="sb">    ....</span>
+<span class="sb">    verbosity=None,</span>
+<span class="sb">    inventory=None,</span>
+<span class="sb">    listhosts=None,</span>
+<span class="sb">    subset=None,</span>
+<span class="sb">    module_paths=None,</span>
+<span class="sb">    extra_vars=None,</span>
+<span class="sb">    forks=None,</span>
+<span class="sb">    ask_vault_pass=None,</span>
+<span class="sb">    vault_password_files=None,</span>
+<span class="sb">    new_vault_password_file=None,</span>
+<span class="sb">    output_file=None,</span>
+<span class="sb">    tags=None,</span>
+<span class="sb">    skip_tags=[],</span>
+<span class="sb">    one_line=None,</span>
+<span class="sb">    tree=None,</span>
+<span class="sb">    ask_sudo_pass=None,</span>
+<span class="sb">    ask_su_pass=None,</span>
+<span class="sb">    sudo=None,</span>
+<span class="sb">    sudo_user=None,</span>
+<span class="sb">    become=None,</span>
+<span class="sb">    become_method=None,</span>
+<span class="sb">    become_user=None,</span>
+<span class="sb">    become_ask_pass=None,</span>
+<span class="sb">    ask_pass=None,</span>
+<span class="sb">    private_key_file=None,</span>
+<span class="sb">    remote_user=None,</span>
+<span class="sb">    connection=None,</span>
+<span class="sb">    timeout=None,</span>
+<span class="sb">    ssh_common_args=None,</span>
+<span class="sb">    sftp_extra_args=None,</span>
+<span class="sb">    scp_extra_args=None,</span>
+<span class="sb">    ssh_extra_args=None,</span>
+<span class="sb">    poll_interval=None,</span>
+<span class="sb">    seconds=None,</span>
+<span class="sb">    check=None,</span>
+<span class="sb">    syntax=None,</span>
+<span class="sb">    diff=None,</span>
+<span class="sb">    force_handlers=None,</span>
+<span class="sb">    flush_cache=None,</span>
+<span class="sb">    listtasks=None,</span>
+<span class="sb">    listtags=[],</span>
+<span class="sb">    module_path=None</span>
+<span class="sb">```</span>
 </pre></div>
 
 
@@ -395,9 +374,9 @@ below).</p>
 <div class="highlight"><pre><span></span>```python
 playbook = config[&#39;state-0-playbook&#39;]
 runner = Runner(
-    tags = &#39;sth&#39;, # &lt;-- must match the tag in the playbook
-    connection = &#39;local&#39;, # &lt;-- must be &quot;local&quot;
-    hostnames = &#39;127.0.0.1&#39;, # &lt;-- assuming execution in localhost
+    tags = &#39;sth&#39;, # &amp;lt;-- must match the tag in the playbook
+    connection = &#39;local&#39;, # &amp;lt;-- must be &quot;local&quot;
+    hostnames = &#39;127.0.0.1&#39;, # &amp;lt;-- assuming execution in localhost
     playbooks = [playbook],
     private_key_file = &#39;&#39;,
     run_data = {},

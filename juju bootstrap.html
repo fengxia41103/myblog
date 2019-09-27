@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -401,7 +380,7 @@ Juju.</p>
 // TODO<span class="o">(</span>mue<span class="o">)</span>: Rename to InterfaceConfig due to consistency later.
 <span class="nb">type</span> InterfaceInfo struct <span class="o">{</span>
     // DeviceIndex specifies the order in which the network interface
-    // appears on the host. The primary interface has an index of 0.
+    // appears on the host. The primary interface has an index of <span class="m">0</span>.
     DeviceIndex int
 
     // MACAddress is the network interface<span class="s1">&#39;s hardware MAC address</span>
@@ -434,7 +413,7 @@ Juju.</p>
 <span class="s1">    AvailabilityZones []string</span>
 
 <span class="s1">    // VLANTag needs to be between 1 and 4094 for VLANs and 0 for</span>
-<span class="s1">    // normal networks. It&#39;</span>s defined by IEEE 802.1Q standard.
+<span class="s1">    // normal networks. It&#39;</span>s defined by IEEE <span class="m">802</span>.1Q standard.
     VLANTag int
 
     // InterfaceName is the raw OS-specific network device name <span class="o">(</span>e.g.
@@ -459,7 +438,7 @@ Juju.</p>
 
     // ConfigType determines whether the interface should be
     // configured via DHCP, statically, manually, etc. See
-    // interfaces<span class="o">(</span>5<span class="o">)</span> <span class="k">for</span> more information.
+    // interfaces<span class="o">(</span><span class="m">5</span><span class="o">)</span> <span class="k">for</span> more information.
     ConfigType InterfaceConfigType
 
     // Address contains an optional static IP address to configure <span class="k">for</span>
@@ -474,7 +453,7 @@ Juju.</p>
 
     // MTU is the Maximum Transmission Unit controlling the maximum size of the
     // protocol packats that the interface can pass through. It is only used
-    // when &gt; 0.
+    // when &gt; <span class="m">0</span>.
     MTU int
 
     // DNSSearchDomains contains the default DNS domain to use <span class="k">for</span> non-FQDN
@@ -606,18 +585,18 @@ in the simulation, see below) is to rely on default values, <code>common</code>
 provider's <code>Bootstrap</code> functions, and return a <code>StartInstanceResult</code>.</p>
 <div class="highlight"><pre><span></span>// For now, we are imitating a successful instance by directly returning a result struct
 var tmpArch <span class="nv">string</span> <span class="o">=</span> arch.AMD64
-var tmpMem <span class="nv">uint64</span> <span class="o">=</span> 2000000
-var tmpCpuCore <span class="nv">uint64</span> <span class="o">=</span> 1
-var tmpCpuPower <span class="nv">uint64</span> <span class="o">=</span> 100
+var tmpMem <span class="nv">uint64</span> <span class="o">=</span> <span class="m">2000000</span>
+var tmpCpuCore <span class="nv">uint64</span> <span class="o">=</span> <span class="m">1</span>
+var tmpCpuPower <span class="nv">uint64</span> <span class="o">=</span> <span class="m">100</span>
 hardware :<span class="o">=</span> instance.HardwareCharacteristics<span class="o">{</span>
         Arch: <span class="p">&amp;</span>tmpArch,
         Mem: <span class="p">&amp;</span>tmpMem,
         CpuCores: <span class="p">&amp;</span>tmpCpuCore,
         CpuPower: <span class="p">&amp;</span>tmpCpuPower,
 <span class="o">}</span>
-volumes :<span class="o">=</span> make<span class="o">([]</span>storage.Volume, 0<span class="o">)</span>
-networkInfo :<span class="o">=</span> make<span class="o">([]</span>network.InterfaceInfo, 0<span class="o">)</span>
-volumeAttachments :<span class="o">=</span> make<span class="o">([]</span>storage.VolumeAttachment, 0<span class="o">)</span>
+volumes :<span class="o">=</span> make<span class="o">([]</span>storage.Volume, <span class="m">0</span><span class="o">)</span>
+networkInfo :<span class="o">=</span> make<span class="o">([]</span>network.InterfaceInfo, <span class="m">0</span><span class="o">)</span>
+volumeAttachments :<span class="o">=</span> make<span class="o">([]</span>storage.VolumeAttachment, <span class="m">0</span><span class="o">)</span>
 
 <span class="k">return</span> <span class="p">&amp;</span>environs.StartInstanceResult<span class="o">{</span>
         Instance:          xclarityBootstrapInstance<span class="o">{}</span>,

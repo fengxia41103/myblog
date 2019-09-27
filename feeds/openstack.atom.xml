@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/openstack.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-03-15T00:00:00-04:00</updated><entry><title>Juju GUI nginx proxy</title><link href="https://fengxia41103.github.io/myblog/juju%20gui%20nginx%20proxy.html" rel="alternate"></link><published>2017-10-22T22:21:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-22:myblog/juju gui nginx proxy.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free' - openstack</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/openstack.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-03-15T00:00:00-04:00</updated><entry><title>Juju GUI nginx proxy</title><link href="https://fengxia41103.github.io/myblog/juju%20gui%20nginx%20proxy.html" rel="alternate"></link><published>2017-10-22T22:21:00-04:00</published><updated>2017-10-22T22:21:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-22:/myblog/juju gui nginx proxy.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with &lt;code&gt;$ juju gui&lt;/code&gt; from juju host; 
+accessing it from anywhere outside
+the host is a challenge. One way is through &lt;code&gt;$ ssh -X&lt;/code&gt; to 
+the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
 enough with &lt;code&gt;$ juju gui&lt;/code&gt; from juju host; 
@@ -54,33 +60,33 @@ $ juju change-user-password
    server listens port &lt;code&gt;443&lt;/code&gt;!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;```&lt;/span&gt;&lt;span class="nt"&gt;shell&lt;/span&gt;
 &lt;span class="nt"&gt;map&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="nt"&gt;http_upgrade&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="nt"&gt;connection_upgrade&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
- &lt;span class="nb"&gt;default&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;      &lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;default&lt;/span&gt; &lt;span class="err"&gt;upgrade&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;&amp;#39;&amp;#39;&lt;/span&gt;      &lt;span class="err"&gt;close&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;jujugui&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
- &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;175&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;135&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;193&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;17070&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="err"&gt;10.175.135.193:17070&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
- &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="m"&gt;443&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;server_name&lt;/span&gt; &lt;span class="m"&gt;192&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;168&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;122&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;214&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;IP&lt;/span&gt;
- &lt;span class="n"&gt;ssl_certificate&lt;/span&gt;           &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ssl_certificate_key&lt;/span&gt;       &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ssl&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ssl_session_cache&lt;/span&gt;  &lt;span class="n"&gt;builtin&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;  &lt;span class="n"&gt;shared&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SSL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ssl_protocols&lt;/span&gt;  &lt;span class="n"&gt;TLSv1&lt;/span&gt; &lt;span class="n"&gt;TLSv1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;TLSv1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ssl_ciphers&lt;/span&gt; &lt;span class="n"&gt;HIGH&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;aNULL&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;eNULL&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;EXPORT&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;CAMELLIA&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;DES&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;MD5&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;PSK&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;RC4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;ssl_prefer_server_ciphers&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
- &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_pass&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;jujugui&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_set_header&lt;/span&gt;    &lt;span class="n"&gt;Host&lt;/span&gt;            &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_set_header&lt;/span&gt;    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Real&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;IP&lt;/span&gt;       &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;remote_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_set_header&lt;/span&gt;    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Forwarded&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;for&lt;/span&gt;  &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_connect_timeout&lt;/span&gt; &lt;span class="m"&gt;300&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;port_in_redirect&lt;/span&gt; &lt;span class="n"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_http_version&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_set_header&lt;/span&gt; &lt;span class="n"&gt;Upgrade&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;http_upgrade&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_set_header&lt;/span&gt; &lt;span class="n"&gt;Connection&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;upgrade&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;proxy_read_timeout&lt;/span&gt; &lt;span class="m"&gt;86400&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;443&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;192.168.122.214&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;your&lt;/span&gt; &lt;span class="err"&gt;IP&lt;/span&gt;
+ &lt;span class="err"&gt;ssl_certificate&lt;/span&gt;           &lt;span class="err"&gt;/etc/nginx/cert.crt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;ssl_certificate_key&lt;/span&gt;       &lt;span class="err"&gt;/etc/nginx/cert.key&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;ssl&lt;/span&gt; &lt;span class="err"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;ssl_session_cache&lt;/span&gt;  &lt;span class="n"&gt;builtin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;  &lt;span class="n"&gt;shared&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SSL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;ssl_protocols&lt;/span&gt;  &lt;span class="err"&gt;TLSv1&lt;/span&gt; &lt;span class="err"&gt;TLSv1.1&lt;/span&gt; &lt;span class="err"&gt;TLSv1.2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;ssl_ciphers&lt;/span&gt; &lt;span class="n"&gt;HIGH&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;aNULL&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;eNULL&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;EXPORT&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;CAMELLIA&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;DES&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;MD5&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;PSK&lt;/span&gt;&lt;span class="o"&gt;:!&lt;/span&gt;&lt;span class="n"&gt;RC4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;ssl_prefer_server_ciphers&lt;/span&gt; &lt;span class="err"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_pass&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;jujugui&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_set_header&lt;/span&gt;    &lt;span class="err"&gt;Host&lt;/span&gt;            &lt;span class="err"&gt;$host&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_set_header&lt;/span&gt;    &lt;span class="err"&gt;X-Real-IP&lt;/span&gt;       &lt;span class="err"&gt;$remote_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_set_header&lt;/span&gt;    &lt;span class="err"&gt;X-Forwarded-for&lt;/span&gt;  &lt;span class="err"&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_connect_timeout&lt;/span&gt; &lt;span class="err"&gt;300&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;port_in_redirect&lt;/span&gt; &lt;span class="err"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_http_version&lt;/span&gt; &lt;span class="err"&gt;1.1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;Upgrade&lt;/span&gt; &lt;span class="err"&gt;$http_upgrade&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;Connection&lt;/span&gt; &lt;span class="err"&gt;&amp;quot;upgrade&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="err"&gt;proxy_read_timeout&lt;/span&gt; &lt;span class="err"&gt;86400&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
  &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;```&lt;/span&gt;
@@ -90,7 +96,11 @@ $ juju change-user-password
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Reload &lt;code&gt;$ sudo service nginx reload&lt;/code&gt;, and browse to
-&lt;code&gt;https://[yourip]/gui&lt;/code&gt;, you shall see the Juju GUI.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju local LXD</title><link href="https://fengxia41103.github.io/myblog/juju%20local%20LXD.html" rel="alternate"></link><published>2017-09-06T13:21:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-09-06:myblog/juju local LXD.html</id><summary type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
+&lt;code&gt;https://[yourip]/gui&lt;/code&gt;, you shall see the Juju GUI.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Juju local LXD</title><link href="https://fengxia41103.github.io/myblog/juju%20local%20LXD.html" rel="alternate"></link><published>2017-09-06T13:21:00-04:00</published><updated>2017-09-06T13:21:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-09-06:/myblog/juju local LXD.html</id><summary type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code change,
+deploying charm, then wait to see the &lt;em&gt;new&lt;/em&gt; code got executed &amp;larr;
+it's good 5-10 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
 development for a while, you know making a one line of code change,
 deploying charm, then wait to see the &lt;em&gt;new&lt;/em&gt; code got executed &amp;larr;
@@ -164,7 +174,7 @@ $ passwd ubuntu
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
 $ nano /etc/ssh/sshd_config
 # Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes # &amp;lt;-- change to &amp;quot;yes&amp;quot;
+PasswordAuthentication yes # &amp;amp;lt;-- change to &amp;quot;yes&amp;quot;
 ```
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -268,9 +278,9 @@ $ lxc publish gold/snap3 --alias juju/trusty/amd64
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
 &lt;span class="p"&gt;|&lt;/span&gt;         ALIAS          &lt;span class="p"&gt;|&lt;/span&gt; FINGERPRINT  &lt;span class="p"&gt;|&lt;/span&gt; PUBLIC &lt;span class="p"&gt;|&lt;/span&gt;                  DESCRIPTION                  &lt;span class="p"&gt;|&lt;/span&gt;  ARCH  &lt;span class="p"&gt;|&lt;/span&gt;   SIZE   &lt;span class="p"&gt;|&lt;/span&gt;         UPLOAD DATE          &lt;span class="p"&gt;|&lt;/span&gt;
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
-&lt;span class="p"&gt;|&lt;/span&gt; juju/trusty/amd64      &lt;span class="p"&gt;|&lt;/span&gt; b95d3291e3ae &lt;span class="p"&gt;|&lt;/span&gt; no     &lt;span class="p"&gt;|&lt;/span&gt;                                               &lt;span class="p"&gt;|&lt;/span&gt; x86_64 &lt;span class="p"&gt;|&lt;/span&gt; 377.03MB &lt;span class="p"&gt;|&lt;/span&gt; Sep 6, &lt;span class="m"&gt;2017&lt;/span&gt; at 2:10pm &lt;span class="o"&gt;(&lt;/span&gt;UTC&lt;span class="o"&gt;)&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt; juju/trusty/amd64      &lt;span class="p"&gt;|&lt;/span&gt; b95d3291e3ae &lt;span class="p"&gt;|&lt;/span&gt; no     &lt;span class="p"&gt;|&lt;/span&gt;                                               &lt;span class="p"&gt;|&lt;/span&gt; x86_64 &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="m"&gt;377&lt;/span&gt;.03MB &lt;span class="p"&gt;|&lt;/span&gt; Sep &lt;span class="m"&gt;6&lt;/span&gt;, &lt;span class="m"&gt;2017&lt;/span&gt; at &lt;span class="m"&gt;2&lt;/span&gt;:10pm &lt;span class="o"&gt;(&lt;/span&gt;UTC&lt;span class="o"&gt;)&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
-&lt;span class="p"&gt;|&lt;/span&gt; ubuntu-xenial &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; more&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; 58f90cbf6892 &lt;span class="p"&gt;|&lt;/span&gt; no     &lt;span class="p"&gt;|&lt;/span&gt; ubuntu 16.04 LTS amd64 &lt;span class="o"&gt;(&lt;/span&gt;release&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;20170815.1&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; x86_64 &lt;span class="p"&gt;|&lt;/span&gt; 154.11MB &lt;span class="p"&gt;|&lt;/span&gt; Aug 17, &lt;span class="m"&gt;2017&lt;/span&gt; at 4:19pm &lt;span class="o"&gt;(&lt;/span&gt;UTC&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt; ubuntu-xenial &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; more&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; 58f90cbf6892 &lt;span class="p"&gt;|&lt;/span&gt; no     &lt;span class="p"&gt;|&lt;/span&gt; ubuntu &lt;span class="m"&gt;16&lt;/span&gt;.04 LTS amd64 &lt;span class="o"&gt;(&lt;/span&gt;release&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;20170815&lt;/span&gt;.1&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; x86_64 &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="m"&gt;154&lt;/span&gt;.11MB &lt;span class="p"&gt;|&lt;/span&gt; Aug &lt;span class="m"&gt;17&lt;/span&gt;, &lt;span class="m"&gt;2017&lt;/span&gt; at &lt;span class="m"&gt;4&lt;/span&gt;:19pm &lt;span class="o"&gt;(&lt;/span&gt;UTC&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -317,8 +327,8 @@ have it create machines &lt;em&gt;manually&lt;/em&gt;:&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Create a new LXD container using the image (or snapshot):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
-$ lxc launch juju/trusty/amd64 testme &amp;amp;&amp;amp; lxc start testme
-$ lxc copy gold/snap3 testme &amp;amp;&amp;amp; lxc start me
+$ lxc launch juju/trusty/amd64 testme &amp;amp;amp;&amp;amp;amp; lxc start testme
+$ lxc copy gold/snap3 testme &amp;amp;amp;&amp;amp;amp; lxc start me
 ```
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -347,7 +357,14 @@ $ juju model-config enable-os-upgrade&lt;span class="o"&gt;=&lt;/span&gt;&lt;spa
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1&gt;Comparison results&lt;/h1&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm Ansible integration</title><link href="https://fengxia41103.github.io/myblog/charm%20ansible%20integration.html" rel="alternate"></link><published>2017-07-06T13:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-07-06:myblog/charm ansible integration.html</id><summary type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
+&lt;h1&gt;Comparison results&lt;/h1&gt;</content><category term="lenovo"></category></entry><entry><title>Charm Ansible integration</title><link href="https://fengxia41103.github.io/myblog/charm%20ansible%20integration.html" rel="alternate"></link><published>2017-07-06T13:00:00-04:00</published><updated>2017-07-06T13:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-07-06:/myblog/charm ansible integration.html</id><summary type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.&lt;/p&gt;
+&lt;p&gt;Design objectives:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Design as reusable &lt;a href="https://jujucharms.com/docs/2.1/developer-layers"&gt;layer(s)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Be compatible with Ubuntu and …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.&lt;/p&gt;
@@ -448,16 +465,16 @@ ansible==2.2.0
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;ansible.cfg&lt;/code&gt;. Instead of using a global config, this is local so
    each charm can have its own variation if desired.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;```shell&lt;/span&gt;
-&lt;span class="x"&gt;[defaults]&lt;/span&gt;
-&lt;span class="x"&gt;inventory = ./hosts&lt;/span&gt;
-&lt;span class="x"&gt;log_path = /var/log/ansible/ansible.log&lt;/span&gt;
-&lt;span class="x"&gt;remote_tmp = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="x"&gt;/.ansible/tmp&lt;/span&gt;
-&lt;span class="x"&gt;local_tmp = &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="x"&gt;/.ansible/tmp&lt;/span&gt;
-&lt;span class="x"&gt;[ssh_connection]&lt;/span&gt;
-&lt;span class="x"&gt;ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s&lt;/span&gt;
-&lt;span class="x"&gt;control_path = ~/.ansible/cp/ansible-ssh-%%h-%%p-%%r&lt;/span&gt;
-&lt;span class="x"&gt;```&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+[defaults]
+inventory = ./hosts
+log_path = /var/log/ansible/ansible.log
+remote_tmp = $HOME/.ansible/tmp
+local_tmp = $HOME/.ansible/tmp
+[ssh_connection]
+ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s
+control_path = ~/.ansible/cp/ansible-ssh-%%h-%%p-%%r
+```
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -465,55 +482,55 @@ ansible==2.2.0
 &lt;li&gt;
 &lt;p&gt;Options. Constructed a class to be the abstraction of Ansible
    options:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
-class Options(object):
-    &amp;quot;&amp;quot;&amp;quot;
-    Options class to replace Ansible OptParser
-    &amp;quot;&amp;quot;&amp;quot;
-    ....
-    verbosity=None,
-    inventory=None,
-    listhosts=None,
-    subset=None,
-    module_paths=None,
-    extra_vars=None,
-    forks=None,
-    ask_vault_pass=None,
-    vault_password_files=None,
-    new_vault_password_file=None,
-    output_file=None,
-    tags=None,
-    skip_tags=[],
-    one_line=None,
-    tree=None,
-    ask_sudo_pass=None,
-    ask_su_pass=None,
-    sudo=None,
-    sudo_user=None,
-    become=None,
-    become_method=None,
-    become_user=None,
-    become_ask_pass=None,
-    ask_pass=None,
-    private_key_file=None,
-    remote_user=None,
-    connection=None,
-    timeout=None,
-    ssh_common_args=None,
-    sftp_extra_args=None,
-    scp_extra_args=None,
-    ssh_extra_args=None,
-    poll_interval=None,
-    seconds=None,
-    check=None,
-    syntax=None,
-    diff=None,
-    force_handlers=None,
-    flush_cache=None,
-    listtasks=None,
-    listtags=[],
-    module_path=None
-```
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="sb"&gt;```python&lt;/span&gt;
+&lt;span class="sb"&gt;class Options(object):&lt;/span&gt;
+&lt;span class="sb"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sb"&gt;    Options class to replace Ansible OptParser&lt;/span&gt;
+&lt;span class="sb"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sb"&gt;    ....&lt;/span&gt;
+&lt;span class="sb"&gt;    verbosity=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    inventory=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    listhosts=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    subset=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    module_paths=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    extra_vars=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    forks=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    ask_vault_pass=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    vault_password_files=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    new_vault_password_file=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    output_file=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    tags=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    skip_tags=[],&lt;/span&gt;
+&lt;span class="sb"&gt;    one_line=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    tree=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    ask_sudo_pass=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    ask_su_pass=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    sudo=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    sudo_user=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    become=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    become_method=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    become_user=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    become_ask_pass=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    ask_pass=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    private_key_file=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    remote_user=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    connection=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    timeout=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    ssh_common_args=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    sftp_extra_args=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    scp_extra_args=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    ssh_extra_args=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    poll_interval=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    seconds=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    check=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    syntax=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    diff=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    force_handlers=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    flush_cache=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    listtasks=None,&lt;/span&gt;
+&lt;span class="sb"&gt;    listtags=[],&lt;/span&gt;
+&lt;span class="sb"&gt;    module_path=None&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -608,9 +625,9 @@ below).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
 playbook = config[&amp;#39;state-0-playbook&amp;#39;]
 runner = Runner(
-    tags = &amp;#39;sth&amp;#39;, # &amp;lt;-- must match the tag in the playbook
-    connection = &amp;#39;local&amp;#39;, # &amp;lt;-- must be &amp;quot;local&amp;quot;
-    hostnames = &amp;#39;127.0.0.1&amp;#39;, # &amp;lt;-- assuming execution in localhost
+    tags = &amp;#39;sth&amp;#39;, # &amp;amp;lt;-- must match the tag in the playbook
+    connection = &amp;#39;local&amp;#39;, # &amp;amp;lt;-- must be &amp;quot;local&amp;quot;
+    hostnames = &amp;#39;127.0.0.1&amp;#39;, # &amp;amp;lt;-- assuming execution in localhost
     playbooks = [playbook],
     private_key_file = &amp;#39;&amp;#39;,
     run_data = {},
@@ -626,7 +643,12 @@ stats = runner.run()
 &lt;/ol&gt;
 &lt;p&gt;That's it. Now you can build a charm by including &lt;code&gt;layer-myansible&lt;/code&gt;
 and run any playbooks in your charm by following this design pattern
-while taking full advantage of the &lt;a href="http://docs.ansible.com/ansible/dev_guide/developing_api.html"&gt;Ansible Python API&lt;/a&gt;. Beautiful.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm layer-basic</title><link href="https://fengxia41103.github.io/myblog/charm%20layer-basic.html" rel="alternate"></link><published>2017-05-29T09:22:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-05-29:myblog/charm layer-basic.html</id><summary type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
+while taking full advantage of the &lt;a href="http://docs.ansible.com/ansible/dev_guide/developing_api.html"&gt;Ansible Python API&lt;/a&gt;. Beautiful.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Charm layer-basic</title><link href="https://fengxia41103.github.io/myblog/charm%20layer-basic.html" rel="alternate"></link><published>2017-05-29T09:22:00-04:00</published><updated>2017-05-29T09:22:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-05-29:/myblog/charm layer-basic.html</id><summary type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
+charm needs to include it? In this article we will take a look
+at its code base to decipher this mystery.&lt;/p&gt;
+&lt;h1&gt;Hooks&lt;/h1&gt;
+&lt;p&gt;We already know hooks are hardcoded. Juju expects certain hooks and
+hook sequence is always executed in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
 charm needs to include it? In this article we will take a look
 at its code base to decipher this mystery.&lt;/p&gt;
 &lt;h1&gt;Hooks&lt;/h1&gt;
@@ -791,9 +813,9 @@ then call two functions from &lt;code&gt;layer-basic&lt;/code&gt;:&lt;/p&gt;
    packages are installed ONCE (reference: &lt;a href="https://docs.python.org/3/install/index.html#inst-config-files"&gt;distutils&lt;/a&gt;, &lt;a href="http://setuptools.readthedocs.io/en/latest/easy_install.html#configuration-files"&gt;easy_install&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;In &lt;code&gt;wheelhouse.txt&lt;/code&gt; file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
-pip&amp;gt;=7.0.0,&amp;lt;8.2.0
-charmhelpers&amp;gt;=0.4.0,&amp;lt;1.0.0
-charms.reactive&amp;gt;=0.1.0,&amp;lt;2.0.0
+pip&amp;amp;gt;=7.0.0,&amp;amp;lt;8.2.0
+charmhelpers&amp;amp;gt;=0.4.0,&amp;amp;lt;1.0.0
+charms.reactive&amp;amp;gt;=0.1.0,&amp;amp;lt;2.0.0
 ```
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -854,7 +876,7 @@ environment and to initialize charm states. It has many hardcoded
 lines for using &lt;code&gt;apt-get&lt;/code&gt; CLI and expecting an Ubuntu
 environment. These have been addressed somewhat in &lt;a href="https://fengxia41103.github.io/myblog/python2 charm.html"&gt;python2 charm&lt;/a&gt;.
 Going forward, the code base can use some work to support host other
-than Ubuntu and Python2 instead of 3.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm Python2</title><link href="https://fengxia41103.github.io/myblog/python2%20charm.html" rel="alternate"></link><published>2017-05-27T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-05-27:myblog/python2 charm.html</id><summary type="html">&lt;p&gt;Python 2. So we dived into charm code to see which feature is blocking
+than Ubuntu and Python2 instead of 3.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Juju charm Python2</title><link href="https://fengxia41103.github.io/myblog/python2%20charm.html" rel="alternate"></link><published>2017-05-27T10:00:00-04:00</published><updated>2017-05-27T10:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-05-27:/myblog/python2 charm.html</id><summary type="html">&lt;p&gt;Charm is based on Python 3 while RHEL/CentOS7 ships&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python 2. So we dived into charm code to see which feature is blocking
 on P2 so we can run charms in CentOS.&lt;/p&gt;
 &lt;p&gt;Why do we want to build Python2 charms? Charms are claimed to built
 for Python3. However, the catch is that charms are also built for
@@ -911,7 +933,7 @@ to Ubuntu's. So yes, &lt;code&gt;import yum&lt;/code&gt; is just the tip of the 
 execution will break anywhere &lt;code&gt;apt_&lt;/code&gt; is called. Take &lt;code&gt;apt_install&lt;/code&gt; for
 example, here is a search result where this function is expected:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-*- mode: grep&lt;span class="p"&gt;;&lt;/span&gt; default-directory: &lt;span class="s2"&gt;&amp;quot;~/workspace/wss/hack/charmhelpers-0.15.0/&amp;quot;&lt;/span&gt; -*-
-Grep started at Sat May &lt;span class="m"&gt;27&lt;/span&gt; 22:32:10
+Grep started at Sat May &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt;:32:10
 
 find . -type d &lt;span class="se"&gt;\(&lt;/span&gt; -path &lt;span class="se"&gt;\*&lt;/span&gt;/SCCS -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/RCS -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/CVS -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/MCVS -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/.src -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/.svn -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/.git -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/.hg -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/.bzr -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/_MTN -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/_darcs -o -path &lt;span class="se"&gt;\*&lt;/span&gt;/&lt;span class="se"&gt;\{&lt;/span&gt;arch&lt;span class="se"&gt;\}&lt;/span&gt; &lt;span class="se"&gt;\)&lt;/span&gt; -prune -o &lt;span class="se"&gt;\!&lt;/span&gt; -type d &lt;span class="se"&gt;\(&lt;/span&gt; -name .&lt;span class="se"&gt;\#\*&lt;/span&gt; -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.beam -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.vee -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.jam -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.hi -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.o -o -name &lt;span class="se"&gt;\*\~&lt;/span&gt; -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.bin -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lbin -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.so -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.a -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.ln -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.blg -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.bbl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.elc -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lof -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.glo -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.idx -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lot -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fmt -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.tfm -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.class -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fas -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lib -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.mem -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.x86f -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.sparcf -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.dfsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.pfsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.d64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.p64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lx64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lx32fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.dx64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.dx32fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fx64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fx32fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.sx64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.sx32fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.wx64fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.wx32fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fasl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.ufsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fsl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.dxl -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.lo -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.la -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.gmo -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.mo -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.toc -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.aux -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.cp -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fn -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.ky -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.pg -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.tp -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.vr -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.cps -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.fns -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.kys -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.pgs -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.tps -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.vrs -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.pyc -o -name &lt;span class="se"&gt;\*&lt;/span&gt;.pyo &lt;span class="se"&gt;\)&lt;/span&gt; -prune -o  -type f &lt;span class="se"&gt;\(&lt;/span&gt; -name &lt;span class="se"&gt;\*&lt;/span&gt;.py &lt;span class="se"&gt;\)&lt;/span&gt; -exec grep -i -nH -e apt_install &lt;span class="se"&gt;\{\}&lt;/span&gt; +
 ./charmhelpers/contrib/hardening/host/checks/pam.py:26:    apt_install,
@@ -1034,7 +1056,7 @@ find . -type d &lt;span class="se"&gt;\(&lt;/span&gt; -path &lt;span class="se"&
 ./tests/fetch/test_fetch.py:839:        fetch.apt_install&lt;span class="o"&gt;(&lt;/span&gt;packages, options&lt;span class="o"&gt;)&lt;/span&gt;
 ./tests/fetch/test_fetch.py:857:        fetch.apt_install&lt;span class="o"&gt;(&lt;/span&gt;packages, options, &lt;span class="nv"&gt;fatal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;True&lt;span class="o"&gt;)&lt;/span&gt;
 
-Grep finished &lt;span class="o"&gt;(&lt;/span&gt;matches found&lt;span class="o"&gt;)&lt;/span&gt; at Sat May &lt;span class="m"&gt;27&lt;/span&gt; 22:32:10
+Grep finished &lt;span class="o"&gt;(&lt;/span&gt;matches found&lt;span class="o"&gt;)&lt;/span&gt; at Sat May &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt;:32:10
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1120,7 +1142,7 @@ mappings:&lt;/p&gt;
 &lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RelationBase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;__metaclass__&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;AutoAccessors&lt;/span&gt;
+    &lt;span class="vm"&gt;__metaclass__&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;AutoAccessors&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1264,7 +1286,7 @@ package functions to mapped version.&lt;/p&gt;
 &lt;p&gt;A formatting error?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;17a18
 &amp;gt; from __future__ import print_function
-114,115c115
+&lt;span class="m"&gt;114&lt;/span&gt;,115c115
 &amp;lt;             print&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ERROR ({}) running {}&amp;quot;&lt;/span&gt;.format&lt;span class="o"&gt;(&lt;/span&gt;e.returncode, e.cmd&lt;span class="o"&gt;)&lt;/span&gt;,
 &amp;lt;                   &lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;stderr&lt;span class="o"&gt;)&lt;/span&gt;
 ---
@@ -1283,7 +1305,7 @@ package functions to mapped version.&lt;/p&gt;
 &lt;li&gt;Copy &lt;code&gt;wss/hack/hooks&lt;/code&gt; to &lt;code&gt;dist/.../hooks&lt;/code&gt;. However, if you have
    customized hooks, you need to make modifications manually. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Have fun with CentOS.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm Reactive</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20reactive.html" rel="alternate"></link><published>2019-03-15T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/juju charm reactive.html</id><summary type="html">&lt;p&gt;execution. This article is to dive into its source code in order to
+&lt;p&gt;Have fun with CentOS.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Charm Reactive</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20reactive.html" rel="alternate"></link><published>2017-04-24T14:00:00-04:00</published><updated>2019-03-15T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:/myblog/juju charm reactive.html</id><summary type="html">&lt;p&gt;Charm's reactive framework is the core of charm design and&lt;/p&gt;</summary><content type="html">&lt;p&gt;execution. This article is to dive into its source code in order to
 understand its execution logic and design philosophy.&lt;/p&gt;
 &lt;p&gt;In this article we will study charm's &lt;a href="https://pythonhosted.org/charms.reactive/"&gt;reactive&lt;/a&gt; framework to get a
 firm understanding of what they mean by writing an reactive charm.&lt;/p&gt;
@@ -1346,8 +1368,8 @@ there are changes (&lt;code&gt;data['changes]&lt;/code&gt; is not empty).&lt;/p&
     &lt;span class="o"&gt;...&lt;/span&gt;
 
     &lt;span class="nd"&gt;@classmethod&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;watch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;watcher&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;states&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_get&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;watch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;watcher&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;states&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_get&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
         &lt;span class="n"&gt;iteration&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;iteration&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
         &lt;span class="n"&gt;changed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;states&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;changes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;changed&lt;/span&gt;
@@ -1395,7 +1417,7 @@ states. Clearly the backend is a &lt;code&gt;sqlite3&lt;/code&gt; database.&lt;/
 &lt;span class="sd"&gt;    To support dicts, lists, integer, floats, and booleans values&lt;/span&gt;
 &lt;span class="sd"&gt;    are automatically json encoded/decoded.&lt;/span&gt;
 &lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;UNIT_STATE_DB&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -1475,7 +1497,11 @@ watch is reset and will be count from 0 again during next iteration
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;other_handlers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="k"&gt;break&lt;/span&gt;
     &lt;span class="n"&gt;_invoke&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;other_handlers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Charm chained states</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20chained%20states.html" rel="alternate"></link><published>2017-04-24T13:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/juju charm chained states.html</id><summary type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
+&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>Charm chained states</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20chained%20states.html" rel="alternate"></link><published>2017-04-24T13:00:00-04:00</published><updated>2017-04-24T13:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:/myblog/juju charm chained states.html</id><summary type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
+charm. Chained states is essentially mirroring a pattern of any sequential
+execution in a workflow. Potentially each execution block can also
+have conditions to set the next state, even though this type of knowledge
+should be exposed outside function element …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
 charm. Chained states is essentially mirroring a pattern of any sequential
 execution in a workflow. Potentially each execution block can also
 have conditions to set the next state, even though this type of knowledge
@@ -1577,7 +1603,11 @@ how states are being scanned and executed from &lt;a href="https://fengxia41103.
 article&lt;/a&gt;. All states are cached in a dictionary and are scanned in
 a tight loop per iteration. Thus a blocking call in any handler will
 cause the loop to a halt. Nowhere in code will take a signal so this
-behavior can not be interruptted either.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>MAAS vs. Ironic</title><link href="https://fengxia41103.github.io/myblog/maas%20and%20ironic.html" rel="alternate"></link><published>2017-03-30T10:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-30:myblog/maas and ironic.html</id><summary type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
+behavior can not be interruptted either.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>MAAS vs. Ironic</title><link href="https://fengxia41103.github.io/myblog/maas%20and%20ironic.html" rel="alternate"></link><published>2017-03-30T10:20:00-04:00</published><updated>2017-03-30T10:20:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-30:/myblog/maas and ironic.html</id><summary type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
+are tools to turn baremetal into a pool of managed resources that are
+ready for consumption by upstream srervice.  On the highest level, a
+baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires
+that the manager is aware of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires
@@ -2325,7 +2355,10 @@ section "Minimal setup" for details.)&lt;/p&gt;
 &lt;p&gt;Ironic has not concept of multi-tenant either. However, it can
 dynamically &lt;em&gt;bind&lt;/em&gt; a port to use, where port is then managed by
 service such as Neutron. This leaves Ironic not suffering from the
-same risk that MAAS setup may have.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Baremetal provisioning</title><link href="https://fengxia41103.github.io/myblog/baremetal%20provisioning.html" rel="alternate"></link><published>2017-03-22T15:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-22:myblog/baremetal provisioning.html</id><summary type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
+same risk that MAAS setup may have.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Baremetal provisioning</title><link href="https://fengxia41103.github.io/myblog/baremetal%20provisioning.html" rel="alternate"></link><published>2017-03-22T15:45:00-04:00</published><updated>2017-03-22T15:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-22:/myblog/baremetal provisioning.html</id><summary type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
+point in life. It is easy to perceive inserting a disk or USB key to
+make this happen because the OS files are &lt;em&gt;there&lt;/em&gt;. A fancier version
+is to boot from network using PXE boot option, which …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
 point in life. It is easy to perceive inserting a disk or USB key to
 make this happen because the OS files are &lt;em&gt;there&lt;/em&gt;. A fancier version
 is to boot from network using PXE boot option, which seems like a
@@ -2422,7 +2455,7 @@ paste them here for reference:&lt;/p&gt;
 ----   ----     --------------------
       &lt;span class="m"&gt;2&lt;/span&gt; bytes    string   &lt;span class="m"&gt;1&lt;/span&gt; byte     string   &lt;span class="m"&gt;1&lt;/span&gt; byte
       -----------------------------------------------
-RRQ/  &lt;span class="p"&gt;|&lt;/span&gt; 01/02 &lt;span class="p"&gt;|&lt;/span&gt;  Filename  &lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;    Mode    &lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
+RRQ/  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="m"&gt;01&lt;/span&gt;/02 &lt;span class="p"&gt;|&lt;/span&gt;  Filename  &lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;    Mode    &lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
 WRQ    -----------------------------------------------
       &lt;span class="m"&gt;2&lt;/span&gt; bytes    &lt;span class="m"&gt;2&lt;/span&gt; bytes       n bytes
       ---------------------------------
@@ -2472,8 +2505,8 @@ number.&lt;/p&gt;
 &lt;p&gt;However, client has not such default. Since client is to initialize
 the contact, it's free to tell the server which port it uses.
 UDP header format:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;                   &lt;span class="m"&gt;1&lt;/span&gt;                   &lt;span class="m"&gt;2&lt;/span&gt;                   3
-&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; 1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;                   &lt;span class="m"&gt;1&lt;/span&gt;                   &lt;span class="m"&gt;2&lt;/span&gt;                   &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 &lt;span class="p"&gt;|&lt;/span&gt;          Source Port          &lt;span class="p"&gt;|&lt;/span&gt;       Destination Port        &lt;span class="p"&gt;|&lt;/span&gt;
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2724,7 +2757,11 @@ behind the scene from BIOS to a PXE:&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
     &lt;img src="images/pxe%20IPL.svg" /&gt;
     &lt;figcaption&gt;PXE IPL (from power on to PXE)&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Openstack Ironic</title><link href="https://fengxia41103.github.io/myblog/ironic%20intro.html" rel="alternate"></link><published>2017-03-15T22:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-15:myblog/ironic intro.html</id><summary type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
+&lt;/figure&gt;</content><category term="lenovo"></category></entry><entry><title>Openstack Ironic</title><link href="https://fengxia41103.github.io/myblog/ironic%20intro.html" rel="alternate"></link><published>2017-03-15T22:45:00-04:00</published><updated>2017-03-15T22:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-15:/myblog/ironic intro.html</id><summary type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
+plan was to first figure out Ironic APIs that will achieve what Juju
+provider needs &amp;mdash; start an instance on demand, then build those
+REST requests into Juju provider code. After playing with Ironic API
+and Openstack's Devstack for …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &amp;mdash; start an instance on demand, then build those
 REST requests into Juju provider code. After playing with Ironic API
@@ -2865,37 +2902,37 @@ driver_info = {
 &lt;p&gt;&lt;code&gt;instance_info&lt;/code&gt;: is populated when the node is
    provisioned. However, user can also set this field through API.&lt;/p&gt;
 &lt;p&gt;Example payload:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
-{
-   &amp;quot;ramdisk&amp;quot;:&amp;quot;1a243f7b-3e96-4140-8408-b82064599cec&amp;quot;,
-   &amp;quot;kernel&amp;quot;:&amp;quot;ef538456-704c-445c-a98b-c081be22ad71&amp;quot;,
-   &amp;quot;image_source&amp;quot;:&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;,
-   &amp;quot;ephemeral_gb&amp;quot;:0,
-   &amp;quot;image_properties&amp;quot;:{
-      &amp;quot;kernel_id&amp;quot;:&amp;quot;ef538456-704c-445c-a98b-c081be22ad71&amp;quot;,
-      &amp;quot;ramdisk_id&amp;quot;:&amp;quot;1a243f7b-3e96-4140-8408-b82064599cec&amp;quot;,
-      &amp;quot;virtual_size&amp;quot;:null
-   },
-   &amp;quot;preserve_ephemeral&amp;quot;:false,
-   &amp;quot;ephemeral_mb&amp;quot;:0,
-   &amp;quot;local_gb&amp;quot;:&amp;quot;10&amp;quot;,
-   &amp;quot;image_disk_format&amp;quot;:&amp;quot;ami&amp;quot;,
-   &amp;quot;image_checksum&amp;quot;:&amp;quot;eb9139e4942121f22bbc2afc0400b2a4&amp;quot;,
-   &amp;quot;nova_host_id&amp;quot;:&amp;quot;devstack&amp;quot;,
-   &amp;quot;ephemeral_format&amp;quot;:null,
-   &amp;quot;root_gb&amp;quot;:&amp;quot;10&amp;quot;,
-   &amp;quot;display_name&amp;quot;:&amp;quot;tt1&amp;quot;,
-   &amp;quot;configdrive&amp;quot;:null,
-   &amp;quot;image_type&amp;quot;:&amp;quot;partition&amp;quot;,
-   &amp;quot;image_tags&amp;quot;:[
-   ],
-   &amp;quot;memory_mb&amp;quot;:&amp;quot;1280&amp;quot;,
-   &amp;quot;vcpus&amp;quot;:&amp;quot;1&amp;quot;,           &amp;quot;image_url&amp;quot;:&amp;quot;http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&amp;amp;temp_url_expires=1488585783&amp;quot;,
-   &amp;quot;image_container_format&amp;quot;:&amp;quot;ami&amp;quot;,
-   &amp;quot;root_mb&amp;quot;:10240,
-   &amp;quot;swap_mb&amp;quot;:0
-}
-```
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;```&lt;/span&gt;&lt;span class="nt"&gt;shell&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+   &lt;span class="err"&gt;&amp;quot;ramdisk&amp;quot;:&amp;quot;1a243f7b-3e96-4140-8408-b82064599cec&amp;quot;,&lt;/span&gt;
+   &lt;span class="err"&gt;&amp;quot;kernel&amp;quot;:&amp;quot;ef538456-704c-445c-a98b-c081be22ad71&amp;quot;,&lt;/span&gt;
+   &lt;span class="err"&gt;&amp;quot;image_source&amp;quot;:&amp;quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&amp;quot;,&lt;/span&gt;
+   &lt;span class="err"&gt;&amp;quot;ephemeral_gb&amp;quot;:0,&lt;/span&gt;
+   &lt;span class="err"&gt;&amp;quot;image_properties&amp;quot;:{&lt;/span&gt;
+      &lt;span class="err"&gt;&amp;quot;kernel_id&amp;quot;:&amp;quot;ef538456-704c-445c-a98b-c081be22ad71&amp;quot;,&lt;/span&gt;
+      &lt;span class="err"&gt;&amp;quot;ramdisk_id&amp;quot;:&amp;quot;1a243f7b-3e96-4140-8408-b82064599cec&amp;quot;,&lt;/span&gt;
+      &lt;span class="err"&gt;&amp;quot;virtual_size&amp;quot;:null&lt;/span&gt;
+   &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;preserve_ephemeral&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;false&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;ephemeral_mb&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;local_gb&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;10&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;image_disk_format&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ami&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;image_checksum&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;eb9139e4942121f22bbc2afc0400b2a4&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;nova_host_id&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;devstack&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;ephemeral_format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;null&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;root_gb&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;10&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;display_name&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tt1&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;configdrive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;null&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;image_type&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;partition&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;image_tags&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;
+   &lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;memory_mb&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1280&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;vcpus&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;           &lt;span class="s2"&gt;&amp;quot;image_url&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&amp;amp;amp;temp_url_expires=1488585783&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;image_container_format&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ami&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;root_mb&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;10240&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;&amp;quot;swap_mb&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;0&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;```&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -3244,8 +3281,12 @@ We are using "Password authentication with scoped authorization".&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Keystone&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;POST&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/identity/v3/auth/tokens&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/identity/v3/?expanded=password-authentication-with-scoped-authorization-detail#password-authentication-with-scoped-authorization"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header:&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/identity/v3/auth/tokens&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/identity/v3/?expanded=password-authentication-with-scoped-authorization-detail#password-authentication-with-scoped-authorization"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header:&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;Content-Type: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
@@ -3291,8 +3332,12 @@ We are using "Password authentication with scoped authorization".&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: &lt;code&gt;Glance&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header:&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header:&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;Accept-Encoding: &lt;code&gt;gzip, deflate&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;*/*&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;User-Agent: &lt;code&gt;python-glanceclient&lt;/code&gt;&lt;/li&gt;
@@ -3337,8 +3382,12 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Glance&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2/schemas/images&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-images-schema-detail#show-images-schema"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header: none&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/v2/schemas/images&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-images-schema-detail#show-images-schema"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header: none&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;JSON payload: none&lt;/li&gt;
 &lt;li&gt;Response: too long to paste.&lt;/li&gt;
 &lt;/ul&gt;
@@ -3346,9 +3395,13 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Nova&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&lt;/code&gt;
-  (&lt;a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header:&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&lt;/code&gt;
+  (&lt;a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header:&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;User-Agent: &lt;code&gt;python-novaclient&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;X-Auth-Token: &lt;code&gt;ccc5f650029b710c4a3c8f20320afaaed04326f1&lt;/code&gt;&lt;/li&gt;
@@ -3388,9 +3441,13 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Neutron&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0&lt;/code&gt;
-(&lt;a href="https://developer.openstack.org/api-ref/networking/v2/?expanded=show-port-details-detail#show-port-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header:&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0&lt;/code&gt;
+(&lt;a href="https://developer.openstack.org/api-ref/networking/v2/?expanded=show-port-details-detail#show-port-details"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header:&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;User-Agent: &lt;code&gt;openstacksdk/0.9.13 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;X-Auth-Token: &lt;code&gt;ccc5f650029b710c4a3c8f20320afaaed04326f1&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -3469,8 +3526,12 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Nova&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;POST&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2.1/servers&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,create-server-detail#create-server"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header:&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/v2.1/servers&lt;/code&gt; (&lt;a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,create-server-detail#create-server"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header:&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;User-Agent: &lt;code&gt;python-novaclient&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Content-Type: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
@@ -3528,9 +3589,13 @@ talked about by the Images v2 API.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service: Nova&lt;/li&gt;
 &lt;li&gt;Method: &lt;code&gt;GET&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Endpoint: &lt;code&gt;/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6&lt;/code&gt;
-  (&lt;a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,show-server-details-detail#show-server-details"&gt;ref&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;HTTP header:&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Endpoint: &lt;code&gt;/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6&lt;/code&gt;
+  (&lt;a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,show-server-details-detail#show-server-details"&gt;ref&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP header:&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;User-Agent: &lt;code&gt;python-novaclient&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Accept: &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;X-Auth-Token: &lt;code&gt;ccc5f650029b710c4a3c8f20320afaaed04326f1&lt;/code&gt;&lt;/li&gt;
@@ -3685,7 +3750,12 @@ talked about by the Images v2 API.&lt;/p&gt;
       &lt;span class="s2"&gt;&amp;quot;OS-FLV-EXT-DATA:ephemeral&amp;quot;&lt;/span&gt;:0
    &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Introduction of Juju charms</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20layers.html" rel="alternate"></link><published>2017-02-28T17:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-28:myblog/juju charm layers.html</id><summary type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
+&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>Introduction of Juju charms</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20layers.html" rel="alternate"></link><published>2017-02-28T17:00:00-05:00</published><updated>2017-02-28T17:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-28:/myblog/juju charm layers.html</id><summary type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
+that hold magic to make an application deployment easy. But devils are
+in the details, as always the case. In this article we will walk in
+the charm world to learn its design.&lt;/p&gt;
+&lt;h1&gt;Bundle, charm, service, application&lt;/h1&gt;
+&lt;p&gt;Juju &lt;a href="https://jujucharms.com/docs/stable/juju-concepts"&gt;terms&lt;/a&gt; can …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
 that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
 the charm world to learn its design.&lt;/p&gt;
@@ -3831,7 +3901,12 @@ is how charm build can pull in dependencies of other charms/layers.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
     &lt;img src="images/vanilla%20charm%20deploy.gif" /&gt;
     &lt;figcaption&gt;Screencast showing deploying a Vanilla charm&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju deploy and Provider</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy%20provider.html" rel="alternate"></link><published>2017-02-08T14:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-08:myblog/juju deploy provider.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
+&lt;/figure&gt;</content><category term="lenovo"></category></entry><entry><title>Juju deploy and Provider</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy%20provider.html" rel="alternate"></link><published>2017-02-08T14:00:00-05:00</published><updated>2017-02-08T14:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-02-08:/myblog/juju deploy provider.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
+including what makes a node eligible as a target and what files will
+be put on by the deployer.If you recall, there were four steps in a
+deploy process:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Add a new machine to the cloud environment. In …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will
 be put on by the deployer.If you recall, there were four steps in a
 deploy process:&lt;/p&gt;
@@ -3947,7 +4022,12 @@ I'm highlighting in &lt;font color="green"&gt;green&lt;/font&gt;.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
     &lt;img src="images/juju%20deploy%20call%20chain.png" /&gt;
     &lt;figcaption&gt;Illustration of call chain by "juju deploy" command&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm deployment</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy.html" rel="alternate"></link><published>2017-01-19T15:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-19:myblog/juju deploy.html</id><summary type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
+&lt;/figure&gt;</content><category term="lenovo"></category></entry><entry><title>Juju charm deployment</title><link href="https://fengxia41103.github.io/myblog/juju%20deploy.html" rel="alternate"></link><published>2017-01-19T15:45:00-05:00</published><updated>2017-01-19T15:45:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-19:/myblog/juju deploy.html</id><summary type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
+continue our research into another important function &amp;mdash; juju
+deploy.&lt;/p&gt;
+&lt;p&gt;Deploy will command a node to pull down requested charm and install
+whatever needed based the charm's instruction. As the bootstrap
+research, I'm interested in the internal mechanism of this …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
 continue our research into another important function &amp;mdash; juju
 deploy.&lt;/p&gt;
 &lt;p&gt;Deploy will command a node to pull down requested charm and install
@@ -4060,11 +4140,11 @@ this folder did not exist prior to the &lt;code&gt;add-machine&lt;/code&gt; comm
 │       └── jujud-machine-15.service
 ├── locks
 └── tools
-    ├── 2.0.1.98-xenial-amd64
+    ├── &lt;span class="m"&gt;2&lt;/span&gt;.0.1.98-xenial-amd64
     │   ├── downloaded-tools.txt
     │   ├── FORCE-VERSION
     │   └── jujud
-    └── machine-15 -&amp;gt; 2.0.1.98-xenial-amd64
+    └── machine-15 -&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt;.0.1.98-xenial-amd64
 
 &lt;span class="m"&gt;8&lt;/span&gt; directories, &lt;span class="m"&gt;6&lt;/span&gt; files
 &lt;/pre&gt;&lt;/div&gt;
@@ -4086,7 +4166,7 @@ forth), but will be tedious. &lt;/p&gt;
 /etc/systemd/system/multi-user.target.wants/jujud-machine-15.service
 
 root@192-168-8-235:~# ls -lh /etc/systemd/system &lt;span class="p"&gt;|&lt;/span&gt; grep juju
-lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root   &lt;span class="m"&gt;60&lt;/span&gt; Jan &lt;span class="m"&gt;19&lt;/span&gt; 16:47 jujud-machine-15.service -&amp;gt; /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
+lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root   &lt;span class="m"&gt;60&lt;/span&gt; Jan &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;16&lt;/span&gt;:47 jujud-machine-15.service -&amp;gt; /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -4100,8 +4180,8 @@ others. &lt;/p&gt;
 /usr/bin/juju-run
 
 root@192-168-8-235:~# ls -lh /usr/bin &lt;span class="p"&gt;|&lt;/span&gt; grep juju
-lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root   root      &lt;span class="m"&gt;36&lt;/span&gt; Jan &lt;span class="m"&gt;19&lt;/span&gt; 16:47 juju-dumplogs -&amp;gt; /var/lib/juju/tools/machine-15/jujud
-lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root   root      &lt;span class="m"&gt;36&lt;/span&gt; Jan &lt;span class="m"&gt;19&lt;/span&gt; 16:47 juju-run -&amp;gt; /var/lib/juju/tools/machine-15/jujud
+lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root   root      &lt;span class="m"&gt;36&lt;/span&gt; Jan &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;16&lt;/span&gt;:47 juju-dumplogs -&amp;gt; /var/lib/juju/tools/machine-15/jujud
+lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root   root      &lt;span class="m"&gt;36&lt;/span&gt; Jan &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;16&lt;/span&gt;:47 juju-run -&amp;gt; /var/lib/juju/tools/machine-15/jujud
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -4265,14 +4345,14 @@ these contents under the &lt;code&gt;/var/lib/juju/unit-jenkins-1/&lt;/code&gt; 
 │       │   ├── templates
 │       │   │   └── jenkins-config.xml
 │       │   ├── tests
-│       │   │   ├── 01-trusty-basic
-│       │   │   ├── 01-xenial-basic
-│       │   │   ├── 02-trusty-website
-│       │   │   ├── 02-xenial-website
-│       │   │   ├── 03-trusty-slave
-│       │   │   ├── 03-xenial-slave
-│       │   │   ├── 04-trusty-external
-│       │   │   ├── 04-xenial-external
+│       │   │   ├── &lt;span class="m"&gt;01&lt;/span&gt;-trusty-basic
+│       │   │   ├── &lt;span class="m"&gt;01&lt;/span&gt;-xenial-basic
+│       │   │   ├── &lt;span class="m"&gt;02&lt;/span&gt;-trusty-website
+│       │   │   ├── &lt;span class="m"&gt;02&lt;/span&gt;-xenial-website
+│       │   │   ├── &lt;span class="m"&gt;03&lt;/span&gt;-trusty-slave
+│       │   │   ├── &lt;span class="m"&gt;03&lt;/span&gt;-xenial-slave
+│       │   │   ├── &lt;span class="m"&gt;04&lt;/span&gt;-trusty-external
+│       │   │   ├── &lt;span class="m"&gt;04&lt;/span&gt;-xenial-external
 │       │   │   ├── basic.py
 │       │   │   ├── deployment.py
 │       │   │   ├── external.py
@@ -4334,7 +4414,7 @@ these contents under the &lt;code&gt;/var/lib/juju/unit-jenkins-1/&lt;/code&gt; 
 ├── meter-status.yaml
 ├── metricspool
 └── tools
-    ├── 2.0.1.98-xenial-amd64
+    ├── &lt;span class="m"&gt;2&lt;/span&gt;.0.1.98-xenial-amd64
     │   ├── action-fail -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── action-get -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── action-set -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
@@ -4367,11 +4447,17 @@ these contents under the &lt;code&gt;/var/lib/juju/unit-jenkins-1/&lt;/code&gt; 
     │   ├── storage-get -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── storage-list -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   └── unit-get -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
-    ├── machine-15 -&amp;gt; 2.0.1.98-xenial-amd64
+    ├── machine-15 -&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt;.0.1.98-xenial-amd64
     └── unit-jenkins-1 -&amp;gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64
 
 &lt;span class="m"&gt;45&lt;/span&gt; directories, &lt;span class="m"&gt;194&lt;/span&gt; files
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju bootstrap process</title><link href="https://fengxia41103.github.io/myblog/juju%20bootstrap.html" rel="alternate"></link><published>2017-01-11T17:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-11:myblog/juju bootstrap.html</id><summary type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
+&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>Juju bootstrap process</title><link href="https://fengxia41103.github.io/myblog/juju%20bootstrap.html" rel="alternate"></link><published>2017-01-11T17:00:00-05:00</published><updated>2017-01-11T17:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-11:/myblog/juju bootstrap.html</id><summary type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
+createa a special machine &amp;mdash; state controller, &lt;code&gt;machine-0&lt;/code&gt;,
+control node, etc. &amp;mdash; naming convention aside, it is the brain
+that tracks others nodes in the cloud, applications installed and
+their status.&lt;/p&gt;
+&lt;h1&gt;Screencast&lt;/h1&gt;
+&lt;p&gt;Through research I want to learn about its …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
 createa a special machine &amp;mdash; state controller, &lt;code&gt;machine-0&lt;/code&gt;,
 control node, etc. &amp;mdash; naming convention aside, it is the brain
 that tracks others nodes in the cloud, applications installed and
@@ -4638,7 +4724,7 @@ Juju.&lt;/p&gt;
 // TODO&lt;span class="o"&gt;(&lt;/span&gt;mue&lt;span class="o"&gt;)&lt;/span&gt;: Rename to InterfaceConfig due to consistency later.
 &lt;span class="nb"&gt;type&lt;/span&gt; InterfaceInfo struct &lt;span class="o"&gt;{&lt;/span&gt;
     // DeviceIndex specifies the order in which the network interface
-    // appears on the host. The primary interface has an index of 0.
+    // appears on the host. The primary interface has an index of &lt;span class="m"&gt;0&lt;/span&gt;.
     DeviceIndex int
 
     // MACAddress is the network interface&lt;span class="s1"&gt;&amp;#39;s hardware MAC address&lt;/span&gt;
@@ -4671,7 +4757,7 @@ Juju.&lt;/p&gt;
 &lt;span class="s1"&gt;    AvailabilityZones []string&lt;/span&gt;
 
 &lt;span class="s1"&gt;    // VLANTag needs to be between 1 and 4094 for VLANs and 0 for&lt;/span&gt;
-&lt;span class="s1"&gt;    // normal networks. It&amp;#39;&lt;/span&gt;s defined by IEEE 802.1Q standard.
+&lt;span class="s1"&gt;    // normal networks. It&amp;#39;&lt;/span&gt;s defined by IEEE &lt;span class="m"&gt;802&lt;/span&gt;.1Q standard.
     VLANTag int
 
     // InterfaceName is the raw OS-specific network device name &lt;span class="o"&gt;(&lt;/span&gt;e.g.
@@ -4696,7 +4782,7 @@ Juju.&lt;/p&gt;
 
     // ConfigType determines whether the interface should be
     // configured via DHCP, statically, manually, etc. See
-    // interfaces&lt;span class="o"&gt;(&lt;/span&gt;5&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
+    // interfaces&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
     ConfigType InterfaceConfigType
 
     // Address contains an optional static IP address to configure &lt;span class="k"&gt;for&lt;/span&gt;
@@ -4711,7 +4797,7 @@ Juju.&lt;/p&gt;
 
     // MTU is the Maximum Transmission Unit controlling the maximum size of the
     // protocol packats that the interface can pass through. It is only used
-    // when &amp;gt; 0.
+    // when &amp;gt; &lt;span class="m"&gt;0&lt;/span&gt;.
     MTU int
 
     // DNSSearchDomains contains the default DNS domain to use &lt;span class="k"&gt;for&lt;/span&gt; non-FQDN
@@ -4843,18 +4929,18 @@ in the simulation, see below) is to rely on default values, &lt;code&gt;common&l
 provider's &lt;code&gt;Bootstrap&lt;/code&gt; functions, and return a &lt;code&gt;StartInstanceResult&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// For now, we are imitating a successful instance by directly returning a result struct
 var tmpArch &lt;span class="nv"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; arch.AMD64
-var tmpMem &lt;span class="nv"&gt;uint64&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 2000000
-var tmpCpuCore &lt;span class="nv"&gt;uint64&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
-var tmpCpuPower &lt;span class="nv"&gt;uint64&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 100
+var tmpMem &lt;span class="nv"&gt;uint64&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;2000000&lt;/span&gt;
+var tmpCpuCore &lt;span class="nv"&gt;uint64&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+var tmpCpuPower &lt;span class="nv"&gt;uint64&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;100&lt;/span&gt;
 hardware :&lt;span class="o"&gt;=&lt;/span&gt; instance.HardwareCharacteristics&lt;span class="o"&gt;{&lt;/span&gt;
         Arch: &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;tmpArch,
         Mem: &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;tmpMem,
         CpuCores: &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;tmpCpuCore,
         CpuPower: &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;tmpCpuPower,
 &lt;span class="o"&gt;}&lt;/span&gt;
-volumes :&lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="o"&gt;([]&lt;/span&gt;storage.Volume, 0&lt;span class="o"&gt;)&lt;/span&gt;
-networkInfo :&lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="o"&gt;([]&lt;/span&gt;network.InterfaceInfo, 0&lt;span class="o"&gt;)&lt;/span&gt;
-volumeAttachments :&lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="o"&gt;([]&lt;/span&gt;storage.VolumeAttachment, 0&lt;span class="o"&gt;)&lt;/span&gt;
+volumes :&lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="o"&gt;([]&lt;/span&gt;storage.Volume, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+networkInfo :&lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="o"&gt;([]&lt;/span&gt;network.InterfaceInfo, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+volumeAttachments :&lt;span class="o"&gt;=&lt;/span&gt; make&lt;span class="o"&gt;([]&lt;/span&gt;storage.VolumeAttachment, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 
 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;environs.StartInstanceResult&lt;span class="o"&gt;{&lt;/span&gt;
         Instance:          xclarityBootstrapInstance&lt;span class="o"&gt;{}&lt;/span&gt;,
@@ -4886,7 +4972,11 @@ how one communicates with jujud. What capability does it have? Who is
 providing that in Juju's environment? How it may be affected by other
 network design/configuration?&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Well, stay tuned.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Juju charm model</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20model.html" rel="alternate"></link><published>2017-01-03T10:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-03:myblog/juju charm model.html</id><summary type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
+&lt;p&gt;Well, stay tuned.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Juju charm model</title><link href="https://fengxia41103.github.io/myblog/juju%20charm%20model.html" rel="alternate"></link><published>2017-01-03T10:45:00-05:00</published><updated>2017-01-03T10:45:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-03:/myblog/juju charm model.html</id><summary type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
+it was fairly confusing when looking at its document which has an army
+of these concepts: charm, bundle, model, unit.... of course, each of
+them makes sense after a while. Its &lt;a href="https://jujucharms.com/docs/2.0/glossary"&gt;terminology&lt;/a&gt; page helps on
+understanding individual …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of
 them makes sense after a while. Its &lt;a href="https://jujucharms.com/docs/2.0/glossary"&gt;terminology&lt;/a&gt; page helps on
@@ -4912,7 +5002,15 @@ eg. a bundle can have N charms.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;By default, &lt;code&gt;juju deploy&lt;/code&gt; will call for a new machine for each
 application within the bundle/charm. Of course, there is command flag
-to switch that so you can specify which machine is to be used.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Targets in MAAS lab</title><link href="https://fengxia41103.github.io/myblog/maas%20target.html" rel="alternate"></link><published>2016-12-09T22:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-12-09:myblog/maas target.html</id><summary type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
+to switch that so you can specify which machine is to be used.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Targets in MAAS lab</title><link href="https://fengxia41103.github.io/myblog/maas%20target.html" rel="alternate"></link><published>2016-12-09T22:00:00-05:00</published><updated>2016-12-09T22:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-12-09:/myblog/maas target.html</id><summary type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
+node is simple.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All nodes must be on the same &lt;strong&gt;192.168.8.0/24&lt;/strong&gt; subnet, and
+they must support PXE boot.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;PXE boot&lt;/h1&gt;
+&lt;p&gt;The MAAS machine functions as both the DHCP server and the TFTP
+server …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
 node is simple.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;All nodes must be on the same &lt;strong&gt;192.168.8.0/24&lt;/strong&gt; subnet, and
@@ -5009,7 +5107,11 @@ taget has to be PXE-booted in order to be managed by the MAAS server.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;MAAS sever can not manage a deployed target unless it PXE boots.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;If released and disk erased, the node becomes &lt;em&gt;READY&lt;/em&gt;, again.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Setup a MAAS Virtualbox lab</title><link href="https://fengxia41103.github.io/myblog/maas%20virtualbox.html" rel="alternate"></link><published>2016-12-08T10:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-12-08:myblog/maas virtualbox.html</id><summary type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
+&lt;p&gt;If released and disk erased, the node becomes &lt;em&gt;READY&lt;/em&gt;, again.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Setup a MAAS Virtualbox lab</title><link href="https://fengxia41103.github.io/myblog/maas%20virtualbox.html" rel="alternate"></link><published>2016-12-08T10:45:00-05:00</published><updated>2016-12-08T10:45:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-12-08:/myblog/maas virtualbox.html</id><summary type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
+life by putting an OS on it. Working together with &lt;a href="https://www.ubuntu.com/cloud/juju"&gt;Juju&lt;/a&gt;, they can
+setup a cluster of applications quite quickly. Think of them as a
+package manage like Ubuntu's &lt;code&gt;apt-get&lt;/code&gt;, but in the context of a
+cloud. Interesting …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
 life by putting an OS on it. Working together with &lt;a href="https://www.ubuntu.com/cloud/juju"&gt;Juju&lt;/a&gt;, they can
 setup a cluster of applications quite quickly. Think of them as a
 package manage like Ubuntu's &lt;code&gt;apt-get&lt;/code&gt;, but in the context of a
@@ -5237,7 +5339,7 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
   &lt;img src="images/maas_vlan_config.png"
        class="col s6" /&gt;
   &lt;img src="images/maas_subnet_config.png"
-       class="col s6" /&gt;  &lt;br /&gt;
+       class="col s6" /&gt;  &lt;br&gt;
   &lt;figcaption&gt;MAAS  DHCP config&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -5254,4 +5356,4 @@ server on subnet 192.168.8.x. No exception!&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;We have done the hard part &amp;mdash; setting up the MAAS server. In our
 &lt;a href="https://fengxia41103.github.io/myblog/maas target.html"&gt;next article&lt;/a&gt;, I'll show you what MAAS can do for fun &amp;rarr;
-brining up a bare metal machine to life. Stay tuned.&lt;/p&gt;</summary><category term="lenovo"></category></entry></feed>
+brining up a bare metal machine to life. Stay tuned.&lt;/p&gt;</content><category term="lenovo"></category></entry></feed>

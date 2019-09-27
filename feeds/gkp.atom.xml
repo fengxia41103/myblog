@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/gkp.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2015-09-12T19:00:00-04:00</updated><entry><title>GKP — major details</title><link href="https://fengxia41103.github.io/myblog/gkp%20majors.html" rel="alternate"></link><published>2015-09-12T19:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-12:myblog/gkp majors.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free' - gkp</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/gkp.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2015-09-12T19:00:00-04:00</updated><entry><title>GKP — major details</title><link href="https://fengxia41103.github.io/myblog/gkp%20majors.html" rel="alternate"></link><published>2015-09-12T19:00:00-04:00</published><updated>2015-09-12T19:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-12:/myblog/gkp majors.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
+two&lt;/a&gt;, I have introduced functions
+to assist students get to know about the schools from multiple
+aspects. In this article, we will touch upon another important factor
+when going to college &amp;mdash; major.&lt;/p&gt;
+&lt;p&gt;In China, majors are split into three layers: category, subcategory,
+and majors. Similar …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
 two&lt;/a&gt;, I have introduced functions
 to assist students get to know about the schools from multiple
 aspects. In this article, we will touch upon another important factor
@@ -15,7 +21,7 @@ useful.&lt;/p&gt;
     &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;According to &lt;a href="https://fengxia41103.github.io/myblog/20121012084054830.pdf"&gt;document&lt;/a&gt;
+&lt;p&gt;According to &lt;a href="https://fengxia41103.github.io/myblog/downloads/20121012084054830.pdf"&gt;document&lt;/a&gt;
 published by the &lt;a href="http://www.moe.gov.cn/publicfiles/business/htmlfiles/moe/s3882/201210/xxgk_143152.html"&gt;Department of Education&lt;/a&gt; in 2012, there are 12
 categories, 92 subcategories and 506 majors.&lt;/p&gt;
 &lt;h1&gt;Category and subcategory&lt;/h1&gt;
@@ -53,7 +59,13 @@ located in those cities since local graduate usually have an advantage
 competing for jobs in local market. Another feature is that a toggle
 switch will turn user's preference on and off so researcher can easily
 search either by major and jobs alone, or by combination of the market
-data and her own criteria.&lt;/p&gt;</summary><category term="gkp"></category></entry><entry><title>GKP — school details</title><link href="https://fengxia41103.github.io/myblog/gkp%20schools.html" rel="alternate"></link><published>2015-09-07T14:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-07:myblog/gkp schools.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
+data and her own criteria.&lt;/p&gt;</content><category term="gkp"></category></entry><entry><title>GKP — school details</title><link href="https://fengxia41103.github.io/myblog/gkp%20schools.html" rel="alternate"></link><published>2015-09-07T14:00:00-04:00</published><updated>2015-09-07T14:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-07:/myblog/gkp schools.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
+introduced functions that will help school
+research at nation level, state and city level. In this article
+I'll talk about features built to help research at &lt;em&gt;school level&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;Bookmark&lt;/h1&gt;
+&lt;p&gt;While research schools, it is useful to bookmark a page for later
+use. That's where the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
 introduced functions that will help school
 research at nation level, state and city level. In this article
 I'll talk about features built to help research at &lt;em&gt;school level&lt;/em&gt;.&lt;/p&gt;
@@ -152,7 +164,11 @@ consideration that any student must have &amp;mdash; majors.  What to
 study is often driven by interest, but also it is closely affected by
 its future job seeking prospective. In &lt;a href="https://fengxia41103.github.io/myblog/gkp majors.html"&gt;part three &amp;mdash;
 majors&lt;/a&gt; we will go over these
-topics.&lt;/p&gt;</summary><category term="gkp"></category></entry><entry><title>GKP — introduction</title><link href="https://fengxia41103.github.io/myblog/gkp%20introduction.html" rel="alternate"></link><published>2015-09-04T10:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-04:myblog/gkp introduction.html</id><summary type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
+topics.&lt;/p&gt;</content><category term="gkp"></category></entry><entry><title>GKP — introduction</title><link href="https://fengxia41103.github.io/myblog/gkp%20introduction.html" rel="alternate"></link><published>2015-09-04T10:00:00-04:00</published><updated>2015-09-04T10:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-04:/myblog/gkp introduction.html</id><summary type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
+Mr.Zhang, back in Jan, 2015.  Mr.Zhang has been in China's college
+education business for 15 year. He has succeeded in building a couple
+online training services and is also the head of a private
+college. The …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
 Mr.Zhang, back in Jan, 2015.  Mr.Zhang has been in China's college
 education business for 15 year. He has succeeded in building a couple
 online training services and is also the head of a private
@@ -314,4 +330,4 @@ flight, train, bus and subway data are matched up.&lt;/p&gt;
 &lt;p&gt;Everything comes down to school level where school specific details
 are laid out to assist prospective students evaluate not only the
 future academic life but also its social life. Read on our &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part two
-&amp;mdash; school details&lt;/a&gt;.&lt;/p&gt;</summary><category term="gkp"></category></entry></feed>
+&amp;mdash; school details&lt;/a&gt;.&lt;/p&gt;</content><category term="gkp"></category></entry></feed>

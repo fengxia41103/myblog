@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -176,7 +155,7 @@ between on-premise <code>Satellite</code> source vs. everything else. </p>
 from. Look at <code>/etc/yum.repo.d/redhat.repo</code>:</p>
 <div class="highlight"><pre><span></span>For example:
 <span class="o">[</span>rhel-7-server-openstack-11-devtools-debug-rpms<span class="o">]</span>
-<span class="nv">metadata_expire</span> <span class="o">=</span> 86400
+<span class="nv">metadata_expire</span> <span class="o">=</span> <span class="m">86400</span>
 <span class="nv">sslclientcert</span> <span class="o">=</span> /etc/pki/entitlement/2890837266996509363.pem
 
 <span class="c1">#####</span>
@@ -184,13 +163,13 @@ from. Look at <code>/etc/yum.repo.d/redhat.repo</code>:</p>
 <span class="c1">#####</span>
 
 <span class="nv">ui_repoid_vars</span> <span class="o">=</span> basearch
-<span class="nv">sslverify</span> <span class="o">=</span> 1
+<span class="nv">sslverify</span> <span class="o">=</span> <span class="m">1</span>
 <span class="nv">name</span> <span class="o">=</span> Red Hat OpenStack Platform <span class="m">11</span> Developer Tools <span class="k">for</span> RHEL <span class="m">7</span> <span class="o">(</span>Debug RPMs<span class="o">)</span>
 <span class="nv">sslclientkey</span> <span class="o">=</span> /etc/pki/entitlement/2890837266996509363-key.pem
 <span class="nv">gpgkey</span> <span class="o">=</span> file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-<span class="nv">enabled</span> <span class="o">=</span> 0
+<span class="nv">enabled</span> <span class="o">=</span> <span class="m">0</span>
 <span class="nv">sslcacert</span> <span class="o">=</span> /etc/rhsm/ca/redhat-uep.pem
-<span class="nv">gpgcheck</span> <span class="o">=</span> 1
+<span class="nv">gpgcheck</span> <span class="o">=</span> <span class="m">1</span>
 </pre></div>
 
 
@@ -199,19 +178,19 @@ catch-all Redhat source, meaning you are pulling things directly from
 Red Hat.</p>
 <p>On a Satellite client, instead, you will something like this:</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>Lenovo_IBB_Lenovo_Yum_Repo_Lenovo_yum_repo_SLES11SP4_Default<span class="o">]</span>
-<span class="nv">metadata_expire</span> <span class="o">=</span> 1
+<span class="nv">metadata_expire</span> <span class="o">=</span> <span class="m">1</span>
 <span class="nv">sslclientcert</span> <span class="o">=</span> /etc/pki/entitlement/3451950880933034925.pem
 
 <span class="c1">#####</span>
 <span class="nv">baseurl</span> <span class="o">=</span> https://brain4-satellite.labs.lenovo.com/pulp/repos/Lenovo_IBB/...........
 <span class="c1">#####</span>
 
-<span class="nv">sslverify</span> <span class="o">=</span> 1
+<span class="nv">sslverify</span> <span class="o">=</span> <span class="m">1</span>
 <span class="nv">name</span> <span class="o">=</span> Lenovo yum repo SLES11SP4_Default
 <span class="nv">sslclientkey</span> <span class="o">=</span> /etc/pki/entitlement/3451950880933034925-key.pem
-<span class="nv">enabled</span> <span class="o">=</span> 1
+<span class="nv">enabled</span> <span class="o">=</span> <span class="m">1</span>
 <span class="nv">sslcacert</span> <span class="o">=</span> /etc/rhsm/ca/katello-server-ca.pem
-<span class="nv">gpgcheck</span> <span class="o">=</span> 0
+<span class="nv">gpgcheck</span> <span class="o">=</span> <span class="m">0</span>
 </pre></div>
 
 

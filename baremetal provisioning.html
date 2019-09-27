@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -231,7 +210,7 @@ paste them here for reference:</p>
 ----   ----     --------------------
       <span class="m">2</span> bytes    string   <span class="m">1</span> byte     string   <span class="m">1</span> byte
       -----------------------------------------------
-RRQ/  <span class="p">|</span> 01/02 <span class="p">|</span>  Filename  <span class="p">|</span>   <span class="m">0</span>  <span class="p">|</span>    Mode    <span class="p">|</span>   <span class="m">0</span>  <span class="p">|</span>
+RRQ/  <span class="p">|</span> <span class="m">01</span>/02 <span class="p">|</span>  Filename  <span class="p">|</span>   <span class="m">0</span>  <span class="p">|</span>    Mode    <span class="p">|</span>   <span class="m">0</span>  <span class="p">|</span>
 WRQ    -----------------------------------------------
       <span class="m">2</span> bytes    <span class="m">2</span> bytes       n bytes
       ---------------------------------
@@ -281,8 +260,8 @@ number.</p>
 <p>However, client has not such default. Since client is to initialize
 the contact, it's free to tell the server which port it uses.
 UDP header format:</p>
-<div class="highlight"><pre><span></span><span class="m">0</span>                   <span class="m">1</span>                   <span class="m">2</span>                   3
-<span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">0</span> 1
+<div class="highlight"><pre><span></span><span class="m">0</span>                   <span class="m">1</span>                   <span class="m">2</span>                   <span class="m">3</span>
+<span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">0</span> <span class="m">1</span>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 <span class="p">|</span>          Source Port          <span class="p">|</span>       Destination Port        <span class="p">|</span>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

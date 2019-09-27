@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -161,57 +140,57 @@ pre-determined. </p>
 representing a deployment instance with these actual config values,
 thus eliminating manual maintenance of a static wiki page.</p>
 <p>For example, here is part of the config file of<code>Satellite</code> VM:</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">vm_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">brain1-satellite &lt;-- host name</span>
-<span class="l l-Scalar l-Scalar-Plain">qcow_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rhel75_qcow_satellite</span>
+<div class="highlight"><pre><span></span><span class="nt">vm_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">brain1-satellite &lt;-- host name</span>
+<span class="nt">qcow_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rhel75_qcow_satellite</span>
 
-<span class="l l-Scalar l-Scalar-Plain">cloud_init_nics</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth0</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.41.1</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.252.0</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.40.1</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth1</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.101</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.255.0</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.1</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth2</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.30.101</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.255.0</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.30.1</span>
-    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">cloud_init_nics</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">nic_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">eth0</span>
+    <span class="nt">nic_boot_protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="nt">nic_ip_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.41.1</span>
+    <span class="nt">nic_netmask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.252.0</span>
+    <span class="nt">nic_gateway</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.40.1</span>
+    <span class="nt">nic_on_boot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="nt">nic_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">eth1</span>
+    <span class="nt">nic_boot_protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="nt">nic_ip_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.101</span>
+    <span class="nt">nic_netmask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.255.0</span>
+    <span class="nt">nic_gateway</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.1</span>
+    <span class="nt">nic_on_boot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="nt">nic_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">eth2</span>
+    <span class="nt">nic_boot_protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="nt">nic_ip_address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.30.101</span>
+    <span class="nt">nic_netmask</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.255.0</span>
+    <span class="nt">nic_gateway</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.30.1</span>
+    <span class="nt">nic_on_boot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 
-<span class="l l-Scalar l-Scalar-Plain">dns1</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.0.10</span>
-<span class="l l-Scalar l-Scalar-Plain">dns2</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.0.11</span>
-<span class="l l-Scalar l-Scalar-Plain">host_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">brain1-satellite</span>
+<span class="nt">dns1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.0.10</span>
+<span class="nt">dns2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.0.11</span>
+<span class="nt">host_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">brain1-satellite</span>
 
 
-<span class="l l-Scalar l-Scalar-Plain">boot_devices</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">hd</span>
-<span class="l l-Scalar l-Scalar-Plain">os</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rhel_7x64</span>
-<span class="l l-Scalar l-Scalar-Plain">cpu_cors</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
-<span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20GiB</span>
-<span class="l l-Scalar l-Scalar-Plain">storage_domain_vm</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">iso</span>
-<span class="l l-Scalar l-Scalar-Plain">storage_domain_disk</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">vmstore</span>
-<span class="l l-Scalar l-Scalar-Plain">disk_format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cow</span>
-<span class="l l-Scalar l-Scalar-Plain">disk_interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio_scsi</span>
-<span class="l l-Scalar l-Scalar-Plain">disk_bootable</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">boot_devices</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hd</span>
+<span class="nt">os</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rhel_7x64</span>
+<span class="nt">cpu_cors</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="nt">memory</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20GiB</span>
+<span class="nt">storage_domain_vm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">iso</span>
+<span class="nt">storage_domain_disk</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vmstore</span>
+<span class="nt">disk_format</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cow</span>
+<span class="nt">disk_interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio_scsi</span>
+<span class="nt">disk_bootable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 
-<span class="l l-Scalar l-Scalar-Plain">nics</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nic1</span>
-    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio</span>
-    <span class="l l-Scalar l-Scalar-Plain">profile_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Campus</span>
-    <span class="l l-Scalar l-Scalar-Plain">network_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Campus</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nic2</span>
-    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio</span>
-    <span class="l l-Scalar l-Scalar-Plain">profile_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PhysicalMgmt</span>
-    <span class="l l-Scalar l-Scalar-Plain">network_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PhysicalMgmt</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">nic3</span>
-    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio</span>
-    <span class="l l-Scalar l-Scalar-Plain">profile_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">VMMgmt</span>
-    <span class="l l-Scalar l-Scalar-Plain">network_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">VMMgmt</span>
+<span class="nt">nics</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nic1</span>
+    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio</span>
+    <span class="nt">profile_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Campus</span>
+    <span class="nt">network_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Campus</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nic2</span>
+    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio</span>
+    <span class="nt">profile_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PhysicalMgmt</span>
+    <span class="nt">network_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PhysicalMgmt</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nic3</span>
+    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">virtio</span>
+    <span class="nt">profile_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">VMMgmt</span>
+    <span class="nt">network_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">VMMgmt</span>
 </pre></div>
 
 

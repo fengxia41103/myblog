@@ -73,27 +73,6 @@
           <div class="row mypage-index">
             <div class="col s12">
               <a href="https://fengxia41103.github.io/myblog/">Home</a>
-              <a href="https://fengxia41103.github.io/myblog/about.html">
-                . About
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/lei.html">
-                . 夏雷
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/project euler.html">
-                . Project Euler
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/quote.html">
-                . Quote
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/resume.html">
-                . Resum&eacute;
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/search.html">
-                . Search
-              </a>
-              <a href="https://fengxia41103.github.io/myblog/slides.html">
-                . Impression
-              </a>
             </div>
           </div>
 
@@ -125,7 +104,7 @@ But how to access the Juju GUI? Launching it is easy
 enough with <code>$ juju gui</code> from juju host; 
 accessing it from anywhere outside
 the host is a challenge. One way is through <code>$ ssh -X</code> to 
-the ...</p>
+the …</p>
       </p>
     </div>
   </div>
@@ -155,7 +134,7 @@ the ...</p>
 experience of Juju and its charms. However, if you have done charm
 development for a while, you know making a one line of code change,
 deploying charm, then wait to see the <em>new</em> code got executed &larr;
-it's ...</p>
+it's good 5-10 …</p>
       </p>
     </div>
   </div>
@@ -188,7 +167,7 @@ of coding in charm's Python files.</p>
 <p>Design objectives:</p>
 <ol>
 <li>Design as reusable <a href="https://jujucharms.com/docs/2.1/developer-layers">layer(s)</a></li>
-<li>Be compatible with ...</li></ol>
+<li>Be compatible with Ubuntu and …</li></ol>
       </p>
     </div>
   </div>
@@ -219,7 +198,7 @@ charm needs to include it? In this article we will take a look
 at its code base to decipher this mystery.</p>
 <h1>Hooks</h1>
 <p>We already know hooks are hardcoded. Juju expects certain hooks and
-hook sequence is always executed in ...</p>
+hook sequence is always executed in …</p>
       </p>
     </div>
   </div>
@@ -301,7 +280,7 @@ hook sequence is always executed in ...</p>
 charm. Chained states is essentially mirroring a pattern of any sequential
 execution in a workflow. Potentially each execution block can also
 have conditions to set the next state, even though this type of knowledge
-should be exposed outside function element ...</p>
+should be exposed outside function element …</p>
       </p>
     </div>
   </div>
@@ -331,7 +310,7 @@ should be exposed outside function element ...</p>
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being <strong>managed</strong> requires
-that the manager is aware of ...</p>
+that the manager is aware of …</p>
       </p>
     </div>
   </div>
@@ -360,7 +339,7 @@ that the manager is aware of ...</p>
         <p>Everyone of us has installed an operating system to a computer at some
 point in life. It is easy to perceive inserting a disk or USB key to
 make this happen because the OS files are <em>there</em>. A fancier version
-is to boot from network using PXE boot option, which ...</p>
+is to boot from network using PXE boot option, which …</p>
       </p>
     </div>
   </div>
@@ -390,7 +369,7 @@ is to boot from network using PXE boot option, which ...</p>
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &mdash; start an instance on demand, then build those
 REST requests into Juju provider code. After playing with Ironic API
-and Openstack's Devstack ...</p>
+and Openstack's Devstack for …</p>
       </p>
     </div>
   </div>
@@ -421,7 +400,7 @@ that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
 the charm world to learn its design.</p>
 <h1>Bundle, charm, service, application</h1>
-<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can ...</p>
+<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can …</p>
       </p>
     </div>
   </div>
@@ -452,7 +431,7 @@ including what makes a node eligible as a target and what files will
 be put on by the deployer.If you recall, there were four steps in a
 deploy process:</p>
 <ol>
-<li>Add a new machine to the cloud environment. In ...</li></ol>
+<li>Add a new machine to the cloud environment. In …</li></ol>
       </p>
     </div>
   </div>
@@ -483,7 +462,7 @@ continue our research into another important function &mdash; juju
 deploy.</p>
 <p>Deploy will command a node to pull down requested charm and install
 whatever needed based the charm's instruction. As the bootstrap
-research, I'm interested in the internal ...</p>
+research, I'm interested in the internal mechanism of this …</p>
       </p>
     </div>
   </div>
@@ -515,7 +494,7 @@ control node, etc. &mdash; naming convention aside, it is the brain
 that tracks others nodes in the cloud, applications installed and
 their status.</p>
 <h1>Screencast</h1>
-<p>Through research I want to learn about its ...</p>
+<p>Through research I want to learn about its …</p>
       </p>
     </div>
   </div>
@@ -545,7 +524,7 @@ their status.</p>
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of
 them makes sense after a while. Its <a href="https://jujucharms.com/docs/2.0/glossary">terminology</a> page helps on
-understanding ...</p>
+understanding individual …</p>
       </p>
     </div>
   </div>
@@ -579,7 +558,7 @@ they must support PXE boot.</p>
 </blockquote>
 <h1>PXE boot</h1>
 <p>The MAAS machine functions as both the DHCP server and the TFTP
-server ...</p>
+server …</p>
       </p>
     </div>
   </div>
@@ -609,7 +588,7 @@ server ...</p>
 life by putting an OS on it. Working together with <a href="https://www.ubuntu.com/cloud/juju">Juju</a>, they can
 setup a cluster of applications quite quickly. Think of them as a
 package manage like Ubuntu's <code>apt-get</code>, but in the context of a
-cloud ...</p>
+cloud. Interesting …</p>
       </p>
     </div>
   </div>

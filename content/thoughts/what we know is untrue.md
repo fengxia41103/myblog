@@ -1,11 +1,11 @@
-Title: What we now is untrue
+Title: What we know is untrue
 Date: 2019-09-28 11:25
 Tags: thoughts
 Slug: what we know is untrue
 Author: Feng Xia
 
 <figure class="col l8 m8 s12">
-  <img src="images/dutch%20figher.jpg"/>
+  <img src="images/dutch%20fighter.jpg"/>
   
   <figcaption>
   Dutch resistence fighter hearing the news of the WWII victory

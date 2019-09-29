@@ -12,7 +12,7 @@ SITEURL = ""
 
 PATH = "content"
 
-IGNORE_FILES = ["\.#.*"]
+IGNORE_FILES = ['.#*']
 
 # These folders will be copied to `/output` without pelican modification
 STATIC_PATHS = ["images", "downloads", "app", "data", "slides"]  # "extra/CNAME"

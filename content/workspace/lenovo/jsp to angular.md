@@ -3,6 +3,10 @@ Date: 2019-07-02 13:26
 Tags: lenovo
 Slug: jsp to angular
 Author: Feng Xia
+Summary: The article describes how to use JSP to boostrap an Angular
+  application. This same concept is applicable to other web framework
+  such as Django.
+
 
 Man, don't I dislike Java!
 

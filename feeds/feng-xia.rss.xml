@@ -114,13 +114,7 @@ some wild release notion and cycles. The important one for me is …&lt;/p&gt;</
 &lt;p&gt;This occurred to me when I was browsing Slashdot at lunch, and started
 to realize that as a pattern which applies to everybody, you will only
 click into the comment for the titles you find interesting &amp;mdash;
-this sounds very …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Jul 2019 12:10:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-07-03:/myblog/self-selected bias.html</guid><category>thoughts</category></item><item><title>JSP to Angular</title><link>https://fengxia41103.github.io/myblog/jsp%20to%20angular.html</link><description>&lt;p&gt;Man, don't I dislike Java!&lt;/p&gt;
-&lt;h1&gt;how to angular&lt;/h1&gt;
-&lt;p&gt;Top level controller is &lt;code&gt;mwc&lt;/code&gt;, and is linked at the root &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./WEB-INF/jsp/administration.jsp:5:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot;&amp;gt;
-./WEB-INF/jsp/login.jsp:6:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot;&amp;gt;
-./WEB-INF/jsp/index.jsp:6:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot; lang=&amp;quot;en&amp;quot;&amp;gt;
-./WEB-INF/jsp/exception/500-server-error …&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 02 Jul 2019 13:26:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-07-02:/myblog/jsp to angular.html</guid><category>lenovo</category></item><item><title>The wrong elite</title><link>https://fengxia41103.github.io/myblog/the%20wrong%20elite.html</link><description>&lt;figure class="col s12"&gt;
+this sounds very …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Jul 2019 12:10:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-07-03:/myblog/self-selected bias.html</guid><category>thoughts</category></item><item><title>JSP to Angular</title><link>https://fengxia41103.github.io/myblog/jsp%20to%20angular.html</link><description>&lt;p&gt;The article describes how to use JSP to boostrap an Angular&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 02 Jul 2019 13:26:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-07-02:/myblog/jsp to angular.html</guid><category>lenovo</category></item><item><title>The wrong elite</title><link>https://fengxia41103.github.io/myblog/the%20wrong%20elite.html</link><description>&lt;figure class="col s12"&gt;
   &lt;img src="images/cat%20viewed%20from%20below.jpg"/&gt;
 &lt;/figure&gt;
 

@@ -1964,13 +1964,9 @@ weaker and weaker, for whatever reason. Someone's had died down long
 time ago; others become smaller flame, and still burn, for a while. I
 wonder how big is my fire inside!? and when it is out, what becomes of
 me? A walking dead? or just everyone else &amp;mdash; those bigfoots, when
-I viewed myself as the smallfoot, a human?&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>JSP to Angular</title><link href="https://fengxia41103.github.io/myblog/jsp%20to%20angular.html" rel="alternate"></link><published>2019-07-02T13:26:00-04:00</published><updated>2019-07-02T13:26:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-02:/myblog/jsp to angular.html</id><summary type="html">&lt;p&gt;Man, don't I dislike Java!&lt;/p&gt;
-&lt;h1&gt;how to angular&lt;/h1&gt;
-&lt;p&gt;Top level controller is &lt;code&gt;mwc&lt;/code&gt;, and is linked at the root &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./WEB-INF/jsp/administration.jsp:5:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot;&amp;gt;
-./WEB-INF/jsp/login.jsp:6:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot;&amp;gt;
-./WEB-INF/jsp/index.jsp:6:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot; lang=&amp;quot;en&amp;quot;&amp;gt;
-./WEB-INF/jsp/exception/500-server-error …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Man, don't I dislike Java!&lt;/p&gt;
+I viewed myself as the smallfoot, a human?&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>JSP to Angular</title><link href="https://fengxia41103.github.io/myblog/jsp%20to%20angular.html" rel="alternate"></link><published>2019-07-02T13:26:00-04:00</published><updated>2019-07-02T13:26:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-02:/myblog/jsp to angular.html</id><summary type="html">&lt;p&gt;The article describes how to use JSP to boostrap an Angular&lt;/p&gt;</summary><content type="html">&lt;p&gt;application. This same concept is applicable to other web framework
+  such as Django.&lt;/p&gt;
+&lt;p&gt;Man, don't I dislike Java!&lt;/p&gt;
 &lt;h1&gt;how to angular&lt;/h1&gt;
 &lt;p&gt;Top level controller is &lt;code&gt;mwc&lt;/code&gt;, and is linked at the root &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./WEB-INF/jsp/administration.jsp:5:&amp;lt;html ng-app=&amp;quot;mwc&amp;quot;&amp;gt;

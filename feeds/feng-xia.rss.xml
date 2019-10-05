@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free' - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 28 Sep 2019 11:25:00 -0400</lastBuildDate><item><title>What we know is untrue</title><link>https://fengxia41103.github.io/myblog/what%20we%20know%20is%20untrue.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free' - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 05 Oct 2019 08:42:00 -0400</lastBuildDate><item><title>Smart phone</title><link>https://fengxia41103.github.io/myblog/smart%20phone.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
+  &lt;img src="images/gozilla%20on%20lego.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I have long been wanting to discuss this topic &amp;mdash; smart
+phone. This discussion/thought had started in 2014 when I was in 太原
+and was chatting w/ 谢部 at a Starbucks downstairs near her
+office. Out of my own experience w/ this type of devices &amp;mdash; a 红
+米 given by …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 05 Oct 2019 08:42:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-05:/myblog/smart phone.html</guid><category>thoughts</category></item><item><title>ThinkAgile CP Deployment</title><link>https://fengxia41103.github.io/myblog/cp%20deployment.html</link><description>&lt;p&gt;Follow these instructions to deploy a ThinkAgile CP stack.&lt;/p&gt;
+&lt;h1&gt;Prerequisite&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Stacks have been cabled.&lt;/li&gt;
+&lt;li&gt;Network planning worksheet has been filled out.&lt;/li&gt;
+&lt;li&gt;Uplink switches have been configured according the worksheet.&lt;/li&gt;
+&lt;li&gt;Connect a bootstrap (Linux) machine, eg. your laptop, with a serial
+   to USB adapter cable. Serial cable is connected to the …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 02 Oct 2019 13:24:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-02:/myblog/cp deployment.html</guid><category>lenovo</category></item><item><title>What we know is untrue</title><link>https://fengxia41103.github.io/myblog/what%20we%20know%20is%20untrue.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/dutch%20fighter.jpg"/&gt;
 
   &lt;figcaption&gt;

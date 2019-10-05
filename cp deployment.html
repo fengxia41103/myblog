@@ -107,20 +107,20 @@
 
       <div class="col s12">
         <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-        2018-12-31
+        2019-10-02
 
 
-        <a class="wave-effect" href="thoughts.html">
+        <a class="wave-effect" href="lenovo.html">
           <i class="fa fa-folder-open-o"></i>
-          thoughts
+          lenovo
         </a>
 
-        <a class="wave-effect" href="tag-thoughts.html">
+        <a class="wave-effect" href="tag-lenovo.html">
           <i class="fa fa-tag"></i>
-          thoughts
+          lenovo
         </a>
 
-        <h1 class="myhighlight">2018</h1>
+        <h1 class="myhighlight">ThinkAgile CP Deployment</h1>
       </div>
 
 
@@ -131,76 +131,151 @@
     <div>
       <div id="article-content" class="row">
         <blockquote>
+          <span class="myhighlight">Copyright @ Lenovo US</span>
         </blockquote>
         <p>
-          <figure class="col s12">
-  <img src="images/1968%20earth.jpg"/>
-  <figcaption>First photo of the Earth taken by NASA in 1968</figcaption>
-</figure>
+          <p>Follow these instructions to deploy a ThinkAgile CP stack.</p>
+<h1>Prerequisite</h1>
+<ol>
+<li>Stacks have been cabled.</li>
+<li>Network planning worksheet has been filled out.</li>
+<li>Uplink switches have been configured according the worksheet.</li>
+<li>Connect a bootstrap (Linux) machine, eg. your laptop, with a serial
+   to USB adapter cable. Serial cable is connected to the primary
+   interconnect.</li>
+</ol>
+<h1>Bootstrap</h1>
+<p>On Ubuntu 18.04, </p>
+<ol>
+<li>
+<p><code>sudo screen /dev/ttyUSB0 115200 cs8</code>, wait for prompt <code>XorPlus
+   login:</code>. Now you are connected to the primary interconnect.</p>
+<ul>
+<li>login: (manager, cloudistics)</li>
+</ul>
+</li>
+<li>
+<p>Setup uplink IP, DNS server, and NTP server:</p>
+<div class="highlight"><pre><span></span>```shell
+sudo cldtx_set_switch_oob_ip -v &amp;lt;oob vlan&amp;gt; \
+  -i &amp;lt;oob ip&amp;gt; \
+  -m &amp;lt;oob netmask&amp;gt; \
+  -g &amp;lt;oob gateway&amp;gt; \
+  -n &amp;lt;primary DNS server, default to 8.8.8.8&amp;gt; \
+  -d &amp;lt;2nd DNS server, default to 8.8.4.4&amp;gt; \
+  -t &amp;lt;primary NTP server, default to &quot;time1.google.com&quot;&amp;gt; \
+  -p &amp;lt;2nd NTP server, default to &quot;time2.google.com&quot;&amp;gt;
+```
+</pre></div>
 
-<p>Last day of 2018. Snowed yesterday. Amazingly the snow accumulated
-over night, and Shanghai is now looking pretty, covered in white, and
-fresh air. Listening to Xmas music in Starbucks, with Noah reading his
-comic book next to me. It's quiet. The shop just opened. I thought it
-was already opened at 7, but it turned out we were the first
-customers. I like it, peaceful and quiet, and holiday in the air. Sent
-you a message on the way over. I saw the snow, and that is forever
-linked with you. I can see your face brighten up and your prettiness
-is captured in someone's camera. Yes, this is what you will like, and
-I am happy to imagine how happy you will be.</p>
-<p>What more can I ask about life, when I have this type of rather luxury
-life, where the person I love, Noah, is next to me, and I am able to
-spend some time w/ Dad? Though I don't know where you are anymore. At
-least, we are in the same city, breathing the same air, seeing the
-same snow, and in the same space in a sense that I know you are here,
-and maybe, you will think of me, too.</p>
-<p>End of 2018. Another year. I dont' get excited over holidays anymore. I
-looked at my camera this morning. Even though I have just bought a
-few more lenses, I don't think I'm becoming a good photographer
-&mdash; I'm not taking pictures, and I dont' have fire burning inside
-me. I don't have an audience in mind for whom I am going to show and
-talk about these pictures, experience, and imagine her face, her
-smell, her reaction. Without that, I feel nothing but emptiness, a
-void. I know you are still there, like living in my soul. Yet, you are
-becoming so silent that I'm afraid I will have moments I don't hear
-your voice anymore in my mind. Reading the "One Hundred Years of
-Solitude", what a tough book! I was constantly reminded of you when
-characters were going through life with their burning desire and their
-persistent, sometimes even rather strange, love. It's one thing to
-live in love, feeling the anxiety, pain, excitement, tingling of skin
-at a touch, quite another that each love ended in misery, or not even
-having an end, just disappeared into a thin air, like nothing
-happened.</p>
-<p>How sad. I feel love is a thing God invented to tease human, that
-gives you so much hope, makes you feel so full and fulfilled, will
-fade, inevitably, and will change, inevitably. The best one can wish
-is to turn it into a family-ish relation, and that's just, sad. What
-happened to desire? to sensitivity? to yearning of seeing someone, of
-being with someone, of be close to someone, of being known and
-understood by someone, being thought of by someone, being reminded by
-someone when the weather is cold, or hot, or rain, or shine, or
-anything, just to be reminded, that the someone, is there?</p>
-<p>I don't know why people can get over these moments so quickly (or so
-easily). I really don't get it. These are the moments in life that
-made life worth living, it gives you a memory to look back, to feel
-yourself deep inside that you are still sensitive to a feeling, even
-it is just sad, that you are alive. Moving on is indeed a wicked
-word. It is not by anyone's choice. It's a choice by time, and time
-goes on without concerning a bit of who you are, what you do, whom you
-love.</p>
-<p>So, 2018, like any other year, is nothing but an earmark of time,
-ruthlessly passing by, announcing its existence, trashing everything
-on its path, indifferent, cold-hearted, sensible.</p>
-<p>But human, if deserves that name, has feelings, and should cherish
-that, because that is all we have left. Like me thinking of you at
-this hour, that you probably will never know, nor will you care
-perhaphs. But that's all I have, all I have to stare at the face of
-time, at the passing of this coldness, so not to be turned into a
-being that myself will hate. You, keep me, sane.</p>
-<p>I miss you. Go play in the snow. You will like it. You always do, and
-that's how I remembered about you, and wish you remember something
-about me, too.</p>
-<p>Happy New Year, 美丽的人.</p>
+
+<p>Example output:</p>
+<div class="highlight"><pre><span></span>```shell
+Execute command: 
+                  set system management-ethernet eth0 ip-gateway IPv4 10.240.22.1.
+The same value is set to node &quot;system management-ethernet eth0 ip-gateway IPv4&quot;.
+root@XorPlus# 
+Execute command: 
+                  commit.
+Commit OK.
+root@XorPlus# 
+Execute command: 
+.
+root@XorPlus# 
+Synchronizing configuration...OK.
+Pica8 PicOS Version 2.11.5.cloudistics.1
+Welcome to PicOS on XorPlus
+root@XorPlus&amp;gt; 
+Execute command: configure.
+Entering configuration mode.
+There are no other users in configuration mode.
+root@XorPlus# 
+Execute command: delete system dns-server-ip 8.8.8.8^M.
+Deleting: 
+    8.8.8.8
+
+OK 
+root@XorPlus# 
+Execute command: commit 
+.
+Commit OK.
+Save done.
+root@XorPlus# 
+Synchronizing configuration...OK.
+Pica8 PicOS Version 2.11.5.cloudistics.1
+OK 
+root@XorPlus# 
+Execute command: commit 
+.
+Commit OK.
+Save done.
+root@XorPlus# 
+Synchronizing configuration...OK.
+Pica8 PicOS Version 2.11.5.cloudistics.1
+Welcome to PicOS on XorPlus
+root@XorPlus&amp;gt; 
+Execute command: configure.
+Entering configuration mode.
+There are no other users in configuration mode.
+root@XorPlus# 
+Execute command: set system dns-server-ip 8.8.8.8.
+root@XorPlus# 
+Execute command: commit
+.
+Commit OK.
+Save done.
+root@XorPlus# 
+Synchronizing configuration...OK.
+Pica8 PicOS Version 2.11.5.cloudistics.1
+Welcome to PicOS on XorPlus
+root@XorPlus&amp;gt; 
+Execute command: configure.
+Entering configuration mode.
+There are no other users in configuration mode.
+root@XorPlus# 
+Execute command: set system dns-server-ip 8.8.4.4.
+root@XorPlus# 
+Execute command: commit
+Synchronizing configuration...OK.
+Pica8 PicOS Version 2.11.5.cloudistics.1
+Welcome to PicOS on XorPlus
+root@XorPlus&amp;gt; 
+Execute command: configure.
+Entering configuration mode.
+There are no other users in configuration mode.
+root@XorPlus# 
+Execute command: set system dns-server-ip 8.8.8.8.
+root@XorPlus# 
+Execute command: commit
+.
+Commit OK.
+Save done.
+root@XorPlus# 
+Synchronizing configuration...OK.
+Pica8 PicOS Version 2.11.5.cloudistics.1
+Welcome to PicOS on XorPlus
+root@XorPlus&amp;gt; 
+Execute command: configure.
+Entering configuration mode.
+There are no other users in configuration mode.
+root@XorPlus# 
+Execute command: set system dns-server-ip 8.8.4.4.
+root@XorPlus# 
+Execute command: commit
+.
+Commit OK.
+Save done.
+root@XorPlus# 
+Stopping NTP server: ntpd.
+Starting NTP server: ntpd.
+Checking connectivity to host:   port: 
+Cloudistics Portal connection check failed    
+```
+</pre></div>
+
+
+</li>
+</ol>
         </p>
 
         <p>
@@ -242,26 +317,23 @@ about me, too.</p>
           <div class="card-content white-text row">
             <div>
               <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-              2019-10-05
+              2019-07-02
             </div>
 
             <h5 class="card-title">
-              Smart phone
+              JSP to Angular
             </h5>
 
             <p>
-              <figure class="col l8 m8 s12">
-  <img src="images/gozilla%20on%20lego.jpg"/>
-</figure>
-
-<p>I have long been wanting to discuss this topic &mdash; smart
-phone. This discussion/thought had started in 2014 when I was in 太原
-and was chatting w/ 谢部 at a...
+              <p>Man, don't I dislike Java!</p>
+<h1>how to angular</h1>
+<p>Top level controller is <code>mwc</code>, and is linked at the root <code>&lt;html&gt;</code>:</p>
+<div class="highlight"><pre><span></span>./WEB-INF/jsp/administration.jsp:5:&lt;html...
             </p>
 
             <div class="card-action">
               <a class="flabel wave-effect"
-                 href="https://fengxia41103.github.io/myblog/smart phone.html">
+                 href="https://fengxia41103.github.io/myblog/jsp to angular.html">
                 read more
               </a>
             </div>
@@ -273,59 +345,27 @@ and was chatting w/ 谢部 at a...
           <div class="card-content white-text row">
             <div>
               <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-              2019-09-28
+              2018-11-16
             </div>
 
             <h5 class="card-title">
-              What we know is untrue
+              IBB brain shutdown procedure
             </h5>
 
             <p>
-              <figure class="col l8 m8 s12">
-  <img src="images/dutch%20fighter.jpg"/>
-
-  <figcaption>
-  Dutch resistence fighter hearing the news of the WWII victory
-  </figcaption>
-</figure>
-
-<p>The more we read, the more I think, the more I start to realize...
+              <p>This document describes procedure to shutdown an IBB brain instance.</p>
+<h1>Shutdown procedure</h1>
+<ol>
+<li>
+<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
+</li>
+<li>
+<p>Put the cluster in...
             </p>
 
             <div class="card-action">
               <a class="flabel wave-effect"
-                 href="https://fengxia41103.github.io/myblog/what we know is untrue.html">
-                read more
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col l4 m6 s12">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text row">
-            <div>
-              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-              2019-09-26
-            </div>
-
-            <h5 class="card-title">
-              Middleschool
-            </h5>
-
-            <p>
-              <figure class="col l6 m6 s12">
-  <img src="images/car%20hitting%20pole.jpg"/>
-</figure>
-
-<p>Watching Noah to do homework these days is like watching paint dry
-&mdash; a true challenge of patience, and the result is often very
-disastrous. His mom...
-            </p>
-
-            <div class="card-action">
-              <a class="flabel wave-effect"
-                 href="https://fengxia41103.github.io/myblog/middleschool.html">
+                 href="https://fengxia41103.github.io/myblog/ibb brain shutdown procedure.html">
                 read more
               </a>
             </div>

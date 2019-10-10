@@ -33,6 +33,8 @@ message, and list of files changed:
 - two commits: `git diff ee4be da82da`
 - a single file: `git diff <file name>`: this will diff between disk
   file and branch's HEAD.
+- a single file between two branches: `git diff <branch A>..<branch B>
+  -- <file name>`
   
 # revert
 

@@ -142,3 +142,76 @@ On Ubuntu 18.04,
         Checking connectivity to host:   port: 
         Cloudistics Portal connection check failed    
         ```
+
+# mwc wildfly local dev
+
+## anaconda
+
+[Official instruction][1].
+
+1. install system packages:
+
+        ```shell
+        apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+        ```
+
+2. download [installer][2].
+
+3. `source ~/.bashrc`. If you are curious, this is what that
+   initialization step put in this file:
+   
+        ```shell
+        __conda_setup="$('/home/fengxia/anaconda2/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+            eval "$__conda_setup"
+        else
+            if [ -f "/home/fengxia/anaconda2/etc/profile.d/conda.sh" ]; then
+                . "/home/fengxia/anaconda2/etc/profile.d/conda.sh"
+            else
+                export PATH="/home/fengxia/anaconda2/bin:$PATH"
+            fi
+        fi
+        unset __conda_setup
+        ```
+
+4. `conda -version`. You should see sth like `conda 4.7.10`.
+
+5. `conda config --add channels conda-forge`.
+
+6. `conda create -n mwc_scripts python=2.7 psycopg2 sqlparse
+   cassandra-driver`. This message `Collecting package metadata
+   (current_repodata.json):` will take a while to complete. Be patient.
+
+## docker
+
+1. Just follow [this].
+2. `sudo usermod -a -G docker $USER`, then exit SSH and login again.
+3. `docker run hello-world` as test.
+
+## mwc
+
+1. In `.bashrc`, append to the end:
+
+        ```shell
+        export CLDTX_HOME=/home/fengxia/workspace/ignite
+        export CLDTX_CONFIG=/etc/cloudistics
+        export PYTHON_HOME=/home/fengxia/miniconda2
+        ```
+2. `source ~/.bashrc`.
+
+3. `mwc\maintenance\unix\setup\init-mwc-builder.sh`. This will build
+   docker images.
+
+4. `mwc/maintenance/unix/setup/init-config.sh`.
+
+5. `~/workspace/ignite/mwc/maintenance/unix/workflow/build-mwc.sh`. If
+   there is error, stop.
+
+6. `cd ~/workspace/ignite/mwc/docker`, then:
+
+  1. `docker-compose up -d postgres scylla`
+  2. `docker-compose up -d wildfly`
+  
+[1]: https://docs.anaconda.com/anaconda/install/linux/
+[2]: https://www.anaconda.com/download/#linux
+[3]: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04

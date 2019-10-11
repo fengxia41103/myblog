@@ -206,7 +206,7 @@ psycopg2==2.7.5
 purl==1.1
 py==1.8.0
 pyasn1==0.1.9
-pyBarcode==0.7
+pyBarcode==0.8b1
 pycadf==2.9.0
 pycallgraph==1.0.1
 pycparser==2.19

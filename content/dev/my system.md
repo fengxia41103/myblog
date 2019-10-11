@@ -1,0 +1,129 @@
+Title: My system
+Date: 2019-10-08 19:05
+Tags: dev
+Slug: my system
+Author: Feng Xia
+Summary: Instructions to rebuild my system from scratch based on Ubuntu 18.04.
+
+Now setting up my Flex Pro from scratch (well, it's too difficult to
+get to its hard drive, so without ruining this beautiful machine, I
+decided to install Ubuntu from scratch), I'm going to document (rather
+a bit catch up) what I need to install in order to get my working
+environment back.
+
+# system files
+
+```shell
+apt install \
+  build-essential \
+  python-pip \
+  fonts-inconsolata \
+  texlive \
+  texlive-fonts-extra \
+  run-one \
+  emacs \
+  python-dev \
+  i3 \
+  wicd-curses \
+  virtualenvwrapper \
+  pandoc \
+  dia \
+  evince \
+  gimp \
+  pidgin \
+  pidgin-sipe \
+  git \
+  dkms \
+  openssh \
+  tmux \
+  python-mysqldb \
+  mysql-client \
+  libmysqlclient-dev \
+  graphviz \
+  libgraphviz-dev \
+  imagemagick \
+  libssl-dev \
+  libcurl4-openssl-dev \
+  pkg-config \
+  libmemcached-dev \
+  zlib1g-dev \
+  libxml2-dev \
+  libxslt-dev \
+  nginx \
+  mplayer \
+  vlc \
+  youtube-dl \
+  rsync \
+  gthumb \
+  libvirt \
+  virt-manager \
+  virtinst \
+  libvirt-bin \
+  bridge-utils \
+  cloud-utils \
+  cloud-init \
+  libguestfs-tools \
+  pkg-config \
+  uwsgi \
+  uwsgi-plugin-python \
+  cpu-checker \
+  htop \
+  tree \
+  libffi6 \
+  libffi-dev \
+  gthumb
+```
+
+# local kvm setup
+
+1. `sshkey-gen`: u can leave the passphrase to none (just ENTER).
+2. `git clone http://github.com/fengxia41103/dev`.
+  1. paste the content in `.ssh/id_rsa.pub` to `dev/kvm/my-user-data`:
+     this will then allow KVM to be accessible using this key.
+
+For more info on KVM, read [here][1].
+
+# 4k display and font size
+
+Fonts will be way too small on a 4k display. The best instruction I
+found and works is [by ArchLinux][2].
+
+First of all, **don't use `xrandr --outout <whatever> --scale
+0.5x0.5`**. This will only decrease the resolution, which makes the
+screen/font blurry!
+
+Instead, there are two things you need to do:
+
+1. Add these to `.Xresources` (if file doesn't exist, create
+   one). Play w/ the `Xft.dpi` value &larr; the smaller the value, the
+   smaller the font will be (you can check by evoking i3wm's menu bar
+   `WIN+d`). No idea what the other values are. Then logout and log
+   back in, you will be super happy!
+
+        ```shell
+        Xft.dpi: 200
+        Xft.autohint: 0
+        Xft.lcdfilter:  lcddefault
+        Xft.hintstyle:  hintfull
+        Xft.hinting: 1
+        Xft.antialias: 1
+        Xft.rgba: rgb
+        ```
+
+2. For Gtk applications, eg. dia, add these to our `.zshrc` or `.bashrc`:
+
+        ```shell
+        export QT_AUTO_SCREEN_SCALE_FACTOR=1
+        export GDK_SCALE=2
+        ```
+# nvm and Node.js stuff
+
+1. Install [nvm][3]. Then, `nvm install node` will install the latest
+   version. Or, do `nvm install <versaion>`. Use `nvm ls-remote` to
+   find which versions are available for installation.
+2. Update npm `npm install npm@latest -g`.
+3. Install bower, `npm install -g bower `.
+
+[1]: {filename}/dev/kvm.md
+[2]: https://wiki.archlinux.org/index.php/HiDPI
+[3]: https://github.com/nvm-sh/nvm

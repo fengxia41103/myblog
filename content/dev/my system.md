@@ -136,6 +136,16 @@ Instead, there are two things you need to do:
         export QT_AUTO_SCREEN_SCALE_FACTOR=1
         export GDK_SCALE=2
         ```
+
+# disable NetworkManager
+
+You have to disable NetworkManager service in order for wicd to take
+over cleanly:
+
+1. stop service: `systemctl stop NetworkManager`
+2. disable it completely: `systemctl disable NetworkManager.service`
+
+
 # nvm and Node.js stuff
 
 1. Install [nvm][3]. Then, `nvm install node` will install the latest
@@ -161,10 +171,29 @@ Follow [this blog][4], and you will get a cool looking shell:
 
 If you want to revert back to bash: `chsh -s /bin/bash`.
 
+# sshfs
+
+Use this to mount another machine's file system into your local. This
+is a great way to share the same code between your localhost and vms.
+
+1. `apt install sshfs`
+2. Uncomment `user_allow_other` in `/etc/fuse.conf`.
+3. to mount: `sshfs -o allow_other
+   fengxia@192.168.1.112:/home/fengxia/workspace ./tmp` &larr; mount
+   remove `workspace/` to your local `./tmp`.
+
+# i3
+
+Under `~/.config`, find two folder named `i3/` and `i3status`. Copy
+[i3.conf][5] to `i3/config`, and [i3status.confg][6] to
+`i3status/i3status.conf`.
 
 [1]: {filename}/dev/kvm.md
 [2]: https://wiki.archlinux.org/index.php/HiDPI
 [3]: https://github.com/nvm-sh/nvm
 [4]: https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4
+[5]: {filename}/downloads/i3.conf
+[6]: {filename}/downloads/i3status.conf
+
 
 [^1]: To check screen resolution: `xdpyinfo | grep dimensions`.

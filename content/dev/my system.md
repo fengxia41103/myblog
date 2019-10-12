@@ -153,6 +153,7 @@ over cleanly:
    find which versions are available for installation.
 2. Update npm `npm install npm@latest -g`.
 3. Install bower, `npm install -g bower `.
+4. Now go to `myblog/template/feng/static`, and run `bower install`.
 
 # zsh
 
@@ -192,8 +193,8 @@ Under `~/.config`, find two folder named `i3/` and `i3status`. Copy
 [2]: https://wiki.archlinux.org/index.php/HiDPI
 [3]: https://github.com/nvm-sh/nvm
 [4]: https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4
-[5]: {filename}/downloads/i3.conf
-[6]: {filename}/downloads/i3status.conf
+[5]: {static}/downloads/i3.conf
+[6]: {static}/downloads/i3status.conf
 
 
 [^1]: To check screen resolution: `xdpyinfo | grep dimensions`.

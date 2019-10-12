@@ -475,6 +475,13 @@ things you need to do:
 
 # Outlook webmail
 
+<figure class="col l6 m6 s12">
+  <img src="images/davmail.png"
+       class="center img-responsive">
+  <figcaption>davmail settings</figcaption>
+</figure>
+
+
 Working outlook/exchange server is tough. The company's server changes
 configuration all the time, and it completly messed up w/ IMAP login
 when one server allows `PLAIN` while another requires `NTLM`, and so
@@ -484,17 +491,11 @@ anymore! Fall back is Thunderbird, but then, once you are used to
 `mu4e`, going back to anything looked like outlook is a pain.
 
 Finally, here is a savior,
-[davmail](http://davmail.sourceforge.net/). It works a gateway between
+[davmail](http://davmail.sourceforge.net/)[^1]. It works a gateway between
 your computer and outlook web mail (aka. OWA &mdash; outlook web
 access). So you can now point your `mbsync` to a local port (default
 `1143`, and davmail will route mbsync's IMAP requests to the remote
 OWA server, nice!
-
-<figure class="col s12">
-  <img src="images/mbsync%20setup.png"
-       class="center img-responsive">
-  <figcaption>My mbsync setup for retrieving and sending mails</figcaption>
-</figure>
 
 The `mbsync` config is quite straightforward:
 
@@ -509,11 +510,21 @@ SSLType None
 AuthMech LOGIN
 ```
 
-and here is the `davmail` settings:
+and here is the `davmail` [settings][1] (copy it to
+`~/.davmail.properties`). The best way to run it is to use a tmux,
+then run it as background process `davmail &`. Alternatively, you can
+set `davmail.server=true`, then use `nohup`. But w/ tmux running
+dettached session., I really don't see any benefit of doing this
+anymore.
 
 <figure class="col s12">
-  <img src="images/davmail.png"
+  <img src="images/mbsync%20setup.png"
        class="center img-responsive">
-  <figcaption>davmail settings</figcaption>
+  <figcaption>My mbsync setup for retrieving and sending mails</figcaption>
 </figure>
+
+
+[1]: {static}/downloads/davmail.properties
+[^1]: Btw, I was having issue w/ v5.3.1. Downgrade it to 5.2 (released
+    in Aug 2019) worked out better.
 

@@ -15,6 +15,9 @@ environment back.
 
 ```shell
 apt install \
+  git \
+  terminator \
+  conky \
   build-essential \
   python-pip \
   fonts-inconsolata \
@@ -34,7 +37,8 @@ apt install \
   pidgin-sipe \
   git \
   dkms \
-  openssh \
+  openssh-server \
+  openssh-client \
   tmux \
   python-mysqldb \
   mysql-client \
@@ -48,14 +52,14 @@ apt install \
   libmemcached-dev \
   zlib1g-dev \
   libxml2-dev \
-  libxslt-dev \
+  libxslt1-dev \
   nginx \
   mplayer \
   vlc \
   youtube-dl \
   rsync \
   gthumb \
-  libvirt \
+  libvirt-bin \
   virt-manager \
   virtinst \
   libvirt-bin \
@@ -71,7 +75,16 @@ apt install \
   tree \
   libffi6 \
   libffi-dev \
-  gthumb
+  gthumb \
+  isync \
+  mu4e \
+  default-jre \
+  openconnect \
+  zsh \
+  powerline \
+  fonts-powerline \
+  thunderbird \
+  sshfs
 ```
 
 # local kvm setup
@@ -109,7 +122,14 @@ Instead, there are two things you need to do:
         Xft.antialias: 1
         Xft.rgba: rgb
         ```
-
+   Use `xdpyinfo` to check screen resolution[^1]:
+   
+   1. On X1 gen 8, it's shown `2560x1440 pixels (677x381
+      millimeters)`. Set `dpi=180` gives the same exp/size as what was
+      on gen 4 without any tweaking.
+   2. On Flex pro, it gives `3840 x 2160`, use `dpi=200` is good; 180
+      is too small.
+      
 2. For Gtk applications, eg. dia, add these to our `.zshrc` or `.bashrc`:
 
         ```shell
@@ -124,6 +144,27 @@ Instead, there are two things you need to do:
 2. Update npm `npm install npm@latest -g`.
 3. Install bower, `npm install -g bower `.
 
+# zsh
+
+Follow [this blog][4], and you will get a cool looking shell:
+
+1. `git clone https://github.com/robbyrussell/oh-my-zsh.git
+   ~/.oh-my-zsh`
+2. `cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc`
+3. change theme in `.zshrc` to `ZSH_THEME="agnoster"`
+4. Set zsh as the default shell: `chsh -s /bin/zsh`
+5. `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+   "$HOME/.zsh-syntax-highlighting" --depth 1`
+6. `echo "source
+   $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >>
+   "$HOME/.zshrc"`
+
+If you want to revert back to bash: `chsh -s /bin/bash`.
+
+
 [1]: {filename}/dev/kvm.md
 [2]: https://wiki.archlinux.org/index.php/HiDPI
 [3]: https://github.com/nvm-sh/nvm
+[4]: https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4
+
+[^1]: To check screen resolution: `xdpyinfo | grep dimensions`.

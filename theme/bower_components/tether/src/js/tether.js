@@ -47,7 +47,7 @@ const position = () => {
 };
 
 function now() {
-  if (typeof performance !== 'undefined' && typeof performance.now !== 'undefined') {
+  if (typeof performance === 'object' && typeof performance.now === 'function') {
     return performance.now();
   }
   return +new Date;
@@ -697,14 +697,9 @@ class TetherClass extends Evented {
           xPos = -_pos.right;
         }
 
-        if (window.matchMedia) {
-          // HubSpot/tether#207
-          const retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches ||
-                         window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
-          if (!retina) {
-            xPos = Math.round(xPos);
-            yPos = Math.round(yPos);
-          }
+        if (typeof window.devicePixelRatio === 'number' && devicePixelRatio % 1 === 0) {
+          xPos = Math.round(xPos * devicePixelRatio) / devicePixelRatio;
+          yPos = Math.round(yPos * devicePixelRatio) / devicePixelRatio;
         }
 
         css[transformKey] = `translateX(${ xPos }px) translateY(${ yPos }px)`;
@@ -760,11 +755,18 @@ class TetherClass extends Evented {
 
     if (!moved) {
       if (this.options.bodyElement) {
-        this.options.bodyElement.appendChild(this.element);
+        if (this.element.parentNode !== this.options.bodyElement) {
+          this.options.bodyElement.appendChild(this.element);
+        }
       } else {
         let offsetParentIsBody = true;
+        function isFullscreenElement(e) {
+          let d = e.ownerDocument;
+          let fe = d.fullscreenElement || d.webkitFullscreenElement || d.mozFullScreenElement || d.msFullscreenElement;
+          return fe === e;
+        }
         let currentNode = this.element.parentNode;
-        while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
+        while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY' && !isFullscreenElement(currentNode)) {
           if (getComputedStyle(currentNode).position !== 'static') {
             offsetParentIsBody = false;
             break;

@@ -26,6 +26,5 @@
   },
   "_source": "https://github.com/denehyg/reveal.js-menu.git",
   "_target": "^0.8.1",
-  "_originalSource": "reveal.js-menu",
-  "_direct": true
+  "_originalSource": "reveal.js-menu"
 }

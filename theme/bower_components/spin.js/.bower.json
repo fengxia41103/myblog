@@ -19,8 +19,8 @@
   "_release": "2.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.2",
-    "commit": "ad9aa9f0a2dc6773978baa8c3aac2b551e1da000"
+    "tag": "2.0.2",
+    "commit": "89734a25ac9b1428806a024e079d93ce83977372"
   },
   "_source": "https://github.com/fgnass/spin.js.git",
   "_target": "~2.0.2",

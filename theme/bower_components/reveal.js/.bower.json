@@ -1,19 +1,16 @@
 {
   "name": "reveal.js",
-  "version": "3.5.0",
+  "version": "3.8.0",
   "main": [
     "js/reveal.js",
     "css/reveal.css"
   ],
-  "homepage": "http://lab.hakim.se/reveal-js/",
+  "homepage": "http://revealjs.com",
   "license": "MIT",
   "description": "The HTML Presentation Framework",
   "authors": [
     "Hakim El Hattab <hakim.elhattab@gmail.com>"
   ],
-  "dependencies": {
-    "headjs": "~1.0.3"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/hakimel/reveal.js.git"
@@ -24,11 +21,11 @@
     "bower_components",
     "test"
   ],
-  "_release": "3.5.0",
+  "_release": "3.8.0",
   "_resolution": {
     "type": "version",
-    "tag": "3.5.0",
-    "commit": "360bc940062711db9b8020ce4e848f6c37014481"
+    "tag": "3.8.0",
+    "commit": "3da09f1fef1fa3c140d2daa5bdee2a32683dd964"
   },
   "_source": "https://github.com/hakimel/reveal.js.git",
   "_target": "^3.3.0",

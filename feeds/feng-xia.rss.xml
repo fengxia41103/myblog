@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free' - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 05 Oct 2019 08:42:00 -0400</lastBuildDate><item><title>Smart phone</title><link>https://fengxia41103.github.io/myblog/smart%20phone.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Fri, 11 Oct 2019 11:34:00 -0400</lastBuildDate><item><title>Linux Terminator cheatsheet</title><link>https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html</link><description>&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 11 Oct 2019 11:34:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</guid><category>dev</category></item><item><title>My system</title><link>https://fengxia41103.github.io/myblog/my%20system.html</link><description>&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 08 Oct 2019 19:05:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</guid><category>dev</category></item><item><title>Smart phone</title><link>https://fengxia41103.github.io/myblog/smart%20phone.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/gozilla%20on%20lego.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -7,14 +7,7 @@
 phone. This discussion/thought had started in 2014 when I was in 太原
 and was chatting w/ 谢部 at a Starbucks downstairs near her
 office. Out of my own experience w/ this type of devices &amp;mdash; a 红
-米 given by …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 05 Oct 2019 08:42:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-05:/myblog/smart phone.html</guid><category>thoughts</category></item><item><title>ThinkAgile CP Deployment</title><link>https://fengxia41103.github.io/myblog/cp%20deployment.html</link><description>&lt;p&gt;Follow these instructions to deploy a ThinkAgile CP stack.&lt;/p&gt;
-&lt;h1&gt;Prerequisite&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;Stacks have been cabled.&lt;/li&gt;
-&lt;li&gt;Network planning worksheet has been filled out.&lt;/li&gt;
-&lt;li&gt;Uplink switches have been configured according the worksheet.&lt;/li&gt;
-&lt;li&gt;Connect a bootstrap (Linux) machine, eg. your laptop, with a serial
-   to USB adapter cable. Serial cable is connected to the …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 02 Oct 2019 13:24:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-02:/myblog/cp deployment.html</guid><category>lenovo</category></item><item><title>What we know is untrue</title><link>https://fengxia41103.github.io/myblog/what%20we%20know%20is%20untrue.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
+米 given by …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 05 Oct 2019 08:42:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-05:/myblog/smart phone.html</guid><category>thoughts</category></item><item><title>What we know is untrue</title><link>https://fengxia41103.github.io/myblog/what%20we%20know%20is%20untrue.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/dutch%20fighter.jpg"/&gt;
 
   &lt;figcaption&gt;
@@ -1319,7 +1312,7 @@ should be exposed outside function element …&lt;/p&gt;</description><dc:creato
 &lt;p&gt;After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.&lt;/p&gt;
-&lt;p&gt;Having tried &lt;a href="https://github.com/OfflineIMAP/offlineimap"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
+&lt;p&gt;Having tried &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
 configuration to make it work (sort of) with …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Mon, 24 Apr 2017 10:15:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-04-24:/myblog/mbsync mu4e email.html</guid><category>dev</category></item><item><title>MAAS vs. Ironic</title><link>https://fengxia41103.github.io/myblog/maas%20and%20ironic.html</link><description>&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a

@@ -1,6 +1,6 @@
 {
   "name": "classnames",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "A simple utility for conditionally joining classNames together",
   "main": [
     "index.js",
@@ -34,11 +34,11 @@
     "node_modules",
     "tests.js"
   ],
-  "_release": "2.2.5",
+  "_release": "2.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "v2.2.5",
-    "commit": "ca2b848bc236e702b10cb63eef367a877eddb3b5"
+    "tag": "v2.2.6",
+    "commit": "30bd487050de10a016ed2abfd6e602619d166ddc"
   },
   "_source": "https://github.com/JedWatson/classnames.git",
   "_target": "^2.2.5",

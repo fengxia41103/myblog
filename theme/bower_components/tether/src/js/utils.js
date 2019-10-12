@@ -17,15 +17,19 @@ function getActualBoundingClientRect(node) {
     rect[k] = boundingRect[k];
   }
 
-  if (node.ownerDocument !== document) {
-    let frameElement = node.ownerDocument.defaultView.frameElement;
-    if (frameElement) {
-      let frameRect = getActualBoundingClientRect(frameElement);
-      rect.top += frameRect.top;
-      rect.bottom += frameRect.top;
-      rect.left += frameRect.left;
-      rect.right += frameRect.left;
+  try {
+    if (node.ownerDocument !== document) {
+      let frameElement = node.ownerDocument.defaultView.frameElement;
+      if (frameElement) {
+        let frameRect = getActualBoundingClientRect(frameElement);
+        rect.top += frameRect.top;
+        rect.bottom += frameRect.top;
+        rect.left += frameRect.left;
+        rect.right += frameRect.left;
+      }
     }
+  } catch (err) {
+    // Ignore "Access is denied" in IE11/Edge
   }
 
   return rect;
@@ -55,7 +59,7 @@ function getScrollParents(el) {
     }
 
     const {overflow, overflowX, overflowY} = style;
-    if (/(auto|scroll)/.test(overflow + overflowY + overflowX)) {
+    if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
       if (position !== 'absolute' || ['relative', 'absolute', 'fixed'].indexOf(style.position) >= 0) {
         parents.push(parent)
       }

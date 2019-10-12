@@ -1,5 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free'</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-10-05T08:42:00-04:00</updated><entry><title>Smart phone</title><link href="https://fengxia41103.github.io/myblog/smart%20phone.html" rel="alternate"></link><published>2019-10-05T08:42:00-04:00</published><updated>2019-10-05T08:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-05:/myblog/smart phone.html</id><summary type="html">&lt;figure class="col l8 m8 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-10-11T11:34:00-04:00</updated><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><updated>2019-10-11T11:34:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</summary><content type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+X&lt;/td&gt;
+&lt;td&gt;Toggle between showing all terminals and only showing the current one.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+O&lt;/td&gt;
+&lt;td&gt;Split terminals Horizontally.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+E&lt;/td&gt;
+&lt;td&gt;Split terminals Vertically.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+Right&lt;/td&gt;
+&lt;td&gt;Move parent dragbar Right.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+Left&lt;/td&gt;
+&lt;td&gt;Move parent dragbar Left.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+Up&lt;/td&gt;
+&lt;td&gt;Move parent dragbar Up.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+Down&lt;/td&gt;
+&lt;td&gt;Move parent dragbar Down.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+W&lt;/td&gt;
+&lt;td&gt;Close the current terminal.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Shift+T&lt;/td&gt;
+&lt;td&gt;Open new tab&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Plus (+)&lt;/td&gt;
+&lt;td&gt;Increase  font  size. Note: this may require you to press shift, depending on your keyboard&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Minus (-)&lt;/td&gt;
+&lt;td&gt;Decrease font size. Note: this may require you to press shift, depending on your keyboard&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl+Zero (0)&lt;/td&gt;
+&lt;td&gt;Restore font size to original setting.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt+Right&lt;/td&gt;
+&lt;td&gt;Move to the right pane.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt+Left,UP,Down&lt;/td&gt;
+&lt;td&gt;Move focus to the pane&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-08T19:05:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
+get to its hard drive, so without ruining this beautiful machine, I
+decided to install Ubuntu from scratch), I'm going to document (rather
+a bit catch up) what I need to install in order to get my working
+environment back.&lt;/p&gt;
+&lt;h1&gt;system files&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt install &lt;span class="se"&gt;\&lt;/span&gt;
+  git &lt;span class="se"&gt;\&lt;/span&gt;
+  terminator &lt;span class="se"&gt;\&lt;/span&gt;
+  conky &lt;span class="se"&gt;\&lt;/span&gt;
+  build-essential &lt;span class="se"&gt;\&lt;/span&gt;
+  python-pip &lt;span class="se"&gt;\&lt;/span&gt;
+  fonts-inconsolata &lt;span class="se"&gt;\&lt;/span&gt;
+  texlive &lt;span class="se"&gt;\&lt;/span&gt;
+  texlive-fonts-extra &lt;span class="se"&gt;\&lt;/span&gt;
+  run-one &lt;span class="se"&gt;\&lt;/span&gt;
+  emacs &lt;span class="se"&gt;\&lt;/span&gt;
+  python-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  i3 &lt;span class="se"&gt;\&lt;/span&gt;
+  wicd-curses &lt;span class="se"&gt;\&lt;/span&gt;
+  virtualenvwrapper &lt;span class="se"&gt;\&lt;/span&gt;
+  pandoc &lt;span class="se"&gt;\&lt;/span&gt;
+  dia &lt;span class="se"&gt;\&lt;/span&gt;
+  evince &lt;span class="se"&gt;\&lt;/span&gt;
+  gimp &lt;span class="se"&gt;\&lt;/span&gt;
+  pidgin &lt;span class="se"&gt;\&lt;/span&gt;
+  pidgin-sipe &lt;span class="se"&gt;\&lt;/span&gt;
+  git &lt;span class="se"&gt;\&lt;/span&gt;
+  dkms &lt;span class="se"&gt;\&lt;/span&gt;
+  openssh-server &lt;span class="se"&gt;\&lt;/span&gt;
+  openssh-client &lt;span class="se"&gt;\&lt;/span&gt;
+  tmux &lt;span class="se"&gt;\&lt;/span&gt;
+  python-mysqldb &lt;span class="se"&gt;\&lt;/span&gt;
+  mysql-client &lt;span class="se"&gt;\&lt;/span&gt;
+  libmysqlclient-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  graphviz &lt;span class="se"&gt;\&lt;/span&gt;
+  libgraphviz-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  imagemagick &lt;span class="se"&gt;\&lt;/span&gt;
+  libssl-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  libcurl4-openssl-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  pkg-config &lt;span class="se"&gt;\&lt;/span&gt;
+  libmemcached-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  zlib1g-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  libxml2-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  libxslt1-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  nginx &lt;span class="se"&gt;\&lt;/span&gt;
+  mplayer &lt;span class="se"&gt;\&lt;/span&gt;
+  vlc &lt;span class="se"&gt;\&lt;/span&gt;
+  youtube-dl &lt;span class="se"&gt;\&lt;/span&gt;
+  rsync &lt;span class="se"&gt;\&lt;/span&gt;
+  gthumb &lt;span class="se"&gt;\&lt;/span&gt;
+  libvirt-bin &lt;span class="se"&gt;\&lt;/span&gt;
+  virt-manager &lt;span class="se"&gt;\&lt;/span&gt;
+  virtinst &lt;span class="se"&gt;\&lt;/span&gt;
+  libvirt-bin &lt;span class="se"&gt;\&lt;/span&gt;
+  bridge-utils &lt;span class="se"&gt;\&lt;/span&gt;
+  cloud-utils &lt;span class="se"&gt;\&lt;/span&gt;
+  cloud-init &lt;span class="se"&gt;\&lt;/span&gt;
+  libguestfs-tools &lt;span class="se"&gt;\&lt;/span&gt;
+  pkg-config &lt;span class="se"&gt;\&lt;/span&gt;
+  uwsgi &lt;span class="se"&gt;\&lt;/span&gt;
+  uwsgi-plugin-python &lt;span class="se"&gt;\&lt;/span&gt;
+  cpu-checker &lt;span class="se"&gt;\&lt;/span&gt;
+  htop &lt;span class="se"&gt;\&lt;/span&gt;
+  tree &lt;span class="se"&gt;\&lt;/span&gt;
+  libffi6 &lt;span class="se"&gt;\&lt;/span&gt;
+  libffi-dev &lt;span class="se"&gt;\&lt;/span&gt;
+  gthumb &lt;span class="se"&gt;\&lt;/span&gt;
+  isync &lt;span class="se"&gt;\&lt;/span&gt;
+  mu4e &lt;span class="se"&gt;\&lt;/span&gt;
+  default-jre &lt;span class="se"&gt;\&lt;/span&gt;
+  openconnect &lt;span class="se"&gt;\&lt;/span&gt;
+  zsh &lt;span class="se"&gt;\&lt;/span&gt;
+  powerline &lt;span class="se"&gt;\&lt;/span&gt;
+  fonts-powerline &lt;span class="se"&gt;\&lt;/span&gt;
+  thunderbird &lt;span class="se"&gt;\&lt;/span&gt;
+  sshfs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;local kvm setup&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sshkey-gen&lt;/code&gt;: u can leave the passphrase to none (just ENTER).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git clone http://github.com/fengxia41103/dev&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;paste the content in &lt;code&gt;.ssh/id_rsa.pub&lt;/code&gt; to &lt;code&gt;dev/kvm/my-user-data&lt;/code&gt;:
+     this will then allow KVM to be accessible using this key.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For more info on KVM, read &lt;a href="https://fengxia41103.github.io/myblog/kvm.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;4k display and font size&lt;/h1&gt;
+&lt;p&gt;Fonts will be way too small on a 4k display. The best instruction I
+found and works is &lt;a href="https://wiki.archlinux.org/index.php/HiDPI"&gt;by ArchLinux&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First of all, &lt;strong&gt;don't use &lt;code&gt;xrandr --outout &amp;lt;whatever&amp;gt; --scale
+0.5x0.5&lt;/code&gt;&lt;/strong&gt;. This will only decrease the resolution, which makes the
+screen/font blurry!&lt;/p&gt;
+&lt;p&gt;Instead, there are two things you need to do:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add these to &lt;code&gt;.Xresources&lt;/code&gt; (if file doesn't exist, create
+   one). Play w/ the &lt;code&gt;Xft.dpi&lt;/code&gt; value &amp;larr; the smaller the value, the
+   smaller the font will be (you can check by evoking i3wm's menu bar
+   &lt;code&gt;WIN+d&lt;/code&gt;). No idea what the other values are. Then logout and log
+   back in, you will be super happy!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+Xft.dpi: 200
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Use &lt;code&gt;xdpyinfo&lt;/code&gt; to check screen resolution&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On X1 gen 8, it's shown &lt;code&gt;2560x1440 pixels (677x381
+      millimeters)&lt;/code&gt;. Set &lt;code&gt;dpi=180&lt;/code&gt; gives the same exp/size as what was
+      on gen 4 without any tweaking.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On Flex pro, it gives &lt;code&gt;3840 x 2160&lt;/code&gt;, use &lt;code&gt;dpi=200&lt;/code&gt; is good; 180
+      is too small.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For Gtk applications, eg. dia, add these to our &lt;code&gt;.zshrc&lt;/code&gt; or &lt;code&gt;.bashrc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export GDK_SCALE=2
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;disable NetworkManager&lt;/h1&gt;
+&lt;p&gt;You have to disable NetworkManager service in order for wicd to take
+over cleanly:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;stop service: &lt;code&gt;systemctl stop NetworkManager&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;disable it completely: &lt;code&gt;systemctl disable NetworkManager.service&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;nvm and Node.js stuff&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;a href="https://github.com/nvm-sh/nvm"&gt;nvm&lt;/a&gt;. Then, &lt;code&gt;nvm install node&lt;/code&gt; will install the latest
+   version. Or, do &lt;code&gt;nvm install &amp;lt;versaion&amp;gt;&lt;/code&gt;. Use &lt;code&gt;nvm ls-remote&lt;/code&gt; to
+   find which versions are available for installation.&lt;/li&gt;
+&lt;li&gt;Update npm &lt;code&gt;npm install npm@latest -g&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Install bower, &lt;code&gt;npm install -g bower&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Now go to &lt;code&gt;myblog/template/feng/static&lt;/code&gt;, and run &lt;code&gt;bower install&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;zsh&lt;/h1&gt;
+&lt;p&gt;Follow &lt;a href="https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4"&gt;this blog&lt;/a&gt;, and you will get a cool looking shell:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;git clone https://github.com/robbyrussell/oh-my-zsh.git
+   ~/.oh-my-zsh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;change theme in &lt;code&gt;.zshrc&lt;/code&gt; to &lt;code&gt;ZSH_THEME="agnoster"&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Set zsh as the default shell: &lt;code&gt;chsh -s /bin/zsh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+   "$HOME/.zsh-syntax-highlighting" --depth 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;echo "source
+   $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" &amp;gt;&amp;gt;
+   "$HOME/.zshrc"&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you want to revert back to bash: &lt;code&gt;chsh -s /bin/bash&lt;/code&gt;.&lt;/p&gt;
+&lt;h1&gt;sshfs&lt;/h1&gt;
+&lt;p&gt;Use this to mount another machine's file system into your local. This
+is a great way to share the same code between your localhost and vms.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;apt install sshfs&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Uncomment &lt;code&gt;user_allow_other&lt;/code&gt; in &lt;code&gt;/etc/fuse.conf&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;to mount: &lt;code&gt;sshfs -o allow_other
+   fengxia@192.168.1.112:/home/fengxia/workspace ./tmp&lt;/code&gt; &amp;larr; mount
+   remove &lt;code&gt;workspace/&lt;/code&gt; to your local &lt;code&gt;./tmp&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;i3&lt;/h1&gt;
+&lt;p&gt;Under &lt;code&gt;~/.config&lt;/code&gt;, find two folder named &lt;code&gt;i3/&lt;/code&gt; and &lt;code&gt;i3status&lt;/code&gt;. Copy
+&lt;a href="https://fengxia41103.github.io/myblog/downloads/i3.conf"&gt;i3.conf&lt;/a&gt; to &lt;code&gt;i3/config&lt;/code&gt;, and &lt;a href="https://fengxia41103.github.io/myblog/downloads/i3status.conf"&gt;i3status.confg&lt;/a&gt; to
+&lt;code&gt;i3status/i3status.conf&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;To check screen resolution: &lt;code&gt;xdpyinfo | grep dimensions&lt;/code&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Smart phone</title><link href="https://fengxia41103.github.io/myblog/smart%20phone.html" rel="alternate"></link><published>2019-10-05T08:42:00-04:00</published><updated>2019-10-05T08:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-05:/myblog/smart phone.html</id><summary type="html">&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/gozilla%20on%20lego.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -181,155 +438,7 @@ unbelievable peer pressure that when your friends are using this app,
 that phone, you (think) you must have it, too.&lt;/p&gt;
 &lt;p&gt;Instead of viewing them as a technology achievement, it is more
 interesting as a social experiment which reveals and manifest human's
-inner desire, fear, anxiety, and like.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>ThinkAgile CP Deployment</title><link href="https://fengxia41103.github.io/myblog/cp%20deployment.html" rel="alternate"></link><published>2019-10-02T13:24:00-04:00</published><updated>2019-10-02T13:24:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-02:/myblog/cp deployment.html</id><summary type="html">&lt;p&gt;Follow these instructions to deploy a ThinkAgile CP stack.&lt;/p&gt;
-&lt;h1&gt;Prerequisite&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;Stacks have been cabled.&lt;/li&gt;
-&lt;li&gt;Network planning worksheet has been filled out.&lt;/li&gt;
-&lt;li&gt;Uplink switches have been configured according the worksheet.&lt;/li&gt;
-&lt;li&gt;Connect a bootstrap (Linux) machine, eg. your laptop, with a serial
-   to USB adapter cable. Serial cable is connected to the …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Follow these instructions to deploy a ThinkAgile CP stack.&lt;/p&gt;
-&lt;h1&gt;Prerequisite&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;Stacks have been cabled.&lt;/li&gt;
-&lt;li&gt;Network planning worksheet has been filled out.&lt;/li&gt;
-&lt;li&gt;Uplink switches have been configured according the worksheet.&lt;/li&gt;
-&lt;li&gt;Connect a bootstrap (Linux) machine, eg. your laptop, with a serial
-   to USB adapter cable. Serial cable is connected to the primary
-   interconnect.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1&gt;Bootstrap&lt;/h1&gt;
-&lt;p&gt;On Ubuntu 18.04, &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;sudo screen /dev/ttyUSB0 115200 cs8&lt;/code&gt;, wait for prompt &lt;code&gt;XorPlus
-   login:&lt;/code&gt;. Now you are connected to the primary interconnect.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;login: (manager, cloudistics)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Setup uplink IP, DNS server, and NTP server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
-sudo cldtx_set_switch_oob_ip -v &amp;amp;lt;oob vlan&amp;amp;gt; \
-  -i &amp;amp;lt;oob ip&amp;amp;gt; \
-  -m &amp;amp;lt;oob netmask&amp;amp;gt; \
-  -g &amp;amp;lt;oob gateway&amp;amp;gt; \
-  -n &amp;amp;lt;primary DNS server, default to 8.8.8.8&amp;amp;gt; \
-  -d &amp;amp;lt;2nd DNS server, default to 8.8.4.4&amp;amp;gt; \
-  -t &amp;amp;lt;primary NTP server, default to &amp;quot;time1.google.com&amp;quot;&amp;amp;gt; \
-  -p &amp;amp;lt;2nd NTP server, default to &amp;quot;time2.google.com&amp;quot;&amp;amp;gt;
-```
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Example output:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
-Execute command: 
-                  set system management-ethernet eth0 ip-gateway IPv4 10.240.22.1.
-The same value is set to node &amp;quot;system management-ethernet eth0 ip-gateway IPv4&amp;quot;.
-root@XorPlus# 
-Execute command: 
-                  commit.
-Commit OK.
-root@XorPlus# 
-Execute command: 
-.
-root@XorPlus# 
-Synchronizing configuration...OK.
-Pica8 PicOS Version 2.11.5.cloudistics.1
-Welcome to PicOS on XorPlus
-root@XorPlus&amp;amp;gt; 
-Execute command: configure.
-Entering configuration mode.
-There are no other users in configuration mode.
-root@XorPlus# 
-Execute command: delete system dns-server-ip 8.8.8.8^M.
-Deleting: 
-    8.8.8.8
-
-OK 
-root@XorPlus# 
-Execute command: commit 
-.
-Commit OK.
-Save done.
-root@XorPlus# 
-Synchronizing configuration...OK.
-Pica8 PicOS Version 2.11.5.cloudistics.1
-OK 
-root@XorPlus# 
-Execute command: commit 
-.
-Commit OK.
-Save done.
-root@XorPlus# 
-Synchronizing configuration...OK.
-Pica8 PicOS Version 2.11.5.cloudistics.1
-Welcome to PicOS on XorPlus
-root@XorPlus&amp;amp;gt; 
-Execute command: configure.
-Entering configuration mode.
-There are no other users in configuration mode.
-root@XorPlus# 
-Execute command: set system dns-server-ip 8.8.8.8.
-root@XorPlus# 
-Execute command: commit
-.
-Commit OK.
-Save done.
-root@XorPlus# 
-Synchronizing configuration...OK.
-Pica8 PicOS Version 2.11.5.cloudistics.1
-Welcome to PicOS on XorPlus
-root@XorPlus&amp;amp;gt; 
-Execute command: configure.
-Entering configuration mode.
-There are no other users in configuration mode.
-root@XorPlus# 
-Execute command: set system dns-server-ip 8.8.4.4.
-root@XorPlus# 
-Execute command: commit
-Synchronizing configuration...OK.
-Pica8 PicOS Version 2.11.5.cloudistics.1
-Welcome to PicOS on XorPlus
-root@XorPlus&amp;amp;gt; 
-Execute command: configure.
-Entering configuration mode.
-There are no other users in configuration mode.
-root@XorPlus# 
-Execute command: set system dns-server-ip 8.8.8.8.
-root@XorPlus# 
-Execute command: commit
-.
-Commit OK.
-Save done.
-root@XorPlus# 
-Synchronizing configuration...OK.
-Pica8 PicOS Version 2.11.5.cloudistics.1
-Welcome to PicOS on XorPlus
-root@XorPlus&amp;amp;gt; 
-Execute command: configure.
-Entering configuration mode.
-There are no other users in configuration mode.
-root@XorPlus# 
-Execute command: set system dns-server-ip 8.8.4.4.
-root@XorPlus# 
-Execute command: commit
-.
-Commit OK.
-Save done.
-root@XorPlus# 
-Stopping NTP server: ntpd.
-Starting NTP server: ntpd.
-Checking connectivity to host:   port: 
-Cloudistics Portal connection check failed    
-```
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;/li&gt;
-&lt;/ol&gt;</content><category term="lenovo"></category></entry><entry><title>What we know is untrue</title><link href="https://fengxia41103.github.io/myblog/what%20we%20know%20is%20untrue.html" rel="alternate"></link><published>2019-09-28T11:25:00-04:00</published><updated>2019-09-28T11:25:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-28:/myblog/what we know is untrue.html</id><summary type="html">&lt;figure class="col l8 m8 s12"&gt;
+inner desire, fear, anxiety, and like.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>What we know is untrue</title><link href="https://fengxia41103.github.io/myblog/what%20we%20know%20is%20untrue.html" rel="alternate"></link><published>2019-09-28T11:25:00-04:00</published><updated>2019-09-28T11:25:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-28:/myblog/what we know is untrue.html</id><summary type="html">&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/dutch%20fighter.jpg"/&gt;
 
   &lt;figcaption&gt;
@@ -20796,7 +20905,7 @@ behavior can not be interruptted either.&lt;/p&gt;</content><category term="leno
 &lt;p&gt;After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.&lt;/p&gt;
-&lt;p&gt;Having tried &lt;a href="https://github.com/OfflineIMAP/offlineimap"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
+&lt;p&gt;Having tried &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
 configuration to make it work (sort of) with …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l5 m6 s12"&gt;
   &lt;img src="images/hahn.png"
        class="center img-responsive"&gt;
@@ -20805,7 +20914,7 @@ configuration to make it work (sort of) with …&lt;/p&gt;</summary><content typ
 &lt;p&gt;After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.&lt;/p&gt;
-&lt;p&gt;Having tried &lt;a href="https://github.com/OfflineIMAP/offlineimap"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
+&lt;p&gt;Having tried &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
 configuration to make it work (sort of) with Hotmail's IMAP. Gmail
 worked flawlessly, but boy, Microsoft, get a grip. No wonder hotmail
 is dying. But in the end I'm just one guy who holds on something
@@ -21241,6 +21350,12 @@ things you need to do:&lt;/p&gt;
    actually exists (&lt;code&gt;mbsync&lt;/code&gt; will not create &lt;code&gt;~/Maildir/Hotmail&lt;/code&gt; for you!)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1&gt;Outlook webmail&lt;/h1&gt;
+&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/davmail.png"
+       class="center img-responsive"&gt;
+  &lt;figcaption&gt;davmail settings&lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;p&gt;Working outlook/exchange server is tough. The company's server changes
 configuration all the time, and it completly messed up w/ IMAP login
 when one server allows &lt;code&gt;PLAIN&lt;/code&gt; while another requires &lt;code&gt;NTLM&lt;/code&gt;, and so
@@ -21249,17 +21364,11 @@ will suddenly decided to stop working, and you don't get emails
 anymore! Fall back is Thunderbird, but then, once you are used to
 &lt;code&gt;mu4e&lt;/code&gt;, going back to anything looked like outlook is a pain.&lt;/p&gt;
 &lt;p&gt;Finally, here is a savior,
-&lt;a href="http://davmail.sourceforge.net/"&gt;davmail&lt;/a&gt;. It works a gateway between
+&lt;a href="http://davmail.sourceforge.net/"&gt;davmail&lt;/a&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;. It works a gateway between
 your computer and outlook web mail (aka. OWA &amp;mdash; outlook web
 access). So you can now point your &lt;code&gt;mbsync&lt;/code&gt; to a local port (default
 &lt;code&gt;1143&lt;/code&gt;, and davmail will route mbsync's IMAP requests to the remote
 OWA server, nice!&lt;/p&gt;
-&lt;figure class="col s12"&gt;
-  &lt;img src="images/mbsync%20setup.png"
-       class="center img-responsive"&gt;
-  &lt;figcaption&gt;My mbsync setup for retrieving and sending mails&lt;/figcaption&gt;
-&lt;/figure&gt;
-
 &lt;p&gt;The &lt;code&gt;mbsync&lt;/code&gt; config is quite straightforward:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;IMAPAccount company-name
 Host localhost &amp;lt;-- using davmail as gateway
@@ -21271,12 +21380,27 @@ AuthMech LOGIN
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; settings:&lt;/p&gt;
+&lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;settings&lt;/a&gt; (copy it to
+&lt;code&gt;~/.davmail.properties&lt;/code&gt;). The best way to run it is to use a tmux,
+then run it as background process &lt;code&gt;davmail &amp;amp;&lt;/code&gt;. Alternatively, you can
+set &lt;code&gt;davmail.server=true&lt;/code&gt;, then use &lt;code&gt;nohup&lt;/code&gt;. But w/ tmux running
+dettached session., I really don't see any benefit of doing this
+anymore.&lt;/p&gt;
 &lt;figure class="col s12"&gt;
-  &lt;img src="images/davmail.png"
+  &lt;img src="images/mbsync%20setup.png"
        class="center img-responsive"&gt;
-  &lt;figcaption&gt;davmail settings&lt;/figcaption&gt;
-&lt;/figure&gt;</content><category term="dev"></category></entry><entry><title>MAAS vs. Ironic</title><link href="https://fengxia41103.github.io/myblog/maas%20and%20ironic.html" rel="alternate"></link><published>2017-03-30T10:20:00-04:00</published><updated>2017-03-30T10:20:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-30:/myblog/maas and ironic.html</id><summary type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
+  &lt;figcaption&gt;My mbsync setup for retrieving and sending mails&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Btw, I was having issue w/ v5.3.1. Downgrade it to 5.2 (released
+in Aug 2019) worked out better.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>MAAS vs. Ironic</title><link href="https://fengxia41103.github.io/myblog/maas%20and%20ironic.html" rel="alternate"></link><published>2017-03-30T10:20:00-04:00</published><updated>2017-03-30T10:20:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-30:/myblog/maas and ironic.html</id><summary type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires

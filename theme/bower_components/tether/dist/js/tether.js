@@ -1,14 +1,14 @@
-/*! tether 1.4.0 */
+/*! tether 1.4.7 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(factory);
+    define([], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require, exports, module);
+    module.exports = factory();
   } else {
     root.Tether = factory();
   }
-}(this, function(require, exports, module) {
+}(this, function() {
 
 'use strict';
 
@@ -35,15 +35,19 @@ function getActualBoundingClientRect(node) {
     rect[k] = boundingRect[k];
   }
 
-  if (node.ownerDocument !== document) {
-    var _frameElement = node.ownerDocument.defaultView.frameElement;
-    if (_frameElement) {
-      var frameRect = getActualBoundingClientRect(_frameElement);
-      rect.top += frameRect.top;
-      rect.bottom += frameRect.top;
-      rect.left += frameRect.left;
-      rect.right += frameRect.left;
+  try {
+    if (node.ownerDocument !== document) {
+      var _frameElement = node.ownerDocument.defaultView.frameElement;
+      if (_frameElement) {
+        var frameRect = getActualBoundingClientRect(_frameElement);
+        rect.top += frameRect.top;
+        rect.bottom += frameRect.top;
+        rect.left += frameRect.left;
+        rect.right += frameRect.left;
+      }
     }
+  } catch (err) {
+    // Ignore "Access is denied" in IE11/Edge
   }
 
   return rect;
@@ -77,7 +81,7 @@ function getScrollParents(el) {
     var overflowX = _style.overflowX;
     var overflowY = _style.overflowY;
 
-    if (/(auto|scroll)/.test(overflow + overflowY + overflowX)) {
+    if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
       if (position !== 'absolute' || ['relative', 'absolute', 'fixed'].indexOf(style.position) >= 0) {
         parents.push(parent);
       }
@@ -476,7 +480,7 @@ var position = function position() {
 };
 
 function now() {
-  if (typeof performance !== 'undefined' && typeof performance.now !== 'undefined') {
+  if (typeof performance === 'object' && typeof performance.now === 'function') {
     return performance.now();
   }
   return +new Date();
@@ -1186,13 +1190,9 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          if (window.matchMedia) {
-            // HubSpot/tether#207
-            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
-            if (!retina) {
-              xPos = Math.round(xPos);
-              yPos = Math.round(yPos);
-            }
+          if (typeof window.devicePixelRatio === 'number' && devicePixelRatio % 1 === 0) {
+            xPos = Math.round(xPos * devicePixelRatio) / devicePixelRatio;
+            yPos = Math.round(yPos * devicePixelRatio) / devicePixelRatio;
           }
 
           css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
@@ -1248,11 +1248,20 @@ var TetherClass = (function (_Evented) {
 
       if (!moved) {
         if (this.options.bodyElement) {
-          this.options.bodyElement.appendChild(this.element);
+          if (this.element.parentNode !== this.options.bodyElement) {
+            this.options.bodyElement.appendChild(this.element);
+          }
         } else {
+          var isFullscreenElement = function isFullscreenElement(e) {
+            var d = e.ownerDocument;
+            var fe = d.fullscreenElement || d.webkitFullscreenElement || d.mozFullScreenElement || d.msFullscreenElement;
+            return fe === e;
+          };
+
           var offsetParentIsBody = true;
+
           var currentNode = this.element.parentNode;
-          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
+          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY' && !isFullscreenElement(currentNode)) {
             if (getComputedStyle(currentNode).position !== 'static') {
               offsetParentIsBody = false;
               break;

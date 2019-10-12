@@ -1,5 +1,5 @@
 # Latex template
-LATEX_TEMPLATE := feng.tex
+LATEX_TEMPLATE := lenovo.tex
 LATEX_CONFIG := latex.yaml
 
 # Links to images, and bibtex reference section header
@@ -14,7 +14,8 @@ MY_CSS := pandoc.css
 CSL := ieee-with-url.csl
 
 # Pandoc flags
-COMMON_FLAGS = 	--number-sections \
+COMMON_FLAGS = 	+RTS -M3000m -RTS\
+	--number-sections \
 	--from markdown \
 	--highlight-style pygments \
 	--filter pandoc-fignos \
@@ -32,11 +33,10 @@ HTML_FLAGS = $(COMMON_FLAGS) \
 PDF_FLAGS = $(COMMON_FLAGS) \
 	--listings \
 	--template $(LATEX_TEMPLATE) \
+	--pdf-engine=xelatex
 
 DOCX_FLAGS = $(COMMON_FLAGS) \
 	--columns 10
-
-
 
 # RHHI source and target
 rhhi_ra_md := ibb\ rhhi\ ra.md
@@ -54,18 +54,20 @@ loc_ra_pdf := loc\ ra.pdf
 loc_ra_docx := loc\ ra.docx
 loc_ra_html := loc\ ra.html
 
-# resume source and target
-resume_md := resume.md
-resume_pdf := resume.pdf
-resume_doc := resume.doc
-RESUME_INPUTS = $(resume_md)
+# Webapp source and target
+webapp_md := webapp.md
+WEBAPP_INPUTS = $(webapp_md) $(REFERENCES)
 
+webapp_pdf := webapp.pdf
+webapp_docx := webapp.docx
+webapp_html := webapp.html
+webapp_tex := webapp.tex
 
-
-all: rhhi_ra loc_ra
-
-# generate RHHI RA
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
+loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
+webapp: webapp_pdf webapp_docx webapp_html
+all: rhhi_ra loc_ra webapp
+
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
 	pandoc $(RHHI_RA_INPUTS) \
@@ -82,9 +84,6 @@ rhhi_ra_docx: $(RHHI_RA_INPUTS) $(LATEX_CONFIG)
 	-o $(rhhi_ra_docx) \
 	$(DOCX_FLAGS)
 
-# generate LOC RA
-loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
-
 loc_ra_html: $(LOC_RA_INPUTS)
 	pandoc $(LOC_RA_INPUTS) \
 	-o $(loc_ra_html) \
@@ -100,16 +99,25 @@ loc_ra_docx: $(LOC_RA_INPUTS) $(LATEX_CONFIG)
 	-o $(loc_ra_docx) \
 	$(DOCX_FLAGS)
 
-# generate resume
-resume_pdf: $(RESUME_INPUTS)
-	pandoc $(RESUME_INPUTS) \
-	-o ../$(resume_pdf) \
-	--pdf-engine xelatex
+webapp_html: $(WEBAPP_INPUTS)
+	pandoc $(WEBAPP_INPUTS) \
+	-o $(webapp_html) \
+	$(HTML_FLAGS)
 
-resume_doc: $(RESUME_INPUTS)
-	pandoc $(RESUME_INPUTS) \
-	-o ../$(resume_doc) \
+webapp_pdf: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
+	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
+	-o $(webapp_pdf) \
+	$(PDF_FLAGS)
+
+webapp_docx: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
+	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
+	-o $(webapp_docx) \
 	$(DOCX_FLAGS)
+
+webapp_tex: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
+	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
+	-o $(webapp_tex) \
+	$(PDF_FLAGS)
 
 clean:
 	rm -f *.pdf *.docx *.html

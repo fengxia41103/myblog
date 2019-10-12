@@ -346,12 +346,12 @@
 
   /** Used to test pseudo private map caches. */
   var mapCaches = (function() {
-    var MapCache = _.memoize.Cache;
+    var MapCache = (_.memoize || lodashStable.memoize).Cache;
     var result = {
       'Hash': new MapCache().__data__.hash.constructor,
       'MapCache': MapCache
     };
-    _.isMatchWith({ 'a': 1 }, { 'a': 1 }, function() {
+    (_.isMatchWith || lodashStable.isMatchWith)({ 'a': 1 }, { 'a': 1 }, function() {
       var stack = lodashStable.last(arguments);
       result.ListCache = stack.__data__.constructor;
       result.Stack = stack.constructor;
@@ -2958,7 +2958,7 @@
           assert.deepEqual(getSymbols(actual.a.b), [symbol]);
           assert.deepEqual(actual.a.b[symbol], object.a.b[symbol]);
           assert.deepEqual(actual.a.b[symbol2], object.a.b[symbol2]);
-          assert.deepEqual(actual.a.b[symbol3], object.a.b[symbol3])
+          assert.deepEqual(actual.a.b[symbol3], object.a.b[symbol3]);
         }
         else {
           skipAssert(assert, 7);
@@ -4711,6 +4711,17 @@
 
       var actual = _.defaultsDeep({ 'a': ['abc'] }, { 'a': 'abc' });
       assert.deepEqual(actual.a, ['abc']);
+    });
+
+    QUnit.test('should not indirectly merge `Object` properties', function(assert) {
+      assert.expect(1);
+
+      _.defaultsDeep({}, { 'constructor': { 'a': 1 } });
+
+      var actual = 'a' in Object;
+      delete Object.a;
+
+      assert.notOk(actual);
     });
   }());
 
@@ -7538,6 +7549,50 @@
 
       actual = _.groupBy([{ 'a': '__proto__' }], 'a');
       assert.notOk(actual instanceof Array);
+    });
+
+    QUnit.test('should not merge "__proto__" properties', function(assert) {
+      assert.expect(1);
+
+      if (JSON) {
+        _.merge({}, JSON.parse('{"__proto__":{"a":1}}'));
+
+        var actual = 'a' in objectProto;
+        delete objectProto.a;
+
+        assert.notOk(actual);
+      } else {
+        skipAssert(assert);
+      }
+    });
+
+    QUnit.test('should not indirectly merge builtin prototype properties', function(assert) {
+      assert.expect(2);
+
+      _.merge({}, { 'toString': { 'constructor': { 'prototype': { 'a': 1 } } } });
+
+      var actual = 'a' in funcProto;
+      delete funcProto.a;
+
+      assert.notOk(actual);
+
+      _.merge({}, { 'constructor': { 'prototype': { 'a': 1 } } });
+
+      actual = 'a' in objectProto;
+      delete objectProto.a;
+
+      assert.notOk(actual);
+    });
+
+    QUnit.test('should not indirectly merge `Object` properties', function(assert) {
+      assert.expect(1);
+
+      _.merge({}, { 'constructor': { 'a': 1 } });
+
+      var actual = 'a' in Object;
+      delete Object.a;
+
+      assert.notOk(actual);
     });
   }());
 
@@ -14885,19 +14940,39 @@
       assert.strictEqual(Foo.a, 1);
     });
 
+    QUnit.test('should merge first source object properties to function', function(assert) {
+      assert.expect(1);
+
+      var fn = function() {},
+          object = { 'prop': {} },
+          actual = _.merge({ 'prop': fn }, object);
+
+      assert.deepEqual(actual, object);
+    });
+
+    QUnit.test('should merge first and second source object properties to function', function(assert) {
+      assert.expect(1);
+
+      var fn = function() {},
+          object = { 'prop': {} },
+          actual = _.merge({ 'prop': fn }, { 'prop': fn }, object);
+
+      assert.deepEqual(actual, object);
+    });
+
     QUnit.test('should not merge onto function values of sources', function(assert) {
       assert.expect(3);
 
       var source1 = { 'a': function() {} },
           source2 = { 'a': { 'b': 2 } },
+          expected = { 'a': { 'b': 2 } },
           actual = _.merge({}, source1, source2);
 
-      assert.deepEqual(actual, { 'a': { 'b': 2 } });
+      assert.deepEqual(actual, expected);
+      assert.notOk('b' in source1.a);
 
       actual = _.merge(source1, source2);
-
-      assert.strictEqual(typeof actual.a, 'function');
-      assert.strictEqual(actual.a.b, 2);
+      assert.deepEqual(actual, expected);
     });
 
     QUnit.test('should merge onto non-plain `object` values', function(assert) {
@@ -15216,18 +15291,21 @@
     });
 
     QUnit.test('should provide `stack` to `customizer`', function(assert) {
-      assert.expect(1);
+      assert.expect(4);
 
-      var actual;
+      var actual = [];
 
-      _.mergeWith({}, { 'a': { 'b': 2 } }, function() {
-        actual = _.last(arguments);
+      _.mergeWith({}, { 'z': 1, 'a': { 'b': 2 } }, function() {
+        actual.push(_.last(arguments));
       });
 
-      assert.ok(isNpm
-        ? actual.constructor.name == 'Stack'
-        : actual instanceof mapCaches.Stack
-      );
+      assert.strictEqual(actual.length, 3);
+      _.each(actual, function(a) {
+        assert.ok(isNpm
+          ? a.constructor.name == 'Stack'
+          : a instanceof mapCaches.Stack
+        );
+      });
     });
 
     QUnit.test('should overwrite primitives with source object clones', function(assert) {
@@ -19742,6 +19820,72 @@
           actual = lodashStable.map(results, lodashStable.isNaN);
 
       assert.deepEqual(actual, expected);
+    });
+
+    QUnit.test('`_.' + methodName + '` should return `Infinity` given `Infinity` regardless of `precision`', function(assert) {
+      assert.expect(6);
+
+      var actual = func(Infinity);
+      assert.strictEqual(actual, Infinity);
+
+      actual = func(Infinity, 0);
+      assert.strictEqual(actual, Infinity);
+
+      actual = func(Infinity, 2);
+      assert.strictEqual(actual, Infinity);
+
+      actual = func(Infinity, -2);
+      assert.strictEqual(actual, Infinity);
+
+      actual = func(Infinity, 2);
+      assert.strictEqual(actual, isFloor ? Infinity : Infinity);
+
+      actual = func(Infinity, 2);
+      assert.strictEqual(actual, isCeil ? Infinity : Infinity);
+    });
+
+    QUnit.test('`_.' + methodName + '` should return `-Infinity` given `-Infinity` regardless of `precision`', function(assert) {
+      assert.expect(6);
+
+      var actual = func(-Infinity);
+      assert.strictEqual(actual, -Infinity);
+
+      actual = func(-Infinity, 0);
+      assert.strictEqual(actual, -Infinity);
+
+      actual = func(-Infinity, 2);
+      assert.strictEqual(actual, -Infinity);
+
+      actual = func(-Infinity, -2);
+      assert.strictEqual(actual, -Infinity);
+
+      actual = func(-Infinity, 2);
+      assert.strictEqual(actual, isFloor ? -Infinity : -Infinity);
+
+      actual = func(-Infinity, 2);
+      assert.strictEqual(actual, isCeil ? -Infinity : -Infinity);
+    });
+
+    QUnit.test('`_.' + methodName + '` should return `NaN` given `NaN` regardless of `precision`', function(assert) {
+      assert.expect(6);
+
+      var actual = func(NaN);
+      assert.deepEqual(actual, NaN);
+
+      actual = func(NaN, 0);
+      assert.deepEqual(actual, NaN);
+
+      actual = func(NaN, 2);
+      assert.deepEqual(actual, NaN);
+
+      actual = func(NaN, -2);
+      assert.deepEqual(actual, NaN);
+
+      actual = func(NaN, 2);
+      assert.deepEqual(actual, isFloor ? NaN : NaN);
+
+      actual = func(NaN, 2);
+      assert.deepEqual(actual, isCeil ? NaN : NaN);
     });
   });
 
@@ -25331,6 +25475,22 @@
           actual = lodashStable.map(strings, _.words);
 
       assert.deepEqual(actual, [['a'], ['b'], ['c']]);
+    });
+
+    QUnit.test('should prevent ReDoS', function(assert) {
+      assert.expect(2);
+
+      var largeWordLen = 50000,
+          largeWord = _.repeat('A', largeWordLen),
+          maxMs = 1000,
+          startTime = lodashStable.now();
+
+      assert.deepEqual(_.words(largeWord + 'ÆiouAreVowels'), [largeWord, 'Æiou', 'Are', 'Vowels']);
+
+      var endTime = lodashStable.now(),
+          timeSpent = endTime - startTime;
+
+      assert.ok(timeSpent < maxMs, 'operation took ' + timeSpent + 'ms');
     });
   }());
 

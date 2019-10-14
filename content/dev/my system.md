@@ -4,6 +4,7 @@ Tags: dev
 Slug: my system
 Author: Feng Xia
 Summary: Instructions to rebuild my system from scratch based on Ubuntu 18.04.
+Modified: 2019-10-14 19:36
 
 Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
@@ -21,8 +22,7 @@ apt install \
   build-essential \
   python-pip \
   fonts-inconsolata \
-  texlive \
-  texlive-fonts-extra \
+  texlive-full \
   run-one \
   emacs \
   python-dev \
@@ -84,7 +84,14 @@ apt install \
   powerline \
   fonts-powerline \
   thunderbird \
-  sshfs
+  sshfs \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  software-properties-common \
+  remmina \
+  pandoc-citeproc \
+
 ```
 
 # local kvm setup
@@ -143,8 +150,12 @@ You have to disable NetworkManager service in order for wicd to take
 over cleanly:
 
 1. stop service: `systemctl stop NetworkManager`
-2. disable it completely: `systemctl disable NetworkManager.service`
+2. disable the service: `systemctl disable NetworkManager.service`
+3. uninstall: `apt remove network-manager-gnome network-manager`
+4. purge: `dpkg --purge network-manager-gnome network-manager`
 
+Without doing so will also mess up the `openconnect` when it is not
+able to modify `/etc/resolv.conf` after its connection.
 
 # nvm and Node.js stuff
 
@@ -189,12 +200,23 @@ Under `~/.config`, find two folder named `i3/` and `i3status`. Copy
 [i3.conf][5] to `i3/config`, and [i3status.confg][6] to
 `i3status/i3status.conf`.
 
+# pandoc
+
+Use Pandoc [2.7.3][7]. The v1.9 in Ubuntu 18.04 didn't work for compiling
+[RA PDF][8]. Read [this article][9] for more details of my Pandoc notes.
+
+1. `pip install pandoc-fignos`
+2. `apt install pandoc-citeproc texlive-full`
+3. optional: install `mermaid-filter: `npm install -g mermaid-filter`
+
 [1]: {filename}/dev/kvm.md
 [2]: https://wiki.archlinux.org/index.php/HiDPI
 [3]: https://github.com/nvm-sh/nvm
 [4]: https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4
 [5]: {static}/downloads/i3.conf
 [6]: {static}/downloads/i3status.conf
-
+[7]: https://github.com/jgm/pandoc/releases/tag/2.7.3
+[8]: {static}/downloads/loc%20ra.pdf
+[9]: {filename}/dev/pandoc.md
 
 [^1]: To check screen resolution: `xdpyinfo | grep dimensions`.

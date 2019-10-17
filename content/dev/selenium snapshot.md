@@ -65,13 +65,13 @@ Of course it can. The idea is this:
 </figure>
 
 Window on the right hand side is monitoring folder on the file system
-  for screenshots. It starts w/ an empty directory. Window on the top
-  left is the terminal where you will see printout from the script
-  when it finds the interested element and takes its snapshot,
-  eg. `smile: mwc-support-mode-modal`. Window on the bottom left is
-  the browser window launched by Selenium which gives you an idea how
-  the computer is working. The browser is shown only for demo
-  purpose. It can be turned into **headless** mode.
+for screenshots. It starts w/ an empty directory. Window on the top
+left is the terminal where you will see printout from the script when
+it finds the interested element and takes its snapshot, eg. `smile:
+mwc-support-mode-modal`. Window on the bottom left is the browser
+window launched by Selenium which gives you an idea how the computer
+is working. The browser is shown only for demo purpose. It can be
+turned into **headless** mode.
 
 
 # context
@@ -80,7 +80,7 @@ One thing of taking snapshot is to provide a context to viewer &mdash;
 in which page/panel/container this component is being used. Believe or
 not, some components I'm dealing w/ is nothing but a small green dot
 (see below)! Therefore, it will be pretty useless if I'm just giving
-you an image of itself. 
+you an image of itself.
 
 
 <figure class="col s12">
@@ -202,8 +202,30 @@ dealing one at a time (if we religiously clicked the CANCEL each time!).
 
 # code
 
-Script is [here][3].
+Script is [here][3]. 
+
+## installation
+
+### chrome driver
+
+`apt search chromedriver`, then install the one you found:
+
+1. on Ubuntu 16.04: `apt install chromedriver`
+2. on Ubuntu 18.04: `apt install chromium-chromedriver`
+
+### firefox webdriver (aka. geckodriver)
+
+```shell
+export GV=v0.25.0
+wget "https://github.com/mozilla/geckodriver/releases/download/$GV/geckodriver-$GV-linux64.tar.gz"
+tar xvzf geckodriver-$GV-linux64.tar.gz 
+chmod +x geckodriver
+sudo cp geckodriver /usr/local/bin/
+```
+
+
 
 [1]: {filename}/dev/analyze%20angular%201x.md
 [2]: {static}/downloads/webapp.pdf
 [3]: https://github.com/fengxia41103/dev/tree/master/snapshot
+

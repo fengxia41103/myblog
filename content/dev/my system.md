@@ -209,6 +209,19 @@ Use Pandoc [2.7.3][7]. The v1.9 in Ubuntu 18.04 didn't work for compiling
 2. `apt install pandoc-citeproc texlive-full`
 3. optional: install `mermaid-filter: `npm install -g mermaid-filter`
 
+# enterprise stuff
+
+Working in an enterprise means that you need a few tools, eg. emails,
+to work w/ everybody else (which == Microsoft, actually, sigh).
+
+1. for Cisco's Anyconnect vpn: [here][10]
+
+2. for emails: [mbsync & davmail][11], or [thunderbird][10]. But
+   honestly, setting up [Davmail][11] is a lot better, and you can
+   have Thunderbird acting as just an email agent off davmail anyway.
+
+3. for Skype business/Lync: use [pidgin][10].
+
 [1]: {filename}/dev/kvm.md
 [2]: https://wiki.archlinux.org/index.php/HiDPI
 [3]: https://github.com/nvm-sh/nvm
@@ -218,5 +231,7 @@ Use Pandoc [2.7.3][7]. The v1.9 in Ubuntu 18.04 didn't work for compiling
 [7]: https://github.com/jgm/pandoc/releases/tag/2.7.3
 [8]: {static}/downloads/loc%20ra.pdf
 [9]: {filename}/dev/pandoc.md
+[10]: {filename}/dev/lenovo%20linux%20box.md
+[11]: {filename}/dev/mbsync.md
 
 [^1]: To check screen resolution: `xdpyinfo | grep dimensions`.

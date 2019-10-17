@@ -146,8 +146,7 @@ environment back.</p>
   build-essential <span class="se">\</span>
   python-pip <span class="se">\</span>
   fonts-inconsolata <span class="se">\</span>
-  texlive <span class="se">\</span>
-  texlive-fonts-extra <span class="se">\</span>
+  texlive-full <span class="se">\</span>
   run-one <span class="se">\</span>
   emacs <span class="se">\</span>
   python-dev <span class="se">\</span>
@@ -209,7 +208,13 @@ environment back.</p>
   powerline <span class="se">\</span>
   fonts-powerline <span class="se">\</span>
   thunderbird <span class="se">\</span>
-  sshfs
+  sshfs <span class="se">\</span>
+  apt-transport-https <span class="se">\</span>
+  ca-certificates <span class="se">\</span>
+  curl <span class="se">\</span>
+  software-properties-common <span class="se">\</span>
+  remmina <span class="se">\</span>
+  pandoc-citeproc <span class="se">\</span>
 </pre></div>
 
 
@@ -274,8 +279,12 @@ export GDK_SCALE=2
 over cleanly:</p>
 <ol>
 <li>stop service: <code>systemctl stop NetworkManager</code></li>
-<li>disable it completely: <code>systemctl disable NetworkManager.service</code></li>
+<li>disable the service: <code>systemctl disable NetworkManager.service</code></li>
+<li>uninstall: <code>apt remove network-manager-gnome network-manager</code></li>
+<li>purge: <code>dpkg --purge network-manager-gnome network-manager</code></li>
 </ol>
+<p>Without doing so will also mess up the <code>openconnect</code> when it is not
+able to modify <code>/etc/resolv.conf</code> after its connection.</p>
 <h1>nvm and Node.js stuff</h1>
 <ol>
 <li>Install <a href="https://github.com/nvm-sh/nvm">nvm</a>. Then, <code>nvm install node</code> will install the latest
@@ -314,6 +323,30 @@ is a great way to share the same code between your localhost and vms.</p>
 <p>Under <code>~/.config</code>, find two folder named <code>i3/</code> and <code>i3status</code>. Copy
 <a href="https://fengxia41103.github.io/myblog/downloads/i3.conf">i3.conf</a> to <code>i3/config</code>, and <a href="https://fengxia41103.github.io/myblog/downloads/i3status.conf">i3status.confg</a> to
 <code>i3status/i3status.conf</code>.</p>
+<h1>pandoc</h1>
+<p>Use Pandoc <a href="https://github.com/jgm/pandoc/releases/tag/2.7.3">2.7.3</a>. The v1.9 in Ubuntu 18.04 didn't work for compiling
+<a href="https://fengxia41103.github.io/myblog/downloads/loc ra.pdf">RA PDF</a>. Read <a href="https://fengxia41103.github.io/myblog/pandoc workflow.html">this article</a> for more details of my Pandoc notes.</p>
+<ol>
+<li><code>pip install pandoc-fignos</code></li>
+<li><code>apt install pandoc-citeproc texlive-full</code></li>
+<li>optional: install <code>mermaid-filter:</code>npm install -g mermaid-filter`</li>
+</ol>
+<h1>enterprise stuff</h1>
+<p>Working in an enterprise means that you need a few tools, eg. emails,
+to work w/ everybody else (which == Microsoft, actually, sigh).</p>
+<ol>
+<li>
+<p>for Cisco's Anyconnect vpn: <a href="https://fengxia41103.github.io/myblog/linux laptop.html">here</a></p>
+</li>
+<li>
+<p>for emails: <a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">mbsync &amp; davmail</a>, or <a href="https://fengxia41103.github.io/myblog/linux laptop.html">thunderbird</a>. But
+   honestly, setting up <a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">Davmail</a> is a lot better, and you can
+   have Thunderbird acting as just an email agent off davmail anyway.</p>
+</li>
+<li>
+<p>for Skype business/Lync: use <a href="https://fengxia41103.github.io/myblog/linux laptop.html">pidgin</a>.</p>
+</li>
+</ol>
 <div class="footnote">
 <hr>
 <ol>

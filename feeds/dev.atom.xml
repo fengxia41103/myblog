@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-10-11T11:34:00-04:00</updated><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><updated>2019-10-11T11:34:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</summary><content type="html">&lt;table&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-10-17T10:11:00-04:00</updated><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><updated>2019-10-11T11:34:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</summary><content type="html">&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Key&lt;/th&gt;
@@ -68,7 +68,7 @@
 &lt;td&gt;Move focus to the pane&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-08T19:05:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-14T19:36:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
 decided to install Ubuntu from scratch), I'm going to document (rather
 a bit catch up) what I need to install in order to get my working
@@ -81,8 +81,7 @@ environment back.&lt;/p&gt;
   build-essential &lt;span class="se"&gt;\&lt;/span&gt;
   python-pip &lt;span class="se"&gt;\&lt;/span&gt;
   fonts-inconsolata &lt;span class="se"&gt;\&lt;/span&gt;
-  texlive &lt;span class="se"&gt;\&lt;/span&gt;
-  texlive-fonts-extra &lt;span class="se"&gt;\&lt;/span&gt;
+  texlive-full &lt;span class="se"&gt;\&lt;/span&gt;
   run-one &lt;span class="se"&gt;\&lt;/span&gt;
   emacs &lt;span class="se"&gt;\&lt;/span&gt;
   python-dev &lt;span class="se"&gt;\&lt;/span&gt;
@@ -144,7 +143,13 @@ environment back.&lt;/p&gt;
   powerline &lt;span class="se"&gt;\&lt;/span&gt;
   fonts-powerline &lt;span class="se"&gt;\&lt;/span&gt;
   thunderbird &lt;span class="se"&gt;\&lt;/span&gt;
-  sshfs
+  sshfs &lt;span class="se"&gt;\&lt;/span&gt;
+  apt-transport-https &lt;span class="se"&gt;\&lt;/span&gt;
+  ca-certificates &lt;span class="se"&gt;\&lt;/span&gt;
+  curl &lt;span class="se"&gt;\&lt;/span&gt;
+  software-properties-common &lt;span class="se"&gt;\&lt;/span&gt;
+  remmina &lt;span class="se"&gt;\&lt;/span&gt;
+  pandoc-citeproc &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -209,8 +214,12 @@ export GDK_SCALE=2
 over cleanly:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;stop service: &lt;code&gt;systemctl stop NetworkManager&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;disable it completely: &lt;code&gt;systemctl disable NetworkManager.service&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;disable the service: &lt;code&gt;systemctl disable NetworkManager.service&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;uninstall: &lt;code&gt;apt remove network-manager-gnome network-manager&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;purge: &lt;code&gt;dpkg --purge network-manager-gnome network-manager&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;Without doing so will also mess up the &lt;code&gt;openconnect&lt;/code&gt; when it is not
+able to modify &lt;code&gt;/etc/resolv.conf&lt;/code&gt; after its connection.&lt;/p&gt;
 &lt;h1&gt;nvm and Node.js stuff&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Install &lt;a href="https://github.com/nvm-sh/nvm"&gt;nvm&lt;/a&gt;. Then, &lt;code&gt;nvm install node&lt;/code&gt; will install the latest
@@ -249,6 +258,30 @@ is a great way to share the same code between your localhost and vms.&lt;/p&gt;
 &lt;p&gt;Under &lt;code&gt;~/.config&lt;/code&gt;, find two folder named &lt;code&gt;i3/&lt;/code&gt; and &lt;code&gt;i3status&lt;/code&gt;. Copy
 &lt;a href="https://fengxia41103.github.io/myblog/downloads/i3.conf"&gt;i3.conf&lt;/a&gt; to &lt;code&gt;i3/config&lt;/code&gt;, and &lt;a href="https://fengxia41103.github.io/myblog/downloads/i3status.conf"&gt;i3status.confg&lt;/a&gt; to
 &lt;code&gt;i3status/i3status.conf&lt;/code&gt;.&lt;/p&gt;
+&lt;h1&gt;pandoc&lt;/h1&gt;
+&lt;p&gt;Use Pandoc &lt;a href="https://github.com/jgm/pandoc/releases/tag/2.7.3"&gt;2.7.3&lt;/a&gt;. The v1.9 in Ubuntu 18.04 didn't work for compiling
+&lt;a href="https://fengxia41103.github.io/myblog/downloads/loc ra.pdf"&gt;RA PDF&lt;/a&gt;. Read &lt;a href="https://fengxia41103.github.io/myblog/pandoc workflow.html"&gt;this article&lt;/a&gt; for more details of my Pandoc notes.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;pip install pandoc-fignos&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt install pandoc-citeproc texlive-full&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;optional: install &lt;code&gt;mermaid-filter:&lt;/code&gt;npm install -g mermaid-filter`&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;enterprise stuff&lt;/h1&gt;
+&lt;p&gt;Working in an enterprise means that you need a few tools, eg. emails,
+to work w/ everybody else (which == Microsoft, actually, sigh).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;for Cisco's Anyconnect vpn: &lt;a href="https://fengxia41103.github.io/myblog/linux laptop.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;for emails: &lt;a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html"&gt;mbsync &amp;amp; davmail&lt;/a&gt;, or &lt;a href="https://fengxia41103.github.io/myblog/linux laptop.html"&gt;thunderbird&lt;/a&gt;. But
+   honestly, setting up &lt;a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html"&gt;Davmail&lt;/a&gt; is a lot better, and you can
+   have Thunderbird acting as just an email agent off davmail anyway.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;for Skype business/Lync: use &lt;a href="https://fengxia41103.github.io/myblog/linux laptop.html"&gt;pidgin&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
@@ -317,19 +350,19 @@ automatically?&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Window on the right hand side is monitoring folder on the file system
-  for screenshots. It starts w/ an empty directory. Window on the top
-  left is the terminal where you will see printout from the script
-  when it finds the interested element and takes its snapshot,
-  eg. &lt;code&gt;smile: mwc-support-mode-modal&lt;/code&gt;. Window on the bottom left is
-  the browser window launched by Selenium which gives you an idea how
-  the computer is working. The browser is shown only for demo
-  purpose. It can be turned into &lt;strong&gt;headless&lt;/strong&gt; mode.&lt;/p&gt;
+for screenshots. It starts w/ an empty directory. Window on the top
+left is the terminal where you will see printout from the script when
+it finds the interested element and takes its snapshot, eg. &lt;code&gt;smile:
+mwc-support-mode-modal&lt;/code&gt;. Window on the bottom left is the browser
+window launched by Selenium which gives you an idea how the computer
+is working. The browser is shown only for demo purpose. It can be
+turned into &lt;strong&gt;headless&lt;/strong&gt; mode.&lt;/p&gt;
 &lt;h1&gt;context&lt;/h1&gt;
 &lt;p&gt;One thing of taking snapshot is to provide a context to viewer &amp;mdash;
 in which page/panel/container this component is being used. Believe or
 not, some components I'm dealing w/ is nothing but a small green dot
 (see below)! Therefore, it will be pretty useless if I'm just giving
-you an image of itself. &lt;/p&gt;
+you an image of itself.&lt;/p&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="images/mwc-network-hardware-status-icon.png"/&gt;
   &lt;figcaption&gt;
@@ -439,7 +472,21 @@ original page), thus is viewed as a stand-alone entity anyway. And
 another good news &amp;mdash; modal can not be nested. Thus, we are only
 dealing one at a time (if we religiously clicked the CANCEL each time!).&lt;/p&gt;
 &lt;h1&gt;code&lt;/h1&gt;
-&lt;p&gt;Script is &lt;a href="https://github.com/fengxia41103/dev/tree/master/snapshot"&gt;here&lt;/a&gt;.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Rebranding</title><link href="https://fengxia41103.github.io/myblog/rebranding.html" rel="alternate"></link><published>2019-09-11T16:15:00-04:00</published><updated>2019-09-11T16:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-11:/myblog/rebranding.html</id><summary type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
+&lt;p&gt;Script is &lt;a href="https://github.com/fengxia41103/dev/tree/master/snapshot"&gt;here&lt;/a&gt;. &lt;/p&gt;
+&lt;h2&gt;installation&lt;/h2&gt;
+&lt;h3&gt;chrome driver&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;apt search chromedriver&lt;/code&gt;, then install the one you found:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;on Ubuntu 16.04: &lt;code&gt;apt install chromedriver&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;on Ubuntu 18.04: &lt;code&gt;apt install chromium-chromedriver&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;firefox webdriver (aka. geckodriver)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;v0.25.0
+wget &lt;span class="s2"&gt;&amp;quot;https://github.com/mozilla/geckodriver/releases/download/&lt;/span&gt;&lt;span class="nv"&gt;$GV&lt;/span&gt;&lt;span class="s2"&gt;/geckodriver-&lt;/span&gt;&lt;span class="nv"&gt;$GV&lt;/span&gt;&lt;span class="s2"&gt;-linux64.tar.gz&amp;quot;&lt;/span&gt;
+tar xvzf geckodriver-&lt;span class="nv"&gt;$GV&lt;/span&gt;-linux64.tar.gz 
+chmod +x geckodriver
+sudo cp geckodriver /usr/local/bin/
+&lt;/pre&gt;&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Rebranding</title><link href="https://fengxia41103.github.io/myblog/rebranding.html" rel="alternate"></link><published>2019-09-11T16:15:00-04:00</published><updated>2019-09-11T16:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-11:/myblog/rebranding.html</id><summary type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
 code base to pick up interested artifacts &amp;larr; brand
 indicator. Definition of these artifacts are highly contextual,
 meaning that a string &lt;code&gt;feng&lt;/code&gt; can mean a variable, or a string literal,
@@ -2607,7 +2654,108 @@ optional arguments:
 
 &lt;p&gt;To start a kvm reusing an existing backing file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python startmykvm.py -b &amp;lt;backing&amp;gt;.qcow2 mydev.xml
-&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><updated>2017-10-04T21:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>Linux laptop</title><link href="https://fengxia41103.github.io/myblog/linux%20laptop.html" rel="alternate"></link><published>2017-10-04T22:19:00-04:00</published><updated>2019-10-17T10:11:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/linux laptop.html</id><summary type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
+&lt;h1&gt;Install Linux&lt;/h1&gt;
+&lt;p&gt;You can do a dual boot or just wipe the whole disk. Window's boot
+manager will interfere, somehow, which I don't remember the details
+anymore. Google it. Eventually it will work. The rest assumes you …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
+&lt;h1&gt;Install Linux&lt;/h1&gt;
+&lt;p&gt;You can do a dual boot or just wipe the whole disk. Window's boot
+manager will interfere, somehow, which I don't remember the details
+anymore. Google it. Eventually it will work. The rest assumes you have
+Linux installed.&lt;/p&gt;
+&lt;p&gt;Also, follow [these steps][6] to get your Linux in a good shape.&lt;/p&gt;
+&lt;h1&gt;VPN&lt;/h1&gt;
+&lt;p&gt;Most importantly, you need VPN.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;code&gt;otp.company.com&lt;/code&gt; to register your phone number.&lt;/li&gt;
+&lt;li&gt;Install &lt;code&gt;Company OTP&lt;/code&gt; from your app store.&lt;/li&gt;
+&lt;li&gt;Keep &lt;code&gt;Company OTP&lt;/code&gt; app running so you can see the active OTP.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt install openconnect screen tmux&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In a screen, &lt;code&gt;sudo openconnect -u [username] webvpn.us.company.com&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;first password: your regular domain login pwd&lt;/li&gt;
+&lt;li&gt;second one: OTP&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If works, you should see something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@fengxia-company:~# openconnect -u fxia1 webvpn.us.company.com
+POST https://webvpn.us.company.com/
+Attempting to connect to server &lt;span class="m"&gt;104&lt;/span&gt;.232.254.247:443
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Got HTTP response: HTTP/1.0 &lt;span class="m"&gt;302&lt;/span&gt; Object Moved
+GET https://webvpn.us.company.com/
+Attempting to connect to server &lt;span class="m"&gt;104&lt;/span&gt;.232.254.247:443
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Got HTTP response: HTTP/1.0 &lt;span class="m"&gt;302&lt;/span&gt; Object Moved
+GET https://webvpn.us.company.com/+webvpn+/index.html
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Please enter your username and password.
+
+Password:  &amp;lt;--- A/D password
+Password:  &amp;lt;--- OTP
+
+POST https://webvpn.us.company.com/+webvpn+/index.html
+Got CONNECT response: HTTP/1.1 &lt;span class="m"&gt;200&lt;/span&gt; OK
+CSTP connected. DPD &lt;span class="m"&gt;30&lt;/span&gt;, Keepalive &lt;span class="m"&gt;30&lt;/span&gt;
+Connected tun0 as &lt;span class="m"&gt;10&lt;/span&gt;.38.102.28, using SSL
+Established DTLS connection &lt;span class="o"&gt;(&lt;/span&gt;using GnuTLS&lt;span class="o"&gt;)&lt;/span&gt;. Ciphersuite &lt;span class="o"&gt;(&lt;/span&gt;DTLS0.9&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;(&lt;/span&gt;RSA&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;(&lt;/span&gt;AES-256-CBC&lt;span class="o"&gt;)&lt;/span&gt;-&lt;span class="o"&gt;(&lt;/span&gt;SHA1&lt;span class="o"&gt;)&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A list of VPN servers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;webvpn.cn.company.com&lt;/code&gt;   for China user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webvpn.hk.company.com&lt;/code&gt;   for AP region user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webvpn.us.company.com&lt;/code&gt;   for AG region user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webvpn.sk.company.com&lt;/code&gt;   for EMEA user​    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Email&lt;/h1&gt;
+&lt;p&gt;These settings work for Thunderbird. Terminology may be different for
+other clients.&lt;/p&gt;
+&lt;p&gt;Incoming (IMAP) settings:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;server: &lt;code&gt;outlookae.company.com&lt;/code&gt;, port &lt;code&gt;993&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;username: your domain login&lt;/li&gt;
+&lt;li&gt;connection security: &lt;code&gt;SSL/TLS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;authentication method: &lt;code&gt;Normal password&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Outgoing (SMTP) settings:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;server: &lt;code&gt;mailae.company.com&lt;/code&gt;, port &lt;code&gt;587&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;connection security: &lt;code&gt;STARTTLS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;authentication method: &lt;code&gt;NTLM&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;username: domain login&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Alternatively, use &lt;a href="{filename}/dev/mbsyc.md"&gt;mbsync w/ Davmail&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Lync&lt;/h1&gt;
+&lt;p&gt;A couple options: &lt;a href="https://www.skype.com/en/download-skype/skype-for-computer/"&gt;skype for business&lt;/a&gt;, &lt;a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa"&gt;pidgin-sipe&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;pidgin&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;DON'T use the stock package!&lt;/strong&gt; It will not work. And don't follow
+&lt;a href="http://sipe.sourceforge.net/install/"&gt;this instruction&lt;/a&gt;, either.  The only way to get it working is
+&lt;a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa"&gt;this&lt;/a&gt; to install &lt;code&gt;pidgin pidgin-sipe&lt;/code&gt;, then add configuration
+listed below!&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;add ppa: &lt;code&gt;add-apt-repository ppa:sipe-collab/ppa&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt update &amp;amp;&amp;amp; apt install pidgin pidgin-sipe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snap install remmina&lt;/code&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Create a new account with these settings:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;protocol: &lt;code&gt;Office Communicator&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;username: &lt;code&gt;you@company.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;password: domain password&lt;/li&gt;
+&lt;li&gt;connection type: &lt;code&gt;Auto&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;user agent: &lt;code&gt;UCCAPI/16.0.6001.1073 OC/16.0.6001.1073 (Skype for Business)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;authentication scheme: &lt;code&gt;NTLM&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;remote desktop client: &lt;code&gt;remmina&lt;/code&gt; (or &lt;code&gt;xfreerdp&lt;/code&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Leave everything else as default/blank.&lt;/p&gt;</content></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><updated>2017-10-04T21:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
 &lt;h1&gt;Tune sensitivity&lt;/h1&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch

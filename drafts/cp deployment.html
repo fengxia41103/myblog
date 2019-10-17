@@ -321,23 +321,48 @@ unset __conda_setup
 <li>
 <p><code>conda create -n mwc_scripts python=2.7 psycopg2 sqlparse
    cassandra-driver</code>. This message <code>Collecting package metadata
-   (current_repodata.json):</code> will take a while to complete. Be patient.</p>
+   (current_repodata.json):</code> will take a while to complete. Be
+   patient. You can execute this multiple times, which <code>conda</code> is
+   smart enough to ask whethe you want to scratch the virtual env
+   <code>mwc_script</code> and rebuild it. Further, <code>pip install</code> will not
+   install the package properly even though <code>which pip</code> shows you are
+   using the virtulenv's one.</p>
 </li>
 </ol>
-<h2>docker</h2>
+<h2>docker &amp; docker-compose</h2>
 <ol>
-<li>Just follow [this].</li>
+<li>Just follow <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04">this</a>.</li>
 <li><code>sudo usermod -a -G docker $USER</code>, then exit SSH and login again.</li>
 <li><code>docker run hello-world</code> as test.</li>
+<li><code>apt install docker-compose</code>.</li>
 </ol>
 <h2>mwc</h2>
+<p>Anything in <code>.sh</code>, you have the option to execute them manually, line
+by line.</p>
 <ol>
 <li>
 <p>In <code>.bashrc</code>, append to the end:</p>
 <div class="highlight"><pre><span></span>```shell
-export CLDTX_HOME=/home/fengxia/workspace/ignite
+export CLDTX_HOME=/home/&amp;lt;you&amp;gt;/workspace/ignite
 export CLDTX_CONFIG=/etc/cloudistics
-export PYTHON_HOME=/home/fengxia/miniconda2
+export PYTHON_HOME=/home/&amp;lt;you&amp;gt;/anaconda2
+```
+</pre></div>
+
+
+<p>This is critical because following <code>.sh</code> will all be referencing
+these variable values. Worse comes to worst, just run the contents
+of the <code>.sh</code> manually.</p>
+</li>
+<li>
+<p>Make <code>/etc/cloudistics</code> and set permissions:</p>
+<div class="highlight"><pre><span></span>```shell
+# They initialize configuration and database directories.
+sudo mkdir -p /etc/cloudistics
+sudo chown -R &quot;<span class="nv">$USER</span>&quot; /etc/cloudistics
+echo &#39;export CLDTX_CONFIG=/etc/cloudistics&#39; <span class="ni">&amp;gt;&amp;gt;</span> <span class="cp">${</span><span class="n">bashrcHome</span><span class="cp">}</span>
+sudo mkdir -p /temp
+sudo chown -R &quot;<span class="nv">$USER</span>&quot; /temp
 ```
 </pre></div>
 
@@ -347,24 +372,222 @@ export PYTHON_HOME=/home/fengxia/miniconda2
 </ol>
 </li>
 <li>
-<p><code>mwc\maintenance\unix\setup\init-mwc-builder.sh</code>. This will build
+<p><code>mwc/maintenance/unix/setup/init-mwc-builder.sh</code>. This will build
    docker images.</p>
+<div class="highlight"><pre><span></span>```bash
+#!/bin/bash
+
+# Create mwc-builder container for building MWC.
+docker build --file &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/mwc/docker/Dockerfile.dev&quot; --tag mwc-builder &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/mwc/docker&quot;
+
+# Create a Docker volume for caching Maven dependencies.
+docker volume create maven-cache
+```
+</pre></div>
+
+
 </li>
 <li>
 <p><code>mwc/maintenance/unix/setup/init-config.sh</code>.</p>
+<div class="highlight"><pre><span></span>```bash
+#!/bin/bash
+
+# Copy notification configuration file to /etc/cloudistics directory.
+cp &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/deployment/management/notifications/notification.rc.json&quot; &quot;<span class="cp">${</span><span class="n">CLDTX_CONFIG</span><span class="cp">}</span>&quot;
+
+# Copy configuration properties to /etc/cloudistics directory.
+cd &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/mwc/src/main/resources/&quot;
+cp *.xml &quot;<span class="cp">${</span><span class="n">CLDTX_CONFIG</span><span class="cp">}</span>&quot;
+cp *.properties &quot;<span class="cp">${</span><span class="n">CLDTX_CONFIG</span><span class="cp">}</span>&quot;
+```
+</pre></div>
+
+
 </li>
 <li>
-<p><code>~/workspace/ignite/mwc/maintenance/unix/workflow/build-mwc.sh</code>. If
-   there is error, stop.</p>
+<p>Go to <code>mwc/docker</code> and spin up database: <code>docker-compose up -d
+   postgres scylla</code>.</p>
 </li>
 <li>
-<p><code>cd ~/workspace/ignite/mwc/docker</code>, then:</p>
+<p>Append "host all all 0.0.0.0/0 trust" to
+   <code>/var/lib/docker/volumes/docker_postgres-data/_data/pg_hba.conf</code>.</p>
 </li>
 <li>
-<p><code>docker-compose up -d postgres scylla</code></p>
+<p>Restart PG2: <code>docker-compose restart postgres scylla</code></p>
 </li>
-<li><code>docker-compose up -d wildfly</code></li>
+<li>
+<p>Init database w/ data: <code>mwc/maintenance/unit/setup/init-database.sh</code></p>
+<div class="highlight"><pre><span></span>```bash
+#!/bin/bash
+
+# Copy management database migrations that are temporarily in a 
+# &quot;management_changes&quot; file until they are given a number in master.
+cp &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/management_changes.sql&quot; &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/migrations.d/111111111.sql&quot;
+
+# Reset the Postgres database.
+&quot;<span class="cp">${</span><span class="n">PYTHON_HOME</span><span class="cp">}</span>/envs/mwc_scripts/bin/python&quot; &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/perform_database_migration.py&quot; --db_host localhost --db_port 5432 --db_user_name cldtx --db_user_password cldtx --db_init --db_init_mwc_test_data
+
+# Remove the temporary management database migration script.
+rm -f &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/migrations.d/111111111.sql&quot;
+
+# Copy stats database migrations that are temporarily in a &quot;management_changes&quot; 
+# file until they are given a number in master.
+cp &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/management_changes.cql&quot; &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/migrations.d/111111111.cql&quot;
+
+# Reset the Cassandra database.
+&quot;<span class="cp">${</span><span class="n">PYTHON_HOME</span><span class="cp">}</span>/envs/mwc_scripts/bin/python&quot; &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/perform_database_migration.py&quot; --db_init
+
+# Remove the temporary stats database migration script.
+rm -f &quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/migrations.d/111111111.cql&quot;
+
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Launch mwc: <code>docker-compose up -d wildfly</code></p>
+</li>
 </ol>
+<h1>Build webapp (Angular) code locally</h1>
+<ol>
+<li>
+<p>Install <a href="https://github.com/nvm-sh/nvm"><code>nvm</code></a></p>
+<div class="highlight"><pre><span></span>```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+```
+</pre></div>
+
+
+<ol>
+<li>
+<p>Check <code>.bashrc</code> for the snippets below, then <code>source ~/.bashrc</code> to load NVM env.</p>
+<p>```shell
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] &amp;&amp; . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion</p>
+<p>```</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Install node: <code>nvm install node</code> will pull down the latest. You can
+   also specify version, eg. <code>nvm install 8.0.0</code>.</p>
+</li>
+<li>
+<p>To check which version you have: <code>nvm list</code>.</p>
+</li>
+<li>
+<p>To use a version: <code>nvm use 8.0.0</code>.</p>
+</li>
+<li>
+<p>Install/upgrade npm: <code>npm install npm@latest -g</code></p>
+</li>
+<li>
+<p>Go to <code>mwc/src/main/webapp</code>, and <code>npm install</code>. This will take a
+   while and create <code>/node_modules</code> folder. <strong>Note</strong>: the version it
+   installs changes each time, and is also depending on the node
+   version selected. So to run different version of node, just delete
+   the <code>node_modules</code> folder and <code>npm install</code> from scratch.</p>
+</li>
+<li>
+<p>Set MWC instance. Edit <code>webpack-dev.config.js</code> and replace <code>target</code>
+   to a MWC instance (the Java middleware this frontend instance will
+   be using):</p>
+<div class="highlight"><pre><span></span><span class="err">```</span><span class="nt">javascript</span>
+<span class="nt">proxy</span><span class="o">:</span> <span class="p">{</span>
+  <span class="err">&#39;/&#39;:</span> <span class="err">{</span>
+    <span class="n">target</span><span class="p">:</span> <span class="s2">&quot;http://&amp;lt;your mwc ip&amp;gt;:8080&quot;</span> <span class="o">//</span> <span class="n">common</span> <span class="n">dev</span>
+  <span class="p">}</span>
+
+<span class="err">```</span>
+</pre></div>
+
+
+<p>A few common values for the MWC instance:</p>
+<ol>
+<li>LTCT lab instance: <code>http://cldtx-build.labs.&lt;company&gt;.com:8080</code>,
+   internal use only.</li>
+<li>Local dev instance: <code>http://&lt;your IP&gt;:8080</code>, if you are running
+   a local MWC docker on your machine.</li>
+</ol>
+</li>
+<li>
+<p>Run <code>npm start</code> should compile w/o error and opens a
+   <code>localhost:3000</code> on your default browser.</p>
+</li>
+</ol>
+<h2>Hot reloading</h2>
+<p><code>webpack dev server</code> will auto compile code upon a detected file
+<code>webpack-dev.config.js</code> for details.
+change and refresh browser window. See settings in</p>
+<p>On Linux, you need to check system watcher value (see <a href="https://github.com/webpack/webpack-dev-server/issues/724">bug</a>) and
+increase it if hot reloading is not working.</p>
+<div class="highlight"><pre><span></span>echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p
+</pre></div>
+
+
+<h3>hot reload does not cover</h3>
+<ol>
+<li>images in <code>app/share/images</code>.</li>
+<li>any <code>.jsp</code></li>
+<li>setting <code>js</code> files such as <code>webpack-&lt;...&gt;.js</code>.</li>
+</ol>
+<p>You have to rebuild MWC's <code>.war</code>, then relaunch the <code>wildfly</code>
+container to see the effect. Therefore, it's necessary to have a local
+MWC build env and change the <code>webpack-dev.config.js</code> dev server to
+your local instance for dev &amp; test in these cases.</p>
+<h2>Development conventions</h2>
+<ol>
+<li>Tab width: 2, for <code>.html</code>, <code>.ts</code>, <code>.js</code>, <code>.scss</code>.</li>
+<li>HTML attributes should be one-per-line, and they should line up:<div class="highlight"><pre><span></span>```html
+&amp;lt;div class=&quot;navbar-header&quot;&amp;gt;
+  &amp;lt;a class=&quot;navbar-brand on-hover-show-text-bg-child-elements&quot;
+     ui-sref=&quot;auth.authentication.login&quot;&amp;gt;
+    &amp;lt;img src=&quot;/app/shared/images/lenovologo-pos-red-vertical.png&quot;
+         class=&quot;inline&quot;&amp;gt;
+  &amp;lt;/a&amp;gt;
+&amp;lt;/div&amp;gt;
+```
+</pre></div>
+
+
+<ol>
+<li>Never use inline style in HTML.</li>
+<li>When changing <code>.scss</code>, search all <code>.html</code> to know the side effect.</li>
+<li>Merge request of HTML changes should update <code>/doc</code> including such
+   as screenshot.</li>
+</ol>
+</li>
+</ol>
+<h1>Knowledge</h1>
+<h2>Usage of <code>webapp/public-marketplace/src/assets/icons</code></h2>
+<ol>
+<li>android-chrome-192x192.png, android-chrome-512x512.png and apple-touch-icon</li>
+</ol>
+<p>Used in manifest.json in the same directory. To quote, "The web app
+   manifest is a simple JSON file that tells the browser about your web
+   application and how it should behave when 'installed' on the user's
+   mobile device or desktop.".</p>
+<p>In order to test those icons, we can use chrome dev tools
+   (Application - Manifest)</p>
+<p>To learn more about this topic, check the following links: <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">Mozilla
+   docs</a> ,<a href="https://developers.google.com/web/fundamentals/app-install-banners/">Google docs</a>.</p>
+<ol>
+<li>favicon-16x16.png, favicon-32x32.png, favicon.ico</li>
+</ol>
+<p>Used to set the favicon for the website. This can be checked easily,
+   look at the icon shown on the browser tab where the portal is opened</p>
+<ol>
+<li>mstile-70x70.png, mstile-144x144png, mstile-150x150.png,
+   mstile-310x150.png,mstile-310x310.png</li>
+</ol>
+<p>Used in browserconfig.xml in the same directory. As we can learn
+   more in <a href="https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/dn320426(v=vs.85)?redirectedfrom=MSDN">this</a>, those icons are used when we pin a website in
+   windows (Start menu or taskbar)</p>
+<p>The easiest way to test this is using Edge Browser. Navigate to the
+   portal, click the 'three dots' option in the top right corner and
+   select where you want the website to be pinned.</p>
         </p>
 
         <p>

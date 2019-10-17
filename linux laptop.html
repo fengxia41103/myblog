@@ -115,10 +115,6 @@
           dev
         </a>
 
-        <a class="wave-effect" href="tag-lenovo.html">
-          <i class="fa fa-tag"></i>
-          lenovo
-        </a>
 
         <h1 class="myhighlight">Linux laptop</h1>
       </div>
@@ -131,22 +127,22 @@
     <div>
       <div id="article-content" class="row">
         <blockquote>
-          <span class="myhighlight">Copyright @ Lenovo US</span>
         </blockquote>
         <p>
-          <p>Instructions to get Ubuntu 16.04 (or any Linux) as your laptop OS.</p>
+          <p>Instructions to get Ubuntu Xenial &amp; Bionic (or any Linux) as your laptop OS.</p>
 <h1>Install Linux</h1>
 <p>You can do a dual boot or just wipe the whole disk. Window's boot
 manager will interfere, somehow, which I don't remember the details
 anymore. Google it. Eventually it will work. The rest assumes you have
 Linux installed.</p>
+<p>Also, follow [these steps][6] to get your Linux in a good shape.</p>
 <h1>VPN</h1>
 <p>Most importantly, you need VPN.</p>
 <ol>
 <li>Go to <code>otp.company.com</code> to register your phone number.</li>
 <li>Install <code>Company OTP</code> from your app store.</li>
 <li>Keep <code>Company OTP</code> app running so you can see the active OTP.</li>
-<li><code>apt install openconnect screen</code></li>
+<li><code>apt install openconnect screen tmux</code></li>
 <li>
 <p>In a screen, <code>sudo openconnect -u [username] webvpn.us.company.com</code></p>
 <ol>
@@ -171,8 +167,10 @@ GET https://webvpn.us.company.com/+webvpn+/index.html
 SSL negotiation with webvpn.us.company.com
 Connected to HTTPS on webvpn.us.company.com
 Please enter your username and password.
-Password:
-Password:
+
+Password:  &lt;--- A/D password
+Password:  &lt;--- OTP
+
 POST https://webvpn.us.company.com/+webvpn+/index.html
 Got CONNECT response: HTTP/1.1 <span class="m">200</span> OK
 CSTP connected. DPD <span class="m">30</span>, Keepalive <span class="m">30</span>
@@ -194,7 +192,7 @@ other clients.</p>
 <p>Incoming (IMAP) settings:</p>
 <ol>
 <li>server: <code>outlookae.company.com</code>, port <code>993</code></li>
-<li>username: your domain login, eg. <code>fxia1</code></li>
+<li>username: your domain login</li>
 <li>connection security: <code>SSL/TLS</code></li>
 <li>authentication method: <code>Normal password</code></li>
 </ol>
@@ -205,10 +203,14 @@ other clients.</p>
 <li>authentication method: <code>NTLM</code></li>
 <li>username: domain login</li>
 </ol>
+<p>Alternatively, use <a href="{filename}/dev/mbsyc.md">mbsync w/ Davmail</a>.</p>
 <h1>Lync</h1>
 <p>A couple options: <a href="https://www.skype.com/en/download-skype/skype-for-computer/">skype for business</a>, <a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa">pidgin-sipe</a>.</p>
 <h2>pidgin</h2>
-<p>Follow <a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa">instructions</a> to install <code>pidgin pidgin-sipe</code>:</p>
+<p><strong>DON'T use the stock package!</strong> It will not work. And don't follow
+<a href="http://sipe.sourceforge.net/install/">this instruction</a>, either.  The only way to get it working is
+<a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa">this</a> to install <code>pidgin pidgin-sipe</code>, then add configuration
+listed below!</p>
 <ol>
 <li>add ppa: <code>add-apt-repository ppa:sipe-collab/ppa</code></li>
 <li><code>apt update &amp;&amp; apt install pidgin pidgin-sipe</code></li>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-10-17T10:11:00-04:00</updated><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><updated>2019-10-11T11:34:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</summary><content type="html">&lt;table&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-10-17T20:55:00-04:00</updated><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><updated>2019-10-11T11:34:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</summary><content type="html">&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Key&lt;/th&gt;
@@ -68,7 +68,7 @@
 &lt;td&gt;Move focus to the pane&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-14T19:36:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-17T20:55:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
 decided to install Ubuntu from scratch), I'm going to document (rather
 a bit catch up) what I need to install in order to get my working
@@ -188,15 +188,13 @@ Xft.rgba: rgb
 
 
 &lt;p&gt;Use &lt;code&gt;xdpyinfo&lt;/code&gt; to check screen resolution&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On X1 gen 8, it's shown &lt;code&gt;2560x1440 pixels (677x381
-      millimeters)&lt;/code&gt;. Set &lt;code&gt;dpi=180&lt;/code&gt; gives the same exp/size as what was
-      on gen 4 without any tweaking.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On Flex pro, it gives &lt;code&gt;3840 x 2160&lt;/code&gt;, use &lt;code&gt;dpi=200&lt;/code&gt; is good; 180
-      is too small.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;On X1 gen 8, it's shown &lt;code&gt;2560x1440 pixels (677x381
+    millimeters)&lt;/code&gt;. Set &lt;code&gt;dpi=180&lt;/code&gt; gives the same exp/size as what was
+    on gen 4 without any tweaking.&lt;/li&gt;
+&lt;li&gt;On Flex pro, it gives &lt;code&gt;3840 x 2160&lt;/code&gt;, use &lt;code&gt;dpi=200&lt;/code&gt; is good; 180
+    is too small.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;For Gtk applications, eg. dia, add these to our &lt;code&gt;.zshrc&lt;/code&gt; or &lt;code&gt;.bashrc&lt;/code&gt;:&lt;/p&gt;
@@ -264,7 +262,7 @@ is a great way to share the same code between your localhost and vms.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;pip install pandoc-fignos&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;apt install pandoc-citeproc texlive-full&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;optional: install &lt;code&gt;mermaid-filter:&lt;/code&gt;npm install -g mermaid-filter`&lt;/li&gt;
+&lt;li&gt;optional: install &lt;code&gt;mermaid-filter&lt;/code&gt;: &lt;code&gt;npm install -g mermaid-filter&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1&gt;enterprise stuff&lt;/h1&gt;
 &lt;p&gt;Working in an enterprise means that you need a few tools, eg. emails,
@@ -614,10 +612,18 @@ an external reference, which is another kid.. but deep down I also
 know this is a paradox, a logic that is self-contradicting, and is
 unfair to him.... But, what should I do?&lt;/p&gt;
 &lt;p&gt;I don't know. Maybe I should just buckle up, ride w/ him, however he
-is going to become, and pray.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Snapshot anything w/ Selenium</title><link href="https://fengxia41103.github.io/myblog/snapshot%20selenium.html" rel="alternate"></link><published>2019-09-25T10:35:00-04:00</published><updated>2019-09-25T10:35:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-25:/myblog/snapshot selenium.html</id><summary type="html">&lt;p&gt;In my previous notes on &lt;a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html"&gt;analyzing Angular 1.x code&lt;/a&gt;, I have stuck at
+is going to become, and pray.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Snapshot anything w/ Selenium</title><link href="https://fengxia41103.github.io/myblog/snapshot%20selenium.html" rel="alternate"></link><published>2019-09-25T10:35:00-04:00</published><updated>2019-09-25T10:35:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-25:/myblog/snapshot selenium.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/back%20rub.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In my previous notes on &lt;a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html"&gt;analyzing Angular 1.x code&lt;/a&gt;, I have stuck at
 how to create snapshots of rendered components for my documentation
 purpose. In the manual data file &lt;code&gt;.json&lt;/code&gt;, I allowed an entry to plug
-in snapshot file taken by human testers. As an example, the code below …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my previous notes on &lt;a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html"&gt;analyzing Angular 1.x code&lt;/a&gt;, I have stuck at
+in snapshot file taken by human testers. As an example, the code below …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/back%20rub.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In my previous notes on &lt;a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html"&gt;analyzing Angular 1.x code&lt;/a&gt;, I have stuck at
 how to create snapshots of rendered components for my documentation
 purpose. In the manual data file &lt;code&gt;.json&lt;/code&gt;, I allowed an entry to plug
 in snapshot file taken by human testers. As an example, the code below

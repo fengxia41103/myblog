@@ -6,6 +6,7 @@ Author: Feng Xia
 Summary: Linux Terminator keybinding cheat sheet.
 
 
+
 | Key              | Description                                                                                 |
 |------------------|---------------------------------------------------------------------------------------------|
 |                  |                                                                                             |

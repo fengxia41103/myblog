@@ -4,7 +4,8 @@ Tags: dev
 Slug: my system
 Author: Feng Xia
 Summary: Instructions to rebuild my system from scratch based on Ubuntu 18.04.
-Modified: 2019-10-14 19:36
+Modified: 2019-10-17 20:55
+
 
 Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
@@ -131,11 +132,11 @@ Instead, there are two things you need to do:
         ```
    Use `xdpyinfo` to check screen resolution[^1]:
    
-   1. On X1 gen 8, it's shown `2560x1440 pixels (677x381
-      millimeters)`. Set `dpi=180` gives the same exp/size as what was
-      on gen 4 without any tweaking.
-   2. On Flex pro, it gives `3840 x 2160`, use `dpi=200` is good; 180
-      is too small.
+     1. On X1 gen 8, it's shown `2560x1440 pixels (677x381
+        millimeters)`. Set `dpi=180` gives the same exp/size as what was
+        on gen 4 without any tweaking.
+     2. On Flex pro, it gives `3840 x 2160`, use `dpi=200` is good; 180
+        is too small.
       
 2. For Gtk applications, eg. dia, add these to our `.zshrc` or `.bashrc`:
 
@@ -207,7 +208,7 @@ Use Pandoc [2.7.3][7]. The v1.9 in Ubuntu 18.04 didn't work for compiling
 
 1. `pip install pandoc-fignos`
 2. `apt install pandoc-citeproc texlive-full`
-3. optional: install `mermaid-filter: `npm install -g mermaid-filter`
+3. optional: install `mermaid-filter`: `npm install -g mermaid-filter`
 
 # enterprise stuff
 

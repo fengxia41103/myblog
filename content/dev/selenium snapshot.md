@@ -4,6 +4,10 @@ Tags: dev
 Slug: snapshot selenium
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="images/back%20rub.jpg"/>
+</figure>
+
 
 In my previous notes on [analyzing Angular 1.x code][1], I have stuck at
 how to create snapshots of rendered components for my documentation

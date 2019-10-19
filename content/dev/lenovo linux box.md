@@ -114,8 +114,14 @@ Create a new account with these settings:
 
 Leave everything else as default/blank.
 
+# jira & Emacs
+
+See my article on [emacs][6].
+
+
 [1]: https://www.skype.com/en/download-skype/skype-for-computer/
 [2]: https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa
 [3]: {filename}/dev/mbsyc.md
 [4]: http://sipe.sourceforge.net/install/
 [5]: {filename}/dev/my%20system.md
+[6]: {filename}/dev/emacs.md

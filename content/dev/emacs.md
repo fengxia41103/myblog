@@ -163,7 +163,34 @@ manage the list.
 (setq mu4e-change-filenames-when-moving t)
 ```
 
+# Jira
+
+If you use Jira, say the url is `https://jira.<company>.com:8443/`
+(port 8443 is the common configuration for Jira), chances are it is
+also using a self-signed cert. 
+
+1. Get the cert (see [here][4]): `openssl s_client -showcerts
+   -servername jira.company.com -connect jira1.company.com:8443 >
+   <your jira>.crt`.
+
+2. Copy it to `/usr/local/share/ca-certificates`, change mode to 644.
+3. `sudo update-ca-certificates`, you should see sth like this:
+
+        ```shell
+        Updating certificates in /etc/ssl/certs...
+        rehash: warning: skipping jira1.pem,it does not contain exactly one certificate or CRL
+        1 added, 0 removed; done.
+        Running hooks in /etc/ca-certificates/update.d...
+
+        Adding debian:jira1.pem
+        done.
+        done.
+        ```
+4. Install [org-jira][3], and get all your issues!
+
 Happy coding.
 
 [1]: {static}/downloads/emacs/init.el
 [2]: {filename}/dev/mbsync.md
+[3]: https://github.com/ahungry/org-jira
+[4]: https://curl.haxx.se/docs/sslcerts.html

@@ -135,7 +135,7 @@
 manager will interfere, somehow, which I don't remember the details
 anymore. Google it. Eventually it will work. The rest assumes you have
 Linux installed.</p>
-<p>Also, follow [these steps][6] to get your Linux in a good shape.</p>
+<p>Also, follow <a href="https://fengxia41103.github.io/myblog/emacs.html">these steps</a> to get your Linux in a good shape.</p>
 <h1>VPN</h1>
 <p>Most importantly, you need VPN.</p>
 <ol>
@@ -186,6 +186,27 @@ Established DTLS connection <span class="o">(</span>using GnuTLS<span class="o">
 <li><code>webvpn.us.company.com</code>   for AG region user</li>
 <li><code>webvpn.sk.company.com</code>   for EMEA user​    </li>
 </ul>
+<h2>recompile openconnect &amp; vpnc-script</h2>
+<p>Well, once a while the enterprise decides to change their server
+configuration so that one server works, but the other keeps failing
+even though you have typed in the correct everything &mdash; my <code>.hk</code>
+server was happy (but complaining about a cert mismatch, not a blocker
+though), while my <code>.us</code> server just won't work.</p>
+<p>Time to recompile from <a href="https://www.infradead.org/openconnect/vpnc-script.html">source</a>:</p>
+<ol>
+<li>get source: <code>git clone
+   git://git.infradead.org/users/dwmw2/openconnect.git</code></li>
+<li>The usual steps: <code>./autogen &amp;&amp; ./configure</code>.</li>
+<li>Download the <a href="http://git.infradead.org/users/dwmw2/vpnc-scripts.git/blob_plain/HEAD:/vpnc-script">latest vpnc-script</a> or install <code>apt install vpnc</code>.</li>
+<li>Remove the stock openconnect: <code>apt remove openconnect &amp;&amp; apt purge
+   openconnect</code>.</li>
+<li><code>make</code> and <code>sudo make install</code>. Check that it's installed in
+   <code>/usr/local/bin</code>.</li>
+<li>Run it again, this time using the <code>vpnc-script</code> if you have one:
+   <code>openconnect -u username --reconnect-timeout 600 --script &lt;path to
+   vnpc-script&gt; webvpn.us.company.com</code>.</li>
+</ol>
+<p>Enjoy your VPN.</p>
 <h1>Email</h1>
 <p>These settings work for Thunderbird. Terminology may be different for
 other clients.</p>
@@ -203,7 +224,7 @@ other clients.</p>
 <li>authentication method: <code>NTLM</code></li>
 <li>username: domain login</li>
 </ol>
-<p>Alternatively, use <a href="{filename}/dev/mbsyc.md">mbsync w/ Davmail</a>.</p>
+<p>Alternatively, use <a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">mbsync w/ Davmail</a>.</p>
 <h1>Lync</h1>
 <p>A couple options: <a href="https://www.skype.com/en/download-skype/skype-for-computer/">skype for business</a>, <a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa">pidgin-sipe</a>.</p>
 <h2>pidgin</h2>
@@ -227,6 +248,8 @@ listed below!</p>
 <li>remote desktop client: <code>remmina</code> (or <code>xfreerdp</code>)</li>
 </ol>
 <p>Leave everything else as default/blank.</p>
+<h1>jira &amp; Emacs</h1>
+<p>See my article on <a href="https://fengxia41103.github.io/myblog/emacs.html">emacs</a>.</p>
         </p>
 
         <p>

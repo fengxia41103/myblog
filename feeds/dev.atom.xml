@@ -2670,7 +2670,7 @@ anymore. Google it. Eventually it will work. The rest assumes you …&lt;/p&gt;<
 manager will interfere, somehow, which I don't remember the details
 anymore. Google it. Eventually it will work. The rest assumes you have
 Linux installed.&lt;/p&gt;
-&lt;p&gt;Also, follow [these steps][6] to get your Linux in a good shape.&lt;/p&gt;
+&lt;p&gt;Also, follow &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;these steps&lt;/a&gt; to get your Linux in a good shape.&lt;/p&gt;
 &lt;h1&gt;VPN&lt;/h1&gt;
 &lt;p&gt;Most importantly, you need VPN.&lt;/p&gt;
 &lt;ol&gt;
@@ -2721,6 +2721,27 @@ Established DTLS connection &lt;span class="o"&gt;(&lt;/span&gt;using GnuTLS&lt;
 &lt;li&gt;&lt;code&gt;webvpn.us.company.com&lt;/code&gt;   for AG region user&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;webvpn.sk.company.com&lt;/code&gt;   for EMEA user​    &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2&gt;recompile openconnect &amp;amp; vpnc-script&lt;/h2&gt;
+&lt;p&gt;Well, once a while the enterprise decides to change their server
+configuration so that one server works, but the other keeps failing
+even though you have typed in the correct everything &amp;mdash; my &lt;code&gt;.hk&lt;/code&gt;
+server was happy (but complaining about a cert mismatch, not a blocker
+though), while my &lt;code&gt;.us&lt;/code&gt; server just won't work.&lt;/p&gt;
+&lt;p&gt;Time to recompile from &lt;a href="https://www.infradead.org/openconnect/vpnc-script.html"&gt;source&lt;/a&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;get source: &lt;code&gt;git clone
+   git://git.infradead.org/users/dwmw2/openconnect.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The usual steps: &lt;code&gt;./autogen &amp;amp;&amp;amp; ./configure&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Download the &lt;a href="http://git.infradead.org/users/dwmw2/vpnc-scripts.git/blob_plain/HEAD:/vpnc-script"&gt;latest vpnc-script&lt;/a&gt; or install &lt;code&gt;apt install vpnc&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Remove the stock openconnect: &lt;code&gt;apt remove openconnect &amp;amp;&amp;amp; apt purge
+   openconnect&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt; and &lt;code&gt;sudo make install&lt;/code&gt;. Check that it's installed in
+   &lt;code&gt;/usr/local/bin&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run it again, this time using the &lt;code&gt;vpnc-script&lt;/code&gt; if you have one:
+   &lt;code&gt;openconnect -u username --reconnect-timeout 600 --script &amp;lt;path to
+   vnpc-script&amp;gt; webvpn.us.company.com&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Enjoy your VPN.&lt;/p&gt;
 &lt;h1&gt;Email&lt;/h1&gt;
 &lt;p&gt;These settings work for Thunderbird. Terminology may be different for
 other clients.&lt;/p&gt;
@@ -2738,7 +2759,7 @@ other clients.&lt;/p&gt;
 &lt;li&gt;authentication method: &lt;code&gt;NTLM&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;username: domain login&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Alternatively, use &lt;a href="{filename}/dev/mbsyc.md"&gt;mbsync w/ Davmail&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Alternatively, use &lt;a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html"&gt;mbsync w/ Davmail&lt;/a&gt;.&lt;/p&gt;
 &lt;h1&gt;Lync&lt;/h1&gt;
 &lt;p&gt;A couple options: &lt;a href="https://www.skype.com/en/download-skype/skype-for-computer/"&gt;skype for business&lt;/a&gt;, &lt;a href="https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa"&gt;pidgin-sipe&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;pidgin&lt;/h2&gt;
@@ -2761,7 +2782,9 @@ listed below!&lt;/p&gt;
 &lt;li&gt;authentication scheme: &lt;code&gt;NTLM&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;remote desktop client: &lt;code&gt;remmina&lt;/code&gt; (or &lt;code&gt;xfreerdp&lt;/code&gt;)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Leave everything else as default/blank.&lt;/p&gt;</content></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><updated>2017-10-04T21:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+&lt;p&gt;Leave everything else as default/blank.&lt;/p&gt;
+&lt;h1&gt;jira &amp;amp; Emacs&lt;/h1&gt;
+&lt;p&gt;See my article on &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;emacs&lt;/a&gt;.&lt;/p&gt;</content></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><updated>2017-10-04T21:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
 &lt;h1&gt;Tune sensitivity&lt;/h1&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
@@ -3545,12 +3568,13 @@ manage the list. &lt;/p&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;mu4e-bookmarks&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;size:5M..500M&amp;quot;&lt;/span&gt;  &lt;span class="s"&gt;&amp;quot;Big messages&amp;quot;&lt;/span&gt;               &lt;span class="nv"&gt;?b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;mu4e-bookmarks&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;flag:flagged&amp;quot;&lt;/span&gt;   &lt;span class="s"&gt;&amp;quot;Flagged messages&amp;quot;&lt;/span&gt;           &lt;span class="nv"&gt;?f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;mu4e-headers-date-format&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;%Y-%m-%d %H:%M:%S&amp;quot;&lt;/span&gt;
-      &lt;span class="nv"&gt;mu4e-headers-fields&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="ss"&gt;:date&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;;;; for more customization options, check here:&lt;/span&gt;
+&lt;span class="c1"&gt;;;; https://www.djcbsoftware.nl/code/mu/mu4e/HV-Overview.html#HV-Overview&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;mu4e-headers-date-format&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;%b-%d %a&amp;quot;&lt;/span&gt;
+      &lt;span class="nv"&gt;mu4e-headers-fields&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="ss"&gt;:date&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
                 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:flags&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:mailing-list&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:from-or-to&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subject&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; 
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:from-or-to&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:thread-subject&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; 
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;mu4e-reply-to-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;fxia1@mycompany.com&amp;quot;&lt;/span&gt;
       &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;fxia1@mycompany.com&amp;quot;&lt;/span&gt;
@@ -3614,6 +3638,116 @@ manage the list. &lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;h1&gt;Jira&lt;/h1&gt;
+&lt;p&gt;If you use Jira, say the url is &lt;code&gt;https://jira.&amp;lt;company&amp;gt;.com:8443/&lt;/code&gt;
+(port 8443 is the common configuration for Jira), chances are it is
+also using a self-signed cert. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get the cert (see &lt;a href="https://curl.haxx.se/docs/sslcerts.html"&gt;here&lt;/a&gt;): &lt;code&gt;openssl s_client -showcerts
+   -servername jira.company.com -connect jira1.company.com:8443 &amp;gt;
+   &amp;lt;your jira&amp;gt;.crt&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy it to &lt;code&gt;/usr/local/share/ca-certificates&lt;/code&gt;, change mode to 644.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo update-ca-certificates&lt;/code&gt;, you should see sth like this:&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+Updating certificates in /etc/ssl/certs...
+rehash: warning: skipping jira1.pem,it does not contain exactly one certificate or CRL
+1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+
+Adding debian:jira1.pem
+done.
+done.
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Install &lt;a href="https://github.com/ahungry/org-jira"&gt;org-jira&lt;/a&gt;, and get all your issues! &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here are things I put in &lt;code&gt;init.el&lt;/code&gt; as global configurations:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; org-jira&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;use-package&lt;/span&gt; 
+  &lt;span class="nv"&gt;org-jira&lt;/span&gt;  
+
+  &lt;span class="ss"&gt;:ensure&lt;/span&gt; 
+  &lt;span class="ss"&gt;:config&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;org-jira-working-dir&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/org&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="ss"&gt;:config&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;jiralib-url&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;https://jira1.labs.&amp;lt;company&amp;gt;.com:8443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="ss"&gt;:config&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;org-jira-use-status-as-todo&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; (setq request-message-level &amp;#39;debug)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (setq request-log-level &amp;#39;debug)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;org-jira-custom-jqls&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:jql&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;#39;Epic Link&amp;#39; in (OL-318) AND Type = BUG and status not in (DONE, CANCELLED) ORDER BY cf[10001] ASC, Status&amp;quot;&lt;/span&gt;
+              &lt;span class="ss"&gt;:limit&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+              &lt;span class="ss"&gt;:filename&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;CP bugs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:jql&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;#39;Epic Link&amp;#39; in (OL-318) AND status not in (CANCELED) AND assignee WAS IN (currentUser(), aoprin, amilitaru) ORDER BY ID,status DESC&amp;quot;&lt;/span&gt;
+              &lt;span class="ss"&gt;:limit&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
+              &lt;span class="ss"&gt;:filename&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;CP&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;defconst&lt;/span&gt; &lt;span class="nv"&gt;org-jira-progress-issue-flow&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Todo&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Selected for Development&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Selected for Development&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;In Progress&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;In Progress&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;In Review&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;In Review&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;In Testing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;In Testing&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Done&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The most useful one is to set &lt;code&gt;org-jira-use-status-as-todo&lt;/code&gt;, so now a
+ticket will show up as below &amp;mdash; notice the word &lt;code&gt;BACKLOG&lt;/code&gt; is a
+status defined in my Jira, and it's taking place of the &lt;code&gt;TODO&lt;/code&gt; in
+default org-mode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;** BACKLOG QA_1910: Invalid port range error message displayed, although the range is correct :OL_3205:
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;what is not working&lt;/h2&gt;
+&lt;h3&gt;workflow does not change status&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;defconst&lt;/span&gt; &lt;span class="nv"&gt;org-jira-progress-issue-flow&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Todo&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Selected for Development&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Selected for Development&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;In Progress&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;In Progress&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;In Review&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;In Review&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;In Testing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;In Testing&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Done&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The workflow defined above actually does not change the &lt;code&gt;status&lt;/code&gt; of
+the Jira ticket because the &lt;code&gt;status&lt;/code&gt; is shown as a property in
+org-mode. So defining them here is only to make it &lt;strong&gt;visually
+consistent&lt;/strong&gt; when you move ticket in org-mode itself as if the
+ticket's status is moving. You still need to use &lt;code&gt;C-c iw&lt;/code&gt; to change
+the status, and it will post to Jira server to actually change the
+ticket.&lt;/p&gt;
+&lt;p&gt;Further, I add this header to the org file itself:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#+TODO: BACKLOG(b) SELECTED-FOR-DEVELOPMENT(f) IN-PROGRESS(p) IN-REVIEW(r) IN-TESTING(t) | DONE(d)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;priority has no effect&lt;/h3&gt;
+&lt;p&gt;org-mode priority has no effect on Jira ticket. It will be overwritten
+when you pull issues again (&lt;code&gt;C-c ij&lt;/code&gt; or &lt;code&gt;C-c ig&lt;/code&gt;). This is one bump I
+haven't figured out because it means I'll be losing info/history upon
+a pull.&lt;/p&gt;
+&lt;h3&gt;multi-line comment&lt;/h3&gt;
+&lt;p&gt;You can add a comment &lt;code&gt;C-c cc&lt;/code&gt;, but it gives you a mini buffer of a
+single line space, thus making it impossible to write multi line
+comment.&lt;/p&gt;
+&lt;p&gt;However, once you add the comment, you can update the org using &lt;code&gt;C-c
+ir&lt;/code&gt; or &lt;code&gt;C-c iR&lt;/code&gt;, which will pull jira again and update org file, thus
+pulling down the new comment. Now go to the comment to add more txt,
+then &lt;code&gt;C-c cu&lt;/code&gt; to update comment. So even as a 2-step process, you can
+write comment w/o leaving org-mode. So this is not too bad.&lt;/p&gt;
 &lt;p&gt;Happy coding.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Spectrwm</title><link href="https://fengxia41103.github.io/myblog/spectrwm.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><updated>2017-01-21T11:45:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:/myblog/spectrwm.html</id><summary type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. &lt;/p&gt;
 &lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;

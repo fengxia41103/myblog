@@ -95,12 +95,13 @@ manage the list.
 (add-to-list 'mu4e-bookmarks '("size:5M..500M"  "Big messages"               ?b) t)
 (add-to-list 'mu4e-bookmarks '("flag:flagged"   "Flagged messages"           ?f) t)
 
-(setq mu4e-headers-date-format "%Y-%m-%d %H:%M:%S"
-      mu4e-headers-fields '((:date . 20)
+;;; for more customization options, check here:
+;;; https://www.djcbsoftware.nl/code/mu/mu4e/HV-Overview.html#HV-Overview
+(setq mu4e-headers-date-format "%b-%d %a"
+      mu4e-headers-fields '((:date . 10)
 			    (:flags . 5)
-			    (:mailing-list . 10)
-			    (:from-or-to . 25)
-			    (:subject . nil))) 
+			    (:from-or-to . 10)
+			    (:thread-subject . nil))) 
 
 (setq mu4e-reply-to-address "fxia1@mycompany.com"
       user-mail-address "fxia1@mycompany.com"
@@ -186,7 +187,99 @@ also using a self-signed cert.
         done.
         done.
         ```
-4. Install [org-jira][3], and get all your issues!
+4. Install [org-jira][3], and get all your issues! 
+
+
+Here are things I put in `init.el` as global configurations:
+
+```lisp
+;; org-jira
+(use-package 
+  org-jira  
+
+  :ensure 
+  :config (setq org-jira-working-dir "~/org")
+  :config (setq jiralib-url "https://jira1.labs.<company>.com:8443")
+  :config (setq org-jira-use-status-as-todo t))
+
+;; (setq request-message-level 'debug)
+;; (setq request-log-level 'debug)
+
+(setq org-jira-custom-jqls
+      '(
+        (:jql "'Epic Link' in (OL-318) AND Type = BUG and status not in (DONE, CANCELLED) ORDER BY cf[10001] ASC, Status"
+              :limit 50
+              :filename "CP bugs")
+        (:jql "'Epic Link' in (OL-318) AND status not in (CANCELED) AND assignee WAS IN (currentUser(), aoprin, amilitaru) ORDER BY ID,status DESC"
+              :limit 100
+              :filename "CP")
+        ))
+
+(defconst org-jira-progress-issue-flow
+  '(("Todo" . "Selected for Development")
+    ("Selected for Development" . "In Progress")
+    ("In Progress" . "In Review")
+    ("In Review" . "In Testing")
+    ("In Testing" . "Done")
+    ))
+```
+
+The most useful one is to set `org-jira-use-status-as-todo`, so now a
+ticket will show up as below &mdash; notice the word `BACKLOG` is a
+status defined in my Jira, and it's taking place of the `TODO` in
+default org-mode:
+
+```org
+** BACKLOG QA_1910: Invalid port range error message displayed, although the range is correct :OL_3205:
+```
+
+## what is not working
+
+### workflow does not change status
+
+```lisp
+(defconst org-jira-progress-issue-flow
+  '(("Todo" . "Selected for Development")
+    ("Selected for Development" . "In Progress")
+    ("In Progress" . "In Review")
+    ("In Review" . "In Testing")
+    ("In Testing" . "Done")
+    ))
+```
+
+The workflow defined above actually does not change the `status` of
+the Jira ticket because the `status` is shown as a property in
+org-mode. So defining them here is only to make it **visually
+consistent** when you move ticket in org-mode itself as if the
+ticket's status is moving. You still need to use `C-c iw` to change
+the status, and it will post to Jira server to actually change the
+ticket.
+
+Further, I add this header to the org file itself:
+
+```org
+#+TODO: BACKLOG(b) SELECTED-FOR-DEVELOPMENT(f) IN-PROGRESS(p) IN-REVIEW(r) IN-TESTING(t) | DONE(d)
+```
+
+### priority has no effect
+
+org-mode priority has no effect on Jira ticket. It will be overwritten
+when you pull issues again (`C-c ij` or `C-c ig`). This is one bump I
+haven't figured out because it means I'll be losing info/history upon
+a pull.
+
+### multi-line comment
+
+You can add a comment `C-c cc`, but it gives you a mini buffer of a
+single line space, thus making it impossible to write multi line
+comment.
+
+However, once you add the comment, you can update the org using `C-c
+ir` or `C-c iR`, which will pull jira again and update org file, thus
+pulling down the new comment. Now go to the comment to add more txt,
+then `C-c cu` to update comment. So even as a 2-step process, you can
+write comment w/o leaving org-mode. So this is not too bad.
+
 
 Happy coding.
 

@@ -65,6 +65,30 @@ A list of VPN servers:
 - `webvpn.us.company.com`   for AG region user
 - `webvpn.sk.company.com`   for EMEA user​    
 
+## recompile openconnect & vpnc-script
+
+Well, once a while the enterprise decides to change their server
+configuration so that one server works, but the other keeps failing
+even though you have typed in the correct everything &mdash; my `.hk`
+server was happy (but complaining about a cert mismatch, not a blocker
+though), while my `.us` server just won't work.
+
+Time to recompile from [source][7]:
+
+1. get source: `git clone
+   git://git.infradead.org/users/dwmw2/openconnect.git`
+2. The usual steps: `./autogen && ./configure`.
+3. Download the [latest vpnc-script][8] or install `apt install vpnc`.
+4. Remove the stock openconnect: `apt remove openconnect && apt purge
+   openconnect`.
+5. `make` and `sudo make install`. Check that it's installed in
+   `/usr/local/bin`.
+6. Run it again, this time using the `vpnc-script` if you have one:
+   `openconnect -u username --reconnect-timeout 600 --script <path to
+   vnpc-script> webvpn.us.company.com`.
+   
+Enjoy your VPN.
+
 # Email
 
 These settings work for Thunderbird. Terminology may be different for
@@ -121,7 +145,9 @@ See my article on [emacs][6].
 
 [1]: https://www.skype.com/en/download-skype/skype-for-computer/
 [2]: https://launchpad.net/~sipe-collab/+archive/ubuntu/ppa
-[3]: {filename}/dev/mbsyc.md
+[3]: {filename}/dev/mbsync.md
 [4]: http://sipe.sourceforge.net/install/
 [5]: {filename}/dev/my%20system.md
 [6]: {filename}/dev/emacs.md
+[7]: https://www.infradead.org/openconnect/vpnc-script.html
+[8]: http://git.infradead.org/users/dwmw2/vpnc-scripts.git/blob_plain/HEAD:/vpnc-script

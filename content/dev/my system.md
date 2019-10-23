@@ -92,7 +92,10 @@ apt install \
   software-properties-common \
   remmina \
   pandoc-citeproc \
-
+  xclip \
+  ffmpeg \
+  recordmydesktop \
+  byzanz
 ```
 
 # local kvm setup

@@ -1,0 +1,7 @@
+{{/* table template */ -}}
+
+{{ range .issues -}}
+{{if eq (.fields.created|age)  "a day"}}
+| {{ .key | printf "%-7s"}} | {{ .fields.summary | abbrev 48 | printf (printf "%%-%ds" 48) }} | {{ slice (.fields.issuetype.name | printf "%-6s") 0 1 }} | {{ slice (.fields.status.name | printf "%-8s") 0 4 }} | {{ slice (.fields.priority.name | printf "%-8s") 0 1 }} | {{ .fields.created | age}}|
+{{end -}}
+{{ end -}}

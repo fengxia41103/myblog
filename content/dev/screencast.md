@@ -102,7 +102,7 @@ desktop in spectrwm.
 [4]: https://linux.die.net/man/1/byzanz-record
 
 ```
-$ sudo apt insteall byzanz-record
+$ sudo apt insteall byzanz <-- ubuntu 18.04
 
 Usage:
   byzanz-record [OPTION...] record your current desktop session

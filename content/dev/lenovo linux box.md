@@ -77,7 +77,7 @@ Time to recompile from [source][7]:
 
 1. get source: `git clone
    git://git.infradead.org/users/dwmw2/openconnect.git`
-2. The usual steps: `./autogen && ./configure`.
+2. The usual steps: `./autogen.sh && ./configure`.
 3. Download the [latest vpnc-script][8] or install `apt install vpnc`.
 4. Remove the stock openconnect: `apt remove openconnect && apt purge
    openconnect`.

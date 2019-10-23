@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://fengxia41103.github.io/myblog/theme/js/html5shiv.min.js"></script>
+    <script src="https://fengxia41103.github.io/myblog/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="https://fengxia41103.github.io/myblog/theme/css/my.css">
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="https://fengxia41103.github.io/myblog/" class="white-text">Be Care Free</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="https://fengxia41103.github.io/myblog/">Home</a>
+              <a href="https://fengxia41103.github.io/myblog/about.html">
+                . About
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/lei.html">
+                . 夏雷
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/project euler.html">
+                . Project Euler
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/quote.html">
+                . Quote
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/search.html">
+                . Search
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2019-10-23
+
+
+        <a class="wave-effect" href="dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+
+
+        <h1 class="myhighlight">Jira</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <figure class="col s12">
+  <img src="images/jira.gif"/>
+</figure>
+
+<p>Jira is, tough. I have been searching a solution to make my Jira life
+easy. The problems I want to fix are:</p>
+<ol>
+<li>Loading browser is too slow &larr; how many times I just want to
+   get a view of the comment or description so to refresh my memory.</li>
+<li>Navigating from one ticket to another is to open a new tab, but
+   that just clutter my browser. Very soon I don't remember which tab
+   is for which ticket, so ended up openning the same jira over and
+   over.</li>
+<li>To switch its status is again, to load page, click some kind of
+   dropdown, then click to select &rarr; 3 clicks. No, I already know
+   what status I want it to be, so I want to simplify this.</li>
+<li>#3 also applies to reassign a ticket to someone &mdash; there are
+   usually only a handful ppl you deal w/ on a daily basis during
+   development. Instead of waiting for the spinning wheel to come up
+   the name, just memorize the user's name, and assign.</li>
+<li>This is actually the very first reason got me to look into an
+   alternative solution than using a browser &mdash; <strong>create ticket</strong>
+   is very tedious! I dislike filling that form very much. Again,
+   usually I already know the value I want to use, so a cheat was to
+   <em>clone</em> an existing one. But then, finding an adequate existing one
+   is time consuming also. So again, to simplify this is a big win.</li>
+<li>Filters. Too many times there are this view, that view &mdash; I
+   want to see all my stories, or all my bugs, or just high priority
+   bugs, or just the ones created today, or all bugs associated w/ the
+   theme I'm working on because I need to coordinate developers on the
+   work.... the list goes on and on, and I know, there is the filter,
+   which is nothing but a web version of the JQL query. So why the
+   hassle of creating a whole bunch of filters, then the browser takes
+   a long time to load, and that filter gives you a <strong>long list of
+   fields</strong> you can display! But hell, I only care a few fields which
+   the team uses, so even to hunt down the fields that is useful to me
+   is time consuming. I want to use the JQL and a list of fields that
+   has valuable info, no more, no less.</li>
+</ol>
+<p>So the journey goes w/ a weekend try starting w/ <a href="https://github.com/ahungry/org-jira">org-jira</a>, which
+looked very promising! I thought it would also be a good way to learn
+org-mode. But hell, the org-mode itself is really slow! Just a small
+org file of my bugs make the entire emacs choking to death. WTF!</p>
+<p>Long story short. Here is the <a href="https://github.com/go-jira/jira">go-jira</a>, incredibly fast, and
+useful! It's a command line (<a href="https://fengxia41103.github.io/myblog/downloads/jira/jira">download here</a>), just copy it to
+<code>/usr/local/bin</code> and type <code>jira help</code>:</p>
+<div class="highlight"><pre><span></span>╰─➤  jira <span class="nb">help</span>
+usage: jira <span class="o">[</span>&lt;flags&gt;<span class="o">]</span> &lt;command&gt; <span class="o">[</span>&lt;args&gt; ...<span class="o">]</span>
+
+Jira Command Line Interface
+
+Global flags:
+      --help                   Show context-sensitive <span class="nb">help</span> <span class="o">(</span>also try --help-long and --help-man<span class="o">)</span>.
+  -v, --verbose ...            Increase verbosity <span class="k">for</span> debugging
+  -e, --endpoint<span class="o">=</span>ENDPOINT      Base URI to use <span class="k">for</span> Jira
+  -k, --insecure               Disable TLS certificate verification
+  -Q, --quiet                  Suppress output to console
+      --unixproxy<span class="o">=</span>UNIXPROXY    Path <span class="k">for</span> a unix-socket proxy
+      --socksproxy<span class="o">=</span>SOCKSPROXY  Address <span class="k">for</span> a socks proxy
+  -u, --user<span class="o">=</span>USER              user name used within the Jira service
+      --login<span class="o">=</span>LOGIN            login name that corresponds to the user used <span class="k">for</span> authentication
+
+Commands:
+  help:                Show help.
+  version:             Prints version
+  acknowledge:         Transition issue to acknowledge state
+  assign:              Assign user to issue
+  attach create:       Attach file to issue
+  attach get:          Fetch attachment
+  attach list:         Prints attachment details <span class="k">for</span> issue
+  attach remove:       Delete attachment
+  backlog:             Transition issue to Backlog state
+  block:               Mark issues as blocker
+  browse:              Open issue in browser
+  close:               Transition issue to close state
+  comment:             Add comment to issue
+  component add:       Add component
+  components:          Show components <span class="k">for</span> a project
+  create:              Create issue
+  createmeta:          View <span class="s1">&#39;create&#39;</span> metadata
+  <span class="k">done</span>:                Transition issue to Done state
+  dup:                 Mark issues as duplicate
+  edit:                Edit issue details
+  editmeta:            View <span class="s1">&#39;edit&#39;</span> metadata
+  epic add:            Add issues to Epic
+  epic create:         Create Epic
+  epic list:           Prints list of issues <span class="k">for</span> an epic with optional search criteria
+  epic remove:         Remove issues from Epic
+  export-templates:    Export templates <span class="k">for</span> customizations
+  fields:              Prints all fields, both System and Custom
+  in-progress:         Transition issue to Progress state
+  issuelink:           Link two issues
+  issuelinktypes:      Show the issue link types
+  issuetypes:          Show issue types <span class="k">for</span> a project
+  labels add:          Add labels to an issue
+  labels remove:       Remove labels from an issue
+  labels set:          Set labels on an issue
+  list:                Prints list of issues <span class="k">for</span> given search criteria
+  login:               Attempt to login into jira server
+  logout:              Deactivate session with Jira server
+  rank:                Mark issues as blocker
+  reopen:              Transition issue to reopen state
+  request:             Open issue in requestr
+  resolve:             Transition issue to resolve state
+  start:               Transition issue to start state
+  stop:                Transition issue to stop state
+  subtask:             Subtask issue
+  take:                Assign issue to yourself
+  todo:                Transition issue to To Do state
+  transition:          Transition issue to given state
+  transitions:         List valid issue transitions
+  transmeta:           List valid issue transitions
+  unassign:            Unassign an issue
+  unexport-templates:  Remove unmodified exported templates
+  view:                Prints issue details
+  vote:                Vote up/down an issue
+  watch:               Add/Remove watcher to issue
+  worklog add:         Add a worklog to an issue
+  worklog list:        Prints the worklog data <span class="k">for</span> given issue
+  session:             Attempt to login into jira server
+</pre></div>
+
+
+<h1>templates</h1>
+<p>This thing is really sick. It uses YAML template to handle all the
+data posting back to the Jira server. Thus, you are dealing w/ a list
+of yaml files to tweak what data fields you want to use in an
+action. But two most useful ones are: <a href="https://fengxia41103.github.io/myblog/downloads/jira/template/table">table</a> and <a href="https://fengxia41103.github.io/myblog/downloads/jira/template/create">create</a>.</p>
+<h2><code>table</code> template</h2>
+<p><a href="https://fengxia41103.github.io/myblog/downloads/jira/template/table">This</a> is the primary table template to display a list of things, the
+same idea in jira browser when you on a list view. Since this is to
+display on a terminal, nothing fancy is required, just straightforward
+string to compose a <em>table</em> look. The key to success is to:</p>
+<ol>
+<li>know what <code>fields</code> are available</li>
+<li>some knowledge of this strange <a href="https://gohugo.io/templates/introduction/">hugo syntax</a>. It's quite like
+   Jinja2, the concept is the same, just different syntax. One thing I
+   find useful is its <a href="https://gohugo.io/functions/">functions</a>, so you can do a bit of extra in
+   the template. But overall, writing template is not pleasant, but
+   it's a one-time deal, so it's ok.</li>
+</ol>
+<p>What it looks like is pretty slick! &rarr;</p>
+<div class="highlight"><pre><span></span>╰─➤  jira cp-bug-mine                                                                                    1 ↵
+| OL-3228 | QA_1910:User management section incorrectly r... | B | In T | fxia1      | M | 19 days
+| OL-3482 | Nav area font is not high contrast enough        | B | Sele | fxia1      | M | 4 days
+| OL-3453 | Storage HA failed notification - contact info... | B | Sele | fxia1      | M | 6 days
+| OL-3342 | QA_1910_chat box icon is not visible in login... | B | Sele | fxia1      | M | 14 days
+| OL-3327 | QA_1910:Shut Down failed for application inst... | B | In P | fxia1      | H | 14 days
+| OL-3326 | QA_1910: Chat support box is grey&#39;ed out         | B | In P | fxia1      | H | 14 days
+| OL-3241 | QA_1910: Lenovo EULA in create account page s... | B | In P | fxia1      | H | 19 days
+| OL-3560 | QA_1910_Empty extra cell in Network Reosurces    | B | Back | fxia1      | M | a day
+| OL-3552 | QA_1910- Cloud controller version is displaye... | B | Back | fxia1      | H | a day
+| OL-3551 | QA_1910 - User guide page is not loaded with ... | B | Back | fxia1      | M | a day
+| OL-3549 | QA_1910_Shows cloudistics fav icon for a second  | B | Back | fxia1      | M | a day
+| OL-3548 | QA_1910_Lenovo cloud market place filter by l... | B | Back | fxia1      | M | a day
+| OL-3546 | QA_1910_change filter by label color             | B | Back | fxia1      | M | a day
+| OL-3545 | QA_1910: The Lenovo logo from main login page... | B | Back | fxia1      | M | a day
+| OL-3544 | QA_1910: The links to User guide and Legal In... | B | Back | fxia1      | M | a day
+| OL-3532 | QA_1910 - Chat box chat information is displa... | B | Back | fxia1      | M | a day
+| OL-3530 | QA_1910_Texts are not visible in calendar pop... | B | Back | fxia1      | M | a day
+| OL-3328 | QA_1910:Error message received while performi... | B | Back | fxia1      | H | 14 days
+| OL-3270 | QA_1910: Trouble downloading multiple templat... | B | Back | fxia1      | H | 15 days
+| OL-3214 | QA_1910: Can filter info storage having only ... | B | Back | fxia1      | M | 20 days
+| OL-3205 | QA_1910: Invalid port range error message dis... | B | Back | fxia1      | H | 20 days
+| OL-3204 | QA_1910:An error appears in top right corner ... | B | Back | fxia1      | M | 20 days
+| OL-3201 | QA_1910: Unable to restart windows Instance      | B | Back | fxia1      | H | 20 days
+| OL-3198 | QA_1910:No text appears in the white borders ... | B | Back | fxia1      | M | 20 days
+| OL-3183 | QA_1910:Inconsistent behavior when assign a V... | B | Back | fxia1      | M | 21 days
+| OL-3182 | QA_1910:The window that pops out when user ad... | B | Back | fxia1      | L | 21 days
+| OL-3117 | QA_1910_&#39;verify phone number page&#39; lenovo Log... | B | Back | fxia1      | M | 27 days
+</pre></div>
+
+
+<h2><code>create</code> template</h2>
+<p>This is to display a YAML file for you to fill in the blanks. This is
+where you can plugin all kinds of <em>hardcoded</em> values to save
+time. It's pretty self-explanatory, so <a href="https://fengxia41103.github.io/myblog/downloads/jira/template/create">take a look</a>. I don't know
+much about the <a href="https://gohugo.io/templates/introduction/">hugo</a> yet, so most of the contents here are just
+basics.</p>
+<h1>jira server, username</h1>
+<p>In <a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml">config.yml</a>, just define these:</p>
+<div class="highlight"><pre><span></span><span class="nt">endpoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://jira1.labs.company.com:8443</span>
+<span class="nt">user</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fxia1</span>
+</pre></div>
+
+
+<p>It will prompt you for password when it tries to connect. Somehow it
+saves (cookie?) so that once you have authenticated, your CLI works
+without asking the password again for a while (good a whole day in my
+situation). I haven't found an option where I can save the pwd, like
+<code>.authinfo</code>. Small inconvenience.</p>
+<h1>custom commands</h1>
+<p>This is really a life-saver, unbelievably powerful! You just define a
+JQL, and it becomes just another command! Example:</p>
+<div class="highlight"><pre><span></span><span class="nt">custom-commands</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mine</span>
+    <span class="nt">help</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Display issues assigned to me</span>
+    <span class="nt">script</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+      <span class="no">{{jira}} list --template table --query &quot;</span>
+      <span class="no">assignee=currentUser()</span>
+        <span class="no">AND status not in (DONE,CANCELED)</span>
+      <span class="no">ORDER BY</span>
+        <span class="no">issuetype ASC,</span>
+        <span class="no">status DESC,</span>
+        <span class="no">created DESC,</span>
+        <span class="no">key DESC</span>
+      <span class="no">&quot;</span>
+</pre></div>
+
+
+<p>This says to use the <a href="https://fengxia41103.github.io/myblog/downloads/jira/template/table">table template</a> for display, and the query
+string is the just whatever you want to speak to jira server. Also by
+using the <code>&gt;-</code> to handle <a href="https://yaml-multiline.info/">yaml multiline string</a>, we can type the
+query in any nice indented format you like, and it will be converted
+into a single string by removing all the newlines in between w/ a
+single white space! Slick, isn't it!?</p>
+<p>With this, you can really just learn the JQL and fly w/ your
+knowledge. The entire jira server is up for your grab at this
+point. Of course you can just copy &amp; paste your filter's SQL query
+string from Jira brower to here!  To give you an idea what it can do,
+here are the <em>filters</em> I'm using:</p>
+<div class="highlight"><pre><span></span>  cp-story:            All CP stories
+  cp-bug:              All CP bugs
+  cp-story-mine:       My CP stories
+  cp-bug-mine:         My CP bugs
+  cp-mine:             Everything of CP that is assigned to me
+  cp-done:             CP <span class="k">done</span> items
+  cp-unassigned:       CP unassigned items
+</pre></div>
+
+
+<p>If I'm really interested the look, I can give it different <code>--template
+&lt;whatever&gt;</code> to customize that experience. But as of today, I really
+want to a consistent view, the same view, for all the tables, so I
+save on context switching looking at different look for each filter
+(which I found very annoying, and no value add in term of information,
+whatsoever).</p>
+<h1>editor</h1>
+<p>Set in <a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml"><code>config.yml</code></a>. I think it uses whatever the default editor
+is. I tried <code>nano</code> and for now, using <code>emacsclient</code> will simply reuse
+the existing emacs session and opens a new buffer! &rarr; makes
+editing YAML so much more pleasant. And it is definitely better than
+typing in browser's small text box!</p>
+<h1>commands</h1>
+<p>These are the ones I use the most:</p>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jira mine</td>
+<td>list everything assigned me</td>
+</tr>
+<tr>
+<td>jira today-mine</td>
+<td>everything created today an assigned to me</td>
+</tr>
+<tr>
+<td>jira <custom cmd></td>
+<td>any shortcut you defined</td>
+</tr>
+<tr>
+<td>jira comment OL-1234</td>
+<td>make a comment</td>
+</tr>
+<tr>
+<td>jira view OL-1234</td>
+<td>view a ticket</td>
+</tr>
+<tr>
+<td>jira create -p OL</td>
+<td>create a ticket for project "OL"</td>
+</tr>
+<tr>
+<td>jira view OL-1234 -t debug</td>
+<td>check what fields are available/useful</td>
+</tr>
+<tr>
+<td>jira transitions</td>
+<td>available transition values</td>
+</tr>
+<tr>
+<td>jira transition "<val>" OL-</td>
+<td>move along the workflow</td>
+</tr>
+<tr>
+<td>jira take OL-</td>
+<td>assign it to myself</td>
+</tr>
+<tr>
+<td>jira give <userX> OL-</td>
+<td>give it to him/her</td>
+</tr>
+<tr>
+<td>jira done OL-</td>
+<td>mark it DONE</td>
+</tr>
+</tbody>
+</table>
+<p>So far, soooooooooooooooooooooooo good ~~~~~</p>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-10-11
+            </div>
+
+            <h5 class="card-title">
+              Linux Terminator cheatsheet
+            </h5>
+
+            <p>
+              <p>Linux Terminator keybinding cheat sheet.</p>
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="https://fengxia41103.github.io/myblog/linux terminator cheatsheet.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2019-10-08
+            </div>
+
+            <h5 class="card-title">
+              My system
+            </h5>
+
+            <p>
+              <p>Instructions to rebuild my system from scratch based on Ubuntu 18.04.</p>
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="https://fengxia41103.github.io/myblog/my system.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="https://fengxia41103.github.io/myblog/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+            <i class="fa fa-tag"></i>
+            feng
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

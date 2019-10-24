@@ -7,6 +7,7 @@ Summary: Instructions to rebuild my system from scratch based on Ubuntu 18.04.
 Modified: 2019-10-17 20:55
 
 
+
 Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
 decided to install Ubuntu from scratch), I'm going to document (rather

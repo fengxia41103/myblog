@@ -165,11 +165,11 @@ additional entries for all CIMP ndoes. Alternatively, you'll need to add
 the machines to <code>/etc/hosts</code> on all nodes (<code>cimp-node2</code> shown below):</p>
 <div class="highlight"><pre><span></span><span class="c1"># cat /etc/hosts</span>
 
-<span class="m">127</span>.0.0.1   cimp-node2 localhost localhost.localdomain localhost4 localhost4.localdomain4
+127.0.0.1   cimp-node2 localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         cimp-node2 localhost localhost.localdomain localhost6 localhost6.localdomain6
-<span class="m">192</span>.0.23.1 cimp-node1
-<span class="m">192</span>.0.23.2 cimp-node2
-<span class="m">192</span>.0.23.3 cimp-node3
+192.0.23.1 cimp-node1
+192.0.23.2 cimp-node2
+192.0.23.3 cimp-node3
 </pre></div>
 
 
@@ -218,7 +218,7 @@ userspace-rcu-0.7.16-1.el7.x86_64.rpm​
 <p>After the installation, use the following command to verify:</p>
 <div class="highlight"><pre><span></span>$ gluster --version
 
-glusterfs <span class="m">3</span>.8.7 built on Dec <span class="m">14</span> <span class="m">2016</span> <span class="m">04</span>:49:31
+glusterfs 3.8.7 built on Dec <span class="m">14</span> <span class="m">2016</span> 04:49:31
 Repository revision: git://git.gluster.com/glusterfs.git
 ...
 </pre></div>
@@ -254,8 +254,8 @@ $ sudo systemctl status glusterd
 <blockquote>
 <p>Execute for each node.</p>
 </blockquote>
-<div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">111</span>/tcp --add-port<span class="o">=</span><span class="m">139</span>/tcp --add-port<span class="o">=</span><span class="m">445</span>/tcp --add-port<span class="o">=</span><span class="m">965</span>/tcp --add-port<span class="o">=</span><span class="m">2049</span>/tcp --add-port<span class="o">=</span><span class="m">38465</span>-38469/tcp --add-port<span class="o">=</span><span class="m">24007</span>-24008/tcp --add-port<span class="o">=</span><span class="m">631</span>/tcp --add-port<span class="o">=</span><span class="m">111</span>/udp --add-port<span class="o">=</span><span class="m">963</span>/udp --add-port<span class="o">=</span><span class="m">49152</span>-49251/tcp  --permanent
-$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">5900</span>-5910/tcp  --permanent
+<div class="highlight"><pre><span></span>$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>111/tcp --add-port<span class="o">=</span>139/tcp --add-port<span class="o">=</span>445/tcp --add-port<span class="o">=</span>965/tcp --add-port<span class="o">=</span>2049/tcp --add-port<span class="o">=</span>38465-38469/tcp --add-port<span class="o">=</span>24007-24008/tcp --add-port<span class="o">=</span>631/tcp --add-port<span class="o">=</span>111/udp --add-port<span class="o">=</span>963/udp --add-port<span class="o">=</span>49152-49251/tcp  --permanent
+$ sudo firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>5900-5910/tcp  --permanent
 $ sudo firewall-cmd --reload
 </pre></div>
 
@@ -272,7 +272,7 @@ $ sudo firewall-cmd --reload
 </blockquote>
 <div class="highlight"><pre><span></span>$ sudo pvcreate /dev/sdb2
 $ sudo vgcreate vg_gluster /dev/sdb2
-$ sudo lvcreate -l <span class="m">100</span>%FREE -n brick-img vg_gluster
+$ sudo lvcreate -l 100%FREE -n brick-img vg_gluster
 $ sudo mkfs.xfs /dev/vg_gluster/brick-img
 </pre></div>
 
@@ -302,7 +302,7 @@ $ sudo  mount /dev/vg_gluster/brick-img /var/brick-img
 
 
 <p>To make this mount persistent, add the following line in the <code>/etc/fstab</code>:</p>
-<div class="highlight"><pre><span></span>/dev/vg_gluster/brick-img /var/brick-img            xfs defaults <span class="m">0</span> <span class="m">0</span>
+<div class="highlight"><pre><span></span>/dev/vg_gluster/brick-img /var/brick-img            xfs defaults <span class="m">0</span> 0
 </pre></div>
 
 
@@ -313,7 +313,7 @@ proc on /proc <span class="nb">type</span> proc <span class="o">(</span>rw,nosui
 
 ...
 
-tmpfs on /run/user/1000 <span class="nb">type</span> tmpfs <span class="o">(</span>rw,nosuid,nodev,relatime,size<span class="o">=</span>52761800k,mode<span class="o">=</span><span class="m">700</span>,uid<span class="o">=</span><span class="m">1000</span>,gid<span class="o">=</span><span class="m">1000</span><span class="o">)</span>
+tmpfs on /run/user/1000 <span class="nb">type</span> tmpfs <span class="o">(</span>rw,nosuid,nodev,relatime,size<span class="o">=</span>52761800k,mode<span class="o">=</span>700,uid<span class="o">=</span>1000,gid<span class="o">=</span>1000<span class="o">)</span>
 /dev/mapper/vg_gluster-brick--img on /var/brick-img <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
 </pre></div>
 
@@ -349,8 +349,8 @@ Volume Name: vol-1
 Type: Replicate
 Volume ID: e2adeb6c-e0ac-4696-8d9f-940536a6f525
 Status: Started
-Snapshot Count: <span class="m">0</span>
-Number of Bricks: <span class="m">1</span> x <span class="nv">3</span> <span class="o">=</span> <span class="m">3</span>
+Snapshot Count: 0
+Number of Bricks: <span class="m">1</span> x <span class="nv">3</span> <span class="o">=</span> 3
 Transport-type: tcp
 Bricks:
 Brick1: cimp-node1:/var/brick-img/running
@@ -382,12 +382,12 @@ snapshots that requires GlusterFS as the backend storage pool.</p>
 
 
 <p>To make the mount persistent, the mount entry should be added to <code>/etc/fstab</code>:</p>
-<div class="highlight"><pre><span></span>cimp-node1:vol-1  /varimages/running glusterfs defaults,_netdev <span class="m">0</span> <span class="m">0</span>
+<div class="highlight"><pre><span></span>cimp-node1:vol-1  /varimages/running glusterfs defaults,_netdev <span class="m">0</span> 0
 </pre></div>
 
 
 <p>Finally, enable <code>virt_use_fusefs</code>:</p>
-<div class="highlight"><pre><span></span>$ sudo setsebool -P virt_use_fusefs <span class="m">1</span>
+<div class="highlight"><pre><span></span>$ sudo setsebool -P virt_use_fusefs 1
 </pre></div>
 
 
@@ -399,7 +399,7 @@ snapshots that requires GlusterFS as the backend storage pool.</p>
 to keep 4 weeks backlog only.</p>
 <div class="highlight"><pre><span></span>$ nano /etc/logrotate.d/glusterfs
 
-rotate <span class="m">52</span> --&gt; rotate <span class="m">4</span>
+rotate <span class="m">52</span> --&gt; rotate 4
 </pre></div>
 
 
@@ -409,7 +409,7 @@ rotate <span class="m">52</span> --&gt; rotate <span class="m">4</span>
 make sure it replicates automatically to all the other CIMP nodes.</p>
 <p>If the directory is read-only, it usually indicates the GlusterFS cluster is not formed either because of networking connection issues or firewall issue.</p>
 <div class="highlight"><pre><span></span><span class="o">[</span>root@cimp-node1 ~<span class="o">]</span><span class="c1"># gluster peer status</span>
-Number of Peers: <span class="m">2</span>
+Number of Peers: 2
 
 Hostname: cimp-node2
 Uuid: c20929dd-3ef1-432f-8d51-ca61ac74f9b2
@@ -492,7 +492,7 @@ ACCEPT     tcp  --  anywhere             anywhere             tcp dpts:49152:492
               <p>In <a href="https://fengxia41103.github.io/myblog/juju local LXD.html">LXD on localhost</a> we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
-enough with <code>$ juju gui</code>...
+enough with <code>$ juju gui</code> ...
             </p>
 
             <div class="card-action">
@@ -519,7 +519,7 @@ enough with <code>$ juju gui</code>...
             <p>
               <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
-development for a while, you know making a one line of code...
+development for a while, you know making a one line of code ...
             </p>
 
             <div class="card-action">
@@ -548,7 +548,7 @@ development for a while, you know making a one line of code...
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.</p>
-<p>Design...
+<p>Design ...
             </p>
 
             <div class="card-action">

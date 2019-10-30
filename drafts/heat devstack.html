@@ -143,7 +143,7 @@ up to date. In the doc there are two ways to enable Heat service:</p>
 <div class="highlight"><pre><span></span><span class="k">[[local|localrc]]</span>
 
 <span class="c1"># Enable heat services</span>
-<span class="na">enable_service h-eng h-api h-api-cfn h-api-cw</span>
+<span class="err">enable_service</span> <span class="err">h-eng</span> <span class="err">h-api</span> <span class="err">h-api-cfn</span> <span class="err">h-api-cw</span>
 </pre></div>
 
 
@@ -153,7 +153,7 @@ up to date. In the doc there are two ways to enable Heat service:</p>
 <div class="highlight"><pre><span></span><span class="k">[[local|localrc]]</span>
 
 <span class="c1">#Enable heat plugin</span>
-<span class="na">enable_plugin heat https://git.openstack.org/openstack/heat</span>
+<span class="err">enable_plugin</span> <span class="err">heat</span> <span class="err">https://git.openstack.org/openstack/heat</span>
 </pre></div>
 
 
@@ -207,8 +207,8 @@ enable_service s-account
 <span class="nv">SWIFT_ENABLE_TEMPURLS</span><span class="o">=</span>True
 
 <span class="c1"># Create 3 virtual machines to pose as Ironic&#39;s baremetal nodes.</span>
-<span class="nv">IRONIC_VM_COUNT</span><span class="o">=</span><span class="m">3</span>
-<span class="nv">IRONIC_VM_SSH_PORT</span><span class="o">=</span><span class="m">22</span>
+<span class="nv">IRONIC_VM_COUNT</span><span class="o">=</span>3
+<span class="nv">IRONIC_VM_SSH_PORT</span><span class="o">=</span>22
 <span class="nv">IRONIC_BAREMETAL_BASIC_OPS</span><span class="o">=</span>True
 <span class="nv">DEFAULT_INSTANCE_TYPE</span><span class="o">=</span>baremetal
 
@@ -221,11 +221,11 @@ enable_service s-account
 
 <span class="c1"># The parameters below represent the minimum possible values to create</span>
 <span class="c1"># functional nodes.</span>
-<span class="nv">IRONIC_VM_SPECS_RAM</span><span class="o">=</span><span class="m">1280</span>
-<span class="nv">IRONIC_VM_SPECS_DISK</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">IRONIC_VM_SPECS_RAM</span><span class="o">=</span>1280
+<span class="nv">IRONIC_VM_SPECS_DISK</span><span class="o">=</span>10
 
 <span class="c1"># Size of the ephemeral partition in GB. Use 0 for no ephemeral partition.</span>
-<span class="nv">IRONIC_VM_EPHEMERAL_DISK</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">IRONIC_VM_EPHEMERAL_DISK</span><span class="o">=</span>0
 
 <span class="c1"># To build your own IPA ramdisk from source, set this to True</span>
 <span class="nv">IRONIC_BUILD_DEPLOY_RAMDISK</span><span class="o">=</span>False
@@ -235,9 +235,9 @@ enable_service s-account
 <span class="c1"># By default, DevStack creates a 10.0.0.0/24 network for instances.</span>
 <span class="c1"># If this overlaps with the hosts network, you may adjust with the</span>
 <span class="c1"># following.</span>
-<span class="nv">NETWORK_GATEWAY</span><span class="o">=</span><span class="m">10</span>.1.0.1
-<span class="nv">FIXED_RANGE</span><span class="o">=</span><span class="m">10</span>.1.0.0/24
-<span class="nv">FIXED_NETWORK_SIZE</span><span class="o">=</span><span class="m">256</span>
+<span class="nv">NETWORK_GATEWAY</span><span class="o">=</span>10.1.0.1
+<span class="nv">FIXED_RANGE</span><span class="o">=</span>10.1.0.0/24
+<span class="nv">FIXED_NETWORK_SIZE</span><span class="o">=</span>256
 
 <span class="c1"># Log all output to files</span>
 <span class="nv">LOGFILE</span><span class="o">=</span>/tmp/devstack.log
@@ -249,11 +249,11 @@ enable_service s-account
 <span class="c1">#enable_service h-eng h-api h-api-cfn h-api-cw</span>
 <span class="c1">#Enable heat plugin</span>
 enable_plugin heat https://git.openstack.org/openstack/heat
-<span class="nv">ENABLED_SERVICES</span><span class="o">+=</span>,heat,h-api,h-api-cfn,h-api-cw,h-eng
+ENABLED_SERVICES+<span class="o">=</span>,heat,h-api,h-api-cfn,h-api-cw,h-eng
 <span class="nv">IMAGE_URL_SITE</span><span class="o">=</span><span class="s2">&quot;http://download.fedoraproject.org&quot;</span>
 <span class="nv">IMAGE_URL_PATH</span><span class="o">=</span><span class="s2">&quot;/pub/fedora/linux/releases/25/CloudImages/x86_64images/&quot;</span>
 <span class="nv">IMAGE_URL_FILE</span><span class="o">=</span><span class="s2">&quot;Fedora-Cloud-Base-25-1.3.x86_64.qcow2&quot;</span>
-<span class="nv">IMAGE_URLS</span><span class="o">+=</span><span class="s2">&quot;,&quot;</span><span class="nv">$IMAGE_URL_SITE$IMAGE_URL_PATH$IMAGE_URL_FILE</span>
+IMAGE_URLS+<span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="nv">$IMAGE_URL_SITE$IMAGE_URL_PATH$IMAGE_URL_FILE</span>
 </pre></div>
         </p>
 
@@ -307,7 +307,7 @@ enable_plugin heat https://git.openstack.org/openstack/heat
               <p>In <a href="https://fengxia41103.github.io/myblog/juju local LXD.html">LXD on localhost</a> we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
-enough with <code>$ juju gui</code>...
+enough with <code>$ juju gui</code> ...
             </p>
 
             <div class="card-action">
@@ -334,7 +334,7 @@ enough with <code>$ juju gui</code>...
             <p>
               <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
-development for a while, you know making a one line of code...
+development for a while, you know making a one line of code ...
             </p>
 
             <div class="card-action">
@@ -363,7 +363,7 @@ development for a while, you know making a one line of code...
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.</p>
-<p>Design...
+<p>Design ...
             </p>
 
             <div class="card-action">

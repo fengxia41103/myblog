@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - rh</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/rh.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-07-19T22:40:00-04:00</updated><entry><title>Use RHEL server qcow2 as sandbox</title><link href="https://fengxia41103.github.io/myblog/use%20rhel%20server%20qcow2%20as%20sandbox.html" rel="alternate"></link><published>2018-04-16T00:00:00-04:00</published><updated>2018-07-19T22:40:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-16:/myblog/use rhel server qcow2 as sandbox.html</id><summary type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
-&lt;a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software"&gt;here&lt;/a&gt;). This image has disabled root password, and disabled SSH
-access &amp;larr; so what the heck!?&lt;/p&gt;
-&lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
-&lt;p&gt;Really ugly solution. Anyway. On a Ubuntu 16.04, install &lt;code&gt;guestfish&lt;/code&gt;
-and &lt;code&gt;libguesttools&lt;/code&gt;, then:&lt;/p&gt;
-&lt;h2&gt;create root …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/rh.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-07-19T22:40:00-04:00</updated><entry><title>Use RHEL server qcow2 as sandbox</title><link href="https://fengxia41103.github.io/myblog/use%20rhel%20server%20qcow2%20as%20sandbox.html" rel="alternate"></link><published>2018-07-19T22:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-16:myblog/use rhel server qcow2 as sandbox.html</id><summary type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
 &lt;a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software"&gt;here&lt;/a&gt;). This image has disabled root password, and disabled SSH
 access &amp;larr; so what the heck!?&lt;/p&gt;
 &lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
@@ -27,10 +21,10 @@ $ openssl passwd -1 natalie
 &lt;p&gt;Modify the image directly:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
 $ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
-&amp;amp;gt;&amp;amp;lt;fs&amp;amp;gt; run
-&amp;amp;gt;&amp;amp;lt;fs&amp;amp;gt; list-filesystems
-&amp;amp;gt;&amp;amp;lt;fs&amp;amp;gt; mount /dev/sda1 /
-&amp;amp;gt;&amp;amp;lt;fs&amp;amp;gt; vi /etc/shadow
+&amp;gt;&amp;lt;fs&amp;gt; run
+&amp;gt;&amp;lt;fs&amp;gt; list-filesystems
+&amp;gt;&amp;lt;fs&amp;gt; mount /dev/sda1 /
+&amp;gt;&amp;lt;fs&amp;gt; vi /etc/shadow
 ```
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -89,13 +83,7 @@ cloud_init_modules:
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now &lt;code&gt;quit&lt;/code&gt; from guetfish terminal. You are done.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Satellite</title><link href="https://fengxia41103.github.io/myblog/satellite.html" rel="alternate"></link><published>2018-04-15T00:00:00-04:00</published><updated>2018-04-15T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-15:/myblog/satellite.html</id><summary type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
-between 6.2 and 6.3. Grasp the concept here, and hopefully you will
-have a good understanding of the Satellite models and procedures.&lt;/p&gt;
-&lt;h1&gt;Architecture&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;One&lt;/strong&gt; satellite server (master server), and &lt;strong&gt;1+&lt;/strong&gt; capsule servers.&lt;/li&gt;
-&lt;li&gt;The Satellite Server is …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
+&lt;p&gt;Now &lt;code&gt;quit&lt;/code&gt; from guetfish terminal. You are done.&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Satellite</title><link href="https://fengxia41103.github.io/myblog/satellite.html" rel="alternate"></link><published>2018-04-15T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-15:myblog/satellite.html</id><summary type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
 between 6.2 and 6.3. Grasp the concept here, and hopefully you will
 have a good understanding of the Satellite models and procedures.&lt;/p&gt;
 &lt;h1&gt;Architecture&lt;/h1&gt;
@@ -137,7 +125,7 @@ between on-premise &lt;code&gt;Satellite&lt;/code&gt; source vs. everything else
 from. Look at &lt;code&gt;/etc/yum.repo.d/redhat.repo&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;For example:
 &lt;span class="o"&gt;[&lt;/span&gt;rhel-7-server-openstack-11-devtools-debug-rpms&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;metadata_expire&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;86400&lt;/span&gt;
+&lt;span class="nv"&gt;metadata_expire&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 86400
 &lt;span class="nv"&gt;sslclientcert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /etc/pki/entitlement/2890837266996509363.pem
 
 &lt;span class="c1"&gt;#####&lt;/span&gt;
@@ -145,13 +133,13 @@ from. Look at &lt;code&gt;/etc/yum.repo.d/redhat.repo&lt;/code&gt;:&lt;/p&gt;
 &lt;span class="c1"&gt;#####&lt;/span&gt;
 
 &lt;span class="nv"&gt;ui_repoid_vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; basearch
-&lt;span class="nv"&gt;sslverify&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;sslverify&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
 &lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Red Hat OpenStack Platform &lt;span class="m"&gt;11&lt;/span&gt; Developer Tools &lt;span class="k"&gt;for&lt;/span&gt; RHEL &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;Debug RPMs&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;sslclientkey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /etc/pki/entitlement/2890837266996509363-key.pem
 &lt;span class="nv"&gt;gpgkey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-&lt;span class="nv"&gt;enabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;enabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 0
 &lt;span class="nv"&gt;sslcacert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /etc/rhsm/ca/redhat-uep.pem
-&lt;span class="nv"&gt;gpgcheck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -160,19 +148,19 @@ catch-all Redhat source, meaning you are pulling things directly from
 Red Hat.&lt;/p&gt;
 &lt;p&gt;On a Satellite client, instead, you will something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Lenovo_IBB_Lenovo_Yum_Repo_Lenovo_yum_repo_SLES11SP4_Default&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="nv"&gt;metadata_expire&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;metadata_expire&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
 &lt;span class="nv"&gt;sslclientcert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /etc/pki/entitlement/3451950880933034925.pem
 
 &lt;span class="c1"&gt;#####&lt;/span&gt;
 &lt;span class="nv"&gt;baseurl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; https://brain4-satellite.labs.lenovo.com/pulp/repos/Lenovo_IBB/...........
 &lt;span class="c1"&gt;#####&lt;/span&gt;
 
-&lt;span class="nv"&gt;sslverify&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;sslverify&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
 &lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Lenovo yum repo SLES11SP4_Default
 &lt;span class="nv"&gt;sslclientkey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /etc/pki/entitlement/3451950880933034925-key.pem
-&lt;span class="nv"&gt;enabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;enabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1
 &lt;span class="nv"&gt;sslcacert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /etc/rhsm/ca/katello-server-ca.pem
-&lt;span class="nv"&gt;gpgcheck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 0
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -437,4 +425,4 @@ page:&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.ibm.com/support/knowledgecenter/SSCR9A_2.2.0/doc/iwd/c_redhat_satlitesrv_standup.html"&gt;IBM doc on Satellite&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://linux.lenovo.com/yum/"&gt;Lenovo Yum repo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.redhat.com/en/about/subscription-model-faq#?"&gt;Red Hat Subscription Model FAQ&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><category term="lenovo"></category></entry></feed>
+&lt;/ol&gt;</summary><category term="lenovo"></category></entry></feed>

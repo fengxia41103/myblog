@@ -247,11 +247,11 @@ this folder did not exist prior to the <code>add-machine</code> command.</p>
 │       └── jujud-machine-15.service
 ├── locks
 └── tools
-    ├── <span class="m">2</span>.0.1.98-xenial-amd64
+    ├── 2.0.1.98-xenial-amd64
     │   ├── downloaded-tools.txt
     │   ├── FORCE-VERSION
     │   └── jujud
-    └── machine-15 -&gt; <span class="m">2</span>.0.1.98-xenial-amd64
+    └── machine-15 -&gt; 2.0.1.98-xenial-amd64
 
 <span class="m">8</span> directories, <span class="m">6</span> files
 </pre></div>
@@ -273,7 +273,7 @@ forth), but will be tedious. </p>
 /etc/systemd/system/multi-user.target.wants/jujud-machine-15.service
 
 root@192-168-8-235:~# ls -lh /etc/systemd/system <span class="p">|</span> grep juju
-lrwxrwxrwx <span class="m">1</span> root root   <span class="m">60</span> Jan <span class="m">19</span> <span class="m">16</span>:47 jujud-machine-15.service -&gt; /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
+lrwxrwxrwx <span class="m">1</span> root root   <span class="m">60</span> Jan <span class="m">19</span> 16:47 jujud-machine-15.service -&gt; /var/lib/juju/init/jujud-machine-15/jujud-machine-15.service
 </pre></div>
 
 
@@ -287,8 +287,8 @@ others. </p>
 /usr/bin/juju-run
 
 root@192-168-8-235:~# ls -lh /usr/bin <span class="p">|</span> grep juju
-lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> <span class="m">16</span>:47 juju-dumplogs -&gt; /var/lib/juju/tools/machine-15/jujud
-lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> <span class="m">16</span>:47 juju-run -&gt; /var/lib/juju/tools/machine-15/jujud
+lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> 16:47 juju-dumplogs -&gt; /var/lib/juju/tools/machine-15/jujud
+lrwxrwxrwx <span class="m">1</span> root   root      <span class="m">36</span> Jan <span class="m">19</span> 16:47 juju-run -&gt; /var/lib/juju/tools/machine-15/jujud
 </pre></div>
 
 
@@ -452,14 +452,14 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
 │       │   ├── templates
 │       │   │   └── jenkins-config.xml
 │       │   ├── tests
-│       │   │   ├── <span class="m">01</span>-trusty-basic
-│       │   │   ├── <span class="m">01</span>-xenial-basic
-│       │   │   ├── <span class="m">02</span>-trusty-website
-│       │   │   ├── <span class="m">02</span>-xenial-website
-│       │   │   ├── <span class="m">03</span>-trusty-slave
-│       │   │   ├── <span class="m">03</span>-xenial-slave
-│       │   │   ├── <span class="m">04</span>-trusty-external
-│       │   │   ├── <span class="m">04</span>-xenial-external
+│       │   │   ├── 01-trusty-basic
+│       │   │   ├── 01-xenial-basic
+│       │   │   ├── 02-trusty-website
+│       │   │   ├── 02-xenial-website
+│       │   │   ├── 03-trusty-slave
+│       │   │   ├── 03-xenial-slave
+│       │   │   ├── 04-trusty-external
+│       │   │   ├── 04-xenial-external
 │       │   │   ├── basic.py
 │       │   │   ├── deployment.py
 │       │   │   ├── external.py
@@ -521,7 +521,7 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
 ├── meter-status.yaml
 ├── metricspool
 └── tools
-    ├── <span class="m">2</span>.0.1.98-xenial-amd64
+    ├── 2.0.1.98-xenial-amd64
     │   ├── action-fail -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── action-get -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── action-set -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
@@ -554,7 +554,7 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
     │   ├── storage-get -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   ├── storage-list -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
     │   └── unit-get -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64/jujud
-    ├── machine-15 -&gt; <span class="m">2</span>.0.1.98-xenial-amd64
+    ├── machine-15 -&gt; 2.0.1.98-xenial-amd64
     └── unit-jenkins-1 -&gt; /var/lib/juju/tools/2.0.1.98-xenial-amd64
 
 <span class="m">45</span> directories, <span class="m">194</span> files
@@ -611,7 +611,7 @@ these contents under the <code>/var/lib/juju/unit-jenkins-1/</code> folder.</p>
               <p>In <a href="https://fengxia41103.github.io/myblog/juju local LXD.html">LXD on localhost</a> we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
-enough with <code>$ juju gui</code>...
+enough with <code>$ juju gui</code> ...
             </p>
 
             <div class="card-action">
@@ -638,7 +638,7 @@ enough with <code>$ juju gui</code>...
             <p>
               <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
-development for a while, you know making a one line of code...
+development for a while, you know making a one line of code ...
             </p>
 
             <div class="card-action">
@@ -667,7 +667,7 @@ development for a while, you know making a one line of code...
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.</p>
-<p>Design...
+<p>Design ...
             </p>
 
             <div class="card-action">

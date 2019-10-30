@@ -156,10 +156,10 @@ $ openssl passwd -1 natalie
 <p>Modify the image directly:</p>
 <div class="highlight"><pre><span></span>```shell
 $ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
-&amp;gt;&amp;lt;fs&amp;gt; run
-&amp;gt;&amp;lt;fs&amp;gt; list-filesystems
-&amp;gt;&amp;lt;fs&amp;gt; mount /dev/sda1 /
-&amp;gt;&amp;lt;fs&amp;gt; vi /etc/shadow
+&gt;&lt;fs&gt; run
+&gt;&lt;fs&gt; list-filesystems
+&gt;&lt;fs&gt; mount /dev/sda1 /
+&gt;&lt;fs&gt; vi /etc/shadow
 ```
 </pre></div>
 
@@ -270,7 +270,7 @@ cloud_init_modules:
             <p>
               <p>These notes are based on Satellite 6.3. There are minor difference
 between 6.2 and 6.3. Grasp the concept here, and hopefully you will
-have a good understanding of the Satellite models and...
+have a good understanding of the Satellite models and ...
             </p>
 
             <div class="card-action">

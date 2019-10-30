@@ -208,7 +208,7 @@ $ passwd ubuntu
 <div class="highlight"><pre><span></span>```shell
 $ nano /etc/ssh/sshd_config
 # Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes # &amp;lt;-- change to &quot;yes&quot;
+PasswordAuthentication yes # &lt;-- change to &quot;yes&quot;
 ```
 </pre></div>
 
@@ -312,9 +312,9 @@ $ lxc publish gold/snap3 --alias juju/trusty/amd64
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
 <span class="p">|</span>         ALIAS          <span class="p">|</span> FINGERPRINT  <span class="p">|</span> PUBLIC <span class="p">|</span>                  DESCRIPTION                  <span class="p">|</span>  ARCH  <span class="p">|</span>   SIZE   <span class="p">|</span>         UPLOAD DATE          <span class="p">|</span>
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
-<span class="p">|</span> juju/trusty/amd64      <span class="p">|</span> b95d3291e3ae <span class="p">|</span> no     <span class="p">|</span>                                               <span class="p">|</span> x86_64 <span class="p">|</span> <span class="m">377</span>.03MB <span class="p">|</span> Sep <span class="m">6</span>, <span class="m">2017</span> at <span class="m">2</span>:10pm <span class="o">(</span>UTC<span class="o">)</span>  <span class="p">|</span>
+<span class="p">|</span> juju/trusty/amd64      <span class="p">|</span> b95d3291e3ae <span class="p">|</span> no     <span class="p">|</span>                                               <span class="p">|</span> x86_64 <span class="p">|</span> 377.03MB <span class="p">|</span> Sep 6, <span class="m">2017</span> at 2:10pm <span class="o">(</span>UTC<span class="o">)</span>  <span class="p">|</span>
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
-<span class="p">|</span> ubuntu-xenial <span class="o">(</span><span class="m">1</span> more<span class="o">)</span> <span class="p">|</span> 58f90cbf6892 <span class="p">|</span> no     <span class="p">|</span> ubuntu <span class="m">16</span>.04 LTS amd64 <span class="o">(</span>release<span class="o">)</span> <span class="o">(</span><span class="m">20170815</span>.1<span class="o">)</span> <span class="p">|</span> x86_64 <span class="p">|</span> <span class="m">154</span>.11MB <span class="p">|</span> Aug <span class="m">17</span>, <span class="m">2017</span> at <span class="m">4</span>:19pm <span class="o">(</span>UTC<span class="o">)</span> <span class="p">|</span>
+<span class="p">|</span> ubuntu-xenial <span class="o">(</span><span class="m">1</span> more<span class="o">)</span> <span class="p">|</span> 58f90cbf6892 <span class="p">|</span> no     <span class="p">|</span> ubuntu 16.04 LTS amd64 <span class="o">(</span>release<span class="o">)</span> <span class="o">(</span>20170815.1<span class="o">)</span> <span class="p">|</span> x86_64 <span class="p">|</span> 154.11MB <span class="p">|</span> Aug 17, <span class="m">2017</span> at 4:19pm <span class="o">(</span>UTC<span class="o">)</span> <span class="p">|</span>
 +------------------------+--------------+--------+-----------------------------------------------+--------+----------+------------------------------+
 </pre></div>
 
@@ -361,8 +361,8 @@ have it create machines <em>manually</em>:</p>
 <li>
 <p>Create a new LXD container using the image (or snapshot):</p>
 <div class="highlight"><pre><span></span>```shell
-$ lxc launch juju/trusty/amd64 testme &amp;amp;&amp;amp; lxc start testme
-$ lxc copy gold/snap3 testme &amp;amp;&amp;amp; lxc start me
+$ lxc launch juju/trusty/amd64 testme &amp;&amp; lxc start testme
+$ lxc copy gold/snap3 testme &amp;&amp; lxc start me
 ```
 </pre></div>
 
@@ -444,7 +444,7 @@ $ juju model-config enable-os-upgrade<span class="o">=</span><span class="nb">fa
               <p>In <a href="https://fengxia41103.github.io/myblog/juju local LXD.html">LXD on localhost</a> we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
-enough with <code>$ juju gui</code>...
+enough with <code>$ juju gui</code> ...
             </p>
 
             <div class="card-action">
@@ -473,7 +473,7 @@ enough with <code>$ juju gui</code>...
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.</p>
-<p>Design...
+<p>Design ...
             </p>
 
             <div class="card-action">

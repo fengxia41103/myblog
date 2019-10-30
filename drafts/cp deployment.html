@@ -157,14 +157,14 @@
 <li>
 <p>Setup uplink IP, DNS server, and NTP server:</p>
 <div class="highlight"><pre><span></span>```shell
-sudo cldtx_set_switch_oob_ip -v &amp;lt;oob vlan&amp;gt; \
-  -i &amp;lt;oob ip&amp;gt; \
-  -m &amp;lt;oob netmask&amp;gt; \
-  -g &amp;lt;oob gateway&amp;gt; \
-  -n &amp;lt;primary DNS server, default to 8.8.8.8&amp;gt; \
-  -d &amp;lt;2nd DNS server, default to 8.8.4.4&amp;gt; \
-  -t &amp;lt;primary NTP server, default to &quot;time1.google.com&quot;&amp;gt; \
-  -p &amp;lt;2nd NTP server, default to &quot;time2.google.com&quot;&amp;gt;
+sudo cldtx_set_switch_oob_ip -v &lt;oob vlan&gt; \
+  -i &lt;oob ip&gt; \
+  -m &lt;oob netmask&gt; \
+  -g &lt;oob gateway&gt; \
+  -n &lt;primary DNS server, default to 8.8.8.8&gt; \
+  -d &lt;2nd DNS server, default to 8.8.4.4&gt; \
+  -t &lt;primary NTP server, default to &quot;time1.google.com&quot;&gt; \
+  -p &lt;2nd NTP server, default to &quot;time2.google.com&quot;&gt;
 ```
 </pre></div>
 
@@ -185,7 +185,7 @@ root@XorPlus#
 Synchronizing configuration...OK.
 Pica8 PicOS Version 2.11.5.cloudistics.1
 Welcome to PicOS on XorPlus
-root@XorPlus&amp;gt; 
+root@XorPlus&gt; 
 Execute command: configure.
 Entering configuration mode.
 There are no other users in configuration mode.
@@ -213,7 +213,7 @@ root@XorPlus#
 Synchronizing configuration...OK.
 Pica8 PicOS Version 2.11.5.cloudistics.1
 Welcome to PicOS on XorPlus
-root@XorPlus&amp;gt; 
+root@XorPlus&gt; 
 Execute command: configure.
 Entering configuration mode.
 There are no other users in configuration mode.
@@ -228,7 +228,7 @@ root@XorPlus#
 Synchronizing configuration...OK.
 Pica8 PicOS Version 2.11.5.cloudistics.1
 Welcome to PicOS on XorPlus
-root@XorPlus&amp;gt; 
+root@XorPlus&gt; 
 Execute command: configure.
 Entering configuration mode.
 There are no other users in configuration mode.
@@ -239,7 +239,7 @@ Execute command: commit
 Synchronizing configuration...OK.
 Pica8 PicOS Version 2.11.5.cloudistics.1
 Welcome to PicOS on XorPlus
-root@XorPlus&amp;gt; 
+root@XorPlus&gt; 
 Execute command: configure.
 Entering configuration mode.
 There are no other users in configuration mode.
@@ -254,7 +254,7 @@ root@XorPlus#
 Synchronizing configuration...OK.
 Pica8 PicOS Version 2.11.5.cloudistics.1
 Welcome to PicOS on XorPlus
-root@XorPlus&amp;gt; 
+root@XorPlus&gt; 
 Execute command: configure.
 Entering configuration mode.
 There are no other users in configuration mode.
@@ -295,19 +295,19 @@ apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxc
 <li>
 <p><code>source ~/.bashrc</code>. If you are curious, this is what that
    initialization step put in this file:</p>
-<div class="highlight"><pre><span></span>```shell
-__conda_setup=&quot;$(&#39;/home/fengxia/anaconda2/bin/conda&#39; &#39;shell.bash&#39; &#39;hook&#39; 2&amp;gt; /dev/null)&quot;
-if [ $? -eq 0 ]; then
-    eval &quot;$__conda_setup&quot;
-else
-    if [ -f &quot;/home/fengxia/anaconda2/etc/profile.d/conda.sh&quot; ]; then
-        . &quot;/home/fengxia/anaconda2/etc/profile.d/conda.sh&quot;
-    else
-        export PATH=&quot;/home/fengxia/anaconda2/bin:$PATH&quot;
-    fi
-fi
-unset __conda_setup
-```
+<div class="highlight"><pre><span></span><span class="x">```shell</span>
+<span class="x">__conda_setup=&quot;</span><span class="p">$(</span><span class="s1">&#39;/home/fengxia/anaconda2/bin/conda&#39;</span> <span class="s1">&#39;shell.bash&#39;</span> <span class="s1">&#39;hook&#39;</span> <span class="m">2</span><span class="err">&gt;</span> <span class="err">/dev/</span><span class="kc">null</span><span class="p">)</span><span class="x">&quot;</span>
+<span class="x">if [ </span><span class="p">$</span><span class="x">? -eq 0 ]; then</span>
+<span class="x">    eval &quot;</span><span class="p">$</span><span class="nv">__conda_setup</span><span class="x">&quot;</span>
+<span class="x">else</span>
+<span class="x">    if [ -f &quot;/home/fengxia/anaconda2/etc/profile.d/conda.sh&quot; ]; then</span>
+<span class="x">        . &quot;/home/fengxia/anaconda2/etc/profile.d/conda.sh&quot;</span>
+<span class="x">    else</span>
+<span class="x">        export PATH=&quot;/home/fengxia/anaconda2/bin:</span><span class="p">$</span><span class="nv">PATH</span><span class="x">&quot;</span>
+<span class="x">    fi</span>
+<span class="x">fi</span>
+<span class="x">unset __conda_setup</span>
+<span class="x">```</span>
 </pre></div>
 
 
@@ -343,9 +343,9 @@ by line.</p>
 <li>
 <p>In <code>.bashrc</code>, append to the end:</p>
 <div class="highlight"><pre><span></span>```shell
-export CLDTX_HOME=/home/&amp;lt;you&amp;gt;/workspace/ignite
+export CLDTX_HOME=/home/&lt;you&gt;/workspace/ignite
 export CLDTX_CONFIG=/etc/cloudistics
-export PYTHON_HOME=/home/&amp;lt;you&amp;gt;/anaconda2
+export PYTHON_HOME=/home/&lt;you&gt;/anaconda2
 ```
 </pre></div>
 
@@ -360,7 +360,7 @@ of the <code>.sh</code> manually.</p>
 # They initialize configuration and database directories.
 sudo mkdir -p /etc/cloudistics
 sudo chown -R &quot;<span class="nv">$USER</span>&quot; /etc/cloudistics
-echo &#39;export CLDTX_CONFIG=/etc/cloudistics&#39; <span class="ni">&amp;gt;&amp;gt;</span> <span class="cp">${</span><span class="n">bashrcHome</span><span class="cp">}</span>
+echo &#39;export CLDTX_CONFIG=/etc/cloudistics&#39; &gt;&gt; <span class="cp">${</span><span class="n">bashrcHome</span><span class="cp">}</span>
 sudo mkdir -p /temp
 sudo chown -R &quot;<span class="nv">$USER</span>&quot; /temp
 ```
@@ -494,13 +494,13 @@ export NVM_DIR="$HOME/.nvm"
 <p>Set MWC instance. Edit <code>webpack-dev.config.js</code> and replace <code>target</code>
    to a MWC instance (the Java middleware this frontend instance will
    be using):</p>
-<div class="highlight"><pre><span></span><span class="err">```</span><span class="nt">javascript</span>
-<span class="nt">proxy</span><span class="o">:</span> <span class="p">{</span>
-  <span class="err">&#39;/&#39;:</span> <span class="err">{</span>
-    <span class="n">target</span><span class="p">:</span> <span class="s2">&quot;http://&amp;lt;your mwc ip&amp;gt;:8080&quot;</span> <span class="o">//</span> <span class="n">common</span> <span class="n">dev</span>
-  <span class="p">}</span>
+<div class="highlight"><pre><span></span>```javascript
+proxy: {
+  &#39;/&#39;: {
+    target: &quot;http://&lt;your mwc ip&gt;:8080&quot; // common dev
+  }
 
-<span class="err">```</span>
+```
 </pre></div>
 
 
@@ -541,13 +541,13 @@ your local instance for dev &amp; test in these cases.</p>
 <ol>
 <li>Tab width: 2, for <code>.html</code>, <code>.ts</code>, <code>.js</code>, <code>.scss</code>.</li>
 <li>HTML attributes should be one-per-line, and they should line up:<div class="highlight"><pre><span></span>```html
-&amp;lt;div class=&quot;navbar-header&quot;&amp;gt;
-  &amp;lt;a class=&quot;navbar-brand on-hover-show-text-bg-child-elements&quot;
-     ui-sref=&quot;auth.authentication.login&quot;&amp;gt;
-    &amp;lt;img src=&quot;/app/shared/images/lenovologo-pos-red-vertical.png&quot;
-         class=&quot;inline&quot;&amp;gt;
-  &amp;lt;/a&amp;gt;
-&amp;lt;/div&amp;gt;
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-header&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;navbar-brand on-hover-show-text-bg-child-elements&quot;</span>
+     <span class="na">ui-sref=</span><span class="s">&quot;auth.authentication.login&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/app/shared/images/lenovologo-pos-red-vertical.png&quot;</span>
+         <span class="na">class=</span><span class="s">&quot;inline&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 ```
 </pre></div>
 
@@ -669,7 +669,7 @@ your local instance for dev &amp; test in these cases.</p>
 <p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
 </li>
 <li>
-<p>Put the cluster in...
+<p>Put the cluster in ...
             </p>
 
             <div class="card-action">
@@ -697,7 +697,7 @@ your local instance for dev &amp; test in these cases.</p>
               <p>If you are like me who dislikes any GUI and mouse clicks, CLI via a
 SSH session to IMM is a fun way to get things done. This one shows how
 to config disks into RAID.</p>
-<p>CLI manual is <a...
+<p>CLI manual is <a ...
             </p>
 
             <div class="card-action">

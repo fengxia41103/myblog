@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - odoo</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/odoo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2017-06-07T08:31:00-04:00</updated><entry><title>ODOO8 native server loading process</title><link href="https://fengxia41103.github.io/myblog/odoo8%20server%20loading%20process.html" rel="alternate"></link><published>2016-07-23T00:00:00-04:00</published><updated>2017-06-07T08:31:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-07-23:/myblog/odoo8 server loading process.html</id><summary type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
-noticing is the slowness when ODOO first boot up.  We are observing up
-to minutes of a bootup time. This plainly is too slow.  Watching debug
-prints indicates that ODOO scans through all modules listed on Python
-path and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/odoo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2017-06-07T08:31:00-04:00</updated><entry><title>ODOO8 native server loading process</title><link href="https://fengxia41103.github.io/myblog/odoo8%20server%20loading%20process.html" rel="alternate"></link><published>2017-06-07T08:31:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-07-23:myblog/odoo8 server loading process.html</id><summary type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
 noticing is the slowness when ODOO first boot up.  We are observing up
 to minutes of a bootup time. This plainly is too slow.  Watching debug
 prints indicates that ODOO scans through all modules listed on Python
@@ -150,4 +146,4 @@ but should not be used for production deployment unless, well,
 the client is the least sophisticated (oh boy there are so many
 of them that it is actually creating a whole nine yard
 of different problems than this one) and creates minimal load
-in reality.&lt;/p&gt;</content><category term="odoo"></category></entry></feed>
+in reality.&lt;/p&gt;</summary><category term="odoo"></category></entry></feed>

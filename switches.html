@@ -152,7 +152,7 @@ while ENOS device uses <code>show</code>. To get a list of commands available:</
 <li>
 <p>CNOS: <code>display ?</code></p>
 <div class="highlight"><pre><span></span>```shell
-LCTC-R1U37-SW&amp;gt;display ?
+LCTC-R1U37-SW&gt;display ?
   aaa               AAA Model
   access            access parameters
   access-lists      List IP access lists
@@ -221,7 +221,7 @@ LCTC-R1U37-SW&amp;gt;display ?
 <li>
 <p>ENOS: <code>show ?</code></p>
 <div class="highlight"><pre><span></span>```shell
-RS G8272&amp;gt;show ?
+RS G8272&gt;show ?
 Show running system information
   access-control     Show access control 
   arp                IP ARP table
@@ -307,9 +307,9 @@ Show running system information
 </ol>
 <h1>login</h1>
 <p>A typical login session looks like this:</p>
-<div class="highlight"><pre><span></span><span class="o">(</span>dev<span class="o">)</span> fengxia@fengxia-feng:~$ telnet <span class="m">10</span>.240.43.29
-Trying <span class="m">10</span>.240.43.29...
-Connected to <span class="m">10</span>.240.43.29.
+<div class="highlight"><pre><span></span><span class="o">(</span>dev<span class="o">)</span> fengxia@fengxia-feng:~$ telnet 10.240.43.29
+Trying 10.240.43.29...
+Connected to 10.240.43.29.
 Escape character is <span class="s1">&#39;^]&#39;</span>.
 
 Feng RackSwitch G8272.
@@ -319,7 +319,7 @@ Enter login username: admin
 Enter login password: 
 ------------------------------------------------------------------
 NOTE: System dump exists in FLASH.
-      The dump was saved at <span class="m">18</span>:44:14 Wed Apr <span class="m">11</span>, <span class="m">2018</span>.
+      The dump was saved at 18:44:14 Wed Apr 11, 2018.
       Use <span class="s1">&#39;copy flash-dump&#39;</span> to extract the dumps <span class="k">for</span> analysis and
       <span class="s1">&#39;clear flash-dump&#39;</span> to clear the FLASH region.
 ------------------------------------------------------------------
@@ -386,8 +386,8 @@ Mac address Aging Time: <span class="m">300</span>
 
      MAC address       VLAN     Port    Trnk  State  Permanent  Openflow
   -----------------  --------  -------  ----  -----  ---------  --------
-  <span class="m">00</span>:00:0c:9f:f0:2f       <span class="m">1</span>    <span class="m">48</span>             FWD                  N    
-  <span class="m">00</span>:00:0c:9f:f0:46     <span class="m">100</span>    <span class="m">48</span>             FWD                  N    
+  00:00:0c:9f:f0:2f       <span class="m">1</span>    <span class="m">48</span>             FWD                  N    
+  00:00:0c:9f:f0:46     <span class="m">100</span>    <span class="m">48</span>             FWD                  N    
 </pre></div>
 
 
@@ -396,8 +396,8 @@ Mac address Aging Time: <span class="m">300</span>
 <div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display mac address-table
  VLAN     MAC Address     Type      Ports 
   -----+----------------+---------+-----------------------+
-  <span class="m">1</span>      <span class="m">0000</span>.0c9f.f02f   dynamic   Ethernet1/54 
-  <span class="m">1</span>      <span class="m">0001</span>.7302.5c96   dynamic   Ethernet1/54 
+  <span class="m">1</span>      0000.0c9f.f02f   dynamic   Ethernet1/54 
+  <span class="m">1</span>      0001.7302.5c96   dynamic   Ethernet1/54 
 </pre></div>
 
 
@@ -430,18 +430,18 @@ network topology such as:</p>
 <div class="highlight"><pre><span></span>RS G8272#show lldp remote-device
 LLDP Remote Devices Information
 Legend<span class="o">(</span>possible values in DMAC column<span class="o">)</span> :
-NB   - Nearest Bridge          - <span class="m">01</span>-80-C2-00-00-0E
-NnTB - Nearest non-TPMR Bridge - <span class="m">01</span>-80-C2-00-00-03
-NCB  - Nearest Customer Bridge - <span class="m">01</span>-80-C2-00-00-00
-Total number of current entries: <span class="m">19</span>
+NB   - Nearest Bridge          - 01-80-C2-00-00-0E
+NnTB - Nearest non-TPMR Bridge - 01-80-C2-00-00-03
+NCB  - Nearest Customer Bridge - 01-80-C2-00-00-00
+Total number of current entries: 19
 
 LocalPort <span class="p">|</span> Index <span class="p">|</span> Remote Chassis ID         <span class="p">|</span> Remote Port          <span class="p">|</span> Remote System Name            <span class="p">|</span> DMAC     
 ----------<span class="p">|</span>-------<span class="p">|</span>---------------------------<span class="p">|</span>----------------------<span class="p">|</span>-------------------------------<span class="p">|</span>---------
-<span class="m">1</span>         <span class="p">|</span> <span class="m">5</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ef a5         <span class="p">|</span> <span class="m">68</span>-05-ca-62-ef-a5    <span class="p">|</span>                               <span class="p">|</span> NB 
-<span class="m">2</span>         <span class="p">|</span> <span class="m">4</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ef a4         <span class="p">|</span> <span class="m">68</span>-05-ca-62-ef-a4    <span class="p">|</span>                               <span class="p">|</span> NB 
-<span class="m">3</span>         <span class="p">|</span> <span class="m">6</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ee 7d         <span class="p">|</span> <span class="m">68</span>-05-ca-62-ee-7d    <span class="p">|</span>                               <span class="p">|</span> NB 
-<span class="m">4</span>         <span class="p">|</span> <span class="m">7</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ee 7c         <span class="p">|</span> <span class="m">68</span>-05-ca-62-ee-7c    <span class="p">|</span>                               <span class="p">|</span> NB 
-<span class="m">5</span>         <span class="p">|</span> <span class="m">8</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> f3 fd         <span class="p">|</span> <span class="m">68</span>-05-ca-62-f3-fd    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">1</span>         <span class="p">|</span> <span class="m">5</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ef a5         <span class="p">|</span> 68-05-ca-62-ef-a5    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">2</span>         <span class="p">|</span> <span class="m">4</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ef a4         <span class="p">|</span> 68-05-ca-62-ef-a4    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">3</span>         <span class="p">|</span> <span class="m">6</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ee 7d         <span class="p">|</span> 68-05-ca-62-ee-7d    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">4</span>         <span class="p">|</span> <span class="m">7</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> ee 7c         <span class="p">|</span> 68-05-ca-62-ee-7c    <span class="p">|</span>                               <span class="p">|</span> NB 
+<span class="m">5</span>         <span class="p">|</span> <span class="m">8</span>     <span class="p">|</span> <span class="m">68</span> <span class="m">05</span> ca <span class="m">62</span> f3 fd         <span class="p">|</span> 68-05-ca-62-f3-fd    <span class="p">|</span>                               <span class="p">|</span> NB 
 </pre></div>
 
 
@@ -457,7 +457,7 @@ LCTC-R1U39-SW        Ethernet1/48    <span class="m">120</span>        BR       
 LCTC-R3U38-SW        Ethernet1/54    <span class="m">120</span>        BR          <span class="m">1</span>              
 LCTC-R1U39-SW        mgmt0           <span class="m">120</span>        BR          <span class="m">47</span>             
 
-Total entries displayed: <span class="m">4</span>
+Total entries displayed: 4
 </pre></div>
 
 
@@ -555,7 +555,7 @@ config terminal  &lt;-- to enter config mode
 interface port &lt;port id&gt;  &lt;-- to <span class="k">select</span> the port to config
 
 switchport mode trunk
-switchport trunk allow vlan &lt;<span class="m">1</span>,2,3...&gt;
+switchport trunk allow vlan &lt;1,2,3...&gt;
 switchport trunk native vlan &lt;vlan id&gt;
 </pre></div>
 
@@ -566,25 +566,25 @@ we are to set native vlan to 1, and current allowed is "2,3,4,5", it
 will fail because 1 is not part of "2,3,4,5". Instead, you should set
 allowed to "1,2,3,4,5" first, then set native to 1.</p>
 <p>To set in <code>access</code> mode &rarr; <code>allowed vlan</code> is applicable anymore!</p>
-<div class="highlight"><pre><span></span><span class="nx">en</span>
-<span class="nx">config</span> <span class="nx">terminal</span>
-<span class="kr">interface</span> <span class="nx">port</span> <span class="o">&lt;</span><span class="nx">port</span> <span class="nx">id</span><span class="o">&gt;</span>
-<span class="nx">swithport</span> <span class="nx">mode</span> <span class="nx">access</span>
-<span class="nx">switchport</span> <span class="nx">access</span> <span class="nx">vlan</span> <span class="o">&lt;</span><span class="nx">vlan</span> <span class="nx">id</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span>en
+config terminal
+interface port &lt;port id&gt;
+swithport mode access
+switchport access vlan &lt;vlan id&gt;
 </pre></div>
 
 
 <h3>check port config</h3>
 <p>Use <code>show interface port &lt;port id&gt;</code>. Example output:</p>
-<div class="highlight"><pre><span></span>LCTC-R1U39-SW#show interface port <span class="m">10</span>
-Current port <span class="m">10</span> configuration: enabled, PVID/Native-VLAN <span class="m">19</span>, Tagging/Trunk-mode
+<div class="highlight"><pre><span></span>LCTC-R1U39-SW#show interface port 10
+Current port <span class="m">10</span> configuration: enabled, PVID/Native-VLAN 19, Tagging/Trunk-mode
     ErrDisable recovery enabled
     Switch port
     STP: non-edge, auto link-type, global loop guard
     The Unicast storm control currently turned off
     The Multicast storm control currently turned off
     The Broadcast storm control currently turned off
-    <span class="m">802</span>.1p priority: <span class="m">0</span>
+    802.1p priority: 0
     DSCP remarking <span class="k">for</span> port: disabled
     BPDU guard: disabled
     Static trunk distribution: disabled
@@ -596,16 +596,16 @@ Current port <span class="m">10</span> configuration: enabled, PVID/Native-VLAN 
     ACL Port config is empty
     UDLD: disabled, mode normal
     OAM: disabled, mode active
-    EVB Profile: <span class="m">0</span>
+    EVB Profile: 0
     Reflective Relay is configured off
     DHCP Snooping trust disable, limit rate: none
     Openflow: disabled
-    VLANs: <span class="m">2</span>-4,6,8-19
+    VLANs: 2-4,6,8-19
     Private-VLAN: disabled
 
 
 Current Port <span class="m">10</span> Gig link configuration:
-    speed <span class="m">10</span>/100/1000, mode auto, fctl none, auto on
+    speed 10/100/1000, mode auto, fctl none, auto on
 </pre></div>
 
 
@@ -613,9 +613,9 @@ Current Port <span class="m">10</span> Gig link configuration:
 <p>Quite similar to ENOS commands. To set in <code>trunk</code> mode:</p>
 <div class="highlight"><pre><span></span>en &lt;-- <span class="nb">enable</span> admin mode
 configure &lt;-- to enter config mode
-interface ethernet <span class="m">1</span>/&lt;port id&gt;  &lt;-- <span class="k">select</span> port to config
+interface ethernet 1/&lt;port id&gt;  &lt;-- <span class="k">select</span> port to config
 bridge-port mode trunk
-bridge-port trunk allowed vlan &lt;<span class="m">1</span>,2,3...&gt;
+bridge-port trunk allowed vlan &lt;1,2,3...&gt;
 bridge-port trunk native vlan &lt;vlan id&gt;
 </pre></div>
 
@@ -623,7 +623,7 @@ bridge-port trunk native vlan &lt;vlan id&gt;
 <p>To set in <code>access</code> mode:</p>
 <div class="highlight"><pre><span></span>en &lt;-- <span class="nb">enable</span> admin mode
 configure &lt;-- to enter config mode
-interface ethernet <span class="m">1</span>/&lt;port id&gt;  &lt;-- <span class="k">select</span> port to config
+interface ethernet 1/&lt;port id&gt;  &lt;-- <span class="k">select</span> port to config
 bridge-port mode access
 bridge-port access vlan &lt;vlan id&gt;
 </pre></div>
@@ -641,8 +641,8 @@ Interface Ethernet1/10
   VRF Binding: Not bound
   Speed <span class="m">10000</span> Mb/s Duplex full
   lacp suspend-individual  admin: Individual - oper: Individual
-  Last link flapped <span class="m">05</span>:30:14 
-  Last clearing of <span class="s2">&quot;display interface&quot;</span> counters <span class="m">05</span>:30:14 
+  Last link flapped 05:30:14 
+  Last clearing of <span class="s2">&quot;display interface&quot;</span> counters 05:30:14 
   <span class="m">30</span> seconds input rate <span class="m">0</span> bits/sec, <span class="m">0</span> bytes/sec, <span class="m">0</span> packets/sec 
   <span class="m">30</span> seconds output rate <span class="m">54779</span> bits/sec, <span class="m">6847</span> bytes/sec, <span class="m">74</span> packets/sec 
   Load-Interval <span class="c1">#2: 5 minute (300 seconds) </span>
@@ -677,7 +677,7 @@ Automatic policy provisioning is disabled on this interface
 <li>enter super user mode: <code>en</code></li>
 <li>enter config terminal: <code>config terminal</code></li>
 </ol>
-<div class="highlight"><pre><span></span>NOS version <span class="m">10</span>.3.2.0 FENG G8272, Wed Mar <span class="m">29</span> <span class="m">12</span>:20:39 PDT <span class="m">2017</span>
+<div class="highlight"><pre><span></span>NOS version 10.3.2.0 FENG G8272, Wed Mar <span class="m">29</span> 12:20:39 PDT 2017
 LCTC-R1U37-SW&gt;en
 LCTC-R1U37-SW#config
 Enter configuration commands, one per line.  End with CNTL/Z.
@@ -692,8 +692,8 @@ yet, thus showing as <em>suspended</em>):</p>
 <div class="highlight"><pre><span></span>LCTC-R1U39-SW<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#show lacp info</span>
 port    mode    adminkey  operkey   selected   prio  aggr  trunk  status  minlinks
 ----------------------------------------------------------------------------------
-<span class="m">1</span>       off            <span class="m">1</span>        <span class="m">1</span>     no      <span class="m">32768</span>    --     --    --        <span class="m">1</span>
-<span class="m">17</span>      active        <span class="m">17</span>       <span class="m">17</span>  suspended  <span class="m">32768</span>    --     --   down       <span class="m">1</span>
+<span class="m">1</span>       off            <span class="m">1</span>        <span class="m">1</span>     no      <span class="m">32768</span>    --     --    --        1
+<span class="m">17</span>      active        <span class="m">17</span>       <span class="m">17</span>  suspended  <span class="m">32768</span>    --     --   down       1
 </pre></div>
 
 
@@ -724,24 +724,24 @@ port    mode    adminkey  operkey   selected   prio  aggr  trunk  status  minlin
 <li>enable vlag globally &larr; <code>vlag enable</code></li>
 </ol>
 <p>Example from <code>show running-config</code>:</p>
-<div class="highlight"><pre><span></span>interface port <span class="m">45</span>
+<div class="highlight"><pre><span></span>interface port 45
 
         lacp mode active
 
-        lacp key <span class="m">100</span>
+        lacp key 100
 
 !
 
-interface port <span class="m">46</span>
+interface port 46
 
         lacp mode active
 
-        lacp key <span class="m">100</span>
+        lacp key 100
 
 vlag <span class="nb">enable</span>
-vlag tier-id <span class="m">222</span>
-vlag hlthchk peer-ip <span class="m">10</span>.240.43.54
-vlag isl adminkey <span class="m">100</span>
+vlag tier-id 222
+vlag hlthchk peer-ip 10.240.43.54
+vlag isl adminkey 100
 </pre></div>
 
 
@@ -787,7 +787,7 @@ section next). See <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo
 </ol>
 <p>To check status: <code>display interface port-aggregation &lt;1-4096&gt;</code> (or
 <code>display lacp internal info all</code>). Example output:</p>
-<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display interface port-aggregation <span class="m">1</span>
+<div class="highlight"><pre><span></span>LCTC-R1U37-SW&gt;display interface port-aggregation 1
 Interface po1
   Hardware is AGGREGATE  Current HW addr: a48c.db34.b203
   Physical:<span class="o">(</span>not <span class="nb">set</span><span class="o">)</span>  Logical:<span class="o">(</span>not <span class="nb">set</span><span class="o">)</span>
@@ -906,7 +906,7 @@ Automatic policy provisioning is disabled on this interface
 <p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
 </li>
 <li>
-<p>Put the cluster in...
+<p>Put the cluster in ...
             </p>
 
             <div class="card-action">
@@ -934,7 +934,7 @@ Automatic policy provisioning is disabled on this interface
               <p>If you are like me who dislikes any GUI and mouse clicks, CLI via a
 SSH session to IMM is a fun way to get things done. This one shows how
 to config disks into RAID.</p>
-<p>CLI manual is <a...
+<p>CLI manual is <a ...
             </p>
 
             <div class="card-action">

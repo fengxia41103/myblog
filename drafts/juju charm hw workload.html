@@ -306,49 +306,49 @@ structure is shown below (using <code>charm-switch</code> as an example):</p>
 command and through Juju GUI. For example, here we define a few switch
 attributes: <code>size</code>, <code>speed</code>, <code>os</code>, <code>cooling-orientation</code>... Charm
 supports four <code>type</code>: boolean, string, int and float.</p>
-<div class="highlight"><pre><span></span><span class="nt">options</span><span class="p">:</span>
-  <span class="nt">size</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-    <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;1U&quot;</span>
-    <span class="nt">descriptioin</span><span class="p">:</span> <span class="s">&quot;1U/2U&quot;</span>
-  <span class="nt">speed</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-    <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;1G&quot;</span>
-    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;1G/10G&quot;</span>
-  <span class="nt">cooling-orientation</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-    <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;Horizontal&quot;</span>
-    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;Horizontal/Vertical&quot;</span>
-  <span class="nt">os</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-    <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;ENOS&quot;</span>
-    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;ENOS/CNOS&quot;</span>
-  <span class="nt">port-config-json</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-    <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;Por</span><span class="nv"> </span><span class="s">config</span><span class="nv"> </span><span class="s">JSON&quot;</span>
-  <span class="nt">configuration-url</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-    <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;http://10.0.240.43/server/configuration/&quot;</span>
-    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;Server</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">URL&quot;</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">size</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;1U&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">descriptioin</span><span class="p p-Indicator">:</span> <span class="s">&quot;1U/2U&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">speed</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;1G&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;1G/10G&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">cooling-orientation</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;Horizontal&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Horizontal/Vertical&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">os</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;ENOS&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;ENOS/CNOS&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">port-config-json</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Por</span><span class="nv"> </span><span class="s">config</span><span class="nv"> </span><span class="s">JSON&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">configuration-url</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="s">&quot;http://10.0.240.43/server/configuration/&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="s">&quot;Server</span><span class="nv"> </span><span class="s">configuration</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">URL&quot;</span>
 </pre></div>
 
 
 <h2>metadata.yaml - relation hierarchy</h2>
 <p>This file defines the charm name, and more importantly, its <code>relation</code>
 with other charms as in the <code>provides</code> and <code>requires</code> section.</p>
-<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">switch</span>
-<span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">This is a switch charm.</span>
-<span class="nt">maintainer</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Feng Xia &lt;fxia1@lenovo.com&gt;</span>
-<span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">switch</span>
+<span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">This is a switch charm.</span>
+<span class="l l-Scalar l-Scalar-Plain">maintainer</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Feng Xia &lt;fxia1@lenovo.com&gt;</span>
+<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
   <span class="no">A generic switch charm.</span>
-<span class="nt">tags</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">switch</span>
-<span class="nt">provides</span><span class="p">:</span>
-  <span class="nt">rack</span><span class="p">:</span>
-    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-switch</span>
-  <span class="nt">server</span><span class="p">:</span>
-    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">switch-server</span>
+<span class="l l-Scalar l-Scalar-Plain">provides</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">rack</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-switch</span>
+  <span class="l l-Scalar l-Scalar-Plain">server</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">switch-server</span>
 </pre></div>
 
 
@@ -374,8 +374,8 @@ with other charms as in the <code>provides</code> and <code>requires</code> sect
   on Juju GUI all configs defined in both the parent and the children
   are visible.</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git@github.com:xyz/xyz.git</span>
-<span class="nt">includes</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">git@github.com:xyz/xyz.git</span>
+<span class="l l-Scalar l-Scalar-Plain">includes</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="s">&#39;layer:basic&#39;</span>
   <span class="p p-Indicator">-</span> <span class="s">&#39;layer:other-charm</span>
 </pre></div>
@@ -400,10 +400,10 @@ this section we will see how to define an interface. Using interface
    used in <code>metadata.yaml</code>, not the folder name.</li>
 <li>repo: will generate a warning, but no harm.</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu</span>
-<span class="nt">summary</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Rack to PDU interface</span>
-<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://git.launchpad.net/whatever/</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu</span>
+<span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Rack to PDU interface</span>
+<span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://git.launchpad.net/whatever/</span>
 </pre></div>
 
 
@@ -428,17 +428,17 @@ or using a bundle (batch mode). </p>
 <div class="highlight"><pre><span></span>$ juju deploy <span class="nv">$JUJU_REPOSITORY</span>/trusty/<span class="o">[</span>charm name<span class="o">]</span>
 
 fengxia@local-charmdev:~/juju deploy <span class="nv">$JUJU_REPOSITORY</span>/trusty/pdu --series trusty --debug
-<span class="m">11</span>:13:59 INFO  juju.cmd supercommand.go:63 running juju <span class="o">[</span><span class="m">2</span>.0.1.97 gc go1.6<span class="o">]</span>
-<span class="m">11</span>:13:59 DEBUG juju.cmd supercommand.go:64   args: <span class="o">[]</span>string<span class="o">{</span><span class="s2">&quot;/home/fengxia/juju&quot;</span>, <span class="s2">&quot;deploy&quot;</span>, <span class="s2">&quot;/home/fengxia/workspace/hwcharm/dist/trusty/pdu&quot;</span>, <span class="s2">&quot;--series&quot;</span>, <span class="s2">&quot;trusty&quot;</span>, <span class="s2">&quot;--debug&quot;</span><span class="o">}</span>
-<span class="m">11</span>:13:59 INFO  juju.juju api.go:72 connecting to API addresses: <span class="o">[</span><span class="m">10</span>.129.186.203:17070<span class="o">]</span>
-<span class="m">11</span>:13:59 INFO  juju.api apiclient.go:530 dialing <span class="s2">&quot;wss://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/api&quot;</span>
-<span class="m">11</span>:13:59 INFO  juju.api apiclient.go:466 connection established to <span class="s2">&quot;wss://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/api&quot;</span>
-<span class="m">11</span>:13:59 DEBUG juju.juju api.go:263 API hostnames unchanged - not resolving
-<span class="m">11</span>:13:59 DEBUG juju.cmd.juju.application deploy.go:768 cannot interpret as <span class="nb">local</span> bundle: <span class="nb">read</span> /home/fengxia/workspace/hwcharm/dist/trusty/pdu: is a directory
-<span class="m">11</span>:13:59 DEBUG httpbakery client.go:244 client <span class="k">do</span> POST https://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/charms?revision<span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">schema</span><span class="o">=</span>local<span class="p">&amp;</span><span class="nv">series</span><span class="o">=</span>trusty <span class="o">{</span>
-<span class="m">11</span>:14:00 DEBUG httpbakery client.go:246 <span class="o">}</span> -&gt; error &lt;nil&gt;
-<span class="m">11</span>:14:00 INFO  cmd cmd.go:129 Deploying charm <span class="s2">&quot;local:trusty/pdu-0&quot;</span>.
-<span class="m">11</span>:14:00 INFO  cmd supercommand.go:467 <span class="nb">command</span> finished
+11:13:59 INFO  juju.cmd supercommand.go:63 running juju <span class="o">[</span>2.0.1.97 gc go1.6<span class="o">]</span>
+11:13:59 DEBUG juju.cmd supercommand.go:64   args: <span class="o">[]</span>string<span class="o">{</span><span class="s2">&quot;/home/fengxia/juju&quot;</span>, <span class="s2">&quot;deploy&quot;</span>, <span class="s2">&quot;/home/fengxia/workspace/hwcharm/dist/trusty/pdu&quot;</span>, <span class="s2">&quot;--series&quot;</span>, <span class="s2">&quot;trusty&quot;</span>, <span class="s2">&quot;--debug&quot;</span><span class="o">}</span>
+11:13:59 INFO  juju.juju api.go:72 connecting to API addresses: <span class="o">[</span>10.129.186.203:17070<span class="o">]</span>
+11:13:59 INFO  juju.api apiclient.go:530 dialing <span class="s2">&quot;wss://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/api&quot;</span>
+11:13:59 INFO  juju.api apiclient.go:466 connection established to <span class="s2">&quot;wss://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/api&quot;</span>
+11:13:59 DEBUG juju.juju api.go:263 API hostnames unchanged - not resolving
+11:13:59 DEBUG juju.cmd.juju.application deploy.go:768 cannot interpret as <span class="nb">local</span> bundle: <span class="nb">read</span> /home/fengxia/workspace/hwcharm/dist/trusty/pdu: is a directory
+11:13:59 DEBUG httpbakery client.go:244 client <span class="k">do</span> POST https://10.129.186.203:17070/model/3b248754-ad0b-40e6-84ca-2b5dedeb98c9/charms?revision<span class="o">=</span>0<span class="p">&amp;</span><span class="nv">schema</span><span class="o">=</span>local<span class="p">&amp;</span><span class="nv">series</span><span class="o">=</span>trusty <span class="o">{</span>
+11:14:00 DEBUG httpbakery client.go:246 <span class="o">}</span> -&gt; error &lt;nil&gt;
+11:14:00 INFO  cmd cmd.go:129 Deploying charm <span class="s2">&quot;local:trusty/pdu-0&quot;</span>.
+11:14:00 INFO  cmd supercommand.go:467 <span class="nb">command</span> finished
 </pre></div>
 
 
@@ -461,27 +461,27 @@ their relations. </p>
 <li><span class="myhighlight">relations</span>: list of relations to
    connect charms.</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="nt">machines</span><span class="p">:</span>
-  <span class="nt">&quot;1&quot;</span><span class="p">:</span>
-    <span class="nt">constraints</span><span class="p">:</span> <span class="s">&quot;mem=2G&quot;</span>
-    <span class="nt">series</span><span class="p">:</span> <span class="s">&quot;xenial&quot;</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">machines</span><span class="p p-Indicator">:</span>
+  <span class="s">&quot;1&quot;</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">constraints</span><span class="p p-Indicator">:</span> <span class="s">&quot;mem=2G&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">series</span><span class="p p-Indicator">:</span> <span class="s">&quot;xenial&quot;</span>
 
-<span class="nt">services</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
   <span class="c1"># 42U default rack</span>
-  <span class="nt">rack</span><span class="p">:</span>
-    <span class="nt">charm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./dist/trusty/rack</span>
-    <span class="nt">num_units</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">annotations</span><span class="p">:</span>
-      <span class="nt">gui-x</span><span class="p">:</span> <span class="s">&quot;300&quot;</span>
-      <span class="nt">gui-y</span><span class="p">:</span> <span class="s">&quot;300&quot;</span>
-    <span class="nt">to</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">rack</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">charm</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">./dist/trusty/rack</span>
+    <span class="l l-Scalar l-Scalar-Plain">num_units</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="l l-Scalar l-Scalar-Plain">annotations</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">gui-x</span><span class="p p-Indicator">:</span> <span class="s">&quot;300&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">gui-y</span><span class="p p-Indicator">:</span> <span class="s">&quot;300&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">to</span><span class="p p-Indicator">:</span>
       <span class="p p-Indicator">-</span> <span class="s">&quot;1&quot;</span>
 
 <span class="c1"># default series, n/a in modeling</span>
-<span class="nt">series</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
+<span class="l l-Scalar l-Scalar-Plain">series</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">xenial</span>
 
 <span class="c1"># relations</span>
-<span class="nt">relations</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">relations</span><span class="p p-Indicator">:</span>
   <span class="c1"># rack to PDU relation</span>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="s">&quot;rack:pdu&quot;</span> <span class="c1"># require first, app name:required interface name</span>
     <span class="p p-Indicator">-</span> <span class="s">&quot;pdu:rack&quot;</span> <span class="c1"># provide 2nd, app name:provides interface name</span>
@@ -496,21 +496,21 @@ eg. http and DB, and <code>requires</code> will consume it.</p>
 general connection between two entities. In the bundle example above,
 we first define an interface in <code>$INTERFACE_PATH</code> called
 <code>rack-pdu</code>. Then in rack's <code>metadata.yaml</code> we define:</p>
-<div class="highlight"><pre><span></span><span class="nt">requires</span><span class="p">:</span>
-  <span class="nt">pdu</span><span class="p">:</span>                   <span class="l l-Scalar l-Scalar-Plain">&lt;-- can be any name</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requires</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">pdu</span><span class="p p-Indicator">:</span>                   <span class="l l-Scalar l-Scalar-Plain">&lt;-- can be any name</span>
     <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu  &lt;-- must be a valid interface!</span>
 </pre></div>
 
 
 <p>and correspondingly in pdu's <code>metadata.yaml</code> we define:</p>
-<div class="highlight"><pre><span></span><span class="nt">provides</span><span class="p">:</span>
-  <span class="nt">rack</span><span class="p">:</span>                  <span class="l l-Scalar l-Scalar-Plain">&lt;-- can be any name</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">provides</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">rack</span><span class="p p-Indicator">:</span>                  <span class="l l-Scalar l-Scalar-Plain">&lt;-- can be any name</span>
     <span class="l l-Scalar l-Scalar-Plain">interface</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rack-pdu</span>
 </pre></div>
 
 
 <p>Then in bundle, we define the followings:</p>
-<div class="highlight"><pre><span></span><span class="nt">relations</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">relations</span><span class="p p-Indicator">:</span>
   <span class="c1"># rack to PDU relation</span>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="s">&quot;rack:pdu&quot;</span> <span class="c1"># require first, charm name:required interface name</span>
     <span class="p p-Indicator">-</span> <span class="s">&quot;pdu:rack&quot;</span> <span class="c1"># provide 2nd, charm name:provides interface name</span>
@@ -578,7 +578,7 @@ bundle.yaml</code> and watch the charms get deployed.</p>
               <p>In <a href="https://fengxia41103.github.io/myblog/juju local LXD.html">LXD on localhost</a> we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
-enough with <code>$ juju gui</code>...
+enough with <code>$ juju gui</code> ...
             </p>
 
             <div class="card-action">
@@ -605,7 +605,7 @@ enough with <code>$ juju gui</code>...
             <p>
               <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
-development for a while, you know making a one line of code...
+development for a while, you know making a one line of code ...
             </p>
 
             <div class="card-action">
@@ -634,7 +634,7 @@ development for a while, you know making a one line of code...
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.</p>
-<p>Design...
+<p>Design ...
             </p>
 
             <div class="card-action">

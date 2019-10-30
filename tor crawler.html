@@ -161,7 +161,7 @@ developers, too. So we took this on almost like an arm race.</p>
 
 <span class="k">class</span> <span class="nc">PlainUtility</span><span class="p">():</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">user_agent</span> <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ip_url</span> <span class="o">=</span> <span class="s1">&#39;http://icanhazip.com/&#39;</span>
@@ -222,7 +222,7 @@ serve request. Further, because TOR service is a socket proxy, not a
 HTTP proxy, we installed another layer, <a href="https://www.privoxy.org/">privoxy</a> in between to connect the two.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TorUtility</span><span class="p">():</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">user_agent</span> <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="n">user_agent</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ip_url</span> <span class="o">=</span> <span class="s1">&#39;http://icanhazip.com/&#39;</span>
@@ -293,11 +293,11 @@ service would in turn pass that on to TOR network on our behalf.</p>
 
 <span class="c1">## The port on which Tor will listen for local connections from Tor</span>
 <span class="c1">## controller applications, as documented in control-spec.txt.</span>
-ControlPort <span class="m">9051</span>
+ControlPort 9051
 
 <span class="c1">## If you enable the controlport, be sure to enable one of these</span>
 <span class="c1">## authentication methods, to prevent attackers from accessing it.</span>
-HashedControlPassword <span class="m">16</span>:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
+HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
 </pre></div>
 
 
@@ -307,7 +307,7 @@ HashedControlPassword <span class="m">16</span>:872860B76453A77D60CA2BB8C1A70420
 Forwarding port was set to 9050 as that's the default listening port by
 the TOR service.</p>
 <div class="highlight"><pre><span></span>listen-address  localhost:8118
-forward-socks5   /   <span class="m">127</span>.0.0.1:9050
+forward-socks5   /   127.0.0.1:9050
 </pre></div>
 
 
@@ -324,7 +324,7 @@ and <a href="http://www.seleniumhq.org/">Selenium</a> were a natural choice for 
 
 <span class="k">class</span> <span class="nc">SeleniumUtility</span><span class="p">():</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_tor</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_tor</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ip_url</span> <span class="o">=</span> <span class="s1">&#39;http://icanhazip.com/&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;gkp&#39;</span><span class="p">)</span>
 
@@ -354,7 +354,7 @@ and <a href="http://www.seleniumhq.org/">Selenium</a> were a natural choice for 
             <span class="k">except</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;#</span><span class="si">%d</span><span class="s1"> request timeout&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
 </pre></div>
 
@@ -427,7 +427,7 @@ to that.</p>
 <p>Jira is, tough. I have been searching a solution to make my Jira life
 easy. The problems I want to fix are:</p>
 <ol>
-<li>Loading browser is too slow &larr; how many times I just...
+<li>Loading browser is too slow &larr; how many times I just ...
             </p>
 
             <div class="card-action">

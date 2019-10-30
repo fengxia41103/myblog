@@ -141,7 +141,7 @@
 <p>After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.</p>
-<p>Having tried <a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties">offlineimap</a> for a bit, I ended up battling its
+<p>Having tried <a href="{static}/downloads/davmail.properties">offlineimap</a> for a bit, I ended up battling its
 configuration to make it work (sort of) with Hotmail's IMAP. Gmail
 worked flawlessly, but boy, Microsoft, get a grip. No wonder hotmail
 is dying. But in the end I'm just one guy who holds on something
@@ -193,14 +193,14 @@ new cert (from the mail server itself) and config <code>CertificateFile</code> t
 that file. I followed the steps <a href="https://wiki.archlinux.org/index.php/Isync#Step_.231:_Get_the_certificates">here</a>.</p>
 <ol>
 <li>
-<p>Create a bash script, <a href="https://fengxia41103.github.io/myblog/downloads/emacs/get_certs.sh"><code>get_certs.sh</code></a>, to facilitate the
+<p>Create a bash script, <a href="{static}/downloads/emacs/get_certs.sh"><code>get_certs.sh</code></a>, to facilitate the
    command line:</p>
 <div class="highlight"><pre><span></span><span class="err">```</span><span class="s s-Atom">shell</span>
 <span class="c1">#!/bin/sh</span>
 <span class="nv">SERVER</span><span class="s s-Atom">=</span><span class="err">$</span><span class="p">{</span><span class="mi">1</span><span class="p">:-</span><span class="s s-Atom">my</span><span class="p">.</span><span class="s s-Atom">server</span><span class="p">.</span><span class="s s-Atom">com</span><span class="p">}</span>
 <span class="nv">PORT</span><span class="s s-Atom">=</span><span class="err">$</span><span class="p">{</span><span class="mi">2</span><span class="p">:-</span><span class="mi">993</span><span class="p">}</span>
 <span class="nv">CERT_FOLDER</span><span class="s s-Atom">=</span><span class="err">$</span><span class="p">{</span><span class="mi">3</span><span class="p">:-</span><span class="s s-Atom">~/certs</span><span class="p">}</span>
-<span class="s s-Atom">openssl</span> <span class="s s-Atom">s_client</span> <span class="o">-</span><span class="s s-Atom">connect</span> <span class="err">$</span><span class="p">{</span><span class="nv">SERVER</span><span class="p">}</span><span class="s s-Atom">:</span><span class="err">$</span><span class="p">{</span><span class="nv">PORT</span><span class="p">}</span> <span class="o">-</span><span class="s s-Atom">showcerts</span> <span class="mi">2</span><span class="s s-Atom">&amp;gt</span><span class="p">;</span><span class="s s-Atom">&amp;amp</span><span class="p">;</span><span class="mi">1</span> <span class="s s-Atom">&amp;lt</span><span class="p">;</span> <span class="o">/</span><span class="s s-Atom">dev</span><span class="o">/</span><span class="s s-Atom">null</span> <span class="p">|</span> <span class="s s-Atom">sed</span> <span class="o">-</span><span class="s s-Atom">ne</span> <span class="s s-Atom">&#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39;</span><span class="p">|</span> <span class="s s-Atom">sed</span> <span class="o">-</span><span class="s s-Atom">ne</span> <span class="s s-Atom">&#39;1,/-END CERTIFICATE-/p&#39;</span> <span class="s s-Atom">&amp;gt</span><span class="p">;</span> <span class="err">$</span><span class="p">{</span><span class="nv">CERT_FOLDER</span><span class="p">}</span><span class="s s-Atom">/</span><span class="err">$</span><span class="p">{</span><span class="nv">SERVER</span><span class="p">}.</span><span class="s s-Atom">pem</span>
+<span class="s s-Atom">openssl</span> <span class="s s-Atom">s_client</span> <span class="o">-</span><span class="s s-Atom">connect</span> <span class="err">$</span><span class="p">{</span><span class="nv">SERVER</span><span class="p">}</span><span class="s s-Atom">:</span><span class="err">$</span><span class="p">{</span><span class="nv">PORT</span><span class="p">}</span> <span class="o">-</span><span class="s s-Atom">showcerts</span> <span class="mi">2</span><span class="s s-Atom">&gt;&amp;</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="o">/</span><span class="s s-Atom">dev</span><span class="o">/</span><span class="s s-Atom">null</span> <span class="p">|</span> <span class="s s-Atom">sed</span> <span class="o">-</span><span class="s s-Atom">ne</span> <span class="s s-Atom">&#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39;</span><span class="p">|</span> <span class="s s-Atom">sed</span> <span class="o">-</span><span class="s s-Atom">ne</span> <span class="s s-Atom">&#39;1,/-END CERTIFICATE-/p&#39;</span> <span class="o">&gt;</span> <span class="err">$</span><span class="p">{</span><span class="nv">CERT_FOLDER</span><span class="p">}</span><span class="s s-Atom">/</span><span class="err">$</span><span class="p">{</span><span class="nv">SERVER</span><span class="p">}.</span><span class="s s-Atom">pem</span>
 <span class="err">```</span>
 </pre></div>
 
@@ -211,7 +211,7 @@ that file. I followed the steps <a href="https://wiki.archlinux.org/index.php/Is
 <div class="highlight"><pre><span></span>```shell
 sh get_certs.sh some.imap.server port ~/.cert/
 eg:
-sh get_certs.sh outlookae.&amp;lt;your company&amp;gt;.com 993 ~/.cert/
+sh get_certs.sh outlookae.&lt;your company&gt;.com 993 ~/.cert/
 ```
 </pre></div>
 
@@ -607,7 +607,7 @@ AuthMech LOGIN
 </pre></div>
 
 
-<p>and here is the <code>davmail</code> <a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties">settings</a> (copy it to
+<p>and here is the <code>davmail</code> <a href="{static}/downloads/davmail.properties">settings</a> (copy it to
 <code>~/.davmail.properties</code>). The best way to run it is to use a tmux,
 then run it as background process <code>davmail &amp;</code>. Alternatively, you can
 set <code>davmail.server=true</code>, then use <code>nohup</code>. But w/ tmux running
@@ -620,7 +620,7 @@ anymore.</p>
 </figure>
 
 <div class="footnote">
-<hr>
+<hr />
 <ol>
 <li id="fn:1">
 <p>Btw, I was having issue w/ v5.3.1. Downgrade it to 5.2 (released
@@ -684,7 +684,7 @@ in Aug 2019) worked out better.&#160;<a class="footnote-backref" href="#fnref:1"
 <p>Jira is, tough. I have been searching a solution to make my Jira life
 easy. The problems I want to fix are:</p>
 <ol>
-<li>Loading browser is too slow &larr; how many times I just...
+<li>Loading browser is too slow &larr; how many times I just ...
             </p>
 
             <div class="card-action">

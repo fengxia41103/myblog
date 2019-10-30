@@ -157,12 +157,12 @@ $ qemu-img info <span class="o">[</span>.img<span class="o">]</span>
 ---------------------
 image: xenial-server-cloudimg-amd64-disk1.img
 file format: qcow2
-virtual size: <span class="m">2</span>.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
+virtual size: 2.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
 disk size: 277M
-cluster_size: <span class="m">65536</span>
+cluster_size: 65536
 Format specific information:
-    compat: <span class="m">0</span>.10
-    refcount bits: <span class="m">16</span>
+    compat: 0.10
+    refcount bits: 16
 </pre></div>
 
 
@@ -425,13 +425,13 @@ image. With all 5 virtual machines, the storage needs is only about
 image: mydev.snap
 file format: qcow2
 virtual size: 22G <span class="o">(</span><span class="m">23836229632</span> bytes<span class="o">)</span>
-disk size: <span class="m">3</span>.4G
-cluster_size: <span class="m">65536</span>
+disk size: 3.4G
+cluster_size: 65536
 backing file: resized-orig.img &lt;&lt;-- here!
 Format specific information:
-    compat: <span class="m">1</span>.1
+    compat: 1.1
     lazy refcounts: <span class="nb">false</span>
-    refcount bits: <span class="m">16</span>
+    refcount bits: 16
     corrupt: <span class="nb">false</span>
 </pre></div>
 
@@ -458,10 +458,10 @@ can use other <a href="http://cloudinit.readthedocs.io/en/latest/topics/format.h
 A minimal version of <code>cloud-config</code> is shown below, which allows
 <code>ubuntu</code> user login using the <code>password</code> value you defined here, eg. <code>whatever001</code>.</p>
 <div class="highlight"><pre><span></span><span class="c1">#cloud-config</span>
-<span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">whatever001</span>
-<span class="nt">chpasswd</span><span class="p">:</span>
-  <span class="nt">expire</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-<span class="nt">ssh_pwauth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">whatever001</span>
+<span class="l l-Scalar l-Scalar-Plain">chpasswd</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">expire</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="l l-Scalar l-Scalar-Plain">ssh_pwauth</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 
 
@@ -612,7 +612,7 @@ optional arguments:
 <p>Jira is, tough. I have been searching a solution to make my Jira life
 easy. The problems I want to fix are:</p>
 <ol>
-<li>Loading browser is too slow &larr; how many times I just...
+<li>Loading browser is too slow &larr; how many times I just ...
             </p>
 
             <div class="card-action">

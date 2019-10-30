@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - demo</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/demo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-10-15T21:43:00-04:00</updated><entry><title>SPA: a cofiguration Dashboard</title><link href="https://fengxia41103.github.io/myblog/project%20spa%20dashboard%20demo.html" rel="alternate"></link><published>2018-10-15T21:43:00-04:00</published><updated>2018-10-15T21:43:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-10-15:/myblog/project spa dashboard demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-    &lt;img src="images/spa%20dashboard%20demo.png" /&gt;
-    &lt;figcaption&gt;Project SPA Dashboard demo&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://fengxia41103.github.io/spa-dashboard/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/fengxia41103/spa-dashboard"&gt;Code&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Project SPA Dashboard is a weekend fun. The idea came from Lenovo Open
-Cloud project, in which we have developed auto deployment of a complex
-stack on three physical servers. Services are Red Hat software
-deployed on a RHHI instance. Previously we have maintained …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/demo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-10-15T21:43:00-04:00</updated><entry><title>SPA: a cofiguration Dashboard</title><link href="https://fengxia41103.github.io/myblog/project%20spa%20dashboard%20demo.html" rel="alternate"></link><published>2018-10-15T21:43:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-10-15:myblog/project spa dashboard demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/spa%20dashboard%20demo.png" /&gt;
     &lt;figcaption&gt;Project SPA Dashboard demo&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -40,57 +26,57 @@ pre-determined. &lt;/p&gt;
 representing a deployment instance with these actual config values,
 thus eliminating manual maintenance of a static wiki page.&lt;/p&gt;
 &lt;p&gt;For example, here is part of the config file of&lt;code&gt;Satellite&lt;/code&gt; VM:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;vm_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite &amp;lt;-- host name&lt;/span&gt;
-&lt;span class="nt"&gt;qcow_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel75_qcow_satellite&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;vm_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite &amp;lt;-- host name&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;qcow_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel75_qcow_satellite&lt;/span&gt;
 
-&lt;span class="nt"&gt;cloud_init_nics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth0&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.41.1&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.252.0&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.40.1&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth1&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.101&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.1&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth2&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.30.101&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.30.1&lt;/span&gt;
-    &lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;cloud_init_nics&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.41.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_netmask&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.252.0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_gateway&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.40.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.101&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_netmask&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_gateway&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth2&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.30.101&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_netmask&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_gateway&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.30.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
 
-&lt;span class="nt"&gt;dns1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.0.10&lt;/span&gt;
-&lt;span class="nt"&gt;dns2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.0.11&lt;/span&gt;
-&lt;span class="nt"&gt;host_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;dns1&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.0.10&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;dns2&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.0.11&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;host_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite&lt;/span&gt;
 
 
-&lt;span class="nt"&gt;boot_devices&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;hd&lt;/span&gt;
-&lt;span class="nt"&gt;os&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel_7x64&lt;/span&gt;
-&lt;span class="nt"&gt;cpu_cors&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;4&lt;/span&gt;
-&lt;span class="nt"&gt;memory&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;20GiB&lt;/span&gt;
-&lt;span class="nt"&gt;storage_domain_vm&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;iso&lt;/span&gt;
-&lt;span class="nt"&gt;storage_domain_disk&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;vmstore&lt;/span&gt;
-&lt;span class="nt"&gt;disk_format&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cow&lt;/span&gt;
-&lt;span class="nt"&gt;disk_interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio_scsi&lt;/span&gt;
-&lt;span class="nt"&gt;disk_bootable&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;boot_devices&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;hd&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;os&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel_7x64&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;cpu_cors&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;4&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;memory&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;20GiB&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;storage_domain_vm&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;iso&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;storage_domain_disk&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;vmstore&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;disk_format&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cow&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;disk_interface&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio_scsi&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;disk_bootable&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
 
-&lt;span class="nt"&gt;nics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic1&lt;/span&gt;
-    &lt;span class="nt"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
-    &lt;span class="nt"&gt;profile_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Campus&lt;/span&gt;
-    &lt;span class="nt"&gt;network_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Campus&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic2&lt;/span&gt;
-    &lt;span class="nt"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
-    &lt;span class="nt"&gt;profile_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;PhysicalMgmt&lt;/span&gt;
-    &lt;span class="nt"&gt;network_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;PhysicalMgmt&lt;/span&gt;
-  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic3&lt;/span&gt;
-    &lt;span class="nt"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
-    &lt;span class="nt"&gt;profile_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;VMMgmt&lt;/span&gt;
-    &lt;span class="nt"&gt;network_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;VMMgmt&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;nics&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;interface&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;profile_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Campus&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;network_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Campus&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic2&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;interface&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;profile_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;PhysicalMgmt&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;network_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;PhysicalMgmt&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic3&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;interface&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;profile_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;VMMgmt&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;network_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;VMMgmt&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -138,20 +124,7 @@ architecture is shown below:&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://facebook.github.io/react/"&gt;REACT&lt;/a&gt;: core&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://webpack.github.io/"&gt;webpack&lt;/a&gt;: new module builder that is making lot of buzz these days.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt;: a new way to talk to API endpoints instead of &lt;code&gt;jQuery AJAX&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content><category term="lenovo"></category></entry><entry><title>SPA: World Snapshot</title><link href="https://fengxia41103.github.io/myblog/data%20visualization.html" rel="alternate"></link><published>2016-10-15T22:00:00-04:00</published><updated>2016-10-15T22:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-10-15:/myblog/data visualization.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-  &lt;img src="images/country_1.png"/&gt;
-    &lt;figcaption&gt;World Snapshot&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://snapshots.world/"&gt;live demo&lt;/a&gt;, and &lt;a href="https://github.com/fengxia41103/worldsnapshot"&gt;github&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The joy of making graphs in a data-driven web application has been the
-highlight that kept me going from project to project. Once all things
-are hooked up and data can be created in a meaningful way, the
-ultimate presentation are &lt;em&gt;reports&lt;/em&gt; and &lt;em&gt;graphs …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+&lt;/ul&gt;</summary><category term="lenovo"></category></entry><entry><title>SPA: World Snapshot</title><link href="https://fengxia41103.github.io/myblog/data%20visualization.html" rel="alternate"></link><published>2016-10-15T22:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-10-15:myblog/data visualization.html</id><summary type="html">&lt;figure class="s12 center"&gt;
   &lt;img src="images/country_1.png"/&gt;
     &lt;figcaption&gt;World Snapshot&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -205,21 +178,7 @@ data acquisition through 3rd party API, and ploting using the awesome D3 library
 source handling into &lt;code&gt;DataSourceContainer&lt;/code&gt; and graphing into its own
 &lt;code&gt;GraphFactoryContainer&lt;/code&gt;.  Therefore, we can swap out any of these
 components, for example, using Google chart for graphing, adding a new
-data source, or using &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt; instead of &lt;code&gt;jQuery&lt;/code&gt; for AJAX calls.&lt;/p&gt;</content><category term="demo"></category><category term="react"></category></entry><entry><title>SPA: car leasing calculator</title><link href="https://fengxia41103.github.io/myblog/car%20leasing.html" rel="alternate"></link><published>2016-09-30T21:00:00-04:00</published><updated>2016-09-30T21:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-30:/myblog/car leasing.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-    &lt;img src="images/demo_car.png"/&gt;
-    &lt;figcaption&gt;Project Car Leasing Calculator&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator angular.html"&gt;AngularJS version&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator react.html"&gt;REACT version&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Car leasing rooted in my own experience while researching for a new
-car.  After putting together an Excel to model the car leasing
-process, I started to think how to make the lesson learned available
-for other buyers. Also, I figure this …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+data source, or using &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt; instead of &lt;code&gt;jQuery&lt;/code&gt; for AJAX calls.&lt;/p&gt;</summary><category term="demo"></category><category term="react"></category></entry><entry><title>SPA: car leasing calculator</title><link href="https://fengxia41103.github.io/myblog/car%20leasing.html" rel="alternate"></link><published>2016-09-30T21:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-30:myblog/car leasing.html</id><summary type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_car.png"/&gt;
     &lt;figcaption&gt;Project Car Leasing Calculator&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -507,23 +466,7 @@ both HTML and JS in one place is a brave attempt to define what a
 component is. Let's face it, in today's web application, all UI
 elements may respond to some user event or data event so leveraging
 Javascript's full power to control presentation from its birth instead
-from jQuery's backwards logic is the right direction.&lt;/p&gt;</content><category term="demo"></category><category term="angular"></category><category term="react"></category></entry><entry><title>Project Fashion Demo</title><link href="https://fengxia41103.github.io/myblog/project%20fashion%20demo.html" rel="alternate"></link><published>2016-03-06T09:00:00-05:00</published><updated>2016-03-06T09:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-03-06:/myblog/project fashion demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-    &lt;img src="images/demo_fashion.png" /&gt;
-    &lt;figcaption&gt;Project Fashion front page&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://fengxia.co:8003/wei/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Project Fashion is built to support daily business of an international
-trading company who specializes fashion products. Main functions of
-the application include product management, customer and vendor
-database, order management (both sales and purchase), and inventory
-management.&lt;/p&gt;
-&lt;p&gt;The company is based …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+from jQuery's backwards logic is the right direction.&lt;/p&gt;</summary><category term="demo"></category><category term="angular"></category><category term="react"></category></entry><entry><title>Project Fashion Demo</title><link href="https://fengxia41103.github.io/myblog/project%20fashion%20demo.html" rel="alternate"></link><published>2016-03-06T09:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-03-06:myblog/project fashion demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_fashion.png" /&gt;
     &lt;figcaption&gt;Project Fashion front page&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -560,21 +503,7 @@ and design considerations in these articles:&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;product and inventory&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;sales order and purchase order&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/fashion reports.html"&gt;reporting&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content></entry><entry><title>Project Stock Backtesting Demo</title><link href="https://fengxia41103.github.io/myblog/project%20stock%20demo.html" rel="alternate"></link><published>2015-08-06T15:00:00-04:00</published><updated>2015-08-06T15:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-08-06:/myblog/project stock demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-    &lt;img src="images/demo_jk.png"/&gt;
-    &lt;figcaption&gt;Project Stock frontpage&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://fengxia.co:8002/jk/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This project started at lunch with a friend who has been trading
-stocks as hobby for years. None of us has worked in a trading house
-playing with some serious money. Nonetheless, he believed that he has
-found a winner strategy and I …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+&lt;/ol&gt;</summary></entry><entry><title>Project Stock Backtesting Demo</title><link href="https://fengxia41103.github.io/myblog/project%20stock%20demo.html" rel="alternate"></link><published>2015-08-06T15:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-08-06:myblog/project stock demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_jk.png"/&gt;
     &lt;figcaption&gt;Project Stock frontpage&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -599,21 +528,7 @@ for a replay.&lt;/p&gt;
 &lt;p&gt;The bad news is that his winner strategy doesn't seem to be a winner
 yet.  The good news is that we now have a framework that can host much
 more data set and strategies, and running data set in this scale is
-fun.&lt;/p&gt;</content></entry><entry><title>Project GKP Demo</title><link href="https://fengxia41103.github.io/myblog/project%20gkp%20demo.html" rel="alternate"></link><published>2015-03-06T09:00:00-05:00</published><updated>2015-03-06T09:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-03-06:/myblog/project gkp demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
-    &lt;img src="images/demo_gkp.png"/&gt;
-    &lt;figcaption&gt;Project GKP frontpage&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://fengxia.co:8001/gaokao/"&gt;Demo (in Chinese)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Project GKP is an interesting one.  It is a web tool that helps high
-school graduates in China to find a right college.  The grand vision
-is to make it a one-stop shop to get information that are mostly
-relevant at …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+fun.&lt;/p&gt;</summary></entry><entry><title>Project GKP Demo</title><link href="https://fengxia41103.github.io/myblog/project%20gkp%20demo.html" rel="alternate"></link><published>2015-03-06T09:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-03-06:myblog/project gkp demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_gkp.png"/&gt;
     &lt;figcaption&gt;Project GKP frontpage&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -658,4 +573,4 @@ hand with demo.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;state, city and a school map&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;everything about a school&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/gkp majors.html"&gt;majors&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content></entry></feed>
+&lt;/ol&gt;</summary></entry></feed>

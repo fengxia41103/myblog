@@ -96,7 +96,10 @@ apt install \
   xclip \
   ffmpeg \
   recordmydesktop \
-  byzanz
+  byzanz \
+  postgresql-server-dev-all \
+  postgresql \
+  pgcli
 ```
 
 # local kvm setup

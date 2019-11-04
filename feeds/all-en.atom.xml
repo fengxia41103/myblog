@@ -788,6 +788,39 @@ is a great way to share the same code between your localhost and vms.&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;apt install pandoc-citeproc texlive-full&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;optional: install &lt;code&gt;mermaid-filter&lt;/code&gt;: &lt;code&gt;npm install -g mermaid-filter&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h1&gt;system tweak&lt;/h1&gt;
+&lt;p&gt;In &lt;code&gt;/etc/sysctl.conf&lt;/code&gt;, then &lt;code&gt;sysctl -p&lt;/code&gt; to reload:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;increase watcher limit, needed for webpack hot reloading:
+   &lt;code&gt;fs.inotify.max_user_watches=524288&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;set &lt;a href="https://wiki.archlinux.org/index.php/HiDPI"&gt;swappiness&lt;/a&gt; to 10: &lt;code&gt;vm.swappiness=10&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Reboot, of course, will work, too.&lt;/p&gt;
+&lt;h1&gt;clear swap script&lt;/h1&gt;
+&lt;p&gt;Create a &lt;a href="https://help.ubuntu.com/community/SwapFaq"&gt;&lt;code&gt;/usr/local/sbin/swap2ram.sh&lt;/code&gt;&lt;/a&gt; per this Ubuntu's FAQ,
+and paste these lines:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nv"&gt;mem&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;C free  &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;/Mem:/ {print $4}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;swap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;C free &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;/Swap:/ {print $3}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$mem&lt;/span&gt; -lt &lt;span class="nv"&gt;$swap&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ERROR: not enough RAM to write swap back, nothing done&amp;quot;&lt;/span&gt; &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;2
+    &lt;span class="nb"&gt;exit&lt;/span&gt; 1
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+swapoff -a &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+swapon -a
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then &lt;code&gt;chmod +x&lt;/code&gt; and execute it. It takes a while and has no stdout
+prints of any kind. You can watch &lt;code&gt;glances&lt;/code&gt; that swap % is going down
+while RAM % is going up, and eventually swap % will be 0!!&lt;/p&gt;
 &lt;h1&gt;enterprise stuff&lt;/h1&gt;
 &lt;p&gt;Working in an enterprise means that you need a few tools, eg. emails,
 to work w/ everybody else (which == Microsoft, actually, sigh).&lt;/p&gt;
@@ -19980,7 +20013,7 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;Preferences -&amp;gt; Advances -&amp;gt; Networking&lt;/code&gt;, set up &lt;code&gt;Manual proxy&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Set up as shown below:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;figure class="s12 center"
+&lt;p&gt;&lt;figure class="s12 center"&gt;
     &lt;img src="images/firefox%20manual%20proxy.png" /&gt;
     &lt;figcaption&gt;Firefox manual proxy setup&lt;/figcaption&gt;
 &lt;/figure&gt;&lt;/p&gt;

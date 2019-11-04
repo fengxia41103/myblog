@@ -336,6 +336,39 @@ is a great way to share the same code between your localhost and vms.</p>
 <li><code>apt install pandoc-citeproc texlive-full</code></li>
 <li>optional: install <code>mermaid-filter</code>: <code>npm install -g mermaid-filter</code></li>
 </ol>
+<h1>system tweak</h1>
+<p>In <code>/etc/sysctl.conf</code>, then <code>sysctl -p</code> to reload:</p>
+<ol>
+<li>
+<p>increase watcher limit, needed for webpack hot reloading:
+   <code>fs.inotify.max_user_watches=524288</code></p>
+</li>
+<li>
+<p>set <a href="https://wiki.archlinux.org/index.php/HiDPI">swappiness</a> to 10: <code>vm.swappiness=10</code></p>
+</li>
+</ol>
+<p>Reboot, of course, will work, too.</p>
+<h1>clear swap script</h1>
+<p>Create a <a href="https://help.ubuntu.com/community/SwapFaq"><code>/usr/local/sbin/swap2ram.sh</code></a> per this Ubuntu's FAQ,
+and paste these lines:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">mem</span><span class="o">=</span><span class="k">$(</span><span class="nv">LC_ALL</span><span class="o">=</span>C free  <span class="p">|</span> awk <span class="s1">&#39;/Mem:/ {print $4}&#39;</span><span class="k">)</span>
+<span class="nv">swap</span><span class="o">=</span><span class="k">$(</span><span class="nv">LC_ALL</span><span class="o">=</span>C free <span class="p">|</span> awk <span class="s1">&#39;/Swap:/ {print $3}&#39;</span><span class="k">)</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$mem</span> -lt <span class="nv">$swap</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;ERROR: not enough RAM to write swap back, nothing done&quot;</span> &gt;<span class="p">&amp;</span>2
+    <span class="nb">exit</span> 1
+<span class="k">fi</span>
+
+swapoff -a <span class="o">&amp;&amp;</span>
+swapon -a
+</pre></div>
+
+
+<p>Then <code>chmod +x</code> and execute it. It takes a while and has no stdout
+prints of any kind. You can watch <code>glances</code> that swap % is going down
+while RAM % is going up, and eventually swap % will be 0!!</p>
 <h1>enterprise stuff</h1>
 <p>Working in an enterprise means that you need a few tools, eg. emails,
 to work w/ everybody else (which == Microsoft, actually, sigh).</p>

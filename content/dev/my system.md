@@ -217,6 +217,41 @@ Use Pandoc [2.7.3][7]. The v1.9 in Ubuntu 18.04 didn't work for compiling
 2. `apt install pandoc-citeproc texlive-full`
 3. optional: install `mermaid-filter`: `npm install -g mermaid-filter`
 
+# system tweak
+
+In `/etc/sysctl.conf`, then `sysctl -p` to reload:
+
+1. increase watcher limit, needed for webpack hot reloading:
+   `fs.inotify.max_user_watches=524288`
+
+2. set [swappiness][2] to 10: `vm.swappiness=10`
+
+Reboot, of course, will work, too.
+
+# clear swap script
+
+Create a [`/usr/local/sbin/swap2ram.sh`][12] per this Ubuntu's FAQ,
+and paste these lines:
+
+```sh
+#!/bin/sh
+
+mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
+swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+
+if [ $mem -lt $swap ]; then
+    echo "ERROR: not enough RAM to write swap back, nothing done" >&2
+    exit 1
+fi
+
+swapoff -a &&
+swapon -a
+```
+
+Then `chmod +x` and execute it. It takes a while and has no stdout
+prints of any kind. You can watch `glances` that swap % is going down
+while RAM % is going up, and eventually swap % will be 0!!
+
 # enterprise stuff
 
 Working in an enterprise means that you need a few tools, eg. emails,
@@ -241,5 +276,6 @@ to work w/ everybody else (which == Microsoft, actually, sigh).
 [9]: {filename}/dev/pandoc.md
 [10]: {filename}/dev/lenovo%20linux%20box.md
 [11]: {filename}/dev/mbsync.md
+[12]: https://help.ubuntu.com/community/SwapFaq
 
 [^1]: To check screen resolution: `xdpyinfo | grep dimensions`.

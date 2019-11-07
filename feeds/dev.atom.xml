@@ -459,7 +459,8 @@ environment back.&lt;/p&gt;
   byzanz &lt;span class="se"&gt;\&lt;/span&gt;
   postgresql-server-dev-all &lt;span class="se"&gt;\&lt;/span&gt;
   postgresql &lt;span class="se"&gt;\&lt;/span&gt;
-  pgcli
+  pgcli &lt;span class="se"&gt;\&lt;/span&gt;
+  postgresql-client
 &lt;/pre&gt;&lt;/div&gt;
 
 

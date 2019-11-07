@@ -140,6 +140,10 @@ can do in my daily development workflow. Here is to document the
 <a href="{static}/downloads/emacs/init.el">init.el</a> that I'm using. It's a work in progress of course since
 I'm updating it all the time. Nonetheless, I'm already in love with
 what I have so far.</p>
+<h1>install emacs26</h1>
+<p>The easiest way to get this: <code>sudo add-apt-repository
+ppa:kelleyk/emacs</code>, then <code>apt remove emacs emacs25 &amp;&amp; apt update &amp;&amp;
+apt install emacs26</code>, then verify <code>emacs --version</code>.</p>
 <h1>replace in files</h1>
 <p>Replacing a string match in multiple files is common, but
 tricky. Emacs doesn't make this intuitive at all. Follow these steps
@@ -291,7 +295,9 @@ manage the list. </p>
 </pre></div>
 
 
-<h1>Jira</h1>
+<h1>Jira in emacs</h1>
+<p>I would suggest to use <a href="https://fengxia41103.github.io/myblog/jira.html">jira cli</a> instead! Read on if you are
+curious about <code>org-jira</code>.</p>
 <p>If you use Jira, say the url is <code>https://jira.&lt;company&gt;.com:8443/</code>
 (port 8443 is the common configuration for Jira), chances are it is
 also using a self-signed cert. </p>

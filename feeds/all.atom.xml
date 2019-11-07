@@ -15696,7 +15696,7 @@ listed below!&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;Leave everything else as default/blank.&lt;/p&gt;
 &lt;h1&gt;jira &amp;amp; Emacs&lt;/h1&gt;
-&lt;p&gt;See my article on &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;emacs&lt;/a&gt;.&lt;/p&gt;</summary></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+&lt;p&gt;See my &lt;a href="https://fengxia41103.github.io/myblog/jira.html"&gt;jira&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;emacs&lt;/a&gt; articles.&lt;/p&gt;</summary></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
 &lt;h1&gt;Tune sensitivity&lt;/h1&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
@@ -23325,6 +23325,10 @@ can do in my daily development workflow. Here is to document the
 &lt;a href="{static}/downloads/emacs/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's a work in progress of course since
 I'm updating it all the time. Nonetheless, I'm already in love with
 what I have so far.&lt;/p&gt;
+&lt;h1&gt;install emacs26&lt;/h1&gt;
+&lt;p&gt;The easiest way to get this: &lt;code&gt;sudo add-apt-repository
+ppa:kelleyk/emacs&lt;/code&gt;, then &lt;code&gt;apt remove emacs emacs25 &amp;amp;&amp;amp; apt update &amp;amp;&amp;amp;
+apt install emacs26&lt;/code&gt;, then verify &lt;code&gt;emacs --version&lt;/code&gt;.&lt;/p&gt;
 &lt;h1&gt;replace in files&lt;/h1&gt;
 &lt;p&gt;Replacing a string match in multiple files is common, but
 tricky. Emacs doesn't make this intuitive at all. Follow these steps
@@ -23476,7 +23480,9 @@ manage the list. &lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1&gt;Jira&lt;/h1&gt;
+&lt;h1&gt;Jira in emacs&lt;/h1&gt;
+&lt;p&gt;I would suggest to use &lt;a href="https://fengxia41103.github.io/myblog/jira.html"&gt;jira cli&lt;/a&gt; instead! Read on if you are
+curious about &lt;code&gt;org-jira&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;If you use Jira, say the url is &lt;code&gt;https://jira.&amp;lt;company&amp;gt;.com:8443/&lt;/code&gt;
 (port 8443 is the common configuration for Jira), chances are it is
 also using a self-signed cert. &lt;/p&gt;

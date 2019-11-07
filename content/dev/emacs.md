@@ -14,6 +14,12 @@ can do in my daily development workflow. Here is to document the
 I'm updating it all the time. Nonetheless, I'm already in love with
 what I have so far.
 
+# install emacs26
+
+The easiest way to get this: `sudo add-apt-repository
+ppa:kelleyk/emacs`, then `apt remove emacs emacs25 && apt update &&
+apt install emacs26`, then verify `emacs --version`.
+
 # replace in files
 
 Replacing a string match in multiple files is common, but
@@ -164,7 +170,10 @@ manage the list.
 (setq mu4e-change-filenames-when-moving t)
 ```
 
-# Jira
+# Jira in emacs
+
+I would suggest to use [jira cli][5] instead! Read on if you are
+curious about `org-jira`.
 
 If you use Jira, say the url is `https://jira.<company>.com:8443/`
 (port 8443 is the common configuration for Jira), chances are it is
@@ -287,3 +296,4 @@ Happy coding.
 [2]: {filename}/dev/mbsync.md
 [3]: https://github.com/ahungry/org-jira
 [4]: https://curl.haxx.se/docs/sslcerts.html
+[5]: {filename}/dev/jira.md

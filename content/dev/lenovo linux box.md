@@ -140,7 +140,7 @@ Leave everything else as default/blank.
 
 # jira & Emacs
 
-See my article on [emacs][6].
+See my [jira][9] and [emacs][6] articles.
 
 
 [1]: https://www.skype.com/en/download-skype/skype-for-computer/
@@ -151,3 +151,4 @@ See my article on [emacs][6].
 [6]: {filename}/dev/emacs.md
 [7]: https://www.infradead.org/openconnect/vpnc-script.html
 [8]: http://git.infradead.org/users/dwmw2/vpnc-scripts.git/blob_plain/HEAD:/vpnc-script
+[9]: {filename}/dev/jira.md

@@ -228,7 +228,7 @@ to fame and fortune for some, but in the end, as an inheritage of mankind.
 > collector. It is a miracle that anything at all has survived for us to
 > enjoy.
 > 
-> Without questin, however, much of Ancient Egypt's magnificent splendor
+> Without question, however, much of Ancient Egypt's magnificent splendor
 > was saved from oblivion by the aggressive policies of Wallis Budge and
 > other &mdash; witness, to mention only a few instances, not only
 > Belzoni's collections, but also the Papyrus of Ani, the best and most

@@ -99,7 +99,8 @@ apt install \
   byzanz \
   postgresql-server-dev-all \
   postgresql \
-  pgcli
+  pgcli \
+  postgresql-client
 ```
 
 # local kvm setup

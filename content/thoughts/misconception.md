@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: misconception
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="images/fish%20tank.jpg"/>
+</figure>
+
+
 I'm in a constant amazement how misconcepted this world is, by me, and
 by many many others. Not only of this world as it is now, but the so
 called history, things that have happened, have passed, should have

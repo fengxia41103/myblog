@@ -100,7 +100,8 @@ apt install \
   postgresql-server-dev-all \
   postgresql \
   pgcli \
-  postgresql-client
+  postgresql-client \
+  fcitx-googlepinyin
 ```
 
 # local kvm setup

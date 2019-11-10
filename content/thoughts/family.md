@@ -4,8 +4,8 @@ Tags: family
 Slug: family info
 Author: Feng Xia
 
-<figure class="col l6 m6 s12">
-  <img src="images/funny/family.jpg"/>
+<figure class="col s12">
+  <img src="images/family%20tree.png"/>
 </figure>
 
 # 爷爷，奶奶，幸福邨，夏炽宇（九弟）

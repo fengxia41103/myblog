@@ -107,7 +107,7 @@
 
       <div class="col s12">
         <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-        2019-06-24
+        2019-11-17
 
 
         <a class="wave-effect" href="dev.html">
@@ -115,12 +115,12 @@
           dev
         </a>
 
-        <a class="wave-effect" href="tag-thoughts.html">
+        <a class="wave-effect" href="tag-dev.html">
           <i class="fa fa-tag"></i>
-          thoughts
+          dev
         </a>
 
-        <h1 class="myhighlight">Dev structure</h1>
+        <h1 class="myhighlight">Strange things of Javascript</h1>
       </div>
 
 
@@ -133,61 +133,136 @@
         <blockquote>
         </blockquote>
         <p>
-          <figure class="col l5 m5 s12">
-  <img src="images/moses.jpg"/>
-  <figcaption>If the Bible story happens today</figcaption>
-</figure>
-
-<p>This is a common question any team/project will have to address
-&mdash; how to structure the knowledge we know of a project so that we
-are not missing things? Each project/application, of course, is
-different. But the overall is actually quite common. Here is a
-structure I'm proposing that is applicable not only during initial
-learning phase, but can guide the design and development as well.</p>
-<p>Take an example that we are building a portal, which has frontend and
-backend &mdash; the <code>backend</code> is showing more levels than the
-<code>frontend</code>, the idea is the same:</p>
-<div class="highlight"><pre><span></span>Portal
-  Frontend
-    Design
-    Build/packaging
-    Dev breakdown <span class="o">(</span>incl. unit tests<span class="o">)</span>
-    Tests
-
-  Backend
-    Design
-      Logical <span class="nv">view</span> <span class="o">=</span>&gt; <span class="nv">components</span>
-                   <span class="o">=</span>&gt; key technology stack
-      Components
-        REST API
-        web portal
-        another..
-        another..
-
-
-    Build/packaging
-      <span class="k">for</span> dev
-      <span class="k">for</span> <span class="nv">production</span> <span class="o">=</span>&gt; CICD integration   
-
-
-    Dev breakdown <span class="o">(</span>incl. unit tests<span class="o">)</span>
-      component A
-      component B
-      ....
-
-
-    Tests
-      all non-dev covered <span class="nv">tests</span> <span class="o">=</span>&gt; QA
-        code static analysis <span class="o">(</span>LINT, style check, best practice<span class="o">)</span>
-        scenario tests <span class="o">(</span>incl. <span class="s2">&quot;integration&quot;</span> tests<span class="o">)</span>
-      <span class="nv">machinary</span> <span class="o">=</span>&gt; CICD integration
+          <p>God, isn't Angular confusing! and I really think it is because of its
+shaky underline language &mdash; Javascript, is itself,
+confusing. Well, even by just looking at its name, how many people
+have thought that it is a <em>script</em> derived from Java!? Oh well well,
+here are some notes I take while studying Angular(JS, sometimes), and
+<code>.js</code>. Btw, there is another article about all the confusion of <a href="https://fengxia41103.github.io/myblog/ecmascript.html"><code>ES&lt;a
+number&gt;</code> denotation</a> that can clarify those naming/version hell.</p>
+<h1>scope</h1>
+<p>Scope is always the most fundamental concept I read of a language, and
+for all I know, I'm expecting something like a <code>global</code> and a <code>local</code>,
+that a local is always <em>private</em> to its enclosed curly brackets or any
+nearest declaration <em>chunk</em> &mdash; if it is declared in a function, it
+is available in a function, not outside; if it is declared in a <code>for</code>
+loop, well, it is only useful inside the <code>for</code> loop, not outside.</p>
+<p>But there comes this country boy Javascript, and for the first time I
+realized there are actually 3 scopes: global, function, and
+<strong>block</strong>. It turned out that <strong>anything declared w/ a <code>var xyz</code> can not
+have a block scope</strong>! What does this mean,</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">// Here x is 10</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Here x is 2</span>
+<span class="p">}</span>
+<span class="c1">// Here x is 2</span>
 </pre></div>
 
 
-<p>The key is to compose a design/component view so that we can
-categorize work into component, which also speaks of key
-technology/implementation. Until this is identified, we can say for
-sure we don't have 100% coverage of this code base yet.</p>
+<p>So the 2nd declaration of <code>var x=2</code> is not creating a new <em>private</em>
+variable that is only useful inside the curly bracket<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>. On the
+contrary, it <strong>re</strong>declare the former <code>var x=10</code>, but now overwriting
+its (I guess the reference) w/ a value of 2. </p>
+<p>Isn't this strange! So it turned out that</p>
+<blockquote>
+<p>Before ES2015 JavaScript did not have Block Scope. <a href="https://www.w3schools.com/js/js_let.asp">ref</a></p>
+</blockquote>
+<p>Well well well, so before the year of 2015, how many poor javascript
+coders have tripped on this!? and how many poor written code has been
+generated? and why the hell it sets such a trap to begin w/!?</p>
+<p>So the correct way is: </p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c1">// Here x is 10</span>
+<span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="o">&lt;==</span> <span class="nx">using</span> <span class="nx">the</span> <span class="sb">`let`</span>
+  <span class="c1">// Here x is 2</span>
+<span class="p">}</span>
+<span class="c1">// Here x is 10</span>
+</pre></div>
+
+
+<p>This doesn't seem very bad if you are enclosing a lot of them into
+functions. But still, try this (really, this is a nasty bug!):</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// some statements</span>
+<span class="p">}</span>
+<span class="c1">// Here i is 10</span>
+</pre></div>
+
+
+<p>Things like this, makes it very difficult for me to like Javascript.</p>
+<h1>hoisting</h1>
+<p>WTF. After being in the trade for 20+ years, this is the very first
+time I heard something like this:</p>
+<blockquote>
+<p>Hoisting is JavaScript's default behavior of moving declarations to
+the top. <a href="https://www.w3schools.com/js/js_hoisting.asp">ref</a></p>
+</blockquote>
+<p>This seems quite fine since it's trying to be smart. But then, here
+comes the rub: <strong>JavaScript only hoists declarations, not
+initializations.</strong> What that means? Two examples below:</p>
+<p>Example 1:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Initialize x</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// Initialize y</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;x is &quot;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&quot; and y is &quot;</span> <span class="o">+</span> <span class="nx">y</span><span class="p">);</span> 
+</pre></div>
+
+
+<p>Example 2:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Initialize x</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;x is &quot;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&quot; and y is &quot;</span> <span class="o">+</span> <span class="nx">y</span><span class="p">);</span> 
+
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// Initialize y</span>
+</pre></div>
+
+
+<p>Two logs generate different results:
+- example 1: <code>x</code> is 5 and <code>y</code> is 7
+- example 2: <code>x</code> is 5 and <code>y</code> is <strong>undefined</strong></p>
+<p>As a matter of fact, example 2 is equivalent to this:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Initialize x</span>
+<span class="kd">var</span> <span class="nx">y</span><span class="p">;</span> <span class="c1">// declaration</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;x is &quot;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&quot; and y is &quot;</span> <span class="o">+</span> <span class="nx">y</span><span class="p">);</span> 
+
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// Initialize y</span>
+</pre></div>
+
+
+<p>I think the problem of this confusion roots in the decision that JS
+allows the use of <code>y</code> even before it has been declared (as seen in the
+original example 2 code above)! In any other language, it will do one
+of the two things:</p>
+<ol>
+<li>variable will be declared <strong>implicitly</strong> and given a value of
+   null/undefined, sth like that &larr; this is <strong>always a bad idea</strong>
+   on the coder's part<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup>.</li>
+<li>compiler will just balk w/ an error &larr; preferred.</li>
+</ol>
+<p>Btw, the new <code>let</code> and <code>const</code> are not hoisted. Thus, if you just
+declare a <code>let feng;</code>, too bad, it stays where it is in its line
+number.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>But if you define the curly as a function, the <code>var</code> inside will
+have a <em>function scope</em>, and it is only visible to the function
+itself, not outside the function.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>We do use this a lot in python in which we don't have to
+   <em>declare</em> a variable explicitly. But then, it is a solid decision
+   in Python, and I don't recall ever need to be aware a <em>trap</em> like
+   what this hoisting idea is producing.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
         </p>
 
         <p>
@@ -224,34 +299,6 @@ sure we don't have 100% coverage of this code base yet.</p>
   <div class="container">
     <h3>Related:</h3>
     <div class="row">
-      <div class="col l4 m6 s12">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text row">
-            <div>
-              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-              2019-11-17
-            </div>
-
-            <h5 class="card-title">
-              Strange things of Javascript
-            </h5>
-
-            <p>
-              <p>God, isn't Angular confusing! and I really think it is because of its
-shaky underline language &mdash; Javascript, is itself,
-confusing. Well, even by just looking at its name, how many people
-have thought that it is a <em>script</em> derived from ...
-            </p>
-
-            <div class="card-action">
-              <a class="flabel wave-effect"
-                 href="https://fengxia41103.github.io/myblog/strange things of javascript.html">
-                read more
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="col l4 m6 s12">
         <div class="card blue-grey darken-1">
           <div class="card-content white-text row">

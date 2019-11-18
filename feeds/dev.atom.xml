@@ -1,5 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-11-10T15:06:00-05:00</updated><entry><title>Software engineer</title><link href="https://fengxia41103.github.io/myblog/software%20engineer.html" rel="alternate"></link><published>2019-11-10T15:06:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-10:myblog/software engineer.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-11-17T13:13:00-05:00</updated><entry><title>Strange things of Javascript</title><link href="https://fengxia41103.github.io/myblog/strange%20things%20of%20javascript.html" rel="alternate"></link><published>2019-11-17T13:13:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-17:myblog/strange things of javascript.html</id><summary type="html">&lt;p&gt;God, isn't Angular confusing! and I really think it is because of its
+shaky underline language &amp;mdash; Javascript, is itself,
+confusing. Well, even by just looking at its name, how many people
+have thought that it is a &lt;em&gt;script&lt;/em&gt; derived from Java!? Oh well well,
+here are some notes I take while studying Angular(JS, sometimes), and
+&lt;code&gt;.js&lt;/code&gt;. Btw, there is another article about all the confusion of &lt;a href="https://fengxia41103.github.io/myblog/ecmascript.html"&gt;&lt;code&gt;ES&amp;lt;a
+number&amp;gt;&lt;/code&gt; denotation&lt;/a&gt; that can clarify those naming/version hell.&lt;/p&gt;
+&lt;h1&gt;scope&lt;/h1&gt;
+&lt;p&gt;Scope is always the most fundamental concept I read of a language, and
+for all I know, I'm expecting something like a &lt;code&gt;global&lt;/code&gt; and a &lt;code&gt;local&lt;/code&gt;,
+that a local is always &lt;em&gt;private&lt;/em&gt; to its enclosed curly brackets or any
+nearest declaration &lt;em&gt;chunk&lt;/em&gt; &amp;mdash; if it is declared in a function, it
+is available in a function, not outside; if it is declared in a &lt;code&gt;for&lt;/code&gt;
+loop, well, it is only useful inside the &lt;code&gt;for&lt;/code&gt; loop, not outside.&lt;/p&gt;
+&lt;p&gt;But there comes this country boy Javascript, and for the first time I
+realized there are actually 3 scopes: global, function, and
+&lt;strong&gt;block&lt;/strong&gt;. It turned out that &lt;strong&gt;anything declared w/ a &lt;code&gt;var xyz&lt;/code&gt; can not
+have a block scope&lt;/strong&gt;! What does this mean,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;// Here x is 10&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="c1"&gt;// Here x is 2&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// Here x is 2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So the 2nd declaration of &lt;code&gt;var x=2&lt;/code&gt; is not creating a new &lt;em&gt;private&lt;/em&gt;
+variable that is only useful inside the curly bracket&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;. On the
+contrary, it &lt;strong&gt;re&lt;/strong&gt;declare the former &lt;code&gt;var x=10&lt;/code&gt;, but now overwriting
+its (I guess the reference) w/ a value of 2. &lt;/p&gt;
+&lt;p&gt;Isn't this strange! So it turned out that&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Before ES2015 JavaScript did not have Block Scope. &lt;a href="https://www.w3schools.com/js/js_let.asp"&gt;ref&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Well well well, so before the year of 2015, how many poor javascript
+coders have tripped on this!? and how many poor written code has been
+generated? and why the hell it sets such a trap to begin w/!?&lt;/p&gt;
+&lt;p&gt;So the correct way is: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;// Here x is 10&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;==&lt;/span&gt; &lt;span class="nx"&gt;using&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="sb"&gt;`let`&lt;/span&gt;
+  &lt;span class="c1"&gt;// Here x is 2&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// Here x is 10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This doesn't seem very bad if you are enclosing a lot of them into
+functions. But still, try this (really, this is a nasty bug!):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="c1"&gt;// some statements&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// Here i is 10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Things like this, makes it very difficult for me to like Javascript.&lt;/p&gt;
+&lt;h1&gt;hoisting&lt;/h1&gt;
+&lt;p&gt;WTF. After being in the trade for 20+ years, this is the very first
+time I heard something like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hoisting is JavaScript's default behavior of moving declarations to
+the top. &lt;a href="https://www.w3schools.com/js/js_hoisting.asp"&gt;ref&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This seems quite fine since it's trying to be smart. But then, here
+comes the rub: &lt;strong&gt;JavaScript only hoists declarations, not
+initializations.&lt;/strong&gt; What that means? Two examples below:&lt;/p&gt;
+&lt;p&gt;Example 1:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Initialize x&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Initialize y&lt;/span&gt;
+
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; and y is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Example 2:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Initialize x&lt;/span&gt;
+
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; and y is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Initialize y&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Two logs generate different results:
+- example 1: &lt;code&gt;x&lt;/code&gt; is 5 and &lt;code&gt;y&lt;/code&gt; is 7
+- example 2: &lt;code&gt;x&lt;/code&gt; is 5 and &lt;code&gt;y&lt;/code&gt; is &lt;strong&gt;undefined&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As a matter of fact, example 2 is equivalent to this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Initialize x&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// declaration&lt;/span&gt;
+
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;x is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; and y is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// Initialize y&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I think the problem of this confusion roots in the decision that JS
+allows the use of &lt;code&gt;y&lt;/code&gt; even before it has been declared (as seen in the
+original example 2 code above)! In any other language, it will do one
+of the two things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;variable will be declared &lt;strong&gt;implicitly&lt;/strong&gt; and given a value of
+   null/undefined, sth like that &amp;larr; this is &lt;strong&gt;always a bad idea&lt;/strong&gt;
+   on the coder's part&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;compiler will just balk w/ an error &amp;larr; preferred.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Btw, the new &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt; are not hoisted. Thus, if you just
+declare a &lt;code&gt;let feng;&lt;/code&gt;, too bad, it stays where it is in its line
+number.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;But if you define the curly as a function, the &lt;code&gt;var&lt;/code&gt; inside will
+have a &lt;em&gt;function scope&lt;/em&gt;, and it is only visible to the function
+itself, not outside the function.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;We do use this a lot in python in which we don't have to
+   &lt;em&gt;declare&lt;/em&gt; a variable explicitly. But then, it is a solid decision
+   in Python, and I don't recall ever need to be aware a &lt;em&gt;trap&lt;/em&gt; like
+   what this hoisting idea is producing.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Software engineer</title><link href="https://fengxia41103.github.io/myblog/software%20engineer.html" rel="alternate"></link><published>2019-11-10T15:06:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-10:myblog/software engineer.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/scissors.jpg"/&gt;
 &lt;/figure&gt;
 

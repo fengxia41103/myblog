@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-11-17T13:13:00-05:00</updated><entry><title>Strange things of Javascript</title><link href="https://fengxia41103.github.io/myblog/strange%20things%20of%20javascript.html" rel="alternate"></link><published>2019-11-17T13:13:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-17:myblog/strange things of javascript.html</id><summary type="html">&lt;p&gt;God, isn't Angular confusing! and I really think it is because of its
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-11-17T13:13:00-05:00</updated><entry><title>Strange things of Javascript</title><link href="https://fengxia41103.github.io/myblog/strange%20things%20of%20javascript.html" rel="alternate"></link><published>2019-11-17T13:13:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-17:myblog/strange things of javascript.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/wise%20doctor.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;God, isn't Angular confusing! and I really think it is because of its
 shaky underline language &amp;mdash; Javascript, is itself,
 confusing. Well, even by just looking at its name, how many people
 have thought that it is a &lt;em&gt;script&lt;/em&gt; derived from Java!? Oh well well,

@@ -1155,7 +1155,7 @@ looked very promising! I thought it would also be a good way to learn
 org-mode. But hell, the org-mode itself is really slow! Just a small
 org file of my bugs make the entire emacs choking to death. WTF!&lt;/p&gt;
 &lt;p&gt;Long story short. Here is the &lt;a href="https://github.com/go-jira/jira"&gt;go-jira&lt;/a&gt;, incredibly fast, and
-useful! It's a command line (&lt;a href="{static}/downloads/jira/jira"&gt;download here&lt;/a&gt;), just copy it to
+useful! It's a command line (&lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/jira"&gt;download here&lt;/a&gt;), just copy it to
 &lt;code&gt;/usr/local/bin&lt;/code&gt; and type &lt;code&gt;jira help&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;╰─➤  jira &lt;span class="nb"&gt;help&lt;/span&gt;
 usage: jira &lt;span class="o"&gt;[&lt;/span&gt;&amp;lt;flags&amp;gt;&lt;span class="o"&gt;]&lt;/span&gt; &amp;lt;command&amp;gt; &lt;span class="o"&gt;[&lt;/span&gt;&amp;lt;args&amp;gt; ...&lt;span class="o"&gt;]&lt;/span&gt;
@@ -1238,9 +1238,9 @@ Commands:
 &lt;p&gt;This thing is really sick. It uses YAML template to handle all the
 data posting back to the Jira server. Thus, you are dealing w/ a list
 of yaml files to tweak what data fields you want to use in an
-action. But two most useful ones are: &lt;a href="{static}/downloads/jira/template/table"&gt;table&lt;/a&gt; and &lt;a href="{static}/downloads/jira/template/create"&gt;create&lt;/a&gt;.&lt;/p&gt;
+action. But two most useful ones are: &lt;a href="{filename}/downloads/jira/template/table"&gt;table&lt;/a&gt; and &lt;a href="{filename}/downloads/jira/template/create"&gt;create&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;&lt;code&gt;table&lt;/code&gt; template&lt;/h2&gt;
-&lt;p&gt;&lt;a href="{static}/downloads/jira/template/table"&gt;This&lt;/a&gt; is the primary table template to display a list of things, the
+&lt;p&gt;&lt;a href="{filename}/downloads/jira/template/table"&gt;This&lt;/a&gt; is the primary table template to display a list of things, the
 same idea in jira browser when you on a list view. Since this is to
 display on a terminal, nothing fancy is required, just straightforward
 string to compose a &lt;em&gt;table&lt;/em&gt; look. The key to success is to:&lt;/p&gt;
@@ -1287,11 +1287,11 @@ string to compose a &lt;em&gt;table&lt;/em&gt; look. The key to success is to:&l
 &lt;h2&gt;&lt;code&gt;create&lt;/code&gt; template&lt;/h2&gt;
 &lt;p&gt;This is to display a YAML file for you to fill in the blanks. This is
 where you can plugin all kinds of &lt;em&gt;hardcoded&lt;/em&gt; values to save
-time. It's pretty self-explanatory, so &lt;a href="{static}/downloads/jira/template/create"&gt;take a look&lt;/a&gt;. I don't know
+time. It's pretty self-explanatory, so &lt;a href="{filename}/downloads/jira/template/create"&gt;take a look&lt;/a&gt;. I don't know
 much about the &lt;a href="https://gohugo.io/templates/introduction/"&gt;hugo&lt;/a&gt; yet, so most of the contents here are just
 basics.&lt;/p&gt;
 &lt;h1&gt;jira server, username&lt;/h1&gt;
-&lt;p&gt;In &lt;a href="{static}/downloads/jira/config.yml"&gt;config.yml&lt;/a&gt;, just define these:&lt;/p&gt;
+&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml"&gt;config.yml&lt;/a&gt;, just define these:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;endpoint&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://jira1.labs.company.com:8443&lt;/span&gt;
 &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;fxia1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1321,7 +1321,7 @@ JQL, and it becomes just another command! Example:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This says to use the &lt;a href="{static}/downloads/jira/template/table"&gt;table template&lt;/a&gt; for display, and the query
+&lt;p&gt;This says to use the &lt;a href="{filename}/downloads/jira/template/table"&gt;table template&lt;/a&gt; for display, and the query
 string is the just whatever you want to speak to jira server. Also by
 using the &lt;code&gt;&amp;gt;-&lt;/code&gt; to handle &lt;a href="https://yaml-multiline.info/"&gt;yaml multiline string&lt;/a&gt;, we can type the
 query in any nice indented format you like, and it will be converted
@@ -1349,7 +1349,7 @@ save on context switching looking at different look for each filter
 (which I found very annoying, and no value add in term of information,
 whatsoever).&lt;/p&gt;
 &lt;h1&gt;editor&lt;/h1&gt;
-&lt;p&gt;Set in &lt;a href="{static}/downloads/jira/config.yml"&gt;&lt;code&gt;config.yml&lt;/code&gt;&lt;/a&gt;. I think it uses whatever the default editor
+&lt;p&gt;Set in &lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml"&gt;&lt;code&gt;config.yml&lt;/code&gt;&lt;/a&gt;. I think it uses whatever the default editor
 is. I tried &lt;code&gt;nano&lt;/code&gt; and for now, using &lt;code&gt;emacsclient&lt;/code&gt; will simply reuse
 the existing emacs session and opens a new buffer! &amp;rarr; makes
 editing YAML so much more pleasant. And it is definitely better than
@@ -1678,11 +1678,11 @@ is a great way to share the same code between your localhost and vms.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;h1&gt;i3&lt;/h1&gt;
 &lt;p&gt;Under &lt;code&gt;~/.config&lt;/code&gt;, find two folder named &lt;code&gt;i3/&lt;/code&gt; and &lt;code&gt;i3status&lt;/code&gt;. Copy
-&lt;a href="{static}/downloads/i3.conf"&gt;i3.conf&lt;/a&gt; to &lt;code&gt;i3/config&lt;/code&gt;, and &lt;a href="{static}/downloads/i3status.conf"&gt;i3status.confg&lt;/a&gt; to
+&lt;a href="https://fengxia41103.github.io/myblog/downloads/i3.conf"&gt;i3.conf&lt;/a&gt; to &lt;code&gt;i3/config&lt;/code&gt;, and &lt;a href="https://fengxia41103.github.io/myblog/downloads/i3status.conf"&gt;i3status.confg&lt;/a&gt; to
 &lt;code&gt;i3status/i3status.conf&lt;/code&gt;.&lt;/p&gt;
 &lt;h1&gt;pandoc&lt;/h1&gt;
 &lt;p&gt;Use Pandoc &lt;a href="https://github.com/jgm/pandoc/releases/tag/2.7.3"&gt;2.7.3&lt;/a&gt;. The v1.9 in Ubuntu 18.04 didn't work for compiling
-&lt;a href="{static}/downloads/loc%20ra.pdf"&gt;RA PDF&lt;/a&gt;. Read &lt;a href="https://fengxia41103.github.io/myblog/pandoc workflow.html"&gt;this article&lt;/a&gt; for more details of my Pandoc notes.&lt;/p&gt;
+&lt;a href="https://fengxia41103.github.io/myblog/downloads/loc ra.pdf"&gt;RA PDF&lt;/a&gt;. Read &lt;a href="https://fengxia41103.github.io/myblog/pandoc workflow.html"&gt;this article&lt;/a&gt; for more details of my Pandoc notes.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;pip install pandoc-fignos&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;apt install pandoc-citeproc texlive-full&lt;/code&gt;&lt;/li&gt;
@@ -2077,7 +2077,7 @@ shows a block documenting:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Well, this gets me going to create the &lt;a href="{static}/downloads/webapp.pdf"&gt;example doc&lt;/a&gt;, but to have
+&lt;p&gt;Well, this gets me going to create the &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;example doc&lt;/a&gt;, but to have
 human hunting down screenshots always give me a fishy feeling &amp;mdash;
 you know how deeply I do not trust human to be &lt;strong&gt;exhaustive&lt;/strong&gt; and
 &lt;strong&gt;deterministic&lt;/strong&gt; &amp;mdash; on a good day or w/ a capable person, yes,
@@ -2787,7 +2787,7 @@ producing a Pandoc &lt;code&gt;.md&lt;/code&gt;. Also, you can dump data into &l
 such as screenshot (as of writing 9/4/2019, we are relying on human to
 take screenshot by painfully finding the component rendered in a
 browser).&lt;/p&gt;
-&lt;p&gt;All in all, take a look &lt;a href="{static}/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</summary><category term="angular"></category><category term="lenovo"></category></entry><entry><title>Internet</title><link href="https://fengxia41103.github.io/myblog/internet.html" rel="alternate"></link><published>2019-09-04T08:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/internet.html</id><summary type="html">&lt;figure class="col s12"&gt;
+&lt;p&gt;All in all, take a look &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</summary><category term="angular"></category><category term="lenovo"></category></entry><entry><title>Internet</title><link href="https://fengxia41103.github.io/myblog/internet.html" rel="alternate"></link><published>2019-09-04T08:20:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/internet.html</id><summary type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/anime%20guitar%20and%20girl.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -21224,7 +21224,7 @@ behavior can not be interruptted either.&lt;/p&gt;</summary><category term="leno
 &lt;p&gt;After becoming an Emacs user for the last few months, I acquired a
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.&lt;/p&gt;
-&lt;p&gt;Having tried &lt;a href="{static}/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
+&lt;p&gt;Having tried &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
 configuration to make it work (sort of) with Hotmail's IMAP. Gmail
 worked flawlessly, but boy, Microsoft, get a grip. No wonder hotmail
 is dying. But in the end I'm just one guy who holds on something
@@ -21276,7 +21276,7 @@ new cert (from the mail server itself) and config &lt;code&gt;CertificateFile&lt
 that file. I followed the steps &lt;a href="https://wiki.archlinux.org/index.php/Isync#Step_.231:_Get_the_certificates"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Create a bash script, &lt;a href="{static}/downloads/emacs/get_certs.sh"&gt;&lt;code&gt;get_certs.sh&lt;/code&gt;&lt;/a&gt;, to facilitate the
+&lt;p&gt;Create a bash script, &lt;a href="https://fengxia41103.github.io/myblog/downloads/emacs/get_certs.sh"&gt;&lt;code&gt;get_certs.sh&lt;/code&gt;&lt;/a&gt;, to facilitate the
    command line:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;```&lt;/span&gt;&lt;span class="s s-Atom"&gt;shell&lt;/span&gt;
 &lt;span class="c1"&gt;#!/bin/sh&lt;/span&gt;
@@ -21690,7 +21690,7 @@ AuthMech LOGIN
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; &lt;a href="{static}/downloads/davmail.properties"&gt;settings&lt;/a&gt; (copy it to
+&lt;p&gt;and here is the &lt;code&gt;davmail&lt;/code&gt; &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;settings&lt;/a&gt; (copy it to
 &lt;code&gt;~/.davmail.properties&lt;/code&gt;). The best way to run it is to use a tmux,
 then run it as background process &lt;code&gt;davmail &amp;amp;&lt;/code&gt;. Alternatively, you can
 set &lt;code&gt;davmail.server=true&lt;/code&gt;, then use &lt;code&gt;nohup&lt;/code&gt;. But w/ tmux running
@@ -24084,7 +24084,7 @@ I'm highlighting in &lt;font color="green"&gt;green&lt;/font&gt;.&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it can do so much beyond
 text editing. Still on the learning curve to get a grasp of what it
 can do in my daily development workflow. Here is to document the
-&lt;a href="{static}/downloads/emacs/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's a work in progress of course since
+&lt;a href="https://fengxia41103.github.io/myblog/downloads/emacs/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's a work in progress of course since
 I'm updating it all the time. Nonetheless, I'm already in love with
 what I have so far.&lt;/p&gt;
 &lt;h1&gt;install emacs26&lt;/h1&gt;
@@ -24356,7 +24356,7 @@ then &lt;code&gt;C-c cu&lt;/code&gt; to update comment. So even as a 2-step proc
 write comment w/o leaving org-mode. So this is not too bad.&lt;/p&gt;
 &lt;p&gt;Happy coding.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Spectrwm</title><link href="https://fengxia41103.github.io/myblog/spectrwm.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/spectrwm.html</id><summary type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. &lt;/p&gt;
-&lt;p&gt;Here is the &lt;a href="{static}/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
+&lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;
 &lt;span class="c1"&gt;# http://opensource.conformal.com/cgi-bin/man-cgi?spectrwm&lt;/span&gt;
 
@@ -27262,7 +27262,7 @@ useful.&lt;/p&gt;
     &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;According to &lt;a href="{static}/downloads/20121012084054830.pdf"&gt;document&lt;/a&gt;
+&lt;p&gt;According to &lt;a href="https://fengxia41103.github.io/myblog/downloads/20121012084054830.pdf"&gt;document&lt;/a&gt;
 published by the &lt;a href="http://www.moe.gov.cn/publicfiles/business/htmlfiles/moe/s3882/201210/xxgk_143152.html"&gt;Department of Education&lt;/a&gt; in 2012, there are 12
 categories, 92 subcategories and 506 majors.&lt;/p&gt;
 &lt;h1&gt;Category and subcategory&lt;/h1&gt;

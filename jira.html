@@ -173,7 +173,7 @@ looked very promising! I thought it would also be a good way to learn
 org-mode. But hell, the org-mode itself is really slow! Just a small
 org file of my bugs make the entire emacs choking to death. WTF!</p>
 <p>Long story short. Here is the <a href="https://github.com/go-jira/jira">go-jira</a>, incredibly fast, and
-useful! It's a command line (<a href="{static}/downloads/jira/jira">download here</a>), just copy it to
+useful! It's a command line (<a href="https://fengxia41103.github.io/myblog/downloads/jira/jira">download here</a>), just copy it to
 <code>/usr/local/bin</code> and type <code>jira help</code>:</p>
 <div class="highlight"><pre><span></span>╰─➤  jira <span class="nb">help</span>
 usage: jira <span class="o">[</span>&lt;flags&gt;<span class="o">]</span> &lt;command&gt; <span class="o">[</span>&lt;args&gt; ...<span class="o">]</span>
@@ -256,9 +256,9 @@ Commands:
 <p>This thing is really sick. It uses YAML template to handle all the
 data posting back to the Jira server. Thus, you are dealing w/ a list
 of yaml files to tweak what data fields you want to use in an
-action. But two most useful ones are: <a href="{static}/downloads/jira/template/table">table</a> and <a href="{static}/downloads/jira/template/create">create</a>.</p>
+action. But two most useful ones are: <a href="{filename}/downloads/jira/template/table">table</a> and <a href="{filename}/downloads/jira/template/create">create</a>.</p>
 <h2><code>table</code> template</h2>
-<p><a href="{static}/downloads/jira/template/table">This</a> is the primary table template to display a list of things, the
+<p><a href="{filename}/downloads/jira/template/table">This</a> is the primary table template to display a list of things, the
 same idea in jira browser when you on a list view. Since this is to
 display on a terminal, nothing fancy is required, just straightforward
 string to compose a <em>table</em> look. The key to success is to:</p>
@@ -305,11 +305,11 @@ string to compose a <em>table</em> look. The key to success is to:</p>
 <h2><code>create</code> template</h2>
 <p>This is to display a YAML file for you to fill in the blanks. This is
 where you can plugin all kinds of <em>hardcoded</em> values to save
-time. It's pretty self-explanatory, so <a href="{static}/downloads/jira/template/create">take a look</a>. I don't know
+time. It's pretty self-explanatory, so <a href="{filename}/downloads/jira/template/create">take a look</a>. I don't know
 much about the <a href="https://gohugo.io/templates/introduction/">hugo</a> yet, so most of the contents here are just
 basics.</p>
 <h1>jira server, username</h1>
-<p>In <a href="{static}/downloads/jira/config.yml">config.yml</a>, just define these:</p>
+<p>In <a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml">config.yml</a>, just define these:</p>
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">endpoint</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://jira1.labs.company.com:8443</span>
 <span class="l l-Scalar l-Scalar-Plain">user</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fxia1</span>
 </pre></div>
@@ -339,7 +339,7 @@ JQL, and it becomes just another command! Example:</p>
 </pre></div>
 
 
-<p>This says to use the <a href="{static}/downloads/jira/template/table">table template</a> for display, and the query
+<p>This says to use the <a href="{filename}/downloads/jira/template/table">table template</a> for display, and the query
 string is the just whatever you want to speak to jira server. Also by
 using the <code>&gt;-</code> to handle <a href="https://yaml-multiline.info/">yaml multiline string</a>, we can type the
 query in any nice indented format you like, and it will be converted
@@ -367,7 +367,7 @@ save on context switching looking at different look for each filter
 (which I found very annoying, and no value add in term of information,
 whatsoever).</p>
 <h1>editor</h1>
-<p>Set in <a href="{static}/downloads/jira/config.yml"><code>config.yml</code></a>. I think it uses whatever the default editor
+<p>Set in <a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml"><code>config.yml</code></a>. I think it uses whatever the default editor
 is. I tried <code>nano</code> and for now, using <code>emacsclient</code> will simply reuse
 the existing emacs session and opens a new buffer! &rarr; makes
 editing YAML so much more pleasant. And it is definitely better than

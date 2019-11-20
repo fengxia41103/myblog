@@ -11,7 +11,7 @@ worry about cluttered view while opening and closing windows.
 
 Here is the [config][2] file I'm using.
 
-[2]: {static}/downloads/spectrwm.conf
+[2]: {filename}/downloads/spectrwm.conf
 
 ```shell
 # PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!

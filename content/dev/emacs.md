@@ -292,7 +292,7 @@ write comment w/o leaving org-mode. So this is not too bad.
 
 Happy coding.
 
-[1]: {static}/downloads/emacs/init.el
+[1]: {filename}/downloads/emacs/init.el
 [2]: {filename}/dev/mbsync.md
 [3]: https://github.com/ahungry/org-jira
 [4]: https://curl.haxx.se/docs/sslcerts.html

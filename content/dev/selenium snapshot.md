@@ -230,6 +230,6 @@ sudo cp geckodriver /usr/local/bin/
 
 
 [1]: {filename}/dev/analyze%20angular%201x.md
-[2]: {static}/downloads/webapp.pdf
+[2]: {filename}/downloads/webapp.pdf
 [3]: https://github.com/fengxia41103/dev/tree/master/snapshot
 

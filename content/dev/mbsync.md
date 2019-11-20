@@ -85,7 +85,7 @@ that file. I followed the steps [here][3].
         openssl s_client -connect ${SERVER}:${PORT} -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'| sed -ne '1,/-END CERTIFICATE-/p' > ${CERT_FOLDER}/${SERVER}.pem
         ```
 
-[4]: {static}/downloads/emacs/get_certs.sh
+[4]: {filename}/downloads/emacs/get_certs.sh
 
 2. Create a `~/.cert` directory, then run:
 
@@ -524,7 +524,7 @@ anymore.
 </figure>
 
 
-[1]: {static}/downloads/davmail.properties
+[1]: {filename}/downloads/davmail.properties
 [^1]: Btw, I was having issue w/ v5.3.1. Downgrade it to 5.2 (released
     in Aug 2019) worked out better.
 

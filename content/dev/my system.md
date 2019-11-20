@@ -271,10 +271,10 @@ to work w/ everybody else (which == Microsoft, actually, sigh).
 [2]: https://wiki.archlinux.org/index.php/HiDPI
 [3]: https://github.com/nvm-sh/nvm
 [4]: https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4
-[5]: {static}/downloads/i3.conf
-[6]: {static}/downloads/i3status.conf
+[5]: {filename}/downloads/i3.conf
+[6]: {filename}/downloads/i3status.conf
 [7]: https://github.com/jgm/pandoc/releases/tag/2.7.3
-[8]: {static}/downloads/loc%20ra.pdf
+[8]: {filename}/downloads/loc%20ra.pdf
 [9]: {filename}/dev/pandoc.md
 [10]: {filename}/dev/lenovo%20linux%20box.md
 [11]: {filename}/dev/mbsync.md

@@ -259,5 +259,6 @@ patterns till Google come along. Once it's codified, human can only
 cry &mdash; it has never been Zen, it was viewed as Zen only because
 figuring it out is hard. Engineers are those ppl who have a desire to
 see how it works; others are just satisfied w/ that it works, but
-becomes victims easily because, well, they have reference. Isn't it
-better to fail w/ knowing why, rather than fail w/o?
+becomes victims easily because, well, they have **no
+reference**. Isn't it better to fail w/ knowing why, rather than fail
+w/o?

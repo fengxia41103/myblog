@@ -185,7 +185,7 @@ courage? If I do that and shout courage, that means something."
 
 So true. 
 
-少年不识愁滋味，爱上层楼。爱上层楼，为赋③新词强说愁。 而今识尽愁滋味，
+少年不识愁滋味，爱上层楼。爱上层楼，为赋新词强说愁。 而今识尽愁滋味，
 欲说还休。欲说还休，却道天凉好个秋。
 
 

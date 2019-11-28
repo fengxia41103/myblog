@@ -26,7 +26,7 @@ different kind, like 妖魔鬼怪 in 西游记, that can be killed at will?
 
 Talking about 西游记， this is what brought me to write this article
 &larr; Noah and I were riding back from Reader's Corner (btw, I picked
-up a book, Russel's [why I am not a Christian], flipped through a few
+up a book, Russel's [why I am not a Christian][1], flipped through a few
 pages while waiting for our take out yesterday, very interesting!), I
 think we were discussing what to eat, and he said he was not hungry.
 
@@ -85,7 +85,7 @@ your face &mdash; messy, ugly, painful, full of choices that ended w/
 terrible outcome, decisions that were bad or even fatal, good
 intentions went nowhere, begging for help received no response... I,
 like many many others, have been left with impression that the two
-nuclear bombs every dropped on real human &mdash; Nagasaki and
+nuclear bombs ever dropped on real human &mdash; Nagasaki and
 Hiroshima, ended the war and saved lives (usually we deem them to be
 American lives). Then we feel relieved and literally, moved on &mdash;
 moved on with our thoughts, with our discussions, with our

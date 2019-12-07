@@ -9,7 +9,6 @@ Author: Feng Xia
   <img src="images/tokyo%20girl.png"/>
 </figure>
 
-
 Man, after watching the [東京女子図鑑][1], then the [beijing
 version][2], I can not stand the [shanghai version][3] at all!!!
 

@@ -21,6 +21,8 @@ message, and list of files changed:
 | mwc/src/main/webapp/README.md
 ```
 
+- commits between two dates: `git log --since "DEC 1 2014" --until "DEC 5 2014"`
+
 # tag
 
 - Add one: `git tag -a <tag name> -m "Say something"`
@@ -41,3 +43,5 @@ message, and list of files changed:
 - back to HEAD: `git reset --hard HEAD`: this throws away everything
   you have changed in this branch.
 - a commit: `git revert <commit #>`
+
+

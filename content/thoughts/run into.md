@@ -12,7 +12,7 @@ guess whom we ran into!?
 Your uncle. What an odds!
 
 She is a famous person, apparently, in this little town, that just
-about everwhere we went, there was someone who was nodding to her,
+about everywhere we went, there was someone who was nodding to her,
 coming to her to chat, and smiled at her. And she had to stop often to
 catch up w/ her _old_ friends and so on. Yet, completly unexpected, we
 ran into him by the foot of the old city gate. Now watching the tiny
@@ -20,13 +20,13 @@ entrance to this new what I would call a private club, I suddenly
 realized who he is, because the name of it rings a bell &mdash; I
 think you mentioned to me before.
 
-Yes, so here he is, sitting across to me, a quite an itneresting, and
-different person, than I pictured &mdash; he is very, real. I don't he
-is intimidating at all. Maybe he is. Maybe it's just because we had
-such a short overlap, that all the politeness was enough to get by for
-such a short time, and by touring us the little space he is making,
-there was also enough topics to talk about, and enough opportunity to
-make it pleasant.
+Yes, so here he is, sitting across to me, quite an interesting, and
+different person, than I pictured &mdash; he is very, real. I don't
+think he is intimidating at all. Maybe he is. Maybe it's just because
+we had such a short overlap, that all the politeness was enough to get
+by for such a short time, and by touring us the little space he is
+making, there was also enough topics to talk about, and enough
+opportunity to make it pleasant.
 
 The space is quite, nice, small, cozy, full of, his thoughts. I like
 it. Not because it is quite an exquisite place, but that he appears to
@@ -35,7 +35,7 @@ people I have come to know and disgusted in China, he is quite, real
 &mdash; he is full of his own thoughts, and I have to say I agree w/
 most of them, not because they are in sync with mine, but that I
 respect the process behind getting these thoughts &mdash; unlike a
-superficial millionare, his mind is actively seeking to think over
+superficial millionaire, his mind is actively seeking to think over
 these thoughts, to come to a term w/ himself. So it doesn't really
 matter what it is, as long as it is original, genuine, and sincere,
 which I think his words, are.

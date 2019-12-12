@@ -3,7 +3,6 @@ Date: 2019-10-09 13:18
 Tags: thoughts
 Slug: git
 Author: Feng Xia
-Status: Draft
 
 Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.

@@ -1,4 +1,4 @@
-oTitle: euphemism
+Title: euphemism
 Date: 2018-02-08 12:00
 Tags: thoughts
 Slug: euphemism

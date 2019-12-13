@@ -4,6 +4,11 @@ Tags: love
 Slug: run into
 Author: Feng Xia
 
+<figure class="col s12 center">
+  <img src="images/huili%20old%20town.jpg"/>
+</figure>
+
+
 What an interesting trip so far! The host wants to take me to the old
 town, which I initially thought would be a rather boring trip since I
 don't really have much interest in the tourist stuff this time. Yet,
@@ -81,5 +86,5 @@ only.... I'll leave this fate now. I tried, I did.
 
 Happy birthday again. Be happy, sweet dreams.
 
-2019. 楠园，on the roof top balcony.
+_In 2019. 楠园，on the roof top balcony._
 

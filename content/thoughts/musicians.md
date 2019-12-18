@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: musicians
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/musician%20zhuang.jpg"/>
+</figure>
+
+
 Never thought there are so many musicians in this tiny little
 city. But honestly, the first couple tunes got me &mdash; so genuine,
 touching, original. I like music, but I don't think music means the
@@ -40,27 +45,27 @@ wondering whether he is still feeling, happy, by playing. Is he? He
 appeared to be high, to be happy, to be in the mood, but only in a few
 moments I felt he was in it. In other times, I felt he was trying, but
 the word _trying_ exactly made me wonder that deep inside, he is not
-as happy and excited as he shows. I really don't him much at all, so
-this is just rootless speculation. Anyway, I find him a fine person to
-be with, maybe having some habits and lingos picked up from his life
-in Beijing, so to be viewed as a sign of coolness. Behind all these,
-he is a thoughtful person, maybe even an angry person &mdash; I don't
-feel a mind of peace in his play, nor a sense of losing-yourself in
-the moment, but an endeavor, an effort, and that, makes feel a bit sad
-about him, actually. 
+as happy and excited as he shows. I really don't know him much at all,
+so this is just rootless speculation. Anyway, I find him a fine person
+to be with, maybe having some habits and lingos picked up from his
+life in Beijing, so to be viewed as a sign of coolness. Behind all
+these, he is a thoughtful person, maybe even an angry person &mdash; I
+don't feel a mind of peace in his play, nor a sense of losing-yourself
+in the moment, but an endeavor, an effort, and that, makes me feel a bit
+sad about him, actually.
 
-Mr. Zhuang, on the other hand, is just incredibly, musical &mdash; his
-play is just, incredible! I can't say how it touches it, but it will,
-trust me, it will. Like human sadness, a genuine feeling is
-contiguous, is universal, and when you see it, you feel it, like a
-dagger piercing your heart &mdash; pain, sharp, real. That's his
-music, that's his person, that's his songs &mdash; pain, sharp,
-real. I can imagine his limitation which probably hindered his
-success. But like everyone else, the weakness is also his strength
-&mdash; exactly because such, personality/traits, that his music has
-the power to get into you &mdash; is it echoing the same feelings
-inside me, that I'm relating myself to him, thus making his music
-powerful? Likely, though I don't want to admit.
+Mr. Zhuang, **the musician**, on the other hand, is just incredibly,
+musical &mdash; his play is just, incredible! I can't say how it
+touches it, but it will, trust me, it will. Like human sadness, a
+genuine feeling is contiguous, is universal, and when you see it, you
+feel it, like a dagger piercing your heart &mdash; pain, sharp,
+real. That's his music, that's his person, that's his songs &mdash;
+pain, sharp, real. I can imagine his limitation which probably
+hindered his success. But like everyone else, the weakness is also his
+strength &mdash; exactly because such, personality/traits, that his
+music has the power to get into you &mdash; is it echoing the same
+feelings inside me, that I'm relating myself to him, thus making his
+music powerful? Likely, though I don't want to admit.
 
 Had a _early morning_ chat w/ her after all the guests had left last
 night. I almost had the moment to tell her why I'm here, but I held

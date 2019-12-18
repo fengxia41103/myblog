@@ -3,6 +3,7 @@ Date: 2019-12-17 09:31
 Tags: thoughts
 Slug: musicians
 Author: Feng Xia
+Modified: 2019-12-18 21:19
 
 <figure class="col s12">
   <img src="images/musician%20zhuang.jpg"/>
@@ -80,8 +81,12 @@ especially grandpa &mdash; I never know, never expected I would ever
 meet him in person (same is true to your uncle also), but what an
 odds! Not only I saw him, but I sat next to him, listened to him, saw
 the place/room you were probably putting up the 窗花 before, and
-probably will soon for the new year &mdash; yes, I'm here, as close to
-you as I never dreamed; yet, you are like a dream to me now, once
+probably will soon for the new year, (and his photo, the moment he
+showed me that, I felt I have seen it before, and I probably have,
+can't recall it for sure, but you may have showed me this at some
+point, oh mine mine mine, memory, memory, I felt I was losing my mind,
+I didn't know what to think anymore) &mdash; yes, I'm here, as close
+to you as I never dreamed; yet, you are like a dream to me now, once
 waking up, there is only a slim sense of memory, however sweet it was,
 it's no where to be found anymore.....
 

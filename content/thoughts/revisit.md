@@ -4,6 +4,10 @@ Tags: love
 Slug: revisit
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/revisit.jpg"/>
+</figure>
+
 For the first time in this trip that I can feel the time is finally,
 all mine, that I can now plan for things I wanted to do, and see
 people I wanted to see. Revisiting seems to be the theme of this trip

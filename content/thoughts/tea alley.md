@@ -4,6 +4,10 @@ Tags: love
 Slug: tea alley
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/tea%20alley.jpg"/>
+</figure>
+
 By pure odds, I stepped into this tea alley &mdash; just the kind I
 was hoping to do in Chengdu. Yet, sitting there among all the old men
 who were playing Mahjiong or pokers, I felt, old, felt, irrelevant,

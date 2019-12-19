@@ -1702,9 +1702,9 @@ Commands:
 &lt;p&gt;This thing is really sick. It uses YAML template to handle all the
 data posting back to the Jira server. Thus, you are dealing w/ a list
 of yaml files to tweak what data fields you want to use in an
-action. But two most useful ones are: &lt;a href="{filename}/downloads/jira/template/table"&gt;table&lt;/a&gt; and &lt;a href="{filename}/downloads/jira/template/create"&gt;create&lt;/a&gt;.&lt;/p&gt;
+action. But two most useful ones are: &lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/table"&gt;table&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/create"&gt;create&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;&lt;code&gt;table&lt;/code&gt; template&lt;/h2&gt;
-&lt;p&gt;&lt;a href="{filename}/downloads/jira/template/table"&gt;This&lt;/a&gt; is the primary table template to display a list of things, the
+&lt;p&gt;&lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/table"&gt;This&lt;/a&gt; is the primary table template to display a list of things, the
 same idea in jira browser when you on a list view. Since this is to
 display on a terminal, nothing fancy is required, just straightforward
 string to compose a &lt;em&gt;table&lt;/em&gt; look. The key to success is to:&lt;/p&gt;
@@ -1751,7 +1751,7 @@ string to compose a &lt;em&gt;table&lt;/em&gt; look. The key to success is to:&l
 &lt;h2&gt;&lt;code&gt;create&lt;/code&gt; template&lt;/h2&gt;
 &lt;p&gt;This is to display a YAML file for you to fill in the blanks. This is
 where you can plugin all kinds of &lt;em&gt;hardcoded&lt;/em&gt; values to save
-time. It's pretty self-explanatory, so &lt;a href="{filename}/downloads/jira/template/create"&gt;take a look&lt;/a&gt;. I don't know
+time. It's pretty self-explanatory, so &lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/create"&gt;take a look&lt;/a&gt;. I don't know
 much about the &lt;a href="https://gohugo.io/templates/introduction/"&gt;hugo&lt;/a&gt; yet, so most of the contents here are just
 basics.&lt;/p&gt;
 &lt;h1&gt;jira server, username&lt;/h1&gt;
@@ -1785,7 +1785,7 @@ JQL, and it becomes just another command! Example:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This says to use the &lt;a href="{filename}/downloads/jira/template/table"&gt;table template&lt;/a&gt; for display, and the query
+&lt;p&gt;This says to use the &lt;a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/table"&gt;table template&lt;/a&gt; for display, and the query
 string is the just whatever you want to speak to jira server. Also by
 using the &lt;code&gt;&amp;gt;-&lt;/code&gt; to handle &lt;a href="https://yaml-multiline.info/"&gt;yaml multiline string&lt;/a&gt;, we can type the
 query in any nice indented format you like, and it will be converted
@@ -1878,7 +1878,7 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;So far, soooooooooooooooooooooooo good ~~~~~&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 23 Oct 2019 13:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-23:myblog/jira.html</guid></item><item><title>Linux Terminator cheatsheet</title><link>https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html</link><description>&lt;table&gt;
+&lt;p&gt;So far, soooooooooooooooooooooooo good ~~~~~&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 18 Dec 2019 08:31:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-23:myblog/jira.html</guid></item><item><title>Linux Terminator cheatsheet</title><link>https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html</link><description>&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Key&lt;/th&gt;

@@ -714,6 +714,255 @@ is to boot from network using PXE boot option, which ...</p>
   <div class="col s12 divider"
        style="margin-top:1em;"></div>
 </div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2017-03-15
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Openstack Ironic
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>This article is an outcome of my writing a Juju-Ironic provider. The
+plan was to first figure out Ironic APIs that will achieve what Juju
+provider needs &mdash; start an instance on demand, then build those
+REST requests into Juju provider code. After playing with Ironic API
+and Openstack's Devstack ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/ironic intro.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2017-02-28
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Introduction of Juju charms
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>Juju <a href="https://jujucharms.com/">charms</a> are, charming. It promises a selection of blueprints
+that hold magic to make an application deployment easy. But devils are
+in the details, as always the case. In this article we will walk in
+the charm world to learn its design.</p>
+<h1>Bundle, charm, service, application</h1>
+<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju charm layers.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2017-02-08
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Juju deploy and Provider
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>In <a href="https://fengxia41103.github.io/myblog/juju deploy.html">this</a> article, we have demonstrated how Juju deploys a charm,
+including what makes a node eligible as a target and what files will
+be put on by the deployer.If you recall, there were four steps in a
+deploy process:</p>
+<ol>
+<li>Add a new machine to the cloud environment. In ...</li></ol>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju deploy provider.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2017-01-19
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Juju charm deployment
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>We have covered Juju's <a href="https://fengxia41103.github.io/myblog/juju bootstrap.html">bootstrap</a> phase. In this article, we will
+continue our research into another important function &mdash; juju
+deploy.</p>
+<p>Deploy will command a node to pull down requested charm and install
+whatever needed based the charm's instruction. As the bootstrap
+research, I'm interested in the internal ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju deploy.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2017-01-11
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Juju bootstrap process
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>The very first command user will encounter is the <code>juju bootstrap</code>. It
+createa a special machine &mdash; state controller, <code>machine-0</code>,
+control node, etc. &mdash; naming convention aside, it is the brain
+that tracks others nodes in the cloud, applications installed and
+their status.</p>
+<h1>Screencast</h1>
+<p>Through research I want to learn about its ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju bootstrap.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2017-01-03
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Juju charm  model
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>This article is a high level view of Juju's internal modelings. For me
+it was fairly confusing when looking at its document which has an army
+of these concepts: charm, bundle, model, unit.... of course, each of
+them makes sense after a while. Its <a href="https://jujucharms.com/docs/2.0/glossary">terminology</a> page helps on
+understanding ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju charm model.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2016-12-09
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Targets in MAAS lab
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>After setting up the MAAS server and its subnet, bringing up a target
+node is simple.</p>
+<blockquote>
+<p>All nodes must be on the same <strong>192.168.8.0/24</strong> subnet, and
+they must support PXE boot.</p>
+</blockquote>
+<h1>PXE boot</h1>
+<p>The MAAS machine functions as both the DHCP server and the TFTP
+server ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/maas target.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <div class="label label-default">
+      <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+      2016-12-08
+    </div>
+  </div>
+  <div class="col s12">
+    <h4>
+      Setup a MAAS Virtualbox lab
+    </h4>
+
+    <div style="color:#adadad;">
+      <p>
+        <p>Canonical <a href="http://maas.io/">MAAS</a> is a deployment tool that can give a bare metal
+life by putting an OS on it. Working together with <a href="https://www.ubuntu.com/cloud/juju">Juju</a>, they can
+setup a cluster of applications quite quickly. Think of them as a
+package manage like Ubuntu's <code>apt-get</code>, but in the context of a
+cloud ...</p>
+      </p>
+    </div>
+  </div>
+  <div class="col s12 right-align">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/maas virtualbox.html">
+      read more
+    </a>
+  </div>
+  <div class="col s12 divider"
+       style="margin-top:1em;"></div>
+</div>
 
 
 
@@ -727,16 +976,6 @@ is to boot from network using PXE boot option, which ...</p>
         1</a>
     </li>
 
-    <li  class="">
-      <a href="https://fengxia41103.github.io/myblog/tag-lenovo2.html">
-        2</a>
-    </li>
-
-    <li class="wave-effect">
-      <a href="https://fengxia41103.github.io/myblog/tag-lenovo2.html">
-        <i class="fa fa-angle-right"></i>
-      </a>
-    </li>
   </ul>
 </div>
 

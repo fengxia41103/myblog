@@ -2,6 +2,7 @@ Title: Jira
 Date: 2019-10-23 13:00
 Slug: jira
 Author: Feng Xia
+Modified: 2019-12-18 08:31
 
 <figure class="col s12">
   <img src="images/jira.gif"/>
@@ -289,8 +290,8 @@ So far, soooooooooooooooooooooooo good ~~~~~
 [1]: https://github.com/ahungry/org-jira
 [2]: https://github.com/go-jira/jira
 [3]: {filename}/downloads/jira/jira
-[4]: {filename}/downloads/jira/template/table
-[5]: {filename}/downloads/jira/template/create
+[4]: {filename}/downloads/jira/templates/table
+[5]: {filename}/downloads/jira/templates/create
 [6]: https://gohugo.io/templates/introduction/
 [7]: https://gohugo.io/functions/
 [8]: {filename}/downloads/jira/config.yml

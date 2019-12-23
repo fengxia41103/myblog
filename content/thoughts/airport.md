@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: airport
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/kunming%20coffee%20shop.jpg"/>
+</figure>
+
 
 It must be how a king feels like, by sitting at airport, maybe sipping
 a cup of Starbucks, and just watching people walking by &mdash; isn't

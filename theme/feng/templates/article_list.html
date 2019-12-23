@@ -10,7 +10,12 @@
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
       {{ article.date|strftime('%Y-%m-%d') }}
+
+      {% if article.tags|tags_contain("love") %}
+      <i class="fa fa-heart myhighlight"></i>
+      {% endif %}
     </div>
+
   </div>
   <div class="col s12">
     <h4>

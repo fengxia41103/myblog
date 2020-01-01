@@ -191,7 +191,7 @@ pathlib2==2.3.3
 pbr==5.1.0
 pdfminer==20140328
 pdoc==0.3.2
-pelican==4.0.1
+pelican==3.7.1
 pep8==1.5.7
 phonenumbers==6.3.0
 Pillow==2.7.0

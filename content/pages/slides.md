@@ -67,4 +67,25 @@ Author: Feng Xia
   </div>
 </div>
 
+<div class="col l4 m6 s12">
+  <div class="card white darken-1">
+    <div class="card-content">
+      <span class="card-title myhighlight">For You 2019</span>
+      <p>
+        Made a trip to a place I wanted to be. No regret, full of
+        surprises, great people. I can see why you can be so beautiful~~
+      </p>
+      <figure>
+        <img src="images/huili%20for%20you.png"
+             class="responsive-img center"/>
+      </figure>
+    </div>
+    <div class="card-action">
+      <a href="https://fengxia41103.github.io/moment/huili/">
+        <i class="fa fa-link"></i>slides
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- 2. [workload solution store](/slides/wss/index.html) -->

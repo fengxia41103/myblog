@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/lenovo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-07-02T13:26:00-04:00</updated><entry><title>JSP to Angular</title><link href="https://fengxia41103.github.io/myblog/jsp%20to%20angular.html" rel="alternate"></link><published>2019-07-02T13:26:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-02:myblog/jsp to angular.html</id><summary type="html">&lt;p&gt;application. This same concept is applicable to other web framework
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - lenovo</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/lenovo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-07-02T13:26:00-04:00</updated><entry><title>JSP to Angular</title><link href="https://fengxia41103.github.io/myblog/jsp%20to%20angular.html" rel="alternate"></link><published>2019-07-02T13:26:00-04:00</published><updated>2019-07-02T13:26:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-02:/myblog/jsp to angular.html</id><summary type="html">&lt;p&gt;The article describes how to use JSP to boostrap an Angular&lt;/p&gt;</summary><content type="html">&lt;p&gt;application. This same concept is applicable to other web framework
   such as Django.&lt;/p&gt;
 &lt;p&gt;Man, don't I dislike Java!&lt;/p&gt;
 &lt;h1&gt;how to angular&lt;/h1&gt;
@@ -74,7 +74,16 @@ name="_favicon" /&amp;gt;&lt;/code&gt; in `.jsp.&lt;/p&gt;
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;description&amp;quot;&lt;/span&gt;
       &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.....&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>IBB brain shutdown procedure</title><link href="https://fengxia41103.github.io/myblog/ibb%20brain%20shutdown%20procedure.html" rel="alternate"></link><published>2018-11-16T15:34:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-11-16:myblog/ibb brain shutdown procedure.html</id><summary type="html">&lt;p&gt;This document describes procedure to shutdown an IBB brain instance.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>IBB brain shutdown procedure</title><link href="https://fengxia41103.github.io/myblog/ibb%20brain%20shutdown%20procedure.html" rel="alternate"></link><published>2018-11-16T15:34:00-05:00</published><updated>2018-11-16T15:34:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-11-16:/myblog/ibb brain shutdown procedure.html</id><summary type="html">&lt;p&gt;This document describes procedure to shutdown an IBB brain instance.&lt;/p&gt;
+&lt;h1&gt;Shutdown procedure&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;On RHV admin portal, shutdown all virtual machines but not the &lt;code&gt;hosted-engine&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put the cluster in &lt;strong&gt;global maintenance mode&lt;/strong&gt; by login any brain
+   server, and &lt;code&gt;hosted-engine --set-maintenance --mode=global&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;To verify, login in a brain node and &lt;code&gt;hosted-engine …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This document describes procedure to shutdown an IBB brain instance.&lt;/p&gt;
 &lt;h1&gt;Shutdown procedure&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -344,7 +353,14 @@ There are no active volume tasks
 &lt;li&gt;
 &lt;p&gt;Starting VMs you need, and you are back to business.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</summary><category term="lenovo"></category></entry><entry><title>Server RAID</title><link href="https://fengxia41103.github.io/myblog/server%20raid.html" rel="alternate"></link><published>2018-06-27T23:54:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-27:myblog/server raid.html</id><summary type="html">&lt;p&gt;If you are like me who dislikes any GUI and mouse clicks, CLI via a
+&lt;/ol&gt;</content><category term="lenovo"></category></entry><entry><title>Server RAID</title><link href="https://fengxia41103.github.io/myblog/server%20raid.html" rel="alternate"></link><published>2018-06-27T23:54:00-04:00</published><updated>2018-06-27T23:54:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-27:/myblog/server raid.html</id><summary type="html">&lt;p&gt;If you are like me who dislikes any GUI and mouse clicks, CLI via a
+SSH session to IMM is a fun way to get things done. This one shows how
+to config disks into RAID.&lt;/p&gt;
+&lt;p&gt;CLI manual is &lt;a href="http://systemx.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.sysx.imm2.doc%2Fnn1iv_c_server_mgmt_local_storage.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;usage:
+    storage -config vol -option &lt;span class="o"&gt;[&lt;/span&gt;-options&lt;span class="o"&gt;]&lt;/span&gt; -target target_id
+options:
+    -remove …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;If you are like me who dislikes any GUI and mouse clicks, CLI via a
 SSH session to IMM is a fun way to get things done. This one shows how
 to config disks into RAID.&lt;/p&gt;
 &lt;p&gt;CLI manual is &lt;a href="http://systemx.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.sysx.imm2.doc%2Fnn1iv_c_server_mgmt_local_storage.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -466,7 +482,10 @@ Background Initialization: Enable
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Have fun~~&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Network switch</title><link href="https://fengxia41103.github.io/myblog/switches.html" rel="alternate"></link><published>2018-10-04T11:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-08:myblog/switches.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Network_switch"&gt;Network switch&lt;/a&gt; is a gold mine. You will need (ip, username, pwd) to get to it,
+&lt;p&gt;Have fun~~&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Network switch</title><link href="https://fengxia41103.github.io/myblog/switches.html" rel="alternate"></link><published>2018-06-08T14:00:00-04:00</published><updated>2018-10-04T11:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-08:/myblog/switches.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Network_switch"&gt;Network switch&lt;/a&gt; is a gold mine. You will need (ip, username, pwd) to get to it,
+using Telnet(!). Your friend is &lt;a href="https://pexpect.readthedocs.io/en/stable/"&gt;pexpect&lt;/a&gt;, but even that gives you
+jinx sometimes when each switch can return you some random garbages
+once a while that makes &lt;code&gt;session.expect("your regex pattern")&lt;/code&gt; to time …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Network_switch"&gt;Network switch&lt;/a&gt; is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is &lt;a href="https://pexpect.readthedocs.io/en/stable/"&gt;pexpect&lt;/a&gt;, but even that gives you
 jinx sometimes when each switch can return you some random garbages
 once a while that makes &lt;code&gt;session.expect("your regex pattern")&lt;/code&gt; to time
@@ -1157,4 +1176,4 @@ Automatic policy provisioning is disabled on this interface
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Have fun w/ switches ~~&lt;/p&gt;</summary><category term="feng"></category></entry></feed>
+&lt;p&gt;Have fun w/ switches ~~&lt;/p&gt;</content><category term="feng"></category></entry></feed>

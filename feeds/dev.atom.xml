@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-12-18T08:31:00-05:00</updated><entry><title>Strange things of Javascript</title><link href="https://fengxia41103.github.io/myblog/strange%20things%20of%20javascript.html" rel="alternate"></link><published>2019-11-17T13:13:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-17:myblog/strange things of javascript.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2019-12-18T08:31:00-05:00</updated><entry><title>Strange things of Javascript</title><link href="https://fengxia41103.github.io/myblog/strange%20things%20of%20javascript.html" rel="alternate"></link><published>2019-11-17T13:13:00-05:00</published><updated>2019-11-17T13:13:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-17:/myblog/strange things of javascript.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/wise%20doctor.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;God, isn't Angular confusing! and I really think it is because of its
+shaky underline language &amp;mdash; Javascript, is itself,
+confusing. Well, even by just looking at its name, how many people
+have thought that it is a &lt;em&gt;script&lt;/em&gt; derived from Java!? Oh well well,
+here are some notes I take …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/wise%20doctor.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -32,7 +40,7 @@ have a block scope&lt;/strong&gt;! What does this mean,&lt;/p&gt;
 
 
 &lt;p&gt;So the 2nd declaration of &lt;code&gt;var x=2&lt;/code&gt; is not creating a new &lt;em&gt;private&lt;/em&gt;
-variable that is only useful inside the curly bracket&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;. On the
+variable that is only useful inside the curly bracket&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. On the
 contrary, it &lt;strong&gt;re&lt;/strong&gt;declare the former &lt;code&gt;var x=10&lt;/code&gt;, but now overwriting
 its (I guess the reference) w/ a value of 2. &lt;/p&gt;
 &lt;p&gt;Isn't this strange! So it turned out that&lt;/p&gt;
@@ -111,28 +119,36 @@ of the two things:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;variable will be declared &lt;strong&gt;implicitly&lt;/strong&gt; and given a value of
    null/undefined, sth like that &amp;larr; this is &lt;strong&gt;always a bad idea&lt;/strong&gt;
-   on the coder's part&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2" rel="footnote"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+   on the coder's part&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
 &lt;li&gt;compiler will just balk w/ an error &amp;larr; preferred.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Btw, the new &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt; are not hoisted. Thus, if you just
 declare a &lt;code&gt;let feng;&lt;/code&gt;, too bad, it stays where it is in its line
 number.&lt;/p&gt;
 &lt;div class="footnote"&gt;
-&lt;hr /&gt;
+&lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn:1"&gt;
 &lt;p&gt;But if you define the curly as a function, the &lt;code&gt;var&lt;/code&gt; inside will
 have a &lt;em&gt;function scope&lt;/em&gt;, and it is only visible to the function
-itself, not outside the function.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+itself, not outside the function.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id="fn:2"&gt;
 &lt;p&gt;We do use this a lot in python in which we don't have to
    &lt;em&gt;declare&lt;/em&gt; a variable explicitly. But then, it is a solid decision
    in Python, and I don't recall ever need to be aware a &lt;em&gt;trap&lt;/em&gt; like
-   what this hoisting idea is producing.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+   what this hoisting idea is producing.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Software engineer</title><link href="https://fengxia41103.github.io/myblog/software%20engineer.html" rel="alternate"></link><published>2019-11-10T15:06:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-10:myblog/software engineer.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Software engineer</title><link href="https://fengxia41103.github.io/myblog/software%20engineer.html" rel="alternate"></link><published>2019-11-10T15:06:00-05:00</published><updated>2019-11-10T15:06:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-10:/myblog/software engineer.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/scissors.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Had a chat w/ a young engineer on the team about career, technology,
+what to study/learn. Whiling writing my responses, many thoughts came
+to me, so I'm pasting the email here since I believe they are very
+relevant in these topics, and they are truthfully represent what I
+think …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/scissors.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -350,7 +366,16 @@ figuring it out is hard. Engineers are those ppl who have a desire to
 see how it works; others are just satisfied w/ that it works, but
 becomes victims easily because, well, they have &lt;strong&gt;no
 reference&lt;/strong&gt;. Isn't it better to fail w/ knowing why, rather than fail
-w/o?&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Jira</title><link href="https://fengxia41103.github.io/myblog/jira.html" rel="alternate"></link><published>2019-12-18T08:31:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-23:myblog/jira.html</id><summary type="html">&lt;figure class="col s12"&gt;
+w/o?&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Jira</title><link href="https://fengxia41103.github.io/myblog/jira.html" rel="alternate"></link><published>2019-10-23T13:00:00-04:00</published><updated>2019-12-18T08:31:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-23:/myblog/jira.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/jira.gif"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Jira is, tough. I have been searching a solution to make my Jira life
+easy. The problems I want to fix are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Loading browser is too slow &amp;larr; how many times I just want to
+   get a view of the comment or description so to refresh my memory.&lt;/li&gt;
+&lt;li&gt;Navigating from one …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/jira.gif"/&gt;
 &lt;/figure&gt;
 
@@ -653,7 +678,7 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;So far, soooooooooooooooooooooooo good ~~~~~&lt;/p&gt;</summary></entry><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;table&gt;
+&lt;p&gt;So far, soooooooooooooooooooooooo good ~~~~~&lt;/p&gt;</content></entry><entry><title>Linux Terminator cheatsheet</title><link href="https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html" rel="alternate"></link><published>2019-10-11T11:34:00-04:00</published><updated>2019-10-11T11:34:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</id><summary type="html">&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</summary><content type="html">&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Key&lt;/th&gt;
@@ -722,7 +747,12 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;td&gt;Move focus to the pane&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</summary><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2019-10-09T13:18:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
+&lt;h1&gt;log&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
+--all&lt;/code&gt; will show a short commit #, who committed it, the commit
+message, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
 &lt;h1&gt;log&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
@@ -758,7 +788,7 @@ message, and list of files changed:&lt;/p&gt;
 &lt;li&gt;back to HEAD: &lt;code&gt;git reset --hard HEAD&lt;/code&gt;: this throws away everything
   you have changed in this branch.&lt;/li&gt;
 &lt;li&gt;a commit: &lt;code&gt;git revert &amp;lt;commit #&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="thoughts"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-17T20:55:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:myblog/my system.html</id><summary type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
+&lt;/ul&gt;</content><category term="thoughts"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-17T20:55:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
 decided to install Ubuntu from scratch), I'm going to document (rather
 a bit catch up) what I need to install in order to get my working
@@ -886,7 +916,7 @@ Xft.rgba: rgb
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Use &lt;code&gt;xdpyinfo&lt;/code&gt; to check screen resolution&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;xdpyinfo&lt;/code&gt; to check screen resolution&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;On X1 gen 8, it's shown &lt;code&gt;2560x1440 pixels (677x381
     millimeters)&lt;/code&gt;. Set &lt;code&gt;dpi=180&lt;/code&gt; gives the same exp/size as what was
@@ -1013,13 +1043,20 @@ to work w/ everybody else (which == Microsoft, actually, sigh).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class="footnote"&gt;
-&lt;hr /&gt;
+&lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn:1"&gt;
-&lt;p&gt;To check screen resolution: &lt;code&gt;xdpyinfo | grep dimensions&lt;/code&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To check screen resolution: &lt;code&gt;xdpyinfo | grep dimensions&lt;/code&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Snapshot anything w/ Selenium</title><link href="https://fengxia41103.github.io/myblog/snapshot%20selenium.html" rel="alternate"></link><published>2019-09-25T10:35:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-25:myblog/snapshot selenium.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Snapshot anything w/ Selenium</title><link href="https://fengxia41103.github.io/myblog/snapshot%20selenium.html" rel="alternate"></link><published>2019-09-25T10:35:00-04:00</published><updated>2019-09-25T10:35:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-25:/myblog/snapshot selenium.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/back%20rub.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In my previous notes on &lt;a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html"&gt;analyzing Angular 1.x code&lt;/a&gt;, I have stuck at
+how to create snapshots of rendered components for my documentation
+purpose. In the manual data file &lt;code&gt;.json&lt;/code&gt;, I allowed an entry to plug
+in snapshot file taken by human testers. As an example, the code below …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/back%20rub.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -1217,7 +1254,11 @@ wget &lt;span class="s2"&gt;&amp;quot;https://github.com/mozilla/geckodriver/rel
 tar xvzf geckodriver-&lt;span class="nv"&gt;$GV&lt;/span&gt;-linux64.tar.gz 
 chmod +x geckodriver
 sudo cp geckodriver /usr/local/bin/
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Rebranding</title><link href="https://fengxia41103.github.io/myblog/rebranding.html" rel="alternate"></link><published>2019-09-11T16:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-11:myblog/rebranding.html</id><summary type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
+&lt;/pre&gt;&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Rebranding</title><link href="https://fengxia41103.github.io/myblog/rebranding.html" rel="alternate"></link><published>2019-09-11T16:15:00-04:00</published><updated>2019-09-11T16:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-11:/myblog/rebranding.html</id><summary type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
+code base to pick up interested artifacts &amp;larr; brand
+indicator. Definition of these artifacts are highly contextual,
+meaning that a string &lt;code&gt;feng&lt;/code&gt; can mean a variable, or a string literal,
+or something else. Think of it, how …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
 code base to pick up interested artifacts &amp;larr; brand
 indicator. Definition of these artifacts are highly contextual,
 meaning that a string &lt;code&gt;feng&lt;/code&gt; can mean a variable, or a string literal,
@@ -1591,7 +1632,11 @@ brand).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Pretty cool, huh!?&lt;/p&gt;</summary><category term="lenovo"></category></entry><entry><title>Analyzing Angular 1.x code</title><link href="https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html" rel="alternate"></link><published>2019-09-25T10:33:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:myblog/analyzing angular 1x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+&lt;p&gt;Pretty cool, huh!?&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Analyzing Angular 1.x code</title><link href="https://fengxia41103.github.io/myblog/analyzing%20angular%201x.html" rel="alternate"></link><published>2019-09-01T17:58:00-04:00</published><updated>2019-09-25T10:33:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-01:/myblog/analyzing angular 1x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+but it didn't work for Angular 1.x code. &lt;/p&gt;
+&lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
+because everyone on the team, including UI devs, can only engage a
+discussion using the visual (the rendered look) &amp;mdash; so far …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
 but it didn't work for Angular 1.x code. &lt;/p&gt;
 &lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
 because everyone on the team, including UI devs, can only engage a
@@ -1664,7 +1709,17 @@ producing a Pandoc &lt;code&gt;.md&lt;/code&gt;. Also, you can dump data into &l
 such as screenshot (as of writing 9/4/2019, we are relying on human to
 take screenshot by painfully finding the component rendered in a
 browser).&lt;/p&gt;
-&lt;p&gt;All in all, take a look &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</summary><category term="angular"></category><category term="lenovo"></category></entry><entry><title>ECMAScript</title><link href="https://fengxia41103.github.io/myblog/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-03:myblog/ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
+&lt;p&gt;All in all, take a look &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;this sample&lt;/a&gt; and enjoy ~~&lt;/p&gt;</content><category term="angular"></category><category term="lenovo"></category></entry><entry><title>ECMAScript</title><link href="https://fengxia41103.github.io/myblog/ecmascript.html" rel="alternate"></link><published>2019-07-03T14:15:00-04:00</published><updated>2019-07-03T14:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-07-03:/myblog/ecmascript.html</id><summary type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
+&lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/ecmascript%20relationship.png"/&gt;
+  &lt;figcaption&gt;Feng's view of how these confusing Javascript words are
+  linked together&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;spec&lt;/h1&gt;
+&lt;p&gt;The mother of all is the &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, which is the spec. It has
+some wild release notion and cycles. The important one for me is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
 &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="images/ecmascript%20relationship.png"/&gt;
@@ -1793,7 +1848,15 @@ and start to make sense, hopefully.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://bytearcher.com/articles/es6-vs-es2015-name/"&gt;ES6 vs ES2015 - What to call a JavaScript version?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://auth0.com/blog/javascript-module-systems-showdown/"&gt;JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://scotch.io/tutorials/javascript-transpilers-what-they-are-why-we-need-them"&gt;avaScript Transpilers: What They Are &amp;amp; Why We Need Them&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>Dev structure</title><link href="https://fengxia41103.github.io/myblog/dev%20structure.html" rel="alternate"></link><published>2019-06-24T14:06:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-06-24:myblog/dev structure.html</id><summary type="html">&lt;figure class="col l5 m5 s12"&gt;
+&lt;/ol&gt;</content><category term="thoughts"></category></entry><entry><title>Dev structure</title><link href="https://fengxia41103.github.io/myblog/dev%20structure.html" rel="alternate"></link><published>2019-06-24T14:06:00-04:00</published><updated>2019-06-24T14:06:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-06-24:/myblog/dev structure.html</id><summary type="html">&lt;figure class="col l5 m5 s12"&gt;
+  &lt;img src="images/moses.jpg"/&gt;
+  &lt;figcaption&gt;If the Bible story happens today&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This is a common question any team/project will have to address
+&amp;mdash; how to structure the knowledge we know of a project so that we
+are not missing things? Each project/application, of course, is
+different. But the overall is actually quite common. Here …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l5 m5 s12"&gt;
   &lt;img src="images/moses.jpg"/&gt;
   &lt;figcaption&gt;If the Bible story happens today&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -1847,7 +1910,17 @@ backend &amp;mdash; the &lt;code&gt;backend&lt;/code&gt; is showing more levels 
 &lt;p&gt;The key is to compose a design/component view so that we can
 categorize work into component, which also speaks of key
 technology/implementation. Until this is identified, we can say for
-sure we don't have 100% coverage of this code base yet.&lt;/p&gt;</summary><category term="thoughts"></category></entry><entry><title>Pandoc workflow</title><link href="https://fengxia41103.github.io/myblog/pandoc%20workflow.html" rel="alternate"></link><published>2019-04-30T09:23:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-30:myblog/pandoc workflow.html</id><summary type="html">&lt;figure class="col s12"&gt;
+sure we don't have 100% coverage of this code base yet.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Pandoc workflow</title><link href="https://fengxia41103.github.io/myblog/pandoc%20workflow.html" rel="alternate"></link><published>2019-04-30T09:23:00-04:00</published><updated>2019-04-30T09:23:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-30:/myblog/pandoc workflow.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/peppa.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;a href="https://pandoc.org/MANUAL.html"&gt;Pandoc&lt;/a&gt; is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some tips of how I'm using it.&lt;/p&gt;
+&lt;h1&gt;doc header&lt;/h1&gt;
+&lt;p&gt;Things that are specific to that document. This, thus, is context
+sensitive &amp;mdash; &lt;code&gt;title&lt;/code&gt;, &lt;code&gt;subtitle&lt;/code&gt;, &lt;code&gt;author&lt;/code&gt;, &lt;code&gt;bibliography&lt;/code&gt;,
+&lt;code&gt;abstract&lt;/code&gt;, &lt;code&gt;keywords …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/peppa.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -2067,7 +2140,19 @@ the two things:&lt;/p&gt;
 &lt;p&gt;Good luck.&lt;/p&gt;
 &lt;p&gt;I give up this battle now at this point. Like teaching a kid &amp;mdash;
 you can't really teach them. You just have to wait for them to grow
-up, if ever. &lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Browser proxy</title><link href="https://fengxia41103.github.io/myblog/browser%20proxy.html" rel="alternate"></link><published>2019-04-23T14:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-23:myblog/browser proxy.html</id><summary type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
+up, if ever. &lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Browser proxy</title><link href="https://fengxia41103.github.io/myblog/browser%20proxy.html" rel="alternate"></link><published>2019-04-23T14:45:00-04:00</published><updated>2019-04-23T14:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-04-23:/myblog/browser proxy.html</id><summary type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
+machine (B). If we can SSH from A&amp;rarr;B, we can reroute browser
+traffic from A to B, much quicker than X-windows.&lt;/p&gt;
+&lt;figure class="col l4 m4 s12"&gt;
+  &lt;img src="images/browser%20proxy.png"
+       class="center img-responsive"&gt;
+&lt;/figure&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;On A, &lt;code&gt;ssh -vv -ND 8080 root@&amp;lt;B's IP&amp;gt;&lt;/code&gt;, then SSH login.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;-N&lt;/code&gt;: Do …&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
 machine (B). If we can SSH from A&amp;rarr;B, we can reroute browser
 traffic from A to B, much quicker than X-windows.&lt;/p&gt;
 &lt;figure class="col l4 m4 s12"&gt;
@@ -2119,7 +2204,16 @@ be available from all interfaces.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;This is it. Then anything on this browser will be routed to localhost
-port 8080, which by the &lt;code&gt;ssh&lt;/code&gt;, will be forwarded to B.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Reveal slides</title><link href="https://fengxia41103.github.io/myblog/reveal%20slides.html" rel="alternate"></link><published>2018-11-27T09:26:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-11-27:myblog/reveal slides.html</id><summary type="html">&lt;div class="iframe-container"&gt;
+port 8080, which by the &lt;code&gt;ssh&lt;/code&gt;, will be forwarded to B.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Reveal slides</title><link href="https://fengxia41103.github.io/myblog/reveal%20slides.html" rel="alternate"></link><published>2018-11-27T09:26:00-05:00</published><updated>2018-11-27T09:26:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-11-27:/myblog/reveal slides.html</id><summary type="html">&lt;div class="iframe-container"&gt;
+  &lt;iframe src="https://fengxia41103.github.io/moment/1236/"
+          allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/hakimel/reveal.js/"&gt;reveal.js&lt;/a&gt; is pretty awesome. I have been using it for the last 9
+months now and love it. It was a bit of hassle to set it up
+initially. Once you have an example, yo can replicate and be
+productive by copying and pasting existing one, and getting a …&lt;/p&gt;</summary><content type="html">&lt;div class="iframe-container"&gt;
   &lt;iframe src="https://fengxia41103.github.io/moment/1236/"
           allowfullscreen&gt;&lt;/iframe&gt;
 
@@ -2204,7 +2298,12 @@ present them in different combinations based on audience.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;You can follow the &lt;a href="https://github.com/hakimel/reveal.js#pdf-export"&gt;official guide&lt;/a&gt; by &lt;code&gt;reveal.js&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Or, using the &lt;a href="https://github.com/astefanutti/decktape"&gt;desktape&lt;/a&gt;: &lt;code&gt;decktape reveal &amp;lt;url&amp;gt; &amp;lt;filename&amp;gt;.pdf&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="thoughts"></category></entry><entry><title>UML</title><link href="https://fengxia41103.github.io/myblog/uml.html" rel="alternate"></link><published>2018-07-24T12:03:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-07-24:myblog/uml.html</id><summary type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
+&lt;/ol&gt;</content><category term="thoughts"></category></entry><entry><title>UML</title><link href="https://fengxia41103.github.io/myblog/uml.html" rel="alternate"></link><published>2018-07-24T12:03:00-04:00</published><updated>2018-07-24T12:03:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-07-24:/myblog/uml.html</id><summary type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
+so I was willing to read it, in one morning). &lt;/p&gt;
+&lt;h1&gt;Milestone 1: requirement review&lt;/h1&gt;
+&lt;p&gt;Everything starts with an analysis of the problem at hand. One thing
+learned and I'd like to clarify is &lt;code&gt;requirement&lt;/code&gt; &amp;mdash;
+it is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
 so I was willing to read it, in one morning). &lt;/p&gt;
 &lt;h1&gt;Milestone 1: requirement review&lt;/h1&gt;
 &lt;p&gt;Everything starts with an analysis of the problem at hand. One thing
@@ -2419,7 +2518,7 @@ beer cans out the window of his pickup truck.
 &lt;li&gt;domain models &amp;amp; relationships&lt;/li&gt;
 &lt;li&gt;basic course use case diagram&lt;/li&gt;
 &lt;li&gt;requirements&lt;/li&gt;
-&lt;/ol&gt;</summary><category term="dev"></category></entry><entry><title>Screencast</title><link href="https://fengxia41103.github.io/myblog/screencast.html" rel="alternate"></link><published>2018-06-06T21:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:myblog/screencast.html</id><summary type="html">&lt;video width="100%" height="100%" controls="controls"&gt;
+&lt;/ol&gt;</content><category term="dev"></category></entry><entry><title>Screencast</title><link href="https://fengxia41103.github.io/myblog/screencast.html" rel="alternate"></link><published>2018-06-06T21:00:00-04:00</published><updated>2018-06-06T21:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:/myblog/screencast.html</id><summary type="html">&lt;p&gt;Introduce tools to create screencast.&lt;/p&gt;</summary><content type="html">&lt;video width="100%" height="100%" controls="controls"&gt;
   &lt;source src="images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" /&gt;
   Your browser does not support the video tag.
   /* instead of the last line you could also add the flash player*/
@@ -2529,7 +2628,10 @@ Application Options:
 
 &lt;p&gt;The two mostly useful are &lt;code&gt;-d&lt;/code&gt; (duration) and &lt;code&gt;--delay=SECS&lt;/code&gt; for a
 delay. Duration is a trial-and-error iteration since usually I don't
-know how long the screencast will run. &lt;/p&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Netbox revised</title><link href="https://fengxia41103.github.io/myblog/netbox.html" rel="alternate"></link><published>2018-08-01T21:50:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:myblog/netbox.html</id><summary type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
+know how long the screencast will run. &lt;/p&gt;</content><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Netbox revised</title><link href="https://fengxia41103.github.io/myblog/netbox.html" rel="alternate"></link><published>2018-06-06T14:00:00-04:00</published><updated>2018-08-01T21:50:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:/myblog/netbox.html</id><summary type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
+But we need more. Managing a lab or a rack is more than level 1. On
+top of all these, we talk about automation, which implies capabilities
+at least to level 4. Therefore, we used Netbox code as …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
 But we need more. Managing a lab or a rack is more than level 1. On
 top of all these, we talk about automation, which implies capabilities
 at least to level 4. Therefore, we used Netbox code as a starting
@@ -2773,7 +2875,15 @@ mounted facing back so that cables can access its port.&lt;/p&gt;
     &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;racks&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;on_delete&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTECT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Django to REST</title><link href="https://fengxia41103.github.io/myblog/django%20to%20rest.html" rel="alternate"></link><published>2018-03-22T08:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-03-22:myblog/django to rest.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Django to REST</title><link href="https://fengxia41103.github.io/myblog/django%20to%20rest.html" rel="alternate"></link><published>2018-03-22T08:40:00-04:00</published><updated>2018-03-22T08:40:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-03-22:/myblog/django to rest.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/funny/the%20art%20of%20programming.jpg"
+       class="center img-responsive"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I have been building Django based web application for a while now. One
+design/request I get often is a REST API. Once the model data is
+exposed in REST, one can truly build a complete separate frontend
+using things like Angular, react, and whatever you fancy. I have tried …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/funny/the%20art%20of%20programming.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -2888,7 +2998,10 @@ be like this:&lt;/p&gt;
 in "step 1", &lt;code&gt;mymodels&lt;/code&gt; part is defined in "step 4"), it should show
 the &lt;code&gt;queryset&lt;/code&gt; (defined in "step 4"). With REST, you can also do
 things like &lt;code&gt;?format=json&lt;/code&gt; or &lt;code&gt;?format=yaml&lt;/code&gt;, and &lt;code&gt;?a_model_field__gt=&lt;/code&gt;
-type of &lt;a href="http://django-tastypie.readthedocs.io/en/latest/interacting.html"&gt;filtering&lt;/a&gt;. Cool huh!?&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>KVM</title><link href="https://fengxia41103.github.io/myblog/kvm.html" rel="alternate"></link><published>2017-10-11T14:41:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-11:myblog/kvm.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
+type of &lt;a href="http://django-tastypie.readthedocs.io/en/latest/interacting.html"&gt;filtering&lt;/a&gt;. Cool huh!?&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>KVM</title><link href="https://fengxia41103.github.io/myblog/kvm.html" rel="alternate"></link><published>2017-10-11T14:41:00-04:00</published><updated>2017-10-11T14:41:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-11:/myblog/kvm.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
+I want to have is a local dev that I can copy &amp;amp; paste from some base
+image in case I forgot to take a snapshot at milestone. This way I
+feel comfortable to stand up a sandbox, try …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
 I want to have is a local dev that I can copy &amp;amp; paste from some base
 image in case I forgot to take a snapshot at milestone. This way I
 feel comfortable to stand up a sandbox, try out crazy things, then
@@ -3309,7 +3422,11 @@ optional arguments:
 
 &lt;p&gt;To start a kvm reusing an existing backing file:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python startmykvm.py -b &amp;lt;backing&amp;gt;.qcow2 mydev.xml
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="lenovo"></category></entry><entry><title>Linux laptop</title><link href="https://fengxia41103.github.io/myblog/linux%20laptop.html" rel="alternate"></link><published>2019-10-17T10:11:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:myblog/linux laptop.html</id><summary type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="lenovo"></category></entry><entry><title>Linux laptop</title><link href="https://fengxia41103.github.io/myblog/linux%20laptop.html" rel="alternate"></link><published>2017-10-04T22:19:00-04:00</published><updated>2019-10-17T10:11:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/linux laptop.html</id><summary type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
+&lt;h1&gt;Install Linux&lt;/h1&gt;
+&lt;p&gt;You can do a dual boot or just wipe the whole disk. Window's boot
+manager will interfere, somehow, which I don't remember the details
+anymore. Google it. Eventually it will work. The rest assumes you …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
 &lt;h1&gt;Install Linux&lt;/h1&gt;
 &lt;p&gt;You can do a dual boot or just wipe the whole disk. Window's boot
 manager will interfere, somehow, which I don't remember the details
@@ -3429,7 +3546,12 @@ listed below!&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;Leave everything else as default/blank.&lt;/p&gt;
 &lt;h1&gt;jira &amp;amp; Emacs&lt;/h1&gt;
-&lt;p&gt;See my &lt;a href="https://fengxia41103.github.io/myblog/jira.html"&gt;jira&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;emacs&lt;/a&gt; articles.&lt;/p&gt;</summary></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+&lt;p&gt;See my &lt;a href="https://fengxia41103.github.io/myblog/jira.html"&gt;jira&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;emacs&lt;/a&gt; articles.&lt;/p&gt;</content></entry><entry><title>Sensitive touchpad</title><link href="https://fengxia41103.github.io/myblog/sensitive%20touchpad.html" rel="alternate"></link><published>2017-10-04T21:15:00-04:00</published><updated>2017-10-04T21:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-04:/myblog/sensitive touchpad.html</id><summary type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+&lt;h1&gt;Tune sensitivity&lt;/h1&gt;
+&lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
+values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
+point (the little read dot rubber thingy on Lenovo's laptops) since I
+don't …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
 &lt;h1&gt;Tune sensitivity&lt;/h1&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
@@ -3559,7 +3681,15 @@ removed the jumpy typing almost completly. However, you have to issue
 this command after running &lt;code&gt;emacs&lt;/code&gt; for some reason. Otherwise, &lt;code&gt;emacs&lt;/code&gt;
 will stuck in initialization forever.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ syndaemon -i 0.5 -d -K -R
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Bye Bye GFW</title><link href="https://fengxia41103.github.io/myblog/bye%20bye%20gfw.html" rel="alternate"></link><published>2017-04-30T22:53:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-30:myblog/bye bye gfw.html</id><summary type="html">&lt;figure class="col l3 m3 s12"&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Bye Bye GFW</title><link href="https://fengxia41103.github.io/myblog/bye%20bye%20gfw.html" rel="alternate"></link><published>2017-04-30T22:53:00-04:00</published><updated>2017-04-30T22:53:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-30:/myblog/bye bye gfw.html</id><summary type="html">&lt;figure class="col l3 m3 s12"&gt;
+  &lt;img src="images/funny/gfw.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The GFW is nothing but an anti-humanity instance that blocks knowledge
+transfer and information sharing in the 21st century when brain is the
+competition advantage and this gov decides to sacrifice all the future
+with a vain hope that creativity can continue to flourish while its
+citizens are excluded from …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l3 m3 s12"&gt;
   &lt;img src="images/funny/gfw.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -3605,7 +3735,16 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 &lt;p&gt;Restart firefox, then go to &lt;code&gt;http://www.google.com&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Welcome back to the world.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>You got mail</title><link href="https://fengxia41103.github.io/myblog/mbsync%20mu4e%20email.html" rel="alternate"></link><published>2019-05-21T10:27:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:myblog/mbsync mu4e email.html</id><summary type="html">&lt;figure class="col l5 m6 s12"&gt;
+&lt;p&gt;Welcome back to the world.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>You got mail</title><link href="https://fengxia41103.github.io/myblog/mbsync%20mu4e%20email.html" rel="alternate"></link><published>2017-04-24T10:15:00-04:00</published><updated>2019-05-21T10:27:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-04-24:/myblog/mbsync mu4e email.html</id><summary type="html">&lt;figure class="col l5 m6 s12"&gt;
+  &lt;img src="images/hahn.png"
+       class="center img-responsive"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;After becoming an Emacs user for the last few months, I acquired a
+burning desire to migrate as much as my daily text editing activities
+into Emacs environment, in particular, emails.&lt;/p&gt;
+&lt;p&gt;Having tried &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
+configuration to make it work (sort of) with …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l5 m6 s12"&gt;
   &lt;img src="images/hahn.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -4063,7 +4202,7 @@ will suddenly decided to stop working, and you don't get emails
 anymore! Fall back is Thunderbird, but then, once you are used to
 &lt;code&gt;mu4e&lt;/code&gt;, going back to anything looked like outlook is a pain.&lt;/p&gt;
 &lt;p&gt;Finally, here is a savior,
-&lt;a href="http://davmail.sourceforge.net/"&gt;davmail&lt;/a&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;. It works a gateway between
+&lt;a href="http://davmail.sourceforge.net/"&gt;davmail&lt;/a&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. It works a gateway between
 your computer and outlook web mail (aka. OWA &amp;mdash; outlook web
 access). So you can now point your &lt;code&gt;mbsync&lt;/code&gt; to a local port (default
 &lt;code&gt;1143&lt;/code&gt;, and davmail will route mbsync's IMAP requests to the remote
@@ -4092,14 +4231,18 @@ anymore.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;div class="footnote"&gt;
-&lt;hr /&gt;
+&lt;hr&gt;
 &lt;ol&gt;
 &lt;li id="fn:1"&gt;
 &lt;p&gt;Btw, I was having issue w/ v5.3.1. Downgrade it to 5.2 (released
-in Aug 2019) worked out better.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+in Aug 2019) worked out better.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2019-09-26T13:40:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><updated>2019-09-26T13:40:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:/myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
+&lt;p&gt;I wouldn't even call it an editor because it can do so much beyond
+text editing. Still on the learning curve to get a grasp of what it
+can do in my daily development workflow. Here is to document the
+&lt;a href="https://fengxia41103.github.io/myblog/downloads/emacs/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's …&lt;/p&gt;</summary><content type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it can do so much beyond
 text editing. Still on the learning curve to get a grasp of what it
 can do in my daily development workflow. Here is to document the
@@ -4373,7 +4516,13 @@ ir&lt;/code&gt; or &lt;code&gt;C-c iR&lt;/code&gt;, which will pull jira again a
 pulling down the new comment. Now go to the comment to add more txt,
 then &lt;code&gt;C-c cu&lt;/code&gt; to update comment. So even as a 2-step process, you can
 write comment w/o leaving org-mode. So this is not too bad.&lt;/p&gt;
-&lt;p&gt;Happy coding.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Spectrwm</title><link href="https://fengxia41103.github.io/myblog/spectrwm.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:myblog/spectrwm.html</id><summary type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
+&lt;p&gt;Happy coding.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Spectrwm</title><link href="https://fengxia41103.github.io/myblog/spectrwm.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><updated>2017-01-21T11:45:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:/myblog/spectrwm.html</id><summary type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
+worry about cluttered view while opening and closing windows. &lt;/p&gt;
+&lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;
+&lt;span class="c1"&gt;# http://opensource.conformal.com/cgi-bin/man-cgi?spectrwm&lt;/span&gt;
+
+&lt;span class="c1"&gt;# colors for focussed and unfocussed window borders …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. &lt;/p&gt;
 &lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;
@@ -4474,7 +4623,11 @@ total_run_times 0
 use_spacer none
 TEXT
 Up:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;uptime_short&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;Temp:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;acpitemp&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;C &lt;span class="p"&gt;|&lt;/span&gt;Batt:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;battery_short&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;addr&lt;/span&gt;&lt;span class="p"&gt; wlan0&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;RAM:&lt;span class="nv"&gt;$memperc&lt;/span&gt;% &lt;span class="p"&gt;|&lt;/span&gt;CPU:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cpu&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;% &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;downspeedf&lt;/span&gt;&lt;span class="p"&gt; wlan0&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="dev"></category></entry><entry><title>Deployment architecture</title><link href="https://fengxia41103.github.io/myblog/deployment%20architecture.html" rel="alternate"></link><published>2017-08-22T21:52:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-09:myblog/deployment architecture.html</id><summary type="html">&lt;p&gt;Deployment strategy for &lt;a href="https://fengxia41103.github.io/myblog/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
+&lt;/pre&gt;&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Deployment architecture</title><link href="https://fengxia41103.github.io/myblog/deployment%20architecture.html" rel="alternate"></link><published>2016-09-09T23:05:00-04:00</published><updated>2017-08-22T21:52:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-09:/myblog/deployment architecture.html</id><summary type="html">&lt;p&gt;Deployment strategy for &lt;a href="https://fengxia41103.github.io/myblog/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
+services: EC2 for application server, RDS for database, and S3 for
+static files and media files.  AWS does have message service as
+well. But to maintain a fair level of portability, I am not using
+that. Instead, vanilla message broker such …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Deployment strategy for &lt;a href="https://fengxia41103.github.io/myblog/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
 services: EC2 for application server, RDS for database, and S3 for
 static files and media files.  AWS does have message service as
 well. But to maintain a fair level of portability, I am not using
@@ -4505,7 +4658,15 @@ Use AWS to save myself from building these essential infrastructure
 so that I could focus on writing application code to solve
 client's real problems. Service such as &lt;a href="https://www.heroku.com/"&gt;Heroku&lt;/a&gt; and &lt;a href="https://cloud.google.com/appengine/"&gt;GAE&lt;/a&gt;
 are even more hands-off if the application architecture
-can fit into their platform.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>General system architecture</title><link href="https://fengxia41103.github.io/myblog/general%20system%20architecture.html" rel="alternate"></link><published>2018-10-17T00:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-08:myblog/general system architecture.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+can fit into their platform.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>General system architecture</title><link href="https://fengxia41103.github.io/myblog/general%20system%20architecture.html" rel="alternate"></link><published>2016-09-08T21:15:00-04:00</published><updated>2018-10-17T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-08:/myblog/general system architecture.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/architecture_joke.jpg"
+       class="center img-responsive"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The word "system architect" has been puzzling to me.  I was hired to
+be one at one point. But it was not a comfortable position. How much
+do we understand the business?  What is the problem we are to solve?
+How does the current "architecture" fail? What is the downfall …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/architecture_joke.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -4587,7 +4748,11 @@ nature (I say it is synchronous in the sense of that a Django's native
 process will receive and process view request without interrupt or
 callback.  Django &lt;a href="https://docs.djangoproject.com/en/1.10/topics/signals/"&gt;signals&lt;/a&gt; are asynchronous,
 however.) where a long running code section could bring the entire
-application to halt.&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>DIY Pelican theme</title><link href="https://fengxia41103.github.io/myblog/pelican%20theme.html" rel="alternate"></link><published>2016-09-04T11:00:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-04:myblog/pelican theme.html</id><summary type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is definitely a winner for our blog
+application to halt.&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>DIY Pelican theme</title><link href="https://fengxia41103.github.io/myblog/pelican%20theme.html" rel="alternate"></link><published>2016-09-04T11:00:00-04:00</published><updated>2016-09-04T11:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-04:/myblog/pelican theme.html</id><summary type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is definitely a winner for our blog
+site. But like any software engineer who hold a high standard to his
+work, I got turned off by all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.  "Ugly",
+"Where is the document?", "Why my translation is not shown?", I felt
+running in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is definitely a winner for our blog
 site. But like any software engineer who hold a high standard to his
 work, I got turned off by all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.  "Ugly",
 "Where is the document?", "Why my translation is not shown?", I felt
@@ -4627,7 +4792,11 @@ to set up a working directory:&lt;/p&gt;
 &lt;code&gt;layout.html&lt;/code&gt; which is the root template of all others.  Once this is
 set up, creating an individual page is simple. Just replace the &lt;code&gt;{%
 block content %}&lt;/code&gt; with relevant content and you are done.  &lt;/p&gt;
-&lt;p&gt;Like what you see? Roll up your sleeves and make a new theme. 1,2,3, Go!&lt;/p&gt;</summary><category term="dev"></category></entry><entry><title>Buildbot continuous integration setup</title><link href="https://fengxia41103.github.io/myblog/buildbot.html" rel="alternate"></link><published>2016-07-20T10:45:00-04:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-07-20:myblog/buildbot.html</id><summary type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
+&lt;p&gt;Like what you see? Roll up your sleeves and make a new theme. 1,2,3, Go!&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>Buildbot continuous integration setup</title><link href="https://fengxia41103.github.io/myblog/buildbot.html" rel="alternate"></link><published>2016-07-20T10:45:00-04:00</published><updated>2016-07-20T10:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-07-20:/myblog/buildbot.html</id><summary type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
+the path between a verbal or written requirement, and an actionable
+application that reflects an implementation of this requirement. Therefore,
+it becomes crucial to set up an CI environment not only to facilitate
+development and testing, but to enforce our …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
 the path between a verbal or written requirement, and an actionable
 application that reflects an implementation of this requirement. Therefore,
 it becomes crucial to set up an CI environment not only to facilitate
@@ -4663,11 +4832,11 @@ for more details.&lt;/p&gt;
 &lt;li&gt;to start slave: buildslave start build-slave&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;To view and administrate our &lt;a href="http://fengxia.co:8011"&gt;CI server&lt;/a&gt;:
-&lt;em&gt; username: admin
-&lt;/em&gt; pwd: xxxxxx&lt;/p&gt;
+* username: admin
+* pwd: xxxxxx&lt;/p&gt;
 &lt;p&gt;To restart master and slave:
-&lt;em&gt; master: buildbot restart build-master
-&lt;/em&gt; slave: buildslave restart build-slave&lt;/p&gt;
+* master: buildbot restart build-master
+* slave: buildslave restart build-slave&lt;/p&gt;
 &lt;p&gt;If config has been modified, it is useful to run &lt;em&gt;buildbot checkconfig build-master&lt;/em&gt;
 to check configurations for error.&lt;/p&gt;
 &lt;p&gt;Note that it is recommended to start master before the slave.
@@ -4880,7 +5049,12 @@ immediately in test environment.&lt;/p&gt;
 &lt;h1&gt;Build master admin&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://fengxia.co:8011"&gt;Build master&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="dev"></category></entry><entry><title>Crawler, TOR, and be a good web citizen</title><link href="https://fengxia41103.github.io/myblog/tor%20crawler.html" rel="alternate"></link><published>2015-03-04T13:00:00-05:00</published><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-03-04:myblog/tor crawler.html</id><summary type="html">&lt;p&gt;Many projects I have done involved harvesting data from
+&lt;/ul&gt;</content><category term="dev"></category></entry><entry><title>Crawler, TOR, and be a good web citizen</title><link href="https://fengxia41103.github.io/myblog/tor%20crawler.html" rel="alternate"></link><published>2015-03-04T13:00:00-05:00</published><updated>2015-03-04T13:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-03-04:/myblog/tor crawler.html</id><summary type="html">&lt;p&gt;Many projects I have done involved harvesting data from
+public sites. Data crawling is an exciting business. On one hand, it
+is easy to develop a crawler these days. In the Python world,
+plenty tutorials will show you how to build
+a simple crawler using the &lt;a href="https://docs.python.org/2/library/urllib.html"&gt;Python urllib&lt;/a&gt;,
+or building …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many projects I have done involved harvesting data from
 public sites. Data crawling is an exciting business. On one hand, it
 is easy to develop a crawler these days. In the Python world,
 plenty tutorials will show you how to build
@@ -5117,4 +5291,4 @@ to that.&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
   &lt;img src="images/crawler.jpg"/&gt;
   &lt;figcaption&gt;Crawler architecture&lt;/figcaption&gt;
-&lt;/figure&gt;</summary><category term="dev"></category></entry></feed>
+&lt;/figure&gt;</content><category term="dev"></category></entry></feed>

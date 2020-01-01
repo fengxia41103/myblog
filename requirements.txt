@@ -112,7 +112,7 @@ glance-store==0.28.0
 Glances==3.0.2
 googlemaps==2.1.1
 greenlet==0.4.9
-gunicorn==19.3.0
+gunicorn==19.5.0
 guppy==0.1.10
 html5lib==0.999
 httplib2==0.12.1

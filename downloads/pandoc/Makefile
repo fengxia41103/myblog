@@ -63,10 +63,18 @@ webapp_docx := webapp.docx
 webapp_html := webapp.html
 webapp_tex := webapp.tex
 
+# resume source and target
+resume_md := resume.md
+RESUME_INPUTS = $(resume_md)
+
+resume_pdf := ../resume.pdf
+
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
-all: rhhi_ra loc_ra webapp
+resume: resume_pdf
+
+all: rhhi_ra loc_ra webapp resume
 
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
@@ -118,6 +126,14 @@ webapp_tex: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
 	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
 	-o $(webapp_tex) \
 	$(PDF_FLAGS)
+
+resume_pdf: $(RESUME_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(resume_pdf) \
+	--pdf-engine=xelatex \
+	$(RESUME_INPUTS)
 
 clean:
 	rm -f *.pdf *.docx *.html

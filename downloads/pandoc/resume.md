@@ -1,8 +1,9 @@
 ---
 mainfont: Noto Sans CJK SC
+monofont: DejaVu Sans Condensed
 titlepage: false
 papersize: a4
-fontsize: 10pt
+fontsize: 8pt
 linkstyle: slanted
 urlcolor: RoyalBlue
 subparagraph: yes
@@ -24,8 +25,7 @@ header-includes: |
     \renewcommand{\labelitemi}{\ding{125}}
     \usepackage[dvipsnames]{xcolor}
     \usepackage{titlesec}
-    \titleformat{\subsection}[leftmargin]
-        {\normalfont\bfseries}{\thesubsection}{}{}
+    \titleformat{\subsection}[leftmargin]{\normalfont\bfseries}{\thesubsection}{8pt}{}
     \titlespacing{\subsection}{5em}{1em}{1pc}
 
 ---
@@ -239,8 +239,8 @@ CrunchTime! Information Technology, Project Manager
   including setting up workflows, triggers, approval processes, a
   customer portal and a vendor portal.
 * Customized Salesforce Customer Portal using APEX, Visualforce and
-  jQuery. The portal won Bronze in the “2011 Steve Awards for Sales &
-  Customer Service”.
+  jQuery. The portal won Bronze in the _"2011 Steve Awards for Sales &
+  Customer Service"_.
 * Built the company's first mobile application prototype using
   Cordova, HTML5 and jQuery Mobile.
 
@@ -296,9 +296,9 @@ MBA, Boston University
 
 * **Major**: International Management Program
 * GPA: 3.75/4.0
-* Recipient of "High Honor and Dean’s Achievement Scholarship"
-* "Certificate of International Management Program"
-* 2nd place in the "13th Annual Net Impact Case Competition"
+* Recipient of _"High Honor and Dean's Achievement Scholarship"_
+* _"Certificate of International Management Program"_
+* 2nd place in the _"13th Annual Net Impact Case Competition"_
 
 ## 09/1995 - 05/1997
 Master of Science, Ohio University
@@ -308,30 +308,30 @@ Master of Science, Ohio University
 
 
 [101]: https://www.linkedin.com/in/fengxia41103
-[102]: {{SITEURL}}/downloads/resume.pdf
+[102]: https://fengxia41103.github.io/myblog/downloads/resume.pdf
 
-[1]: {{SITEURL}}/project%20fashion%20demo.html
-[2]: {{SITEURL}}/project%20gkp%20demo.html
-[3]: {{SITEURL}}/project%20stock%20demo.html
-[4]: {{SITEURL}}/downloads/odoo%20roadmap.pdf
-[5]: {{SITEURL}}/maas%20virtualbox.html
-[6]: {{SITEURL}}/juju%20charm%20reactive.html
-[7]: {{SITEURL}}/baremetal%20provisioning.html
-[8]: {{SITEURL}}/ironic%20intro.html
-[9]: {{SITEURL}}/maas%20and%20ironic.html
-[11]: {{SITEURL}}/pages/jinneng_6001.pdf
-[12]: {{SITEURL}}/pages/jinneng_6002.pdf
-[13]: {{SITEURL}}/pages/jinneng_6003.pdf
+[1]: https://fengxia41103.github.io/myblog/project%20fashion%20demo.html
+[2]: https://fengxia41103.github.io/myblog/project%20gkp%20demo.html
+[3]: https://fengxia41103.github.io/myblog/project%20stock%20demo.html
+[4]: https://fengxia41103.github.io/myblog/downloads/odoo%20roadmap.pdf
+[5]: https://fengxia41103.github.io/myblog/maas%20virtualbox.html
+[6]: https://fengxia41103.github.io/myblog/juju%20charm%20reactive.html
+[7]: https://fengxia41103.github.io/myblog/baremetal%20provisioning.html
+[8]: https://fengxia41103.github.io/myblog/ironic%20intro.html
+[9]: https://fengxia41103.github.io/myblog/maas%20and%20ironic.html
+[11]: https://fengxia41103.github.io/myblog/pages/jinneng_6001.pdf
+[12]: https://fengxia41103.github.io/myblog/pages/jinneng_6002.pdf
+[13]: https://fengxia41103.github.io/myblog/pages/jinneng_6003.pdf
 [14]: https://fengxia41103.github.io/moment/wss/vx.html
-[15]: {{SITEURL}}/netbox.html
-[16]: {{SITEURL}}/switches.html
-[17]: {{SITEURL}}/server%20raid.html
+[15]: https://fengxia41103.github.io/myblog/netbox.html
+[16]: https://fengxia41103.github.io/myblog/switches.html
+[17]: https://fengxia41103.github.io/myblog/server%20raid.html
 [18]: https://github.com/lenovo/netbox
-[19]: {{SITEURL}}/satellite.html
+[19]: https://fengxia41103.github.io/myblog/satellite.html
 [20]: https://github.com/fengxia41103/fashion
 [21]: https://github.com/fengxia41103/gkp
 [22]: https://github.com/fengxia41103/jk
-[23]: {{SITEURL}}/downloads/ibb%20rhhi%20ra.pdf
-[24]: {{SITEURL}}/downloads/loc%20ra.pdf
+[23]: https://fengxia41103.github.io/myblog/downloads/ibb%20rhhi%20ra.pdf
+[24]: https://fengxia41103.github.io/myblog/downloads/loc%20ra.pdf
 [25]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
 [26]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture

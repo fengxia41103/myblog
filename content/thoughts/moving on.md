@@ -3,6 +3,10 @@ Date: 2019-12-31 08:44
 Tags: love
 Slug: moving on
 Author: Feng Xia
+Summary: After a long trip filled w/ surprises and tiredness, I'm
+  coming to face the reality of life, and started to feel that it is
+  time to let you go, time to move on. However hard it is, I need to
+  do that, for you are a kite who should fly high, high high away.
 
 <div class="col s12">
 <video width="100%" height="100%" controls="controls">

@@ -58,7 +58,7 @@ people in it, and like a place, people, give it, a soul.
 
 Went back to the boutique coffee shop tonight after a full dinner,
 feeling I wanted to pay it another visit before leaving town
-tomorrow. However, it's was rather a disappointed experience &mdash;
+tomorrow. However, it's was rather a disappointing experience &mdash;
 so there were these two women ahead of me, who got their fancy coffee
 also, and they started doing some kind of astrology-kind show while I
 was waiting for mine &mdash; one apparently was a main speaker, whose

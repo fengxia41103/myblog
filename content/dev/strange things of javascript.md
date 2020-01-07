@@ -136,6 +136,47 @@ Btw, the new `let` and `const` are not hoisted. Thus, if you just
 declare a `let feng;`, too bad, it stays where it is in its line
 number.
 
+# True versus Truthy, `!!me`
+
+In Javascript, the evaluation of a variable to be True or False is a
+tricky thing. There are two aspects you need to be aware:
+
+## strict vs. not-so-strict
+
+The strict versions are `===` or `!==`, which will only equal if both
+the **value** and the **type** are the same. Otherwise, say you use
+`==`, you are depending on Javascript's engine implementation, which,
+well, is not necessarily what you want, because something is **Truthy** is not
+the same that it is **True**.
+
+## truthy
+
+What is truthy? That the variable is not evaluated to a Boolean (True
+or False), but is considers _sort of true_ (or _sort_of_false):
+
+- **falsey**:
+
+    - Empty string: ""
+    - 0
+    - null
+    - undefined
+    - NaN
+
+- **truthy**:
+
+    - Object: {}
+    - Array: []
+    - Not empty string: "anything"
+    - Number other than zero: 3.14
+    - Date: new Date();
+
+So `if truthy` will be a positive logic, but this counter-intuitive
+when you would expect an empty `{}` or `[]` to be falsey. 
+
+You can take one step further to convert whatever into a Boolean by
+using double exclamation marks: `!!myVar`, and you will get a `true or
+false`. No ambiguity, thus `if True` or `if False`.
+
 [1]: {filename}/dev/ecmascript.md
 [2]: https://www.w3schools.com/js/js_let.asp
 [3]: https://www.w3schools.com/js/js_hoisting.asp

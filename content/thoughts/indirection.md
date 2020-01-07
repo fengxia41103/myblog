@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: indirection
 Author: Feng Xia
 
+<figure class="col l6 m6 s12">
+  <img src="images/indirection.png"/>
+</figure>
+
+
 I wonder whether the Chinese people have been used to reading,
 indirectly &mdash; so I was sitting on a cab going to the train
 station this morning, and the driver had a music playing w/ a title

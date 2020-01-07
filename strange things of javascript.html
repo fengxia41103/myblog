@@ -253,6 +253,45 @@ of the two things:</p>
 <p>Btw, the new <code>let</code> and <code>const</code> are not hoisted. Thus, if you just
 declare a <code>let feng;</code>, too bad, it stays where it is in its line
 number.</p>
+<h1>True versus Truthy, <code>!!me</code></h1>
+<p>In Javascript, the evaluation of a variable to be True or False is a
+tricky thing. There are two aspects you need to be aware:</p>
+<h2>strict vs. not-so-strict</h2>
+<p>The strict versions are <code>===</code> or <code>!==</code>, which will only equal if both
+the <strong>value</strong> and the <strong>type</strong> are the same. Otherwise, say you use
+<code>==</code>, you are depending on Javascript's engine implementation, which,
+well, is not necessarily what you want, because something is <strong>Truthy</strong> is not
+the same that it is <strong>True</strong>.</p>
+<h2>truthy</h2>
+<p>What is truthy? That the variable is not evaluated to a Boolean (True
+or False), but is considers <em>sort of true</em> (or _sort_of_false):</p>
+<ul>
+<li>
+<p><strong>falsey</strong>:</p>
+<ul>
+<li>Empty string: ""</li>
+<li>0</li>
+<li>null</li>
+<li>undefined</li>
+<li>NaN</li>
+</ul>
+</li>
+<li>
+<p><strong>truthy</strong>:</p>
+<ul>
+<li>Object: {}</li>
+<li>Array: []</li>
+<li>Not empty string: "anything"</li>
+<li>Number other than zero: 3.14</li>
+<li>Date: new Date();</li>
+</ul>
+</li>
+</ul>
+<p>So <code>if truthy</code> will be a positive logic, but this counter-intuitive
+when you would expect an empty <code>{}</code> or <code>[]</code> to be falsey. </p>
+<p>You can take one step further to convert whatever into a Boolean by
+using double exclamation marks: <code>!!myVar</code>, and you will get a <code>true or
+false</code>. No ambiguity, thus <code>if True</code> or <code>if False</code>.</p>
 <div class="footnote">
 <hr>
 <ol>

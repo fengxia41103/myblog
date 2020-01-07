@@ -125,6 +125,45 @@ of the two things:&lt;/p&gt;
 &lt;p&gt;Btw, the new &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt; are not hoisted. Thus, if you just
 declare a &lt;code&gt;let feng;&lt;/code&gt;, too bad, it stays where it is in its line
 number.&lt;/p&gt;
+&lt;h1&gt;True versus Truthy, &lt;code&gt;!!me&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;In Javascript, the evaluation of a variable to be True or False is a
+tricky thing. There are two aspects you need to be aware:&lt;/p&gt;
+&lt;h2&gt;strict vs. not-so-strict&lt;/h2&gt;
+&lt;p&gt;The strict versions are &lt;code&gt;===&lt;/code&gt; or &lt;code&gt;!==&lt;/code&gt;, which will only equal if both
+the &lt;strong&gt;value&lt;/strong&gt; and the &lt;strong&gt;type&lt;/strong&gt; are the same. Otherwise, say you use
+&lt;code&gt;==&lt;/code&gt;, you are depending on Javascript's engine implementation, which,
+well, is not necessarily what you want, because something is &lt;strong&gt;Truthy&lt;/strong&gt; is not
+the same that it is &lt;strong&gt;True&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;truthy&lt;/h2&gt;
+&lt;p&gt;What is truthy? That the variable is not evaluated to a Boolean (True
+or False), but is considers &lt;em&gt;sort of true&lt;/em&gt; (or _sort_of_false):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;falsey&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Empty string: ""&lt;/li&gt;
+&lt;li&gt;0&lt;/li&gt;
+&lt;li&gt;null&lt;/li&gt;
+&lt;li&gt;undefined&lt;/li&gt;
+&lt;li&gt;NaN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;truthy&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Object: {}&lt;/li&gt;
+&lt;li&gt;Array: []&lt;/li&gt;
+&lt;li&gt;Not empty string: "anything"&lt;/li&gt;
+&lt;li&gt;Number other than zero: 3.14&lt;/li&gt;
+&lt;li&gt;Date: new Date();&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So &lt;code&gt;if truthy&lt;/code&gt; will be a positive logic, but this counter-intuitive
+when you would expect an empty &lt;code&gt;{}&lt;/code&gt; or &lt;code&gt;[]&lt;/code&gt; to be falsey. &lt;/p&gt;
+&lt;p&gt;You can take one step further to convert whatever into a Boolean by
+using double exclamation marks: &lt;code&gt;!!myVar&lt;/code&gt;, and you will get a &lt;code&gt;true or
+false&lt;/code&gt;. No ambiguity, thus &lt;code&gt;if True&lt;/code&gt; or &lt;code&gt;if False&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;

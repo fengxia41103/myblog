@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: bucharest
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/bucharest.jpg"/>
+</figure>
+
 Luck to have this business trip and jumped on it at the last
 minute. Even luckier that I switched seat on the way here at the last
 moment, literally, when I found out I were going to seat next to

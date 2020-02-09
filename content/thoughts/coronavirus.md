@@ -12,7 +12,7 @@ The entire episode of 2020 Coronavirus is an ugly reality show. The
 poor Dr. Li died, and it's really sad, and ugly, an ugly truth that a
 hero was not born to be one; rather, they were becoming one by pure
 accident because they stepped forward, unknowingly,  becoming _out of
-line_, _standing out_ among the crowd, right the time when a wave
+line_, _standing out_ among the crowd, at the _wrong_ time when a wave
 of collapse was to sweep through.... Li didn't foresee the scale of
 this epidemic; he is not a God. I don't believe anyone did, including
 the scolded Wuhan mayor who "should have taken this more seriously"

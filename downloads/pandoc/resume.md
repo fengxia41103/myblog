@@ -80,9 +80,25 @@ Documentation
 
 Lenovo US, Advisory Engineer
 
-* Author of the `Lenovo Open Cloud` reference
-  architecture and `Red Hat Hyperverged Infrastructure for
-  Virtalization` reference architecture. Published on 5/5/2019.
+* `ThinkAgile CP` product. UI lead and early member. Develop and
+  maintain AngularJS legacy code, and direct next gen design in
+  ReactJS based Material UI. Have global team across three
+  geographical locations.
+  
+    - **Tools**: AngularJS, Typescript, ReactJS, Docker
+    - **Sample writing**: [official portal][27]
+  
+* `ThinkAgile CP` product. UI lead. Developed Python scripts for
+  rebranding analysis, and to build catalog of Angular components to
+  link code to its visual results.
+  
+    - **Tools**: Python, Selenium, Pandoc
+    - **Sample writing**: 
+        1. [rebranding analysis][28]
+        2. [Angular component catalog][29]
+        
+* `Lenovo Open Cloud` product. Author of two reference architecture
+  papers. Published on 5/5/2019.
   
     - **Tools**: Pandoc, Markdown, BibTex, XeLaTex, GNU make, CSS
     - **Sample writing**:
@@ -92,7 +108,7 @@ Lenovo US, Advisory Engineer
            Reference Architecture: [pretty draft in PDF][24], [official
            version][26]
 
-* Architect of the `Lenovo Open Cloud` product. Drove overall network
+* `Lenovo Open Cloud` product. Architect. Drove overall network
   design. Developed Python scrips and playbooks to automate RH
   Satellite deployment and configuration. Led development of playbooks
   to automate RHHI deployment on baremetal.
@@ -104,7 +120,7 @@ Lenovo US, Advisory Engineer
         2. [Config Lenovo server to RAID][17]
         3. [RH Satellite][19]
 
-* Core developer of the `Lenovo Open Cloud` product.  Forked
+* `Lenovo Open Cloud` product. Principal developer. Forked
   [Netbox][18] by Digital Ocean. Retrofit its models and added
   functions to make it data center planning and orchestration tool.
   Extended Netbox architecture to include Redis for async
@@ -115,15 +131,16 @@ Lenovo US, Advisory Engineer
     - **Tools**: Django, Celery, Redis, Postgresql, Ansible, pexpect
     - **Sample writings**: [Netbox design][15]
 
-* `VX Installer` product. Designed system architecture. Coded Django
-  backend and RESTful API.
+* `VX Installer` product. Consultant. Collaborated w/ architect in
+  system design. Coded Django backend and RESTful API.
 
     - **Tools**: Django, Tastypie, Celery, Redis, Ansible, Canonical charms, Docker
     - **PPT**: Architecture of [VX Installer][14]
     
-* `Workload Solution Store` project. Evaluated service orchestration
-  technologies and developed Lenovo's core competence in automating
-  baremetal provisioning.
+* `Workload Solution Store` project. Architect and principal
+  developer. Evaluated service orchestration technologies and
+  developed Lenovo's core competence in automating baremetal
+  provisioning.
 
     - **Tools**: Openstack, Ironic, Juju, MaaS, Canonical charms,
                  Python, LXD, KVM, Virtualbox
@@ -335,3 +352,6 @@ Master of Science, Ohio University
 [24]: https://fengxia41103.github.io/myblog/downloads/loc%20ra.pdf
 [25]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
 [26]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture
+[27]: https://cp.lenovo.com/login#/
+[28]: https://fengxia41103.github.io/myblog/downloads/rebranding%20example.md
+[29]: https://fengxia41103.github.io/myblog/downloads/webapp.pdf

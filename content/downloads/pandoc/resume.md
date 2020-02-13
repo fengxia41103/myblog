@@ -353,5 +353,5 @@ Master of Science, Ohio University
 [25]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
 [26]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture
 [27]: https://cp.lenovo.com/login#/
-[28]: https://fengxia41103.github.io/myblog/downloads/rebranding%20example.md
+[28]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py
 [29]: https://fengxia41103.github.io/myblog/downloads/webapp.pdf

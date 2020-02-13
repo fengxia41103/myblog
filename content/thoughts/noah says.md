@@ -38,3 +38,7 @@ been burned off by fire. So I asked what happened to it, he replied:
    come live with me anytime. I'll get you a key... wait, I'll
    introduce you to the concierge, so she will know you, and you can
    just come whenever you want."
+
+4. 10:00 pm. Math, struggling w/ the concept of "20% off", which he
+   subtracted `$0.2`. Why so? "So how much is 20%?" "It's 20 over 100"
+   "So how much will that be?" "0.2, 20 cents". Speechless, isn't it!

@@ -42,3 +42,13 @@ been burned off by fire. So I asked what happened to it, he replied:
 4. 10:00 pm. Math, struggling w/ the concept of "20% off", which he
    subtracted `$0.2`. Why so? "So how much is 20%?" "It's 20 over 100"
    "So how much will that be?" "0.2, 20 cents". Speechless, isn't it!
+
+5. "Noah, remember to think before you ask." Pretty common
+   conversation between. I don't recall what the topic
+   was. Anyway. Listen to this. "爸， 我在新加坡的时候就有think." Very
+   firm tone. "Really!? How?" "你记得吗？那个时候我想要touch一个bird
+   poop" "我不记得了...然后呢？" "然后你说了No" "Yeah, that sounds
+   right!" "但是那个时候我就有think" "How!?" this is interesting "真的
+   真的！那个时候我就在think, 那个bird poop看起来是dry, 所以我就很想要
+   touch它"...... speechless, isn't it!? What an example he gave to
+   testify that he actually, thinks ~~

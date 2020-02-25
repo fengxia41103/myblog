@@ -165,6 +165,24 @@ Modified: 2018-07-23 12:04
   </div>
 </div>
 
+* `ThinkAgile CP` product. UI lead and early member. Develop and
+  maintain AngularJS legacy code, and direct next gen design in
+  ReactJS based Material UI. Have global team across three
+  geographical locations.
+  
+    - **Tools**: AngularJS, Typescript, ReactJS, Docker
+    - **Sample writing**: [official portal][27]
+  
+* `ThinkAgile CP` product. UI lead. Developed Python scripts for
+  rebranding analysis, and to build catalog of Angular components to
+  link code to its visual results.
+  
+    - **Tools**: Python, Selenium, Pandoc
+    - **Sample writing**: 
+        1. [rebranding analysis][28]
+        2. [Angular component catalog][29]
+        
+
 * Author of the `Lenovo Open Cloud` reference architecture and `Red
   Hat Hyperverged Infrastructure for Virtalization` reference
   architecture. Published on 5/5/2019.
@@ -635,3 +653,6 @@ Modified: 2018-07-23 12:04
 [24]: {filename}/downloads/loc%20ra.pdf
 [25]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
 [26]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture
+[27]: https://cp.lenovo.com/login#/
+[28]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py
+[29]: https://fengxia41103.github.io/myblog/downloads/webapp.pdf

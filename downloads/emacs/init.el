@@ -323,104 +323,105 @@ future."
                              font-family ")\n") 'face `((:family ,font-family) italic)))))))
 
 ;;(set-face-attribute 'default nil :family "Bitstream Vera Sans Mono" :height 100)
-;; (add-to-list 'default-frame-alist '(font . "Inconsolata"))
+
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono"))
 (set-face-attribute 'default nil :family "DejaVu Sans Mono)" :height 120)
+;; (add-to-list 'default-frame-alist '(font . "Inconsolata"))
 ;; (set-face-attribute 'default nil 
 ;;                     :family "Inconsolata" 
 ;;                     :height 120)
 
 
 ;; Theme and font good for coding
-(use-package 
-  suscolors-theme 
+;; (use-package 
+;;   suscolors-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'suscolors t)
 
-(use-package 
-  lush-theme 
+;; (use-package 
+;;   lush-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'lush t)
 
-(use-package 
-  moe-theme 
+;; (use-package 
+;;   moe-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'moe-dark t)
 
 
-(use-package 
-  alect-themes 
+;; (use-package 
+;;   alect-themes 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'alect-black t)
 
-(use-package 
-  metalheart-theme 
+;; (use-package 
+;;   metalheart-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'metalheart t)
 
-(use-package 
-  paganini-theme 
+;; (use-package 
+;;   paganini-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'paganini t)
 
-;; Smart Mode Line
-(use-package 
-  smart-mode-line
-  :ensure 
-  :config (progn 
-            ;; (use-package 
-            ;;   smart-mode-line-powerline-theme) 
-            (sml/setup) 
-            ;;(setq sml/apply-theme 'respectful)
-            ))
+;; ;; Smart Mode Line
+;; (use-package 
+;;   smart-mode-line
+;;   :ensure 
+;;   :config (progn 
+;;             ;; (use-package 
+;;             ;;   smart-mode-line-powerline-theme) 
+;;             (sml/setup) 
+;;             ;;(setq sml/apply-theme 'respectful)
+;;             ))
 
-(use-package 
-  firecode-theme 
+;; (use-package 
+;;   firecode-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'firecode t)
 
-(use-package 
-  molokai-theme 
+;; (use-package 
+;;   molokai-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'molokai t)
 
-(use-package 
-  zenburn-theme 
+;; (use-package 
+;;   zenburn-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'zenburn t)
 
-(use-package 
-  solarized-theme 
+;; (use-package 
+;;   solarized-theme 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 ;; (load-theme 'solarized t)
 
-(use-package 
-  color-theme-modern 
+;; (use-package 
+;;   color-theme-modern 
 
-  :ensure 
-  :config)
-(load-theme 'hober t)
-
+;;   :ensure 
+;;   :config)
+;;; (load-theme 'hober t)
+(load-theme 'fengxia t)
 
 ;; Is this now removed by default?
 (menu-bar-mode -1)
@@ -778,28 +779,6 @@ and buffers which are visible in other windows are normally skipped."
           (lambda () 
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-;; Org publish (org-publish-all)
-(setq org-publish-project-alist '("org-notes" :base-directory "~/org" 
-                                  :publishing-directory "/nfs/wwwPeople/fxia1/org_publish/" 
-                                  :publishing-function org-twbs-publish-to-html 
-                                  :with-sub-superscript nil))
-
-(defun my-org-publish-buffer () 
-  (interactive) 
-  (save-buffer) 
-  (save-excursion (org-publish-current-file)) 
-  (let* ((proj (org-publish-get-project-from-filename buffer-file-name)) 
-         (proj-plist (cdr proj)) 
-         (rel (file-relative-name buffer-file-name (plist-get proj-plist 
-                                                              :base-directory))) 
-         (dest (plist-get proj-plist 
-                          :publishing-directory))) 
-    (browse-url (concat "file://" (file-name-as-directory (expand-file-name dest)) 
-                        (file-name-sans-extension rel) ".html"))))
-
-(add-hook 'org-mode-hook 
-          (lambda () 
-            (local-set-key (kbd "s-\\") 'my-org-publish-buffer)))
 
 ;; Add latin
 (global-set-key (kbd "C-c C-l s") 'lorem-ipsum-insert-sentences)
@@ -853,20 +832,20 @@ non-nil; otherwise prompts the user to enter the directory."
   :config)
 
 ;; ssh directly from emacs
-(use-package 
-  ssh 
+;; (use-package 
+;;   ssh 
 
-  :ensure 
-  :config)
+;;   :ensure 
+;;   :config)
 
 ;; xcscope package
-(use-package 
-  xcscope 
+;; (use-package 
+;;   xcscope 
 
-  :ensure 
-  :config (cscope-setup))
-(defvar cisco-cscope-inited nil 
-  "Used to initialize the cisco extension only once.")
+;;   :ensure 
+;;   :config (cscope-setup))
+;; (defvar cisco-cscope-inited nil 
+;;   "Used to initialize the cisco extension only once.")
 
 ;; ;; flycheck
 ;; (use-package 
@@ -890,6 +869,8 @@ non-nil; otherwise prompts the user to enter the directory."
   :ensure 
   :config)
 (elpy-enable)
+
+(require 'virtualenvwrapper)
 
 ;;  highlight
 (use-package 
@@ -1142,10 +1123,7 @@ non-nil; otherwise prompts the user to enter the directory."
   markdown-mode 
 
   :ensure 
-  :config (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode)) 
-  :config (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode)) 
   :config (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)) 
-  :config (add-to-list 'auto-mode-alist '("\\.mdown$" . markdown-mode)) 
   :config (add-hook 'markdown-mode-hook 
                     (lambda () 
                       (visual-line-mode t) 
@@ -1312,6 +1290,9 @@ non-nil; otherwise prompts the user to enter the directory."
 ;;syntax highlight code blocks
 (setq org-src-fontify-natively t)
 
+;; include diary
+(setq org-agenda-include-diary t)
+
 ;; Standard key bindings
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -1351,7 +1332,18 @@ non-nil; otherwise prompts the user to enter the directory."
                                      ("CANCELLED" :foreground "forest green"
                                       :weight bold)
                                      ("WORKING" :foreground "forest green"
-                                      :weight bold))))
+                                      :weight bold)
+                                     ("BACKLOG" :foreground "red"
+                                      :weight bold)
+                                     ("SELECTED-FOR-DEVELOPMENT" :foreground "magenta"
+                                      :weight bold)
+                                     ("IN-PROGRESS" :foreground "green"
+                                      :weight bold)
+                                     ("IN-REVIEW" :foreground "yellow"
+                                      :weight bold)
+                                     ("IN-TESTING" :foreground "dodger blue"
+                                      :weight bold)
+                                     )))
 
 (setq org-use-fast-todo-selection t)
 
@@ -1373,15 +1365,17 @@ non-nil; otherwise prompts the user to enter the directory."
 (setq org-directory "~/org/")
 (setq org-default-notes-file "~/org/notes.org")
 
-(setq org-capture-templates '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
-                               "* TODO [#A] %?\n %i\n")
-                              ("n" "Note" entry (file+datetree "~/org/notes.org")
-                               "* NOTE %?\n %i\n ")
-                              ("o" "Tool" entry (file+datetree "~/org/tools.org")
-                               "* TOOL %?\n %i\n ")
-                              ("j" "Journal" entry (file+datetree "~/org/journal.org")
-                               "* %?\nEntered on %U\n  %i\n ")
-                              ))
+(setq org-capture-templates
+      '(
+        ("t" "Todo" entry (file+headline "~/org/tasks.org" "MISC")
+         "* TODO [#H] %?\n %i\n %a")
+
+        ("n" "Note" entry (file+datetree "~/org/notes.org")
+         "* NOTE %?\n %i\n ")
+
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n %a")
+        ))
 
 (setq header-line-format mode-line-format)
 
@@ -1488,8 +1482,14 @@ non-nil; otherwise prompts the user to enter the directory."
   (setq js-indent-level 2)             ; js-mode
   (setq js2-basic-offset 2) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
   (setq css-indent-offset 2)            ; css-mode
+
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-comment-style 2)  
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
+
 
 ;; to format LISP code
 (use-package 
@@ -1516,7 +1516,7 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;;command used to get mail
 ;; use this for testing
-(setq mu4e-get-mail-command "true")
+;;; (setq mu4e-get-mail-command "true")
 
 ;;; (setq mu4e-view-prefer-html t)
 
@@ -1542,19 +1542,29 @@ non-nil; otherwise prompts the user to enter the directory."
 (add-to-list 'mu4e-bookmarks '("size:5M..500M"  "Big messages"               ?b) t)
 (add-to-list 'mu4e-bookmarks '("flag:flagged"   "Flagged messages"           ?f) t)
 
-(setq mu4e-headers-date-format "%Y-%m-%d %H:%M:%S"
-      mu4e-headers-fields '((:date . 20)
-			    (:flags . 5)
-			    (:mailing-list . 10)
-			    (:from-or-to . 25)
-			    (:subject . nil))) 
+(add-to-list 'mu4e-header-info-custom
+             '(:recipnum .
+                         ( :name "Number of recipients"  ;; long name, as seen in the message-view
+                                 :shortname "R#"           ;; short name, as seen in the headers view
+                                 :help "Number of recipients for this message" ;; tooltip
+                                 :function (lambda (msg)
+                                             (format "%d"
+                                                     (+ (length (mu4e-message-field msg :to))
+                                                        (length (mu4e-message-field msg :cc))))))))
 
-(setq mu4e-reply-to-address "fxia1@lenovo.com"
-      user-mail-address "fxia1@lenovo.com"
+(setq mu4e-headers-date-format "%b-%d %a"
+      mu4e-headers-fields '((:date . 10)
+			    (:flags . 5)
+                            (:recipnum . 3)
+			    (:from-or-to . 10)
+			    (:thread-subject . nil))) 
+
+(setq mu4e-reply-to-address "fxia1@mycompany.com"
+      user-mail-address "fxia1@mycompany.com"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
-                          "http://fengxia.co\n")
+                          "http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/\n")
       message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
       message-citation-line-function 'message-insert-formatted-citation-line
       mu4e-headers-results-limit 500)
@@ -1563,44 +1573,46 @@ non-nil; otherwise prompts the user to enter the directory."
       (concat
        "Best regards,\n\n"
        "Feng Xia\n"
-       "Advisory Engineer\n"
-       "Datacenter Group (DCG), Lenovo US\n"
-       "8000 Development Drive, Morrisville, NC 27560\n"
-       "W: http://www.lenovo.com\n"))
+       "W: http://www.mycompany.com\n"))
 
 ;; save attachment to my desktop (this can also be a function)
 (setq mu4e-attachment-dir "~/Downloads")
 
 ;; attempt to show images when viewing messages
 (setq mu4e-view-show-images t)
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
 
 (require 'smtpmail)
 (setq send-mail-function 'smtpmail-send-it
-      user-mail-address "fxia1@lenovo.com"
+      user-mail-address "fxia1@mycompany.com"
       smtpmail-debug-info t
-      smtpmail-smtp-user "fengxia41103"
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 "fengxia41103" nil))
-      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-user "fxia1@mycompany.com"
+      smtpmail-default-smtp-server "localhost"
       smtpmail-auth-credentials (expand-file-name "~/.authinfo")
-      smtpmail-smtp-service 587
+      smtpmail-smtp-service 1025
       smtpmail-stream-type nil
-      starttls-use-gnutls t
-      starttls-gnutls-program "/usr/bin/gnutls-cli"
+      starttls-use-gnutls nil
       starttls-extra-arguments nil
       )
 
 (setq message-kill-buffer-on-exit t
       ;; mu4e-sent-messages-behavior 'delete
       mu4e-headers-skip-duplicates t
+
+      ;; header include relate emails
       mu4e-headers-include-related t
+      
       mail-user-agent 'mu4e-user-agent
       mu4e-get-mail-command "mbsync -a"
-      mu4e-update-interval 300 ;; update every 5 min
+      mu4e-update-interval 600 ;; update every 10 min
       mu4e-attachment-dir  "~/Downloads"
       ;;set up queue for offline email
       ;;use mu mkdir  ~/Maildir/queue to set up first
       smtpmail-queue-mail  nil ;; queue sent mail
       smtpmail-queue-dir   "~/Maildir/queue/cur")
+
 (setq mu4e-html2text-command "html2text -utf8 -width 72")
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
@@ -1613,13 +1625,17 @@ non-nil; otherwise prompts the user to enter the directory."
 
 ;;store org-mode links to messages
 (require 'org-mu4e)
+
+(add-hook 'mu4e-view-mode-hook #'visual-line-mode) 
+(add-hook 'mu4e-compose-mode-hook 'flyspell-mode)
+
 ;;store link to message if in header view, not to header query
-(setq org-mu4e-link-query-in-headers-mode nil)
+(setq org-mu4e-link-query-in-headers-mode t)
 (define-key mu4e-headers-mode-map (kbd "C-c c") 'org-mu4e-store-and-capture)
 (define-key mu4e-view-mode-map    (kbd "C-c c") 'org-mu4e-store-and-capture)
 (setq org-capture-templates
-      '(("t" "todo" entry (file+headline "~/org/tasks.org" "Tasks")
-         "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
+      '(("t" "todo" entry (file+headline "~/org/tasks.org" "Emails")
+         "* TODO [#H] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n")))
 
 ;; chinese-pyim
 (require 'pyim)
@@ -1724,9 +1740,110 @@ non-nil; otherwise prompts the user to enter the directory."
  (lambda ()
    (define-key markdown-mode-map "\C-c[" 'markdown-reftex-citation)))
 
-(message "Emacs is ready to do thy bidding, Master %s!" current-user)
+;; TIDE and Typescript-mode
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(setq package-check-signature  nil)
+
+;; A function to allow concantenate multiline strings
+;; into a single one. Useful when running `-nw'.
+(defun strip-convert-lines-into-one-big-string (beg end)
+  "strip and convert selected lines into one big string which is copied into kill ring.
+When transient-mark-mode is enabled, if no region is active then only the
+current line is acted upon.
+
+If the region begins or ends in the middle of a line, that entire line is
+copied, even if the region is narrowed to the middle of a line.
+
+Current position is preserved."
+  (interactive "r")
+  (let (str (orig-pos (point-marker)))
+    (save-restriction
+      (widen)
+      (when (and transient-mark-mode (not (use-region-p)))
+        (setq beg (line-beginning-position)
+              end (line-beginning-position 2)))
+
+      (goto-char beg)
+      (setq beg (line-beginning-position))
+      (goto-char end)
+      (unless (= (point) (line-beginning-position))
+        (setq end (line-beginning-position 2)))
+
+      (goto-char beg)
+      (setq str (replace-regexp-in-string "[ \t]*\n" " " (replace-regexp-in-string "^[ \t]+" "" (buffer-substring-no-properties beg end))))
+      ;; (message "str=%s" str)
+      (kill-new str)
+      (goto-char orig-pos)))
+  )
+(global-set-key (kbd "C-c C-y") 'strip-convert-lines-into-one-big-string)
+
+;; xclip mode, integrate clipboard with x11
+(require 'xclip)
+(setq xclip-mode 1)
 
 ;; Local Variables:
 ;; coding: utf-8
 ;; no-byte-compile: t
 ;; End:
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; update packages
+
+(defun package-upgrade-all ()
+  "Upgrade all packages automatically without showing *Packages* buffer."
+  (interactive)
+  (package-refresh-contents)
+  (let (upgrades)
+    (cl-flet ((get-version (name where)
+                           (let ((pkg (cadr (assq name where))))
+                             (when pkg
+                               (package-desc-version pkg)))))
+      (dolist (package (mapcar #'car package-alist))
+        (let ((in-archive (get-version package package-archive-contents)))
+          (when (and in-archive
+                     (version-list-< (get-version package package-alist)
+                                     in-archive))
+            (push (cadr (assq package package-archive-contents))
+                  upgrades)))))
+    (if upgrades
+        (when (yes-or-no-p
+               (message "Upgrade %d package%s (%s)? "
+                        (length upgrades)
+                        (if (= (length upgrades) 1) "" "s")
+                        (mapconcat #'package-desc-full-name upgrades ", ")))
+          (save-window-excursion
+            (dolist (package-desc upgrades)
+              (let ((old-package (cadr (assq (package-desc-name package-desc)
+                                             package-alist))))
+                (package-install package-desc)
+                (package-delete  old-package)))))
+      (message "All packages are up to date"))))
+
+(message "Emacs is ready to do thy bidding, Master %s!" current-user)
+

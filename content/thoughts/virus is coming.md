@@ -4,11 +4,15 @@ Tags: thoughts
 Slug: virus is coming
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/bucharest%20status.jpg"/>
+</figure>
+
 News of the new virus coming to the States is all over the place now,
 and the stock market has been dropping like a stone. Panic?
 
 I haven't heard many people talking about it, life is rather running
-as usual, but I thin this is hanging on everyone's mind now, that we
+as usual, but I think this is hanging on everyone's mind now, that we
 are just waiting for a phone call from school that school is shutting
 down, or an email from company that you are all required to work from
 home for the next two weeks.. then what? what about food? drink?
@@ -62,6 +66,10 @@ some than others, while these info are just random encounters to us
 &mdash; we are fed by some authorities and channels, while whoever has
 the loudest voice gets the attention, thus the preference.
 
+In case you want to brush up your hand washing technique, here is a
+[NPR][4] on the subject. Quite fun to watch ~~
+
 [1]: https://en.wikipedia.org/wiki/Hiroshima:_Out_of_the_Ashes
 [2]: https://www.imdb.com/title/tt6969550/
 [3]: {filename}/thoughts/sars.md
+[4]: https://www.npr.org/2020/03/04/811609241/coronavirus-fears-have-led-to-a-golden-age-of-hand-washing-psas

@@ -101,5 +101,5 @@ the past.
 
 [1]: https://www.imdb.com/title/tt0988045/
 [2]: https://www.cdc.gov/coronavirus/2019-ncov/index.html
-[3]: {filename}/thought/virus%20is%20coming.md
+[3]: {filename}/thoughts/virus%20is%20coming.md
 [4]: https://www.amazon.com/Tolerance-Hendrik-Willem-Van-Loon/dp/B00085NWH0

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 14 Mar 2020 08:59:00 -0400</lastBuildDate><item><title>Cowardice</title><link>https://fengxia41103.github.io/myblog/cowardice.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 18 Mar 2020 09:25:00 -0400</lastBuildDate><item><title>Feng's movie browser</title><link>https://fengxia41103.github.io/myblog/movie%20browser.html</link><description>&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/movie.gif"/&gt;
+    &lt;figcaption&gt;Movie browser demo&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Background&lt;/h1&gt;
+&lt;p&gt;Posted a challenge to build a &lt;em&gt;search&lt;/em&gt;/browser for movie
+fan. Initially was given a static data set to display. So on top of
+that, I start to pull in a few other data sources to spice things
+up. Coded in React …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 18 Mar 2020 09:25:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-03-18:/myblog/movie browser.html</guid><category>react</category></item><item><title>Cowardice</title><link>https://fengxia41103.github.io/myblog/cowardice.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/Marie-Antoinette,_1775_-_Musée_Antoine_Lécuyer.jpg"/&gt;
 &lt;/figure&gt;
 

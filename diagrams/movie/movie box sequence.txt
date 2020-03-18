@@ -1,0 +1,26 @@
+@startuml
+
+actor "OMDB API" as api
+
+participant "RootBox.state" as root
+participant "SearchBox" as search
+
+box "MovieBox"
+  participant props
+  participant state
+  participant render
+  participant handlUpdate as handler
+  participant AjaxContainer as fetch
+  participant handleUpdate as handler
+end box
+
+search -> root: update IMDB IDs
+root -> props: a IMDB ID
+props -> fetch: IMDB ID
+fetch -> api: Send to OMDB API w/ "i=<id>"
+api -> fetch: response w/ movie meta
+fetch -> handler: normalize movie data
+handler -> state: Save normalized data to state
+state -> render: Present movie meta
+
+@enduml

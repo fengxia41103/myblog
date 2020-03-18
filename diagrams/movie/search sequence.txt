@@ -1,0 +1,31 @@
+@startuml
+
+actor "User" as user
+actor "OMDB API" as api
+
+box "RootBox"
+  participant handleUpdate as handler
+end box
+
+box "SearchBox"
+  participant state
+  participant render
+  participant DebounceInput as input
+  participant handlUpdate as handler
+  participant AjaxContainer as fetch
+end box
+
+
+participant MovieBox as movie
+
+user -> input: String to search
+input -> input: Debounce for 1 second before accepting value change
+input -> fetch: Compose query
+fetch -> api: Send to OMDB API w/ "s=<search me>"
+api -> fetch: response w/ IMDB IDs
+fetch -> handler: IMDB IDs
+handler -> state: Save IMDB IDs to state
+state -> render: State change causes render update
+render -> movie: IMDB id
+movie -> movie: Retrieve then render movie info
+@enduml

@@ -1,5 +1,5 @@
 ---
-documentclass: scrreprt
+documentclass: article
 papersize: a4
 mainfont: Ubuntu
 monofont: DejaVu Sans Condensed
@@ -18,7 +18,6 @@ lof: true
 lot: true
 link-citations: true
 header-includes:
-  - \usepackage{quotchap}
   - \usepackage{fvextra}
   - \usepackage{parskip}
   - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}

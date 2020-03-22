@@ -1,6 +1,7 @@
 # Latex template
-LATEX_TEMPLATE := lenovo.tex
-LATEX_CONFIG := latex.yaml
+LATEX_TEMPLATE := feng.tex
+LATEX_REPORT_CONFIG := latex.yaml
+LATEX_ARTICLE_CONFIG := article-latex.yaml
 
 # Links to images, and bibtex reference section header
 REFERENCES := references.md
@@ -51,6 +52,7 @@ loc_ra_md := loc\ ra.md
 LOC_RA_INPUTS = $(loc_ra_md) $(REFERENCES)
 
 loc_ra_pdf := loc\ ra.pdf
+loc_ra_tex := loc\ ra.tex
 loc_ra_docx := loc\ ra.docx
 loc_ra_html := loc\ ra.html
 
@@ -69,12 +71,19 @@ RESUME_INPUTS = $(resume_md)
 
 resume_pdf := ../resume.pdf
 
+# Blog source and target
+git_md := git\ strategy.md
+GIT_INPUTS = $(git_md) $(REFERENCES)
+git_pdf := git.pdf
+
+
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
 resume: resume_pdf
+git: git_pdf
 
-all: rhhi_ra loc_ra webapp resume
+all: rhhi_ra loc_ra webapp resume git
 
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
@@ -82,13 +91,13 @@ rhhi_ra_html: $(RHHI_RA_INPUTS)
 	-o $(rhhi_ra_html) \
 	$(HTML_FLAGS)
 
-rhhi_ra_pdf: $(RHHI_RA_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(RHHI_RA_INPUTS) \
+rhhi_ra_pdf: $(RHHI_RA_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(RHHI_RA_INPUTS) \
 	-o $(rhhi_ra_pdf) \
 	$(PDF_FLAGS)
 
-rhhi_ra_docx: $(RHHI_RA_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(RHHI_RA_INPUTS) \
+rhhi_ra_docx: $(RHHI_RA_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(RHHI_RA_INPUTS) \
 	-o $(rhhi_ra_docx) \
 	$(DOCX_FLAGS)
 
@@ -97,33 +106,38 @@ loc_ra_html: $(LOC_RA_INPUTS)
 	-o $(loc_ra_html) \
 	$(HTML_FLAGS)
 
-loc_ra_pdf: $(LOC_RA_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(LOC_RA_INPUTS) \
+loc_ra_pdf: $(LOC_RA_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(LOC_RA_INPUTS) \
 	-o $(loc_ra_pdf) \
 	$(PDF_FLAGS)
 
-loc_ra_docx: $(LOC_RA_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(LOC_RA_INPUTS) \
+loc_ra_docx: $(LOC_RA_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(LOC_RA_INPUTS) \
 	-o $(loc_ra_docx) \
 	$(DOCX_FLAGS)
+
+loc_ra_tex: $(LOC_RA_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(LOC_RA_INPUTS) \
+	-o $(loc_ra_tex) \
+	$(PDF_FLAGS)
 
 webapp_html: $(WEBAPP_INPUTS)
 	pandoc $(WEBAPP_INPUTS) \
 	-o $(webapp_html) \
 	$(HTML_FLAGS)
 
-webapp_pdf: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
+webapp_pdf: $(WEBAPP_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(WEBAPP_INPUTS) \
 	-o $(webapp_pdf) \
 	$(PDF_FLAGS)
 
-webapp_docx: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
+webapp_docx: $(WEBAPP_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(WEBAPP_INPUTS) \
 	-o $(webapp_docx) \
 	$(DOCX_FLAGS)
 
-webapp_tex: $(WEBAPP_INPUTS) $(LATEX_CONFIG)
-	pandoc $(LATEX_CONFIG) $(WEBAPP_INPUTS) \
+webapp_tex: $(WEBAPP_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(WEBAPP_INPUTS) \
 	-o $(webapp_tex) \
 	$(PDF_FLAGS)
 
@@ -134,6 +148,11 @@ resume_pdf: $(RESUME_INPUTS)
 	-o $(resume_pdf) \
 	--pdf-engine=xelatex \
 	$(RESUME_INPUTS)
+
+git_pdf: $(GIT_INPUTS) $(LATEX_ARTICLE_CONFIG)
+	pandoc $(LATEX_ARTICLE_CONFIG) $(GIT_INPUTS) \
+	-o $(git_pdf) \
+	$(PDF_FLAGS)
 
 clean:
 	rm -f *.pdf *.docx *.html

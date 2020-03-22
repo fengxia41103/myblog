@@ -1,5 +1,634 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-03-18T09:25:00-04:00</updated><entry><title>Feng's movie browser</title><link href="https://fengxia41103.github.io/myblog/movie%20browser.html" rel="alternate"></link><published>2020-03-18T09:25:00-04:00</published><updated>2020-03-18T09:25:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-03-18:/myblog/movie browser.html</id><summary type="html">&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-03-21T12:42:00-04:00</updated><entry><title>Git strategy</title><link href="https://fengxia41103.github.io/myblog/git%20strategy.html" rel="alternate"></link><published>2020-03-21T12:42:00-04:00</published><updated>2020-03-21T12:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-03-21:/myblog/git strategy.html</id><summary type="html">&lt;p&gt;&lt;a href="{filename}/thoughts/dev/git.md"&gt;git&lt;/a&gt; is wonderful, but its workflow is very confusing. Surprised?
+Then I would dare to say that you haven't had first hand experience
+using it in a full blown enterprise environment &amp;mdash; when in such
+environment, the challenge isn't about git itself, but what the
+content of a release are, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="{filename}/thoughts/dev/git.md"&gt;git&lt;/a&gt; is wonderful, but its workflow is very confusing. Surprised?
+Then I would dare to say that you haven't had first hand experience
+using it in a full blown enterprise environment &amp;mdash; when in such
+environment, the challenge isn't about git itself, but what the
+content of a release are, and how we are testing/CICD them.&lt;/p&gt;
+&lt;p&gt;You would think it sounds rather cliche that this problem even
+exists. After all, these are what a software engineering is all about,
+aren't they? But take a step back and consider this scenario:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We just did a release 5.0.0.&lt;/li&gt;
+&lt;li&gt;We have two features: 1 &amp;amp; 2.&lt;/li&gt;
+&lt;li&gt;Initially they were all targeting the next release, say &lt;code&gt;5.1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We create a &lt;strong&gt;staging&lt;/strong&gt; branch, &lt;code&gt;5.1-staging&lt;/code&gt; and point our CICD to
+   this so to QA them (more on this later).&lt;/li&gt;
+&lt;li&gt;Feature 1 &amp;amp; 2 have been merged into &lt;code&gt;5.1-staging&lt;/code&gt;. Their source
+   branches, eg. &lt;code&gt;feature-1&lt;/code&gt;, have been deleted &amp;larr; at merge
+   request, select to delete source branch.&lt;/li&gt;
+&lt;li&gt;Time is slipping, 5.1 is up this Friday, but one feature is failing
+   QA tests. So management is going to release 5.1 w/ feature 1 only,
+   and moving feature 2 to release 5.2, which has another staging
+   branch &lt;code&gt;5.2-staging&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;All sound fair and common. But there are multiple questions. First,
+let's set the objective.&lt;/p&gt;
+&lt;h1&gt;Objective&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;AS a product owner, I want to control the release content, so that I
+can plan release schedule into the future and communicate w/ stake
+holders of availability of a feature based on these schedules.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;No mystery here. Regardless Agile or not, team is to deliver features,
+and these features will fall into a release, and release is not Agile
+by nature &amp;larr; however Agile desires the product to be &lt;em&gt;usable&lt;/em&gt; by
+the end of each Sprint, the reality is not so, and further, the
+definition of a release has usually two more requirements than a
+product being &lt;em&gt;usable&lt;/em&gt; (&lt;code&gt;usable&lt;/code&gt; is an ambiguous term and is useless
+in determining a release):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It must pass a set of user defined tests (UAT).&lt;/li&gt;
+&lt;li&gt;We must know the content of the release in term of functions
+   (aka. features).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It's the second requirement we are to discuss in this article.&lt;/p&gt;
+&lt;h1&gt;Problem statement&lt;/h1&gt;
+&lt;p&gt;The problem is that at any given time, there are multiple teams and
+developers working on various topics &amp;mdash; some features, some bug
+fixings, thus code is constantly in fluctuation. This is directly
+contradicting us controlling the content of a release:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I want to select the changes I want and nothing else, while the pool
+of changes to be selected from is constantly expanding in a rate
+higher than an individual can keep up w/.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Since all development result in a code change, and all code changes
+are ear marked in git, is there a git strategy to solve this problem?&lt;/p&gt;
+&lt;p&gt;Yes there is gotta be. Otherwise, git or any other version control
+tool will become useless for software development.&lt;/p&gt;
+&lt;h1&gt;Two rules&lt;/h1&gt;
+&lt;p&gt;In git, individual code change is ear marked in &lt;strong&gt;commit&lt;/strong&gt;, and
+changes are &lt;em&gt;grouped&lt;/em&gt; into &lt;strong&gt;branches&lt;/strong&gt;. Here we are to use two
+branches for discussion &amp;mdash; feature branch, and release
+staging. Feature branch is to hold the group of changes of a feature;
+release staging is hold the group of changes of a release. It is the
+release staging we are interested in controlling.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Assuming&lt;/strong&gt; branch &lt;code&gt;develop&lt;/code&gt; is our MASTER:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Feature branch &lt;strong&gt;must go into a staging&lt;/strong&gt; or abandoned. No one can
+   merge a feature directly into &lt;code&gt;develop&lt;/code&gt; &amp;larr; this is to prevent
+   skipping CICD/QA.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Release staging will go into &lt;code&gt;develop&lt;/code&gt; eventually instead of
+   living as independent branch indefinitely&lt;/strong&gt;. This is assuming that
+   all releases are essentially backwards compatible. &lt;strong&gt;This may not
+   be true&lt;/strong&gt;, and we will discuss further in "Long term support"
+   section.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Possible strategies&lt;/h1&gt;
+&lt;p&gt;Now consider the original story that we have an past release of &lt;code&gt;5.0&lt;/code&gt;,
+and two upcoming releases &lt;code&gt;5.1&lt;/code&gt; &amp;amp; &lt;code&gt;5.2&lt;/code&gt;. Since a release must have
+staging, we will have two staging branches: &lt;code&gt;5.1-staging&lt;/code&gt; and
+&lt;code&gt;5.2-staging&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;There are two features in development, feature 1 &amp;amp; 2, correspondingly
+there are two feature branches.&lt;/p&gt;
+&lt;p&gt;Out of all these, there are only finite combinations of possibilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;What are the origin of these two staging branches? Two
+   possibilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;both from &lt;code&gt;develop&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5.2-staging&lt;/code&gt; is a branch off &lt;code&gt;5.1-staging&lt;/code&gt;, and &lt;code&gt;5.1-staging&lt;/code&gt;
+   was branched off &lt;code&gt;develop&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What are the origin of these two feature branches? &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;both from &lt;code&gt;develop&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;both from &lt;code&gt;5.1-staging&lt;/code&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Similarly we determine where these features are merged into, and where
+these staging branches are merged in eventually. So with these in
+mind, we have the following combinations:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;th&gt;Applicable&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 2&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;another staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 2&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 2&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;another staging&lt;/td&gt;
+&lt;td&gt;yet another staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 2&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Strategy 2,6,10,14 are ruled out because they violate rule #1 &amp;larr;
+feature code can not be merged directly to &lt;code&gt;develop&lt;/code&gt;.&lt;/p&gt;
+&lt;h1&gt;Strategy 1&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%201.png"/&gt;
+    &lt;figcaption&gt;Release staging (dev&amp;rarr;dev), feature (dev&amp;rarr;staging)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In the diagram I have two feature branches and two staging
+branches. All four were created from &lt;code&gt;develop&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Pros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Developer always create his/her feature from &lt;code&gt;develop&lt;/code&gt;. Thus they
+  don't have to be aware which release this feature is going
+  into. Logistically it's a managerial decision anyway.&lt;/p&gt;
+&lt;p&gt;But, this is to creating a big problem! See first item in "cons"
+  section below.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Developer's starting point is arbitrary &amp;larr; dev don't have
+  control what is in &lt;code&gt;C0&lt;/code&gt; and &lt;code&gt;C4&lt;/code&gt;, nor do they really pay attention
+  to them when they were creating a branch at that moment.&lt;/p&gt;
+&lt;p&gt;What this means is that feature 1 is fine in its own branch,
+ but may break as soon as it's merged to &lt;code&gt;5.2-staging&lt;/code&gt;, because
+ &lt;code&gt;C4&lt;/code&gt; is after both &lt;code&gt;C0&lt;/code&gt; and &lt;code&gt;C1&lt;/code&gt;, thus having &lt;strong&gt;unknown&lt;/strong&gt;
+ contents when developer was working on feature 1.&lt;/p&gt;
+&lt;p&gt;Mitigation is to control the starting points, for example, having
+ both features starting from &lt;code&gt;C0&lt;/code&gt; &amp;rarr; if we have multiple
+ features, the latter ones will have to consult the very first
+ feature branch for its starting point.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;staging-5.2&lt;/code&gt; will also have hot fix content because of feature 2
+  merge. This may not be desired if I want feature branch to only have
+  feature content. &lt;/p&gt;
+&lt;p&gt;Because features are created from &lt;code&gt;develop&lt;/code&gt;, &lt;code&gt;C4&lt;/code&gt; from which
+ feature 2 branch was created is essentially a random location (you
+ don't necessarily know what is before &lt;code&gt;C4&lt;/code&gt; when you decided to
+ create a &lt;code&gt;5.2-staging&lt;/code&gt; brach from it), thus making the content of
+ &lt;code&gt;5.2-staging&lt;/code&gt; random as well. Same is true for &lt;code&gt;C0&lt;/code&gt; that we don't
+ necessarily consider it be part of &lt;code&gt;5.1&lt;/code&gt; release at all, but it is
+ pulled in because of the branching strategy.&lt;/p&gt;
+&lt;p&gt;Therefore, contents of both feature staging become arbitrary if not
+ controlled carefully when the feature branch is
+ created. Considering that dev owns feature branch, it's too much a
+ risk to rely on personal code of conduct to keep staging branch
+ &lt;em&gt;clean/minimal&lt;/em&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Strategy 3&amp;amp;4&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%203%20and%204.png"/&gt;
+    &lt;figcaption&gt;Release staging (dev&amp;rarr;dev), feature (staging&amp;rarr;staging)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In this diagram I am covering two strategies: &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;feature is either folding into the same stating it was branched off
+   (case 3) &amp;mdash; feature 2 was developed for 5.2, and will be
+   merged to &lt;code&gt;5.2-staging&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;feature is merged onto yet another staging (case 4) &amp;mdash; feature
+   1 was developed for 5.1, but later was decided to be 5.2.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;As in strategy 1, staging branches were created from two different
+  &lt;code&gt;develop&lt;/code&gt; commits, making its contents arbitrary.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In case 4, feature 1 may stop working when merged into &lt;code&gt;5.2-staging&lt;/code&gt;
+  because contents between &lt;code&gt;C0&lt;/code&gt; and &lt;code&gt;C3&lt;/code&gt; were unknown to feature 1's
+  developer.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Developer has to be aware which release the feature is intended so
+  to create the feature branch off the &lt;strong&gt;proper&lt;/strong&gt; staging, even though
+  this doesn't have any material impact on the code state. Thus this
+  is an unnecessary noise for developer and adds no value but a
+  falsified impression that we are feature code is already &lt;em&gt;contained&lt;/em&gt;
+  within a release, which it is not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Strategy 5&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;another staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%205.png"/&gt;
+    &lt;figcaption&gt;Release staging (staging&amp;rarr;dev), feature (dev&amp;rarr;staging)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In this strategy, &lt;code&gt;5.1.1-staging&lt;/code&gt; is created from &lt;code&gt;5.1-staging&lt;/code&gt;. This
+is simulating that we started w/ 5.1 release development, but later
+decided to do a &lt;code&gt;5.1.1&lt;/code&gt; release first.&lt;/p&gt;
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;This strategy suffers the same problems as strategy 1, that we will
+   have arbitrary contents in the staging depending on what the
+   feature is bringing w/ it &amp;mdash; feature 2 will drag in all the
+   changes of &lt;code&gt;C0&lt;/code&gt; to &lt;code&gt;C4&lt;/code&gt; into &lt;code&gt;5.1.1-staging&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Strategy 7&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;another staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%207.png"/&gt;
+    &lt;figcaption&gt;Release staging (staging&amp;rarr;dev), feature
+  (staging&amp;rarr;same staging)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Pros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This is a clean solution that we have had a 5.0 release, thus any
+  staging is off the 5.0 commit, creating a common base for all
+  features.&lt;/li&gt;
+&lt;li&gt;Features are confined to its release staging during development.&lt;/li&gt;
+&lt;li&gt;Contents of the staging is controlled. Nothing on &lt;code&gt;develop&lt;/code&gt; will
+  leak into the staging by surprise.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Strategy 8&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;another staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging 1&lt;/td&gt;
+&lt;td&gt;staging 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%208.png"/&gt;
+    &lt;figcaption&gt;Release staging (staging&amp;rarr;dev), feature
+  (staging 1&amp;rarr;staging 2)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Similar to strategy 4, that we are changing mind during a release
+(&lt;code&gt;5.1-staging&lt;/code&gt;), that we are shift one feature to another release
+(&lt;code&gt;5.2-staging&lt;/code&gt;) instead.&lt;/p&gt;
+&lt;p&gt;Pros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Because of the common root law of two staging branches, shifting
+  feature has no ill effect at all &amp;mdash; both staging has clean
+  contents from feature development, and feature 2 will work the same
+  on &lt;code&gt;5.2-staging&lt;/code&gt; because it is based on 5.0 in any case.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Strategy 9&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Strategy&lt;/th&gt;
+&lt;th&gt;Staging from&lt;/th&gt;
+&lt;th&gt;Staging to&lt;/th&gt;
+&lt;th&gt;Feature from&lt;/th&gt;
+&lt;th&gt;Feature to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;td&gt;develop&lt;/td&gt;
+&lt;td&gt;staging&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%209.png"/&gt;
+    &lt;figcaption&gt;Release staging (dev&amp;rarr;staging), feature
+  (dev&amp;rarr;staging)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Up to this point you can certainly see the similarity between strategy
+1, 5 and 9. Even though we are merging staging into another staging
+instead of &lt;code&gt;develop&lt;/code&gt;, this strategy suffers all the problems strategy
+1&amp;amp;5 suffer. After all, the core of the objective is to have a known
+content in a release, which this fails to achieve.&lt;/p&gt;
+&lt;h1&gt;Strategy conclusion&lt;/h1&gt;
+&lt;p&gt;I'm gonna skip strategy 10-16 because they are redundant after the
+discussions so far. It's clear that the key to the issue are two:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;root of the staging&lt;/li&gt;
+&lt;li&gt;root of the feature&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If we can't control these two, we lost control of the contents in each
+branch. Therefore, the only viable strategy is 7 or 8:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;stagings use the same root, ideally a past release&lt;/li&gt;
+&lt;li&gt;root of feature is staging (if we satisfies first point, all
+   stagings are essentially the same!)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Long term support (LTS) releases and hot fixes&lt;/h1&gt;
+&lt;p&gt;A release is a snapshot in time. But hardly, because there will be hot
+fixes &amp;mdash; things you have to patch, say, security, that will
+ultimately change the content of a released release. What is the
+strategy for hot fixes? &lt;/p&gt;
+&lt;h2&gt;Hot fixes&lt;/h2&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%20lts.png"/&gt;
+    &lt;figcaption&gt;LTS and hot fixes based on Strategy 7&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Coming from strategy 7, you can see that same problem will occur again
+if we are to merge hot fixes into my LTS, that unintended commits &lt;code&gt;C0&lt;/code&gt;
+and &lt;code&gt;C1&lt;/code&gt; will be included in LTS. Remedy is simple, hot fix branch
+must be rooted in &lt;code&gt;5.0&lt;/code&gt; like all &lt;code&gt;5.x&lt;/code&gt; release branches!&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%20lts%20based%20on%208.png"/&gt;
+    &lt;figcaption&gt;LTS and hot fixes&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;If we had two releases, 4 &amp;amp; 5, we will create two parallel hot fix
+branches tracking each.&lt;/p&gt;
+&lt;p&gt;Now, what if I found a security bug in V4, fixed it, can I apply the
+same fix to V5? or vice versa? From V4&amp;rarr;5, yes; but from 5&amp;rarr;4,
+no. See next section on "Bugs".&lt;/p&gt;
+&lt;h2&gt;Bugs&lt;/h2&gt;
+&lt;p&gt;Bugs are essentially the same as hot fixes but w/ a critical
+difference: we don't know bugs are critical until we discover and fix
+them; we know hot fixes are critical because they are usually
+determined by some external sources such as vendor of a library we are
+using, or of the operating system we are deploying into.&lt;/p&gt;
+&lt;p&gt;Once bug is found and fixed, we are facing the question whether
+this same bug is &lt;strong&gt;critical enough&lt;/strong&gt; that needs to be applied in other
+releases.&lt;/p&gt;
+&lt;p&gt;Following the hot fix discussion, bugs found in V4 can be applied to
+V5 without ill feeling because V4's &lt;code&gt;C0&lt;/code&gt; is already part of V5. But
+bringing V5's bug fix into V4 will then bring &lt;code&gt;C1&lt;/code&gt; into V4! Therefore,
+bugs and hot fixes can only roll forward, but never backward &amp;mdash;
+you can apply a bug fix of a older release to a newer release, but not
+the other way around.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%20lts%20bugs.png"/&gt;
+    &lt;figcaption&gt;LTS and bug fixes&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;CICD/QA, UAT, and life cycle of a release&lt;/h2&gt;
+&lt;p&gt;When does a release start, when does it end? We have said in rule that
+all development will always go into a staging, and the purpose of a
+staging is to have a chance for CICD/QA. If we follow git strategy 7,
+we will have a clear idea of the contents in a staging, thus whenever
+CICD passes a certain criteria, that particular commit can then be a
+release candidate.  Usually the criteria is per user-acceptance-test
+(UAT), thus it represents &lt;strong&gt;what the user considers done&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;At that point, the staging can be further &lt;em&gt;elevated&lt;/em&gt; into a official
+release. Again, release is mostly dictated by time line or a
+managerial decision. Dev (including QA) is responsible for passing the
+UAT on staging, but they don't roll out a release whenever. When we
+release V5, we fold the code into &lt;code&gt;develop&lt;/code&gt; and tag it.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/olympia/git%20strategy%20release.png"/&gt;
+    &lt;figcaption&gt;CICD/QA, UAT, and life cycle of LTS&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;If we released V5 and now have a hot fix, what do we do? We roll hot
+fix into &lt;code&gt;v5-staging&lt;/code&gt; to test, then to a patched release if UAT
+passes. Note that UAT in this case may be an enhanced version of the
+original UAT because of the hot fixes. Patch release should also be
+foled to &lt;code&gt;develop&lt;/code&gt; as an official release.&lt;/p&gt;
+&lt;p&gt;When LTS reaches its end of life, the &lt;code&gt;v5-lts&lt;/code&gt; branch is folded into
+&lt;code&gt;develop&lt;/code&gt;. At that point, &lt;code&gt;v5-staging&lt;/code&gt; will be removed.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;To sum these all up:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;All three types of in-progress branches should root in the same
+   commit, ideally a releas commit &amp;mdash; feature, hot fixes, and
+   release staging.&lt;/li&gt;
+&lt;li&gt;If you create multiple release stagings, have them use the same
+   root, too.&lt;/li&gt;
+&lt;li&gt;CICD/QA monitors staging branch.&lt;/li&gt;
+&lt;li&gt;Merge a release commit to &lt;code&gt;develop&lt;/code&gt; as soon as the release is official.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;develop&lt;/code&gt; should not have commits other than releases.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Enjoy. (also available in &lt;a href="https://fengxia41103.github.io/myblog/downloads/git.pdf"&gt;pdf&lt;/a&gt;)&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Feng's movie browser</title><link href="https://fengxia41103.github.io/myblog/movie%20browser.html" rel="alternate"></link><published>2020-03-18T09:25:00-04:00</published><updated>2020-03-18T09:25:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-03-18:/myblog/movie browser.html</id><summary type="html">&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
   &lt;img src="images/movie.gif"/&gt;
     &lt;figcaption&gt;Movie browser demo&lt;/figcaption&gt;

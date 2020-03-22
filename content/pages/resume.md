@@ -171,7 +171,7 @@ Modified: 2018-07-23 12:04
   geographical locations.
   
     - **Tools**: AngularJS, Typescript, ReactJS, Docker
-    - **Sample writing**: [official portal][27]
+    - **Sample writing**: [official portal][27], [git strategy][30]
   
 * `ThinkAgile CP` product. UI lead. Developed Python scripts for
   rebranding analysis, and to build catalog of Angular components to
@@ -656,3 +656,4 @@ Modified: 2018-07-23 12:04
 [27]: https://cp.lenovo.com/login#/
 [28]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py
 [29]: https://fengxia41103.github.io/myblog/downloads/webapp.pdf
+[30]: {filename}/downloads/git.pdf

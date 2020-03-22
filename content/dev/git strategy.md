@@ -427,19 +427,18 @@ When LTS reaches its end of life, the `v5-lts` branch is folded into
 
 To sum these all up:
 
-1. Use Git strategy 7 (or 8).
-2. All three types of in-progress branches should root in the same
+1. All three types of in-progress branches should root in the same
    commit, ideally a releas commit &mdash; feature, hot fixes, and
    release staging.
-3. If you create multiple release stagings, have them use the same
+2. If you create multiple release stagings, have them use the same
    root, too.
-4. CICD/QA monitors staging branch.
-5. Merge a release commit to `develop` as soon as the release is official.
-6. `develop` should not have commits other than releases.
+3. CICD/QA monitors staging branch.
+4. Merge a release commit to `develop` as soon as the release is official.
+5. `develop` should not have commits other than releases.
 
-Enjoy.
+Enjoy. (also available in [pdf][2])
 
 
 [1]: {filename}/thoughts/dev/git.md
-
+[2]: {filename}/downloads/git.pdf
 

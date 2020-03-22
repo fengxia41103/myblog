@@ -439,6 +439,6 @@ To sum these all up:
 Enjoy. (also available in [pdf][2])
 
 
-[1]: {filename}/thoughts/dev/git.md
+[1]: {filename}/dev/git.md
 [2]: {filename}/downloads/git.pdf
 

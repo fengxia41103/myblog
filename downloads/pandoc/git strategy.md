@@ -334,6 +334,24 @@ branch. Therefore, the only viable strategy is 7 or 8:
 2. root of feature is staging (if we satisfies first point, all
    stagings are essentially the same!)
 
+# Move feature to new staging
+
+Common request is to move a feature to a new release. The feature may
+be in progress or having been merged. How to do this properly?
+
+From strategy 8, we already see that repointing MR is necessarily
+sufficient because moving feature 2 will bring commits that were
+developed on `5.1-staging`. For all we know, these commits can be
+intermittent works by feature 1. Therefore, we will be leaking feature
+1 works to the `5.2-staging`.
+
+The clean method is to fully revert feature 2 on `5.1-staging`,
+**reimplement** it from scratch on `5.2-staging`, then MR.
+
+![Move feature to a new release staging](../../images/olympia/git%20strategy%20move%20feature%20to%20new%20staging.png){#fig:move-feature}
+
+
+
 # Long term support (LTS) releases
 
 A release is a snapshot in time. But that hardly holds in real life

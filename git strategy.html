@@ -631,10 +631,15 @@ decided to do a <code>5.1.1</code> release first.</p>
 (<code>5.2-staging</code>) instead.</p>
 <p>Pros:</p>
 <ul>
-<li>Because of the common root law of two staging branches, shifting
-  feature has no ill effect at all &mdash; both staging has clean
-  contents from feature development, and feature 2 will work the same
-  on <code>5.2-staging</code> because it is based on 5.0 in any case.</li>
+<li>Because of the common root law of two staging branches, feature 2
+  will work the same on <code>5.2-staging</code> because it is based on 5.0 in
+  any case.</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Feature 2 merging will bring w/ it <code>C1</code> and <code>C2</code> to <code>5.2-staging</code>,
+  which may defeat the purpose of moving feature 2 (but feature 1) to
+  <code>5.2-staging</code> at the first place.</li>
 </ul>
 <h1>Strategy 9</h1>
 <table>
@@ -676,12 +681,27 @@ discussions so far. It's clear that the key to the issue are two:</p>
 <li>root of the feature</li>
 </ol>
 <p>If we can't control these two, we lost control of the contents in each
-branch. Therefore, the only viable strategy is 7 or 8:</p>
+branch. Therefore, the only viable strategy is 7:</p>
 <ol>
 <li>stagings use the same root, ideally a past release</li>
 <li>root of feature is staging (if we satisfies first point, all
    stagings are essentially the same!)</li>
 </ol>
+<h1>Move feature to new staging</h1>
+<p>Common request is to move a feature to a new release. The feature may
+be in progress or having been merged. How to do this properly?</p>
+<p>From strategy 8, we already see that repointing MR is necessarily
+sufficient because moving feature 2 will bring commits that were
+developed on <code>5.1-staging</code>. For all we know, these commits can be
+intermittent works by feature 1. Therefore, we will be leaking feature
+1 works to the <code>5.2-staging</code>.</p>
+<p>The clean method is to fully revert feature 2 on <code>5.1-staging</code>,
+<strong>reimplement</strong> it from scratch on <code>5.2-staging</code>, then MR.
+`
+<figure class="col s12 center">
+  <img src="images/olympia/git%20strategy%20move%20feature%20to%20new%20staging.png"/>
+    <figcaption>Move feature to a new release staging</figcaption>
+</figure></p>
 <h1>Long term support (LTS) releases and hot fixes</h1>
 <p>A release is a snapshot in time. But hardly, because there will be hot
 fixes &mdash; things you have to patch, say, security, that will

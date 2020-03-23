@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 21 Mar 2020 12:42:00 -0400</lastBuildDate><item><title>Git strategy</title><link>https://fengxia41103.github.io/myblog/git%20strategy.html</link><description>&lt;p&gt;&lt;a href="https://fengxia41103.github.io/myblog/git.html"&gt;git&lt;/a&gt; is wonderful, but its workflow is very confusing. Surprised?
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 21 Mar 2020 12:42:00 -0400</lastBuildDate><item><title>Git strategy</title><link>https://fengxia41103.github.io/myblog/git%20strategy.html</link><description>&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/funny/a%20lot%20of%20cats.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;a href="https://fengxia41103.github.io/myblog/git.html"&gt;git&lt;/a&gt; is wonderful, but its workflow is very confusing. Surprised?
 Then I would dare to say that you haven't had first hand experience
 using it in a full blown enterprise environment &amp;mdash; when in such
 environment, the challenge isn't about git itself, but what the

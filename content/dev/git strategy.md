@@ -4,6 +4,11 @@ Tags: thoughts
 Slug: git strategy
 Author: Feng Xia
 
+<figure class="col s12 center">
+  <img src="images/funny/a%20lot%20of%20cats.jpg"/>
+</figure>
+
+
 [git][1] is wonderful, but its workflow is very confusing. Surprised?
 Then I would dare to say that you haven't had first hand experience
 using it in a full blown enterprise environment &mdash; when in such

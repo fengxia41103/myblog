@@ -302,10 +302,15 @@ Similar to strategy 4, that we are changing mind during a release
 
 Pros:
 
-- Because of the common root law of two staging branches, shifting
-  feature has no ill effect at all &mdash; both staging has clean
-  contents from feature development, and feature 2 will work the same
-  on `5.2-staging` because it is based on 5.0 in any case.
+- Because of the common root law of two staging branches, feature 2
+  will work the same on `5.2-staging` because it is based on 5.0 in
+  any case.
+
+Cons:
+
+- Feature 2 merging will bring w/ it `C1` and `C2` to `5.2-staging`,
+  which may defeat the purpose of moving feature 2 (but feature 1) to
+  `5.2-staging` at the first place.
 
 # Strategy 9
 
@@ -334,11 +339,31 @@ discussions so far. It's clear that the key to the issue are two:
 2. root of the feature
 
 If we can't control these two, we lost control of the contents in each
-branch. Therefore, the only viable strategy is 7 or 8:
+branch. Therefore, the only viable strategy is 7:
 
 1. stagings use the same root, ideally a past release
 2. root of feature is staging (if we satisfies first point, all
    stagings are essentially the same!)
+
+# Move feature to new staging
+
+Common request is to move a feature to a new release. The feature may
+be in progress or having been merged. How to do this properly?
+
+From strategy 8, we already see that repointing MR is necessarily
+sufficient because moving feature 2 will bring commits that were
+developed on `5.1-staging`. For all we know, these commits can be
+intermittent works by feature 1. Therefore, we will be leaking feature
+1 works to the `5.2-staging`.
+
+The clean method is to fully revert feature 2 on `5.1-staging`,
+**reimplement** it from scratch on `5.2-staging`, then MR.
+`
+<figure class="col s12 center">
+  <img src="images/olympia/git%20strategy%20move%20feature%20to%20new%20staging.png"/>
+    <figcaption>Move feature to a new release staging</figcaption>
+</figure>
+
 
 # Long term support (LTS) releases and hot fixes
 

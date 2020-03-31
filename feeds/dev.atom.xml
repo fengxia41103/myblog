@@ -1443,14 +1443,15 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;td&gt;Move focus to the pane&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2019-10-09T13:18:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2020-03-20T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
 &lt;h1&gt;log&lt;/h1&gt;
+&lt;h2&gt;show file changed&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
---all&lt;/code&gt; will show a short commit #, who committed it, the commit
-message, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+--all&lt;/code&gt; will show a short commit #, who committed it, the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
 &lt;h1&gt;log&lt;/h1&gt;
+&lt;h2&gt;show file changed&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
 --all&lt;/code&gt; will show a short commit #, who committed it, the commit
 message, and list of files changed:&lt;/p&gt;
@@ -1461,9 +1462,46 @@ message, and list of files changed:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;commits between two dates: &lt;code&gt;git log --since "DEC 1 2014" --until "DEC 5 2014"&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2&gt;train tracks&lt;/h2&gt;
+&lt;p&gt;Another one is to draw a log graph of train tracks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git log --graph --full-history --all --color &lt;span class="se"&gt;\&lt;/span&gt;
+        --pretty&lt;span class="o"&gt;=&lt;/span&gt;format:&lt;span class="s2"&gt;&amp;quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will show in terminal of full git histories and draw those train
+track graphs. An example of my blog git:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* 8775404a       Update pandoc Makefile and pandoc.css
+*   495b70e4     Merge branch &lt;span class="s1"&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="se"&gt;\ &lt;/span&gt; 
+&lt;span class="p"&gt;|&lt;/span&gt; * 9d44fd57     Update draft doc.
+* &lt;span class="p"&gt;|&lt;/span&gt;   656ed837   Merge branch &lt;span class="s1"&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="se"&gt;\ \ &lt;/span&gt; 
+&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;/  
+&lt;span class="p"&gt;|&lt;/span&gt; * bd47499b     Adding cp deployment.md and git.md
+* &lt;span class="p"&gt;|&lt;/span&gt;   2b4cdbd0   Merge branch &lt;span class="s1"&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="se"&gt;\ \ &lt;/span&gt; 
+&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;/  
+&lt;span class="p"&gt;|&lt;/span&gt; * cf000d79     Add a summary to .md.
+* &lt;span class="p"&gt;|&lt;/span&gt;   eaa16ba3   Merge branch &lt;span class="s1"&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="se"&gt;\ \ &lt;/span&gt; 
+&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;/  
+&lt;span class="p"&gt;|&lt;/span&gt; * a2efd99c     Add thoughts/smart phone.md
+* &lt;span class="p"&gt;|&lt;/span&gt;   e346f0d5   Merge branch &lt;span class="s1"&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="se"&gt;\ \ &lt;/span&gt; 
+&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;/  
+&lt;span class="p"&gt;|&lt;/span&gt; * b1c05698     Upgrade pelican to 4.1.2. Fixing page iteration on the index page.
+* &lt;span class="p"&gt;|&lt;/span&gt;   e2456350   Merge branch &lt;span class="s1"&gt;&amp;#39;dev&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="se"&gt;\ \ &lt;/span&gt; 
+&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;/  
+&lt;span class="p"&gt;|&lt;/span&gt; * d9bfa593     Add thoughts/what we know is untrue.md
+&lt;span class="p"&gt;|&lt;/span&gt;/  
+* 5e8e909b       Replacing &lt;span class="o"&gt;{&lt;/span&gt;filename&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; download content w/ &lt;span class="o"&gt;{&lt;/span&gt;static&lt;span class="o"&gt;}&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;commits between two dates&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;git log --since "DEC 1 2014" --until "DEC 5 2014"&lt;/code&gt;&lt;/p&gt;
 &lt;h1&gt;tag&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Add one: &lt;code&gt;git tag -a &amp;lt;tag name&amp;gt; -m "Say something"&lt;/code&gt;&lt;/li&gt;
@@ -1483,6 +1521,9 @@ message, and list of files changed:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;back to HEAD: &lt;code&gt;git reset --hard HEAD&lt;/code&gt;: this throws away everything
   you have changed in this branch.&lt;/li&gt;
+&lt;li&gt;back to a commit but keep the local changes: &lt;code&gt;git reset --soft
+  &amp;lt;commit #&amp;gt;&lt;/code&gt; &amp;larr; this is going back in time, but keep my changes
+  since then scenario. Neat!&lt;/li&gt;
 &lt;li&gt;a commit: &lt;code&gt;git revert &amp;lt;commit #&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><category term="thoughts"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-17T20:55:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I

@@ -138,6 +138,7 @@
           <p>Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.</p>
 <h1>log</h1>
+<h2>show file changed</h2>
 <p><code>git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
 --all</code> will show a short commit #, who committed it, the commit
 message, and list of files changed:</p>
@@ -148,9 +149,46 @@ message, and list of files changed:</p>
 </pre></div>
 
 
-<ul>
-<li>commits between two dates: <code>git log --since "DEC 1 2014" --until "DEC 5 2014"</code></li>
-</ul>
+<h2>train tracks</h2>
+<p>Another one is to draw a log graph of train tracks:</p>
+<div class="highlight"><pre><span></span>git log --graph --full-history --all --color <span class="se">\</span>
+        --pretty<span class="o">=</span>format:<span class="s2">&quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s&quot;</span>
+</pre></div>
+
+
+<p>This will show in terminal of full git histories and draw those train
+track graphs. An example of my blog git:</p>
+<div class="highlight"><pre><span></span>* 8775404a       Update pandoc Makefile and pandoc.css
+*   495b70e4     Merge branch <span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ </span> 
+<span class="p">|</span> * 9d44fd57     Update draft doc.
+* <span class="p">|</span>   656ed837   Merge branch <span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span> 
+<span class="p">|</span> <span class="p">|</span>/  
+<span class="p">|</span> * bd47499b     Adding cp deployment.md and git.md
+* <span class="p">|</span>   2b4cdbd0   Merge branch <span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span> 
+<span class="p">|</span> <span class="p">|</span>/  
+<span class="p">|</span> * cf000d79     Add a summary to .md.
+* <span class="p">|</span>   eaa16ba3   Merge branch <span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span> 
+<span class="p">|</span> <span class="p">|</span>/  
+<span class="p">|</span> * a2efd99c     Add thoughts/smart phone.md
+* <span class="p">|</span>   e346f0d5   Merge branch <span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span> 
+<span class="p">|</span> <span class="p">|</span>/  
+<span class="p">|</span> * b1c05698     Upgrade pelican to 4.1.2. Fixing page iteration on the index page.
+* <span class="p">|</span>   e2456350   Merge branch <span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span> 
+<span class="p">|</span> <span class="p">|</span>/  
+<span class="p">|</span> * d9bfa593     Add thoughts/what we know is untrue.md
+<span class="p">|</span>/  
+* 5e8e909b       Replacing <span class="o">{</span>filename<span class="o">}</span> <span class="k">for</span> download content w/ <span class="o">{</span>static<span class="o">}</span>.
+</pre></div>
+
+
+<h2>commits between two dates</h2>
+<p><code>git log --since "DEC 1 2014" --until "DEC 5 2014"</code></p>
 <h1>tag</h1>
 <ul>
 <li>Add one: <code>git tag -a &lt;tag name&gt; -m "Say something"</code></li>
@@ -170,6 +208,9 @@ message, and list of files changed:</p>
 <ul>
 <li>back to HEAD: <code>git reset --hard HEAD</code>: this throws away everything
   you have changed in this branch.</li>
+<li>back to a commit but keep the local changes: <code>git reset --soft
+  &lt;commit #&gt;</code> &larr; this is going back in time, but keep my changes
+  since then scenario. Neat!</li>
 <li>a commit: <code>git revert &lt;commit #&gt;</code></li>
 </ul>
         </p>

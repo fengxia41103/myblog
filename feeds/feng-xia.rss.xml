@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Tue, 31 Mar 2020 07:24:00 -0400</lastBuildDate><item><title>Corvid-19 Summit</title><link>https://fengxia41103.github.io/myblog/summit.html</link><description>&lt;p&gt;Spot a Chinese forum on Corvid-19 in WeChat, which says
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 01 Apr 2020 11:42:00 -0400</lastBuildDate><item><title>Git strategy for backward compatibility</title><link>https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html</link><description>&lt;figure class="col s12 center"&gt;
+  &lt;img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
+  &lt;figcaption&gt;
+  Git strategy for a backward-compatible release
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;As a sequel to our discussion on &lt;a href="https://fengxia41103.github.io/myblog/git strategy.html"&gt;git strategy&lt;/a&gt;, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how &lt;strong&gt;backwards compatibility&lt;/strong&gt; of releases may not be true
+if we are introducing long-term-support on releases, that hot …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 01 Apr 2020 11:42:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-04-01:/myblog/git rebase strategy.html</guid><category>thoughts</category></item><item><title>Corvid-19 Summit</title><link>https://fengxia41103.github.io/myblog/summit.html</link><description>&lt;p&gt;Spot a Chinese forum on Corvid-19 in WeChat, which says
 something about the mentality of the Chiense elite circle.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 31 Mar 2020 07:24:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-03-31:/myblog/summit.html</guid></item><item><title>Git strategy</title><link>https://fengxia41103.github.io/myblog/git%20strategy.html</link><description>&lt;figure class="col s12 center"&gt;
   &lt;img src="images/funny/a%20lot%20of%20cats.jpg"/&gt;
 &lt;/figure&gt;
@@ -270,10 +281,13 @@ easy. The problems I want to fix are:&lt;/p&gt;
    get a view of the comment or description so to refresh my memory.&lt;/li&gt;
 &lt;li&gt;Navigating from one …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 23 Oct 2019 13:00:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-23:/myblog/jira.html</guid></item><item><title>Linux Terminator cheatsheet</title><link>https://fengxia41103.github.io/myblog/linux%20terminator%20cheatsheet.html</link><description>&lt;p&gt;Linux Terminator keybinding cheat sheet.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 11 Oct 2019 11:34:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-11:/myblog/linux terminator cheatsheet.html</guid><category>dev</category></item><item><title>Git</title><link>https://fengxia41103.github.io/myblog/git.html</link><description>&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
-&lt;h1&gt;log&lt;/h1&gt;
-&lt;h2&gt;show file changed&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
---all&lt;/code&gt; will show a short commit #, who committed it, the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 09 Oct 2019 13:18:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</guid><category>thoughts</category></item><item><title>My system</title><link>https://fengxia41103.github.io/myblog/my%20system.html</link><description>&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 08 Oct 2019 19:05:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</guid><category>dev</category></item><item><title>Smart phone</title><link>https://fengxia41103.github.io/myblog/smart%20phone.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
+&lt;h1&gt;.gitconfig&lt;/h1&gt;
+&lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;alias&lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="nv"&gt;lg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg2-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg3-specific --all --simplify-by-decoration …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 09 Oct 2019 13:18:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</guid><category>thoughts</category></item><item><title>My system</title><link>https://fengxia41103.github.io/myblog/my%20system.html</link><description>&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Tue, 08 Oct 2019 19:05:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</guid><category>dev</category></item><item><title>Smart phone</title><link>https://fengxia41103.github.io/myblog/smart%20phone.html</link><description>&lt;figure class="col l8 m8 s12"&gt;
   &lt;img src="images/gozilla%20on%20lego.jpg"/&gt;
 &lt;/figure&gt;
 

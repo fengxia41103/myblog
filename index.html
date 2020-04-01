@@ -219,6 +219,36 @@
     <div>
       <i class="fa fa-calendar" style="opacity:0.5;"></i>
       <em>
+        2020-04-01
+
+      </em>
+      <h3>Git strategy for backward compatibility</h3>
+
+      <blockquote>
+      </blockquote>
+    </div>
+
+    <figure class="col s12 center">
+  <img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/>
+  <figcaption>
+  Git strategy for a backward-compatible release
+  </figcaption>
+</figure>
+
+<p>As a sequel to our discussion on <a href="https://fengxia41103.github.io/myblog/git strategy.html">git strategy</a>, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how <strong>backwards compatibility</strong> of releases may not be true
+if we are introducing long-term-support on releases, that hot …</p>
+    <a class="btn btn-default button" href="git rebase strategy.html">
+      <i class="fa fa-coffee" style="opacity:0.5;"></i>
+      continue reading
+    </a>
+  </div>
+  <div class="pin-card z-depth-2 row">
+    <div>
+      <i class="fa fa-calendar" style="opacity:0.5;"></i>
+      <em>
         2020-03-31
 
       </em>
@@ -1253,10 +1283,12 @@ easy. The problems I want to fix are:</p>
 
     <p>Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.</p>
-<h1>log</h1>
-<h2>show file changed</h2>
-<p><code>git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
---all</code> will show a short commit #, who committed it, the …</p>
+<h1>.gitconfig</h1>
+<p>Copy this to <code>$HOME</code>:</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>alias<span class="o">]</span>
+    <span class="nv">lg</span> <span class="o">=</span> !<span class="s2">&quot;git lg1&quot;</span>
+    <span class="nv">lg1</span> <span class="o">=</span> !<span class="s2">&quot;git lg1-specific --all --simplify-by-decoration&quot;</span>
+    <span class="nv">lg2</span> <span class="o">=</span>...
     <a class="btn btn-default button" href="git.html">
       <i class="fa fa-coffee" style="opacity:0.5;"></i>
       continue reading
@@ -1487,37 +1519,6 @@ thoughts have been lingering around my mind for quite some. But they
 are rather elusive &mdash; they come and go, and on the moment when I
 felt them, I was always busy with something else. Then by …</p>
     <a class="btn btn-default button" href="internet.html">
-      <i class="fa fa-coffee" style="opacity:0.5;"></i>
-      continue reading
-    </a>
-  </div>
-  <div class="pin-card z-depth-2 row">
-    <div>
-      <i class="fa fa-calendar" style="opacity:0.5;"></i>
-      <em>
-        2019-08-26
-
-        <i class="fa fa-heart myhighlight"></i>
-      </em>
-      <h3>Nagasaki</h3>
-
-      <blockquote>
-      </blockquote>
-    </div>
-
-    <div class="col s12" style="margin-right: 2em;">
-<video width="100%" height="100%" controls="controls">
-  <source src="images/noah%20at%20mit.mp4 "
-          type="video/mp4" />
-  Your browser does not support the video tag.
-  /* instead of the last line you could also add the flash player*/
-</video>
-</div>
-
-<p>What a fine early Autumn day, nice weather, nice temperature, nice
-breeze. Noah's first day to the middle school. His bus left at 7:36,
-so the day all started …</p>
-    <a class="btn btn-default button" href="nagasaki.html">
       <i class="fa fa-coffee" style="opacity:0.5;"></i>
       continue reading
     </a>

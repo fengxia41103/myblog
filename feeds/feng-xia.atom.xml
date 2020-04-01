@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-03-31T07:24:00-04:00</updated><entry><title>Corvid-19 Summit</title><link href="https://fengxia41103.github.io/myblog/summit.html" rel="alternate"></link><published>2020-03-31T07:24:00-04:00</published><updated>2020-03-31T07:24:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-03-31:/myblog/summit.html</id><summary type="html">&lt;p&gt;Spot a Chinese forum on Corvid-19 in WeChat, which says
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-04-01T11:42:00-04:00</updated><entry><title>Git strategy for backward compatibility</title><link href="https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html" rel="alternate"></link><published>2020-04-01T11:42:00-04:00</published><updated>2020-04-01T11:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-01:/myblog/git rebase strategy.html</id><summary type="html">&lt;figure class="col s12 center"&gt;
+  &lt;img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
+  &lt;figcaption&gt;
+  Git strategy for a backward-compatible release
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;As a sequel to our discussion on &lt;a href="https://fengxia41103.github.io/myblog/git strategy.html"&gt;git strategy&lt;/a&gt;, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how &lt;strong&gt;backwards compatibility&lt;/strong&gt; of releases may not be true
+if we are introducing long-term-support on releases, that hot …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12 center"&gt;
+  &lt;img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
+  &lt;figcaption&gt;
+  Git strategy for a backward-compatible release
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;As a sequel to our discussion on &lt;a href="https://fengxia41103.github.io/myblog/git strategy.html"&gt;git strategy&lt;/a&gt;, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how &lt;strong&gt;backwards compatibility&lt;/strong&gt; of releases may not be true
+if we are introducing long-term-support on releases, that hot fixes
+and bugs can only &lt;strong&gt;roll forward&lt;/strong&gt;, eg. V4 bugs can be patched to V5
+(assuming V5 was released after V4, time wise and git commit wise),
+but not from V5 &amp;rarr; V4 without introducing some V5 contents into V4
+(whether this is desired or not is the focal of the discussion,
+essentially, how much control you want to have over the release
+content!?)&lt;/p&gt;
+&lt;p&gt;Now, let's build on top of this and say that &lt;strong&gt;we want backwards
+compatibility&lt;/strong&gt; &amp;mdash; all newer releases are always backwards
+compatible? This is certainly a desired outcome because this makes
+upgrade and maintenance easier (who wants to maintain a 10-year-old
+code when a customer &lt;em&gt;frozen in time&lt;/em&gt; call you of a bug which you
+probably don't even remember who wrote that crap 10 years earlier! Was
+that me?... this can't be good for self-conscience ~~)&lt;/p&gt;
+&lt;p&gt;Now what you do? Pretty simple, use rebase or merge, whichever you
+feel comfortable, to keep your branch in sync w/ moving targets
+&amp;mdash; changes you will be interested in:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Who&lt;/th&gt;
+&lt;th&gt;Do what&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;feature dev&lt;/td&gt;
+&lt;td&gt;rebase feature onto &lt;code&gt;release 5.1 dev&lt;/code&gt; prior to MR submission&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5.1 branch owner&lt;/td&gt;
+&lt;td&gt;merge changes from &lt;code&gt;develop&lt;/code&gt; periodically&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CICD&lt;/td&gt;
+&lt;td&gt;rebase/merge changes from both &lt;code&gt;develop&lt;/code&gt; and &lt;code&gt;5.1 dev&lt;/code&gt; when it becomes stable&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;A few notes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Root of CICD branch does not have to be the same as dev root
+   anymore because we are constantly pulling in changes from
+   &lt;code&gt;develop&lt;/code&gt;. &lt;strong&gt;This is the most important difference&lt;/strong&gt; from &lt;a href="https://fengxia41103.github.io/myblog/git strategy.html"&gt;previous
+   git strategy&lt;/a&gt;, in which I made argument in conclusion that "&lt;em&gt;All
+   three types of in-progress branches should root in the same commit,
+   ideally a releas commit &amp;mdash; feature, hot fixes, and release
+   staging.&lt;/em&gt;" This is because we are now assuming these releases are
+   backward compatible, while previously they are not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;5.1 dev&lt;/code&gt; branch is a &lt;strong&gt;public branch&lt;/strong&gt;, thus should not use
+   rebase. Use &lt;code&gt;merge&lt;/code&gt; instead to pull in changes from &lt;code&gt;develop&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;5.1 staging&lt;/code&gt; should not be treated as CICD's development
+   branch. Otherwise, rebase should also be prohibited on it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="thoughts"></category></entry><entry><title>Corvid-19 Summit</title><link href="https://fengxia41103.github.io/myblog/summit.html" rel="alternate"></link><published>2020-03-31T07:24:00-04:00</published><updated>2020-03-31T07:24:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-03-31:/myblog/summit.html</id><summary type="html">&lt;p&gt;Spot a Chinese forum on Corvid-19 in WeChat, which says
 something about the mentality of the Chiense elite circle.&lt;/p&gt;</summary><content type="html">&lt;figure class="row"&gt;
   &lt;img class="col l6 m6"
        src="images/corvid-19%20forum%201.png"/&gt;
@@ -4447,11 +4532,36 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2020-03-20T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
-&lt;h1&gt;log&lt;/h1&gt;
-&lt;h2&gt;show file changed&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
---all&lt;/code&gt; will show a short commit #, who committed it, the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+&lt;h1&gt;.gitconfig&lt;/h1&gt;
+&lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;alias&lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="nv"&gt;lg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg2-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg3-specific --all --simplify-by-decoration …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
+&lt;h1&gt;.gitconfig&lt;/h1&gt;
+&lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;alias&lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="nv"&gt;lg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg2-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;lg3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg3-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
+
+    lg1-specific &lt;span class="o"&gt;=&lt;/span&gt; log --graph --abbrev-commit --decorate --format&lt;span class="o"&gt;=&lt;/span&gt;format:&lt;span class="s1"&gt;&amp;#39;%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)&amp;#39;&lt;/span&gt;
+    lg2-specific &lt;span class="o"&gt;=&lt;/span&gt; log --graph --abbrev-commit --decorate --format&lt;span class="o"&gt;=&lt;/span&gt;format:&lt;span class="s1"&gt;&amp;#39;%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n&amp;#39;&amp;#39;          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)&amp;#39;&lt;/span&gt;
+    lg3-specific &lt;span class="o"&gt;=&lt;/span&gt; log --graph --abbrev-commit --decorate --format&lt;span class="o"&gt;=&lt;/span&gt;format:&lt;span class="s1"&gt;&amp;#39;%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n&amp;#39;&amp;#39;          %C(white)%s%C(reset)%n&amp;#39;&amp;#39;          %C(dim white)- %an &amp;lt;%ae&amp;gt; %C(reset) %C(dim white)(committer: %cn &amp;lt;%ce&amp;gt;)%C(reset)&amp;#39;&lt;/span&gt;
+    &lt;span class="nv"&gt;hist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; log --graph --first-parent --all --pretty&lt;span class="o"&gt;=&lt;/span&gt;format:&lt;span class="s1"&gt;&amp;#39;%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)&amp;lt;%an&amp;gt;%Creset&amp;#39;&lt;/span&gt; --date&lt;span class="o"&gt;=&lt;/span&gt;short
+    &lt;span class="nv"&gt;gr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; log --graph --full-history --all --color --pretty&lt;span class="o"&gt;=&lt;/span&gt;tformat:&lt;span class="s2"&gt;&amp;quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m&amp;quot;&lt;/span&gt; --simplify-by-decoration
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;checkout and track&lt;/h1&gt;
+&lt;p&gt;One bang, create both a local and track:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout -t origin/&amp;lt;branch name&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h1&gt;log&lt;/h1&gt;
 &lt;h2&gt;show file changed&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph

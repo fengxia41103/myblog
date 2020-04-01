@@ -8,6 +8,33 @@ Modified: 2020-03-20
 Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.
 
+# .gitconfig
+
+Copy this to `$HOME`:
+
+```shell
+[alias]
+    lg = !"git lg1"
+    lg1 = !"git lg1-specific --all --simplify-by-decoration"
+    lg2 = !"git lg2-specific --all --simplify-by-decoration"
+    lg3 = !"git lg3-specific --all --simplify-by-decoration"
+
+    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+    hist = log --graph --first-parent --all --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short
+    gr = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m" --simplify-by-decoration
+
+```
+
+# checkout and track
+
+One bang, create both a local and track:
+
+```shell
+git checkout -t origin/<branch name>
+```
+
 # log
 
 ## show file changed

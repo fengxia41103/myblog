@@ -48,7 +48,7 @@ feel comfortable, to keep your branch in sync w/ moving targets
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;feature dev&lt;/td&gt;
-&lt;td&gt;rebase feature onto &lt;code&gt;release 5.1 dev&lt;/code&gt; prior to MR submission&lt;/td&gt;
+&lt;td&gt;rebase feature onto &lt;code&gt;5.1 dev&lt;/code&gt; prior to MR submission&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;5.1 branch owner&lt;/td&gt;
@@ -56,11 +56,11 @@ feel comfortable, to keep your branch in sync w/ moving targets
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CICD&lt;/td&gt;
-&lt;td&gt;rebase/merge changes from both &lt;code&gt;develop&lt;/code&gt; and &lt;code&gt;5.1 dev&lt;/code&gt; when it becomes stable&lt;/td&gt;
+&lt;td&gt;rebase/merge changes to &lt;code&gt;5.1 staging&lt;/code&gt; from both &lt;code&gt;develop&lt;/code&gt; and &lt;code&gt;5.1 dev&lt;/code&gt; when &lt;code&gt;5.1 dev&lt;/code&gt; becomes stable&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;CICD/release&lt;/td&gt;
+&lt;td&gt;rebase &lt;code&gt;5.1 staging&lt;/code&gt; to &lt;code&gt;develop&lt;/code&gt;, close &lt;code&gt;5.1 dev&lt;/code&gt;, tag release on &lt;code&gt;develop&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

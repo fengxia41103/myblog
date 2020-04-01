@@ -173,7 +173,7 @@ feel comfortable, to keep your branch in sync w/ moving targets
 <tbody>
 <tr>
 <td>feature dev</td>
-<td>rebase feature onto <code>release 5.1 dev</code> prior to MR submission</td>
+<td>rebase feature onto <code>5.1 dev</code> prior to MR submission</td>
 </tr>
 <tr>
 <td>5.1 branch owner</td>
@@ -181,11 +181,11 @@ feel comfortable, to keep your branch in sync w/ moving targets
 </tr>
 <tr>
 <td>CICD</td>
-<td>rebase/merge changes from both <code>develop</code> and <code>5.1 dev</code> when it becomes stable</td>
+<td>rebase/merge changes to <code>5.1 staging</code> from both <code>develop</code> and <code>5.1 dev</code> when <code>5.1 dev</code> becomes stable</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>CICD/release</td>
+<td>rebase <code>5.1 staging</code> to <code>develop</code>, close <code>5.1 dev</code>, tag release on <code>develop</code></td>
 </tr>
 </tbody>
 </table>

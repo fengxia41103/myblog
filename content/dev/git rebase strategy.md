@@ -35,12 +35,13 @@ Now what you do? Pretty simple, use rebase or merge, whichever you
 feel comfortable, to keep your branch in sync w/ moving targets
 &mdash; changes you will be interested in:
 
-| Who              | Do what                                                                       |
-|------------------|-------------------------------------------------------------------------------|
-| feature dev      | rebase feature onto `release 5.1 dev` prior to MR submission                  |
-| 5.1 branch owner | merge changes from `develop` periodically                                     |
-| CICD             | rebase/merge changes from both `develop` and `5.1 dev` when it becomes stable |
-|                  |                                                                               |
+| Who              | Do what                                                                                               |
+|------------------|-------------------------------------------------------------------------------------------------------|
+| feature dev      | rebase feature onto `5.1 dev` prior to MR submission                                                  |
+| 5.1 branch owner | merge changes from `develop` periodically                                                             |
+| CICD             | rebase/merge changes to `5.1 staging` from both `develop` and `5.1 dev` when `5.1 dev` becomes stable |
+| CICD/release     | rebase `5.1 staging` to `develop`, close `5.1 dev`, tag release on `develop`                          |
+
 
 A few notes:
 

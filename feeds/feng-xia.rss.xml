@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 01 Apr 2020 11:42:00 -0400</lastBuildDate><item><title>Git strategy for backward compatibility</title><link>https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html</link><description>&lt;figure class="col s12 center"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 01 Apr 2020 17:38:00 -0400</lastBuildDate><item><title>Role model</title><link>https://fengxia41103.github.io/myblog/role%20model.html</link><description>&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/role%20model.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Don't take this as an April Fool's trick. Seriously, I'm also alarmed
+how I could have changed, a 180 degree turn, from disliking this guy,
+Bill Gates, when I was young, to today, I'm taking him as a role
+model, and if he runs for president, I'll vote for him …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 01 Apr 2020 17:38:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-04-01:/myblog/role model.html</guid></item><item><title>Git strategy for backward compatibility</title><link>https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html</link><description>&lt;figure class="col s12 center"&gt;
   &lt;img
   src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
   &lt;figcaption&gt;

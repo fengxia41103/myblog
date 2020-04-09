@@ -145,10 +145,28 @@ let's keep notes on the ones I'd like to use and what they are.</p>
     <span class="nv">lg2</span> <span class="o">=</span> !<span class="s2">&quot;git lg2-specific --all --simplify-by-decoration&quot;</span>
     <span class="nv">lg3</span> <span class="o">=</span> !<span class="s2">&quot;git lg3-specific --all --simplify-by-decoration&quot;</span>
 
-    lg1-specific <span class="o">=</span> log --graph --abbrev-commit --decorate --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)&#39;</span>
-    lg2-specific <span class="o">=</span> log --graph --abbrev-commit --decorate --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n&#39;&#39;          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)&#39;</span>
-    lg3-specific <span class="o">=</span> log --graph --abbrev-commit --decorate --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n&#39;&#39;          %C(white)%s%C(reset)%n&#39;&#39;          %C(dim white)- %an &lt;%ae&gt; %C(reset) %C(dim white)(committer: %cn &lt;%ce&gt;)%C(reset)&#39;</span>
-    <span class="nv">hist</span> <span class="o">=</span> log --graph --first-parent --all --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --date<span class="o">=</span>short
+    lg1-specific <span class="o">=</span> log --graph --abbrev-commit --decorate
+    --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold</span>
+<span class="s1">    green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)-</span>
+<span class="s1">    %an%C(reset)%C(auto)%d%C(reset)&#39;</span>
+
+    lg2-specific <span class="o">=</span> log --graph --abbrev-commit --decorate
+    --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold</span>
+<span class="s1">    cyan)%aD%C(reset) %C(bold</span>
+<span class="s1">    green)(%ar)%C(reset)%C(auto)%d%C(reset)%n&#39;&#39;</span>
+<span class="s1">    %C(white)%s%C(reset) %C(dim white)- %an%C(reset)&#39;</span>
+
+    lg3-specific <span class="o">=</span> log --graph --abbrev-commit --decorate
+    --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold</span>
+<span class="s1">    cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold</span>
+<span class="s1">    cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n&#39;&#39;</span>
+<span class="s1">    %C(white)%s%C(reset)%n&#39;&#39;          %C(dim white)- %an &lt;%ae&gt;</span>
+<span class="s1">    %C(reset) %C(dim white)(committer: %cn &lt;%ce&gt;)%C(reset)&#39;</span>
+
+    <span class="nv">hist</span> <span class="o">=</span> log --graph --first-parent --all
+    --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold</span>
+<span class="s1">    blue)&lt;%an&gt;%Creset&#39;</span> --date<span class="o">=</span>short
+
     <span class="nv">gr</span> <span class="o">=</span> log --graph --full-history --all --color --pretty<span class="o">=</span>tformat:<span class="s2">&quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m&quot;</span> --simplify-by-decoration
 </pre></div>
 
@@ -175,6 +193,8 @@ message, and list of files changed:</p>
 <p>Another one is to draw a log graph of train tracks:</p>
 <div class="highlight"><pre><span></span>git log --graph --full-history --all --color <span class="se">\</span>
         --pretty<span class="o">=</span>format:<span class="s2">&quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s&quot;</span>
+
+git log --oneline --graph --abbrev-commit --decorate --format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)&#39;</span> --name-only
 </pre></div>
 
 
@@ -235,6 +255,21 @@ track graphs. An example of my blog git:</p>
   since then scenario. Neat!</li>
 <li>a commit: <code>git revert &lt;commit #&gt;</code></li>
 </ul>
+<h1>port change from one branch to another</h1>
+<p>This is common when a feature is delayed/moved into a later release,
+thus we have to create a newer branch for the new release, but keep
+all the old changes. How to do that?</p>
+<ol>
+<li>Create a new branch off the new release staging.</li>
+<li>Checkout the old feature branch.</li>
+<li>Use <code>git log --name-only</code> (see a fancy one above) to see the list
+   of file changes.</li>
+<li>Switch back to the new branch, <code>git checkout &lt;old branch&gt;
+   &lt;filename&gt;</code>, one by one.</li>
+</ol>
+<h1>remove remote branch</h1>
+<div class="highlight"><pre><span></span>git push -d origin &lt;branch_name&gt;
+</pre></div>
         </p>
 
         <p>

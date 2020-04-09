@@ -19,12 +19,29 @@ Copy this to `$HOME`:
     lg2 = !"git lg2-specific --all --simplify-by-decoration"
     lg3 = !"git lg3-specific --all --simplify-by-decoration"
 
-    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
-    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
-    hist = log --graph --first-parent --all --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short
+    lg1-specific = log --graph --abbrev-commit --decorate
+    --format=format:'%C(bold blue)%h%C(reset) - %C(bold
+    green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)-
+    %an%C(reset)%C(auto)%d%C(reset)'
+    
+    lg2-specific = log --graph --abbrev-commit --decorate
+    --format=format:'%C(bold blue)%h%C(reset) - %C(bold
+    cyan)%aD%C(reset) %C(bold
+    green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''
+    %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+    
+    lg3-specific = log --graph --abbrev-commit --decorate
+    --format=format:'%C(bold blue)%h%C(reset) - %C(bold
+    cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold
+    cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''
+    %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae>
+    %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+    
+    hist = log --graph --first-parent --all
+    --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold
+    blue)<%an>%Creset' --date=short
+    
     gr = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m" --simplify-by-decoration
-
 ```
 
 # checkout and track
@@ -56,6 +73,8 @@ Another one is to draw a log graph of train tracks:
 ```shell
 git log --graph --full-history --all --color \
         --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+        
+git log --oneline --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --name-only
 ```
 
 This will show in terminal of full git histories and draw those train
@@ -118,4 +137,21 @@ track graphs. An example of my blog git:
   since then scenario. Neat!
 - a commit: `git revert <commit #>`
 
+# port change from one branch to another
 
+This is common when a feature is delayed/moved into a later release,
+thus we have to create a newer branch for the new release, but keep
+all the old changes. How to do that?
+
+1. Create a new branch off the new release staging.
+2. Checkout the old feature branch.
+3. Use `git log --name-only` (see a fancy one above) to see the list
+   of file changes.
+4. Switch back to the new branch, `git checkout <old branch>
+   <filename>`, one by one.
+
+# remove remote branch
+
+```shell
+git push -d origin <branch_name>
+```

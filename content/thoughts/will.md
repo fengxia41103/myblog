@@ -9,9 +9,9 @@ Author: Feng Xia
 </figure>
 
 Contacted attorney for a will. Boy, writing will is the sole process
-that will reveal, and make you utterly, how lonely you are in this
-world &mdash; when you are faced to pick out a name to take care of
-your aftermath, I flipped through my contact list over and over and
+that will reveal, and make you utterly aware, how lonely you are in
+this world &mdash; when you are faced to pick out a name to take care
+of your aftermath, I flipped through my contact list over and over and
 over, but no name jumps out.
 
 No, not Noah's mom. Period. The trust is gone, over. But then, who? I

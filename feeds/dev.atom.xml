@@ -1528,15 +1528,7 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;td&gt;Move focus to the pane&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2020-03-20T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
-let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
-&lt;h1&gt;.gitconfig&lt;/h1&gt;
-&lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;alias&lt;span class="o"&gt;]&lt;/span&gt;
-    &lt;span class="nv"&gt;lg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;lg1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;lg2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg2-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;lg3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg3-specific --all --simplify-by-decoration …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2020-03-20T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Tips on git.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
 &lt;h1&gt;.gitconfig&lt;/h1&gt;
 &lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;

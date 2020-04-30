@@ -46,21 +46,36 @@ boring boxes!&lt;/p&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="images/517%20kitchen%20wall%20shelf.png"/&gt;
   &lt;figcaption&gt;Kitchen open shelves&lt;/figcaption&gt;
-&lt;/figure&gt;</content><category term="thoughts"></category></entry><entry><title>Will</title><link href="https://fengxia41103.github.io/myblog/will.html" rel="alternate"></link><published>2020-04-14T12:58:00-04:00</published><updated>2020-04-14T12:58:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-14:/myblog/will.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;dining pendant light&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.ikea.com/us/en/p/evedal-pendant-lamp-gray-10364226/"&gt;ikea&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cb2.com/soso-tan-and-white-metal-pendant-light/s525523"&gt;cb2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.build.com/elegant-lighting-ldpd2003/s1424719?uid=3348498"&gt;build.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.pinterest.com/search/pins/?rs=ac&amp;amp;len=2&amp;amp;q=red%20industrial%20pendant%20light&amp;amp;eq=red%20industrial%20pe&amp;amp;etslf=7465&amp;amp;term_meta[]=red%7Cautocomplete%7C0&amp;amp;term_meta[]=industrial%7Cautocomplete%7C0&amp;amp;term_meta[]=pendant%7Cautocomplete%7C0&amp;amp;term_meta[]=light%7Cautocomplete%7C0"&gt;pinterest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.lumens.com/deep-reflector-outdoor-pendant-by-troy-rlm-lighting-RLM675717.html"&gt;lumens.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;benquette&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.potterybarn.com/products/modular-banquette-set-gray/?catalogId=84&amp;amp;sku=3758013&amp;amp;cm_ven=PLA&amp;amp;cm_cat=Google&amp;amp;cm_pla=Furniture%20%3E%20Dining%20Chairs&amp;amp;cm_ite=3758013&amp;amp;gclid=CjwKCAjwnIr1BRAWEiwA6GpwNQHO1SotxBMBPoRoOBXPeNgzaeibDqCQRTIVHxEopGlh5GUG3XWC_xoCXbIQAvD_BwE"&gt;potter
+  barn&lt;/a&gt;,
+  4-piece set is &lt;code&gt;87.5"&lt;/code&gt;, perfect for that wall.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="thoughts"></category></entry><entry><title>Will</title><link href="https://fengxia41103.github.io/myblog/will.html" rel="alternate"></link><published>2020-04-14T12:58:00-04:00</published><updated>2020-04-14T12:58:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-14:/myblog/will.html</id><summary type="html">&lt;figure class="s12 center"&gt;
   &lt;img src="images/will.png"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Contacted attorney for a will. Boy, writing will is the sole process
-that will reveal, and make you utterly, how lonely you are in this
-world &amp;mdash; when you are faced to pick out a name to take care of
-your aftermath, I flipped through my contact list over and over …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+that will reveal, and make you utterly aware, how lonely you are in
+this world &amp;mdash; when you are faced to pick out a name to take care
+of your aftermath, I flipped through my contact list over and …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
   &lt;img src="images/will.png"/&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Contacted attorney for a will. Boy, writing will is the sole process
-that will reveal, and make you utterly, how lonely you are in this
-world &amp;mdash; when you are faced to pick out a name to take care of
-your aftermath, I flipped through my contact list over and over and
+that will reveal, and make you utterly aware, how lonely you are in
+this world &amp;mdash; when you are faced to pick out a name to take care
+of your aftermath, I flipped through my contact list over and over and
 over, but no name jumps out.&lt;/p&gt;
 &lt;p&gt;No, not Noah's mom. Period. The trust is gone, over. But then, who? I
 thought of her, but then, she is so far away, and by the time I'm
@@ -4800,15 +4815,7 @@ typing in browser's small text box!&lt;/p&gt;
 &lt;td&gt;Move focus to the pane&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2020-03-20T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
-let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
-&lt;h1&gt;.gitconfig&lt;/h1&gt;
-&lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;alias&lt;span class="o"&gt;]&lt;/span&gt;
-    &lt;span class="nv"&gt;lg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;lg1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg1-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;lg2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg2-specific --all --simplify-by-decoration&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;lg3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; !&lt;span class="s2"&gt;&amp;quot;git lg3-specific --all --simplify-by-decoration …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
+&lt;/table&gt;</content><category term="dev"></category></entry><entry><title>Git</title><link href="https://fengxia41103.github.io/myblog/git.html" rel="alternate"></link><published>2019-10-09T13:18:00-04:00</published><updated>2020-03-20T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-09:/myblog/git.html</id><summary type="html">&lt;p&gt;Tips on git.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Too many times I can't remember a particular git command. So here
 let's keep notes on the ones I'd like to use and what they are.&lt;/p&gt;
 &lt;h1&gt;.gitconfig&lt;/h1&gt;
 &lt;p&gt;Copy this to &lt;code&gt;$HOME&lt;/code&gt;:&lt;/p&gt;

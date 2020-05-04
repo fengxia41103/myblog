@@ -95,7 +95,9 @@
     </div>
 
     {# Dont' use article.content. The content is generated HTML. #}
-    {{ article.summary|truncate(600) }}
+    <p>
+      {{ article.summary|truncate(600) }}
+    </p>
     <a class="btn btn-default button" href="{{ article.url }}">
       <i class="fa fa-coffee" style="opacity:0.5;"></i>
       continue reading

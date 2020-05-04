@@ -1,5 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-04-01T11:42:00-04:00</updated><entry><title>Git strategy for backward compatibility</title><link href="https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html" rel="alternate"></link><published>2020-04-01T11:42:00-04:00</published><updated>2020-04-01T11:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-01:/myblog/git rebase strategy.html</id><summary type="html">&lt;figure class="col s12 center"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-05-01T15:11:00-04:00</updated><entry><title>Git &amp; Jira</title><link href="https://fengxia41103.github.io/myblog/git%20and%20jira.html" rel="alternate"></link><published>2020-05-01T15:11:00-04:00</published><updated>2020-05-01T15:11:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-05-01:/myblog/git and jira.html</id><summary type="html">&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
+&lt;p&gt;Having be in both sides of a software development, I can now see
+clearer than many what management wants but are not getting, and what
+dev is doing but not doing it right. In essence, what is a management
+in a software development? It's a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
+&lt;p&gt;Having be in both sides of a software development, I can now see
+clearer than many what management wants but are not getting, and what
+dev is doing but not doing it right. In essence, what is a management
+in a software development? It's a catch-22 that manager needs to be
+tech savvy so s/he knows what the dev is doing, but then, even so,
+s/he is a few in number comparing to the number of devs, not to
+mention the line of code changes. So it's simply not practical for him
+to keep up anyway. If then, what to manage? and how to manage? If I
+were the manager, what do I want to control?&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;As of writing, Jira is the popular project management tool, and git is
+the code repo. So here is a diagram showing where information reside,
+taking an hypothetical example that I'm to release version 5.1.1. The
+dream of a manager can be stated as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As the manager, I want my entire team to focus on 5.1.1 items, so
+that I can get them done on time and meet product owner's&lt;/p&gt;
+&lt;p&gt;expectation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, how do we do this? In Jira I have defined my expectations &amp;mdash;
+Jira items that I want people to work on. But then, do I need to learn
+git in order to find out what people have actually worked on?
+Similarly, how do I know QA is testing the right stuff, that CICD is
+building the right code, that my instance contains &lt;code&gt;5.1.1&lt;/code&gt; changes but
+not some future experimental contents planned for &lt;code&gt;6.6.6&lt;/code&gt; release?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fundamentally, I think we need an analytic tool. Like QA is for
+function verification, a &lt;em&gt;management QA&lt;/em&gt; tool for managment.&lt;/strong&gt;&lt;/p&gt;
+&lt;h1&gt;Workflow and problems&lt;/h1&gt;
+&lt;p&gt;Sticking w/ Jira and git, we plug in players in a workflow
+demonstrating where they are getting their input, and what their
+outputs are.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/git%20and%20jira.png"&gt;
+  &lt;figcaption&gt;Workflow using Jira for PM and Git for code&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;To manage this workflow is to trace information, eg. requirement, from
+Jira, all the way to the stack, that they are implemented
+&lt;strong&gt;correctly&lt;/strong&gt;. So first, let's see what information are there and
+where to find them.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Creator&lt;/th&gt;
+&lt;th&gt;Information&lt;/th&gt;
+&lt;th&gt;Info Source&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Manager&lt;/td&gt;
+&lt;td&gt;What 5.1.1 items to work on &amp;rarr; todo list&lt;/td&gt;
+&lt;td&gt;Jira, filtered by &lt;code&gt;release&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dev&lt;/td&gt;
+&lt;td&gt;What is in the 5.1.1 code?&lt;/td&gt;
+&lt;td&gt;Git&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CICD&lt;/td&gt;
+&lt;td&gt;Which 5.1.1 code is in build? Is build clean?&lt;/td&gt;
+&lt;td&gt;Jenkins, artifacts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;devops&lt;/td&gt;
+&lt;td&gt;Which instance has the 5.1.1 build?&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;QA&lt;/td&gt;
+&lt;td&gt;Test coverage of 5.1.1 code?  is 5.1.1 affecting older functions?&lt;/td&gt;
+&lt;td&gt;QA repo, report&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Now walking down this list, let me explain what issues are there we
+are to address.&lt;/p&gt;
+&lt;h2&gt;manager &amp;amp; Jira&lt;/h2&gt;
+&lt;p&gt;Starting w/ Jira, if we are to managing &lt;code&gt;5.1.1&lt;/code&gt;, then we essentially
+divide all actions into:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;5.1.1&lt;/code&gt; items&lt;ol&gt;
+&lt;li&gt;todo that will result in code&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;feature&lt;/code&gt; targeting &lt;code&gt;5.1.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bug fixes&lt;/code&gt;&lt;ol&gt;
+&lt;li&gt;found in &lt;code&gt;5.1.1&lt;/code&gt; code, and will be fixed in &lt;code&gt;5.1.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;found in other versions, and will be fixed in &lt;code&gt;5.1.1&lt;/code&gt; &amp;rarr;
+   backwards compatibility&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;those that will not&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;non-5.1.1&lt;/code&gt; items&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These Jira items can be grouped in many ways logistically within Jira
+itself, such as using epic, or even outside Jira so it fits the
+manager's vision, or the organization's style. But these groupings
+don't change the ingredients &amp;mdash; the contents of these todos
+remain regardless how you are grouping them.&lt;/p&gt;
+&lt;h2&gt;dev &amp;amp; git&lt;/h2&gt;
+&lt;p&gt;First and foremost, git code should always be mapped to &lt;code&gt;5.1.1&lt;/code&gt; Jira
+(feature &amp;amp; bug fixes) because, after all, Jira defines the requirement
+(what to implement/fix). Two common approaches are: naming branch
+using Jira key, and include Jira key in commit message.&lt;/p&gt;
+&lt;p&gt;If using git w/ gitlab and if dev puts Jira number in commit message
+or merge request, Jira ticket will automatically receive a comment w/
+a link to the gitlab commit page.&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;However, this is where a problem arises &amp;mdash; the match between Jira
+and git is through the Jira key in git commit. &lt;strong&gt;What if dev didn't
+write that way?&lt;/strong&gt; It can result in four undesirable scenarios:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Completly missing&lt;/strong&gt;: dev forgot to put the Jira number.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mismatch&lt;/strong&gt;: dev put in the wrong Jira number in commit, eg. typo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ignorant&lt;/strong&gt;: manager moved a Jira off a release, dev doesn't
+   know. Or even worse, the code has been merged to &lt;code&gt;5.1.1&lt;/code&gt;
+   branch. Then what?&lt;/li&gt;
+&lt;li&gt;Dev worked on a code that is not &lt;code&gt;5.1.1&lt;/code&gt; Jira (the black boxes in
+   the diagram), eg. lack of focus.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For all these gaps, how to identify them?&lt;/p&gt;
+&lt;h2&gt;CICD &amp;amp; artifacts&lt;/h2&gt;
+&lt;p&gt;Transforming code into artifacts, eg. binaries, is the job of
+CICD. Ignore the continuous testing aspect of CICD for the time
+being. Ideally, the code used to build &lt;code&gt;5.1.1&lt;/code&gt; artifacts should have:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;All the 5.1.1 code that are in &lt;strong&gt;done&lt;/strong&gt; state (and the &lt;em&gt;done&lt;/em&gt;
+   should match Jira status).&lt;/li&gt;
+&lt;li&gt;Nothing from parallel or future code such as &lt;code&gt;5.1.2&lt;/code&gt; or &lt;code&gt;6.0.0&lt;/code&gt;
+   &amp;larr; no feature leaks, or bugs from immature (or even untested)
+   code &amp;rarr; this is a &lt;strong&gt;clean&lt;/strong&gt; build.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;But then, &lt;strong&gt;how do I know CICD is doing these two?&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;QA &amp;amp; tests&lt;/h2&gt;
+&lt;p&gt;Last but the least, &lt;strong&gt;how to map QA's tests and reports to Jira?&lt;/strong&gt; It
+doesn't nee to be mapped to an individual Jira item. However,
+conceptually, a group of Jira represents a feature/function that
+should be achieved, thus QA's result should be mapped to this
+level. For example, if an epic represents a new module I'm putting
+into my product, QA would have at least one test for this module, thus
+I'd like to map this test to the epic.&lt;/p&gt;
+&lt;h1&gt;&lt;/h1&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Even so, clicking through Jira just to know that the link
+exists, or matching the right code, is not practical for a project managaer.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;There is a counter argument that mangagement doesn't really care
+the process in between. Instead, he defines the requirement, and
+will conduct acceptance review or test for result. How the
+requirement is fulfilled is not his concern.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content></entry><entry><title>Git strategy for backward compatibility</title><link href="https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html" rel="alternate"></link><published>2020-04-01T11:42:00-04:00</published><updated>2020-04-01T11:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-01:/myblog/git rebase strategy.html</id><summary type="html">&lt;figure class="col s12 center"&gt;
   &lt;img
   src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
   &lt;figcaption&gt;

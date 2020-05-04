@@ -1,5 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-04-24T15:13:00-04:00</updated><entry><title>517</title><link href="https://fengxia41103.github.io/myblog/517.html" rel="alternate"></link><published>2020-04-24T15:13:00-04:00</published><updated>2020-04-24T15:13:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-24:/myblog/517.html</id><summary type="html">&lt;p&gt;Add my thoughts on how to remodel 517. I have some ideas. Most surely,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all-en.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-05-01T15:11:00-04:00</updated><entry><title>Git &amp; Jira</title><link href="https://fengxia41103.github.io/myblog/git%20and%20jira.html" rel="alternate"></link><published>2020-05-01T15:11:00-04:00</published><updated>2020-05-01T15:11:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-05-01:/myblog/git and jira.html</id><summary type="html">&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
+&lt;p&gt;Having be in both sides of a software development, I can now see
+clearer than many what management wants but are not getting, and what
+dev is doing but not doing it right. In essence, what is a management
+in a software development? It's a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
+&lt;p&gt;Having be in both sides of a software development, I can now see
+clearer than many what management wants but are not getting, and what
+dev is doing but not doing it right. In essence, what is a management
+in a software development? It's a catch-22 that manager needs to be
+tech savvy so s/he knows what the dev is doing, but then, even so,
+s/he is a few in number comparing to the number of devs, not to
+mention the line of code changes. So it's simply not practical for him
+to keep up anyway. If then, what to manage? and how to manage? If I
+were the manager, what do I want to control?&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;As of writing, Jira is the popular project management tool, and git is
+the code repo. So here is a diagram showing where information reside,
+taking an hypothetical example that I'm to release version 5.1.1. The
+dream of a manager can be stated as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As the manager, I want my entire team to focus on 5.1.1 items, so
+that I can get them done on time and meet product owner's&lt;/p&gt;
+&lt;p&gt;expectation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, how do we do this? In Jira I have defined my expectations &amp;mdash;
+Jira items that I want people to work on. But then, do I need to learn
+git in order to find out what people have actually worked on?
+Similarly, how do I know QA is testing the right stuff, that CICD is
+building the right code, that my instance contains &lt;code&gt;5.1.1&lt;/code&gt; changes but
+not some future experimental contents planned for &lt;code&gt;6.6.6&lt;/code&gt; release?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fundamentally, I think we need an analytic tool. Like QA is for
+function verification, a &lt;em&gt;management QA&lt;/em&gt; tool for managment.&lt;/strong&gt;&lt;/p&gt;
+&lt;h1&gt;Workflow and problems&lt;/h1&gt;
+&lt;p&gt;Sticking w/ Jira and git, we plug in players in a workflow
+demonstrating where they are getting their input, and what their
+outputs are.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/git%20and%20jira.png"&gt;
+  &lt;figcaption&gt;Workflow using Jira for PM and Git for code&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;To manage this workflow is to trace information, eg. requirement, from
+Jira, all the way to the stack, that they are implemented
+&lt;strong&gt;correctly&lt;/strong&gt;. So first, let's see what information are there and
+where to find them.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Creator&lt;/th&gt;
+&lt;th&gt;Information&lt;/th&gt;
+&lt;th&gt;Info Source&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Manager&lt;/td&gt;
+&lt;td&gt;What 5.1.1 items to work on &amp;rarr; todo list&lt;/td&gt;
+&lt;td&gt;Jira, filtered by &lt;code&gt;release&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dev&lt;/td&gt;
+&lt;td&gt;What is in the 5.1.1 code?&lt;/td&gt;
+&lt;td&gt;Git&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CICD&lt;/td&gt;
+&lt;td&gt;Which 5.1.1 code is in build? Is build clean?&lt;/td&gt;
+&lt;td&gt;Jenkins, artifacts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;devops&lt;/td&gt;
+&lt;td&gt;Which instance has the 5.1.1 build?&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;QA&lt;/td&gt;
+&lt;td&gt;Test coverage of 5.1.1 code?  is 5.1.1 affecting older functions?&lt;/td&gt;
+&lt;td&gt;QA repo, report&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Now walking down this list, let me explain what issues are there we
+are to address.&lt;/p&gt;
+&lt;h2&gt;manager &amp;amp; Jira&lt;/h2&gt;
+&lt;p&gt;Starting w/ Jira, if we are to managing &lt;code&gt;5.1.1&lt;/code&gt;, then we essentially
+divide all actions into:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;5.1.1&lt;/code&gt; items&lt;ol&gt;
+&lt;li&gt;todo that will result in code&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;feature&lt;/code&gt; targeting &lt;code&gt;5.1.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bug fixes&lt;/code&gt;&lt;ol&gt;
+&lt;li&gt;found in &lt;code&gt;5.1.1&lt;/code&gt; code, and will be fixed in &lt;code&gt;5.1.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;found in other versions, and will be fixed in &lt;code&gt;5.1.1&lt;/code&gt; &amp;rarr;
+   backwards compatibility&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;those that will not&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;non-5.1.1&lt;/code&gt; items&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These Jira items can be grouped in many ways logistically within Jira
+itself, such as using epic, or even outside Jira so it fits the
+manager's vision, or the organization's style. But these groupings
+don't change the ingredients &amp;mdash; the contents of these todos
+remain regardless how you are grouping them.&lt;/p&gt;
+&lt;h2&gt;dev &amp;amp; git&lt;/h2&gt;
+&lt;p&gt;First and foremost, git code should always be mapped to &lt;code&gt;5.1.1&lt;/code&gt; Jira
+(feature &amp;amp; bug fixes) because, after all, Jira defines the requirement
+(what to implement/fix). Two common approaches are: naming branch
+using Jira key, and include Jira key in commit message.&lt;/p&gt;
+&lt;p&gt;If using git w/ gitlab and if dev puts Jira number in commit message
+or merge request, Jira ticket will automatically receive a comment w/
+a link to the gitlab commit page.&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;However, this is where a problem arises &amp;mdash; the match between Jira
+and git is through the Jira key in git commit. &lt;strong&gt;What if dev didn't
+write that way?&lt;/strong&gt; It can result in four undesirable scenarios:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Completly missing&lt;/strong&gt;: dev forgot to put the Jira number.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mismatch&lt;/strong&gt;: dev put in the wrong Jira number in commit, eg. typo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ignorant&lt;/strong&gt;: manager moved a Jira off a release, dev doesn't
+   know. Or even worse, the code has been merged to &lt;code&gt;5.1.1&lt;/code&gt;
+   branch. Then what?&lt;/li&gt;
+&lt;li&gt;Dev worked on a code that is not &lt;code&gt;5.1.1&lt;/code&gt; Jira (the black boxes in
+   the diagram), eg. lack of focus.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For all these gaps, how to identify them?&lt;/p&gt;
+&lt;h2&gt;CICD &amp;amp; artifacts&lt;/h2&gt;
+&lt;p&gt;Transforming code into artifacts, eg. binaries, is the job of
+CICD. Ignore the continuous testing aspect of CICD for the time
+being. Ideally, the code used to build &lt;code&gt;5.1.1&lt;/code&gt; artifacts should have:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;All the 5.1.1 code that are in &lt;strong&gt;done&lt;/strong&gt; state (and the &lt;em&gt;done&lt;/em&gt;
+   should match Jira status).&lt;/li&gt;
+&lt;li&gt;Nothing from parallel or future code such as &lt;code&gt;5.1.2&lt;/code&gt; or &lt;code&gt;6.0.0&lt;/code&gt;
+   &amp;larr; no feature leaks, or bugs from immature (or even untested)
+   code &amp;rarr; this is a &lt;strong&gt;clean&lt;/strong&gt; build.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;But then, &lt;strong&gt;how do I know CICD is doing these two?&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;QA &amp;amp; tests&lt;/h2&gt;
+&lt;p&gt;Last but the least, &lt;strong&gt;how to map QA's tests and reports to Jira?&lt;/strong&gt; It
+doesn't nee to be mapped to an individual Jira item. However,
+conceptually, a group of Jira represents a feature/function that
+should be achieved, thus QA's result should be mapped to this
+level. For example, if an epic represents a new module I'm putting
+into my product, QA would have at least one test for this module, thus
+I'd like to map this test to the epic.&lt;/p&gt;
+&lt;h1&gt;&lt;/h1&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Even so, clicking through Jira just to know that the link
+exists, or matching the right code, is not practical for a project managaer.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;There is a counter argument that mangagement doesn't really care
+the process in between. Instead, he defines the requirement, and
+will conduct acceptance review or test for result. How the
+requirement is fulfilled is not his concern.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content></entry><entry><title>Cart ahead of the horse</title><link href="https://fengxia41103.github.io/myblog/cart%20ahead%20of%20the%20horse.html" rel="alternate"></link><published>2020-05-01T14:16:00-04:00</published><updated>2020-05-01T14:16:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-05-01:/myblog/cart ahead of the horse.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/DSC_1190356.JPG"/&gt;
+  &lt;figcaption&gt;Taken in Romanian National History Museum, Bucharest, 2020&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Bumped into an article by the Google news directory, &lt;a href="https://www.statnews.com/2020/03/17/a-fiasco-in-the-making-as-the-coronavirus-pandemic-takes-hold-we-are-making-decisions-without-reliable-data/"&gt;"A fiasco in the
+making? As the coronavirus pandemic takes hold, we are making
+decisions without reliable data"&lt;/a&gt;, and its
+follow up discussion that &lt;a href="https://www.statnews.com/2020/04/27/hear-scientists-different-views-covid-19-dont-attack-them/"&gt;"Scientists who express different views on
+Covid-19 should be …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/DSC_1190356.JPG"/&gt;
+  &lt;figcaption&gt;Taken in Romanian National History Museum, Bucharest, 2020&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Bumped into an article by the Google news directory, &lt;a href="https://www.statnews.com/2020/03/17/a-fiasco-in-the-making-as-the-coronavirus-pandemic-takes-hold-we-are-making-decisions-without-reliable-data/"&gt;"A fiasco in the
+making? As the coronavirus pandemic takes hold, we are making
+decisions without reliable data"&lt;/a&gt;, and its
+follow up discussion that &lt;a href="https://www.statnews.com/2020/04/27/hear-scientists-different-views-covid-19-dont-attack-them/"&gt;"Scientists who express different views on
+Covid-19 should be heard, not demonized"&lt;/a&gt;. I find them very
+interesting because a recent event between me and Noah had echoed a
+similar dilemma &amp;mdash; can we know ahead of time? or in other words,
+are we constantly putting a cart in front of a horse?&lt;/p&gt;
+&lt;p&gt;Both questions sound pretty, stupid. Any common sense would say &lt;strong&gt;NO&lt;/strong&gt;
+to both &amp;mdash; no we can't know ahead of time (as we often heard &lt;em&gt;no
+one has a crystal ball&lt;/em&gt;), and certainly it's a bad sign if the cart is
+put in front the horse (as my current project is perceived to
+be). But, if the answers are so obvious, why do they even pop up, all
+the time, and worthwhile to discuss? Let me first start the even w/
+Noah.&lt;/p&gt;
+&lt;p&gt;Like many other days I prepared a meal for him, and towards the end of
+it he said he was full and couldn't eat anymore (and we are usually
+talking about a tiny portion that was left on the plate, and this
+totally reminds me myself at his age that I was doing the same thing,
+and my brother got really mad one day, and I thought "what a nasty guy
+(to point this out blankly)!", oh well, what goes around, comes
+around, don't they!?) So &lt;em&gt;naturally&lt;/em&gt; I started my lecture that "you
+could have said at the beginning that I couldn't finish them, and thus
+cut out the portion you would finish, instead of touching food like
+this towards the end. Now what are we gonna do w/ this left overs!?"
+Well, whiling saying that, I was thinking loud to myself, how could
+he, or anyone in that matter, know beforehand that he couldn't finish
+the portion!? What about the saying that &lt;em&gt;never try, never know&lt;/em&gt;!?
+Wouldn't it be reasonable, or inevitable, that he could only find out
+that he can't finish this much once he is towards the end of it? The
+definition that "I can't eat anymore" is that when I get to the point
+when there is food left, isn't it? So, it's simply not fair of my
+lecture.&lt;/p&gt;
+&lt;p&gt;But then, is this a mistake doing the lecture? If the statement "I
+can't know before it happened" becomes stand, wouldn't he then get
+away from anything? Seems so, doesn't it? Like his accidents, his
+mischiefs, since they are all measured by their consequences, and
+consequences are carts, that can only seen towards the end, thus he
+legitimately can create such left overs again and again because, he
+couldn't possibly know his capacity until he tries it. Doesn't sound
+right either. So what am I missing?&lt;/p&gt;
+&lt;p&gt;Same for these two articles &amp;mdash; enough data and evidence will take
+time to be accumulated, analyzed, and even then, there is not
+guarantee that only one view (or _the view) will emerge, left alone
+being agreed upon. So, can we have all waited till then to take an
+action, such as this staying-at-home order, even though we don't know
+either whether this is doing more harm than good? I don't know. I echo
+the author's argument, but in the middle of this event, I also don't
+see an alternative if I were the governor &amp;mdash; people (yeah, I'm
+using this word which I dislike) demand an action, any action. This
+leads me to believe the true question lies in human psych, and in this
+case, the social psych &amp;mdash; &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;why do people want an action asap?&lt;/li&gt;
+&lt;li&gt;Isn't it a soothing factor that is more important than its actual
+   result?&lt;/li&gt;
+&lt;li&gt;Wouldn't this soothing effect itself be sufficient to justify the
+   action?&lt;/li&gt;
+&lt;li&gt;Does it matter that we will &lt;em&gt;deal with the results&lt;/em&gt; later, but take
+   the action now? Especially that no one can tell the result anyway,
+   right (not enough evidence for or against!), so isn't taking an
+   action better than being a sitting duck?&lt;/li&gt;
+&lt;li&gt;Even after some time we have evidences, wouldn't it be interpreted
+   subjectively anyway, that some thinks it justifies the past action,
+   while others disagree (but even so, so what!? We can't go back in
+   time, and damage is done, right?)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Puzzling, isn't it? So it seems to me, one way or another is equally
+valid, or equally baseless. &lt;strong&gt;In this sense the action guy will always
+win, even by the fact that collecting evidence takes time, while the
+power to ac is available, now!&lt;/strong&gt; Thus, I believe this pattern will
+always be so, regardless what the even will be in the future. I
+totally agree that letting these voices heard is critical for social
+health. But I'm convinced that these voices will always not be in the
+driver's seat, thus making no material difference for the ongoing
+event &amp;larr; well, if so, it makes them heard even more appealing
+since, they don't do any &lt;em&gt;harm&lt;/em&gt; :)&lt;/p&gt;
+&lt;p&gt;What a convoluted world human has got themselves in!&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>517</title><link href="https://fengxia41103.github.io/myblog/517.html" rel="alternate"></link><published>2020-04-24T15:13:00-04:00</published><updated>2020-04-24T15:13:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-24:/myblog/517.html</id><summary type="html">&lt;p&gt;Add my thoughts on how to remodel 517. I have some ideas. Most surely,
 I want a big bookshelf as my Boston home, and I'm going to remove
 kitchen wall cabinets to make them shelves also. I like open
 spaces. Besides, I don't see point to put all the junks …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Add my thoughts on how to remodel 517. I have some ideas. Most surely,

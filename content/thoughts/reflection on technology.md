@@ -24,7 +24,7 @@ majority of all are just mediocre, and even trying-too-hard. The true
 good ones are always, I believe, always, organic &mdash; meaning that
 the idea comes from rich experience and deep insights, not some
 outsider dreams of a new way overnight. My favourate these days is the
-news of `vpnhub` owned by `porthub` &larr; what a wonderful genius
+news of `vpnhub` owned by `pornhub` &larr; what a wonderful genius
 idea!!!
 
 

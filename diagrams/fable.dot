@@ -1,0 +1,422 @@
+digraph G {
+  node[shape=box];
+  rankdir="LR";
+  compound=true;
+  labeldistance=0;
+
+
+
+  subgraph cluster_graces{
+    label="Graces
+    banquet, dance, social enjoyments, elegant arts";
+    color=pink;
+
+    Euphrosyne;
+    Aglaia;
+    Thalia;
+  }
+
+
+  subgraph cluster_furies {
+    label="Furies
+    (Erinnyes, Enumenides)";
+
+    Alecto;
+    Tisiphone;
+    Megera;
+  }
+
+
+  subgraph cluster_the_beginning {
+    label="The Very Beginning";
+
+    chaos[label="Chaos", color=red];
+    Love;
+
+    // earth starts them all
+    Earth[label="Earth
+          (Gaia, Gaea)",
+          color=pink];
+    Earth->Uranus[label="mother of"];
+
+
+    Sky[color=blue,
+        label="Sky/Heaven"];
+  }
+  Sky->Alecto[label="blood turn into",
+              lhead="cluster_furies"];
+
+  subgraph cluster_hyperion_kids {
+    Sun[color=blue];
+    Moon[color=pink];
+    Dawn[color=pink];
+  }
+
+  subgraph cluster_male_titans{
+    label="Male titans";
+    node[shape=box,
+         style=filled];
+    style=filled;
+    color=lightblue;
+
+    //******************************
+    // male titans
+    //******************************
+
+    // hyperion family
+    Hyperion[color=white,
+             label="Hyperion
+             original Sun god"];
+    Oceanus[color=white];
+    Coeus[color=white];
+    Crius[color=white];
+    Lapetus[color=white];
+    Cronos[label="Saturn
+           (Cronos, Cronus)",
+           color=white];
+  }
+  Earth->Hyperion[label="mother of",
+                  lhead=cluster_male_titans];
+  Sky->Hyperion[label="father of",
+                lhead=cluster_male_titans];
+  Hyperion->Moon[label="father of",
+                 lhead=cluster_hyperion_kids];
+
+  Cronos->Uranus[label="kill",
+                   color=red];
+
+  subgraph cluster_female_titans {
+
+    label="Female titans";
+    node[shape=box,
+         style=filled];
+    style=filled;
+    color=pink;
+
+    //******************************
+    // female titans
+    //******************************
+    Theia[color=white];
+
+    Themis[color=white,
+           label="Themis
+           (Law)"];
+    Themis->Euphrosyne[label="mother of"
+                       lhead=cluster_graces];
+
+    Phoebe[color=white];
+    Tethys[color=white];
+    Mnemosyne[color=white,
+              label="Mnemosyne
+              (Memory)"];
+
+    Rhea[label="Rhea
+         (Ops)
+         God of nature",
+         color=white];
+  }
+
+  subgraph cluster_cronos_kids{
+    label="Cronos kids";
+
+    // 3 boys
+    Jupiter[label="Jupiter/Jove
+            (Zeus)",
+            color=blue];
+    Neptune[label="Neptune
+            (Poseidon)",
+            color=blue];
+    Pluto[label="Pluto
+          (Dis, Hades)",
+          color=blue];
+
+    // 3 girls
+    Ceres[color=pink,
+          label="Ceres
+          (Demeter)
+          agriculture"];
+
+    Vesta[color=pink,
+          label="Vesta
+          (Hestia)
+          public & private hearth"];
+
+    Juno[color=pink,
+         label="Juno
+         (Hera)
+         Queen of gods"];
+  }
+  Cronos->Jupiter[label="father of",
+                  lhead=cluster_cronos_kids];
+  Rhea->Jupiter[label="mother of",
+                lhead=cluster_cronos_kids];
+
+  Vestal_virgins[color=pink,
+                 label="Six virgins"];
+  Vestal_virgins->Vesta[label="priestesses the sacred fire, Vestal
+                        in her temple",
+                        style=dotted,
+                        color=red];
+
+  Themis->Jupiter[label="sit by Jove on his throne &
+                  give counsel"];
+
+  // other titans
+  Iapetus[color=blue];
+
+
+  // misc
+  Metis[label="Metis
+        (Prudence)",
+        color=pink];
+  Metis->Cronos[label="disgorge his children",
+                style=dotted,
+                color=red];
+  Jupiter->Atlas[label="punish",
+                 style=dotted,
+                 color=red];
+
+
+  subgraph cluster_old_ruler {
+    label="Old Rulers";
+    Eurynome[color=pink];
+    Ophion[color=blue];
+    Cronos->Eurynome[label="dethrone",
+                     style=dotted,
+                     color=red,
+                     lhead=cluster_old_ruler];
+  }
+
+
+  // Jupiter is productive
+  subgraph cluster_jupiter_wives {
+    label="Jupiter (Zeus) sexual partners";
+    color=pink;
+
+    Dione;
+    Maia;
+    Semele;
+    Io;
+    Latona;
+  }
+  Phoebe->Latona[label="mother of"];
+  Oceanus->Io[label="grandpa of"];
+
+  // rest of them are all Gods
+  subgraph cluster_jupiter_kids {
+    label="The Jupiter Kids";
+    style=filled;
+    color="#f5f5f5";
+
+    Apollo[color=blue,
+           label="Apollo
+           (Phebus)
+           God of Sun
+           plant: archery, prophecy & music"];
+    Latona->Apollo[label="mother of"];
+    Hyperion->Apollo[label="transfer dominion"];
+
+
+    Diana[color=pink,
+          label="Diana
+          (Artemis)
+          God of moon"];
+    Latona->Diana;
+
+    Mars[color=blue,
+         label="Mars
+         (Ares)
+         God of war"];
+    Juno->Mars;
+
+    Minerva[color=pink,
+            label="Minerva
+            (Pallas Athene)
+            God of wisdom
+            Make dresses for Gods
+            bird: owl
+            plant: olive"];
+
+    Mercury[color=blue,
+            label="Mecury
+            (Hermes)
+            God of commerce, wrestling, gymnastics, thieving
+            invent: lyre"];
+    Maia->Mercury[label="mother of"];
+
+    // venus family
+    subgraph cluster_vulcan_venus {
+      label="Venus family";
+      style=filled;
+      color=white;
+
+      Vulcan[color=blue,
+             label="Vulcan
+               (Hephestos, Mulciber)
+               architect, smith, armourer, chariot builder, artist"];
+      Juno->Vulcan[label="mother of"];
+
+      Venus[color=pink,
+            label="Venus
+            (Aphrodite)
+            God of love & beauty
+            birds: swan & dove
+            plant: rose & myrtle"];
+      Dione->Venus;
+
+      Cupid[color=blue,
+            label="Cupid
+            (Eros)
+            God of love"]
+      Anteros[color=blue,
+              label="Anteros
+              God of requited love,"];
+
+      // mother of
+      Venus->Cupid[label="mother of"];
+      Venus->Anteros[label="mother of"];
+    }
+
+    Bacchus[color=blue,
+            label="Bucchus
+            (Dionysus, Liber)
+            God of wine
+            promoter of civilization, lawgiver, lover of peace"];
+    Semele->Bacchus[label="mother of"];
+
+    // muses
+    subgraph cluster_muses {
+      label="Muses";
+      color=pink;
+
+      Clio[label="Clio
+           history"];
+      Euterpe[label="Euterpe
+              lyric poetry"];
+      Thalia[label="Thalia
+             comedy"];
+      Melpomeni[label="Melpomeni
+                tragedy"];
+      Terpsichore[label="Terpsichore
+                  choral dance & song"];
+      Erato[label="Erato
+            love poetry"];
+      Polyhymnia[label="Polyhymnia
+                 sacred poetry"];
+      Ourania[label="Qurania/Urania
+              astronomy"];
+      Calliope[label="Calliope
+               epic poetry"];
+    }
+
+    subgraph cluster_fates {
+      label="Fates
+      spin the thread of human destiny";
+      color=yellow;
+
+      Clotho;
+      Lachesis;
+      Atropos;
+    }
+    Themis->Clotho[label="mother of",
+                   lhead=cluster_fates];
+
+  } // end of jupiter kids
+  Jupiter->Apollo[label="father of",
+                  lhead=cluster_jupiter_kids];
+
+  Proserpine[color=pink,
+             label="Proserpine
+             (Persephone)
+             Queen of the dead"];
+  Ceres->Proserpine[label="mother of"];
+
+  // sad story
+  Seasons[label="The Seasons",
+          color=white];
+  Ceres->Seasons[label="make winter"];
+  Pluto->Proserpine[label="want"];
+  Proserpine->Seasons[label="spring, summer, fall
+                      be w/ Ceres"];
+
+  Pan[color=blue,
+      label="Pan
+      God of flock & shepherds"];
+  Mercury->Pan[label="father of"];
+
+  Iris[color=pink,
+       label="Iris
+       God of rainbow
+       bird: peacock"];
+  Iris->Juno[label="attendant &
+             messenger",
+             style=dotted,
+             color=blue];
+
+  Nemesis[color=pink
+          label="Nemesis
+          righteous anger of the gods"];
+
+
+  Satyrs[label="Satyrs
+         dieties of the woods & fields"];
+
+  Momus[color=blue,
+        label="Momum
+        God of laughter"];
+
+  Plutus[color=blue,
+         label="Plutus
+         God of wealth"];
+
+  Faunus[color=blue,
+         label="Faunus
+         Roman only
+         God of fields & shepherds"];
+
+  Quirinus[color=blue,
+           label="Quirinus
+           Roman only
+           God of war"];
+
+  Bellona[color=pink,
+          label="Bellona
+          Roman only
+          God of war"];
+
+  Terminus[color=blue,
+           label="Terminus
+           Roman only
+           God of landmark"];
+
+  Pales[color=pink,
+        label="Pales
+        Roman only
+        God of cattle & pastures"];
+
+  Flora[color=pink,
+        label="Flora
+        Roman only
+        God of flowers"];
+
+  Lucina[color=pink,
+         label="Lucina
+         Roman only
+         God of childbirth"];
+
+  Pomona[label="Pomona
+         God of fruit trees"];
+
+  Janus[color=blue,
+        label="Janus
+        Roman only
+        porter of heaven
+        guardian deity of gates"];
+
+  Penates[label="Penates
+          Roman only
+          welfare & properity"];
+
+  Lares[label="Lares/Lars
+        souls of the ancestor"];
+}

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Fri, 01 May 2020 15:11:00 -0400</lastBuildDate><item><title>Git &amp; Jira</title><link>https://fengxia41103.github.io/myblog/git%20and%20jira.html</link><description>&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 13 May 2020 13:23:00 -0400</lastBuildDate><item><title>Fangfang-style diary</title><link>https://fengxia41103.github.io/myblog/fangfang%20style%20diary.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/doctor%20zhivago.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Every since the &lt;a href="https://www.amazon.com/Wuhan-Diary-Dispatches-Quarantined-City-ebook/dp/B086JXGZFB"&gt;Wuhan Diary&lt;/a&gt;, the style is in fashion. Just a
+moment ago I saw another by a cousin's friend, titled "华府日记"
+(DC Diary), and it distinctly bears a, style, that I found rather,
+strange.&lt;/p&gt;
+&lt;p&gt;It bears a style of smoothness and, calm, that, amid this Corvid-19
+crisis &amp;mdash; essentially …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 13 May 2020 13:23:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-05-13:/myblog/fangfang style diary.html</guid><category>thoughts</category></item><item><title>Git &amp; Jira</title><link>https://fengxia41103.github.io/myblog/git%20and%20jira.html</link><description>&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
 &lt;p&gt;Having be in both sides of a software development, I can now see
 clearer than many what management wants but are not getting, and what
 dev is doing but not doing it right. In essence, what is a management

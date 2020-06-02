@@ -17,9 +17,9 @@ release, wouldn't it be nice if it listed out:&lt;/p&gt;
 &lt;li&gt;list of Jira &amp;rarr; tasks the team wants to achieve in planning&lt;/li&gt;
 &lt;li&gt;list of commits &amp;rarr; actual code changes/contributions&lt;/li&gt;
 &lt;li&gt;statistics of grouped information such as number of commits by Jira
-  component, or label&lt;/li&gt;
+component, or label&lt;/li&gt;
 &lt;li&gt;developer contributions: who changed which file, and how much was
-  changed&lt;/li&gt;
+changed&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Further, when team follows a development workflow, such as the
 &lt;em&gt;popular&lt;/em&gt; &lt;a href="https://nvie.com/posts/a-successful-git-branching-model/"&gt;git
@@ -47,110 +47,110 @@ other as the status of one becomes the trigger/input for another. The
 strategy to solve this challenge is:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Develop data extractor that brings these scattered  information
-   into one place &amp;larr; 1st tier data.&lt;/li&gt;
+into one place &amp;larr; 1st tier data.&lt;/li&gt;
 &lt;li&gt;Checking consistency of cross reference, eg. a Jira status of "work
-   in progress" should not find an associated git commit already lived
-   in a release, not to mention already deployed into production!&lt;/li&gt;
+in progress" should not find an associated git commit already lived
+in a release, not to mention already deployed into production!&lt;/li&gt;
 &lt;li&gt;Derive 2nd tier data, such as aggregated statistics following their
-   logical relationships, so to provide insight to the overall
-   development activities measured by management expectation.&lt;/li&gt;
+logical relationships, so to provide insight to the overall
+development activities measured by management expectation.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Following the &lt;a href=""&gt;five-level capability model&lt;/a&gt;, this strategy will
 fulfill level 1-3:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;level 1 inventory: have mechanism to collect needed information bits&lt;/li&gt;
 &lt;li&gt;level 2 expectation &amp;amp; reality: map out models and relationships
-  between expectation and reality. For example, management expectation
-  is represented by Jira items while development reality represented
-  by code in git. The tool will build cross reference of the two. With
-  growth of knowledge, we can bring in more related information bits,
-  thus extending the scope these cross references.&lt;/li&gt;
+between expectation and reality. For example, management expectation
+is represented by Jira items while development reality represented
+by code in git. The tool will build cross reference of the two. With
+growth of knowledge, we can bring in more related information bits,
+thus extending the scope these cross references.&lt;/li&gt;
 &lt;li&gt;level 3 diff = expectation - reality: Identify gap between an
-  expectation and the reality, thus signaling an execution gap that
-  requires management attention.&lt;/li&gt;
+expectation and the reality, thus signaling an execution gap that
+requires management attention.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1&gt;Information bits&lt;/h1&gt;
 &lt;p&gt;What information do we have? Following the development pipeline described
 in the diagram below, pretending we are development for a release
 called &lt;code&gt;5.1.1&lt;/code&gt;, let's focus on what is in Jira and what is in Git:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Jira: two buckets &amp;mdash; 5.1.1 related vs. non-5.1.1 related&lt;/p&gt;
-&lt;ol&gt;
+&lt;li&gt;Jira: two buckets &amp;mdash; 5.1.1 related vs. non-5.1.1 related&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;5.1.1 items: three kinds&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;5.1.1 features&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.1.1 features&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Bugs: two types of bugs:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;bugs found in other version, and will be fixed in this release.&lt;/li&gt;
-&lt;li&gt;bugs found in &lt;code&gt;5.1.1&lt;/code&gt; (maybe during development), and needs to
-   be fixed in this release.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bugs found in other version, and will be fixed in this release.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bugs found in &lt;code&gt;5.1.1&lt;/code&gt; (maybe during development), and needs to
+be fixed in this release.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;5.1.1 non-code related activities &amp;mdash; managerial, logistics&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;non-5.1.1 items&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Git: two buckets &amp;mdash; code/branch that will be included in 5.1.1 build
-  vs. those that will not be included.&lt;/p&gt;
-&lt;ol&gt;
+vs. those that will not be included.&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Release 5.1.1 branches/code: two types:&lt;/p&gt;
-&lt;ol&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;new code: including newly added code, deleted and/or
-   modified old code that was done for the purpose of
-   5.1.1. Following the Jira categories above, there are two
-   types, and within each, there is Jira tracked
-   vs. not-tracked.&lt;/p&gt;
-&lt;ol&gt;
+modified old code that was done for the purpose of
+5.1.1. Following the Jira categories above, there are two
+types, and within each, there is Jira tracked
+vs. not-tracked.&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;features: new code for implementing a feature:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;jira tracked: has logical relationship between the
-   code work and a Jira ticket&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;not-tracked&lt;/strong&gt;: code was made either w/o a Jira,
-   eg. ad-hoc code change not linked to a planned
-   activity, or a missing cross reference between the
-   two which made this change
-   difficult to trace in term of management visibility. &lt;br&gt;
-            2. bugs: new code for fixing a bug (remember, two types of
-               bugs). Similar to the feature code changes, they can be
-               either Jira tracked, or not-tracked.&lt;/li&gt;
-&lt;li&gt;jira tracked&lt;/li&gt;
-&lt;li&gt;not-tracked&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;
+&lt;p&gt;jira tracked: has logical relationship between the
+code work and a Jira ticket&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;not-tracked&lt;/strong&gt;: code was made either w/o a Jira,
+eg. ad-hoc code change not linked to a planned
+activity, or a missing cross reference between the
+two which made this change
+difficult to trace in term of management visibility.   &lt;/li&gt;
+&lt;li&gt;bugs: new code for fixing a bug (remember, two types of
+bugs). Similar to the feature code changes, they can be
+either Jira tracked, or not-tracked.&lt;/li&gt;
+&lt;li&gt;jira tracked&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;not-tracked&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;old code that didn't change, but will be part of 5.1.1
-   &amp;larr; regression.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+&amp;larr; regression.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Non-5.1.1 branches: these code will not be part of the 5.1.1
-   release in term of build and release. Similarly, it can be
-   divided into new code vs. old code.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;new code&lt;/li&gt;
+release in term of build and release. Similarly, it can be
+divided into new code vs. old code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;new code&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;old code &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img alt="Git &amp;amp; Jira information bit of a release v5.1.1" src="images/gitjira/git%20and%20jira.png"&gt;&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/gitjira/git%20and%20jira.png" /&gt;
+  &lt;figcaption&gt;
+    Git &amp; Jira information bit of a release v5.1.1
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;p&gt;If we could harness all these information bits and categorize them, we
 will be able to answer:&lt;/p&gt;
 &lt;table&gt;

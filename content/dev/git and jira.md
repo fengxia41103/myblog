@@ -81,54 +81,54 @@ in the diagram below, pretending we are development for a release
 called `5.1.1`, let's focus on what is in Jira and what is in Git:
 
 - Jira: two buckets &mdash; 5.1.1 related vs. non-5.1.1 related
-1. 5.1.1 items: three kinds
-
-1. 5.1.1 features
-2. Bugs: two types of bugs:
-
-1. bugs found in other version, and will be fixed in this release.
-2. bugs found in `5.1.1` (maybe during development), and needs to
-be fixed in this release.
-
-3. 5.1.1 non-code related activities &mdash; managerial, logistics
-
-2. non-5.1.1 items
-
+    1. 5.1.1 items: three kinds
+    
+        1. 5.1.1 features
+        2. Bugs: two types of bugs:
+        
+            1. bugs found in other version, and will be fixed in this release.
+            2. bugs found in `5.1.1` (maybe during development), and needs to
+               be fixed in this release.
+               
+        3. 5.1.1 non-code related activities &mdash; managerial, logistics
+    
+    2. non-5.1.1 items
+   
 - Git: two buckets &mdash; code/branch that will be included in 5.1.1 build
-vs. those that will not be included.
+  vs. those that will not be included.
+  
+    1. Release 5.1.1 branches/code: two types:
+    
+        1. new code: including newly added code, deleted and/or
+           modified old code that was done for the purpose of
+           5.1.1. Following the Jira categories above, there are two
+           types, and within each, there is Jira tracked
+           vs. not-tracked.
+           
+            1. features: new code for implementing a feature:
+            
+                - jira tracked: has logical relationship between the
+                   code work and a Jira ticket
+                - **not-tracked**: code was made either w/o a Jira,
+                   eg. ad-hoc code change not linked to a planned
+                   activity, or a missing cross reference between the
+                   two which made this change
+                   difficult to trace in term of management visibility.   
+            2. bugs: new code for fixing a bug (remember, two types of
+               bugs). Similar to the feature code changes, they can be
+               either Jira tracked, or not-tracked.
+                - jira tracked
+                - not-tracked
+              
+        2. old code that didn't change, but will be part of 5.1.1
+           &larr; regression.
+           
+    2. Non-5.1.1 branches: these code will not be part of the 5.1.1
+       release in term of build and release. Similarly, it can be
+       divided into new code vs. old code.
 
-1. Release 5.1.1 branches/code: two types:
-
-1. new code: including newly added code, deleted and/or
-modified old code that was done for the purpose of
-5.1.1. Following the Jira categories above, there are two
-types, and within each, there is Jira tracked
-vs. not-tracked.
-
-1. features: new code for implementing a feature:
-
-- jira tracked: has logical relationship between the
-code work and a Jira ticket
-- **not-tracked**: code was made either w/o a Jira,
-eg. ad-hoc code change not linked to a planned
-activity, or a missing cross reference between the
-two which made this change
-difficult to trace in term of management visibility.   
-2. bugs: new code for fixing a bug (remember, two types of
-bugs). Similar to the feature code changes, they can be
-either Jira tracked, or not-tracked.
-- jira tracked
-- not-tracked
-
-2. old code that didn't change, but will be part of 5.1.1
-&larr; regression.
-
-2. Non-5.1.1 branches: these code will not be part of the 5.1.1
-release in term of build and release. Similarly, it can be
-divided into new code vs. old code.
-
-- new code
-- old code 
+        - new code
+        - old code 
 
 <figure class="col s12">
   <img src="images/gitjira/git%20and%20jira.png" />

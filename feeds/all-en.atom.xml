@@ -218,75 +218,81 @@ requires management attention.&lt;/li&gt;
 in the diagram below, pretending we are development for a release
 called &lt;code&gt;5.1.1&lt;/code&gt;, let's focus on what is in Jira and what is in Git:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Jira: two buckets &amp;mdash; 5.1.1 related vs. non-5.1.1 related&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Jira: two buckets &amp;mdash; 5.1.1 related vs. non-5.1.1 related&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;5.1.1 items: three kinds&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;5.1.1 features&lt;/p&gt;
-&lt;/li&gt;
+&lt;ol&gt;
+&lt;li&gt;5.1.1 features&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Bugs: two types of bugs:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;bugs found in other version, and will be fixed in this release.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;bugs found in &lt;code&gt;5.1.1&lt;/code&gt; (maybe during development), and needs to
-be fixed in this release.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;bugs found in other version, and will be fixed in this release.&lt;/li&gt;
+&lt;li&gt;bugs found in &lt;code&gt;5.1.1&lt;/code&gt; (maybe during development), and needs to
+   be fixed in this release.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;5.1.1 non-code related activities &amp;mdash; managerial, logistics&lt;/p&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;non-5.1.1 items&lt;/p&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Git: two buckets &amp;mdash; code/branch that will be included in 5.1.1 build
-vs. those that will not be included.&lt;/p&gt;
-&lt;/li&gt;
+  vs. those that will not be included.&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Release 5.1.1 branches/code: two types:&lt;/p&gt;
-&lt;/li&gt;
+&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;new code: including newly added code, deleted and/or
-modified old code that was done for the purpose of
-5.1.1. Following the Jira categories above, there are two
-types, and within each, there is Jira tracked
-vs. not-tracked.&lt;/p&gt;
-&lt;/li&gt;
+   modified old code that was done for the purpose of
+   5.1.1. Following the Jira categories above, there are two
+   types, and within each, there is Jira tracked
+   vs. not-tracked.&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;features: new code for implementing a feature:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;jira tracked: has logical relationship between the
-code work and a Jira ticket&lt;/p&gt;
-&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;jira tracked: has logical relationship between the
+   code work and a Jira ticket&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;not-tracked&lt;/strong&gt;: code was made either w/o a Jira,
-eg. ad-hoc code change not linked to a planned
-activity, or a missing cross reference between the
-two which made this change
-difficult to trace in term of management visibility.   &lt;/li&gt;
-&lt;li&gt;bugs: new code for fixing a bug (remember, two types of
-bugs). Similar to the feature code changes, they can be
-either Jira tracked, or not-tracked.&lt;/li&gt;
+   eg. ad-hoc code change not linked to a planned
+   activity, or a missing cross reference between the
+   two which made this change
+   difficult to trace in term of management visibility. &lt;br&gt;
+            2. bugs: new code for fixing a bug (remember, two types of
+               bugs). Similar to the feature code changes, they can be
+               either Jira tracked, or not-tracked.&lt;/li&gt;
 &lt;li&gt;jira tracked&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;not-tracked&lt;/p&gt;
+&lt;li&gt;not-tracked&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;old code that didn't change, but will be part of 5.1.1
-&amp;larr; regression.&lt;/p&gt;
+   &amp;larr; regression.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Non-5.1.1 branches: these code will not be part of the 5.1.1
-release in term of build and release. Similarly, it can be
-divided into new code vs. old code.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;new code&lt;/p&gt;
-&lt;/li&gt;
+   release in term of build and release. Similarly, it can be
+   divided into new code vs. old code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;new code&lt;/li&gt;
 &lt;li&gt;old code &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="images/gitjira/git%20and%20jira.png" /&gt;

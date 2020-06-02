@@ -202,75 +202,81 @@ requires management attention.</li>
 in the diagram below, pretending we are development for a release
 called <code>5.1.1</code>, let's focus on what is in Jira and what is in Git:</p>
 <ul>
-<li>Jira: two buckets &mdash; 5.1.1 related vs. non-5.1.1 related</li>
+<li>
+<p>Jira: two buckets &mdash; 5.1.1 related vs. non-5.1.1 related</p>
+<ol>
 <li>
 <p>5.1.1 items: three kinds</p>
-</li>
-<li>
-<p>5.1.1 features</p>
-</li>
+<ol>
+<li>5.1.1 features</li>
 <li>
 <p>Bugs: two types of bugs:</p>
-</li>
-<li>
-<p>bugs found in other version, and will be fixed in this release.</p>
-</li>
-<li>
-<p>bugs found in <code>5.1.1</code> (maybe during development), and needs to
-be fixed in this release.</p>
+<ol>
+<li>bugs found in other version, and will be fixed in this release.</li>
+<li>bugs found in <code>5.1.1</code> (maybe during development), and needs to
+   be fixed in this release.</li>
+</ol>
 </li>
 <li>
 <p>5.1.1 non-code related activities &mdash; managerial, logistics</p>
 </li>
+</ol>
+</li>
 <li>
 <p>non-5.1.1 items</p>
 </li>
+</ol>
+</li>
 <li>
 <p>Git: two buckets &mdash; code/branch that will be included in 5.1.1 build
-vs. those that will not be included.</p>
-</li>
+  vs. those that will not be included.</p>
+<ol>
 <li>
 <p>Release 5.1.1 branches/code: two types:</p>
-</li>
+<ol>
 <li>
 <p>new code: including newly added code, deleted and/or
-modified old code that was done for the purpose of
-5.1.1. Following the Jira categories above, there are two
-types, and within each, there is Jira tracked
-vs. not-tracked.</p>
-</li>
+   modified old code that was done for the purpose of
+   5.1.1. Following the Jira categories above, there are two
+   types, and within each, there is Jira tracked
+   vs. not-tracked.</p>
+<ol>
 <li>
 <p>features: new code for implementing a feature:</p>
-</li>
-<li>
-<p>jira tracked: has logical relationship between the
-code work and a Jira ticket</p>
-</li>
+<ul>
+<li>jira tracked: has logical relationship between the
+   code work and a Jira ticket</li>
 <li><strong>not-tracked</strong>: code was made either w/o a Jira,
-eg. ad-hoc code change not linked to a planned
-activity, or a missing cross reference between the
-two which made this change
-difficult to trace in term of management visibility.   </li>
-<li>bugs: new code for fixing a bug (remember, two types of
-bugs). Similar to the feature code changes, they can be
-either Jira tracked, or not-tracked.</li>
+   eg. ad-hoc code change not linked to a planned
+   activity, or a missing cross reference between the
+   two which made this change
+   difficult to trace in term of management visibility. <br>
+            2. bugs: new code for fixing a bug (remember, two types of
+               bugs). Similar to the feature code changes, they can be
+               either Jira tracked, or not-tracked.</li>
 <li>jira tracked</li>
-<li>
-<p>not-tracked</p>
+<li>not-tracked</li>
+</ul>
+</li>
+</ol>
 </li>
 <li>
 <p>old code that didn't change, but will be part of 5.1.1
-&larr; regression.</p>
+   &larr; regression.</p>
+</li>
+</ol>
 </li>
 <li>
 <p>Non-5.1.1 branches: these code will not be part of the 5.1.1
-release in term of build and release. Similarly, it can be
-divided into new code vs. old code.</p>
-</li>
-<li>
-<p>new code</p>
-</li>
+   release in term of build and release. Similarly, it can be
+   divided into new code vs. old code.</p>
+<ul>
+<li>new code</li>
 <li>old code </li>
+</ul>
+</li>
+</ol>
+</li>
 </ul>
 <figure class="col s12">
   <img src="images/gitjira/git%20and%20jira.png" />

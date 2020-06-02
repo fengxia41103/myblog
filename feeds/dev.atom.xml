@@ -1,48 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-05-01T15:11:00-04:00</updated><entry><title>Git &amp; Jira</title><link href="https://fengxia41103.github.io/myblog/git%20and%20jira.html" rel="alternate"></link><published>2020-05-01T15:11:00-04:00</published><updated>2020-05-01T15:11:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-05-01:/myblog/git and jira.html</id><summary type="html">&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
-&lt;p&gt;Having be in both sides of a software development, I can now see
-clearer than many what management wants but are not getting, and what
-dev is doing but not doing it right. In essence, what is a management
-in a software development? It's a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
-&lt;p&gt;Having be in both sides of a software development, I can now see
-clearer than many what management wants but are not getting, and what
-dev is doing but not doing it right. In essence, what is a management
-in a software development? It's a catch-22 that manager needs to be
-tech savvy so s/he knows what the dev is doing, but then, even so,
-s/he is a few in number comparing to the number of devs, not to
-mention the line of code changes. So it's simply not practical for him
-to keep up anyway. If then, what to manage? and how to manage? If I
-were the manager, what do I want to control?&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;As of writing, Jira is the popular project management tool, and git is
-the code repo. So here is a diagram showing where information reside,
-taking an hypothetical example that I'm to release version 5.1.1. The
-dream of a manager can be stated as:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;As the manager, I want my entire team to focus on 5.1.1 items, so
-that I can get them done on time and meet product owner's&lt;/p&gt;
-&lt;p&gt;expectation.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;So, how do we do this? In Jira I have defined my expectations &amp;mdash;
-Jira items that I want people to work on. But then, do I need to learn
-git in order to find out what people have actually worked on?
-Similarly, how do I know QA is testing the right stuff, that CICD is
-building the right code, that my instance contains &lt;code&gt;5.1.1&lt;/code&gt; changes but
-not some future experimental contents planned for &lt;code&gt;6.6.6&lt;/code&gt; release?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fundamentally, I think we need an analytic tool. Like QA is for
-function verification, a &lt;em&gt;management QA&lt;/em&gt; tool for managment.&lt;/strong&gt;&lt;/p&gt;
-&lt;h1&gt;Workflow and problems&lt;/h1&gt;
-&lt;p&gt;Sticking w/ Jira and git, we plug in players in a workflow
-demonstrating where they are getting their input, and what their
-outputs are.&lt;/p&gt;
-&lt;figure class="col s12"&gt;
-  &lt;img src="images/git%20and%20jira.png"&gt;
-  &lt;figcaption&gt;Workflow using Jira for PM and Git for code&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;To manage this workflow is to trace information, eg. requirement, from
-Jira, all the way to the stack, that they are implemented
-&lt;strong&gt;correctly&lt;/strong&gt;. So first, let's see what information are there and
-where to find them.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - dev</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/dev.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-05-01T15:11:00-04:00</updated><entry><title>Git &amp; Jira</title><link href="https://fengxia41103.github.io/myblog/git%20and%20jira.html" rel="alternate"></link><published>2020-05-01T15:11:00-04:00</published><updated>2020-05-01T15:11:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-05-01:/myblog/git and jira.html</id><summary type="html">&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;We use Jira for project manage, and git for code. W/ a plugin, Jira is
+able to integrate w/ Gitlab such as create a link to git commit as
+comment. However, it has not the capability to create statistic
+analysis of git commits within Jira, for example, how to …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;We use Jira for project manage, and git for code. W/ a plugin, Jira is
+able to integrate w/ Gitlab such as create a link to git commit as
+comment. However, it has not the capability to create statistic
+analysis of git commits within Jira, for example, how to know the
+number of line changes of a Jira (number of line changes are a good
+indicator of workload as well as a hotspot of bugs), and vice versa,
+how to know a commit is part of a release 5.1.1 (the &lt;code&gt;fix version&lt;/code&gt;
+attribute in Jira)? If we are to generate a &lt;strong&gt;release note&lt;/strong&gt; of a
+release, wouldn't it be nice if it listed out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;list of Jira &amp;rarr; tasks the team wants to achieve in planning&lt;/li&gt;
+&lt;li&gt;list of commits &amp;rarr; actual code changes/contributions&lt;/li&gt;
+&lt;li&gt;statistics of grouped information such as number of commits by Jira
+  component, or label&lt;/li&gt;
+&lt;li&gt;developer contributions: who changed which file, and how much was
+  changed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Further, when team follows a development workflow, such as the
+&lt;em&gt;popular&lt;/em&gt; &lt;a href="https://nvie.com/posts/a-successful-git-branching-model/"&gt;git
+strategy&lt;/a&gt;,
+it is impossible for manager to identify violation w/o bringing
+information from both Jira and git together for cross reference,
+whether manually or automated. Once we follow the development chain
+from dev to CICD to various version of testing/QA, this dilemma is
+compounded even more &amp;mdash; how do I know CICD is building the right
+source? how do I know QA is testing the right feature? and how do I
+know what is deployed on a stack is the right code?&lt;/p&gt;
+&lt;p&gt;Essentially, if we agree that QA is a &lt;strong&gt;MUST&lt;/strong&gt; to protect code
+quality, then QA is also a &lt;strong&gt;MUST&lt;/strong&gt; to protect process quality. Such
+QA for management is harder than code's because it is less well
+understood, thus more difficult to quantify, to standardize, and to be
+assisted by system &amp;mdash; if CICD is now a cliche in any software
+development project, a management version of CICD is not yet an
+essence.&lt;/p&gt;
+&lt;p&gt;This tool is to solve this.&lt;/p&gt;
+&lt;h1&gt;Strategy&lt;/h1&gt;
+&lt;p&gt;Building cross reference is an information asymmetry challenge &amp;mdash;
+we have multiple information sources scattered in different form,
+place, by different owner. Logically, their data have relation to each
+other as the status of one becomes the trigger/input for another. The
+strategy to solve this challenge is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Develop data extractor that brings these scattered  information
+   into one place &amp;larr; 1st tier data.&lt;/li&gt;
+&lt;li&gt;Checking consistency of cross reference, eg. a Jira status of "work
+   in progress" should not find an associated git commit already lived
+   in a release, not to mention already deployed into production!&lt;/li&gt;
+&lt;li&gt;Derive 2nd tier data, such as aggregated statistics following their
+   logical relationships, so to provide insight to the overall
+   development activities measured by management expectation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Following the &lt;a href=""&gt;five-level capability model&lt;/a&gt;, this strategy will
+fulfill level 1-3:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;level 1 inventory: have mechanism to collect needed information bits&lt;/li&gt;
+&lt;li&gt;level 2 expectation &amp;amp; reality: map out models and relationships
+  between expectation and reality. For example, management expectation
+  is represented by Jira items while development reality represented
+  by code in git. The tool will build cross reference of the two. With
+  growth of knowledge, we can bring in more related information bits,
+  thus extending the scope these cross references.&lt;/li&gt;
+&lt;li&gt;level 3 diff = expectation - reality: Identify gap between an
+  expectation and the reality, thus signaling an execution gap that
+  requires management attention.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Information bits&lt;/h1&gt;
+&lt;p&gt;What information do we have? Following the development pipeline described
+in the diagram below, pretending we are development for a release
+called &lt;code&gt;5.1.1&lt;/code&gt;, let's focus on what is in Jira and what is in Git:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Jira: two buckets &amp;mdash; 5.1.1 related vs. non-5.1.1 related&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;5.1.1 items: three kinds&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;5.1.1 features&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bugs: two types of bugs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;bugs found in other version, and will be fixed in this release.&lt;/li&gt;
+&lt;li&gt;bugs found in &lt;code&gt;5.1.1&lt;/code&gt; (maybe during development), and needs to
+   be fixed in this release.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5.1.1 non-code related activities &amp;mdash; managerial, logistics&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;non-5.1.1 items&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Git: two buckets &amp;mdash; code/branch that will be included in 5.1.1 build
+  vs. those that will not be included.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Release 5.1.1 branches/code: two types:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;new code: including newly added code, deleted and/or
+   modified old code that was done for the purpose of
+   5.1.1. Following the Jira categories above, there are two
+   types, and within each, there is Jira tracked
+   vs. not-tracked.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;features: new code for implementing a feature:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;jira tracked: has logical relationship between the
+   code work and a Jira ticket&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;not-tracked&lt;/strong&gt;: code was made either w/o a Jira,
+   eg. ad-hoc code change not linked to a planned
+   activity, or a missing cross reference between the
+   two which made this change
+   difficult to trace in term of management visibility. &lt;br&gt;
+            2. bugs: new code for fixing a bug (remember, two types of
+               bugs). Similar to the feature code changes, they can be
+               either Jira tracked, or not-tracked.&lt;/li&gt;
+&lt;li&gt;jira tracked&lt;/li&gt;
+&lt;li&gt;not-tracked&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;old code that didn't change, but will be part of 5.1.1
+   &amp;larr; regression.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Non-5.1.1 branches: these code will not be part of the 5.1.1
+   release in term of build and release. Similarly, it can be
+   divided into new code vs. old code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;new code&lt;/li&gt;
+&lt;li&gt;old code &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Git &amp;amp; Jira information bit of a release v5.1.1" src="images/gitjira/git%20and%20jira.png"&gt;&lt;/p&gt;
+&lt;p&gt;If we could harness all these information bits and categorize them, we
+will be able to answer:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,95 +184,143 @@ where to find them.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;QA&lt;/td&gt;
-&lt;td&gt;Test coverage of 5.1.1 code?  is 5.1.1 affecting older functions?&lt;/td&gt;
+&lt;td&gt;Test coverage of 5.1.1 code?  Is 5.1.1 affecting older functions?&lt;/td&gt;
 &lt;td&gt;QA repo, report&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Now walking down this list, let me explain what issues are there we
-are to address.&lt;/p&gt;
-&lt;h2&gt;manager &amp;amp; Jira&lt;/h2&gt;
-&lt;p&gt;Starting w/ Jira, if we are to managing &lt;code&gt;5.1.1&lt;/code&gt;, then we essentially
-divide all actions into:&lt;/p&gt;
+&lt;h1&gt;Application design&lt;/h1&gt;
+&lt;p&gt;The application is a modern data driven web application divided into
+three components: backend, frontend, and data collector.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/gitjira/high%20level%20design.png" /&gt;
+  &lt;figcaption&gt;High level architecture&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;data model&lt;/h2&gt;
+&lt;p&gt;Everything starts w/ data model. It tells what information bits will
+be collected and stored, and the logical relationships among them.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+    &lt;img src="images/gitjira/jirra.png"/&gt;
+    &lt;figcaption&gt;Django data model&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;data collector&lt;/h2&gt;
+&lt;p&gt;Can be any tool/script to pull information from interested information
+source. &lt;code&gt;Gitpython&lt;/code&gt; and &lt;code&gt;jira-python&lt;/code&gt; are self-explanatory. The
+&lt;code&gt;git-jira-analyzer&lt;/code&gt; script is to use these two libraries to extract
+information from Jira and a clone of a git on your local system.&lt;/p&gt;
+&lt;p&gt;The collectors are, however, only a library. The extracted data must
+be persisted to the DB in the backend. However, instead of speaking to
+DB directly, we are to take advantage of Django's &lt;a href="https://docs.djangoproject.com/en/3.0/howto/custom-management-commands/"&gt;custom
+command&lt;/a&gt;,
+so the extractor is fully in sync w/ the backend data model, and can
+use Django's powerful query and ORM for data manipulation.&lt;/p&gt;
+&lt;p&gt;&lt;a href="git_jira_analyzer.py"&gt;source&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;backend&lt;/h2&gt;
+&lt;p&gt;Backend is Django+Gunicorn. We use
+&lt;a href="https://django-tastypie.readthedocs.io/en/latest/"&gt;Tastypie&lt;/a&gt; to
+provide RESTful API based on Django models. Aggregated stats can be
+either processed on the client side (by frontend), or on the server
+side (by backend). In this design, we opted for backend for the job.&lt;/p&gt;
+&lt;p&gt;Further, we keep the backend as a pure API provider, meaning that we
+avoid building any custom URL endpoint that participates backend-front
+action &amp;larr; every single bit the frontend needs is obtainable via
+exposed and documented REST API, no more and no less.&lt;/p&gt;
+&lt;p&gt;As of writing (5/22/2020), API is not enforcing user
+authentication. However, backend has capability to provide &lt;a href="https://django-tastypie.readthedocs.io/en/latest/authentication.html"&gt;various
+types of
+authentication&lt;/a&gt;
+when the time comes.&lt;/p&gt;
+&lt;h3&gt;tastypie vs. DRF&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://www.django-rest-framework.org/"&gt;Django Rest Framework&lt;/a&gt; is a
+more powerful REST API toolset than
+&lt;a href="https://django-tastypie.readthedocs.io/en/latest/"&gt;Tastypie&lt;/a&gt;. By my
+experience, Tastypie is easier to produce de facto API by using
+&lt;code&gt;ModelResource&lt;/code&gt;, which maps neatly 1:1 between Django model to an API
+resource. If you need lots of special massage of data between raw
+model data to its JSON version, eg. mapping date to some special
+format, DRF gives you more machinery along the hydration/dehydration
+path.&lt;/p&gt;
+&lt;h2&gt;frontend&lt;/h2&gt;
+&lt;p&gt;Frontend is based on REACT + &lt;a href="https://materializecss.com/"&gt;materialize
+CSS&lt;/a&gt;. The setup is also ready to use &lt;a href="https://react-bootstrap.github.io/"&gt;React
+Bootstrap&lt;/a&gt;. For more sophisticated
+UI layout and function, a Bootstrap-based approach will be better.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/gitjira/frontend.png"/&gt;
+  &lt;figcaption&gt;Frontend main page&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Roughly there is a 1:1 mapping between REACT component and &lt;a href="http://10.240.43.48:8001/api/v1/"&gt;API
+resource&lt;/a&gt;, simply for the reason
+that each resource needs rendering at some point of a UI. Thus even
+for simple component such as &lt;code&gt;Branch&lt;/code&gt; which is only rendering the
+branch name, we created a separate component (as place holder) so the
+code structure is ready to be extended.&lt;/p&gt;
+&lt;h3&gt;JWT authentication&lt;/h3&gt;
+&lt;p&gt;not implemented yet&lt;/p&gt;
+&lt;h3&gt;routing&lt;/h3&gt;
+&lt;p&gt;not implemented yet&lt;/p&gt;
+&lt;h1&gt;Development&lt;/h1&gt;
+&lt;p&gt;Everything has been dockerized. Use it for both development &amp;amp;
+deployment. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Prerequisite&lt;/strong&gt;: &lt;a href="https://docs.docker.com/compose/install/"&gt;install &lt;code&gt;docker-compose&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;for backend: in &lt;code&gt;backend/&lt;/code&gt; folder, &lt;code&gt;docker-compose up --build&lt;/code&gt; if
+  you are running it for the first time. You can omit the &lt;code&gt;--build&lt;/code&gt;
+  once the image has been built.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;for frontend: in &lt;code&gt;frontend/&lt;/code&gt; folder, run &lt;code&gt;npm install &amp;amp;&amp;amp; npm run
+  dev&lt;/code&gt;, then browser to &lt;code&gt;localhost:8080&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Alternatively, you can use &lt;code&gt;docker-compose up --build&lt;/code&gt;. Here
+  &lt;strong&gt;&lt;code&gt;--build&lt;/code&gt; is required&lt;/strong&gt; because the REACT source needs a
+  compilation. However, you lose the &lt;code&gt;webpack hot reload&lt;/code&gt; in this
+  method because the compilation is happening inside the docker on a
+  fresh copy of your &lt;code&gt;/src&lt;/code&gt; each time its &lt;code&gt;docker-compose up&lt;/code&gt;, so
+  there is nothing to &lt;em&gt;reload&lt;/em&gt;. This is good for deployment, but
+  doesn't work well for frontend dev.&lt;/p&gt;
+&lt;h2&gt;manual intervention&lt;/h2&gt;
+&lt;p&gt;There are always  configs needed tweaking to fit  your environment . In
+particular you want to pay attention to:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;5.1.1&lt;/code&gt; items&lt;ol&gt;
-&lt;li&gt;todo that will result in code&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;feature&lt;/code&gt; targeting &lt;code&gt;5.1.1&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;bug fixes&lt;/code&gt;&lt;ol&gt;
-&lt;li&gt;found in &lt;code&gt;5.1.1&lt;/code&gt; code, and will be fixed in &lt;code&gt;5.1.1&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;found in other versions, and will be fixed in &lt;code&gt;5.1.1&lt;/code&gt; &amp;rarr;
-   backwards compatibility&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;
+&lt;p&gt;port mapping: expose Docker port to host. For example, MySQL port
+   &lt;code&gt;3306&lt;/code&gt; is mapped to host &lt;code&gt;3306&lt;/code&gt; by default as shown below.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yaml
+    ports:
+      - "3306:3306"&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;
+&lt;p&gt;IP mapping: in &lt;code&gt;frontend/src/root.jsx&lt;/code&gt;, class function
+   &lt;code&gt;constructor&lt;/code&gt;:&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;those that will not&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SERVER&lt;/code&gt;: set to the API server IP or hostname&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PORT&lt;/code&gt;: API server port&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;non-5.1.1&lt;/code&gt; items&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;These Jira items can be grouped in many ways logistically within Jira
-itself, such as using epic, or even outside Jira so it fits the
-manager's vision, or the organization's style. But these groupings
-don't change the ingredients &amp;mdash; the contents of these todos
-remain regardless how you are grouping them.&lt;/p&gt;
-&lt;h2&gt;dev &amp;amp; git&lt;/h2&gt;
-&lt;p&gt;First and foremost, git code should always be mapped to &lt;code&gt;5.1.1&lt;/code&gt; Jira
-(feature &amp;amp; bug fixes) because, after all, Jira defines the requirement
-(what to implement/fix). Two common approaches are: naming branch
-using Jira key, and include Jira key in commit message.&lt;/p&gt;
-&lt;p&gt;If using git w/ gitlab and if dev puts Jira number in commit message
-or merge request, Jira ticket will automatically receive a comment w/
-a link to the gitlab commit page.&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;However, this is where a problem arises &amp;mdash; the match between Jira
-and git is through the Jira key in git commit. &lt;strong&gt;What if dev didn't
-write that way?&lt;/strong&gt; It can result in four undesirable scenarios:&lt;/p&gt;
+&lt;p&gt;For example, when we are setting them to &lt;code&gt;localhost&lt;/code&gt; &amp;amp; &lt;code&gt;8002&lt;/code&gt;
+   because we are assuming the backend dockers are living on the same
+   host (thus &lt;code&gt;localhost&lt;/code&gt;) and is available on port &lt;code&gt;8002&lt;/code&gt; (which is
+   listened by the backend nginx).&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Completly missing&lt;/strong&gt;: dev forgot to put the Jira number.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mismatch&lt;/strong&gt;: dev put in the wrong Jira number in commit, eg. typo.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Ignorant&lt;/strong&gt;: manager moved a Jira off a release, dev doesn't
-   know. Or even worse, the code has been merged to &lt;code&gt;5.1.1&lt;/code&gt;
-   branch. Then what?&lt;/li&gt;
-&lt;li&gt;Dev worked on a code that is not &lt;code&gt;5.1.1&lt;/code&gt; Jira (the black boxes in
-   the diagram), eg. lack of focus.&lt;/li&gt;
+&lt;li&gt;CORS whitelisting: in &lt;code&gt;backend/gitt/settings.py&lt;/code&gt;,
+   &lt;code&gt;CORS_ORIGIN_WHITELIST&lt;/code&gt;, adds the API server IP and port. This is
+   &lt;strong&gt;critical&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;For all these gaps, how to identify them?&lt;/p&gt;
-&lt;h2&gt;CICD &amp;amp; artifacts&lt;/h2&gt;
-&lt;p&gt;Transforming code into artifacts, eg. binaries, is the job of
-CICD. Ignore the continuous testing aspect of CICD for the time
-being. Ideally, the code used to build &lt;code&gt;5.1.1&lt;/code&gt; artifacts should have:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;All the 5.1.1 code that are in &lt;strong&gt;done&lt;/strong&gt; state (and the &lt;em&gt;done&lt;/em&gt;
-   should match Jira status).&lt;/li&gt;
-&lt;li&gt;Nothing from parallel or future code such as &lt;code&gt;5.1.2&lt;/code&gt; or &lt;code&gt;6.0.0&lt;/code&gt;
-   &amp;larr; no feature leaks, or bugs from immature (or even untested)
-   code &amp;rarr; this is a &lt;strong&gt;clean&lt;/strong&gt; build.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;But then, &lt;strong&gt;how do I know CICD is doing these two?&lt;/strong&gt;&lt;/p&gt;
-&lt;h2&gt;QA &amp;amp; tests&lt;/h2&gt;
-&lt;p&gt;Last but the least, &lt;strong&gt;how to map QA's tests and reports to Jira?&lt;/strong&gt; It
-doesn't nee to be mapped to an individual Jira item. However,
-conceptually, a group of Jira represents a feature/function that
-should be achieved, thus QA's result should be mapped to this
-level. For example, if an epic represents a new module I'm putting
-into my product, QA would have at least one test for this module, thus
-I'd like to map this test to the epic.&lt;/p&gt;
-&lt;h1&gt;&lt;/h1&gt;
-&lt;div class="footnote"&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;Even so, clicking through Jira just to know that the link
-exists, or matching the right code, is not practical for a project managaer.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:2"&gt;
-&lt;p&gt;There is a counter argument that mangagement doesn't really care
-the process in between. Instead, he defines the requirement, and
-will conduct acceptance review or test for result. How the
-requirement is fulfilled is not his concern.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</content></entry><entry><title>Git strategy for backward compatibility</title><link href="https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html" rel="alternate"></link><published>2020-04-01T11:42:00-04:00</published><updated>2020-04-01T11:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-01:/myblog/git rebase strategy.html</id><summary type="html">&lt;figure class="col s12 center"&gt;
+&lt;p&gt;Of course, the values in &lt;code&gt;docker-compose&lt;/code&gt; can be changed such as
+&lt;code&gt;enviroment&lt;/code&gt; that defines DB port, user name, password, even the
+application's database name, and so on. They are fairly
+self-explanatory. Therefore I'm skipping them here.&lt;/p&gt;
+&lt;h1&gt;Deployment&lt;/h1&gt;
+&lt;p&gt;The &lt;code&gt;docker-compose&lt;/code&gt; way is production ready. &lt;/p&gt;
+&lt;p&gt;There certainly can be different ways to deploy depending on the
+underline platform this is deployed unto. For example, using &lt;code&gt;uwsgi&lt;/code&gt;
+instead of &lt;code&gt;gunicorn&lt;/code&gt;, or tweaking the number of &lt;code&gt;gunicorn&lt;/code&gt; workers,
+and so on. These topics are beyond the scope of this document.&lt;/p&gt;</content></entry><entry><title>Git strategy for backward compatibility</title><link href="https://fengxia41103.github.io/myblog/git%20rebase%20strategy.html" rel="alternate"></link><published>2020-04-01T11:42:00-04:00</published><updated>2020-04-01T11:42:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-04-01:/myblog/git rebase strategy.html</id><summary type="html">&lt;figure class="col s12 center"&gt;
   &lt;img
   src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
   &lt;figcaption&gt;

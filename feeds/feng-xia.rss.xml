@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 13 May 2020 13:23:00 -0400</lastBuildDate><item><title>Fangfang-style diary</title><link>https://fengxia41103.github.io/myblog/fangfang%20style%20diary.html</link><description>&lt;figure class="col s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sat, 23 May 2020 10:24:00 -0400</lastBuildDate><item><title>Thoughtless</title><link>https://fengxia41103.github.io/myblog/thoughtless.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/1968%20earth.jpg"/&gt;
+  &lt;figcaption&gt;First photo of the Earth taken by NASA in 1968&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Sitting here in the sun feels like Cambodia, humid, hot, the green
+plants look greener after a day of rain, and w/ Noah fooling around
+here and there w/ his primal bow and arrow, and Zhuzhu lying by the
+feet …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 23 May 2020 10:24:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-05-23:/myblog/thoughtless.html</guid><category>thoughts</category></item><item><title>Fangfang-style diary</title><link>https://fengxia41103.github.io/myblog/fangfang%20style%20diary.html</link><description>&lt;figure class="col s12"&gt;
   &lt;img src="images/doctor%20zhivago.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -8,11 +16,11 @@ moment ago I saw another by a cousin's friend, titled "华府日记"
 (DC Diary), and it distinctly bears a, style, that I found rather,
 strange.&lt;/p&gt;
 &lt;p&gt;It bears a style of smoothness and, calm, that, amid this Corvid-19
-crisis &amp;mdash; essentially …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 13 May 2020 13:23:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-05-13:/myblog/fangfang style diary.html</guid><category>thoughts</category></item><item><title>Git &amp; Jira</title><link>https://fengxia41103.github.io/myblog/git%20and%20jira.html</link><description>&lt;p&gt;Huston, we have a problem.&lt;/p&gt;
-&lt;p&gt;Having be in both sides of a software development, I can now see
-clearer than many what management wants but are not getting, and what
-dev is doing but not doing it right. In essence, what is a management
-in a software development? It's a …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 01 May 2020 15:11:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-05-01:/myblog/git and jira.html</guid></item><item><title>Cart ahead of the horse</title><link>https://fengxia41103.github.io/myblog/cart%20ahead%20of%20the%20horse.html</link><description>&lt;figure class="col s12"&gt;
+crisis &amp;mdash; essentially …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 13 May 2020 13:23:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-05-13:/myblog/fangfang style diary.html</guid><category>thoughts</category></item><item><title>Git &amp; Jira</title><link>https://fengxia41103.github.io/myblog/git%20and%20jira.html</link><description>&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;We use Jira for project manage, and git for code. W/ a plugin, Jira is
+able to integrate w/ Gitlab such as create a link to git commit as
+comment. However, it has not the capability to create statistic
+analysis of git commits within Jira, for example, how to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Fri, 01 May 2020 15:11:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-05-01:/myblog/git and jira.html</guid></item><item><title>Cart ahead of the horse</title><link>https://fengxia41103.github.io/myblog/cart%20ahead%20of%20the%20horse.html</link><description>&lt;figure class="col s12"&gt;
   &lt;img src="images/DSC_1190356.JPG"/&gt;
   &lt;figcaption&gt;Taken in Romanian National History Museum, Bucharest, 2020&lt;/figcaption&gt;
 &lt;/figure&gt;

@@ -131,46 +131,156 @@
         <blockquote>
         </blockquote>
         <p>
-          <p>Huston, we have a problem.</p>
-<p>Having be in both sides of a software development, I can now see
-clearer than many what management wants but are not getting, and what
-dev is doing but not doing it right. In essence, what is a management
-in a software development? It's a catch-22 that manager needs to be
-tech savvy so s/he knows what the dev is doing, but then, even so,
-s/he is a few in number comparing to the number of devs, not to
-mention the line of code changes. So it's simply not practical for him
-to keep up anyway. If then, what to manage? and how to manage? If I
-were the manager, what do I want to control?<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
-<p>As of writing, Jira is the popular project management tool, and git is
-the code repo. So here is a diagram showing where information reside,
-taking an hypothetical example that I'm to release version 5.1.1. The
-dream of a manager can be stated as:</p>
-<blockquote>
-<p>As the manager, I want my entire team to focus on 5.1.1 items, so
-that I can get them done on time and meet product owner's</p>
-<p>expectation.</p>
-</blockquote>
-<p>So, how do we do this? In Jira I have defined my expectations &mdash;
-Jira items that I want people to work on. But then, do I need to learn
-git in order to find out what people have actually worked on?
-Similarly, how do I know QA is testing the right stuff, that CICD is
-building the right code, that my instance contains <code>5.1.1</code> changes but
-not some future experimental contents planned for <code>6.6.6</code> release?</p>
-<p><strong>Fundamentally, I think we need an analytic tool. Like QA is for
-function verification, a <em>management QA</em> tool for managment.</strong></p>
-<h1>Workflow and problems</h1>
-<p>Sticking w/ Jira and git, we plug in players in a workflow
-demonstrating where they are getting their input, and what their
-outputs are.</p>
-<figure class="col s12">
-  <img src="images/git%20and%20jira.png">
-  <figcaption>Workflow using Jira for PM and Git for code</figcaption>
-</figure>
-
-<p>To manage this workflow is to trace information, eg. requirement, from
-Jira, all the way to the stack, that they are implemented
-<strong>correctly</strong>. So first, let's see what information are there and
-where to find them.</p>
+          <h1>Introduction</h1>
+<p>We use Jira for project manage, and git for code. W/ a plugin, Jira is
+able to integrate w/ Gitlab such as create a link to git commit as
+comment. However, it has not the capability to create statistic
+analysis of git commits within Jira, for example, how to know the
+number of line changes of a Jira (number of line changes are a good
+indicator of workload as well as a hotspot of bugs), and vice versa,
+how to know a commit is part of a release 5.1.1 (the <code>fix version</code>
+attribute in Jira)? If we are to generate a <strong>release note</strong> of a
+release, wouldn't it be nice if it listed out:</p>
+<ul>
+<li>list of Jira &rarr; tasks the team wants to achieve in planning</li>
+<li>list of commits &rarr; actual code changes/contributions</li>
+<li>statistics of grouped information such as number of commits by Jira
+  component, or label</li>
+<li>developer contributions: who changed which file, and how much was
+  changed</li>
+</ul>
+<p>Further, when team follows a development workflow, such as the
+<em>popular</em> <a href="https://nvie.com/posts/a-successful-git-branching-model/">git
+strategy</a>,
+it is impossible for manager to identify violation w/o bringing
+information from both Jira and git together for cross reference,
+whether manually or automated. Once we follow the development chain
+from dev to CICD to various version of testing/QA, this dilemma is
+compounded even more &mdash; how do I know CICD is building the right
+source? how do I know QA is testing the right feature? and how do I
+know what is deployed on a stack is the right code?</p>
+<p>Essentially, if we agree that QA is a <strong>MUST</strong> to protect code
+quality, then QA is also a <strong>MUST</strong> to protect process quality. Such
+QA for management is harder than code's because it is less well
+understood, thus more difficult to quantify, to standardize, and to be
+assisted by system &mdash; if CICD is now a cliche in any software
+development project, a management version of CICD is not yet an
+essence.</p>
+<p>This tool is to solve this.</p>
+<h1>Strategy</h1>
+<p>Building cross reference is an information asymmetry challenge &mdash;
+we have multiple information sources scattered in different form,
+place, by different owner. Logically, their data have relation to each
+other as the status of one becomes the trigger/input for another. The
+strategy to solve this challenge is:</p>
+<ol>
+<li>Develop data extractor that brings these scattered  information
+   into one place &larr; 1st tier data.</li>
+<li>Checking consistency of cross reference, eg. a Jira status of "work
+   in progress" should not find an associated git commit already lived
+   in a release, not to mention already deployed into production!</li>
+<li>Derive 2nd tier data, such as aggregated statistics following their
+   logical relationships, so to provide insight to the overall
+   development activities measured by management expectation.</li>
+</ol>
+<p>Following the <a href="">five-level capability model</a>, this strategy will
+fulfill level 1-3:</p>
+<ul>
+<li>level 1 inventory: have mechanism to collect needed information bits</li>
+<li>level 2 expectation &amp; reality: map out models and relationships
+  between expectation and reality. For example, management expectation
+  is represented by Jira items while development reality represented
+  by code in git. The tool will build cross reference of the two. With
+  growth of knowledge, we can bring in more related information bits,
+  thus extending the scope these cross references.</li>
+<li>level 3 diff = expectation - reality: Identify gap between an
+  expectation and the reality, thus signaling an execution gap that
+  requires management attention.</li>
+</ul>
+<h1>Information bits</h1>
+<p>What information do we have? Following the development pipeline described
+in the diagram below, pretending we are development for a release
+called <code>5.1.1</code>, let's focus on what is in Jira and what is in Git:</p>
+<ul>
+<li>
+<p>Jira: two buckets &mdash; 5.1.1 related vs. non-5.1.1 related</p>
+<ol>
+<li>
+<p>5.1.1 items: three kinds</p>
+<ol>
+<li>5.1.1 features</li>
+<li>
+<p>Bugs: two types of bugs:</p>
+<ol>
+<li>bugs found in other version, and will be fixed in this release.</li>
+<li>bugs found in <code>5.1.1</code> (maybe during development), and needs to
+   be fixed in this release.</li>
+</ol>
+</li>
+<li>
+<p>5.1.1 non-code related activities &mdash; managerial, logistics</p>
+</li>
+</ol>
+</li>
+<li>
+<p>non-5.1.1 items</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Git: two buckets &mdash; code/branch that will be included in 5.1.1 build
+  vs. those that will not be included.</p>
+<ol>
+<li>
+<p>Release 5.1.1 branches/code: two types:</p>
+<ol>
+<li>
+<p>new code: including newly added code, deleted and/or
+   modified old code that was done for the purpose of
+   5.1.1. Following the Jira categories above, there are two
+   types, and within each, there is Jira tracked
+   vs. not-tracked.</p>
+<ol>
+<li>
+<p>features: new code for implementing a feature:</p>
+<ul>
+<li>jira tracked: has logical relationship between the
+   code work and a Jira ticket</li>
+<li><strong>not-tracked</strong>: code was made either w/o a Jira,
+   eg. ad-hoc code change not linked to a planned
+   activity, or a missing cross reference between the
+   two which made this change
+   difficult to trace in term of management visibility. <br>
+            2. bugs: new code for fixing a bug (remember, two types of
+               bugs). Similar to the feature code changes, they can be
+               either Jira tracked, or not-tracked.</li>
+<li>jira tracked</li>
+<li>not-tracked</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>old code that didn't change, but will be part of 5.1.1
+   &larr; regression.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Non-5.1.1 branches: these code will not be part of the 5.1.1
+   release in term of build and release. Similarly, it can be
+   divided into new code vs. old code.</p>
+<ul>
+<li>new code</li>
+<li>old code </li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><img alt="Git &amp; Jira information bit of a release v5.1.1" src="images/gitjira/git%20and%20jira.png"></p>
+<p>If we could harness all these information bits and categorize them, we
+will be able to answer:</p>
 <table>
 <thead>
 <tr>
@@ -202,95 +312,143 @@ where to find them.</p>
 </tr>
 <tr>
 <td>QA</td>
-<td>Test coverage of 5.1.1 code?  is 5.1.1 affecting older functions?</td>
+<td>Test coverage of 5.1.1 code?  Is 5.1.1 affecting older functions?</td>
 <td>QA repo, report</td>
 </tr>
 </tbody>
 </table>
-<p>Now walking down this list, let me explain what issues are there we
-are to address.</p>
-<h2>manager &amp; Jira</h2>
-<p>Starting w/ Jira, if we are to managing <code>5.1.1</code>, then we essentially
-divide all actions into:</p>
+<h1>Application design</h1>
+<p>The application is a modern data driven web application divided into
+three components: backend, frontend, and data collector.</p>
+<figure class="col s12 center">
+  <img src="images/gitjira/high%20level%20design.png" />
+  <figcaption>High level architecture</figcaption>
+</figure>
+
+<h2>data model</h2>
+<p>Everything starts w/ data model. It tells what information bits will
+be collected and stored, and the logical relationships among them.</p>
+<figure class="col s12 center">
+    <img src="images/gitjira/jirra.png"/>
+    <figcaption>Django data model</figcaption>
+</figure>
+
+<h2>data collector</h2>
+<p>Can be any tool/script to pull information from interested information
+source. <code>Gitpython</code> and <code>jira-python</code> are self-explanatory. The
+<code>git-jira-analyzer</code> script is to use these two libraries to extract
+information from Jira and a clone of a git on your local system.</p>
+<p>The collectors are, however, only a library. The extracted data must
+be persisted to the DB in the backend. However, instead of speaking to
+DB directly, we are to take advantage of Django's <a href="https://docs.djangoproject.com/en/3.0/howto/custom-management-commands/">custom
+command</a>,
+so the extractor is fully in sync w/ the backend data model, and can
+use Django's powerful query and ORM for data manipulation.</p>
+<p><a href="git_jira_analyzer.py">source</a></p>
+<h2>backend</h2>
+<p>Backend is Django+Gunicorn. We use
+<a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a> to
+provide RESTful API based on Django models. Aggregated stats can be
+either processed on the client side (by frontend), or on the server
+side (by backend). In this design, we opted for backend for the job.</p>
+<p>Further, we keep the backend as a pure API provider, meaning that we
+avoid building any custom URL endpoint that participates backend-front
+action &larr; every single bit the frontend needs is obtainable via
+exposed and documented REST API, no more and no less.</p>
+<p>As of writing (5/22/2020), API is not enforcing user
+authentication. However, backend has capability to provide <a href="https://django-tastypie.readthedocs.io/en/latest/authentication.html">various
+types of
+authentication</a>
+when the time comes.</p>
+<h3>tastypie vs. DRF</h3>
+<p><a href="https://www.django-rest-framework.org/">Django Rest Framework</a> is a
+more powerful REST API toolset than
+<a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a>. By my
+experience, Tastypie is easier to produce de facto API by using
+<code>ModelResource</code>, which maps neatly 1:1 between Django model to an API
+resource. If you need lots of special massage of data between raw
+model data to its JSON version, eg. mapping date to some special
+format, DRF gives you more machinery along the hydration/dehydration
+path.</p>
+<h2>frontend</h2>
+<p>Frontend is based on REACT + <a href="https://materializecss.com/">materialize
+CSS</a>. The setup is also ready to use <a href="https://react-bootstrap.github.io/">React
+Bootstrap</a>. For more sophisticated
+UI layout and function, a Bootstrap-based approach will be better.</p>
+<figure class="col s12 center">
+  <img src="images/gitjira/frontend.png"/>
+  <figcaption>Frontend main page</figcaption>
+</figure>
+
+<p>Roughly there is a 1:1 mapping between REACT component and <a href="http://10.240.43.48:8001/api/v1/">API
+resource</a>, simply for the reason
+that each resource needs rendering at some point of a UI. Thus even
+for simple component such as <code>Branch</code> which is only rendering the
+branch name, we created a separate component (as place holder) so the
+code structure is ready to be extended.</p>
+<h3>JWT authentication</h3>
+<p>not implemented yet</p>
+<h3>routing</h3>
+<p>not implemented yet</p>
+<h1>Development</h1>
+<p>Everything has been dockerized. Use it for both development &amp;
+deployment. </p>
+<p><strong>Prerequisite</strong>: <a href="https://docs.docker.com/compose/install/">install <code>docker-compose</code></a>.</p>
+<ul>
+<li>
+<p>for backend: in <code>backend/</code> folder, <code>docker-compose up --build</code> if
+  you are running it for the first time. You can omit the <code>--build</code>
+  once the image has been built.</p>
+</li>
+<li>
+<p>for frontend: in <code>frontend/</code> folder, run <code>npm install &amp;&amp; npm run
+  dev</code>, then browser to <code>localhost:8080</code>.</p>
+</li>
+</ul>
+<p>Alternatively, you can use <code>docker-compose up --build</code>. Here
+  <strong><code>--build</code> is required</strong> because the REACT source needs a
+  compilation. However, you lose the <code>webpack hot reload</code> in this
+  method because the compilation is happening inside the docker on a
+  fresh copy of your <code>/src</code> each time its <code>docker-compose up</code>, so
+  there is nothing to <em>reload</em>. This is good for deployment, but
+  doesn't work well for frontend dev.</p>
+<h2>manual intervention</h2>
+<p>There are always  configs needed tweaking to fit  your environment . In
+particular you want to pay attention to:</p>
 <ol>
-<li><code>5.1.1</code> items<ol>
-<li>todo that will result in code<ol>
-<li><code>feature</code> targeting <code>5.1.1</code></li>
-<li><code>bug fixes</code><ol>
-<li>found in <code>5.1.1</code> code, and will be fixed in <code>5.1.1</code></li>
-<li>found in other versions, and will be fixed in <code>5.1.1</code> &rarr;
-   backwards compatibility</li>
-</ol>
+<li>
+<p>port mapping: expose Docker port to host. For example, MySQL port
+   <code>3306</code> is mapped to host <code>3306</code> by default as shown below.</p>
+<p><code>yaml
+    ports:
+      - "3306:3306"</code></p>
 </li>
-</ol>
+<li>
+<p>IP mapping: in <code>frontend/src/root.jsx</code>, class function
+   <code>constructor</code>:</p>
 </li>
-<li>those that will not</li>
+<li><code>SERVER</code>: set to the API server IP or hostname</li>
+<li><code>PORT</code>: API server port</li>
 </ol>
-</li>
-<li><code>non-5.1.1</code> items</li>
-</ol>
-<p>These Jira items can be grouped in many ways logistically within Jira
-itself, such as using epic, or even outside Jira so it fits the
-manager's vision, or the organization's style. But these groupings
-don't change the ingredients &mdash; the contents of these todos
-remain regardless how you are grouping them.</p>
-<h2>dev &amp; git</h2>
-<p>First and foremost, git code should always be mapped to <code>5.1.1</code> Jira
-(feature &amp; bug fixes) because, after all, Jira defines the requirement
-(what to implement/fix). Two common approaches are: naming branch
-using Jira key, and include Jira key in commit message.</p>
-<p>If using git w/ gitlab and if dev puts Jira number in commit message
-or merge request, Jira ticket will automatically receive a comment w/
-a link to the gitlab commit page.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
-<p>However, this is where a problem arises &mdash; the match between Jira
-and git is through the Jira key in git commit. <strong>What if dev didn't
-write that way?</strong> It can result in four undesirable scenarios:</p>
+<p>For example, when we are setting them to <code>localhost</code> &amp; <code>8002</code>
+   because we are assuming the backend dockers are living on the same
+   host (thus <code>localhost</code>) and is available on port <code>8002</code> (which is
+   listened by the backend nginx).</p>
 <ol>
-<li><strong>Completly missing</strong>: dev forgot to put the Jira number.</li>
-<li><strong>Mismatch</strong>: dev put in the wrong Jira number in commit, eg. typo.</li>
-<li><strong>Ignorant</strong>: manager moved a Jira off a release, dev doesn't
-   know. Or even worse, the code has been merged to <code>5.1.1</code>
-   branch. Then what?</li>
-<li>Dev worked on a code that is not <code>5.1.1</code> Jira (the black boxes in
-   the diagram), eg. lack of focus.</li>
+<li>CORS whitelisting: in <code>backend/gitt/settings.py</code>,
+   <code>CORS_ORIGIN_WHITELIST</code>, adds the API server IP and port. This is
+   <strong>critical</strong>.</li>
 </ol>
-<p>For all these gaps, how to identify them?</p>
-<h2>CICD &amp; artifacts</h2>
-<p>Transforming code into artifacts, eg. binaries, is the job of
-CICD. Ignore the continuous testing aspect of CICD for the time
-being. Ideally, the code used to build <code>5.1.1</code> artifacts should have:</p>
-<ol>
-<li>All the 5.1.1 code that are in <strong>done</strong> state (and the <em>done</em>
-   should match Jira status).</li>
-<li>Nothing from parallel or future code such as <code>5.1.2</code> or <code>6.0.0</code>
-   &larr; no feature leaks, or bugs from immature (or even untested)
-   code &rarr; this is a <strong>clean</strong> build.</li>
-</ol>
-<p>But then, <strong>how do I know CICD is doing these two?</strong></p>
-<h2>QA &amp; tests</h2>
-<p>Last but the least, <strong>how to map QA's tests and reports to Jira?</strong> It
-doesn't nee to be mapped to an individual Jira item. However,
-conceptually, a group of Jira represents a feature/function that
-should be achieved, thus QA's result should be mapped to this
-level. For example, if an epic represents a new module I'm putting
-into my product, QA would have at least one test for this module, thus
-I'd like to map this test to the epic.</p>
-<h1></h1>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Even so, clicking through Jira just to know that the link
-exists, or matching the right code, is not practical for a project managaer.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>There is a counter argument that mangagement doesn't really care
-the process in between. Instead, he defines the requirement, and
-will conduct acceptance review or test for result. How the
-requirement is fulfilled is not his concern.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+<p>Of course, the values in <code>docker-compose</code> can be changed such as
+<code>enviroment</code> that defines DB port, user name, password, even the
+application's database name, and so on. They are fairly
+self-explanatory. Therefore I'm skipping them here.</p>
+<h1>Deployment</h1>
+<p>The <code>docker-compose</code> way is production ready. </p>
+<p>There certainly can be different ways to deploy depending on the
+underline platform this is deployed unto. For example, using <code>uwsgi</code>
+instead of <code>gunicorn</code>, or tweaking the number of <code>gunicorn</code> workers,
+and so on. These topics are beyond the scope of this document.</p>
         </p>
 
         <p>

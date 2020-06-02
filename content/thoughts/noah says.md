@@ -52,3 +52,20 @@ been burned off by fire. So I asked what happened to it, he replied:
    真的！那个时候我就在think, 那个bird poop看起来是dry, 所以我就很想要
    touch它"...... speechless, isn't it!? What an example he gave to
    testify that he actually, thinks ~~
+
+6. Noah figured out how to put his math answer back into the equation
+   to verify, "哇塞，我做的这么对！！" He was genuinely surprised by
+   himself, haha, what a fun to watch him grow in moment like this.
+
+7. A beautiful early summer evening. After a long stressful day
+   evacuating the contractor and his tools, having a barbecue w/ Noah
+   outside the kitchen. He was talking w/ his mom about virus
+   vs. bacteria. Mom was asking about "do you know which virus, and
+   the only virus, cured by human so far?" (it was Hypatitis-C). Noah
+   studied his science vigilantly in the week and the topic was about
+   virus & bacteria, so he was confident in the discussion. However,
+   he didn't have this piece. So instead he realized his gap, and said
+   "Do you know what I cured?... Dad's loneliness." &larr; because in
+   that afternoon, he was my companion to 517 to clean up the mess
+   left by the contractor, and on the way home I said thank you to him
+   for being my companion. How funny!!

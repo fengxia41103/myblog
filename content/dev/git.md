@@ -156,3 +156,8 @@ all the old changes. How to do that?
 ```shell
 git push -d origin <branch_name>
 ```
+# Ref
+
+I like [this blog][1].
+
+[1]: https://ohshitgit.com/

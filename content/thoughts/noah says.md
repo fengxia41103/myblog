@@ -69,3 +69,15 @@ been burned off by fire. So I asked what happened to it, he replied:
    that afternoon, he was my companion to 517 to clean up the mess
    left by the contractor, and on the way home I said thank you to him
    for being my companion. How funny!!
+   
+8. On our way home from 517, I was commenting on Noah's hair and asked
+   him "what is his secret". Guess what he said? He was very serious
+   and also in a good mood, responded that "I will give you one
+   advice, is to use woman product." "Why woman product?" "因为她们总
+   是想要look good, so you must use woman product" "所以你用她们的
+   product, 你也会look good" "是啊，and I use 妈的shampoo" "是吧， 但
+   是那都得等很久，像什么15分钟，我没那个耐心，那你怎么办的？" "I will
+   meditate" "meditate?" "yeah" "what if it's still too long?" "那我就
+   put on more shampoo"... hahahaha.... this is the very first time
+   Noah seriously gives me his advice, and you can tell he is really
+   believing in his own discovery in this one!

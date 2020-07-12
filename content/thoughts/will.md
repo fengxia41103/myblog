@@ -4,7 +4,7 @@ Slug: will
 Author: Feng Xia
 
 
-<figure class="s12 center">
+<figure class="col s12 center">
   <img src="images/will.png"/>
 </figure>
 

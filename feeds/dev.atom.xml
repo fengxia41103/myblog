@@ -1989,7 +1989,11 @@ all the old changes. How to do that?&lt;/p&gt;
 &lt;/ol&gt;
 &lt;h1&gt;remove remote branch&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git push -d origin &amp;lt;branch_name&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="thoughts"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-17T20:55:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Ref&lt;/h1&gt;
+&lt;p&gt;I like &lt;a href="https://ohshitgit.com/"&gt;this blog&lt;/a&gt;.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>My system</title><link href="https://fengxia41103.github.io/myblog/my%20system.html" rel="alternate"></link><published>2019-10-08T19:05:00-04:00</published><updated>2019-10-17T20:55:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-10-08:/myblog/my system.html</id><summary type="html">&lt;p&gt;Instructions to rebuild my system from scratch based on Ubuntu 18.04.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now setting up my Flex Pro from scratch (well, it's too difficult to
 get to its hard drive, so without ruining this beautiful machine, I
 decided to install Ubuntu from scratch), I'm going to document (rather
 a bit catch up) what I need to install in order to get my working

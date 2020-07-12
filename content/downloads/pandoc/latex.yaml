@@ -1,7 +1,7 @@
 ---
 documentclass: scrreprt
 papersize: a4
-mainfont: Ubuntu
+# mainfont: Ubuntu
 monofont: DejaVu Sans Condensed
 fontsize: 12pt
 geometry: margin=1in

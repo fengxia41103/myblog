@@ -248,5 +248,5 @@ writing something **new** and **fresh** that only my brain is
 producing.
 
 Those last part, if being original and bearing a thought worth
-talkinb about, is my solute to innovation.
+talking about, is my solute to innovation.
 

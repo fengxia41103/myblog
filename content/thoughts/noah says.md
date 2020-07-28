@@ -81,3 +81,13 @@ been burned off by fire. So I asked what happened to it, he replied:
    put on more shampoo"... hahahaha.... this is the very first time
    Noah seriously gives me his advice, and you can tell he is really
    believing in his own discovery in this one!
+
+9. This one heard from his mom. She caught him taking a loooooong time
+   in shower, and asked him what's taking him so long. "你的shower 有
+   很多头发堵了，我在给你de堵".... what a, Chinglish?
+   
+10. On our way back from 517. There was a shower in some areas ahead
+    of us. So by the time we were on the road, it was wet. All of
+    sudden, Noah said "yi2" "what" "彩色，虹", you know, in a mumbling
+    kinda of way, that he heard the word spoken by us, but doesn't
+    really know how to say it properly. Very cute!

@@ -1,5 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-08-21T13:45:00-04:00</updated><entry><title>Can you do this?</title><link href="https://fengxia41103.github.io/myblog/can%20you%20do%20this.html" rel="alternate"></link><published>2020-08-21T13:45:00-04:00</published><updated>2020-08-21T13:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-08-21:/myblog/can you do this.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/all.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-08-24T09:48:00-04:00</updated><entry><title>My view on microservice arch</title><link href="https://fengxia41103.github.io/myblog/my%20view%20on%20microservice%20arch.html" rel="alternate"></link><published>2020-08-24T09:48:00-04:00</published><updated>2020-08-24T09:48:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-08-24:/myblog/my view on microservice arch.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/DSC_1100384.JPG"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This is an email w/ teammates regarding my thinkings on microservice
+arch and a few other things happening in the project which I
+dislike. &lt;/p&gt;
+&lt;p&gt;Read at your convenience ~~&lt;/p&gt;
+&lt;h1&gt;SOA is hard, and I haven't seen it working&lt;/h1&gt;
+&lt;p&gt;I first learned &lt;a href="https://en.wikipedia.org/wiki/Service-oriented_architecture"&gt;SOA&lt;/a&gt; (and an IBM &lt;a href="https://www.redbooks.ibm.com/redbooks/pdfs/sg246303.pdf"&gt;book&lt;/a&gt;, very comprehensive) in
+2013. I …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/DSC_1100384.JPG"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This is an email w/ teammates regarding my thinkings on microservice
+arch and a few other things happening in the project which I
+dislike. &lt;/p&gt;
+&lt;p&gt;Read at your convenience ~~&lt;/p&gt;
+&lt;h1&gt;SOA is hard, and I haven't seen it working&lt;/h1&gt;
+&lt;p&gt;I first learned &lt;a href="https://en.wikipedia.org/wiki/Service-oriented_architecture"&gt;SOA&lt;/a&gt; (and an IBM &lt;a href="https://www.redbooks.ibm.com/redbooks/pdfs/sg246303.pdf"&gt;book&lt;/a&gt;, very comprehensive) in
+2013. I was in charge of designing the architecture of a 3-million $$
+project for a Fortune 500 company. Yes it was SOA-ed, but not, no one
+can implement it.&lt;/p&gt;
+&lt;p&gt;I have been in this trade long enough to see these patterns come and go,
+every so many years they come back in a new emperor's
+dress. Microservice arch seems to be the same thing. It's popular in all
+meetings and talks. We assume ourselves ignorant if we can't name a
+single project personally that has successfully pulled it off. But the
+reality, I'm afraid, is that except a few deep pocket giants, no one has
+done it according to book, and it never will.&lt;/p&gt;
+&lt;p&gt;SOA requires a ESB (enterprise service bus) for messaging (data), and
+&lt;a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation"&gt;BPM&lt;/a&gt; engine for workflow orchestration. Both concepts are sound. I
+love them. But they are very difficult to implement. The bottleneck is
+not technology, but to abstract biz workflow so much so it can be
+delegated to BPM engine, and maintenance (BPMN is too hard for client to
+learn) because biz logic is constantly changing.&lt;/p&gt;
+&lt;h1&gt;Talk is cheap (rant)&lt;/h1&gt;
+&lt;p&gt;It's a cheap word to make one look good and sophisticated. But here is
+my view &amp;mdash; if you propose it, you do it. I'm frustrated that
+&lt;em&gt;architects&lt;/em&gt; roll of their tongue these buzz words as if they are ready
+to grab, but they never code any of them, and they usually end the
+sentence "Any question? If no, you do it".&lt;/p&gt;
+&lt;p&gt;There is another popular version of the same superficial talk in China,
+&lt;a href="https://fengxia41103.github.io/myblog/mature tech.html"&gt;so-and-so technology is mature and simple&lt;/a&gt; used to justify the proposal
+is low risk.. just because you can say the word, doesn't make it
+simple. There are different level of credits to this statement (best -&amp;gt;
+worst, in order):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Yourself has coded it, even as small part of a large proj/module.&lt;/li&gt;
+&lt;li&gt;You have a die-hard buddy John, and he has done it and showed to you
+   before.&lt;/li&gt;
+&lt;li&gt;Your friend John has a friend Alex who claims he is coding it.&lt;/li&gt;
+&lt;li&gt;You and John and Alex all read about it on a SO post, or a book, or a
+   meetup, and know it's a trendy thing to do right now.&lt;/li&gt;
+&lt;li&gt;You all know that Google is using this technology and it's
+   awesome (but, are you Google?)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You get the spirit. I had same conversation w/ my client in 2013. It's a
+common mistake non-engineer make. Just because Google can do it, doesn't
+mean I can, or this team can. There are plenty such example in
+life. Pick up any Physics book, the theory of atomic bomb is
+printed. Can you then build one? Yeah we all know US has built a bunch
+for a while, does it make it easy if you, or your country, to build one?&lt;/p&gt;
+&lt;p&gt;Talkers don't care details; but they dont sweat making the claim
+that "it is simple", either.&lt;/p&gt;
+&lt;h1&gt;container, microservice&lt;/h1&gt;
+&lt;p&gt;Microservice architecture is good, but too good to be true. Forget about
+benefits. Let's talk problems we can perceive.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It's not justified &lt;em&gt;monotholic&lt;/em&gt; design is natively bad. One common
+   sales pitch is "your company's systems are all silos, and mine is a
+   one-stop-shop".&lt;/p&gt;
+&lt;p&gt;If each micro-service is a full stand-alone thing, aren't we then
+creating a bunch of &lt;em&gt;silos&lt;/em&gt;?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modular.&lt;/p&gt;
+&lt;p&gt;Code naturally become modular because repetitive pattern emerge
+during coding, and I hate to copy&amp;amp;paste. So up to 10th time, I start
+think to make it a &lt;em&gt;module&lt;/em&gt; (whatever the name is) so I write one
+line to call it. I'm sure you echo this.&lt;/p&gt;
+&lt;p&gt;I worked w/ an IT woman in 2010. At a lunch break, we were talking
+how tolerant you are before you want to &lt;em&gt;automate&lt;/em&gt; sth. I considered
+myself pretty hardcore to eliminate repetitive works using
+scripts. Her answer was, "1". It's an exaggeration I thought. But the
+mentality is sound -- constantly think how to combine things into a
+logical group, thus "module", so to save yourself the trouble.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Top down design.&lt;/p&gt;
+&lt;p&gt;Top down to do modular in design is great, if the person has deep
+knowledge of the domain, and is responsible. His/her view essentially
+makes decisions that function XYZ should be a service/module on its
+own, or not. It's a very difficult decision. Whoever says it's easy
+is a liar.&lt;/p&gt;
+&lt;p&gt;My first job was in a semiconductor company making lithography
+machine. The entire project (300+ people) was directly by this one
+guy. He was an engineer, 60s maybe, gave us a talk every week, and he
+knew everything of that product -- mechanical, real-time control (my
+job), everything. I haven't ever met such situation after. Guru is
+wonderful, if they are real. In 99.999% cases, it's &lt;em&gt;con artist&lt;/em&gt; w/
+impressive title.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Container.&lt;/p&gt;
+&lt;p&gt;Container is a packaging choice. It can't package anything. Some code
+can and benefit from it; some don't. The one single blocker I would
+consider is that it is a single process -- if your thing can live w/
+it, good. Otherwise, you need other trick to scale horizontally,
+which adds complexity in knowledge and maintenance. Therefore,
+speaking "containerizing" sth as if it were a given is ignorant (the
+atomic bomb example above).&lt;/p&gt;
+&lt;p&gt;My view is that a container is yesterday's CD/ISO. Fit your music on
+a CD doesn't make your music suddenly good, if it were bad.&lt;/p&gt;
+&lt;p&gt;By choosing docker and k8s, it comes an &lt;em&gt;ecosystem&lt;/em&gt; that makes things
+&lt;em&gt;easier&lt;/em&gt;. But. It shouldn't replace the knowledge if you were to do
+it without them -- if you can't maintain an accounting book using
+paper and ink (let's say all the Excels are dead today), are you
+still an accountant? These ecosystems, like python native and 3rd
+party libraries, require you to learn, to try, and some work out of
+box, others don't as claimed. So, it's same engineering practice, not
+magic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I know LXCO architecture is microservice &lt;em&gt;oriented&lt;/em&gt;, at least some
+components, such as an aggregator (API proxy), access gateway. It's a
+living example to examine. I don't know the status of it, nor how
+good/bad it is. Find it out yourself if you are interested in. Talk to
+engineers who code it, not manager's PPT.&lt;/p&gt;
+&lt;h1&gt;in CP?&lt;/h1&gt;
+&lt;p&gt;We can't, and we shouldn't.&lt;/p&gt;
+&lt;p&gt;Service MUST maintains its own state. Each will have at least an admin
+interface (aka. UI), and an API.&lt;/p&gt;
+&lt;p&gt;Therefore, there can't be one UI team coding all these UIs. Each service
+has a UI person to code and maintain and add feature and debug. Same for
+UX.&lt;/p&gt;
+&lt;p&gt;This leads to more considerations -- how to reuse components, or not?
+and common technology stack, or not?...&lt;/p&gt;
+&lt;p&gt;CP is sort of service-oriented. What can be done is to break up
+components into its own repo, its own build pipeline, its own release
+schedule, and of course, finish each w/ an admin interface and API if
+missing.&lt;/p&gt;
+&lt;p&gt;Now, the million $$ problem, is the STATEs. The complexity has been
+hidden by Postgres &amp;amp; Scylla, because &lt;a href="https://www.codeproject.com/Articles/359654/11-important-database-designing-rules-which-I-fo-2"&gt;DB's model and constraints&lt;/a&gt;
+&lt;strong&gt;guarantee&lt;/strong&gt; a logical relationship between two data points. But in a
+group of isolated services, it's fishy. I don't have knowledge to
+suggest further reading or thinking. At least, read &lt;a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing"&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Remember. Technology might be &lt;em&gt;mature&lt;/em&gt;, but until we built one crude
+versioin, that wonderful theory is, theory. &lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Can you do this?</title><link href="https://fengxia41103.github.io/myblog/can%20you%20do%20this.html" rel="alternate"></link><published>2020-08-21T13:45:00-04:00</published><updated>2020-08-21T13:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-08-21:/myblog/can you do this.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/funny/good_code.png"/&gt;
 &lt;/figure&gt;
 

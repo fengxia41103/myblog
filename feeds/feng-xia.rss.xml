@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Fri, 21 Aug 2020 13:45:00 -0400</lastBuildDate><item><title>Can you do this?</title><link>https://fengxia41103.github.io/myblog/can%20you%20do%20this.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Mon, 24 Aug 2020 09:48:00 -0400</lastBuildDate><item><title>My view on microservice arch</title><link>https://fengxia41103.github.io/myblog/my%20view%20on%20microservice%20arch.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/DSC_1100384.JPG"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This is an email w/ teammates regarding my thinkings on microservice
+arch and a few other things happening in the project which I
+dislike. &lt;/p&gt;
+&lt;p&gt;Read at your convenience ~~&lt;/p&gt;
+&lt;h1&gt;SOA is hard, and I haven't seen it working&lt;/h1&gt;
+&lt;p&gt;I first learned &lt;a href="https://en.wikipedia.org/wiki/Service-oriented_architecture"&gt;SOA&lt;/a&gt; (and an IBM &lt;a href="https://www.redbooks.ibm.com/redbooks/pdfs/sg246303.pdf"&gt;book&lt;/a&gt;, very comprehensive) in
+2013. I …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Mon, 24 Aug 2020 09:48:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-08-24:/myblog/my view on microservice arch.html</guid><category>thoughts</category></item><item><title>Can you do this?</title><link>https://fengxia41103.github.io/myblog/can%20you%20do%20this.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/funny/good_code.png"/&gt;
 &lt;/figure&gt;
 

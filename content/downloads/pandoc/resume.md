@@ -1,9 +1,9 @@
 ---
-mainfont: Noto Sans CJK SC
-monofont: DejaVu Sans Condensed
+mainfont: DejaVu Serif
+monofont: DejaVu Sans Mono
 titlepage: false
 papersize: a4
-fontsize: 8pt
+fontsize: 10pt
 linkstyle: slanted
 urlcolor: RoyalBlue
 subparagraph: yes
@@ -32,23 +32,23 @@ header-includes: |
 
 # Summary
 
-* Python developer since 1998.
-* Can deliver any web application from napkin design to Django POC in 72 hours.
+* Strong scripting capability, especially to design system automation
+  and/or integration using Python and webservice API.
+* Can deliver any web application from napkin idea to Django-based POC in 48 hours.
 * Full-stack capable.
 * Welcome challenging problem.
 * Have a high standard in work quality.
-* SalesForce advocate.
-* Also available in: [linkedin][101], [PDF][102].
 
 # Skills
 
 Software Development
-: Python, C, ODOO/OpenERP, SQL, Salesforce APEX, Cordova, Google App
-  Engine (GAE), Git, SVN, Bower, Yeoman, Jira
+: Python, Ansible, Git, Jira, ODOO/OpenERP, SQL, Salesforce APEX
 
-Web Application
-: Django, Ansible, ReactJS, AngularJS, jQuery, Materialize, Bootstrap,
-  Jinja2, Pelican
+Web Application Backend
+: Django, Flask, Tastypie, Django REST Framework, Swagger, Jinja2, Pelican, Jekyll
+
+Web Frontend/UI
+: React, Angular, Material UI, Bootstrap
 
 Data Visualization
 : Graphviz, Cytoscape.js, netjsongraph.js, D3plus, Highcharts, Google
@@ -60,8 +60,8 @@ QA
 System design
 : pencil & paper, UML, PlantUML, Dia, Visio
 
-System deployment
-: Amazon EC2/RDS/S3, uWSGI, Nginx, Apache2, Builtbot, Fabric
+System deployment/packaging
+: Ansible, Docker, Amazon EC2/RDS/S3, uWSGI, Nginx, Apache2, Builtbot, Fabric
 
 System monitoring
 : ELK stack, InfluxDB, Grafana, Cacti, Nagios
@@ -71,8 +71,7 @@ System administration
   AWS
 
 Documentation
-: LaTex, Markdown, reveal.js, Confluence, Org mode, Word, Powerpoint,
-  Excel, MS Project, Taskjugger
+: Confluence, Markdown, Pandoc, LaTex, reveal.js
 
 # Experience
 
@@ -80,231 +79,89 @@ Documentation
 
 Lenovo US, Advisory Engineer
 
-* `ThinkAgile CP` product. UI lead and early member. Develop and
-  maintain AngularJS legacy code, and direct next gen design in
-  ReactJS based Material UI. Have global team across three
-  geographical locations.
+* Built Git+Jira analysis tool from scratch using Django, React, and
+  Python scripting. Backend provides RESTful API. Python scripts will
+  scan Jira API and git commits to build cross reference, and audit
+  code development such Git branching strategy. In use in
+  production. Demo available.
   
-    - **Tools**: AngularJS, Typescript, ReactJS, Docker
-    - **Sample writing**: [official portal][27]
-  
-* `ThinkAgile CP` product. UI lead. Developed Python scripts for
-  rebranding analysis, and to build catalog of Angular components to
-  link code to its visual results.
-  
-    - **Tools**: Python, Selenium, Pandoc
-    - **Sample writing**: 
-        1. [rebranding analysis][28]
-        2. [Angular component catalog][29]
+* `ThinkAgile CP` product. UI lead. Maintain legacy Java Spring and
+   AngularJS UI deployed in Docker, Wildfly and Nginx in
+   production. Lead design and prototyping of next Gen UI and backend
+   REST API. Built UI component catalog using Python, Selenium, and
+   Pandoc.
         
-* `Lenovo Open Cloud` product. Author of two reference architecture
-  papers. Published on 5/5/2019.
-  
-    - **Tools**: Pandoc, Markdown, BibTex, XeLaTex, GNU make, CSS
-    - **Sample writing**:
-        1. Lenovo Open Cloud Reference Architecture: [pretty
-           draft in PDF][23], [official version][25]
-        2. Red Hat Hyperconverged Infrastructure for Virtualization
-           Reference Architecture: [pretty draft in PDF][24], [official
-           version][26]
+* `Lenovo Open Cloud` (LOC) product. Architect and primary author of
+  two reference architecture papers published on 5/5/2019. Designed
+  its public and private networking. Developed Ansible and Python code
+  to automate deployment, configuration, and operation of 11
+  applications including RedHat RHHI, RedHat Satellite, RedHat Ansible
+  Tower, Lenovo xClarity, GitLab. In production.
 
-* `Lenovo Open Cloud` product. Architect. Drove overall network
-  design. Developed Python scrips and playbooks to automate RH
-  Satellite deployment and configuration. Led development of playbooks
-  to automate RHHI deployment on baremetal.
-
-    - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
-                 RHEL 7 server cloud image, KVM/virsh
-    - **Sample writings**: 
-        1. [Config Lenovo switches ENOS & CNOS][16]
-        2. [Config Lenovo server to RAID][17]
-        3. [RH Satellite][19]
-
-* `Lenovo Open Cloud` product. Principal developer. Forked
-  [Netbox][18] by Digital Ocean. Retrofit its models and added
-  functions to make it data center planning and orchestration tool.
-  Extended Netbox architecture to include Redis for async
-  task. Scripted switch and server scanning to draw topology of
-  server-switch & switch-switch physical connections. Source code in
-  [github][18].
-
-    - **Tools**: Django, Celery, Redis, Postgresql, Ansible, pexpect
-    - **Sample writings**: [Netbox design][15]
-
-* `VX Installer` product. Consultant. Collaborated w/ architect in
-  system design. Coded Django backend and RESTful API.
-
-    - **Tools**: Django, Tastypie, Celery, Redis, Ansible, Canonical charms, Docker
-    - **PPT**: Architecture of [VX Installer][14]
+* `Lenovo Open Cloud` product. Extended [Netbox][18] using Python,
+  Redis to fully automate hardware discovery, inventory, and
+  configuration. In production.
     
-* `Workload Solution Store` project. Architect and principal
-  developer. Evaluated service orchestration technologies and
-  developed Lenovo's core competence in automating baremetal
-  provisioning.
-
-    - **Tools**: Openstack, Ironic, Juju, MaaS, Canonical charms,
-                 Python, LXD, KVM, Virtualbox
-    - **Sample writings**: 
-        1. [MAAS lab][5]
-        2. Juju charm's [reactive framework][6]
-        3. introduction of [Openstack Ironic][8]
-        4. comparison analysis of [Ironic vs. MAAS][9]
-        5. technologies used in [baremetal provisioining][7]
+* `Workload Solution Store` project. Architect. Built prototype of
+  Lenovo's orchestration engine to integrate internal manufacturing
+  and sales systems, and to automate deployment of complex system such
+  as OpenStack with little overhead. 
 
 ## 01/2015 - 11/2016
 
 PY Consulting, Founder & Consultant
 
-* `Wei Fashion Group` project. Wei Fashion Group is an international
-  fashion product trading company. Designed and built an inventory
-  management and order tracking system in four weeks. Developed
-  Android prototype in two weeks. Played a key role in setting up its
-  Shenzhen subsidiary. Invited as feature speaker by "_2016 Jiuzhou
-  e-Commerce Convention_" on Dec 8th, 2015, Shenzhen, China.
-    - **Tools**: Django, Bootstrap, jQuery, Cordova, AngularJS, AWS,
-                 uWSGI, Nginx
-    - **Demo**: [view project Fashion for details][1]
-    - **Source**: [github][20]
+* `World's Snapshot` project. React based SPA integrated with DHS and
+  World Bank data APIs. Rich data visualization. Demo available.
+  
+* `Wei Fashion Group` project. Designed and built an inventory
+  management and order tracking system in Django and MySQL, eliminated
+  90% of overhead of offline operations. Demo available.
 
+* `GKP` project. Built a web application in Django, MySQL, Redis, and
+  Python web crawler. Featured REST API. Deployment by Fabric in
+  Heroku. Demo available.
 
-* `GKP` project. Designed a web reference tool assisting Chinese
-  high school graduate selecting domestic colleges. Featuring information
-  about 3,383 colleges and universities, 1,663 majors, two million
-  historical exam records and 50,000 lines per minute live chat stream.
-
-    - **Tools**: Django, Bootstrap, Redis, Google map API, Baidu map
-                 API, Baidu Echarts, TOR API, Privoxy, AWS, uWSGI,
-                 Nginx
-    - **Demo**: [view project GKP for details][2]
-    - **Source**: [github][21]
-
-* `Stock analysis` project. Developed an open-source web application that
-  runs stock trading simulation with step-by-step transaction
-  trace. User can test strategy and view comparisons with actual
-  S&P500 daily data and China’s S&P500 equivalent. Asynchronous design
-  puts CPU intense computation to background processed by
-  multithreading consumer.
-
-    - **Tools**: Django, Bootstrap, Redis, Highcharts, AWS, uWSGI, Nginx
-    - **Demo**: [view project Stock for details][3]
-    - **Source**: [github][22]
-
-* `Linkage` project. Linkage Ltd. is a Chinese start-up software company
-  specializing ODOO module development. Built ODOO’s continuous
-  integration (CI) server. Customized ODOO inventory management
-  system. Authored the company’s “2016-17 Technology Roadmap”.
-
-    * **Tools**: Python, ODOO, Buildbot
-    * **Sample writings**: [Linkage 2016-17 Technology Roadmap][4] (in Chinese)
-
+* `SP500 Analysis` project. Built a web application in Django, Postgre
+  SQL, Redis, and external data API. Intense data crunching
+  capability. Demo available.
+  
 ## 11/2013 - 01/2015
 
 Beijing Lean Strategy Consulting Group, Director
 
-* Responsible for a $3-million fixed-bid software contract. Client is
-  a Fortune-500 company. Project included designing and developing
-  full-stack web and mobile applications which replaced three legacy
-  systems.
-
-    * **Tools**: Python, ODOO, Buildbot
-    * **Reports (in Chinese)**: 
-        1. [晋能集团数据中心建设分析 – 规模和成本][11]
-        2. [晋能集团云平台建设和使用咨询报告][12]
-
-
-* Design system architecture using SOA technologies. Managed
-  evaluation of ESB, BPM and database components.
-
-    * **Tools**: IBM Rational, MySQL, Java Spring Struts Hibernate,
-                 JBoss ESB, Mule ESB, Apache ServiceMix, Activiti BPM
-    * **Reports (in Chinese)**: [数据库技术和系统测试简介][13]
-
-* Supervised two vendor invitation-for-bids. Responsible for
-  $1.2-million RMB ($200,000 USD) purchase.
-
-* Managed QA team to automate regression tests.  Coded two thousand
-  test cases in TDD syntax, Python Unittest and Selenium
-  webdriver. Built QA continuous integration infrastructure using
-  Jenkins and SonarQube.
-
-    * **Tools**: Python, Selenium webdriver, PhantomJS, Jenkins, SonarQube
-
-* Enhanced company's standard operating procedure (SOP), including
-  initiation of an online knowledge base, a project management system
-  and a configuration management system.
-
-    * **Tools**: Redmine, SVN
-
-* Setup a local service team. Screened hundreds of resume and
-  interviewed nearly one hundred candidates.
+* Designed and built a distributed system in Java. Led QA
+  team to automate regression tests using TDD, Python Unittest and
+  Selenium. Deployed SonarCube for static code analysis, and Jenkins
+  for CICD.
 
 ## 07/2010 - 11/2013
 CrunchTime! Information Technology, Project Manager
 
-> **Tools**: Salesforce APEX, Visualforce, Jira, MS Project,
-> Taskjuggler
-
-* Provided technical support to client on administrating our ERP
-  product. Initiated statement-of-work(SOW) and followed it through
-  development, user-acceptance-test(UAT) and deployment.
-* Played a key role in pre-sales to Yum!China, Yum!’s most profitable
-  branch at the time. Analyzed over 600 pages of requirements covering
-  operation of fourteen departments. Worked closely with CEO and
-  Yum!’s senior executives to outline deal structure. Participated in
-  all key decisions regarding this deal.
-* In charge of administrating Salesforce production instance,
-  including setting up workflows, triggers, approval processes, a
-  customer portal and a vendor portal.
 * Customized Salesforce Customer Portal using APEX, Visualforce and
   jQuery. The portal won Bronze in the _"2011 Steve Awards for Sales &
   Customer Service"_.
 * Built the company's first mobile application prototype using
   Cordova, HTML5 and jQuery Mobile.
-
-    * **Tools**: Cordova, HTML5, jQuery mobile, Google map API, AT&T
-                 yellow page API
-
-* Built user-acceptance-test(UAT) library using Python-Selenium,
-  reducing one UAT cycle from 40-man-hour to less than 2 hours.
-
-    * **Tools**: Python, Selenium webdriver, Django
+* Built user-acceptance-test(UAT) library using Python Selenium.
 
 ## 04/2009 - 04/2010
 China Everbright Bank, Business Manager
 
-> **Tools**: Word, Powerpoint, Project
-
 * Supervised two vendor invitation-for-bids. In charge of a $2-million
   purchase of a software system. Managed system implementation,
   customization, training and administration.
-* Setup Business Analysis team from ground up. Created report
-  templates and analysis framework. Analysis results were the basis of
-  two loans of substantial amount.
-* Led team to create drafts of contracts, business policies, workflows
-  and training materials.
 
 ## 04/2004 - 05/2007
 Bit 9 Inc. (Carbon Black), Team Lead
 
-> **Tools**: NT kernel, Python, Graphviz, VC++, rootkits, VMWare
-
-* Led a breakthrough in endpoint application control product, which
-  played a key role in winning Bit9 a $6-million B-round led by
-  Kleiner Perkins.
-* Member of Bit9's SaaS team. Built the world's largest Windows binary
-  repository at the time featuring four billion data records. Wrote
-  C++ parser for Windows binary PE formats.
+* Wrote Windows kernel code. Lots of C, link lists, pointers, and
+  opaque data structs.
 
 ## 07/1998 - 04/2004
 Instron Corp., Senior Engineer
 
-> **Tools**: RTOS, C, VB, PLC, Python
-
-* Developed embedded controller of Instron’s impact tester line (9250HV).
-* Developed embedded controller of two million-dollar projects. Led
-  system training. 　　
-* Initiated a new product line -- closed-loop Brinell hardness tester.
-* Assisted in training the company’s first Chinese R&D team.
+* Wrote firmware in C and RTOS. Familiar w/ DMA, interrupt, low level debugging.
 
 # Education
 

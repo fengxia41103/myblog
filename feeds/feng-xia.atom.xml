@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-08-24T09:48:00-04:00</updated><entry><title>My view on microservice arch</title><link href="https://fengxia41103.github.io/myblog/my%20view%20on%20microservice%20arch.html" rel="alternate"></link><published>2020-08-24T09:48:00-04:00</published><updated>2020-08-24T09:48:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-08-24:/myblog/my view on microservice arch.html</id><summary type="html">&lt;figure class="col s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-09-03T13:57:00-04:00</updated><entry><title>Conflicting course</title><link href="https://fengxia41103.github.io/myblog/conflicting%20course.html" rel="alternate"></link><published>2020-09-03T13:57:00-04:00</published><updated>2020-09-03T13:57:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-09-03:/myblog/conflicting course.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/1e17114.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Watching this &lt;a href="https://www.youtube.com/watch?v=ledJBbRfH8g"&gt;youtube&lt;/a&gt;, it suddenly occurs to me, what I have been
+debating with myself &amp;mdash; the &lt;a href="https://fengxia41103.github.io/myblog/technology and society.html"&gt;technology and responsibility&lt;/a&gt;, why
+technology needs to reflect on what this technology really means, even
+in a hindsight, is better than ignoring its effect, has a root
+cause. Yes, it is a &lt;strong&gt;fear&lt;/strong&gt;, that …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/1e17114.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Watching this &lt;a href="https://www.youtube.com/watch?v=ledJBbRfH8g"&gt;youtube&lt;/a&gt;, it suddenly occurs to me, what I have been
+debating with myself &amp;mdash; the &lt;a href="https://fengxia41103.github.io/myblog/technology and society.html"&gt;technology and responsibility&lt;/a&gt;, why
+technology needs to reflect on what this technology really means, even
+in a hindsight, is better than ignoring its effect, has a root
+cause. Yes, it is a &lt;strong&gt;fear&lt;/strong&gt;, that once we develop a powerful weapon,
+the possibility that it falls into the &lt;em&gt;wrong hand&lt;/em&gt; is always
+there. Therefore, the more powerful the weapon is, the worse a damage
+it will do to us, when &lt;em&gt;abused&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;That's it!&lt;/p&gt;
+&lt;p&gt;Now, the question is, when I develop a technology, should I then
+consider this possibility, or just brush it aside, "Hey, that's
+someone else's job. Let me just focus on make this work." Can I, or
+should I?&lt;/p&gt;
+&lt;p&gt;It seems obvious the answer is, no you shouldn't just ignore it. But
+then, if the possibilities are endless, is theren't a way to prove its
+negation, right? This is the same as &lt;a href="https://www.amazon.com/Physicists-Guide-Skepticism-Faster-Than-Light-Pseudoscientific/dp/0879754400"&gt;this book&lt;/a&gt; starting off that
+even though there is always the possibility, however, certain things
+have been proven very unlikely to be true, for example, that a speed
+higher than the light speed. Therefore, there can a similar argument
+that if we do "so and so", that will reduce the possibility of it
+falling into the wrong hand or used in a &lt;em&gt;wrong way&lt;/em&gt; so &lt;em&gt;unlikely&lt;/em&gt;,
+that it is ok to develop it.&lt;/p&gt;
+&lt;p&gt;But then, of course, this also brings another dilemma, that if you
+view the world from a physicist's prospective, yeah it won't have
+anything than light. But, isn't light speed itself a definition by
+physicist? So, it feels like they are both the referee and the player
+now. Then, if I change a lens, wouldn't I then suddenly open up a line
+of different possibilities? Well, in that matter, who defines the
+"wrong" hand anyway!? Terrorist is certainly justified their deeds by
+saying they are the savior, and the other guy is the evil.&lt;/p&gt;
+&lt;p&gt;I don't know. I think it is important for engineers to think more of
+their actions and what they mean, even though it seems very
+self-defeating and even irrelevant. I think at least there is one
+aspect of being an engineer that does put them in the best position to
+think about these things &amp;mdash; as the first line solider, they know
+the most of the technology, thus having the best information to
+evaluate and ponder what they mean, what they can do, for good or for
+worse.&lt;/p&gt;
+&lt;p&gt;Right?&lt;/p&gt;</content></entry><entry><title>My view on microservice arch</title><link href="https://fengxia41103.github.io/myblog/my%20view%20on%20microservice%20arch.html" rel="alternate"></link><published>2020-08-24T09:48:00-04:00</published><updated>2020-08-24T09:48:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-08-24:/myblog/my view on microservice arch.html</id><summary type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/DSC_1100384.JPG"/&gt;
 &lt;/figure&gt;
 
@@ -12323,16 +12373,14 @@ urban smell. I was here; I am here.&lt;/p&gt;
   &lt;figcaption&gt;First photo of the Earth taken by NASA in 1968&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;try this&lt;/p&gt;
 &lt;p&gt;Last day of 2018. Snowed yesterday. Amazingly the snow accumulated
 over night, and Shanghai is now looking pretty, covered in white, and
 fresh air. Listening to Xmas music in Starbucks, with Noah reading his
-comic book next to …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+comic book next to me. It's …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/1968%20earth.jpg"/&gt;
   &lt;figcaption&gt;First photo of the Earth taken by NASA in 1968&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;try this&lt;/p&gt;
 &lt;p&gt;Last day of 2018. Snowed yesterday. Amazingly the snow accumulated
 over night, and Shanghai is now looking pretty, covered in white, and
 fresh air. Listening to Xmas music in Starbucks, with Noah reading his

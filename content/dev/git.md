@@ -128,7 +128,10 @@ track graphs. An example of my blog git:
   file and branch's HEAD.
 - a single file between two branches: `git diff <branch A>..<branch B>
   -- <file name>`
-  
+- list of commits between two branches/commits: `git log --left-right
+  --cherry-pick --oneline c1..c2`
+
+
 # revert
 
 - back to HEAD: `git reset --hard HEAD`: this throws away everything

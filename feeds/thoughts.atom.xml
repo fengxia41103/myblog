@@ -1,5 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - thoughts</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/thoughts.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-09-03T13:57:00-04:00</updated><entry><title>Conflicting course</title><link href="https://fengxia41103.github.io/myblog/conflicting%20course.html" rel="alternate"></link><published>2020-09-03T13:57:00-04:00</published><updated>2020-09-03T13:57:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-09-03:/myblog/conflicting course.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - thoughts</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/thoughts.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-09-28T16:39:00-04:00</updated><entry><title>Medical miracles</title><link href="https://fengxia41103.github.io/myblog/medical%20miracles.html" rel="alternate"></link><published>2020-09-28T16:39:00-04:00</published><updated>2020-09-28T16:39:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-09-28:/myblog/medical miracles.html</id><summary type="html">&lt;p&gt;This is a topic I have always wanted to write about and research,
+because, there are too many times that myself gets tripped up by
+arguments or stories presented by someone, that sounds quite logical
+and reasonable, but tickles me inside that &lt;em&gt;something isn't
+right&lt;/em&gt;. But, what is it? I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a topic I have always wanted to write about and research,
+because, there are too many times that myself gets tripped up by
+arguments or stories presented by someone, that sounds quite logical
+and reasonable, but tickles me inside that &lt;em&gt;something isn't
+right&lt;/em&gt;. But, what is it? I haven't been able to pin down. The reason I
+call this article "logic fallacies" because fundamentally I believe
+the &lt;em&gt;something&lt;/em&gt; is a wrong in its logic, its way of fabricating a
+causal relationship whereas there isn't one. I truly want to
+understand their method in order to identify them and expose them
+(honestly, I have this urge to open a lecture, a school maybe, in
+China, to talk to people of my findings, if any, so to apply these to
+other stories audience can relate and see the common pattern.. what
+can I say? I'm a big fan of patterns).&lt;/p&gt;
+&lt;p&gt;This is probably viewed as an example of those epics of western
+medicine vs. Chinese medicine. Here is a miracle doctor who treated a
+patient, often the story teller him/her-self with &lt;em&gt;success&lt;/em&gt;, such as
+prolonged life (or avoiding death completly), while the same person
+has been seeking medical treatment from hospitals, but has been told
+&lt;em&gt;no more can be done&lt;/em&gt; (thus, a death sentence). Therefore, the
+contrast is:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Hospital doc&lt;/th&gt;
+&lt;th&gt;Miracle doc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Follow western medical practices&lt;/td&gt;
+&lt;td&gt;Unconventional practices, doesn't even need to be medical&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nothing we can do to improve or change this condition&lt;/td&gt;
+&lt;td&gt;Prolonged life, and sometimes even healed&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;And the conclusion to follow is that there are powers out there which
+we don't understand, and such unconventional practice can be more
+effective in some circumstances. To make the statement more personal
+and sounding, story teller is often professional trained to believe in
+western science, such as a doctor him/her-self, but that belief is now
+shaken.&lt;/p&gt;
+&lt;p&gt;There are multiple logic fallacies in play. Let me try to explain one
+by one.&lt;/p&gt;
+&lt;h2&gt;it implies causal, but there isn't one&lt;/h2&gt;
+&lt;p&gt;The story didn't use the word &lt;strong&gt;because&lt;/strong&gt; explicitly, but its logic is
+clearly pointing to a causal relationship that patient's improved
+condition is the result of whatever done by this miracle doc. So the
+equation is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Because the miracle doc did A, patient's condition improved.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;First of all, patient's condition improved is a necessary condition,
+thus can not derive that miracle doc did A. In other words,
+enumerating however many patients who have improved or survived after
+the hospital sentences, will never get us to draw conclusion that
+miracle doc did A (or B, or C, or any).&lt;/p&gt;
+&lt;p&gt;Second, in order to establish such a causal relationship, one must
+isolate the changing factor of the patient's life &lt;strong&gt;to one and only
+one&lt;/strong&gt; &amp;mdash; miracle doc's intervention. If we can't establish such a
+controlled environment, even in lab, how do we know it's not some
+street food the patient has eaten last Wednesday that has done the
+trick!? Or, for that matter, if we introduce the butterfly effect, why
+not a South America bufferfly who has done the trick!? There are
+endless possibilities out there, each is equally true (or false) as
+the intervention. Unless we have a way to rule those out, picking one
+out of a haysack is clearly not convincing.&lt;/p&gt;
+&lt;h2&gt;it is self-contradicting&lt;/h2&gt;
+&lt;p&gt;Another cornerstone of the story is that hospital has drawn a
+conclusion (which, unfortunately, isn't good for the patient's
+ears/heart), thus enter the miracle doc when no hope is in sight.&lt;/p&gt;
+&lt;p&gt;But, let's consider the transition from hospital's decision to the
+miracle doc.&lt;/p&gt;
+&lt;p&gt;If the miracle doc is to take the hospital's conclusion as an
+"assumption", thus using his practice to challenge its legitimacy,
+which, in all these stories, is to prove the assumption wrong, then
+apparently, a single case is not gonna do it. Let's say hospital
+determines 100 patients beyond hope, and they all went to this miracle
+doc. If miracle took place 10 times, we still have 100-10=90 patients
+who die just as the hospital predicted! If only presented by the
+numbers here, one would immediately think hospital is a better prophet
+than the miracle doc -- what it said actually came true! So in this
+case, the story has just defeated its purpose ~~&lt;/p&gt;
+&lt;p&gt;Alternatively, the miracle doc says, "I'm only taking patients that
+hospitals don't take anymore", meaning I'm only treating patients who
+have run out of hope w/ hospitals, then, why are you now **trusting
+the hospital's conclusion (=out of hope) as your foundation, while
+your eventual conclusion is that hospital was wrong! And if the
+conclusion stands, wouldn't it then mean that hospital's conclusion
+was also wrong, therefore, these patients didn't run out of hope when
+they came to you! &amp;mdash; in either way, you see the logic is
+self-contradicting, the premise and the conclusion is constantly at
+war, and in no way both can be true at the same time!&lt;/p&gt;
+&lt;p&gt;Let's put this way: hospital in this sense is being staged as a
+middleman, if I can get to the God (the miracle doc), why bother to
+try the inferior middleman? Let's go straight to the source!&lt;/p&gt;
+&lt;h2&gt;treating exception as a rule&lt;/h2&gt;
+&lt;p&gt;I have argued &lt;a href="https://fengxia41103.github.io/myblog/science.html"&gt;against science&lt;/a&gt; before. I'm not here to retract my
+criticism of it. While too many things are being called &lt;em&gt;scientific&lt;/em&gt;,
+when they are, I want to use one necessary condition of science for
+the following argument &amp;mdash; how repeatable is it!? Being
+scientific, or engineering for that matter, to me, meanings the same
+outcome is achieved whenever the same inputs are given.&lt;/p&gt;
+&lt;p&gt;Now apply this to the story. First of all, hospital saw and cures far
+more patients than probably the life time of this miracle doc. This I
+don't think anyone wouldn't agree with.&lt;/p&gt;
+&lt;p&gt;Second, if we collect some percentage of improvement on both sides,
+guess which one has better score!? &lt;/p&gt;
+&lt;p&gt;The fallacy is treating an exception as the rule. And honestly, if you
+can't repeat your trick reliably, coming to you will be like drawing a
+lottery for cure &amp;mdash; it's not a doctor, it's just dumb luck!&lt;/p&gt;
+&lt;h2&gt;using a non-fallable statement&lt;/h2&gt;
+&lt;p&gt;After the challenged listed above, the defense has retreated to be&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;"You have to admit that Chinese medicine has its value", or, &lt;/li&gt;
+&lt;li&gt;"There are things we don't know, right? So it could be just your
+   ignorance that you can't comprehend the power of this miracle"....&lt;/li&gt;
+&lt;li&gt;"Everyone has a preference. I believe it, and I don't force you to
+   agree with me"&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The problem of the first two are simple &amp;rarr; they can not be proven
+right or wrong, because &lt;strong&gt;they are perpetually true&lt;/strong&gt;! &amp;larr; yes
+there is always things we don't know (actually by definition, or,
+rather ironically, this is the view of science, not the view of
+metaphysics or religion, which these miracles actually belong), and
+yes I could very well be ignorant of this miracle method.&lt;/p&gt;
+&lt;p&gt;But, if I ever turn around these sentences to them, without changing a
+single letter, they are also true! and that is exactly the problem!
+&amp;mdash; when it is forever true, it's really just a big stick to end
+discussion.&lt;/p&gt;
+&lt;p&gt;The last one is tricky, because it literally puts the story now into a
+religious sphere, in which science does not have a seat. Therefore,
+there is no point of discussion or debate anymore because no ground
+can be built upon &amp;mdash; it's like in an olympic game, and now we
+decide to scratch the rules in the middle of a race, who will be the
+winner, or loser, or anything!? The entire race has now lost its
+meaning.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Conflicting course</title><link href="https://fengxia41103.github.io/myblog/conflicting%20course.html" rel="alternate"></link><published>2020-09-03T13:57:00-04:00</published><updated>2020-09-03T13:57:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-09-03:/myblog/conflicting course.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/1e17114.jpg"/&gt;
 &lt;/figure&gt;
 

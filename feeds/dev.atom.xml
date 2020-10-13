@@ -1965,6 +1965,8 @@ track graphs. An example of my blog git:&lt;/p&gt;
   file and branch's HEAD.&lt;/li&gt;
 &lt;li&gt;a single file between two branches: &lt;code&gt;git diff &amp;lt;branch A&amp;gt;..&amp;lt;branch B&amp;gt;
   -- &amp;lt;file name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;list of commits between two branches/commits: &lt;code&gt;git log --left-right
+  --cherry-pick --oneline c1..c2&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1&gt;revert&lt;/h1&gt;
 &lt;ul&gt;

@@ -4,6 +4,12 @@ Tags: thoughts
 Slug: medical miracles
 Author: Feng Xia
 
+
+<figure class="col s12">
+  <img src="images/DSC_3070211.JPG"/>
+</figure>
+
+
 This is a topic I have always wanted to write about and research,
 because, there are too many times that myself gets tripped up by
 arguments or stories presented by someone, that sounds quite logical
@@ -42,7 +48,7 @@ shaken.
 There are multiple logic fallacies in play. Let me try to explain one
 by one.
 
-## it implies causal, but there isn't one
+# it implies causal, but there isn't one
 
 The story didn't use the word **because** explicitly, but its logic is
 clearly pointing to a causal relationship that patient's improved
@@ -68,7 +74,7 @@ endless possibilities out there, each is equally true (or false) as
 the intervention. Unless we have a way to rule those out, picking one
 out of a haysack is clearly not convincing.
 
-## it is self-contradicting
+# it is self-contradicting
 
 Another cornerstone of the story is that hospital has drawn a
 conclusion (which, unfortunately, isn't good for the patient's
@@ -103,7 +109,7 @@ Let's put this way: hospital in this sense is being staged as a
 middleman, if I can get to the God (the miracle doc), why bother to
 try the inferior middleman? Let's go straight to the source!
 
-## treating exception as a rule
+# treating exception as a rule
 
 I have argued [against science][1] before. I'm not here to retract my
 criticism of it. While too many things are being called _scientific_,
@@ -123,7 +129,7 @@ The fallacy is treating an exception as the rule. And honestly, if you
 can't repeat your trick reliably, coming to you will be like drawing a
 lottery for cure &mdash; it's not a doctor, it's just dumb luck!
 
-## using a non-fallable statement
+# using a non-fallable statement
 
 After the challenged listed above, the defense has retreated to be
 

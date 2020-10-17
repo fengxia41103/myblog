@@ -105,4 +105,4 @@ A line from the book, page 147, a woman across a desk:
 > 
 
 
-[1]: {filename}/thoughts/humans%20in%20nyc.md
+[1]: {filename}/thoughts/humans%20in%20new%20york.md

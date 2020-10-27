@@ -39,7 +39,7 @@ colorclass==2.2.0
 configparser==3.5.0
 contextlib2==0.5.5
 coverage==4.1
-cryptography==2.4.2
+cryptography==3.2
 cursive==0.2.2
 cycler==0.10.0
 debtcollector==1.21.0

@@ -491,13 +491,15 @@ Remove bell and dings.
 #+END_SRC
 ** Fontlock
 This gets the font coloring switched on for all buffers.
-*** TODO Note: this should be the default, maybe this can go ?
-:LOGBOOK:
-- State "TODO"       from              [2018-11-07 Wed 22:29]
-:END:
+
+I have encountered a strange case when a mal-formatted Java file
+caused Emacs to crash. After many research, the remedy is to use
+[[https://github.com/jhipster/prettier-java][prettier-java]] to reformat this file first, then emacs is happy.
+
 #+BEGIN_SRC emacs-lisp
-(global-font-lock-mode t)
+  (global-font-lock-mode t)
 #+END_SRC
+
 ** In terminal mode
 #+BEGIN_SRC emacs-lisp
 (when (display-graphic-p)
@@ -653,6 +655,14 @@ Let's one jump around text
 (setq next-line-add-newlines nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
+** tabs to 2
+
+This will also set the auto tab to 2.
+
+#+begin_SRC emacs-lisp
+  (setq indent-line-function 'insert-tab)
+  (setq-default tab-width 2)
+#+end_SRC
 ** Mark the 80 cols boundary
 #+BEGIN_SRC emacs-lisp
   (use-package column-enforce-mode
@@ -934,15 +944,9 @@ Change text style quickly:
               '(lambda ()
                  (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
   #+end_SRC
-** telephone-line
-#+begin_SRC emacs-lisp
-  (use-package telephone-line
-    :ensure
-    :config)
-(telephone-line-mode t)
-#+end_SRC
 
 * Coding
+
 ** Version control
 *** magit
 Add the powerful Magit
@@ -1309,14 +1313,47 @@ web-mode with config for Polymer editing
     :ensure t
     :mode "\\.html\\'"
     :config
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-enable-current-element-highlight t)
+      (setq web-mode-enable-current-element-highlight t)
     (setq web-mode-enable-current-column-highlight t)
-    (setq web-mode-enable-css-colorization t)
-    (setq web-mode-comment-style 2))
+    (setq web-mode-enable-css-colorization t))
 #+END_SRC
+
+Who should use this mode:
+#+begin_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+#+end_SRC
+*** web-beautify
+This is actually depending on =js-beautify=. See [[https://github.com/yasuyk/web-beautify][web-beautify]] for
+details.
+
+#+begin_SRC emacs-lisp
+  (use-package web-beautify
+    :ensure
+    :config
+    (add-hook 'js2-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+    (add-hook 'json-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+    (add-hook 'web-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+    (add-hook 'css-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+    (add-hook 'html-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+    )
+#+end_SRC
 *** csv-mode
 mode to edit CSV files.
 #+BEGIN_SRC emacs-lisp
@@ -1366,7 +1403,9 @@ Setup an IDE:
     (elpy-enable))
 #+end_SRC
 
-ELPY has its own indentation mode, which is overriding the one I use globally, so disable this one:
+ELPY has its own indentation mode, which is overriding the one I use
+globally, so disable this one:
+
 #+begin_SRC emacs-lisp
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 #+end_SRC
@@ -1400,6 +1439,15 @@ Sort python import. Need to install =pip install isort= offline.
 #+begin_SRC emacs-lisp
 (add-hook 'python-mode-hook #'smartparens-mode)
 #+end_SRC
+*** json-mode
+This should be installed before the javascript stuff because I'll be
+using the =prettier= as beautifier.
+
+#+begin_SRC emacs-lisp
+  (use-package json-mode
+    :ensure
+    :config)
+#+end_SRC
 *** javascript family: .js .ts .jsx
 There are a couple packages for .js files.
 
@@ -1408,11 +1456,13 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
 
 #+begin_SRC emacs-lisp
   (use-package js2-mode
-    :ensure
-    :config
-    (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-    (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode)))
-  (add-hook 'js-mode-hook #'smartparens-mode)
+      :ensure
+      :config)
+
+  (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+  (add-hook 'js2-mode-hook #'smartparens-mode)
+
 #+end_SRC
 
 **** prettier-js
@@ -1428,7 +1478,10 @@ Link js2-mode to prettier to beautify my code.
                              "--tab-width" "2"
                              )));
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'json-mode-hook 'prettier-js-mode)
+  (add-hook 'js-mode-hook 'prettier-js-mode)
 #+end_SRC
+
 **** js-doc
 Nothing is complete without a doc solution.
 
@@ -1436,10 +1489,10 @@ Nothing is complete without a doc solution.
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@mycompany.com")
+  (setq js-doc-mail-address "fxia1@lenovo.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
-  (setq js-doc-license "Mycompany License")
+  (setq js-doc-url "http://www.lenovo.com")
+  (setq js-doc-license "Lenovo License")
 )
 (add-hook 'js2-mode-hook
           #'(lambda ()
@@ -1447,6 +1500,69 @@ Nothing is complete without a doc solution.
               (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
 #+end_SRC
+** last, set my tab style
+
+Found this [[https://github.com/syl20bnr/spacemacs/issues/5923][here]], and I like it, to set my styles in a central
+location. This was researched while battling the .js tab level. I
+don't want to use the =customize= way since that will be a hidden manual
+step after a fresh install.
+
+First, define a func to include my indent settings. It takes an input
+argument:
+
+#+begin_SRC emacs-lisp
+  (defun my-setup-indent (n)
+    ;; java/c/c++
+    (setq-local standard-indent n)
+    (setq-local c-basic-offset n)
+
+    ;; javascript family
+    (setq-local javascript-indent-level n) ; javascript-mode
+    (setq-local js-indent-level n) ; js-mode
+    (setq-local js2-basic-offset n) ; js2-mode
+    (setq-local js-switch-indent-offset n) ; js-mode
+    (setq-local javascript-indent-level n) ; javacript-mode
+    (setq-local react-indent-level n) ; react-mode
+    (setq-local js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+
+    ;; html, css
+    (setq-local web-mode-attr-indent-offset n) ; web-mode
+    (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+    (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+    (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+    (setq-local web-mode-sql-indent-offset n) ; web-mode
+    (setq-local web-mode-attr-value-indent-offset n) ; web-mode
+    (setq web-mode-comment-style 2) ;; web-mode
+    (setq-local css-indent-offset n) ; css-mode
+
+    ;; shells
+    (setq-local sh-basic-offset n) ; shell scripts
+    (setq-local sh-indentation n))
+#+end_SRC
+
+Now set the tabs:
+
+#+begin_SRC emacs-lisp
+  (defun my-personal-code-style ()
+    (interactive)
+    (message "My personal code style!")
+    ;; use space instead of tab
+    (setq indent-tabs-mode nil)
+    ;; indent 2 spaces width
+    (my-setup-indent 2))
+
+  ;; it would be lovely if this was enough, but it gets stomped on by modes.
+  (my-personal-code-style)
+#+end_SRC
+
+So, to enfore this on some modes:
+#+begin_SRC emacs-lisp
+  (add-hook 'css-mode-hook 'my-personal-code-style)
+  (add-hook 'js2-mode-hook 'my-personal-code-style)
+  (add-hook 'react-mode-hook 'my-personal-code-style)
+  (add-hook 'sh-mode-hook 'my-personal-code-style)
+#+end_SRC
+
 * Org
 Load all my org stuff, but first org-mode itself.
 ** Init
@@ -2592,7 +2708,7 @@ My signature line:
         (concat
          "Best regards,\n\n"
          "Feng Xia\n"
-         "W: http://www.mycompany.com\n"))
+         "W: http://www.lenovo.com\n"))
 #+END_SRC
 *** send
 Sending email is to use SMTP. Here I'm showing to use the company one
@@ -2604,9 +2720,9 @@ use Gmail/hotmail:
     :ensure t
     :config
     (setq send-mail-function 'smtpmail-send-it
-          user-mail-address "fxia1@mycompany.com"
+          user-mail-address "fxia1@lenovo.com"
           smtpmail-debug-info t
-          smtpmail-smtp-user "fxia1@mycompany.com"
+          smtpmail-smtp-user "fxia1@lenovo.com"
           smtpmail-default-smtp-server "localhost"
           smtpmail-auth-credentials (expand-file-name "~/.authinfo")
           smtpmail-smtp-service 1025
@@ -2626,8 +2742,8 @@ just write, then queue, then when reconnected to the internect, send.
 *** reply
 When replying an email, auto fill in my info:
 #+BEGIN_SRC emacs-lisp
-  (setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
-        user-mail-address "fxia1@mycompany.com"
+  (setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
+        user-mail-address "fxia1@lenovo.com"
         user-full-name "Feng Xia"
         message-signature  (concat
                             "Feng Xia\n"

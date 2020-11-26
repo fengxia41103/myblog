@@ -461,6 +461,105 @@ Make the dired coloful:
     :ensure
     :config)
 #+end_SRC
+** treemacs
+
+Copied from [[https://github.com/Alexander-Miller/treemacs#installation][here]]:
+
+#+begin_SRC emacs-lisp
+  (use-package treemacs
+    :ensure t
+    :defer t
+    :init
+    (with-eval-after-load 'winum
+      (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+    :config
+    (progn
+      (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+            treemacs-deferred-git-apply-delay      0.5
+            treemacs-directory-name-transformer    #'identity
+            treemacs-display-in-side-window        t
+            treemacs-eldoc-display                 t
+            treemacs-file-event-delay              5000
+            treemacs-file-extension-regex          treemacs-last-period-regex-value
+            treemacs-file-follow-delay             0.2
+            treemacs-file-name-transformer         #'identity
+            treemacs-follow-after-init             t
+            treemacs-git-command-pipe              ""
+            treemacs-goto-tag-strategy             'refetch-index
+            treemacs-indentation                   2
+            treemacs-indentation-string            " "
+            treemacs-is-never-other-window         nil
+            treemacs-max-git-entries               5000
+            treemacs-missing-project-action        'ask
+            treemacs-move-forward-on-expand        nil
+            treemacs-no-png-images                 nil
+            treemacs-no-delete-other-windows       t
+            treemacs-project-follow-cleanup        nil
+            treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+            treemacs-position                      'left
+            treemacs-recenter-distance             0.1
+            treemacs-recenter-after-file-follow    nil
+            treemacs-recenter-after-tag-follow     nil
+            treemacs-recenter-after-project-jump   'always
+            treemacs-recenter-after-project-expand 'on-distance
+            treemacs-show-cursor                   nil
+            treemacs-show-hidden-files             t
+            treemacs-silent-filewatch              nil
+            treemacs-silent-refresh                nil
+            treemacs-sorting                       'alphabetic-asc
+            treemacs-space-between-root-nodes      t
+            treemacs-tag-follow-cleanup            t
+            treemacs-tag-follow-delay              1.5
+            treemacs-user-mode-line-format         nil
+            treemacs-user-header-line-format       nil
+            treemacs-width                         35
+            treemacs-workspace-switch-cleanup      nil)
+
+      ;; The default width and height of the icons is 22 pixels. If you are
+      ;; using a Hi-DPI display, uncomment this to double the icon size.
+      ;;(treemacs-resize-icons 44)
+
+      (treemacs-follow-mode t)
+      (treemacs-filewatch-mode t)
+      (treemacs-fringe-indicator-mode t)
+      (pcase (cons (not (null (executable-find "git")))
+                   (not (null treemacs-python-executable)))
+        (`(t . t)
+         (treemacs-git-mode 'deferred))
+        (`(t . _)
+         (treemacs-git-mode 'simple))))
+    :bind
+    (:map global-map
+          ("M-0"       . treemacs-select-window)
+          ("C-x t 1"   . treemacs-delete-other-windows)
+            ("C-x t t"   . treemacs)
+            ("C-x t B"   . treemacs-bookmark)
+            ("C-x t C-t" . treemacs-find-file)
+            ("C-x t M-t" . treemacs-find-tag)))
+
+
+    (use-package treemacs-icons-dired
+      :after treemacs dired
+      :ensure t
+        :config (treemacs-icons-dired-mode))
+
+    (use-package treemacs-projectile
+      :after treemacs projectile
+      :ensure t)
+    (use-package treemacs-magit
+      :after treemacs magit
+      :ensure t)
+  #+end_SRC
+
+  Add some files to ignore, eg. ~.pyc`:
+
+  #+begin_SRC emacs-lisp
+    (with-eval-after-load 'treemacs
+      (defun treemacs-ignore-gitignore (file _)
+        (string= file ".pyc"))
+      (push #'treemacs-ignore-gitignore treemacs-ignored-file-predicates))
+  #+end_SRC
+
 * Colors and Look
 ** Theme
 Loading a theme I like:
@@ -936,13 +1035,20 @@ Change text style quickly:
     :config)
   (add-hook 'elpy-mode-hook
               '(lambda ()
-                 (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
   (add-hook 'org-mode-hook
               '(lambda ()
-                 (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
   (add-hook 'mu4e-compose-mode-hook
               '(lambda ()
-                 (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
+  (add-hook 'js2-mode-hook
+              '(lambda ()
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
   #+end_SRC
 
 * Coding
@@ -1489,10 +1595,10 @@ Nothing is complete without a doc solution.
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@lenovo.com")
+  (setq js-doc-mail-address "fxia1@company.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.lenovo.com")
-  (setq js-doc-license "Lenovo License")
+  (setq js-doc-url "http://www.company.com")
+  (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook
           #'(lambda ()
@@ -2708,7 +2814,7 @@ My signature line:
         (concat
          "Best regards,\n\n"
          "Feng Xia\n"
-         "W: http://www.lenovo.com\n"))
+         "W: http://www.company.com\n"))
 #+END_SRC
 *** send
 Sending email is to use SMTP. Here I'm showing to use the company one
@@ -2720,9 +2826,9 @@ use Gmail/hotmail:
     :ensure t
     :config
     (setq send-mail-function 'smtpmail-send-it
-          user-mail-address "fxia1@lenovo.com"
+          user-mail-address "fxia1@company.com"
           smtpmail-debug-info t
-          smtpmail-smtp-user "fxia1@lenovo.com"
+          smtpmail-smtp-user "fxia1@company.com"
           smtpmail-default-smtp-server "localhost"
           smtpmail-auth-credentials (expand-file-name "~/.authinfo")
           smtpmail-smtp-service 1025
@@ -2742,8 +2848,8 @@ just write, then queue, then when reconnected to the internect, send.
 *** reply
 When replying an email, auto fill in my info:
 #+BEGIN_SRC emacs-lisp
-  (setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
-        user-mail-address "fxia1@lenovo.com"
+  (setq mu4e-compose-reply-to-address "fxia1@company.com"
+        user-mail-address "fxia1@company.com"
         user-full-name "Feng Xia"
         message-signature  (concat
                             "Feng Xia\n"

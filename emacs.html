@@ -138,14 +138,19 @@
           <p>What a wonderful editor!</p>
 <p>I wouldn't even call it an editor because it can do so much beyond
 text editing. Still on the learning curve to get a grasp of what it
-can do in my daily development workflow. Here is to document the
-<a href="https://fengxia41103.github.io/myblog/downloads/emacs/init.el">init.el</a> that I'm using. It's a work in progress of course since
-I'm updating it all the time. Nonetheless, I'm already in love with
-what I have so far.</p>
+can do in my daily development workflow.</p>
 <h1>install emacs26</h1>
 <p>The easiest way to get this: <code>sudo add-apt-repository
 ppa:kelleyk/emacs</code>, then <code>apt remove emacs emacs25 &amp;&amp; apt update &amp;&amp;
 apt install emacs26</code>, then verify <code>emacs --version</code>.</p>
+<h1>bootstrap &amp; config</h1>
+<p>Welcome the wonderful <code>org-mode</code> and the <a href="https://fengxia41103.github.io/myblog/downloads/emacs/emacs_setup.html">config file in org-mode</a>. Bootstrap is easy:</p>
+<ol>
+<li>backup your current emacs: <code>mv ~/.emacs.d ~/.emacs.d.bak</code></li>
+<li>create <code>.emacs</code>, or copy <a href="https://fengxia41103.github.io/myblog/downloads/emacs/dot_emacs.el">.emacs</a> to <code>~</code>.</li>
+<li>launch emacs, sit back, and once all packages are downloaded and
+   compiled, you are done.</li>
+</ol>
 <h1>replace in files</h1>
 <p>Replacing a string match in multiple files is common, but
 tricky. Emacs doesn't make this intuitive at all. Follow these steps
@@ -161,7 +166,7 @@ to get there:</p>
 <li>In that buffer, press <code>t</code> to select all (press <code>t</code> again will
    toggle it off).</li>
 <li>Press <code>Q</code> (capital).</li>
-<li><code>Query replace regexp in marked files...</code>: </li>
+<li><code>Query replace regexp in marked files...</code>:</li>
 <li>set the old string</li>
 <li>
 <p><code>with:</code>: set new string</p>
@@ -183,232 +188,6 @@ to get there:</p>
 </ol>
 <p>I find that the easiest way to revert a mistake is to <code>git checkout
 -f</code>, then start this exercise from beginning.</p>
-<h1>email</h1>
-<p>Using Emacs for email is both awesome and tricky. Read <a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">this</a> for
-details of <code>mbsync</code> setups. On the emacs side, I'm using these in
-<code>init.el</code> to link <code>mu4e</code> with <code>mbsync</code>. However, note that they are
-actually two separate things, that you can run <code>mbsync -a</code> on a
-terminal to get all the mails sync-ed, and <code>mu4e</code> is just an agent/UI
-that displays them in emacs and giving you a couple key bindings to
-manage the list. </p>
-<div class="highlight"><pre><span></span><span class="c1">;; mu42 gmail setup</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&quot;/usr/share/emacs/site-lisp/mu4e/&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;mu4e</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">mu4e-maildirs-extension</span><span class="p">)</span>
-
-<span class="c1">;;location of my maildir</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-maildir</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/Maildir&quot;</span><span class="p">))</span>
-
-<span class="c1">;;command used to get mail</span>
-<span class="c1">;; use this for testing</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-get-mail-command</span> <span class="s">&quot;true&quot;</span><span class="p">)</span>
-
-<span class="c1">;;; (setq mu4e-view-prefer-html t)</span>
-
-<span class="c1">;; use this to sync with mbsync</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-get-mail-command</span> <span class="s">&quot;mbsync -a&quot;</span><span class="p">)</span>
-
-
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-drafts-folder</span> <span class="s">&quot;/drafts&quot;</span>
-      <span class="nv">mu4e-sent-folder</span>   <span class="s">&quot;/sent&quot;</span>
-      <span class="nv">mu4e-trash-folder</span>  <span class="s">&quot;/trash&quot;</span><span class="p">)</span>
-<span class="c1">;; (setq mu4e-maildir-shortcuts</span>
-<span class="c1">;;       &#39;((&quot;/INBOX&quot;             . ?i)</span>
-<span class="c1">;;  (&quot;/sent&quot;              . ?s)</span>
-<span class="c1">;;  (&quot;/trash&quot;             . ?t)</span>
-<span class="c1">;;  (&quot;/drafts&quot;            . ?d)</span>
-<span class="c1">;;  (&quot;/review&quot;            . ?r)</span>
-<span class="c1">;;  (&quot;/cours&quot;             . ?c)</span>
-<span class="c1">;;  (&quot;/private&quot;           . ?p)</span>
-<span class="c1">;;  (&quot;/inserm&quot;            . ?m)</span>
-<span class="c1">;;  (&quot;/aphp&quot;              . ?a)</span>
-<span class="c1">;;  (&quot;/mailing&quot;           . ?l)))</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;mu4e-bookmarks</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;flag:attach&quot;</span>    <span class="s">&quot;Messages with attachment&quot;</span>   <span class="nv">?a</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;mu4e-bookmarks</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;size:5M..500M&quot;</span>  <span class="s">&quot;Big messages&quot;</span>               <span class="nv">?b</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;mu4e-bookmarks</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;flag:flagged&quot;</span>   <span class="s">&quot;Flagged messages&quot;</span>           <span class="nv">?f</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-
-<span class="c1">;;; for more customization options, check here:</span>
-<span class="c1">;;; https://www.djcbsoftware.nl/code/mu/mu4e/HV-Overview.html#HV-Overview</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-headers-date-format</span> <span class="s">&quot;%b-%d %a&quot;</span>
-      <span class="nv">mu4e-headers-fields</span> <span class="o">&#39;</span><span class="p">((</span><span class="ss">:date</span> <span class="o">.</span> <span class="mi">10</span><span class="p">)</span>
-                <span class="p">(</span><span class="ss">:flags</span> <span class="o">.</span> <span class="mi">5</span><span class="p">)</span>
-                <span class="p">(</span><span class="ss">:from-or-to</span> <span class="o">.</span> <span class="mi">10</span><span class="p">)</span>
-                <span class="p">(</span><span class="ss">:thread-subject</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)))</span> 
-
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-reply-to-address</span> <span class="s">&quot;fxia1@mycompany.com&quot;</span>
-      <span class="nv">user-mail-address</span> <span class="s">&quot;fxia1@mycompany.com&quot;</span>
-      <span class="nv">user-full-name</span> <span class="s">&quot;Feng Xia&quot;</span>
-      <span class="nv">message-signature</span>  <span class="p">(</span><span class="nv">concat</span>
-                          <span class="s">&quot;Feng Xia\n&quot;</span>
-                          <span class="s">&quot;http://fengxia.co\n&quot;</span><span class="p">)</span>
-      <span class="nv">message-citation-line-format</span> <span class="s">&quot;On %Y-%m-%d %H:%M:%S, %f wrote:&quot;</span>
-      <span class="nv">message-citation-line-function</span> <span class="ss">&#39;message-insert-formatted-citation-line</span>
-      <span class="nv">mu4e-headers-results-limit</span> <span class="mi">500</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-compose-signature</span>
-      <span class="p">(</span><span class="nv">concat</span>
-       <span class="s">&quot;Best regards,\n\n&quot;</span>
-       <span class="s">&quot;Feng Xia\n&quot;</span>
-       <span class="s">&quot;Advisory Engineer\n&quot;</span>
-       <span class="s">&quot;Datacenter Group (DCG), Mycompany US\n&quot;</span>
-       <span class="s">&quot;8000 Development Drive, Morrisville, NC 27560\n&quot;</span>
-       <span class="s">&quot;W: http://www.mycompany.com\n&quot;</span><span class="p">))</span>
-
-<span class="c1">;; save attachment to my desktop (this can also be a function)</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-attachment-dir</span> <span class="s">&quot;~/Downloads&quot;</span><span class="p">)</span>
-
-<span class="c1">;; attempt to show images when viewing messages</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-view-show-images</span> <span class="no">t</span><span class="p">)</span>
-
-<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;smtpmail</span><span class="p">)</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">send-mail-function</span> <span class="ss">&#39;smtpmail-send-it</span>
-      <span class="nv">user-mail-address</span> <span class="s">&quot;fxia1@mycompany.com&quot;</span>
-      <span class="nv">smtpmail-debug-info</span> <span class="no">t</span>
-      <span class="nv">smtpmail-smtp-user</span> <span class="s">&quot;fxia1@mycompany.com&quot;</span>
-      <span class="nv">smtpmail-default-smtp-server</span> <span class="s">&quot;localhost&quot;</span>
-      <span class="nv">smtpmail-auth-credentials</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&quot;~/.authinfo&quot;</span><span class="p">)</span>
-      <span class="nv">smtpmail-smtp-service</span> <span class="mi">1025</span>
-      <span class="nv">smtpmail-stream-type</span> <span class="no">nil</span>
-      <span class="nv">starttls-use-gnutls</span> <span class="no">nil</span>
-      <span class="nv">starttls-extra-arguments</span> <span class="no">nil</span>
-      <span class="p">)</span>
-
-<span class="p">(</span><span class="k">setq</span> <span class="nv">message-kill-buffer-on-exit</span> <span class="no">t</span>
-      <span class="c1">;; mu4e-sent-messages-behavior &#39;delete</span>
-      <span class="nv">mu4e-headers-skip-duplicates</span> <span class="no">t</span>
-      <span class="nv">mu4e-headers-include-related</span> <span class="no">t</span>
-      <span class="nv">mail-user-agent</span> <span class="ss">&#39;mu4e-user-agent</span>
-      <span class="nv">mu4e-get-mail-command</span> <span class="s">&quot;mbsync -a&quot;</span>
-      <span class="nv">mu4e-update-interval</span> <span class="mi">300</span> <span class="c1">;; update every 5 min</span>
-      <span class="nv">mu4e-attachment-dir</span>  <span class="s">&quot;~/Downloads&quot;</span>
-      <span class="c1">;;set up queue for offline email</span>
-      <span class="c1">;;use mu mkdir  ~/Maildir/queue to set up first</span>
-      <span class="nv">smtpmail-queue-mail</span>  <span class="no">nil</span> <span class="c1">;; queue sent mail</span>
-      <span class="nv">smtpmail-queue-dir</span>   <span class="s">&quot;~/Maildir/queue/cur&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-html2text-command</span> <span class="s">&quot;html2text -utf8 -width 72&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;mu4e-view-actions</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;ViewInBrowser&quot;</span> <span class="o">.</span> <span class="nv">mu4e-action-view-in-browser</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
-
-<span class="c1">;; don&#39;t keep message buffers around</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">message-kill-buffer-on-exit</span> <span class="no">t</span><span class="p">)</span>
-
-<span class="c1">;;rename files when moving</span>
-<span class="c1">;;NEEDED FOR MBSYNC</span>
-<span class="p">(</span><span class="k">setq</span> <span class="nv">mu4e-change-filenames-when-moving</span> <span class="no">t</span><span class="p">)</span>
-</pre></div>
-
-
-<h1>Jira in emacs</h1>
-<p>I would suggest to use <a href="https://fengxia41103.github.io/myblog/jira.html">jira cli</a> instead! Read on if you are
-curious about <code>org-jira</code>.</p>
-<p>If you use Jira, say the url is <code>https://jira.&lt;company&gt;.com:8443/</code>
-(port 8443 is the common configuration for Jira), chances are it is
-also using a self-signed cert. </p>
-<ol>
-<li>
-<p>Get the cert (see <a href="https://curl.haxx.se/docs/sslcerts.html">here</a>): <code>openssl s_client -showcerts
-   -servername jira.company.com -connect jira1.company.com:8443 &gt;
-   &lt;your jira&gt;.crt</code>.</p>
-</li>
-<li>
-<p>Copy it to <code>/usr/local/share/ca-certificates</code>, change mode to 644.</p>
-</li>
-<li><code>sudo update-ca-certificates</code>, you should see sth like this:<div class="highlight"><pre><span></span>```shell
-Updating certificates in /etc/ssl/certs...
-rehash: warning: skipping jira1.pem,it does not contain exactly one certificate or CRL
-1 added, 0 removed; done.
-Running hooks in /etc/ca-certificates/update.d...
-
-Adding debian:jira1.pem
-done.
-done.
-```
-</pre></div>
-
-
-<ol>
-<li>Install <a href="https://github.com/ahungry/org-jira">org-jira</a>, and get all your issues! </li>
-</ol>
-</li>
-</ol>
-<p>Here are things I put in <code>init.el</code> as global configurations:</p>
-<div class="highlight"><pre><span></span><span class="c1">;; org-jira</span>
-<span class="p">(</span><span class="nb">use-package</span> 
-  <span class="nv">org-jira</span>  
-
-  <span class="ss">:ensure</span> 
-  <span class="ss">:config</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">org-jira-working-dir</span> <span class="s">&quot;~/org&quot;</span><span class="p">)</span>
-  <span class="ss">:config</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">jiralib-url</span> <span class="s">&quot;https://jira1.labs.&lt;company&gt;.com:8443&quot;</span><span class="p">)</span>
-  <span class="ss">:config</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">org-jira-use-status-as-todo</span> <span class="no">t</span><span class="p">))</span>
-
-<span class="c1">;; (setq request-message-level &#39;debug)</span>
-<span class="c1">;; (setq request-log-level &#39;debug)</span>
-
-<span class="p">(</span><span class="k">setq</span> <span class="nv">org-jira-custom-jqls</span>
-      <span class="o">&#39;</span><span class="p">(</span>
-        <span class="p">(</span><span class="ss">:jql</span> <span class="s">&quot;&#39;Epic Link&#39; in (OL-318) AND Type = BUG and status not in (DONE, CANCELLED) ORDER BY cf[10001] ASC, Status&quot;</span>
-              <span class="ss">:limit</span> <span class="mi">50</span>
-              <span class="ss">:filename</span> <span class="s">&quot;CP bugs&quot;</span><span class="p">)</span>
-        <span class="p">(</span><span class="ss">:jql</span> <span class="s">&quot;&#39;Epic Link&#39; in (OL-318) AND status not in (CANCELED) AND assignee WAS IN (currentUser(), aoprin, amilitaru) ORDER BY ID,status DESC&quot;</span>
-              <span class="ss">:limit</span> <span class="mi">100</span>
-              <span class="ss">:filename</span> <span class="s">&quot;CP&quot;</span><span class="p">)</span>
-        <span class="p">))</span>
-
-<span class="p">(</span><span class="nv">defconst</span> <span class="nv">org-jira-progress-issue-flow</span>
-  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Todo&quot;</span> <span class="o">.</span> <span class="s">&quot;Selected for Development&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;Selected for Development&quot;</span> <span class="o">.</span> <span class="s">&quot;In Progress&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;In Progress&quot;</span> <span class="o">.</span> <span class="s">&quot;In Review&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;In Review&quot;</span> <span class="o">.</span> <span class="s">&quot;In Testing&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;In Testing&quot;</span> <span class="o">.</span> <span class="s">&quot;Done&quot;</span><span class="p">)</span>
-    <span class="p">))</span>
-</pre></div>
-
-
-<p>The most useful one is to set <code>org-jira-use-status-as-todo</code>, so now a
-ticket will show up as below &mdash; notice the word <code>BACKLOG</code> is a
-status defined in my Jira, and it's taking place of the <code>TODO</code> in
-default org-mode:</p>
-<div class="highlight"><pre><span></span>** BACKLOG QA_1910: Invalid port range error message displayed, although the range is correct :OL_3205:
-</pre></div>
-
-
-<h2>what is not working</h2>
-<h3>workflow does not change status</h3>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">defconst</span> <span class="nv">org-jira-progress-issue-flow</span>
-  <span class="o">&#39;</span><span class="p">((</span><span class="s">&quot;Todo&quot;</span> <span class="o">.</span> <span class="s">&quot;Selected for Development&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;Selected for Development&quot;</span> <span class="o">.</span> <span class="s">&quot;In Progress&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;In Progress&quot;</span> <span class="o">.</span> <span class="s">&quot;In Review&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;In Review&quot;</span> <span class="o">.</span> <span class="s">&quot;In Testing&quot;</span><span class="p">)</span>
-    <span class="p">(</span><span class="s">&quot;In Testing&quot;</span> <span class="o">.</span> <span class="s">&quot;Done&quot;</span><span class="p">)</span>
-    <span class="p">))</span>
-</pre></div>
-
-
-<p>The workflow defined above actually does not change the <code>status</code> of
-the Jira ticket because the <code>status</code> is shown as a property in
-org-mode. So defining them here is only to make it <strong>visually
-consistent</strong> when you move ticket in org-mode itself as if the
-ticket's status is moving. You still need to use <code>C-c iw</code> to change
-the status, and it will post to Jira server to actually change the
-ticket.</p>
-<p>Further, I add this header to the org file itself:</p>
-<div class="highlight"><pre><span></span>#+TODO: BACKLOG(b) SELECTED-FOR-DEVELOPMENT(f) IN-PROGRESS(p) IN-REVIEW(r) IN-TESTING(t) | DONE(d)
-</pre></div>
-
-
-<h3>priority has no effect</h3>
-<p>org-mode priority has no effect on Jira ticket. It will be overwritten
-when you pull issues again (<code>C-c ij</code> or <code>C-c ig</code>). This is one bump I
-haven't figured out because it means I'll be losing info/history upon
-a pull.</p>
-<h3>multi-line comment</h3>
-<p>You can add a comment <code>C-c cc</code>, but it gives you a mini buffer of a
-single line space, thus making it impossible to write multi line
-comment.</p>
-<p>However, once you add the comment, you can update the org using <code>C-c
-ir</code> or <code>C-c iR</code>, which will pull jira again and update org file, thus
-pulling down the new comment. Now go to the comment to add more txt,
-then <code>C-c cu</code> to update comment. So even as a 2-step process, you can
-write comment w/o leaving org-mode. So this is not too bad.</p>
 <p>Happy coding.</p>
         </p>
 

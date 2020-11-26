@@ -1,0 +1,4 @@
+(setq ring-bell-function
+      '(lambda ()
+         (message "The answer is 42...")))
+(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)

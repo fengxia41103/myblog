@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Thu, 12 Nov 2020 15:13:00 -0500</lastBuildDate><item><title>CP &amp; miro</title><link>https://fengxia41103.github.io/myblog/cp%20miro.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Thu, 26 Nov 2020 10:03:00 -0500</lastBuildDate><item><title>Bach, and shoppings</title><link>https://fengxia41103.github.io/myblog/bach%20and%20shoppings.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/DSC_1230631.JPG"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;2020 Thanksgiving day. Sitting here and listening to &lt;a href="https://www.youtube.com/watch?v=0Cg_0jepxow&amp;amp;t=833s"&gt;Hilary Hahn&lt;/a&gt;
+playing Bach at the end of the concerto, what a wonderful sound! When
+I was at Noah's age, Dad used to listen to Bach and Hendel, and I
+thought they were no comparison to the pop songs I liked, and …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 26 Nov 2020 10:03:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2020-11-26:/myblog/bach and shoppings.html</guid><category>thoughts</category></item><item><title>CP &amp; miro</title><link>https://fengxia41103.github.io/myblog/cp%20miro.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/DSC_1230533.JPG"/&gt;
 &lt;/figure&gt;
 
@@ -1801,8 +1808,10 @@ deploy process:&lt;/p&gt;
 &lt;li&gt;Add a new machine to the cloud environment. In …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 08 Feb 2017 14:00:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-02-08:/myblog/juju deploy provider.html</guid><category>lenovo</category></item><item><title>Emacs</title><link>https://fengxia41103.github.io/myblog/emacs.html</link><description>&lt;p&gt;What a wonderful editor!&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it can do so much beyond
 text editing. Still on the learning curve to get a grasp of what it
-can do in my daily development workflow. Here is to document the
-&lt;a href="https://fengxia41103.github.io/myblog/downloads/emacs/init.el"&gt;init.el&lt;/a&gt; that I'm using. It's …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 21 Jan 2017 11:45:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-01-21:/myblog/emacs.html</guid><category>dev</category></item><item><title>Spectrwm</title><link>https://fengxia41103.github.io/myblog/spectrwm.html</link><description>&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
+can do in my daily development workflow.&lt;/p&gt;
+&lt;h1&gt;install emacs26&lt;/h1&gt;
+&lt;p&gt;The easiest way to get this: &lt;code&gt;sudo add-apt-repository
+ppa …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sat, 21 Jan 2017 11:45:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2017-01-21:/myblog/emacs.html</guid><category>dev</category></item><item><title>Spectrwm</title><link>https://fengxia41103.github.io/myblog/spectrwm.html</link><description>&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. &lt;/p&gt;
 &lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;

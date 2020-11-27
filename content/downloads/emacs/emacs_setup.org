@@ -1,4 +1,4 @@
-#+TITLE: Paf's portable Emacs configuration
+t#+TITLE: Paf's portable Emacs configuration
 #+AUTHOR: Pascal Fleury
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
@@ -561,6 +561,17 @@ Copied from [[https://github.com/Alexander-Miller/treemacs#installation][here]]:
   #+end_SRC
 
 * Colors and Look
+
+** all-the-icons
+
+Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
+#+begin_SRC emacs-lisp
+  (use-package all-the-icons
+    :ensure)
+#+end_SRC
+
+You would have to run =M-x all-the-icons-install-fonts== manually at
+least once to install fonts to your system.
 ** Theme
 Loading a theme I like:
 
@@ -570,6 +581,12 @@ Loading a theme I like:
     :config)
 (add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
 #+END_SRC
+** doom-modeline
+#+begin_SRC emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+#+end_SRC
 ** Hide menu bar & toolbar
 Using i3 is forcing me to use keyboard.
 
@@ -824,35 +841,11 @@ Well, who wants to type parenthesis:
 #+end_SRC
 
 * Cool packages
-** annotate-mode
-The file-annotations are store externally. Seems to fail with =args-out-of-range= and then Emacs is confused. (filed issue for this)
 
-Also, it seems to interfere with colorful modes like =magit= or =org-agenda-mode= so that I went with a whitelist instead of the wish of a blacklist of modes.
+Here is a good [[https://huadeyu.tech/tools/emacs-setup-notes.html][list]] of them. I advise to take them slowly because each
+comes with a set of key combo, and they take time to become muscle
+memory.
 
-#+BEGIN_SRC emacs-lisp
-(use-package annotate
-  :ensure t
-  :bind ("C-c C-A" . 'annotate-annotate)  ;; for ledger-mode, as 'C-c C-a' is taken there.
-  :config
-  (add-hook 'org-mode 'annotate-mode)
-  (add-hook 'csv-mode 'annotate-mode)
-  (add-hook 'c-mode 'annotate-mode)
-  (add-hook 'c++-mode 'annotate-mode)
-  (add-hook 'sh-mode 'annotate-mode)
-  (add-hook 'ledger-mode 'annotate-mode)
-;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
-;;;    (lambda () (annotate-mode 1)))
-;;;  (global-annotate-mode 1)
-  )
-#+END_SRC
-
-** protobuf-mode
-Mode for Google protocol buffer mode
-#+BEGIN_SRC emacs-lisp
-  (use-package protobuf-mode
-    :ensure t
-    :mode "\\.proto\\'")
-#+END_SRC
 ** Helm (list completion)
 Trying out Helm instead of icicles, as it is available on ELPA.
 
@@ -926,12 +919,65 @@ Found [[https://www.reddit.com/r/emacs/comments/30yer0/helm_and_recentf_tips/][t
                                   helm-source-buffer-not-found))
 #+end_SRC
 
-** [[https://github.com/smihica/emmet-mode][emmet-mode]]
-Useful abbreviations when coding in HTML.
+** string inflection
+Change text style quickly:
+#+begin_SRC emacs-lisp
+  (use-package string-inflection
+    :ensure
+    :config)
+  (add-hook 'elpy-mode-hook
+              '(lambda ()
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
+  (add-hook 'org-mode-hook
+              '(lambda ()
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
+  (add-hook 'mu4e-compose-mode-hook
+              '(lambda ()
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
+  (add-hook 'js2-mode-hook
+              '(lambda ()
+                 (local-set-key (kbd "C-q C-u")
+                                'string-inflection-python-style-cycle)))
+  #+end_SRC
+
+** annotate-mode
+The file-annotations are store externally. Seems to fail with
+=args-out-of-range= and then Emacs is confused. (filed issue for this)
+
+Also, it seems to interfere with colorful modes like =magit= or
+=org-agenda-mode= so that I went with a whitelist instead of the wish of
+a blacklist of modes.
+
 #+BEGIN_SRC emacs-lisp
-(use-package emmet-mode
-:ensure t)
+(use-package annotate
+  :ensure t
+  :bind ("C-c C-A" . 'annotate-annotate)  ;; for ledger-mode, as 'C-c C-a' is taken there.
+  :config
+  (add-hook 'org-mode 'annotate-mode)
+  (add-hook 'csv-mode 'annotate-mode)
+  (add-hook 'c-mode 'annotate-mode)
+  (add-hook 'c++-mode 'annotate-mode)
+  (add-hook 'sh-mode 'annotate-mode)
+  (add-hook 'ledger-mode 'annotate-mode)
+;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
+;;;    (lambda () (annotate-mode 1)))
+;;;  (global-annotate-mode 1)
+  )
 #+END_SRC
+
+** protobuf-mode
+
+Mode for Google protocol buffer mode
+
+#+BEGIN_SRC emacs-lisp
+  (use-package protobuf-mode
+    :ensure t
+    :mode "\\.proto\\'")
+#+END_SRC
+
 ** rainbow-mode
 Colorize color names and codes in the correct color.
 #+BEGIN_SRC emacs-lisp
@@ -1027,30 +1073,6 @@ Looks convenient:
     :config)
 (move-text-default-bindings)
 #+end_SRC
-** string inflection
-Change text style quickly:
-#+begin_SRC emacs-lisp
-  (use-package string-inflection
-    :ensure
-    :config)
-  (add-hook 'elpy-mode-hook
-              '(lambda ()
-                 (local-set-key (kbd "C-q C-u")
-                                'string-inflection-python-style-cycle)))
-  (add-hook 'org-mode-hook
-              '(lambda ()
-                 (local-set-key (kbd "C-q C-u")
-                                'string-inflection-python-style-cycle)))
-  (add-hook 'mu4e-compose-mode-hook
-              '(lambda ()
-                 (local-set-key (kbd "C-q C-u")
-                                'string-inflection-python-style-cycle)))
-  (add-hook 'js2-mode-hook
-              '(lambda ()
-                 (local-set-key (kbd "C-q C-u")
-                                'string-inflection-python-style-cycle)))
-  #+end_SRC
-
 * Coding
 
 ** Version control
@@ -1419,7 +1441,7 @@ web-mode with config for Polymer editing
     :ensure t
     :mode "\\.html\\'"
     :config
-      (setq web-mode-enable-current-element-highlight t)
+    (setq web-mode-enable-current-element-highlight t)
     (setq web-mode-enable-current-column-highlight t)
     (setq web-mode-enable-css-colorization t))
 #+END_SRC
@@ -1442,24 +1464,39 @@ details.
 #+begin_SRC emacs-lisp
   (use-package web-beautify
     :ensure
-    :config
-    (add-hook 'js2-mode-hook
-              (lambda ()
-                (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-    (add-hook 'json-mode-hook
-              (lambda ()
-                (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-    (add-hook 'web-mode-hook
-              (lambda ()
-                (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-    (add-hook 'css-mode-hook
-              (lambda ()
-                (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
-    (add-hook 'html-mode-hook
-              (lambda ()
-                (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-    )
+    :config)
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+  (add-hook 'css-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+  (add-hook 'html-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
 #+end_SRC
+*** [[https://github.com/smihica/emmet-mode][emmet-mode]]
+Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencoding][zencoding]] for details.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package emmet-mode
+    :ensure t
+    :after(web-mode css-mode scss-mode)
+    :config)
+  (setq emmet-expand-jsx-className? t)
+  (setq emmet-move-cursor-between-quotes t)
+  (add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'scss-mode-hook  'emmet-mode)
+#+END_SRC
 *** csv-mode
 mode to edit CSV files.
 #+BEGIN_SRC emacs-lisp

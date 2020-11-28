@@ -236,34 +236,40 @@ tangled, and the tangled file is compiled."
   (:map global-map
         ("M-0"       . treemacs-select-window)
         ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
+          ("C-x t t"   . treemacs)
+          ("C-x t B"   . treemacs-bookmark)
+          ("C-x t C-t" . treemacs-find-file)
+          ("C-x t M-t" . treemacs-find-tag)))
 
 
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+  (use-package treemacs-icons-dired
+    :after treemacs dired
+    :ensure t
+      :config (treemacs-icons-dired-mode))
 
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
+  (use-package treemacs-projectile
+    :after treemacs projectile
+    :ensure t)
+  (use-package treemacs-magit
+    :after treemacs magit
+    :ensure t)
 
-(use-package treemacs-magit
-  :after treemacs magit
-  :ensure t)
+(with-eval-after-load 'treemacs
+  (defun treemacs-ignore-gitignore (file _)
+    (string= file ".pyc"))
+  (push #'treemacs-ignore-gitignore treemacs-ignored-file-predicates))
 
-(use-package treemacs-persp ;;treemacs-persective if you use perspective.el vs. persp-mode
-  :after treemacs persp-mode ;;or perspective vs. persp-mode
-  :ensure t
-  :config (treemacs-set-scope-type 'Perspectives))
+(use-package all-the-icons
+  :ensure)
 
 (use-package sublime-themes
     :ensure
     :config)
 (add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -421,25 +427,6 @@ tangled, and the tangled file is compiled."
   (require 'smartparens-config))
 (add-hook 'prog-mode-hook #'smartparens-mode)
 
-(use-package annotate
-  :ensure t
-  :bind ("C-c C-A" . 'annotate-annotate)  ;; for ledger-mode, as 'C-c C-a' is taken there.
-  :config
-  (add-hook 'org-mode 'annotate-mode)
-  (add-hook 'csv-mode 'annotate-mode)
-  (add-hook 'c-mode 'annotate-mode)
-  (add-hook 'c++-mode 'annotate-mode)
-  (add-hook 'sh-mode 'annotate-mode)
-  (add-hook 'ledger-mode 'annotate-mode)
-;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
-;;;    (lambda () (annotate-mode 1)))
-;;;  (global-annotate-mode 1)
-  )
-
-(use-package protobuf-mode
-  :ensure t
-  :mode "\\.proto\\'")
-
 (use-package helm
  :ensure t
  :delight helm-mode
@@ -499,8 +486,44 @@ tangled, and the tangled file is compiled."
                                   helm-source-bookmarks
                                   helm-source-buffer-not-found))
 
-(use-package emmet-mode
-:ensure t)
+(use-package string-inflection
+  :ensure
+  :config)
+(add-hook 'elpy-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'org-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'mu4e-compose-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'js2-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+
+(use-package annotate
+  :ensure t
+  :bind ("C-c C-A" . 'annotate-annotate)  ;; for ledger-mode, as 'C-c C-a' is taken there.
+  :config
+  (add-hook 'org-mode 'annotate-mode)
+  (add-hook 'csv-mode 'annotate-mode)
+  (add-hook 'c-mode 'annotate-mode)
+  (add-hook 'c++-mode 'annotate-mode)
+  (add-hook 'sh-mode 'annotate-mode)
+  (add-hook 'ledger-mode 'annotate-mode)
+;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
+;;;    (lambda () (annotate-mode 1)))
+;;;  (global-annotate-mode 1)
+  )
+
+(use-package protobuf-mode
+  :ensure t
+  :mode "\\.proto\\'")
 
 (use-package rainbow-mode
   :ensure t)
@@ -561,19 +584,6 @@ tangled, and the tangled file is compiled."
     :ensure
     :config)
 (move-text-default-bindings)
-
-(use-package string-inflection
-  :ensure
-  :config)
-(add-hook 'elpy-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
-(add-hook 'org-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
-(add-hook 'mu4e-compose-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
 
 (use-package magit
   :ensure t
@@ -773,40 +783,49 @@ tangled, and the tangled file is compiled."
 
 (use-package web-mode
   :ensure t
-  :mode "\\.html\\'"
   :config
-    (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-css-colorization t))
 
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 
 (use-package web-beautify
   :ensure
-  :config
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-  (add-hook 'json-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-  (add-hook 'css-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
-  (add-hook 'html-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-  )
+  :config)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+(add-hook 'json-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+(add-hook 'css-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+(add-hook 'html-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+
+(use-package emmet-mode
+  :ensure t
+  :after(web-mode css-mode scss-mode)
+  :config)
+(setq emmet-expand-jsx-className? t)
+(setq emmet-move-cursor-between-quotes t)
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'scss-mode-hook  'emmet-mode)
 
 (use-package csv-mode
   :ensure t
@@ -894,7 +913,7 @@ tangled, and the tangled file is compiled."
   (setq js-doc-mail-address "fxia1@lenovo.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
   (setq js-doc-url "http://www.lenovo.com")
-  (setq js-doc-license "Lenovo License")
+  (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook
           #'(lambda ()

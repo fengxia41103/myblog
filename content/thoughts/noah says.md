@@ -14,14 +14,14 @@ been burned off by fire. So I asked what happened to it, he replied:
 
 1. "I chewed it off." "But why!?" "**I had this sudden desire to chew
    it.**" Said calmly and unshamefully. WTF!
-   
+
      So here goes the first line of his I'm writing down. So him.
 
 2. Commenting on the new badminton coach he had in class. "This guy is
    all about power." "Oh so he was a power player. That's good."  "Not
    really. **Sometimes power has to bow to wisdom.**" &mdash; very
    philosophical, isn't it!?
-   
+
 3. 8:30 pm. Out of nowhere, after his Mom left for gym, he said to me,
    "爸，我决定了，等你有了517, 我和你住" "Why?" "Because I think it
    will be difficult living with her." "Why?" "So she bought snack
@@ -69,7 +69,7 @@ been burned off by fire. So I asked what happened to it, he replied:
    that afternoon, he was my companion to 517 to clean up the mess
    left by the contractor, and on the way home I said thank you to him
    for being my companion. How funny!!
-   
+
 8. On our way home from 517, I was commenting on Noah's hair and asked
    him "what is his secret". Guess what he said? He was very serious
    and also in a good mood, responded that "I will give you one
@@ -85,9 +85,23 @@ been burned off by fire. So I asked what happened to it, he replied:
 9. This one heard from his mom. She caught him taking a loooooong time
    in shower, and asked him what's taking him so long. "你的shower 有
    很多头发堵了，我在给你de堵".... what a, Chinglish?
-   
+
 10. On our way back from 517. There was a shower in some areas ahead
     of us. So by the time we were on the road, it was wet. All of
     sudden, Noah said "yi2" "what" "彩色，虹", you know, in a mumbling
     kinda of way, that he heard the word spoken by us, but doesn't
     really know how to say it properly. Very cute!
+
+11. At dinner table, Noah started a thread, "爸，你知道，葡萄美酒夜光
+    杯，是啥么？“”知道啊，这个叫唐诗。你咋知道的？“ So it turned out
+    he saw it on mom's phone the other night, and he thought it's
+    extremely funny, because, "美酒，no wine!" he claimed, and started
+    laughing hard, by himself.... errr....pretty speechless ~~
+
+12. Had a wechat call w/ 陈思，I figure it would be good to connect
+    him with some social friends at his age, and help him to establish
+    some confidence. After an hour of talk, I asked "so 陈思家有只兔子
+    是吧？”“对，她家有只兔子，还有很多鱼，她还有很多鸟....她还养了个姐
+    ".. hahaha... well, so I was overhearing their conversation, that
+    the girl introduced her older sister, and Noah brought up the
+    boyfriend-girlfriend topic also... interesting.

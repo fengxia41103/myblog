@@ -1,4 +1,4 @@
-t#+TITLE: Paf's portable Emacs configuration
+#+TITLE: Paf's portable Emacs configuration
 #+AUTHOR: Pascal Fleury
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
@@ -360,7 +360,7 @@ and =C-c right=.
 Awesome window manager. It's like using i3m but inside emacs. Use the
 =C-c C-w <0..9>= key to switch to so called desktop. On each desktop,
 you can have different buffers open and so on, so I don't have to
-close buffers, or =C-x b= a lot anymore.
+close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.cc/eyebrowse/][here]].
 
 #+BEGIN_SRC emacs-lisp
   (use-package eyebrowse
@@ -562,49 +562,6 @@ Copied from [[https://github.com/Alexander-Miller/treemacs#installation][here]]:
 
 * Colors and Look
 
-** all-the-icons
-
-Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
-#+begin_SRC emacs-lisp
-  (use-package all-the-icons
-    :ensure)
-#+end_SRC
-
-You would have to run =M-x all-the-icons-install-fonts== manually at
-least once to install fonts to your system.
-** Theme
-Loading a theme I like:
-
-#+BEGIN_SRC emacs-lisp
-  (use-package sublime-themes
-    :ensure
-    :config)
-(add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
-#+END_SRC
-** doom-modeline
-#+begin_SRC emacs-lisp
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-#+end_SRC
-** Hide menu bar & toolbar
-Using i3 is forcing me to use keyboard.
-
-#+BEGIN_SRC emacs-lisp
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
-(blink-cursor-mode -1)
-#+END_SRC
-** Be quiet
-Remove bell and dings.
-
-#+BEGIN_SRC emacs-lisp
-(setq ring-bell-function
-      '(lambda ()
-         (message "The answer is 42...")))
-(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
-#+END_SRC
 ** Fontlock
 This gets the font coloring switched on for all buffers.
 
@@ -616,6 +573,72 @@ caused Emacs to crash. After many research, the remedy is to use
   (global-font-lock-mode t)
 #+END_SRC
 
+** faces
+This makes some of the faces a bit more contrasted.
+#+BEGIN_SRC emacs-lisp
+;; faces for general region highlighting zenburn is too low-key.
+(custom-set-faces
+ '(highlight ((t (:background "forest green"))))
+ '(region ((t (:background "forest green")))))
+#+END_SRC
+***
+** all-the-icons
+
+Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
+#+begin_SRC emacs-lisp
+  (use-package all-the-icons
+    :ensure)
+#+end_SRC
+
+You would have to run =M-x all-the-icons-install-fonts== manually at
+least once to install fonts to your system.
+
+** Hide menu bar & toolbar
+Using i3 is forcing me to use keyboard.
+
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(blink-cursor-mode -1)
+#+END_SRC
+** Theme
+Loading a theme I like:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sublime-themes
+    :ensure
+    :config)
+(add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
+#+END_SRC
+** Be quiet
+Remove bell and dings.
+
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function
+      '(lambda ()
+         (message "The answer is 42...")))
+(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
+#+END_SRC
+** mode lines
+*** doom-modeline
+#+begin_SRC emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+#+end_SRC
+*** remove some modelines
+#+BEGIN_SRC emacs-lisp
+  (use-package eldoc
+    :delight)
+#+END_SRC
+
+*** nyan-mode
+#+BEGIN_SRC emacs-lisp
+(use-package nyan-mode
+  :ensure t
+  :bind ("C-M-x n" . 'nyan-mode))
+#+END_SRC
 ** In terminal mode
 #+BEGIN_SRC emacs-lisp
 (when (display-graphic-p)
@@ -643,12 +666,6 @@ Setup the visual cues about the current editing buffer
 (setq scroll-step 1)
 (setq-default transient-mark-mode t)  ;; highlight selection
 #+END_SRC
-** nyan-mode
-#+BEGIN_SRC emacs-lisp
-(use-package nyan-mode
-  :ensure t
-  :bind ("C-M-x n" . 'nyan-mode))
-#+END_SRC
 ** dynamic cursor colors
 The cursor is displayed in different colors, depending on overwrite or insert mode.
 #+BEGIN_SRC emacs-lisp
@@ -670,27 +687,12 @@ The cursor is displayed in different colors, depending on overwrite or insert mo
 
 (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
 #+END_SRC
-** faces
-This makes some of the faces a bit more contrasted.
-#+BEGIN_SRC emacs-lisp
-;; faces for general region highlighting zenburn is too low-key.
-(custom-set-faces
- '(highlight ((t (:background "forest green"))))
- '(region ((t (:background "forest green")))))
-#+END_SRC
-***
 ** delight
 Package to remove some info from the mode-line for minor-modes.
 #+BEGIN_SRC emacs-lisp
   (use-package delight
     :ensure t)
 #+END_SRC
-** remove some modelines
-#+BEGIN_SRC emacs-lisp
-  (use-package eldoc
-    :delight)
-#+END_SRC
-
 ** alternate key mappings
 Letting one enter chars that are otherwise difficult in e.g. the minibuffer.
 #+BEGIN_SRC emacs-lisp
@@ -738,6 +740,16 @@ Configure the shortcuts for multiple cursors
   (use-package hydra
     :ensure t)
 #+END_SRC
+** whichkey
+
+Give me a hint when I'm entering a keybinding:
+#+begin_SRC emacs-lisp
+  (use-package which-key
+    :ensure
+    :config
+    (which-key-setup-side-window-right))
+  (which-key-mode)
+#+end_SRC
 ** dimmer
 #+begin_SRC emacs-lisp
 (use-package dimmer
@@ -788,6 +800,16 @@ This will also set the auto tab to 2.
     :bind ("C-c m" . 'column-enforce-mode))
   ;; column-enforce-face
 #+END_SRC
+
+*** whitespace
+Highlight unnecessary chars and lines over 80.
+#+BEGIN_SRC emacs-lisp
+(use-package whitespace
+  :ensure
+  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
+  :config (global-whitespace-mode t))
+#+END_SRC
+
 ** Better kill ring
 Don't use =popup-kill-ring= as it's dead. Use the [[https://github.com/browse-kill-ring/browse-kill-ring][browse-kill-ring]]:
 
@@ -1055,16 +1077,6 @@ Show number of search matches.
   :config)
 (global-anzu-mode +1)
 #+END_SRC
-** whitespace
-Highlight unnecessary chars and lines over 80.
-#+BEGIN_SRC emacs-lisp
-(use-package
-  whitespace
-
-  :ensure
-  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
-  :config (global-whitespace-mode t))
-#+END_SRC
 ** move-text
 Looks convenient:
 #+begin_SRC emacs-lisp
@@ -1073,6 +1085,7 @@ Looks convenient:
     :config)
 (move-text-default-bindings)
 #+end_SRC
+
 * Coding
 
 ** Version control
@@ -1439,7 +1452,6 @@ web-mode with config for Polymer editing
 #+BEGIN_SRC emacs-lisp
   (use-package web-mode
     :ensure t
-    :mode "\\.html\\'"
     :config
     (setq web-mode-enable-current-element-highlight t)
     (setq web-mode-enable-current-column-highlight t)
@@ -1448,13 +1460,12 @@ web-mode with config for Polymer editing
 
 Who should use this mode:
 #+begin_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 #+end_SRC
 *** web-beautify
@@ -1632,9 +1643,9 @@ Nothing is complete without a doc solution.
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@company.com")
+  (setq js-doc-mail-address "fxia1@lenovo.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.company.com")
+  (setq js-doc-url "http://www.lenovo.com")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook
@@ -2851,7 +2862,7 @@ My signature line:
         (concat
          "Best regards,\n\n"
          "Feng Xia\n"
-         "W: http://www.company.com\n"))
+         "W: http://www.lenovo.com\n"))
 #+END_SRC
 *** send
 Sending email is to use SMTP. Here I'm showing to use the company one
@@ -2863,9 +2874,9 @@ use Gmail/hotmail:
     :ensure t
     :config
     (setq send-mail-function 'smtpmail-send-it
-          user-mail-address "fxia1@company.com"
+          user-mail-address "fxia1@lenovo.com"
           smtpmail-debug-info t
-          smtpmail-smtp-user "fxia1@company.com"
+          smtpmail-smtp-user "fxia1@lenovo.com"
           smtpmail-default-smtp-server "localhost"
           smtpmail-auth-credentials (expand-file-name "~/.authinfo")
           smtpmail-smtp-service 1025
@@ -2885,8 +2896,8 @@ just write, then queue, then when reconnected to the internect, send.
 *** reply
 When replying an email, auto fill in my info:
 #+BEGIN_SRC emacs-lisp
-  (setq mu4e-compose-reply-to-address "fxia1@company.com"
-        user-mail-address "fxia1@company.com"
+  (setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
+        user-mail-address "fxia1@lenovo.com"
         user-full-name "Feng Xia"
         message-signature  (concat
                             "Feng Xia\n"

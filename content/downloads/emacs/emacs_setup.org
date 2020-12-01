@@ -27,7 +27,7 @@ The key here are relying on two things:
    it short version will tangle this org file, and write over itself
    (on disk), thus literally replaced itself w/ more contents. At this
    point, it will tangle all the code blocks in this file, and at the
-   end of it, it will call to [[recompile_packages]], thus kicking off the
+   end of it, it will call to [[#recompile-packages][recompile packages]], thus kicking off the
    entire download, compiling, installation and configuration.
 
 * clean start
@@ -102,14 +102,14 @@ all others can be in a comprised state when you start emacs.
 
 ** recompile all packages
 :PROPERTIES:
-:CUSTOM_ID: recompile_packages
+:CUSTOM_ID: recompile-packages
 :END:
 
 This is the *RESET* button. This will force-recompile everything in
 =~/.emacs.d/elpa/...= Just run =M-:= and then enter this:
 
 #+BEGIN_SRC emacs-lisp :tangle no
-(byte-recompile-directory package-user-dir nil 'force)
+  (byte-recompile-directory package-user-dir nil 'force)
 #+END_SRC
 
 or simply =C-x C-e= at the end of that line.
@@ -206,7 +206,7 @@ init file as soon as I save it.
 
 There are some packages you'd better load prior to everything else, so
 that when other packages are being configured, they are already
-available. For example, the [[hydra]].
+available. For example, the .
 
 ** all-the-icons
 
@@ -228,6 +228,10 @@ Colorize color names and codes in the correct color.
     :ensure t)
 #+END_SRC
 ** Hydra
+:PROPERTIES:
+:CUSTOM_ID: hydra
+:END:
+
 #+BEGIN_SRC emacs-lisp
   (use-package hydra
     :ensure t)
@@ -862,10 +866,10 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 Part 1, writing stuff such as taking notes.
 
 *** by packages
-**** [[Zetteldeft]]
+**** Zetteldeft
 
 This is a note-taking packages inspired by the principles of the
-[[https://zettelkasten.de/][Zettelkasten]]
+[[https://zettelkasten.de/][Zettelkasten.]]
 
 #+BEGIN_SRC emacs-lisp
   (use-package deft
@@ -1693,9 +1697,6 @@ There are three concepts seem to me: desktop, window config, and buffers.
 
 ** by packages
 *** multi desktops: eyebrowse
-:PROPERTIES:
-:CUSTOM_ID: eyebrowse
-:END:
 
 Awesome window manager. It's like using i3m but inside emacs. Use the
 =C-c C-w <0..9>= key to switch to so called desktop. On each desktop,
@@ -1781,7 +1782,7 @@ Enables =winner-mode=. Navigate buffer-window configs with =C-c left= and
   (winner-mode 1)
 #+END_SRC
 
-However, with the [[\[\[#eyebrowse\]\]][eyebrowse]], I think this is redundant function. Maybe I should skip this?
+However, with eyebrowse, I think this is redundant function. Maybe I should skip this?
 
 ** toggle maximize buffer
 
@@ -1820,7 +1821,7 @@ Nonetheless, navigating code tree is necessary, and the one like CP is
 so deeply buried that having a good navigator is probably a good
 thing.
 
-The most dramatic thing is the [[\[\[#eyebrowse\]\]][treemacs]], which I need some time to get
+The most dramatic thing is [[#treemacs][treemacs]], which I need some time to get
 used to. It looks nice, but feels a bit, exaggerated to my taste.
 
 ** dir hack
@@ -2403,10 +2404,63 @@ Read news:
     :config)
   (elfeed-goodies/setup)
 #+end_SRC
+** taskjuggler
+#+BEGIN_SRC emacs-lisp
+  (use-package tj3-mode
+    :ensure t
+    :after org-plus-contrib
+    :config
+    (require 'ox-taskjuggler)
+    (custom-set-variables
+     '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+     '(org-taskjuggler-project-tag "PRJ")))
+#+END_SRC
+
 * Coding
 
 Big part of my life is taken by coding. So here it is, all the coding
 related stuff.
+** taskjuggler-mode (tj3-mode)
+#+BEGIN_SRC emacs-lisp
+  (use-package tj3-mode
+    :ensure t
+    :after org-plus-contrib
+    :config
+    (require 'ox-taskjuggler)
+    (custom-set-variables
+     '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+     '(org-taskjuggler-project-tag "PRJ")))
+#+END_SRC
+*** csv
+mode to edit CSV files.
+#+BEGIN_SRC emacs-lisp
+  (use-package csv-mode
+    :ensure t
+    :mode "\\.csv\\'")
+#+END_SRC
+*** json
+
+This should be installed before the javascript stuff because I'll be
+using the =prettier= as beautifier.
+
+#+begin_SRC emacs-lisp
+  (use-package json-mode
+    :ensure
+    :config)
+#+end_SRC
+*** yaml
+
+Details are [[https://github.com/yoshiki/yaml-mode][here]].
+
+#+begin_SRC emacs-lisp
+  (use-package yaml-mode
+    :ensure
+    :config)
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-hook 'yaml-mode-hook
+            '(lambda ()
+          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+#+end_SRC
 ** Version control
 *** magit
 
@@ -2696,7 +2750,7 @@ Use =circe=.
 
 These are minor modes to handle programming language specifics which
 are often termed as development rules agreed by the team.
-*** markdown-mode
+*** markdown
 Enough to handle my Markdown needs.
 
 #+BEGIN_SRC emacs-lisp
@@ -2740,10 +2794,10 @@ Essentially, use the Google C++ style formatting.
 *** python
 
 Setup an IDE:
+
 #+begin_SRC emacs-lisp
   (use-package elpy
     :ensure
-    :init
     :init
     (elpy-enable))
 #+end_SRC
@@ -2752,7 +2806,7 @@ ELPY has its own indentation mode, which is overriding the one I use
 globally, so disable this one:
 
 #+begin_SRC emacs-lisp
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 #+end_SRC
 
 **** py-autopep8
@@ -2897,25 +2951,15 @@ Nothing is complete without a doc solution.
               (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
 #+end_SRC
-*** taskjuggler-mode (tj3-mode)
-#+BEGIN_SRC emacs-lisp
-  (use-package tj3-mode
-    :ensure t
-    :after org-plus-contrib
-    :config
-    (require 'ox-taskjuggler)
-    (custom-set-variables
-     '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
-     '(org-taskjuggler-project-tag "PRJ")))
-#+END_SRC
-*** csv-mode
+*** csv
 mode to edit CSV files.
 #+BEGIN_SRC emacs-lisp
   (use-package csv-mode
     :ensure t
     :mode "\\.csv\\'")
 #+END_SRC
-*** json-mode
+*** json
+
 This should be installed before the javascript stuff because I'll be
 using the =prettier= as beautifier.
 
@@ -2923,6 +2967,19 @@ using the =prettier= as beautifier.
   (use-package json-mode
     :ensure
     :config)
+#+end_SRC
+*** yaml
+
+Details are [[https://github.com/yoshiki/yaml-mode][here]].
+
+#+begin_SRC emacs-lisp
+  (use-package yaml-mode
+    :ensure
+    :config)
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-hook 'yaml-mode-hook
+            '(lambda ()
+          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+end_SRC
 ** LAST: enforce my tab style
 
@@ -2935,33 +2992,33 @@ First, define a func to include my indent settings. It takes an input
 argument:
 
 #+begin_SRC emacs-lisp
-  (defun my-setup-indent (n)
-    ;; java/c/c++
-    (setq-local standard-indent n)
-    (setq-local c-basic-offset n)
+    (defun my-setup-indent (n)
+      ;; java/c/c++
+      (setq-local standard-indent n)
+      (setq-local c-basic-offset n)
 
-    ;; javascript family
-    (setq-local javascript-indent-level n) ; javascript-mode
-    (setq-local js-indent-level n) ; js-mode
-    (setq-local js2-basic-offset n) ; js2-mode
-    (setq-local js-switch-indent-offset n) ; js-mode
-    (setq-local javascript-indent-level n) ; javacript-mode
-    (setq-local react-indent-level n) ; react-mode
-    (setq-local js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+      ;; javascript family
+      (setq-local javascript-indent-level n) ; javascript-mode
+      (setq-local js-indent-level n) ; js-mode
+      (setq-local js2-basic-offset n) ; js2-mode
+      (setq-local js-switch-indent-offset n) ; js-mode
+      (setq-local javascript-indent-level n) ; javacript-mode
+      (setq-local react-indent-level n) ; react-mode
+      (setq-local js2-basic-offset n)
 
-    ;; html, css
-    (setq-local web-mode-attr-indent-offset n) ; web-mode
-    (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
-    (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
-    (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-    (setq-local web-mode-sql-indent-offset n) ; web-mode
-    (setq-local web-mode-attr-value-indent-offset n) ; web-mode
-    (setq web-mode-comment-style 2) ;; web-mode
-    (setq-local css-indent-offset n) ; css-mode
+      ;; html, css
+      (setq-local web-mode-attr-indent-offset n) ; web-mode
+      (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+      (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+      (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+      (setq-local web-mode-sql-indent-offset n) ; web-mode
+      (setq-local web-mode-attr-value-indent-offset n) ; web-mode
+      (setq web-mode-comment-style 2) ;; web-mode
+      (setq-local css-indent-offset n) ; css-mode
 
-    ;; shells
-    (setq-local sh-basic-offset n) ; shell scripts
-    (setq-local sh-indentation n))
+      ;; shells
+      (setq-local sh-basic-offset n) ; shell scripts
+      (setq-local sh-indentation n))
 #+end_SRC
 
 Now set the tabs:
@@ -2986,11 +3043,3 @@ So, to enfore this on some modes:
   (add-hook 'react-mode-hook 'my-personal-code-style)
   (add-hook 'sh-mode-hook 'my-personal-code-style)
 #+end_SRC
-
-
-* Q&A
-
-Quick answers that should direct you to the proper part of this doc for details.
-
-** how to change config file's name?
-See [[pre-flight check]] when the file is tangled for the first time.

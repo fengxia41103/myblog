@@ -30,6 +30,33 @@ The key here are relying on two things:
    end of it, it will call to [[#recompile-packages][recompile packages]], thus kicking off the
    entire download, compiling, installation and configuration.
 
+* deps
+
+There are some host packages/tools you need to install. These are not
+hard dependencies, but really, it works better that way if they are there.
+
+I have been thinking how to handle them. The original author uses tangle to create a bash file. So the idea is to run this =.sh= first. But then, I think there are two problems:
+
+1. host package manager is different, eg. =apt= for Ubuntu, and =yum= for Cent.
+2. package name changes sometimes, and not mention, the packages are
+   completely different among distributions.
+
+   So all in all, I think it's much better to simply list what I want
+   to have, and then let some offline research/google to handle how to
+   install them. Another idea is to build a Docker image w/ all thest
+   inside. Hmm... I may try that someday.
+
+** what I want to use
+
+I'll simply keep a list:
+
+1. [[https://github.com/ggreer/the_silver_searcher][silver searcher, aka. ag]]
+2. [[https://github.com/nvm-sh/nvm][nvm]]: needed for Node
+3. [[https://prettier.io/docs/en/install.html][prettier]]: require Node first
+4. sqlite3: needed by org-roam
+5. [[https://github.com/hakimel/reveal.js/][reveal.js]]: needed to enable org-export to reveal slides
+6. [[https://plantuml.com/download][plantuml.jar]]
+
 * clean start
 
 *ASSUMPTION*:
@@ -225,7 +252,8 @@ Colorize color names and codes in the correct color.
 
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-mode
-    :ensure t)
+    :ensure t
+    :delight)
 #+END_SRC
 ** Hydra
 :PROPERTIES:
@@ -1692,7 +1720,10 @@ take effect on all of them.
 There are three concepts seem to me: desktop, window config, and buffers.
 
 - desktop: is like virtual desktop, and you can have many, like i3.
-- window config: think of it like a look you have created using buffers, eg. stack them this way or that way, on the same desktop. So switching a window config will switch the buffer layout within your current desktop.
+- window config: think of it like a look you have created using
+  buffers, eg. stack them this way or that way, on the same
+  desktop. So switching a window config will switch the buffer layout
+  within your current desktop.
 - buffer: is the building block.
 
 ** by packages
@@ -1807,10 +1838,10 @@ Map it to a key.
 ** buffer decorations
 Setup the visual cues about the current editing buffer
 #+BEGIN_SRC emacs-lisp
-(column-number-mode t)
-(setq visible-bell t)
-(setq scroll-step 1)
-(setq-default transient-mark-mode t)  ;; highlight selection
+  (column-number-mode t)
+  (setq visible-bell t)
+  (setq scroll-step 1)
+  (setq-default transient-mark-mode t)  ;; highlight selection
 #+END_SRC
 * navigate file & dir
 
@@ -2431,36 +2462,6 @@ related stuff.
      '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
      '(org-taskjuggler-project-tag "PRJ")))
 #+END_SRC
-*** csv
-mode to edit CSV files.
-#+BEGIN_SRC emacs-lisp
-  (use-package csv-mode
-    :ensure t
-    :mode "\\.csv\\'")
-#+END_SRC
-*** json
-
-This should be installed before the javascript stuff because I'll be
-using the =prettier= as beautifier.
-
-#+begin_SRC emacs-lisp
-  (use-package json-mode
-    :ensure
-    :config)
-#+end_SRC
-*** yaml
-
-Details are [[https://github.com/yoshiki/yaml-mode][here]].
-
-#+begin_SRC emacs-lisp
-  (use-package yaml-mode
-    :ensure
-    :config)
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-hook 'yaml-mode-hook
-            '(lambda ()
-          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-#+end_SRC
 ** Version control
 *** magit
 

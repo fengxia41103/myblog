@@ -22,7 +22,9 @@ into emacs to take effect.
 
 The key here are relying on two things:
 
-1. There are two version of the =emacs_setup.el= file, one is a dummy short version that gets loaded for the very first time. This is the same stuff you can recreate using the [[manual tangle]]: =C-c C-v t=.
+1. There are two version of the =emacs_setup.el= file, one is a dummy
+   short version that gets loaded for the very first time. This is the
+   same stuff you can recreate using the [[manual tangle]]: =C-c C-v t=.
 2. In the default =.emacs, write one line: to load this =.el= file. Then,
    it short version will tangle this org file, and write over itself
    (on disk), thus literally replaced itself w/ more contents. At this
@@ -35,7 +37,9 @@ The key here are relying on two things:
 There are some host packages/tools you need to install. These are not
 hard dependencies, but really, it works better that way if they are there.
 
-I have been thinking how to handle them. The original author uses tangle to create a bash file. So the idea is to run this =.sh= first. But then, I think there are two problems:
+I have been thinking how to handle them. The original author uses
+tangle to create a bash file. So the idea is to run this =.sh=
+first. But then, I think there are two problems:
 
 1. host package manager is different, eg. =apt= for Ubuntu, and =yum= for Cent.
 2. package name changes sometimes, and not mention, the packages are
@@ -310,6 +314,14 @@ Make Emacs request UTF-8 first when pasting stuff
   :config
   (exec-path-from-shell-initialize))
 #+end_SRC
+** UTF-8 env
+#+begin_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+
+  (setenv "LANG" "en_US.UTF-8")
+  (setenv "LC_ALL" "en_US.UTF-8")
+  (setenv "LC_CTYPE" "en_US.UTF-8")
+#+end_SRC
 ** browser (default: chrome)
 
 I like Chrome. Period.
@@ -360,14 +372,6 @@ Change all prompts to y or n:
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_SRC
 
-** always show line number?
-
-Yes I like line numbers.
-
-#+begin_SRC emacs-lisp
-  (global-display-line-numbers-mode)
-#+end_SRC
-
 ** hide menu bar & toolbar
 Using i3 is forcing me to use keyboard.
 
@@ -394,6 +398,33 @@ minibuffer.
   (global-set-key [f4] 'end-kbd-macro)
   (global-set-key [f5] 'call-last-kbd-macro)
 #+END_SRC
+** linum
+
+For now, I'm doing it globally.
+
+#+begin_SRC emacs-lisp
+(global-display-line-numbers-mode t)
+#+end_SRC
+
+
+Yes I like having line numbers, but turnning it on globally makes some
+buffers look strange. So let's limit it to the ones that I think
+brings value. *Note* that the ones I skip are:
+
+1. mu4e-compose-mode: when writing email, it's better not to count for line num.
+2. markdown: for the same reason. I'm writing.
+
+#+begin_SRC emacs-lisp :tangle no
+  (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
+  (add-hook 'org-mode-hook 'display-line-numbers-mode)
+  (add-hook 'elpy-mode-hook 'display-line-numbers-mode)
+  (add-hook 'web-mode-hook 'display-line-numbers-mode)
+  (add-hook 'js2-mode-hook 'display-line-numbers-mode)
+  (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
+  (add-hook 'json-mode-hook 'display-line-numbers-mode)
+  (add-hook 'java-mode-hook 'display-line-numbers-mode)
+#+end_SRC
+
 * font, theme
 
 The whole point of using emacs is that I like the user experience, and
@@ -805,13 +836,10 @@ All keys prefixed with =C-c n=
     :after org-roam)
 #+END_SRC
 
-EmacSQL will need to get its C-binary compiled, and needs supporting tools. Note that 'tcc' for Termux seems not complete enough for the job.
-#+BEGIN_SRC bash :tangle install_deps.sh
-# org-roam needs this binary
-install_pkg -x sqlite3 sqlite3
-# Make sure there is a C compiler for emacsql-sqlite
-[[ -n "$(which cc)" ]] || install_pkg -x cc clang
-#+END_SRC
+EmacSQL will need to get its C-binary compiled, and needs supporting
+tools. Note that 'tcc' for Termux seems not complete enough for the
+job.
+
 
 **** org-board
 Archive entire sites locally with `wget`.
@@ -821,13 +849,6 @@ Archive entire sites locally with `wget`.
     :ensure t
     :config
     (global-set-key (kbd "C-c o") org-board-keymap))
-#+END_SRC
-
-This is the needed tool used to fetch a URL's content.
-
-#+BEGIN_SRC bash :tangle install_deps.sh
-# wget used for org-board archiving.
-install_pkg -x wget wget
 #+END_SRC
 
 **** iimage (M-I)
@@ -886,8 +907,8 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 #+begin_SRC emacs-lisp
   (use-package org-bullets
     :ensure
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+    :config)
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+end_SRC
 ** writing stuff
 
@@ -933,34 +954,10 @@ This is a note-taking packages inspired by the principles of the
   )
 #+END_SRC
 
-Update the version by downloading the latest version here:
-
-#+BEGIN_SRC bash :tangle no
-wget https://raw.githubusercontent.com/EFLS/zetteldeft/master/zetteldeft.el -O ~/Emacs/zetteldeft.el
-#+END_SRC
-
 **** plant-uml
 
 Tell where PlantUML is to be found. This needs to be downloaded and
 installed separately, see the [[http://plantuml.com/][PlantUML website]].
-
-You could install the PlantUML JAR file with this snippet:
-
-#+BEGIN_SRC bash :tangle install_deps.sh
-  # Get a version of the PlantUML jar file.
-  install_pkg -x wget wget
-
-  URL='http://sourceforge.net/projects/plantuml/files/plantuml.jar/download'
-  DIR="${HOME}/Emacs"
-  if [[ ! -e "${DIR}/plantuml.jar" ]]; then
-      [[ -d "${DIR}" ]] || mkdir -p "${DIR}"
-      (cd "${DIR}" && wget -O plantuml.jar "${URL}")
-      ls -l "${DIR}/plantuml.jar"
-  fi
-#+END_SRC
-
-#+RESULTS:
-: -rw-r--r--  1 fleury  primarygroup  178 Jun 14 14:22 /Users/fleury/Apps/plantuml.jar
 
 #+BEGIN_SRC emacs-lisp
 (use-package plantuml-mode
@@ -1453,6 +1450,28 @@ experience. Here are the ones I use to make editing quicker, easier,
 less typing essentially.
 
 ** by packages
+*** auto company
+
+A good auto completion thing. See details [[https://company-mode.github.io/][here]].
+
+#+begin_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :config)
+(add-hook 'prog-mode-hook 'global-company-mode)
+#+end_SRC
+*** undo tree
+
+More [[https://elpa.gnu.org/packages/undo-tree.html][undos]]?
+
+#+begin_SRC emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :config
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t))
+  (global-undo-tree-mode)
+#+end_SRC
 *** search & jump
 **** ag
 Use the silversearcher.
@@ -1498,11 +1517,6 @@ Last, hook to =xref= to use =M.= bind:
 #+end_SRC
 **** ripgrep
 This enables searching recursively in projects.
-
-#+BEGIN_SRC bash :tangle install_deps.sh
-# This can be used by helm-ag for faster grepping
-install_pkg -x rg ripgrep
-#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (use-package ripgrep
@@ -1773,17 +1787,17 @@ will not then be saved.
 
 #+BEGIN_SRC emacs-lisp
 
-(setq desktop-path (list "~/.emacs.d/savehist"))
-(setq desktop-dirname "~/.emacs.d/savehist")
-(setq desktop-restore-eager 5)
-(setq desktop-load-locked-desktop t)
-(desktop-save-mode 1)
+  (setq desktop-path (list "~/.emacs.d/savehist"))
+  (setq desktop-dirname "~/.emacs.d/savehist")
+  (setq desktop-restore-eager 5)
+  (setq desktop-load-locked-desktop t)
+  (desktop-save-mode 1)
 
-(savehist-mode 1)
-(setq history-length t)
-(setq history-delete-duplicates t)
-(setq savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+  (savehist-mode 1)
+  (setq history-length t)
+  (setq history-delete-duplicates t)
+  (setq savehist-save-minibuffer-history 1)
+  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 
 #+END_SRC
 
@@ -2435,6 +2449,7 @@ Read news:
     :config)
   (elfeed-goodies/setup)
 #+end_SRC
+
 ** taskjuggler
 #+BEGIN_SRC emacs-lisp
   (use-package tj3-mode
@@ -2546,19 +2561,6 @@ Start using projectile. It has the documentation [[https://docs.projectile.mx/en
     :delight projectile-mode
     :config
     (helm-projectile-on))
-#+END_SRC
-
-Also make sure we do have the faster [[https://github.com/ggreer/the_silver_searcher#the-silver-searcher][silver searcher]] version.  This
-may need you to install the corresponding tool for this, with the
-following snippet:
-
-#+BEGIN_SRC bash :tangle install_deps.sh
-# helm-ag uses this for faster grepping
-if [[ "$(uname)" == "Darwin" ]]; then
-  install_pkg -x ag the_silver_searcher
-else
-  install_pkg -x ag silversearcher-ag
-fi
 #+END_SRC
 
 Search the entire project with =C-c p s s= for a regexp. This let's

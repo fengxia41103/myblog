@@ -20,36 +20,53 @@
 (eval-when-compile (require 'use-package))
 
 (defun tangle-init ()
-  "If the current buffer is 'init.org' the code-blocks are
-tangled, and the tangled file is compiled."
+  "If the current buffer is 'init.org' the code-blocks are tangled,
+and the tangled file is compiled."
   (when (equal (buffer-file-name)
-               (expand-file-name "~/Emacs/emacs_setup.org"))
+               (expand-file-name "~/Emacs/fengxia.org"))
     ;; Avoid running hooks when tangling.
     (let ((prog-mode-hook nil))
       (org-babel-tangle)
-      (byte-compile-file "~/Emacs/emacs_setup.el"))))
+      (byte-compile-file "~/Emacs/fengxia.el"))))
 
+;; auto-tangle hook
 (add-hook 'after-save-hook 'tangle-init)
 
-(global-set-key (kbd "C-M-x") nil)
+(use-package all-the-icons
+  :ensure)
 
-(defmacro add-hook-run-once (hook function &optional append local)
-  "Like add-hook, but remove the hook after it is called"
-  (let ((sym (make-symbol "#once")))
-    `(progn
-       (defun ,sym ()
-         (remove-hook ,hook ',sym ,local)
-         (funcall ,function))
-       (add-hook ,hook ',sym ,append ,local))))
+(use-package rainbow-mode
+  :ensure t
+  :delight)
 
-(setq browse-url-generic-program (executable-find "google-chrome")
-  browse-url-browser-function 'browse-url-generic)
+(use-package hydra
+  :ensure t)
+
+(use-package which-key
+  :ensure
+  :config
+  (which-key-setup-side-window-right))
+(which-key-mode)
 
 (use-package unicode-escape
   :ensure t
   :init
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 (set-language-environment "UTF-8")
+
+(use-package exec-path-from-shell
+  :ensure
+  :config
+  (exec-path-from-shell-initialize))
+
+(prefer-coding-system 'utf-8)
+
+(setenv "LANG" "en_US.UTF-8")
+(setenv "LC_ALL" "en_US.UTF-8")
+(setenv "LC_CTYPE" "en_US.UTF-8")
+
+(setq browse-url-generic-program (executable-find "google-chrome")
+  browse-url-browser-function 'browse-url-generic)
 
 (defun no-junk-please-we-are-unixish ()
   (let ((coding-str (symbol-name buffer-file-coding-system)))
@@ -58,134 +75,74 @@ tangled, and the tangled file is compiled."
 
 (add-hook 'find-file-hook 'no-junk-please-we-are-unixish)
 
-(setq desktop-path (list "~/.emacs.d/savehist"))
-(setq desktop-dirname "~/.emacs.d/savehist")
-(setq desktop-restore-eager 5)
-(setq desktop-load-locked-desktop t)
-(desktop-save-mode 1)
-
-(savehist-mode 1)
-(setq history-length t)
-(setq history-delete-duplicates t)
-(setq savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-
-(setq desktop-buffers-not-to-save
-     (concat "\\("
-             "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-             "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-             "\\)$"))
-(add-to-list 'desktop-modes-not-to-save 'dired-mode)
-(add-to-list 'desktop-modes-not-to-save 'Info-mode)
-(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-
 (global-auto-revert-mode 1)
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(use-package
-  exec-path-from-shell
-  :ensure
-  :config
-  (exec-path-from-shell-initialize))
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(blink-cursor-mode -1)
 
-(global-display-line-numbers-mode)
+(global-set-key (kbd "C-m") 'newline-and-indent)
+(global-set-key (kbd "C-j") 'newline)
+(global-set-key [delete] 'delete-char)
+(global-set-key [kp-delete] 'delete-char)
 
-(winner-mode 1)
-
-(use-package eyebrowse
-    :ensure t)
-(eyebrowse-mode t)
-
-(defun toggle-maximize-buffer () "Maximize buffer"
-  (interactive)
-  (if (= 1 (length (window-list)))
-      (jump-to-register '_)
-    (progn
-      (window-configuration-to-register '_)
-      (delete-other-windows))))
-
-(global-set-key [M-f8] 'toggle-maximize-buffer)
-
-(use-package ace-window
-  :ensure
-  :config
-  (setq aw-ignore-current t)
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
-  (global-set-key (kbd "M-o") 'ace-window)
-  (custom-set-faces
-   '(aw-leading-char-face
-     ((t (:inherit ace-jump-face-foreground
-                   :background "GhostWhite"
-                   :box nil)))))
-)
-
-(use-package dash
-  :ensure
-  :config)
-
-(use-package dired-hacks-utils
-  :ensure
-  :config)
-
-(use-package dired-rainbow
-  :ensure
-  :config
-  (progn
-    (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
-    (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
-    (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
-    (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb" "pdf" "ps" "rtf" "djvu" "epub" "odp" "ppt" "pptx"))
-    (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md" "mkd" "nfo" "pod" "rst" "tex" "textfile" "txt"))
-    (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb" "sqlite" "nc"))
-    (dired-rainbow-define media "#de751f" ("mp3" "mp4" "MP3" "MP4" "avi" "mpeg" "mpg" "flv" "ogg" "mov" "mid" "midi" "wav" "aiff" "flac"))
-    (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg" "jpg" "png" "psd" "eps" "svg"))
-    (dired-rainbow-define log "#c17d11" ("log"))
-    (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh" "vim"))
-    (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql" "mysql" "pgsql" "sql" "r" "clj" "cljs" "scala" "js"))
-    (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++" "h++" "hpp" "hxx" "m" "cc" "cs" "cp" "cpp" "go" "f" "for" "ftn" "f90" "f95" "f03" "f08" "s" "rs" "hi" "hs" "pyc" ".java"))
-    (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
-    (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz" "xz" "z" "Z" "jar" "war" "ear" "rar" "sar" "xpi" "apk" "xz" "tar"))
-    (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab" "pak" "pk3" "vdf" "vpk" "bsp"))
-    (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc" "signature" "sig" "p12" "pem"))
-    (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
-    (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
-    (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
-    (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
-    ))
-
-(use-package dired-narrow
-  :ensure
-  :config)
-
-(use-package dired-collapse
-  :ensure
-  :config)
-
-(use-package dired-filter
-  :ensure
-  :config)
+(global-display-line-numbers-mode t)
 
 (use-package sublime-themes
     :ensure
     :config)
 (add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
 
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
-(blink-cursor-mode -1)
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+(use-package eldoc
+  :delight)
+
+(use-package nyan-mode
+  :ensure t
+  :bind ("C-M-x n" . 'nyan-mode))
+
+(use-package delight
+  :ensure t)
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
+         ("C->" . 'mc/mark-next-like-this)
+         ("C-<" . 'mc/mark-previous-like-this)
+         ("C-c C->" . 'mc/mark-all-like-this)))
+
+(use-package dimmer
+  :ensure
+  :config
+  (dimmer-configure-which-key)
+  (dimmer-configure-helm))
+(dimmer-mode t)
+
+(use-package highlight-indent-guides
+:ensure
+:config
+(setq highlight-indent-guides-method 'character))
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+(global-font-lock-mode t)
+
+;; faces for general region highlighting zenburn is too low-key.
+(custom-set-faces
+ '(highlight ((t (:background "forest green"))))
+ '(region ((t (:background "forest green")))))
 
 (setq ring-bell-function
       '(lambda ()
          (message "The answer is 42...")))
 (setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
-
-(global-font-lock-mode t)
 
 (when (display-graphic-p)
   (set-background-color "#ffffff")
@@ -195,19 +152,6 @@ tangled, and the tangled file is compiled."
 (when window-system
   (mouse-wheel-mode)  ;; enable wheelmouse support by default
   (set-selection-coding-system 'compound-text-with-extensions))
-
-(use-package uniquify
-  :init
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
-
-(column-number-mode t)
-(setq visible-bell t)
-(setq scroll-step 1)
-(setq-default transient-mark-mode t)  ;; highlight selection
-
-(use-package nyan-mode
-  :ensure t
-  :bind ("C-M-x n" . 'nyan-mode))
 
 (setq hcz-set-cursor-color-color "")
 (setq hcz-set-cursor-color-buffer "")
@@ -226,560 +170,6 @@ tangled, and the tangled file is compiled."
       (setq hcz-set-cursor-color-buffer (buffer-name)))))
 
 (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
-
-;; faces for general region highlighting zenburn is too low-key.
-(custom-set-faces
- '(highlight ((t (:background "forest green"))))
- '(region ((t (:background "forest green")))))
-
-(use-package delight
-  :ensure t)
-
-(use-package eldoc
-  :delight)
-
-(global-set-key (kbd "C-m") 'newline-and-indent)
-(global-set-key (kbd "C-j") 'newline)
-(global-set-key [delete] 'delete-char)
-(global-set-key [kp-delete] 'delete-char)
-
-(global-set-key [f3] 'start-kbd-macro)
-(global-set-key [f4] 'end-kbd-macro)
-(global-set-key [f5] 'call-last-kbd-macro)
-
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
-
-(global-set-key (kbd "C-M-i") 'iedit-mode)
-
-(global-set-key (kbd "C-c <C-left>")  'windmove-left)
-(global-set-key (kbd "C-c <C-right>") 'windmove-right)
-(global-set-key (kbd "C-c <C-up>")    'windmove-up)
-(global-set-key (kbd "C-c <C-down>")  'windmove-down)
-(global-set-key (kbd "C-c C-g") 'goto-line)
-
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
-         ("C->" . 'mc/mark-next-like-this)
-         ("C-<" . 'mc/mark-previous-like-this)
-         ("C-c C->" . 'mc/mark-all-like-this)))
-
-(use-package hydra
-  :ensure t)
-
-(use-package dimmer
-:ensure
-:config
- (dimmer-configure-which-key)
- (dimmer-configure-helm))
- (dimmer-mode t)
-
-(use-package highlight-indent-guides
-:ensure
-:config
-(setq highlight-indent-guides-method 'character))
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-
-(use-package ace-jump-mode
-  :ensure t
-  :bind (("C-c C-SPC" . 'ace-jump-mode)
-         ("C-c C-DEL" . 'ace-jump-mode-pop-mark)))
-
-(setq-default indent-tabs-mode nil)
-(setq require-final-newline t)
-(setq next-line-add-newlines nil)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(use-package column-enforce-mode
-  :ensure t
-  :config
-  (setq column-enforce-column 80)
-  :bind ("C-c m" . 'column-enforce-mode))
-;; column-enforce-face
-
-(use-package browse-kill-ring
-:ensure
-:config
-(setq browse-kill-ring-highlight-current-entry t)
-(setq browse-kill-ring-highlight-inserted-item t))
-
-(browse-kill-ring-default-keybindings)
-
-(show-paren-mode t)
-(set-face-attribute 'region nil
-                    :background "#666"
-                    :foreground "#d52349")
-(set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "#d52349")
-(set-face-attribute 'show-paren-match nil
-                    :weight 'extra-bold)
-
-(use-package rainbow-delimiters
-  :ensure
-  :config
-  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                      :background "GhostWhite"))
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-(use-package smartparens
-  :ensure
-  :config
-  (require 'smartparens-config))
-(add-hook 'prog-mode-hook #'smartparens-mode)
-
-(use-package annotate
-  :ensure t
-  :bind ("C-c C-A" . 'annotate-annotate)  ;; for ledger-mode, as 'C-c C-a' is taken there.
-  :config
-  (add-hook 'org-mode 'annotate-mode)
-  (add-hook 'csv-mode 'annotate-mode)
-  (add-hook 'c-mode 'annotate-mode)
-  (add-hook 'c++-mode 'annotate-mode)
-  (add-hook 'sh-mode 'annotate-mode)
-  (add-hook 'ledger-mode 'annotate-mode)
-;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
-;;;    (lambda () (annotate-mode 1)))
-;;;  (global-annotate-mode 1)
-  )
-
-(use-package protobuf-mode
-  :ensure t
-  :mode "\\.proto\\'")
-
-(use-package helm
- :ensure t
- :delight helm-mode
- :config
-  (require 'helm-config)
-  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-  (global-set-key (kbd "C-c h") 'helm-command-prefix)
-  (global-unset-key (kbd "C-x c"))
-
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-  (define-key helm-map (kbd "C-M-x") 'helm-execute-persistent-action) ; make TAB work in terminal
-  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-
-  (when (executable-find "curl")
-    (setq helm-google-suggest-use-curl-p t))
-
-  (setq helm-split-window-inside-p            t ; open helm buffer inside current window, not occupy whole other window
-        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-        helm-ff-file-name-history-use-recentf t
-        helm-echo-input-in-header-line t)
-
-  (setq helm-autoresize-max-height 50)
-  (setq helm-autoresize-min-height 0)
-  (helm-autoresize-mode 1)
-
-  (setq helm-M-x-fuzzy-match t)
-  (setq helm-buffers-fuzzy-matching t
-        helm-recentf-fuzzy-match    t)
-  (setq helm-semantic-fuzzy-match t
-        helm-imenu-fuzzy-match    t)
-(setq helm-locate-fuzzy-match t)
-(setq helm-apropos-fuzzy-match t)
-(setq helm-lisp-fuzzy-completion t)
-(helm-mode 1)
-
-  (global-set-key (kbd "M-x") 'helm-M-x))
-
-(defun spacemacs//helm-hide-minibuffer-maybe ()
-  "Hide minibuffer in Helm session if we use the header line as input field."
-  (when (with-helm-buffer helm-echo-input-in-header-line)
-    (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-      (overlay-put ov 'window (selected-window))
-      (overlay-put ov 'face
-                   (let ((bg-color (face-background 'default nil)))
-                     `(:background ,bg-color :foreground ,bg-color)))
-      (setq-local cursor-type nil))))
-
-(add-hook 'helm-minibuffer-set-up-hook
-          'spacemacs//helm-hide-minibuffer-maybe)
-
-(setq helm-mini-default-sources '(helm-source-buffers-list
-                                  helm-source-recentf
-                                  helm-source-bookmarks
-                                  helm-source-buffer-not-found))
-
-(use-package emmet-mode
-:ensure t)
-
-(use-package rainbow-mode
-  :ensure t)
-
-(use-package writeroom-mode
-  :ensure t
-  :init
-  (global-set-key (kbd "C-M-x w") 'writeroom-mode))
-
-(use-package wgrep
-  :ensure t)
-
-(defun single-lines-only ()
-  "replace multiple blank lines with a single one"
-  (interactive)
-  (goto-char (point-min))
-  (while (re-search-forward "\\(^\\s-*$\\)\n" nil t)
-    (replace-match "\n")
-    (forward-char 1)))
-
-(defun paf/cleanup-ledger-buffer ()
-  "Cleanup the ledger file"
-  (interactive)
-  (delete-trailing-whitespace)
-  (single-lines-only)
-  (ledger-mode-clean-buffer)
-  (ledger-sort-buffer))
-
-(use-package ledger-mode
-  :ensure nil
-  :pin manual
-  :mode "\\.ledger\\'"
-  :bind ("<f6>" . 'paf/cleanup-ledger-buffer)
-  :config
-  (setq ledger-reconcile-default-commodity "CHF"))
-
-(use-package hyperbole
-  :ensure t
-  :config
-  (bind-key "C-c C-/" 'hui-search-web)  ;; bind before calling require
-  (require 'hyperbole))
-
-(use-package
-  anzu
-
-  :ensure
-  :config)
-(global-anzu-mode +1)
-
-(use-package
-  whitespace
-
-  :ensure
-  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
-  :config (global-whitespace-mode t))
-
-(use-package move-text
-    :ensure
-    :config)
-(move-text-default-bindings)
-
-(use-package string-inflection
-  :ensure
-  :config)
-(add-hook 'elpy-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
-(add-hook 'org-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
-(add-hook 'mu4e-compose-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
-
-(use-package telephone-line
-    :ensure
-    :config)
-(telephone-line-mode t)
-
-(use-package magit
-  :ensure t
-  :defer
-  :config
-  (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
-  :bind ("C-x g" . 'magit-status))
-(use-package magit-todos
-  :ensure t
-  :defer)
-(use-package
-  magit-gitflow
-
-  :ensure
-  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
-
-(use-package monky
-  :ensure t
-  :defer
-  :bind ("C-x m" . 'monky-status))
-
-(defun paf/vcs-status ()
-     (interactive)
-     (condition-case nil
-         (magit-status-setup-buffer)
-       (error (monky-status))))
-
-(global-set-key (kbd "C-M-x v") 'paf/vcs-status)
-
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-completion-system 'helm)
-  (projectile-mode +1))
-
-(use-package helm-projectile
-  :ensure t
-  :after projectile
-  :requires projectile
-  :delight projectile-mode
-  :config
-  (helm-projectile-on))
-
-(use-package helm-ag
-  :ensure t
-  :config)
-
-(global-set-key (kbd "M-?") 'helm-ag)
-
-(use-package google-c-style
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
-
-(use-package flymake-google-cpplint
-  :ensure t)
-
-(use-package ag
-  :ensure
-  :config
-  (setq ag-highlight-search t)
-  (setq ag-reuse-buffers t))
-
-(setq helm-ag-insert-at-point 'symbol)
-(setq helm-ag-use-temp-buffer t)
-
-(use-package xref
-  :ensure
-  :config)
-
-(use-package dumb-jump
-  :ensure
-  :config
-  (setq dumb-jump-prefer-searcher 'ag))
-
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-
-(use-package ripgrep
-  :ensure t)
-(use-package projectile-ripgrep
-  :ensure t
-  :requires (ripgrep projectile))
-
-(autoload 'comment-out-region "comment" nil t)
-(global-set-key (kbd "C-c q") 'comment-out-region)
-
-(defun uniquify-region-lines (beg end)
-  "Remove duplicate adjacent lines in region."
-  (interactive "*r")
-  (save-excursion
-    (goto-char beg)
-    (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
-      (replace-match "\\1"))))
-
-(defun paf/sort-and-uniquify-region ()
-  "Remove duplicates and sort lines in region."
-  (interactive)
-  (sort-lines nil (region-beginning) (region-end))
-  (uniquify-region-lines (region-beginning) (region-end)))
-
-(global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
-
-(use-package vdiff
-  :ensure t
-  :config
-  ; This binds commands under the prefix when vdiff is active.
-  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-
-(defun set-selective-display-dlw (&optional level)
-  "Fold text indented more than the cursor.
-   If level is set, set the indent level to level.
-   0 displays the entire buffer."
-  (interactive "P")
-  (set-selective-display (or level (current-column))))
-
-(global-set-key "\C-x$" 'set-selective-display-dlw)
-
-(use-package git-gutter-fringe+
-  :ensure t
-  :defer
-  :if window-system
-  :bind ("C-c g" . 'git-gutter+-mode))
-
-(defvar locate-dominating-stop-dir-regexp
-  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
-
-(use-package shift-number
-  :ensure t
-  :bind (("M-+" . shift-number-up)
-         ("M-_" . shift-number-down)))
-
-(setq gdb-many-windows t)
-(setq gdb-use-separate-io-buffer t)
-
-(defun easy-gdb-top-of-stack-and-restore-windows ()
-  (interactive)
-  (switch-to-buffer (gdb-stack-buffer-name))
-  (goto-char (point-min))
-  (gdb-select-frame)
-  (gdb-restore-windows)
-  (other-window 2))
-
-(global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
-
-; This unfortunately also messes up the regular frame navigation of source code.
-;(add-to-list 'display-buffer-alist
-;             (cons 'cdb-source-code-buffer-p
-;                   (cons 'display-source-code-buffer nil)))
-
-(defun cdb-source-code-buffer-p (bufName action)
-  "Return whether BUFNAME is a source code buffer."
-  (let ((buf (get-buffer bufName)))
-    (and buf
-         (with-current-buffer buf
-           (derived-mode-p buf 'c++-mode 'c-mode 'csharp-mode 'nxml-mode)))))
-
-(defun display-source-code-buffer (sourceBuf alist)
-  "Find a window with source code and set sourceBuf inside it."
-  (let* ((curbuf (current-buffer))
-         (wincurbuf (get-buffer-window curbuf))
-         (win (if (and wincurbuf
-                       (derived-mode-p sourceBuf 'c++-mode 'c-mode 'nxml-mode)
-                       (derived-mode-p (current-buffer) 'c++-mode 'c-mode 'nxml-mode))
-                  wincurbuf
-                (get-window-with-predicate
-                 (lambda (window)
-                   (let ((bufName (buffer-name (window-buffer window))))
-                     (or (cdb-source-code-buffer-p bufName nil)
-                         (assoc bufName display-buffer-alist)
-                         ))))))) ;; derived-mode-p doesn't work inside this, don't know why...
-    (set-window-buffer win sourceBuf)
-    win))
-
-(use-package
-  circe
-    :ensure
-    :config(
-            setq circe-network-options '((
-                                          "Freenode" :tls t
-                                          :nick "fengxia41103"
-                                          :channels ("#emacs"
-                                                     "#python"
-                                                     "#odoo"
-                                                     "#reactjs"
-                                                     "#latex")))))
-(use-package
-  helm-circe
-
-  :ensure
-  :config)
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
-
-(use-package web-mode
-  :ensure t
-  :mode "\\.html\\'"
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-enable-current-element-highlight t)
-  (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-css-colorization t)
-  (setq web-mode-comment-style 2))
-
-(use-package csv-mode
-  :ensure t
-  :mode "\\.csv\\'")
-
-(use-package tj3-mode
-  :ensure t
-  :after org-plus-contrib
-  :config
-  (require 'ox-taskjuggler)
-  (custom-set-variables
-   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
-   '(org-taskjuggler-project-tag "PRJ")))
-
-(use-package writegood-mode
-  :ensure
-  :config)
-
-(use-package
-  markdown-mode
-
-  :ensure
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
-  (add-hook 'markdown-mode-hook
-            (lambda ()
-              (visual-line-mode t)
-              (writegood-mode t)
-              (flyspell-mode t)))))
-
-(use-package elpy
-  :ensure
-  :init
-  :init
-  (elpy-enable))
-
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
-
-(use-package
-  py-autopep8
-
-  :ensure t
-  :config
-  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  (setq py-autopep8-options '("--max-line-length=80")))
-
-(use-package
-  py-isort
-
-  :ensure
-  :config
-  (add-hook 'before-save-hook 'py-isort-before-save)
-  (setq py-isort-options '("-sl")))
-
-(add-hook 'python-mode-hook #'smartparens-mode)
-
-(use-package js2-mode
-  :ensure
-  :config
-  (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode)))
-(add-hook 'js-mode-hook #'smartparens-mode)
-
-(use-package prettier-js
-  :ensure
-  :config
-  (setq prettier-js-args '(
-                           "--trailing-comma" "es5"
-                           "--single-quote" "false"
-                           "--print-width" "80"
-                           "--tab-width" "2"
-                           )));
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-
-(use-package js-doc
-  :ensure
-  :config
-  (setq js-doc-mail-address "fxia1@lenovo.com")
-  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.lenovo.com")
-  (setq js-doc-license "Lenovo License")
-)
-(add-hook 'js2-mode-hook
-          #'(lambda ()
-              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
-              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
 (use-package org
   :ensure nil
@@ -801,8 +191,6 @@ tangled, and the tangled file is compiled."
   (find-file remote-org-directory))
 
 (global-set-key (kbd "C-M-x r o") 'paf/open-remote-org-directory)
-
-(require 'org-protocol)
 
 (defun org-relative-file (filename)
   "Compute an expanded absolute file path for org files"
@@ -877,58 +265,16 @@ tangled, and the tangled file is compiled."
           (append org-file-tags (when ltags (split-string ltags ":" t))))
     (if (string= ":" tags) nil tags)))
 
-(defun kiwon/org-agenda-redo-in-other-window ()
-  "Call org-agenda-redo function even in the non-agenda buffer."
-  (interactive)
-  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
-    (when agenda-window
-      (with-selected-window agenda-window (org-agenda-redo)))))
+(setq org-babel-sh-command "bash")
 
-(defun update-agenda-if-visible ()
-  (interactive)
-  (let ((buf (get-buffer "*Org Agenda*"))
-        wind)
-    (if buf
-        (org-agenda-redo))))
+(setq org-roam-capture-templates
+      `(("m" "Meeting" entry (function org-roam--capture-get-point)
+             "* %?\n%U\n%^{with}\n"
+             :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
+             :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
+             )))
 
-(defun jump-to-org-agenda ()
-  (interactive)
-  (let ((buf (get-buffer "*Org Agenda*"))
-        wind)
-    (if buf
-        (if (setq wind (get-buffer-window buf))
-            (select-window wind)
-          (if (called-interactively-p 'any)
-              (progn
-                (select-window (display-buffer buf t t))
-                (org-fit-window-to-buffer)
-                (org-agenda-redo)
-                )
-            (with-selected-window (display-buffer buf)
-              (org-fit-window-to-buffer)
-              ;;(org-agenda-redo)
-              )))
-      (call-interactively 'org-agenda-list)))
-  ;;(let ((buf (get-buffer "*Calendar*")))
-  ;;  (unless (get-buffer-window buf)
-  ;;    (org-agenda-goto-calendar)))
-  )
-
-(defun paf/org-agenda-get-location()
-  "Gets the value of the LOCATION property"
-  (let ((loc (org-entry-get (point) "LOCATION")))
-    (if (> (length loc) 0)
-        loc
-      "")))
-
-(use-package request
-  :ensure t)
-(load-file "~/Emacs/org-gtasks.el")
-
-(use-package org-super-agenda
-  :ensure t
-  :config
-  (org-super-agenda-mode t))
+(require 'org-protocol)
 
 (use-package org-roam
   :ensure t
@@ -948,30 +294,10 @@ tangled, and the tangled file is compiled."
   :ensure t
   :after org-roam)
 
-(use-package org-clock-convenience
-  :ensure t
-  :bind (:map org-agenda-mode-map
-           ("<S-right>" . org-clock-convenience-timestamp-up)
-           ("<S-left>" . org-clock-convenience-timestamp-down)
-           ("[" . org-clock-convenience-fill-gap)
-           ("]" . org-clock-convenience-fill-gap-both)))
-
-;;(use-package org-kanban
-;;  :ensure t)
-
 (use-package org-board
   :ensure t
   :config
   (global-set-key (kbd "C-c o") org-board-keymap))
-
-(use-package ox-reveal
-  :ensure t
-  :after (htmlize)
-  :config
-  (setq org-reveal-root (expand-file-name "~/reveal.js")))
-
-(use-package htmlize
-  :ensure t)
 
 (defun paf/org-toggle-iimage-in-org ()
   "display images in your org file"
@@ -990,8 +316,6 @@ tangled, and the tangled file is compiled."
                              ;; display images
                              (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
                             )))
-
-(load-file "~/Emacs/org-collector.el")
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -1014,8 +338,102 @@ tangled, and the tangled file is compiled."
 
 (use-package org-bullets
   :ensure
+  :config)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(use-package deft
+  :ensure t)
+(use-package avy
+  :ensure t)
+
+(use-package zetteldeft
+  :ensure t
+  :after (org deft avy)
+
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (setq deft-extensions '("org" "md" "txt"))
+  (setq deft-directory (org-relative-file "Zettelkasten"))
+  (setq deft-recursive t)
+
+  :bind (("C-c z d" . deft)
+         ("C-c z D" . zetteldeft-deft-new-search)
+         ("C-c z R" . deft-refresh)
+         ("C-c z s" . zetteldeft-search-at-point)
+         ("C-c z c" . zetteldeft-search-current-id)
+         ("C-c z f" . zetteldeft-follow-link)
+         ("C-c z F" . zetteldeft-avy-file-search-ace-window)
+         ("C-c z l" . zetteldeft-avy-link-search)
+         ("C-c z t" . zetteldeft-avy-tag-search)
+         ("C-c z T" . zetteldeft-tag-buffer)
+         ("C-c z i" . zetteldeft-find-file-id-insert)
+         ("C-c z I" . zetteldeft-find-file-full-title-insert)
+         ("C-c z o" . zetteldeft-find-file)
+         ("C-c z n" . zetteldeft-new-file)
+         ("C-c z N" . zetteldeft-new-file-and-link)
+         ("C-c z r" . zetteldeft-file-rename))
+)
+
+(use-package plantuml-mode
+ :ensure t
+ :config
+  (setq plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
+  (setq org-plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
+  ;; Let us edit PlantUML snippets in plantuml-mode within orgmode
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  ;; make it load this language (for export ?)
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+  ;; Enable plantuml-mode for PlantUML files
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
+
+(use-package ox-odt
+  :defer)
+(use-package ox-taskjuggler
+  :defer)
+(use-package ox-impress-js
+  :defer)
+
+(use-package ox-reveal
+  :ensure t
+  :after (htmlize)
+  :config
+  (setq org-reveal-root (expand-file-name "~/reveal.js")))
+
+(use-package htmlize
+  :ensure t)
+
+(setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (R . t)
+   (dot . t)
+   (emacs-lisp . t)
+   (gnuplot . t)
+   (python . t)
+   (ledger . t)
+   ;;(sh . t)
+   (latex . t)
+   (shell . t)
+  ))
+
+(setq org-link-abbrev-alist
+      '(("b" . "http://b/")
+        ("go" . "http://go/")
+        ("cl" . "http://cr/")))
+
+(use-package org-super-agenda
+  :ensure t
+  :config
+  (org-super-agenda-mode t))
+
+(use-package org-clock-convenience
+  :ensure t
+  :bind (:map org-agenda-mode-map
+           ("<S-right>" . org-clock-convenience-timestamp-up)
+           ("<S-left>" . org-clock-convenience-timestamp-down)
+           ("[" . org-clock-convenience-fill-gap)
+           ("]" . org-clock-convenience-fill-gap-both)))
 
 (use-package org-habit
   :delight
@@ -1024,24 +442,6 @@ tangled, and the tangled file is compiled."
   (setq org-habit-preceding-days 35)
   (setq org-habit-following-days 10)
   (setq org-habit-show-habits-only-for-today nil))
-
-(setq org-babel-sh-command "bash")
-
-(setq org-clock-into-drawer t)
-(setq org-log-into-drawer t)
-(setq org-clock-int-drawer "CLOCK")
-
-(defun org-get-first-agenda-file ()
-  (interactive)
-  (find-file (elt org-agenda-files 0)))
-(global-set-key [f12] 'org-get-first-agenda-file)
-; F12 on Mac OSX displays the dashboard....
-(global-set-key [C-f12] 'org-get-first-agenda-file)
-
-(setq org-link-abbrev-alist
-      '(("b" . "http://b/")
-        ("go" . "http://go/")
-        ("cl" . "http://cr/")))
 
 (use-package paf-secretary
   :load-path "~/Emacs"
@@ -1057,13 +457,17 @@ tangled, and the tangled file is compiled."
                         ("HOME" . ?h)
                         ("VC" . ?v))))
 
-(setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks 'invisible)
-
-(setq org-global-properties
-      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 4:00 8:00 16:00")))
-(setq org-columns-default-format
-      "%TODO %30ITEM %3PRIORITY %6Effort{:} %10DEADLINE")
+(use-package org-duration
+  :config
+  (setq org-duration-units
+        `(("min" . 1)
+          ("h" . 60)
+          ("d" . ,(* 60 8))
+          ("w" . ,(* 60 8 5))
+          ("m" . ,(* 60 8 5 4))
+          ("y" . ,(* 60 8 5 4 10)))
+        )
+  (org-duration-set-regexps))
 
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "NEXT(n!)" "STARTED(s!)" "WAITING(w!)" "AI(a!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
@@ -1101,6 +505,75 @@ tangled, and the tangled file is compiled."
         ;; Other stuff
         ("ACTIVE" . (:foreground "darkgreen" :weight bold))
         ))
+
+(setq org-default-notes-file (org-relative-file "Inbox.org"))
+
+(setq org-capture-templates
+      `(("t" "Task"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Tasks")
+         "* TODO %?\n%U\n\n%x"
+         :clock-resume t)
+        ;;
+        ("i" "Idea"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Ideas")
+         "* SOMEDAY %?\n%U\n\n%x"
+         :clock-resume t)
+        ;;
+        ("m" "Meeting"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         "* %?  :MTG:\n%U\n%^{with}p"
+         :clock-in t
+         :clock-resume t)
+        ;;
+        ("s" "Stand-up"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         "* Stand-up  :MTG:\n%U\n\n%?"
+         :clock-in t
+         :clock-resume t)
+        ;;
+        ("1" "1:1"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
+         :clock-in t
+         :clock-resume t)
+        ;;
+        ("p" "Talking Point"
+         entry (file+headline ,(org-relative-file "refile.org") "Talking Points")
+         "* %?  :TALK:\n%U\n%^{dowith}p"
+         :clock-keep t)
+        ;;
+        ("j" "Journal"
+         entry (file+olp+datetree ,(org-relative-file "journal.org"))
+         "* %?\n%U"
+         :clock-in t
+         :clock-resume t
+         :kill-buffer t)))
+
+;; show up to 2 levels for refile targets, in all agenda files
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
+(setq org-log-refile t)  ;; will add timestamp when refiled.
+
+;; from: http://doc.norang.ca/org-mode.html
+;; Exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+(setq org-refile-target-verify-function 'bh/verify-refile-target)
+
+(setq org-enforce-todo-dependencies t)
+(setq org-agenda-dim-blocked-tasks 'invisible)
+
+(setq org-global-properties
+      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 4:00 8:00 16:00")))
+(setq org-columns-default-format
+      "%TODO %30ITEM %3PRIORITY %6Effort{:} %10DEADLINE")
+
+(defun org-get-first-agenda-file ()
+  (interactive)
+  (find-file (elt org-agenda-files 0)))
+(global-set-key [f12] 'org-get-first-agenda-file)
+; F12 on Mac OSX displays the dashboard....
+(global-set-key [C-f12] 'org-get-first-agenda-file)
 
 (setq org-agenda-custom-commands
       '(("t" "Hot Today" ((agenda "" ((org-agenda-span 'day)))
@@ -1163,156 +636,443 @@ tangled, and the tangled file is compiled."
 ;;(add-hook 'org-mode-hook
 ;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
 
-(use-package org-duration
-  :config
-  (setq org-duration-units
-        `(("min" . 1)
-          ("h" . 60)
-          ("d" . ,(* 60 8))
-          ("w" . ,(* 60 8 5))
-          ("m" . ,(* 60 8 5 4))
-          ("y" . ,(* 60 8 5 4 10)))
-        )
-  (org-duration-set-regexps))
+(defun kiwon/org-agenda-redo-in-other-window ()
+  "Call org-agenda-redo function even in the non-agenda buffer."
+  (interactive)
+  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+    (when agenda-window
+      (with-selected-window agenda-window (org-agenda-redo)))))
 
-(setq org-default-notes-file (org-relative-file "Inbox.org"))
+(defun update-agenda-if-visible ()
+  (interactive)
+  (let ((buf (get-buffer "*Org Agenda*"))
+        wind)
+    (if buf
+        (org-agenda-redo))))
 
-(setq org-capture-templates
-      `(("t" "Task"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Tasks")
-         "* TODO %?\n%U\n\n%x"
-         :clock-resume t)
-        ;;
-        ("i" "Idea"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Ideas")
-         "* SOMEDAY %?\n%U\n\n%x"
-         :clock-resume t)
-        ;;
-        ("m" "Meeting"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
-         "* %?  :MTG:\n%U\n%^{with}p"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("s" "Stand-up"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
-         "* Stand-up  :MTG:\n%U\n\n%?"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("1" "1:1"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
-         "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("p" "Talking Point"
-         entry (file+headline ,(org-relative-file "refile.org") "Talking Points")
-         "* %?  :TALK:\n%U\n%^{dowith}p"
-         :clock-keep t)
-        ;;
-        ("j" "Journal"
-         entry (file+olp+datetree ,(org-relative-file "journal.org"))
-         "* %?\n%U"
-         :clock-in t
-         :clock-resume t
-         :kill-buffer t)))
+(defun jump-to-org-agenda ()
+  (interactive)
+  (let ((buf (get-buffer "*Org Agenda*"))
+        wind)
+    (if buf
+        (if (setq wind (get-buffer-window buf))
+            (select-window wind)
+          (if (called-interactively-p 'any)
+              (progn
+                (select-window (display-buffer buf t t))
+                (org-fit-window-to-buffer)
+                (org-agenda-redo)
+                )
+            (with-selected-window (display-buffer buf)
+              (org-fit-window-to-buffer)
+              ;;(org-agenda-redo)
+              )))
+      (call-interactively 'org-agenda-list)))
+  ;;(let ((buf (get-buffer "*Calendar*")))
+  ;;  (unless (get-buffer-window buf)
+  ;;    (org-agenda-goto-calendar)))
+  )
 
-;; show up to 2 levels for refile targets, in all agenda files
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
-(setq org-log-refile t)  ;; will add timestamp when refiled.
+(defun paf/org-agenda-get-location()
+  "Gets the value of the LOCATION property"
+  (let ((loc (org-entry-get (point) "LOCATION")))
+    (if (> (length loc) 0)
+        loc
+      "")))
 
-;; from: http://doc.norang.ca/org-mode.html
-;; Exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets"
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-(setq org-refile-target-verify-function 'bh/verify-refile-target)
-
-(setq org-roam-capture-templates
-      `(("m" "Meeting" entry (function org-roam--capture-get-point)
-             "* %?\n%U\n%^{with}\n"
-             :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
-             :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
-             )))
-
-(setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (R . t)
-   (dot . t)
-   (emacs-lisp . t)
-   (gnuplot . t)
-   (python . t)
-   (ledger . t)
-   ;;(sh . t)
-   (latex . t)
-   (shell . t)
-  ))
-
-(use-package ox-odt
-  :defer)
-(use-package ox-taskjuggler
-  :defer)
-(use-package ox-impress-js
-  :defer)
-
-(use-package plantuml-mode
- :ensure t
- :config
-  (setq plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
-  (setq org-plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
-  ;; Let us edit PlantUML snippets in plantuml-mode within orgmode
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-  ;; make it load this language (for export ?)
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
-  ;; Enable plantuml-mode for PlantUML files
-  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
-
-(use-package yankpad
-  :ensure t
-  :defer
-  :init
-  (setq yankpad-file (org-relative-file "yankpad.org"))
-  :config
-  (bind-key "C-M-x y m" 'yankpad-map)
-  (bind-key "C-M-x y e" 'yankpad-expand))
-
-(use-package deft
-  :ensure t)
-(use-package avy
-  :ensure t)
-
-(use-package zetteldeft
-  :ensure t
-  :after (org deft avy)
-
-  :config
-  (setq deft-extensions '("org" "md" "txt"))
-  (setq deft-directory (org-relative-file "Zettelkasten"))
-  (setq deft-recursive t)
-
-  :bind (("C-c z d" . deft)
-         ("C-c z D" . zetteldeft-deft-new-search)
-         ("C-c z R" . deft-refresh)
-         ("C-c z s" . zetteldeft-search-at-point)
-         ("C-c z c" . zetteldeft-search-current-id)
-         ("C-c z f" . zetteldeft-follow-link)
-         ("C-c z F" . zetteldeft-avy-file-search-ace-window)
-         ("C-c z l" . zetteldeft-avy-link-search)
-         ("C-c z t" . zetteldeft-avy-tag-search)
-         ("C-c z T" . zetteldeft-tag-buffer)
-         ("C-c z i" . zetteldeft-find-file-id-insert)
-         ("C-c z I" . zetteldeft-find-file-full-title-insert)
-         ("C-c z o" . zetteldeft-find-file)
-         ("C-c z n" . zetteldeft-new-file)
-         ("C-c z N" . zetteldeft-new-file-and-link)
-         ("C-c z r" . zetteldeft-file-rename))
-)
+(setq org-clock-into-drawer t)
+(setq org-log-into-drawer t)
+(setq org-clock-int-drawer "CLOCK")
 
 (org-reload)
+
+(use-package company
+  :ensure t
+  :config)
+(add-hook 'prog-mode-hook 'global-company-mode)
+
+(use-package undo-tree
+  :ensure t
+  :config
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-diff t))
+(global-undo-tree-mode)
+
+(use-package ag
+  :ensure
+  :config
+  (setq ag-highlight-search t)
+  (setq ag-reuse-buffers t))
+
+(setq helm-ag-insert-at-point 'symbol)
+(setq helm-ag-use-temp-buffer t)
+
+(use-package xref
+  :ensure
+  :config)
+
+(use-package dumb-jump
+  :ensure
+  :config
+  (setq dumb-jump-prefer-searcher 'ag))
+
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+
+(use-package ripgrep
+  :ensure t)
+(use-package projectile-ripgrep
+  :ensure t
+  :requires (ripgrep projectile))
+
+(use-package ace-jump-mode
+  :ensure t
+  :bind (("C-c C-SPC" . 'ace-jump-mode)
+         ("C-c C-DEL" . 'ace-jump-mode-pop-mark)))
+
+(use-package column-enforce-mode
+  :ensure t
+  :config
+  (setq column-enforce-column 80)
+  :bind ("C-c m" . 'column-enforce-mode))
+;; column-enforce-face
+
+(use-package whitespace
+  :ensure
+  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
+  :config (global-whitespace-mode t))
+
+(use-package browse-kill-ring
+  :ensure
+  :config
+  (setq browse-kill-ring-highlight-current-entry t)
+  (setq browse-kill-ring-highlight-inserted-item t))
+
+(browse-kill-ring-default-keybindings)
+
+(show-paren-mode t)
+(set-face-attribute 'region nil
+                    :background "#666"
+                    :foreground "#d52349")
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-foreground 'show-paren-match "#d52349")
+(set-face-attribute 'show-paren-match nil
+                    :weight 'extra-bold)
+
+(use-package rainbow-delimiters
+  :ensure
+  :config
+  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                      :background "GhostWhite"))
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+(use-package smartparens
+  :ensure
+  :config
+  (require 'smartparens-config))
+(add-hook 'prog-mode-hook #'smartparens-mode)
+
+(use-package string-inflection
+  :ensure
+  :config)
+(add-hook 'elpy-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'org-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'mu4e-compose-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'js2-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+
+(use-package annotate
+  :ensure t
+
+  ;; for ledger-mode, as 'C-c C-a' is taken there.
+  :bind ("C-c C-A" . 'annotate-annotate)
+
+  :config
+  (add-hook 'org-mode 'annotate-mode)
+  (add-hook 'csv-mode 'annotate-mode)
+  (add-hook 'c-mode 'annotate-mode)
+  (add-hook 'c++-mode 'annotate-mode)
+  (add-hook 'sh-mode 'annotate-mode)
+;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
+;;;    (lambda () (annotate-mode 1)))
+;;;  (global-annotate-mode 1)
+  )
+
+(use-package writeroom-mode
+  :ensure t
+  :config)
+
+(use-package
+  anzu
+
+  :ensure
+  :config)
+(global-anzu-mode +1)
+
+(use-package move-text
+    :ensure
+    :config)
+(move-text-default-bindings)
+
+(setq-default indent-tabs-mode nil)
+(setq require-final-newline t)
+(setq indent-line-function 'insert-tab)
+(setq-default tab-width 2)
+
+(setq next-line-add-newlines nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(global-set-key (kbd "C-M-i") 'iedit-mode)
+
+(use-package eyebrowse
+    :ensure t)
+(eyebrowse-mode t)
+
+(use-package ace-window
+  :ensure
+  :config
+  (setq aw-ignore-current t)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-background nil)
+  (global-set-key (kbd "M-o") 'ace-window)
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground
+                   :background "GhostWhite"
+                   :box nil)))))
+)
+
+(use-package uniquify
+  :init
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
+
+(setq desktop-path (list "~/.emacs.d/savehist"))
+(setq desktop-dirname "~/.emacs.d/savehist")
+(setq desktop-restore-eager 5)
+(setq desktop-load-locked-desktop t)
+(desktop-save-mode 1)
+
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+(setq desktop-buffers-not-to-save
+     (concat "\\("
+             "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+             "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+             "\\)$"))
+(add-to-list 'desktop-modes-not-to-save 'dired-mode)
+(add-to-list 'desktop-modes-not-to-save 'Info-mode)
+(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
+
+(defun toggle-maximize-buffer () "Maximize buffer"
+  (interactive)
+  (if (= 1 (length (window-list)))
+      (jump-to-register '_)
+    (progn
+      (window-configuration-to-register '_)
+      (delete-other-windows))))
+
+(global-set-key [M-f8] 'toggle-maximize-buffer)
+
+(column-number-mode t)
+(setq visible-bell t)
+(setq scroll-step 1)
+(setq-default transient-mark-mode t)  ;; highlight selection
+
+(use-package dash
+  :ensure
+  :config)
+
+(use-package dired-hacks-utils
+  :ensure
+  :config)
+
+(use-package dired-rainbow
+  :ensure
+  :config
+  (progn
+    (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
+    (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
+    (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
+    (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb" "pdf" "ps" "rtf" "djvu" "epub" "odp" "ppt" "pptx"))
+    (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md" "mkd" "nfo" "pod" "rst" "tex" "textfile" "txt"))
+    (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb" "sqlite" "nc"))
+    (dired-rainbow-define media "#de751f" ("mp3" "mp4" "MP3" "MP4" "avi" "mpeg" "mpg" "flv" "ogg" "mov" "mid" "midi" "wav" "aiff" "flac"))
+    (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg" "jpg" "png" "psd" "eps" "svg"))
+    (dired-rainbow-define log "#c17d11" ("log"))
+    (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh" "vim"))
+    (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql" "mysql" "pgsql" "sql" "r" "clj" "cljs" "scala" "js"))
+    (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++" "h++" "hpp" "hxx" "m" "cc" "cs" "cp" "cpp" "go" "f" "for" "ftn" "f90" "f95" "f03" "f08" "s" "rs" "hi" "hs" "pyc" ".java"))
+    (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+    (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz" "xz" "z" "Z" "jar" "war" "ear" "rar" "sar" "xpi" "apk" "xz" "tar"))
+    (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab" "pak" "pk3" "vdf" "vpk" "bsp"))
+    (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc" "signature" "sig" "p12" "pem"))
+    (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
+    (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
+    (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
+    (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
+    ))
+
+(use-package dired-narrow
+  :ensure
+  :config)
+
+(use-package dired-collapse
+  :ensure
+  :config)
+
+(use-package dired-filter
+  :ensure
+  :config)
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :config
+  (progn
+    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+          treemacs-deferred-git-apply-delay      0.5
+          treemacs-directory-name-transformer    #'identity
+          treemacs-display-in-side-window        t
+          treemacs-eldoc-display                 t
+          treemacs-file-event-delay              5000
+          treemacs-file-extension-regex          treemacs-last-period-regex-value
+          treemacs-file-follow-delay             0.2
+          treemacs-file-name-transformer         #'identity
+          treemacs-follow-after-init             t
+          treemacs-git-command-pipe              ""
+          treemacs-goto-tag-strategy             'refetch-index
+          treemacs-indentation                   2
+          treemacs-indentation-string            " "
+          treemacs-is-never-other-window         nil
+          treemacs-max-git-entries               5000
+          treemacs-missing-project-action        'ask
+          treemacs-move-forward-on-expand        nil
+          treemacs-no-png-images                 nil
+          treemacs-no-delete-other-windows       t
+          treemacs-project-follow-cleanup        nil
+          treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                      'left
+          treemacs-recenter-distance             0.1
+          treemacs-recenter-after-file-follow    nil
+          treemacs-recenter-after-tag-follow     nil
+          treemacs-recenter-after-project-jump   'always
+          treemacs-recenter-after-project-expand 'on-distance
+          treemacs-show-cursor                   nil
+          treemacs-show-hidden-files             t
+          treemacs-silent-filewatch              nil
+          treemacs-silent-refresh                nil
+          treemacs-sorting                       'alphabetic-asc
+          treemacs-space-between-root-nodes      t
+          treemacs-tag-follow-cleanup            t
+          treemacs-tag-follow-delay              1.5
+          treemacs-user-mode-line-format         nil
+          treemacs-user-header-line-format       nil
+          treemacs-width                         35
+          treemacs-workspace-switch-cleanup      nil)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+          ("C-x t t"   . treemacs)
+          ("C-x t B"   . treemacs-bookmark)
+          ("C-x t C-t" . treemacs-find-file)
+          ("C-x t M-t" . treemacs-find-tag)))
+
+
+  (use-package treemacs-icons-dired
+    :after treemacs dired
+    :ensure t
+      :config (treemacs-icons-dired-mode))
+
+  (use-package treemacs-projectile
+    :after treemacs projectile
+    :ensure t)
+  (use-package treemacs-magit
+    :after treemacs magit
+    :ensure t)
+
+(with-eval-after-load 'treemacs
+  (defun treemacs-ignore-gitignore (file _)
+    (string= file ".pyc"))
+  (push #'treemacs-ignore-gitignore treemacs-ignored-file-predicates))
+
+(use-package helm
+ :ensure t
+ :delight helm-mode
+ :config
+  (require 'helm-config)
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
+
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+  (define-key helm-map (kbd "C-M-x") 'helm-execute-persistent-action) ; make TAB work in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
+
+  (setq helm-split-window-inside-p            t ; open helm buffer inside current window, not occupy whole other window
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t
+        helm-echo-input-in-header-line t)
+
+  (setq helm-autoresize-max-height 50)
+  (setq helm-autoresize-min-height 0)
+  (helm-autoresize-mode 1)
+
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t
+        helm-recentf-fuzzy-match    t)
+  (setq helm-semantic-fuzzy-match t
+        helm-imenu-fuzzy-match    t)
+(setq helm-locate-fuzzy-match t)
+(setq helm-apropos-fuzzy-match t)
+(setq helm-lisp-fuzzy-completion t)
+(helm-mode 1)
+
+  (global-set-key (kbd "M-x") 'helm-M-x))
+
+(setq helm-mini-default-sources '(helm-source-buffers-list
+                                  helm-source-recentf
+                                  helm-source-bookmarks
+                                  helm-source-buffer-not-found))
 
 (use-package pyim
   :ensure
@@ -1550,3 +1310,358 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure
   :config)
 (elfeed-goodies/setup)
+
+(use-package tj3-mode
+  :ensure t
+  :after org-plus-contrib
+  :config
+  (require 'ox-taskjuggler)
+  (custom-set-variables
+   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+   '(org-taskjuggler-project-tag "PRJ")))
+
+(use-package tj3-mode
+  :ensure t
+  :after org-plus-contrib
+  :config
+  (require 'ox-taskjuggler)
+  (custom-set-variables
+   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+   '(org-taskjuggler-project-tag "PRJ")))
+
+(use-package magit
+  :ensure t
+  :defer
+  :config
+  (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+  :bind ("C-x g" . 'magit-status))
+(use-package magit-todos
+  :ensure t
+  :defer)
+(use-package
+  magit-gitflow
+
+  :ensure
+  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+
+(use-package monky
+  :ensure t
+  :defer
+  :bind ("C-x m" . 'monky-status))
+
+(use-package git-gutter-fringe+
+  :ensure t
+  :defer
+  :if window-system
+  :bind ("C-c g" . 'git-gutter+-mode))
+
+(defvar locate-dominating-stop-dir-regexp
+  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
+
+(defun paf/vcs-status ()
+     (interactive)
+     (condition-case nil
+         (magit-status-setup-buffer)
+       (error (monky-status))))
+
+(global-set-key (kbd "C-M-x v") 'paf/vcs-status)
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'helm)
+  (projectile-mode +1))
+
+(use-package helm-projectile
+  :ensure t
+  :after projectile
+  :requires projectile
+  :delight projectile-mode
+  :config
+  (helm-projectile-on))
+
+(use-package helm-ag
+  :ensure t
+  :config)
+
+(global-set-key (kbd "M-?") 'helm-ag)
+
+(setq gdb-many-windows t)
+(setq gdb-use-separate-io-buffer t)
+
+(defun easy-gdb-top-of-stack-and-restore-windows ()
+  (interactive)
+  (switch-to-buffer (gdb-stack-buffer-name))
+  (goto-char (point-min))
+  (gdb-select-frame)
+  (gdb-restore-windows)
+  (other-window 2))
+
+(global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
+
+; This unfortunately also messes up the regular frame navigation of source code.
+;(add-to-list 'display-buffer-alist
+;             (cons 'cdb-source-code-buffer-p
+;                   (cons 'display-source-code-buffer nil)))
+
+(defun cdb-source-code-buffer-p (bufName action)
+  "Return whether BUFNAME is a source code buffer."
+  (let ((buf (get-buffer bufName)))
+    (and buf
+         (with-current-buffer buf
+           (derived-mode-p buf 'c++-mode 'c-mode 'csharp-mode 'nxml-mode)))))
+
+(defun display-source-code-buffer (sourceBuf alist)
+  "Find a window with source code and set sourceBuf inside it."
+  (let* ((curbuf (current-buffer))
+         (wincurbuf (get-buffer-window curbuf))
+         (win (if (and wincurbuf
+                       (derived-mode-p sourceBuf 'c++-mode 'c-mode 'nxml-mode)
+                       (derived-mode-p (current-buffer) 'c++-mode 'c-mode 'nxml-mode))
+                  wincurbuf
+                (get-window-with-predicate
+                 (lambda (window)
+                   (let ((bufName (buffer-name (window-buffer window))))
+                     (or (cdb-source-code-buffer-p bufName nil)
+                         (assoc bufName display-buffer-alist)
+                         ))))))) ;; derived-mode-p doesn't work inside this, don't know why...
+    (set-window-buffer win sourceBuf)
+    win))
+
+(use-package vdiff
+  :ensure t
+  :config
+  ; This binds commands under the prefix when vdiff is active.
+  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
+
+(autoload 'comment-out-region "comment" nil t)
+(global-set-key (kbd "C-c q") 'comment-out-region)
+
+(defun uniquify-region-lines (beg end)
+  "Remove duplicate adjacent lines in region."
+  (interactive "*r")
+  (save-excursion
+    (goto-char beg)
+    (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
+      (replace-match "\\1"))))
+
+(defun paf/sort-and-uniquify-region ()
+  "Remove duplicates and sort lines in region."
+  (interactive)
+  (sort-lines nil (region-beginning) (region-end))
+  (uniquify-region-lines (region-beginning) (region-end)))
+
+(global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
+
+(use-package
+  circe
+    :ensure
+    :config(
+            setq circe-network-options '((
+                                          "Freenode" :tls t
+                                          :nick "fengxia41103"
+                                          :channels ("#emacs"
+                                                     "#python"
+                                                     "#odoo"
+                                                     "#reactjs"
+                                                     "#latex")))))
+(use-package
+  helm-circe
+
+  :ensure
+  :config)
+
+(use-package writegood-mode
+  :ensure
+  :config)
+
+(use-package
+  markdown-mode
+
+  :ensure
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              (visual-line-mode t)
+              (writegood-mode t)
+              (flyspell-mode t)))))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+
+(use-package google-c-style
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+
+(use-package flymake-google-cpplint
+  :ensure t)
+
+(use-package elpy
+  :ensure
+  :init
+  (elpy-enable))
+
+(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+
+(use-package
+  py-autopep8
+
+  :ensure t
+  :config
+  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  (setq py-autopep8-options '("--max-line-length=80")))
+
+(use-package
+  py-isort
+
+  :ensure
+  :config
+  (add-hook 'before-save-hook 'py-isort-before-save)
+  (setq py-isort-options '("-sl")))
+
+(add-hook 'python-mode-hook #'smartparens-mode)
+
+(use-package web-mode
+  :ensure t
+  :config
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (setq web-mode-enable-css-colorization t))
+
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+
+(use-package web-beautify
+  :ensure
+  :config)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+(add-hook 'json-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+(add-hook 'css-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+(add-hook 'html-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+
+(use-package emmet-mode
+  :ensure t
+  :after(web-mode css-mode scss-mode)
+  :config)
+(setq emmet-expand-jsx-className? t)
+(setq emmet-move-cursor-between-quotes t)
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'scss-mode-hook  'emmet-mode)
+
+(use-package js2-mode
+    :ensure
+    :config)
+
+(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+(add-hook 'js2-mode-hook #'smartparens-mode)
+
+(use-package prettier-js
+  :ensure
+  :config
+  (setq prettier-js-args '(
+                           "--trailing-comma" "es5"
+                           "--single-quote" "false"
+                           "--print-width" "80"
+                           "--tab-width" "2"
+                           )));
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'json-mode-hook 'prettier-js-mode)
+(add-hook 'js-mode-hook 'prettier-js-mode)
+
+(use-package js-doc
+  :ensure
+  :config
+  (setq js-doc-mail-address "fxia1@lenovo.com")
+  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
+  (setq js-doc-url "http://www.lenovo.com")
+  (setq js-doc-license "Company License")
+)
+(add-hook 'js2-mode-hook
+          #'(lambda ()
+              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
+(use-package csv-mode
+  :ensure t
+  :mode "\\.csv\\'")
+
+(use-package json-mode
+  :ensure
+  :config)
+
+(use-package yaml-mode
+  :ensure
+  :config)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+(defun my-setup-indent (n)
+  ;; java/c/c++
+  (setq-local standard-indent n)
+  (setq-local c-basic-offset n)
+
+  ;; javascript family
+  (setq-local javascript-indent-level n) ; javascript-mode
+  (setq-local js-indent-level n) ; js-mode
+  (setq-local js2-basic-offset n) ; js2-mode
+  (setq-local js-switch-indent-offset n) ; js-mode
+  (setq-local javascript-indent-level n) ; javacript-mode
+  (setq-local react-indent-level n) ; react-mode
+  (setq-local js2-basic-offset n)
+
+  ;; html, css
+  (setq-local web-mode-attr-indent-offset n) ; web-mode
+  (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq-local web-mode-sql-indent-offset n) ; web-mode
+  (setq-local web-mode-attr-value-indent-offset n) ; web-mode
+  (setq web-mode-comment-style 2) ;; web-mode
+  (setq-local css-indent-offset n) ; css-mode
+
+  ;; shells
+  (setq-local sh-basic-offset n) ; shell scripts
+  (setq-local sh-indentation n))
+
+(defun my-personal-code-style ()
+  (interactive)
+  (message "My personal code style!")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 2 spaces width
+  (my-setup-indent 2))
+
+;; it would be lovely if this was enough, but it gets stomped on by modes.
+(my-personal-code-style)
+
+(add-hook 'css-mode-hook 'my-personal-code-style)
+(add-hook 'js2-mode-hook 'my-personal-code-style)
+(add-hook 'react-mode-hook 'my-personal-code-style)
+(add-hook 'sh-mode-hook 'my-personal-code-style)

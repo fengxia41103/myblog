@@ -1,8 +1,8 @@
+#+LATEX_COMPILER: xelatex
 #+TITLE: Feng's Emacs configuration
 #+AUTHOR: Feng Xia
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
-
 
 I have seen others using org-mode to mangae emacs config, and they
 came out very nicely. Finally, after 4 years of using emacs, I ran
@@ -60,6 +60,8 @@ I'll simply keep a list:
 4. sqlite3: needed by org-roam
 5. [[https://github.com/hakimel/reveal.js/][reveal.js]]: needed to enable org-export to reveal slides
 6. [[https://plantuml.com/download][plantuml.jar]]
+7. [[https://packages.ubuntu.com/search?keywords=mu4e][mu4e]] & [[https://packages.ubuntu.com/search?keywords=isync][isync]] (this give you =mbsync=)
+8. [[https://github.com/mguessan/davmail][davmail]]
 
 * clean start
 
@@ -526,7 +528,6 @@ This makes some of the faces a bit more contrasted.
    '(highlight ((t (:background "forest green"))))
    '(region ((t (:background "forest green")))))
 #+END_SRC
-***
 
 ** be quiet
 Remove bell and dings.
@@ -840,7 +841,6 @@ EmacSQL will need to get its C-binary compiled, and needs supporting
 tools. Note that 'tcc' for Termux seems not complete enough for the
 job.
 
-
 **** org-board
 Archive entire sites locally with `wget`.
 
@@ -973,32 +973,26 @@ installed separately, see the [[http://plantuml.com/][PlantUML website]].
   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
 #+END_SRC
 
-**** export formats
+*** org-link-abbrev
+
+This lets one write links as e.g. [ [b:123457] ]
+
+#+BEGIN_SRC emacs-lisp
+(setq org-link-abbrev-alist
+      '(("b" . "http://b/")
+        ("go" . "http://go/")
+        ("cl" . "http://cr/")))
+#+END_SRC
+** export
+
+Part 2, exporting.
+
+This is big deal. It took me a while to learn org, and even right now
+I still don't know how to use it for schedule management. This feels
+like latex, it's wonderful, but not common among non-org-mode folks.
 
 Add a few formats to the export functionality of org-mode.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ox-odt
-    :defer)
-  (use-package ox-taskjuggler
-    :defer)
-  (use-package ox-impress-js
-    :defer)
-#+END_SRC
-**** org-reveal
-
-You need to install =reveal.js= offline, then specify its path here.
-#+BEGIN_SRC emacs-lisp
-  (use-package ox-reveal
-    :ensure t
-    :after (htmlize)
-    :config
-    (setq org-reveal-root (expand-file-name "~/reveal.js")))
-
-  (use-package htmlize
-    :ensure t)
-#+END_SRC
-**** org-babel
+*** org-babel
 
 What kind of code block languages do I need
 
@@ -1020,19 +1014,48 @@ What kind of code block languages do I need
     ))
 #+END_SRC
 
-*** org-link-abbrev
-
-This lets one write links as e.g. [ [b:123457] ]
-
+*** markdown
 #+BEGIN_SRC emacs-lisp
-(setq org-link-abbrev-alist
-      '(("b" . "http://b/")
-        ("go" . "http://go/")
-        ("cl" . "http://cr/")))
+  (use-package ox-md
+    :defer)
 #+END_SRC
+*** beamer
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-beamer
+    :defer)
+#+END_SRC
+*** org-reveal
+
+You need to install =reveal.js= offline, then specify its path here.
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-reveal
+    :ensure t
+    :after (htmlize)
+    :config
+    (setq org-reveal-root (expand-file-name "~/reveal.js")))
+
+  (use-package htmlize
+    :ensure t)
+#+END_SRC
+*** odt
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-odt
+    :defer)
+#+END_SRC
+*** taskjuggler
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-taskjuggler
+    :defer)
+#+END_SRC
+*** confluence
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-confluence
+    :defer)
+#+END_SRC
+
 ** managing life (aka. agenda/todo)
 
-Part 2 of org, managing TODOs.
+Part 3 of org, managing TODOs.
 
 *** by packages
 **** org-super-agenda
@@ -1510,6 +1533,19 @@ Now install =dumb-jump=:
     (setq dumb-jump-prefer-searcher 'ag))
 #+end_SRC
 
+Some hydra:
+#+begin_SRC emacs-lisp
+(defhydra dumb-jump-hydra (:color blue :columns 3)
+    "Dumb Jump"
+    ("j" dumb-jump-go "Go")
+    ("o" dumb-jump-go-other-window "Other window")
+    ("e" dumb-jump-go-prefer-external "Go external")
+    ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
+    ("i" dumb-jump-go-prompt "Prompt")
+    ("l" dumb-jump-quick-look "Quick look")
+    ("b" dumb-jump-back "Back"))
+#+end_SRC
+
 Last, hook to =xref= to use =M.= bind:
 
 #+begin_SRC emacs-lisp
@@ -1526,16 +1562,6 @@ This enables searching recursively in projects.
     :requires (ripgrep projectile))
 #+END_SRC
 
-**** ace-jump-mode
-
-Let's one jump around text
-
-#+BEGIN_SRC emacs-lisp
-(use-package ace-jump-mode
-  :ensure t
-  :bind (("C-c C-SPC" . 'ace-jump-mode)
-         ("C-c C-DEL" . 'ace-jump-mode-pop-mark)))
-#+END_SRC
 
 *** max 80 cols wide
 #+BEGIN_SRC emacs-lisp
@@ -1702,7 +1728,7 @@ Looks convenient [[https://github.com/emacsfodder/move-text][here]]:
 (move-text-default-bindings)
 #+end_SRC
 
-** tabs to 2
+t** tabs to 2
 
 These are global tab settings. Since TAB is such a sensitive thing,
 each coding mode may have a different style/preference that will

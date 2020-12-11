@@ -1,8 +1,8 @@
-#+LATEX_COMPILER: xelatex
 #+TITLE: Feng's Emacs configuration
 #+AUTHOR: Feng Xia
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
+#+LATEX_COMPILER: xelatex
 
 I have seen others using org-mode to mangae emacs config, and they
 came out very nicely. Finally, after 4 years of using emacs, I ran
@@ -404,7 +404,7 @@ minibuffer.
 
 For now, I'm doing it globally.
 
-#+begin_SRC emacs-lisp
+#+begin_SRC emacs-lisp :tangle no
 (global-display-line-numbers-mode t)
 #+end_SRC
 
@@ -416,7 +416,7 @@ brings value. *Note* that the ones I skip are:
 1. mu4e-compose-mode: when writing email, it's better not to count for line num.
 2. markdown: for the same reason. I'm writing.
 
-#+begin_SRC emacs-lisp :tangle no
+#+begin_SRC emacs-lisp
   (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
   (add-hook 'org-mode-hook 'display-line-numbers-mode)
   (add-hook 'elpy-mode-hook 'display-line-numbers-mode)
@@ -599,12 +599,9 @@ e.g. =(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")=
     :ensure nil
     :delight org-mode
     :config
-    (setq org-startup-indented t)
-    (if (not (boundp 'org-directory))
-        (setq org-directory "~/org"))
-    (add-hook 'org-mode-hook #'(lambda ()
-                                 (visual-line-mode)
-                                 (org-indent-mode))))
+    :hook ((org-mode . visual-line-mode)
+         (org-mode . org-indent-mode)))
+
 #+END_SRC
 
 ** others
@@ -907,8 +904,7 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 #+begin_SRC emacs-lisp
   (use-package org-bullets
     :ensure
-    :config)
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+    :hook (org-mode . org-bullets-mode))
 #+end_SRC
 ** writing stuff
 
@@ -1136,7 +1132,7 @@ This is my version of the org-secretary
           )
     (org-duration-set-regexps))
 #+END_SRC
-*** org TODO keywords
+*** keywords
 
 #+BEGIN_SRC emacs-lisp
   (setq org-todo-keywords
@@ -1176,7 +1172,14 @@ This is my version of the org-secretary
           ("ACTIVE" . (:foreground "darkgreen" :weight bold))
           ))
 #+END_SRC
+*** priorities
 
+Set color for priorities based on [[http://pragmaticemacs.com/emacs/org-mode-basics-vi-a-simple-todo-list/][this]].
+#+begin_SRC emacs-lisp
+(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab"))))
+#+end_SRC
 *** capture & refile
 
 Capture and refile stuff, with some templates that I think are useful.
@@ -1185,44 +1188,44 @@ Very nice post on how to get capture templats from a file: [[https://joshrollins
 in Files]].
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (org-relative-file "Inbox.org"))
+  (setq org-default-notes-file (org-relative-file "~/org/tasks.org"))
 
   (setq org-capture-templates
         `(("t" "Task"
-           entry (file+headline ,(org-relative-file "Inbox.org") "Tasks")
-           "* TODO %?\n%U\n\n%x"
+           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Tasks")
+           "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
            :clock-resume t)
           ;;
           ("i" "Idea"
-           entry (file+headline ,(org-relative-file "Inbox.org") "Ideas")
+           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Ideas")
            "* SOMEDAY %?\n%U\n\n%x"
            :clock-resume t)
           ;;
           ("m" "Meeting"
-           entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
            "* %?  :MTG:\n%U\n%^{with}p"
            :clock-in t
            :clock-resume t)
           ;;
           ("s" "Stand-up"
-           entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
            "* Stand-up  :MTG:\n%U\n\n%?"
            :clock-in t
            :clock-resume t)
           ;;
           ("1" "1:1"
-           entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
            "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
            :clock-in t
            :clock-resume t)
           ;;
           ("p" "Talking Point"
-           entry (file+headline ,(org-relative-file "refile.org") "Talking Points")
+           entry (file+headline ,(org-relative-file "~/org/refile.org") "Talking Points")
            "* %?  :TALK:\n%U\n%^{dowith}p"
            :clock-keep t)
           ;;
           ("j" "Journal"
-           entry (file+olp+datetree ,(org-relative-file "journal.org"))
+           entry (file+olp+datetree ,(org-relative-file "~/org/journal.org"))
            "* %?\n%U"
            :clock-in t
            :clock-resume t
@@ -1464,7 +1467,145 @@ Ran into a [[https://github.com/seagle0128/.emacs.d/issues/129][strange error]],
 solution:
 
 #+BEGIN_SRC emacs-lisp
-  (org-reload)
+  (org-mode-restart)
+#+END_SRC
+* buffers
+
+There are three concepts seem to me: desktop, window config, and buffers.
+
+- desktop: is like virtual desktop, and you can have many, like i3.
+- window config: think of it like a look you have created using
+  buffers, eg. stack them this way or that way, on the same
+  desktop. So switching a window config will switch the buffer layout
+  within your current desktop.
+- buffer: is the building block.
+
+** by packages
+*** multi desktops: eyebrowse
+
+Awesome window manager. It's like using i3m but inside emacs. Use the
+=C-c C-w <0..9>= key to switch to so called desktop. On each desktop,
+you can have different buffers open and so on, so I don't have to
+close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.cc/eyebrowse/][here]].
+
+#+BEGIN_SRC emacs-lisp
+  (use-package eyebrowse
+    :ensure t)
+(eyebrowse-mode t)
+#+END_SRC
+
+*** select buffer
+
+#+begin_SRC emacs-lisp
+  (use-package ace-window
+    :ensure
+    :config
+    (setq aw-ignore-current t)
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    (setq aw-background nil)
+    (global-set-key (kbd "M-o") 'ace-window)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground
+                     :background "GhostWhite"
+                     :box nil)))))
+  )
+#+end_SRC
+
+*** buffer naming
+#+BEGIN_SRC emacs-lisp
+(use-package uniquify
+  :init
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
+#+END_SRC
+** save & restore buffers
+
+First, you need to create a folder =~/.emacs.d/savehist=. If not, upon
+existing emacs, it will complain, asking you whether you want to
+=ignore= it, answer =yes= will be fine. No harm. It's just the session
+will not then be saved.
+
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq desktop-path (list "~/.emacs.d/savehist"))
+  (setq desktop-dirname "~/.emacs.d/savehist")
+  (setq desktop-restore-eager 5)
+  (setq desktop-load-locked-desktop t)
+  (desktop-save-mode 1)
+
+    (setq history-length t)
+  (setq history-delete-duplicates t)
+  (setq savehist-save-minibuffer-history 1)
+  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+#+END_SRC
+
+But skip the followings:
+#+begin_SRC emacs-lisp
+  (setq desktop-buffers-not-to-save
+       (concat "\\("
+               "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+               "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+               "\\)$"))
+  (add-to-list 'desktop-modes-not-to-save 'dired-mode)
+  (add-to-list 'desktop-modes-not-to-save 'Info-mode)
+  (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+  (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
+#+end_SRC
+
+See [[https://github.com/thierryvolpiatto/psession][here]]:
+
+#+begin_SRC emacs-lisp
+  (use-package psession
+    :ensure)
+  (psession-mode 1)
+  (psession-savehist-mode 1)
+  (psession-autosave-mode 1)
+#+end_SRC
+
+** switch window config: winner-mode
+
+Read [[https://www.emacswiki.org/emacs/WinnerMode][here]]. A config is essentially a look of buffers, and there can be
+many, say, a config has two windows side by side, while another is 3
+stacked. This mode will let you switch between them on the same desktop.
+
+Enables =winner-mode=. Navigate buffer-window configs with =C-c left= and
+=C-c right=.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (winner-mode 1)
+#+END_SRC
+
+However, with eyebrowse, I think this is redundant function. Maybe I should skip this?
+
+** toggle maximize buffer
+
+Temporarily maximize a buffer.  [[https://gist.github.com/mads379/3402786][found here]]
+
+#+BEGIN_SRC emacs-lisp
+(defun toggle-maximize-buffer () "Maximize buffer"
+  (interactive)
+  (if (= 1 (length (window-list)))
+      (jump-to-register '_)
+    (progn
+      (window-configuration-to-register '_)
+      (delete-other-windows))))
+#+END_SRC
+
+Map it to a key.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key [M-f8] 'toggle-maximize-buffer)
+#+END_SRC
+
+** buffer decorations
+Setup the visual cues about the current editing buffer
+#+BEGIN_SRC emacs-lisp
+  (column-number-mode t)
+  (setq visible-bell t)
+  (setq scroll-step 1)
+  (setq-default transient-mark-mode t)  ;; highlight selection
 #+END_SRC
 * editing
 
@@ -1561,7 +1702,6 @@ This enables searching recursively in projects.
     :ensure t
     :requires (ripgrep projectile))
 #+END_SRC
-
 
 *** max 80 cols wide
 #+BEGIN_SRC emacs-lisp
@@ -1755,134 +1895,6 @@ take effect on all of them.
   (global-set-key (kbd "C-M-i") 'iedit-mode)
 #+END_SRC
 
-* buffers
-
-There are three concepts seem to me: desktop, window config, and buffers.
-
-- desktop: is like virtual desktop, and you can have many, like i3.
-- window config: think of it like a look you have created using
-  buffers, eg. stack them this way or that way, on the same
-  desktop. So switching a window config will switch the buffer layout
-  within your current desktop.
-- buffer: is the building block.
-
-** by packages
-*** multi desktops: eyebrowse
-
-Awesome window manager. It's like using i3m but inside emacs. Use the
-=C-c C-w <0..9>= key to switch to so called desktop. On each desktop,
-you can have different buffers open and so on, so I don't have to
-close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.cc/eyebrowse/][here]].
-
-#+BEGIN_SRC emacs-lisp
-  (use-package eyebrowse
-    :ensure t)
-(eyebrowse-mode t)
-#+END_SRC
-
-*** select buffer
-
-#+begin_SRC emacs-lisp
-  (use-package ace-window
-    :ensure
-    :config
-    (setq aw-ignore-current t)
-    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    (setq aw-background nil)
-    (global-set-key (kbd "M-o") 'ace-window)
-    (custom-set-faces
-     '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground
-                     :background "GhostWhite"
-                     :box nil)))))
-  )
-#+end_SRC
-
-*** buffer naming
-#+BEGIN_SRC emacs-lisp
-(use-package uniquify
-  :init
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
-#+END_SRC
-** save & restore buffers
-
-First, you need to create a folder =~/.emacs.d/savehist=. If not, upon
-existing emacs, it will complain, asking you whether you want to
-=ignore= it, answer =yes= will be fine. No harm. It's just the session
-will not then be saved.
-
-#+BEGIN_SRC emacs-lisp
-
-  (setq desktop-path (list "~/.emacs.d/savehist"))
-  (setq desktop-dirname "~/.emacs.d/savehist")
-  (setq desktop-restore-eager 5)
-  (setq desktop-load-locked-desktop t)
-  (desktop-save-mode 1)
-
-  (savehist-mode 1)
-  (setq history-length t)
-  (setq history-delete-duplicates t)
-  (setq savehist-save-minibuffer-history 1)
-  (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-
-#+END_SRC
-
-But skip the followings:
-#+begin_SRC emacs-lisp
-  (setq desktop-buffers-not-to-save
-       (concat "\\("
-               "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-               "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-               "\\)$"))
-  (add-to-list 'desktop-modes-not-to-save 'dired-mode)
-  (add-to-list 'desktop-modes-not-to-save 'Info-mode)
-  (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-  (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-#+end_SRC
-
-** switch window config: winner-mode
-
-Read [[https://www.emacswiki.org/emacs/WinnerMode][here]]. A config is essentially a look of buffers, and there can be
-many, say, a config has two windows side by side, while another is 3
-stacked. This mode will let you switch between them on the same desktop.
-
-Enables =winner-mode=. Navigate buffer-window configs with =C-c left= and
-=C-c right=.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (winner-mode 1)
-#+END_SRC
-
-However, with eyebrowse, I think this is redundant function. Maybe I should skip this?
-
-** toggle maximize buffer
-
-Temporarily maximize a buffer.  [[https://gist.github.com/mads379/3402786][found here]]
-
-#+BEGIN_SRC emacs-lisp
-(defun toggle-maximize-buffer () "Maximize buffer"
-  (interactive)
-  (if (= 1 (length (window-list)))
-      (jump-to-register '_)
-    (progn
-      (window-configuration-to-register '_)
-      (delete-other-windows))))
-#+END_SRC
-
-Map it to a key.
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key [M-f8] 'toggle-maximize-buffer)
-#+END_SRC
-
-** buffer decorations
-Setup the visual cues about the current editing buffer
-#+BEGIN_SRC emacs-lisp
-  (column-number-mode t)
-  (setq visible-bell t)
-  (setq scroll-step 1)
-  (setq-default transient-mark-mode t)  ;; highlight selection
-#+END_SRC
 * navigate file & dir
 
 I'm not quite used to using emacs as file manager yet. To me, it's
@@ -2203,7 +2215,7 @@ Now, we tell emacs I want to use =mu4e= as email client:
 #+END_SRC
 
 Link to a couple modes to help me writing good emails:
-#+begin_SRC emacs-lisp :tangle no
+#+begin_SRC emacs-lisp
   (add-hook 'mu4e-compose-mode-hook
                 (lambda ()
                   (visual-line-mode t)

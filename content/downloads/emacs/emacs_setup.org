@@ -1132,12 +1132,33 @@ This is my version of the org-secretary
           )
     (org-duration-set-regexps))
 #+END_SRC
-*** keywords
+*** keywords & status state machine
+
+TODO doesn't have to have a special keyword. However, once you have a
+list, you can enjoy things like color coded font, status transition
+timestamp, and kinda of query report such as "give me the list of my
+<meetings>". Just convenient.
+
+The state machine is essentially your workflow, how you want to take a
+task through its stages, eg. from ready to in-progress to in-review to
+done. So really, develop a workflow of your own that fits your way of
+thinking, and it should feel natural how you handle a todo in daily
+life.
+
+I think this is the single most challenging point to adopt Org because
+people, myself included, are hardly capable to analyze your own task
+handling habit to abstract such workflow. Company hires consulting
+firms to do that for them; an individual, unlikely. We coast along
+life everyday, but who can write down "here is how I get a TODO off my
+list, each time!?".
+
+Anyway, I think adopting Org is essentially to force yourself into a
+*routine* that is codified. It sounds rigid, IT-ish. But for efficiency,
+it's a necessary evil.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-todo-keywords
-        '((sequence "TODO(t!)" "NEXT(n!)" "STARTED(s!)" "WAITING(w!)" "AI(a!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
-          (sequence "APPLIED(A!)" "WAITING(w!)" "ACCEPTED" "|" "REJECTED" "PUBLISHED")
+        '((sequence "TODO(t!)" "WORKING(w!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
           (sequence "TASK(m!)" "ACTIVE" "|" "DONE(d!)" "CANCELLED(C@)" )))
 
   (setq org-tags-exclude-from-inheritance '("PRJ" "REGULAR")
@@ -1145,11 +1166,11 @@ This is my version of the org-secretary
         org-stuck-projects '("+PRJ/-DONE-CANCELLED"
                              ;; it is considered stuck if there is no next action
                              (;"TODO"
-                              "NEXT" "STARTED" "TASK") ()))
+                              "WORKING" "ACTIVE" "TASK") ()))
 
   (setq org-todo-keyword-faces
         '(
-          ("TODO" . (:foreground "purple" :weight bold))
+          ("TODO" . (:foreground "GhostWhite" :weight bold))
           ("TASK" . (:foreground "steelblue" :weight bold))
           ("NEXT" . (:foreground "red" :weight bold))
           ("STARTED" . (:foreground "green" :weight bold))
@@ -2336,7 +2357,7 @@ My signature line:
         (concat
          "Best regards,\n\n"
          "Feng Xia\n"
-         "W: http://www.mycompany.com\n"))
+         "W: http://www.lenovo.com\n"))
 #+END_SRC
 *** send
 Sending email is to use SMTP. Here I'm showing to use the company one
@@ -2348,9 +2369,9 @@ use Gmail/hotmail:
     :ensure t
     :config
     (setq send-mail-function 'smtpmail-send-it
-          user-mail-address "fxia1@mycompany.com"
+          user-mail-address "fxia1@lenovo.com"
           smtpmail-debug-info t
-          smtpmail-smtp-user "fxia1@mycompany.com"
+          smtpmail-smtp-user "fxia1@lenovo.com"
           smtpmail-default-smtp-server "localhost"
           smtpmail-auth-credentials (expand-file-name "~/.authinfo")
           smtpmail-smtp-service 1025
@@ -2370,8 +2391,8 @@ just write, then queue, then when reconnected to the internect, send.
 *** reply
 When replying an email, auto fill in my info:
 #+BEGIN_SRC emacs-lisp
-  (setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
-        user-mail-address "fxia1@mycompany.com"
+  (setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
+        user-mail-address "fxia1@lenovo.com"
         user-full-name "Feng Xia"
         message-signature  (concat
                             "Feng Xia\n"
@@ -2875,6 +2896,12 @@ Sort python import. Need to install =pip install isort= offline.
     (add-hook 'before-save-hook 'py-isort-before-save)
     (setq py-isort-options '("-sl")))
 #+END_SRC
+**** imenu-list
+#+begin_SRC emacs-lisp
+  (use-package imenu-list
+  :ensure)
+#+end_SRC
+
 **** smartparens
 #+begin_SRC emacs-lisp
 (add-hook 'python-mode-hook #'smartparens-mode)
@@ -2981,9 +3008,9 @@ Nothing is complete without a doc solution.
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@mycompany.com")
+  (setq js-doc-mail-address "fxia1@lenovo.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-url "http://www.lenovo.com")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook

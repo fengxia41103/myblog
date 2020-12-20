@@ -140,13 +140,13 @@ Instead, there are two things you need to do:
         Xft.rgba: rgb
         ```
    Use `xdpyinfo` to check screen resolution[^1]:
-   
+
      1. On X1 gen 8, it's shown `2560x1440 pixels (677x381
         millimeters)`. Set `dpi=180` gives the same exp/size as what was
         on gen 4 without any tweaking.
      2. On Flex pro, it gives `3840 x 2160`, use `dpi=200` is good; 180
         is too small.
-      
+
 2. For Gtk applications, eg. dia, add these to our `.zshrc` or `.bashrc`:
 
         ```shell
@@ -266,6 +266,41 @@ to work w/ everybody else (which == Microsoft, actually, sigh).
    have Thunderbird acting as just an email agent off davmail anyway.
 
 3. for Skype business/Lync: use [pidgin][10].
+
+# fix a broken upgrade
+
+It was a strange experience that by doing `do-release-upgrade` to
+20.04, my X1 didn't have network manager and `wicd` after! This made
+it impossible for me to use the wifi. Tried `dhclient`, `iwconfig` and
+so on, no avail. So in the end I learned something quite powerful
+&mdash; by booting into the USB live system, you can swap a few things
+so that now the OS is running off your installed folder, thus you can
+do `apt-get` using the live image (I think it's running in memory)
+while it will use disk files from your installation!
+
+1. Boot a Ubuntu live CD in "Try without installing". Make sure you are connected to the internet.
+2. In terminal type:
+
+      ```shell
+      sudo mount --bind /dev /<chrootlocation>/dev
+      sudo mount --bind /proc /<chrootlocation>/proc
+      sudo mount --bind /sys /<chrootlocation>/sys
+      sudo cp /etc/resolv.conf /<chrootlocation>/etc/resolv.conf
+      sudo chroot /<chrootlocation>
+      ```
+
+      You will need to replace `<chrootlocation>` with the appropriate
+      location of your Ubuntu install, typically the label of the partition
+      it's installed on. The partition must also be mounted so that you can
+      access it.
+3. Edit your `/etc/resolve.conf` and add at least one nameserver:
+
+      ```shell
+      nameserver 8.8.8.8 # Google Public DNS
+      ```
+4. Now you can do the `apt update` and so on.
+5. Exit chroot by simply doing `exit` in terminal.
+6. If you are done, just `reboot now`.
 
 [1]: {filename}/dev/kvm.md
 [2]: https://wiki.archlinux.org/index.php/HiDPI

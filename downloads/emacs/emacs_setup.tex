@@ -1,8 +1,6 @@
-% Created 2020-11-21 Sat 13:36
-% Intended LaTeX compiler: pdflatex
+% Created 2020-12-05 Sat 19:29
+% Intended LaTeX compiler: xelatex
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{longtable}
@@ -14,12 +12,12 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
-\author{Pascal Fleury}
+\author{Feng Xia}
 \date{\today}
-\title{Paf's portable Emacs configuration}
+\title{Feng's Emacs configuration}
 \hypersetup{
- pdfauthor={Pascal Fleury},
- pdftitle={Paf's portable Emacs configuration},
+ pdfauthor={Feng Xia},
+ pdftitle={Feng's Emacs configuration},
  pdfkeywords={},
  pdfsubject={},
  pdfcreator={Emacs 26.3 (Org mode 9.4)},
@@ -29,191 +27,183 @@
 \maketitle
 \tableofcontents
 
-This is my Emacs config. You need to tangle this into a file that then
-gets loaded by Emacs: \texttt{C-c C-v t} [org-babel-tangle]. Below, I also
-explain how this tangling is automated.
+I have seen others using org-mode to mangae emacs config, and they
+came out very nicely. Finally, after 4 years of using emacs, I ran
+into \href{https://github.com/pascalfleury/emacs-config}{Pascal Fleury} portal emacs config, and it makes sense to me!!
+After trying it out for a couple weeks now, I really like it! So now
+after the configs are stable to my taste, and is also growing slowly
+when I add new packages and custom stuff, I find the original sections
+a bit, confusing. So I'm to take his copy and rearrange it so it fits
+my way of thinking. I will not change the fundamental things such as
+\texttt{tangle}, but will clarify what the packages and configs are about.
 
-Find extensive documentation about how to do this \href{https://github.com/larstvei/dot-emacs}{here}.
+\section{the idea}
+\label{sec:org28571e1}
 
-\section{Personal plans}
-\label{sec:org613b8bc}
-I regularly try out new packages, this is my current list of things
-being evaluated.  They usually live temporarily in my \texttt{\textasciitilde{}/.emacs} until
-I am happy, in which case I move their config into this file so that
-it gets replicated on all machines I work on with Emacs.
+This idea is actually a bit chicken-egg: in order to tangle, you must
+first fire up emacs, then convert this org to \texttt{.el}, then load it back
+into emacs to take effect.
 
-\subsection{Currently under review}
-\label{sec:org2cd2f37}
-\begin{itemize}
-\item \href{https://github.com/Kungsgeten/yankpad}{yankpad} + \href{https://github.com/joaotavora/yasnippet}{yasnippet}
-\item \href{https://github.com/yjwen/org-reveal}{ox-reveal} (see \href{https://github.com/yjwen/org-reveal\#set-the-location-of-revealjs}{installation})
-\end{itemize}
+The key here are relying on two things:
 
-\section{One-time initial setup}
-\label{sec:org9901551}
-I have my config in directory \texttt{\textasciitilde{}/Emacs} which is where I clone this repository. The config setup is maintained purely in the \texttt{\textasciitilde{}/Emacs/emacs\_setup.org} file.
+\begin{enumerate}
+\item There are two version of the \texttt{emacs\_setup.el} file, one is a dummy
+short version that gets loaded for the very first time. This is the
+same stuff you can recreate using the \ref{sec:org4bb977e}: \texttt{C-c C-v t}.
+\item In the default \texttt{.emacs, write one line: to load this =.el} file. Then,
+it short version will tangle this org file, and write over itself
+(on disk), thus literally replaced itself w/ more contents. At this
+point, it will tangle all the code blocks in this file, and at the
+end of it, it will call to \hyperref[sec:org7bb9a16]{recompile packages}, thus kicking off the
+entire download, compiling, installation and configuration.
+\end{enumerate}
+
+\section{deps}
+\label{sec:orgfbdce36}
+
+There are some host packages/tools you need to install. These are not
+hard dependencies, but really, it works better that way if they are there.
+
+I have been thinking how to handle them. The original author uses
+tangle to create a bash file. So the idea is to run this \texttt{.sh}
+first. But then, I think there are two problems:
+
+\begin{enumerate}
+\item host package manager is different, eg. \texttt{apt} for Ubuntu, and \texttt{yum} for Cent.
+\item package name changes sometimes, and not mention, the packages are
+completely different among distributions.
+
+So all in all, I think it's much better to simply list what I want
+to have, and then let some offline research/google to handle how to
+install them. Another idea is to build a Docker image w/ all thest
+inside. Hmm\ldots{} I may try that someday.
+\end{enumerate}
+
+\subsection{what I want to use}
+\label{sec:org3bf0e73}
+
+I'll simply keep a list:
+
+\begin{enumerate}
+\item \href{https://github.com/ggreer/the\_silver\_searcher}{silver searcher, aka. ag}
+\item \href{https://github.com/nvm-sh/nvm}{nvm}: needed for Node
+\item \href{https://prettier.io/docs/en/install.html}{prettier}: require Node first
+\item sqlite3: needed by org-roam
+\item \href{https://github.com/hakimel/reveal.js/}{reveal.js}: needed to enable org-export to reveal slides
+\item \href{https://plantuml.com/download}{plantuml.jar}
+\item \href{https://packages.ubuntu.com/search?keywords=mu4e}{mu4e} \& \href{https://packages.ubuntu.com/search?keywords=isync}{isync} (this give you \texttt{mbsync})
+\item \href{https://github.com/mguessan/davmail}{davmail}
+\end{enumerate}
+
+\section{clean start}
+\label{sec:orgd2eac0b}
+
+\textbf{ASSUMPTION}:
+
+\begin{enumerate}
+\item you have installed emacs. Using v26.3 as of writing.
+\item determine where to put this org file. Throughout this doc, we are
+assuming \texttt{\textasciitilde{}/Emacs/} as the folder.
+\end{enumerate}
+
+Once you are here, starting from a clean sheet is pretty easy:
+
+\begin{enumerate}
+\item delete all your old \texttt{.emacs}, \texttt{.emacs.d}, or back them up somewhere.
+\item tangle this org file into a \texttt{.el} file. To make things easier, I'm
+going to include the \texttt{.el} in the repo. So just copy it.
+\item create a \texttt{.emacs} file, and write one line \texttt{(load-file
+   "\textasciitilde{}/Emacs/emacs\_setup.el")}, essentially tells emacs where to find
+the initial config file.
+\item make sure Emacs re-interprets its init (you could restart it).
+\end{enumerate}
+
+That's it. Just sit back and watch emacs download and compile things,
+and after it's done, you will be given the power of this beautiful
+editor, all configured and ready to go! Now to think of it, isn't this
+what LOC is trying to achieve!?
+
+\subsection{.emacs}
+\label{sec:orga1aa6d1}
+
+I have my config in directory \texttt{\textasciitilde{}/Emacs} which is where I clone this
+repository. The config setup is maintained purely in the
+\texttt{\textasciitilde{}/Emacs/emacs\_setup.org} file.
 
 In your \texttt{\textasciitilde{}/.emacs} file, all you need to add is
 
 \begin{verbatim}
-;; Loads PAF's emacs setup with bootstrap
+;; Loads Feng's emacs setup with bootstrap
 (load-file "~/Emacs/emacs_setup.el")
 \end{verbatim}
 
-\subsection{Bootstrap}
-\label{sec:org6a07b41}
-Initially when cloning this repository, you have the \texttt{emacs\_setup.org}
-file, that contains the config that you adapt to your specific setup,
-and an \texttt{emacs\_setup.el} with a bootstrap content that will tangle and
-compile the org file, \emph{and replace itself}. This is useful the very
-first time.
+\subsection{bootstrap .el}
+\label{sec:org274852e}
 
-After that, the config itself should have the hook to re-tangle and
-re-compile the setup at each save.
-
-Therefore my setup is very easy to install, and it needs these steps:
-
-\begin{enumerate}
-\item clone this repo into \texttt{\textasciitilde{}/Emacs}
-\item add the one line in you \texttt{\textasciitilde{}/.emacs}
-\item make sure Emacs re-interprets its init (you could restart it)
-\end{enumerate}
-
-It may be that \href{https://github.com/jwiegley/use-package}{use-package} is not installed on your setup, so it will
-first try to install that. After that step, it will also start
-installing any package that is marked as needed in this config
-automatically.
-
-The original content of the \texttt{emacs\_setup.el} is as follows:
+Put this in the \texttt{\textasciitilde{}/Emacs/emacs\_setup.el}, and viola, it will regnerate itself!
 
 \begin{verbatim}
+
 ;; This is the initial state of the file to be loaded.
 ;; It will replace itself with the actual configuration at first run.
 
 (require 'org) ; We can't tangle without org!
 
 (setq config_base (expand-file-name "emacs_setup"
-                                    (file-name-directory
-                                     (or load-file-name buffer-file-name))))
+            (file-name-directory
+             (or load-file-name buffer-file-name))))
 (find-file (concat config_base ".org"))        ; Open the configuration
 (org-babel-tangle)                             ; tangle it
 (load-file (concat config_base ".el"))         ; load it
 (byte-compile-file (concat config_base ".el")) ; finally byte-compile it
 \end{verbatim}
+\section{reset}
+\label{sec:orgf3fd964}
 
-\subsection{Recompile all packages}
-\label{sec:orgac09f84}
-This will force-recompile everything in \texttt{\textasciitilde{}/.emacs.d/elpa/...} Just run \texttt{M-:} and then enter this:
+Reset takes two steps, but you can do either or both, depending on
+what you are trying to reset.
+
+\subsection{reset config}
+\label{sec:orgb8322df}
+
+If you have made a change to this org and what's to test drive it, you
+need to either \ref{sec:org4bb977e} or just save this file to trigger \ref{sec:org242c211}. Sometimes, I found I have to go the \ref{sec:org4bb977e} route
+because the hook is not fired. This is understandable that when I'm
+changing this file, it may render a broken config, thus the hook and
+all others can be in a comprised state when you start emacs.
+
+\subsection{recompile all packages}
+\label{sec:org7bb9a16}
+This is the \textbf{RESET} button. This will force-recompile everything in
+\texttt{\textasciitilde{}/.emacs.d/elpa/...} Just run \texttt{M-:} and then enter this:
+
 \begin{verbatim}
 (byte-recompile-directory package-user-dir nil 'force)
 \end{verbatim}
+
 or simply \texttt{C-x C-e} at the end of that line.
 
-\subsection{One-time configure}
-\label{sec:org7e4fe16}
-To preserve the original state of this file when updating the git repos with new config settings, execute the following block once (\texttt{C-c C-c}):
+\textbf{Note} that by setting \texttt{:tangle no}, this piece of code will be included
+into the \texttt{.el} file. So it stays inside this org. Nice.
 
-\begin{verbatim}
-#!/bin/bash
-# Make git ignore the tangled & updated emacs_setup.el
-if [[ -z "$(which git)" ]]; then
-  echo "You will need 'git' to be installed !"
-  exit 1
-fi
-if  [[ -z "$(which emacs)" ]]; then
-  echo "You might need 'emacs' for this to be useful !"
-  exit 1
-fi
+\section{initialize emacs}
+\label{sec:org88e1d04}
 
-GIT_ROOT=$(dirname $0)
-(cd ${GIT_ROOT} && git update-index --skip-worktree emacs_setup.el)
+\subsection{info header}
+\label{sec:org7070636}
 
-# Maybe this is a new install, .emacs does not exist
-test -e ~/.emacs || touch ~/.emacs
+Just to add a little information in the tangled file so you don't
+\textbf{manually} mess with the generated \texttt{.el} file.
 
-# Initial tangle of files.
-emacs --batch --load ${GIT_ROOT}/emacs_setup.el
-
-# Add the load-file as the first thing in the user's ~/.emacs
-# If not yet added.
-declare lines=$(grep ';; dot_emacs.el' ~/.emacs | wc -l)
-if (( lines < 1 )); then
-  echo "Added loading the config in your ~/.emacs"
-  echo ";; dot_emacs.el" > ~/.emacs.new
-  cat ${GIT_ROOT}/dot_emacs.el >> ~/.emacs.new
-  cat ~/.emacs >> ~/.emacs.new
-  mv ~/.emacs.new ~/.emacs
-else
-  echo "Config in your ~/.emacs already set up!"
-fi
-
-# Install system dependencies
-echo "Installing dependencies"
-bash ${GIT_ROOT}/install_deps.sh
-
-echo "Cleanup"
-rm ${GIT_ROOT}/dot_emacs.el
-rm ${GIT_ROOT}/install_deps.sh
-\end{verbatim}
-
-This script is then used to install the needed packages on the system.
-\begin{verbatim}
-#!/bin/bash
-
-# Trick to make it work on Termux
-which "ls" || pkg install debianutils
-
-# This is a bit of heuristics to find out what the install system is
-# They are attempted in this order, put the least likely first.
-declare -a PKG_MGRS=("pkg" "brew" "apt-get")
-
-PKG_PREFIX_apt_get="sudo"
-
-for pkg in "${PKG_MGRS[@]}"; do
-    if [[ -x "$(which ${pkg})" ]]; then
-        INSTALLER="${pkg}"
-        break
-    fi
-done
-if [[ -z "${INSTALLER}" ]]; then
-    echo "Did not find a suitable installer (tried ${PKG_MGRS[@]})"
-    exit 1
-fi
-
-# This is the function to call to install anything. It can optionally
-# check for a binary and avoid installing if it's found.  install_pkg
-# [-x <binary>] <package>
-function install_pkg() {
-    if [[ "$1" == "-x" ]]; then
-        local binary="$(which $2)"
-        if [[ -n "${binary}" && -x "${binary}" ]]; then
-            echo "Found $2 (${binary}), nothing to install for $3."
-            return
-        fi
-        shift 2
-    fi
-
-    local token=$(echo -n ${INSTALLER} | tr -c '0-9a-zA-Z_' '_')
-    local prefix_var="PKG_PREFIX_${token}"
-
-    echo "Trying: ${INSTALLER} install $*"
-    ${!prefix_var} $(which ${INSTALLER}) install "$@"
-}
-\end{verbatim}
-
-\section{Initialize Emacs}
-\label{sec:org4b8b45a}
-This section sets up Emacs so it can tangle the config, find \texttt{use-package}, and find the ELPA repositories where to get the new packes from.
-\subsection{Info header}
-\label{sec:org33d6f8e}
-Just to add a little information in the tangled file.
 \begin{verbatim}
 ;; ===== this file was auto-tangled, only edit the emacs_setup.org =====
 \end{verbatim}
 
 \subsection{melpa}
-\label{sec:org06a58ef}
+\label{sec:orgf961fcc}
+
 Make sure we have the package system initialized before we load anything.
+
 \begin{verbatim}
 (require 'package)
 (when (< emacs-major-version 27)
@@ -221,6 +211,7 @@ Make sure we have the package system initialized before we load anything.
 \end{verbatim}
 
 Adding my choice of packages repositories.
+
 \#+NAME melpa-setup
 \begin{verbatim}
 (setq package-archives '(("org" . "https://orgmode.org/elpa/")
@@ -230,11 +221,18 @@ Adding my choice of packages repositories.
                          ; ("marmalade" . "https://marmalade-repo.org/packages/")
                         ))
 \end{verbatim}
+
 \subsection{use-package}
-\label{sec:org80b4982}
-I use \texttt{use-package} for most configuration, and that needs to be at the top of the file.  \texttt{use-package} verifies the presence of the requested package, otherwise installs it, and presents convenient sections for configs of variables, key bindings etc. that happen only if the package is actually loaded.
+\label{sec:orgfc8a1eb}
+
+I use \texttt{use-package} for most configuration, and that needs to be at the
+top of the file.  \texttt{use-package} verifies the presence of the requested
+package, otherwise installs it, and presents convenient sections for
+configs of variables, key bindings etc. that happen only if the
+package is actually loaded.
 
 First, make sure it gets installed if it is not there yet.
+
 \begin{verbatim}
 ;; make sure use-package is installed
 (unless (package-installed-p 'use-package)
@@ -246,64 +244,109 @@ First, make sure it gets installed if it is not there yet.
 \begin{verbatim}
 (eval-when-compile (require 'use-package))
 \end{verbatim}
-\subsection{tangle-this-config}
-\label{sec:org6715b1e}
-I set this up to tangle the init org-mode file into the actual Emacs init file as soon as I save it.
+
+\subsection{tangle this config}
+\label{sec:org7ffb906}
+\subsubsection{manual tangle}
+\label{sec:org4bb977e}
+
+I have setup auto tangle in the header as \texttt{:tangle yes}. So upon save,
+this org file will be tangled into an \texttt{.el} file, and that is the file
+emacs should load.
+
+Alternatively, use the \texttt{C-c C-v t} [org-babel-tangle] to do this
+manually.
+
+\subsubsection{auto tangle}
+\label{sec:org242c211}
+
+I set this up to tangle the init org-mode file into the actual Emacs
+init file as soon as I save it.
+
 \begin{verbatim}
 (defun tangle-init ()
-  "If the current buffer is 'init.org' the code-blocks are
-tangled, and the tangled file is compiled."
+  "If the current buffer is 'init.org' the code-blocks are tangled,
+and the tangled file is compiled."
   (when (equal (buffer-file-name)
-               (expand-file-name "~/Emacs/emacs_setup.org"))
+               (expand-file-name "~/Emacs/fengxia.org"))
     ;; Avoid running hooks when tangling.
     (let ((prog-mode-hook nil))
       (org-babel-tangle)
-      (byte-compile-file "~/Emacs/emacs_setup.el"))))
+      (byte-compile-file "~/Emacs/fengxia.el"))))
 
+;; auto-tangle hook
 (add-hook 'after-save-hook 'tangle-init)
 \end{verbatim}
-\section{Personal initialization}
-\label{sec:org26342f2}
-\subsection{Clear \texttt{C-c f} so I can use it as a prefix}
-\label{sec:org3b3a635}
-Remove \texttt{C-c f} that I want to use for \textbf{me} personally as a prefix.
+
+\section{base packages}
+\label{sec:org1075415}
+
+There are some packages you'd better load prior to everything else, so
+that when other packages are being configured, they are already
+available. For example, the .
+
+\subsection{all-the-icons}
+\label{sec:orgf73e607}
+
+Want fancy \href{https://github.com/domtronn/all-the-icons.el\#installation}{icons}:
 \begin{verbatim}
-(global-set-key (kbd "C-c f") nil)
+(use-package all-the-icons
+  :ensure)
 \end{verbatim}
 
-\section{Helper functions}
-\label{sec:org592ef9d}
-\subsection{add-hook-run-once}
-\label{sec:org0127b62}
-Use instead of add-hook to run it a single time.
-\href{https://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once}{found here}
+You would have to run \texttt{M-x all-the-icons-install-fonts=} manually at
+least once to install fonts to your system.
+
+\subsection{rainbow-mode}
+\label{sec:orgd9a25c9}
+
+Colorize color names and codes in the correct color.
+
 \begin{verbatim}
-(defmacro add-hook-run-once (hook function &optional append local)
-  "Like add-hook, but remove the hook after it is called"
-  (let ((sym (make-symbol "#once")))
-    `(progn
-       (defun ,sym ()
-         (remove-hook ,hook ',sym ,local)
-         (funcall ,function))
-       (add-hook ,hook ',sym ,append ,local))))
+(use-package rainbow-mode
+  :ensure t
+  :delight)
 \end{verbatim}
-\section{Environment}
-\label{sec:org45c7b6e}
-\subsection{Browser default}
-\label{sec:org0845682}
+\subsection{Hydra}
+\label{sec:org19b8c05}
 \begin{verbatim}
-(setq browse-url-generic-program (executable-find "google-chrome")
-  browse-url-browser-function 'browse-url-generic)
+(use-package hydra
+  :ensure t)
 \end{verbatim}
-\subsection{Setup server}
-\label{sec:org2ece2bb}
-Start the background server, so we can use emacsclient.
+\subsection{whichkey}
+\label{sec:org3eae559}
+
+Give me a hint when I'm entering a keybinding:
 \begin{verbatim}
-(server-start)
+(use-package which-key
+  :ensure
+  :config
+  (which-key-setup-side-window-right))
+(which-key-mode)
 \end{verbatim}
-\subsection{UTF-8}
-\label{sec:orgcbb2205}
-Make Emacs request UTF-8 first when pasting stuff.
+\section{global stuff}
+\label{sec:org3d53629}
+
+Some global settings such as line number. Well, just about everything
+of emacs are global in a sense, say, a package, will affect the look
+and behavior when loaded. Even though the mode could be refined to be
+loaded only for some file pattern, but hey, the fun is about loading
+these funky modes, and with them, a million funky keybinding combos to
+remember.
+
+So here, just some obvious value settings. If I find some to be more
+topic specific, I will move them into that topic's section instead.
+
+\subsection{by packages}
+\label{sec:org8960995}
+
+These are achieved by using someone's package.
+
+\subsubsection{UTF-8}
+\label{sec:org1e1157b}
+
+Make Emacs request UTF-8 first when pasting stuff
+
 \begin{verbatim}
 (use-package unicode-escape
   :ensure t
@@ -311,9 +354,50 @@ Make Emacs request UTF-8 first when pasting stuff.
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 (set-language-environment "UTF-8")
 \end{verbatim}
-\subsection{Newline (only Unix wanted)}
-\label{sec:org7d0a122}
-This should automatically convert any files with dos or Mac line endings into Unix style ones. Code found \href{https://www.emacswiki.org/emacs/EndOfLineTips}{here}.
+
+\subsubsection{shell env}
+\label{sec:org209f78f}
+
+\begin{verbatim}
+(use-package exec-path-from-shell
+  :ensure
+  :config
+  (exec-path-from-shell-initialize))
+\end{verbatim}
+\subsection{UTF-8 env}
+\label{sec:org9f83a1e}
+\begin{verbatim}
+(prefer-coding-system 'utf-8)
+
+(setenv "LANG" "en_US.UTF-8")
+(setenv "LC_ALL" "en_US.UTF-8")
+(setenv "LC_CTYPE" "en_US.UTF-8")
+\end{verbatim}
+\subsection{browser (default: chrome)}
+\label{sec:org2521a0b}
+
+I like Chrome. Period.
+
+\begin{verbatim}
+(setq browse-url-generic-program (executable-find "google-chrome")
+  browse-url-browser-function 'browse-url-generic)
+\end{verbatim}
+
+\subsection{emacs server (default: off)}
+\label{sec:org44eb461}
+
+Start the background server, so we can use emacsclient.
+
+\begin{verbatim}
+(server-start)
+\end{verbatim}
+
+\subsection{newline (only Unix wanted)}
+\label{sec:org519f433}
+
+This should automatically convert any files with dos or Mac line
+endings into Unix style ones. Code found \href{https://www.emacswiki.org/emacs/EndOfLineTips}{here}.
+
 \begin{verbatim}
 (defun no-junk-please-we-are-unixish ()
   (let ((coding-str (symbol-name buffer-file-coding-system)))
@@ -323,10 +407,1591 @@ This should automatically convert any files with dos or Mac line endings into Un
 (add-hook 'find-file-hook 'no-junk-please-we-are-unixish)
 \end{verbatim}
 
-\subsection{save \& restore buffers}
-\label{sec:orge43c89b}
+\subsection{auto revert}
+\label{sec:org74258a0}
 
-Turn on global:
+Use \texttt{auto-revert}, which reloads a file if it's updated on disk and not
+modified in the buffer.
+
+\begin{verbatim}
+(global-auto-revert-mode 1)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+\end{verbatim}
+
+\subsection{yes-or-no}
+\label{sec:org9ec6b61}
+
+Change all prompts to y or n:
+
+\begin{verbatim}
+(fset 'yes-or-no-p 'y-or-n-p)
+\end{verbatim}
+
+\subsection{hide menu bar \& toolbar}
+\label{sec:org603270b}
+Using i3 is forcing me to use keyboard.
+
+\begin{verbatim}
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(blink-cursor-mode -1)
+\end{verbatim}
+\subsection{alternate key mappings}
+\label{sec:org08dfc72}
+
+Letting one enter chars that are otherwise difficult in e.g. the
+minibuffer.
+
+\begin{verbatim}
+(global-set-key (kbd "C-m") 'newline-and-indent)
+(global-set-key (kbd "C-j") 'newline)
+(global-set-key [delete] 'delete-char)
+(global-set-key [kp-delete] 'delete-char)
+\end{verbatim}
+\subsection{macros (default: off)}
+\label{sec:orgca7034a}
+\begin{verbatim}
+(global-set-key [f3] 'start-kbd-macro)
+(global-set-key [f4] 'end-kbd-macro)
+(global-set-key [f5] 'call-last-kbd-macro)
+\end{verbatim}
+\subsection{linum}
+\label{sec:org09d3715}
+
+For now, I'm doing it globally.
+
+\begin{verbatim}
+(global-display-line-numbers-mode t)
+\end{verbatim}
+
+
+Yes I like having line numbers, but turnning it on globally makes some
+buffers look strange. So let's limit it to the ones that I think
+brings value. \textbf{Note} that the ones I skip are:
+
+\begin{enumerate}
+\item mu4e-compose-mode: when writing email, it's better not to count for line num.
+\item markdown: for the same reason. I'm writing.
+\end{enumerate}
+
+\begin{verbatim}
+(add-hook 'c-mode-common-hook 'display-line-numbers-mode)
+(add-hook 'org-mode-hook 'display-line-numbers-mode)
+(add-hook 'elpy-mode-hook 'display-line-numbers-mode)
+(add-hook 'web-mode-hook 'display-line-numbers-mode)
+(add-hook 'js2-mode-hook 'display-line-numbers-mode)
+(add-hook 'yaml-mode-hook 'display-line-numbers-mode)
+(add-hook 'json-mode-hook 'display-line-numbers-mode)
+(add-hook 'java-mode-hook 'display-line-numbers-mode)
+\end{verbatim}
+
+\section{font, theme}
+\label{sec:orgef6d1b6}
+
+The whole point of using emacs is that I like the user experience, and
+a big part of it is the color and look. There are too many ways to
+tweak it. So I'll try not to run wild on this one. Most are inherited
+from the original post, and I added some while playing with this
+setting. Enjoy \textasciitilde{}\textasciitilde{}
+
+\subsection{by packages}
+\label{sec:org6dc7d1f}
+
+\subsubsection{sublime themes (default: spolsky)}
+\label{sec:org26f6f09}
+
+Loading a theme I like.
+
+\begin{verbatim}
+  (use-package sublime-themes
+    :ensure
+    :config)
+(add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
+\end{verbatim}
+
+\subsubsection{mode lines}
+\label{sec:orgb0e7bed}
+\begin{enumerate}
+\item doom-modeline
+\label{sec:orgd497039}
+\begin{verbatim}
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+\end{verbatim}
+\item remove some modelines
+\label{sec:org5a2394a}
+\begin{verbatim}
+(use-package eldoc
+  :delight)
+\end{verbatim}
+\item nyan-mode
+\label{sec:orgb018e9d}
+\begin{verbatim}
+(use-package nyan-mode
+  :ensure t
+  :bind ("C-M-x n" . 'nyan-mode))
+\end{verbatim}
+\end{enumerate}
+\subsubsection{delight}
+\label{sec:orgf5bc969}
+Package to remove some info from the mode-line for minor-modes.
+\begin{verbatim}
+(use-package delight
+  :ensure t)
+\end{verbatim}
+\subsubsection{multiple-cursors}
+\label{sec:org927c3c6}
+
+Configure the shortcuts for multiple cursors.
+
+\begin{verbatim}
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
+         ("C->" . 'mc/mark-next-like-this)
+         ("C-<" . 'mc/mark-previous-like-this)
+         ("C-c C->" . 'mc/mark-all-like-this)))
+\end{verbatim}
+\subsubsection{dimmer}
+\label{sec:org6bf3dd9}
+
+This will dim the buffer that is not the current. Sort of a visual
+cue. However, I found that it can be ugly depending the theme.
+
+\begin{verbatim}
+(use-package dimmer
+  :ensure
+  :config
+  (dimmer-configure-which-key)
+  (dimmer-configure-helm))
+(dimmer-mode t)
+\end{verbatim}
+
+\subsubsection{highlight indent}
+\label{sec:org7520ccd}
+\begin{verbatim}
+(use-package highlight-indent-guides
+:ensure
+:config
+(setq highlight-indent-guides-method 'character))
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+\end{verbatim}
+\subsection{fontlock}
+\label{sec:org1933d98}
+
+This gets the font coloring switched on for all buffers.
+
+I have encountered a strange case when a mal-formatted Java file
+caused Emacs to crash. After many research, the remedy is to use
+\href{https://github.com/jhipster/prettier-java}{prettier-java} to reformat this file first, then emacs is happy.
+
+\begin{verbatim}
+(global-font-lock-mode t)
+\end{verbatim}
+
+\subsection{faces}
+\label{sec:org007a619}
+
+This makes some of the faces a bit more contrasted.
+
+\begin{verbatim}
+;; faces for general region highlighting zenburn is too low-key.
+(custom-set-faces
+ '(highlight ((t (:background "forest green"))))
+ '(region ((t (:background "forest green")))))
+\end{verbatim}
+
+
+\subsection{be quiet}
+\label{sec:orgd7113e0}
+Remove bell and dings.
+
+\begin{verbatim}
+(setq ring-bell-function
+      '(lambda ()
+         (message "The answer is 42...")))
+(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
+\end{verbatim}
+\subsection{In terminal mode}
+\label{sec:org5046155}
+\begin{verbatim}
+(when (display-graphic-p)
+  (set-background-color "#ffffff")
+  (set-foreground-color "#141312"))
+\end{verbatim}
+\subsection{In X11 mode: mouse and window title}
+\label{sec:orgf4a34b9}
+\begin{verbatim}
+(setq frame-title-format "emacs @ %b - %f")
+(when window-system
+  (mouse-wheel-mode)  ;; enable wheelmouse support by default
+  (set-selection-coding-system 'compound-text-with-extensions))
+\end{verbatim}
+\subsection{dynamic cursor colors}
+\label{sec:org7e05030}
+
+The cursor is displayed in different colors, depending on overwrite or
+insert mode.
+
+\begin{verbatim}
+(setq hcz-set-cursor-color-color "")
+(setq hcz-set-cursor-color-buffer "")
+
+(defun hcz-set-cursor-color-according-to-mode ()
+  "change cursor color according to some minor modes."
+  ;; set-cursor-color is somewhat costly, so we only call it when needed:
+  (let ((color
+         (if buffer-read-only "orange"
+           (if overwrite-mode "red"
+             "green"))))
+    (unless (and
+             (string= color hcz-set-cursor-color-color)
+             (string= (buffer-name) hcz-set-cursor-color-buffer))
+      (set-cursor-color (setq hcz-set-cursor-color-color color))
+      (setq hcz-set-cursor-color-buffer (buffer-name)))))
+
+(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
+\end{verbatim}
+\section{the big Org}
+\label{sec:org2f6f7f4}
+
+Org-mode is, overwhelming! It can do a lot, and it takes a long time
+for me to understand what it does (and what it doesn't). Part of this
+config in org mode is just the way to force myself to learn org mdoe
+and write things in org mode. I haven't yet taken full advantage of
+its TODO capability. Well, one day.
+
+\subsection{init}
+\label{sec:org0a95cb4}
+
+If variable \texttt{org-directory} is not set yet, map it to my home's
+files. You may set this in the \texttt{\textasciitilde{}/.emacs} to another value,
+e.g. \texttt{(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")}
+
+\subsubsection{{\bfseries\sffamily NEXT} This does not seem to work, check out doc about \href{https://stackoverflow.com/questions/3806423/how-can-i-get-a-variables-initial-value-in-elisp}{defcustom}}
+\label{sec:orga277f21}
+\begin{verbatim}
+(use-package org
+  :ensure nil
+  :delight org-mode
+  :config
+  (setq org-startup-indented t)
+  (if (not (boundp 'org-directory))
+      (setq org-directory "~/org"))
+  (add-hook 'org-mode-hook #'(lambda ()
+                               (visual-line-mode)
+                               (org-indent-mode))))
+\end{verbatim}
+
+\subsection{others}
+\label{sec:orgd8f99fa}
+
+Don't know what they belong to. Just stuck them here. There are some functions used by the following code. So unfortunately this section must comes in early.
+
+\subsubsection{snippets found online}
+\label{sec:orgf5a30cb}
+
+Some helper snippets found online.
+
+\begin{enumerate}
+\item Open remote org dir
+\label{sec:org0e098f5}
+
+In your \texttt{.emacs} just add this to configure the location:
+
+\begin{verbatim}
+(setq remote-org-directory "/ssh:fleury@my.hostname.com:OrgFiles")
+\end{verbatim}
+
+Then you can use the keyboard shortcut to open that dir.
+
+\begin{verbatim}
+(defcustom remote-org-directory "~/OrgFiles"
+  "Location of remove OrgFile directory, should you have one."
+  :type 'string
+  :group 'paf)
+(defun paf/open-remote-org-directory ()
+  (interactive)
+  (find-file remote-org-directory))
+
+(global-set-key (kbd "C-M-x r o") 'paf/open-remote-org-directory)
+\end{verbatim}
+
+\item Org-relative file function
+\label{sec:org9bcc637}
+
+\begin{verbatim}
+(defun org-relative-file (filename)
+  "Compute an expanded absolute file path for org files"
+  (expand-file-name filename org-directory))
+\end{verbatim}
+\item Adjust tags on the right
+\label{sec:org2108d83}
+
+Dynamically adjust tag position \href{https://orgmode.org/worg/org-hacks.html\#org0560357}{source on worg}
+
+\begin{verbatim}
+(defun ba/org-adjust-tags-column-reset-tags ()
+  "In org-mode buffers it will reset tag position according to
+`org-tags-column'."
+  (when (and
+         (not (string= (buffer-name) "*Remember*"))
+         (eql major-mode 'org-mode))
+    (let ((b-m-p (buffer-modified-p)))
+      (condition-case nil
+          (save-excursion
+            (goto-char (point-min))
+            (command-execute 'outline-next-visible-heading)
+            ;; disable (message) that org-set-tags generates
+            (cl-letf (((symbol-function 'message) #'format))
+              (org-set-tags 1 t))
+            (set-buffer-modified-p b-m-p))
+        (error nil)))))
+
+(defun ba/org-adjust-tags-column-now ()
+  "Right-adjust `org-tags-column' value, then reset tag position."
+  (set (make-local-variable 'org-tags-column)
+       (- (- (window-width) (length org-ellipsis))))
+  (ba/org-adjust-tags-column-reset-tags))
+
+(defun ba/org-adjust-tags-column-maybe ()
+  "If `ba/org-adjust-tags-column' is set to non-nil, adjust tags."
+  (when ba/org-adjust-tags-column
+    (ba/org-adjust-tags-column-now)))
+
+(defun ba/org-adjust-tags-column-before-save ()
+  "Tags need to be left-adjusted when saving."
+  (when ba/org-adjust-tags-column
+     (setq org-tags-column 1)
+     (ba/org-adjust-tags-column-reset-tags)))
+
+(defun ba/org-adjust-tags-column-after-save ()
+  "Revert left-adjusted tag position done by before-save hook."
+  (ba/org-adjust-tags-column-maybe)
+  (set-buffer-modified-p nil))
+
+;; between invoking org-refile and displaying the prompt (which
+;; triggers window-configuration-change-hook) tags might adjust,
+;; which invalidates the org-refile cache
+(defadvice org-refile (around org-refile-disable-adjust-tags)
+  "Disable dynamically adjusting tags"
+  (let ((ba/org-adjust-tags-column nil))
+    ad-do-it))
+(ad-activate 'org-refile)
+
+;; Now set it up
+(setq ba/org-adjust-tags-column t)
+;; automatically align tags on right-hand side
+;; TODO(fleury): Does not seem to work as of 2017/12/18
+;; Seems to work again 2018/11/01
+(add-hook 'window-configuration-change-hook
+          'ba/org-adjust-tags-column-maybe)
+(add-hook 'before-save-hook 'ba/org-adjust-tags-column-before-save)
+(add-hook 'after-save-hook 'ba/org-adjust-tags-column-after-save)
+(add-hook 'org-agenda-mode-hook (lambda ()
+                                  (setq org-agenda-tags-column (- (window-width)))))
+\end{verbatim}
+
+\begin{enumerate}
+\item {\bfseries\sffamily TODO} Update \texttt{org-set-tags-to}
+\label{sec:orgc9f054b}
+\href{https://orgmode.org/worg/doc.html\#org-set-tags-to}{\texttt{org-set-tags-to}} is gone, and \texttt{org-set-tags} with > 1 args is not working.
+Not sure what to replace it with though\ldots{}
+\end{enumerate}
+
+\item Preserve structure in archives
+\label{sec:orgee0ab90}
+
+Make sure archiving preserves the same tree structure, including when
+archiving subtrees.  \href{https://orgmode.org/worg/org-hacks.html\#org4265b4c}{source on worg}
+
+\begin{verbatim}
+(defun my-org-inherited-no-file-tags ()
+  (let ((tags (org-entry-get nil "ALLTAGS" 'selective))
+        (ltags (org-entry-get nil "TAGS")))
+    (mapc (lambda (tag)
+            (setq tags
+                  (replace-regexp-in-string (concat tag ":") "" tags)))
+          (append org-file-tags (when ltags (split-string ltags ":" t))))
+    (if (string= ":" tags) nil tags)))
+\end{verbatim}
+
+This used to work, but \texttt{org-extract-archive-file} is no longer defined.
+
+\begin{verbatim}
+(defadvice org-archive-subtree
+    (around my-org-archive-subtree-low-level activate)
+  (let ((tags (my-org-inherited-no-file-tags))
+        (org-archive-location
+         (if (save-excursion (org-back-to-heading)
+                             (> (org-outline-level) 1))
+             (concat (car (split-string org-archive-location "::"))
+                     "::* "
+                     (car (org-get-outline-path)))
+           org-archive-location)))
+    ad-do-it
+    (with-current-buffer (find-file-noselect (org-extract-archive-file))
+      (save-excursion
+        (while (org-up-heading-safe))
+        (org-set-tags tags)))))
+\end{verbatim}
+\item Properties collector (default: off)
+\label{sec:org8098378}
+
+Collect properties into tables. See documentation in the file.
+
+\begin{verbatim}
+(load-file "~/Emacs/org-collector.el")
+\end{verbatim}
+\item access org file remotely via SSH
+\label{sec:org2a8ff13}
+
+Let's bind this to a key, so I can open remote dirs. I suually put
+this in my \texttt{.emacs} as it is host- and user-specific.
+
+\begin{verbatim}
+(defun paf/open-remote-org-dir ()
+  (interactive)
+  (dired "/ssh:remote.host.com:org"))
+
+(global-set-key (kbd "C-M-x r o") 'paf/open-remote-org-dir)
+\end{verbatim}
+
+\item bash command
+\label{sec:org826d2a2}
+\begin{verbatim}
+(setq org-babel-sh-command "bash")
+\end{verbatim}
+
+\item OrgRoam templates
+\label{sec:orgd7752ba}
+
+\begin{verbatim}
+(setq org-roam-capture-templates
+      `(("m" "Meeting" entry (function org-roam--capture-get-point)
+             "* %?\n%U\n%^{with}\n"
+             :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
+             :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
+             )))
+
+\end{verbatim}
+\end{enumerate}
+\subsubsection{by packages}
+\label{sec:org3a049c8}
+\begin{enumerate}
+\item org-protocol
+\label{sec:org60621f7}
+
+Let other tools use emacs client to interact
+
+\begin{verbatim}
+(require 'org-protocol)
+\end{verbatim}
+
+\item org-roam
+\label{sec:org89906ea}
+My cheat sheet for \texttt{org-roam}
+
+All keys prefixed with \texttt{C-c n}
+
+\begin{center}
+\begin{tabular}{lc}
+\hline
+Function & \texttt{C-c n <key>}\\
+\hline
+Toggle side panel & l\\
+\hline
+Find/create & f\\
+Insert link & i\\
+Capture & c\\
+\hline
+Graph & g\\
+Switch to buffer & b\\
+\hline
+\end{tabular}
+\end{center}
+
+
+\begin{verbatim}
+(use-package org-roam
+  :ensure t
+  :hook (after-init . org-roam-mode)
+  :init (setq org-roam-directory
+              (org-relative-file "OrgRoam"))
+  :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n c" . org-roam-capture)
+               ("C-c n g" . org-roam-graph))
+         :map org-mode-map
+              (("C-c n i" . org-roam-insert))))
+
+(use-package company-org-roam
+  :ensure t
+  :after org-roam)
+\end{verbatim}
+
+EmacSQL will need to get its C-binary compiled, and needs supporting
+tools. Note that 'tcc' for Termux seems not complete enough for the
+job.
+
+\item org-board
+\label{sec:org540eae2}
+Archive entire sites locally with `wget`.
+
+\begin{verbatim}
+(use-package org-board
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c o") org-board-keymap))
+\end{verbatim}
+
+\item iimage (M-I)
+\label{sec:org18af3e8}
+
+Make the display of images a simple key-stroke away.
+
+\begin{verbatim}
+(defun paf/org-toggle-iimage-in-org ()
+  "display images in your org file"
+  (interactive)
+  (if (face-underline-p 'org-link)
+      (set-face-underline 'org-link nil)
+    (set-face-underline 'org-link t))
+  (iimage-mode 'toggle))
+
+(use-package iimage
+  :config
+  (add-to-list 'iimage-mode-image-regex-alist
+               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
+                             "\\)\\]")  1))
+  (add-hook 'org-mode-hook (lambda ()
+                             ;; display images
+                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
+                            )))
+\end{verbatim}
+\end{enumerate}
+
+\subsection{key mappings}
+\label{sec:org47e316d}
+
+\begin{verbatim}
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-iswitchb)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-<up>") 'org-move-subtree-up)
+            (local-set-key (kbd "C-<down>") 'org-move-subtree-down)
+            (local-set-key (kbd "C-c l") 'org-store-link)
+            (local-set-key (kbd "C-c C-l") 'org-insert-link)))
+
+\end{verbatim}
+\subsection{display settings}
+\label{sec:org28630a0}
+Some config for display. Some of these are borrowed from \href{https://zzamboni.org/post/beautifying-org-mode-in-emacs/}{here}:
+
+\begin{verbatim}
+(setq org-hide-leading-stars t)
+(setq org-log-done t)
+(setq org-startup-indented t)
+(setq org-startup-folded t)
+(setq org-ellipsis "...")
+(setq org-hide-emphasis-markers t)
+\end{verbatim}
+
+\subsubsection{org-bullets}
+\label{sec:org96e500a}
+\begin{verbatim}
+(use-package org-bullets
+  :ensure
+  :config)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+\end{verbatim}
+\subsection{writing stuff}
+\label{sec:org4f11a5a}
+
+Part 1, writing stuff such as taking notes.
+
+\subsubsection{by packages}
+\label{sec:org783d09d}
+\begin{enumerate}
+\item Zetteldeft
+\label{sec:org87d1098}
+
+This is a note-taking packages inspired by the principles of the
+\href{https://zettelkasten.de/}{Zettelkasten.}
+
+\begin{verbatim}
+(use-package deft
+  :ensure t)
+(use-package avy
+  :ensure t)
+
+(use-package zetteldeft
+  :ensure t
+  :after (org deft avy)
+
+  :config
+  (setq deft-extensions '("org" "md" "txt"))
+  (setq deft-directory (org-relative-file "Zettelkasten"))
+  (setq deft-recursive t)
+
+  :bind (("C-c z d" . deft)
+         ("C-c z D" . zetteldeft-deft-new-search)
+         ("C-c z R" . deft-refresh)
+         ("C-c z s" . zetteldeft-search-at-point)
+         ("C-c z c" . zetteldeft-search-current-id)
+         ("C-c z f" . zetteldeft-follow-link)
+         ("C-c z F" . zetteldeft-avy-file-search-ace-window)
+         ("C-c z l" . zetteldeft-avy-link-search)
+         ("C-c z t" . zetteldeft-avy-tag-search)
+         ("C-c z T" . zetteldeft-tag-buffer)
+         ("C-c z i" . zetteldeft-find-file-id-insert)
+         ("C-c z I" . zetteldeft-find-file-full-title-insert)
+         ("C-c z o" . zetteldeft-find-file)
+         ("C-c z n" . zetteldeft-new-file)
+         ("C-c z N" . zetteldeft-new-file-and-link)
+         ("C-c z r" . zetteldeft-file-rename))
+)
+\end{verbatim}
+
+\item plant-uml
+\label{sec:org9676ac2}
+
+Tell where PlantUML is to be found. This needs to be downloaded and
+installed separately, see the \href{http://plantuml.com/}{PlantUML website}.
+
+\begin{verbatim}
+(use-package plantuml-mode
+ :ensure t
+ :config
+  (setq plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
+  (setq org-plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
+  ;; Let us edit PlantUML snippets in plantuml-mode within orgmode
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  ;; make it load this language (for export ?)
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+  ;; Enable plantuml-mode for PlantUML files
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
+\end{verbatim}
+\end{enumerate}
+
+\subsubsection{org-link-abbrev}
+\label{sec:org9350970}
+
+This lets one write links as e.g. [ [b:123457] ]
+
+\begin{verbatim}
+(setq org-link-abbrev-alist
+      '(("b" . "http://b/")
+        ("go" . "http://go/")
+        ("cl" . "http://cr/")))
+\end{verbatim}
+\subsection{export}
+\label{sec:org5ac5bec}
+
+Part 2, exporting.
+
+This is big deal. It took me a while to learn org, and even right now
+I still don't know how to use it for schedule management. This feels
+like latex, it's wonderful, but not common among non-org-mode folks.
+
+Add a few formats to the export functionality of org-mode.
+\subsubsection{org-babel}
+\label{sec:orgfaac233}
+
+What kind of code block languages do I need
+
+\begin{verbatim}
+(setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (R . t)
+   (dot . t)
+   (emacs-lisp . t)
+   (gnuplot . t)
+   (python . t)
+   (ledger . t)
+   ;;(sh . t)
+   (latex . t)
+   (shell . t)
+  ))
+\end{verbatim}
+
+\subsubsection{markdown}
+\label{sec:org5724dba}
+\begin{verbatim}
+(use-package ox-md
+  :defer)
+\end{verbatim}
+\subsubsection{beamer}
+\label{sec:org527797a}
+\begin{verbatim}
+(use-package ox-beamer
+  :defer)
+\end{verbatim}
+\subsubsection{org-reveal}
+\label{sec:org6c6b05c}
+
+You need to install \texttt{reveal.js} offline, then specify its path here.
+\begin{verbatim}
+(use-package ox-reveal
+  :ensure t
+  :after (htmlize)
+  :config
+  (setq org-reveal-root (expand-file-name "~/reveal.js")))
+
+(use-package htmlize
+  :ensure t)
+\end{verbatim}
+\subsubsection{odt}
+\label{sec:org2bb1150}
+\begin{verbatim}
+(use-package ox-odt
+  :defer)
+\end{verbatim}
+\subsubsection{taskjuggler}
+\label{sec:org0c2cf98}
+\begin{verbatim}
+(use-package ox-taskjuggler
+  :defer)
+\end{verbatim}
+\subsubsection{confluence}
+\label{sec:org5c9bab8}
+\begin{verbatim}
+(use-package ox-confluence
+  :defer)
+\end{verbatim}
+
+\subsection{managing life (aka. agenda/todo)}
+\label{sec:org43dfb07}
+
+Part 3 of org, managing TODOs.
+
+\subsubsection{by packages}
+\label{sec:org454bc3a}
+\begin{enumerate}
+\item org-super-agenda
+\label{sec:org76c6209}
+
+This enables a more fine-grained filtering of the agenda items.
+
+\begin{verbatim}
+(use-package org-super-agenda
+  :ensure t
+  :config
+  (org-super-agenda-mode t))
+\end{verbatim}
+\item org-clock-convenience
+\label{sec:org3e61d5b}
+\begin{verbatim}
+(use-package org-clock-convenience
+  :ensure t
+  :bind (:map org-agenda-mode-map
+           ("<S-right>" . org-clock-convenience-timestamp-up)
+           ("<S-left>" . org-clock-convenience-timestamp-down)
+           ("[" . org-clock-convenience-fill-gap)
+           ("]" . org-clock-convenience-fill-gap-both)))
+\end{verbatim}
+\item org-habit
+\label{sec:orgf7714fc}
+\begin{verbatim}
+(use-package org-habit
+  :delight
+  :config
+  (setq org-habit-graph-column 38)
+  (setq org-habit-preceding-days 35)
+  (setq org-habit-following-days 10)
+  (setq org-habit-show-habits-only-for-today nil))
+\end{verbatim}
+\item org-secretary
+\label{sec:orgc69d878}
+
+This package is good, but it does not do it simply. I re-modeled it
+somewhat below.
+
+\begin{verbatim}
+(use-package org-secretary
+  :ensure org-plus-contrib
+  :config
+  (setq org-sec-me "feng")
+  (setq org-tag-alist '(("PRJ" . ?p)
+                        ("DESIGNDOC" . ?D)
+                        ("Milestone" . ?m)
+                        ("DESK" . ?d)
+                        ("HOME" . ?h)
+                        ("VC" . ?v))))
+\end{verbatim}
+
+This is my version of the org-secretary
+\begin{verbatim}
+(use-package paf-secretary
+  :load-path "~/Emacs"
+  :bind (("\C-cw" . paf-sec-set-with)
+         ("\C-cW" . paf-sec-set-where)
+         ("\C-cj" . paf-sec-tag-entry))
+  :config
+  (setq paf-sec-me "paf")
+  (setq org-tag-alist '(("PRJ" . ?p)
+                        ("DESIGNDOC" . ?D)
+                        ("Milestone" . ?m)
+                        ("DESK" . ?d)
+                        ("HOME" . ?h)
+                        ("VC" . ?v))))
+\end{verbatim}
+\item org-duration
+\label{sec:org8cdbf63}
+\begin{verbatim}
+(use-package org-duration
+  :config
+  (setq org-duration-units
+        `(("min" . 1)
+          ("h" . 60)
+          ("d" . ,(* 60 8))
+          ("w" . ,(* 60 8 5))
+          ("m" . ,(* 60 8 5 4))
+          ("y" . ,(* 60 8 5 4 10)))
+        )
+  (org-duration-set-regexps))
+\end{verbatim}
+\end{enumerate}
+\subsubsection{org TODO keywords}
+\label{sec:orgd8f0981}
+
+\begin{verbatim}
+(setq org-todo-keywords
+      '((sequence "TODO(t!)" "NEXT(n!)" "STARTED(s!)" "WAITING(w!)" "AI(a!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
+        (sequence "APPLIED(A!)" "WAITING(w!)" "ACCEPTED" "|" "REJECTED" "PUBLISHED")
+        (sequence "TASK(m!)" "ACTIVE" "|" "DONE(d!)" "CANCELLED(C@)" )))
+
+(setq org-tags-exclude-from-inheritance '("PRJ" "REGULAR")
+      org-use-property-inheritance '("PRIORITY")
+      org-stuck-projects '("+PRJ/-DONE-CANCELLED"
+                           ;; it is considered stuck if there is no next action
+                           (;"TODO"
+                            "NEXT" "STARTED" "TASK") ()))
+
+(setq org-todo-keyword-faces
+      '(
+        ("TODO" . (:foreground "purple" :weight bold))
+        ("TASK" . (:foreground "steelblue" :weight bold))
+        ("NEXT" . (:foreground "red" :weight bold))
+        ("STARTED" . (:foreground "green" :weight bold))
+        ("WAITING" . (:foreground "orange" :weight bold))
+        ("FLAG_GATED" . (:foreground "orange" :weight bold))
+        ("SOMEDAY" . (:foreground "steelblue" :weight bold))
+        ("MAYBE" . (:foreground "steelblue" :weight bold))
+        ("AI" . (:foreground "red" :weight bold))
+        ("NEW" . (:foreground "orange" :weight bold))
+        ("RUNNING" . (:foreground "orange" :weight bold))
+        ("WORKED" . (:foreground "green" :weight bold))
+        ("FAILED" . (:foreground "red" :weight bold))
+        ("REFILED" . (:foreground "gray"))
+        ;; For publications
+        ("APPLIED" . (:foreground "orange" :weight bold))
+        ("ACCEPTED" . (:foreground "orange" :weight bold))
+        ("REJECTED" . (:foreground "red" :weight bold))
+        ("PUBLISHED" . (:foreground "green" :weight bold))
+        ;; Other stuff
+        ("ACTIVE" . (:foreground "darkgreen" :weight bold))
+        ))
+\end{verbatim}
+
+\subsubsection{capture \& refile}
+\label{sec:orgbd59a98}
+
+Capture and refile stuff, with some templates that I think are useful.
+
+Very nice post on how to get capture templats from a file: \href{https://joshrollinswrites.com/help-desk-head-desk/org-capture-in-files/}{Org-capture
+in Files}.
+
+\begin{verbatim}
+(setq org-default-notes-file (org-relative-file "Inbox.org"))
+
+(setq org-capture-templates
+      `(("t" "Task"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Tasks")
+         "* TODO %?\n%U\n\n%x"
+         :clock-resume t)
+        ;;
+        ("i" "Idea"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Ideas")
+         "* SOMEDAY %?\n%U\n\n%x"
+         :clock-resume t)
+        ;;
+        ("m" "Meeting"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         "* %?  :MTG:\n%U\n%^{with}p"
+         :clock-in t
+         :clock-resume t)
+        ;;
+        ("s" "Stand-up"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         "* Stand-up  :MTG:\n%U\n\n%?"
+         :clock-in t
+         :clock-resume t)
+        ;;
+        ("1" "1:1"
+         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
+         :clock-in t
+         :clock-resume t)
+        ;;
+        ("p" "Talking Point"
+         entry (file+headline ,(org-relative-file "refile.org") "Talking Points")
+         "* %?  :TALK:\n%U\n%^{dowith}p"
+         :clock-keep t)
+        ;;
+        ("j" "Journal"
+         entry (file+olp+datetree ,(org-relative-file "journal.org"))
+         "* %?\n%U"
+         :clock-in t
+         :clock-resume t
+         :kill-buffer t)))
+
+;; show up to 2 levels for refile targets, in all agenda files
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
+(setq org-log-refile t)  ;; will add timestamp when refiled.
+
+;; from: http://doc.norang.ca/org-mode.html
+;; Exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+(setq org-refile-target-verify-function 'bh/verify-refile-target)
+\end{verbatim}
+\subsubsection{task tracking}
+\label{sec:org303b0f9}
+
+Track task dependencies, and dim them in the agenda.
+
+\begin{verbatim}
+(setq org-enforce-todo-dependencies t)
+(setq org-agenda-dim-blocked-tasks 'invisible)
+\end{verbatim}
+\subsubsection{effort \& columns mode}
+\label{sec:org64e6d54}
+
+\begin{verbatim}
+(setq org-global-properties
+      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 4:00 8:00 16:00")))
+(setq org-columns-default-format
+      "%TODO %30ITEM %3PRIORITY %6Effort{:} %10DEADLINE")
+\end{verbatim}
+
+\subsubsection{shortcut to open first agenda file}
+\label{sec:org9b3118a}
+
+F12 open the first agenda file
+
+\begin{verbatim}
+(defun org-get-first-agenda-file ()
+  (interactive)
+  (find-file (elt org-agenda-files 0)))
+(global-set-key [f12] 'org-get-first-agenda-file)
+; F12 on Mac OSX displays the dashboard....
+(global-set-key [C-f12] 'org-get-first-agenda-file)
+\end{verbatim}
+
+\subsubsection{org-agenda}
+\label{sec:orge0fe785}
+\begin{enumerate}
+\item views
+\label{sec:org885ad2a}
+\begin{verbatim}
+(setq org-agenda-custom-commands
+      '(("t" "Hot Today" ((agenda "" ((org-agenda-span 'day)))
+                          (tags-todo "-with={.+}/WAITING")
+                          (tags-todo "-with={.+}+TODO=\"STARTED\"")
+                          (tags-todo "/NEXT")))
+        ("T" "Team Today" ((agenda "" ((org-agenda-span 'day)))
+                           (tags-todo "with={.+}"
+                                    ((org-super-agenda-groups
+                                      '((:auto-property "with"))))
+                                    )))
+        ("r" "Recurring" ((tags "REGULAR")
+                          (tags-todo "/WAITING")
+                          (tags-todo "TODO=\"STARTED\"")
+                          (tags-todo "/NEXT")))
+        ("n" "Agenda and all TODO's" ((agenda "")
+                                      (alltodo "")))
+        ("N" "Next actions" tags-todo "-dowith={.+}/!-TASK-TODO"
+         ((org-agenda-todo-ignore-scheduled t)))
+        ("h" "Work todos" tags-todo "-dowith={.+}/!-TASK"
+         ((org-agenda-todo-ignore-scheduled t)))
+        ("H" "All work todos" tags-todo "-personal/!-TASK-CANCELLED"
+         ((org-agenda-todo-ignore-scheduled nil)))
+        ("A" "Work todos with doat or dowith" tags-todo
+         "dowith={.+}/!-TASK"
+         ((org-agenda-todo-ignore-scheduled nil)))
+
+        ("p" "Tasks with current WITH and WHERE"
+         ((tags-todo (paf-sec-replace-with-where "with={$WITH}" ".+")
+                     ((org-agenda-overriding-header
+                       (paf-sec-replace-with-where "Tasks with $WITH in $WHERE" "anyone" "any place"))
+                      (org-super-agenda-groups
+                       '((:name "" :pred paf-sec-limit-to-with-where)
+                         (:discard (:anything t)))))
+                     )))
+        ("j" "TODO dowith and TASK with"
+         ((org-sec-with-view "TODO dowith")
+          (org-sec-stuck-with-view "TALK with")
+          (org-sec-where-view "TODO doat")
+          (org-sec-assigned-with-view "TASK with")
+          (org-sec-stuck-with-view "STUCK with")
+          (todo "STARTED")))
+        ("J" "Interactive TODO dowith and TASK with"
+         ((org-sec-who-view "TODO dowith")))))
+
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 2)
+\end{verbatim}
+\item delight
+\label{sec:org0d5ea2c}
+\begin{verbatim}
+(delight 'org-agenda-mode)
+\end{verbatim}
+\item colors and faces
+\label{sec:orgf1b1a27}
+
+Make the calendar day info a bit more visible and contrasted.
+
+\begin{verbatim}
+;; Faces to make the calendar more colorful.
+(custom-set-faces
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
+ '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
+ '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold)))))
+\end{verbatim}
+\item now marker
+\label{sec:org49b98e7}
+
+A more visible current-time marker in the agenda
+
+\begin{verbatim}
+(setq org-agenda-current-time-string ">>>>>>>>>> NOW <<<<<<<<<<")
+\end{verbatim}
+\item auto-refresh
+\label{sec:orgf3a25e9}
+
+\begin{verbatim}
+;; will refresh it only if already visible
+(run-at-time nil 180 'update-agenda-if-visible)
+;;(add-hook 'org-mode-hook
+;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
+\end{verbatim}
+
+This would open the agenda if any org file was opened. In the end, I
+don't like this feature, so it is disabled by not tangling it.
+
+\begin{verbatim}
+;; Make this happen only if we open an org file.
+(add-hook 'org-mode-hook
+          (lambda () (run-with-idle-timer 600 t 'jump-to-org-agenda)))
+\end{verbatim}
+\item auto-save org files when idle
+\label{sec:org5bbf496}
+
+This will save them regularly when the idle for more than a minute.
+
+\begin{verbatim}
+(add-hook 'org-mode-hook
+          (lambda () (run-with-idle-timer 600 t 'org-save-all-org-buffers)))
+\end{verbatim}
+\item export
+\label{sec:orge6c8f30}
+
+That's the export function to update the agenda view.
+
+\begin{verbatim}
+(setq org-agenda-exporter-settings
+      '((ps-number-of-columns 2)
+        (ps-portrait-mode t)
+        (org-agenda-add-entry-text-maxlines 5)
+        (htmlize-output-type 'font)))
+
+(defun dmg-org-update-agenda-file (&optional force)
+  (interactive)
+  (save-excursion
+    (save-window-excursion
+      (let ((file "~/www/agenda/agenda.html"))
+        (org-agenda-list)
+        (org-agenda-write file)))))
+\end{verbatim}
+\item Auto-Refresh Agenda
+\label{sec:orgc950ff3}
+
+Refresh org-mode agenda regularly.  \href{https://orgmode.org/worg/org-hacks.html\#orgab827a7}{source on worg} There are two
+functions that supposedly do the same.
+
+\begin{verbatim}
+(defun kiwon/org-agenda-redo-in-other-window ()
+  "Call org-agenda-redo function even in the non-agenda buffer."
+  (interactive)
+  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+    (when agenda-window
+      (with-selected-window agenda-window (org-agenda-redo)))))
+
+(defun update-agenda-if-visible ()
+  (interactive)
+  (let ((buf (get-buffer "*Org Agenda*"))
+        wind)
+    (if buf
+        (org-agenda-redo))))
+\end{verbatim}
+\item Display Agenda when idle
+\label{sec:org2c53479}
+
+Show the agenda when emacs left idle.  \href{https://orgmode.org/worg/org-hacks.html\#orgaea636d}{source on worg}
+
+\begin{verbatim}
+(defun jump-to-org-agenda ()
+  (interactive)
+  (let ((buf (get-buffer "*Org Agenda*"))
+        wind)
+    (if buf
+        (if (setq wind (get-buffer-window buf))
+            (select-window wind)
+          (if (called-interactively-p 'any)
+              (progn
+                (select-window (display-buffer buf t t))
+                (org-fit-window-to-buffer)
+                (org-agenda-redo)
+                )
+            (with-selected-window (display-buffer buf)
+              (org-fit-window-to-buffer)
+              ;;(org-agenda-redo)
+              )))
+      (call-interactively 'org-agenda-list)))
+  ;;(let ((buf (get-buffer "*Calendar*")))
+  ;;  (unless (get-buffer-window buf)
+  ;;    (org-agenda-goto-calendar)))
+  )
+\end{verbatim}
+\item Display location in agenda
+\label{sec:org08a2277}
+
+From some help on \href{https://emacs.stackexchange.com/questions/26249/customize-text-after-task-in-custom-org-agenda-view}{this page} I think this could work:
+
+\begin{verbatim}
+(defun paf/org-agenda-get-location()
+  "Gets the value of the LOCATION property"
+  (let ((loc (org-entry-get (point) "LOCATION")))
+    (if (> (length loc) 0)
+        loc
+      "")))
+\end{verbatim}
+
+Also, to set this after org-mode has loaded (\href{https://emacs.stackexchange.com/questions/19091/how-to-set-org-agenda-prefix-format-before-org-agenda-starts}{see here}):
+\begin{verbatim}
+(with-eval-after-load 'org-agenda
+  (add-to-list 'org-agenda-prefix-format
+               '(agenda . "  %-12:c%?-12t %(paf/org-agenda-get-location)% s"))
+\end{verbatim}
+\end{enumerate}
+\subsubsection{org-clock properties}
+\label{sec:orgf17ee6b}
+clock stuff into a drawer.
+\begin{verbatim}
+(setq org-clock-into-drawer t)
+(setq org-log-into-drawer t)
+(setq org-clock-int-drawer "CLOCK")
+\end{verbatim}
+\subsection{LAST step: reload org}
+\label{sec:org21cccce}
+
+Ran into a \href{https://github.com/seagle0128/.emacs.d/issues/129}{strange error}, and reloading org at the end is the
+solution:
+
+\begin{verbatim}
+(org-reload)
+\end{verbatim}
+\section{editing}
+\label{sec:org580d36a}
+
+The heart of editor is, well, editing. Many things are determining the
+experience. Here are the ones I use to make editing quicker, easier,
+less typing essentially.
+
+\subsection{by packages}
+\label{sec:org0439641}
+\subsubsection{auto company}
+\label{sec:orgda647f0}
+
+A good auto completion thing. See details \href{https://company-mode.github.io/}{here}.
+
+\begin{verbatim}
+(use-package company
+  :ensure t
+  :config)
+(add-hook 'prog-mode-hook 'global-company-mode)
+\end{verbatim}
+\subsubsection{undo tree}
+\label{sec:orge65322a}
+
+More \href{https://elpa.gnu.org/packages/undo-tree.html}{undos}?
+
+\begin{verbatim}
+(use-package undo-tree
+  :ensure t
+  :config
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-diff t))
+(global-undo-tree-mode)
+\end{verbatim}
+\subsubsection{search \& jump}
+\label{sec:orgc21af8c}
+\begin{enumerate}
+\item ag
+\label{sec:org314b1b1}
+Use the silversearcher.
+\begin{verbatim}
+(use-package ag
+  :ensure
+  :config
+  (setq ag-highlight-search t)
+  (setq ag-reuse-buffers t))
+\end{verbatim}
+
+Follow the \href{https://github.com/emacsorphanage/helm-ag}{helm-ag manual}, "Insert thing at point as default search
+pattern, if this value is non nil":
+
+\begin{verbatim}
+(setq helm-ag-insert-at-point 'symbol)
+(setq helm-ag-use-temp-buffer t)
+\end{verbatim}
+\item dumb-jump
+\label{sec:org5159961}
+
+First, let's make sure we have \texttt{xref} because we will hook into the
+xref backend:
+
+\begin{verbatim}
+(use-package xref
+  :ensure
+  :config)
+\end{verbatim}
+
+Now install \texttt{dumb-jump}:
+
+\begin{verbatim}
+(use-package dumb-jump
+  :ensure
+  :config
+  (setq dumb-jump-prefer-searcher 'ag))
+\end{verbatim}
+
+Last, hook to \texttt{xref} to use \texttt{M.} bind:
+
+\begin{verbatim}
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+\end{verbatim}
+\item ripgrep
+\label{sec:org5fd2db7}
+This enables searching recursively in projects.
+
+\begin{verbatim}
+(use-package ripgrep
+  :ensure t)
+(use-package projectile-ripgrep
+  :ensure t
+  :requires (ripgrep projectile))
+\end{verbatim}
+
+\item ace-jump-mode
+\label{sec:orgaeae224}
+
+Let's one jump around text
+
+\begin{verbatim}
+(use-package ace-jump-mode
+  :ensure t
+  :bind (("C-c C-SPC" . 'ace-jump-mode)
+         ("C-c C-DEL" . 'ace-jump-mode-pop-mark)))
+\end{verbatim}
+\end{enumerate}
+
+\subsubsection{max 80 cols wide}
+\label{sec:org4e2cdec}
+\begin{verbatim}
+(use-package column-enforce-mode
+  :ensure t
+  :config
+  (setq column-enforce-column 80)
+  :bind ("C-c m" . 'column-enforce-mode))
+;; column-enforce-face
+\end{verbatim}
+\subsubsection{highlight whitespace \& lines > 80 long}
+\label{sec:org0bf5c0c}
+Highlight unnecessary chars and lines over 80.
+\begin{verbatim}
+(use-package whitespace
+  :ensure
+  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
+  :config (global-whitespace-mode t))
+\end{verbatim}
+
+\subsubsection{browse kill ring}
+\label{sec:orgb035017}
+
+Don't use \texttt{popup-kill-ring} as it's dead. Use the \href{https://github.com/browse-kill-ring/browse-kill-ring}{browse-kill-ring}:
+
+\begin{verbatim}
+(use-package browse-kill-ring
+  :ensure
+  :config
+  (setq browse-kill-ring-highlight-current-entry t)
+  (setq browse-kill-ring-highlight-inserted-item t))
+
+(browse-kill-ring-default-keybindings)
+\end{verbatim}
+\subsubsection{parenthesis}
+\label{sec:org9b165b3}
+
+Borrowing from old init.el:
+
+\begin{verbatim}
+(show-paren-mode t)
+(set-face-attribute 'region nil
+                    :background "#666"
+                    :foreground "#d52349")
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-foreground 'show-paren-match "#d52349")
+(set-face-attribute 'show-paren-match nil
+                    :weight 'extra-bold)
+\end{verbatim}
+
+\begin{enumerate}
+\item show matching delimiters (default: on)
+\label{sec:orgad281b3}
+
+Use \href{https://github.com/Fanael/rainbow-delimiters}{rainbow-delimiter}. Do not set the
+\texttt{rainbow-delimiters-mismatched-face} because it will raise alarm all all
+the following brackets when there is a mismatch, like a xmas lights,
+and it's distracting to find out the actual mismatch!
+
+\begin{verbatim}
+(use-package rainbow-delimiters
+  :ensure
+  :config
+  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                      :background "GhostWhite"))
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+\end{verbatim}
+\item type using smartparens (default: on)
+\label{sec:orgc5a38e6}
+
+Well, who wants to type parenthesis.
+
+\begin{verbatim}
+(use-package smartparens
+  :ensure
+  :config
+  (require 'smartparens-config))
+(add-hook 'prog-mode-hook #'smartparens-mode)
+\end{verbatim}
+\end{enumerate}
+\subsubsection{string inflection (default: some modes)}
+\label{sec:orgf498d90}
+
+This is useful in coding to change a string to snake, camel and so on.
+
+\begin{verbatim}
+(use-package string-inflection
+  :ensure
+  :config)
+(add-hook 'elpy-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'org-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'mu4e-compose-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+(add-hook 'js2-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-q C-u")
+                              'string-inflection-python-style-cycle)))
+\end{verbatim}
+
+\subsubsection{annotate-mode (default: some modes)}
+\label{sec:orge622e3d}
+
+The file-annotations are store externally. Seems to fail with
+\texttt{args-out-of-range} and then Emacs is confused. (filed issue for this)
+
+Also, it seems to interfere with colorful modes like \texttt{magit} or
+\texttt{org-agenda-mode} so that I went with a whitelist instead of the wish of
+a blacklist of modes.
+
+Read more \href{https://github.com/bastibe/annotate.el}{here}.
+
+\begin{verbatim}
+(use-package annotate
+  :ensure t
+
+  ;; for ledger-mode, as 'C-c C-a' is taken there.
+  :bind ("C-c C-A" . 'annotate-annotate)
+
+  :config
+  (add-hook 'org-mode 'annotate-mode)
+  (add-hook 'csv-mode 'annotate-mode)
+  (add-hook 'c-mode 'annotate-mode)
+  (add-hook 'c++-mode 'annotate-mode)
+  (add-hook 'sh-mode 'annotate-mode)
+;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
+;;;    (lambda () (annotate-mode 1)))
+;;;  (global-annotate-mode 1)
+  )
+\end{verbatim}
+
+\subsubsection{writeroom-mode (default: off)}
+\label{sec:orgf847dd3}
+
+It seems to be a particular way of changing the buffer look so the
+writer can focus on, writing. Read \href{https://github.com/joostkremers/writeroom-mode}{more here}.
+
+\begin{verbatim}
+(use-package writeroom-mode
+  :ensure t
+  :config)
+\end{verbatim}
+
+\subsubsection{anzu}
+\label{sec:org9e9ced4}
+
+Show number of search matches.
+
+\begin{verbatim}
+(use-package
+  anzu
+
+  :ensure
+  :config)
+(global-anzu-mode +1)
+\end{verbatim}
+
+\subsubsection{move-text}
+\label{sec:orgdd3b660}
+
+Looks convenient \href{https://github.com/emacsfodder/move-text}{here}:
+\begin{itemize}
+\item \texttt{Meta-up} move-text-up (line or active region)
+\item \texttt{Meta-down} move-text-down (line or active region)
+\end{itemize}
+
+\begin{verbatim}
+  (use-package move-text
+    :ensure
+    :config)
+(move-text-default-bindings)
+\end{verbatim}
+
+t** tabs to 2
+
+These are global tab settings. Since TAB is such a sensitive thing,
+each coding mode may have a different style/preference that will
+override this.
+
+\begin{verbatim}
+(setq-default indent-tabs-mode nil)
+(setq require-final-newline t)
+(setq indent-line-function 'insert-tab)
+(setq-default tab-width 2)
+\end{verbatim}
+\subsection{no trailing spaces}
+\label{sec:orge180548}
+\begin{verbatim}
+(setq next-line-add-newlines nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+\end{verbatim}
+\subsection{iedit mode}
+\label{sec:org8a48dc4}
+
+Instead of using the string replacement, use this edit mode will
+highlight all the occurances in the buffer, and now your editing will
+take effect on all of them.
+
+\begin{verbatim}
+(global-set-key (kbd "C-M-i") 'iedit-mode)
+\end{verbatim}
+
+\section{buffers}
+\label{sec:org1ded03f}
+
+There are three concepts seem to me: desktop, window config, and buffers.
+
+\begin{itemize}
+\item desktop: is like virtual desktop, and you can have many, like i3.
+\item window config: think of it like a look you have created using
+buffers, eg. stack them this way or that way, on the same
+desktop. So switching a window config will switch the buffer layout
+within your current desktop.
+\item buffer: is the building block.
+\end{itemize}
+
+\subsection{by packages}
+\label{sec:orgca4ae00}
+\subsubsection{multi desktops: eyebrowse}
+\label{sec:org6894401}
+
+Awesome window manager. It's like using i3m but inside emacs. Use the
+\texttt{C-c C-w <0..9>} key to switch to so called desktop. On each desktop,
+you can have different buffers open and so on, so I don't have to
+close buffers, or \texttt{C-x b} a lot anymore. Look for details \href{https://depp.brause.cc/eyebrowse/}{here}.
+
+\begin{verbatim}
+  (use-package eyebrowse
+    :ensure t)
+(eyebrowse-mode t)
+\end{verbatim}
+
+\subsubsection{select buffer}
+\label{sec:orgc69d81c}
+
+\begin{verbatim}
+(use-package ace-window
+  :ensure
+  :config
+  (setq aw-ignore-current t)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-background nil)
+  (global-set-key (kbd "M-o") 'ace-window)
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground
+                   :background "GhostWhite"
+                   :box nil)))))
+)
+\end{verbatim}
+
+\subsubsection{buffer naming}
+\label{sec:org480792e}
+\begin{verbatim}
+(use-package uniquify
+  :init
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
+\end{verbatim}
+\subsection{save \& restore buffers}
+\label{sec:orgc3c44ea}
+
+First, you need to create a folder \texttt{\textasciitilde{}/.emacs.d/savehist}. If not, upon
+existing emacs, it will complain, asking you whether you want to
+\texttt{ignore} it, answer \texttt{yes} will be fine. No harm. It's just the session
+will not then be saved.
+
 \begin{verbatim}
 
 (setq desktop-path (list "~/.emacs.d/savehist"))
@@ -356,63 +2021,26 @@ But skip the followings:
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 \end{verbatim}
 
-\subsection{auto revert}
-\label{sec:org393c6e1}
-Use \texttt{auto-revert}, which reloads a file if it's updated on disk
-and not modified in the buffer.
-\begin{verbatim}
-(global-auto-revert-mode 1)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-\end{verbatim}
+\subsection{switch window config: winner-mode}
+\label{sec:orgc728e99}
 
-\subsection{yes-or-no}
-\label{sec:orgc4e9103}
-Change all prompts to y or n:
-\begin{verbatim}
-(fset 'yes-or-no-p 'y-or-n-p)
-\end{verbatim}
-\subsection{shell env}
-\label{sec:org08e86a9}
-\begin{verbatim}
-(use-package
-  exec-path-from-shell
-  :ensure
-  :config
-  (exec-path-from-shell-initialize))
-\end{verbatim}
-\subsection{always show line number?}
-\label{sec:org8408fc3}
-\begin{verbatim}
-;;(global-display-line-numbers-mode)
-\end{verbatim}
-\section{Managing buffers}
-\label{sec:orgd265ce4}
-\subsection{winner-mode (layout managing)}
-\label{sec:org85023ba}
-Enables \texttt{winner-mode}. Navigate buffer-window configs with \texttt{C-c left}
-and \texttt{C-c right}.
+Read \href{https://www.emacswiki.org/emacs/WinnerMode}{here}. A config is essentially a look of buffers, and there can be
+many, say, a config has two windows side by side, while another is 3
+stacked. This mode will let you switch between them on the same desktop.
+
+Enables \texttt{winner-mode}. Navigate buffer-window configs with \texttt{C-c left} and
+\texttt{C-c right}.
 
 \begin{verbatim}
 (winner-mode 1)
 \end{verbatim}
 
-\subsection{eyebrowse (layout managing)}
-\label{sec:org8bb872b}
-Awesome window manager. It's like using i3m but inside emacs. Use the
-\texttt{C-c C-w <0..9>} key to switch to so called desktop. On each desktop,
-you can have different buffers open and so on, so I don't have to
-close buffers, or \texttt{C-x b} a lot anymore.
+However, with eyebrowse, I think this is redundant function. Maybe I should skip this?
 
-\begin{verbatim}
-(use-package eyebrowse
-  :ensure t)
-\end{verbatim}
+\subsection{toggle maximize buffer}
+\label{sec:org9bd2440}
 
-\subsection{toggle-maximize-buffer}
-\label{sec:org16e5ee1}
-Temporarily maximize a buffer.
-\href{https://gist.github.com/mads379/3402786}{found here}
+Temporarily maximize a buffer.  \href{https://gist.github.com/mads379/3402786}{found here}
 
 \begin{verbatim}
 (defun toggle-maximize-buffer () "Maximize buffer"
@@ -425,90 +2053,13 @@ Temporarily maximize a buffer.
 \end{verbatim}
 
 Map it to a key.
+
 \begin{verbatim}
 (global-set-key [M-f8] 'toggle-maximize-buffer)
 \end{verbatim}
-\subsection{select buffer}
-\label{sec:orgc2a0896}
-\begin{verbatim}
-(use-package ace-window
-  :ensure
-  :config
-  (setq aw-ignore-current t)
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
-  (global-set-key (kbd "M-o") 'ace-window)
-  (custom-set-faces
-   '(aw-leading-char-face
-     ((t (:inherit ace-jump-face-foreground
-                   :background "white"
-                   :box nil)))))
-)
-\end{verbatim}
-\section{Colors and Look}
-\label{sec:org9d666d7}
-\subsection{Theme}
-\label{sec:org2786988}
-Loading a theme I like:
 
-\begin{verbatim}
-  (use-package sublime-themes
-    :ensure
-    :config)
-(add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
-\end{verbatim}
-\subsection{Hide menu bar \& toolbar}
-\label{sec:orgb3bf410}
-Using i3 is forcing me to use keyboard.
-
-\begin{verbatim}
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
-(blink-cursor-mode -1)
-\end{verbatim}
-\subsection{Be quiet}
-\label{sec:org7cf1787}
-Remove bell and dings.
-
-\begin{verbatim}
-(setq ring-bell-function
-      '(lambda ()
-         (message "The answer is 42...")))
-(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
-\end{verbatim}
-\subsection{Fontlock}
-\label{sec:org974af92}
-This gets the font coloring switched on for all buffers.
-\subsubsection{{\bfseries\sffamily TODO} Note: this should be the default, maybe this can go ?}
-\label{sec:orgd00a88d}
-\begin{verbatim}
-(global-font-lock-mode t)
-\end{verbatim}
-\subsection{In terminal mode}
-\label{sec:orge4083d5}
-\begin{verbatim}
-(when (display-graphic-p)
-  (set-background-color "#ffffff")
-  (set-foreground-color "#141312"))
-\end{verbatim}
-\subsection{In X11 mode: mouse and window title}
-\label{sec:org07126f6}
-\begin{verbatim}
-(setq frame-title-format "emacs @ %b - %f")
-(when window-system
-  (mouse-wheel-mode)  ;; enable wheelmouse support by default
-  (set-selection-coding-system 'compound-text-with-extensions))
-\end{verbatim}
-\subsection{Look: buffer naming}
-\label{sec:org969cc56}
-\begin{verbatim}
-(use-package uniquify
-  :init
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
-\end{verbatim}
-\subsection{Buffer Decorations}
-\label{sec:org5a3abbd}
+\subsection{buffer decorations}
+\label{sec:org97e4641}
 Setup the visual cues about the current editing buffer
 \begin{verbatim}
 (column-number-mode t)
@@ -516,224 +2067,188 @@ Setup the visual cues about the current editing buffer
 (setq scroll-step 1)
 (setq-default transient-mark-mode t)  ;; highlight selection
 \end{verbatim}
-\subsection{nyan-mode}
-\label{sec:org95fe87b}
-\begin{verbatim}
-(use-package nyan-mode
-  :ensure t
-  :bind ("C-c f n" . 'nyan-mode))
-\end{verbatim}
-\subsection{dynamic cursor colors}
-\label{sec:org61af5ce}
-The cursor is displayed in different colors, depending on overwrite or insert mode.
-\begin{verbatim}
-(setq hcz-set-cursor-color-color "")
-(setq hcz-set-cursor-color-buffer "")
+\section{navigate file \& dir}
+\label{sec:orgd164413}
 
-(defun hcz-set-cursor-color-according-to-mode ()
-  "change cursor color according to some minor modes."
-  ;; set-cursor-color is somewhat costly, so we only call it when needed:
-  (let ((color
-         (if buffer-read-only "orange"
-           (if overwrite-mode "red"
-             "green"))))
-    (unless (and
-             (string= color hcz-set-cursor-color-color)
-             (string= (buffer-name) hcz-set-cursor-color-buffer))
-      (set-cursor-color (setq hcz-set-cursor-color-color color))
-      (setq hcz-set-cursor-color-buffer (buffer-name)))))
+I'm not quite used to using emacs as file manager yet. To me, it's
+much easier to just start a shell and type.
 
-(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
-\end{verbatim}
-\subsection{faces}
-\label{sec:orgac16c39}
-This makes some of the faces a bit more contrasted.
-\begin{verbatim}
-;; faces for general region highlighting zenburn is too low-key.
-(custom-set-faces
- '(highlight ((t (:background "forest green"))))
- '(region ((t (:background "forest green")))))
-\end{verbatim}
-\textbf{*}
-\subsection{delight}
-\label{sec:org89e8bbb}
-Package to remove some info from the mode-line for minor-modes.
-\begin{verbatim}
-(use-package delight
-  :ensure t)
-\end{verbatim}
-\subsection{remove some modelines}
-\label{sec:org341e96a}
-\begin{verbatim}
-(use-package eldoc
-  :delight)
-\end{verbatim}
+Nonetheless, navigating code tree is necessary, and the one like CP is
+so deeply buried that having a good navigator is probably a good
+thing.
 
-\subsection{alternate key mappings}
-\label{sec:org83c82f7}
-Letting one enter chars that are otherwise difficult in e.g. the minibuffer.
+The most dramatic thing is \hyperref[sec:org090dfeb]{treemacs}, which I need some time to get
+used to. It looks nice, but feels a bit, exaggerated to my taste.
+
+\subsection{dir hack}
+\label{sec:orgc4825c9}
 \begin{verbatim}
-(global-set-key (kbd "C-m") 'newline-and-indent)
-(global-set-key (kbd "C-j") 'newline)
-(global-set-key [delete] 'delete-char)
-(global-set-key [kp-delete] 'delete-char)
+(use-package dash
+  :ensure
+  :config)
+
+(use-package dired-hacks-utils
+  :ensure
+  :config)
 \end{verbatim}
-\subsection{Macros}
-\label{sec:orgc4862c3}
+\subsection{dired-rainbow}
+\label{sec:orge13eb4a}
+
+Make the dired coloful. Copied from \href{https://github.com/Fuco1/dired-hacks}{dired-hacks}.
+
 \begin{verbatim}
-(global-set-key [f3] 'start-kbd-macro)
-(global-set-key [f4] 'end-kbd-macro)
-(global-set-key [f5] 'call-last-kbd-macro)
-\end{verbatim}
-\subsection{Text size}
-\label{sec:org80a7a91}
-Increase/decrease text size
-\begin{verbatim}
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
-\end{verbatim}
-\subsection{multiple regions}
-\label{sec:orgd08da0d}
-\begin{verbatim}
-(global-set-key (kbd "C-M-i") 'iedit-mode)
-\end{verbatim}
-\subsection{Moving around buffers}
-\label{sec:orgf32a8a4}
-\begin{verbatim}
-(global-set-key (kbd "C-c <C-left>")  'windmove-left)
-(global-set-key (kbd "C-c <C-right>") 'windmove-right)
-(global-set-key (kbd "C-c <C-up>")    'windmove-up)
-(global-set-key (kbd "C-c <C-down>")  'windmove-down)
-(global-set-key (kbd "C-c C-g") 'goto-line)
-\end{verbatim}
-\subsection{multiple-cursors}
-\label{sec:org024f2db}
-Configure the shortcuts for multiple cursors
-\begin{verbatim}
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
-         ("C->" . 'mc/mark-next-like-this)
-         ("C-<" . 'mc/mark-previous-like-this)
-         ("C-c C->" . 'mc/mark-all-like-this)))
-\end{verbatim}
-\subsection{ace-jump-mode}
-\label{sec:org94ba6a6}
-Let's one jump around text
-\begin{verbatim}
-(use-package ace-jump-mode
-  :ensure t
-  :bind (("C-c C-SPC" . 'ace-jump-mode)
-         ("C-c C-DEL" . 'ace-jump-mode-pop-mark)))
-\end{verbatim}
-\subsection{Hydra}
-\label{sec:org73d59b8}
-\begin{verbatim}
-(use-package hydra
-  :ensure t)
-\end{verbatim}
-\subsection{dimmer}
-\label{sec:org82b1c2e}
-\begin{verbatim}
-(use-package dimmer
-:ensure
-:config
- (dimmer-configure-which-key)
- (dimmer-configure-helm))
- (dimmer-mode t)
-\end{verbatim}
-\subsection{Highlight indent}
-\label{sec:org926d215}
-\begin{verbatim}
-(use-package highlight-indent-guides
-:ensure
-:config
-(setq highlight-indent-guides-method 'character))
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-\end{verbatim}
-\section{Editing style}
-\label{sec:org02e2826}
-\subsection{No tabs, ever. No trailing spaces either.}
-\label{sec:orgae78ce2}
-\begin{verbatim}
-(setq-default indent-tabs-mode nil)
-(setq require-final-newline t)
-(setq next-line-add-newlines nil)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-\end{verbatim}
-\subsection{Mark the 80 cols boundary}
-\label{sec:org5332146}
-\begin{verbatim}
-(use-package column-enforce-mode
-  :ensure t
+(use-package dired-rainbow
+  :ensure
   :config
-  (setq column-enforce-column 80)
-  :bind ("C-c m" . 'column-enforce-mode))
-;; column-enforce-face
+  (progn
+    (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
+    (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
+    (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
+    (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb" "pdf" "ps" "rtf" "djvu" "epub" "odp" "ppt" "pptx"))
+    (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md" "mkd" "nfo" "pod" "rst" "tex" "textfile" "txt"))
+    (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb" "sqlite" "nc"))
+    (dired-rainbow-define media "#de751f" ("mp3" "mp4" "MP3" "MP4" "avi" "mpeg" "mpg" "flv" "ogg" "mov" "mid" "midi" "wav" "aiff" "flac"))
+    (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg" "jpg" "png" "psd" "eps" "svg"))
+    (dired-rainbow-define log "#c17d11" ("log"))
+    (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh" "vim"))
+    (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql" "mysql" "pgsql" "sql" "r" "clj" "cljs" "scala" "js"))
+    (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++" "h++" "hpp" "hxx" "m" "cc" "cs" "cp" "cpp" "go" "f" "for" "ftn" "f90" "f95" "f03" "f08" "s" "rs" "hi" "hs" "pyc" ".java"))
+    (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+    (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz" "xz" "z" "Z" "jar" "war" "ear" "rar" "sar" "xpi" "apk" "xz" "tar"))
+    (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab" "pak" "pk3" "vdf" "vpk" "bsp"))
+    (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc" "signature" "sig" "p12" "pem"))
+    (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
+    (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
+    (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
+    (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
+    ))
+
 \end{verbatim}
-\subsection{Better kill ring}
-\label{sec:orgc1dbb31}
-Don't use \texttt{popup-kill-ring} as it's dead. Use the \href{https://github.com/browse-kill-ring/browse-kill-ring}{browse-kill-ring}:
+\subsection{dired-narrow}
+\label{sec:org64f681a}
+\begin{verbatim}
+(use-package dired-narrow
+  :ensure
+  :config)
+\end{verbatim}
+\subsection{dired-collapse}
+\label{sec:org367d67e}
+\begin{verbatim}
+(use-package dired-collapse
+  :ensure
+  :config)
+\end{verbatim}
+\subsection{dired-filter}
+\label{sec:orgc9902b4}
+\begin{verbatim}
+(use-package dired-filter
+  :ensure
+  :config)
+\end{verbatim}
+\subsection{treemacs (default: off)}
+\label{sec:org090dfeb}
+Copied from \href{https://github.com/Alexander-Miller/treemacs\#installation}{here}. I'm leaving this mode off by default. \texttt{C-c t t} to
+enable it.
 
 \begin{verbatim}
-(use-package browse-kill-ring
-:ensure
-:config
-(setq browse-kill-ring-highlight-current-entry t)
-(setq browse-kill-ring-highlight-inserted-item t))
-
-(browse-kill-ring-default-keybindings)
-\end{verbatim}
-\subsection{Parenthesis mode}
-\label{sec:org99aaf71}
-Borrowing from old init.el:
-\begin{verbatim}
-(show-paren-mode t)
-(set-face-attribute 'region nil
-                    :background "#666"
-                    :foreground "#d52349")
-(set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "#d52349")
-(set-face-attribute 'show-paren-match nil
-                    :weight 'extra-bold)
-\end{verbatim}
-
-\section{Cool packages}
-\label{sec:orgb21806a}
-\subsection{annotate-mode}
-\label{sec:org2d43ee0}
-The file-annotations are store externally. Seems to fail with \texttt{args-out-of-range} and then Emacs is confused. (filed issue for this)
-
-Also, it seems to interfere with colorful modes like \texttt{magit} or \texttt{org-agenda-mode} so that I went with a whitelist instead of the wish of a blacklist of modes.
-
-\begin{verbatim}
-(use-package annotate
+(use-package treemacs
   :ensure t
-  :bind ("C-c C-A" . 'annotate-annotate)  ;; for ledger-mode, as 'C-c C-a' is taken there.
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
-  (add-hook 'org-mode 'annotate-mode)
-  (add-hook 'csv-mode 'annotate-mode)
-  (add-hook 'c-mode 'annotate-mode)
-  (add-hook 'c++-mode 'annotate-mode)
-  (add-hook 'sh-mode 'annotate-mode)
-  (add-hook 'ledger-mode 'annotate-mode)
-;;;  (define-globalized-minor-mode global-annotate-mode annotate-mode
-;;;    (lambda () (annotate-mode 1)))
-;;;  (global-annotate-mode 1)
-  )
+  (progn
+    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+          treemacs-deferred-git-apply-delay      0.5
+          treemacs-directory-name-transformer    #'identity
+          treemacs-display-in-side-window        t
+          treemacs-eldoc-display                 t
+          treemacs-file-event-delay              5000
+          treemacs-file-extension-regex          treemacs-last-period-regex-value
+          treemacs-file-follow-delay             0.2
+          treemacs-file-name-transformer         #'identity
+          treemacs-follow-after-init             t
+          treemacs-git-command-pipe              ""
+          treemacs-goto-tag-strategy             'refetch-index
+          treemacs-indentation                   2
+          treemacs-indentation-string            " "
+          treemacs-is-never-other-window         nil
+          treemacs-max-git-entries               5000
+          treemacs-missing-project-action        'ask
+          treemacs-move-forward-on-expand        nil
+          treemacs-no-png-images                 nil
+          treemacs-no-delete-other-windows       t
+          treemacs-project-follow-cleanup        nil
+          treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                      'left
+          treemacs-recenter-distance             0.1
+          treemacs-recenter-after-file-follow    nil
+          treemacs-recenter-after-tag-follow     nil
+          treemacs-recenter-after-project-jump   'always
+          treemacs-recenter-after-project-expand 'on-distance
+          treemacs-show-cursor                   nil
+          treemacs-show-hidden-files             t
+          treemacs-silent-filewatch              nil
+          treemacs-silent-refresh                nil
+          treemacs-sorting                       'alphabetic-asc
+          treemacs-space-between-root-nodes      t
+          treemacs-tag-follow-cleanup            t
+          treemacs-tag-follow-delay              1.5
+          treemacs-user-mode-line-format         nil
+          treemacs-user-header-line-format       nil
+          treemacs-width                         35
+          treemacs-workspace-switch-cleanup      nil)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+          ("C-x t t"   . treemacs)
+          ("C-x t B"   . treemacs-bookmark)
+          ("C-x t C-t" . treemacs-find-file)
+          ("C-x t M-t" . treemacs-find-tag)))
+
+
+  (use-package treemacs-icons-dired
+    :after treemacs dired
+    :ensure t
+      :config (treemacs-icons-dired-mode))
+
+  (use-package treemacs-projectile
+    :after treemacs projectile
+    :ensure t)
+  (use-package treemacs-magit
+    :after treemacs magit
+    :ensure t)
 \end{verbatim}
 
-\subsection{protobuf-mode}
-\label{sec:orga1b4be7}
-Mode for Google protocol buffer mode
+Add some files to ignore, eg. \textasciitilde{}.pyc`:
+
 \begin{verbatim}
-(use-package protobuf-mode
-  :ensure t
-  :mode "\\.proto\\'")
+(with-eval-after-load 'treemacs
+  (defun treemacs-ignore-gitignore (file _)
+    (string= file ".pyc"))
+  (push #'treemacs-ignore-gitignore treemacs-ignored-file-predicates))
 \end{verbatim}
-\subsection{Helm (list completion)}
-\label{sec:org6fe00d9}
-Trying out Helm instead of icicles, as it is available on ELPA.
+
+\section{Helm}
+\label{sec:org9c0fca6}
+
+Helm should really has its own section because it touches everything!
 
 I just took over the config described in this \href{https://tuhdo.github.io/helm-intro.html}{helm intro}.
 
@@ -750,7 +2265,7 @@ I just took over the config described in this \href{https://tuhdo.github.io/helm
   (global-unset-key (kbd "C-x c"))
 
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-  (define-key helm-map (kbd "C-c f") 'helm-execute-persistent-action) ; make TAB work in terminal
+  (define-key helm-map (kbd "C-M-x") 'helm-execute-persistent-action) ; make TAB work in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
   (when (executable-find "curl")
@@ -780,24 +2295,8 @@ I just took over the config described in this \href{https://tuhdo.github.io/helm
   (global-set-key (kbd "M-x") 'helm-M-x))
 \end{verbatim}
 
-I don't know what this is about, copied from the intro:
-
-\begin{verbatim}
-(defun spacemacs//helm-hide-minibuffer-maybe ()
-  "Hide minibuffer in Helm session if we use the header line as input field."
-  (when (with-helm-buffer helm-echo-input-in-header-line)
-    (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-      (overlay-put ov 'window (selected-window))
-      (overlay-put ov 'face
-                   (let ((bg-color (face-background 'default nil)))
-                     `(:background ,bg-color :foreground ,bg-color)))
-      (setq-local cursor-type nil))))
-
-(add-hook 'helm-minibuffer-set-up-hook
-          'spacemacs//helm-hide-minibuffer-maybe)
-\end{verbatim}
-
 Found \href{https://www.reddit.com/r/emacs/comments/30yer0/helm\_and\_recentf\_tips/}{this reddit post} of using \texttt{helm-mini}:
+
 \begin{verbatim}
 (setq helm-mini-default-sources '(helm-source-buffers-list
                                   helm-source-recentf
@@ -805,156 +2304,421 @@ Found \href{https://www.reddit.com/r/emacs/comments/30yer0/helm\_and\_recentf\_t
                                   helm-source-buffer-not-found))
 \end{verbatim}
 
-\subsection{\href{https://github.com/smihica/emmet-mode}{emmet-mode}}
-\label{sec:orga84ad0e}
-Useful abbreviations when coding in HTML.
+\section{Write chinese}
+\label{sec:org140d6d4}
+I have been using this one w/ reasonable success.
 \begin{verbatim}
-(use-package emmet-mode
-:ensure t)
-\end{verbatim}
-\subsection{rainbow-mode}
-\label{sec:orgd6de9f2}
-Colorize color names and codes in the correct color.
-\begin{verbatim}
-(use-package rainbow-mode
-  :ensure t)
-\end{verbatim}
-\subsection{writeroom-mode}
-\label{sec:org7c2a711}
-\begin{verbatim}
-(use-package writeroom-mode
-  :ensure t
-  :init
-  (global-set-key (kbd "C-c f w") 'writeroom-mode))
-\end{verbatim}
-
-\subsection{wgrep-mode}
-\label{sec:org5845f25}
-\begin{verbatim}
-(use-package wgrep
-  :ensure t)
-\end{verbatim}
-
-\subsection{\href{https://github.com/ledger/ledger-mode}{ledger-mode}}
-\label{sec:org6173c19}
-\subsubsection{Cleanup ledger file}
-\label{sec:orgfa61e63}
-\begin{verbatim}
-(defun single-lines-only ()
-  "replace multiple blank lines with a single one"
-  (interactive)
-  (goto-char (point-min))
-  (while (re-search-forward "\\(^\\s-*$\\)\n" nil t)
-    (replace-match "\n")
-    (forward-char 1)))
-
-(defun paf/cleanup-ledger-buffer ()
-  "Cleanup the ledger file"
-  (interactive)
-  (delete-trailing-whitespace)
-  (single-lines-only)
-  (ledger-mode-clean-buffer)
-  (ledger-sort-buffer))
-\end{verbatim}
-\subsubsection{Setup}
-\label{sec:orgcd35993}
-\begin{verbatim}
-(use-package ledger-mode
-  :ensure nil
-  :pin manual
-  :mode "\\.ledger\\'"
-  :bind ("<f6>" . 'paf/cleanup-ledger-buffer)
+(use-package pyim
+  :ensure
+  :defer 10
   :config
-  (setq ledger-reconcile-default-commodity "CHF"))
-\end{verbatim}
-\subsection{\href{http://www.gnu.org/software/hyperbole/}{hyperbole}}
-\label{sec:org8b68213}
-Let's try this too, even though I do not quite get the point of this
-whole package yet.
+  ;; 激活 basedict 拼音词库
+  (use-package pyim-basedict
+    :ensure nil
+    :config (pyim-basedict-enable))
 
-\textbf{NOTE} assigns \texttt{hui-search-web} to \texttt{C-c C-/} to not clobber the later used \texttt{C-c /} from OrgMode (org-mode sparse trees). This works because hyperbole will first check if the function is already bound to some key before binding it to the coded default.
-\begin{verbatim}
-(use-package hyperbole
-  :ensure t
-  :config
-  (bind-key "C-c C-/" 'hui-search-web)  ;; bind before calling require
-  (require 'hyperbole))
-\end{verbatim}
-\subsection{\href{https://github.com/fourier/ztree\#ztree}{ztree}}
-\label{sec:orga0f31e5}
-A tree-view navigation of files, with diff tool for directories.
-\begin{verbatim}
-(use-package ztree
-  :ensure t)
-\end{verbatim}
-\subsection{anzu}
-\label{sec:org09540b2}
-Show number of search matches.
-\begin{verbatim}
-(use-package
-  anzu
+  ;; 五笔用户使用 wbdict 词库
+  ;; (use-package pyim-wbdict
+  ;;   :ensure nil
+  ;;   :config (pyim-wbdict-gbk-enable))
 
+  (setq default-input-method "pyim")
+
+  ;; 我使用全拼
+  (setq pyim-default-scheme 'quanpin)
+
+  ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
+  ;; 我自己使用的中英文动态切换规则是：
+  ;; 1. 光标只有在注释里面时，才可以输入中文。
+  ;; 2. 光标前是汉字字符时，才能输入中文。
+  ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
+  (setq-default pyim-english-input-switch-functions
+                '(pyim-probe-dynamic-english
+                  pyim-probe-isearch-mode
+                  pyim-probe-program-mode
+                  pyim-probe-org-structure-template))
+
+  (setq-default pyim-punctuation-half-width-functions
+                '(pyim-probe-punctuation-line-beginning
+                  pyim-probe-punctuation-after-punctuation))
+
+  ;; 开启拼音搜索功能
+  ;; (pyim-isearch-mode 1)
+
+  ;; 使用 pupup-el 来绘制选词框
+  (setq pyim-page-tooltip 'popup)
+
+  ;; 选词框显示5个候选词
+  (setq pyim-page-length 5)
+
+  ;; 让 Emacs 启动时自动加载 pyim 词库
+  (add-hook 'emacs-startup-hook
+            #'(lambda () (pyim-restart-1 t)))
+  :bind
+  (;与 pyim-probe-dynamic-english 配合
+  ("M-j" . pyim-convert-code-at-point)
+
+   ("C-;" . pyim-delete-word-from-personal-buffer)))
+   (setq default-input-method "pyim")
+   (global-set-key (kbd "C-\\") 'toggle-input-method)
+\end{verbatim}
+\section{Office stuff}
+\label{sec:org1fdd010}
+Using emacs in a corporate env can be daunting.
+
+\subsection{mu4e email}
+\label{sec:org83ca39d}
+mu4e only a emac client. The workhorse are davmail, isync and mu. You need to install these offline and hook them up using the config below.
+
+\subsubsection{install \& minimal setup}
+\label{sec:org2b9243e}
+First thing first, load the package. As you can see, I have used \texttt{apt-get} install mu4e.
+
+\begin{verbatim}
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
+(require 'mu4e)
+\end{verbatim}
+
+Then we load \texttt{maildirs-extension}:
+
+\begin{verbatim}
+(use-package mu4e-maildirs-extension
   :ensure
   :config)
-(global-anzu-mode +1)
+(mu4e-maildirs-extension)
 \end{verbatim}
-\subsection{whitespace}
-\label{sec:orga125f16}
-Highlight unnecessary chars and lines over 80.
-\begin{verbatim}
-(use-package
-  whitespace
 
-  :ensure
-  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
-  :config (global-whitespace-mode t))
-\end{verbatim}
-\subsection{move-text}
-\label{sec:org09124e8}
-Looks convenient:
+Now, we tell emacs I want to use \texttt{mu4e} as email client:
+
 \begin{verbatim}
-  (use-package move-text
-    :ensure
-    :config)
-(move-text-default-bindings)
+(setq mail-user-agent 'mu4e-user-agent)
 \end{verbatim}
-\subsection{string inflection}
-\label{sec:orgadb1cdf}
-Change text style quickly:
+
+Link to a couple modes to help me writing good emails:
 \begin{verbatim}
-(use-package string-inflection
-  :ensure
-  :config)
-(add-hook 'elpy-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
-(add-hook 'org-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
 (add-hook 'mu4e-compose-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-q C-u") 'string-inflection-python-style-cycle)))
+              (lambda ()
+                (visual-line-mode t)
+                (writegood-mode t)
+                (flyspell-mode t)))
 \end{verbatim}
-\subsection{guide-key}
-\label{sec:orgb8b5986}
-Show key bindings. The built-in one is \texttt{C-h b}.
+\subsubsection{how to get mails}
+\label{sec:orga1660e3}
+Setup location of my maildir.
 \begin{verbatim}
-(use-package guide-key
-  :ensure
-  :config
-  (setq guide-key/guide-key-sequence t)
-  (setq guide-key/highlight-command-regexp "rectangle"))
-(guide-key-mode 1)
+(setq mu4e-maildir (expand-file-name "~/Maildir"))
 \end{verbatim}
 
+Sync email by calling \texttt{mbsync}:
+\begin{verbatim}
+(setq mu4e-get-mail-command "mbsync -a")
+\end{verbatim}
+
+How often should I check? Value in seconds:
+\begin{verbatim}
+(setq mu4e-update-interval 600)
+\end{verbatim}
+
+Setup some common folders:
+\begin{verbatim}
+(setq mu4e-drafts-folder "/drafts"
+      mu4e-sent-folder   "/sent"
+      mu4e-trash-folder  "/trash")
+\end{verbatim}
+
+Setup some shortcuts as bookmarks:
+\begin{verbatim}
+(add-to-list
+ 'mu4e-bookmarks
+ '("flag:attach"
+   "Messages with attachment"
+   ?a) t)
+
+(add-to-list
+ 'mu4e-bookmarks
+ '("size:5M..500M"
+   "Big messages"
+   ?b) t)
+
+(add-to-list
+ 'mu4e-bookmarks
+ '("flag:flagged"
+   "Flagged messages"
+   ?f) t)
+\end{verbatim}
+
+\subsubsection{list view}
+\label{sec:orgce27f1a}
+Customize the list view header:
+\begin{verbatim}
+(setq mu4e-headers-date-format "%b-%d %a"
+      mu4e-headers-fields '((:date . 10)
+                            (:flags . 5)
+                            (:recipnum . 3)
+                            (:from-or-to . 10)
+                            (:thread-subject . nil)))
+\end{verbatim}
+
+Skip duplicates:
+
+\begin{verbatim}
+(setq mu4e-headers-skip-duplicates t)
+\end{verbatim}
+
+Showing related in a tree fashion so I know the context:
+
+\begin{verbatim}
+(setq mu4e-headers-include-related t)
+\end{verbatim}
+
+Here is a fun one. I noticed that the email thread grows like that greedy snake game, a pretty good sign that the team is malfunctioning :) So we add a displayed number on the number of recipients, and just watch it grow:
+\begin{verbatim}
+(add-to-list 'mu4e-header-info-custom
+             '(:recipnum .
+                         ( :name "Number of recipients"  ;; long name, as seen in the message-view
+                                 :shortname "R#"           ;; short name, as seen in the headers view
+                                 :help "Number of recipients for this message" ;; tooltip
+                                 :function (lambda (msg)
+                                             (format "%d"
+                                                     (+ (length (mu4e-message-field msg :to))
+                                                        (length (mu4e-message-field msg :cc))))))))
+
+\end{verbatim}
+\subsubsection{read \& attachment}
+\label{sec:org016c820}
+Save attachment to:
+
+\begin{verbatim}
+(setq mu4e-attachment-dir "~/Downloads")
+\end{verbatim}
+
+To open HTML in browser:
+\begin{verbatim}
+(add-to-list 'mu4e-view-actions
+             '("ViewInBrowser" . mu4e-action-view-in-browser)
+             t)
+\end{verbatim}
+
+Attempt to show images when viewing messages:
+
+\begin{verbatim}
+(setq mu4e-view-show-images t)
+\end{verbatim}
+
+Use imagemagick, if available:
+
+\begin{verbatim}
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+\end{verbatim}
+\subsubsection{write new}
+\label{sec:orgda97385}
+My signature line:
+
+\begin{verbatim}
+(setq mu4e-compose-signature
+      (concat
+       "Best regards,\n\n"
+       "Feng Xia\n"
+       "W: http://www.mycompany.com\n"))
+\end{verbatim}
+\subsubsection{send}
+\label{sec:org4ebc34a}
+Sending email is to use SMTP. Here I'm showing to use the company one
+through \texttt{davmail} which runs smtp listen on port \texttt{1025}. You can also
+use Gmail/hotmail:
+
+\begin{verbatim}
+(use-package smtpmail
+  :ensure t
+  :config
+  (setq send-mail-function 'smtpmail-send-it
+        user-mail-address "fxia1@mycompany.com"
+        smtpmail-debug-info t
+        smtpmail-smtp-user "fxia1@mycompany.com"
+        smtpmail-default-smtp-server "localhost"
+        smtpmail-auth-credentials (expand-file-name "~/.authinfo")
+        smtpmail-smtp-service 1025
+        smtpmail-stream-type nil
+        starttls-use-gnutls nil
+        starttls-extra-arguments nil))
+\end{verbatim}
+
+There is a toggle where you can queue the sending email first instead
+of sending to server immediately. This is useful for travel when you
+just write, then queue, then when reconnected to the internect, send.
+
+\begin{verbatim}
+(setq smtpmail-queue-mail nil
+      smtpmail-queue-dir "~/Maildir/queue/cur")
+\end{verbatim}
+\subsubsection{reply}
+\label{sec:org8f501d6}
+When replying an email, auto fill in my info:
+\begin{verbatim}
+(setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
+      user-mail-address "fxia1@mycompany.com"
+      user-full-name "Feng Xia"
+      message-signature  (concat
+                          "Feng Xia\n"
+                          "http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/\n")
+      message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
+      message-citation-line-function 'message-insert-formatted-citation-line
+      mu4e-headers-results-limit 500)
+\end{verbatim}
+\subsubsection{kill all buffer upon exit}
+\label{sec:org4a8d6d7}
+mu4e can open a lot of writing buffers. Just kill them all when we exit mu4e:
+
+\begin{verbatim}
+(setq message-kill-buffer-on-exit t)
+\end{verbatim}
+\subsubsection{write html}
+\label{sec:orga9705b7}
+Emacs doesn't like html email body. Nor do I. But one thing I found
+out is that markdown mode table will look terrible as plain text on
+receiving end. There are a couple ways to work around.
+
+\begin{enumerate}
+\item write in org
+\label{sec:org51232d6}
+So we now write email in org mode, then call \texttt{M-x org-mime-htmlize} to
+convert either the whole buffer or a region to html before sending:
+
+\begin{verbatim}
+(use-package org-mime
+  :ensure
+  :config
+  (setq org-mime-export-ascii 'utf-8))
+\end{verbatim}
+
+\item write in markdown
+\label{sec:org126c982}
+
+How about writing it in markdown? You don't need to do much. Switch to
+\texttt{markdown-mode} to write, then switch back to \texttt{mu4e-compose-mode} and
+then \texttt{C-c C-c} to send:
+
+\begin{verbatim}
+(defun multipart-html-message (plain html)
+  "Creates a multipart HTML email with a text part and an html part."
+  (concat "<#multipart type=alternative>\n"
+          "<#part type=text/plain>"
+          plain
+          "<#part type=text/html>\n"
+          html
+          "<#/multipart>\n"))
+
+(defun convert-message-to-markdown ()
+  "Convert the message in the current buffer to a multipart HTML email.
+
+The HTML is rendered by treating the message content as Markdown."
+  (interactive)
+  (unless (executable-find "pandoc")
+    (error "Pandoc not found, unable to convert message"))
+  (let* ((begin
+          (save-excursion
+            (goto-char (point-min))
+            (search-forward mail-header-separator)))
+         (end (point-max))
+         (html-buf (generate-new-buffer "*mail-md-output*"))
+         (exit-code
+          (call-process-region begin end "pandoc" nil html-buf nil
+                               "--quiet" "-f" "gfm" "-t" "html"))
+         (html (format "<html>\n<head></head>\n<body>\n%s\n</body></html>\n"
+                (with-current-buffer html-buf
+                  (buffer-substring (point-min) (point-max)))))
+         (raw-body (buffer-substring begin end)))
+    (when (not (= exit-code 0))
+      (error "Markdown conversion failed, see %s" (buffer-name html-buf)))
+    (with-current-buffer html-buf
+      (set-buffer-modified-p nil)
+      (kill-buffer))
+    (undo-boundary)
+    (delete-region begin end)
+    (save-excursion
+      (goto-char begin)
+      (newline)
+      (insert (multipart-html-message raw-body html)))))
+
+(defun message-md-send (&optional arg)
+  "Convert the current buffer and send it.
+If given prefix arg ARG, skips markdown conversion."
+  (interactive "P")
+  (unless arg
+    (convert-message-to-markdown))
+  (message-send))
+
+(defun message-md-send-and-exit (&optional arg)
+  "Convert the current buffer and send it, then exit from mail buffer.
+If given prefix arg ARG, skips markdown conversion."
+  (interactive "P")
+  (unless arg
+    (convert-message-to-markdown))
+  (message-send-and-exit))
+
+(with-eval-after-load 'message
+ (define-key message-mode-map (kbd "C-c C-s") #'message-md-send)
+ (define-key message-mode-map (kbd "C-c C-c") #'message-md-send-and-exit))
+\end{verbatim}
+\end{enumerate}
+\section{Hobbies}
+\label{sec:org2a75643}
+\subsection{elfeed}
+\label{sec:org5085744}
+
+Read news:
+\begin{verbatim}
+(use-package elfeed
+  :ensure
+  :config)
+(setq elfeed-feeds
+      '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
+        ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)
+        ("https://www.reddit.com/r/aww+jokes.rss" fun)))
+(use-package elfeed-goodies
+  :ensure
+  :config)
+(elfeed-goodies/setup)
+\end{verbatim}
+
+\subsection{taskjuggler}
+\label{sec:org26753eb}
+\begin{verbatim}
+(use-package tj3-mode
+  :ensure t
+  :after org-plus-contrib
+  :config
+  (require 'ox-taskjuggler)
+  (custom-set-variables
+   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+   '(org-taskjuggler-project-tag "PRJ")))
+\end{verbatim}
 
 \section{Coding}
-\label{sec:orgea3ed7c}
+\label{sec:orgd91c51a}
+
+Big part of my life is taken by coding. So here it is, all the coding
+related stuff.
+\subsection{taskjuggler-mode (tj3-mode)}
+\label{sec:org865f05d}
+\begin{verbatim}
+(use-package tj3-mode
+  :ensure t
+  :after org-plus-contrib
+  :config
+  (require 'ox-taskjuggler)
+  (custom-set-variables
+   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+   '(org-taskjuggler-project-tag "PRJ")))
+\end{verbatim}
 \subsection{Version control}
-\label{sec:orgaa90700}
+\label{sec:org358e8a5}
 \subsubsection{magit}
-\label{sec:org69f0d1d}
+\label{sec:org53d4598}
+
 Add the powerful Magit
+
 \begin{verbatim}
 (use-package magit
   :ensure t
@@ -972,17 +2736,40 @@ Add the powerful Magit
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 \end{verbatim}
 \subsubsection{monky}
-\label{sec:org9f1e752}
+\label{sec:org2f8f91b}
 Add the Magit-copy for Mercurial 'monky'
+
 \begin{verbatim}
 (use-package monky
   :ensure t
   :defer
   :bind ("C-x m" . 'monky-status))
 \end{verbatim}
-\subsubsection{Global caller}
-\label{sec:org8455c22}
+\subsubsection{git informations in gutter}
+\label{sec:org97e3e7b}
+\begin{verbatim}
+(use-package git-gutter-fringe+
+  :ensure t
+  :defer
+  :if window-system
+  :bind ("C-c g" . 'git-gutter+-mode))
+\end{verbatim}
+\subsubsection{speedup VCS}
+\label{sec:org48c9129}
+Regexp matching directory names that are not under VC's control. The
+default regexp prevents fruitless and time-consuming attempts to
+determine the VC status in directories in which filenames are
+interpreted as hostnames.
+
+\begin{verbatim}
+(defvar locate-dominating-stop-dir-regexp
+  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
+\end{verbatim}
+\subsubsection{global caller}
+\label{sec:orgb34da25}
+
 Have a single binding to call the most appropriate tool given the repository.
+
 \begin{verbatim}
 (defun paf/vcs-status ()
      (interactive)
@@ -990,12 +2777,14 @@ Have a single binding to call the most appropriate tool given the repository.
          (magit-status-setup-buffer)
        (error (monky-status))))
 
-(global-set-key (kbd "C-c f v") 'paf/vcs-status)
+(global-set-key (kbd "C-M-x v") 'paf/vcs-status)
 \end{verbatim}
 
 \subsection{Projectile}
-\label{sec:org15340ac}
+\label{sec:orgf0adbad}
+
 Start using projectile. It has the documentation \href{https://docs.projectile.mx/en/latest/}{here}.
+
 \begin{verbatim}
 (use-package projectile
   :ensure t
@@ -1013,18 +2802,6 @@ Start using projectile. It has the documentation \href{https://docs.projectile.m
   (helm-projectile-on))
 \end{verbatim}
 
-Also make sure we do have the faster \href{https://github.com/ggreer/the\_silver\_searcher\#the-silver-searcher}{silver searcher} version.  This
-may need you to install the corresponding tool for this, with the
-following snippet:
-\begin{verbatim}
-# helm-ag uses this for faster grepping
-if [[ "$(uname)" == "Darwin" ]]; then
-  install_pkg -x ag the_silver_searcher
-else
-  install_pkg -x ag silversearcher-ag
-fi
-\end{verbatim}
-
 Search the entire project with \texttt{C-c p s s} for a regexp. This let's
 you turn the matching results into an editable buffer using \texttt{C-c
 C-e}. Other keys are listed \href{https://github.com/syohex/emacs-helm-ag\#keymap}{here}.
@@ -1040,186 +2817,10 @@ I havae used it by a \texttt{M-?} binding. It's just old habit:
 (global-set-key (kbd "M-?") 'helm-ag)
 \end{verbatim}
 
-\subsection{no indentation of namespaces in C++}
-\label{sec:org95d7e4d}
-Essentially, use the Google C++ style formatting.
-\begin{verbatim}
-(use-package google-c-style
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
-
-(use-package flymake-google-cpplint
-  :ensure t)
-\end{verbatim}
-\subsection{search \& jump}
-\label{sec:org25c8cd2}
-\subsubsection{ag}
-\label{sec:orgc166b4c}
-Use the silversearcher.
-\begin{verbatim}
-(use-package ag
-  :ensure
-  :config
-  (setq ag-highlight-search t)
-  (setq ag-reuse-buffers t))
-\end{verbatim}
-
-Follow the \href{https://github.com/emacsorphanage/helm-ag}{helm-ag manual}, "Insert thing at point as default search
-pattern, if this value is non nil":
-
-\begin{verbatim}
-(setq helm-ag-insert-at-point 'symbol)
-(setq helm-ag-use-temp-buffer t)
-\end{verbatim}
-\subsubsection{dumb-jump}
-\label{sec:org223f303}
-
-First, let's make sure we have \texttt{xref} because we will hook into the
-xref backend:
-\begin{verbatim}
-(use-package xref
-  :ensure
-  :config)
-\end{verbatim}
-
-Now install \texttt{dumb-jump}:
-\begin{verbatim}
-(use-package dumb-jump
-  :ensure
-  :config
-  (setq dumb-jump-prefer-searcher 'ag))
-\end{verbatim}
-
-Last, hook to \texttt{xref} to use \texttt{M.} bind:
-\begin{verbatim}
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-\end{verbatim}
-\subsubsection{ripgrep}
-\label{sec:orgc93363d}
-This enables searching recursively in projects.
-\begin{verbatim}
-# This can be used by helm-ag for faster grepping
-install_pkg -x rg ripgrep
-\end{verbatim}
-
-\begin{verbatim}
-(use-package ripgrep
-  :ensure t)
-(use-package projectile-ripgrep
-  :ensure t
-  :requires (ripgrep projectile))
-\end{verbatim}
-
-\subsection{commenting out}
-\label{sec:orge08d88e}
-Easy commenting out of lines.
-\begin{verbatim}
-(autoload 'comment-out-region "comment" nil t)
-(global-set-key (kbd "C-c q") 'comment-out-region)
-\end{verbatim}
-
-\subsection{Deduplicate and sort}
-\label{sec:orgf63ef60}
-Help cleanup the includes and using lists.
-\href{http://www.emacswiki.org/emacs/DuplicateLines}{found here}
-\begin{verbatim}
-(defun uniquify-region-lines (beg end)
-  "Remove duplicate adjacent lines in region."
-  (interactive "*r")
-  (save-excursion
-    (goto-char beg)
-    (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
-      (replace-match "\\1"))))
-
-(defun paf/sort-and-uniquify-region ()
-  "Remove duplicates and sort lines in region."
-  (interactive)
-  (sort-lines nil (region-beginning) (region-end))
-  (uniquify-region-lines (region-beginning) (region-end)))
-\end{verbatim}
-
-Simplify cleanup of \texttt{\#include} / \texttt{typedef} / \texttt{using} blocks.
-\begin{verbatim}
-(global-set-key (kbd "C-c f s") 'paf/sort-and-uniquify-region)
-\end{verbatim}
-
-\subsection{diffing}
-\label{sec:orge8d1f8d}
-\href{https://github.com/justbur/emacs-vdiff}{vdiff} let's one compare buffers or files.
-\begin{verbatim}
-(use-package vdiff
-  :ensure t
-  :config
-  ; This binds commands under the prefix when vdiff is active.
-  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-\end{verbatim}
-
-\subsection{yasnippet}
-\label{sec:orgee60fa9}
-Let's first see how far I get with file-based capture templates and yankpad.
-\begin{verbatim}
-  (use-package yasnippet
-    :ensure t)
-  (use-package auto-yasnippet
-    :ensure t
-:after yasnippet
-    :config
-    (bind-key "C-c f C-s c" 'aya-create)
-    (bind-key "C-c f C-s e" 'aya-expand))
-\end{verbatim}
-
-\subsection{Selective display}
-\label{sec:orga61c5d6}
-Will fold all text indented more than the position of the cursor at
-the time the keys are pressed.
-
-\begin{verbatim}
-(defun set-selective-display-dlw (&optional level)
-  "Fold text indented more than the cursor.
-   If level is set, set the indent level to level.
-   0 displays the entire buffer."
-  (interactive "P")
-  (set-selective-display (or level (current-column))))
-
-(global-set-key "\C-x$" 'set-selective-display-dlw)
-\end{verbatim}
-\subsection{Info in the gutter}
-\label{sec:org361b679}
-\subsubsection{git informations}
-\label{sec:orged59afe}
-\begin{verbatim}
-(use-package git-gutter-fringe+
-  :ensure t
-  :defer
-  :if window-system
-  :bind ("C-c g" . 'git-gutter+-mode))
-\end{verbatim}
-\subsection{Speedup VCS}
-\label{sec:orga358b69}
-Regexp matching directory names that are not under VC's control. The
-default regexp prevents fruitless and time-consuming attempts to
-determine the VC status in directories in which filenames are
-interpreted as hostnames.
-
-\begin{verbatim}
-(defvar locate-dominating-stop-dir-regexp
-  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
-\end{verbatim}
-\subsection{Dealing with numbers}
-\label{sec:orgb1d1489}
-Simple way to increase/decrease a number in code.
-\begin{verbatim}
-(use-package shift-number
-  :ensure t
-  :bind (("M-+" . shift-number-up)
-         ("M-_" . shift-number-down)))
-\end{verbatim}
-\subsection{GDB with many windows}
-\label{sec:orge23bb48}
+\subsection{debug w/ GDB}
+\label{sec:orge831571}
 \subsubsection{{\bfseries\sffamily TODO} Make it so that the source frame placement is forced only when using gdb.}
-\label{sec:orgd254f54}
+\label{sec:orgcfc2186}
 
 \begin{verbatim}
 (setq gdb-many-windows t)
@@ -1296,72 +2897,116 @@ Execute & Until current line & u\\
 \hline
 \end{tabular}
 \end{center}
+\subsection{editing}
+\label{sec:orgf6367fe}
+\subsubsection{diffing}
+\label{sec:org4209ed5}
+\href{https://github.com/justbur/emacs-vdiff}{
+vdiff} let's one compare buffers or files.
 
-\subsection{smartparens}
-\label{sec:org345e6f2}
-Well, who wants to type parenthesis:
 \begin{verbatim}
-(use-package smartparens
-  :ensure
+(use-package vdiff
+  :ensure t
   :config
-  (require 'smartparens-config))
-(add-hook 'prog-mode-hook #'smartparens-mode)
+  ; This binds commands under the prefix when vdiff is active.
+  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
 \end{verbatim}
-\subsection{specific languages}
-\label{sec:orgf435760}
+
+\subsubsection{yasnippet}
+\label{sec:org74deb3e}
+Let's first see how far I get with file-based capture templates and yankpad.
+
+\begin{verbatim}
+  (use-package yasnippet
+    :ensure t)
+  (use-package auto-yasnippet
+    :ensure t
+:after yasnippet
+    :config
+    (bind-key "C-M-x C-s c" 'aya-create)
+    (bind-key "C-M-x C-s e" 'aya-expand))
+\end{verbatim}
+
+\subsubsection{commenting out}
+\label{sec:org0d89a59}
+Easy commenting out of lines.
+
+\begin{verbatim}
+(autoload 'comment-out-region "comment" nil t)
+(global-set-key (kbd "C-c q") 'comment-out-region)
+\end{verbatim}
+
+\subsubsection{deduplicate and sort}
+\label{sec:org2ee7fbd}
+Help cleanup the includes and using lists.
+\href{http://www.emacswiki.org/emacs/DuplicateLines}{found here}
+
+\begin{verbatim}
+(defun uniquify-region-lines (beg end)
+  "Remove duplicate adjacent lines in region."
+  (interactive "*r")
+  (save-excursion
+    (goto-char beg)
+    (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
+      (replace-match "\\1"))))
+
+(defun paf/sort-and-uniquify-region ()
+  "Remove duplicates and sort lines in region."
+  (interactive)
+  (sort-lines nil (region-beginning) (region-end))
+  (uniquify-region-lines (region-beginning) (region-end)))
+\end{verbatim}
+
+Simplify cleanup of \texttt{\#include} / \texttt{typedef} / \texttt{using} blocks.
+
+\begin{verbatim}
+(global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
+\end{verbatim}
+\subsubsection{selective display (default: off)}
+\label{sec:org29c0edb}
+Will fold all text indented more than the position of the cursor at
+the time the keys are pressed.
+
+\begin{verbatim}
+(defun set-selective-display-dlw (&optional level)
+  "Fold text indented more than the cursor.
+   If level is set, set the indent level to level.
+   0 displays the entire buffer."
+  (interactive "P")
+  (set-selective-display (or level (current-column))))
+
+(global-set-key "\C-x$" 'set-selective-display-dlw)
+\end{verbatim}
+\subsection{IRC}
+\label{sec:org72a3a13}
+Use \texttt{circe}.
+\begin{verbatim}
+(use-package
+  circe
+    :ensure
+    :config(
+            setq circe-network-options '((
+                                          "Freenode" :tls t
+                                          :nick "fengxia41103"
+                                          :channels ("#emacs"
+                                                     "#python"
+                                                     "#odoo"
+                                                     "#reactjs"
+                                                     "#latex")))))
+(use-package
+  helm-circe
+
+  :ensure
+  :config)
+\end{verbatim}
+
+\subsection{languages}
+\label{sec:org78f58dc}
+
 These are minor modes to handle programming language specifics which
 are often termed as development rules agreed by the team.
-\subsubsection{c}
-\label{sec:org699daa1}
-\begin{enumerate}
-\item header/implementation toggle
-\label{sec:orgafc8fc3}
-
-Switch from header to implementation file quickly.
-\begin{verbatim}
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
-\end{verbatim}
-\end{enumerate}
-\subsubsection{web-mode}
-\label{sec:orgd193111}
-web-mode with config for Polymer editing
-\begin{verbatim}
-(use-package web-mode
-  :ensure t
-  :mode "\\.html\\'"
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-enable-current-element-highlight t)
-  (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-css-colorization t)
-  (setq web-mode-comment-style 2))
-\end{verbatim}
-\subsubsection{csv-mode}
-\label{sec:org2d6235a}
-mode to edit CSV files.
-\begin{verbatim}
-(use-package csv-mode
-  :ensure t
-  :mode "\\.csv\\'")
-\end{verbatim}
-\subsubsection{taskjuggler-mode (tj3-mode)}
-\label{sec:org801e7d4}
-\begin{verbatim}
-(use-package tj3-mode
-  :ensure t
-  :after org-plus-contrib
-  :config
-  (require 'ox-taskjuggler)
-  (custom-set-variables
-   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
-   '(org-taskjuggler-project-tag "PRJ")))
-\end{verbatim}
-\subsubsection{markdown-mode}
-\label{sec:org188de1d}
+\subsubsection{markdown}
+\label{sec:org6ac447b}
 Enough to handle my Markdown needs.
 
 \begin{verbatim}
@@ -1374,33 +3019,61 @@ Enough to handle my Markdown needs.
 
   :ensure
   :config
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
   (add-hook 'markdown-mode-hook
             (lambda ()
               (visual-line-mode t)
               (writegood-mode t)
-              (flyspell-mode t))))
+              (flyspell-mode t)))))
 \end{verbatim}
+\subsubsection{C/C++}
+\label{sec:org15bdee6}
+\begin{enumerate}
+\item header/implementation toggle
+\label{sec:orgbdda376}
+
+Switch from header to implementation file quickly.
+\begin{verbatim}
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+\end{verbatim}
+\item no indentation of namespaces in C++
+\label{sec:orga75c898}
+Essentially, use the Google C++ style formatting.
+\begin{verbatim}
+(use-package google-c-style
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+
+(use-package flymake-google-cpplint
+  :ensure t)
+\end{verbatim}
+\end{enumerate}
 \subsubsection{python}
-\label{sec:org8e9ecf7}
+\label{sec:orgccafedc}
 
 Setup an IDE:
+
 \begin{verbatim}
 (use-package elpy
   :ensure
   :init
-  :init
   (elpy-enable))
 \end{verbatim}
 
-ELPY has its own indentation mode, which is overriding the one I use globally, so disable this one:
+ELPY has its own indentation mode, which is overriding the one I use
+globally, so disable this one:
+
 \begin{verbatim}
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 \end{verbatim}
 
 \begin{enumerate}
 \item py-autopep8
-\label{sec:org22160f0}
+\label{sec:org9ed82f8}
 Add hook to reformat python code based on pep8 spec. You need to
 install \texttt{pip install autopep8} offline.
 
@@ -1414,7 +3087,7 @@ install \texttt{pip install autopep8} offline.
   (setq py-autopep8-options '("--max-line-length=80")))
 \end{verbatim}
 \item py-isort
-\label{sec:org8907059}
+\label{sec:org0b4be65}
 Sort python import. Need to install \texttt{pip install isort} offline.
 
 \begin{verbatim}
@@ -1427,31 +3100,97 @@ Sort python import. Need to install \texttt{pip install isort} offline.
   (setq py-isort-options '("-sl")))
 \end{verbatim}
 \item smartparens
-\label{sec:org7655575}
+\label{sec:orge4bf277}
 \begin{verbatim}
 (add-hook 'python-mode-hook #'smartparens-mode)
 \end{verbatim}
 \end{enumerate}
+\subsubsection{web-mode}
+\label{sec:org263febc}
+web-mode with config for Polymer editing
+\begin{verbatim}
+(use-package web-mode
+  :ensure t
+  :config
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (setq web-mode-enable-css-colorization t))
+\end{verbatim}
+
+Who should use this mode:
+\begin{verbatim}
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+\end{verbatim}
+\subsubsection{web-beautify}
+\label{sec:orgb7eb209}
+This is actually depending on \texttt{js-beautify}. See \href{https://github.com/yasuyk/web-beautify}{web-beautify} for
+details.
+
+\begin{verbatim}
+(use-package web-beautify
+  :ensure
+  :config)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+(add-hook 'json-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+(add-hook 'css-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+(add-hook 'html-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+\end{verbatim}
+\subsubsection{\href{https://github.com/smihica/emmet-mode}{emmet-mode}}
+\label{sec:orgeee6ede}
+Useful abbreviations when coding in HTML. See \href{https://github.com/rooney/zencoding}{zencoding} for details.
+
+\begin{verbatim}
+(use-package emmet-mode
+  :ensure t
+  :after(web-mode css-mode scss-mode)
+  :config)
+(setq emmet-expand-jsx-className? t)
+(setq emmet-move-cursor-between-quotes t)
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'scss-mode-hook  'emmet-mode)
+\end{verbatim}
 \subsubsection{javascript family: .js .ts .jsx}
-\label{sec:org22e2d18}
+\label{sec:orgddd980e}
 There are a couple packages for .js files.
 
 \begin{enumerate}
 \item js2-mode
-\label{sec:orgd4743b6}
+\label{sec:org6507fca}
 First, use \texttt{js2-mode} to handle \texttt{.js} and \texttt{.jsx} files.
 
 \begin{verbatim}
 (use-package js2-mode
-  :ensure
-  :config
-  (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode)))
-(add-hook 'js-mode-hook #'smartparens-mode)
+    :ensure
+    :config)
+
+(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+(add-hook 'js2-mode-hook #'smartparens-mode)
+
 \end{verbatim}
 
 \item prettier-js
-\label{sec:orgc68b506}
+\label{sec:orgc4e1412}
 Link js2-mode to prettier to beautify my code.
 \begin{verbatim}
 (use-package prettier-js
@@ -1464,19 +3203,22 @@ Link js2-mode to prettier to beautify my code.
                            "--tab-width" "2"
                            )));
 (add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'json-mode-hook 'prettier-js-mode)
+(add-hook 'js-mode-hook 'prettier-js-mode)
 \end{verbatim}
+
 \item js-doc
-\label{sec:orge2df120}
+\label{sec:org87ad9e0}
 Nothing is complete without a doc solution.
 
 \begin{verbatim}
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@lenovo.com")
+  (setq js-doc-mail-address "fxia1@mycompany.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.lenovo.com")
-  (setq js-doc-license "Lenovo License")
+  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook
           #'(lambda ()
@@ -1485,1437 +3227,100 @@ Nothing is complete without a doc solution.
 
 \end{verbatim}
 \end{enumerate}
-\section{Org}
-\label{sec:org7b51ad7}
-Load all my org stuff, but first org-mode itself.
-\subsection{Init}
-\label{sec:org596c0d2}
-If variable \texttt{org-directory} is not set yet, map it to my home's
-files. You may set this in the \texttt{\textasciitilde{}/.emacs} to another value,
-e.g. \texttt{(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")}
-
-\subsubsection{{\bfseries\sffamily NEXT} This does not seem to work, check out doc about \href{https://stackoverflow.com/questions/3806423/how-can-i-get-a-variables-initial-value-in-elisp}{defcustom}}
-\label{sec:orgacdd28d}
+\subsubsection{csv}
+\label{sec:org4859fc1}
+mode to edit CSV files.
 \begin{verbatim}
-(use-package org
-  :ensure nil
-  :delight org-mode
-  :config
-  (setq org-startup-indented t)
-  (if (not (boundp 'org-directory))
-      (setq org-directory "~/org"))
-  (add-hook 'org-mode-hook #'(lambda ()
-                               (visual-line-mode)
-                               (org-indent-mode))))
-\end{verbatim}
-\subsection{Access my remote Org files directory}
-\label{sec:org34ced97}
-Let's bind this to a key, so I can open remote dirs. I suually put this in my \texttt{.emacs} as it is host- and user-specific.
-\begin{verbatim}
-(defun paf/open-remote-org-dir ()
-  (interactive)
-  (dired "/ssh:remote.host.com:org"))
-
-(global-set-key (kbd "C-c f r o") 'paf/open-remote-org-dir)
-\end{verbatim}
-\subsection{Helper Functions / Tools found on the web / worg}
-\label{sec:orgd4a35f1}
-\subsubsection{Open remote org dir}
-\label{sec:org7d25c24}
-In your \texttt{.emacs} just add this to configure the location:
-
-\begin{verbatim}
-(setq remote-org-directory "/ssh:fleury@my.hostname.com:OrgFiles")
-\end{verbatim}
-
-Then you can use the keyboard shortcut to open that dir.
-
-\begin{verbatim}
-(defcustom remote-org-directory "~/OrgFiles"
-  "Location of remove OrgFile directory, should you have one."
-  :type 'string
-  :group 'paf)
-(defun paf/open-remote-org-directory ()
-  (interactive)
-  (find-file remote-org-directory))
-
-(global-set-key (kbd "C-c f r o") 'paf/open-remote-org-directory)
-\end{verbatim}
-
-\subsubsection{org-protocol}
-\label{sec:orgf4035e6}
-Let other tools use emacs client to interact
-\begin{verbatim}
-(require 'org-protocol)
-\end{verbatim}
-\subsubsection{Org-relative file function}
-\label{sec:orgac3a293}
-\begin{verbatim}
-(defun org-relative-file (filename)
-  "Compute an expanded absolute file path for org files"
-  (expand-file-name filename org-directory))
-\end{verbatim}
-\subsubsection{Adjust tags on the right}
-\label{sec:orgb665931}
-Dynamically adjust tag position
-\href{https://orgmode.org/worg/org-hacks.html\#org0560357}{source on worg}
-
-\begin{verbatim}
-(defun ba/org-adjust-tags-column-reset-tags ()
-  "In org-mode buffers it will reset tag position according to
-`org-tags-column'."
-  (when (and
-         (not (string= (buffer-name) "*Remember*"))
-         (eql major-mode 'org-mode))
-    (let ((b-m-p (buffer-modified-p)))
-      (condition-case nil
-          (save-excursion
-            (goto-char (point-min))
-            (command-execute 'outline-next-visible-heading)
-            ;; disable (message) that org-set-tags generates
-            (cl-letf (((symbol-function 'message) #'format))
-              (org-set-tags 1 t))
-            (set-buffer-modified-p b-m-p))
-        (error nil)))))
-
-(defun ba/org-adjust-tags-column-now ()
-  "Right-adjust `org-tags-column' value, then reset tag position."
-  (set (make-local-variable 'org-tags-column)
-       (- (- (window-width) (length org-ellipsis))))
-  (ba/org-adjust-tags-column-reset-tags))
-
-(defun ba/org-adjust-tags-column-maybe ()
-  "If `ba/org-adjust-tags-column' is set to non-nil, adjust tags."
-  (when ba/org-adjust-tags-column
-    (ba/org-adjust-tags-column-now)))
-
-(defun ba/org-adjust-tags-column-before-save ()
-  "Tags need to be left-adjusted when saving."
-  (when ba/org-adjust-tags-column
-     (setq org-tags-column 1)
-     (ba/org-adjust-tags-column-reset-tags)))
-
-(defun ba/org-adjust-tags-column-after-save ()
-  "Revert left-adjusted tag position done by before-save hook."
-  (ba/org-adjust-tags-column-maybe)
-  (set-buffer-modified-p nil))
-
-;; between invoking org-refile and displaying the prompt (which
-;; triggers window-configuration-change-hook) tags might adjust,
-;; which invalidates the org-refile cache
-(defadvice org-refile (around org-refile-disable-adjust-tags)
-  "Disable dynamically adjusting tags"
-  (let ((ba/org-adjust-tags-column nil))
-    ad-do-it))
-(ad-activate 'org-refile)
-
-;; Now set it up
-(setq ba/org-adjust-tags-column t)
-;; automatically align tags on right-hand side
-;; TODO(fleury): Does not seem to work as of 2017/12/18
-;; Seems to work again 2018/11/01
-(add-hook 'window-configuration-change-hook
-          'ba/org-adjust-tags-column-maybe)
-(add-hook 'before-save-hook 'ba/org-adjust-tags-column-before-save)
-(add-hook 'after-save-hook 'ba/org-adjust-tags-column-after-save)
-(add-hook 'org-agenda-mode-hook (lambda ()
-                                  (setq org-agenda-tags-column (- (window-width)))))
-\end{verbatim}
-
-\begin{enumerate}
-\item {\bfseries\sffamily TODO} Update \texttt{org-set-tags-to}
-\label{sec:orge014cd6}
-\href{https://orgmode.org/worg/doc.html\#org-set-tags-to}{\texttt{org-set-tags-to}} is gone, and \texttt{org-set-tags} with > 1 args is not working.
-Not sure what to replace it with though\ldots{}
-\end{enumerate}
-
-\subsubsection{Preserve structure in archives}
-\label{sec:orgbb3bb96}
-Make sure archiving preserves the same tree structure, including when archiving subtrees.
-\href{https://orgmode.org/worg/org-hacks.html\#org4265b4c}{source on worg}
-
-\begin{verbatim}
-(defun my-org-inherited-no-file-tags ()
-  (let ((tags (org-entry-get nil "ALLTAGS" 'selective))
-        (ltags (org-entry-get nil "TAGS")))
-    (mapc (lambda (tag)
-            (setq tags
-                  (replace-regexp-in-string (concat tag ":") "" tags)))
-          (append org-file-tags (when ltags (split-string ltags ":" t))))
-    (if (string= ":" tags) nil tags)))
-\end{verbatim}
-
-This used to work, but \texttt{org-extract-archive-file} is no longer defined.
-\begin{verbatim}
-(defadvice org-archive-subtree
-    (around my-org-archive-subtree-low-level activate)
-  (let ((tags (my-org-inherited-no-file-tags))
-        (org-archive-location
-         (if (save-excursion (org-back-to-heading)
-                             (> (org-outline-level) 1))
-             (concat (car (split-string org-archive-location "::"))
-                     "::* "
-                     (car (org-get-outline-path)))
-           org-archive-location)))
-    ad-do-it
-    (with-current-buffer (find-file-noselect (org-extract-archive-file))
-      (save-excursion
-        (while (org-up-heading-safe))
-        (org-set-tags tags)))))
-\end{verbatim}
-\subsubsection{Auto-Refresh Agenda}
-\label{sec:org63e5f41}
-Refresh org-mode agenda regularly.
-\href{https://orgmode.org/worg/org-hacks.html\#orgab827a7}{source on worg}
-There are two functions that supposedly do the same.
-\begin{verbatim}
-(defun kiwon/org-agenda-redo-in-other-window ()
-  "Call org-agenda-redo function even in the non-agenda buffer."
-  (interactive)
-  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
-    (when agenda-window
-      (with-selected-window agenda-window (org-agenda-redo)))))
-
-(defun update-agenda-if-visible ()
-  (interactive)
-  (let ((buf (get-buffer "*Org Agenda*"))
-        wind)
-    (if buf
-        (org-agenda-redo))))
-\end{verbatim}
-\subsubsection{Display Agenda when idle}
-\label{sec:org5dd2e6d}
-Show the agenda when emacs left idle.
-\href{https://orgmode.org/worg/org-hacks.html\#orgaea636d}{source on worg}
-\begin{verbatim}
-(defun jump-to-org-agenda ()
-  (interactive)
-  (let ((buf (get-buffer "*Org Agenda*"))
-        wind)
-    (if buf
-        (if (setq wind (get-buffer-window buf))
-            (select-window wind)
-          (if (called-interactively-p 'any)
-              (progn
-                (select-window (display-buffer buf t t))
-                (org-fit-window-to-buffer)
-                (org-agenda-redo)
-                )
-            (with-selected-window (display-buffer buf)
-              (org-fit-window-to-buffer)
-              ;;(org-agenda-redo)
-              )))
-      (call-interactively 'org-agenda-list)))
-  ;;(let ((buf (get-buffer "*Calendar*")))
-  ;;  (unless (get-buffer-window buf)
-  ;;    (org-agenda-goto-calendar)))
-  )
-\end{verbatim}
-\subsubsection{Display location in agenda}
-\label{sec:org9f75eed}
-From some help on \href{https://emacs.stackexchange.com/questions/26249/customize-text-after-task-in-custom-org-agenda-view}{this page} I think this could work:
-\begin{verbatim}
-(defun paf/org-agenda-get-location()
-  "Gets the value of the LOCATION property"
-  (let ((loc (org-entry-get (point) "LOCATION")))
-    (if (> (length loc) 0)
-        loc
-      "")))
-\end{verbatim}
-
-Also, to set this after org-mode has loaded (\href{https://emacs.stackexchange.com/questions/19091/how-to-set-org-agenda-prefix-format-before-org-agenda-starts}{see here}):
-\begin{verbatim}
-(with-eval-after-load 'org-agenda
-  (add-to-list 'org-agenda-prefix-format
-               '(agenda . "  %-12:c%?-12t %(paf/org-agenda-get-location)% s"))
-\end{verbatim}
-\subsubsection{org-gtasks}
-\label{sec:org36b9a30}
-Should follow this git repo: \href{https://github.com/JulienMasson/org-gtasks}{org-gtasks}
-I have copied a version of the file here, it's not yet available on MELPA.
-
-To help debug, use this before running things:
-(setq request-log-level 'debug)
-
-\begin{verbatim}
-(use-package request
-  :ensure t)
-(load-file "~/Emacs/org-gtasks.el")
-\end{verbatim}
-
-I have this currently in my `\textasciitilde{}/.emacs`:
-\begin{verbatim}
-(use-package org-gtasks
-  :init
-  (org-gtasks-register-account
-     :name "pascal"
-     :directory "~/OrgFiles/GTasks/"
-     :client-id "XXX"
-     :client-secret "XXX"))
-\end{verbatim}
-\subsubsection{org-super-agenda}
-\label{sec:org71187a3}
-This enables a more fine-grained filtering of the agenda items.
-\begin{verbatim}
-(use-package org-super-agenda
+(use-package csv-mode
   :ensure t
-  :config
-  (org-super-agenda-mode t))
+  :mode "\\.csv\\'")
 \end{verbatim}
-\subsubsection{org-roam}
-\label{sec:orgc5233bc}
-My cheat sheet for \texttt{org-roam}
+\subsubsection{json}
+\label{sec:org026a42d}
 
-All keys prefixed with \texttt{C-c n}
-
-\begin{center}
-\begin{tabular}{lc}
-\hline
-Function & \texttt{C-c n <key>}\\
-\hline
-Toggle side panel & l\\
-\hline
-Find/create & f\\
-Insert link & i\\
-Capture & c\\
-\hline
-Graph & g\\
-Switch to buffer & b\\
-\hline
-\end{tabular}
-\end{center}
-
+This should be installed before the javascript stuff because I'll be
+using the \texttt{prettier} as beautifier.
 
 \begin{verbatim}
-(use-package org-roam
-  :ensure t
-  :hook (after-init . org-roam-mode)
-  :init (setq org-roam-directory
-              (org-relative-file "OrgRoam"))
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n b" . org-roam-switch-to-buffer)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n c" . org-roam-capture)
-               ("C-c n g" . org-roam-graph))
-         :map org-mode-map
-              (("C-c n i" . org-roam-insert))))
-
-(use-package company-org-roam
-  :ensure t
-  :after org-roam)
-\end{verbatim}
-
-EmacSQL will need to get its C-binary compiled, and needs supporting tools. Note that 'tcc' for Termux seems not complete enough for the job.
-\begin{verbatim}
-# org-roam needs this binary
-install_pkg -x sqlite3 sqlite3
-# Make sure there is a C compiler for emacsql-sqlite
-[[ -n "$(which cc)" ]] || install_pkg -x cc clang
-\end{verbatim}
-
-\subsubsection{org-clock-convenience}
-\label{sec:orga9fd33e}
-\begin{verbatim}
-(use-package org-clock-convenience
-  :ensure t
-  :bind (:map org-agenda-mode-map
-           ("<S-right>" . org-clock-convenience-timestamp-up)
-           ("<S-left>" . org-clock-convenience-timestamp-down)
-           ("[" . org-clock-convenience-fill-gap)
-           ("]" . org-clock-convenience-fill-gap-both)))
-\end{verbatim}
-\subsubsection{org-kanban}
-\label{sec:org06bed54}
-\begin{verbatim}
-;;(use-package org-kanban
-;;  :ensure t)
-\end{verbatim}
-\subsubsection{org-board}
-\label{sec:org4d0a7b7}
-Archive entire sites locally with `wget`.
-\begin{verbatim}
-(use-package org-board
-  :ensure t
-  :config
-  (global-set-key (kbd "C-c o") org-board-keymap))
-\end{verbatim}
-
-This is the needed tool used to fetch a URL's content.
-\begin{verbatim}
-# wget used for org-board archiving.
-install_pkg -x wget wget
-\end{verbatim}
-
-\subsubsection{org-reveal}
-\label{sec:org1ead49f}
-This presentation generator is still under review (by me).
-
-\begin{verbatim}
-# Install reveal.js
-if [[ -d "${HOME}/workspace/me/moment/reveal.js" ]]; then
-  echo "Reveal already installed"
-else
-  (cd ~/ && git clone https://github.com/hakimel/reveal.js.git)
-fi
-\end{verbatim}
-
-\begin{verbatim}
-(use-package ox-reveal
-  :ensure t
-  :after (htmlize)
-  :config
-  (setq org-reveal-root (expand-file-name "~/workspace/me/moment/reveal.js")))
-
-(use-package htmlize
-  :ensure t)
-\end{verbatim}
-
-\subsubsection{iimage (M-I)}
-\label{sec:orgdc30902}
-Make the display of images a simple key-stroke away.
-\begin{verbatim}
-(defun paf/org-toggle-iimage-in-org ()
-  "display images in your org file"
-  (interactive)
-  (if (face-underline-p 'org-link)
-      (set-face-underline 'org-link nil)
-    (set-face-underline 'org-link t))
-  (iimage-mode 'toggle))
-
-(use-package iimage
-  :config
-  (add-to-list 'iimage-mode-image-regex-alist
-               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
-                             "\\)\\]")  1))
-  (add-hook 'org-mode-hook (lambda ()
-                             ;; display images
-                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
-                            )))
-\end{verbatim}
-\subsubsection{Properties collector}
-\label{sec:org79c615f}
-Collect properties into tables. See documentation in the file.
-\begin{verbatim}
-(load-file "~/Emacs/org-collector.el")
-\end{verbatim}
-
-\subsection{My Setup}
-\label{sec:org20c29c0}
-These are mostly org-config specific to me, myself and I.
-\subsubsection{key mappings}
-\label{sec:org14cf40d}
-\begin{verbatim}
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'org-iswitchb)
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-<up>") 'org-move-subtree-up)
-            (local-set-key (kbd "C-<down>") 'org-move-subtree-down)
-            (local-set-key (kbd "C-c l") 'org-store-link)
-            (local-set-key (kbd "C-c C-l") 'org-insert-link)))
-
-\end{verbatim}
-\subsubsection{display settings}
-\label{sec:orgb65ceba}
-Some config for display.
-\begin{verbatim}
-(setq org-hide-leading-stars t)
-(setq org-log-done t)
-(setq org-startup-indented t)
-(setq org-startup-folded t)
-(setq org-ellipsis "...")
-\end{verbatim}
-
-\subsubsection{org-habit}
-\label{sec:org36a6ea3}
-\begin{verbatim}
-(use-package org-habit
-  :delight
-  :config
-  (setq org-habit-graph-column 38)
-  (setq org-habit-preceding-days 35)
-  (setq org-habit-following-days 10)
-  (setq org-habit-show-habits-only-for-today nil))
-\end{verbatim}
-\subsubsection{bash command}
-\label{sec:org6d3b9d6}
-\begin{verbatim}
-(setq org-babel-sh-command "bash")
-\end{verbatim}
-\subsubsection{org-clock properties}
-\label{sec:org2935d0e}
-clock stuff into a drawer.
-\begin{verbatim}
-(setq org-clock-into-drawer t)
-(setq org-log-into-drawer t)
-(setq org-clock-int-drawer "CLOCK")
-\end{verbatim}
-\subsubsection{open first agenda file}
-\label{sec:orga9d9959}
-F12 open the first agenda file
-\begin{verbatim}
-(defun org-get-first-agenda-file ()
-  (interactive)
-  (find-file (elt org-agenda-files 0)))
-(global-set-key [f12] 'org-get-first-agenda-file)
-; F12 on Mac OSX displays the dashboard....
-(global-set-key [C-f12] 'org-get-first-agenda-file)
-\end{verbatim}
-\subsubsection{org-ehtml [localhost:55555]}
-\label{sec:orgd374920}
-This will start serving the org files through the emacs-based webbrowser when pressing \texttt{M-f12} (on localhost:55555)
-\begin{verbatim}
-(use-package org-ehtml
-  :ensure t
-  :config
-  (setq org-ehtml-docroot (expand-file-name org-directory))
-  (setq org-ehtml-everything-editable t)
-  (setq org-ehtml-allow-agenda t))
-
-(defun paf/start-web-server ()
-  (interactive)
-  (ws-start org-ehtml-handler 55555))
-(global-set-key (kbd "<M-f12>") 'paf/start-web-server)
-\end{verbatim}
-\subsubsection{org-link-abbrev}
-\label{sec:org1076e09}
-This lets one write links as e.g. [ [b:123457] ]
-\begin{verbatim}
-(setq org-link-abbrev-alist
-      '(("b" . "http://b/")
-        ("go" . "http://go/")
-        ("cl" . "http://cr/")))
-\end{verbatim}
-\subsubsection{org-secretary}
-\label{sec:org31d6123}
-This package is good, but it does not do it simply. I re-modeled it
-somewhat below.
-\begin{verbatim}
-(use-package org-secretary
-  :ensure org-plus-contrib
-  :config
-  (setq org-sec-me "paf")
-  (setq org-tag-alist '(("PRJ" . ?p)
-                        ("DESIGNDOC" . ?D)
-                        ("Milestone" . ?m)
-                        ("DESK" . ?d)
-                        ("HOME" . ?h)
-                        ("VC" . ?v))))
-\end{verbatim}
-
-This is my version of the org-secretary
-\begin{verbatim}
-(use-package paf-secretary
-  :load-path "~/Emacs"
-  :bind (("\C-cw" . paf-sec-set-with)
-         ("\C-cW" . paf-sec-set-where)
-         ("\C-cj" . paf-sec-tag-entry))
-  :config
-  (setq paf-sec-me "paf")
-  (setq org-tag-alist '(("PRJ" . ?p)
-                        ("DESIGNDOC" . ?D)
-                        ("Milestone" . ?m)
-                        ("DESK" . ?d)
-                        ("HOME" . ?h)
-                        ("VC" . ?v))))
-\end{verbatim}
-\subsubsection{task tracking}
-\label{sec:org37dbb7e}
-Track task dependencies, and dim them in the agenda.
-
-\begin{verbatim}
-(setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks 'invisible)
-\end{verbatim}
-\subsubsection{effort \& columns mode}
-\label{sec:org68fc38c}
-
-\begin{verbatim}
-(setq org-global-properties
-      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 4:00 8:00 16:00")))
-(setq org-columns-default-format
-      "%TODO %30ITEM %3PRIORITY %6Effort{:} %10DEADLINE")
-\end{verbatim}
-\subsubsection{org-todo keywords}
-\label{sec:orgd32b510}
-
-\begin{verbatim}
-(setq org-todo-keywords
-      '((sequence "TODO(t!)" "NEXT(n!)" "STARTED(s!)" "WORKING(w!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
-        (sequence "APPLIED(A!)" "WAITING(w!)" "ACCEPTED" "|" "REJECTED" "PUBLISHED")
-        (sequence "TASK(m!)" "ACTIVE" "|" "DONE(d!)" "CANCELLED(C@)" )))
-
-(setq org-tags-exclude-from-inheritance '("PRJ" "REGULAR")
-      org-use-property-inheritance '("PRIORITY")
-      org-stuck-projects '("+PRJ/-DONE-CANCELLED"
-                           ;; it is considered stuck if there is no next action
-                           (;"TODO"
-                            "NEXT" "STARTED" "TASK") ()))
-
-(setq org-todo-keyword-faces
-      '(
-        ("TODO" . (:foreground "purple" :weight bold))
-        ("TASK" . (:foreground "steelblue" :weight bold))
-        ("NEXT" . (:foreground "red" :weight bold))
-        ("STARTED" . (:foreground "green" :weight bold))
-        ("WAITING" . (:foreground "GhostWhite" :weight bold))
-        ("FLAG_GATED" . (:foreground "orange" :weight bold))
-        ("SOMEDAY" . (:foreground "steelblue" :weight bold))
-        ("MAYBE" . (:foreground "steelblue" :weight bold))
-        ("WORKING" . (:foreground "GhostWhite" :weight bold))
-        ("NEW" . (:foreground "orange" :weight bold))
-        ("RUNNING" . (:foreground "orange" :weight bold))
-        ("WORKED" . (:foreground "green" :weight bold))
-        ("FAILED" . (:foreground "red" :weight bold))
-        ("REFILED" . (:foreground "gray"))
-        ;; For publications
-        ("APPLIED" . (:foreground "orange" :weight bold))
-        ("ACCEPTED" . (:foreground "orange" :weight bold))
-        ("REJECTED" . (:foreground "red" :weight bold))
-        ("PUBLISHED" . (:foreground "green" :weight bold))
-        ;; Other stuff
-        ("ACTIVE" . (:foreground "GhostWhite" :weight bold))
-        ))
-\end{verbatim}
-\subsubsection{org-agenda}
-\label{sec:org4cd6a60}
-\begin{enumerate}
-\item where are my agenda files
-\label{sec:org9e91408}
-\begin{verbatim}
-(setq org-agenda-files (list "~/org/tasks.org"))
-\end{verbatim}
-\item views
-\label{sec:org1967422}
-\begin{verbatim}
-(setq org-agenda-custom-commands
-      '(("t" "Hot Today" ((agenda "" ((org-agenda-span 'day)))
-                          (tags-todo "-with={.+}/WAITING")
-                          (tags-todo "-with={.+}+TODO=\"STARTED\"")
-                          (tags-todo "/NEXT")))
-        ("T" "Team Today" ((agenda "" ((org-agenda-span 'day)))
-                           (tags-todo "with={.+}"
-                                    ((org-super-agenda-groups
-                                      '((:auto-property "with"))))
-                                    )))
-        ("r" "Recurring" ((tags "REGULAR")
-                          (tags-todo "/WAITING")
-                          (tags-todo "TODO=\"STARTED\"")
-                          (tags-todo "/NEXT")))
-        ("n" "Agenda and all TODO's" ((agenda "")
-                                      (alltodo "")))
-        ("N" "Next actions" tags-todo "-dowith={.+}/!-TASK-TODO"
-         ((org-agenda-todo-ignore-scheduled t)))
-        ("h" "Work todos" tags-todo "-dowith={.+}/!-TASK"
-         ((org-agenda-todo-ignore-scheduled t)))
-        ("H" "All work todos" tags-todo "-personal/!-TASK-CANCELLED"
-         ((org-agenda-todo-ignore-scheduled nil)))
-        ("A" "Work todos with doat or dowith" tags-todo
-         "dowith={.+}/!-TASK"
-         ((org-agenda-todo-ignore-scheduled nil)))
-
-        ("p" "Tasks with current WITH and WHERE"
-         ((tags-todo (paf-sec-replace-with-where "with={$WITH}" ".+")
-                     ((org-agenda-overriding-header
-                       (paf-sec-replace-with-where "Tasks with $WITH in $WHERE" "anyone" "any place"))
-                      (org-super-agenda-groups
-                       '((:name "" :pred paf-sec-limit-to-with-where)
-                         (:discard (:anything t)))))
-                     )))
-        ("j" "TODO dowith and TASK with"
-         ((org-sec-with-view "TODO dowith")
-          (org-sec-stuck-with-view "TALK with")
-          (org-sec-where-view "TODO doat")
-          (org-sec-assigned-with-view "TASK with")
-          (org-sec-stuck-with-view "STUCK with")
-          (todo "STARTED")))
-        ("J" "Interactive TODO dowith and TASK with"
-         ((org-sec-who-view "TODO dowith")))))
-
-(setq org-agenda-skip-deadline-prewarning-if-scheduled 2)
-\end{verbatim}
-\item delight
-\label{sec:org137009d}
-\begin{verbatim}
-(delight 'org-agenda-mode)
-\end{verbatim}
-\item colors and faces
-\label{sec:org3a386b0}
-Make the calendar day info a bit more visible and contrasted.
-
-\begin{verbatim}
-;; Faces to make the calendar more colorful.
-(custom-set-faces
- '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
- '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
- '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold)))))
-\end{verbatim}
-\item now marker
-\label{sec:org6fd3630}
-A more visible current-time marker in the agenda
-
-\begin{verbatim}
-(setq org-agenda-current-time-string ">>>>>>>>>> NOW <<<<<<<<<<")
-\end{verbatim}
-\item auto-refresh
-\label{sec:orgf493013}
-
-\begin{verbatim}
-;; will refresh it only if already visible
-(run-at-time nil 180 'update-agenda-if-visible)
-;;(add-hook 'org-mode-hook
-;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
-\end{verbatim}
-
-This would open the agenda if any org file was opened. In the end, I
-don't like this feature, so it is disabled by not tangling it.
-\begin{verbatim}
-;; Make this happen only if we open an org file.
-(add-hook 'org-mode-hook
-          (lambda () (run-with-idle-timer 600 t 'jump-to-org-agenda)))
-\end{verbatim}
-\item auto-save org files when idle
-\label{sec:org3065b63}
-
-This will save them regularly when the idle for more than a minute.
-
-\begin{verbatim}
-(add-hook 'org-mode-hook
-    (lambda () (run-with-idle-timer 600 t 'org-save-all-org-buffers)))
-\end{verbatim}
-\item export
-\label{sec:org5bc0491}
-That's the export function to update the agenda view.
-\begin{verbatim}
-(setq org-agenda-exporter-settings
-      '((ps-number-of-columns 2)
-        (ps-portrait-mode t)
-        (org-agenda-add-entry-text-maxlines 5)
-        (htmlize-output-type 'font)))
-
-(defun dmg-org-update-agenda-file (&optional force)
-  (interactive)
-  (save-excursion
-    (save-window-excursion
-      (let ((file "~/org/agenda.html"))
-        (org-agenda-list)
-        (org-agenda-write file)))))
-\end{verbatim}
-\end{enumerate}
-\subsubsection{org-duration}
-\label{sec:org38b7b46}
-\begin{verbatim}
-(use-package org-duration
-  :config
-  (setq org-duration-units
-        `(("min" . 1)
-          ("h" . 60)
-          ("d" . ,(* 60 8))
-          ("w" . ,(* 60 8 5))
-          ("m" . ,(* 60 8 5 4))
-          ("y" . ,(* 60 8 5 4 10)))
-        )
-  (org-duration-set-regexps))
-\end{verbatim}
-\subsubsection{Capture \& refile}
-\label{sec:org38d9dc6}
-Capture and refile stuff, with some templates that I think are useful.
-
-Very nice post on how to get capture templats from a file:
-\href{https://joshrollinswrites.com/help-desk-head-desk/org-capture-in-files/}{Org-capture
-in Files}.
-
-\begin{verbatim}
-(setq org-default-notes-file (org-relative-file "inbox.org"))
-
-(setq org-capture-templates
-      `(("t" "Task"
-         entry (file+headline ,(org-relative-file "inbox.org") "Tasks")
-         "* TODO %?\n%U\n\n%x"
-         :clock-resume t)
-        ;;
-        ("i" "Idea"
-         entry (file+headline ,(org-relative-file "inbox.org") "Ideas")
-         "* SOMEDAY %?\n%U\n\n%x"
-         :clock-resume t)
-        ;;
-        ("m" "Meeting"
-         entry (file+headline ,(org-relative-file "inbox.org") "Meetings")
-         "* %?  :MTG:\n%U\n%^{with}p"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("s" "Stand-up"
-         entry (file+headline ,(org-relative-file "inbox.org") "Meetings")
-         "* Stand-up  :MTG:\n%U\n\n%?"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("1" "1:1"
-         entry (file+headline ,(org-relative-file "inbox.org") "Meetings")
-         "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("p" "Talking Point"
-         entry (file+headline ,(org-relative-file "refile.org") "Talking Points")
-         "* %?  :TALK:\n%U\n%^{dowith}p"
-         :clock-keep t)
-        ;;
-        ("j" "Journal"
-         entry (file+olp+datetree ,(org-relative-file "journal.org"))
-         "* %?\n%U"
-         :clock-in t
-         :clock-resume t
-         :kill-buffer t)))
-
-;; show up to 2 levels for refile targets, in all agenda files
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
-(setq org-log-refile t)  ;; will add timestamp when refiled.
-
-;; from: http://doc.norang.ca/org-mode.html
-;; Exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets"
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-(setq org-refile-target-verify-function 'bh/verify-refile-target)
-\end{verbatim}
-\subsubsection{OrgRoam templates}
-\label{sec:orgad8abf7}
-\begin{verbatim}
-(setq org-roam-capture-templates
-      `(("m" "Meeting" entry (function org-roam--capture-get-point)
-             "* %?\n%U\n%^{with}\n"
-             :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
-             :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
-             )))
-
-\end{verbatim}
-\subsubsection{org-babel}
-\label{sec:orgb053a25}
-What kind of code block languages do I need
-
-\begin{verbatim}
-(setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (R . t)
-   (dot . t)
-   (emacs-lisp . t)
-   (gnuplot . t)
-   (python . t)
-   (ledger . t)
-   ;;(sh . t)
-   (latex . t)
-   (shell . t)
-  ))
-\end{verbatim}
-\subsubsection{org-export}
-\label{sec:org9deeb59}
-Add a few formats to the export functionality of org-mode.
-
-\begin{verbatim}
-(use-package ox-odt
-  :defer)
-(use-package ox-taskjuggler
-  :defer)
-(use-package ox-impress-js
-  :defer)
-\end{verbatim}
-\subsubsection{plant-uml}
-\label{sec:orgeb312a3}
-
-Tell where PlantUML is to be found. This needs to be downloaded and
-installed separately, see the \href{http://plantuml.com/}{PlantUML website}.
-
-You could install the PlantUML JAR file with this snippet:
-
-\begin{verbatim}
-# Get a version of the PlantUML jar file.
-install_pkg -x wget wget
-
-URL='http://sourceforge.net/projects/plantuml/files/plantuml.jar/download'
-DIR="${HOME}/Emacs"
-if [[ ! -e "${DIR}/plantuml.jar" ]]; then
-    [[ -d "${DIR}" ]] || mkdir -p "${DIR}"
-    (cd "${DIR}" && wget -O plantuml.jar "${URL}")
-    ls -l "${DIR}/plantuml.jar"
-fi
-\end{verbatim}
-
-\begin{verbatim}
-(use-package plantuml-mode
- :ensure t
- :config
-  (setq plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
-  (setq org-plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
-  ;; Let us edit PlantUML snippets in plantuml-mode within orgmode
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-  ;; make it load this language (for export ?)
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
-  ;; Enable plantuml-mode for PlantUML files
-  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
-\end{verbatim}
-
-\subsubsection{PDF-Tools}
-\label{sec:org3e536de}
-A bit difficult to find the docs of how to use it, but it seems quite
-useful.
-
-Disabled, as it causes only trouble to me, and I am not really using
-it anyway.
-
-\begin{verbatim}
-(use-package pdf-tools
-  :if (and (eq system-type 'gnu/linux)  ;; Set it up on Linux
-           (not (string-prefix-p "aarch64" system-configuration)))  ;; but not mobile devices
-  :pin manual  ;; update only manually
-  :config
-  ;; initialize
-  (pdf-tools-install)
-  (setq-default pdf-view-display-size 'fit-page)           ;; Fit to page when opening
-  (add-hook 'pdf-view-mode-hook (lambda () (cua-mode 0)))  ;; turn off cua so copy works
-  (setq pdf-view-resize-factor 1.1)                        ;; more fine-grained zoom control
-  ;; keyboard shortcuts
-  (define-key pdf-view-mode-map (kbd "h") 'pdf-annot-add-highlight-markup-annotation)
-  (define-key pdf-view-mode-map (kbd "t") 'pdf-annot-add-text-annotation)
-  (define-key pdf-view-mode-map (kbd "D") 'pdf-annot-delete))
-
-(use-package org-pdfview
-  :after (pdf-tools)
-  :init
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-  (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open)))
-\end{verbatim}
-
-\begin{verbatim}
-# For all the native apps related to PDF tools
-# I did not sintall it on Max OSX yet.
-if [[ "$(uname)" != "Darwin" ]]; then
-  install_pkg pdf-tools
-fi
-\end{verbatim}
-\subsubsection{yankpad}
-\label{sec:orgd228adf}
-Check out the \href{https://kungsgeten.github.io/yankpad.html}{blog post} (and the \href{https://kungsgeten.github.io/yankpad13.html}{follow-up}) and the \href{https://github.com/Kungsgeten/yankpad}{package docs}.
-
-\begin{verbatim}
-(use-package yankpad
-  :ensure t
-  :defer
-  :init
-  (setq yankpad-file (org-relative-file "yankpad.org"))
-  :config
-  (bind-key "C-c f y m" 'yankpad-map)
-  (bind-key "C-c f y e" 'yankpad-expand))
-\end{verbatim}
-
-\subsubsection{\href{https://www.eliasstorms.net/zetteldeft/}{Zetteldeft}}
-\label{sec:org0cb593c}
-This is a note-taking packages inspired by the principles of the
-\href{https://zettelkasten.de/}{Zettelkasten}
-
-\begin{verbatim}
-(use-package deft
-  :ensure t)
-(use-package avy
-  :ensure t)
-
-(use-package zetteldeft
-  :ensure t
-  :after (org deft avy)
-
-  :config
-  (setq deft-extensions '("org" "md" "txt"))
-  (setq deft-directory (org-relative-file "Zettelkasten"))
-  (setq deft-recursive t)
-
-  :bind (("C-c z d" . deft)
-         ("C-c z D" . zetteldeft-deft-new-search)
-         ("C-c z R" . deft-refresh)
-         ("C-c z s" . zetteldeft-search-at-point)
-         ("C-c z c" . zetteldeft-search-current-id)
-         ("C-c z f" . zetteldeft-follow-link)
-         ("C-c z F" . zetteldeft-avy-file-search-ace-window)
-         ("C-c z l" . zetteldeft-avy-link-search)
-         ("C-c z t" . zetteldeft-avy-tag-search)
-         ("C-c z T" . zetteldeft-tag-buffer)
-         ("C-c z i" . zetteldeft-find-file-id-insert)
-         ("C-c z I" . zetteldeft-find-file-full-title-insert)
-         ("C-c z o" . zetteldeft-find-file)
-         ("C-c z n" . zetteldeft-new-file)
-         ("C-c z N" . zetteldeft-new-file-and-link)
-         ("C-c z r" . zetteldeft-file-rename))
-)
-\end{verbatim}
-
-Update the version by downloading the latest version here:
-
-\begin{verbatim}
-wget https://raw.githubusercontent.com/EFLS/zetteldeft/master/zetteldeft.el -O ~/Emacs/zetteldeft.el
-\end{verbatim}
-
-\subsubsection{reload org}
-\label{sec:org3020721}
-Ran into a \href{https://github.com/seagle0128/.emacs.d/issues/129}{strange error}, and reloading org at the end is the
-solution:
-
-\begin{verbatim}
-(org-reload)
-\end{verbatim}
-
-\section{Write chinese}
-\label{sec:orga42552f}
-I have been using this one w/ reasonable success.
-\begin{verbatim}
-(use-package pyim
-  :ensure
-  :defer 30
-  :config
-  ;; 激活 basedict 拼音词库
-  (use-package pyim-basedict
-    :ensure nil
-    :config (pyim-basedict-enable))
-
-  ;; 五笔用户使用 wbdict 词库
-  ;; (use-package pyim-wbdict
-  ;;   :ensure nil
-  ;;   :config (pyim-wbdict-gbk-enable))
-
-  (setq default-input-method "pyim")
-
-  ;; 我使用全拼
-  (setq pyim-default-scheme 'quanpin)
-
-  ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
-  ;; 我自己使用的中英文动态切换规则是：
-  ;; 1. 光标只有在注释里面时，才可以输入中文。
-  ;; 2. 光标前是汉字字符时，才能输入中文。
-  ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-  (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-dynamic-english
-                  pyim-probe-isearch-mode
-                  pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
-
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
-
-  ;; 开启拼音搜索功能
-  ;; (pyim-isearch-mode 1)
-
-  ;; 使用 pupup-el 来绘制选词框
-  (setq pyim-page-tooltip 'popup)
-
-  ;; 选词框显示5个候选词
-  (setq pyim-page-length 5)
-
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  (add-hook 'emacs-startup-hook
-            #'(lambda () (pyim-restart-1 t)))
-  :bind
-  (;与 pyim-probe-dynamic-english 配合
-  ("M-j" . pyim-convert-code-at-point)
-
-   ("C-;" . pyim-delete-word-from-personal-buffer)))
-   (setq default-input-method "pyim")
-   (global-set-key (kbd "C-\\") 'toggle-input-method)
-\end{verbatim}
-\section{Office stuff}
-\label{sec:org2cd8ff1}
-Using emacs in a corporate env can be daunting.
-
-\subsection{mu4e email}
-\label{sec:orgff3fcd7}
-mu4e only a emac client. The workhorse are davmail, isync and mu. You need to install these offline and hook them up using the config below.
-
-\subsubsection{install \& minimal setup}
-\label{sec:org55aa375}
-First thing first, load the package. As you can see, I have used \texttt{apt-get} install mu4e.
-
-\begin{verbatim}
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
-(require 'mu4e)
-\end{verbatim}
-
-Then we load \texttt{maildirs-extension}:
-
-\begin{verbatim}
-(use-package mu4e-maildirs-extension
+(use-package json-mode
   :ensure
   :config)
-(mu4e-maildirs-extension)
 \end{verbatim}
+\subsubsection{yaml}
+\label{sec:org9c4dd88}
 
-Now, we tell emacs I want to use \texttt{mu4e} as email client:
+Details are \href{https://github.com/yoshiki/yaml-mode}{here}.
 
 \begin{verbatim}
-(setq mail-user-agent 'mu4e-user-agent)
-\end{verbatim}
-
-\subsubsection{how to get mails}
-\label{sec:org221baae}
-Setup location of my maildir.
-\begin{verbatim}
-(setq mu4e-maildir (expand-file-name "~/Maildir"))
-\end{verbatim}
-
-Sync email by calling \texttt{mbsync}:
-\begin{verbatim}
-(setq mu4e-get-mail-command "mbsync -a")
-\end{verbatim}
-
-How often should I check? Value in seconds:
-\begin{verbatim}
-(setq mu4e-update-interval 600)
-\end{verbatim}
-
-Setup some common folders:
-\begin{verbatim}
-(setq mu4e-drafts-folder "/drafts"
-      mu4e-sent-folder   "/sent"
-      mu4e-trash-folder  "/trash")
-\end{verbatim}
-
-Setup some shortcuts as bookmarks:
-\begin{verbatim}
-(add-to-list
- 'mu4e-bookmarks
- '("flag:attach"
-   "Messages with attachment"
-   ?a) t)
-
-(add-to-list
- 'mu4e-bookmarks
- '("size:5M..500M"
-   "Big messages"
-   ?b) t)
-
-(add-to-list
- 'mu4e-bookmarks
- '("flag:flagged"
-   "Flagged messages"
-   ?f) t)
-\end{verbatim}
-
-\subsubsection{list view}
-\label{sec:org23b6502}
-Customize the list view header:
-\begin{verbatim}
-(setq mu4e-headers-date-format "%b-%d %a"
-      mu4e-headers-fields '((:date . 10)
-                            (:flags . 5)
-                            (:recipnum . 3)
-                            (:from-or-to . 10)
-                            (:thread-subject . nil)))
-\end{verbatim}
-
-Skip duplicates:
-
-\begin{verbatim}
-(setq mu4e-headers-skip-duplicates t)
-\end{verbatim}
-
-Showing related in a tree fashion so I know the context:
-
-\begin{verbatim}
-(setq mu4e-headers-include-related t)
-\end{verbatim}
-
-Here is a fun one. I noticed that the email thread grows like that greedy snake game, a pretty good sign that the team is malfunctioning :) So we add a displayed number on the number of recipients, and just watch it grow:
-\begin{verbatim}
-(add-to-list 'mu4e-header-info-custom
-             '(:recipnum .
-                         ( :name "Number of recipients"  ;; long name, as seen in the message-view
-                                 :shortname "R#"           ;; short name, as seen in the headers view
-                                 :help "Number of recipients for this message" ;; tooltip
-                                 :function (lambda (msg)
-                                             (format "%d"
-                                                     (+ (length (mu4e-message-field msg :to))
-                                                        (length (mu4e-message-field msg :cc))))))))
-
-\end{verbatim}
-\subsubsection{read \& attachment}
-\label{sec:org626d795}
-Save attachment to:
-
-\begin{verbatim}
-(setq mu4e-attachment-dir "~/Downloads")
-\end{verbatim}
-
-To open HTML in browser:
-\begin{verbatim}
-(add-to-list 'mu4e-view-actions
-             '("ViewInBrowser" . mu4e-action-view-in-browser)
-             t)
-\end{verbatim}
-
-Attempt to show images when viewing messages:
-
-\begin{verbatim}
-(setq mu4e-view-show-images t)
-\end{verbatim}
-
-Use imagemagick, if available:
-
-\begin{verbatim}
-(when (fboundp 'imagemagick-register-types)
-  (imagemagick-register-types))
-\end{verbatim}
-\subsubsection{write new}
-\label{sec:org4183f51}
-My signature line:
-
-\begin{verbatim}
-(setq mu4e-compose-signature
-      (concat
-       "Best regards,\n\n"
-       "Feng Xia\n"
-       "W: http://www.lenovo.com\n"))
-\end{verbatim}
-\subsubsection{send}
-\label{sec:orge3a7cac}
-Sending email is to use SMTP. Here I'm showing to use the company one
-through \texttt{davmail} which runs smtp listen on port \texttt{1025}. You can also
-use Gmail/hotmail:
-
-\begin{verbatim}
-(use-package smtpmail
-  :ensure t
-  :config
-  (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "fxia1@lenovo.com"
-        smtpmail-debug-info t
-        smtpmail-smtp-user "fxia1@lenovo.com"
-        smtpmail-default-smtp-server "localhost"
-        smtpmail-auth-credentials (expand-file-name "~/.authinfo")
-        smtpmail-smtp-service 1025
-        smtpmail-stream-type nil
-        starttls-use-gnutls nil
-        starttls-extra-arguments nil))
-\end{verbatim}
-
-There is a toggle where you can queue the sending email first instead
-of sending to server immediately. This is useful for travel when you
-just write, then queue, then when reconnected to the internect, send.
-
-\begin{verbatim}
-(setq smtpmail-queue-mail nil
-      smtpmail-queue-dir "~/Maildir/queue/cur")
-\end{verbatim}
-\subsubsection{reply}
-\label{sec:org04a3b07}
-When replying an email, auto fill in my info:
-\begin{verbatim}
-(setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
-      user-mail-address "fxia1@lenovo.com"
-      user-full-name "Feng Xia"
-      message-signature  (concat
-                          "Feng Xia\n"
-                          "http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/\n")
-      message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
-      message-citation-line-function 'message-insert-formatted-citation-line
-      mu4e-headers-results-limit 500)
-\end{verbatim}
-\subsubsection{kill all buffer upon exit}
-\label{sec:org09b35f4}
-mu4e can open a lot of writing buffers. Just kill them all when we exit mu4e:
-
-\begin{verbatim}
-(setq message-kill-buffer-on-exit t)
-\end{verbatim}
-\subsubsection{write html}
-\label{sec:org844e116}
-Emacs doesn't like html email body. Nor do I. But one thing I found
-out is that markdown mode table will look terrible as plain text on
-receiving end. So we now write email in org mode, then use this to
-convert it to html before sending:
-\begin{verbatim}
-(use-package org-mime
+(use-package yaml-mode
   :ensure
-  :config
-  (setq org-mime-export-ascii 'utf-8))
+  :config)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 \end{verbatim}
+\subsection{LAST: enforce my tab style}
+\label{sec:orgf0adae6}
 
-How about writing it in markdown and export?
+Found this \href{https://github.com/syl20bnr/spacemacs/issues/5923}{here}, and I like it, to set my styles in a central
+location. This was researched while battling the .js tab level. I
+don't want to use the \texttt{customize} way since that will be a hidden
+manual step after a fresh install.
+
+First, define a func to include my indent settings. It takes an input
+argument:
+
 \begin{verbatim}
-(defun multipart-html-message (plain html)
-  "Creates a multipart HTML email with a text part and an html part."
-  (concat "<#multipart type=alternative>\n"
-          "<#part type=text/plain>"
-          plain
-          "<#part type=text/html>\n"
-          html
-          "<#/multipart>\n"))
+(defun my-setup-indent (n)
+  ;; java/c/c++
+  (setq-local standard-indent n)
+  (setq-local c-basic-offset n)
 
-(defun convert-message-to-markdown ()
-  "Convert the message in the current buffer to a multipart HTML email.
+  ;; javascript family
+  (setq-local javascript-indent-level n) ; javascript-mode
+  (setq-local js-indent-level n) ; js-mode
+  (setq-local js2-basic-offset n) ; js2-mode
+  (setq-local js-switch-indent-offset n) ; js-mode
+  (setq-local javascript-indent-level n) ; javacript-mode
+  (setq-local react-indent-level n) ; react-mode
+  (setq-local js2-basic-offset n)
 
-The HTML is rendered by treating the message content as Markdown."
-  (interactive)
-  (unless (executable-find "pandoc")
-    (error "Pandoc not found, unable to convert message"))
-  (let* ((begin
-          (save-excursion
-            (goto-char (point-min))
-            (search-forward mail-header-separator)))
-         (end (point-max))
-         (html-buf (generate-new-buffer "*mail-md-output*"))
-         (exit-code
-          (call-process-region begin end "pandoc" nil html-buf nil
-                               "--quiet" "-f" "gfm" "-t" "html"))
-         (html (format "<html>\n<head></head>\n<body>\n%s\n</body></html>\n"
-                (with-current-buffer html-buf
-                  (buffer-substring (point-min) (point-max)))))
-         (raw-body (buffer-substring begin end)))
-    (when (not (= exit-code 0))
-      (error "Markdown conversion failed, see %s" (buffer-name html-buf)))
-    (with-current-buffer html-buf
-      (set-buffer-modified-p nil)
-      (kill-buffer))
-    (undo-boundary)
-    (delete-region begin end)
-    (save-excursion
-      (goto-char begin)
-      (newline)
-      (insert (multipart-html-message raw-body html)))))
+  ;; html, css
+  (setq-local web-mode-attr-indent-offset n) ; web-mode
+  (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq-local web-mode-sql-indent-offset n) ; web-mode
+  (setq-local web-mode-attr-value-indent-offset n) ; web-mode
+  (setq web-mode-comment-style 2) ;; web-mode
+  (setq-local css-indent-offset n) ; css-mode
 
-(defun message-md-send (&optional arg)
-  "Convert the current buffer and send it.
-If given prefix arg ARG, skips markdown conversion."
-  (interactive "P")
-  (unless arg
-    (convert-message-to-markdown))
-  (message-send))
-
-(defun message-md-send-and-exit (&optional arg)
-  "Convert the current buffer and send it, then exit from mail buffer.
-If given prefix arg ARG, skips markdown conversion."
-  (interactive "P")
-  (unless arg
-    (convert-message-to-markdown))
-  (message-send-and-exit))
-
-(with-eval-after-load 'message
- (define-key message-mode-map (kbd "C-c C-s") #'message-md-send)
- (define-key message-mode-map (kbd "C-c C-c") #'message-md-send-and-exit))
+  ;; shells
+  (setq-local sh-basic-offset n) ; shell scripts
+  (setq-local sh-indentation n))
 \end{verbatim}
-\section{Hobby stuff}
-\label{sec:org19a3505}
-Things I do as hobby and could now do them inside emacs.
 
-\section{Learn org}
-\label{sec:org8416cbf}
-Here is my sandbox that I'm gonna learn writing org to manage my tasks and life.
-\subsection{write todo}
-\label{sec:orgb117d75}
-\subsubsection{{\bfseries\sffamily WORKING} create a new task?}
-\label{sec:org066dc7e}
-Add something content to this todo, and you can write as much as you'd
-like so to describe your idea well with \textbf{bold} and \emph{slant} and \uline{underscore} and \texttt{verbatim}?
+Now set the tabs:
 
-\begin{center}
-\begin{tabular}{ll}
-this & that\\
-\hline
-how about a table & like this?\\
-\end{tabular}
-\end{center}
+\begin{verbatim}
+(defun my-personal-code-style ()
+  (interactive)
+  (message "My personal code style!")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 2 spaces width
+  (my-setup-indent 2))
 
-Then I can write more and more and more.
-\subsubsection{{\bfseries\sffamily TODO} The, move on to the next one \textasciitilde{}\textasciitilde{} this is really neat!}
-\label{sec:orgff5d0a3}
-\subsubsection{{\bfseries\sffamily WAITING} some task}
-\label{sec:org93930bc}
-\subsubsection{{\bfseries\sffamily TODO} try another todo}
-\label{sec:orgc098295}
-\subsubsection{{\bfseries\sffamily TODO} lab cleanup}
-\label{sec:orge9c37a8}
-\begin{enumerate}
-\item switch login:
-\begin{itemize}
-\item (admin, SYSadmin2019)
-\item (admin,admin)
-\item (admin, CPadmin2019)
-\item (admin, LOCadmin2020)
-\end{itemize}
-\item switch serial connection: \texttt{do screen /dev/ttyUSB0 115200,cs8}. For older switches, baud rate is 9600.
-\end{enumerate}
+;; it would be lovely if this was enough, but it gets stomped on by modes.
+(my-personal-code-style)
+\end{verbatim}
 
-
-\begin{center}
-\begin{tabular}{rlrll}
- & Device & IP & pwd & In excel?\\
-\hline
-1 & R1U40 & 10.240.43.51 &  & \\
-2 & R1U39 & 10.240.41.146 &  & \\
-3 & R1U38 &  &  & \\
-4 & R1U37 & 10.240.41.147 & LOCadmin2020 & \\
-5 & R31U41 & 192.168.50.50 & CPadmin2019 & n/a\\
-6 & R20U40 & 10.240.20.140 & CPadmin2019 & no\\
-7 & R0U40 & 10.240.40.84 &  & \\
-8 & ROU39 & 10.240.42.204 &  & \\
-9 & ROU38 & 10.240.42.205 &  & \\
-10 & ROU37 & 10.240.42.158 &  & \\
-11 & ROU36 & 10.240.40.83 &  & \\
-12 & ROU35 & 10.240.40.195 &  & no\\
-13 & R2U39 & 10.240.41.144 &  & \\
-14 & R2U38 & 10.240.43.54 & admin & \\
-15 & R2U37 & 10.240.41.145 &  & \\
-16 & R3U40 & 10.240.41.99 &  & \\
-17 & R3U39 & 10.240.41.100 &  & \\
-18 & R3U38 & 10.240.41.101 &  & \\
-19 & R4U39 & 10.240.43.28 &  & \\
-20 & R4U37 & 10.240.43.29 &  & \\
-21 & R5U39 & 10.240.41.103 &  & no\\
-22 & R5U38 & 10.240.42.228 &  & \\
-23 & R5U37 & 10.240.124.10 &  & \\
-24 & R5U36 & 10.240.40.248 &  & \\
-25 & R19U40 & 10.240.20.147 & CPadmin2019 & \\
-26 & R19U25 & 10.240.20.249 & CPadmin2019 & \\
-27 & R21U41 & 10.240.20.92 & CPadmin2019 & \\
-28 & R21U40 & 10.240.20.93 & CPadmin2019 & \\
-29 & R22U40 & 10.240.18.30 & CPadmin2019 & \\
-30 & R22U39 & 10.240.20.49 & CPadmin2019 & \\
-31 & R22U38 & 10.240.22.10 & CPadmin2019 & \\
-32 & R23U40 & 10.240.20.94 & CPadmin2019 & \\
-33 & R23U39 &  &  & \\
-34 & R23U38 &  &  & \\
-35 & R23U37 & 10.240.20.103 & CPadmin2019 & \\
-36 & R23U36 & 10.240.18.12 & CPadmin2019 & \\
-37 & R23U34 & 10.240.20.97 & none & no\\
-38 & R24U41 & 10.240.20.141 & CPadmin2019 & \\
-39 & R24U40 & 10.240.20.138 & CPadmin2019 & \\
-40 & R25U41 & 10.240.20.142 & CPadmin2019 & \\
-41 & R25U40 & 10.240.20.139 & CPadmin2019 & \\
-42 & R25U35 & 10.240.20.109 & none & no\\
-\end{tabular}
-\end{center}
-
-\begin{enumerate}
-\item Active BMCs
-\begin{itemize}
-\item 10.240.41.71
-\item 10.240.41.74
-\item 10.240.20.148
-\item 10.240.41.248
-\item 10.240.41.249
-\item 10.240.41.250
-\item 10.240.41.251
-\item 10.240.41.246
-\item 10.240.41.247
-\item 10.240.41.243
-\item 10.240.41.229
-\item 10.240.41.228
-\item 10.240.43.49
-\end{itemize}
-\item
-\end{enumerate}
+So, to enfore this on some modes:
+\begin{verbatim}
+(add-hook 'css-mode-hook 'my-personal-code-style)
+(add-hook 'js2-mode-hook 'my-personal-code-style)
+(add-hook 'react-mode-hook 'my-personal-code-style)
+(add-hook 'sh-mode-hook 'my-personal-code-style)
+\end{verbatim}
 \end{document}

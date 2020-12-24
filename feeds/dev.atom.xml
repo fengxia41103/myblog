@@ -2249,6 +2249,37 @@ to work w/ everybody else (which == Microsoft, actually, sigh).&lt;/p&gt;
 &lt;p&gt;for Skype business/Lync: use &lt;a href="https://fengxia41103.github.io/myblog/linux laptop.html"&gt;pidgin&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h1&gt;fix a broken upgrade&lt;/h1&gt;
+&lt;p&gt;It was a strange experience that by doing &lt;code&gt;do-release-upgrade&lt;/code&gt; to
+20.04, my X1 didn't have network manager and &lt;code&gt;wicd&lt;/code&gt; after! This made
+it impossible for me to use the wifi. Tried &lt;code&gt;dhclient&lt;/code&gt;, &lt;code&gt;iwconfig&lt;/code&gt; and
+so on, no avail. So in the end I learned something quite powerful
+&amp;mdash; by booting into the USB live system, you can swap a few things
+so that now the OS is running off your installed folder, thus you can
+do &lt;code&gt;apt-get&lt;/code&gt; using the live image (I think it's running in memory)
+while it will use disk files from your installation!&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Boot a Ubuntu live CD in "Try without installing". Make sure you are connected to the internet.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In terminal type:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;shell
+  sudo mount --bind /dev /&amp;lt;chrootlocation&amp;gt;/dev
+  sudo mount --bind /proc /&amp;lt;chrootlocation&amp;gt;/proc
+  sudo mount --bind /sys /&amp;lt;chrootlocation&amp;gt;/sys
+  sudo cp /etc/resolv.conf /&amp;lt;chrootlocation&amp;gt;/etc/resolv.conf
+  sudo chroot /&amp;lt;chrootlocation&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You will need to replace &lt;code&gt;&amp;lt;chrootlocation&amp;gt;&lt;/code&gt; with the appropriate
+  location of your Ubuntu install, typically the label of the partition
+  it's installed on. The partition must also be mounted so that you can
+  access it.
+3. Edit your &lt;code&gt;/etc/resolve.conf&lt;/code&gt; and add at least one nameserver:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;shell
+  nameserver 8.8.8.8 # Google Public DNS&lt;/code&gt;
+4. Now you can do the &lt;code&gt;apt update&lt;/code&gt; and so on.
+5. Exit chroot by simply doing &lt;code&gt;exit&lt;/code&gt; in terminal.
+6. If you are done, just &lt;code&gt;reboot now&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;

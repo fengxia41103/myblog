@@ -389,6 +389,37 @@ to work w/ everybody else (which == Microsoft, actually, sigh).</p>
 <p>for Skype business/Lync: use <a href="https://fengxia41103.github.io/myblog/linux laptop.html">pidgin</a>.</p>
 </li>
 </ol>
+<h1>fix a broken upgrade</h1>
+<p>It was a strange experience that by doing <code>do-release-upgrade</code> to
+20.04, my X1 didn't have network manager and <code>wicd</code> after! This made
+it impossible for me to use the wifi. Tried <code>dhclient</code>, <code>iwconfig</code> and
+so on, no avail. So in the end I learned something quite powerful
+&mdash; by booting into the USB live system, you can swap a few things
+so that now the OS is running off your installed folder, thus you can
+do <code>apt-get</code> using the live image (I think it's running in memory)
+while it will use disk files from your installation!</p>
+<ol>
+<li>Boot a Ubuntu live CD in "Try without installing". Make sure you are connected to the internet.</li>
+<li>
+<p>In terminal type:</p>
+<p><code>shell
+  sudo mount --bind /dev /&lt;chrootlocation&gt;/dev
+  sudo mount --bind /proc /&lt;chrootlocation&gt;/proc
+  sudo mount --bind /sys /&lt;chrootlocation&gt;/sys
+  sudo cp /etc/resolv.conf /&lt;chrootlocation&gt;/etc/resolv.conf
+  sudo chroot /&lt;chrootlocation&gt;</code></p>
+<p>You will need to replace <code>&lt;chrootlocation&gt;</code> with the appropriate
+  location of your Ubuntu install, typically the label of the partition
+  it's installed on. The partition must also be mounted so that you can
+  access it.
+3. Edit your <code>/etc/resolve.conf</code> and add at least one nameserver:</p>
+<p><code>shell
+  nameserver 8.8.8.8 # Google Public DNS</code>
+4. Now you can do the <code>apt update</code> and so on.
+5. Exit chroot by simply doing <code>exit</code> in terminal.
+6. If you are done, just <code>reboot now</code>.</p>
+</li>
+</ol>
 <div class="footnote">
 <hr>
 <ol>

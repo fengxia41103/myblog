@@ -3,7 +3,7 @@ Date: 2019-11-07 07:58
 Tags: thoughts
 Slug: noah says
 Author: Feng Xia
-Modified: 2020-02-10 20:38
+Modified: 2020-12-28 15:44
 
 This is to keep track what Noah says these days, some smart
 remarks. But first of all, let me vent what this kid is like, this
@@ -104,5 +104,16 @@ been burned off by fire. So I asked what happened to it, he replied:
     是吧？”“对，她家有只兔子，还有很多鱼，她还有很多鸟....她还养了个姐
     ".. hahaha... well, so I was overhearing their conversation, that
     the girl introduced her older sister, and Noah brought up the
+
+13. Telling Noah we will have 豆腐骨头西红柿汤. He suddenly raised his
+    head, looked at with an expression of awe, "等一下，你是说，今天的
+    豆腐有骨头?"..... hahaha ~~ The kid is always super **precise**!
+
+14. Was at dinner at his mom's place over 2020 xmas. He was having
+    something in the breakfast, and his mom commented that this is
+    something he has been long to have, thus he is now 如原以偿. He
+    immediately countered, "No! 我没有常想(这个东西）I didn't always
+    think of it".. oh well, what can I say?
+
 
 ##### boyfriend-girlfriend topic also... interesting. #####

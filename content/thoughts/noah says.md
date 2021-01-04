@@ -111,7 +111,7 @@ been burned off by fire. So I asked what happened to it, he replied:
 
 14. Was at dinner at his mom's place over 2020 xmas. He was having
     something in the breakfast, and his mom commented that this is
-    something he has been long to have, thus he is now 如原以偿. He
+    something he has been longing to have, thus he is now 如原以偿. He
     immediately countered, "No! 我没有常想(这个东西）I didn't always
     think of it".. oh well, what can I say?
 

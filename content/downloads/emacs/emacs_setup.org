@@ -3111,3 +3111,22 @@ So, to enfore this on some modes:
   (add-hook 'react-mode-hook 'my-personal-code-style)
   (add-hook 'sh-mode-hook 'my-personal-code-style)
 #+end_SRC
+* My doc writing
+
+Writing doc is painful, not because I don't like writing, but because
+I hate WORD. So I have been trying all kinds of things to generate PDF
+and have people accept my PDF. I used to write simply in LaTex,
+plain. Then of course there is the big-org which can be converted. But
+since I have been writing a lot of Markdown for my blogs, I don't feel
+like converting all my writings into `.org` just fo the sake of org
+mode. So instead, I have had success in writing the Pandoc version of
+Markdown for my two Lenovo reference architecture papers, and I think
+it gives me more control of the LaTex template, the CSS file I can
+customize, and so on. So I'll stick to it for now.
+** pandoc
+
+#+begin_SRC emacs-lisp
+  (use-package pandoc-mode
+    :ensure)
+  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+#+end_SRC

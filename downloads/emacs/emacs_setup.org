@@ -2498,16 +2498,11 @@ Read news:
 #+begin_SRC emacs-lisp
   (use-package elfeed
     :ensure
-    :config
-    (setq elfeed-feeds
-          '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
-            ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)
-            ("https://www.reddit.com/r/aww+jokes.rss" fun)
-            ("https://www.reddit.com/r/StockMarket/.rss" money)
-            ))
+    :config)
+  (setq elfeed-feeds
+        '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
+          ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)))
 #+end_SRC
-
-To read without leaving the view window, simply use the ~n~ or ~p~ key.
 
 ** taskjuggler
 #+BEGIN_SRC emacs-lisp
@@ -2858,10 +2853,9 @@ Essentially, use the Google C++ style formatting.
 Setup an IDE:
 
 #+begin_SRC emacs-lisp
-  (use-package elpy
-    :ensure
-    :init)
-  (elpy-enable)
+(use-package elpy
+  :ensure)
+(elpy-enable)
 #+end_SRC
 
 ELPY has its own indentation mode, which is overriding the one I use
@@ -2881,8 +2875,8 @@ install =pip install autopep8= offline.
 
     :ensure t
     :config
-    (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-    (setq py-autopep8-options '("--max-line-length=80")))
+    (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+    (setq py-autopep8-options '("--max-line-length=79")))
 #+END_SRC
 **** py-isort
 Sort python import. Need to install =pip install isort= offline.
@@ -2897,6 +2891,7 @@ Sort python import. Need to install =pip install isort= offline.
     (setq py-isort-options '("-sl")))
 #+END_SRC
 **** imenu-list
+
 #+begin_SRC emacs-lisp
   (use-package imenu-list
   :ensure)
@@ -2904,8 +2899,27 @@ Sort python import. Need to install =pip install isort= offline.
 
 **** smartparens
 #+begin_SRC emacs-lisp
-(add-hook 'python-mode-hook #'smartparens-mode)
+(add-hook 'elpy-mode-hook #'smartparens-mode)
 #+end_SRC
+**** python-black
+
+I installed ~black~ using ~apt install black~ because my default
+virtualenv is still on python 2.7. If you have 3.x, you should follow
+their [[https://github.com/psf/black][official instruction]]. Anyway, I think either should be fine.
+
+Now use the emacs wrapper:
+
+#+begin_src emacs-lisp
+(use-package python-black
+  :ensure
+  :demand t
+  :after python)
+(add-hook 'elpy-mode-hook (lambda () (python-black-on-save-mode)))
+(add-hook 'elpy-mode-hook (lambda ()
+                            (add-hook 'before-save-hook
+                            'elpy-black-fix-code nil t)))
+#+end_src
+
 *** web-mode
 web-mode with config for Polymer editing
 #+BEGIN_SRC emacs-lisp

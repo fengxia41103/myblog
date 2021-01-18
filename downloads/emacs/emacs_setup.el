@@ -1330,13 +1330,10 @@ If given prefix arg ARG, skips markdown conversion."
 
 (use-package elfeed
   :ensure
-  :config
-  (setq elfeed-feeds
-        '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
-          ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)
-          ("https://www.reddit.com/r/aww+jokes.rss" fun)
-          ("https://www.reddit.com/r/StockMarket/.rss" money)
-          ))
+  :config)
+(setq elfeed-feeds
+      '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
+        ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)))
 
 (use-package tj3-mode
   :ensure t
@@ -1529,8 +1526,7 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure t)
 
 (use-package elpy
-  :ensure
-  :init)
+  :ensure)
 (elpy-enable)
 
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
@@ -1540,8 +1536,8 @@ If given prefix arg ARG, skips markdown conversion."
 
   :ensure t
   :config
-  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  (setq py-autopep8-options '("--max-line-length=80")))
+  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+  (setq py-autopep8-options '("--max-line-length=79")))
 
 (use-package
   py-isort
@@ -1554,7 +1550,16 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package imenu-list
 :ensure)
 
-(add-hook 'python-mode-hook #'smartparens-mode)
+(add-hook 'elpy-mode-hook #'smartparens-mode)
+
+(use-package python-black
+  :ensure
+  :demand t
+  :after python)
+(add-hook 'elpy-mode-hook (lambda () (python-black-on-save-mode)))
+(add-hook 'elpy-mode-hook (lambda ()
+                            (add-hook 'before-save-hook
+                            'elpy-black-fix-code nil t)))
 
 (use-package web-mode
   :ensure t

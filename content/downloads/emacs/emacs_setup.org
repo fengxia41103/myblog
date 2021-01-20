@@ -419,7 +419,7 @@ brings value. *Note* that the ones I skip are:
 #+begin_SRC emacs-lisp
   (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
   (add-hook 'org-mode-hook 'display-line-numbers-mode)
-  (add-hook 'elpy-mode-hook 'display-line-numbers-mode)
+  (add-hook 'python-mode-hook 'display-line-numbers-mode)
   (add-hook 'web-mode-hook 'display-line-numbers-mode)
   (add-hook 'js2-mode-hook 'display-line-numbers-mode)
   (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
@@ -608,6 +608,48 @@ e.g. =(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")=
 
 Don't know what they belong to. Just stuck them here. There are some functions used by the following code. So unfortunately this section must comes in early.
 
+***  by packages
+**** org-protocol
+
+Let other tools use emacs client to interact
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-protocol)
+#+END_SRC
+
+**** org-board
+Archive entire sites locally with `wget`.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-board
+    :ensure t
+    :config
+    (global-set-key (kbd "C-c o") org-board-keymap))
+#+END_SRC
+
+**** iimage (M-I)
+
+Make the display of images a simple key-stroke away.
+
+#+BEGIN_SRC emacs-lisp
+  (defun paf/org-toggle-iimage-in-org ()
+    "display images in your org file"
+    (interactive)
+    (if (face-underline-p 'org-link)
+        (set-face-underline 'org-link nil)
+      (set-face-underline 'org-link t))
+    (iimage-mode 'toggle))
+
+  (use-package iimage
+    :config
+    (add-to-list 'iimage-mode-image-regex-alist
+                 (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
+                               "\\)\\]")  1))
+    (add-hook 'org-mode-hook (lambda ()
+                               ;; display images
+                               (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
+                              )))
+#+END_SRC
 *** snippets found online
 
 Some helper snippets found online.
@@ -785,93 +827,6 @@ this in my =.emacs= as it is host- and user-specific.
                )))
 
 #+END_SRC
-***  by packages
-**** org-protocol
-
-Let other tools use emacs client to interact
-
-#+BEGIN_SRC emacs-lisp
-  (require 'org-protocol)
-#+END_SRC
-
-**** org-roam
-My cheat sheet for =org-roam=
-
-All keys prefixed with =C-c n=
-
-|-------------------+---------------|
-| Function          | =C-c n <key>= |
-| <l>               |      <c>      |
-|-------------------+---------------|
-| Toggle side panel |       l       |
-|-------------------+---------------|
-| Find/create       |       f       |
-| Insert link       |       i       |
-| Capture           |       c       |
-|-------------------+---------------|
-| Graph             |       g       |
-| Switch to buffer  |       b       |
-|-------------------+---------------|
-
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :hook (after-init . org-roam-mode)
-    :init (setq org-roam-directory
-                (org-relative-file "OrgRoam"))
-    :bind (:map org-roam-mode-map
-                (("C-c n l" . org-roam)
-                 ("C-c n b" . org-roam-switch-to-buffer)
-                 ("C-c n f" . org-roam-find-file)
-                 ("C-c n c" . org-roam-capture)
-                 ("C-c n g" . org-roam-graph))
-           :map org-mode-map
-                (("C-c n i" . org-roam-insert))))
-
-  (use-package company-org-roam
-    :ensure t
-    :after org-roam)
-#+END_SRC
-
-EmacSQL will need to get its C-binary compiled, and needs supporting
-tools. Note that 'tcc' for Termux seems not complete enough for the
-job.
-
-**** org-board
-Archive entire sites locally with `wget`.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-board
-    :ensure t
-    :config
-    (global-set-key (kbd "C-c o") org-board-keymap))
-#+END_SRC
-
-**** iimage (M-I)
-
-Make the display of images a simple key-stroke away.
-
-#+BEGIN_SRC emacs-lisp
-  (defun paf/org-toggle-iimage-in-org ()
-    "display images in your org file"
-    (interactive)
-    (if (face-underline-p 'org-link)
-        (set-face-underline 'org-link nil)
-      (set-face-underline 'org-link t))
-    (iimage-mode 'toggle))
-
-  (use-package iimage
-    :config
-    (add-to-list 'iimage-mode-image-regex-alist
-                 (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
-                               "\\)\\]")  1))
-    (add-hook 'org-mode-hook (lambda ()
-                               ;; display images
-                               (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
-                              )))
-#+END_SRC
-
 ** key mappings
 
 #+BEGIN_SRC emacs-lisp
@@ -1735,7 +1690,7 @@ This enables searching recursively in projects.
 #+END_SRC
 *** highlight whitespace & lines > 80 long
 Highlight unnecessary chars and lines over 80.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package whitespace
   :ensure
   :config (setq whitespace-style '(face empty tabs lines-tail trailing))
@@ -1804,7 +1759,7 @@ This is useful in coding to change a string to snake, camel and so on.
   (use-package string-inflection
     :ensure
     :config)
-  (add-hook 'elpy-mode-hook
+  (add-hook 'python-mode-hook
               '(lambda ()
                  (local-set-key (kbd "C-q C-u")
                                 'string-inflection-python-style-cycle)))
@@ -2365,9 +2320,9 @@ through =davmail= which runs smtp listen on port =1025=. You can also
 use Gmail/hotmail:
 
 #+BEGIN_SRC emacs-lisp
-  (use-package smtpmail
-    :ensure t
-    :config
+  ;;(use-package smtpmail
+  ;;  :ensure t
+  ;;  :config
     (setq send-mail-function 'smtpmail-send-it
           user-mail-address "fxia1@mycompany.com"
           smtpmail-debug-info t
@@ -2377,7 +2332,8 @@ use Gmail/hotmail:
           smtpmail-smtp-service 1025
           smtpmail-stream-type nil
           starttls-use-gnutls nil
-          starttls-extra-arguments nil))
+          starttls-extra-arguments nil)
+  ;;)
 #+END_SRC
 
 There is a toggle where you can queue the sending email first instead
@@ -2501,12 +2457,7 @@ Read news:
     :config)
   (setq elfeed-feeds
         '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
-          ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)
-          ("https://www.reddit.com/r/aww+jokes.rss" fun)))
-  (use-package elfeed-goodies
-    :ensure
-    :config)
-  (elfeed-goodies/setup)
+          ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)))
 #+end_SRC
 
 ** taskjuggler
@@ -2731,12 +2682,10 @@ Let's first see how far I get with file-based capture templates and yankpad.
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package yasnippet
     :ensure t)
-  (use-package auto-yasnippet
-    :ensure t
-:after yasnippet
-    :config
-    (bind-key "C-M-x C-s c" 'aya-create)
-    (bind-key "C-M-x C-s e" 'aya-expand))
+  (yas-reload-all)
+
+  (use-package yasnippet-snippets
+    :ensure t)
 #+END_SRC
 
 *** commenting out
@@ -2786,6 +2735,7 @@ the time the keys are pressed.
 
 (global-set-key "\C-x$" 'set-selective-display-dlw)
 #+END_SRC
+
 ** IRC
 Use =circe=.
 #+BEGIN_SRC emacs-lisp
@@ -2858,17 +2808,21 @@ Essentially, use the Google C++ style formatting.
 Setup an IDE:
 
 #+begin_SRC emacs-lisp
-  (use-package elpy
-    :ensure
-    :init
-    (elpy-enable))
+(use-package elpy
+  :ensure)
+(elpy-enable)
 #+end_SRC
 
 ELPY has its own indentation mode, which is overriding the one I use
 globally, so disable this one:
 
 #+begin_SRC emacs-lisp
-  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+  (add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1)))
+#+end_SRC
+
+Finally, link to yasnippet mode:
+#+begin_SRC emacs-lisp
+(add-hook 'python-mode-hook #'yas-minor-mode)
 #+end_SRC
 
 **** py-autopep8
@@ -2878,12 +2832,14 @@ install =pip install autopep8= offline.
 #+BEGIN_SRC emacs-lisp
   (use-package
     py-autopep8
-
-    :ensure t
-    :config
-    (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-    (setq py-autopep8-options '("--max-line-length=80")))
+    :ensure)
+  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  (setq py-autopep8-options '("--max-line-length=79"))
 #+END_SRC
+
+#+RESULTS:
+| --max-line-length=79 |
+
 **** py-isort
 Sort python import. Need to install =pip install isort= offline.
 
@@ -2897,6 +2853,7 @@ Sort python import. Need to install =pip install isort= offline.
     (setq py-isort-options '("-sl")))
 #+END_SRC
 **** imenu-list
+
 #+begin_SRC emacs-lisp
   (use-package imenu-list
   :ensure)
@@ -2906,6 +2863,19 @@ Sort python import. Need to install =pip install isort= offline.
 #+begin_SRC emacs-lisp
 (add-hook 'python-mode-hook #'smartparens-mode)
 #+end_SRC
+**** python-black
+
+I installed ~black~ using ~apt install black~ because my default
+virtualenv is still on python 2.7. If you have 3.x, you should follow
+their [[https://github.com/psf/black][official instruction]]. Anyway, I think either should be fine.
+
+Now use the emacs wrapper:
+
+#+begin_src emacs-lisp
+(use-package python-black
+  :ensure)
+#+end_src
+
 *** web-mode
 web-mode with config for Polymer editing
 #+BEGIN_SRC emacs-lisp
@@ -3120,7 +3090,7 @@ plain. Then of course there is the big-org which can be converted. But
 since I have been writing a lot of Markdown for my blogs, I don't feel
 like converting all my writings into `.org` just fo the sake of org
 mode. So instead, I have had success in writing the Pandoc version of
-Markdown for my two Lenovo reference architecture papers, and I think
+Markdown for my two Mycompany reference architecture papers, and I think
 it gives me more control of the LaTex template, the CSS file I can
 customize, and so on. So I'll stick to it for now.
 ** pandoc

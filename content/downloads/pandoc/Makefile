@@ -68,22 +68,27 @@ webapp_tex := webapp.tex
 # resume source and target
 resume_md := resume.md
 RESUME_INPUTS = $(resume_md)
-
 resume_pdf := ../resume.pdf
 
-# Blog source and target
+# git startegy article
 git_md := git\ strategy.md
 GIT_INPUTS = $(git_md) $(REFERENCES)
 git_pdf := git.pdf
 
+# netbox proposal
+netbox_md := netbox.md
+NETBOX_INPUTS = $(netbox_md) $(REFERENCES)
+netbox_pdf := netbox.pdf
+netbox_docx := netbox.docx
 
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
 resume: resume_pdf
 git: git_pdf
+netbox: netbox_pdf netbox_docx
 
-all: rhhi_ra loc_ra webapp resume git
+all: rhhi_ra loc_ra webapp resume git netbox
 
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
@@ -153,6 +158,17 @@ git_pdf: $(GIT_INPUTS) $(LATEX_ARTICLE_CONFIG)
 	pandoc $(LATEX_ARTICLE_CONFIG) $(GIT_INPUTS) \
 	-o $(git_pdf) \
 	$(PDF_FLAGS)
+
+netbox_pdf: $(NETBOX_INPUTS) $(LATEX_ARTICLE_CONFIG)
+	pandoc $(LATEX_ARTICLE_CONFIG) $(NETBOX_INPUTS) \
+	-o $(netbox_pdf) \
+	$(PDF_FLAGS)
+
+netbox_docx: $(NETBOX_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(NETBOX_INPUTS) \
+	-o $(netbox_docx) \
+	$(DOCX_FLAGS)
+
 
 clean:
 	rm -f *.pdf *.docx *.html

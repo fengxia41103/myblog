@@ -91,7 +91,14 @@ and the tangled file is compiled."
 (global-set-key [delete] 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
 
-(global-display-line-numbers-mode t)
+(add-hook 'c-mode-common-hook 'display-line-numbers-mode)
+(add-hook 'org-mode-hook 'display-line-numbers-mode)
+(add-hook 'python-mode-hook 'display-line-numbers-mode)
+(add-hook 'web-mode-hook 'display-line-numbers-mode)
+(add-hook 'js2-mode-hook 'display-line-numbers-mode)
+(add-hook 'yaml-mode-hook 'display-line-numbers-mode)
+(add-hook 'json-mode-hook 'display-line-numbers-mode)
+(add-hook 'java-mode-hook 'display-line-numbers-mode)
 
 (use-package sublime-themes
     :ensure
@@ -175,12 +182,33 @@ and the tangled file is compiled."
   :ensure nil
   :delight org-mode
   :config
-  (setq org-startup-indented t)
-  (if (not (boundp 'org-directory))
-      (setq org-directory "~/org"))
-  (add-hook 'org-mode-hook #'(lambda ()
-                               (visual-line-mode)
-                               (org-indent-mode))))
+  :hook ((org-mode . visual-line-mode)
+       (org-mode . org-indent-mode)))
+
+(require 'org-protocol)
+
+(use-package org-board
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c o") org-board-keymap))
+
+(defun paf/org-toggle-iimage-in-org ()
+  "display images in your org file"
+  (interactive)
+  (if (face-underline-p 'org-link)
+      (set-face-underline 'org-link nil)
+    (set-face-underline 'org-link t))
+  (iimage-mode 'toggle))
+
+(use-package iimage
+  :config
+  (add-to-list 'iimage-mode-image-regex-alist
+               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
+                             "\\)\\]")  1))
+  (add-hook 'org-mode-hook (lambda ()
+                             ;; display images
+                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
+                            )))
 
 (defcustom remote-org-directory "~/OrgFiles"
   "Location of remove OrgFile directory, should you have one."
@@ -274,49 +302,6 @@ and the tangled file is compiled."
              :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
              )))
 
-(require 'org-protocol)
-
-(use-package org-roam
-  :ensure t
-  :hook (after-init . org-roam-mode)
-  :init (setq org-roam-directory
-              (org-relative-file "OrgRoam"))
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n b" . org-roam-switch-to-buffer)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n c" . org-roam-capture)
-               ("C-c n g" . org-roam-graph))
-         :map org-mode-map
-              (("C-c n i" . org-roam-insert))))
-
-(use-package company-org-roam
-  :ensure t
-  :after org-roam)
-
-(use-package org-board
-  :ensure t
-  :config
-  (global-set-key (kbd "C-c o") org-board-keymap))
-
-(defun paf/org-toggle-iimage-in-org ()
-  "display images in your org file"
-  (interactive)
-  (if (face-underline-p 'org-link)
-      (set-face-underline 'org-link nil)
-    (set-face-underline 'org-link t))
-  (iimage-mode 'toggle))
-
-(use-package iimage
-  :config
-  (add-to-list 'iimage-mode-image-regex-alist
-               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
-                             "\\)\\]")  1))
-  (add-hook 'org-mode-hook (lambda ()
-                             ;; display images
-                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
-                            )))
-
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -338,8 +323,7 @@ and the tangled file is compiled."
 
 (use-package org-bullets
   :ensure
-  :config)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  :hook (org-mode . org-bullets-mode))
 
 (use-package deft
   :ensure t)
@@ -385,21 +369,10 @@ and the tangled file is compiled."
   ;; Enable plantuml-mode for PlantUML files
   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
 
-(use-package ox-odt
-  :defer)
-(use-package ox-taskjuggler
-  :defer)
-(use-package ox-impress-js
-  :defer)
-
-(use-package ox-reveal
-  :ensure t
-  :after (htmlize)
-  :config
-  (setq org-reveal-root (expand-file-name "~/reveal.js")))
-
-(use-package htmlize
-  :ensure t)
+(setq org-link-abbrev-alist
+      '(("b" . "http://b/")
+        ("go" . "http://go/")
+        ("cl" . "http://cr/")))
 
 (setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
 
@@ -417,10 +390,29 @@ and the tangled file is compiled."
    (shell . t)
   ))
 
-(setq org-link-abbrev-alist
-      '(("b" . "http://b/")
-        ("go" . "http://go/")
-        ("cl" . "http://cr/")))
+(use-package ox-md
+  :defer)
+
+(use-package ox-beamer
+  :defer)
+
+(use-package ox-reveal
+  :ensure t
+  :after (htmlize)
+  :config
+  (setq org-reveal-root (expand-file-name "~/reveal.js")))
+
+(use-package htmlize
+  :ensure t)
+
+(use-package ox-odt
+  :defer)
+
+(use-package ox-taskjuggler
+  :defer)
+
+(use-package ox-confluence
+  :defer)
 
 (use-package org-super-agenda
   :ensure t
@@ -470,8 +462,7 @@ and the tangled file is compiled."
   (org-duration-set-regexps))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t!)" "NEXT(n!)" "STARTED(s!)" "WAITING(w!)" "AI(a!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
-        (sequence "APPLIED(A!)" "WAITING(w!)" "ACCEPTED" "|" "REJECTED" "PUBLISHED")
+      '((sequence "TODO(t!)" "WORKING(w!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
         (sequence "TASK(m!)" "ACTIVE" "|" "DONE(d!)" "CANCELLED(C@)" )))
 
 (setq org-tags-exclude-from-inheritance '("PRJ" "REGULAR")
@@ -479,11 +470,11 @@ and the tangled file is compiled."
       org-stuck-projects '("+PRJ/-DONE-CANCELLED"
                            ;; it is considered stuck if there is no next action
                            (;"TODO"
-                            "NEXT" "STARTED" "TASK") ()))
+                            "WORKING" "ACTIVE" "TASK") ()))
 
 (setq org-todo-keyword-faces
       '(
-        ("TODO" . (:foreground "purple" :weight bold))
+        ("TODO" . (:foreground "GhostWhite" :weight bold))
         ("TASK" . (:foreground "steelblue" :weight bold))
         ("NEXT" . (:foreground "red" :weight bold))
         ("STARTED" . (:foreground "green" :weight bold))
@@ -506,44 +497,48 @@ and the tangled file is compiled."
         ("ACTIVE" . (:foreground "darkgreen" :weight bold))
         ))
 
-(setq org-default-notes-file (org-relative-file "Inbox.org"))
+(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab"))))
+
+(setq org-default-notes-file (org-relative-file "~/org/tasks.org"))
 
 (setq org-capture-templates
       `(("t" "Task"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Tasks")
-         "* TODO %?\n%U\n\n%x"
+         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Tasks")
+         "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
          :clock-resume t)
         ;;
         ("i" "Idea"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Ideas")
+         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Ideas")
          "* SOMEDAY %?\n%U\n\n%x"
          :clock-resume t)
         ;;
         ("m" "Meeting"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
          "* %?  :MTG:\n%U\n%^{with}p"
          :clock-in t
          :clock-resume t)
         ;;
         ("s" "Stand-up"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
          "* Stand-up  :MTG:\n%U\n\n%?"
          :clock-in t
          :clock-resume t)
         ;;
         ("1" "1:1"
-         entry (file+headline ,(org-relative-file "Inbox.org") "Meetings")
+         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
          "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
          :clock-in t
          :clock-resume t)
         ;;
         ("p" "Talking Point"
-         entry (file+headline ,(org-relative-file "refile.org") "Talking Points")
+         entry (file+headline ,(org-relative-file "~/org/refile.org") "Talking Points")
          "* %?  :TALK:\n%U\n%^{dowith}p"
          :clock-keep t)
         ;;
         ("j" "Journal"
-         entry (file+olp+datetree ,(org-relative-file "journal.org"))
+         entry (file+olp+datetree ,(org-relative-file "~/org/journal.org"))
          "* %?\n%U"
          :clock-in t
          :clock-resume t
@@ -684,7 +679,71 @@ and the tangled file is compiled."
 (setq org-log-into-drawer t)
 (setq org-clock-int-drawer "CLOCK")
 
-(org-reload)
+(org-mode-restart)
+
+(use-package eyebrowse
+    :ensure t)
+(eyebrowse-mode t)
+
+(use-package ace-window
+  :ensure
+  :config
+  (setq aw-ignore-current t)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-background nil)
+  (global-set-key (kbd "M-o") 'ace-window)
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground
+                   :background "GhostWhite"
+                   :box nil)))))
+)
+
+(use-package uniquify
+  :init
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
+
+(setq desktop-path (list "~/.emacs.d/savehist"))
+(setq desktop-dirname "~/.emacs.d/savehist")
+(setq desktop-restore-eager 5)
+(setq desktop-load-locked-desktop t)
+(desktop-save-mode 1)
+
+  (setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+(setq desktop-buffers-not-to-save
+     (concat "\\("
+             "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+             "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+             "\\)$"))
+(add-to-list 'desktop-modes-not-to-save 'dired-mode)
+(add-to-list 'desktop-modes-not-to-save 'Info-mode)
+(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
+
+(use-package psession
+  :ensure)
+(psession-mode 1)
+(psession-savehist-mode 1)
+(psession-autosave-mode 1)
+
+(defun toggle-maximize-buffer () "Maximize buffer"
+  (interactive)
+  (if (= 1 (length (window-list)))
+      (jump-to-register '_)
+    (progn
+      (window-configuration-to-register '_)
+      (delete-other-windows))))
+
+(global-set-key [M-f8] 'toggle-maximize-buffer)
+
+(column-number-mode t)
+(setq visible-bell t)
+(setq scroll-step 1)
+(setq-default transient-mark-mode t)  ;; highlight selection
 
 (use-package company
   :ensure t
@@ -716,6 +775,16 @@ and the tangled file is compiled."
   :config
   (setq dumb-jump-prefer-searcher 'ag))
 
+(defhydra dumb-jump-hydra (:color blue :columns 3)
+    "Dumb Jump"
+    ("j" dumb-jump-go "Go")
+    ("o" dumb-jump-go-other-window "Other window")
+    ("e" dumb-jump-go-prefer-external "Go external")
+    ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
+    ("i" dumb-jump-go-prompt "Prompt")
+    ("l" dumb-jump-quick-look "Quick look")
+    ("b" dumb-jump-back "Back"))
+
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 (use-package ripgrep
@@ -724,22 +793,12 @@ and the tangled file is compiled."
   :ensure t
   :requires (ripgrep projectile))
 
-(use-package ace-jump-mode
-  :ensure t
-  :bind (("C-c C-SPC" . 'ace-jump-mode)
-         ("C-c C-DEL" . 'ace-jump-mode-pop-mark)))
-
 (use-package column-enforce-mode
   :ensure t
   :config
   (setq column-enforce-column 80)
   :bind ("C-c m" . 'column-enforce-mode))
 ;; column-enforce-face
-
-(use-package whitespace
-  :ensure
-  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
-  :config (global-whitespace-mode t))
 
 (use-package browse-kill-ring
   :ensure
@@ -774,7 +833,7 @@ and the tangled file is compiled."
 (use-package string-inflection
   :ensure
   :config)
-(add-hook 'elpy-mode-hook
+(add-hook 'python-mode-hook
             '(lambda ()
                (local-set-key (kbd "C-q C-u")
                               'string-inflection-python-style-cycle)))
@@ -833,65 +892,6 @@ and the tangled file is compiled."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-set-key (kbd "C-M-i") 'iedit-mode)
-
-(use-package eyebrowse
-    :ensure t)
-(eyebrowse-mode t)
-
-(use-package ace-window
-  :ensure
-  :config
-  (setq aw-ignore-current t)
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
-  (global-set-key (kbd "M-o") 'ace-window)
-  (custom-set-faces
-   '(aw-leading-char-face
-     ((t (:inherit ace-jump-face-foreground
-                   :background "GhostWhite"
-                   :box nil)))))
-)
-
-(use-package uniquify
-  :init
-  (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
-
-(setq desktop-path (list "~/.emacs.d/savehist"))
-(setq desktop-dirname "~/.emacs.d/savehist")
-(setq desktop-restore-eager 5)
-(setq desktop-load-locked-desktop t)
-(desktop-save-mode 1)
-
-(savehist-mode 1)
-(setq history-length t)
-(setq history-delete-duplicates t)
-(setq savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-
-(setq desktop-buffers-not-to-save
-     (concat "\\("
-             "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-             "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-             "\\)$"))
-(add-to-list 'desktop-modes-not-to-save 'dired-mode)
-(add-to-list 'desktop-modes-not-to-save 'Info-mode)
-(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-
-(defun toggle-maximize-buffer () "Maximize buffer"
-  (interactive)
-  (if (= 1 (length (window-list)))
-      (jump-to-register '_)
-    (progn
-      (window-configuration-to-register '_)
-      (delete-other-windows))))
-
-(global-set-key [M-f8] 'toggle-maximize-buffer)
-
-(column-number-mode t)
-(setq visible-bell t)
-(setq scroll-step 1)
-(setq-default transient-mark-mode t)  ;; highlight selection
 
 (use-package dash
   :ensure
@@ -1138,6 +1138,12 @@ and the tangled file is compiled."
 
 (setq mail-user-agent 'mu4e-user-agent)
 
+(add-hook 'mu4e-compose-mode-hook
+              (lambda ()
+                (visual-line-mode t)
+                (writegood-mode t)
+                (flyspell-mode t)))
+
 (setq mu4e-maildir (expand-file-name "~/Maildir"))
 
 (setq mu4e-get-mail-command "mbsync -a")
@@ -1202,27 +1208,28 @@ and the tangled file is compiled."
       (concat
        "Best regards,\n\n"
        "Feng Xia\n"
-       "W: http://www.lenovo.com\n"))
+       "W: http://www.mycompany.com\n"))
 
-(use-package smtpmail
-  :ensure t
-  :config
+;;(use-package smtpmail
+;;  :ensure t
+;;  :config
   (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "fxia1@lenovo.com"
+        user-mail-address "fxia1@mycompany.com"
         smtpmail-debug-info t
-        smtpmail-smtp-user "fxia1@lenovo.com"
+        smtpmail-smtp-user "fxia1@mycompany.com"
         smtpmail-default-smtp-server "localhost"
         smtpmail-auth-credentials (expand-file-name "~/.authinfo")
         smtpmail-smtp-service 1025
         smtpmail-stream-type nil
         starttls-use-gnutls nil
-        starttls-extra-arguments nil))
+        starttls-extra-arguments nil)
+;;)
 
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
-      user-mail-address "fxia1@lenovo.com"
+(setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
+      user-mail-address "fxia1@mycompany.com"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
@@ -1304,12 +1311,7 @@ If given prefix arg ARG, skips markdown conversion."
   :config)
 (setq elfeed-feeds
       '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
-        ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)
-        ("https://www.reddit.com/r/aww+jokes.rss" fun)))
-(use-package elfeed-goodies
-  :ensure
-  :config)
-(elfeed-goodies/setup)
+        ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)))
 
 (use-package tj3-mode
   :ensure t
@@ -1502,19 +1504,18 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure t)
 
 (use-package elpy
-  :ensure
-  :init
-  (elpy-enable))
+  :ensure)
+(elpy-enable)
 
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+(add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1)))
+
+(add-hook 'python-mode-hook #'yas-minor-mode)
 
 (use-package
   py-autopep8
-
-  :ensure t
-  :config
-  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  (setq py-autopep8-options '("--max-line-length=80")))
+  :ensure)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=79"))
 
 (use-package
   py-isort
@@ -1524,7 +1525,13 @@ If given prefix arg ARG, skips markdown conversion."
   (add-hook 'before-save-hook 'py-isort-before-save)
   (setq py-isort-options '("-sl")))
 
+(use-package imenu-list
+:ensure)
+
 (add-hook 'python-mode-hook #'smartparens-mode)
+
+(use-package python-black
+  :ensure)
 
 (use-package web-mode
   :ensure t
@@ -1596,9 +1603,9 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@lenovo.com")
+  (setq js-doc-mail-address "fxia1@mycompany.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.lenovo.com")
+  (setq js-doc-url "http://www.mycompany.com")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook
@@ -1665,3 +1672,7 @@ If given prefix arg ARG, skips markdown conversion."
 (add-hook 'js2-mode-hook 'my-personal-code-style)
 (add-hook 'react-mode-hook 'my-personal-code-style)
 (add-hook 'sh-mode-hook 'my-personal-code-style)
+
+(use-package pandoc-mode
+  :ensure)
+(add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)

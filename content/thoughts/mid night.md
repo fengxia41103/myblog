@@ -11,7 +11,7 @@ Since coming back from Spring Break trip, my body and mind have been
 really tired. Work is progressing fine. A lot of new things to learn,
 but overall are quite manageable. But work is just, work. I was
 sitting in this good looking, big kitchen 2 o'clock in the morning
-after fixing a few things, but I really missed you. 
+after fixing a few things, but I really missed you.
 
 Writing to you have become a habit, if not the only person I feel an
 urge to talk to, to share what comes to my mind, if not what sits on
@@ -100,7 +100,7 @@ live through such scrutiny. This is like what ppl say about medical
 progress, that people nowadays have a lot more problems than before,
 but it's because we now have a name for it (before Dad, I challenge
 anyone in China has regarded his situation in any medical sense
-&mdash; dementia, alzheimer). So let them laugh, **ignorance is the
+&mdash; dementia, Alzheimer). So let them laugh, **ignorance is the
 recipe for happiness, indeed**.
 
 Data collection and so called profiling of a customer or a citizen (as

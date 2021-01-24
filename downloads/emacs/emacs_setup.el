@@ -93,7 +93,7 @@ and the tangled file is compiled."
 
 (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
 (add-hook 'org-mode-hook 'display-line-numbers-mode)
-(add-hook 'elpy-mode-hook 'display-line-numbers-mode)
+(add-hook 'python-mode-hook 'display-line-numbers-mode)
 (add-hook 'web-mode-hook 'display-line-numbers-mode)
 (add-hook 'js2-mode-hook 'display-line-numbers-mode)
 (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
@@ -184,6 +184,31 @@ and the tangled file is compiled."
   :config
   :hook ((org-mode . visual-line-mode)
        (org-mode . org-indent-mode)))
+
+(require 'org-protocol)
+
+(use-package org-board
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c o") org-board-keymap))
+
+(defun paf/org-toggle-iimage-in-org ()
+  "display images in your org file"
+  (interactive)
+  (if (face-underline-p 'org-link)
+      (set-face-underline 'org-link nil)
+    (set-face-underline 'org-link t))
+  (iimage-mode 'toggle))
+
+(use-package iimage
+  :config
+  (add-to-list 'iimage-mode-image-regex-alist
+               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
+                             "\\)\\]")  1))
+  (add-hook 'org-mode-hook (lambda ()
+                             ;; display images
+                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
+                            )))
 
 (defcustom remote-org-directory "~/OrgFiles"
   "Location of remove OrgFile directory, should you have one."
@@ -276,49 +301,6 @@ and the tangled file is compiled."
              :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
              :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
              )))
-
-(require 'org-protocol)
-
-(use-package org-roam
-  :ensure t
-  :hook (after-init . org-roam-mode)
-  :init (setq org-roam-directory
-              (org-relative-file "OrgRoam"))
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n b" . org-roam-switch-to-buffer)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n c" . org-roam-capture)
-               ("C-c n g" . org-roam-graph))
-         :map org-mode-map
-              (("C-c n i" . org-roam-insert))))
-
-(use-package company-org-roam
-  :ensure t
-  :after org-roam)
-
-(use-package org-board
-  :ensure t
-  :config
-  (global-set-key (kbd "C-c o") org-board-keymap))
-
-(defun paf/org-toggle-iimage-in-org ()
-  "display images in your org file"
-  (interactive)
-  (if (face-underline-p 'org-link)
-      (set-face-underline 'org-link nil)
-    (set-face-underline 'org-link t))
-  (iimage-mode 'toggle))
-
-(use-package iimage
-  :config
-  (add-to-list 'iimage-mode-image-regex-alist
-               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
-                             "\\)\\]")  1))
-  (add-hook 'org-mode-hook (lambda ()
-                             ;; display images
-                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
-                            )))
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -818,11 +800,6 @@ and the tangled file is compiled."
   :bind ("C-c m" . 'column-enforce-mode))
 ;; column-enforce-face
 
-(use-package whitespace
-  :ensure
-  :config (setq whitespace-style '(face empty tabs lines-tail trailing))
-  :config (global-whitespace-mode t))
-
 (use-package browse-kill-ring
   :ensure
   :config
@@ -856,7 +833,7 @@ and the tangled file is compiled."
 (use-package string-inflection
   :ensure
   :config)
-(add-hook 'elpy-mode-hook
+(add-hook 'python-mode-hook
             '(lambda ()
                (local-set-key (kbd "C-q C-u")
                               'string-inflection-python-style-cycle)))
@@ -1231,27 +1208,28 @@ and the tangled file is compiled."
       (concat
        "Best regards,\n\n"
        "Feng Xia\n"
-       "W: http://www.lenovo.com\n"))
+       "W: http://www.mycompany.com\n"))
 
-(use-package smtpmail
-  :ensure t
-  :config
+;;(use-package smtpmail
+;;  :ensure t
+;;  :config
   (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "fxia1@lenovo.com"
+        user-mail-address "fxia1@mycompany.com"
         smtpmail-debug-info t
-        smtpmail-smtp-user "fxia1@lenovo.com"
+        smtpmail-smtp-user "fxia1@mycompany.com"
         smtpmail-default-smtp-server "localhost"
         smtpmail-auth-credentials (expand-file-name "~/.authinfo")
         smtpmail-smtp-service 1025
         smtpmail-stream-type nil
         starttls-use-gnutls nil
-        starttls-extra-arguments nil))
+        starttls-extra-arguments nil)
+;;)
 
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
-      user-mail-address "fxia1@lenovo.com"
+(setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
+      user-mail-address "fxia1@mycompany.com"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
@@ -1529,15 +1507,15 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure)
 (elpy-enable)
 
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+(add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1)))
+
+(add-hook 'python-mode-hook #'yas-minor-mode)
 
 (use-package
   py-autopep8
-
-  :ensure t
-  :config
-  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-  (setq py-autopep8-options '("--max-line-length=79")))
+  :ensure)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=79"))
 
 (use-package
   py-isort
@@ -1550,16 +1528,10 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package imenu-list
 :ensure)
 
-(add-hook 'elpy-mode-hook #'smartparens-mode)
+(add-hook 'python-mode-hook #'smartparens-mode)
 
 (use-package python-black
-  :ensure
-  :demand t
-  :after python)
-(add-hook 'elpy-mode-hook (lambda () (python-black-on-save-mode)))
-(add-hook 'elpy-mode-hook (lambda ()
-                            (add-hook 'before-save-hook
-                            'elpy-black-fix-code nil t)))
+  :ensure)
 
 (use-package web-mode
   :ensure t
@@ -1631,9 +1603,9 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@lenovo.com")
+  (setq js-doc-mail-address "fxia1@mycompany.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.lenovo.com")
+  (setq js-doc-url "http://www.mycompany.com")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook

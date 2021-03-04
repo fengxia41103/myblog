@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Feng Xia" />
+  <meta name="author" content="Miro Halas" />
+  <meta name="dcterms.date" content="2021-01-31" />
+  <meta name="keywords" content="Lenovo Open Cloud, RHHI" />
+  <title>Red Hat Hyperconverged Infrastructure for Virtualization</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Red Hat Hyperconverged Infrastructure for Virtualization</h1>
+<p class="subtitle">Version 1.0</p>
+<p class="author">Feng Xia</p>
+<p class="author">Miro Halas</p>
+<p class="date">January 31, 2021</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a></li>
+<li><a href="#business-problem-and-business-value"><span class="toc-section-number">2</span> Business problem and business value</a><ul>
+<li><a href="#business-problem"><span class="toc-section-number">2.1</span> Business problem</a></li>
+<li><a href="#business-value"><span class="toc-section-number">2.2</span> Business value</a></li>
+</ul></li>
+<li><a href="#requirements"><span class="toc-section-number">3</span> Requirements</a><ul>
+<li><a href="#functional-requirements-use-cases"><span class="toc-section-number">3.1</span> Functional requirements (use cases)</a></li>
+<li><a href="#non-functional-requirements"><span class="toc-section-number">3.2</span> Non-functional requirements</a><ul>
+<li><a href="#fault-tolerance"><span class="toc-section-number">3.2.1</span> Fault tolerance</a></li>
+<li><a href="#high-availability"><span class="toc-section-number">3.2.2</span> High availability</a></li>
+<li><a href="#maintenance"><span class="toc-section-number">3.2.3</span> Maintenance</a></li>
+<li><a href="#ease-of-installation"><span class="toc-section-number">3.2.4</span> Ease of installation</a></li>
+<li><a href="#high-performance"><span class="toc-section-number">3.2.5</span> High performance</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#rhhi-architecture"><span class="toc-section-number">4</span> Architectural Overview</a></li>
+<li><a href="#component-model"><span class="toc-section-number">5</span> Component model</a></li>
+<li><a href="#operational-model"><span class="toc-section-number">6</span> Operational model</a><ul>
+<li><a href="#hardware"><span class="toc-section-number">6.1</span> Hardware</a><ul>
+<li><a href="#lenovo-sr650-servers"><span class="toc-section-number">6.1.1</span> Lenovo SR650 Servers</a></li>
+<li><a href="#lenovo-930-x-raid-controller"><span class="toc-section-number">6.1.2</span> Lenovo 930-x RAID controller</a></li>
+<li><a href="#lenovo-network-switches"><span class="toc-section-number">6.1.3</span> Lenovo Network Switches</a></li>
+</ul></li>
+<li><a href="#software"><span class="toc-section-number">6.2</span> Software</a><ul>
+<li><a href="#rh-rhv"><span class="toc-section-number">6.2.1</span> Red Hat Virtualization (RHV)</a></li>
+<li><a href="#rh-gluster"><span class="toc-section-number">6.2.2</span> Red Hat Gluster Storage (RHGS)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#development-considerations"><span class="toc-section-number">7</span> Deployment considerations</a><ul>
+<li><a href="#server-configurations"><span class="toc-section-number">7.1</span> Server Configurations</a><ul>
+<li><a href="#disk-configuration"><span class="toc-section-number">7.1.1</span> Disk configurations</a></li>
+<li><a href="#raid-configuration"><span class="toc-section-number">7.1.2</span> RAID configurations</a></li>
+<li><a href="#server-firmware"><span class="toc-section-number">7.1.3</span> Firmware</a></li>
+</ul></li>
+<li><a href="#platform-network"><span class="toc-section-number">7.2</span> Network Configurations</a><ul>
+<li><a href="#convention"><span class="toc-section-number">7.2.1</span> Design Conventions</a></li>
+<li><a href="#network-overview"><span class="toc-section-number">7.2.2</span> Network Overview</a></li>
+<li><a href="#topology"><span class="toc-section-number">7.2.3</span> Topology</a></li>
+<li><a href="#loc-rhhi-logical-networks"><span class="toc-section-number">7.2.4</span> Logical networks</a></li>
+<li><a href="#vlans"><span class="toc-section-number">7.2.5</span> VLANs</a></li>
+<li><a href="#subnets"><span class="toc-section-number">7.2.6</span> Subnets</a></li>
+<li><a href="#platform-vlan-to-nic"><span class="toc-section-number">7.2.7</span> Map VLAN to Server NIC</a></li>
+<li><a href="#platform-nic-to-switch"><span class="toc-section-number">7.2.8</span> Map Server NIC to Switch</a></li>
+<li><a href="#platform-cabling"><span class="toc-section-number">7.2.9</span> Define Cable Schema</a></li>
+<li><a href="#platform-switch-configuration"><span class="toc-section-number">7.2.10</span> Configure Switch Ports</a></li>
+</ul></li>
+<li><a href="#storage"><span class="toc-section-number">7.3</span> Storage</a><ul>
+<li><a href="#gluster"><span class="toc-section-number">7.3.1</span> Gluster</a></li>
+<li><a href="#nfs"><span class="toc-section-number">7.3.2</span> NFS</a></li>
+<li><a href="#rhv-storage-domains"><span class="toc-section-number">7.3.3</span> RHV storage domains</a></li>
+<li><a href="#lvm-cache"><span class="toc-section-number">7.3.4</span> LVM cache</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#deployment"><span class="toc-section-number">8</span> Deployment</a><ul>
+<li><a href="#prerequisite"><span class="toc-section-number">8.1</span> Prerequisite</a></li>
+<li><a href="#bootstrap-appliance"><span class="toc-section-number">8.2</span> Bootstrap appliance</a><ul>
+<li><a href="#bootstrap-services"><span class="toc-section-number">8.2.1</span> Bootstrap services</a></li>
+<li><a href="#bootstrap-networks"><span class="toc-section-number">8.2.2</span> Bootstrap networks</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#bom"><span class="toc-section-number">9</span> Appendix: Bill of Material</a><ul>
+<li><a href="#switches"><span class="toc-section-number">9.1</span> Switches</a><ul>
+<li><a href="#gb-switch"><span class="toc-section-number">9.1.1</span> 1Gb switch</a></li>
+<li><a href="#gb-switch-1"><span class="toc-section-number">9.1.2</span> 10Gb switch</a></li>
+<li><a href="#gb-switch-2"><span class="toc-section-number">9.1.3</span> 25Gb switch</a></li>
+</ul></li>
+<li><a href="#servers"><span class="toc-section-number">9.2</span> Servers</a><ul>
+<li><a href="#sas-ssd"><span class="toc-section-number">9.2.1</span> SAS SSDs</a></li>
+<li><a href="#gb-nic"><span class="toc-section-number">9.2.2</span> 25Gb NIC</a></li>
+</ul></li>
+<li><a href="#software-1"><span class="toc-section-number">9.3</span> Software</a></li>
+<li><a href="#other-recommendations"><span class="toc-section-number">9.4</span> Other recommendations</a><ul>
+<li><a href="#tpm-2.0-and-secure-boot"><span class="toc-section-number">9.4.1</span> TPM 2.0 and Secure Boot</a></li>
+<li><a href="#thinksystem-xclarity-controller-standard-to-enterprise-level"><span class="toc-section-number">9.4.2</span> ThinkSystem XClarity Controller Standard to Enterprise Level</a></li>
+<li><a href="#best-recipes"><span class="toc-section-number">9.4.3</span> Best recipes</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#questionnaire"><span class="toc-section-number">10</span> Appendix: Implementation Questionnaire</a><ul>
+<li><a href="#bom-switch-firmware"><span class="toc-section-number">10.1</span> Switches</a><ul>
+<li><a href="#switch-port-sizing-worksheet"><span class="toc-section-number">10.1.1</span> Switch port sizing worksheet</a></li>
+</ul></li>
+<li><a href="#disk-raid-config-worksheet"><span class="toc-section-number">10.2</span> Storage sizing worksheet</a></li>
+<li><a href="#network-mapping"><span class="toc-section-number">10.3</span> Network mapping</a><ul>
+<li><a href="#ip-sizing-case-1"><span class="toc-section-number">10.3.1</span> Strategy 1</a></li>
+<li><a href="#ip-sizing-case-2"><span class="toc-section-number">10.3.2</span> Strategy 2</a></li>
+<li><a href="#ip-sizing-case-3"><span class="toc-section-number">10.3.3</span> Strategy 3</a></li>
+<li><a href="#ip-sizing-case-4"><span class="toc-section-number">10.3.4</span> Strategy 4</a></li>
+<li><a href="#ip-sizing-case-5"><span class="toc-section-number">10.3.5</span> Strategy 5</a></li>
+<li><a href="#network-mapping-worksheet"><span class="toc-section-number">10.3.6</span> Network mapping worksheet</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#contributors"><span class="toc-section-number">11</span> Contributors</a></li>
+<li><a href="#references"><span class="toc-section-number">12</span> References</a></li>
+</ul>
+</nav>
+<h1 id="introduction"><span class="header-section-number">1</span> Introduction</h1>
+<p>Technology evolves fast. In the age of cloud computing, user and workload owner expects a feeling of unlimited resources available on-demand instantly, fast, cheap, and reliable. To build and to maintain such an infrastructure is taken for granted as if servers, switches, even cables, have fixed recipes that with a swing of magic wand, they are wired, configured, provisioned, deployed, and readily consumable.</p>
+<p>It is not quite as easy, but not too far from reality either. Technology of server virtualization has been the talk of the day for the last two decades. Making a physical server shareable among workloads through a hypervisor that hides complexity of hardware and gives its tenant a sense of a complete machine dedicated to its own use is still the backbone of many software development and deployment. If you go to AWS today and register an EC2 instance, your expectation is that this machine can be treated just like a real server with the configurations you have requested — CPU, memory, and so on, except it is virtualized, meaning that its resources are shared, but you don’t know, and you don’t care.</p>
+<p>Regardless which software your company is working on, the inevitable question you will have to answer at some point is, “where to put it?” This is both a question for development, and for production. Development stack is often contained within a single host environment — it is not uncommon to see an entire stack inside a single virtual machine, sometimes even run as a production instance by some entrepreneurs. But once your design grows, you start seeing the word “scalability”, “high availability”, and that’s when a single host environment will start to break. To have more “host environments”, you are facing two choices: physical servers, or virtual.</p>
+<p>Here we are using the word “virtual” referring to any virtualized environment in general. This includes cloud such as AWS, OpenStack, and containers. Anything but physical is thus, virtual. But virtual is the outcome, not the starting point. As infrastructure architect, or an infrastructure administrator, this is the result you are delivering to your customer, and you are responsible to build it, to run it, and to keep it up to date.</p>
+<p>Whether the seemingly unlimited resources are presented as virtual machine, container, or some other forms, these are software in its core, and they need to run on a server, have access to storage, to network, and to be coordinated and orchestrated by its managerial software. Therefore, if we take a broad view of all these software, there are essentially two groups of them: management, and workloads.</p>
+<dl>
+<dt>Management</dt>
+<dd>These are software responsible to coordinate and orchestrate workloads that can run distributively across network over multiple infrastructure. It has the meta model of its workload, has the capability of collect and monitor its subordinates, and to create and delete workloads, and to have an UI or API that communicates to the world outside itself.
+</dd>
+<dt>Workloads</dt>
+<dd>These are software worker bees that makes up the actual application. It responds to customer input, performs business logic, and reads and writes data as the logic determines.
+</dd>
+</dl>
+<p>So as a starting point, before any of the <code>workload</code> software exist, you have to find a place for your <code>management</code> software, and that’s where the Lenovo Open Cloud (LOC) RHHI-v fits in — it describes a comprehensive approach from ground up that provides RHEL 7.5 on baremetal and a virtual-machine ready platform supported by RHHI 1.5 that gives users a foothold for the <code>management</code> piece, and scale it out to include more hardware and software as your resources grow.</p>
+<p>In this RA we describe the system architecture for the Lenovo Open Cloud (LOC) RHHI-v based on Lenovo ThinkSystem servers, Lenovo network switches, and RHHI 1.5. It provides details of the hardware requirements and configuration. It also describes the network architecture and switch configurations. The hardware bill of materials is provided for all required components to build the Open Cloud cluster. An example deployment is used to show how to prepare, provision, and deploy Red Hat Hyperconverged Infrastructure for Virtualization on Lenovo ThinkSystem servers and Lenovo network switches.</p>
+<p>The target audience for this Reference Architecture (RA) is system administrators of virtualized environment, or system architects who is considering to deploy workloads into virtual machines. Some experience with Lenovo server and switch configurations are highly desirable. Experience with Red Hat implementation of virtualization and Red Hat Enterprise Linux (RHEL) version 7.5 is helpful, but it is not required.</p>
+<h1 id="business-problem-and-business-value"><span class="header-section-number">2</span> Business problem and business value</h1>
+<h2 id="business-problem"><span class="header-section-number">2.1</span> Business problem</h2>
+<p>Many software continue to be deployed to either physical server (aka. baremetal), and virtual machine. Container based deployment is gaining ground, especially in software development, and for application whose architecture fits for containerization. However, virtual machine still hold advantage in areas such as security, backwards compatibility, human resource who has knowledge of the technology, technology maturity, support, and operational experience.</p>
+<p>Within the virtualization sphere, kernel-based virtual machine (aka. KVM) is a popular hypervisor. It is open source and production ready. But this is only half the battle. Infrastructure must also provide adequate storage backend, networking, and management of all these aspects.</p>
+<p>Building such a solution from the ground up is not an easy task. Software is an experience product, meaning that one has to see it in action and get hands on experience in order to relate to its function, strength, and limitation. How to quickly deploy an instance in lab for evaluation without yet having the full knowledge of all the components from hardware all the way up some web UI of hundreds of options an admin can turn on and off is a constant struggle.</p>
+<p>On the other hand, another parity is the development environment vs. production environment. A development infrastructure, if deviated from the production one, can seriously risk the stability once the application moves off its nest to the real world. How to build and maintain an identical stack that fit for both development who wants agile, small foot print, light weight, constantly being rebuilt (and constantly being broken by testing, by bugs, and so on), and for production that stability, scalability, security are as important as function.</p>
+<p>Then, there is a whole world of hardware pieces to match — server, CPU, disk, disk controller, network card, switches, down to cables, server height, weight, power consumption, facing orientation, air flow, and an army of software configurations at firmware level, at operating system level, at application level, and so on.</p>
+<h2 id="business-value"><span class="header-section-number">2.2</span> Business value</h2>
+<p>This document will describe in details how Lenovo has used Red Hat Hyperconverged Infrastructure for Virtualization<span class="citation" data-cites="redhat-rhhi-home">[1]</span>, an <code>oVirt</code> based hyperconverged infrastructure solution, on top of selected Lenovo severs and switches, to build such a virtualization environment. We will leave out some topics such as floor weight, rack foot print, but will focus on the configuration of hardware and software, and choice of settings based on our experience and test results.</p>
+<p>There isn’t one size fit for all. By looking into the technology and describing how they work with hardware and network, this document provides a broader scope of knowledge than the Red Hat Hyperconverged Infrastructure for Virtualization 1.5<span class="citation" data-cites="redhat-rhhi-guide">[2]</span>. Once one has grasped the information in this document, one will be well positioned to consider and discuss options in both the hardware and the software with a clear understanding of where they fit together and why so.</p>
+<h1 id="requirements"><span class="header-section-number">3</span> Requirements</h1>
+<h2 id="functional-requirements-use-cases"><span class="header-section-number">3.1</span> Functional requirements (use cases)</h2>
+<p>The primary use case of Red Hat Hyperconverged Infrastructure for Virtualization is to deploy software application in virtual machine. One thus gains the benefit of virtualization such as sharing common physical resource, resilience to hardware failure through backup, snapshot, export and import, and live migration. Further, virtual machine can usually be converted into a format portable to other virtualization environment, eg. VMware and KVM.</p>
+<figure>
+<img src="../../images/ibb/ibb%20rhhi%20functional%20requirement%20use%20cases.png" id="fig:functional-requirement-use-cases" alt="" /><figcaption><span>Figure 1:</span> Functional requirements</figcaption>
+</figure>
+<ol class="example" type="1">
+<li><p>As a cloud user, I want to deploy application in virtual machine(s), so that the deployment is portable to VMware and KVM.</p></li>
+<li><p>As a cloud user, I want to create VM from disk image, so that I can reuse an existing VM image.</p></li>
+<li><p>As a cloud user, I want to create VM from a configuration template that defines VM attributes, such as CPU, memory, disk size, base image, and so on, so that I will get an identical VM if using the same values.</p></li>
+</ol>
+<p>There are many dials in a virtual machine that one can play with. The common ones are easy — CPU, memory, disk, and network. In addition, Red Hat Hyperconverged Infrastructure for Virtualization is set to meet the <code>affinity</code> requirement, that is to pin a virtual machine to a physical node.</p>
+<ol start="4" class="example" type="1">
+<li><p>As a cloud user, I want to pin VM to a specific physical node, so that I can use a HA model on my application by mandating VMs over different physical nodes so to prevent single point of server failure.</p></li>
+<li><p>As a cloud user, I want to pin VM to CPU threads, IO threads, emulator threads, or NUMA nodes, so that I can meet performance requirement of my workload.</p></li>
+<li><p>As a cloud user, I want to take snapshot of VM to preserve its execution states so that I can restore the states and resume the execution from that.</p></li>
+</ol>
+<h2 id="non-functional-requirements"><span class="header-section-number">3.2</span> Non-functional requirements</h2>
+<p>In addition to the use cases above, a private cloud needs fault tolerance, high availability, maintenance, ease of installation, and high performance.</p>
+<h3 id="fault-tolerance"><span class="header-section-number">3.2.1</span> Fault tolerance</h3>
+<p>Fault tolerance is covering cases to maintain the integrity of the infrastructure when some hardware resource become unavailable. The most important consideration is the safety of data — management data, workload execution states, and user data.</p>
+<ol type="1">
+<li><p>As a cloud admin, I want the data saved in the storage resilient in the event of single disk failure or single server failure.</p></li>
+<li><p>As a cloud admin, I want to create backup of VM snapshots, so that snapshots can be restored from backup in the event of snapshot corruption. This, however, does not dictate whether backups are themselves known-good.</p></li>
+<li><p>As a cloud admin, I want the infrastructure to meet all the functional requirements when a single node is broken. This includes malfunction of any sub-components inside the node, eg. NIC, RAID controller.</p></li>
+<li><p>As a cloud admin, I want to have redundancy in network connections, so that losing one connection in the pair will not disrupt the networks on that line logically.</p></li>
+</ol>
+<h3 id="high-availability"><span class="header-section-number">3.2.2</span> High availability</h3>
+<p>This reference architecture looks over two common failure modes — server failure, and network connection loss, so to alleviate disruption of service:</p>
+<ol type="1">
+<li><p>As a cloud admin, I want cluster management application cut over to a working node in the cluster automatically when its underline host breaks its function.</p></li>
+<li><p>As a cloud admin, if a network has more than one connection for redundancy purpose, I want the network traffic to cut over to a working connection automatically if the one it is on is broken.</p></li>
+</ol>
+<p>However, some part of the Red Hat Hyperconverged Infrastructure for Virtualization is highly sensitive to networking disruption, which is intrinsic to its underline technology.</p>
+<h3 id="maintenance"><span class="header-section-number">3.2.3</span> Maintenance</h3>
+<p>Infrastructure requires regular maintenance. The key consideration is to strategize a maintenance by understanding its impact and its goal. Some will inevitably disrupt the service and seemingly break high availability. But in the long run, it brings a healthy system, sound integrity, and long-running operation without which HA is not possible:</p>
+<ol type="1">
+<li><p>As a cloud admin, I want to know which virtual machines are running on which physical node, so that I can evaluate the impact of shutdown of that node in the event of server maintenance or repair.</p></li>
+<li><p>As a cloud admin, I want to know which physical node and VMs are running on a network, so that I can evaluate the impact of shutdown of that network in the event of network maintenance or repair.</p></li>
+<li><p>As a cloud admin, I want to migrate VM to another physical node manually in the event of server shutdown for maintenance or repair<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
+</ol>
+<h3 id="ease-of-installation"><span class="header-section-number">3.2.4</span> Ease of installation</h3>
+<p>One of this document is to make it easy for data center to build such an infrastructure for their own use or for their customer.</p>
+<ol type="1">
+<li><p>As a cloud admin, I want to build the infrastructure on baremetal servers with a configuration file as input, so that the end state of the infrastructure is fully descriptive.</p></li>
+<li><p>As a cloud admin, I want to rebuild the infrastructure to the same state each time if the configuration inputs remain the same, so that the construction process is deterministic.</p></li>
+<li><p>As a cloud admin, I want to automate the entire installation, so that building one takes single input — the configuration file, and one CLI or a button click.</p></li>
+</ol>
+<h3 id="high-performance"><span class="header-section-number">3.2.5</span> High performance</h3>
+<p>In general, one can expect from this architecture that:</p>
+<ol type="1">
+<li><p>As a cloud admin, I want to create <code>&gt;1,000</code> VMs that has 2 CPU core, 8G memory, and 100 GB disk space, so that I can support these many workloads of the size.</p></li>
+<li><p>As a cloud admin, I want to have <code>&gt;200 MB/s</code> write throughput and <code>&gt;500 MB/s</code> read throughput seen by a virtual machine showing <code>&lt;50%</code> CPU idleness.</p></li>
+</ol>
+<h1 id="rhhi-architecture"><span class="header-section-number">4</span> Architectural Overview</h1>
+<p>Red Hat Hyperconverged Infrastructure for virtualization (RHHI-v) meets the requirements described in the previous chapter. RHHI-v consists of an integrated <a href="#rh-rhv">Red Hat Virtualization</a> cluster and <a href="#rh-gluster">Red Hat Gluster</a> cluster on a set of Lenovo servers and switches. Figure below shows an overview using three servers.</p>
+<figure>
+<img src="../../images/ibb/ibb%20rhhi%20overview.png" id="fig:rhhi-arch-diagram" alt="" /><figcaption><span>Figure 2:</span> Lenovo Open Cloud RHHI-v Architecture of a 3-server Configuration</figcaption>
+</figure>
+<p>Red Hat Hyperconverged Infrastructure for Virtualization offers four configurations (see <a href="#bom">BOM</a>):</p>
+<ol type="1">
+<li>3-server configuration</li>
+<li>6-server configuration</li>
+<li>9-server configuration</li>
+<li>12-server configuration</li>
+</ol>
+<p>Primary storage is a Gluster cluster that uses internal drives in servers to form distributed storage. By default data blocks are replicated to all servers in the cluster.</p>
+<p>The server’s compute resources are virtualized through a hypervisor, and workloads are deployed in virtual machines (VMs) that can then be located on any of the hosts in the cluster. The cluster’s management is also in redundant VMs and will automatically use another host when there is a problem, thus providing an uninterrupted management capability. There is also a management CLI application on all cluster hosts that provides administration capabilities.</p>
+<p>Initial setup can choose a minimal 3-server configuration. Once the software is deployed, more servers can be added to extend the cluster to provide additional resources for workloads.</p>
+<h1 id="component-model"><span class="header-section-number">5</span> Component model</h1>
+<p>The Red Hat Hyperconverged Infrastructure for virtualization (RHHI-v) consists of four components: physical networks, storage, hypervisor, and interfaces.</p>
+<figure>
+<img src="../../images/ibb/ibb%20rhhi%20component%20model.png" id="fig:ibb-rhhi-component-model" alt="" /><figcaption><span>Figure 3:</span> RHHI-v component model</figcaption>
+</figure>
+<dl>
+<dt>Physical networks</dt>
+<dd>They represent the actual physical network connections between switches and servers. Based on their primary purpose, it can be further broken down into:
+</dd>
+</dl>
+<ol type="1">
+<li><p><strong>Management networks</strong>: These carry administrative functions of the cluster such as the admin portal, remote access to host, and API.</p></li>
+<li><p><strong>Storage networks</strong>: These are the data traffic to retrieve from and write to storage backend. In use cases in which storage performance is the key, this will be the determining factor in design to support high data throughput.</p></li>
+<li><p><strong>Workload networks</strong>: Networks to support applications (aka. workloads) deployed on the infrastructure.</p></li>
+</ol>
+<dl>
+<dt>Storage</dt>
+<dd>RHHI-v provides four types of storage:
+</dd>
+</dl>
+<ol type="1">
+<li><p><strong>Distributed storage</strong>: This is a network storage. The key difference between this and other network storage such as NFS, is that it has built-in capability to distribute data read &amp; write to multiple storage endpoints, and to create data replication. This can not only improve throughput performance, but is the key design factor to support fault tolerance and HA.</p>
+<p>However, redundancy comes with penalty — the storage capacity will not always linearly grow by adding more disks to the cluster. See section <a href="#gluster-type">Gluster volume type</a> for details.</p></li>
+<li><p><strong>Network storage</strong>: Unlike distributed storage above, this storage does not offer data replication or data distribution. This fit for application who has already considered these functions in its design without depending on the storage itself. Benefit of such simplification is that storage capacity will grow linearly with the number of disks.</p></li>
+<li><p><strong>Storage cache</strong>: Along the storage data path, one would find many data caches — RAID cache, OS kernel cache, file system cache, database cache, and so on. We use this term to describe include all these caches that will hold data, even temporarily. They are usually working behind the scene and are beyond a user’s access. However, their existence and their configurations have much effect on the infrastructure’s performance and stability.</p></li>
+<li><p><strong>Local only storage</strong>: These are un-shared storages by either a host or an application.</p></li>
+</ol>
+<dl>
+<dt>Hypervisor</dt>
+<dd>is the virtualization layer of the infrastructure, in which hardware resources will be represented as virtual resources.
+</dd>
+</dl>
+<ol type="1">
+<li><p><strong>Virtual machines</strong>: These are virtualized compute resources. There are two types of virtual machine on the RHHI-v infrastructure — workloads, and management.</p>
+<ol type="1">
+<li>Workloads: Any software deployed on the infrastructure is a workload.</li>
+<li>Management: VMs are for administrating the RHHI-v infrastructure’s.</li>
+</ol></li>
+<li><p><strong>Networks</strong>: Physical networks are virtualized so a server’ physical NICs and cable connections are shareable by virtual machines.</p>
+<p>Virtual networks are not associated with any particular physical server. Thus regardless where the virtual machine is running, these networks can be available to it. In order for this to work, however, all servers in a cluster must have identical physical networks. See section <a href="#platform-network">Network Configurations</a> for details.</p></li>
+<li><p><strong>Files</strong>: There are three important types of files in RHHI-v:</p>
+<ol type="1">
+<li><p><strong>VM disk image</strong>: A virtual machine consists of one or many disk images. They function more or less like the physical disk in a server. But since they are file based, there can be features VM disk can do that are impossible for a physical disk.</p></li>
+<li><p><strong>VM snapshot</strong>: A key motivation of the RHHI-v is to virtualize a workload, thus allowing user to take snapshot — freeze the states of a virtual machine in time, and recover and resume from a snapshot.</p></li>
+<li><p><strong>Static files</strong>: As an infrastructure, RHHI-v can be the source of truth of static files such as ISO images..</p></li>
+</ol></li>
+<li><p><strong>Support services</strong>: There are many support services for the infrastructure. Three key services are:</p>
+<ol type="1">
+<li><p><strong>VDSM</strong>: Daemon running on each host to support the admin application.</p></li>
+<li><p><strong>HA services</strong>: responsible to keep the admin application running on a healthy host so that administrative capability of the infrastructure has high availability.</p></li>
+<li><p><strong>VM console server</strong>: gives remote console access to the virtual machines. Before VM’s network is created, this is the only mean to gain access to the VM for administrative tasks.</p></li>
+</ol></li>
+</ol>
+<dl>
+<dt>Interfaces</dt>
+<dd>These are entry points through which the infrastructure admin or user can access the infrastructure’s function.
+</dd>
+</dl>
+<ol type="1">
+<li><p><strong>Admin interfaces</strong>: There are three interfaces for the infrastructure admin — a web portal, a RESTful API, and a</p>
+<ol start="151" type="I">
+<li>They cover both the hypervisor and the gluster storage.</li>
+</ol></li>
+<li><p><strong>OS portal</strong>: RHEL 7 has a built-in portal, the <code>cockpit</code>, that makes it easy to administrate a RHEL-based host.</p></li>
+<li><p><strong>OOB portal/CLI</strong>: Interface to manage hardware when they are not yet provisioned. This includes admin portal and CLI of switches.</p></li>
+</ol>
+<h1 id="operational-model"><span class="header-section-number">6</span> Operational model</h1>
+<h2 id="hardware"><span class="header-section-number">6.1</span> Hardware</h2>
+<p>This section describes the hardware infrastructure aspects of the LOC RHHI-v reference architecture.</p>
+<h3 id="lenovo-sr650-servers"><span class="header-section-number">6.1.1</span> Lenovo SR650 Servers</h3>
+<figure>
+<img src="https://www.lenovo.com/medias/lenovo-servers-rack-thinksystem-sr650-subseries-gallery-1.jpg?context=bWFzdGVyfHJvb3R8MjQzNzV8aW1hZ2UvanBlZ3xoMjIvaGFhLzk0OTEwNDMwNTc2OTQuanBnfDUxZTdjYmYyZmRlODc1MWFkMGE0M2I3NGNhZTZhNWJjNWY5NDA0NGU4NDk5Y2M5NDY4MTlkYjJkZjA0MjEzNTM" id="fig:lenovo-sr650" alt="" /><figcaption><span>Figure 4:</span> Lenovo ThinkSystem SR650</figcaption>
+</figure>
+<p>The Lenovo ThinkSystem SR650 server is an enterprise class 2U two-socket versatile server that incorporates outstanding reliability, availability, and serviceability (RAS), security, and high efficiency for business-critical applications and cloud deployments. Unique Lenovo AnyBay technology provides the flexibility to mix-and-match SAS/SATA HDDs/SSDs and NVMe SSDs in the same drive bays. Four direct-connect NVMe ports on the motherboard provide ultra-fast read/writes with NVMe drives and reduce costs by eliminating PCIe switch adapters. Plus, storage can be tiered for greater application performance, to provide the most cost-effective solution.</p>
+<p>Combined with the Intel® Xeon® Scalable processors product family, the Lenovo ThinkSystem SR650 server offers a high density combination of workloads and performance. Its flexible, pay-as-you-grow design and great expansion capabilities solidify dependability for any kind of virtualized workload, with minimal downtime. Additionally, it supports two 300W high-performance GPUs and ML2 NIC adapters with shared management.</p>
+<p>The Lenovo ThinkSystem SR650 server provides internal storage density of up to 100 TB (with up to 26 x 2.5-inch drives) in a 2U form factor with its impressive array of workload-optimized storage configurations. The ThinkSystem SR650 offers easy management and saves floor space and power consumption for the most demanding storage virtualization use cases by consolidating the storage and server into one system. The Lenovo ThinkSystem SR650 server supports up to twenty-four 2.5-inch or fourteen 3.5-inch hot-swappable SAS/SATA HDDs or SSDs together with up to eight on-board NVMe PCIe ports that allow direct connections to the U.2 NVMe PCIe SSDs. The ThinkSystem SR650 server also supports up to two NVIDIA GRID cards for AI or media processing acceleration.</p>
+<p>The SR650 server supports up to two processors, each with up to 28-core or 56 threads with hyper-threading enabled, up to 38.5 MB of last level cache (LLC), up to 2666 MHz memory speeds and up to 3 TB of memory capacity. The SR650 also support up to 6 x PCIe slots. Its on-board Ethernet solution provides 2/4 standard embedded Gigabit Ethernet ports and 2/4 optional embedded 10 Gigabit Ethernet ports without occupying PCIe slots. All these advanced features make the server ideal to run data and bandwidth intensive VNF workload and storage functions of NFVI platform.</p>
+<p>For more information, see product guide <span class="citation" data-cites="lenovo-sr650-product-guide">[3]</span>.</p>
+<h3 id="lenovo-930-x-raid-controller"><span class="header-section-number">6.1.2</span> Lenovo 930-x RAID controller</h3>
+<figure>
+<img src="https://lenovopress.com/assets/images/LP0652/ThinkSystem%20RAID%20930-8i.jpg" id="fig:lenovo-raid-930" alt="" /><figcaption><span>Figure 5:</span> ThinkSystem RAID 930-8i RAID Controller</figcaption>
+</figure>
+<p>RAID controller is a critical component in Red Hat Hyperconverged Infrastructure for Virtualization architecture. Server disks must be RAID-ed to achieve both high availability and good performance. In addition, having the correct RAID firmware and feature enabled are crucial to make <code>Gluster</code> cluster work. In the following section we will show how to validate your server meeting this requirement.</p>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-raid-930-product-guide">[4]</span>.</p>
+<h3 id="lenovo-network-switches"><span class="header-section-number">6.1.3</span> Lenovo Network Switches</h3>
+<p>The following sections describe the Top-of-Rack (ToR) switches used in this reference architecture. The Networking Operating System (see <a href="#bom-switch-firmware">switch firmware BOM</a>)software features of these Lenovo switches deliver seamless, standards-based integration into upstream switches.</p>
+<p>Two 10Gb switches and two 1Gb switches are recommended in this architecture. For high throughput workloads, we recommend Lenovo 25Gb switches such as NE2572, in which case server should also equip 25G NIC (see <a href="#bom">BOM</a> for details) instead of 10G NICs. The 25G switch are compatible with 10G NICs, but not the other way around.</p>
+<h4 id="lenovo-rackswitch-g8272-10gb"><span class="header-section-number">6.1.3.1</span> Lenovo RackSwitch G8272 (10Gb)</h4>
+<figure>
+<img src="https://lenovopress.com/assets/images/tips1267/0.1340.jpg" id="fig:g8272" alt="" /><figcaption><span>Figure 6:</span> Lenovo RackSwitch G8272</figcaption>
+</figure>
+<p>The Lenovo RackSwitch G8272 uses 10Gb SFP+ and 40Gb QSFP+ Ethernet technology and is specifically designed for the data center. It is an enterprise class Layer 2 and Layer 3 full featured switch that delivers line-rate, high-bandwidth, low latency switching, filtering, and traffic queuing without delaying data. Large data center-grade buffers help keep traffic moving, while the hot-swap redundant power supplies and fans (along with numerous high-availability features) help provide high availability for business sensitive traffic.</p>
+<p>The RackSwitch G8272 (as shown in fig. <a href="#fig:g8272">6</a>) is ideal for latency sensitive applications, such as high-performance computing clusters, financial applications and NFV deployments. In addition to 10 Gb Ethernet (GbE) and 40 GbE connections, the G8272 can use 1 GbE connections (need the Photoelectric conversion module).</p>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-g8272-product-guide">[5]</span>.</p>
+<h4 id="lenovo-rackswitch-g8052-1gb"><span class="header-section-number">6.1.3.2</span> Lenovo RackSwitch G8052 (1Gb)</h4>
+<figure>
+<img src="https://lenovopress.com/assets/images/tips1270/0.118C.jpg" id="fig:g8052" alt="" /><figcaption><span>Figure 7:</span> Lenovo RackSwitch G8052</figcaption>
+</figure>
+<p>The Lenovo RackSwitch™ G8052 (as shown in fig. <a href="#fig:g8052">7</a>) is a top-of-rack data center switch that delivers unmatched line-rate Layer 2/3 performance at an attractive price. It has 48x 10/100/1000BASE-T RJ-45 ports and four 10 Gigabit Ethernet SFP+ ports (it also supports 1 GbE SFP transceivers), and includes hot-swap redundant power supplies and fans as standard, which minimizes your configuration requirements. Unlike most rack equipment that cools from side-to-side, the G8052 has rear-to-front or front-to-rear airflow that matches server airflow.</p>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-g8052-product-guide">[6]</span>.</p>
+<h4 id="lenovo-thinksystem-ne2572-25gb"><span class="header-section-number">6.1.3.3</span> Lenovo ThinkSystem NE2572 (25Gb)</h4>
+<figure>
+<img src="https://www.lenovo.com/medias/lenovo-data-center-networking-thinksystem-ne2572-subseries-hero.png?context=bWFzdGVyfHJvb3R8MzgxMTF8aW1hZ2UvcG5nfGg3MS9oMDAvOTQ3OTEwNjc4OTQwNi5wbmd8NzIyNmQ5NTBlOTA3NzVmNmMyNzU0YWQwMTJkNDM5MGEzZjNlOWRkZmJkYTY4MGViZWQ4NjkwYzgxNzhhYzY3Yg" id="fig:ne2572" alt="" /><figcaption><span>Figure 8:</span> Lenovo RackSwitch NE2572</figcaption>
+</figure>
+<p>The NE2572 is optimized for enterprise data centers with features, such as:</p>
+<ul>
+<li>Software Defined Data Center interfaces ensure smooth interoperability with popular enterprise management applications.</li>
+<li>Open Architecture: NE2572 supports automation and control while</li>
+<li>Lenovo Network Orchestrator automates vlan changes to improve. integrating with industry-standard application and APIs, such as REST, OpenStack, OpenContrail, and Ansible.</li>
+<li>Resiliency: NE2572 offers outstanding fault tolerance with one of the quickest high-availability failovers in the industry so running applications are less likely to require a restart.</li>
+</ul>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-ne2572-product-guide">[7]</span>.</p>
+<h2 id="software"><span class="header-section-number">6.2</span> Software</h2>
+<p>Based on Red Hat Hyperconverged Infrastructure for Virtualization 1.5<span class="citation" data-cites="redhat-rhhi-guide">[2]</span>. RHHI-v can be viewed as being comprised of two primary components: Red Hat Virtualization (RHV)<span class="citation" data-cites="redhat-rhv">[8]</span>, and Red Hat Gluster (RHGS)<span class="citation" data-cites="redhat-rhgs">[9]</span>.</p>
+<figure>
+<img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Hyperconverged_Infrastructure_for_Virtualization-1.5-Deploying_Red_Hat_Hyperconverged_Infrastructure_for_Virtualization-en-US/images/4a9666b1f646ebbee25951430518a999/rhhi-architecture.png" id="fig:rhhi-arch-diagram" alt="" /><figcaption><span>Figure 9:</span> Red Hat Hyperconverged Infrastructure for Virtualization architecture (source: <span class="citation" data-cites="redhat-rhhi-architecture-diagram">[10]</span>)</figcaption>
+</figure>
+<h3 id="rh-rhv"><span class="header-section-number">6.2.1</span> Red Hat Virtualization (RHV)</h3>
+<blockquote>
+<p>Red Hat Virtualization is an enterprise-grade virtualization platform built on Red Hat Enterprise Linux. Virtualization allows users to easily provision new virtual servers and workstations, and provides more efficient use of physical server resources. With Red Hat Virtualization, you can manage your entire virtual infrastructure - including hosts, virtual machines, networks, storage, and users - from a centralized graphical user interface or RESTful API. (source: <span class="citation" data-cites="redhat-rhv-4.1-product-guide">[11]</span>)</p>
+</blockquote>
+<p>RHV has three key components:</p>
+<ol type="1">
+<li><strong>Red Hat Virtualization Manager</strong>: A service that provides a graphical user interface and a RESTful API to manage the resources in the environment.</li>
+<li><strong>Hosts</strong>: Red Hat Enterprise Linux hosts (RHEL-based hypervisors) and Red Hat Virtualization Hosts (image-based hypervisors) are the two supported types of host. Hosts use Kernel-based Virtual Machine (KVM) technology and provide resources used to run virtual machines.</li>
+<li><strong>Shared Storage</strong>: A storage service is used to store the data associated with virtual machines.</li>
+</ol>
+<p>There are two deployment modes: standalone or self-hosted engine. In this reference architecture, we are using the <code>self-hosted engine</code> method (fig. <a href="#fig:rh-rhv-deployment-diagram">10</a>):</p>
+<blockquote>
+<p>The Red Hat Virtualization Manager runs as a virtual machine on self-hosted engine nodes (specialized hosts) in the same environment it manages. A self-hosted engine environment requires one less physical server, but requires more administrative overhead to deploy and manage. The Manager is highly available without external HA management. (source: <span class="citation" data-cites="redhat-rhv-4.2-planning-prerequisite-guide">[12]</span>)</p>
+</blockquote>
+<figure>
+<img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Virtualization-4.2-Product_Guide-en-US/images/894aaa576d2f26123a3b3149a5e18159/RHV_SHE_ARCHITECTURE1.png" id="fig:rh-rhv-deployment-diagram" alt="" /><figcaption><span>Figure 10:</span> Red Hat Virtualization Self-Hosted Engine Architecture (source: <span class="citation" data-cites="redhat-rhv-self-hosted-engine-architecture-diagram">[13]</span>)</figcaption>
+</figure>
+<p>The <code>hosted-engine</code> VM can be started on any server. If the server on which it is currently residing goes down, eg. for maintenance or due to hardware failure, the VM will automatically migrate to a different server<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, thus providing a seamless user experience.</p>
+<h3 id="rh-gluster"><span class="header-section-number">6.2.2</span> Red Hat Gluster Storage (RHGS)</h3>
+<blockquote>
+<p>Red Hat Gluster Storage is a software-defined, scale-out storage that provides flexible and affordable unstructured data storage for the enterprise. Red Hat Gluster Storage 3.4 provides new opportunities to unify data storage and infrastructure, increase performance, and improve availability and manageability in order to meet a broader set of an organization’s storage challenges and requirements.</p>
+<p>GlusterFS, a key building block of Red Hat Gluster Storage, is based on a stackable user space design and can deliver exceptional performance for diverse workloads. GlusterFS aggregates various storage servers over network interconnects into one large parallel network file system. (source: <span class="citation" data-cites="redhat-rhgs-3.4-installation-guide">[14]</span>)</p>
+</blockquote>
+<figure>
+<img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Storage-3.1-Administration_Guide-en-US/images/667b8206666b18dbed70d300c3e2710c/RH_Gluster_Storage_diagrams_334434_0415_JCS_5.png" id="fig:rhgs-arch-diagram" alt="" /><figcaption><span>Figure 11:</span> Red Hat Gluster Storage architecture (source: <span class="citation" data-cites="redhat-gluster-storage-architecture-diagram">[15]</span>)</figcaption>
+</figure>
+<p>The key feature of RHGS is that unlike other distributed storage methods in which tracking the location of data is based on a metadata server, RHGS locates files mathematically using an elastic hashing algorithm. This not only removes single-point-of-failure of metadata server, but also makes the system linearly scalable.</p>
+<p>In this reference architecture, <code>Gluster</code> is the primary storage backend. Depending on the workload requirement, Red Hat Hyperconverged Infrastructure for Virtualization can also provide other storage solutions such as NFS for OpenStack Swift object store.</p>
+<h1 id="development-considerations"><span class="header-section-number">7</span> Deployment considerations</h1>
+<h2 id="server-configurations"><span class="header-section-number">7.1</span> Server Configurations</h2>
+<h3 id="disk-configuration"><span class="header-section-number">7.1.1</span> Disk configurations</h3>
+<p>Disk configuration is important to achieve high performance. SR650 server is flexible in this regards. It supports various types of disks. In general SSD will yield better performance than HDD. In this example, we recommend the following in each SR650 server:</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Server disk configurations</caption>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Position</th>
+<th>Number</th>
+<th>Size</th>
+<th>RAID</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SATA SSD</td>
+<td>Front backplane</td>
+<td>2</td>
+<td>480GB</td>
+<td>RAID1</td>
+<td>Operating system</td>
+</tr>
+<tr class="even">
+<td>SATA SSD</td>
+<td>Front backplane</td>
+<td>2</td>
+<td>960GB</td>
+<td>RAID1</td>
+<td>LVM cache</td>
+</tr>
+<tr class="odd">
+<td>SAS HDD</td>
+<td>Front backplane</td>
+<td>20</td>
+<td>2.4TB</td>
+<td>RAID6</td>
+<td>GlusterFS</td>
+</tr>
+</tbody>
+</table>
+<p>By default gluster volumes will be in <a href="#gluster-volume-type"><strong>replicated</strong></a> mode, which renders total storage capacity in a 3-server HCI Gluster: <code>20 * 2.4TB = 48 TB</code>. LVM cache can be turned on and off in deployment (see <a href="#loc-rhhi-deployment-template">deployment template</a>). To determine whether to enable it, see <a href="#lvm-cache">LVM cache</a> for details.</p>
+<p>In addition, Red Hat Hyperconverged Infrastructure for Virtualization supports alternative network storage such as NFS, for example, used for SWIFT object store. Disk configuration will thus require two additional disks for the purpose:</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Server Disk Configurations w/ support of file-based storage</caption>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Position</th>
+<th>Number</th>
+<th>Size</th>
+<th>RAID</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SATA SSD</td>
+<td>Front backplane</td>
+<td>2</td>
+<td>480GB</td>
+<td>RAID1</td>
+<td>Operating system</td>
+</tr>
+<tr class="even">
+<td>SATA SSD</td>
+<td>Front backplane</td>
+<td>2</td>
+<td>960GB</td>
+<td>RAID1</td>
+<td>LVM cache</td>
+</tr>
+<tr class="odd">
+<td>SAS HDD</td>
+<td>Front backplane</td>
+<td>18</td>
+<td>2.4TB</td>
+<td>RAID6</td>
+<td>GlusterFS</td>
+</tr>
+<tr class="even">
+<td>SAS HDD</td>
+<td>Front backplane</td>
+<td>2</td>
+<td>2.4TB</td>
+<td>RAID1</td>
+<td>Affinitized VMs</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raid-configuration"><span class="header-section-number">7.1.2</span> RAID configurations</h3>
+<p>RAID affects not only performance, but provides data redundancy. Table below lists the key attributes of Red Hat Hyperconverged Infrastructure for Virtualization:</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Server RAID Configurations</caption>
+<thead>
+<tr class="header">
+<th>Config</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stripe size</td>
+<td>256 KB</td>
+</tr>
+<tr class="even">
+<td>Read policy</td>
+<td>Adaptive Read Ahead</td>
+</tr>
+<tr class="odd">
+<td>Write policy</td>
+<td>Always Write Back</td>
+</tr>
+<tr class="even">
+<td>I/O policy</td>
+<td>Direct I/O</td>
+</tr>
+<tr class="odd">
+<td>Access policy</td>
+<td>Read Write</td>
+</tr>
+<tr class="even">
+<td>Disk cache policy</td>
+<td>Unchanged</td>
+</tr>
+<tr class="odd">
+<td>Background initialization</td>
+<td>Disabled</td>
+</tr>
+</tbody>
+</table>
+<p>Regarding the <code>write policy</code>, in some older RAID controllers, there was a need to attach an add-on cache card and had option of having an on-board battery in order to use the <code>Write With BBU</code> setting for the write policy. On the Lenovo’s 930-x RAID controller, however, this has been simplified:</p>
+<blockquote>
+<p>MegaRAID flash cache protection uses NAND flash memory, which is powered by a <code>CacheVault Power Module</code> supercapacitor, to protect data that is stored in the controller cache. This module eliminates the need for a lithium-ion battery, which is commonly used to protect DRAM cache memory on PCI RAID controllers. To avoid the possibility of data loss or corruption during a power or server failure, flash cache protection technology transfers the contents of the DRAM cache to NAND flash using power from the offload power module. After the power is restored to the RAID controller, the content of the NAND flash is transferred back to the DRAM, which is flushed to disk. (source: <span class="citation" data-cites="lenovo-raid-930-product-guide">[4]</span>)</p>
+</blockquote>
+<p>Therefore, setting the write policy to <code>Always Write Back</code> is recommended.</p>
+<h3 id="server-firmware"><span class="header-section-number">7.1.3</span> Firmware</h3>
+<p>All RHHI-v servers should meet the following firmware requirements:</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Server Firmware</caption>
+<thead>
+<tr class="header">
+<th>Firmware</th>
+<th>Version</th>
+<th>Build</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IMM</td>
+<td>4.40</td>
+<td>TCOO36C</td>
+</tr>
+<tr class="even">
+<td>UEFI</td>
+<td>2.81</td>
+<td>TCE138G</td>
+</tr>
+</tbody>
+</table>
+<h2 id="platform-network"><span class="header-section-number">7.2</span> Network Configurations</h2>
+<p>The most critical piece of a successful Red Hat Hyperconverged Infrastructure for Virtualization deployment is its networking. In this section we will go over the details of a networking design that follows the basic RHHI-v’s requirement, but also taking advantage of the Lenovo hardware we have introduced so that you gain in both robustness and flexibility.</p>
+<h3 id="convention"><span class="header-section-number">7.2.1</span> Design Conventions</h3>
+<p>We recognize there are endless possibility to design a network, and each data center is different. In this architecture we have followed these conventions:</p>
+<ol type="1">
+<li><p>Data center switches follow a <code>spine-leaf</code> topology.</p></li>
+<li><p>Switch to switch connections are always paired (inter-switch-links, aka. ISL) for redundancy.</p></li>
+<li><p>Except BMC connection, server to switch connections are always paired(fig. <a href="#fig:server-switch-convention">12</a>). In addition, each pair should connect to separate NICs on the server side, and to separate switches.</p>
+<figure>
+<img src="../../images/ibb/ibb%20network%20server%20to%20switch%20convention.png" id="fig:server-switch-convention" alt="" /><figcaption><span>Figure 12:</span> Server-Switch network convention</figcaption>
+</figure>
+<p>This requires matching configuration on the switch side, and on the server using <strong>active-active</strong> <code>bonding</code><span class="citation" data-cites="rhel-6-bonding-interface">[16]</span> or <strong>active-backup</strong>. Both we will demonstrate how to create in the following sections.</p></li>
+<li><p>Separate management traffic from data traffic whenever possible.</p></li>
+<li><p>Improve network isolation by assigning private IP space to internal only traffic whenever possible.</p></li>
+</ol>
+<h3 id="network-overview"><span class="header-section-number">7.2.2</span> Network Overview</h3>
+<p>Red Hat Hyperconverged Infrastructure for Virtualization networks can be categorized into three groups: <strong>management network</strong>, <strong>storage network</strong>, and <strong>workloads network</strong>. But this is a much simplified view. In practice, there is also traffic to manage baremetal servers, to access BMC, and workloads may have their specific pattern of consuming and congesting a shared NIC.</p>
+<p>Considering each environment is rather different, we recommend these steps to understand design in this reference architecture. This same approach can then be applied to a specific workload in order to build a well-planned network.</p>
+<ol type="1">
+<li><strong>Define logical networks by their function</strong>: this defines the purpose of this network, thus clarifying its characteristics such as load, latency, space, etc..</li>
+<li><strong>Assign VLAN to logical networks</strong>: each logical network is assigned a unique VLAN. We recommend to establish a consistent VLAN scheme, like a naming convention, that all VLANs in your RHHI-v environment should follow.</li>
+<li><strong>Map network/VLANs to server’s network interface</strong>: this defines how server side interfaces will be configured to support these networks.</li>
+<li><strong>Map server’s networking interface to switch</strong>: this defines the connection between server and switch, thus the switch side configurations including port mode, vLAG, native vlan, and untagged vlans.</li>
+<li><strong>Cabling schema</strong>: this defines switch port assignments, which server port is to be connected to which switch and which port.</li>
+<li><strong>Configure switches</strong>: this shows how to apply switch side configurations to Lenovo G8052 and Lenovo G8272 switches.</li>
+<li><strong>Configure server network interfaces</strong>: this shows configuration files used to create network interfaces on the server with RHEL 7.5.</li>
+<li><strong>Map workload network to VLAN and RHV network</strong>: this defines networks that are needed to support workloads running on top of LOC.</li>
+</ol>
+<h3 id="topology"><span class="header-section-number">7.2.3</span> Topology</h3>
+<p>Overall topology of Red Hat Hyperconverged Infrastructure for Virtualization networking is shown in fig. <a href="#fig:loc-topology-diagram">13</a>.</p>
+<figure>
+<img src="../../images/ibb/ibb%20platform%20network%20overview.png" id="fig:loc-topology-diagram" alt="" /><figcaption><span>Figure 13:</span> Lenovo Open Cloud RHHI-v network topology</figcaption>
+</figure>
+<ol type="1">
+<li>One of LOC’s 1Gb switch is connected to uplink to allow management access from external network.</li>
+<li>LOC switches are paired via inter-switch-link (ISL).</li>
+<li>Except BMC connection, all server to switch links are in pairs on switch side.</li>
+<li>10G connections are teamed in vLAG; 1G connections are not teamed.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+</ol>
+<h3 id="loc-rhhi-logical-networks"><span class="header-section-number">7.2.4</span> Logical networks</h3>
+<figure>
+<img src="../../images/ibb/ibb%20platform%20minimal%20rhhi%20network.png" id="fig:rhhi-network" alt="" /><figcaption><span>Figure 14:</span> Lenovo Open Cloud RHHI-v logical networks</figcaption>
+</figure>
+<p>Red Hat Hyperconverged Infrastructure for Virtualization networks are designed to offer performance and high availability. These are extensions of the minimal RHHI-v networking requirement shown in fig. <a href="#fig:rhhi-arch-diagram">9</a>. It is possible to merge these to conform with the minimal setup, or to reuse existing ones for its purpose (see <a href="#questionnaire">Implementation Questionnaire</a> for details). By highlighting their functions individually, they serve to distinguish operation and data that are actually included in a RHHI-v setup, and such distinction assists admin to understand their impact and implication, and help to make decisions as to what is the best way to manage and operate these functional aspects.</p>
+<dl>
+<dt>Campus internal</dt>
+<dd><p>aka. public network. A common case is a web application that is accessible by general audience remotely within a data center or even from the Internet.</p>
+<p>In a typical RHHI-v deployment, <code>ovirt</code> management network serves the admin UI. Therefore it seems redundant to have another network for such purpose. However, following our design philosophy of making the deployment as much self-contained, we are to treat <code>ovirt</code> as an internal network, while having this <code>Campus</code> network representing public access. Therefore, RHHI-v admin gains more control when accessing the RHHI-v admin port and ovirt API should be allowed by general public. An implementation is through a proxy (or jump host) which we will demonstrate in section [xxx].</p>
+</dd>
+<dt>BMC</dt>
+<dd>aka.<code>Out-of-Band</code> (OOB) management network. It connects to a dedicated management port on physical servers. In practice this is often replaced by <code>Campus</code> so admin can remotely dial into a BMC controller and activate commands such as rebooting servers to UEFI. However, this is risking security for convenience. We highly recommend using a dedicated <code>BMC</code> network for OOB so they can be independently managed and secured.
+</dd>
+<dt>ovirt management</dt>
+<dd><p>is the network linking RHHI-v management console to RHHI-v clusters. This is the default network serving RHHI-v admin portal and ovirt API.</p>
+<p>As mentioned above, a standard deployment will use <code>ovirt</code> network for public access. However, we recommend treating it as an internal while establishing a <code>Campus</code> network for public consumption. To expose admin port and API for tasks such as automation and integration w/ other applications who run on <code>Campus</code>, one can utilize proxy, jump host, or routing to achieve the effect while maintaining control over this network.</p>
+</dd>
+<dt>GlusterFS</dt>
+<dd><p>is a private network for <code>Gluster</code> data storage. The Gluster cluster is highly sensitive to network interruption.</p>
+<p>In this design we dedicate two 10G ports on each server for this network. Further, we are to take measures in server configs and switch configs (shown in section <a href="#platform-nic-to-switch">Map Server NIC to Switch</a>) to improve both data throughput and redundancy so to satisfy high availability.</p>
+</dd>
+<dt>Physical server management</dt>
+<dd>is to support <code>In-Band</code> managerial tasks, eg. <code>ssh</code> to a server. This is to recognize the need that remote administration of a physical server is often limited to operators who has that privilege. In practice, setting this to the same as <code>Campus</code> is not uncommon.
+</dd>
+<dt>RHHI provisioning</dt>
+<dd><p>is to support data traffic of installing the OS on a physical server. This is highly depending on the technology of server provisioning you are choosing.</p>
+<p>The most common method is PXE. PXE is a broadcast protocol, thus isolating it to this network avoids cross-talk.</p>
+<p>However, Lenovo’s xClarity server management software can provision a baremetal by accessing BMC and mount remote disk images directly, thus can work without this network.</p>
+</dd>
+</dl>
+<h3 id="vlans"><span class="header-section-number">7.2.5</span> VLANs</h3>
+<p>VLANs are assigned to Red Hat Hyperconverged Infrastructure for Virtualization logical networks, which later will determine <a href="#platform-switch-configuration">switch port configurations</a>. These values are examples we will use for the rest of this document to illustrate networking considerations. Before deploying a Red Hat Hyperconverged Infrastructure for Virtualization instance, user should use the <a href="#questionnaire">Implementation Questionnaire</a> to map these VLANs to their network environment.</p>
+<table>
+<caption>Example Red Hat Hyperconverged Infrastructure for Virtualization logical network VLANs</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>RHHI provisioning</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>GlusterFS</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+<h3 id="subnets"><span class="header-section-number">7.2.6</span> Subnets</h3>
+<p>Last, when reserving IP space for each network, we use <code>192.168.x.x</code> IP addresses defined in RFC 1918<span class="citation" data-cites="rfc-1918">[17]</span> to keep Red Hat Hyperconverged Infrastructure for Virtualization network self-contained. As suggested earlier, operator can use proxy, routing, and jump host to grant access to broader audience if needs arise.</p>
+<p>We will use the following naming convention for LOC subnets:</p>
+<pre><code>192.168.[vlan index].x</code></pre>
+<p>If vlan index is greater than <code>255</code>, we remove the last digit of the vlan number, eg. <code>400</code> to <code>40</code>, thus making its subnet pattern <code>192.168.40.x</code>.</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Logical Network Subnets</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>Subnet</th>
+<th>Addresses</th>
+<th>Mask</th>
+<th>Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>192.168.1.x</td>
+<td>254</td>
+<td>/24</td>
+<td>192.168.1.1</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>192.168.2.x</td>
+<td>254</td>
+<td>/24</td>
+<td>192.168.2.1</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>192.168.3.x</td>
+<td>254</td>
+<td>/24</td>
+<td>192.168.3.1</td>
+</tr>
+<tr class="even">
+<td>RHHI provisioning</td>
+<td>192.168.10.x</td>
+<td>3/6/9</td>
+<td>/24</td>
+<td>192.168.10.1</td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>192.168.100.x</td>
+<td>3/6/9</td>
+<td>/29</td>
+<td>192.168.100.1</td>
+</tr>
+<tr class="even">
+<td>GlusterFS</td>
+<td>192.168.40.x</td>
+<td>3/6/9</td>
+<td>/29</td>
+<td>192.168.40.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform-vlan-to-nic"><span class="header-section-number">7.2.7</span> Map VLAN to Server NIC</h3>
+<p>Mapping VLAN to server NIC makes VLANs available to RHV.</p>
+<h4 id="server-nic-connections"><span class="header-section-number">7.2.7.1</span> Server NIC connections</h4>
+<p>Following design convention, pair cables connect two NIC ports on two different switches. Later on <a href="#platform-nic-to-switch">switch configurations</a>, 1G connections will have identical configurations but do not use LACP; 10G connections are teamed in <code>vLAG</code>.</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization VLAN to Server’s NIC Mapping</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+<th style="text-align: center;">BMC</th>
+<th style="text-align: center;">2 x 1G</th>
+<th style="text-align: center;">2 x 10G</th>
+<th>Switch Port LACP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>BMC<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></td>
+<td>2</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>RHHI provisioning</td>
+<td>10</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>100</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>GlusterFS</td>
+<td>400</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="server-nic-bonding-interfaces"><span class="header-section-number">7.2.7.2</span> Server NIC bonding interfaces</h4>
+<p>1G connections form a <code>active-backup</code> bonding interface (<code>bond 0</code> for management), and 10G connections form <code>active-active</code> bonding interfaces (<code>bond 1</code> for gluster storage).</p>
+<figure>
+<img src="../../images/ibb/ibb%20platform%20server%20vlan.png" id="fig:platform-server-vlan" alt="" /><figcaption><span>Figure 15:</span> Red Hat Hyperconverged Infrastructure for Virtualization Server Map VLAN to NIC</figcaption>
+</figure>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization VLAN to Server Bonding Interfaces Mapping</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+<th>Bonding Interfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>1</td>
+<td>bond 0 (management)</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>2</td>
+<td>bond 0 (management)</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>3</td>
+<td>bond 0 (management)</td>
+</tr>
+<tr class="even">
+<td>RHHI provisioning</td>
+<td>10</td>
+<td>bond 0 (management)</td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>100</td>
+<td>bond 0 (management)</td>
+</tr>
+<tr class="even">
+<td>GlusterFS</td>
+<td>400</td>
+<td>bond 1 (storage)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="server-nic-bridge-interfaces"><span class="header-section-number">7.2.7.3</span> Server NIC bridge interfaces</h4>
+<p>Virtual bridge interfaces are created on top of a bonding interface to define a one-to-one mapping between VLAN and a RHV network.</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization VLAN to Server Bonding Interfaces Mapping</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+<th>Bonding Interface</th>
+<th>Bridge Interface (RHV network)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>1</td>
+<td>bond 0</td>
+<td>CampusInternal</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>2</td>
+<td>bond 0</td>
+<td>BMC</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>3</td>
+<td>bond 0</td>
+<td>PhysicalMgmt</td>
+</tr>
+<tr class="even">
+<td>RHHI provisioning</td>
+<td>10</td>
+<td>bond 0</td>
+<td>RHHIProvision</td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>100</td>
+<td>bond 0</td>
+<td>ovirtmgmt</td>
+</tr>
+<tr class="even">
+<td>GlusterFS</td>
+<td>400</td>
+<td>bond 1</td>
+<td>gluster</td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform-nic-to-switch"><span class="header-section-number">7.2.8</span> Map Server NIC to Switch</h3>
+<p>Red Hat Hyperconverged Infrastructure for Virtualization uses two G8052 (1Gb) switches and two G8272 (10Gb) switches in this architecture so that each logical network is running on a cable pair that is connected to two different switches for redundancy.</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Server to Switch Connections</caption>
+<thead>
+<tr class="header">
+<th>Server Port</th>
+<th>Switch</th>
+<th>Port Redundancy</th>
+<th>Mode</th>
+<th>Native VLAN</th>
+<th>Allowed VLANs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BMC</td>
+<td>1Gb</td>
+<td>none</td>
+<td>access</td>
+<td>–</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>eno1, eno2</td>
+<td>1Gb</td>
+<td>pair w/o LACP</td>
+<td>trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+<tr class="odd">
+<td>1F0, 2F0</td>
+<td>10Gb</td>
+<td>pair w/ LACP</td>
+<td>trunk</td>
+<td>3999</td>
+<td>400,3999</td>
+</tr>
+<tr class="even">
+<td>1F1, 2F1</td>
+<td>10Gb</td>
+<td>pair w/ LACP</td>
+<td>trunk</td>
+<td>3999<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></td>
+<td>3999</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="../../images/ibb/ibb%20platform%20switch%20config.png" id="fig:server-switch-config" alt="" /><figcaption><span>Figure 16:</span> Lenovo Open Cloud Plaform Server to Switch</figcaption>
+</figure>
+<h3 id="platform-cabling"><span class="header-section-number">7.2.9</span> Define Cable Schema</h3>
+<p>Both Lenovo G8052 and G8272 switches have 52 ports, in which 48 ports are used for server connections, and the other four ports are for inter-switch connections and switch uplinks. Here we present an example cable schema following the network designs described in previous section. We will also use this schema to demonstrate switch port configurations.</p>
+<p>Consider that Red Hat Hyperconverged Infrastructure for Virtualization can support up to 12 servers, we have reserved port 1-16 on one G8052 switch for BMC connections.</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Server-Switch Cable Schema of a 3-server Configuration</caption>
+<thead>
+<tr class="header">
+<th>Port</th>
+<th>G8052 #1</th>
+<th>G8052 #2</th>
+<th>G8272 #1</th>
+<th>G8272 #2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>server 1 BMC</td>
+<td></td>
+<td>server 1 1F0</td>
+<td>server 1 2F0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>server 2 BMC</td>
+<td></td>
+<td>server 2 1F0</td>
+<td>server 2 2F0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>server 3 BMC</td>
+<td></td>
+<td>server 3 1F0</td>
+<td>server 3 2F0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td></td>
+<td></td>
+<td>server 1 1F1</td>
+<td>server 1 2F1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td></td>
+<td></td>
+<td>server 2 1F1</td>
+<td>server 2 2F1</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td></td>
+<td></td>
+<td>server 3 1F1</td>
+<td>server 3 2F1</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>server 1 eno1</td>
+<td>server 1 eno2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>server 2 eno1</td>
+<td>server 2 eno2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>server 3 eno1</td>
+<td>server 3 eno2</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform-switch-configuration"><span class="header-section-number">7.2.10</span> Configure Switch Ports</h3>
+<p>Lenovo networking switches are highly configurable. We have developed tools for switch administrators including CLI and Ansible module. See <a href="#switch-config-method">Switch Port Configuration Methods</a> for more information.</p>
+<p>Following the cable schema in previous section, switch port configs are now ready to be applied:</p>
+<table>
+<caption>Example of G8052 #1 Port Configurations</caption>
+<thead>
+<tr class="header">
+<th>Port</th>
+<th>LACP</th>
+<th>Mode</th>
+<th>Native VLAN</th>
+<th>Tagged VLANs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>No</td>
+<td>Access</td>
+<td>–</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>No</td>
+<td>Access</td>
+<td>–</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>No</td>
+<td>Access</td>
+<td>–</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Example of G8052 #2 Port Configurations</caption>
+<thead>
+<tr class="header">
+<th>Port</th>
+<th>LACP</th>
+<th>Mode</th>
+<th>Native VLAN</th>
+<th>Tagged VLANs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>17</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>2</td>
+<td>1,2,3,10,100</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Example of G8272 #1 &amp; #2 Port Configurations</caption>
+<thead>
+<tr class="header">
+<th>Port</th>
+<th>LACP</th>
+<th>Mode</th>
+<th>Native VLAN</th>
+<th>Tagged VLANs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>3999</td>
+<td>400,3999</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>3999</td>
+<td>400,3999</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>3999</td>
+<td>400,3999</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>workload dependent</td>
+<td>workload dependent</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>workload dependent</td>
+<td>workload dependent</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Yes</td>
+<td>Trunk</td>
+<td>workload dependent</td>
+<td>workload dependent</td>
+</tr>
+</tbody>
+</table>
+<h2 id="storage"><span class="header-section-number">7.3</span> Storage</h2>
+<h3 id="gluster"><span class="header-section-number">7.3.1</span> Gluster</h3>
+<p>The primary storage in Red Hat Hyperconverged Infrastructure for Virtualization is the gluster cluster. Gluster is a user space storage solution. GlusterFS, though called a “file system”, is not a file system in a strict sense. Instead, it is an abstraction of a common interface to backing file stores which can be many kinds — <code>xfs</code>, <code>ext4</code>, <code>nfs</code>, <code>samba</code>, just to name a few. In LOC RHHI-v, all underline file systems is a XFS.</p>
+<p>All Red Hat Hyperconverged Infrastructure for Virtualization servers in the gluster trusted pool has identical configuration. Therefore, we will use a 3-server RHHI-v configuration for illustration.</p>
+<h4 id="bricks"><span class="header-section-number">7.3.1.1</span> Bricks</h4>
+<blockquote>
+<p>The glusterFS basic unit of storage, represented by an export directory on a server in the trusted storage pool. A brick is expressed by combining a server with an export directory in the following format: <code>SERVER:EXPORT</code></p>
+</blockquote>
+<p>There are three bricks in each server, and each brick is corresponding to a logical volume created on the host.</p>
+<ol type="1">
+<li><code>engine</code> brick: space for hosted-engine VM storage only.</li>
+<li><code>vmstore</code> brick: space for all RHV virtual machine disk images.</li>
+<li><code>data</code> brick: space for static file such as an operating system ISO image that is then used to create virtual machines.</li>
+</ol>
+<figure>
+<img src="../../images/ibb/ibb%20gluster%20host%20logical%20volumes.png" id="fig:ibb-host-logical-volume" alt="" /><figcaption><span>Figure 17:</span> Red Hat Hyperconverged Infrastructure for Virtualization Host Logical Volumes and Gluster Bricks</figcaption>
+</figure>
+<p>A brick is then “exported” by given a mounting point on the system:</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization Gluster bricks and mounting point</caption>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>LV Name</th>
+<th>File System</th>
+<th>Mounting Point</th>
+<th>LV Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>gluster_lv_engine</code></td>
+<td>XFS</td>
+<td><code>/gluster_bricks/engine</code></td>
+<td>thick</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>gluster_lv_vmstore</code></td>
+<td>XFS</td>
+<td><code>/gluster_bricks/vmstore</code></td>
+<td>thin</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>gluster_lv_data</code></td>
+<td>XFS</td>
+<td><code>/gluster_bricks/data</code></td>
+<td>thin</td>
+</tr>
+</tbody>
+</table>
+<h4 id="gluster-volume"><span class="header-section-number">7.3.1.2</span> Volumes</h4>
+<p>Brick is a local storage to a host. The power of the GlusterFS is to build a cluster of storage over bricks on multiple servers. A group of bricks is called gluster volume<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. A 3-server Red Hat Hyperconverged Infrastructure for Virtualization configuration will have a gluster cluster that includes three servers in its trusted pool, and the cluster will have three volumes — engine, vmstore, and data.</p>
+<figure>
+<img src="../../images/ibb/ibb%20gluster%20bricks.png" id="fig:ibb-gluster-bricks" alt="" /><figcaption><span>Figure 18:</span> 3-server Red Hat Hyperconverged Infrastructure for Virtualization Gluster cluster overview</figcaption>
+</figure>
+<ol start="3" type="1">
+<li><code>engine</code>: collection of all <code>engine</code> bricks.</li>
+<li><code>vmstore</code>: collection of all <code>vmstore</code> bricks.</li>
+<li><code>data</code>: collection of all <code>data</code> bricks.</li>
+</ol>
+<h4 id="gluster-type"><span class="header-section-number">7.3.1.3</span> Volume type — Replicated</h4>
+<p>For a Red Hat Hyperconverged Infrastructure for Virtualization deployment, a key decision is the volume type for the gluster. Default volume type is <strong>replicated</strong> mode, which will replicate files across all bricks in the volume. Refer to Gluster doc<span class="citation" data-cites="gluster-volume-type">[19]</span> for a full list of supported mode.</p>
+<p>Relicated mode benefits workload that seeks high availability and high reliability. The downside is that the cluster will <strong>not</strong> grow linearly by adding more storage servers to the trusted pool. The size of the storage is limited to the size of the smallest brick in the volume.</p>
+<p>Therefore, in a default Red Hat Hyperconverged Infrastructure for Virtualization configuration, the mean to increase the gluster capacity is limited to:</p>
+<ol type="1">
+<li>Purchase disk of larger capacity than what is suggested in the <a href="#bom">BOM</a>.</li>
+<li>Use RAID10 instead of RAID6 on gluster disks.</li>
+</ol>
+<p>All these, however, are only applicable to a single server. If growing storage is a priority, one should replace <code>replicated</code> mode with <code>distributed</code> or <code>distributed replicated</code> mode.</p>
+<p>Note that there is <strong>no</strong> arbiter volume in the default setup.</p>
+<h3 id="nfs"><span class="header-section-number">7.3.2</span> NFS</h3>
+<p>NFS is a network file system supported by the Red Hat Hyperconverged Infrastructure for Virtualization.</p>
+<p>First of all, NFS can be the format of backing store that forms a gluster volume. Therefore, a gluster can very well be NFS based.</p>
+<p>Here we are discussing NFS without gluster abstraction, in which case the key difference is the loss of benefit determined by those gluster modes<span class="citation" data-cites="gluster-volume-type">[19]</span> such as data replication. On the flip side NFS removes gluster’s overhead, thus provides better WRITE performance in general.</p>
+<p>NFS in Red Hat Hyperconverged Infrastructure for Virtualization are based on minimal two disks in each server:</p>
+<ol type="1">
+<li>Disks are configured in <a href="#disk-configuration">RAID1</a>.</li>
+<li>Linux logical volume <code>vm-data</code> is created.</li>
+<li>Assign mounting point <code>/mnt/vm</code>.</li>
+<li>Export share to NFS in <code>/etc/exports</code> as: <code>/mnt/vm *(rw)</code></li>
+</ol>
+<figure>
+<img src="../../images/ibb/ibb%20nfs%20host%20logical%20volumes.png" id="fig:ibb-host-nfs-logical-volume" alt="" /><figcaption><span>Figure 19:</span> Red Hat Hyperconverged Infrastructure for Virtualization Host Logical Volumes and NFS</figcaption>
+</figure>
+<h3 id="rhv-storage-domains"><span class="header-section-number">7.3.3</span> RHV storage domains</h3>
+<p>All storages are made available in RHV as storage domains.</p>
+<blockquote>
+<p>A storage domain is a collection of images that have a common storage interface. A storage domain contains complete images of templates and virtual machines (including snapshots), or ISO files. A storage domain can be made of either block devices (SAN - iSCSI or FCP) or a file system (NAS - NFS or other POSIX compliant file systems).</p>
+</blockquote>
+<p>There are two [domains types]<span class="citation" data-cites="ovirt-storage-domains">[20]</span> to consider<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>:</p>
+<ol type="1">
+<li><p><code>Data</code> domain: A data domain holds the virtual hard disks and OVF files of all the virtual machines and templates in a data center. In addition, snapshots of the virtual machines are also stored in the data domain.</p>
+<p><strong>There must be at least one data domain in each Red Hat Hyperconverged Infrastructure for Virtualization deployment.</strong></p></li>
+<li><p><code>ISO</code> domain: ISO domains store ISO files (or logical CDs) used to install and boot operating systems and applications for the virtual machines. An ISO domain removes the data center’s need for physical media. An ISO domain can be shared across different data centers. ISO domains can only be NFS-based.</p>
+<p><strong>Only one ISO domain can be added to a data center</strong>.</p></li>
+</ol>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization storage to RHV storage domain mapping</caption>
+<thead>
+<tr class="header">
+<th>RHHI-v Storage</th>
+<th>RHV Domain Name</th>
+<th>Domain Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>gluster volume <code>engine</code></td>
+<td>hosted_storage</td>
+<td>Data</td>
+</tr>
+<tr class="even">
+<td>gluster volume <code>vmstore</code></td>
+<td>vmstore</td>
+<td>Data</td>
+</tr>
+<tr class="odd">
+<td>gluster volume <code>data</code></td>
+<td>iso</td>
+<td>ISO</td>
+</tr>
+<tr class="even">
+<td>NFS</td>
+<td>host&lt;1/2/3&gt;nfs</td>
+<td>Data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lvm-cache"><span class="header-section-number">7.3.4</span> LVM cache</h3>
+<blockquote>
+<p>An LVM Cache logical volume (LV) can be used to improve the performance of a block device by attaching to it a smaller and much faster device to act as a data acceleration layer. When a cache is attached to an LV, the Linux kernel subsystems attempt to keep ‘hot’ data copies in the fast cache layer at the block level. Additionally, as space in the cache allows, writes are made initially to the cache layer. The results can be better Input/Output (I/O) performance improvements for many workloads.</p>
+</blockquote>
+<p>In general, enabling cache will improve I/O performance. [LVM cache for Red Hat Gluster storage]<span class="citation" data-cites="gluster-lvm-cache">[21]</span> has more details on how to determine whether the lvm cache should be used.</p>
+<p>In Red Hat Hyperconverged Infrastructure for Virtualization, enabling this feature takes:</p>
+<ol type="1">
+<li><p>In <a href="#disk-configuration">disk configuration</a> and <a href="#bom">BOM</a>, two 800GB SSD disks are set in RAID1 for this purpose.</p>
+<figure>
+<img src="../../images/ibb/ibb%20lvm%20cache.png" id="fig:lvm-cache-storage" alt="" /><figcaption><span>Figure 20:</span> Red Hat Hyperconverged Infrastructure for Virtualization node disk configurations w/ LVM cache enabled</figcaption>
+</figure></li>
+<li><p>In <a href="#loc-rhhi-deployment-tempalte">deployment template</a>:</p></li>
+<li><p>Set <code>storage/lvm/size</code> to the size of cache in GB. It should be an integer value <code>&lt;=800</code>.</p></li>
+<li><p>Set <code>storage/lvm/mounting_point</code>, eg. <code>sdb</code>.</p></li>
+</ol>
+<p>Leaving the value of <code>storage/lvm</code> blank is to skip setting up the cache on all hosts in deployment even though disks are in place.</p>
+<h1 id="deployment"><span class="header-section-number">8</span> Deployment</h1>
+<p>Traditionally deploying RHHI-v on servers have two options: using an ISO image, or using RHEL and Red Hat <code>yum</code> package manager like installing other Red Hat software. Lenovo Open Cloud has developed a <code>bootstrap</code> appliance to make RHHI-v deployment fully automated.</p>
+<h2 id="prerequisite"><span class="header-section-number">8.1</span> Prerequisite</h2>
+<p>Before starting auto deployment process, the following conditions should be met:</p>
+<ol type="1">
+<li>Servers are cabled as in <a href="#platform-cabling">server cable schema</a>.</li>
+<li>Switch ports are configured as in <a href="#platform-switch-configuration">configured</a>.</li>
+</ol>
+<h2 id="bootstrap-appliance"><span class="header-section-number">8.2</span> Bootstrap appliance</h2>
+<h3 id="bootstrap-services"><span class="header-section-number">8.2.1</span> Bootstrap services</h3>
+<p>Bootstrap appliance can be either a physical server or a virtual appliance. It includes a set of core services to facilitate deployment:</p>
+<table>
+<caption>Bootstrap Appliance Core Services</caption>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 23%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Software repo</td>
+<td>Source of software installation</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Automation</td>
+<td>Deployment orchestration</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>OS deployment</td>
+<td>Out-of-band (OOB) management of server</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Configuration repo</td>
+<td>Source of deployment templates &amp; instance configurations</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Validation</td>
+<td>Deployment validation</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>OS Image</td>
+<td>Source of OS images and VM images</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Launchpad</td>
+<td>Automation runtime worker environment</td>
+</tr>
+</tbody>
+</table>
+<p>In additional, there are add-on services that can be enabled to extend automation such as discovering server on a monitored network:</p>
+<table>
+<caption>Bootstrap Appliance Add-on Services</caption>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Discovery</td>
+<td>Hardware detection and configuration</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Inventory</td>
+<td>Infrastructure planning and role-based hardware commission</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Single pane of glass</td>
+<td>Unified administration interface</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bootstrap-networks"><span class="header-section-number">8.2.2</span> Bootstrap networks</h3>
+<p>Bootstrap appliance must have proper networking connection to LOC RHHI-v’s servers. As shown in fig. <a href="#fig:bootstrap-service-network">21</a>, three networks are essential. They are also part of the overall <a href="#loc-rhhi-logical-networks">LOC RHHI logical networks</a>:</p>
+<figure>
+<img src="../../images/ibb/ibb%20bootstrap%20network.png" id="fig:bootstrap-service-network" alt="" /><figcaption><span>Figure 21:</span> LOC Bootstrap Appliance Networks</figcaption>
+</figure>
+<ul>
+<li><code>Campus internal</code>: general purpose connection between bootstrap appliance services and Red Hat Hyperconverged Infrastructure for Virtualization node.</li>
+<li><code>BMC</code>: for OOB server management and OS provisioning.</li>
+<li><code>ovirt mgmt</code>: for RHV administration during buildup.</li>
+</ul>
+<p>Noticeably three RHHI-v networks are not present in fig. <a href="#fig:bootstrap-service-network">21</a>: <code>GlusterFS</code> (VLAN 400), <code>Physical server management</code> (VLAN 3), and <code>RHHI provisioning</code> (VLAN 10). These ommissions are intentional because they are not used by bootstrap appliance. Their configurations are defined in <a href="#loc-rhhi-deployment-tempalte">Red Hat Hyperconverged Infrastructure for Virtualization deployment template</a>, and will be setup accordingly.</p>
+<h1 id="bom"><span class="header-section-number">9</span> Appendix: Bill of Material</h1>
+<h2 id="switches"><span class="header-section-number">9.1</span> Switches</h2>
+<h3 id="gb-switch"><span class="header-section-number">9.1.1</span> 1Gb switch</h3>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization RackSwitch G8052 1Gb bill of materials, rear to front</caption>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7159HC1</td>
+<td>Switch-G8052 : Lenovo RackSwitch G8052 (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>ASY2</td>
+<td>Lenovo RackSwitch G8052 (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3793</td>
+<td>3m Yellow Cat5e Cable</td>
+<td>up to 37</td>
+</tr>
+<tr class="even">
+<td>A1PJ</td>
+<td>3m Passive DAC SFP+ Cable</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>6311</td>
+<td>2.8m, 10A/100-250V, C13 to C14 Jumper Cord</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>00WW816</td>
+<td>Essential Service - 3Yr 24x7 4Hr Response</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>For front-to-rear configuration, replace <code>ASY2</code> with <code>ASY1</code>.</p>
+<h3 id="gb-switch-1"><span class="header-section-number">9.1.2</span> 10Gb switch</h3>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization RackSwitch G8272 10Gb Bill of Material</caption>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7159HCW</td>
+<td>Switch-G8272 : Lenovo RackSwitch G2752 (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>ASRD</td>
+<td>Lenovo RackSwitch G8272 (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>A1PJ</td>
+<td>3m Passive DAC SFP+ Cable</td>
+<td>up to 24</td>
+</tr>
+<tr class="even">
+<td>A1DP</td>
+<td>1m QSFP to QSFP+ Cable</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3793</td>
+<td>3m Yellow Cat5e Cable</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>6311</td>
+<td>2.8m, 10A/100-250V, C13 to C14 Jumper Cord</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>00WW781</td>
+<td>Foundation Service - 3Yr Next Business Day Response</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>For front-to-rear configuration, replace <code>ASRD</code> with <code>ASRE</code>.</p>
+<h3 id="gb-switch-2"><span class="header-section-number">9.1.3</span> 25Gb switch</h3>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization RackSwitch NE2572 25Gb Bill of Material</caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 74%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7159HE3</td>
+<td>Switch-25G : Lenovo ThinkSystem NE2572 RackSwitch (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>AV19</td>
+<td>Lenovo ThinkSystem NE2572 RackSwitch (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AV1F</td>
+<td>Lenovo 3m 25G SFP28 Active Optical Cable</td>
+<td>up to 24</td>
+</tr>
+<tr class="even">
+<td>AV1L</td>
+<td>Lenovo 3m 100G QSFP28 Active Optical Cable</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3793</td>
+<td>3m Yellow Cat5e Cable</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>6204</td>
+<td>2.8m, 10A/100-250V, C13 to IEC 320-C20 Rack Power Cable</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>5WS7A06889</td>
+<td>Premier with Essential - 3Yr 24x7 4Hr Response</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>For front-to-rear configuration, replace <code>AV19</code> with <code>AV1A</code>.</p>
+<h2 id="servers"><span class="header-section-number">9.2</span> Servers</h2>
+<p>Default configuration uses SATA SSD and 10G NICs. For SAS SSDs, see the <a href="#sas-ssd">SAS SSDs</a> section:</p>
+<table>
+<caption>SR650 Bill of Materials based on SATA SSDS</caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 75%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7X06CTO1WW</td>
+<td>Red Hat Hyperconverged Infrastructure for Virtualization: ThinkSystem SR650 - 3yr Warranty</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>AUVV</td>
+<td>ThinkSystem SR650 2.5" Chassis with 8, 16 or 24 bays</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AWEC</td>
+<td>Intel Xeon Silver 4114 10C 85W 2.2GHz Processor</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AUND</td>
+<td>ThinkSystem 32GB TruDDR4 2666 MHz (2Rx4 1.2V) RDIMM</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>AUR5</td>
+<td>ThinkSystem SR650 2.5" AnyBay 8-Bay Backplane</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>AUNK</td>
+<td>ThinkSystem RAID 930-16i 4GB Flash PCIe 12Gb Adapter</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>B49M</td>
+<td>ThinkSystem 2.5" Intel S4610 480GB Mainstream SATA 6Gb Hot Swap SSD</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>B49N</td>
+<td>ThinkSystem 2.5" Intel S4610 960GB Mainstream SATA 6Gb Hot Swap SSD</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>B0YS</td>
+<td>ThinkSystem 2.5" 2.4TB 10K SAS 12Gb Hot Swap 512e HDD</td>
+<td>up to 20</td>
+</tr>
+<tr class="even">
+<td>AUR7</td>
+<td>ThinkSystem 2U x8/X8/x8ML2 PCIE FH Riser 1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AURC</td>
+<td>ThinkSystem SR550/SR590/SR650 (x16/x8)/(x16/x16) PCIe FH Riser 2 Kit</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>AUKK</td>
+<td>ThinkSystem 1Gb 4-port RJ45 LOM</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AUKX</td>
+<td>ThinkSystem Intel X710-DA2 PCIe 10Gb 2-Port SFP+ Ethernet Adapter</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AVWF</td>
+<td>ThinkSystem 1100W (-48V DC) Platinum Hot-Swap Power Supply</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>6400</td>
+<td>2.8m, 13A/100-250V, C13 to C14 Jumper Cord</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AUPW</td>
+<td>ThinkSystem XClarity Controller Standard to Enterprise Upgrade</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AXCH</td>
+<td>ThinkSystem Toolless Slide Rail Kit with 2U CMA</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>A51P</td>
+<td>2m Passive DAC SFP+ Cable</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sas-ssd"><span class="header-section-number">9.2.1</span> SAS SSDs</h3>
+<p>To use SAS SSDs, replace B49M with B16Z, and B49N with B170:</p>
+<table>
+<caption>SR650 Bill of Materials based on SAS SSDs</caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 81%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>B16Z</td>
+<td>ThinkSystem 3.5" HUSMM32 400GB Performance SAS 12Gb Hot Swap SSD 7N47A00997</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>B170</td>
+<td>ThinkSystem 3.5" HUSMM32 800GB Performance SAS 12Gb Hot Swap SSD</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gb-nic"><span class="header-section-number">9.2.2</span> 25Gb NIC</h3>
+<p>To use 25Gb NIC, replace AUKX with B0WY:</p>
+<table>
+<caption>SR650 Bill of Materials based on 25G NIC</caption>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>B0WY</td>
+<td>Intel XXV710-DA2 10/25GbE SFP28 2-Port PCIe Ethernet Adapter</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="software-1"><span class="header-section-number">9.3</span> Software</h2>
+<p>Based on a 3-node Red Hat Hyperconverged Infrastructure for Virtualization deployment:</p>
+<table>
+<caption>LOC 3-node RHHI-v software BOM, 3 year premium service support</caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 80%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>SKU</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RS00139F3</td>
+<td>Red Hat Hyperconverged Infrastructure for Virtualization (RHHI-v)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>RH00031F3</td>
+<td>Smart Management</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>MCT3475F3</td>
+<td>Red Hat Insights</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>00MT202</td>
+<td>Lenovo xClarity Enterprise</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="other-recommendations"><span class="header-section-number">9.4</span> Other recommendations</h2>
+<p>We also recommend the features and upgrades in this section to maximize the security and manageability of the Red Hat Hyperconverged Infrastructure for Virtualization solution built using the configurations discussed in this document.</p>
+<h3 id="tpm-2.0-and-secure-boot"><span class="header-section-number">9.4.1</span> TPM 2.0 and Secure Boot</h3>
+<p>Trusted Platform Module (TPM) is an international standard for a secure cryptoprocessor, a dedicated microcontroller designed to secure hardware through integrated cryptographic keys. TPM technology is designed to provide hardware-based, security-related functions and is used extensively by Microsoft in Windows Server 2016 technologies including BitLocker, Device Guard, Credential Guard, UEFI Secure Boot, and others. <strong>There is no additional cost to enable TPM 2.0 on Lenovo ThinkSystem servers</strong>.</p>
+<p>For the SR650, order Feature Code <code>AUK7</code>.</p>
+<h3 id="thinksystem-xclarity-controller-standard-to-enterprise-level"><span class="header-section-number">9.4.2</span> ThinkSystem XClarity Controller Standard to Enterprise Level</h3>
+<p>The Lenovo XClarity™ Controller (aka. XCC) is the next generation management controller that replaces the baseboard management controller (BMC) for Lenovo ThinkSystem servers. Although the XCC Standard Level includes many important manageability features, we recommend upgrading to the XCC Enterprise Level of functionality. This enhanced set of features includes Virtual Console (out of band browser-based remote control), Virtual Media mounting, and other remote management capabilities.</p>
+<p>For the SR650, order Feature Codes <code>B173</code>.</p>
+<h3 id="best-recipes"><span class="header-section-number">9.4.3</span> Best recipes</h3>
+<p>Lenovo best recipe describes the exact Lenovo firmware versions that have been tested successfully. This includes firmware of all components in a server. Together with the <a href="#bom">BOM</a>, they define precisely what a LOC RHHI host should have.</p>
+<p>Below is an example of a best recipe for a LOC RHHI three-server configuration based on Lenovo System x3650 M5 rack servers with suggested <a href="#disk-configuration">disk configurations</a> but without additional SSDs for LVM cache:</p>
+<table>
+<caption>Red Hat Hyperconverged Infrastructure for Virtualization SR650 server best recipe</caption>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 68%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Slot</th>
+<th style="text-align: left;">Updatable Unit</th>
+<th style="text-align: left;">Installed Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Drive(ST1000NM0023)</td>
+<td style="text-align: left;">LC5H</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Intel X710 2x10GbE SFP+ Adapter (Etrack ID)</td>
+<td style="text-align: left;">80002A0A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Intel X710 2x10GbE SFP+ Adapter (Combined Option ROM Image)</td>
+<td style="text-align: left;">1.1313.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Drive(ST1000NM0045)</td>
+<td style="text-align: left;">LK86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">ServeRAID M5210 (10140454)</td>
+<td style="text-align: left;">24.16.0-0104</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">ServeRAID M5210 (10140454)</td>
+<td style="text-align: left;">24.16.0-0104</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">IMM2 Firmware</td>
+<td style="text-align: left;">TCOO46F-5.11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">IMM2 Backup Firmware</td>
+<td style="text-align: left;">TCOO26H-3.70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">UEFI Firmware/BIOS</td>
+<td style="text-align: left;">TCE138D-2.80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">UEFI Backup Firmware/BIOS</td>
+<td style="text-align: left;">TCE128I-2.31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">DSA Diagnostic Software</td>
+<td style="text-align: left;">DSALB2Q-10.3</td>
+</tr>
+</tbody>
+</table>
+<p>Please consult with the Lenovo sales and support for the best recipe of your hardware and configuration.</p>
+<h1 id="questionnaire"><span class="header-section-number">10</span> Appendix: Implementation Questionnaire</h1>
+<p>Implementation questionnaire are tools to map Lenovo Open Cloud infrastructure to your environment.</p>
+<h2 id="bom-switch-firmware"><span class="header-section-number">10.1</span> Switches</h2>
+<table>
+<caption>Implementation Worksheet — Switches</caption>
+<thead>
+<tr class="header">
+<th>Switches</th>
+<th>Type</th>
+<th>Model</th>
+<th>Firmware</th>
+<th>Qty</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>access switch</td>
+<td>1Gb</td>
+<td>G8052</td>
+<td>8.4.12 ENOS</td>
+<td>2</td>
+<td>suggested:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>your env:</td>
+</tr>
+<tr class="odd">
+<td>access switch</td>
+<td>10Gb</td>
+<td>G8272</td>
+<td>10.9.3.0 CNOS</td>
+<td>2</td>
+<td>suggested</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>your env:</td>
+</tr>
+</tbody>
+</table>
+<h3 id="switch-port-sizing-worksheet"><span class="header-section-number">10.1.1</span> Switch port sizing worksheet</h3>
+<p>This worksheet is to assist network admin to determine switch port sizing based on RHHI-v configuration. Dedicating the Lenovo switches in the <a href="#bom">BOM</a> section will have enough ports to support the largest configuration (12-node deployment).</p>
+<p>However, in many cases deployment is sharing switches with other infrastructure. Thus, the admin can use this worksheet to look up how many ports are needed for a configuration.</p>
+<table>
+<caption>Switch port sizing worksheet</caption>
+<thead>
+<tr class="header">
+<th>RHHI-v Config Index</th>
+<th>RHHI-v Servers</th>
+<th>G8052 #1</th>
+<th>G8052 #2</th>
+<th>G8272 #1</th>
+<th>G8272 #2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>6</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>12</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>18</td>
+<td>9</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>24</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<h2 id="disk-raid-config-worksheet"><span class="header-section-number">10.2</span> Storage sizing worksheet</h2>
+<p>Storage sizing is based on replicated gluster volumes. For additional gluster capacity, <code>distributed</code> or <code>distributed replicated</code> mode should be used instead.</p>
+<table>
+<caption>Storage sizing worksheet (<code>replicated</code> gluster)</caption>
+<thead>
+<tr class="header">
+<th>RHHI-v Config Index</th>
+<th>RHHI-v Servers</th>
+<th>Gluster (TB)</th>
+<th>NFS (TB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>12</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>12</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>12</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<h2 id="network-mapping"><span class="header-section-number">10.3</span> Network mapping</h2>
+<p>In order for Lenovo Open Cloud functions to work as designed, it is important to map your network environment to meet requirements presented by suggested values.</p>
+<p>The setup described in the <a href="#loc-rhhi-logical-networks">logical networks</a> section is an ideal networking case. In reality networking environment can hardly map directly into these schema. Further, each of the management services have an admin portal and an API, thus a deployment requires a set of IP addresses on each network. How many of them are now tied with networking choices.</p>
+<p>Here we have identified five deployment strategies of the LOC networks to assist your decision. The key is how to map these <strong>three core management networks</strong>:</p>
+<ol type="1">
+<li>campus internal</li>
+<li>BMC</li>
+<li>ovirt management</li>
+</ol>
+<h3 id="ip-sizing-case-1"><span class="header-section-number">10.3.1</span> Strategy 1</h3>
+<p>Keep all three networks separated is the recommended solution.</p>
+<table>
+<caption>IP address sizing worksheet, all separated.</caption>
+<thead>
+<tr class="header">
+<th>RHHI Config Index</th>
+<th>RHHI Servers</th>
+<th>Campus internal</th>
+<th>BMC</th>
+<th>ovirt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>9</td>
+<td>11</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>9</td>
+<td>14</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>9</td>
+<td>17</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ip-sizing-case-2"><span class="header-section-number">10.3.2</span> Strategy 2</h3>
+<p>A common strategy benefits OOB management of servers by combining <code>campus internal</code> with <code>BMC</code>. If you have a dedicated OOB management network, <code>BMC</code> can also be combined with that, in which case this becomes the <a href="#ip-sizing-case-1">Case 1</a> above because these three networks are still separated.</p>
+<p>In any case, we highly recommend to avoid mixing BMC with other networks, because OOB is the last line of defense when the deployment is broken in some way.</p>
+<table>
+<caption>IP address sizing worksheet, <code>campus internal</code> == <code>BMC</code>, <code>ovirt</code> separated</caption>
+<thead>
+<tr class="header">
+<th>RHHI Config Index</th>
+<th>RHHI Servers</th>
+<th>Campus internal== BMC</th>
+<th>ovirt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>13</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>16</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>19</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>22</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ip-sizing-case-3"><span class="header-section-number">10.3.3</span> Strategy 3</h3>
+<p>This strategy improves accessibility to the Runtime service management portal and API. It does not affect other Platform management services because they have <code>Campus internal</code> for UI and API already.</p>
+<p>However, it makes management traffic between the Runtime service and other Platform management services, which are program calls to APIs, share the same network with other management tasks, which are mostly manual.</p>
+<table>
+<caption>IP address sizing worksheet, <code>campus internal</code> == <code>ovirt</code>, <code>BMC</code> separated</caption>
+<thead>
+<tr class="header">
+<th>RHHI Config Index</th>
+<th>RHHI Servers</th>
+<th>Campus internal== ovirt</th>
+<th>BMC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>13</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>16</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>19</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>22</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ip-sizing-case-4"><span class="header-section-number">10.3.4</span> Strategy 4</h3>
+<p>This strategy treats <code>ovirt</code> and <code>BMC</code> internal, and emphasizes <code>Campus internal</code> being the converge point for instance access.</p>
+<table>
+<caption>IP address sizing worksheet, <code>ovirt</code> == <code>BMC</code>, <code>Campus internal</code> separated</caption>
+<thead>
+<tr class="header">
+<th>RHHI Config Index</th>
+<th>RHHI Servers</th>
+<th>ovirt == BMC</th>
+<th>Campus internal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>10</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>13</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>16</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>19</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ip-sizing-case-5"><span class="header-section-number">10.3.5</span> Strategy 5</h3>
+<p>This strategy is the simplest solution because all three networks are combined into one flat network. It benefits accessibility, thus is often seen in a development setting.</p>
+<p>However, it removes intended isolation by the design, making the deployment prone to error and hard to debug because all traffics are now mixed.</p>
+<table>
+<caption>IP address sizing worksheet, a flat network.</caption>
+<thead>
+<tr class="header">
+<th>RHHI Config Index</th>
+<th>RHHI Servers</th>
+<th>Campus internal == ovirt == BMC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>12</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<h3 id="network-mapping-worksheet"><span class="header-section-number">10.3.6</span> Network mapping worksheet</h3>
+<p>Once a deployment strategy has been selected, the worksheet below can be filled out to further clarify network requirements:</p>
+<table>
+<caption>LOC RHHI network mapping worksheet</caption>
+<thead>
+<tr class="header">
+<th>Network</th>
+<th></th>
+<th>VLAN</th>
+<th>Subnet</th>
+<th>Mask</th>
+<th>Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>suggested:</td>
+<td>1</td>
+<td>192.168.1.x</td>
+<td>/24</td>
+<td>192.168.1.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>your env:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>BMC</td>
+<td>suggested:</td>
+<td>2</td>
+<td>192.168.2.x</td>
+<td>/24</td>
+<td>192.168.2.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>your env:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>suggested:</td>
+<td>3</td>
+<td>192.168.3.x</td>
+<td>/24</td>
+<td>192.168.3.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>your env:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RHHI provisioning</td>
+<td>suggested:</td>
+<td>10</td>
+<td>192.168.10.x</td>
+<td>/28</td>
+<td>192.168.10.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>your env:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>suggested:</td>
+<td>100</td>
+<td>192.168.100.x</td>
+<td>/28</td>
+<td>192.168.100.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>your env:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>GlusterFS</td>
+<td>suggested:</td>
+<td>400</td>
+<td>192.168.40.x</td>
+<td>/28</td>
+<td>192.168.40.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>your env:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="contributors"><span class="header-section-number">11</span> Contributors</h1>
+<p>A special thank you to the following Lenovo colleagues for their contributions to this document:</p>
+<ul>
+<li>Jay Bryant, Senior Engineer — Data Center Group</li>
+<li>Weiwei Chen, Engineer — Data Center Group</li>
+<li>Chengzhen Chu, Engineer — Data Center Group</li>
+<li>Patrick Jenning, Engineer — Data Center Group</li>
+<li>Guannan Sun, Engineer — Data Center Group</li>
+<li>Ricky Stambach, Engineer — Data Center Group</li>
+<li>Zelin Wang, Engineer — Data Center Group</li>
+</ul>
+<!-- footnotes -->
+<h1 id="references"><span class="header-section-number">12</span> References</h1>
+<!-- My diagrams -->
+<!-- lenovo external images -->
+<!-- need reference images -->
+<!-- references -->
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-redhat-rhhi-home">
+<p>[1] Red Hat, “Red hat hyperconverged infrastructure.” [Online]. Available: <a href="https://access.redhat.com/products/red-hat-hyperconverged-infrastructure">https://access.redhat.com/products/red-hat-hyperconverged-infrastructure</a></p>
+</div>
+<div id="ref-redhat-rhhi-guide">
+<p>[2] Red Hat, “Product documentation for red hat hyperconverged infrastructure for virtualization 1.5.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_hyperconverged_infrastructure_for_virtualization/1.5/">https://access.redhat.com/documentation/en-us/red_hat_hyperconverged_infrastructure_for_virtualization/1.5/</a></p>
+</div>
+<div id="ref-lenovo-sr650-product-guide">
+<p>[3] Lenovo, “Lenovo thinksystem sr650 server (xeon sp gen 1): Product guide.” [Online]. Available: <a href="https://lenovopress.com/lp0644-thinksystem-sr650-server-xeon-sp-gen1">https://lenovopress.com/lp0644-thinksystem-sr650-server-xeon-sp-gen1</a></p>
+</div>
+<div id="ref-lenovo-raid-930-product-guide">
+<p>[4] Lenovo, “Lenovo thinksystem raid 930 series internal raid adapters: Product guide.” [Online]. Available: <a href="https://lenovopress.com/lp0652-thinksystem-raid-930-series-internal-raid-adapters">https://lenovopress.com/lp0652-thinksystem-raid-930-series-internal-raid-adapters</a></p>
+</div>
+<div id="ref-lenovo-g8272-product-guide">
+<p>[5] Lenovo, “Lenovo rackswitch g8272: Product guide.” [Online]. Available: <a href="https://lenovopress.com/tips1267-lenovo-rackswitch-g8272">https://lenovopress.com/tips1267-lenovo-rackswitch-g8272</a></p>
+</div>
+<div id="ref-lenovo-g8052-product-guide">
+<p>[6] Lenovo, “Lenovo rackswitch g8052: Product guide.” [Online]. Available: <a href="https://lenovopress.com/tips1270-lenovo-rackswitch-g8052">https://lenovopress.com/tips1270-lenovo-rackswitch-g8052</a></p>
+</div>
+<div id="ref-lenovo-ne2572-product-guide">
+<p>[7] Lenovo, “Lenovo thinksystem ne2572 rackswitch: Product guide.” [Online]. Available: <a href="https://lenovopress.com/lp0608-lenovo-thinksystem-ne2572-rackswitch">https://lenovopress.com/lp0608-lenovo-thinksystem-ne2572-rackswitch</a></p>
+</div>
+<div id="ref-redhat-rhv">
+<p>[8] Red Hat, “RED hat virtualization 4.2: PRODUCT guide.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/product_guide/index">https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/product_guide/index</a></p>
+</div>
+<div id="ref-redhat-rhgs">
+<p>[9] Red Hat, “Product documentation for red hat gluster storage 3.4.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_gluster_storage/3.4/">https://access.redhat.com/documentation/en-us/red_hat_gluster_storage/3.4/</a></p>
+</div>
+<div id="ref-redhat-rhhi-architecture-diagram">
+<p>[10] Red Hat, Available: <a href="https://access.redhat.com/webassets/avalon/d/Red_Hat_Hyperconverged_Infrastructure_for_Virtualization-1.5-Deploying_Red_Hat_Hyperconverged_Infrastructure_for_Virtualization-en-US/images/4a9666b1f646ebbee25951430518a999/rhhi-architecture.png">https://access.redhat.com/webassets/avalon/d/Red_Hat_Hyperconverged_Infrastructure_for_Virtualization-1.5-Deploying_Red_Hat_Hyperconverged_Infrastructure_for_Virtualization-en-US/images/4a9666b1f646ebbee25951430518a999/rhhi-architecture.png</a></p>
+</div>
+<div id="ref-redhat-rhv-4.1-product-guide">
+<p>[11] Red Hat, “RED hat virtualization 4.1 product guide: CHAPTER 1. INTRODUCTION to red hat virtualization.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/product_guide/introduction">https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/product_guide/introduction</a></p>
+</div>
+<div id="ref-redhat-rhv-4.2-planning-prerequisite-guide">
+<p>[12] Red Hat, “RED hat virtualization 4.2 planning and prerequisites guide: CHAPTER 1. RED hat virtualization architecture.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/planning_and_prerequisites_guide/rhv_architecture">https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/planning_and_prerequisites_guide/rhv_architecture</a></p>
+</div>
+<div id="ref-redhat-rhv-self-hosted-engine-architecture-diagram">
+<p>[13] Red Hat, Available: <a href="https://access.redhat.com/webassets/avalon/d/Red_Hat_Virtualization-4.2-Product_Guide-en-US/images/894aaa576d2f26123a3b3149a5e18159/RHV_SHE_ARCHITECTURE1.png">https://access.redhat.com/webassets/avalon/d/Red_Hat_Virtualization-4.2-Product_Guide-en-US/images/894aaa576d2f26123a3b3149a5e18159/RHV_SHE_ARCHITECTURE1.png</a></p>
+</div>
+<div id="ref-redhat-rhgs-3.4-installation-guide">
+<p>[14] Red Hat, “RED hat gluster storage 3.4 installation guide: CHAPTER 1. PLANNING red hat gluster storage installation.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_gluster_storage/3.4/html/installation_guide/chap-planning_red_hat_storage_installation">https://access.redhat.com/documentation/en-us/red_hat_gluster_storage/3.4/html/installation_guide/chap-planning_red_hat_storage_installation</a></p>
+</div>
+<div id="ref-redhat-gluster-storage-architecture-diagram">
+<p>[15] Red Hat, Available: <a href="https://access.redhat.com/webassets/avalon/d/Red_Hat_Storage-3.1-Administration_Guide-en-US/images/667b8206666b18dbed70d300c3e2710c/RH_Gluster_Storage_diagrams_334434_0415_JCS_5.png">https://access.redhat.com/webassets/avalon/d/Red_Hat_Storage-3.1-Administration_Guide-en-US/images/667b8206666b18dbed70d300c3e2710c/RH_Gluster_Storage_diagrams_334434_0415_JCS_5.png</a></p>
+</div>
+<div id="ref-rhel-6-bonding-interface">
+<p>[16] Red Hat, “RED hat enterprise linux 6 deployment guide: 11.2.4. CHANNEL bonding interfaces.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/s2-networkscripts-interfaces-chan">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/s2-networkscripts-interfaces-chan</a></p>
+</div>
+<div id="ref-rfc-1918">
+<p>[17] Y. Rekhter, B. Moskowitz, D. Karrenberg, G. J. de Groot, and E. Lear, “Address allocation for private internets.” Feb-1996 [Online]. Available: <a href="https://tools.ietf.org/html/rfc1918">https://tools.ietf.org/html/rfc1918</a></p>
+</div>
+<div id="ref-lenovo-loc-ra">
+<p>[18] F. Xia, L. Gu, J. Bryant, and M. Halas, “Lenovo open cloud reference architecture,” May 2019 [Online]. Available: <a href="https://lenovopress.com/lp1149">https://lenovopress.com/lp1149</a></p>
+</div>
+<div id="ref-gluster-volume-type">
+<p>[19] “Setting up glusterfs volumes.” [Online]. Available: <a href="https://docs.gluster.org/en/latest/Administrator%20Guide/Setting%20Up%20Volumes/">https://docs.gluster.org/en/latest/Administrator%20Guide/Setting%20Up%20Volumes/</a></p>
+</div>
+<div id="ref-ovirt-storage-domains">
+<p>[20] “Chapter 8: Storage.” [Online]. Available: <a href="https://www.ovirt.org/documentation/admin-guide/chap-Storage.html">https://www.ovirt.org/documentation/admin-guide/chap-Storage.html</a></p>
+</div>
+<div id="ref-gluster-lvm-cache">
+<p>[21] Red Hat, “RED hat gluster storage 3.4 administration guide: 21.8. LVM cache for red hat gluster storage.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_gluster_storage/3.4/html/administration_guide/sect-lvm_cache%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20">https://access.redhat.com/documentation/en-us/red_hat_gluster_storage/3.4/html/administration_guide/sect-lvm_cache
+                  </a></p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>A pin-ed VM, however, is not migratable<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>RHV can run on minimal two-servers, but its deployment requires at least three servers.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>If there is only one 10G switch available, ports can be teamed using <code>port-channel</code> instead of <code>vLAG</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>BMC network is also exposed as a RHV network <code>BMC</code> which is through 1G connections so VMs can have access to BMC controllers on server. However, here BMC network is shown connected only to the BMC port on server.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>VLAN <code>3999</code> is a special vlan that represents a <code>not-in-use</code> network in this document. The two 10Gb ports of <code>1F1</code> &amp; <code>2F1</code> will be used to support LOC RHHI workloads such as a Red Hat Openstack. Therefore, its switch configuration will be determined by the requirement of workload. For examples of networking setup of LOC and Red Hat OSP 10 &amp; 13 workloads, refer to the “Lenovo Open Cloud Reference Architecture”<span class="citation" data-cites="lenovo-loc-ra">[18]</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Gluster volume is different from logical volume. It is a logical grouping of gluster bricks, which in turn is a grouping of logical volumes.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p><code>Export</code> domain is deprecated and replaced by <code>Data</code> domain.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Sun, 24 Jan 2021 10:25:00 -0500</lastBuildDate><item><title>Attention</title><link>https://fengxia41103.github.io/myblog/attention.html</link><description>&lt;figure class="col l6 m12 s12"&gt;
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 03 Mar 2021 21:31:00 -0500</lastBuildDate><item><title>Stock Trend Analysis</title><link>https://fengxia41103.github.io/myblog/stock%20trend%20analysis.html</link><description>&lt;p&gt;Continue from &lt;a href="https://fengxia41103.github.io/myblog/stock detail.html"&gt;last article&lt;/a&gt;. That one focused on value
+assessment. This will go over trend analysis.&lt;/p&gt;
+&lt;h1&gt;Select a period &amp;amp; price&lt;/h1&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/trend%20price.png"/&gt;
+  &lt;figcaption&gt;Select a time range for trend analysis&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
+and 6m as time range, this tool can select any …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Mar 2021 21:31:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-03:/myblog/stock trend analysis.html</guid><category>dev</category></item><item><title>Details of a Stock</title><link>https://fengxia41103.github.io/myblog/stock%20detail.html</link><description>&lt;p&gt;Detail of a stock is the primary research tool where you get
+one-stop-shop of its numbers. Instead of duplicating common layouts
+such as Google Finance, Finviz, I'm hoping to provide a &lt;em&gt;better&lt;/em&gt; user
+experience that focuses on how a reader of this page is to consume the
+information, not just …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Mar 2021 10:16:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-03:/myblog/stock detail.html</guid><category>dev</category></item><item><title>Stock App Design</title><link>https://fengxia41103.github.io/myblog/stock%20app%20design.html</link><description>&lt;h1&gt;backdrop&lt;/h1&gt;
+&lt;p&gt;The app is a complete rewrite of one which I wrote five years
+ago. At the time Jookun approached me that he had some wise strategies
+of investment. I was intrigued by his passion, but wanted to verify
+its worth using some simulation. Thus a Django was created with …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sun, 28 Feb 2021 21:16:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-02-28:/myblog/stock app design.html</guid><category>dev</category></item><item><title>Impeachment</title><link>https://fengxia41103.github.io/myblog/impeachment.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/mitch.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I have to say, this is very disappointing. Listening to the calls of these senators to say guilty or not guilty, was very disheartening, when so many say not guilty. This was very puzzling to me. I mean, what would you do when there were somebody pointed a gun at …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Sun, 14 Feb 2021 10:46:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-02-14:/myblog/impeachment.html</guid><category>thoughts</category></item><item><title>Stock</title><link>https://fengxia41103.github.io/myblog/stock%20thoughts.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/1968%20earth.jpg"/&gt;
+  &lt;figcaption&gt;First photo of the Earth taken by NASA in 1968&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Let's get serious about stocks. There are two ways of investing: pursuing value, or pursuing trend.&lt;/p&gt;
+&lt;p&gt;Rules:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don't mix the two camps &amp;mdash; if you buy a stock for its value, don't pay much attention to its day-to-day trend. Instead, read …&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Mon, 08 Feb 2021 13:33:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-02-08:/myblog/stock thoughts.html</guid><category>thoughts</category></item><item><title>GameStop</title><link>https://fengxia41103.github.io/myblog/gamestop.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/reddit.png"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This, is absolutely, entertaining! Wow, I have to believe that
+somewhere out there there is a voice that is directing me to these
+things, really. I don't watch the market usually, if at all, then,
+open to read the news yesterday, and it was the frenzy of GameStop and
+AMC …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Thu, 28 Jan 2021 14:19:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-01-28:/myblog/gamestop.html</guid><category>thoughts</category></item><item><title>Attention</title><link>https://fengxia41103.github.io/myblog/attention.html</link><description>&lt;figure class="col l6 m12 s12"&gt;
   &lt;img src="images/IMG_20210123_175332.jpg"/&gt;
 &lt;/figure&gt;
 

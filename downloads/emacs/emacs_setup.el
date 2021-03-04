@@ -100,6 +100,9 @@ and the tangled file is compiled."
 (add-hook 'json-mode-hook 'display-line-numbers-mode)
 (add-hook 'java-mode-hook 'display-line-numbers-mode)
 
+(electric-indent-mode -1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+
 (use-package sublime-themes
     :ensure
     :config)
@@ -1208,15 +1211,15 @@ and the tangled file is compiled."
       (concat
        "Best regards,\n\n"
        "Feng Xia\n"
-       "W: http://www.mycompany.com\n"))
+       "W: http://www.lenovo.com\n"))
 
 ;;(use-package smtpmail
 ;;  :ensure t
 ;;  :config
   (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "fxia1@mycompany.com"
+        user-mail-address "fxia1@lenovo.com"
         smtpmail-debug-info t
-        smtpmail-smtp-user "fxia1@mycompany.com"
+        smtpmail-smtp-user "fxia1@lenovo.com"
         smtpmail-default-smtp-server "localhost"
         smtpmail-auth-credentials (expand-file-name "~/.authinfo")
         smtpmail-smtp-service 1025
@@ -1228,8 +1231,8 @@ and the tangled file is compiled."
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
-      user-mail-address "fxia1@mycompany.com"
+(setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
+      user-mail-address "fxia1@lenovo.com"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
@@ -1474,6 +1477,15 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure
   :config)
 
+(use-package restclient
+  :ensure)
+
+(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+(require 'ob-restclient)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
+
 (use-package writegood-mode
   :ensure
   :config)
@@ -1507,9 +1519,11 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure)
 (elpy-enable)
 
-(add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1)))
+(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
-(add-hook 'python-mode-hook #'yas-minor-mode)
+(add-hook 'elpy-mode-hook #'yas-minor-mode)
+
+(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
 
 (use-package
   py-autopep8
@@ -1548,25 +1562,6 @@ If given prefix arg ARG, skips markdown conversion."
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 
-(use-package web-beautify
-  :ensure
-  :config)
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-(add-hook 'json-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-(add-hook 'css-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
-(add-hook 'html-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-
 (use-package emmet-mode
   :ensure t
   :after(web-mode css-mode scss-mode)
@@ -1586,6 +1581,7 @@ If given prefix arg ARG, skips markdown conversion."
 (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
 (add-hook 'js2-mode-hook #'smartparens-mode)
+(add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 
 (use-package prettier-js
   :ensure
@@ -1599,13 +1595,19 @@ If given prefix arg ARG, skips markdown conversion."
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'json-mode-hook 'prettier-js-mode)
 (add-hook 'js-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+
+(eval-after-load 'web-mode
+  '(progn
+     (add-hook 'web-mode-hook #'add-node-modules-path)
+     (add-hook 'web-mode-hook #'prettier-js-mode)))
 
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@mycompany.com")
+  (setq js-doc-mail-address "fxia1@lenovo.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-url "http://www.lenovo.com")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook

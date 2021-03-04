@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent" />
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://fengxia41103.github.io/myblog/theme/js/html5shiv.min.js"></script>
+    <script src="https://fengxia41103.github.io/myblog/theme/js/respond.min.js"></script>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://fengxia41103.github.io/myblog/theme/bower_components/tether/dist/css/tether.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+
+    <link rel="stylesheet"
+          href="https://fengxia41103.github.io/myblog/theme/css/my.css">
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    </script>
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+<!-- end of block navbar -->
+
+    <div>
+      <header class="page-header ">
+        <div class="container">
+          <div class="row">
+	    <div class="my-banner col s12">
+              <a href="https://fengxia41103.github.io/myblog/" class="white-text">Be Care Free</a>
+	    </div>
+          </div>
+
+
+          <div class="row mypage-index">
+            <div class="col s12">
+              <a href="https://fengxia41103.github.io/myblog/">Home</a>
+              <a href="https://fengxia41103.github.io/myblog/about.html">
+                . About
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/lei.html">
+                . 夏雷
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/project euler.html">
+                . Project Euler
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/quote.html">
+                . Quote
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/resume.html">
+                . Resum&eacute;
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/search.html">
+                . Search
+              </a>
+              <a href="https://fengxia41103.github.io/myblog/slides.html">
+                . Impression
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </header><!-- end of block header -->
+
+      <div id="content">
+<div style="background-color: #fefefe;">
+  <article class="container" style="padding-top:1em;">
+    <div class="page-header row">
+
+      <div class="col s12">
+        <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+        2021-02-28
+
+
+        <a class="wave-effect" href="stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+
+        <a class="wave-effect" href="tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+
+        <h1 class="myhighlight">Stock App Design</h1>
+      </div>
+
+
+    </div>
+
+    <ol id="toc" class="row"></ol>
+
+    <div>
+      <div id="article-content" class="row">
+        <blockquote>
+        </blockquote>
+        <p>
+          <h1>backdrop</h1>
+<p>The app is a complete rewrite of one which I wrote five years
+ago. At the time Jookun approached me that he had some wise strategies
+of investment. I was intrigued by his passion, but wanted to verify
+its worth using some simulation. Thus a Django was created with Yahoo
+finance daily data as the input, and some data crunch based on his
+idea. Like all other ideas, I started to come up some of my own while
+working on it, and gradually it let me deep down into the rabbit hole
+&mdash; for the first time in my career, I had computation so intense
+that it would overheat my laptop and had it shut down! I felt I was on
+track of something. However, it had then been left to rot
+since. Though I had tried to revive it over the years, some of the
+code was done in such a complex manner that I didn't have the heart to
+read it again. One impression, however, always left me with a hope,
+the difficulty of obtain these free daily data. As mentioned, I
+started with Yahoo data. However, it was shut down just around that
+time. Later I shifted to Alpha Advantage while it was still free of
+use. Well, not anymore. Soon after I switched to it, I guess it gained
+enough popularity that it went on with memberships and so on. What
+jumping through these hoops occurred to me that if I could just
+publish these historical data somehow, and let people download and use
+them, there are already value.</p>
+<p>So recently, I started to think about this idea. Starting with another
+round of reviving the old app, I implemented Django command to dump DB
+data into CSVs, thus creating 500+ files, each representing a SP500
+symbol, which were what I had. However, I want more &mdash; how about
+a better user experience? how about some computation of probabilities
+based on a layman's observation? how about DCF?... all these,
+eventually propelled me to rewrite this from scratch, and here it is.</p>
+<h1>audience &amp; goals</h1>
+<p>First, it is an absolute illusion if a beginner like myself will beat
+the market by these analysis, not only because of limitation of
+knowledge, information, and experience, but of personality. I don't
+know what the winners are like. Internet is filled with articles on
+what it takes to be a good investor. I have some of those qualities,
+but there is no guarantee nonetheless. Therefore, I'm back to zero.</p>
+<p>But one thing I am certain, that everyone will experience what I have
+experienced, at some point of his/her life, that they are curious, or
+interested in, the stock market, have the itch to try, know some bits
+of it, but not a whole lot, and have some basic <strong>hunch</strong> of some
+<em>pattern</em>, or <em>frequency</em>, or <em>occurance</em>, and thought there might be
+a gold mine buried underneath and yourself might be the lucky one. So,
+how to find out, or to verify?</p>
+<p>Here are five levels of users I sense:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Tool</th>
+<th>Audience</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>apps &amp; websites</td>
+<td>Have basic knowledge, satisfied with reported info</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Excel</td>
+<td>Think they have some data/info analysis edge</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Excel + VBA</strong></td>
+<td><strong>Automate routine computation and data assembly</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Script or lib</td>
+<td>Programmer who gained more computation power over Excel</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Commercial</td>
+<td>Professional, sky is the limit, membership</td>
+</tr>
+</tbody>
+</table>
+<p>Difference between 3 &amp; 4 are blurry, but the idea is that
+scripting/lib will give you a much wider selection of tools than
+VBA. Further, VBA is not as good a building block if you want to stand
+on the shoulder of a giant.</p>
+<p>Users of type 1 and type 5 are not my audience. User of type 2,3,4 are
+essentially the same people &mdash;</p>
+<ul>
+<li>they are independent/self-confident enough to think of their own
+  method, but are yet willing to go with a commercial source or
+  solution</li>
+<li>they have some financial knowledge, and</li>
+<li>are not afraid of (or even fond of) data crunching.</li>
+</ul>
+<p>Their routine follows these steps &mdash;</p>
+<ol>
+<li>Obtain raw data:</li>
+<li>daily price (well, you could also have finer grain data)</li>
+<li>financial reports: balance sheet, income statement, cash flow</li>
+<li>computed ratios, eg. P/E, beta</li>
+<li>some popular indicator or evaluation values</li>
+<li>Crunch of his own indicator or measure using these data</li>
+<li>Draw a graph here and there to visualize his results</li>
+<li>Search for pattern</li>
+</ol>
+<p>During my research and implementation, following this pattern, I found
+a few places where this tool can help:</p>
+<ul>
+<li>
+<p><strong>Getting data</strong>. represented the first barrier higher than expected. I have
+  related my experience w/ Yahoo, Google, Alpha. I'm surprised how
+  limited such data sources are there considering how widely spread
+  the Internet has become, and stock data being always in the public
+  domain.</p>
+<p>A value of this tool is to handle API of available data
+  sources so to retrieve available <em>raw</em> data.</p>
+</li>
+<li>
+<p><strong>Cleansing data</strong>. Once you get data, consuming data represents
+  another barrier &mdash; understanding particular data form (&larr;
+  this is usually source dependent) and handling data anomaly.</p>
+<p>2nd value of this tool is to normalize these data points, and
+  potentially amending missing data by providing reasonable default.</p>
+</li>
+<li>
+<p><strong>Computing standard ratios</strong>. Crunching a clean data set is usually not the
+  challenge at all.  Of course you can go with your fancy where the
+  <em>edge</em> is believed to be. However, there are always a few <em>standard</em>
+  ratios everyone seems to begin with, eg. growth rate of a number
+  from period to period, or pcnt of one expanse of the total, things
+  like that. They are not difficult to compute, but rather
+  mechanical/tedious, and are not readily available from a data
+  source<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. Therefore, you have to do them <em>manually</em>.</p>
+<p>Therefore, 3rd value of this tool is to provide some computed values
+  out of box. One beauty of historical data is that they don't
+  change. Therefore, a pre-calculated result is as good as new.</p>
+</li>
+</ul>
+<p>In short, one can view this tool as a fancy automated Excel template
+that I have built to facilitate routine works and get you going w/
+your analysis quickly less the mechanical build-up that is necessary
+but distracting from analysis itself.</p>
+<h1>system design</h1>
+<figure class="col s12 center">
+  <img src="images/stock/high%20level%20design.png"/>
+</figure>
+
+<p>System is split into backend and fronend. Backend is a Django app w/ exposed REST API using
+<a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a>. Frontend is <a href="https://reactjs.org/">React</a>.</p>
+<p>Primary data source is Yahoo's financial data. In particular, I'm pulling these:</p>
+<ul>
+<li>historical stock daily prices &mdash; high, low, open, close, volume</li>
+<li>financial statements &mdash; balance sheet, income statement, and cash flow statement</li>
+<li>published meta &mdash; beta, P/E, and so on. Since these are
+  opinionated, Yahoo is just one of many alternatives.</li>
+</ul>
+<h1>data model</h1>
+<p>Model names are intuitive.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MyStock</td>
+<td>Place for name, symbol</td>
+</tr>
+<tr>
+<td>MyStockHistorical</td>
+<td>Daily trading data</td>
+</tr>
+<tr>
+<td>MyStrategyValue</td>
+<td>Pre-computed values based on historical, eg. moving average</td>
+</tr>
+<tr>
+<td>IncomeStatement</td>
+<td>As name</td>
+</tr>
+<tr>
+<td>BalanceSheet</td>
+<td>As name</td>
+</tr>
+<tr>
+<td>CashFlow</td>
+<td>As name</td>
+</tr>
+<tr>
+<td>ValuationRatio</td>
+<td>Published valuation ratios, eg. P/E. They are source dependent.</td>
+</tr>
+</tbody>
+</table>
+<figure class="col s12">
+  <img src="images/stock/stock.png"/>
+</figure>
+
+<h1>data persistence &amp; processing</h1>
+<p>Data persistence is MySql 5.7. Using Django's ORM, this is not a hard requirement if your preference is something else.</p>
+<p>Data processing is handled by Redis via Celery so to achieve ease of scale. As mentioned earlier, <code>MyStrategeValue</code> are derived from historicals, thus are computed prehand using this mechanism: Django custom command &rarr; compose celery task &rarr; submit task to Redis queue &rarr; task executed and data is persisted to DB.</p>
+<p>There are also custom model property which is computed on the
+fly. Most of them can be pre-computed also since historicals are not
+static. However, to minimize dependency on these values that must be
+prepared as a separate step, I opted to the current method. By
+observation, performance penalty by not having them in DB is
+acceptable.</p>
+<p>Using docker, the following data volumes are used:</p>
+<table>
+<thead>
+<tr>
+<th>Volume</th>
+<th>Attach to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stock-data</td>
+<td>Main DB data storage</td>
+</tr>
+<tr>
+<td>redis-data</td>
+<td>Redis data storage</td>
+</tr>
+</tbody>
+</table>
+<h1>network</h1>
+<p>Network of the setup is fairly simple. We distinguish <code>data</code> vs. <code>management</code>:</p>
+<figure class="col s12">
+  <img src="images/stock/stock.png"/>
+</figure>
+
+<h2>ports</h2>
+<p>A service is a function unit. In this implementation, each is a
+docker. I try to limit exposure of ports on docker host so this
+application can be easily co-hosted with others without causing port
+conflicts. In essence, <code>8084</code> is the frontend UI port, and <code>8003</code> is
+the backend API port. All others are docker-to-docker only.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Port</th>
+<th>Service</th>
+<th>Host Map</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend</td>
+<td>80</td>
+<td>Main frontend app w/ Nginx built-in</td>
+<td>8084</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>80</td>
+<td>Nginx proxy</td>
+<td>8003</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>3306</td>
+<td>MySql DB</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>8001</td>
+<td>Django app</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>6379</td>
+<td>Redis</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h1>develop &amp; deployment</h1>
+<p>Assuming you have <code>docker</code> and <code>docker-compose</code> installed already, clone the <a href="https://fengxia41103.github.io/myblog/stock thoughts.html">repo</a>, and under <code>/backend</code> and <code>/frontend</code>, use the <code>docker-compose up --build</code> for the first run to build initial images, and <code>docker-compose up -d</code> for incremental changes.</p>
+<p>Frontend development can be benefited by a non-docker setup. So you need to <code>npm install</code> then <code>npm run dev</code>. Once you are satisfied w/ your frontend code, production deployment can be <code>docker-compose up --build -d</code>.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Some source provide indicators such as MACD. Most, however, only
+provide raw/reported data such as sales of an Income Statement. My
+goal, therefore, is to follow the conventional train of thought by
+converting these values into percentage, and some period-to-period
+change rate, and so on, which I found myself doing a lot whenever
+I receive an Excel full of numbers.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+        </p>
+
+        <p>
+          &mdash; by
+          <a href="feng-xia.html">Feng Xia</a>
+        </p>
+
+        <div id="disqus_thread"></div>
+        <script>
+
+         /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+         /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+          */
+         (function() { // DON'T EDIT BELOW THIS LINE
+           var d = document, s = d.createElement('script');
+           s.src = '//fengxia-co.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());
+           (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </article>
+
+
+
+  <div class="container">
+    <h3>Related:</h3>
+    <div class="row">
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2021-03-03
+            </div>
+
+            <h5 class="card-title">
+              Stock Trend Analysis
+            </h5>
+
+            <p>
+              <p>Continue from <a href="https://fengxia41103.github.io/myblog/stock detail.html">last article</a>. That one focused on value
+assessment. This will go over trend analysis.</p>
+<h1>Select a period &amp; price</h1>
+<figure class="col s12">
+  <img...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="https://fengxia41103.github.io/myblog/stock trend analysis.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l4 m6 s12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text row">
+            <div>
+              <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
+              2021-03-03
+            </div>
+
+            <h5 class="card-title">
+              Details of a Stock
+            </h5>
+
+            <p>
+              <p>Detail of a stock is the primary research tool where you get
+one-stop-shop of its numbers. Instead of duplicating common layouts
+such as Google Finance, Finviz, I'm hoping to provide a <em>better</em> user
+experience that focuses on how a reader of...
+            </p>
+
+            <div class="card-action">
+              <a class="flabel wave-effect"
+                 href="https://fengxia41103.github.io/myblog/stock detail.html">
+                read more
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div><!-- /.container -->
+
+    </div>
+<!-- end of block main -->
+
+
+    <footer class="page-footer">
+      <div class="container">
+	<div class="row">
+          <h5>Categories:</h5>
+          <a href="https://fengxia41103.github.io/myblog/demo.html">
+            <i class="fa fa-folder-open-o"></i>
+            demo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/dev.html">
+            <i class="fa fa-folder-open-o"></i>
+            dev
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/fashion.html">
+            <i class="fa fa-folder-open-o"></i>
+            fashion
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/gkp.html">
+            <i class="fa fa-folder-open-o"></i>
+            gkp
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+            <i class="fa fa-folder-open-o"></i>
+            lenovo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/odoo.html">
+            <i class="fa fa-folder-open-o"></i>
+            odoo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/openstack.html">
+            <i class="fa fa-folder-open-o"></i>
+            openstack
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/react.html">
+            <i class="fa fa-folder-open-o"></i>
+            REACT
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/rh.html">
+            <i class="fa fa-folder-open-o"></i>
+            rh
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/stock.html">
+            <i class="fa fa-folder-open-o"></i>
+            stock
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+            <i class="fa fa-folder-open-o"></i>
+            thoughts
+          </a>
+
+          <h5>Tags:</h5>
+          <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+            <i class="fa fa-tag"></i>
+            feng
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+            <i class="fa fa-tag"></i>
+            lenovo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+            <i class="fa fa-tag"></i>
+            love
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+            <i class="fa fa-tag"></i>
+            family
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+            <i class="fa fa-tag"></i>
+            demo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+            <i class="fa fa-tag"></i>
+            dev
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+            <i class="fa fa-tag"></i>
+            react
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+            <i class="fa fa-tag"></i>
+            gkp
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+            <i class="fa fa-tag"></i>
+            fashion
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+            <i class="fa fa-tag"></i>
+            design
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+            <i class="fa fa-tag"></i>
+            odoo
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+            <i class="fa fa-tag"></i>
+            angular
+          </a>
+          <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+            <i class="fa fa-tag"></i>
+            thoughts
+          </a>
+	</div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col l8 m8 s12">
+          <p>
+            2016-2019 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02146
+          </p>
+
+          <p>
+            <a href="mailto:feng_xia41103@hotmail.com">
+              <i class="fa fa-envelope"></i>
+            </a>
+
+            <a href="http://github.com/fengxia41103">
+              <i class="fa fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/fengxia41103">
+              <i class="fa fa-linkedin"></i>
+            </a>
+
+            <a href="">
+              <i class="fa fa-phone-square"></i>
+              (508)801-1794
+            </a>
+          </p>
+            </div>
+            <div class="col l4 m4 s12">
+              <p class="right">
+                <i class="fa fa-copyright"></i>
+                All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </footer>
+<!- end of block footer -->
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/tether/dist/js/tether.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/financejs/finance.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/highcharts/highcharts.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/lodash/dist/lodash.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/classnames/index.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/react/react.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/react/react-dom.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/babel/browser.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/remarkable/dist/remarkable.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/d3/d3.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/js/d3plus.full.min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://fengxia41103.github.io/myblog/theme/bower_components/jquery.toc/jquery.toc.js">
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+
+    <script type="text/javascript">
+     var j$ = jQuery.noConflict();
+
+
+     j$(document).ready(function(){
+       // common global widget initializations
+       var table = j$('table.my-datatable').dataTable({
+	 paging: false,
+	 info:false,
+	 "pagingType": "simple"
+       });
+
+       // lightbox
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+	 var url = j$(this).attr('src');
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       });
+
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$('pre').each(function(i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$('.materialboxed').materialbox();
+
+       // carousel
+       j$('.carousel').carousel();
+
+       // slider
+       j$('.slider').slider({
+         height: "90%"
+       });
+     });
+    </script>
+ <!-- end of block JS -->
+
+  <script type="text/javascript">
+   var j$ = jQuery.noConflict();
+
+   j$(document).ready(function(){
+     // table of contents
+     j$("#toc").toc({
+       content:"div#article-content"
+     });
+
+     // This is needed to deal with browser-default
+     // that is used in Material css. How stupid.
+     j$("ul").addClass("browser-default");
+
+     // Default table class
+     j$("table").addClass("bordered striped");
+   });
+  </script>
+  </body>
+
+</html>

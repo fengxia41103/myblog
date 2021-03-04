@@ -1,8 +1,8 @@
 ---
 documentclass: scrreprt
 papersize: a4
-# mainfont: Ubuntu
-monofont: DejaVu Sans Condensed
+mainfont: FreeSerif
+monofont: FreeMono
 fontsize: 12pt
 geometry: margin=1in
 linkstyle: slanted

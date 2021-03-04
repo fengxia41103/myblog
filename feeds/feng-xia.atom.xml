@@ -1,5 +1,1127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2021-01-24T10:25:00-05:00</updated><entry><title>Attention</title><link href="https://fengxia41103.github.io/myblog/attention.html" rel="alternate"></link><published>2021-01-24T10:25:00-05:00</published><updated>2021-01-24T10:25:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-01-24:/myblog/attention.html</id><summary type="html">&lt;figure class="col l6 m12 s12"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - Feng Xia</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/feng-xia.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2021-03-03T21:31:00-05:00</updated><entry><title>Stock Trend Analysis</title><link href="https://fengxia41103.github.io/myblog/stock%20trend%20analysis.html" rel="alternate"></link><published>2021-03-03T21:31:00-05:00</published><updated>2021-03-03T21:31:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-03-03:/myblog/stock trend analysis.html</id><summary type="html">&lt;p&gt;Continue from &lt;a href="https://fengxia41103.github.io/myblog/stock detail.html"&gt;last article&lt;/a&gt;. That one focused on value
+assessment. This will go over trend analysis.&lt;/p&gt;
+&lt;h1&gt;Select a period &amp;amp; price&lt;/h1&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/trend%20price.png"/&gt;
+  &lt;figcaption&gt;Select a time range for trend analysis&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
+and 6m as time range, this tool can select any …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Continue from &lt;a href="https://fengxia41103.github.io/myblog/stock detail.html"&gt;last article&lt;/a&gt;. That one focused on value
+assessment. This will go over trend analysis.&lt;/p&gt;
+&lt;h1&gt;Select a period &amp;amp; price&lt;/h1&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/trend%20price.png"/&gt;
+  &lt;figcaption&gt;Select a time range for trend analysis&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
+and 6m as time range, this tool can select any date-to-date as you
+wish, and all following analysis will be done over this selected
+range.&lt;/p&gt;
+&lt;h1&gt;Daily return %&lt;/h1&gt;
+&lt;p&gt;Daily return is defined as &lt;code&gt;(close-open)/close&lt;/code&gt; of that day. This
+value is pre-computed as a strategy value.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/daily%20return.png"/&gt;
+  &lt;figcaption&gt;Example of daily return&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Overnight return %&lt;/h1&gt;
+&lt;p&gt;Overnight return is defined as &lt;code&gt;(today's open - yesterday's
+close)/yesterday's close&lt;/code&gt;. This is also a pre-computed strategy value.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/overnight%20return.png"/&gt;
+  &lt;figcaption&gt;Example of overnight return&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I noticed that there is always some &lt;strong&gt;after market&lt;/strong&gt; news or earning&lt;/p&gt;
+&lt;p&gt;calls that will sway the market. Further, apparently trading is going
+on after the market is closed to me! Therefore, there is a dark period
+when the price is moving, but I can not participate until the next
+morning. Using this value together with daily return, I'm hoping to
+gain sense how likely an up seen overnight will translate to an up
+during day.&lt;/p&gt;
+&lt;h1&gt;My indicators&lt;/h1&gt;
+&lt;p&gt;This is really what got me to begin with &amp;mdash; the analysis edge I
+was hoping to achieve. I think this is the same drive that you have in
+mind. If so, read on.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/my%20indicators.png"/&gt;
+  &lt;figcaption&gt;Example of my indicators&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;end-to-end return %&lt;/code&gt;: if I buy at the first &lt;code&gt;open&lt;/code&gt; price, and hold
+  it till the last &lt;code&gt;close&lt;/code&gt; price, how much do you gain? I also call
+  this &lt;code&gt;range return&lt;/code&gt;. One can easily picture that any buy-sell pair
+  can be viewed as a range return. Of course, in reality, buying at
+  open price and sell at close price is not possible, at least not for
+  me. So whatever the return is, it's an ideal situation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;compounded return %&lt;/code&gt;: this is to emulate a busy day trader who,
+  instead of holding through the range, buy at each &lt;code&gt;open&lt;/code&gt; and sell at
+  each &lt;code&gt;close&lt;/code&gt;, thus riding the daily wave. Since there are ups and
+  downs, what is the compounded return then?&lt;/p&gt;
+&lt;p&gt;In most cases I looked at, compounded return is always &amp;lt; range
+  return. Therefore, riding wave is not a good idea, even when
+  transaction fee is 0.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;close price RSD %&lt;/code&gt;: RSD, relative standard deviation, is to measure
+  how much swing close price is seen in this time period. The larger
+  the value, the more volatile it appeared.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One catch, however, is that when computed over a longer time period,
+  because prices is ever going up, for example, this value will
+  naturally become larger. Therefore, it's more useful if you compare
+  stock A vs. B over the same period, not to a single stock itself.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;overnight flip/consistency&lt;/code&gt;: I'm curious how likely an overnight
+  trend carries over to the next day&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. Numbers are day count.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;overnight flip returns up %/down %&lt;/code&gt;: This is one step further on
+  observing an overnight trend against its next day. In a flip, there
+  could be a large up, then a small down, and vice versa. Therefore,
+  by computing the compounded return of overnight and today, we can
+  see how many flips resulted in a positive return. Up and down % adds
+  up to 100%.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the example above, among overnight flips, 46% would have resulted
+  in a positive return, but 56% in the negative. Therefore, in this
+  case down flips were not compensated enough by the next day ups,
+  meaning the sentiment, though flipped a bit, was still carrying the
+  day.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;two-day trend up/down/flip&lt;/code&gt;: Taking two consecutive days, how many
+  are both ups, downs, or reversed. Since human is naturally looking
+  at yesterday's trend feeling it will be duplicated today&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;,
+  knowing how likely today's positive will flip is at least a useful
+  probability measure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;daily return up %/down %&lt;/code&gt;: Easy. Take each day's return, what's the
+  odds you would have made money if riding that day? In the example
+  above, 50/50, indeed a random walk down the Wall Street.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;nightly return up %/down %&lt;/code&gt;: Counting overnight returns, how likely
+  it would have gone up or down. Using this probability, one may bet
+  the overnight. One reason is that overnight is off limit to
+  investor. We simply don't have access or control over this period,
+  but the market doesn't sleep. Further, I noticed that some companies
+  make earning calls deliberately after market is closed. Therefore,
+  this is really a period of uncertainty by design of the system.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;up daily return avg/RSD %&lt;/code&gt;: Curious how much a daily up we saw in
+  term of average and its RSD. Taking this together w/ &lt;code&gt;down daily
+  return avg/RSD %&lt;/code&gt;, I'm hoping to shed light whether upside is better
+  than the downside.&lt;/p&gt;
+&lt;p&gt;In the example, upside avg was 1.91% while downside was
+  2.11%. Therefore, downside dominated, in average. Up's RSD was less
+  than down's, so that we saw larger scale of swing when there was a
+  down day than one of an up day. So overall, I would take this period
+  as a down period and would expect to lose since the odds were not in
+  up's favor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Tech indicators&lt;/h1&gt;
+&lt;p&gt;I didn't invent any of these. Found this &lt;a href="https://github.com/rrag/react-stockcharts"&gt;react library&lt;/a&gt;, and am
+using it to plot these fancies. One downside of this approach is that
+I don't have computed numbers such as SMAs. So later I might
+re-implement these values so to make more sense of them.&lt;/p&gt;
+&lt;p&gt;One observation is that all of them are doing some kind of SMA, which
+is essentially a smoothing technique. I have commented in &lt;a href="https://fengxia41103.github.io/myblog/stock detail.html"&gt;previous
+article&lt;/a&gt; that this is a double edge sword as it can generate so
+called a pattern for pattern's sake.&lt;/p&gt;
+&lt;p&gt;Further, these charts are clearly against philosophy that stock
+history is not a reliable indicator of the &lt;em&gt;future&lt;/em&gt;. Therefore, I have
+them here because of their popularity mostly.&lt;/p&gt;
+&lt;h2&gt;Bollinger Band&lt;/h2&gt;
+&lt;p&gt;Read the &lt;a href="https://en.wikipedia.org/wiki/Bollinger_Bands"&gt;wiki&lt;/a&gt;. It's interesting.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/bollinger%20band.png"/&gt;
+  &lt;figcaption&gt;Example of Bollinger Band&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Elder Ray&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="https://www.investopedia.com/terms/e/elderray.asp"&gt;intro&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/elder%20ray.png"/&gt;
+  &lt;figcaption&gt;Example of Elder Ray&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;SAR&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="https://en.wikipedia.org/wiki/Parabolic_SAR"&gt;wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/SAR.png"/&gt;
+  &lt;figcaption&gt;Example of SAR&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Full Stochastics Oscillator&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="https://en.wikipedia.org/wiki/Stochastic_oscillator"&gt;wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/full%20stochastics.png"/&gt;
+  &lt;figcaption&gt;Example of Full Stochastics oscillator&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Heikin-Ashi&lt;/h2&gt;
+&lt;p&gt;Read &lt;a href="https://www.investopedia.com/trading/heikin-ashi-better-candlestick/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/heikin%20ashi.png"/&gt;
+  &lt;figcaption&gt;Example of Heikin Ashi&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;MACD&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="https://en.wikipedia.org/wiki/MACD"&gt;wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/MACD.png"/&gt;
+  &lt;figcaption&gt;Example of MACD&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Relative Strength (RSI)&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="https://www.investopedia.com/terms/r/rsi.asp"&gt;intro&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/RSI.png"/&gt;
+  &lt;figcaption&gt;Example of RSI&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;In theory, you can profit off any probability that is greater
+than 50. Therefore, if there is a discrepancy between consistency
+and flip, you should be able to bet the next day using this
+probability. This same thought goes to other &lt;em&gt;flip/consistency&lt;/em&gt;
+measures.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;Even though it is a cliche that history does not predict the
+future, in stock's case, it is difficult for layman investor such
+as myself to think otherwise. Yesterday's trend is the closest
+information we have got.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Details of a Stock</title><link href="https://fengxia41103.github.io/myblog/stock%20detail.html" rel="alternate"></link><published>2021-03-03T10:16:00-05:00</published><updated>2021-03-03T10:16:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-03-03:/myblog/stock detail.html</id><summary type="html">&lt;p&gt;Detail of a stock is the primary research tool where you get
+one-stop-shop of its numbers. Instead of duplicating common layouts
+such as Google Finance, Finviz, I'm hoping to provide a &lt;em&gt;better&lt;/em&gt; user
+experience that focuses on how a reader of this page is to consume the
+information, not just …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Detail of a stock is the primary research tool where you get
+one-stop-shop of its numbers. Instead of duplicating common layouts
+such as Google Finance, Finviz, I'm hoping to provide a &lt;em&gt;better&lt;/em&gt; user
+experience that focuses on how a reader of this page is to consume the
+information, not just throwing at him pile of facts &amp;amp; data, which,
+though always impressive to begin with, is often overwhelming and
+creating a diminishing return of these information quickly.&lt;/p&gt;
+&lt;h1&gt;Select a stock&lt;/h1&gt;
+&lt;p&gt;To look at detail of a stock, select a symbol of list:&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock%20list.png"/&gt;
+  &lt;figcaption&gt;Stock list filter&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Upon typing on the search bar, case-sensitive matching takes place automatically with a 1-second debounce. Matched one will then be highlighted. To return to the full list, simply clear the search bar.&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock%20detail%20summary.png"/&gt;
+  &lt;figcaption&gt;Stock detail summary section&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Three values that are less intuitive than others are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;DuPont ROE&lt;/code&gt;: ROE computed using the Dupont model. This is based on
+  company's financial statements. If happened to be that this stock
+  doesn't have statement data, value will be 0, equivalent to an
+  invalid.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ROE Gap %&lt;/code&gt;: Since there is also &lt;em&gt;published&lt;/em&gt; ROE, this value
+  indicates how far off the Dupont ROE from published one: &lt;code&gt;% =
+  (published-dupont)/published&lt;/code&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. Negative value will indicate that
+  consensus opinion is more &lt;em&gt;conservative&lt;/em&gt; on this stock than I am.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Top 10 Institution Owned %&lt;/code&gt;: Counting the ownership of top 10
+  largest institutional owner/investor in this stock.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Dupont ROE&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://www.investopedia.com/terms/d/dupontanalysis.asp"&gt;Dupont model&lt;/a&gt; is a &lt;strong&gt;decomposition&lt;/strong&gt; of ROE.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are three major financial metrics that drive return on equity
+(ROE): operating efficiency, asset use efficiency and financial
+leverage. Operating efficiency is represented by net profit margin
+or net income divided by total sales or revenue. Asset use
+efficiency is measured by the asset turnover ratio. Leverage is
+measured by the equity multiplier, which is equal to average assets
+divided by average equity.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What I like about this is the distinction of three different business models:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;high margin&lt;/strong&gt;: reflected in high profit margin. Their unit profit
+   is good, think of high-end fashion. Downside of this type is that
+   increasing volume will work against high unit margin. Thus scaling
+   up by producing more is not the right strategy.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;high turn over&lt;/strong&gt;: think of Walmart, low unit margin, but huge
+   volume. This is the opposite of high margin model, and is the
+   dominant strategy by nearly all new entrants of an industry &amp;larr;
+   selling things cheap is always a eyeball catcher.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;high leverage&lt;/strong&gt;: don't know yet how to read this value because it
+   feels a double-edge sword &amp;mdash; can be interpreted as having the
+   good credit to borrow (assuming banks are not stupid), or, on the
+   other hand, loaded w/ debt and is in trouble. Further, this is
+   highly dependent on the macro when debt is cheap or expansive, and
+   I would even say the personality of CFO, as we all know, gamblers
+   stack high leverage, and conservative grandpa hates debt. A common
+   example of this model is the financial industry, whose foundation
+   is leverage.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ROE, or the published ROE you find online, is usually based on an
+averaged sales over multiple reporting periods, averaged assets, and
+so on, thus resulting a single number.  This tool, however, computes
+ROE for each reporting period, thus shedding lights on how ROE has
+changed over time&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/dupont%20roe%20chart.png"/&gt;
+  &lt;img src="images/stock/dupont%20roe%20values.png"/&gt;
+  &lt;figcaption&gt;Example of Dupont Period-to-Period&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In this example above, MSFT's ROE runs around 30 year to year. Profit
+margin and asset turnover all went up in 2020 report, indicating a
+healthy business operation. Its equity multiplier dropped a bit,
+indicating it is taking on more debt than before. Considering MSFT's
+reputation, I wouldn't then worry about its increased debt, and
+further considering the cheap interest rate, it's likely a good
+strategy to leverage up in this period. For example, if you google
+&lt;code&gt;msft bond rate&lt;/code&gt;, MSFT is running at &lt;a href="https://cbonds.com/bonds/87917/#:~:text=International%20bonds%3A%20Microsoft%2C%203.625%25%2015dec2023%2C%20USD%20(US594918AW47)"&gt;&lt;code&gt;3.625%&lt;/code&gt;&lt;/a&gt;, making borrowing
+money quite cheap for MSFT.&lt;/p&gt;
+&lt;h1&gt;Net Asset per Share&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://www.investopedia.com/terms/a/asset-based-approach.asp"&gt;Net asset&lt;/a&gt; valuation is often applied to company that will be
+liquidated. Here I'm applying a simple version: &lt;code&gt;(total asset - total
+liabilities)/shares&lt;/code&gt;. The idea is that if I pay off all liabilities,
+what's left for stockholder, assuming you get asset for its book
+value. Of course, this is a very rough estimation.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/net%20asset.png"/&gt;
+  &lt;figcaption&gt;Example of Net Asset per Share&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;However, there is also an important underline assumption that &lt;strong&gt;asset
+will grow together with business&lt;/strong&gt; &amp;larr; essentially the company is
+becoming bigger and bigger, and that biggness is in term of its
+assets. Therefore, if it is deemed a healthy business, growing net
+assets per share should be an indicator of its success. Using the
+example above, BFAM's NAV grew from $12 to $21. Considering it is
+acquiring more daycare centers and probably equipment with them, I am
+taking this trend as a healthy growth of the business.&lt;/p&gt;
+&lt;h1&gt;DCF&lt;/h1&gt;
+&lt;p&gt;Yeah I did quite some DCFs back in the MBA days, and sadly, I almost
+forgot how to do it. So here it is, bringing back some memories.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/dcf.png"/&gt;
+  &lt;figcaption&gt;Example of DCF&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;DCF has a &lt;strong&gt;lot of assumptions&lt;/strong&gt;. So I really don't see how to verify
+or beat the market on all these dials single-handedly. Play with your
+scenario by tweaking the input fields see how it will affect the
+valuation&lt;sup id="fnref:3"&gt;&lt;a class="footnote-ref" href="#fn:3"&gt;3&lt;/a&gt;&lt;/sup&gt;. &lt;strong&gt;Note&lt;/strong&gt; that terminal rate has a dramatic impact on the
+valuation. So be prudent in your projection. Also, if your target is
+an ETF, there won't be a DCF because it doesn't have balance sheet.&lt;/p&gt;
+&lt;h1&gt;Balance Sheet&lt;/h1&gt;
+&lt;p&gt;Balance sheet data are the largest data set. See &lt;a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#balance_sheet"&gt;yahooquery doc&lt;/a&gt;
+for available data points. I found raw numbers on a balance sheet are
+rather pointless because human brain isn't good at processing
+them. Further, knowing one's asset is 2.3B is meaningless, but its
+changing from 2.3B to 2300B in one period is revealing! Therefore, for
+balance sheet analysis, I'm not listing any reported numbers, but are
+focusing on % of a total, and the same index change % from one period
+to next.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/balance%20sheet.png"/&gt;
+  &lt;figcaption&gt;Example of balance sheet&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I want to be conservative. Therefore, more attention is given to debt
+and liability.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;equity multiplier&lt;/code&gt;: &lt;code&gt;= asset / equity&lt;/code&gt;. Since &lt;code&gt;asset=debt+equity&lt;/code&gt;,
+  the higher this multiplier is, the more debt this company is taking,
+  thus more leveraged. This, of course, is a double edged sword. It
+  can mean that it has capability to raise debt (w/ lenders), thus
+  using less equity to do business; it an also mean it's loaded w/
+  debt and is in trouble.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;debt to equity ratio&lt;/code&gt;: &lt;code&gt;= total debt/equity&lt;/code&gt;.  Similar to the
+  equity multiplier, I'm trying to understand how bad the company is
+  relying on debt. So, if debt is 60%, and equity is 40%, it will be
+  6:4=1.5. Therefore, the higher this number is, the more leveraged
+  this company is.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;liability/asset %&lt;/code&gt;: &lt;code&gt;= total liability/total assets&lt;/code&gt;. I'm assuming
+  if the company is liquidating, will its asset enough to pay off its
+  liability&lt;sup id="fnref:4"&gt;&lt;a class="footnote-ref" href="#fn:4"&gt;4&lt;/a&gt;&lt;/sup&gt;. Without consideration of discount, relative change
+  among periods are still valid.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;period-to-period changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;debt % of asset&lt;/code&gt;: &lt;code&gt;= total debt / total assets&lt;/code&gt;. Debt is long-term
+  liability. Ideally you also need to discount liability for its
+  market value, not using its book value. In the example above, about
+  50% of assets are debts. Debts are often renewed so a company
+  constantly borrows. So my understanding is that a stable % is fine;
+  a sudden change will signal health issue or a strategy shift.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;debt %&lt;/code&gt;: &lt;code&gt;= growth of total debt&lt;/code&gt; from p1 to p1. Value of the first
+  reporting period will be set to 0 as it has no &lt;em&gt;previous&lt;/em&gt;
+  one. Similar to the &lt;code&gt;debt % of asset&lt;/code&gt; above, it measures how quickly
+  a company is accruing debts. Negative value will be highlighted
+  because the debt is decreasing, a good sign.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;account payable %&lt;/code&gt;: &lt;code&gt;= growth of AP&lt;/code&gt;. AP is a liability. I feel in
+  business AP can grow for two reasons: company is not paying off
+  vendors because it's poor, or being greedy to use AP as free deposit
+  for interest. AP decrease may either be a healthy sign that company
+  has money to pay, or that vendors are losing faith in this business.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;account receivable %&lt;/code&gt;: &lt;code&gt;= growth of AC&lt;/code&gt;. The counterpart of AP. If
+  it grows, it's a bad sign that customers are not paying.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cash %&lt;/code&gt;: &lt;code&gt;= growth of cash, cash equivalents, and short-term
+  investment&lt;/code&gt;. In other words, anything one an quickly turn into cash
+  are counted. If it grows, I take it as a positive sign.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;working capital %&lt;/code&gt;: as name. Working capital = current assets -
+  current liabilities. In other words, this measures how much a
+  company needs to keep its business going, like a filler. If it
+  grows, then the gap is enlarging, which puts more burden in
+  borrowing to get a bigger filler.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;net PP&amp;amp;E %&lt;/code&gt;: as name.  PP&amp;amp;E is a long-term investment. It's a
+  signal how much they are investing into the future production.&lt;/p&gt;
+&lt;p&gt;Think about this. If you are going to run away, will u want to
+  invest into a factory, or keep cash? So, I think a positive
+  change is a good thing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Income Statement&lt;/h1&gt;
+&lt;p&gt;See &lt;a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#income_statement"&gt;yahooquery doc&lt;/a&gt; for available data points. Again, raw numbers are not helpful. Instead, % of a total is useful, eg. profit margin.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/income%20statement.png"/&gt;
+  &lt;img src="images/stock/income%20statement%20values.png"/&gt;
+  &lt;figcaption&gt;Example of income statement&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;COGS margin %&lt;/code&gt;: &lt;code&gt;= cogs/revenue&lt;/code&gt;. Total cost to bring in that much
+  revenue. I'm expecting it to be rather stable if a business is run
+  well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;operating income margin %&lt;/code&gt;: &lt;code&gt;= operating income/operating
+  revenue&lt;/code&gt;. The higher it is, the higher operating margin there are,
+  thus more efficient.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;operating expanse margin %&lt;/code&gt;: &lt;code&gt;= operating expanse/operating
+  revenue&lt;/code&gt;. These are direct cost to earn those revenue. The lower,
+  the better. However, if we look at &lt;code&gt;operating income margin&lt;/code&gt;
+  together with this, you will find their sum is not 100%! What is
+  missing is the operation overhead.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;OPEX margin %&lt;/code&gt;: &lt;code&gt;= OPEX/revenue&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;EBIT margin %&lt;/code&gt;: &lt;code&gt;= EBIT/revenue&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;total expanse margin&lt;/code&gt;: &lt;code&gt;= total expanse/revenue&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Cash Flow Statement&lt;/h1&gt;
+&lt;p&gt;See &lt;a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#cash_flow"&gt;yahooquery doc&lt;/a&gt; for available data points. In this analysis,
+all values are converted to &lt;code&gt;B&lt;/code&gt;. As a layman, I think the more cash
+you have, the better.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/cash%20flow%20values.png"/&gt;
+  &lt;figcaption&gt;Example of Cash Flow Statement&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cash growth from beginning&lt;/code&gt;: &lt;code&gt;= (ending cash - beginning
+  cash)/beginning&lt;/code&gt;. This measures how much cash grew in that reporting
+  period. I take this as a sign of how profitable the business is.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;operating cash from prev %&lt;/code&gt;: how much operating cash grew from
+  previous report. I focus on operating cash because it represents
+  what this business is about. Income, on the other hand, can be
+  generated not through its core business, but some fancy accounting
+  or financial activity (eg. bought bitcoin early) &amp;larr; these are
+  not what this business is, but luck. So if this index is growing, I
+  take the biz is growing stronger.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;FCF/operating CF&lt;/code&gt;: how much operating cash ended up being free
+  cash. The higher, the less overhead/debt one needs to pay off from
+  operating cash flow, thus healthier.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;FCF/net income&lt;/code&gt;: a good explanation &lt;a href="https://www.morningstar.com/invglossary/cash_flow_from_operations.aspx"&gt;here&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If net income is much larger than cash flow from operations, it's a
+signal that the company's earnings quality-the usefulness of
+earnings-is questionable. If cash flow from operations exceeds net
+income, on the other hand, the company may be much healthier than
+its net income suggests.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;operating CF/net income&lt;/code&gt;: just because.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;valuation ratios&lt;/h1&gt;
+&lt;p&gt;These are published ratios taken from &lt;a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#valuation_measures"&gt;yahooquery&lt;/a&gt;. I'm taking them
+on face value as a reference point.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/valuation%20ratios.png"/&gt;
+  &lt;img src="images/stock/valuation%20ratios%values.png"/&gt;
+  &lt;figcaption&gt;Example of valuation ratios&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In this example, BFAM's PE grew from 49.76 in 12/31/2019 to now 379.47
+on 2/24/2021. Alarming, isn't it!? If accepting this, we are saying
+this business grew 7x more valuable in just one year, 2020, and don't
+forget 2020 was the Corvid year! Doesn't make sense, does it?&lt;/p&gt;
+&lt;p&gt;On the other hand, P/B decreased from 9.73 &amp;rarr; 8.06 over the same
+period. Therefore, we actually need to find out what these &lt;em&gt;book
+values&lt;/em&gt; came from, as it must have grown a lot in 2020. If they are
+assets useful for operation, it's a good thing; otherwise, remember,
+liability is part of asset also (since debt can actually be sold, thus
+has value!). So growing asset can also be that it's taking on more
+debts, which, in my opinion, is not a good thing.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Whenever there is a published alternative to a computed one, it
+will always cast doubt when the two are different. Comparison as
+this is an attempt to measure how accurate source data are, and
+how accurate my computation is. Even assuming these two are
+perfect, a substantial gap would imply that I'm missing
+information which the concensus value has included (of course,
+here I'm assuming the published value is itself dependable).&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;Smoothing always troubles me because it can mask outliers
+without good reasoning. An outlier can either be a noise that
+skews result, or a signal that something is wrong. Overall, I
+prefer a business who runs rather like a stable ship, not a bumper
+cart.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:3"&gt;
+&lt;p&gt;I thought of building a sensitivity analysis. However, the
+general impact of each factor can be understood without using a
+specific stock. Further, combination of these factors can grow to
+a large matrix, and presenting all of them may seem impressive,
+but defeats the purpose making data consumable by a user.&amp;#160;&lt;a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:4"&gt;
+&lt;p&gt;Asset value is using its book value. In reality, this should be
+discounted as some assets may have no buyer. Further, intangible
+asset such as reputation should be heavily discounted or removed
+entirely since I'm really thinking of this in case of the company
+being troubled, and then its name won't be worth much.&amp;#160;&lt;a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Stock App Design</title><link href="https://fengxia41103.github.io/myblog/stock%20app%20design.html" rel="alternate"></link><published>2021-02-28T21:16:00-05:00</published><updated>2021-02-28T21:16:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-02-28:/myblog/stock app design.html</id><summary type="html">&lt;h1&gt;backdrop&lt;/h1&gt;
+&lt;p&gt;The app is a complete rewrite of one which I wrote five years
+ago. At the time Jookun approached me that he had some wise strategies
+of investment. I was intrigued by his passion, but wanted to verify
+its worth using some simulation. Thus a Django was created with …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;backdrop&lt;/h1&gt;
+&lt;p&gt;The app is a complete rewrite of one which I wrote five years
+ago. At the time Jookun approached me that he had some wise strategies
+of investment. I was intrigued by his passion, but wanted to verify
+its worth using some simulation. Thus a Django was created with Yahoo
+finance daily data as the input, and some data crunch based on his
+idea. Like all other ideas, I started to come up some of my own while
+working on it, and gradually it let me deep down into the rabbit hole
+&amp;mdash; for the first time in my career, I had computation so intense
+that it would overheat my laptop and had it shut down! I felt I was on
+track of something. However, it had then been left to rot
+since. Though I had tried to revive it over the years, some of the
+code was done in such a complex manner that I didn't have the heart to
+read it again. One impression, however, always left me with a hope,
+the difficulty of obtain these free daily data. As mentioned, I
+started with Yahoo data. However, it was shut down just around that
+time. Later I shifted to Alpha Advantage while it was still free of
+use. Well, not anymore. Soon after I switched to it, I guess it gained
+enough popularity that it went on with memberships and so on. What
+jumping through these hoops occurred to me that if I could just
+publish these historical data somehow, and let people download and use
+them, there are already value.&lt;/p&gt;
+&lt;p&gt;So recently, I started to think about this idea. Starting with another
+round of reviving the old app, I implemented Django command to dump DB
+data into CSVs, thus creating 500+ files, each representing a SP500
+symbol, which were what I had. However, I want more &amp;mdash; how about
+a better user experience? how about some computation of probabilities
+based on a layman's observation? how about DCF?... all these,
+eventually propelled me to rewrite this from scratch, and here it is.&lt;/p&gt;
+&lt;h1&gt;audience &amp;amp; goals&lt;/h1&gt;
+&lt;p&gt;First, it is an absolute illusion if a beginner like myself will beat
+the market by these analysis, not only because of limitation of
+knowledge, information, and experience, but of personality. I don't
+know what the winners are like. Internet is filled with articles on
+what it takes to be a good investor. I have some of those qualities,
+but there is no guarantee nonetheless. Therefore, I'm back to zero.&lt;/p&gt;
+&lt;p&gt;But one thing I am certain, that everyone will experience what I have
+experienced, at some point of his/her life, that they are curious, or
+interested in, the stock market, have the itch to try, know some bits
+of it, but not a whole lot, and have some basic &lt;strong&gt;hunch&lt;/strong&gt; of some
+&lt;em&gt;pattern&lt;/em&gt;, or &lt;em&gt;frequency&lt;/em&gt;, or &lt;em&gt;occurance&lt;/em&gt;, and thought there might be
+a gold mine buried underneath and yourself might be the lucky one. So,
+how to find out, or to verify?&lt;/p&gt;
+&lt;p&gt;Here are five levels of users I sense:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Tool&lt;/th&gt;
+&lt;th&gt;Audience&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;apps &amp;amp; websites&lt;/td&gt;
+&lt;td&gt;Have basic knowledge, satisfied with reported info&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Excel&lt;/td&gt;
+&lt;td&gt;Think they have some data/info analysis edge&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;3&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Excel + VBA&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Automate routine computation and data assembly&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;Script or lib&lt;/td&gt;
+&lt;td&gt;Programmer who gained more computation power over Excel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;Commercial&lt;/td&gt;
+&lt;td&gt;Professional, sky is the limit, membership&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Difference between 3 &amp;amp; 4 are blurry, but the idea is that
+scripting/lib will give you a much wider selection of tools than
+VBA. Further, VBA is not as good a building block if you want to stand
+on the shoulder of a giant.&lt;/p&gt;
+&lt;p&gt;Users of type 1 and type 5 are not my audience. User of type 2,3,4 are
+essentially the same people &amp;mdash;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;they are independent/self-confident enough to think of their own
+  method, but are yet willing to go with a commercial source or
+  solution&lt;/li&gt;
+&lt;li&gt;they have some financial knowledge, and&lt;/li&gt;
+&lt;li&gt;are not afraid of (or even fond of) data crunching.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Their routine follows these steps &amp;mdash;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Obtain raw data:&lt;/li&gt;
+&lt;li&gt;daily price (well, you could also have finer grain data)&lt;/li&gt;
+&lt;li&gt;financial reports: balance sheet, income statement, cash flow&lt;/li&gt;
+&lt;li&gt;computed ratios, eg. P/E, beta&lt;/li&gt;
+&lt;li&gt;some popular indicator or evaluation values&lt;/li&gt;
+&lt;li&gt;Crunch of his own indicator or measure using these data&lt;/li&gt;
+&lt;li&gt;Draw a graph here and there to visualize his results&lt;/li&gt;
+&lt;li&gt;Search for pattern&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;During my research and implementation, following this pattern, I found
+a few places where this tool can help:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Getting data&lt;/strong&gt;. represented the first barrier higher than expected. I have
+  related my experience w/ Yahoo, Google, Alpha. I'm surprised how
+  limited such data sources are there considering how widely spread
+  the Internet has become, and stock data being always in the public
+  domain.&lt;/p&gt;
+&lt;p&gt;A value of this tool is to handle API of available data
+  sources so to retrieve available &lt;em&gt;raw&lt;/em&gt; data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cleansing data&lt;/strong&gt;. Once you get data, consuming data represents
+  another barrier &amp;mdash; understanding particular data form (&amp;larr;
+  this is usually source dependent) and handling data anomaly.&lt;/p&gt;
+&lt;p&gt;2nd value of this tool is to normalize these data points, and
+  potentially amending missing data by providing reasonable default.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Computing standard ratios&lt;/strong&gt;. Crunching a clean data set is usually not the
+  challenge at all.  Of course you can go with your fancy where the
+  &lt;em&gt;edge&lt;/em&gt; is believed to be. However, there are always a few &lt;em&gt;standard&lt;/em&gt;
+  ratios everyone seems to begin with, eg. growth rate of a number
+  from period to period, or pcnt of one expanse of the total, things
+  like that. They are not difficult to compute, but rather
+  mechanical/tedious, and are not readily available from a data
+  source&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. Therefore, you have to do them &lt;em&gt;manually&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Therefore, 3rd value of this tool is to provide some computed values
+  out of box. One beauty of historical data is that they don't
+  change. Therefore, a pre-calculated result is as good as new.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In short, one can view this tool as a fancy automated Excel template
+that I have built to facilitate routine works and get you going w/
+your analysis quickly less the mechanical build-up that is necessary
+but distracting from analysis itself.&lt;/p&gt;
+&lt;h1&gt;system design&lt;/h1&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/stock/high%20level%20design.png"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;System is split into backend and fronend. Backend is a Django app w/ exposed REST API using
+&lt;a href="https://django-tastypie.readthedocs.io/en/latest/"&gt;Tastypie&lt;/a&gt;. Frontend is &lt;a href="https://reactjs.org/"&gt;React&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Primary data source is Yahoo's financial data. In particular, I'm pulling these:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;historical stock daily prices &amp;mdash; high, low, open, close, volume&lt;/li&gt;
+&lt;li&gt;financial statements &amp;mdash; balance sheet, income statement, and cash flow statement&lt;/li&gt;
+&lt;li&gt;published meta &amp;mdash; beta, P/E, and so on. Since these are
+  opinionated, Yahoo is just one of many alternatives.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;data model&lt;/h1&gt;
+&lt;p&gt;Model names are intuitive.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;MyStock&lt;/td&gt;
+&lt;td&gt;Place for name, symbol&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MyStockHistorical&lt;/td&gt;
+&lt;td&gt;Daily trading data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MyStrategyValue&lt;/td&gt;
+&lt;td&gt;Pre-computed values based on historical, eg. moving average&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IncomeStatement&lt;/td&gt;
+&lt;td&gt;As name&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BalanceSheet&lt;/td&gt;
+&lt;td&gt;As name&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CashFlow&lt;/td&gt;
+&lt;td&gt;As name&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ValuationRatio&lt;/td&gt;
+&lt;td&gt;Published valuation ratios, eg. P/E. They are source dependent.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock.png"/&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;data persistence &amp;amp; processing&lt;/h1&gt;
+&lt;p&gt;Data persistence is MySql 5.7. Using Django's ORM, this is not a hard requirement if your preference is something else.&lt;/p&gt;
+&lt;p&gt;Data processing is handled by Redis via Celery so to achieve ease of scale. As mentioned earlier, &lt;code&gt;MyStrategeValue&lt;/code&gt; are derived from historicals, thus are computed prehand using this mechanism: Django custom command &amp;rarr; compose celery task &amp;rarr; submit task to Redis queue &amp;rarr; task executed and data is persisted to DB.&lt;/p&gt;
+&lt;p&gt;There are also custom model property which is computed on the
+fly. Most of them can be pre-computed also since historicals are not
+static. However, to minimize dependency on these values that must be
+prepared as a separate step, I opted to the current method. By
+observation, performance penalty by not having them in DB is
+acceptable.&lt;/p&gt;
+&lt;p&gt;Using docker, the following data volumes are used:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Volume&lt;/th&gt;
+&lt;th&gt;Attach to&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;stock-data&lt;/td&gt;
+&lt;td&gt;Main DB data storage&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;redis-data&lt;/td&gt;
+&lt;td&gt;Redis data storage&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1&gt;network&lt;/h1&gt;
+&lt;p&gt;Network of the setup is fairly simple. We distinguish &lt;code&gt;data&lt;/code&gt; vs. &lt;code&gt;management&lt;/code&gt;:&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock.png"/&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;ports&lt;/h2&gt;
+&lt;p&gt;A service is a function unit. In this implementation, each is a
+docker. I try to limit exposure of ports on docker host so this
+application can be easily co-hosted with others without causing port
+conflicts. In essence, &lt;code&gt;8084&lt;/code&gt; is the frontend UI port, and &lt;code&gt;8003&lt;/code&gt; is
+the backend API port. All others are docker-to-docker only.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Port&lt;/th&gt;
+&lt;th&gt;Service&lt;/th&gt;
+&lt;th&gt;Host Map&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Frontend&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;td&gt;Main frontend app w/ Nginx built-in&lt;/td&gt;
+&lt;td&gt;8084&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;td&gt;Nginx proxy&lt;/td&gt;
+&lt;td&gt;8003&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;3306&lt;/td&gt;
+&lt;td&gt;MySql DB&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;8001&lt;/td&gt;
+&lt;td&gt;Django app&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;6379&lt;/td&gt;
+&lt;td&gt;Redis&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1&gt;develop &amp;amp; deployment&lt;/h1&gt;
+&lt;p&gt;Assuming you have &lt;code&gt;docker&lt;/code&gt; and &lt;code&gt;docker-compose&lt;/code&gt; installed already, clone the &lt;a href="https://fengxia41103.github.io/myblog/stock thoughts.html"&gt;repo&lt;/a&gt;, and under &lt;code&gt;/backend&lt;/code&gt; and &lt;code&gt;/frontend&lt;/code&gt;, use the &lt;code&gt;docker-compose up --build&lt;/code&gt; for the first run to build initial images, and &lt;code&gt;docker-compose up -d&lt;/code&gt; for incremental changes.&lt;/p&gt;
+&lt;p&gt;Frontend development can be benefited by a non-docker setup. So you need to &lt;code&gt;npm install&lt;/code&gt; then &lt;code&gt;npm run dev&lt;/code&gt;. Once you are satisfied w/ your frontend code, production deployment can be &lt;code&gt;docker-compose up --build -d&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Some source provide indicators such as MACD. Most, however, only
+provide raw/reported data such as sales of an Income Statement. My
+goal, therefore, is to follow the conventional train of thought by
+converting these values into percentage, and some period-to-period
+change rate, and so on, which I found myself doing a lot whenever
+I receive an Excel full of numbers.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Impeachment</title><link href="https://fengxia41103.github.io/myblog/impeachment.html" rel="alternate"></link><published>2021-02-14T10:46:00-05:00</published><updated>2021-02-14T10:46:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-02-14:/myblog/impeachment.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/mitch.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I have to say, this is very disappointing. Listening to the calls of these senators to say guilty or not guilty, was very disheartening, when so many say not guilty. This was very puzzling to me. I mean, what would you do when there were somebody pointed a gun at …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/mitch.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I have to say, this is very disappointing. Listening to the calls of these senators to say guilty or not guilty, was very disheartening, when so many say not guilty. This was very puzzling to me. I mean, what would you do when there were somebody pointed a gun at your head? And isn't this capitol hill building like their home? So? We ordinary people were all taught that if someone invaded your private property, you can just fire and shoot. But here, their home was invaded by these mobs, and yet, they played so called politics! I don't understand, really, &lt;strong&gt;what is going on&lt;/strong&gt;!?&lt;/p&gt;
+&lt;p&gt;When I was young, I learned that those so called 世纪审判 by Soviet were all staged. I remember reading them in a book from my college library, and it was quite a shocker to me. I had little life experience then, and nothing of my own opinion on this subject. But over the years I have always believed that such trials won't happen in America. Not that I believe politics are better there. But I have an ultimate faith in the legal system of what America stands for, that a person is assumed innocent until proven guilty, and all accusations are based on evidence, not behind-the-door deal makings. But this, is a slap in the face. I especially couldn't understand Mitch McConnel's speech after he voted not guilty. Why acquitting him then!? And impeaching him doesn't block him from being sued for criminal charges, either, right!? It's irrelevant whether there is a better mean to judge him or punish him, it's your stand that matters here. It's the same that you stand up for a bully at the moment you catch him doing the wrongs &amp;mdash; yes there is police and all that who can punish him better. But hey, you should just stand up to the bully at that time, and say, "stop"! because that's what a decent citizen, human being, should do!&lt;/p&gt;
+&lt;p&gt;I don't understand this. I think the real damage isn't only this
+demonstration of cowardice, but now they are sending a confusing
+message to the public. When a person doesn't behave consistently,
+everything becomes a crying wolf, and it makes it difficult then to
+know when there is a real wolf. I thought this was exactly the
+argument by Hayak in his &lt;a href="https://en.wikipedia.org/wiki/The_Road_to_Serfdom"&gt;The Road to Serfdom&lt;/a&gt;, that a planning
+economy distorted the message conveyed by price, thus making people
+not trusting the market anymore, which then spills over to all aspects
+of society because, once your inner compass was disturbed, you lose a
+reference to tell true from false. I think this is exactly what
+happened yesterday when he was acquitted.&lt;/p&gt;
+&lt;p&gt;This is even more difficult for a dad when I'm raising my son and
+battling his habit of saying a lie so to get out of a trouble. This is
+a human nature, the first defense you use when you are caught. And I
+think the entire education is about curbing this nature, so that you
+will be honest even when things are not in favor to yourself, you
+admit your acts, apologize, and try to fix it. That's what I preached
+to Noah, that's what I thought everyone should be doing, that's what
+an adult was told to be. These senators are supposed to be an example
+&lt;strong&gt;because they represent ideas, and an idea is what America is all
+about!&lt;/strong&gt; So when they fail, they didn't fail as an individual, but
+failed as an idea, and when America doesn't have the idea anymore, how
+is it then different from any other country in which people are
+suffering because of their government or even their dictators!&lt;/p&gt;
+&lt;p&gt;This is just, wrong.&lt;/p&gt;
+&lt;p&gt;I don't know. This is a dark time, really, I think, that is comparable
+to what I heard of the 1930s when Hitler was rising. Condolence of 1/6
+is like condoning invasion of Poland &amp;mdash; that was a calculated act
+that all the Allies thought were a deal. Yet, the world ended up
+paying millions of lives for this.  When a mistake like such was made,
+no one was going to win.. well, Stalin won, but hey, who is to use his
+example to justify a deed, any deed? He was the lowest of the lows,
+wasn't he!? These senators thinking they could still retreat w/ their
+loots were simply defying history lessons! If you want to be nasty and
+benefit yourself!?  well, what Mr.Kim's family has been doing is
+actually the correct version &amp;mdash; doing the wrong consistently,
+blatantly, publicly, shamelessly, relentlessly, and thoroughly. So was
+Hitler. He said what he did, and he never swayed from his idea, no
+inconsistency whatsoever. I don't like any of these fanatics. But they
+are at least predictable, and thus stoppable.&lt;/p&gt;
+&lt;p&gt;It's these opportunists, who always put their benefits ahead of any,
+are, like an elusive bug &amp;larr; if you can't reproduce them, how do
+you then analyze them and come up a fix!?&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Stock</title><link href="https://fengxia41103.github.io/myblog/stock%20thoughts.html" rel="alternate"></link><published>2021-02-08T13:33:00-05:00</published><updated>2021-02-08T13:33:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-02-08:/myblog/stock thoughts.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/1968%20earth.jpg"/&gt;
+  &lt;figcaption&gt;First photo of the Earth taken by NASA in 1968&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Let's get serious about stocks. There are two ways of investing: pursuing value, or pursuing trend.&lt;/p&gt;
+&lt;p&gt;Rules:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don't mix the two camps &amp;mdash; if you buy a stock for its value, don't pay much attention to its day-to-day trend. Instead, read …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/1968%20earth.jpg"/&gt;
+  &lt;figcaption&gt;First photo of the Earth taken by NASA in 1968&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Let's get serious about stocks. There are two ways of investing: pursuing value, or pursuing trend.&lt;/p&gt;
+&lt;p&gt;Rules:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don't mix the two camps &amp;mdash; if you buy a stock for its value, don't pay much attention to its day-to-day trend. Instead, read its 8K and 10k.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Use the NASDAQ &lt;a href="https://www.nasdaq.com/market-activity/earnings"&gt;earning calendar&lt;/a&gt; to find your target.&lt;/p&gt;
+&lt;h1&gt;Value (by me)&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;How to determine its value on paper?&lt;/li&gt;
+&lt;li&gt;What creates value? I think these conditions must be AND:&lt;/li&gt;
+&lt;li&gt;the product/service are in an industry having growing need.&lt;/li&gt;
+&lt;li&gt;product/service is good quality&lt;/li&gt;
+&lt;li&gt;management makes sound decision&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;How to find candidates&lt;/h2&gt;
+&lt;p&gt;I may have to re-read Benjamin's &lt;a href="https://riosmauricio.com/wp-content/uploads/2019/04/The_Intelligent_Investor.pdf"&gt;intelligent investor&lt;/a&gt;. All below are yr-to-yr.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Revenue growth above a threshold&lt;/li&gt;
+&lt;li&gt;Operating income/cash growing. Even better, if it takes a consistent % or larger of the revenue &amp;rarr; company is operating to grow, not doing some other tricks such as finance.&lt;/li&gt;
+&lt;li&gt;Debt-to-income ratio is not blowing up &amp;larr; a leverage threshold?&lt;/li&gt;
+&lt;li&gt;No ugly insider. Any of the below should trigger a NO:&lt;/li&gt;
+&lt;li&gt;executives scandal&lt;/li&gt;
+&lt;li&gt;big bonus when it's downsizing&lt;/li&gt;
+&lt;li&gt;execs sell off stocks in large numbers&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;DCF model&lt;/h2&gt;
+&lt;p&gt;Time to pick up your MBA.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cash + cash equivalent assets.&lt;/li&gt;
+&lt;li&gt;Current revenue&lt;/li&gt;
+&lt;li&gt;Future revenue as &lt;code&gt;current rev * (1+growth rate)^year&lt;/code&gt; for 1-10 years. 6-10 uses rate 50% of the 1-5's.&lt;/li&gt;
+&lt;li&gt;Discount future revenues w/ a rate &amp;larr; use \beta to look up a discount rate.&lt;/li&gt;
+&lt;li&gt;Total debts, both long &amp;amp; short-term.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Value = (cash + discounted revenues - total debts)/shares&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;MSFT&lt;/h2&gt;
+&lt;h2&gt;AMZN&lt;/h2&gt;
+&lt;h2&gt;BFAM&lt;/h2&gt;
+&lt;h2&gt;SBUX&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://investors.brighthorizons.com/static-files/c23b8d9f-cda0-49ab-9fb0-325d5be61ca8"&gt;8k&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;what if my evaluation is always less than the stock price?&lt;/h3&gt;
+&lt;h1&gt;Trend (by computer)&lt;/h1&gt;
+&lt;p&gt;Trend is essentially saying that there is an underline current despite of the daily up/down. Well, for a company if I'm identifying its long-term trend as &lt;em&gt;growth&lt;/em&gt;, isn't it the same as investing for value? Therefore, I think this thread should not address much as &lt;em&gt;how good it is in the long run&lt;/em&gt;, but can be taken blindly only on basis of some calculation from historicals instead of much knowledge of the company.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;keep going up: buy things that are rising&lt;/li&gt;
+&lt;li&gt;quit at certain gain&lt;/li&gt;
+&lt;li&gt;quit when trend is reversed &amp;larr; negative direction, and above a threshold.&lt;/li&gt;
+&lt;li&gt;down &amp;rarr; up: buy things that just fell, but I believe it will come back &amp;larr; by probability, not value based&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;n-day run probability&lt;/h2&gt;
+&lt;p&gt;For a stock, compute how many N-day consecutive run in one direction &amp;rarr; if I'm seeing A has 3-day ups now, this will tell me how likely it will have a 4-day up. Of course, if the probability is small, I should sell before its 4th day.&lt;/p&gt;
+&lt;p&gt;This computation can be further broken down into:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;buy low sell high: probability when A fell, say 1%, how many days it took for it to recover 1% (now I have 1% gain)? 2%? and so on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;buy high sell high: chasing an up wave. Compute n-day consecutive run probability.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;how long can it run in one direction?&lt;/li&gt;
+&lt;li&gt;how much it can gain before losing steam &amp;larr; quit at certain gain&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, what number used for this computation?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;adj close price: volatile perhaps. All derived values are essentially trying to make this less volatile. But until I understand them better, I don't think they are relevant yet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;a longer-term trend (NO)&lt;/h2&gt;
+&lt;p&gt;Apparently, daily volatility is too much. What if I combine different length of time frame, eg. 1-day AND 1-wk and 1-m? If all are in one direction, wouldn't it be a good indicator of the macro of this company?&lt;/p&gt;
+&lt;p&gt;Not really. I don't see a basis for this theory, because I could equally argue why not using 2-wk, or 6-m data? If I don't do value research, just want to identify a value candidate, say A is on the up curve, why not use yr-to-yr growth of revenue?&lt;/p&gt;
+&lt;p&gt;Therefore, there isn't a point doing this calculation.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>GameStop</title><link href="https://fengxia41103.github.io/myblog/gamestop.html" rel="alternate"></link><published>2021-01-28T14:19:00-05:00</published><updated>2021-01-28T14:19:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-01-28:/myblog/gamestop.html</id><summary type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/reddit.png"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This, is absolutely, entertaining! Wow, I have to believe that
+somewhere out there there is a voice that is directing me to these
+things, really. I don't watch the market usually, if at all, then,
+open to read the news yesterday, and it was the frenzy of GameStop and
+AMC …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+  &lt;img src="images/reddit.png"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This, is absolutely, entertaining! Wow, I have to believe that
+somewhere out there there is a voice that is directing me to these
+things, really. I don't watch the market usually, if at all, then,
+open to read the news yesterday, and it was the frenzy of GameStop and
+AMC all over the news! Of course there are plenty China readers
+reaction as well. So, what to make of it!?&lt;/p&gt;
+&lt;p&gt;China posts usually put this as a revolution so that common people
+uprising against the big capitalist, the Wall Street. Well, it's
+exciting thinking that way, but it's only what the surface looks
+like. I don't buy this story, well, I should say, I totally buy what
+the news said about the &lt;a href="https://www.reddit.com/r/wallstreetbets/"&gt;Reddit wallstreetbets&lt;/a&gt; where this whole
+thing might have started from. But the implication, imho, is far more
+than an uprising. So, this is another predict-to-the-future
+episode. Let me try, maybe I do have a crystal ~~&lt;/p&gt;
+&lt;p&gt;First of all, learned in MBA class that stock market is pretty small
+comparing to the bond market. I think it's just a commoner's fallacy
+that wall street traders all watching the stock market going up and
+down as we, or the 菜场大妈， do. Far from it, even though I'm just
+another outside. They don't watch market as we do, and if anything,
+big decisions are unlikely made on the spot by any human &amp;mdash; there
+is gotta be process, and likely automation. It's a loaded cannon, for
+God's sake, that it may react quickly if a human commander can just
+pull the trigger, but hey, days like yesterday's are few in a whole
+year, but a loaded canon can misfire a LOT if relying on a human. So,
+regardless how popular the image of these traders are in movies, I
+firmly believe Wall Street lives off discipline and likely strict
+automation &amp;rarr; I'm not even talking about automation of data
+crunch, backtesting, big data analysis, AI, those craps. It's codified
+knowledge, strategy, experience, trial-and-error, policy, protection,
+the core of what they know and what they do. Therefore, the uprising,
+if we call it so, isn't really causing some panic traders running
+around. Rather, it's a puzzling act, I bet, that they start to get
+notifications of some strategy conditions have been met, but
+unexpected, like me stepping on a bug, you know, you stare at the
+screen, and all you will be saying is, "WTF", and hardly much you can
+do even if you know exactly which line of code to change, because the
+change has to go through a line of processes before it be stamped as
+&lt;em&gt;production ready&lt;/em&gt;. So, I think, is what the Wall Street, was like
+yesterday.&lt;/p&gt;
+&lt;p&gt;Now, move on to what this episode means in the future? The easiest
+answer tossed around is that revolution is here, 颤抖吧资本家. Really?
+In my opinion, no. Capitalist isn't going to shake to death at
+all. Again, using my bug analogy, it's definitely annoying, but not a
+killer, even the BSOD isn't bad enough to scare you off your pants, is
+it!? Just some terrible oversight allowed this to happen, and always
+always always, a human error, not the machine's. So, we can safely
+dismiss the idea that now all shorts are going to leave the arena
+because, hey, who dares to counter so called &lt;em&gt;the people&lt;/em&gt;!? But,
+regardless how they raid, yes, raid, this is exactly like those
+normads raiding some town back in the days &amp;mdash; they brought fear,
+death, and walk away w/ loots, but at the end of the day, it's hardly
+a profitable model, let alone sustainable. There are many factors come
+to play, which I can predict, will collapse this brotherhood high even
+though it feels so good. No, this isn't some conspiracy theory, but by
+my observation and thinkings of human behavior in similar settings.&lt;/p&gt;
+&lt;p&gt;First, there will be split of opinion on whom to loot. If not amassing
+enough force, raid will not work. The first couple raids are easy to
+pull off because few has too much opinion yet on a new thing &amp;mdash;
+let's try it. Once the POC is done, all of sudden, many more realize
+this is a feasible path (to make $$), thus each start to chip in their
+personality and opinion, which then lead down to, not business, but
+politics. And to my observation, once a loosely organized community
+start to battle different opinions, it will be strained because of the
+high tension, and that pushes away many, thus it hurts the community
+becomes large. The alternative, however, is the party, or the church,
+like things, that have rules, priests, punishments, and all these
+things are totally not what people joining such community wanted to
+have at the first place! So they will find them propelling an org
+which they themselves dislike, morally. So even making good money, the
+conscience isn't as wonderful as it feels yesterday &amp;mdash; yesterday,
+it felt they did &lt;strong&gt;the right thing&lt;/strong&gt;, but eventually, it becomes a
+tradeoff between moral and profit, well, then how different it is then
+from the Street they hate!?&lt;/p&gt;
+&lt;p&gt;Second, I don't like this mob actions at all. Again, it is super
+entertaining. But it's scary. Not that they have a guy big enough to
+blow anybody. Not yet. But they definitely have a gun that hurts. Now
+the question is, are they a responsible/sane/decent guy owner!? Well,
+this is a fuzzy question. Whose moral standard we go by with? And even
+we could challenge, does it matter? If we consider the capitalist has
+the origin of sin, then it justifies the action, right? Well, then, is
+the assumption, correct? By the Trump years we can already see the
+magnified mob voice everywhere, US, China, everywhere! Lies, truth,
+facts, who-knows-what, are flying all over the place. Internet is a
+free highway, and a lot of folks are behaving like a highway robbers,
+too. So, if January we were still debating Trump's tweeter
+account. Now all of sudden the Netcizens showed that other aspects of
+life can be as vulnerable as the politics if applying the Internet
+way. If a platform can sway voters to elect a Trump, then it is
+certainly perceivable the same method can be applied to a stock, a
+company, of course, a human being. If we used to consider online
+bullies are just minorities of some teenager incidents, we now see the
+same spirit, I should say, sentiment, is now spilling out of that
+playground, and is now stretching its paws onto something we thought
+pretty out of reach &amp;mdash; well, it apparent is not, anymore.&lt;/p&gt;
+&lt;p&gt;Third, just saw a news that creditors of AMC just got off the hook
+because now AMC can issue more stocks, raise money, then pay off these
+creditors. For a losing business, creditors are betting the high
+interest w/ that company not going to bankrupt. Well, now I bet they
+start to realize there is another strategy &amp;mdash; buy some online
+power, get the sentiments to support his client, then bail out! Wow,
+now, these people are very different from the people &amp;mdash; they are
+bankers, they have money, they have incentive, and yesterday, the
+people just demo-ed a POC! Wow, I think this is the real implication
+going forward. The big money is now going to come into the Internet
+shouting game, hire some big mega phone, and arouse some
+sentiments.&lt;/p&gt;
+&lt;p&gt;This, is not going to be pretty.&lt;/p&gt;
+&lt;p&gt;There is still one more question I don't know the answer yet &amp;mdash; again, it's easy to perceive such strategy, but it's hard to pull it off. So, w/ all the strangers on a forum, why and how they can act in union? This, is actually quite amazing. Reminds me the news of 鹿晗 fans organized to get some exact number of blesses, something like exactly 10^8, no more, no less, on his birthday. It does then seem possible this can happen, if not sending a bless, but in yesterday's case, money.&lt;/p&gt;
+&lt;p&gt;Hmm... I like the name, GameStop, yeah, indeed, some old games are
+being stopped, and new players and new ways are here.&lt;/p&gt;</content><category term="thoughts"></category></entry><entry><title>Attention</title><link href="https://fengxia41103.github.io/myblog/attention.html" rel="alternate"></link><published>2021-01-24T10:25:00-05:00</published><updated>2021-01-24T10:25:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2021-01-24:/myblog/attention.html</id><summary type="html">&lt;figure class="col l6 m12 s12"&gt;
   &lt;img src="images/IMG_20210123_175332.jpg"/&gt;
 &lt;/figure&gt;
 

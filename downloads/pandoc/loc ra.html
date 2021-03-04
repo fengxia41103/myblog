@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Feng Xia" />
+  <meta name="author" content="Lijun Gu" />
+  <meta name="author" content="Jay Bryant" />
+  <meta name="author" content="Miro Halas" />
+  <meta name="dcterms.date" content="2021-01-31" />
+  <meta name="keywords" content="Lenovo Open Cloud" />
+  <title>Lenovo Open Cloud Reference Architecture</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lenovo Open Cloud Reference Architecture</h1>
+<p class="subtitle">Version 1.0</p>
+<p class="author">Feng Xia</p>
+<p class="author">Lijun Gu</p>
+<p class="author">Jay Bryant</p>
+<p class="author">Miro Halas</p>
+<p class="date">January 31, 2021</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a></li>
+<li><a href="#business-problem-and-business-value"><span class="toc-section-number">2</span> Business problem and business value</a><ul>
+<li><a href="#business-problem"><span class="toc-section-number">2.1</span> Business problem</a></li>
+<li><a href="#business-value"><span class="toc-section-number">2.2</span> Business value</a></li>
+</ul></li>
+<li><a href="#requirements"><span class="toc-section-number">3</span> Requirements</a><ul>
+<li><a href="#functional-requirements-use-cases"><span class="toc-section-number">3.1</span> Functional requirements (use cases)</a></li>
+<li><a href="#non-functional-requirements"><span class="toc-section-number">3.2</span> Non-functional requirements</a><ul>
+<li><a href="#scalability"><span class="toc-section-number">3.2.1</span> Scalability</a></li>
+<li><a href="#infrastructure-as-code-iac"><span class="toc-section-number">3.2.2</span> Infrastructure as code (IaC)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#architectural-overview"><span class="toc-section-number">4</span> Architectural Overview</a></li>
+<li><a href="#component-model"><span class="toc-section-number">5</span> Component model</a><ul>
+<li><a href="#loc-rhhi"><span class="toc-section-number">5.1</span> Hypervisor runtime service</a></li>
+<li><a href="#platform-services"><span class="toc-section-number">5.2</span> Platform management services</a><ul>
+<li><a href="#software-repo-service"><span class="toc-section-number">5.2.1</span> Software repository &amp; life cycle management service</a></li>
+<li><a href="#automation-service"><span class="toc-section-number">5.2.2</span> Automation service</a></li>
+<li><a href="#discovery-service"><span class="toc-section-number">5.2.3</span> Discovery service</a></li>
+<li><a href="#inventory-service"><span class="toc-section-number">5.2.4</span> Inventory planning service</a></li>
+<li><a href="#config-repo-service"><span class="toc-section-number">5.2.5</span> Configure &amp; Automation repository service</a></li>
+<li><a href="#validation-service"><span class="toc-section-number">5.2.6</span> Validation service</a></li>
+<li><a href="#os-image-service"><span class="toc-section-number">5.2.7</span> OS image service</a></li>
+<li><a href="#lxca"><span class="toc-section-number">5.2.8</span> Server config &amp; OS deployment service</a></li>
+<li><a href="#single-pane-of-glass"><span class="toc-section-number">5.2.9</span> Single pane of glass</a></li>
+</ul></li>
+<li><a href="#ceph-management-services"><span class="toc-section-number">5.3</span> Ceph management services</a><ul>
+<li><a href="#ceph-storage-monitor"><span class="toc-section-number">5.3.1</span> Ceph storage monitor</a></li>
+</ul></li>
+<li><a href="#cloud-management-services"><span class="toc-section-number">5.4</span> Cloud management services</a><ul>
+<li><a href="#red-hat-cloud-director"><span class="toc-section-number">5.4.1</span> Red Hat Cloud Director</a></li>
+<li><a href="#cloud-controllers"><span class="toc-section-number">5.4.2</span> Cloud controllers</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#operational-model"><span class="toc-section-number">6</span> Operational Model</a><ul>
+<li><a href="#loc-brain"><span class="toc-section-number">6.1</span> Virtual control plane</a><ul>
+<li><a href="#vm-sizing"><span class="toc-section-number">6.1.1</span> VM sizing</a></li>
+<li><a href="#license"><span class="toc-section-number">6.1.2</span> License</a></li>
+<li><a href="#operation-on-loc-rhhi"><span class="toc-section-number">6.1.3</span> LOC RHHI as the Runtime service</a></li>
+</ul></li>
+<li><a href="#hardware"><span class="toc-section-number">6.2</span> Hardware</a><ul>
+<li><a href="#lenovo-sr650-servers"><span class="toc-section-number">6.2.1</span> Lenovo SR650 Servers</a></li>
+<li><a href="#lenovo-rackswitch-g8052-1gb"><span class="toc-section-number">6.2.2</span> Lenovo RackSwitch G8052 (1Gb)</a></li>
+<li><a href="#lenovo-thinksystem-ne2572-25gb"><span class="toc-section-number">6.2.3</span> Lenovo ThinkSystem NE2572 (25Gb)</a></li>
+</ul></li>
+<li><a href="#how-loc-builds-an-infrastructure"><span class="toc-section-number">6.3</span> How LOC builds an infrastructure</a></li>
+<li><a href="#build-a-storage-infrastructure"><span class="toc-section-number">6.4</span> Build a storage infrastructure</a><ul>
+<li><a href="#ceph-control-plane"><span class="toc-section-number">6.4.1</span> Storage virtual control plane</a></li>
+<li><a href="#deploy-a-new-ceph-cluster"><span class="toc-section-number">6.4.2</span> Deploy a new Ceph cluster</a></li>
+<li><a href="#extending-an-existing-ceph-cluster"><span class="toc-section-number">6.4.3</span> Extending an existing Ceph cluster</a></li>
+</ul></li>
+<li><a href="#build-a-red-hat-openstack-platform-13-infrastructure"><span class="toc-section-number">6.5</span> Build a Red Hat OpenStack Platform 13 infrastructure</a><ul>
+<li><a href="#openstack-deployment-configurations"><span class="toc-section-number">6.5.1</span> OpenStack deployment configurations</a></li>
+<li><a href="#osp-control-plane"><span class="toc-section-number">6.5.2</span> OpenStack virtual control plane</a></li>
+<li><a href="#deploy-a-red-hat-openstack"><span class="toc-section-number">6.5.3</span> Deploy a Red Hat OpenStack</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#deployment-considerations"><span class="toc-section-number">7</span> Deployment considerations</a><ul>
+<li><a href="#loc-logical-networks"><span class="toc-section-number">7.1</span> Lenovo Open Cloud logical networks</a></li>
+<li><a href="#vlans-of-the-loc-management-services"><span class="toc-section-number">7.2</span> VLANs of the LOC management services</a></li>
+<li><a href="#storage-networks"><span class="toc-section-number">7.3</span> Storage networks</a><ul>
+<li><a href="#storage-logical-networks"><span class="toc-section-number">7.3.1</span> Ceph specific logical networks</a></li>
+<li><a href="#storage-vlans"><span class="toc-section-number">7.3.2</span> Ceph specific VLANs</a></li>
+<li><a href="#shared-platform-networks"><span class="toc-section-number">7.3.3</span> Shared Platform networks</a></li>
+<li><a href="#added-platform-rhv-networks-for-storage-infrastructure"><span class="toc-section-number">7.3.4</span> Added Platform RHV networks for storage infrastructure</a></li>
+</ul></li>
+<li><a href="#cloud-networks"><span class="toc-section-number">7.4</span> Cloud networks</a><ul>
+<li><a href="#cloud-logical-networks"><span class="toc-section-number">7.4.1</span> Cloud specific logical networks</a></li>
+<li><a href="#cloud-vlans"><span class="toc-section-number">7.4.2</span> Cloud specific VLANs</a></li>
+<li><a href="#shared-storage-networks"><span class="toc-section-number">7.4.3</span> Shared storage networks</a></li>
+<li><a href="#shared-platform-networks-1"><span class="toc-section-number">7.4.4</span> Shared Platform networks</a></li>
+<li><a href="#added-platform-rhv-networks-for-cloud-infrastructure"><span class="toc-section-number">7.4.5</span> Added Platform RHV networks for cloud infrastructure</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#bom"><span class="toc-section-number">8</span> Appendix: Bill of Material</a><ul>
+<li><a href="#hardware-bom"><span class="toc-section-number">8.1</span> Three-node LOC RHHI hardware BOM</a><ul>
+<li><a href="#gb-switch"><span class="toc-section-number">8.1.1</span> 1Gb switch</a></li>
+<li><a href="#gb-switch-1"><span class="toc-section-number">8.1.2</span> 25Gb switch</a></li>
+<li><a href="#servers"><span class="toc-section-number">8.1.3</span> Servers</a></li>
+</ul></li>
+<li><a href="#rhhi-software-bom"><span class="toc-section-number">8.2</span> Three-node LOC RHHI software BOM</a></li>
+<li><a href="#ceph-osp-bom"><span class="toc-section-number">8.3</span> Three-node HCI Ceph and Openstack software BOM</a></li>
+<li><a href="#ceph-only-bom"><span class="toc-section-number">8.4</span> Three-node Ceph ONLY software BOM</a></li>
+<li><a href="#osp-13-bom"><span class="toc-section-number">8.5</span> Three-node Openstack software BOM</a></li>
+</ul></li>
+<li><a href="#appendix-unified-hardware-management"><span class="toc-section-number">9</span> Appendix: Unified Hardware Management</a></li>
+<li><a href="#contributors"><span class="toc-section-number">10</span> Contributors</a></li>
+<li><a href="#references"><span class="toc-section-number">11</span> References</a></li>
+</ul>
+</nav>
+<h1 id="introduction"><span class="header-section-number">1</span> Introduction</h1>
+<p>The target audience for this Reference Architecture (RA) is system administrators or system architects who are looking for an integrated environment that makes deployment of an infrastructure such as Ceph and OpenStack, either for a lab environment or for production, easier, quicker, better automated, better supported, than the traditional, manual intensive approach. Especially if bringing new baremetal servers onboard for a cluster has been a time-consuming experience, Lenovo Open Cloud is a solution to change that.</p>
+<p>Further, for users who are looking to deploy a virtualized control plane so as to take advantage of snapshot/backup, restoration, and migration, Lenovo Open Cloud will demonstrate how this feature is implemented by Lenovo’s hardware and a selected set of software services.</p>
+<p>Technology evolves fast. We have seen the wave of hardware virtualization in both server space and in personal computing. Then came cloud computing, in which infrastructure becomes even more abstract and remote to the end user than ever before. Instead of being viewed as brick and mortar, server, storage and networking are <strong>resources</strong> that can be requested, leased for a period of time, paid per use, and released when done — all through nothing but an online account and a credit card. The flexibility of this model and the feeling that resource pools can be extended boundlessly has both lowered the barrier of entry of new applications growing from zero to infinity with little sweat, and elevated requirements on the design, implementation, and operation of such infrastructure</p>
+<p>Further more, along the trail of technology evolution, business has been left with an army of legacy systems which were designed and built on a technology stack that was adequate then, but not in trend now. Millions have been invested, millions of users are probably depending on the continuity of service, and many developers and operators were trained and are given the responsibility to maintain such stacks. It is neither feasible to cut the cord just because a new technology becomes the talk of the day, nor advisable to continue as before without taking advantage of what new tools can bring. Therefore, it is not only desirable, but in our opinion essential, to have an infrastructure that is both flexible and balanced — it must support a broad range of users and applications by providing a platform that has a rich mix of building blocks which, first of all, covers common needs out of the box, such as keeping an operating system up to date via patches, updates and hotfixes, while maintaining an open architecture to extend both horizontally in terms of resource (compute, storage, networking), and vertically (application stack).</p>
+<p>It is with this in mind that Lenovo Open Cloud is designed to combine the best of technologies in the market today into a coherent user experience while all the following users will feel at home:</p>
+<ol type="1">
+<li><p><strong>VM users</strong>: Open Cloud supports hardware virtualization in its core. Virtual machine users and applications can be migrated onto the platform while minimizing dependency on the underlying hardware environment.</p></li>
+<li><p><strong>Cloud users</strong>: Open Cloud provides on-premise cloud computing environments based on OpenStack, the leading cloud operating system.</p></li>
+<li><p><strong>Container users</strong>: Devops have continuously pushed the boundary to merge development and production into a single, consistent experience that developers use as a <code>sandbox</code> should be identical to what can be used in production. By doing so not only will we eliminate the necessity to maintain multiple stacks catering for different environments — a typical setup will have one for development, one for testing, and one for production, but minimize the chance of incompatibility and bugs due to differences between two environments.</p></li>
+</ol>
+<p>This RA describes the system architecture of the Lenovo Open Cloud (LOC) with a focus on its management services, and how users can use them to build infrastructure such as Ceph storage and OpenStack. For deployment mode based on the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span>, knowledge and experience of the LOC RHHI would be highly desirable.</p>
+<h1 id="business-problem-and-business-value"><span class="header-section-number">2</span> Business problem and business value</h1>
+<h2 id="business-problem"><span class="header-section-number">2.1</span> Business problem</h2>
+<p>IT infrastructure is the back bone of all other IT activities. But at any given time there are always competing technologies that require different, if not conflicting, infrastructure to support — the stacks are different (more so on the software side than on the hardware side), the groups of users and developers are different, and the workloads running on top often have different architectural genes, and sometimes completely different design paradigm. How to build an infrastructure such as an OpenStack on demand? and how to lower the barrier of operating these different infrastructures using some common “best practices”?</p>
+<p>Further, infrastructure means different things to different people, just as the term “cloud” does. What does not change is that all software, regardless the form, language, design pattern, will live on a set of hardware, or be more precise, hardware resources — servers (also referred to as “compute”), storages, networks. From end user’s prospective, these resources are magically appearing whenever needed, always available, always functional, always ready. How to turn hardware to new resources quickly? and how to minimize service interruption by having better failure detection, health monitoring, and less manual steps that are prone to operator errors?</p>
+<p>Finally, hardware breaks, and hardware is expansive. Not to mention a broken hardware can damage the integrity of its workloads to the point that it can kill the business. However, in today’s IT, hardware is also shared so that its utilization can be improved as a measure to reduce its total cost of ownership (TCO). This makes its more difficult to troubleshoot when things go awry, and at the mean time having more diversified user requirements to meet.</p>
+<p>These, are the challenges.</p>
+<h2 id="business-value"><span class="header-section-number">2.2</span> Business value</h2>
+<p>Lenovo Open Cloud is a solution to meet these challenges. We recognize the need to support multiple platforms on the same set of hardware so to enable development, deployment, and business that requires or prefers different technology. We believe infrastructure should enable business and application developers to have the freedom to choose the best tools for the job, not hinder them.</p>
+<p>Out of box, the Lenovo Open Cloud has fully deployed control plane to build a hyperconverged hypervisor cluster with gluster storage over three physical nodes, OpenStack, Ceph storage, and Kubernetes.</p>
+<p>Hyperconverged cluster provides small footprint (3-node as default) and robust functions to satisfy compute and storage need, especially for VM-based workloads. All others are ready to go using Lenovo’s just-in-time license so that no cost is incurred until user decides to activate the OpenStack, for example, by creating an instance over a number of compute nodes. The process of adding new hardware resources, and on board process can be fully automated using LOC’s <a href="#platform-services">management services</a>.</p>
+<p>Further, each of these platforms are defined in descriptive YAML. Using them as templates, user can specify different configurations to build new instance with a click of a button — an OpenStack 10 environment for production, another OpenStack 13 environment for dev team, or a k8s for the Northeast region only — the possibilities are wide open.</p>
+<p>Last but not the least, by streamlining the deployment process and treat infrastructure as code, LOC can reduce transaction cost of communication, which traditionally requires hardware team, networking team, and so on to coordinate in person to get resources ready for the next step in the workflow, now being modeled and orchestrated in programming scripts and services. An iteration that used to be measured in days, is now being done in hours:</p>
+<table>
+<caption>Example of duration of LOC building a supported infrastructure<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></caption>
+<thead>
+<tr class="header">
+<th>Infrastructure (3-node)</th>
+<th>Average build (hours)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hyperconverged virtualization</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>Ceph</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>OpenStack</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Kubernetes</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<h1 id="requirements"><span class="header-section-number">3</span> Requirements</h1>
+<h2 id="functional-requirements-use-cases"><span class="header-section-number">3.1</span> Functional requirements (use cases)</h2>
+<p>Lenovo Open Cloud is an infrastructure for infrastructure (aka. iFi). The primary use case of it is to build on-premise infrastructure — OpenStack, Ceph, Kubernetes, and hypervisors. This includes both the upstream versions and commercial offerings, in particular, the Red Hat products. Thus the LOC is catering to four types of users — cloud users, container users, storage users, and virtual machine users. This section describes the functional requirements for such an infrastructure to support these workloads.</p>
+<figure>
+<img src="../../images/ibb/loc%20functional%20requirements.png" id="fig:functional-requirement-use-cases" alt="" /><figcaption><span>Figure 1:</span> LOC RHHI functional requirement use cases</figcaption>
+</figure>
+<ol class="example" type="1">
+<li><p>As a LOC cloud user, I want to build an OpenStack of minimal three-compute node cluster, so that I can offer an on-premise cloud to my users.</p></li>
+<li><p>As a LOC storage user, I want to build a Ceph cluster of minimal three nodes and use it as storage backend for OpenStack and Kubernetes, so that data persistence and their life cycle will be managed centrally.</p></li>
+<li><p>As a LOC container user, I want to build a Kubernetes over minimal three nodes, so that container workloads will be managed by it.</p></li>
+<li><p>As a LOC virtual machine user, I want to build a hypervisor cluster of minimal three nodes, so that I can deploy application in virtual machines that is portable to VMware and KVM.</p></li>
+</ol>
+<p>Derived from these high level requirements, additional use cases can then be perceived to facilitate management and implementation:</p>
+<ol start="5" class="example" type="1">
+<li><p>As a LOC user, I want to manage a physical server without installing an operating system, so that I can upgrade/downgrade firmware, select boot device and boot order, turn power on/off, set OOB management IP, manage components including network interface card (NIC), RAID controllers, disks, and monitor these hardware for failures.</p></li>
+<li><p>As a LOC user, I want to provision an operating system on a server with or without using DHCP, and have these OS images managed centrally, so that I can manage versions of these images, add new server to cluster, or re-commission a server for a different use.</p></li>
+<li><p>As a LOC user, I want a service to manage the software packages on provisioned servers, so that I can install, upgrade or downgrade a version of a software knowing the dependencies are being taken care of.</p></li>
+<li><p>As a LOC user, I want to detect a server as soon as it is plugged in on a monitored network, so that I can discover new server and kick off some executions against this server such as OS provisioning.</p></li>
+<li><p>As a LOC user, I want to build hardware inventory of my data center before procurement shipment arrives, so that I can plan for their location, rack position, usage, and configurations that go with these decisions.</p></li>
+<li><p>As a LOC user, I want to orchestrate a workflow that supports serial execution and parallel execution of programming scripts, so that I can develop functions and compose them into a workflow to accomplish complex automation.</p></li>
+<li><p>As a LOC user, I want to simplify administration by having a single portal that aggregates managerial tasks and data of the LOC and infrastructures deployed on top of it, so that routine status report and tasks can be carried out from it.</p></li>
+<li><p>As a LOC user, I want to run tests against the LOC infrastructure and its workloads as CICD, so that I can define and validate the health of the infrastructures, and continuously monitor and improve its soundness.</p></li>
+</ol>
+<h2 id="non-functional-requirements"><span class="header-section-number">3.2</span> Non-functional requirements</h2>
+<p>The LOC is built with maintenance in mind, in particular, scalability and infrastructure as code (IaC).</p>
+<h3 id="scalability"><span class="header-section-number">3.2.1</span> Scalability</h3>
+<p>Infrastructure resources can expand or shrink. This is especially true to a cloud computing platform who, by definition, provides such elasticity.</p>
+<ol type="1">
+<li><p>As a LOC cloud/storage/container/VM user, I want to add new server to the OpenStack/Ceph/Kubernetes/hypervisor cluster, so that the cluster can be scaled up.</p></li>
+<li><p>Similarly, server can be removed from a cluster to scale down.</p></li>
+<li><p>As a LOC user, I want server be re-purposed by software, so that I can choose to use it as an OpenStack compute node at one time, and as a Ceph storage node at another time.</p></li>
+</ol>
+<h3 id="infrastructure-as-code-iac"><span class="header-section-number">3.2.2</span> Infrastructure as code (IaC)</h3>
+<p>Traditionally an infrastructure does not change much once it is built, and rebuilding it is often a daunting task. Changing configurations is always a risk because the infrastructure lacks built-in support of best practices that have been well known in quality control of software development — version control, automated testing, and CICD. LOC is addressing this gap by adopting and advocating the infrastructure as code approach:</p>
+<ol type="1">
+<li>As a LOC user, I want to define the infrastructure as code, so that I can manage its end state descriptively, and rebuild/re-configure it with deterministic result.</li>
+</ol>
+<h1 id="architectural-overview"><span class="header-section-number">4</span> Architectural Overview</h1>
+<figure>
+<img src="../../images/ibb/ibb%20overall%20architecture.png" id="fig:ibb-arch-diagram" alt="" /><figcaption><span>Figure 2:</span> Lenovo Open Cloud architecture (on a three-node LOC RHHI)</figcaption>
+</figure>
+<p>Overall Lenovo Open Cloud architecture can be viewed in two sets of clusters: <code>management cluster</code> and <code>workload cluster</code>.</p>
+<p>Management cluster includes two groups of management services: platform management and workload management.</p>
+<dl>
+<dt>Platform management</dt>
+<dd>includes a Runtime service that provides virtual machine capability, and a list of services (aka. Platform services) to manage infrastructure hardware and software. They cover a wide range of common use cases including server discovery and provisioning, software package management, configuration driven automation, workflow, inventory planning and tracking, and validation, monitoring and storage performance test of the LOC and its supported infrastructures.
+</dd>
+<dt>Workload management</dt>
+<dd>are infrastructure dependent services that support and manage the infrastructure deployed by LOC.
+</dd>
+</dl>
+<ol type="1">
+<li><p>Storage services: Management functions of storage infrastructure. In this version LOC supports Ceph clusters, and Swift object stores.</p></li>
+<li><p>Cloud services: Management functions of cloud infrastructure. In this version LOC supports both Red Hat Openstack 10 &amp; 13.</p></li>
+<li><p>Container services: Management functions of container infrastructure. In this version LOC supports Red Hat OpenShift 3.11.</p></li>
+</ol>
+<p>Workload cluster refers to software and applications that run either on top of LOC or in parallel to LOC, while their management software, such as OpenStack controllers, are deployed as LOC services.</p>
+<h1 id="component-model"><span class="header-section-number">5</span> Component model</h1>
+<p>LOC infrastructure consists of four components: Lenovo Open Cloud RHHI, platform management services, configuration templates and deployed instances, and interfaces.</p>
+<figure>
+<img src="../../images/ibb/loc%20component%20model.png" id="fig:loc-component-model" alt="" /><figcaption><span>Figure 3:</span> Lenovo Open Cloud component model</figcaption>
+</figure>
+<h2 id="loc-rhhi"><span class="header-section-number">5.1</span> Hypervisor runtime service</h2>
+<p>This service refers to a virtualization environment. By default LOC uses the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span> as its runtime service. It is a hyperconverged infrastructure deployed over Lenovo ThinkSystem servers and switches. LOC RHHI offers four configurations:</p>
+<ol type="1">
+<li>3-server configuration</li>
+<li>6-server configuration</li>
+<li>9-server configuration</li>
+<li>12-server configuration</li>
+</ol>
+<figure>
+<img src="../../images/ibb/ibb%20rhhi%20overview.png" id="fig:rhhi-arch-diagram" alt="" /><figcaption><span>Figure 4:</span> Lenovo Open Cloud RHHI architecture of a 3-server configuration</figcaption>
+</figure>
+<p>Primary storage is a Gluster cluster that takes servers’ internal disks to form a distributed storage. By default data are replicated to all servers in the cluster.</p>
+<p>Server’s compute resources are virtualized through hypervisor, and workloads are deployed in virtual machines that can then be located on any of the hosts in the cluster. Cluster’s management application is also in a virtual machine. It can cut over to another host automatically when its host is experiencing problem, thus providing an uninterrupted management capability. There is also a management CLI application identical on all cluster hosts. Thus accessing any of the host will give admin the administration capability.</p>
+<p>For more information, see the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span>.</p>
+<h2 id="platform-services"><span class="header-section-number">5.2</span> Platform management services</h2>
+<p>There are ten platform management services. They provide administrative functions to support operation of LOC, including building and managing other infrastructure clusters, and repurposing hardware to extend or downsize footprint.</p>
+<table>
+<caption>LOC Platform management services and versions</caption>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 22%" />
+<col style="width: 43%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Service</th>
+<th>Implementation Example</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Software repo</td>
+<td>Red Hat Satellite</td>
+<td>6.4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Automation</td>
+<td>Red Hat Ansible Tower</td>
+<td>3.4.2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Discovery</td>
+<td>Lenovo Confluent</td>
+<td>2.2.0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Inventory planning</td>
+<td>Digital Ocean Netbox</td>
+<td>Lenovo fork</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>OS deployment</td>
+<td>Lenovo xClarity</td>
+<td>2.3.0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Configuration repo</td>
+<td>Gitlab CE</td>
+<td>8.1.4</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Validation</td>
+<td>Jenkins, Elasticsearch, Logstash, Kibana</td>
+<td>J(2.150.3), ELK (6.5.4)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>OS Image</td>
+<td>Lenovo distribution point</td>
+<td>n/a</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Single pane of glass</td>
+<td>Red Hat Cloudforms</td>
+<td>5.10.0.18</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Launchpad</td>
+<td>Red Hat Enterprise Linux</td>
+<td>7.5</td>
+</tr>
+</tbody>
+</table>
+<p>LOC Platform management services are in place to recognize common tasks we have seen in deploying and managing a cloud environment, such as extending the cluster with new hardware resources, provisioning of baremetal, deploying management software, maintaining configs, and administration with a single view of truth. Together they provide a comprehensive coverage of these needs, and many of them are being covered by some form of automation developed in LOC. Thus, using these services would speed up the onboarding process of a new resource, and centralizing management of cloud resources that admins would inevitably consider one way or another.</p>
+<dl>
+<dt>Automation service &amp; Config repo service</dt>
+<dd>All LOC Platform management services except the Discovery Service and the Launchpad have an admin web portal and a RESTful API. Integration of services are orchestrated through the Automation service. Automation code, template, and default configs are maintained by the Config Repo service. The Automation Service can connect directly to the Config Repo to be in sync, and has the option to execute based on version, branch, or even a specific commit. This makes it possible to fine tune automation and try out new development.
+</dd>
+<dt>Launchpad</dt>
+<dd>Execution of automation is proceeded in launchpad. Launchpad represents an isolated automation environment. Decoupling the two makes it flexible to compose different environments for different automation needs, such as version, library, and network requirement.
+</dd>
+<dt>Discovery service &amp; Inventory Planning service</dt>
+<dd>work together to maintain hardware inventory including procured future inventory and new ones just plugged into the grid for the first time. These hardware resources can then be commissioned by others based on their characteristics. In addition, a pre-determined automation path can be activated as soon as the hardware is detected so that its life cycle starts with little operator intervention.
+</dd>
+<dt>Software Repo Service and OS Image Service</dt>
+<dd>provide the baseline software packages for all other services. OS Image, considering the size and distribution cycle of its contents, is mostly static and has no version control. Software Repo, on the other hand, is highly sophisticated and can integrate with upstream sources including vendor release points and open source projects as long as the package format is compatible.
+</dd>
+<dt>OS Deployment service</dt>
+<dd>All software lands on hardeware somewhere. OS Deployment Service makes managing Lenovo hardware easy. Things like firmware, boot order, RAID configuration are so fundamental that getting them right is the only way to build a robust stack. OS Deployment, thus, is here to bring these aspects of management under control.
+</dd>
+<dt>Validation service</dt>
+<dd>monitors the status of LOC hardware and software so to keep LOC in a good shape. It can be customized to launch user tests that development and administration often require. It integrates seamlessly with the Config Repo Service and the Automation Service, bringing writing test code and running test code into a cohesive workflow.
+</dd>
+<dt>Single pane of glass:</dt>
+<dd>takes advantage of the RESTful APIs of these services to provide a unified user experience through a single view point of a Lenovo Open Cloud. Through a flexible plug-in system, all LOC Platform management services with an API endpoint are integrated, and some common actions such as creating a new VM resource can even be directly configured and launched from the service. Itself also has a RESTful API, thus making LOC services ready for integration with other tools a user maybe using.
+</dd>
+</dl>
+<p>In this version of the Lenovo Open Cloud, many services are implemented by Red Hat software. The following discussions will be based on some unique concepts applicable to that Red Hat component, for example, the <a href="#satellite-subscription">subscription</a> of the Software repo service.</p>
+<p>[LOC Platform management services overview][platform service overview]</p>
+<p>LOC has built a set of recipes to orchestrate these services to work together to achieve highly sophisticated automation such as building an OpenStack as soon as compute nodes have been powered on even without have been set OOB IP address. Of course certain level of planning is still required. But these services and LOC’s recipes have covered many common cases that once planning has filled in a configuration template with necessary information, the configuration will drive these services to carry out the rest of the execution from end to end.</p>
+<p>Services can be used separately also as we will demonstrate in the following sections.</p>
+<h3 id="software-repo-service"><span class="header-section-number">5.2.1</span> Software repository &amp; life cycle management service</h3>
+<p>This service is the central location of software packages. It is the upstream source for all installers happening next. It handles software licenses, updates, and versioning for all third-party software. In Lenovo Open Cloud, it manages Red Hat subscriptions for all LOC hardware and software. A user can also use it to manage subscriptions for his/her workloads, making it a single source-of-truth of software licenses.</p>
+<p>Out-of-box, all native LOC hardware and VMs are registered to this instance, and it provides a matching number of subscriptions and entitlements to support the life cycle of these subscribers.</p>
+<p>This service is built upon the Red Hat Satellite<span class="citation" data-cites="redhat-satellite-home">[4]</span>:</p>
+<blockquote>
+<p>Satellite is an on-premise alternative to trying to download all of your content from the Red Hat content delivery network or managing your subscriptions through the Customer Portal. From a performance side, it reduces hits to your network bandwidth because local systems can download everything they need locally; from a security standpoint, it can limit the risks of malicious content or access, even enabling entirely disconnected environments.</p>
+<p>Satellite is composed of a centralized Satellite Server. Depending on your data center setup, organization design, and geographic locations, you can have local Capsule Servers, which are proxies that locally manage content and obtain subscriptions, registration, and content from the central Satellite Server. (source: <span class="citation" data-cites="redhat-satellite-home">[4]</span>)</p>
+</blockquote>
+<p>Key concepts of the software repo service are:</p>
+<ol type="1">
+<li><p><strong>Life cycle environment</strong>: Logical group to make different versions of the same software available to members in the group. The name implies that the environments are defined to represent the <em>life cycle</em> of the application, eg. development to QA to production.</p></li>
+<li><p><strong>Content view</strong>: Logical group to segment software sources in the repo. For example, a view that includes the OpenStack files, but excludes OpenShift.</p></li>
+<li><p><strong>Subscriptions</strong>: These are software licenses that controls the number of endpoints one license supports, and its expiration date.</p></li>
+</ol>
+<h4 id="life-cycle-environment"><span class="header-section-number">5.2.1.1</span> Life cycle environment</h4>
+<blockquote>
+<p>Application life cycles are divided into life cycle environments, which represent each stage of the application life cycle. Life cycle environments are linked to form an environment path. You can promote content along the environment path to the next life cycle environment when required. (source: <span class="citation" data-cites="redhat-satellite-6.2-life-cycle-environment">[5]</span>)</p>
+</blockquote>
+<p>LOC software repo service offers three environments: development, test, and production, and the default environment path is <code>development to test to production</code>.</p>
+<dl>
+<dt>development</dt>
+<dd>Usually it maintains the newest version of packages. Once a version satisfies development, this version can be promoted to the <code>test</code> environment for more rigorous testing and broader integration.
+</dd>
+<dt>test</dt>
+<dd>Staging area for QA/CICD. Versions included in this environment are usually promoted from <code>development</code>, but are not necessarily the latest version.
+</dd>
+<dt>production</dt>
+<dd>Environment supporting a stable version of applications.
+</dd>
+</dl>
+<p>In LOC, all hosts and virtual machines of the management cluster are registered to <code>production</code> life cycle environment.</p>
+<p>If a new resource, including provisioned new baremetal server and new virtual machine, is created by LOC <a href="#automation-service">Automation Service</a>, the resource will be registered to the <code>development</code> environment by default. This can be changed by specifying a different environment as an automation parameter.</p>
+<h4 id="software-subscription"><span class="header-section-number">5.2.1.2</span> Subscriptions</h4>
+<p>The following subscriptions are included to support Platform hosts and services. Additional subscriptions are needed for infrastructure such as Ceph storage and OpenStack.</p>
+<table>
+<caption>LOC Software repo and life cycle subscriptions of a 3-server configuration</caption>
+<thead>
+<tr class="header">
+<th>Subscription</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Red Hat Satellite</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Red Hat Virtualization</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Red Hat Gluster Storage</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Red Hat Ansible Tower</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Red Hat CloudForms</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Red Hat Ceph Storage</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Red Hat Enterprise Linux</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>Red Hat OpenStack Platform</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>OpenShift</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h4 id="content-views"><span class="header-section-number">5.2.1.3</span> Content views</h4>
+<blockquote>
+<p>Content views are managed selections of content, which contain one or more repositories (yum, puppet, or containers) with optional filtering. These filters can be either inclusive or exclusive, and tailor a system view of content for life cycle management. They are used to customize content to be made available to client systems. (source: <span class="citation" data-cites="redhat-satellite-6.1-content-view">[6]</span>)</p>
+</blockquote>
+<p>Content view is the way to make subscriptions available to managed hosts and virtual machines. LOC Platform provides the following content views:</p>
+<table>
+<caption>LOC Software repo and life cycle management RH Satellite Content Views</caption>
+<thead>
+<tr class="header">
+<th>Content View</th>
+<th>Subscription</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>platform</td>
+<td>Red Hat Gluster Storage</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Red Hat Virtualization</td>
+</tr>
+<tr class="odd">
+<td>rhel</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="even">
+<td>satellite</td>
+<td>Red Hat Satellite</td>
+</tr>
+<tr class="odd">
+<td>dashboard</td>
+<td>Red Hat CloudForms</td>
+</tr>
+<tr class="even">
+<td>ansible</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+</tbody>
+</table>
+<h4 id="activation-keys"><span class="header-section-number">5.2.1.4</span> Activation keys</h4>
+<blockquote>
+<p>An activation key ensures that the content host is associated with the correct host group and that the content host consumes the correct subscription. Activation keys store a set of subscriptions that can be associated with content hosts without attaching these subscriptions directly. (source: <span class="citation" data-cites="redhat-satellite-6.1-activation-key">[7]</span>)</p>
+</blockquote>
+<p>LOC Platform names activation keys following the pattern: <code>&lt;content view&gt;&lt;life cycle&gt; key</code>. Subscriptions under each key is consistent with what is included in the content view.</p>
+<table>
+<caption>LOC Software repo and life cycle management activation keys</caption>
+<thead>
+<tr class="header">
+<th>Activation Key</th>
+<th>Content View</th>
+<th>Environment</th>
+<th>Subscription</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rhel development key</td>
+<td>rhel</td>
+<td>development</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="even">
+<td>rhel test key</td>
+<td>rhel</td>
+<td>test</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="odd">
+<td>rhel production key</td>
+<td>rhel</td>
+<td>production</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="even">
+<td>satellite development key</td>
+<td>satellite</td>
+<td>development</td>
+<td>Red Hat Satellite</td>
+</tr>
+<tr class="odd">
+<td>satellite test key</td>
+<td>satellite</td>
+<td>test</td>
+<td>Red Hat Satellite</td>
+</tr>
+<tr class="even">
+<td>satellite production key</td>
+<td>satellite</td>
+<td>production</td>
+<td>Red Hat Satellite</td>
+</tr>
+<tr class="odd">
+<td>dashboard development key</td>
+<td>dashboard</td>
+<td>development</td>
+<td>Red Hat CloudForms</td>
+</tr>
+<tr class="even">
+<td>dashboard test key</td>
+<td>dashboard</td>
+<td>test</td>
+<td>Red Hat CloudForms</td>
+</tr>
+<tr class="odd">
+<td>dashboard production key</td>
+<td>dashboard</td>
+<td>production</td>
+<td>Red Hat CloudForms</td>
+</tr>
+<tr class="even">
+<td>ansible development key</td>
+<td>ansible</td>
+<td>development</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="odd">
+<td>ansible test key</td>
+<td>ansible</td>
+<td>test</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="even">
+<td>ansible production key</td>
+<td>ansible</td>
+<td>production</td>
+<td>Red Hat Enterprise Linux</td>
+</tr>
+<tr class="odd">
+<td>platform development key</td>
+<td>platform</td>
+<td>development</td>
+<td>Red Hat Gluster Storage</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>Red Hat Virtualization</td>
+</tr>
+<tr class="odd">
+<td>platform test key</td>
+<td>platform</td>
+<td>test</td>
+<td>Red Hat Gluster Storage</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>Red Hat Virtualization</td>
+</tr>
+<tr class="odd">
+<td>platform production key</td>
+<td>platform</td>
+<td>production</td>
+<td>Red Hat Gluster Storage</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>Red Hat Virtualization</td>
+</tr>
+</tbody>
+</table>
+<h4 id="docker-images"><span class="header-section-number">5.2.1.5</span> Docker images</h4>
+<p>LOC Software repo service is also the central management for Docker images. It can be viewed as a local Docker registry so in a self-contained environment, LOC infrastructure can support container based applications out of the box.</p>
+<h3 id="automation-service"><span class="header-section-number">5.2.2</span> Automation service</h3>
+<p>Automation service is an execution orchestrator. On one hand, it fully integrates with the <a href="#config-repo-service">Config Repo Service</a>, thus having visibility to its files — code, scripts, templates, template instances — managed by the config repo. By changing where it points to, it can run a version of a file by git branch such as in testing a feature implementation, or git commit such as in debugging a specific code change.</p>
+<p>On the other, it supports common workflow pattern — sequential, parallel, mixed, cron — while execution status and outputs are logged and trackable through this service.</p>
+<p>This service is built upon [Red Hat Ansible Tower][tower]. Lenovo Open Cloud is shipped with a list of pre-defined automation that makes managing the infrastructure easy and efficient.</p>
+<p>See product guide<span class="citation" data-cites="redhat-tower-home">[8]</span> for details.</p>
+<h3 id="discovery-service"><span class="header-section-number">5.2.3</span> Discovery service</h3>
+<figure>
+<img src="../../images/ibb/ibb%20discovery%20service%20overview.png" id="fig:discovery-service" alt="" /><figcaption><span>Figure 5:</span> LOC Discovery service overview</figcaption>
+</figure>
+<p>Discovery service is a helper service. It continuously monitors the BMC network for new Lenovo hardware resources becoming available. When used together with the <a href="#inventory-service">Inventory Planning Service</a>, it can initialize a device inventory of hundreds even thousands of devices in a matter of seconds.</p>
+<p>A role-based discovery can further reduce operator task by matching device UUID w/ inventory record, and kick off a pre-defined server configuration as soon as the device is connected to the network, including setting up the server’s BMC IP without ever walking to the rack.</p>
+<h3 id="inventory-service"><span class="header-section-number">5.2.4</span> Inventory planning service</h3>
+<p>This service is the source-of-truth of infrastructure planning that handles the pre-on-board phase of hardware such as tracking device attributes (manufacturer, part number, model, etc.), allocating rack position, assigning it to a tenant, organizing it by site or by organization, designating a role if using role-based LOC discovery automation (see <a href="#discovery-service">Discovery Service</a> for details).</p>
+<p>A unique feature of this service is to be the source-of-truth of the cable schema between LOC servers and switches. It can both take a schema config from the <a href="#config-repo">Config Repo Service</a> to apply to the switch, or create a schema config based on what it sees on these hardware.</p>
+<h3 id="config-repo-service"><span class="header-section-number">5.2.5</span> Configure &amp; Automation repository service</h3>
+<p>Config repo service is the source-of-truth of configuration templates and scripts. All published LOC automation scripts are saved and version-controlled by this service.</p>
+<p>LOC implements a data-driven design that configuration templates are inputs to LOC automation, whether it is to rebuild an LOC service, or even the entire LOC instance, or to create a new VM for your workload, or a new network matching to a VLAN in your environment. Check “LOC User Manual” for full list of use cases.</p>
+<p>We call a template filled with a set of values “an instance of that template”, and these instances can also be managed by the config repo service.</p>
+<h3 id="validation-service"><span class="header-section-number">5.2.6</span> Validation service</h3>
+<p>Based on an ELK stack, the Validation service is a versatile service. It can do many things and do them well.</p>
+<p>First, it integrates with the <a href="#config-repo-service">Config Repo Service</a>, and runs all tests defined in the repo’s <code>/LOC validation test suite</code> continuously to monitor the health of LOC instance.</p>
+<p>Second, it is pre-configured w/ test cases for storage performance test using <a href="https://www.phoronix-test-suite.com/">PTS</a> that can be launched against any storage solution. An example of using it to test LOC RHHI’s performance can be viewed in the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span> <code>Appendix: LOC RHHI Storage Performance</code>.</p>
+<h3 id="os-image-service"><span class="header-section-number">5.2.7</span> OS image service</h3>
+<p>OS image service is the source-of-truth of OS images including virtual machine images.</p>
+<p>It is a common task to provision a baremetal server with an operating system, or to create a virtual machine using a cloud image or a snapshot of a previous VM dump. These files are usually large, not changed after their creation, but crucial to be managed properly so their contents are well known, and its deployment is deterministic.</p>
+<p>Instead of relying on Internet resources to download on the fly, OS image service brings these artifacts inside LOC so not only using them becomes much more efficient, but admins now have a single point of management to maintain them, whether for licensing purposes or to upgrade to a new release.</p>
+<p>In LOC, the following images are preloaded:</p>
+<table>
+<caption>LOC OS Image service preloaded images</caption>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 44%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>rhel-server-7.4-x86_64-dvd.iso</td>
+<td>For server provisioning</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>rhel-server-7.5-x86_64-dvd.iso</td>
+<td>For server provisioning</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>lnvgy_sw_lxca_204-2.1.0_kvm_x86-64.qcow2</td>
+<td>Installer for the OS Deployment service</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>rhel-server-7.5-x86_64-kvm.qcow2</td>
+<td>Size SMALL RHV virtual machine base image</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>rhel-server-7.5-x86_64-kvm-500G.qcow2</td>
+<td>Size MEDIUM RHV virtual machine base image</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>cfme-rhevm-5.10.0.18-1.x86_64.qcow2</td>
+<td>Installer for the Single Pane of Glass service</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lxca"><span class="header-section-number">5.2.8</span> Server config &amp; OS deployment service</h3>
+<p>This service is a configurator of hardware including Lenovo baremetal servers and Lenovo switches.</p>
+<p>Common tasks such as firmware updates, boot order, and switch port configuration are managed by this service.</p>
+<p>Following LOC’s data driven philosophy, this service is integrated with the <a href="#config-repo-service">Config Repo Service</a> in which a config file, called <code>profile</code>, defines the state of hardware, and this service will apply this <code>profile</code> to make it happen.</p>
+<h3 id="single-pane-of-glass"><span class="header-section-number">5.2.9</span> Single pane of glass</h3>
+<p>This service is the LOC admin portal. It centralizes view of:</p>
+<ul>
+<li>hardware: by integrating with the <a href="#lxca">Server Config &amp; OS Deployment Service</a>.</li>
+<li>software: by integrating with the <a href="#software-repo-service">Software Repo Service</a>.</li>
+<li>virtual machines: by integrating with the <a href="#runtime-service">Runtime Service</a>.</li>
+<li>automation: by integrating with the <a href="#automation-service">Automation Service</a>.</li>
+<li>inventory: by integrating with the <a href="#inventory-service">Inventory Service</a>.</li>
+<li>OS images: by integrating with the <a href="#os-image-service">OS Image Service</a>.</li>
+<li>LOC health: by integrating with the <a href="#validation-service">Validation Service</a>.</li>
+</ul>
+<h2 id="ceph-management-services"><span class="header-section-number">5.3</span> Ceph management services</h2>
+<h3 id="ceph-storage-monitor"><span class="header-section-number">5.3.1</span> Ceph storage monitor</h3>
+<p>Lenovo Open Cloud comes with a value add monitoring solution, Lenovo Open Cloud Storage Monitor. LOC’s Storage Monitor is automatically deployed as a VM in the LOC platform cluster and is configured to monitor any Red Hat Ceph Storage Clusters deployed by Lenovo Open Cloud.</p>
+<p>The LOC Storage Monitor provides a number of features to cloud and storage administrators:</p>
+<ul>
+<li>A dashboard displaying cluster utilization, server and disk status as well as health alerts</li>
+<li>Infrastructure tools to manage the cluster’s hardware</li>
+<li>A GUI based tool to manage the cluster’s pools and volumes</li>
+<li>Tools for backing up the cluster’s data</li>
+<li>Alert configuration and change auditing</li>
+</ul>
+<p>Additional details on Lenovo Open Cloud Storage Monitor may be seen in the Lenovo’s Reference Architecture for Red Hat Ceph Storage<span class="citation" data-cites="lenovo-ceph-ra">[2]</span>.</p>
+<h2 id="cloud-management-services"><span class="header-section-number">5.4</span> Cloud management services</h2>
+<h3 id="red-hat-cloud-director"><span class="header-section-number">5.4.1</span> Red Hat Cloud Director</h3>
+<p>The Red Hat OpenStack Platform uses Director as the toolset for installing and managing a production OpenStack environment, e.g. overcloud. Each overcloud instance requires a Director instance for installation, management and maintenance operations. In LOC solution, the Red Hat OpenStack Platform Director is deployed as a VM on the LOC platform cluster. Additional information about Director usage can be found in Director Installation and Usage<span class="citation" data-cites="redhat-osp13-director">[9]</span>.</p>
+<h3 id="cloud-controllers"><span class="header-section-number">5.4.2</span> Cloud controllers</h3>
+<p>OpenStack Controllers are Nodes that provide administration, networking, and high availability for the OpenStack environment. An ideal OpenStack environment recommends three of these nodes together in a high availability cluster.</p>
+<p>The Controller nodes are deployed with a collection of interacting services that control compute, storage, and networking resources, such as OpenStack nova, horizon, neutron, glance, etc..and other software components like MariaDB, HAproxy and pacemaker. The three controller nodes can be deployed as VM on LOC platform and work in HA mode.</p>
+<h1 id="operational-model"><span class="header-section-number">6</span> Operational Model</h1>
+<p>A LOC deployment is shown in fig. <a href="#fig:loc-operational-model">6</a>. Initial deployment can start with three HCI ndoes. User can then choose to activate Ceph and/or OpenStack control plane to build Ceph or OpenStack infrastructure with added servers. Three Ceph nodes and three OSP compute nodes are default configuration for illustration purpose. In reality, there can be much more servers in a Ceph or OpenStack cluster than three.</p>
+<p>Further, the value of LOC is to construct these infrastructure quickly and with flexible configuration. Thus, it is not uncommon to have LOC build multiple OpenStack instances with different number of compute resources so to cater for different user groups — a three-node OpenStack with virtual Ceph for development, and a larger deployment with hundreds of compute nodes and an external Ceph for production.</p>
+<figure>
+<img src="../../images/ibb/loc%20operational%20model.png" id="fig:loc-operational-model" alt="" /><figcaption><span>Figure 6:</span> An example deployment of LOC on a 42U rack</figcaption>
+</figure>
+<h2 id="loc-brain"><span class="header-section-number">6.1</span> Virtual control plane</h2>
+<p>All LOC services are deployed as one or more virtual machines. Default runtime for the virtual machines is a LOC RHHI<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span>. This is the key feature of using LOC to build other infrastructure — infrastructure control planes are now virtual.</p>
+<h3 id="vm-sizing"><span class="header-section-number">6.1.1</span> VM sizing</h3>
+<table>
+<caption>LOC management services VM sizing</caption>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>LOC Management Service</th>
+<th>CPU Cores</th>
+<th>Mem (GB)</th>
+<th>Storage (GB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Software repo(upstream)</td>
+<td>4</td>
+<td>20</td>
+<td>1000</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Software repo(downstream)</td>
+<td>4</td>
+<td>20</td>
+<td>500</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Automation</td>
+<td>2</td>
+<td>4</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Server config &amp; OS deployment</td>
+<td>4</td>
+<td>8</td>
+<td>200</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Inventory planning</td>
+<td>2</td>
+<td>4</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Discovery</td>
+<td>2</td>
+<td>4</td>
+<td>50</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Config repo</td>
+<td>2</td>
+<td>4</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Single pane of glass</td>
+<td>4</td>
+<td>8</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Validation</td>
+<td>4</td>
+<td>8</td>
+<td>300</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>OS Image</td>
+<td>2</td>
+<td>4</td>
+<td>500</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>Launchpad</td>
+<td>2</td>
+<td>4</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+<p>Also, refer to <a href="#ceph-control-plane">Ceph control plane</a> and <a href="#osp-control-plane">OpenStack control plane</a> for details of their virtual machine sizing and specific requirements.</p>
+<h3 id="license"><span class="header-section-number">6.1.2</span> License</h3>
+<p>By default all platform services are enabled and covered by proper licenses. Ceph management services and OSP management services are installed but are disabled, meaning that they can not yet build Ceph and OpenStack infrastructure without first installing licenses.</p>
+<ol type="1">
+<li>To enable Ceph only storage infrastructure, see <a href="#ceph-only-bom">Ceph only software BOM</a>.</li>
+<li>To enable OpenStack only infrastructure, see <a href="#osp-13-bom">OpenStack software BOM</a>.</li>
+<li>To enable HCI Ceph and OpenStack infrastructure, see <a href="#ceph-osp-bom">HCI Ceph and OpenStack BOM</a>.</li>
+</ol>
+<p>Once they have been enabled, virtual control plane can build new infrastructure from scratch, or adding or removing hardware from an existing cluster.</p>
+<h3 id="operation-on-loc-rhhi"><span class="header-section-number">6.1.3</span> LOC RHHI as the Runtime service</h3>
+<p>Lenovo Open Cloud RHHI<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span> is the default Runtime service for LOC. VM’s primary storage is the gluster. There is additional NFS storage on each host, and VM has the option to be affinitized to a host:</p>
+<table>
+<caption>LOC management services VM on LOC RHHI</caption>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 30%" />
+<col style="width: 9%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>LOC Management Service</th>
+<th>NFS (GB)</th>
+<th>Boot Options</th>
+<th>Affinity (Y/N)</th>
+<th>Enable Auto Migration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Software repo</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Automation</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Server config &amp; OS deployment</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Inventory planning</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Discovery</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Config repo</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Single pane of glass</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Validation</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>OS Image</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Launchpad</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Also, refer to <a href="#ceph-control-plane">Ceph control plane</a> and <a href="#osp-control-plane">OpenStack control plane</a> for details of their virtual machine requirements.</p>
+<figure>
+<img src="../../images/ibb/loc%20service%20deployment.png" id="fig:loc-service-deployment" alt="" /><figcaption><span>Figure 7:</span> LOC service deployment on LOC RHHI as the Runtime service</figcaption>
+</figure>
+<p><code>Hosted-engine</code> has the capability to cut over to a different server if its current host is experiencing failure. Other LOC services, however, <strong>do not have this feature in this version</strong>. Therefore, it is critical to select qualified hardware components (see the <a href="#hardware-bom">Three-node LOC RHHI hardware BOM</a> section for details) to compensate for this limitation.</p>
+<h2 id="hardware"><span class="header-section-number">6.2</span> Hardware</h2>
+<h3 id="lenovo-sr650-servers"><span class="header-section-number">6.2.1</span> Lenovo SR650 Servers</h3>
+<figure>
+<img src="https://www.lenovo.com/medias/lenovo-servers-rack-thinksystem-sr650-subseries-gallery-1.jpg?context=bWFzdGVyfHJvb3R8MjQzNzV8aW1hZ2UvanBlZ3xoMjIvaGFhLzk0OTEwNDMwNTc2OTQuanBnfDUxZTdjYmYyZmRlODc1MWFkMGE0M2I3NGNhZTZhNWJjNWY5NDA0NGU4NDk5Y2M5NDY4MTlkYjJkZjA0MjEzNTM" id="fig:lenovo-sr650" alt="" /><figcaption><span>Figure 8:</span> Lenovo ThinkSystem SR650</figcaption>
+</figure>
+<p>The Lenovo ThinkSystem SR650 server is an enterprise class 2U two-socket versatile server that incorporates outstanding reliability, availability, and serviceability (RAS), security, and high efficiency for business-critical applications and cloud deployments. Unique Lenovo AnyBay technology provides the flexibility to mix-and-match SAS/SATA HDDs/SSDs and NVMe SSDs in the same drive bays. Four direct-connect NVMe ports on the motherboard provide ultra-fast read/writes with NVMe drives and reduce costs by eliminating PCIe switch adapters. Plus, storage can be tiered for greater application performance, to provide the most cost-effective solution.</p>
+<p>Combined with the Intel® Xeon® Scalable processors product family, the Lenovo ThinkSystem SR650 server offers a high density combination of workloads and performance. Its flexible, pay-as-you-grow design and great expansion capabilities solidify dependability for any kind of virtualized workload, with minimal downtime. Additionally, it supports two 300W high-performance GPUs and ML2 NIC adapters with shared management.</p>
+<p>The Lenovo ThinkSystem SR650 server provides internal storage density of up to 100 TB (with up to 26 x 2.5-inch drives) in a 2U form factor with its impressive array of workload-optimized storage configurations. The ThinkSystem SR650 offers easy management and saves floor space and power consumption for the most demanding storage virtualization use cases by consolidating the storage and server into one system. The Lenovo ThinkSystem SR650 server supports up to twenty-four 2.5-inch or fourteen 3.5-inch hot-swappable SAS/SATA HDDs or SSDs together with up to eight on-board NVMe PCIe ports that allow direct connections to the U.2 NVMe PCIe SSDs. The ThinkSystem SR650 server also supports up to two NVIDIA GRID cards for AI or media processing acceleration.</p>
+<p>The SR650 server supports up to two processors, each with up to 28-core or 56 threads with hyper-threading enabled, up to 38.5 MB of last level cache (LLC), up to 2666 MHz memory speeds and up to 3 TB of memory capacity. The SR650 also support up to 6 x PCIe slots. Its on-board Ethernet solution provides 2/4 standard embedded Gigabit Ethernet ports and 2/4 optional embedded 10 Gigabit Ethernet ports without occupying PCIe slots. All these advanced features make the server ideal to run data and bandwidth intensive VNF workload and storage functions of NFVI platform.</p>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-sr650-product-guide">[10]</span>.</p>
+<h3 id="lenovo-rackswitch-g8052-1gb"><span class="header-section-number">6.2.2</span> Lenovo RackSwitch G8052 (1Gb)</h3>
+<figure>
+<img src="https://lenovopress.com/assets/images/tips1270/0.118C.jpg" id="fig:g8052" alt="" /><figcaption><span>Figure 9:</span> Lenovo RackSwitch G8052</figcaption>
+</figure>
+<p>The Lenovo RackSwitch™ G8052 (as shown in fig. <a href="#fig:g8052">9</a>) is a top-of-rack data center switch that delivers unmatched line-rate Layer 2/3 performance at an attractive price. It has 48x 10/100/1000BASE-T RJ-45 ports and four 10 Gigabit Ethernet SFP+ ports (it also supports 1 GbE SFP transceivers), and includes hot-swap redundant power supplies and fans as standard, which minimizes your configuration requirements. Unlike most rack equipment that cools from side-to-side, the G8052 has rear-to-front or front-to-rear airflow that matches server airflow.</p>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-g8052-product-guide">[11]</span>.</p>
+<h3 id="lenovo-thinksystem-ne2572-25gb"><span class="header-section-number">6.2.3</span> Lenovo ThinkSystem NE2572 (25Gb)</h3>
+<figure>
+<img src="https://www.lenovo.com/medias/lenovo-data-center-networking-thinksystem-ne2572-subseries-hero.png?context=bWFzdGVyfHJvb3R8MzgxMTF8aW1hZ2UvcG5nfGg3MS9oMDAvOTQ3OTEwNjc4OTQwNi5wbmd8NzIyNmQ5NTBlOTA3NzVmNmMyNzU0YWQwMTJkNDM5MGEzZjNlOWRkZmJkYTY4MGViZWQ4NjkwYzgxNzhhYzY3Yg" id="fig:ne2572" alt="" /><figcaption><span>Figure 10:</span> Lenovo RackSwitch NE2572</figcaption>
+</figure>
+<p>The NE2572 is optimized for enterprise data centers with features, such as:</p>
+<ul>
+<li>Software Defined Data Center interfaces ensure smooth interoperability with popular enterprise management applications.</li>
+<li>Open Architecture: NE2572 supports automation and control while</li>
+<li>Lenovo Network Orchestrator automates vlan changes to improve. integrating with industry-standard application and APIs, such as REST, OpenStack, OpenContrail, and Ansible.</li>
+<li>Resiliency: NE2572 offers outstanding fault tolerance with one of the quickest high-availability failovers in the industry so running applications are less likely to require a restart.</li>
+</ul>
+<p>For more information, see product guide<span class="citation" data-cites="lenovo-ne2572-product-guide">[12]</span>.</p>
+<h2 id="how-loc-builds-an-infrastructure"><span class="header-section-number">6.3</span> How LOC builds an infrastructure</h2>
+<p>In LOC’s view, building an infrastructure follows a common pattern:</p>
+<ol type="1">
+<li>Resource planning — servers, networks, roles, and tenants</li>
+<li>Configure server — firmware, RAID, boot order</li>
+<li>Provision OS</li>
+<li>OS customization — <code>cloud-init</code>, package/subscription manager, network (remote administration)</li>
+<li>Infrastructure installer</li>
+<li>Infrastructure post-install configuration</li>
+<li>Infrastructure testing
+<ol type="1">
+<li>function/validation</li>
+<li>health monitoring</li>
+<li>specific interest — performance, stress</li>
+</ol></li>
+</ol>
+<p>LOC’s management services are designed to fit this pattern following these steps:</p>
+<ol type="1">
+<li><p>Save hardware info in the Inventory service, such as manufacturer, model, serial number.</p></li>
+<li><p>User uses Inventory service to plan for hardware’s usage by assigning rack position, tenant it belongs to, and its network assignment — IP addresses, which interface on which subnet, and vlans.</p></li>
+<li><p>User assigns a <code>tenant</code>, <code>role</code> and <code>status</code> to a server in the Inventory service:</p>
+<ol type="1">
+<li><code>tenant</code>: eg. <code>cloud xyz</code>, meaning that this server will be a resource for this tenant. The type of resource is defined in <code>role</code> (see next).</li>
+<li><code>role</code>: eg. <code>OpenStack compute</code>, that determines which configs and which automation procedure will be applied to the server.</li>
+<li><code>status == available</code>: marks the server as new resource.</li>
+</ol></li>
+<li><p>Automation service calls the Discovery service to scan the BMC network, and uses detected server UUID to query the Inventory service for its <code>role</code> and <code>status</code>.</p></li>
+<li><p>If found matching servers that are <code>available</code>, Automation service calls the Inventory service for server’s BMC network assignments, and apply them to the Discovery service to set up OOB management of the server.</p></li>
+<li><p>Automation service retrieves config patterns by the <code>role</code> from the Config repo service, and applies it to the OS Deployment service to configure server — firmware upgrade/downgrade, RAID, boot order.</p></li>
+<li><p>Inventory service retrieves server component information such as disks, RAID controller, network controller, firmware, as part of server’s meta data.</p></li>
+<li><p>Automation service retrieves OS config by the <code>role</code> from the Config repo service, and applies to the OS Image to setup OS image to use.</p></li>
+<li><p>Automation service retrieves network assignment the server, such as IP addresses, root user name, password, from the Inventory service, and calls the OS Deployment service to provision the server, including <code>cloud-init</code> to set up user accounts.</p>
+<p>By this point, server is provisioned and is SSH ready.</p></li>
+<li><p>(optional) Automation service registers the new server to the Software repo &amp; life cycle management service if the server is to use this service as software package upstream.</p></li>
+<li><p>Automation service changes server’s status to <code>provisioned</code> in the Inventory service.</p></li>
+<li><p>Automation retrieve infrastructure config files by the <code>tenant</code> from the Config repo.</p></li>
+<li><p>Automation service starts a pre-defined workflow to install infrastructure or to extend existing infrastructure with these servers.</p></li>
+<li><p>Automation service sets servers’ status to <code>in-use</code>.</p></li>
+<li><p>Automation service updates tenant’s infrastructure config files in the Config repo.</p></li>
+<li><p>Automation service updates the Inventory service w/ <code>tenant</code> config ID, type, and default test cases.</p>
+<p>User can activate additional test cases for the infrastructure in the Inventory service.</p>
+<p>Test can set to <code>run once</code> or <code>CRON</code>.</p></li>
+<li><p>Automation service retrieves infrastructure configs from the Config service, and passes it to the Validation service to run validation tests as sanity check.</p></li>
+<li><p>Automation service retrieves test cases by <code>tenant</code> from the Inventory service, and calls Validation service to run tests.</p></li>
+<li><p>For new infrastructure, the Automation service registers the infrastructure in the Single pane of glass.</p></li>
+<li><p>Validation service runs CRON tests to continuously monitor the health of the infrastructure.</p></li>
+</ol>
+<h2 id="build-a-storage-infrastructure"><span class="header-section-number">6.4</span> Build a storage infrastructure</h2>
+<p>Storage infrastructure in the cloud can vary widely depending on the application. Lenovo Open Cloud’s storage options are designed to give the end user flexible options to easily support a variety of needs. Given that LOC is built upon Red Hat and OpenStack technologies many different storage backends are available to the end user. For this release of LOC we focus on Gluster and Ceph storage to support LOC’s workloads.</p>
+<p>In this section we will introduce Ceph storage and how the integration of storage is simplified when deploying an LOC environment.</p>
+<h3 id="ceph-control-plane"><span class="header-section-number">6.4.1</span> Storage virtual control plane</h3>
+<p>Ceph control plane includes a Ceph dashboard that monitors the status of Ceph cluster. It is a VM deployed on the LOC Platform:</p>
+<table>
+<caption>LOC Platform VM requirement for Ceph deployment</caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 9%" />
+<col style="width: 8%" />
+<col style="width: 12%" />
+<col style="width: 8%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>VM</th>
+<th>CPU Cores</th>
+<th>Mem (GB)</th>
+<th>Gluster (GB)</th>
+<th>NFS (GB)</th>
+<th>Boot Options</th>
+<th>Affinity (Y/N)</th>
+<th>Enable Auto Migration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ceph dashboard</td>
+<td>2</td>
+<td>8</td>
+<td>60</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deploy-a-new-ceph-cluster"><span class="header-section-number">6.4.2</span> Deploy a new Ceph cluster</h3>
+<figure>
+<img src="../../images/ibb/loc%20ceph%20deployment.png" id="fig:loc-ceph-deployment" alt="" /><figcaption><span>Figure 11:</span> Deploy a new Ceph cluster by LOC</figcaption>
+</figure>
+<p>Lenovo Open Cloud uses Red Hat Ceph Storage to provide scalable, open, software-defined storage to Red Hat OpenStack Platform. Like Gluster storage, Red Hat Ceph Storage is built from a number of Ceph storage nodes to provide fault-tolerant storage.</p>
+<p>Additional details on Lenovo Open Cloud’s RedHat Ceph Storage support may be seen in the Lenovo’s Reference Architecture for Ceph Storage<span class="citation" data-cites="lenovo-ceph-ra">[2]</span>. For more details on Red Hat Ceph Storage integration into RHOSP, see the Red Hat’s OpenStack Platform documentation<span class="citation" data-cites="redhat-osp13-home">[13]</span>.</p>
+<p>The automation service can trigger an automated workflow on demand to create a Ceph Cluster for Lenovo Open Cloud platform. The automation workflow pulls in the necessary configuration files from the config repo to determine the size, disk configuration, monitor placement and target OpenStack cloud for the requested cluster. The automation workflow then requests the Runtime service to create a VM in the LOC platform to support the Ceph Dashboard. The Runtime service also requests baremetal resources from the Inventory service to serve as the Ceph Storage Nodes.</p>
+<p>Once the VM/BM resources are ready, each node gets an operating system deployed to it and the node’s network interfaces and VLANs are configured.</p>
+<p>After configuring each node as a Storage Node the automation then enables the appropriate software repos to support installing Red Hat Ceph Storage 3.0. The binaries and libraries for Ceph support are installed and Ceph is deployed using the disks requested via the config repo in each node, creating a cluster across the BM resources made available by the Inventory service.</p>
+<p>Once Lenovo’s storage automation has verified that the Ceph cluster has been properly deployed it continues on to create storage pools for each of the OpenStack components which require Ceph storage. The following pools are created by default:</p>
+<ol type="1">
+<li>cloudx_nova</li>
+<li>cloudx_volumes</li>
+<li>cloudx_images</li>
+<li>cloudx_backups</li>
+<li>cloudx_metrics</li>
+</ol>
+<p>Note:</p>
+<ul>
+<li><code>x</code>: cloud index, eg. 1-9. An LOC Platform can support multiple cloud instances. Ceph storage pools follow this naming convention so that it is possible to easily associate a Ceph pool with a cloud.</li>
+</ul>
+<p>The names for each of the pools are descriptive of their purpose:</p>
+<ol type="1">
+<li>nova - backs ephemeral storage for Nova instances to enable VM migration</li>
+<li>volumes - storage for the Cinder volume service</li>
+<li>images - storage for the Glance image service</li>
+<li>backups - storage to be utilized for backing up volumes</li>
+<li>metrics - storage utilized by OpenStack’s Telemetry Service</li>
+</ol>
+<p>After the pools have been created the storage automation creates a client with a name that is indexed on the cloud number like the pools. So, cloud 1, for instance will have the cloud1.client user created. A key is created for accessing the cluster and the appropriate authorities are configured for the cloud to access each pool.</p>
+<p>All of the information necessary for accessing the newly created cluster is then added to the config repo and may be accessed, based on the cloud index, to subsequently deploy a cloud.</p>
+<p>The final step in deploying a Ceph cluster is to add the cluster to the Ceph Dashboard. So, the last step the automation runs is the necessary scripting on the dashboard VM to discover the Ceph cluster and start monitoring it.</p>
+<h3 id="extending-an-existing-ceph-cluster"><span class="header-section-number">6.4.3</span> Extending an existing Ceph cluster</h3>
+<p>To extend an existing cluster much of the same process is followed as when creating a new Ceph cluster. The Runtime service will pull the updated configuration files from the config repo. Once the files are processed a barmetal resource will then be requested from the Inventory service. The new baremetal resource will be prepared to be a Ceph node and the node is then added into the Ceph cluster. Once the automation has determined that the node has been successfully integrated, storage will be rebalanced to make use of the new node and the Ceph Dashboard will be updated. Note, when extending the cluster that the pool and client creation steps do not need to be repeated.</p>
+<h2 id="build-a-red-hat-openstack-platform-13-infrastructure"><span class="header-section-number">6.5</span> Build a Red Hat OpenStack Platform 13 infrastructure</h2>
+<p>Red Hat OpenStack Platform 13<span class="citation" data-cites="redhat-osp13-home">[13]</span> provides an integrated solution to create, deploy, and scale a secure and reliable private OpenStack cloud as one of the supported types of workload cluster in Lenovo Open Cloud platform. Red Hat OpenStack Platform 13 is based on the OpenStack Queens release. It is packaged so that available physical hardware can be turned into a private, public, or hybrid cloud platform that includes:</p>
+<ul>
+<li>Fully distributed object storage</li>
+<li>Persistent block-level storage</li>
+<li>Virtual machine provisioning engine and image storage</li>
+<li>Authentication and authorization mechanisms</li>
+<li>Integrated networking</li>
+<li>Web browser-based interface accessible to users and administrators</li>
+</ul>
+<p>Lenovo’s solution supports deploying OpenStack cloud with various storage configurations. Furthermore, with Red Hat OpenStack 13, the controller cluster of the OpenStack cloud supports two approaches of deployment. The controller nodes can be installed to baremetal nodes, as well as virtual machines spread across multiple physical instances.</p>
+<p>In this reference architecture, we can fully benefit from this feature by deploying the OpenStack cloud controller nodes as VMs on the LOC Platform Runtime Service. This is extremely useful to decrease TCO for the workload cluster, and provides users with a scalable cloud-ready infrastructure with much easier operational management. The virtualized control plane of Open Stack cloud is easy to rebuild, maintain and replace. Furthermore the 3-node configuration Platform Runtime Service of LOC guarantees the HA capability for cloud controllers. Virtualized controller deployment is most suitable for medium scale clouds of less than 40 nodes.</p>
+<p>Further, multiple cloud clusters are supported to locate on one LOC platform. This enables customer to easily deploy isolated clouds with different configurations for various business purposes.</p>
+<h3 id="openstack-deployment-configurations"><span class="header-section-number">6.5.1</span> OpenStack deployment configurations</h3>
+<p>LOC support three OpenStack deployment configurations.</p>
+<p>Deployment without a Ceph Cluster(Swift collocated):</p>
+<table>
+<caption>LOC OSP 13 deployment with Swift collocated</caption>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>VM/BM</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Director</td>
+<td>VM</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Cloud Controller with Swift service colocated(HA)</td>
+<td>VM</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Cloud compute</td>
+<td>BM</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Deployment with External Ceph Cluster:</p>
+<table>
+<caption>LOC OSP 13 deployment with external Ceph</caption>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>VM/BM</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Director</td>
+<td>VM</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Cloud Controller(HA)</td>
+<td>VM</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>Cloud compute</td>
+<td>BM</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Ceph Storage Node</td>
+<td>BM</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>Deployment with Hyperconverged Ceph Cluster:</p>
+<table>
+<caption>LOC OSP 13 deployment with HCI Ceph</caption>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>VM/BM</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Director</td>
+<td>VM</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Cloud Controller(HA)</td>
+<td>VM</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>HCI Ceph node</td>
+<td>BM</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="osp-control-plane"><span class="header-section-number">6.5.2</span> OpenStack virtual control plane</h3>
+<p>In order to deploy OpenStack director and controller nodes as VM instances on LOC platform. The VM instances should be properly configured. Below is the configuration Lenovo recommends for each of the VM roles.</p>
+<table>
+<caption>LOC Platform VM requirement for OSP 13 deployment</caption>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 6%" />
+<col style="width: 5%" />
+<col style="width: 8%" />
+<col style="width: 5%" />
+<col style="width: 21%" />
+<col style="width: 9%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>VM</th>
+<th>CPU Cores</th>
+<th>Mem (GB)</th>
+<th>Gluster (GB)</th>
+<th>NFS (GB)</th>
+<th>Boot Options</th>
+<th>Affinity (Y/N)</th>
+<th>Enable Auto Migration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Director</td>
+<td>4</td>
+<td>16</td>
+<td>80</td>
+<td>n/a</td>
+<td>HD</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Cloud controllers (HA)</td>
+<td>8</td>
+<td>16</td>
+<td>100</td>
+<td>n/a</td>
+<td>PXE as primary, and HD as secondary</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Cloud controllers w/ Swift service colocated (HA)</td>
+<td>8</td>
+<td>16</td>
+<td>100</td>
+<td>50</td>
+<td>PXE as primary, and HD as secondary</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Considerations to take:</p>
+<ol type="1">
+<li><p>Storage: The LOC Platform Runtime Service built on top of RHHI exposes two types of storage that can be shared by upper VM instances.</p>
+<ol type="1">
+<li><p><strong>Red Hat Gluster storage</strong>: The RHHI platform will deploy a Gluster cluster by default. Several storage domains are created on Gluster storage for different purposes. The ‘vmstore’ is the default storage domain for VM workloads.</p></li>
+<li><p><strong>NFS storage</strong>: The NFS storage spaces are created from the peripheral disks on each RHHI node as the optional storage for special LOC workloads. As OpenStack Swift has built-in features for 3 member replicas, and Gluster also applies replica mechanisms for data protection, we will specify NFS storage on each RHHI node for OpenStack Swift data to avoid double replication penalty.</p></li>
+</ol>
+<p>You can refer to the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span> for detailed information about RHHI storage.</p></li>
+<li><p>HA: In order for the OpenStack controller HA feature to function properly on LOC platform, we will also disable the VM auto migration on RHHI for controller nodes, and enable host affinity to make sure all three controller nodes run on different RHHI physical nodes. This guarantees the OpenStack cloud to sustain two RHHI physical nodes in case of an outage.</p></li>
+</ol>
+<h3 id="deploy-a-red-hat-openstack"><span class="header-section-number">6.5.3</span> Deploy a Red Hat OpenStack</h3>
+<figure>
+<img src="../../images/ibb/loc%20osp%20deployment.png" id="fig:loc-osp-deployment" alt="" /><figcaption><span>Figure 12:</span> Deploy a new Red Hat OpenStack 13 by LOC</figcaption>
+</figure>
+<p>The automation service can trigger a cloud automation workflow on demand to deploy a cloud. It will load the scripts and heat-templates required by Director from Config repo service. Config repo service will also provide platform service config that contains information on the endpoint info of platform services, and input from the system adminstrator for the expected cloud configuration, and VM and BM requirements used for cloud nodes.</p>
+<p>The cloud deployment workflow will then request the Runtime service to create and configure the necessary virtual machines for its controller and Director. It will in parallel work with the Inventory service to allocate and provision the baremetal compute nodes for the cloud.</p>
+<p>After all VM/BM resources are ready, the cloud deployment will be executed via Director with rendered heat-templates to reflect the expected cloud configuration.</p>
+<p>The whole automation process can be orchestrated in a simple and flexible way that can efficiently improve the IT work for cloud deployment, scaling, operational management, and maintenance.</p>
+<h1 id="deployment-considerations"><span class="header-section-number">7</span> Deployment considerations</h1>
+<h2 id="loc-logical-networks"><span class="header-section-number">7.1</span> Lenovo Open Cloud logical networks</h2>
+<p>LOC’s network is based on the same set of logical networks defined in the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span>.</p>
+<table>
+<caption>LOC logical network and VLANs</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Campus internal</td>
+<td>1</td>
+<td>For public access of admin portal and API</td>
+</tr>
+<tr class="even">
+<td>BMC</td>
+<td>2</td>
+<td>OOB management</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>3</td>
+<td>SSH admin access</td>
+</tr>
+<tr class="even">
+<td>RHHI provisioning</td>
+<td>10</td>
+<td>New baremetal server provisioning network</td>
+</tr>
+<tr class="odd">
+<td>OVIRT management</td>
+<td>100</td>
+<td>LOC RHHI management portal and API</td>
+</tr>
+<tr class="even">
+<td>GlusterFS</td>
+<td>400</td>
+<td>LOC RHHI hyperconverged storage</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vlans-of-the-loc-management-services"><span class="header-section-number">7.2</span> VLANs of the LOC management services</h2>
+<p>For the LOC management services, it is important that they have access to the correct network in order to fulfill its function:</p>
+<table>
+<caption>Platform management services to VLAN Mapping</caption>
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Service</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>10</th>
+<th>100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Runtime</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td>x</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Software repo</td>
+<td>x</td>
+<td></td>
+<td>x</td>
+<td></td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Automation</td>
+<td>x</td>
+<td></td>
+<td>x</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Discovery</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Inventory</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>OS deployment</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Configuration repo</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Validation</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>OS Image</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Single pane of glass</td>
+<td>x</td>
+<td></td>
+<td></td>
+<td></td>
+<td>x</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Launchpad</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>Considerations for such arragnements are:</p>
+<ol type="1">
+<li>Runtime service:
+<ul>
+<li><code>ovirt management</code> (V100): managing LOC RHHI servers, and serving the admin portal and its API endpoint.</li>
+</ul></li>
+<li>Single pane of glass:
+<ul>
+<li><code>Campus internal</code> (V1): integration point to other services except the Runtime service.</li>
+<li><code>ovirt management</code> (V100): integration point w/ the Runtime service.</li>
+</ul></li>
+<li>Software repo:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and its API endpoint.</li>
+<li><code>Physical server management</code> (V3): remote administration of LOC physical servers after OS provisioning.</li>
+<li><code>ovirt management</code> (V100): integration point w/ the Runtime service.</li>
+</ul></li>
+<li>Automation:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and its API endpoint.</li>
+<li><code>Physical server management</code> (V3): remote administration of LOC physical servers using Ansible.</li>
+</ul></li>
+<li>Server config:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and its API endpoint.</li>
+<li><code>BMC</code> (V2): server OOB management, and OS provisioning.</li>
+</ul></li>
+<li>Inventory planning:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and its API endpoint, and accessing LOC switches for port configuration and cable schema mapping.</li>
+<li><code>BMC</code> (V2): server OOB query for building inventory attributes and cable schema.</li>
+<li><code>Physical server management</code> (V3): query server networking interfaces for cable schema mapping.</li>
+</ul></li>
+<li>Discovery:
+<ul>
+<li><code>Campus internal</code> (V1): integration point w/ the Inventory planning service.</li>
+<li><code>BMC</code> (V2): monitoring new baremetal server.</li>
+</ul></li>
+<li>Config repo:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and API endpoint.</li>
+</ul></li>
+<li>OS image:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and API endpoint.</li>
+</ul></li>
+<li>Validation:
+<ul>
+<li><code>Campus internal</code> (V1): serving admin portal and API endpoints.</li>
+<li><code>BMC</code> (V2): run tests via OOB module.</li>
+<li><code>Physical server management</code> (V3): run tests via remote access such as SSH.</li>
+<li><code>ovirt management</code> (V100): run tests via the Runtime service API such as creating new virtual machine or workload.</li>
+<li><code>RHHI provisioning</code> (V10): run tests such as adding a new LOC hardware resource.</li>
+</ul></li>
+</ol>
+<figure>
+<img src="../../images/ibb/ibb%20platform%20services%20network.png" id="fig:platform-services-network" alt="" /><figcaption><span>Figure 13:</span> LOC networks of the Platform management services</figcaption>
+</figure>
+<h2 id="storage-networks"><span class="header-section-number">7.3</span> Storage networks</h2>
+<p>Lenovo Open Cloud supports Ceph storage backends. A storage backend can be shared among multiple workloads and platforms, such as an OpenStack on-premise cloud. By deploying Ceph on top of Open Cloud Platform, we can also share common services and networks.</p>
+<p>Storage networks can be viewed in two groups:</p>
+<ol type="1">
+<li>Storage specific networks: these are networks only applicable for the storage instance.</li>
+<li>Shared Platform networks: networks extended from the LOC Platform networks to support storage infrastructure components that are deployed on the Platform and/or using the Platform management services.</li>
+</ol>
+<figure>
+<img src="../../images/ibb/ibb%20ceph%20service%20network%20overview.png" id="fig:storage-service-network-overview" alt="" /><figcaption><span>Figure 14:</span> LOC Storage networks for storage services</figcaption>
+</figure>
+<h3 id="storage-logical-networks"><span class="header-section-number">7.3.1</span> Ceph specific logical networks</h3>
+<p>Ceph itself adds three new networks — Ceph management, Ceph storage public, and Ceph cluster private.</p>
+<dl>
+<dt>Ceph management</dt>
+<dd>communication between the Ceph dashboard and Ceph nodes, e.g. RPC and transferring zabbix monitoring data.
+</dd>
+<dt>Ceph storage public</dt>
+<dd>data traffic by workloads who will use Ceph as their storage backend, also known as <code>front-side</code>.
+</dd>
+<dt>Ceph cluster private</dt>
+<dd>Ceph private data traffic such as used in data rebalancing, also known as <code>back-side</code>.
+</dd>
+</dl>
+<h3 id="storage-vlans"><span class="header-section-number">7.3.2</span> Ceph specific VLANs</h3>
+<table>
+<caption>LOC Ceph as storage infrastructure logical Network Definition</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ceph management</td>
+<td>30</td>
+</tr>
+<tr class="even">
+<td>Ceph storage public</td>
+<td>30x</td>
+</tr>
+<tr class="odd">
+<td>Ceph cluster private</td>
+<td>40x</td>
+</tr>
+</tbody>
+</table>
+<p>Note:</p>
+<ul>
+<li><code>x</code>: cloud index, eg. 1-9. A LOC Platform can support multiple cloud instances. VLAN schema follows the pattern by using a cloud index to maintain network isolation.</li>
+</ul>
+<h3 id="shared-platform-networks"><span class="header-section-number">7.3.3</span> Shared Platform networks</h3>
+<p>To manage Storage physical servers, we will connect them to three existing Platform networks — <code>BMC</code> (VLAN 2) for OOB management and node discovery, <code>RHHI Provisioning</code> (VLAN 10) for server OS provisioning, and <code>Physical server management</code> (VLAN 3) for general admin tasks such as SSH access.</p>
+<p>In addition, to supporting the <code>Storage capacity service</code>, which is the main management tool of Storage deployed on Open Cloud Platform, we also need <code>Campus</code> (VLAN 1) for accessing its UI, and <code>VM general management</code> (VLAN 600).</p>
+<table>
+<caption>Ceph storage logical networks shared with Platform</caption>
+<thead>
+<tr class="header">
+<th>Platform Logical Networks</th>
+<th>VLAN</th>
+<th>Ceph Dashboard (VM)</th>
+<th>Ceph nodes (BM)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BMC</td>
+<td>2</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Campus internal</td>
+<td>1</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Physical server management</td>
+<td>10</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="added-platform-rhv-networks-for-storage-infrastructure"><span class="header-section-number">7.3.4</span> Added Platform RHV networks for storage infrastructure</h3>
+<p>Two new Platform RHV networks are created to support Ceph specific functions including compute node provisioning, and cloud management.</p>
+<dl>
+<dt>Ceph management</dt>
+<dd>As defined in <a href="#storage-logical-networks">storage logical networks</a>, this network is mapped onto the LOC Platform so that the Ceph Dashboard can monitor the Ceph cluster.
+</dd>
+<dt>Cloud all</dt>
+<dd>A general bucket to support all cloud management. This includes making the <code>Ceph storage public</code> network available for these management applications.
+</dd>
+</dl>
+<h2 id="cloud-networks"><span class="header-section-number">7.4</span> Cloud networks</h2>
+<p>By building cloud infrastructure on LOC Platform and potentially a storage backend that is also supported by LOC Platform, cloud network can be viewed in three groups:</p>
+<ol type="1">
+<li><p>Cloud specific networks: these are networks only applicable for the cloud instance.</p></li>
+<li><p>Shared storage networks: network to utilize a storage backend such as Ceph.</p></li>
+<li><p>Shared Platform networks: networks extended from the LOC Platform networks to support cloud infrastructure components that are deployed on the Platform and/or using the Platform management services.</p></li>
+</ol>
+<figure>
+<img src="../../images/ibb/ibb%20cloud%20service%20network%20overview.png" id="fig:cloud-service-network-overview" alt="" /><figcaption><span>Figure 15:</span> LOC Cloud networks for cloud services</figcaption>
+</figure>
+<h3 id="cloud-logical-networks"><span class="header-section-number">7.4.1</span> Cloud specific logical networks</h3>
+<p>Multiple Red Hat OpenStack clouds are supported to locate on one LOC platform. As the cloud controller nodes and OpenStack director are deployed as VM instances on the LOC Platform, and there can be an external storage solution as the storage backend, cloud network is designed to be consistent with LOC Platform, choice of storage backend, and the requirement of OpenStack cloud.</p>
+<p>These networks are to support OSP deployment and its workload such as NFV.</p>
+<dl>
+<dt>OSP provisioning</dt>
+<dd>Provides DHCP and PXE boot functions to help discover bare metal systems for use in the OpenStack installer to provision the system. This network is used by all cloud nodes.
+</dd>
+<dt>OSP tenants</dt>
+<dd>This is the subnet for allocating the VM private IP addresses. Through this network, the VM instances can talk to each other. This network is used by cloud controller and compute nodes.
+</dd>
+<dt>OSP storage mgmt</dt>
+<dd>OpenStack Object Storage (Swift) uses this network to synchronize data objects between participating replica nodes. Used by Swift, cloud controller with Swift service collocated.
+</dd>
+<dt>OSP internal API</dt>
+<dd>The Internal API network is used for communication between the OpenStack services using API communication, RPC messages, and database communication. Used by cloud controller and compute nodes.
+</dd>
+<dt>OSP DPDK</dt>
+<dd>The NFV Data(OSP DPDK) Network is used for NFV data plane traffic for VM applications that require high performance. Used by compute nodes with NFV workload.
+</dd>
+<dt>OSP provider</dt>
+<dd>This is the provider network used for VM traffic on dedicated network infrastructure that do not require high performance. Used by controller and compute nodes.
+</dd>
+<dt>Ceph storage</dt>
+<dd>The front-side storage network where Ceph clients (through Glance API, Cinder API, or Ceph CLI) access the Ceph cluster. Ceph Monitors operate on this network. Used by cloud controller and compute nodes.
+</dd>
+</dl>
+<h3 id="cloud-vlans"><span class="header-section-number">7.4.2</span> Cloud specific VLANs</h3>
+<p>VLAN technology provides a simple way for logical grouping and isolation of the various networks. In order to achieve multiple OpenStack clouds, we will also apply rules on VLAN ID selections for different clouds.</p>
+<table>
+<caption>LOC cloud infrastructure cloud-specific logical networks</caption>
+<thead>
+<tr class="header">
+<th>Logical Network</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OSP provisioning</td>
+<td>1x</td>
+</tr>
+<tr class="even">
+<td>OSP internal API</td>
+<td>20x</td>
+</tr>
+<tr class="odd">
+<td>Ceph storage</td>
+<td>30x</td>
+</tr>
+<tr class="even">
+<td>OSP storage mgt</td>
+<td>40x</td>
+</tr>
+<tr class="odd">
+<td>OSP tenants</td>
+<td>50x</td>
+</tr>
+<tr class="even">
+<td>OSP DPDK</td>
+<td>7xb</td>
+</tr>
+<tr class="odd">
+<td>OSP provider</td>
+<td>8xb</td>
+</tr>
+</tbody>
+</table>
+<p>Note:</p>
+<ul>
+<li><code>x</code>: cloud index, eg. 1-9. A LOC Platform can support multiple cloud instances. VLAN schema follows the pattern by using a cloud index to maintain network isolation.</li>
+<li><code>xb</code>: VLAN index assigned for DPDK and provider inside a cloud instance. For example, VLANs for DPDK workloads on cloud <code>1</code> can be <code>711-719</code>. This, in turn, determines switch port VLAN configurations.</li>
+</ul>
+<h3 id="shared-storage-networks"><span class="header-section-number">7.4.3</span> Shared storage networks</h3>
+<p>cloud infrastructure can take advantage of an external storage solutions such as Ceph as its storage backend. This way, storage can be centralized and different solutions can be used.</p>
+<dl>
+<dt>Storage public</dt>
+<dd>Interface to the storage solution. In Ceph, this is the <code>front-side</code> network serving storage data traffic.
+</dd>
+</dl>
+<table>
+<thead>
+<tr class="header">
+<th>Storage Logical Networks</th>
+<th>VLAN</th>
+<th>Director (VM)</th>
+<th>Controller (VM)</th>
+<th>Compute (BM)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Storage public</td>
+<td>30x<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Note:</p>
+<p>By <a href="#convention">convention</a>, the Storage public is connected to 10G ports (or faster) on cloud compute nodes.</p>
+<h3 id="shared-platform-networks-1"><span class="header-section-number">7.4.4</span> Shared Platform networks</h3>
+<p>All LOC based cloud deployment builds Director and cloud controllers as virtual machines. This, therefore, requires them to be on Platform networks in order to use Platform service during initial setup and possibly their life cycle management such as software upgrade and fixes. Similarly, cloud servers also need to be on a set of Platform networks to be managed by the Platform service, and by the cloud services.</p>
+<table>
+<caption>LOC cloud infrastructure cloud-specific logical networks</caption>
+<thead>
+<tr class="header">
+<th>Platform Networks</th>
+<th>VLAN</th>
+<th>Director (VM)</th>
+<th>Controller (VM)</th>
+<th>Compute (BM)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BMC</td>
+<td>2</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Campus internal</td>
+<td>1</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>ovirt management</td>
+<td>100</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="added-platform-rhv-networks-for-cloud-infrastructure"><span class="header-section-number">7.4.5</span> Added Platform RHV networks for cloud infrastructure</h3>
+<figure>
+<img src="../../images/ibb/ibb%20cloud%20added%20platform%20networks.png" id="fig:cloud-added-platform-networks" alt="" /><figcaption><span>Figure 16:</span> LOC cloud infrastructures added Platform RHV networks</figcaption>
+</figure>
+<p>Two new Platform RHV networks are created to support cloud specific functions including compute node provisioning, and cloud management.</p>
+<dl>
+<dt>OSP Provisioning</dt>
+<dd>As defined in <a href="#cloud-logical-networks">cloud logical networks</a>, this network is mapped onto the LOC Platform so that the Director and cloud controllers can initiate and control compute node provisioning.
+</dd>
+<dt>Cloud all</dt>
+<dd><p>A general bucket to support all cloud management and some service data traffic that need to be through the Platform. This includes:</p>
+<ul>
+<li>OSP internal API</li>
+<li>OSP storage management</li>
+<li>OSP tenants</li>
+<li>OSP providers</li>
+<li>Ceph storage</li>
+</ul>
+<p>Such design simplifies integration between the LOC Platform and its cloud infrastructures by keeping these cloud-driven decisions internal to workload designers.</p>
+</dd>
+</dl>
+<h1 id="bom"><span class="header-section-number">8</span> Appendix: Bill of Material</h1>
+<p>Minimal hardware requirement is to have a 3-node Lenovo Open Cloud RHHI-v cluster (see the Lenovo Open Cloud RHHI Reference Architecture<span class="citation" data-cites="lenovo-loc-rhhi-ra">[1]</span>).</p>
+<p>Control planes for OpenStack, Ceph and Kubernetes are software only, which will be addressed here. Their hardware bill of materials and configuration options can be viewed in detail in respective documents:</p>
+<ol type="1">
+<li>For OpenStack, see the Red Hat OpenStack Platform with ThinkSystem Servers Reference Architecture<span class="citation" data-cites="lenovo-rhosp13-ra">[3]</span>.</li>
+<li>For Ceph, see the Red Hat Ceph Reference Architecture<span class="citation" data-cites="lenovo-ceph-ra">[2]</span>.</li>
+<li>For OpenShift, see the Red Hat OpenShift Container Platform on Lenovo ThinkSystem Servers<span class="citation" data-cites="lenovo-openshift-ra">[14]</span></li>
+</ol>
+<h2 id="hardware-bom"><span class="header-section-number">8.1</span> Three-node LOC RHHI hardware BOM</h2>
+<h3 id="gb-switch"><span class="header-section-number">8.1.1</span> 1Gb switch</h3>
+<table>
+<caption>LOC RHHI-v RackSwitch G8052 1Gb bill of materials, rear to front</caption>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7159HC1</td>
+<td>Switch-G8052 : Lenovo RackSwitch G8052 (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>ASY2</td>
+<td>Lenovo RackSwitch G8052 (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3793</td>
+<td>3m Yellow Cat5e Cable</td>
+<td>up to 37</td>
+</tr>
+<tr class="even">
+<td>A1PJ</td>
+<td>3m Passive DAC SFP+ Cable</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>6311</td>
+<td>2.8m, 10A/100-250V, C13 to C14 Jumper Cord</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>00WW816</td>
+<td>Essential Service - 3Yr 24x7 4Hr Response</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>For front-to-rear configuration, replace <code>ASY2</code> with <code>ASY1</code>.</p>
+<h3 id="gb-switch-1"><span class="header-section-number">8.1.2</span> 25Gb switch</h3>
+<table>
+<caption>LOC RHHI-v RackSwitch NE2572 25Gb Bill of Material</caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 74%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7159HE3</td>
+<td>Switch-25G : Lenovo ThinkSystem NE2572 RackSwitch (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>AV19</td>
+<td>Lenovo ThinkSystem NE2572 RackSwitch (Rear to Front)</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AV1F</td>
+<td>Lenovo 3m 25G SFP28 Active Optical Cable</td>
+<td>up to 24</td>
+</tr>
+<tr class="even">
+<td>AV1L</td>
+<td>Lenovo 3m 100G QSFP28 Active Optical Cable</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3793</td>
+<td>3m Yellow Cat5e Cable</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>6204</td>
+<td>2.8m, 10A/100-250V, C13 to IEC 320-C20 Rack Power Cable</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>5WS7A06889</td>
+<td>Premier with Essential - 3Yr 24x7 4Hr Response</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>For front-to-rear configuration, replace <code>AV19</code> with <code>AV1A</code>.</p>
+<h3 id="servers"><span class="header-section-number">8.1.3</span> Servers</h3>
+<table style="width:100%;">
+<caption>LOC Lenovo SR650 Server Bill of Materials</caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 79%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part Number</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7X06CTO1WW</td>
+<td>LOC RHHI: ThinkSystem SR650 - 3yr Warranty</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>AUVV</td>
+<td>ThinkSystem SR650 2.5" Chassis with 8, 16 or 24 bays</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AWEC</td>
+<td>Intel Xeon Silver 4114 10C 85W 2.2GHz Processor</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AUND</td>
+<td>ThinkSystem 32GB TruDDR4 2666 MHz (2Rx4 1.2V) RDIMM</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>AURA</td>
+<td>ThinkSystem 2U/Twr 2.5" SATA/SAS 8-Bay Backplane</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AUNK</td>
+<td>ThinkSystem RAID 930-16i 4GB Flash PCIe 12Gb Adapter</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>B49M</td>
+<td>ThinkSystem 2.5" Intel S4610 480GB Mainstream SATA 6Gb Hot Swap SSD</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>B49N</td>
+<td>ThinkSystem 2.5" Intel S4610 960GB Mainstream SATA 6Gb Hot Swap SSD</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>B0YS</td>
+<td>ThinkSystem 2.5" 2.4TB 10K SAS 12Gb Hot Swap 512e HDD</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>AUR7</td>
+<td>ThinkSystem 2U x8/X8/x8ML2 PCIE FH Riser 1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AURC</td>
+<td>ThinkSystem SR550/SR590/SR650 (x16/x8)/(x16/x16) PCIe FH Riser 2 Kit</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>AUKK</td>
+<td>ThinkSystem 1Gb 4-port RJ45 LOM</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>B0WY</td>
+<td>Intel XXV710-DA2 10/25GbE SFP28 2-Port PCIe Ethernet Adapter</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AVWF</td>
+<td>ThinkSystem 1100W (-48V DC) Platinum Hot-Swap Power Supply</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>6400</td>
+<td>2.8m, 13A/100-250V, C13 to C14 Jumper Cord</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>AUPW</td>
+<td>ThinkSystem XClarity Controller Standard to Enterprise Upgrade</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>AXCH</td>
+<td>ThinkSystem Toolless Slide Rail Kit with 2U CMA</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>A51P</td>
+<td>2m Passive DAC SFP+ Cable</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>Feature code enables function of a Lenovo server and its component. The following feature code are enabled for RHHI server:</p>
+<table>
+<caption>LOC Lenovo SR650 Server Feature Code</caption>
+<thead>
+<tr class="header">
+<th>Feature code</th>
+<th>Feature type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0034</td>
+<td>52</td>
+<td>Lenovo XClarity Controller Advanced Upgrade</td>
+</tr>
+<tr class="even">
+<td>0035</td>
+<td>53</td>
+<td>Lenovo XClarity Controller Enterprise Upgrade</td>
+</tr>
+<tr class="odd">
+<td>801C</td>
+<td>32796</td>
+<td>IBM Security Key Lifecycle Manager for Lenovo SEDs</td>
+</tr>
+</tbody>
+</table>
+<p>Note:</p>
+<ol type="1">
+<li>Listed feature code is included in server. No additional purchase is necessary.</li>
+</ol>
+<h2 id="rhhi-software-bom"><span class="header-section-number">8.2</span> Three-node LOC RHHI software BOM</h2>
+<table>
+<caption>LOC Software BOM, 3 year premium service support</caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 80%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>SKU</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RS00139F3</td>
+<td>Red Hat Hyperconverged Infrastructure for Virtualization (RHHI-V)</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>RH00031F3</td>
+<td>Smart Management</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>MCT3475F3</td>
+<td>Red Hat Insights</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>00MT202</td>
+<td>Lenovo xClarity Enterprise</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ceph-osp-bom"><span class="header-section-number">8.3</span> Three-node HCI Ceph and Openstack software BOM</h2>
+<table>
+<caption>LOC 3-node HCI Ceph and Openstack Software BOM, 3 year premium service support</caption>
+<thead>
+<tr class="header">
+<th>SKU</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RS00032F3</td>
+<td>Red Hat Cep Storage</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>MCT2982F3</td>
+<td>Red Hat Openstack Platform (w/o Guest) with Smart Management</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>MCT2980F3</td>
+<td>Red Hat OpenStack Platform with Smart Management &amp; Guests</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>00MT202</td>
+<td>Lenovo xClarity Enterprise</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ceph-only-bom"><span class="header-section-number">8.4</span> Three-node Ceph ONLY software BOM</h2>
+<p>Up to 256TB on a maximum of 12 physical nodes.</p>
+<table>
+<caption>LOC 3-node Ceph ONLY Software BOM, 3 year premium service support</caption>
+<thead>
+<tr class="header">
+<th>SKU</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RS00032F3</td>
+<td>Red Hat Cep Storage</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>00MT202</td>
+<td>Lenovo xClarity Enterprise</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="osp-13-bom"><span class="header-section-number">8.5</span> Three-node Openstack software BOM</h2>
+<table>
+<caption>LOC HCI 3-node Openstack Software BOM, 3 year premium service support</caption>
+<thead>
+<tr class="header">
+<th>SKU</th>
+<th>Product Description</th>
+<th>Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MCT2982F3</td>
+<td>Red Hat Openstack Platform (w/o Guest) with Smart Management</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>MCT2980F3</td>
+<td>Red Hat OpenStack Platform with Smart Management &amp; Guests</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>00MT202</td>
+<td>Lenovo xClarity Enterprise</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h1 id="appendix-unified-hardware-management"><span class="header-section-number">9</span> Appendix: Unified Hardware Management</h1>
+<p>Unified Hardware Management refers to the common steps that a hardware, in particular a baremetal server, will go through in order to be included into an infrastructure:</p>
+<pre class="plantuml"><code>autonumber &quot;&lt;font color=red&gt;&lt;b&gt;Message 00:&quot;
+
+actor Admin
+
+box &quot;Platform Services&quot;
+  participant &quot;Inventory Service&quot; as Netbox
+  participant &quot;Automation Service&quot; as Tower
+  participant &quot;OS Deployment Service&quot; as LXCA
+  participant &quot;Software Repository Service&quot; as Satellite
+  participant &quot;Config Repo Service&quot; as Config
+end box
+
+collections Servers #ff6a00
+
+== PHASE 1: Register resource ==
+
+Admin -&gt; Tower: apply_workflow(inventory_server_id, workflow_id)
+Tower -&gt; Netbox: get_server_bmc_info(inventory_server_id)
+Netbox -&gt; Tower: (bmc_ip, bmc_credentials)
+Tower -&gt; LXCA: manage(bmc_ip, bmc_credentials)
+LXCA -&gt; Tower: `hw_mgt_server_id` if successful; NULL if failed.
+
+== PHASE 2: Apply HW configs ==
+
+alt role based
+  Tower -&gt; Netbox: get_server_role(inventory_server_id)
+  Netbox -&gt; Tower: server_role
+  Tower -&gt; Config: get_server_configs(server_role)
+  Config -&gt; Tower: role based `hw_configs`
+  note left: configs is determined by `device role`
+
+  Tower -&gt; LXCA: config_server(hw_mgt_server_id, hw_configs).
+
+else UUID based
+  Tower -&gt; Config: get_server_configs(uuid)
+  Config -&gt; Tower: UUID based `hw_configs`
+  note left: configs is determined by device `UUID`
+
+  Tower -&gt; LXCA: config_server(uuid, hw_configs).
+end
+
+LXCA -&gt; Servers: apply_configs(hw_configs)
+LXCA -&gt; Tower: config result `TRUE|FALSE`
+
+== PHASE 3: PROVISION OS ==
+
+alt role based
+  Tower -&gt; Netbox: get_server_role(inventory_server_id)
+  Netbox -&gt; Tower: server_role
+  Tower -&gt; Config: get_server_os(server_role)
+  Config -&gt; Tower: role based `os_configs`
+  Tower -&gt; LXCA: provision_os(hw_mgt_server_id, os_configs)
+  LXCA -&gt; Servers: provision_os(hw_mgt_server_id, os_configs)
+  LXCA -&gt; Tower: provision result `TRUE|FALSE`
+  Tower -&gt; Netbox: update_server_ssh_info(ip, username, pwd)
+
+else UUID based
+  Tower -&gt; Config: get_server_os(uuid)
+  Config -&gt; Tower: UUID based `os_configs`
+  Tower -&gt; LXCA: provision_os(uuid, os_configs)
+end
+
+LXCA -&gt; Servers: provision_os(hw_mgt_server_id, os_configs)
+LXCA -&gt; Tower: provision result `TRUE|FALSE`
+Tower -&gt; Netbox: update_server_ssh_info(ip, username, pwd)
+
+== PHASE 4: REGISTER TO SOFTWARE REPO ==
+
+alt role based
+  Tower -&gt; Netbox: get_server_role(inventory_server_id)
+  Netbox -&gt; Tower: server_role
+  Tower -&gt; Config: get_server_repo_key(server_role)
+  Config -&gt; Tower: role based `repo_service_key_name`
+
+else UUID based
+  Tower -&gt; Config: get_server_repo_key(uuid)
+  Config -&gt; Tower: UUID based `repo_service_key_name`
+end
+
+Tower -&gt; Satellite: register_server_to_repo(repo_service_key_name)
+</code></pre>
+<h1 id="contributors"><span class="header-section-number">10</span> Contributors</h1>
+<p>A special thank you to the following Lenovo colleagues for their contributions to this document:</p>
+<ul>
+<li>Weiwei Chen, Engineer — Data Center Group</li>
+<li>Chengzhen Chu, Engineer — Data Center Group</li>
+<li>Leilei Lei, Engineer — Data Center Group</li>
+<li>Guannan Sun, Engineer — Data Center Group</li>
+<li>Ricky Stambach, Engineer — Data Center Group</li>
+<li>Zelin Wang, Engineer — Data Center Group</li>
+</ul>
+<h1 id="references"><span class="header-section-number">11</span> References</h1>
+<!-- My diagrams -->
+<!-- lenovo external images -->
+<!-- need reference images -->
+<!-- references -->
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-lenovo-loc-rhhi-ra">
+<p>[1] F. Xia and M. Halas, “Lenovo open cloud rhhi reference architecture,” May 2019 [Online]. Available: <a href="https://lenovopress.com/lp1148">https://lenovopress.com/lp1148</a></p>
+</div>
+<div id="ref-lenovo-ceph-ra">
+<p>[2] F. Lei, M. Halas, J. Bryant, L. Liu, D. Ding, and M. Perks, “Reference architecture: Red hat ceph storage,” May 2019 [Online]. Available: <a href="https://lenovopress.com/lp1147">https://lenovopress.com/lp1147</a></p>
+</div>
+<div id="ref-lenovo-rhosp13-ra">
+<p>[3] J. Xiaotong, X. Lin, M. Perks, Y. Huang, and S. Angalur, “Reference architecture: Red hat openstack platform with thinksystem servers,” Sep. 2017 [Online]. Available: <a href="https://lenovopress.com/lp0762">https://lenovopress.com/lp0762</a></p>
+</div>
+<div id="ref-redhat-satellite-home">
+<p>[4] Red Hat, “Red hat satellite.” [Online]. Available: <a href="https://access.redhat.com/products/red-hat-satellite">https://access.redhat.com/products/red-hat-satellite</a></p>
+</div>
+<div id="ref-redhat-satellite-6.2-life-cycle-environment">
+<p>[5] Red Hat, “RED hat satellite 6.2 server administration guide: 3.3. LIFE cycle environments.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_satellite/6.2/html/server_administration_guide/sect-red_hat_satellite-server_administration_guide-configuring_organizations_locations_and_life_cycle_environments-life_cycle_environments">https://access.redhat.com/documentation/en-us/red_hat_satellite/6.2/html/server_administration_guide/sect-red_hat_satellite-server_administration_guide-configuring_organizations_locations_and_life_cycle_environments-life_cycle_environments</a></p>
+</div>
+<div id="ref-redhat-satellite-6.1-content-view">
+<p>[6] Red Hat, “RED hat satellite 6.1 user guide: CHAPTER 6. USING content views.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_satellite/6.1/html/user_guide/chap-red_hat_satellite-user_guide-using_content_views">https://access.redhat.com/documentation/en-us/red_hat_satellite/6.1/html/user_guide/chap-red_hat_satellite-user_guide-using_content_views</a></p>
+</div>
+<div id="ref-redhat-satellite-6.1-activation-key">
+<p>[7] Red Hat, “RED hat satellite 6.1 user guide: CHAPTER 11. CONFIGURING activation keys.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_satellite/6.1/html/user_guide/chap-red_hat_satellite-user_guide-configuring_activation_keys">https://access.redhat.com/documentation/en-us/red_hat_satellite/6.1/html/user_guide/chap-red_hat_satellite-user_guide-configuring_activation_keys</a></p>
+</div>
+<div id="ref-redhat-tower-home">
+<p>[8] Red Hat, “Red hat ansible tower.” [Online]. Available: <a href="https://access.redhat.com/products/ansible-tower-red-hat">https://access.redhat.com/products/ansible-tower-red-hat</a></p>
+</div>
+<div id="ref-redhat-osp13-director">
+<p>[9] Red Hat OpenStack Documentation Team, “RED hat openstack platform 13 director installation and usage: An end-to-end scenario on using red hat openstack platform director to create an openstack cloud.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/director_installation_and_usage">https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/director_installation_and_usage</a></p>
+</div>
+<div id="ref-lenovo-sr650-product-guide">
+<p>[10] Lenovo, “Lenovo thinksystem sr650 server (xeon sp gen 1): Product guide.” [Online]. Available: <a href="https://lenovopress.com/lp0644-thinksystem-sr650-server-xeon-sp-gen1">https://lenovopress.com/lp0644-thinksystem-sr650-server-xeon-sp-gen1</a></p>
+</div>
+<div id="ref-lenovo-g8052-product-guide">
+<p>[11] Lenovo, “Lenovo rackswitch g8052: Product guide.” [Online]. Available: <a href="https://lenovopress.com/tips1270-lenovo-rackswitch-g8052">https://lenovopress.com/tips1270-lenovo-rackswitch-g8052</a></p>
+</div>
+<div id="ref-lenovo-ne2572-product-guide">
+<p>[12] Lenovo, “Lenovo thinksystem ne2572 rackswitch: Product guide.” [Online]. Available: <a href="https://lenovopress.com/lp0608-lenovo-thinksystem-ne2572-rackswitch">https://lenovopress.com/lp0608-lenovo-thinksystem-ne2572-rackswitch</a></p>
+</div>
+<div id="ref-redhat-osp13-home">
+<p>[13] Red Hat, “Product documentation for red hat openstack platform 13.” [Online]. Available: <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/">https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/</a></p>
+</div>
+<div id="ref-lenovo-openshift-ra">
+<p>[14] X. Jiang, M. Perks, B. Sun, and S. Angaluri, “Reference architecture: Red hat openshift container platform on lenovo thinksystem servers,” 2019 [Online]. Available: <a href="https://lenovopress.com/lp0968">https://lenovopress.com/lp0968</a></p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Hardware configuration varies from platform to platform. Some requires more physical resources, thus will take longer. Also, each platform has different configuration choices. See Lenovo’s product guide on these for details.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p><code>x</code> is the cloud index<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

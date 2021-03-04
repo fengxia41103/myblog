@@ -852,7 +852,7 @@ the backend API port. All others are docker-to-docker only.&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h1&gt;develop &amp;amp; deployment&lt;/h1&gt;
-&lt;p&gt;Assuming you have &lt;code&gt;docker&lt;/code&gt; and &lt;code&gt;docker-compose&lt;/code&gt; installed already, clone the &lt;a href="https://fengxia41103.github.io/myblog/stock thoughts.html"&gt;repo&lt;/a&gt;, and under &lt;code&gt;/backend&lt;/code&gt; and &lt;code&gt;/frontend&lt;/code&gt;, use the &lt;code&gt;docker-compose up --build&lt;/code&gt; for the first run to build initial images, and &lt;code&gt;docker-compose up -d&lt;/code&gt; for incremental changes.&lt;/p&gt;
+&lt;p&gt;Assuming you have &lt;code&gt;docker&lt;/code&gt; and &lt;code&gt;docker-compose&lt;/code&gt; installed already, clone the &lt;a href="https://fengxia41103.github.io/myblog/drafts/stock thoughts.html"&gt;repo&lt;/a&gt;, and under &lt;code&gt;/backend&lt;/code&gt; and &lt;code&gt;/frontend&lt;/code&gt;, use the &lt;code&gt;docker-compose up --build&lt;/code&gt; for the first run to build initial images, and &lt;code&gt;docker-compose up -d&lt;/code&gt; for incremental changes.&lt;/p&gt;
 &lt;p&gt;Frontend development can be benefited by a non-docker setup. So you need to &lt;code&gt;npm install&lt;/code&gt; then &lt;code&gt;npm run dev&lt;/code&gt;. Once you are satisfied w/ your frontend code, production deployment can be &lt;code&gt;docker-compose up --build -d&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;

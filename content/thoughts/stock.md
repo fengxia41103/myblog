@@ -1,13 +1,9 @@
 Title: Stock
 Date: 2021-02-08 13:33
 Tags: thoughts
-Slug: stock
+Slug: stock thoughts
+Status: Draft
 Author: Feng Xia
-
-<figure class="col s12">
-  <img src="images/1968%20earth.jpg"/>
-  <figcaption>First photo of the Earth taken by NASA in 1968</figcaption>
-</figure>
 
 Let's get serious about stocks. There are two ways of investing: pursuing value, or pursuing trend.
 
@@ -74,13 +70,18 @@ Trend is essentially saying that there is an underline current despite of the da
 
 ## n-day run probability
 
-For a stock, compute how many N-day consecutive run in one direction &rarr; if I'm seeing A has 3-day ups now, this will tell me how likely it will have a 4-day up. Of course, if the probability is small, I should sell before its 4th day.
+For a stock, compute how many N-day consecutive run in one direction
+&rarr; if I'm seeing A has 3-day ups now, this will tell me how likely
+it will have a 4-day up. Of course, if the probability is small, I
+should sell before its 4th day.
 
 This computation can be further broken down into:
 
-1. buy low sell high: probability when A fell, say 1%, how many days it took for it to recover 1% (now I have 1% gain)? 2%? and so on.
+1. buy low sell high: probability when A fell, say 1%, how many days
+   it took for it to recover 1% (now I have 1% gain)? 2%? and so on.
 
-2. buy high sell high: chasing an up wave. Compute n-day consecutive run probability.
+2. buy high sell high: chasing an up wave. Compute n-day consecutive
+   run probability.
   1. how long can it run in one direction?
   2. how much it can gain before losing steam &larr; quit at certain gain
 

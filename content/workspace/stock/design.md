@@ -4,7 +4,11 @@ Tags: dev
 Slug: stock app design
 Author: Feng Xia
 
-# backdrop
+<figure class="col s12">
+  <img src="images/stock/ui.png"/>
+</figure>
+
+# Backdrop
 
 The app is a complete rewrite of one which I wrote five years
 ago. At the time Jookun approached me that he had some wise strategies
@@ -36,7 +40,7 @@ a better user experience? how about some computation of probabilities
 based on a layman's observation? how about DCF?... all these,
 eventually propelled me to rewrite this from scratch, and here it is.
 
-# audience & goals
+# Audience & goals
 
 First, it is an absolute illusion if a beginner like myself will beat
 the market by these analysis, not only because of limitation of
@@ -125,14 +129,15 @@ that I have built to facilitate routine works and get you going w/
 your analysis quickly less the mechanical build-up that is necessary
 but distracting from analysis itself.
 
-# system design
+# System design
 
 <figure class="col s12 center">
   <img src="images/stock/high%20level%20design.png"/>
+  <figcaption>Stock app high level design</figcaption>
 </figure>
 
-System is split into backend and fronend. Backend is a Django app w/ exposed REST API using
-[Tastypie][2]. Frontend is [React][3].
+System is split into backend and fronend. Backend is a Django app w/
+exposed REST API using [Tastypie][2]. Frontend is [React][3].
 
 Primary data source is Yahoo's financial data. In particular, I'm pulling these:
 
@@ -142,7 +147,7 @@ Primary data source is Yahoo's financial data. In particular, I'm pulling these:
   opinionated, Yahoo is just one of many alternatives.
 
 
-# data model
+# Data model
 
 Model names are intuitive.
 
@@ -158,9 +163,10 @@ Model names are intuitive.
 
 <figure class="col s12">
   <img src="images/stock/stock.png"/>
+  <figcaption>Stock app data models</figcaption>
 </figure>
 
-# data persistence & processing
+# Data persistence & processing
 
 Data persistence is MySql 5.7. Using Django's ORM, this is not a hard requirement if your preference is something else.
 
@@ -180,15 +186,16 @@ Using docker, the following data volumes are used:
 | stock-data | Main DB data storage |
 | redis-data | Redis data storage   |
 
-# network
+# Network
 
 Network of the setup is fairly simple. We distinguish `data` vs. `management`:
 
-<figure class="col s12">
-  <img src="images/stock/stock.png"/>
+<figure class="col s12 center">
+  <img src="images/stock/backend%20network.png"/>
+  <figcaption>Stock app networks</figcaption>
 </figure>
 
-## ports
+## Ports
 
 A service is a function unit. In this implementation, each is a
 docker. I try to limit exposure of ports on docker host so this
@@ -196,15 +203,15 @@ application can be easily co-hosted with others without causing port
 conflicts. In essence, `8084` is the frontend UI port, and `8003` is
 the backend API port. All others are docker-to-docker only.
 
-| Component | Port | Service                             | Host Map |
-|-----------|------|-------------------------------------|----------|
-| Frontend  | 80   | Main frontend app w/ Nginx built-in | 8084     |
-| Backend   | 80   | Nginx proxy                         | 8003     |
-| Backend   | 3306 | MySql DB                            | none     |
-| Backend   | 8001 | Django app                          | none     |
-| Backend   | 6379 | Redis                               | none     |
+| Component | Docker Port | Service                             | Host Map |
+|-----------|-------------|-------------------------------------|----------|
+| Frontend  | 80          | Main frontend app w/ Nginx built-in | 8084     |
+| Backend   | 80          | Nginx proxy                         | 8003     |
+| Backend   | 3306        | MySql DB                            | none     |
+| Backend   | 8001        | Django app                          | none     |
+| Backend   | 6379        | Redis                               | none     |
 
-# develop & deployment
+# Develop & Deployment
 
 Assuming you have `docker` and `docker-compose` installed already, clone the [repo][1], and under `/backend` and `/frontend`, use the `docker-compose up --build` for the first run to build initial images, and `docker-compose up -d` for incremental changes.
 

@@ -1,7 +1,7 @@
-Title: Details of a Stock
+Title: Valuation of a Stock
 Date: 2021-03-03 10:16
 Tags: dev
-Slug: stock detail
+Slug: stock valuation
 Author: Feng Xia
 
 Detail of a stock is the primary research tool where you get
@@ -19,10 +19,18 @@ To look at detail of a stock, select a symbol of list:
 
 <figure class="col s12">
   <img src="images/stock/stock%20list.png"/>
-  <figcaption>Stock list filter</figcaption>
+  <figcaption>Stock list</figcaption>
 </figure>
 
-Upon typing on the search bar, case-sensitive matching takes place automatically with a 1-second debounce. Matched one will then be highlighted. To return to the full list, simply clear the search bar.
+Upon typing on the search bar, case-sensitive matching takes place
+automatically with a 1-second debounce. Matched one will then be
+highlighted. To return to the full list, simply clear the search bar.
+
+<figure class="col s12">
+  <img src="images/stock/stock%20list%20filtered.png"/>
+  <figcaption>Stock list filtered</figcaption>
+</figure>
+
 
 # Summary
 
@@ -92,15 +100,15 @@ changed over time[^2].
   <figcaption>Example of Dupont Period-to-Period</figcaption>
 </figure>
 
-In this example above, MSFT's ROE runs around 30 year to year. Profit
-margin and asset turnover all went up in 2020 report, indicating a
-healthy business operation. Its equity multiplier dropped a bit,
-indicating it is taking on more debt than before. Considering MSFT's
-reputation, I wouldn't then worry about its increased debt, and
-further considering the cheap interest rate, it's likely a good
-strategy to leverage up in this period. For example, if you google
-`msft bond rate`, MSFT is running at [`3.625%`][2], making borrowing
-money quite cheap for MSFT.
+Chart is normalized so to see its change easily. In this example
+above, MSFT's ROE runs around 30 year to year. Profit margin and asset
+turnover all went up in 2020 report, indicating a healthy business
+operation. Its equity multiplier dropped a bit, indicating it is
+taking on more debt than before. Considering MSFT's reputation, I
+wouldn't then worry about its increased debt, and further considering
+the cheap interest rate, it's likely a good strategy to leverage up in
+this period. For example, if you google `msft bond rate`, MSFT is
+running at [`3.625%`][2], making borrowing money quite cheap for MSFT.
 
 # Net Asset per Share
 
@@ -257,6 +265,7 @@ you have, the better.
 
 
 <figure class="col s12">
+  <img src="images/stock/cash%20flow.png"/>
   <img src="images/stock/cash%20flow%20values.png"/>
   <figcaption>Example of Cash Flow Statement</figcaption>
 </figure>
@@ -294,16 +303,16 @@ on face value as a reference point.
 
 <figure class="col s12">
   <img src="images/stock/valuation%20ratios.png"/>
-  <img src="images/stock/valuation%20ratios%values.png"/>
+  <img src="images/stock/valuation%20ratios%20values.png"/>
   <figcaption>Example of valuation ratios</figcaption>
 </figure>
 
-In this example, BFAM's PE grew from 49.76 in 12/31/2019 to now 379.47
-on 2/24/2021. Alarming, isn't it!? If accepting this, we are saying
+In this example, BFAM's PE grew from 49.76 in 12/31/2019 to now 364.38
+on 3/3/2021. Alarming, isn't it!? If accepting this, we are saying
 this business grew 7x more valuable in just one year, 2020, and don't
 forget 2020 was the Corvid year! Doesn't make sense, does it?
 
-On the other hand, P/B decreased from 9.73 &rarr; 8.06 over the same
+On the other hand, P/B decreased from 9.73 &rarr; 7.76 over the same
 period. Therefore, we actually need to find out what these _book
 values_ came from, as it must have grown a lot in 2020. If they are
 assets useful for operation, it's a good thing; otherwise, remember,

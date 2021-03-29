@@ -67,3 +67,7 @@ production_envvars.py
 
 # ignore /plugins
 plugins/
+
+# emacs
+[#].*
+*~

@@ -115,5 +115,8 @@ been burned off by fire. So I asked what happened to it, he replied:
     immediately countered, "No! 我没有常想(这个东西）I didn't always
     think of it".. oh well, what can I say?
 
-
-##### boyfriend-girlfriend topic also... interesting. #####
+15. At lunch chatting w/ Noah about the small room I'm thinking to
+    decorate. "我觉得那个屋子可以用来打游戏“，”I agree! 它又小，又黑，
+    还有门".. huh!? hahaha, and he bursted into a laugh himself
+    also. Both of us realized what he meant &rarr; so he could shut
+    himself inside and play as much as he wants. Hahahaha.

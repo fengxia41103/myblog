@@ -216,7 +216,7 @@ pycurl==7.43.0.2
 pydot==1.4.1
 pyfiglet==0.8.post1
 pyflakes==2.0.0
-Pygments==2.3.1
+Pygments==2.7.4
 pygraphviz==1.2
 pyinotify==0.9.6
 PyJWT==0.4.1

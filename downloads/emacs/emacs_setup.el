@@ -377,6 +377,9 @@ and the tangled file is compiled."
         ("go" . "http://go/")
         ("cl" . "http://cr/")))
 
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
 (setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
 
 (org-babel-do-load-languages

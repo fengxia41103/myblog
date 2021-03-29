@@ -615,7 +615,7 @@ e.g. =(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")=
 
 Don't know what they belong to. Just stuck them here. There are some functions used by the following code. So unfortunately this section must comes in early.
 
-***  by packages
+*** by packages
 **** org-protocol
 
 Let other tools use emacs client to interact
@@ -941,6 +941,15 @@ This lets one write links as e.g. [ [b:123457] ]
         ("go" . "http://go/")
         ("cl" . "http://cr/")))
 #+END_SRC
+*** auto line wrap
+
+Wrap around after 80 columns. The key is auto-fill mode.
+
+#+begin_SRC emacs-lisp
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+#+end_SRC
+
 ** export
 
 Part 2, exporting.

@@ -1109,7 +1109,7 @@ have a block scope&lt;/strong&gt;! What does this mean,&lt;/p&gt;
 
 
 &lt;p&gt;So the 2nd declaration of &lt;code&gt;var x=2&lt;/code&gt; is not creating a new &lt;em&gt;private&lt;/em&gt;
-variable that is only useful inside the curly bracket&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. On the
+variable that is only useful inside the curly bracket&lt;sup id="fnref-1"&gt;&lt;a class="footnote-ref" href="#fn-1"&gt;1&lt;/a&gt;&lt;/sup&gt;. On the
 contrary, it &lt;strong&gt;re&lt;/strong&gt;declare the former &lt;code&gt;var x=10&lt;/code&gt;, but now overwriting
 its (I guess the reference) w/ a value of 2. &lt;/p&gt;
 &lt;p&gt;Isn't this strange! So it turned out that&lt;/p&gt;
@@ -1188,7 +1188,7 @@ of the two things:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;variable will be declared &lt;strong&gt;implicitly&lt;/strong&gt; and given a value of
    null/undefined, sth like that &amp;larr; this is &lt;strong&gt;always a bad idea&lt;/strong&gt;
-   on the coder's part&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+   on the coder's part&lt;sup id="fnref-2"&gt;&lt;a class="footnote-ref" href="#fn-2"&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
 &lt;li&gt;compiler will just balk w/ an error &amp;larr; preferred.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Btw, the new &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt; are not hoisted. Thus, if you just
@@ -1236,16 +1236,16 @@ false&lt;/code&gt;. No ambiguity, thus &lt;code&gt;if True&lt;/code&gt; or &lt;c
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn:1"&gt;
+&lt;li id="fn-1"&gt;
 &lt;p&gt;But if you define the curly as a function, the &lt;code&gt;var&lt;/code&gt; inside will
 have a &lt;em&gt;function scope&lt;/em&gt;, and it is only visible to the function
-itself, not outside the function.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+itself, not outside the function.&amp;#160;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id="fn:2"&gt;
+&lt;li id="fn-2"&gt;
 &lt;p&gt;We do use this a lot in python in which we don't have to
    &lt;em&gt;declare&lt;/em&gt; a variable explicitly. But then, it is a solid decision
    in Python, and I don't recall ever need to be aware a &lt;em&gt;trap&lt;/em&gt; like
-   what this hoisting idea is producing.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+   what this hoisting idea is producing.&amp;#160;&lt;a class="footnote-backref" href="#fnref-2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Software engineer</title><link href="https://fengxia41103.github.io/myblog/software%20engineer.html" rel="alternate"></link><published>2019-11-10T15:06:00-05:00</published><updated>2019-11-10T15:06:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-11-10:/myblog/software engineer.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
@@ -2123,7 +2123,7 @@ Xft.rgba: rgb
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Use &lt;code&gt;xdpyinfo&lt;/code&gt; to check screen resolution&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;xdpyinfo&lt;/code&gt; to check screen resolution&lt;sup id="fnref-1"&gt;&lt;a class="footnote-ref" href="#fn-1"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;On X1 gen 8, it's shown &lt;code&gt;2560x1440 pixels (677x381
     millimeters)&lt;/code&gt;. Set &lt;code&gt;dpi=180&lt;/code&gt; gives the same exp/size as what was
@@ -2283,8 +2283,8 @@ while it will use disk files from your installation!&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;To check screen resolution: &lt;code&gt;xdpyinfo | grep dimensions&lt;/code&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;li id="fn-1"&gt;
+&lt;p&gt;To check screen resolution: &lt;code&gt;xdpyinfo | grep dimensions&lt;/code&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Snapshot anything w/ Selenium</title><link href="https://fengxia41103.github.io/myblog/snapshot%20selenium.html" rel="alternate"></link><published>2019-09-25T10:35:00-04:00</published><updated>2019-09-25T10:35:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2019-09-25:/myblog/snapshot selenium.html</id><summary type="html">&lt;figure class="col l6 m6 s12"&gt;
@@ -5440,7 +5440,7 @@ will suddenly decided to stop working, and you don't get emails
 anymore! Fall back is Thunderbird, but then, once you are used to
 &lt;code&gt;mu4e&lt;/code&gt;, going back to anything looked like outlook is a pain.&lt;/p&gt;
 &lt;p&gt;Finally, here is a savior,
-&lt;a href="http://davmail.sourceforge.net/"&gt;davmail&lt;/a&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. It works a gateway between
+&lt;a href="http://davmail.sourceforge.net/"&gt;davmail&lt;/a&gt;&lt;sup id="fnref-1"&gt;&lt;a class="footnote-ref" href="#fn-1"&gt;1&lt;/a&gt;&lt;/sup&gt;. It works a gateway between
 your computer and outlook web mail (aka. OWA &amp;mdash; outlook web
 access). So you can now point your &lt;code&gt;mbsync&lt;/code&gt; to a local port (default
 &lt;code&gt;1143&lt;/code&gt;, and davmail will route mbsync's IMAP requests to the remote
@@ -5471,9 +5471,9 @@ anymore.&lt;/p&gt;
 &lt;div class="footnote"&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id="fn:1"&gt;
+&lt;li id="fn-1"&gt;
 &lt;p&gt;Btw, I was having issue w/ v5.3.1. Downgrade it to 5.2 (released
-in Aug 2019) worked out better.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+in Aug 2019) worked out better.&amp;#160;&lt;a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</content><category term="dev"></category></entry><entry><title>Emacs</title><link href="https://fengxia41103.github.io/myblog/emacs.html" rel="alternate"></link><published>2017-01-21T11:45:00-05:00</published><updated>2020-11-23T18:14:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-01-21:/myblog/emacs.html</id><summary type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
@@ -5851,11 +5851,11 @@ for more details.&lt;/p&gt;
 &lt;li&gt;to start slave: buildslave start build-slave&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;To view and administrate our &lt;a href="http://fengxia.co:8011"&gt;CI server&lt;/a&gt;:
-* username: admin
-* pwd: xxxxxx&lt;/p&gt;
+&lt;em&gt; username: admin
+&lt;/em&gt; pwd: xxxxxx&lt;/p&gt;
 &lt;p&gt;To restart master and slave:
-* master: buildbot restart build-master
-* slave: buildslave restart build-slave&lt;/p&gt;
+&lt;em&gt; master: buildbot restart build-master
+&lt;/em&gt; slave: buildslave restart build-slave&lt;/p&gt;
 &lt;p&gt;If config has been modified, it is useful to run &lt;em&gt;buildbot checkconfig build-master&lt;/em&gt;
 to check configurations for error.&lt;/p&gt;
 &lt;p&gt;Note that it is recommended to start master before the slave.

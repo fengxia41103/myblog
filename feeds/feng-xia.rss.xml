@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Wed, 03 Mar 2021 21:31:00 -0500</lastBuildDate><item><title>Stock Trend Analysis</title><link>https://fengxia41103.github.io/myblog/stock%20trend%20analysis.html</link><description>&lt;p&gt;Continue from &lt;a href="https://fengxia41103.github.io/myblog/stock detail.html"&gt;last article&lt;/a&gt;. That one focused on value
+<rss version="2.0"><channel><title>Be Care Free - Feng Xia</title><link>https://fengxia41103.github.io/myblog/</link><description></description><lastBuildDate>Mon, 29 Mar 2021 09:12:00 -0400</lastBuildDate><item><title>Asian Hate</title><link>https://fengxia41103.github.io/myblog/asian%20hate.html</link><description>&lt;figure class="col l6 m6 s12"&gt;
+  &lt;img src="images/bertrand%20russell.jpg"/&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This, is a genie in a bottle &amp;mdash; the entire hatred now felt by the
+society and occupying the headline news and congress's attention. The
+world paid dearly for putting it back, putting aside the actual
+justice each side claimed to be. Yet, Trump disturbed the hornet's
+nest, and viola, now …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Mon, 29 Mar 2021 09:12:00 -0400</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-29:/myblog/asian hate.html</guid></item><item><title>Stock Trend Analysis</title><link>https://fengxia41103.github.io/myblog/stock%20trend%20analysis.html</link><description>&lt;p&gt;Continue from &lt;a href="{filename}/workspace/stock/stock%20detail.md"&gt;last article&lt;/a&gt;. That one focused on value
 assessment. This will go over trend analysis.&lt;/p&gt;
 &lt;h1&gt;Select a period &amp;amp; price&lt;/h1&gt;
 &lt;figure class="col s12"&gt;
@@ -8,11 +16,15 @@ assessment. This will go over trend analysis.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
-and 6m as time range, this tool can select any …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Mar 2021 21:31:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-03:/myblog/stock trend analysis.html</guid><category>dev</category></item><item><title>Details of a Stock</title><link>https://fengxia41103.github.io/myblog/stock%20detail.html</link><description>&lt;p&gt;Detail of a stock is the primary research tool where you get
+and 6m as time range, this tool can select any …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Mar 2021 21:31:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-03:/myblog/stock trend analysis.html</guid><category>dev</category></item><item><title>Valuation of a Stock</title><link>https://fengxia41103.github.io/myblog/stock%20valuation.html</link><description>&lt;p&gt;Detail of a stock is the primary research tool where you get
 one-stop-shop of its numbers. Instead of duplicating common layouts
 such as Google Finance, Finviz, I'm hoping to provide a &lt;em&gt;better&lt;/em&gt; user
 experience that focuses on how a reader of this page is to consume the
-information, not just …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Mar 2021 10:16:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-03:/myblog/stock detail.html</guid><category>dev</category></item><item><title>Stock App Design</title><link>https://fengxia41103.github.io/myblog/stock%20app%20design.html</link><description>&lt;h1&gt;backdrop&lt;/h1&gt;
+information, not just …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Feng Xia</dc:creator><pubDate>Wed, 03 Mar 2021 10:16:00 -0500</pubDate><guid isPermaLink="false">tag:fengxia41103.github.io,2021-03-03:/myblog/stock valuation.html</guid><category>dev</category></item><item><title>Stock App Design</title><link>https://fengxia41103.github.io/myblog/stock%20app%20design.html</link><description>&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/ui.png"/&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Backdrop&lt;/h1&gt;
 &lt;p&gt;The app is a complete rewrite of one which I wrote five years
 ago. At the time Jookun approached me that he had some wise strategies
 of investment. I was intrigued by his passion, but wanted to verify

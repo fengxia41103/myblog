@@ -168,7 +168,7 @@ have a block scope</strong>! What does this mean,</p>
 
 
 <p>So the 2nd declaration of <code>var x=2</code> is not creating a new <em>private</em>
-variable that is only useful inside the curly bracket<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. On the
+variable that is only useful inside the curly bracket<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>. On the
 contrary, it <strong>re</strong>declare the former <code>var x=10</code>, but now overwriting
 its (I guess the reference) w/ a value of 2. </p>
 <p>Isn't this strange! So it turned out that</p>
@@ -247,7 +247,7 @@ of the two things:</p>
 <ol>
 <li>variable will be declared <strong>implicitly</strong> and given a value of
    null/undefined, sth like that &larr; this is <strong>always a bad idea</strong>
-   on the coder's part<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</li>
+   on the coder's part<sup id="fnref-2"><a class="footnote-ref" href="#fn-2">2</a></sup>.</li>
 <li>compiler will just balk w/ an error &larr; preferred.</li>
 </ol>
 <p>Btw, the new <code>let</code> and <code>const</code> are not hoisted. Thus, if you just
@@ -295,16 +295,16 @@ false</code>. No ambiguity, thus <code>if True</code> or <code>if False</code>.<
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn:1">
+<li id="fn-1">
 <p>But if you define the curly as a function, the <code>var</code> inside will
 have a <em>function scope</em>, and it is only visible to the function
-itself, not outside the function.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+itself, not outside the function.&#160;<a class="footnote-backref" href="#fnref-1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
-<li id="fn:2">
+<li id="fn-2">
 <p>We do use this a lot in python in which we don't have to
    <em>declare</em> a variable explicitly. But then, it is a solid decision
    in Python, and I don't recall ever need to be aware a <em>trap</em> like
-   what this hoisting idea is producing.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+   what this hoisting idea is producing.&#160;<a class="footnote-backref" href="#fnref-2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

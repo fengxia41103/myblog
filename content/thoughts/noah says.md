@@ -120,3 +120,10 @@ been burned off by fire. So I asked what happened to it, he replied:
     还有门".. huh!? hahaha, and he bursted into a laugh himself
     also. Both of us realized what he meant &rarr; so he could shut
     himself inside and play as much as he wants. Hahahaha.
+
+16. After dinner, showing Noah the old album I brought back from
+    Suzhou. There was picture of Dad when he was probably late 20s,
+    and he didn't recognize him. Then on the next page, another of
+    his, probably early 40s, and Noah pointed it out, "这是也爷爷!"
+    "Not bad. How do u know?" "Because 他在 sporting 他现在的
+    look"... hahaha!

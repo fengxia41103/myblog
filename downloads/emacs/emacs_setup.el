@@ -696,13 +696,17 @@ and the tangled file is compiled."
   :config
   (setq aw-ignore-current t)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
+  (setq aw-ignore-current nil)
+  (setq aw-minibuffer-flag nil)
+  (setq aw-background t)
   (global-set-key (kbd "M-o") 'ace-window)
   (custom-set-faces
    '(aw-leading-char-face
      ((t (:inherit ace-jump-face-foreground
-                   :background "GhostWhite"
-                   :box nil)))))
+     :foreground "#D52349"
+     :height 1000
+     :overline t
+     :box nil)))))
 )
 
 (use-package uniquify

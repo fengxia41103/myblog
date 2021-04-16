@@ -58,7 +58,7 @@ django-celery==3.1.16
 django-compressor==1.4
 django-cors-headers==1.1.0
 django-crispy-forms==1.4.0
-django-debug-toolbar==1.2.2
+django-debug-toolbar==1.11.1
 django-devserver==0.8.0
 django-el-pagination==2.1.2
 django-extensions==1.6.1

@@ -2806,7 +2806,7 @@ are often termed as development rules agreed by the team.
 Enough to handle my Markdown needs.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package writegood-mode
+  (use-packag!e writegood-mode
     :ensure
     :config)
 
@@ -2820,8 +2820,13 @@ Enough to handle my Markdown needs.
               (lambda ()
                 (visual-line-mode t)
                 (writegood-mode t)
+                (auto-fill-mode t)
                 (flyspell-mode t)))))
 #+END_SRC
+
+#+RESULTS:
+: t
+
 *** C/C++
 **** header/implementation toggle
 

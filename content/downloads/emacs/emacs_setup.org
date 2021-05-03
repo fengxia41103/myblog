@@ -249,7 +249,7 @@ Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
     :ensure)
 #+end_SRC
 
-You would have to run =M-x all-the-icons-install-fonts== manually at
+You would have to run =M-x all-the-icons-install-fonts= manually at
 least once to install fonts to your system.
 
 ** rainbow-mode
@@ -426,6 +426,13 @@ brings value. *Note* that the ones I skip are:
   (add-hook 'json-mode-hook 'display-line-numbers-mode)
   (add-hook 'java-mode-hook 'display-line-numbers-mode)
 #+end_SRC
+** disable electric-indent
+
+This is very annoying that it keeps indenting.
+#+begin_SRC emacs-lisp
+(electric-indent-mode -1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+#+end_SRC
 
 * font, theme
 
@@ -600,15 +607,19 @@ e.g. =(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")=
     :delight org-mode
     :config
     :hook ((org-mode . visual-line-mode)
-         (org-mode . org-indent-mode)))
+           (org-mode . variable-patch-mode)
+           (org-mode . org-indent-mode)))
 
 #+END_SRC
 
+#+RESULTS:
+
 ** others
 
-Don't know what they belong to. Just stuck them here. There are some functions used by the following code. So unfortunately this section must comes in early.
+Don't know what they belong to. Just stuck them here. There are some functions
+used by the following code. So unfortunately this section must comes in early.
 
-***  by packages
+*** by packages
 **** org-protocol
 
 Let other tools use emacs client to interact
@@ -861,6 +872,36 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
     :ensure
     :hook (org-mode . org-bullets-mode))
 #+end_SRC
+
+*** custom font faces
+
+Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
+
+*this*
+
+#+begin_SRC emacs-lisp
+  (custom-theme-set-faces
+   'user
+   '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+   '(org-bold ((t (:foreground "#d52349"))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:foreground "royal blue" :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+   '(org-block-begin-line ((t (:background "RoyalBlue3"))))
+   '(org-block-end-line ((t (:background "RoyalBlue3"))))
+  )
+#+end_SRC
+
+#+RESULTS:
+
 ** writing stuff
 
 Part 1, writing stuff such as taking notes.
@@ -934,6 +975,15 @@ This lets one write links as e.g. [ [b:123457] ]
         ("go" . "http://go/")
         ("cl" . "http://cr/")))
 #+END_SRC
+*** auto line wrap
+
+Wrap around after 80 columns. The key is auto-fill mode.
+
+#+begin_SRC emacs-lisp
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+#+end_SRC
+
 ** export
 
 Part 2, exporting.
@@ -1478,15 +1528,22 @@ close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.
     :config
     (setq aw-ignore-current t)
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    (setq aw-background nil)
-    (global-set-key (kbd "M-o") 'ace-window)
+    (setq aw-ignore-current nil)
+    (setq aw-minibuffer-flag nil)
+    (setq aw-background t)
+    (global-set-key (kbd "C-x C-o") 'ace-window)
     (custom-set-faces
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground
-                     :background "GhostWhite"
-                     :box nil)))))
+       :foreground "#D52349"
+       :height 1000
+       :overline t
+       :box nil)))))
   )
 #+end_SRC
+
+#+RESULTS:
+: t
 
 *** buffer naming
 #+BEGIN_SRC emacs-lisp
@@ -1553,7 +1610,8 @@ Enables =winner-mode=. Navigate buffer-window configs with =C-c left= and
   (winner-mode 1)
 #+END_SRC
 
-However, with eyebrowse, I think this is redundant function. Maybe I should skip this?
+However, with eyebrowse, I think this is redundant function. Maybe I should skip
+this?
 
 ** toggle maximize buffer
 
@@ -1844,7 +1902,7 @@ Looks convenient [[https://github.com/emacsfodder/move-text][here]]:
 (move-text-default-bindings)
 #+end_SRC
 
-t** tabs to 2
+*** tabs to 2
 
 These are global tab settings. Since TAB is such a sensitive thing,
 each coding mode may have a different style/preference that will
@@ -2092,8 +2150,11 @@ I just took over the config described in this [[https://tuhdo.github.io/helm-int
   (setq helm-lisp-fuzzy-completion t)
   (helm-mode 1)
 
-    (global-set-key (kbd "M-x") 'helm-M-x))
+    (global-set-key (kbd "C-x C-m") 'helm-M-x))
 #+END_SRC
+
+#+RESULTS:
+: t
 
 Found [[https://www.reddit.com/r/emacs/comments/30yer0/helm_and_recentf_tips/][this reddit post]] of using =helm-mini=:
 
@@ -2111,10 +2172,6 @@ I have been using this one w/ reasonable success.
     :ensure
     :defer 10
     :config
-    ;; 激活 basedict 拼音词库
-    (use-package pyim-basedict
-      :ensure nil
-      :config (pyim-basedict-enable))
 
     ;; 五笔用户使用 wbdict 词库
     ;; (use-package pyim-wbdict
@@ -2758,6 +2815,23 @@ Use =circe=.
     :config)
 #+END_SRC
 
+** restclient
+
+#+begin_SRC emacs-lisp
+(use-package restclient
+  :ensure)
+#+end_SRC
+
+Then wrap it w/ this, you can then embed restcall in org!
+
+#+begin_SRC emacs-lisp
+(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+(require 'ob-restclient)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
+#+end_SRC
+
 ** languages
 
 These are minor modes to handle programming language specifics which
@@ -2780,8 +2854,13 @@ Enough to handle my Markdown needs.
               (lambda ()
                 (visual-line-mode t)
                 (writegood-mode t)
+                (auto-fill-mode t)
                 (flyspell-mode t)))))
 #+END_SRC
+
+#+RESULTS:
+: t
+
 *** C/C++
 **** header/implementation toggle
 
@@ -2800,8 +2879,6 @@ Essentially, use the Google C++ style formatting.
     (add-hook 'c-mode-common-hook 'google-set-c-style)
     (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
-  (use-package flymake-google-cpplint
-    :ensure t)
 #+END_SRC
 *** python
 
@@ -2809,23 +2886,33 @@ Setup an IDE:
 
 #+begin_SRC emacs-lisp
 (use-package elpy
-  :ensure)
+  :ensure
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 (elpy-enable)
 #+end_SRC
+
+#+RESULTS:
 
 ELPY has its own indentation mode, which is overriding the one I use
 globally, so disable this one:
 
 #+begin_SRC emacs-lisp
-  (add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1)))
+  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 #+end_SRC
 
-Finally, link to yasnippet mode:
+Link to yasnippet mode:
 #+begin_SRC emacs-lisp
-(add-hook 'python-mode-hook #'yas-minor-mode)
+(add-hook 'elpy-mode-hook #'yas-minor-mode)
+#+end_SRC
+
+Auto black on save:
+#+begin_SRC emacs-lisp
+(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
 #+end_SRC
 
 **** py-autopep8
+
 Add hook to reformat python code based on pep8 spec. You need to
 install =pip install autopep8= offline.
 
@@ -2901,7 +2988,7 @@ Who should use this mode:
 This is actually depending on =js-beautify=. See [[https://github.com/yasuyk/web-beautify][web-beautify]] for
 details.
 
-#+begin_SRC emacs-lisp
+#+begin_SRC emacs-lisp :tangle no
   (use-package web-beautify
     :ensure
     :config)
@@ -2951,7 +3038,7 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
   (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
   (add-hook 'js2-mode-hook #'smartparens-mode)
-
+  (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 #+end_SRC
 
 **** prettier-js
@@ -2969,6 +3056,12 @@ Link js2-mode to prettier to beautify my code.
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'json-mode-hook 'prettier-js-mode)
   (add-hook 'js-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+
+  (eval-after-load 'web-mode
+    '(progn
+       (add-hook 'web-mode-hook #'add-node-modules-path)
+       (add-hook 'web-mode-hook #'prettier-js-mode)))
 #+end_SRC
 
 **** js-doc
@@ -3093,6 +3186,7 @@ mode. So instead, I have had success in writing the Pandoc version of
 Markdown for my two Mycompany reference architecture papers, and I think
 it gives me more control of the LaTex template, the CSS file I can
 customize, and so on. So I'll stick to it for now.
+
 ** pandoc
 
 #+begin_SRC emacs-lisp

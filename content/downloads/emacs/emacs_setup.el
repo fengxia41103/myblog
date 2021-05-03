@@ -100,6 +100,9 @@ and the tangled file is compiled."
 (add-hook 'json-mode-hook 'display-line-numbers-mode)
 (add-hook 'java-mode-hook 'display-line-numbers-mode)
 
+(electric-indent-mode -1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+
 (use-package sublime-themes
     :ensure
     :config)
@@ -183,7 +186,8 @@ and the tangled file is compiled."
   :delight org-mode
   :config
   :hook ((org-mode . visual-line-mode)
-       (org-mode . org-indent-mode)))
+         (org-mode . variable-patch-mode)
+         (org-mode . org-indent-mode)))
 
 (require 'org-protocol)
 
@@ -325,6 +329,25 @@ and the tangled file is compiled."
   :ensure
   :hook (org-mode . org-bullets-mode))
 
+(custom-theme-set-faces
+ 'user
+ '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+ '(org-bold ((t (:foreground "#d52349"))))
+ '(org-code ((t (:inherit (shadow fixed-pitch)))))
+ '(org-document-info ((t (:foreground "dark orange"))))
+ '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+ '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+ '(org-link ((t (:foreground "royal blue" :underline t))))
+ '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-property-value ((t (:inherit fixed-pitch))) t)
+ '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+ '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+ '(org-block-begin-line ((t (:background "RoyalBlue3"))))
+ '(org-block-end-line ((t (:background "RoyalBlue3"))))
+)
+
 (use-package deft
   :ensure t)
 (use-package avy
@@ -373,6 +396,9 @@ and the tangled file is compiled."
       '(("b" . "http://b/")
         ("go" . "http://go/")
         ("cl" . "http://cr/")))
+
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 (setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
 
@@ -690,13 +716,17 @@ and the tangled file is compiled."
   :config
   (setq aw-ignore-current t)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-background nil)
-  (global-set-key (kbd "M-o") 'ace-window)
+  (setq aw-ignore-current nil)
+  (setq aw-minibuffer-flag nil)
+  (setq aw-background t)
+  (global-set-key (kbd "C-x C-o") 'ace-window)
   (custom-set-faces
    '(aw-leading-char-face
      ((t (:inherit ace-jump-face-foreground
-                   :background "GhostWhite"
-                   :box nil)))))
+     :foreground "#D52349"
+     :height 1000
+     :overline t
+     :box nil)))))
 )
 
 (use-package uniquify
@@ -1067,7 +1097,7 @@ and the tangled file is compiled."
 (setq helm-lisp-fuzzy-completion t)
 (helm-mode 1)
 
-  (global-set-key (kbd "M-x") 'helm-M-x))
+  (global-set-key (kbd "C-x C-m") 'helm-M-x))
 
 (setq helm-mini-default-sources '(helm-source-buffers-list
                                   helm-source-recentf
@@ -1078,10 +1108,6 @@ and the tangled file is compiled."
   :ensure
   :defer 10
   :config
-  ;; 激活 basedict 拼音词库
-  (use-package pyim-basedict
-    :ensure nil
-    :config (pyim-basedict-enable))
 
   ;; 五笔用户使用 wbdict 词库
   ;; (use-package pyim-wbdict
@@ -1474,6 +1500,15 @@ If given prefix arg ARG, skips markdown conversion."
   :ensure
   :config)
 
+(use-package restclient
+  :ensure)
+
+(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+(require 'ob-restclient)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
+
 (use-package writegood-mode
   :ensure
   :config)
@@ -1488,6 +1523,7 @@ If given prefix arg ARG, skips markdown conversion."
             (lambda ()
               (visual-line-mode t)
               (writegood-mode t)
+              (auto-fill-mode t)
               (flyspell-mode t)))))
 
 (add-hook 'c-mode-common-hook
@@ -1500,16 +1536,17 @@ If given prefix arg ARG, skips markdown conversion."
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
-(use-package flymake-google-cpplint
-  :ensure t)
-
 (use-package elpy
-  :ensure)
+  :ensure
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 (elpy-enable)
 
-(add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1)))
+(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
-(add-hook 'python-mode-hook #'yas-minor-mode)
+(add-hook 'elpy-mode-hook #'yas-minor-mode)
+
+(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
 
 (use-package
   py-autopep8
@@ -1548,25 +1585,6 @@ If given prefix arg ARG, skips markdown conversion."
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 
-(use-package web-beautify
-  :ensure
-  :config)
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-(add-hook 'json-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-(add-hook 'css-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
-(add-hook 'html-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-
 (use-package emmet-mode
   :ensure t
   :after(web-mode css-mode scss-mode)
@@ -1586,6 +1604,7 @@ If given prefix arg ARG, skips markdown conversion."
 (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
 (add-hook 'js2-mode-hook #'smartparens-mode)
+(add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 
 (use-package prettier-js
   :ensure
@@ -1599,6 +1618,12 @@ If given prefix arg ARG, skips markdown conversion."
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'json-mode-hook 'prettier-js-mode)
 (add-hook 'js-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+
+(eval-after-load 'web-mode
+  '(progn
+     (add-hook 'web-mode-hook #'add-node-modules-path)
+     (add-hook 'web-mode-hook #'prettier-js-mode)))
 
 (use-package js-doc
   :ensure

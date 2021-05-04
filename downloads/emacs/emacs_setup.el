@@ -186,7 +186,8 @@ and the tangled file is compiled."
   :delight org-mode
   :config
   :hook ((org-mode . visual-line-mode)
-       (org-mode . org-indent-mode)))
+         (org-mode . variable-patch-mode)
+         (org-mode . org-indent-mode)))
 
 (require 'org-protocol)
 
@@ -327,6 +328,25 @@ and the tangled file is compiled."
 (use-package org-bullets
   :ensure
   :hook (org-mode . org-bullets-mode))
+
+(custom-theme-set-faces
+ 'user
+ '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+ '(org-bold ((t (:foreground "#d52349"))))
+ '(org-code ((t (:inherit (shadow fixed-pitch)))))
+ '(org-document-info ((t (:foreground "dark orange"))))
+ '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+ '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+ '(org-link ((t (:foreground "royal blue" :underline t))))
+ '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-property-value ((t (:inherit fixed-pitch))) t)
+ '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+ '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+ '(org-block-begin-line ((t (:background "RoyalBlue3"))))
+ '(org-block-end-line ((t (:background "RoyalBlue3"))))
+)
 
 (use-package deft
   :ensure t)
@@ -699,7 +719,7 @@ and the tangled file is compiled."
   (setq aw-ignore-current nil)
   (setq aw-minibuffer-flag nil)
   (setq aw-background t)
-  (global-set-key (kbd "M-o") 'ace-window)
+  (global-set-key (kbd "C-x C-o") 'ace-window)
   (custom-set-faces
    '(aw-leading-char-face
      ((t (:inherit ace-jump-face-foreground
@@ -1077,7 +1097,7 @@ and the tangled file is compiled."
 (setq helm-lisp-fuzzy-completion t)
 (helm-mode 1)
 
-  (global-set-key (kbd "M-x") 'helm-M-x))
+  (global-set-key (kbd "C-x C-m") 'helm-M-x))
 
 (setq helm-mini-default-sources '(helm-source-buffers-list
                                   helm-source-recentf
@@ -1088,10 +1108,6 @@ and the tangled file is compiled."
   :ensure
   :defer 10
   :config
-  ;; 激活 basedict 拼音词库
-  (use-package pyim-basedict
-    :ensure nil
-    :config (pyim-basedict-enable))
 
   ;; 五笔用户使用 wbdict 词库
   ;; (use-package pyim-wbdict
@@ -1507,6 +1523,7 @@ If given prefix arg ARG, skips markdown conversion."
             (lambda ()
               (visual-line-mode t)
               (writegood-mode t)
+              (auto-fill-mode t)
               (flyspell-mode t)))))
 
 (add-hook 'c-mode-common-hook
@@ -1519,11 +1536,10 @@ If given prefix arg ARG, skips markdown conversion."
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
-(use-package flymake-google-cpplint
-  :ensure t)
-
 (use-package elpy
-  :ensure)
+  :ensure
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 (elpy-enable)
 
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))

@@ -249,7 +249,7 @@ Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
     :ensure)
 #+end_SRC
 
-You would have to run =M-x all-the-icons-install-fonts== manually at
+You would have to run =M-x all-the-icons-install-fonts= manually at
 least once to install fonts to your system.
 
 ** rainbow-mode
@@ -607,13 +607,17 @@ e.g. =(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")=
     :delight org-mode
     :config
     :hook ((org-mode . visual-line-mode)
-         (org-mode . org-indent-mode)))
+           (org-mode . variable-patch-mode)
+           (org-mode . org-indent-mode)))
 
 #+END_SRC
 
+#+RESULTS:
+
 ** others
 
-Don't know what they belong to. Just stuck them here. There are some functions used by the following code. So unfortunately this section must comes in early.
+Don't know what they belong to. Just stuck them here. There are some functions
+used by the following code. So unfortunately this section must comes in early.
 
 *** by packages
 **** org-protocol
@@ -868,6 +872,36 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
     :ensure
     :hook (org-mode . org-bullets-mode))
 #+end_SRC
+
+*** custom font faces
+
+Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
+
+*this*
+
+#+begin_SRC emacs-lisp
+  (custom-theme-set-faces
+   'user
+   '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+   '(org-bold ((t (:foreground "#d52349"))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:foreground "royal blue" :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+   '(org-block-begin-line ((t (:background "RoyalBlue3"))))
+   '(org-block-end-line ((t (:background "RoyalBlue3"))))
+  )
+#+end_SRC
+
+#+RESULTS:
+
 ** writing stuff
 
 Part 1, writing stuff such as taking notes.
@@ -1497,7 +1531,7 @@ close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.
     (setq aw-ignore-current nil)
     (setq aw-minibuffer-flag nil)
     (setq aw-background t)
-    (global-set-key (kbd "M-o") 'ace-window)
+    (global-set-key (kbd "C-x C-o") 'ace-window)
     (custom-set-faces
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground
@@ -1576,7 +1610,8 @@ Enables =winner-mode=. Navigate buffer-window configs with =C-c left= and
   (winner-mode 1)
 #+END_SRC
 
-However, with eyebrowse, I think this is redundant function. Maybe I should skip this?
+However, with eyebrowse, I think this is redundant function. Maybe I should skip
+this?
 
 ** toggle maximize buffer
 
@@ -2115,8 +2150,11 @@ I just took over the config described in this [[https://tuhdo.github.io/helm-int
   (setq helm-lisp-fuzzy-completion t)
   (helm-mode 1)
 
-    (global-set-key (kbd "M-x") 'helm-M-x))
+    (global-set-key (kbd "C-x C-m") 'helm-M-x))
 #+END_SRC
+
+#+RESULTS:
+: t
 
 Found [[https://www.reddit.com/r/emacs/comments/30yer0/helm_and_recentf_tips/][this reddit post]] of using =helm-mini=:
 
@@ -2134,10 +2172,6 @@ I have been using this one w/ reasonable success.
     :ensure
     :defer 10
     :config
-    ;; 激活 basedict 拼音词库
-    (use-package pyim-basedict
-      :ensure nil
-      :config (pyim-basedict-enable))
 
     ;; 五笔用户使用 wbdict 词库
     ;; (use-package pyim-wbdict
@@ -2806,7 +2840,7 @@ are often termed as development rules agreed by the team.
 Enough to handle my Markdown needs.
 
 #+BEGIN_SRC emacs-lisp
-  (use-packag!e writegood-mode
+  (use-package writegood-mode
     :ensure
     :config)
 
@@ -2845,8 +2879,6 @@ Essentially, use the Google C++ style formatting.
     (add-hook 'c-mode-common-hook 'google-set-c-style)
     (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
-  (use-package flymake-google-cpplint
-    :ensure t)
 #+END_SRC
 *** python
 
@@ -2854,9 +2886,13 @@ Setup an IDE:
 
 #+begin_SRC emacs-lisp
 (use-package elpy
-  :ensure)
+  :ensure
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 (elpy-enable)
 #+end_SRC
+
+#+RESULTS:
 
 ELPY has its own indentation mode, which is overriding the one I use
 globally, so disable this one:

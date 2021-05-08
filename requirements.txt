@@ -94,7 +94,7 @@ EasyProcess==0.1.6
 EbookLib==0.15
 ecdsa==0.13
 enum34==1.1.6
-eventlet==0.19.0
+eventlet==0.31.0
 extras==0.0.3
 Fabric==1.11.1
 factory-boy==2.4.1

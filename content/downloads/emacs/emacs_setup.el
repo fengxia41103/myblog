@@ -1482,6 +1482,8 @@ If given prefix arg ARG, skips markdown conversion."
 
 (global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
 
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
 (use-package
   circe
     :ensure

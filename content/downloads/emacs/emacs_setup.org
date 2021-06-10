@@ -877,8 +877,6 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 
 Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
 
-*this*
-
 #+begin_SRC emacs-lisp
   (custom-theme-set-faces
    'user
@@ -2792,6 +2790,12 @@ the time the keys are pressed.
 
 (global-set-key "\C-x$" 'set-selective-display-dlw)
 #+END_SRC
+*** hightlight-indent-guids-mode
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+end_src
+
+#+RESULTS:
 
 ** IRC
 Use =circe=.

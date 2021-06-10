@@ -33,7 +33,7 @@ call it a coffee shop, because the stereotype of coffee shop these
 days have been mapped to this, static, industrial, no ceiling, steel
 beams, black paint, kind of image, that, was exciting when you saw it
 for the first time, but quickly become boring and fake, because the
-people who sit in it, don't fit the scene! 
+people who sit in it, don't fit the scene!
 
 Not here. Everyone walking into the door fits this place, almost
 perfectly &mdash; mid-age guy who just walked in with jeans, sneakers,

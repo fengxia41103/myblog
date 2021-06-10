@@ -91,7 +91,7 @@ really better than this paper!? Not really. It has not so called
 many people agrees upon, that's all. It is always someone's dream that
 you will find gold everywhere on Mars or somewhere, where it was
 treated like dirt, but beings over there values, human waste, as their
-"gold"! 
+"gold"!
 
 This is the same theme over and over and over. When US conquered the
 West, native Indians couldn't care less about [gold mine in Black

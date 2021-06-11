@@ -1482,6 +1482,8 @@ If given prefix arg ARG, skips markdown conversion."
 
 (global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
 
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
 (use-package
   circe
     :ensure
@@ -1576,6 +1578,9 @@ If given prefix arg ARG, skips markdown conversion."
   (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-css-colorization t))
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
 
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))

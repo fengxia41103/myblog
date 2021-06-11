@@ -877,8 +877,6 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 
 Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
 
-*this*
-
 #+begin_SRC emacs-lisp
   (custom-theme-set-faces
    'user
@@ -2792,6 +2790,12 @@ the time the keys are pressed.
 
 (global-set-key "\C-x$" 'set-selective-display-dlw)
 #+END_SRC
+*** hightlight-indent-guids-mode
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+end_src
+
+#+RESULTS:
 
 ** IRC
 Use =circe=.
@@ -2972,6 +2976,9 @@ web-mode with config for Polymer editing
     (setq web-mode-enable-current-element-highlight t)
     (setq web-mode-enable-current-column-highlight t)
     (setq web-mode-enable-css-colorization t))
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
 #+END_SRC
 
 Who should use this mode:

@@ -1,4 +1,4 @@
-Title: Mio on the store
+Title: Mio on the Shore
 Date: 2021-06-10 14:20
 Tags: thoughts
 Slug: mio

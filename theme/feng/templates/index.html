@@ -36,10 +36,13 @@
 <p>
     {{ article.summary }}
 </p>
-<a class="btn btn-default button" href="{{ article.url }}">
-    <i class="fa fa-coffee" style="opacity:0.5;"></i>
-    continue reading
-</a>
+
+<p style="margin-top: 3em;">
+    <a class="btn btn-default button" href="{{ article.url }}">
+        <i class="fa fa-coffee" style="opacity:0.5;"></i>
+        continue reading
+    </a>
+</p>
 {% endfor %}
 
 {% endblock %}

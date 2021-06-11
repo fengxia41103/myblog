@@ -443,6 +443,28 @@ code {
     margin-top: 10%;
 }
 
+.flabel {
+    display: inline-block;
+    float: left;
+    padding: 0 10px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    border: 1px solid #fefefe;
+    font: 13px/28px Universcom57Condensed, Arial, Helvetica, sans-serif;
+    font-family: Universcom57Condensed, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 28px;
+    /*color: #8c8c8c;*/
+    text-decoration: none;
+    transition: border-color 0.3s ease-out;
+    transition-property: border-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    transition-delay: initial;
+    background-color: #fefff5;
+}
+
+
 /* new CSS for grid layout */
 
 @media (min-width: 700px) {
@@ -451,12 +473,12 @@ code {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         column-gap: 5px;
         width: 100%;
-        min-height: 100vh;
+        /* min-height: 100vh; */
         overflow: auto;
     }
 
     #showcase {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     header {
@@ -511,7 +533,8 @@ header {
 }
 
 footer {
-    background-color: rgba(43, 45, 47, 0.75);
+    background-color: rgba(12, 12, 22, 0.9);
+    color: #fefff5;
 }
 
 #content {
@@ -519,15 +542,6 @@ footer {
     color: rgba(52, 52, 52);
 }
 
-#showcase {
-    display: grid;
-    column-gap: 10px;
-    row-gap: 0;
-}
-
-footer>h1 {
-    color: #fefff5;
-}
 
 .split-left-pane {
     display: grid;
@@ -577,26 +591,6 @@ footer>h1 {
     column-gap: 10px;
 }
 
-.flabel {
-    display: inline-block;
-    float: left;
-    padding: 0 10px;
-    margin-right: 6px;
-    margin-bottom: 6px;
-    border: 1px solid #fefefe;
-    font: 13px/28px Universcom57Condensed, Arial, Helvetica, sans-serif;
-    font-family: Universcom57Condensed, Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    line-height: 28px;
-    /*color: #8c8c8c;*/
-    text-decoration: none;
-    transition: border-color 0.3s ease-out;
-    transition-property: border-color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-    transition-delay: initial;
-    background-color: #fefff5;
-}
 
 .flabel:hover {
     border: 1px solid #d52349;
@@ -607,4 +601,43 @@ footer>h1 {
 
 .flabel:hover a {
     color: #d52349;
+}
+
+video {
+  /* position: fixed; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* min-width: 100%; */
+  /* min-height: 100%; */
+  /* width: auto; */
+  /* height: auto; */
+  width: 100%;
+  /* transform: translateX(-50%) translateY(-50%); */
+  background-size: cover;
+  transition: 1s opacity;
+  opacity: 0.2;
+}
+
+
+#showcase {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 0;
+}
+
+footer h1,
+footer h5 {
+    color: #D52349;
+}
+
+.footer-copyright {
+    background-color: rgba(12, 12, 22, 0.8);
+    display: block;
+    width: 100%;
+    vertical-align: middle;
+    color: #fefff5;
+}
+
+.btn {
+  background-color: rgba(12, 12, 22, 0.8);
 }

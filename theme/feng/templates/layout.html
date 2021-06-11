@@ -96,51 +96,110 @@
                 </div>
             </div>
         </div>
+
     </div>
 
-    <footer>
-        <h1>Show Cases</h1>
-        <div id="showcase">
-            <p class="flabel">
-                Photo album:
-                <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
-            </p>
-            <p class="flabel">
-                API & charts:
-                <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com">SP500</a>
-            </p>
-            <p class="flabel">
-                API & charts:
-                <a href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/">Snapshot of The World</a>
-            </p>
+    <footer class="split-screen">
+        <div class="container">
+            <h5>Categories:</h5>
+            {% for c,article in categories %}
+            <a href="{{SITEURL}}/{{c.url}}">
+                <i class="fa fa-folder-open-o"></i>
+                {{ c }}
+            </a>
+            {% endfor %}
 
-            <p class="flabel">
-                Django (in Chinese):
-                <a href="{{SITEURL}}/project gkp demo.html">GKP</a>
-            </p>
-            <p class="flabel">
-                ERP:
-                <a href="{{SITEURL}}/project fashion demo.html">Fashion</a>
-            </p>
-            <p class="flabel">
-                Data processing:
-                <a href="{{SITEURL}}/project stock demo.html">Stock</a>
-            </p>
-            <p class="flabel">
-                Angular & REACT:
-                <a href="{{SITEURL}}/car leasing.html">Car leasing</a>
-                &nbsp;|&nbsp;
-                <a href="https://fengxia41103.github.io/spa-dashboard/">
-                    YAML Config Dashboard
-                </a>
-            </p>
-            <p class="flabel">
-                API & REACT:
-                <a href="https://fengxia41103.github.io/movie/">Movies</a>
-            </p>
+            <h5>Tags:</h5>
+            {% for c,article in tags %}
+            <a href="{{SITEURL}}/{{c.url}}">
+                <i class="fa fa-tag"></i>
+                {{ c }}
+            </a>
+            {% endfor %}
+            <div class="">
+                <h5>Show Cases:</h5>
+                <div id="showcase">
+                    <p>
+                        Photo album:
+                        <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+                    </p>
+                    <p>
+                        API & charts:
+                        <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com">SP500</a>
+                    </p>
+                    <p>
+                        API & charts:
+                        <a href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/">Snapshot of The World</a>
+                    </p>
+
+                    <p>
+                        Django (in Chinese):
+                        <a href="{{SITEURL}}/project gkp demo.html">GKP</a>
+                    </p>
+                    <p>
+                        ERP:
+                        <a href="{{SITEURL}}/project fashion demo.html">Fashion</a>
+                    </p>
+                    <p>
+                        Data processing:
+                        <a href="{{SITEURL}}/project stock demo.html">Stock</a>
+                    </p>
+                    <p>
+                        Angular & REACT:
+                        <a href="{{SITEURL}}/car leasing.html">Car leasing</a>
+                        &nbsp;|&nbsp;
+                        <a href="https://fengxia41103.github.io/spa-dashboard/">
+                            YAML Config Dashboard
+                        </a>
+                    </p>
+                    <p>
+                        API & REACT:
+                        <a href="https://fengxia41103.github.io/movie/">Movies</a>
+                    </p>
+                </div>
+            </div>
         </div>
-
+        <video autoplay muted loop id="myVideo">
+            <source src="downloads/polina.mp4" type="video/mp4" />
+        </video>
     </footer>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col l8 m8 s12">
+                    <p>
+                        2016-2021 PY Consulting Ltd.
+                        1236 Beacon Street, Brookline, MA 02146
+                    </p>
+
+                    <p>
+                        <a href="mailto:{{EMAIL_ADDRESS}}">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+
+                        <a href="{{GITHUB_ADDRESS}}">
+                            <i class="fa fa-github"></i>
+                        </a>
+
+                        <a href="{{LINKEDIN_ADDRESS}}">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+
+                        <a href="">
+                            <i class="fa fa-phone-square"></i>
+                            (508)801-1794
+                        </a>
+                    </p>
+                </div>
+                <div class="col l4 m4 s12">
+                    <p class="right">
+                        <i class="fa fa-copyright"></i>
+                        All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 
     {# block push #}

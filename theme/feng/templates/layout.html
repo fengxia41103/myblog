@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
 
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
-    <meta name="apple-mobile-web-app-capable"
-          content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent" />
-    <meta name="viewport"
-          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -21,50 +17,34 @@
     <script src="{{ SITEURL }}/theme/js/respond.min.js"></script>
 
     {# Fontawesome #}
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ SITEURL }}/theme/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/bower_components/font-awesome/css/font-awesome.min.css">
 
     {# DataTable #}
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ SITEURL }}/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css">
 
     {# lightbox #}
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ SITEURL }}/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/bower_components/lightbox2/dist/css/lightbox.min.css">
 
     {# tether #}
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ SITEURL }}/theme/bower_components/tether/dist/css/tether.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/bower_components/tether/dist/css/tether.min.css">
 
     {# highlight.js #}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
 
     {# google fonts #}
-    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Archivo+Narrow|Montserrat|Jaldi|Teko" rel="stylesheet">
 
     {# material css #}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
 
     {# my own #}
-    <link rel="stylesheet"
-          href="{{ SITEURL }}/theme/css/my.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/my.css">
 
     {# JQuery lib #}
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     {# angularJS #}
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js">
     </script>
     {% endblock %}
 
@@ -72,149 +52,127 @@
     {% block title %}
     <title>{{SITENAME}}</title>
     {% endblock %}
-  </head>
+</head>
 
-  <body>
+<body>
+    {# static pages #}
     {% block navbar %}
-    {% endblock %}<!-- end of block navbar -->
+    <header id="mypage-index">
+        <a href="{{SITEURL}}/">Home</a>
+        {% for p in pages %}
+        <a href="{{SITEURL}}/{{ p.url }}">
+            . {{ p.title }}
+        </a>
+        {% endfor %}
+    </header>
+    {% endblock %}
+    <!-- end of block navbar -->
 
     {% block main %}
-    <div>
-      <header class="page-header ">
-        <div class="container">
-          <div class="row">
-	    <div class="my-banner col s12">
-              <a href="{{SITEURL}}/" class="white-text">{{ SITENAME }}</a>
-	    </div>
-          </div>
+    <div class="split-screen">
+        <div class="split-left-pane">
+            <h3>
+                <a href="{{SITEURL}}/" class="white-text">{{ SITENAME }}</a>
+            </h3>
 
-          {# front page intro section #}
-          {% block introduction %}
-          {% endblock %}
-
-          {# static pages #}
-          <div class="row mypage-index">
-            <div class="col s12">
-              <a href="{{SITEURL}}/">Home</a>
-	      {% for p in pages %}
-              <a href="{{SITEURL}}/{{ p.url }}">
-                . {{ p.title }}
-              </a>
-	      {% endfor %}
-            </div>
-          </div>
+            {# front page intro section #}
+            {% block introduction %}
+            {% endblock %}
 
         </div>
-      </header><!-- end of block header -->
 
-      <div id="content">
-        {# main content #}
-	{% block content %}
-	{% endblock %}
+        <div class="split-right-pane">
 
-        {# pagination #}
-        {% block pagination %}
-        {% endblock %}
+            {# main content #}
+            <div id="content" class="container">
+                {% block content %}
+                {% endblock %}
 
-        {# block of related contents #}
-        {% block related %}
-        {% endblock %}
-      </div><!-- /.container -->
 
-      {# block push #}
-      {% block push %}
-      {% endblock %}
+                {# pagination #}
+                {% block pagination %}
+                {% endblock %}
+
+                {# block of related contents #}
+              <div id="related">
+                {% block related %}
+                {% endblock %}
+              </div>
+            </div>
+        </div>
     </div>
-    {% endblock %}<!-- end of block main -->
 
+    <footer>
+      <h1>Show Cases</h1>
+      <div id="showcase">
+        <p class="flabel">
+          Photo album:
+          <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+        </p>
+        <p class="flabel">
+          API & charts:
+          <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com">SP500</a>
+        </p>
+        <p class="flabel">
+          API & charts:
+          <a href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/">Snapshot of The World</a>
+        </p>
 
-    {% block footer %}
-    <footer class="page-footer">
-      <div class="container">
-	<div class="row">
-          <h5>Categories:</h5>
-          {% for c,article in categories %}
-          <a href="{{SITEURL}}/{{c.url}}">
-            <i class="fa fa-folder-open-o"></i>
-            {{ c }}
+        <p class="flabel">
+          Django (in Chinese):
+          <a href="{{SITEURL}}/project gkp demo.html">GKP</a>
+        </p>
+        <p class="flabel">
+          ERP:
+          <a href="{{SITEURL}}/project fashion demo.html">Fashion</a>
+        </p>
+        <p class="flabel">
+          Data processing:
+          <a href="{{SITEURL}}/project stock demo.html">Stock</a>
+        </p>
+        <p class="flabel">
+          Angular & REACT:
+          <a href="{{SITEURL}}/car leasing.html">Car leasing</a>
+          &nbsp;|&nbsp;
+          <a href="https://fengxia41103.github.io/spa-dashboard/">
+            YAML Config Dashboard
           </a>
-          {% endfor %}
-
-          <h5>Tags:</h5>
-          {% for c,article in tags %}
-          <a href="{{SITEURL}}/{{c.url}}">
-            <i class="fa fa-tag"></i>
-            {{ c }}
-          </a>
-          {% endfor %}
-	</div>
+        </p>
+        <p class="flabel">
+          API & REACT:
+          <a href="https://fengxia41103.github.io/movie/">Movies</a>
+        </p>
       </div>
 
-      <div class="footer-copyright">
-        <div class="container">
-          <div class="row">
-            <div class="col l8 m8 s12">
-          <p>
-            2016-2019 PY Consulting Ltd.
-            1236 Beacon Street, Brookline, MA 02146
-          </p>
-
-          <p>
-            <a href="mailto:{{EMAIL_ADDRESS}}">
-              <i class="fa fa-envelope"></i>
-            </a>
-
-            <a href="{{GITHUB_ADDRESS}}">
-              <i class="fa fa-github"></i>
-            </a>
-
-            <a href="{{LINKEDIN_ADDRESS}}">
-              <i class="fa fa-linkedin"></i>
-            </a>
-
-            <a href="">
-              <i class="fa fa-phone-square"></i>
-              (508)801-1794
-            </a>
-          </p>
-            </div>
-            <div class="col l4 m4 s12">
-              <p class="right">
-                <i class="fa fa-copyright"></i>
-                All rights reserved.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </footer>
-    </footer>
-    {% endblock %}<!- end of block footer -->
+    {% endblock %}
+
+    {# block push #}
+    {% block push %}
+    {% endblock %}
+    <!-- end of block main -->
+
+
 
 
     <!-- Placed at the end of the document so the pages load faster -->
     {% block Javascripts %}
     {# jquery-ui #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/jquery-ui/jquery-ui.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/jquery-ui/jquery-ui.min.js">
     </script>
 
     {# tether #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/tether/dist/js/tether.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/tether/dist/js/tether.min.js">
     </script>
 
     {# material css #}
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js">
     </script>
 
     {# DataTable #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/datatables/media/js/jquery.dataTables.min.js">
     </script>
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js">
     </script>
 
     {# lightbox: http://ashleydw.github.io/lightbox
@@ -223,94 +181,74 @@
     </script>
 
     {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js">
     </script>
 
     {# financejs #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/financejs/finance.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/financejs/finance.js">
     </script>
 
     {# Highcharts #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/highcharts/highcharts.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/highcharts/highcharts.js">
     </script>
 
     {# Lodash #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/lodash/dist/lodash.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/lodash/dist/lodash.min.js">
     </script>
 
     {# https://github.com/JedWatson/classnames #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/classnames/index.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/classnames/index.js">
     </script>
 
     {# REACT #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/react/react.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/react/react.js">
     </script>
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/react/react-dom.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/react/react-dom.min.js">
     </script>
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/babel/browser.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/babel/browser.min.js">
     </script>
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/remarkable/dist/remarkable.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/remarkable/dist/remarkable.min.js">
     </script>
 
     {# d3 and d3plus #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/d3/d3.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/d3/d3.min.js">
     </script>
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/js/d3plus.full.min.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/js/d3plus.full.min.js">
     </script>
 
     {# TOC https://github.com/ndabas/toc #}
-    <script type="text/javascript"
-            src="{{ SITEURL }}/theme/bower_components/jquery.toc/jquery.toc.js">
+    <script type="text/javascript" src="{{ SITEURL }}/theme/bower_components/jquery.toc/jquery.toc.js">
     </script>
 
     {# highlight.js #}
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
 
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"></script>
 
     {# application js #}
     <script type="text/javascript">
      var j$ = jQuery.noConflict();
 
 
-     j$(document).ready(function(){
+     j$(document).ready(function() {
        // common global widget initializations
        var table = j$('table.my-datatable').dataTable({
-	 paging: false,
-	 info:false,
-	 "pagingType": "simple"
+         paging: false,
+         info: false,
+         "pagingType": "simple"
        });
 
        // lightbox
-       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
-	 var url = j$(this).attr('src');
-	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
-	 j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+       j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e) {
+         var url = j$(this).attr('src');
+         j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href', url);
+         j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src', url);
        });
 
        // highlight.js initialization
@@ -334,7 +272,8 @@
        });
      });
     </script>
-    {% endblock %} <!-- end of block JS -->
+    {% endblock %}
+    <!-- end of block JS -->
 
     {# extra javascript code #}
     {% block theme_js %}
@@ -343,6 +282,6 @@
     {% endblock %}
     {% block reactjs %}
     {% endblock %}
-  </body>
+</body>
 
 </html>

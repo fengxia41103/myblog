@@ -58,7 +58,7 @@
     {# static pages #}
     {% block navbar %}
     <header id="mypage-index">
-        <a href="{{SITEURL}}/">Home</a>
+        <a href="{{SITEURL}}/">{{ SITENAME }} </a>
         {% for p in pages %}
         <a href="{{SITEURL}}/{{ p.url }}">
             . {{ p.title }}
@@ -71,10 +71,6 @@
     {% block main %}
     <div class="split-screen">
         <div class="split-left-pane">
-            <h3>
-                <a href="{{SITEURL}}/" class="white-text">{{ SITENAME }}</a>
-            </h3>
-
             {# front page intro section #}
             {% block introduction %}
             {% endblock %}

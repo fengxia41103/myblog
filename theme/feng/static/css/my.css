@@ -174,38 +174,6 @@ h6 {
     columns: 6;
 }
 
-.flabel {
-    display: inline-block;
-    float: left;
-    padding: 0 10px;
-    margin-right: 6px;
-    margin-bottom: 6px;
-    border: 1px solid #fefefe;
-    font: 13px/28px Universcom57Condensed, Arial, Helvetica, sans-serif;
-    font-family: Universcom57Condensed, Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    line-height: 28px;
-    /*color: #8c8c8c;*/
-    text-decoration: none;
-    transition: border-color 0.3s ease-out;
-    transition-property: border-color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-    transition-delay: initial;
-    background-color: #fefefe
-}
-
-.flabel:hover {
-    border: 1px solid #d52349;
-    background-color: white;
-    color: black;
-}
-
-
-.flabel:hover a {
-    color: #d52349;
-}
-
 
 .glyphicon-remove:hover,
 .fa-close:hover {
@@ -477,62 +445,65 @@ code {
 
 /* new CSS for grid layout */
 
-.split-screen {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 5px;
-    width: 100%;
-    min-height: 100vh;
-    overflow: auto;
+@media (min-width: 700px) {
+    .split-screen {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 5px;
+        width: 100%;
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    #showcase {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    header {
+        height: 70px;
+    }
+
+    footer {
+        padding: 3em;
+    }
+
+
+    #content {
+        margin-top: 90px;
+        min-height: 100vh;
+    }
 }
 
-.split-left-pane {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
+@media (max-width: 700px) {
+    .split-screen {
+        width: 100%;
+    }
 
-    /* background: url("/theme/images/background-1684.jpg") no-repeat; */
-    background: url("../images/mio.jpg") no-repeat;
-    background-color: #aaa;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: #efefef;
-    padding: 2em 3em;
-    overflow: hidden;
-    min-height: 1200px;
+    .split-left-pane {
+        min-height: 66vh;
+    }
+
+    #showcase {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    header {
+        height: 90px;
+    }
+
+    footer {
+        padding: 1em;
+    }
+
+    #content {
+        margin-top: 50px;
+    }
 }
-
-.split-right-pane {
-    row-gap: 10px;
-    overflow: auto;
-}
-
-#site-title {
-    font-family: 'Francois One', sans-serif;
-    font-size: 3em;
-    color: #fefefe;
-    grid-row: 2;
-}
-
-#showcase {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: 10px;
-    row-gap: 0;
-}
-
-#content {
-    margin-top: 100px;
-    min-height: 100vh;
-}
-
 
 header {
     display: block;
     width: 100%;
-    background-color: rgba(60, 59, 56, 0.5);
-    height: 70px;
+    background-color: rgba(52, 52, 52, 0.5);
     position: fixed;
     top: 0;
     left: 0;
@@ -540,8 +511,52 @@ header {
 }
 
 footer {
-    background-color: rgba(235, 232, 238);
-    padding: 3em;
+    background-color: rgba(43, 45, 47, 0.75);
+}
+
+#content {
+    padding-bottom: 3em;
+    color: rgba(52, 52, 52);
+}
+
+#showcase {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 0;
+}
+
+footer>h1 {
+    color: #fefff5;
+}
+
+.split-left-pane {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 10px;
+
+    /* background: url("/theme/images/background-1684.jpg") no-repeat; */
+    background: url("../images/mio.jpg") no-repeat;
+    background-color: rgba(52, 52, 52, 0.5);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #efefef;
+    padding: 2em 3em;
+    overflow: hidden;
+    /* min-height: 1200px; */
+}
+
+.split-right-pane {
+    overflow: auto;
+}
+
+
+#site-title {
+    font-family: 'Francois One', sans-serif;
+    font-size: 3em;
+    color: #fefefe;
+    grid-row: 2;
 }
 
 #mypage-index {
@@ -562,9 +577,34 @@ footer {
     column-gap: 10px;
 }
 
-#push {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+.flabel {
+    display: inline-block;
+    float: left;
+    padding: 0 10px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    border: 1px solid #fefefe;
+    font: 13px/28px Universcom57Condensed, Arial, Helvetica, sans-serif;
+    font-family: Universcom57Condensed, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 28px;
+    /*color: #8c8c8c;*/
+    text-decoration: none;
+    transition: border-color 0.3s ease-out;
+    transition-property: border-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    transition-delay: initial;
+    background-color: #fefff5;
+}
+
+.flabel:hover {
+    border: 1px solid #d52349;
+    background-color: white;
+    color: rgba(52, 52, 52);
+}
+
+
+.flabel:hover a {
+    color: #d52349;
 }

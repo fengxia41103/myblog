@@ -9,6 +9,9 @@
 {% endblock %}
 
 {% block content %}
+
+{% include 'pagination.html' %}
+
 {% for article in articles_page.object_list %}
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
@@ -31,7 +34,7 @@
 
 {# Dont' use article.content. The content is generated HTML. #}
 <p>
-    {{ article.summary|truncate(1000) }}
+    {{ article.summary }}
 </p>
 <a class="btn btn-default button" href="{{ article.url }}">
     <i class="fa fa-coffee" style="opacity:0.5;"></i>

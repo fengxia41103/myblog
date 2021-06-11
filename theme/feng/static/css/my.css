@@ -180,18 +180,19 @@ h6 {
     padding: 0 10px;
     margin-right: 6px;
     margin-bottom: 6px;
-    border: 1px solid #d7d7d7;
+    border: 1px solid #fefefe;
     font: 13px/28px Universcom57Condensed, Arial, Helvetica, sans-serif;
     font-family: Universcom57Condensed, Arial, Helvetica, sans-serif;
     font-size: 15px;
     line-height: 28px;
-    color: #8c8c8c;
+    /*color: #8c8c8c;*/
     text-decoration: none;
     transition: border-color 0.3s ease-out;
     transition-property: border-color;
     transition-duration: 0.3s;
     transition-timing-function: ease-out;
     transition-delay: initial;
+    background-color: #fefefe
 }
 
 .flabel:hover {
@@ -479,9 +480,10 @@ code {
 .split-screen {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 10px;
+    column-gap: 5px;
     width: 100%;
     min-height: 100vh;
+    overflow: auto;
 }
 
 .split-left-pane {
@@ -502,7 +504,7 @@ code {
 }
 
 .split-right-pane {
-    row-gap:10px;
+    row-gap: 10px;
     overflow: auto;
 }
 
@@ -513,39 +515,40 @@ code {
     grid-row: 2;
 }
 
-#showcase{
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  column-gap: 10px;
-  row-gap: 5px;
+#showcase {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 10px;
+    row-gap: 0;
 }
 
 #content {
-  margin-top:100px;
-  min-height: 100vh;
+    margin-top: 100px;
+    min-height: 100vh;
 }
 
 
-header{
-  display: block;
-  width: 100%;
-  background-color: rgba(60, 59, 56,0.5);
-  height: 70px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  vertical-align: middle;
+header {
+    display: block;
+    width: 100%;
+    background-color: rgba(60, 59, 56, 0.5);
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    vertical-align: middle;
 }
 
-footer{
-  background-color: rgba(10, 10, 11);
-  padding: 3em;
+footer {
+    background-color: rgba(235, 232, 238);
+    padding: 3em;
 }
 
-#mypage-index{
-  padding-top: 22px;
-  padding-left: 30px;
+#mypage-index {
+    padding-top: 22px;
+    padding-left: 30px;
 }
+
 #mypage-index a {
     color: #d52349;
 }
@@ -555,13 +558,13 @@ footer{
 }
 
 #related {
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
 }
 
-#push{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+#push {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }

@@ -51,11 +51,12 @@
     <div>
         {# article main body #}
         <div id="article-content">
+
+            {% if article.tags|tags_contain("lenovo") %}
             <blockquote>
-                {% if article.tags|tags_contain("lenovo") %}
                 <span class="myhighlight">Copyright @ Lenovo US</span>
-                {% endif %}
             </blockquote>
+            {% endif %}
             <p>
                 {{ article.content }}
             </p>

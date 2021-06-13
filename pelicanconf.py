@@ -58,7 +58,7 @@ LINKEDIN_ADDRESS = "https://www.linkedin.com/in/fengxia41103"
 
 LOAD_CONTENT_CACHE = False  # for development use
 
-# SUMMARY_MAX_LENGTH = 300
+SUMMARY_MAX_LENGTH = 175
 IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 
 # plugins
@@ -74,6 +74,7 @@ CATEGORY_URL = "{slug}.html"
 CATEGORY_SAVE_AS = "{slug}.html"
 TAG_URL = "tag-{slug}.html"
 TAG_SAVE_AS = "tag-{slug}.html"
+
 
 ##############################
 #

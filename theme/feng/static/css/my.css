@@ -13,6 +13,7 @@ h6 {
 
 #article-content {
     counter-reset: h1;
+    counter-reset: figures;
 }
 
 #article-content h1 {
@@ -337,15 +338,19 @@ img {
     width: 100%;
 }
 
+figure {
+    counter-increment: figures;
+}
+
 figcaption,
-img+em {
+img {
     margin-bottom: 1em;
     color: #545454;
     text-align: left;
 }
 
 figcaption:before,
-img+em:before {
+img:before {
     content: 'Fig.'counter(figures) ': ';
 }
 
@@ -468,7 +473,7 @@ code {
 
 /* new CSS for grid layout */
 
-@media (min-width: 700px) {
+@media (min-width: 800px) {
     .split-screen {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -497,7 +502,7 @@ code {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .split-screen {
         width: 100%;
     }

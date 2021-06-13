@@ -118,7 +118,32 @@
     <p><a href="https://en.wikipedia.org/wiki/Network_switch">Network switch</a> is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is <a href="https://pexpect.readthedocs.io/en/stable/">pexpect</a>, but even that gives you
 jinx sometimes when each switch can return you some random garbages
-once a while that makes <code>session.expect("your regex pattern")</code> to time …</p>
+once a while that makes <code>session.expect("your regex pattern")</code> to time
+out and you don't know why.</p>
+<h1>enos vs. cnos</h1>
+<p>Not much to say. These are two switch OS seen on Feng switches. They
+are all closely looked like Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html">IOS</a>, but different. </p>
+<ol>
+<li><a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf">CNOS manual</a></li>
+<li><a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf">ENOS commands</a> (Googling <code>enos manual</code> shows Feng switch
+   types, eg. G8272. So I guess the term is applicable on a model basis.)</li>
+</ol>
+<p>Anyway, the biggest difference to be aware is that CNOS device uses <code>display</code>
+while ENOS device uses <code>show</code>. To get a list of commands available:</p>
+<ol>
+<li>
+<p>CNOS: <code>display ?</code></p>
+<div class="highlight"><pre><span></span>```shell
+LCTC-R1U37-SW&gt;display ?
+  aaa               AAA Model
+  access            access parameters
+  access-lists      List IP access lists
+  arp               IP ARP table
+  banner            Show current motd banner message
+  bfd               Bidirectional Forwarding Detection (BFD)
+  bgp               Border Gateway Protocol (BGP)
+  cee               Converged Enhanced Ethernet
+  class-map         Class map entry …</pre></div></li></ol>
 </p>
 
 <p style="margin-top: 3em;">

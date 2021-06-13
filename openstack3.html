@@ -104,7 +104,32 @@ of coding in charm's Python files.</p>
 <p>Design objectives:</p>
 <ol>
 <li>Design as reusable <a href="https://jujucharms.com/docs/2.1/developer-layers">layer(s)</a></li>
-<li>Be compatible with Ubuntu and …</li></ol>
+<li>Be compatible with Ubuntu and CentOS</li>
+<li>Simple pattern to execute a playbook</li>
+</ol>
+<p>Assumption:</p>
+<ol>
+<li>Playbooks will be local (in charm) so to maintain the
+   atomic nature of a HW charm &mdash; the model contains both the
+   declaration of attributes and actions to handle runtime state transitions.</li>
+</ol>
+<h1>Method 1: layer-ansible</h1>
+<p>Method 1 is to use an existing project, <a href="https://github.com/chuckbutler/charms.ansible">layer-ansible</a>.</p>
+<p>Examine its code reveals a typical pattern one would use to introduce
+a new function:</p>
+<ol>
+<li>
+<p>Install Ansible. The approach it took is to use a
+   <code>ppa:ansible/ansible</code> source and installed by calling
+   <code>charmhelpers.fetch.apt_install</code>. The key issue here is using <code>ppa</code>
+   which is an <strong>hardcoded</strong> Ubuntu approach.</p>
+<div class="highlight"><pre><span></span>```python
+def install_ansible_support(from_ppa=True, ppa_location=&#39;ppa:ansible/ansible&#39;):
+  if from_ppa:
+      charmhelpers.fetch.add_source(ppa_location)
+      charmhelpers.fetch.apt_update(fatal=True)
+  charmhelpers.fetch.apt_install(&#39;ansible&#39;)
+  with …</pre></div></li></ol>
       </p>
   </div>
 

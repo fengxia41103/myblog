@@ -120,7 +120,19 @@
 but it didn't work for Angular 1.x code. </p>
 <p>The goal is to <strong>create a lookup/catalogue between code and visual</strong>
 because everyone on the team, including UI devs, can only engage a
-discussion using the visual (the rendered look) &mdash; so far …</p>
+discussion using the visual (the rendered look) &mdash; so far, I
+haven't been able to develop the capability to <em>see</em> how it will look
+like by just staring at code.</p>
+<p>This issue gets compounded when components are calling each other
+&mdash; some pages are calling all kinds of components, and these
+components are in turn used in all sorts of <em>parent</em> pages. This
+presents an issue how to knows its effect when, say, I'm taking a task
+to change this component? Without such a cross reference, I'm
+completely in the dark. Think about this, if component A is used in 3
+places, we should have 3 test cases just to be sure it doesn't break
+the visual.</p>
+<p>This leads me to a google search and I think the term for what I'm
+thinking is <a href="https://storybook.js.org/docs/testing/automated-visual-testing/">visual regression …</a></p>
 </p>
 
 <p style="margin-top: 3em;">

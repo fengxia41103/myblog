@@ -105,7 +105,28 @@ they must support PXE boot.</p>
 </blockquote>
 <h1>PXE boot</h1>
 <p>The MAAS machine functions as both the DHCP server and the TFTP
-server …</p>
+server, both are required to facilitate PXE booting. First, we creat a
+blank VM. The important things are:</p>
+<ol>
+<li>
+<p>Under <em>System &rarr; Mother board &rarr; Boot order</em>, check the
+    <em>Network</em>. However, it is not necessary to move the <em>Network</em> boot
+    above <em>Hard Disk</em>. When there is no OS deployed yet on the hard
+    disk, boot process will fall through to PXE anyway. Once an OS has
+    been installed, the machine will boot normally from HD.</p>
+<blockquote>
+<p>If you put PXE as the first order, this target will not boot
+into HD image at all.</p>
+</blockquote>
+</li>
+<li>
+<p>Set <em>Network &rarr; Adapter 1 &rarr; Internal Network</em>, named
+    <em>intnet</em>. This corresponds to the MAAS managed subnet of
+    192.168.8.0/24.</p>
+</li>
+</ol>
+<p>After this, start the target VM and it should PXE boot and will shut
+itself …</p>
       </p>
   </div>
 

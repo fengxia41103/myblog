@@ -101,7 +101,20 @@
 experience of Juju and its charms. However, if you have done charm
 development for a while, you know making a one line of code change,
 deploying charm, then wait to see the <em>new</em> code got executed &larr;
-it's good 5-10 …</p>
+it's good 5-10 minutes per cycle. These add up quickly when you are in
+the middle of churning out code to get your ideas written. Not to
+mention creating a new <code>machine</code> is 2x slower, and bootstraping a new
+controller is even worse. I had experience in Shanghai sitting 30+
+minutes for a new controller due to the location's unreliable
+connections, and sometimes it just failed w/ a timeout. </p>
+<p>What to do? The goal is to create a way to reduce this trial-error
+cycle as much as possible so to speed up code development.</p>
+<h1>Challenge</h1>
+<p>If you watch <code>juju debug-log</code> while it deploys a charm, you start to
+realize that there are roughly seven steps:</p>
+<ol>
+<li>creating a container (will discuss <code>--to</code> switch later)</li>
+<li>update/upgrade the new container …</li></ol>
       </p>
   </div>
 

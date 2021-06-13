@@ -5,7 +5,32 @@ to assist students get to know about the schools from multiple
 aspects. In this article, we will touch upon another important factor
 when going to college &amp;mdash; major.&lt;/p&gt;
 &lt;p&gt;In China, majors are split into three layers: category, subcategory,
-and majors. Similar …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
+and majors. Similar to the &lt;em&gt;state-city-school&lt;/em&gt; configuration,
+functions at category and subcategory level focus on statistic
+analysis so to offer an overview, where major level contains details
+that are relevant to that particular major which students would find
+useful.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_major_setup.png"/&gt;
+    &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;According to &lt;a href="https://fengxia41103.github.io/myblog/downloads/20121012084054830.pdf"&gt;document&lt;/a&gt;
+published by the &lt;a href="http://www.moe.gov.cn/publicfiles/business/htmlfiles/moe/s3882/201210/xxgk_143152.html"&gt;Department of Education&lt;/a&gt; in 2012, there are 12
+categories, 92 subcategories and 506 majors.&lt;/p&gt;
+&lt;h1&gt;Category and subcategory&lt;/h1&gt;
+&lt;p&gt;At this level, focus was to provide statistics which is similar to
+what is done for schools at &lt;em&gt;State level&lt;/em&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_18.png"/&gt;
+    &lt;figcaption&gt;Major category and subcategory&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Students can quickly browse through category and subcategory to locate
+area of interest she wants to drill further down.&lt;/p&gt;
+&lt;h1&gt;Major&lt;/h1&gt;
+&lt;p&gt;At this level, we think the most relevant information students want to
+know is the job …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
 two&lt;/a&gt;, I have introduced functions
 to assist students get to know about the schools from multiple
 aspects. In this article, we will touch upon another important factor
@@ -65,7 +90,45 @@ research at nation level, state and city level. In this article
 I'll talk about features built to help research at &lt;em&gt;school level&lt;/em&gt;.&lt;/p&gt;
 &lt;h1&gt;Bookmark&lt;/h1&gt;
 &lt;p&gt;While research schools, it is useful to bookmark a page for later
-use. That's where the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
+use. That's where the &lt;em&gt;bookmark&lt;/em&gt; feature comes in. User can save
+unlimited bookmarks and manage them by &lt;em&gt;x-out&lt;/em&gt;(remove) it from saved
+list. Convenient.&lt;/p&gt;
+&lt;figure class="row"&gt;
+    &lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_9.png" /&gt;
+    &lt;/div&gt;&lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_10.png" /&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;Bookmark a school&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;School summary&lt;/h1&gt;
+&lt;p&gt;School summary are mostly text extracted from multiple sources.  The
+first page contains an introduction, or a quick view, of the school.
+It contains many meta data that can be extracted to form more data
+dimensions.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_11.png"/&gt;
+    &lt;figcaption&gt;School summary&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;School detail page expands on top of the introduction. One small feature
+concerning development is that TOC is auto generated.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_12.png"/&gt;
+    &lt;figcaption&gt;School wiki&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Historical admission scores&lt;/h1&gt;
+&lt;p&gt;This page lists historical cutoff scores that the school has applied
+in past admissions. GKP has collected over 2,000,000 data records
+between 2010 and 2014 and covering 3,000 schools.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_13.png"/&gt;
+    &lt;figcaption&gt;School historical cutoff scores&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Students …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
 introduced functions that will help school
 research at nation level, state and city level. In this article
 I'll talk about features built to help research at &lt;em&gt;school level&lt;/em&gt;.&lt;/p&gt;
@@ -168,7 +231,25 @@ topics.&lt;/p&gt;</content><category term="gkp"></category></entry><entry><title
 Mr.Zhang, back in Jan, 2015.  Mr.Zhang has been in China's college
 education business for 15 year. He has succeeded in building a couple
 online training services and is also the head of a private
-college. The …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
+college. The GKP project is to consolidate multiple data sources into
+one place so to facilitate high school graduates and their parents
+searching and evaluating college and university.&lt;/p&gt;
+&lt;p&gt;In this article I'll give a brief introduction of core functions and
+thoughts behind each design. It also illustrates how we have
+approached each problem with the solution you are currently seeing.&lt;/p&gt;
+&lt;h1&gt;User preference&lt;/h1&gt;
+&lt;p&gt;An important tool is the &lt;code&gt;user preference&lt;/code&gt;. Each user can specify her own
+searching criteria so to narrow down from a general search to a more
+customized version.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_2.png" /&gt;
+    &lt;figcaption&gt;Set up user preferences&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;These settings are related directly to how Chinese college categorize
+students. Take the &lt;strong&gt;Geo requirement&lt;/strong&gt; setting for example.  Let's say
+that MIT takes 3,000 freshmen each year. Instead of accepting
+application nation …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
 Mr.Zhang, back in Jan, 2015.  Mr.Zhang has been in China's college
 education business for 15 year. He has succeeded in building a couple
 online training services and is also the head of a private

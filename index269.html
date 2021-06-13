@@ -121,7 +121,26 @@ text editing. Still on the learning curve to get a grasp of what it
 can do in my daily development workflow.</p>
 <h1>install emacs26</h1>
 <p>The easiest way to get this: <code>sudo add-apt-repository
-ppa …</code></p>
+ppa:kelleyk/emacs</code>, then <code>apt remove emacs emacs25 &amp;&amp; apt update &amp;&amp;
+apt install emacs26</code>, then verify <code>emacs --version</code>.</p>
+<h1>bootstrap &amp; config</h1>
+<p>Welcome the wonderful <code>org-mode</code> and the <a href="https://fengxia41103.github.io/myblog/downloads/emacs/emacs_setup.html">config file in org-mode</a>. Bootstrap is easy:</p>
+<ol>
+<li>backup your current emacs: <code>mv ~/.emacs.d ~/.emacs.d.bak</code></li>
+<li>create <code>.emacs</code>, or copy <a href="https://fengxia41103.github.io/myblog/downloads/emacs/dot_emacs.el">.emacs</a> to <code>~</code>.</li>
+<li>launch emacs, sit back, and once all packages are downloaded and
+   compiled, you are done.</li>
+</ol>
+<h1>replace in files</h1>
+<p>Replacing a string match in multiple files is common, but
+tricky. Emacs doesn't make this intuitive at all. Follow these steps
+to get there:</p>
+<ol>
+<li><code>M-x find-grep-dired</code></li>
+<li><code>Find-grep (directory)</code>: is to select the root folder for the scan</li>
+<li><code>Find-grep (grep regexp)</code>: is the regex for the string pattern you
+   are searching, eg. <code>"images/</code> is to find anything starts with a
+   double …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">

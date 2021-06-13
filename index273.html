@@ -120,7 +120,27 @@
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of
 them makes sense after a while. Its <a href="https://jujucharms.com/docs/2.0/glossary">terminology</a> page helps on
-understanding individual …</p>
+understanding individual term. But like other Canonical documents, it
+needs a design level diagram to help user grasp the structure of this
+wealth of knowledge.</p>
+<p>So here it is my attemp to show the relationship between these
+terms. Instead of drawing a tree to reflect 1-N relationship, I used
+an outer enclosure which can have multiple of its inner enclosures,
+eg. a bundle can have N charms.</p>
+<figure class="s12 center">
+  <img src="images/juju%20control%20modeling.png"/>
+  <figcaption>Juju control models</figcaption>
+</figure>
+
+<p>A few interesting points besides the 1-N relationships. </p>
+<ul>
+<li>A single application can be deployed on multiple machines,
+  eg. Application #2 has two units. This is how one application can be
+  scaled out horizontally.</li>
+<li>One machine, in turn, can host multiple applications, eg. one unit
+  of application #2 and #3 both live on the same machine.</li>
+</ul>
+<p>By default …</p>
 </p>
 
 <p style="margin-top: 3em;">

@@ -5,7 +5,30 @@ reviewed inventory management and order management. Their functions
 are meant for operator to book-keep information of daily operations.
 Once these data points have been captured, the power of the application
 shines in term of data analysis and reporting.&lt;/p&gt;
-&lt;p&gt;Reports can be grouped …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; and
+&lt;p&gt;Reports can be grouped into three categories:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports at product level&lt;/span&gt;: top
+   seller, top purchased, top profitable&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports at order level&lt;/span&gt;: top SO by
+   qty balance, top SO in-progress fulfills&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports of seller/buyer account
+   level&lt;/span&gt;: customer AR, vendor AP&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Data points are essentially rolled up following this pattern: product level &amp;rarr; order level
+&amp;rarr; account level.&lt;/p&gt;
+&lt;h1&gt;Product level reports&lt;/h1&gt;
+&lt;h2&gt;Top selling product&lt;/h2&gt;
+&lt;p&gt;Knowing the top seller is the most important thing for any business.
+The report is compiled from sales orders to show which product is high in demand.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_19.png"&gt;
+    &lt;figcaption&gt;Top seller report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Top profitable product&lt;/h2&gt;
+&lt;p&gt;Your best seller shows the demand, but they are not necessarily
+the best for your business if their margin is low. Instead, a high margin
+item may be the target that your next market campaign …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; and
 &lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;part two&lt;/a&gt;, we have
 reviewed inventory management and order management. Their functions
 are meant for operator to book-keep information of daily operations.
@@ -102,7 +125,19 @@ shown the design and function behind Product and Inventory management.
 In this article I'll talk about orders.&lt;/p&gt;
 &lt;p&gt;Sales order and purchase order are like two sides of the same coin.
 Each sales order(SO) can include a mixed bag of products from
-different vendors. Once …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
+different vendors. Once a SO has been created, application will parse
+it into multiple purchase order (PO) and route them to their
+vendor. Reversely, company can place a PO with a vendor, and purchased
+products can be used to fulfill multiple sales orders later.&lt;/p&gt;
+&lt;h1&gt;Order life cycle&lt;/h1&gt;
+&lt;p&gt;To understand the design of orders, one has to first grasp the life
+cycle of an order. I'd like to divide its functions into roughly two
+areas: &lt;em&gt;about physical good&lt;/em&gt; and &lt;em&gt;about money&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The area of physical goods takes care of the acquisition of products
+on order. This includes shipping, receiving, reconciliation,
+inventory, product return and substitution. Like what we did in
+inventory, we maintain a theoretical list which comes from the sales
+order itself (think of it as a wish …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
 shown the design and function behind Product and Inventory management.
 In this article I'll talk about orders.&lt;/p&gt;
 &lt;p&gt;Sales order and purchase order are like two sides of the same coin.
@@ -347,7 +382,20 @@ utilized to drive a better operation.&lt;/p&gt;</content><category term="fashion
 operations in an international trading company who has a specialty in
 fashion products. Each season there are between 10 and 20 vendors and
 a few thousand new SKUs. Most vendors roll out new designs twice per
-year &amp;mdash; spring …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Project Fashion is an ERP system built from ground up based on
+year &amp;mdash; spring/summer season and fall/winter season. Some may
+have new products every month. To keep track of these products and
+keep up with vendor's schedule have been the primarily challenge this
+coompany has.&lt;/p&gt;
+&lt;p&gt;The system's role, therefore, is to replace previously paper-based
+operations with now an online version so that product catelogue can be
+centrally maintained, and multiple subsidaries who are geographically
+separated can coordinate sales, purchase and inventory, and upper
+management can receive instant up-to-date reports and the ability to
+drill down to SKU level details when needed.&lt;/p&gt;
+&lt;p&gt;Unlike a full blown ERP, a decision was made during design to remove
+complexity so user and customer can operate with little training.
+Configurable UI and workflow were scratched off. Instead, hard coded
+workflow and accurate …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Project Fashion is an ERP system built from ground up based on
 operations in an international trading company who has a specialty in
 fashion products. Each season there are between 10 and 20 vendors and
 a few thousand new SKUs. Most vendors roll out new designs twice per

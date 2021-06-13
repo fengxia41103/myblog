@@ -123,7 +123,19 @@
 <p>While fixing my <a href="https://github.com/fengxia41103/jk">stock project</a>, I hit a road block, that Yahoo's 
 free finance API is <a href="https://forums.yahoo.net/t5/Yahoo-Finance-help/Is-Yahoo-Finance-API-broken/td-p/250503">gone!</a>, no more. This is quite a bummer. How
 to get daily quotes so to reestablish the data stream? Well, as a the
-beauty of free market, someone is always up to the …</p>
+beauty of free market, someone is always up to the service if there is
+a demand. So I ended up using <a href="https://www.alphavantage.co/documentation/">Alpha Advantage API</a> for a change.</p>
+<p>Tagging on top the <a href="https://fengxia41103.github.io/myblog/data visualization.html">World Snapshot</a> project, this one is
+essentially a graph browser that takes the API data stream based on
+user selected company symbol, and draw all the data index on a single page.</p>
+<blockquote>
+<p><a href="http://sp500chart.s3-website-us-east-1.amazonaws.com">live demo</a></p>
+</blockquote>
+<p>The <code>architecture</code>/<code>design</code> is shown below, and <a href="https://github.com/fengxia41103/sp500">github code</a>.</p>
+<figure class="s12 center">
+  <img src="images/sp500%20architecture.png"/>
+  <figcaption>SP500 SPA architecture</figcaption>
+</figure>
 </p>
 
 <p style="margin-top: 3em;">

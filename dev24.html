@@ -102,7 +102,32 @@
 <p>The idea here is to use <code>xinput</code> command to tune finger sensitivity
 values so to find a good balance. Also, we are to <strong>disable</strong> touch
 point (the little read dot rubber thingy on Lenovo's laptops) since I
-don't …</p>
+don't ever use it.</p>
+<ol>
+<li>
+<p><code>xinput list</code> to get a list (uses the <code>ssh -X</code> if on remote
+   machine):</p>
+<div class="highlight"><pre><span></span>```shell
+(dev) fengxia@fengxia-lenovo:~/workspace/wss$ xinput list
+⎡ Virtual core pointer                      id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ SynPS/2 Synaptics TouchPad                id=11   [slave  pointer  (2)]
+⎜   ↳ TPPS/2 IBM TrackPoint                     id=13   [slave  pointer  (2)]
+⎣ Virtual core keyboard                     id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    ↳ Power Button                              id=6    [slave  keyboard (3)]
+    ↳ Video Bus                                 id=7    [slave  keyboard (3)]
+    ↳ Sleep Button                              id=8    [slave  keyboard (3)]
+    ↳ Integrated Camera                         id=9    [slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard              id=10   [slave  keyboard (3)]
+    ↳ ThinkPad Extra Buttons                    id=12   [slave  keyboard (3)]
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>To disable …</p></li></ol>
       </p>
   </div>
 

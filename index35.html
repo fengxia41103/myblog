@@ -119,7 +119,24 @@
 <p>We use Jira for project manage, and git for code. W/ a plugin, Jira is
 able to integrate w/ Gitlab such as create a link to git commit as
 comment. However, it has not the capability to create statistic
-analysis of git commits within Jira, for example, how to …</p>
+analysis of git commits within Jira, for example, how to know the
+number of line changes of a Jira (number of line changes are a good
+indicator of workload as well as a hotspot of bugs), and vice versa,
+how to know a commit is part of a release 5.1.1 (the <code>fix version</code>
+attribute in Jira)? If we are to generate a <strong>release note</strong> of a
+release, wouldn't it be nice if it listed out:</p>
+<ul>
+<li>list of Jira &rarr; tasks the team wants to achieve in planning</li>
+<li>list of commits &rarr; actual code changes/contributions</li>
+<li>statistics of grouped information such as number of commits by Jira
+component, or label</li>
+<li>developer contributions: who changed which file, and how much was
+changed</li>
+</ul>
+<p>Further, when team follows a development workflow, such as the
+<em>popular</em> <a href="https://nvie.com/posts/a-successful-git-branching-model/">git
+strategy</a>,
+it is …</p>
 </p>
 
 <p style="margin-top: 3em;">

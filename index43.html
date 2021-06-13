@@ -123,7 +123,20 @@
 Then I would dare to say that you haven't had first hand experience
 using it in a full blown enterprise environment &mdash; when in such
 environment, the challenge isn't about git itself, but what the
-content of a release are, and …</p>
+content of a release are, and how we are testing/CICD them.</p>
+<p>You would think it sounds rather cliche that this problem even
+exists. After all, these are what a software engineering is all about,
+aren't they? But take a step back and consider this scenario:</p>
+<ol>
+<li>We just did a release 5.0.0.</li>
+<li>We have two features: 1 &amp; 2.</li>
+<li>Initially they were all targeting the next release, say <code>5.1</code>.</li>
+<li>We create a <strong>staging</strong> branch, <code>5.1-staging</code> and point our CICD to
+   this so to QA them (more on this later).</li>
+<li>Feature 1 &amp; 2 have been merged into <code>5.1-staging</code>. Their source
+   branches, eg. <code>feature-1</code>, have been deleted &larr; at merge
+   request, select to delete source branch.</li>
+<li>Time is slipping, 5.1 is up this Friday, but one feature is failing …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">

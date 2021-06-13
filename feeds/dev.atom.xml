@@ -3,7 +3,24 @@
 &lt;p&gt;We use Jira for project manage, and git for code. W/ a plugin, Jira is
 able to integrate w/ Gitlab such as create a link to git commit as
 comment. However, it has not the capability to create statistic
-analysis of git commits within Jira, for example, how to …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Introduction&lt;/h1&gt;
+analysis of git commits within Jira, for example, how to know the
+number of line changes of a Jira (number of line changes are a good
+indicator of workload as well as a hotspot of bugs), and vice versa,
+how to know a commit is part of a release 5.1.1 (the &lt;code&gt;fix version&lt;/code&gt;
+attribute in Jira)? If we are to generate a &lt;strong&gt;release note&lt;/strong&gt; of a
+release, wouldn't it be nice if it listed out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;list of Jira &amp;rarr; tasks the team wants to achieve in planning&lt;/li&gt;
+&lt;li&gt;list of commits &amp;rarr; actual code changes/contributions&lt;/li&gt;
+&lt;li&gt;statistics of grouped information such as number of commits by Jira
+component, or label&lt;/li&gt;
+&lt;li&gt;developer contributions: who changed which file, and how much was
+changed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Further, when team follows a development workflow, such as the
+&lt;em&gt;popular&lt;/em&gt; &lt;a href="https://nvie.com/posts/a-successful-git-branching-model/"&gt;git
+strategy&lt;/a&gt;,
+it is …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;We use Jira for project manage, and git for code. W/ a plugin, Jira is
 able to integrate w/ Gitlab such as create a link to git commit as
 comment. However, it has not the capability to create statistic
@@ -337,7 +354,19 @@ and so on. These topics are beyond the scope of this document.&lt;/p&gt;</conten
 &lt;p&gt;As a sequel to our discussion on &lt;a href="https://fengxia41103.github.io/myblog/git strategy.html"&gt;git strategy&lt;/a&gt;, we have started w/
 an objective that we want to "control the release content". Further, I
 discussed how &lt;strong&gt;backwards compatibility&lt;/strong&gt; of releases may not be true
-if we are introducing long-term-support on releases, that hot …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12 center"&gt;
+if we are introducing long-term-support on releases, that hot fixes
+and bugs can only &lt;strong&gt;roll forward&lt;/strong&gt;, eg. V4 bugs can be patched to V5
+(assuming V5 was released after V4, time wise and git commit wise),
+but not from V5 &amp;rarr; V4 without introducing some V5 contents into V4
+(whether this is desired or not is the focal of the discussion,
+essentially, how much control you want to have over the release
+content!?)&lt;/p&gt;
+&lt;p&gt;Now, let's build on top of this and say that &lt;strong&gt;we want backwards
+compatibility&lt;/strong&gt; &amp;mdash; all newer releases are always backwards
+compatible? This is certainly a desired outcome because this makes
+upgrade and maintenance easier (who wants to maintain a 10-year-old
+code when a customer &lt;em&gt;frozen in time&lt;/em&gt; call you of a bug which you
+probably don't even remember who wrote that crap …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12 center"&gt;
   &lt;img
   src="images/olympia/git%20strategy%20rebase%20for%20release.png"/&gt;
   &lt;figcaption&gt;
@@ -419,7 +448,20 @@ feel comfortable, to keep your branch in sync w/ moving targets
 Then I would dare to say that you haven't had first hand experience
 using it in a full blown enterprise environment &amp;mdash; when in such
 environment, the challenge isn't about git itself, but what the
-content of a release are, and …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12 center"&gt;
+content of a release are, and how we are testing/CICD them.&lt;/p&gt;
+&lt;p&gt;You would think it sounds rather cliche that this problem even
+exists. After all, these are what a software engineering is all about,
+aren't they? But take a step back and consider this scenario:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We just did a release 5.0.0.&lt;/li&gt;
+&lt;li&gt;We have two features: 1 &amp;amp; 2.&lt;/li&gt;
+&lt;li&gt;Initially they were all targeting the next release, say &lt;code&gt;5.1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We create a &lt;strong&gt;staging&lt;/strong&gt; branch, &lt;code&gt;5.1-staging&lt;/code&gt; and point our CICD to
+   this so to QA them (more on this later).&lt;/li&gt;
+&lt;li&gt;Feature 1 &amp;amp; 2 have been merged into &lt;code&gt;5.1-staging&lt;/code&gt;. Their source
+   branches, eg. &lt;code&gt;feature-1&lt;/code&gt;, have been deleted &amp;larr; at merge
+   request, select to delete source branch.&lt;/li&gt;
+&lt;li&gt;Time is slipping, 5.1 is up this Friday, but one feature is failing …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="col s12 center"&gt;
   &lt;img src="images/funny/a%20lot%20of%20cats.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -1076,7 +1118,18 @@ foled to &lt;code&gt;develop&lt;/code&gt; as an official release.&lt;/p&gt;
 shaky underline language &amp;mdash; Javascript, is itself,
 confusing. Well, even by just looking at its name, how many people
 have thought that it is a &lt;em&gt;script&lt;/em&gt; derived from Java!? Oh well well,
-here are some notes I take …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+here are some notes I take while studying Angular(JS, sometimes), and
+&lt;code&gt;.js&lt;/code&gt;. Btw, there is another article about all the confusion of &lt;a href="https://fengxia41103.github.io/myblog/ecmascript.html"&gt;&lt;code&gt;ES&amp;lt;a
+number&amp;gt;&lt;/code&gt; denotation&lt;/a&gt; that can clarify those naming/version hell.&lt;/p&gt;
+&lt;h1&gt;scope&lt;/h1&gt;
+&lt;p&gt;Scope is always the most fundamental concept I read of a language, and
+for all I know, I'm expecting something like a &lt;code&gt;global&lt;/code&gt; and a &lt;code&gt;local&lt;/code&gt;,
+that a local is always &lt;em&gt;private&lt;/em&gt; to its enclosed curly brackets or any
+nearest declaration &lt;em&gt;chunk&lt;/em&gt; &amp;mdash; if it is declared in a function, it
+is available in a function, not outside; if it is declared in a &lt;code&gt;for&lt;/code&gt;
+loop, well, it is only useful inside the &lt;code&gt;for&lt;/code&gt; loop, not outside.&lt;/p&gt;
+&lt;p&gt;But there comes this country boy Javascript, and for the first time I
+realized there are actually 3 scopes: global …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/wise%20doctor.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -1256,7 +1309,19 @@ itself, not outside the function.&amp;#160;&lt;a class="footnote-backref" href="
 what to study/learn. Whiling writing my responses, many thoughts came
 to me, so I'm pasting the email here since I believe they are very
 relevant in these topics, and they are truthfully represent what I
-think …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+think about them.&lt;/p&gt;
+&lt;h1&gt;data structure, project Euler&lt;/h1&gt;
+&lt;p&gt;I don't recommend you study data structure or OS on paper at
+all. There are three data structures you need to know, and they cover
+90% of all cases you will ever encounter in your career &amp;mdash; array,
+link list, and hash table. In Python's term, they are list -&amp;gt; array,
+no equivalent -&amp;gt; link list, and dictionary -&amp;gt; hash table.&lt;/p&gt;
+&lt;p&gt;Pick a language you feel comfortable w/, and whatever the term they
+use to describe these 3 data structures, read about them. There is no
+better way to &lt;em&gt;study&lt;/em&gt; them other than finding a &lt;em&gt;real&lt;/em&gt; problem to
+solve using these. I recommend you to try &lt;a href="https://projecteuler.net/"&gt;Project
+Euler&lt;/a&gt;. They are pure mathematical
+problems, and forces you to use these data structure &lt;em&gt;creatively&lt;/em&gt; for …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/scissors.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -1483,7 +1548,18 @@ easy. The problems I want to fix are:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Loading browser is too slow &amp;larr; how many times I just want to
    get a view of the comment or description so to refresh my memory.&lt;/li&gt;
-&lt;li&gt;Navigating from one …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+&lt;li&gt;Navigating from one ticket to another is to open a new tab, but
+   that just clutter my browser. Very soon I don't remember which tab
+   is for which ticket, so ended up openning the same jira over and
+   over.&lt;/li&gt;
+&lt;li&gt;To switch its status is again, to load page, click some kind of
+   dropdown, then click to select &amp;rarr; 3 clicks. No, I already know
+   what status I want it to be, so I want to simplify this.&lt;/li&gt;
+&lt;li&gt;#3 also applies to reassign a ticket to someone &amp;mdash; there are
+   usually only a handful ppl you deal w/ on a daily basis during
+   development. Instead of waiting for the spinning wheel to come up
+   the name, just memorize the user's name, and assign.&lt;/li&gt;
+&lt;li&gt;This is actually the very first reason got …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/jira.gif"/&gt;
 &lt;/figure&gt;
 
@@ -2294,7 +2370,40 @@ while it will use disk files from your installation!&lt;/p&gt;
 &lt;p&gt;In my previous notes on &lt;a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html"&gt;analyzing Angular 1.x code&lt;/a&gt;, I have stuck at
 how to create snapshots of rendered components for my documentation
 purpose. In the manual data file &lt;code&gt;.json&lt;/code&gt;, I allowed an entry to plug
-in snapshot file taken by human testers. As an example, the code below …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+in snapshot file taken by human testers. As an example, the code below
+shows a block documenting:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;module: &lt;code&gt;mwc.mapping&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;its components as a LIST, and each has a key &lt;code&gt;screenshot&lt;/code&gt; that is a
+   path to the snapshot file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;quot;components&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;source file&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;../app/topology/components/mappings.component.ts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mwc-mappings&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;screenshot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;./screenshots/mwc-mappings.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;used by&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;using&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-create-flash-pool-button&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-flash-pool-actions-button&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-create-migration-zone-button&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;mwc-migration-zone-actions-button&amp;quot;&lt;/span&gt;
+      &lt;span class="p"&gt;],&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;quot;class&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;MappingsComponent&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;mwc.mappings&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Well, this gets me going to create the &lt;a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf"&gt;example doc&lt;/a&gt;, but to have
+human hunting down screenshots always give me a fishy feeling &amp;mdash;
+you know how deeply I do not trust human to be &lt;strong&gt;exhaustive&lt;/strong&gt; and
+&lt;strong&gt;deterministic&lt;/strong&gt; &amp;mdash; on a good day or w/ a capable person, yes,
+you get a pretty satisfactory result, but even then, it's no guarantee
+his/her next day's delivery will be the same. Not to mention …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/back%20rub.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -2496,7 +2605,30 @@ sudo cp geckodriver /usr/local/bin/
 code base to pick up interested artifacts &amp;larr; brand
 indicator. Definition of these artifacts are highly contextual,
 meaning that a string &lt;code&gt;feng&lt;/code&gt; can mean a variable, or a string literal,
-or something else. Think of it, how …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
+or something else. Think of it, how many programming languages in your
+application stack, and how many different comment styles there are!?
+Crazy.&lt;/p&gt;
+&lt;p&gt;So let's start w/ the most basic &amp;mdash; string literal &amp;mdash; if I
+find a string &lt;code&gt;whatever&lt;/code&gt; (old brand), replace it w/ &lt;code&gt;feng&lt;/code&gt; (new
+brand).&lt;/p&gt;
+&lt;h1&gt;the how&lt;/h1&gt;
+&lt;p&gt;The script can be found &lt;a href="https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py"&gt;here&lt;/a&gt;. The idea is to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Walk through &lt;code&gt;root&lt;/code&gt; folder and its subfolders and files.&lt;/li&gt;
+&lt;li&gt;File is selected by its extension &amp;mdash;  an exclusion list and an inclusion
+   list. Exclusion has a default list to exclude all binary formats,
+   eg. &lt;code&gt;.png&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open the file as text file, search line by line whether interested
+   pattern in found.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If found, log down the file full path, line number, and original
+     line text.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Identify &lt;code&gt;reference&lt;/code&gt;, which is defined as &lt;code&gt;/&amp;lt;.....&amp;gt;&lt;/code&gt; &amp;mdash; this
+   covers reference to a …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Rebranding is a common task. The core of it is how to evaluate your
 code base to pick up interested artifacts &amp;larr; brand
 indicator. Definition of these artifacts are highly contextual,
 meaning that a string &lt;code&gt;feng&lt;/code&gt; can mean a variable, or a string literal,
@@ -2874,7 +3006,19 @@ brand).&lt;/p&gt;
 but it didn't work for Angular 1.x code. &lt;/p&gt;
 &lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
 because everyone on the team, including UI devs, can only engage a
-discussion using the visual (the rendered look) &amp;mdash; so far …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
+discussion using the visual (the rendered look) &amp;mdash; so far, I
+haven't been able to develop the capability to &lt;em&gt;see&lt;/em&gt; how it will look
+like by just staring at code.&lt;/p&gt;
+&lt;p&gt;This issue gets compounded when components are calling each other
+&amp;mdash; some pages are calling all kinds of components, and these
+components are in turn used in all sorts of &lt;em&gt;parent&lt;/em&gt; pages. This
+presents an issue how to knows its effect when, say, I'm taking a task
+to change this component? Without such a cross reference, I'm
+completely in the dark. Think about this, if component A is used in 3
+places, we should have 3 test cases just to be sure it doesn't break
+the visual.&lt;/p&gt;
+&lt;p&gt;This leads me to a google search and I think the term for what I'm
+thinking is &lt;a href="https://storybook.js.org/docs/testing/automated-visual-testing/"&gt;visual regression …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/compodoc/compodoc"&gt;Compodoc&lt;/a&gt; can generate component hierarchy diagrams, call chains,
 but it didn't work for Angular 1.x code. &lt;/p&gt;
 &lt;p&gt;The goal is to &lt;strong&gt;create a lookup/catalogue between code and visual&lt;/strong&gt;
 because everyone on the team, including UI devs, can only engage a
@@ -2957,7 +3101,22 @@ browser).&lt;/p&gt;
 
 &lt;h1&gt;spec&lt;/h1&gt;
 &lt;p&gt;The mother of all is the &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, which is the spec. It has
-some wild release notion and cycles. The important one for me is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
+some wild release notion and cycles. The important one for me is the
+&lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, and I think starting from that release, the schedule
+becomes annual, thus we have &lt;code&gt;ECMAScript 2016&lt;/code&gt; and so on. Since the
+2015 release is the &lt;strong&gt;6th&lt;/strong&gt; revision of the spec, thus also created
+the notion &lt;code&gt;ES6&lt;/code&gt; (&lt;code&gt;ES2015&lt;/code&gt; ==  &lt;code&gt;ES6&lt;/code&gt;).&lt;/p&gt;
+&lt;h1&gt;spec implementation&lt;/h1&gt;
+&lt;p&gt;Javascript, together with &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ActionScript"&gt;ActionScript&lt;/a&gt;, are
+implementation of this spec, and of course, by different
+companies. The problem is, each implements some subset of the spec,
+thus there are overlaps as well as incompatibilities. Sucks!
+Therefore, when reading some Javascript articles, there is always
+reference to &lt;code&gt;ES6&lt;/code&gt; compatible or a feature, which means whether the
+Javascript implementation is up to that spec's release, or not.&lt;/p&gt;
+&lt;h1&gt;javascript engine and compatibility&lt;/h1&gt;
+&lt;p&gt;Ok. Here comes the giant twist &amp;mdash; starting when the spec
+committee decides that before …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Isn't this confusing &amp;mdash; &lt;a href="https://en.wikipedia.org/wiki/ECMAScript"&gt;ECMAScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015"&gt;ES2015&lt;/a&gt;, ES6, Javascript,
 &lt;a href="https://en.wikipedia.org/wiki/JScript"&gt;JScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/CoffeeScript"&gt;CoffeeScript&lt;/a&gt;, &lt;a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript"&gt;TypeScript&lt;/a&gt;... what the heck!?&lt;/p&gt;
 &lt;figure class="col s12"&gt;
   &lt;img src="images/ecmascript%20relationship.png"/&gt;
@@ -3094,7 +3253,50 @@ and start to make sense, hopefully.&lt;/p&gt;
 &lt;p&gt;This is a common question any team/project will have to address
 &amp;mdash; how to structure the knowledge we know of a project so that we
 are not missing things? Each project/application, of course, is
-different. But the overall is actually quite common. Here …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l5 m5 s12"&gt;
+different. But the overall is actually quite common. Here is a
+structure I'm proposing that is applicable not only during initial
+learning phase, but can guide the design and development as well.&lt;/p&gt;
+&lt;p&gt;Take an example that we are building a portal, which has frontend and
+backend &amp;mdash; the &lt;code&gt;backend&lt;/code&gt; is showing more levels than the
+&lt;code&gt;frontend&lt;/code&gt;, the idea is the same:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Portal
+  Frontend
+    Design
+    Build/packaging
+    Dev breakdown &lt;span class="o"&gt;(&lt;/span&gt;incl. unit tests&lt;span class="o"&gt;)&lt;/span&gt;
+    Tests
+
+  Backend
+    Design
+      Logical &lt;span class="nv"&gt;view&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; &lt;span class="nv"&gt;components&lt;/span&gt;
+                   &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; key technology stack
+      Components
+        REST API
+        web portal
+        another..
+        another..
+
+
+    Build/packaging
+      &lt;span class="k"&gt;for&lt;/span&gt; dev
+      &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;production&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; CICD integration   
+
+
+    Dev breakdown &lt;span class="o"&gt;(&lt;/span&gt;incl. unit tests&lt;span class="o"&gt;)&lt;/span&gt;
+      component A
+      component B
+      ....
+
+
+    Tests
+      all non-dev covered &lt;span class="nv"&gt;tests&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; QA
+        code static analysis &lt;span class="o"&gt;(&lt;/span&gt;LINT, style check, best practice&lt;span class="o"&gt;)&lt;/span&gt;
+        scenario tests &lt;span class="o"&gt;(&lt;/span&gt;incl. &lt;span class="s2"&gt;&amp;quot;integration&amp;quot;&lt;/span&gt; tests&lt;span class="o"&gt;)&lt;/span&gt;
+      &lt;span class="nv"&gt;machinary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; CICD integration
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The key is to compose a design/component view …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l5 m5 s12"&gt;
   &lt;img src="images/moses.jpg"/&gt;
   &lt;figcaption&gt;If the Bible story happens today&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -3158,7 +3360,35 @@ document for work. Here is some tips of how I'm using it.&lt;/p&gt;
 &lt;h1&gt;doc header&lt;/h1&gt;
 &lt;p&gt;Things that are specific to that document. This, thus, is context
 sensitive &amp;mdash; &lt;code&gt;title&lt;/code&gt;, &lt;code&gt;subtitle&lt;/code&gt;, &lt;code&gt;author&lt;/code&gt;, &lt;code&gt;bibliography&lt;/code&gt;,
-&lt;code&gt;abstract&lt;/code&gt;, &lt;code&gt;keywords …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+&lt;code&gt;abstract&lt;/code&gt;, &lt;code&gt;keywords&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;title&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Open Cloud  Reference Architecture&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;subtitle&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Version 1.0&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;author&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Feng Xia&lt;/span&gt;
+
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;bibliography&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;feng.bib&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;keywords&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;Open Cloud&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;abstract&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+
+  &lt;span class="no"&gt;Anything goes here.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One catch is semicolon in &lt;code&gt;title&lt;/code&gt;! Unbelievably, which I haven't
+figured out why, that including a ":" in the title string will mess
+up export to PDF. The symptom you will see is that all your
+reference in &lt;code&gt;.bib&lt;/code&gt; will not be found!!&lt;/p&gt;
+&lt;h1&gt;LaTex setting&lt;/h1&gt;
+&lt;p&gt;A universal setting to latex export. This is additional to the LaTex
+template file I use. Supposedly I can set all these in the template
+also.&lt;/p&gt;
+&lt;p&gt;But if I'm using multiple template, this can be looked as the common
+settings for all the PDF I write.&lt;/p&gt;
+&lt;p&gt;Here is &lt;a href="/downloads/pandoc/latex.yaml"&gt;current version&lt;/a&gt;. It looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;documentclass&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;scrreprt&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;papersize&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;a4 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/peppa.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -3390,7 +3620,20 @@ traffic from A to B, much quicker than X-windows.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;On A, &lt;code&gt;ssh -vv -ND 8080 root@&amp;lt;B's IP&amp;gt;&lt;/code&gt;, then SSH login.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;-N&lt;/code&gt;: Do …&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
+&lt;li&gt;&lt;code&gt;-N&lt;/code&gt;: Do not execute a remote command.  This is useful for
+   just forwarding ports.`&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-D [bind_address:]port&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Specifies a local “dynamic” application-level port forwarding.  This works by
+allocating a socket to listen to port on the local side, optionally bound to
+the specified bind_address.  Whenever a connection is made to this port, the
+connection is forwarded over the secure channel, and the application protocol
+is then used to determine where to connect to from the remote machine.  Cur‐
+rently the SOCKS4 and SOCKS5 protocols are supported, and ssh will act as a
+SOCKS server.  Only root can forward privileged ports.  Dynamic port forward‐
+ings can also be specified in the configuration file.&lt;/p&gt;
+&lt;p&gt;IPv6 addresses can be specified by enclosing the address in square brackets.
+Only the superuser …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This is a common trick. Say we have local machine (A), and a remote
 machine (B). If we can SSH from A&amp;rarr;B, we can reroute browser
 traffic from A to B, much quicker than X-windows.&lt;/p&gt;
 &lt;figure class="col l4 m4 s12"&gt;
@@ -3451,7 +3694,31 @@ port 8080, which by the &lt;code&gt;ssh&lt;/code&gt;, will be forwarded to B.&lt
 &lt;p&gt;&lt;a href="https://github.com/hakimel/reveal.js/"&gt;reveal.js&lt;/a&gt; is pretty awesome. I have been using it for the last 9
 months now and love it. It was a bit of hassle to set it up
 initially. Once you have an example, yo can replicate and be
-productive by copying and pasting existing one, and getting a …&lt;/p&gt;</summary><content type="html">&lt;div class="iframe-container"&gt;
+productive by copying and pasting existing one, and getting a
+consistent look and workflow. And the results? amazing.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as photo album: &lt;a href="https://fengxia41103.github.io/moment/1236/"&gt;momoent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;as for work: &lt;a href="https://fengxia41103.github.io/moment/netbox/"&gt;netbox&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;To create a new presentation&lt;/h1&gt;
+&lt;p&gt;The easiest way to create a new slides for your topic is to copy an
+existing folder, eg. &lt;code&gt;netbox&lt;/code&gt;, and make modifications to your
+contents.&lt;/p&gt;
+&lt;p&gt;Each folder should have the following contents:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+├── images
+├── index.html
+├── my.css
+└── slides.md
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Only &lt;code&gt;index.html&lt;/code&gt; and &lt;code&gt;.md&lt;/code&gt; are essential. &lt;code&gt;index.html&lt;/code&gt; is the overall
+HTML shell that will be loaded by browser, and &lt;code&gt;.md&lt;/code&gt; are slide
+contents that will be converted from Markdown into HTML and included
+in &lt;code&gt;index.html&lt;/code&gt;. You can split your contents into multiple &lt;code&gt;.md&lt;/code&gt;
+files, which we will cover in more details next.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;my.css&lt;/code&gt; is used to make customized CSS change per …&lt;/p&gt;</summary><content type="html">&lt;div class="iframe-container"&gt;
   &lt;iframe src="https://fengxia41103.github.io/moment/1236/"
           allowfullscreen&gt;&lt;/iframe&gt;
 
@@ -3541,7 +3808,22 @@ so I was willing to read it, in one morning). &lt;/p&gt;
 &lt;h1&gt;Milestone 1: requirement review&lt;/h1&gt;
 &lt;p&gt;Everything starts with an analysis of the problem at hand. One thing
 learned and I'd like to clarify is &lt;code&gt;requirement&lt;/code&gt; &amp;mdash;
-it is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
+it is a set of &lt;strong&gt;constraints&lt;/strong&gt; (thus the word &lt;code&gt;must&lt;/code&gt;,
+&lt;code&gt;should&lt;/code&gt;). Requirements often cause confusion as they are taken as the
+system's objectives &amp;rarr; in essence they are, but they are measured
+as a set of &lt;strong&gt;conditions&lt;/strong&gt; that the system will have to &lt;strong&gt;behave
+within boundary&lt;/strong&gt;. Thus, viewing them as the &lt;strong&gt;law for your
+design&lt;/strong&gt;, it's a valid test to your test, but your design
+can come in many forms, and that's where engineering has some fun.&lt;/p&gt;
+&lt;p&gt;So it becomes clear &amp;amp; natural that design and implementation are like
+people living in society &amp;rarr; his behavior is completly boxed by law
+he has to obey, that's the minimal.  Anything that no law permits nor
+prohibits (functions that links to no requirements), well, is just to
+keep the developers happy.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/practical%20uml%20problem%20domain.png"
+       class="responsive-image"&gt;
+  &lt;figcaption&gt;Problem …&lt;/figcaption&gt;&lt;/figure&gt;</summary><content type="html">&lt;p&gt;Finally &lt;a href="https://www.amazon.com/Driven-Object-Modeling-UMLTheory-Practice/dp/1590597745"&gt;a book on UML&lt;/a&gt; that makes sense to me (and is short enough
 so I was willing to read it, in one morning). &lt;/p&gt;
 &lt;h1&gt;Milestone 1: requirement review&lt;/h1&gt;
 &lt;p&gt;Everything starts with an analysis of the problem at hand. One thing
@@ -3869,7 +4151,20 @@ delay. Duration is a trial-and-error iteration since usually I don't
 know how long the screencast will run. &lt;/p&gt;</content><category term="dev"></category><category term="lenovo"></category></entry><entry><title>Netbox revised</title><link href="https://fengxia41103.github.io/myblog/netbox.html" rel="alternate"></link><published>2018-06-06T14:00:00-04:00</published><updated>2018-08-01T21:50:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-06:/myblog/netbox.html</id><summary type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
 But we need more. Managing a lab or a rack is more than level 1. On
 top of all these, we talk about automation, which implies capabilities
-at least to level 4. Therefore, we used Netbox code as …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
+at least to level 4. Therefore, we used Netbox code as a starting
+point, and built a POC.&lt;/p&gt;
+&lt;h1&gt;Background&lt;/h1&gt;
+&lt;p&gt;It has been a painful experience to witness how we are diagnosing
+infrastructure, especially network connections, in a what I would call
+&lt;code&gt;chasing the rabbit&lt;/code&gt; fashion in which &lt;code&gt;ping&lt;/code&gt;, &lt;code&gt;route&lt;/code&gt;, &lt;code&gt;vlan&lt;/code&gt;, &lt;code&gt;port&lt;/code&gt;
+on a switch, to which port the two ends of a cable plugged into, all
+coming to a single chain of a &lt;code&gt;valid&lt;/code&gt; connection. Part of it is to
+verify hardware connections (cablings), part of software
+configurations (many layers deep). A knowledgeable person can traverse
+the link from one end to the other, but even he is faced with a harsh
+reality of which area is to focus on.&lt;/p&gt;
+&lt;p&gt;If you think of it in the highest level &amp;mdash; a topology design, its
+mirror image is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://netbox.readthedocs.io/en/latest/"&gt;Netbox&lt;/a&gt; is a nice level 1 tool (for levels, see &lt;a href="https://fengxia41103.github.io/myblog/capability model.html"&gt;capability model&lt;/a&gt;).
 But we need more. Managing a lab or a rack is more than level 1. On
 top of all these, we talk about automation, which implies capabilities
 at least to level 4. Therefore, we used Netbox code as a starting
@@ -4121,7 +4416,23 @@ mounted facing back so that cables can access its port.&lt;/p&gt;
 &lt;p&gt;I have been building Django based web application for a while now. One
 design/request I get often is a REST API. Once the model data is
 exposed in REST, one can truly build a complete separate frontend
-using things like Angular, react, and whatever you fancy. I have tried …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+using things like Angular, react, and whatever you fancy. I have tried
+a couple times myself following this architecture. On one hand it
+gives a lot of flexibility and it looks nice, too &amp;larr; front end
+technology is a lot of "{}", but it does look quite nice, and
+responsive, too. But on the other, REST is a thing few understands
+well except it is an API through which you can CRUD. Honestly, I don't
+even understand yet how authentication is done, what is a good balance
+between massaging data (in Tastypie's term, (de)-hydration) and
+exposing data model raw.&lt;/p&gt;
+&lt;p&gt;Anyway, here I want to document a practice I use, a really rudimentary
+one, of making django model available as REST resource through
+Tastypie.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://docs.djangoproject.com/en/2.0/ref/models/fields/"&gt;Django model reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://django-tastypie.readthedocs.io/en/latest/"&gt;Tastypie&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Let's say you are building a site called &lt;code&gt;mysite&lt;/code&gt;, and in …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/funny/the%20art%20of%20programming.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -4239,7 +4550,38 @@ things like &lt;code&gt;?format=json&lt;/code&gt; or &lt;code&gt;?format=yaml&lt
 type of &lt;a href="http://django-tastypie.readthedocs.io/en/latest/interacting.html"&gt;filtering&lt;/a&gt;. Cool huh!?&lt;/p&gt;</content><category term="dev"></category></entry><entry><title>KVM</title><link href="https://fengxia41103.github.io/myblog/kvm.html" rel="alternate"></link><published>2017-10-11T14:41:00-04:00</published><updated>2017-10-11T14:41:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-10-11:/myblog/kvm.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
 I want to have is a local dev that I can copy &amp;amp; paste from some base
 image in case I forgot to take a snapshot at milestone. This way I
-feel comfortable to stand up a sandbox, try …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
+feel comfortable to stand up a sandbox, try out crazy things, then
+discard it entirely at done, and repeat. So this means something
+minimal, fast.&lt;/p&gt;
+&lt;p&gt;First thing first, get &lt;code&gt;kvm&lt;/code&gt; and a few tools:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apt kvm libvirt-bin bridge-utils cloud-utils cloud-init libguestfs-tools
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Cloud image&lt;/h1&gt;
+&lt;p&gt;Don't bother with full blown &lt;code&gt;.iso&lt;/code&gt;, use cloud images,
+eg. &lt;a href="https://cloud-images.ubuntu.com/releases/16.04/release/"&gt;xenial 16.04&lt;/a&gt;, my de faco at writing. It's &amp;lt; 300M
+and boots fast. Key to know at this point is the file format &amp;larr;
+use &lt;code&gt;qemu-img info [.img]&lt;/code&gt; for &lt;code&gt;file format:&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget &lt;span class="o"&gt;[&lt;/span&gt;.img url&lt;span class="o"&gt;]&lt;/span&gt;
+
+To get file format:
+$ qemu-img info &lt;span class="o"&gt;[&lt;/span&gt;.img&lt;span class="o"&gt;]&lt;/span&gt;
+---------------------
+image: xenial-server-cloudimg-amd64-disk1.img
+file format: qcow2
+virtual size: 2.2G &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2361393152&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt;
+disk size: 277M
+cluster_size: 65536
+Format specific information:
+    compat: 0.10
+    refcount bits: 16
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Resize disk&lt;/h2&gt;
+&lt;p&gt;One caveat caught me is that snapshot using &lt;a href="https://wiki.qemu.org/Documentation/CreateSnapshot"&gt;backing file&lt;/a&gt; inherits
+the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"&gt;KVM&lt;/a&gt; is something new to me, and it sounds awesome. The experience
 I want to have is a local dev that I can copy &amp;amp; paste from some base
 image in case I forgot to take a snapshot at milestone. This way I
 feel comfortable to stand up a sandbox, try out crazy things, then
@@ -4664,7 +5006,31 @@ optional arguments:
 &lt;h1&gt;Install Linux&lt;/h1&gt;
 &lt;p&gt;You can do a dual boot or just wipe the whole disk. Window's boot
 manager will interfere, somehow, which I don't remember the details
-anymore. Google it. Eventually it will work. The rest assumes you …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
+anymore. Google it. Eventually it will work. The rest assumes you have
+Linux installed.&lt;/p&gt;
+&lt;p&gt;Also, follow &lt;a href="https://fengxia41103.github.io/myblog/emacs.html"&gt;these steps&lt;/a&gt; to get your Linux in a good shape.&lt;/p&gt;
+&lt;h1&gt;VPN&lt;/h1&gt;
+&lt;p&gt;Most importantly, you need VPN.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;code&gt;otp.company.com&lt;/code&gt; to register your phone number.&lt;/li&gt;
+&lt;li&gt;Install &lt;code&gt;Company OTP&lt;/code&gt; from your app store.&lt;/li&gt;
+&lt;li&gt;Keep &lt;code&gt;Company OTP&lt;/code&gt; app running so you can see the active OTP.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt install openconnect screen tmux&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In a screen, &lt;code&gt;sudo openconnect -u [username] webvpn.us.company.com&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;first password: your regular domain login pwd&lt;/li&gt;
+&lt;li&gt;second one: OTP&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If works, you should see something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@fengxia-company:~# openconnect -u fxia1 webvpn.us.company.com
+POST https://webvpn.us.company.com/
+Attempting to connect to server 104.232.254.247:443
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Got …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Instructions to get Ubuntu Xenial &amp;amp; Bionic (or any Linux) as your laptop OS.&lt;/p&gt;
 &lt;h1&gt;Install Linux&lt;/h1&gt;
 &lt;p&gt;You can do a dual boot or just wipe the whole disk. Window's boot
 manager will interfere, somehow, which I don't remember the details
@@ -4789,7 +5155,32 @@ listed below!&lt;/p&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
 point (the little read dot rubber thingy on Lenovo's laptops) since I
-don't …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
+don't ever use it.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;xinput list&lt;/code&gt; to get a list (uses the &lt;code&gt;ssh -X&lt;/code&gt; if on remote
+   machine):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+(dev) fengxia@fengxia-lenovo:~/workspace/wss$ xinput list
+⎡ Virtual core pointer                      id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ SynPS/2 Synaptics TouchPad                id=11   [slave  pointer  (2)]
+⎜   ↳ TPPS/2 IBM TrackPoint                     id=13   [slave  pointer  (2)]
+⎣ Virtual core keyboard                     id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    ↳ Power Button                              id=6    [slave  keyboard (3)]
+    ↳ Video Bus                                 id=7    [slave  keyboard (3)]
+    ↳ Sleep Button                              id=8    [slave  keyboard (3)]
+    ↳ Integrated Camera                         id=9    [slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard              id=10   [slave  keyboard (3)]
+    ↳ ThinkPad Extra Buttons                    id=12   [slave  keyboard (3)]
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To disable …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;The symptom is that typing jumps all over the place.&lt;/p&gt;
 &lt;h1&gt;Tune sensitivity&lt;/h1&gt;
 &lt;p&gt;The idea here is to use &lt;code&gt;xinput&lt;/code&gt; command to tune finger sensitivity
 values so to find a good balance. Also, we are to &lt;strong&gt;disable&lt;/strong&gt; touch
@@ -4927,7 +5318,18 @@ will stuck in initialization forever.&lt;/p&gt;
 transfer and information sharing in the 21st century when brain is the
 competition advantage and this gov decides to sacrifice all the future
 with a vain hope that creativity can continue to flourish while its
-citizens are excluded from …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l3 m3 s12"&gt;
+citizens are excluded from the rest of the world. The most frustrating
+point is that technology forums are handicapped in the crossfire to a
+ridiculous degree, for example, my experience with Stackoverflow has
+been downgraded to having at least 50% &lt;strong&gt;dead links&lt;/strong&gt; due to the
+blocking. Come on! and you are talking about technology innovation!?
+Get a grip.&lt;/p&gt;
+&lt;p&gt;How do I know this ia bad!? Well, when my brain has to slow down to
+cope with incoming information, it is a sign that this place is
+culturally backwards and hopeless, because my brain, though not that
+much impressive and has average power most of the time, is being
+wasted due to artificial barrier which has no reason to exist
+especially in the name of &lt;strong&gt;political stability&lt;/strong&gt; (and harmony!? give …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l3 m3 s12"&gt;
   &lt;img src="images/funny/gfw.jpg"/&gt;
 &lt;/figure&gt;
 
@@ -4982,7 +5384,21 @@ how to punch a hole and stay connected with life:&lt;/p&gt;
 burning desire to migrate as much as my daily text editing activities
 into Emacs environment, in particular, emails.&lt;/p&gt;
 &lt;p&gt;Having tried &lt;a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties"&gt;offlineimap&lt;/a&gt; for a bit, I ended up battling its
-configuration to make it work (sort of) with …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l5 m6 s12"&gt;
+configuration to make it work (sort of) with Hotmail's IMAP. Gmail
+worked flawlessly, but boy, Microsoft, get a grip. No wonder hotmail
+is dying. But in the end I'm just one guy who holds on something
+linking my youth days, for sentimental purpose. So without being able
+to win the battle with offlineimap, I started searching for
+alternatives, then I found &lt;a href="http://isync.sourceforge.net/mbsync.html"&gt;mbsync&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Its &lt;a href="http://isync.sourceforge.net/mbsync.html"&gt;man page&lt;/a&gt; is worth a read. It looks intimidating at first
+glance, but it isn't really. In a nutshell, it defines three things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;A remote store&lt;/strong&gt;: this also links to an &lt;strong&gt;Account&lt;/strong&gt;, which of
+   course holds your email credentials.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A local store&lt;/strong&gt;: this defines local file structure where you want
+   to emails to be downloaded to.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A channel&lt;/strong&gt;: a link that connects the a remote store with a local
+   store …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="col l5 m6 s12"&gt;
   &lt;img src="images/hahn.png"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -5482,7 +5898,26 @@ text editing. Still on the learning curve to get a grasp of what it
 can do in my daily development workflow.&lt;/p&gt;
 &lt;h1&gt;install emacs26&lt;/h1&gt;
 &lt;p&gt;The easiest way to get this: &lt;code&gt;sudo add-apt-repository
-ppa …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
+ppa:kelleyk/emacs&lt;/code&gt;, then &lt;code&gt;apt remove emacs emacs25 &amp;amp;&amp;amp; apt update &amp;amp;&amp;amp;
+apt install emacs26&lt;/code&gt;, then verify &lt;code&gt;emacs --version&lt;/code&gt;.&lt;/p&gt;
+&lt;h1&gt;bootstrap &amp;amp; config&lt;/h1&gt;
+&lt;p&gt;Welcome the wonderful &lt;code&gt;org-mode&lt;/code&gt; and the &lt;a href="https://fengxia41103.github.io/myblog/downloads/emacs/emacs_setup.html"&gt;config file in org-mode&lt;/a&gt;. Bootstrap is easy:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;backup your current emacs: &lt;code&gt;mv ~/.emacs.d ~/.emacs.d.bak&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create &lt;code&gt;.emacs&lt;/code&gt;, or copy &lt;a href="https://fengxia41103.github.io/myblog/downloads/emacs/dot_emacs.el"&gt;.emacs&lt;/a&gt; to &lt;code&gt;~&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;launch emacs, sit back, and once all packages are downloaded and
+   compiled, you are done.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;replace in files&lt;/h1&gt;
+&lt;p&gt;Replacing a string match in multiple files is common, but
+tricky. Emacs doesn't make this intuitive at all. Follow these steps
+to get there:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;M-x find-grep-dired&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Find-grep (directory)&lt;/code&gt;: is to select the root folder for the scan&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Find-grep (grep regexp)&lt;/code&gt;: is the regex for the string pattern you
+   are searching, eg. &lt;code&gt;"images/&lt;/code&gt; is to find anything starts with a
+   double …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;What a wonderful editor!&lt;/p&gt;
 &lt;p&gt;I wouldn't even call it an editor because it can do so much beyond
 text editing. Still on the learning curve to get a grasp of what it
 can do in my daily development workflow.&lt;/p&gt;
@@ -5541,7 +5976,45 @@ worry about cluttered view while opening and closing windows. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;
 &lt;span class="c1"&gt;# http://opensource.conformal.com/cgi-bin/man-cgi?spectrwm&lt;/span&gt;
 
-&lt;span class="c1"&gt;# colors for focussed and unfocussed window borders …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
+&lt;span class="c1"&gt;# colors for focussed and unfocussed window borders&lt;/span&gt;
+&lt;span class="c1"&gt;# NOTE: all colors in this file are in hex! see XQueryColor for examples&lt;/span&gt;
+&lt;span class="nv"&gt;color_focus&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; red
+&lt;span class="nv"&gt;color_unfocus&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; rgb:88/88/88
+
+&lt;span class="c1"&gt;# bar settings&lt;/span&gt;
+&lt;span class="nv"&gt;bar_enabled&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;bar_border_width&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; 1
+bar_border&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; rgb:00/80/80
+bar_color&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;        &lt;span class="o"&gt;=&lt;/span&gt; black
+bar_font_color&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt; rgb:a0/a0/a0
+&lt;span class="nv"&gt;bar_font&lt;/span&gt;        &lt;span class="o"&gt;=&lt;/span&gt; -*-terminus-medium-*-*-*-*-*-*-*-*-*-*-*
+&lt;span class="c1"&gt;#bar_action     = baraction.sh&lt;/span&gt;
+&lt;span class="nv"&gt;bar_action&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; conky
+&lt;span class="nv"&gt;bar_delay&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;bar_justify&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; right
+&lt;span class="nv"&gt;bar_at_bottom&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; 0
+&lt;span class="nv"&gt;stack_enabled&lt;/span&gt;           &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;clock_enabled&lt;/span&gt;           &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;clock_format&lt;/span&gt;            &lt;span class="o"&gt;=&lt;/span&gt; %a %b %d %R %Z %Y
+&lt;span class="nv"&gt;title_name_enabled&lt;/span&gt;      &lt;span class="o"&gt;=&lt;/span&gt; 0
+&lt;span class="nv"&gt;title_class_enabled&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; 0
+&lt;span class="nv"&gt;window_name_enabled&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; 0
+&lt;span class="nv"&gt;verbose_layout&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;focus_mode&lt;/span&gt;              &lt;span class="o"&gt;=&lt;/span&gt; default
+&lt;span class="nv"&gt;disable_border&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;border_width&lt;/span&gt;            &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;span class="nv"&gt;urgent_enabled&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; 1
+
+&lt;span class="c1"&gt;# spawn app&lt;/span&gt;
+program&lt;span class="o"&gt;[&lt;/span&gt;term&lt;span class="o"&gt;]&lt;/span&gt;           &lt;span class="o"&gt;=&lt;/span&gt; terminator
+&lt;span class="c1"&gt;#program[screenshot_all]        = screenshot.sh full&lt;/span&gt;
+&lt;span class="c1"&gt;#program[screenshot_wind]= screenshot.sh window&lt;/span&gt;
+&lt;span class="c1"&gt;#program[lock]          = xlock&lt;/span&gt;
+&lt;span class="c1"&gt;#program[initscr]       = initscreen.sh&lt;/span&gt;
+program&lt;span class="o"&gt;[&lt;/span&gt;menu&lt;span class="o"&gt;]&lt;/span&gt;           &lt;span class="o"&gt;=&lt;/span&gt; dmenu_run -fn &lt;span class="nv"&gt;$bar_font&lt;/span&gt; -nb &lt;span class="nv"&gt;$bar_color&lt;/span&gt; -nf &lt;span class="nv"&gt;$bar_font_color&lt;/span&gt; -sb &lt;span class="nv"&gt;$bar_border&lt;/span&gt; -sf &lt;span class="nv"&gt;$bar_color&lt;/span&gt;
+&lt;span class="nv"&gt;spawn_term&lt;/span&gt;              &lt;span class="o"&gt;=&lt;/span&gt; terminator
+
+&lt;span class="c1"&gt;# dialog box size ratio .3 &amp;gt;= r &amp;lt; 1 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;My favourate &lt;a href="https://wiki.archlinux.org/index.php/spectrwm"&gt;desktop manage&lt;/a&gt; which tiles windows neatly so I never
 worry about cluttered view while opening and closing windows. &lt;/p&gt;
 &lt;p&gt;Here is the &lt;a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf"&gt;config&lt;/a&gt; file I'm using.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!&lt;/span&gt;
@@ -5646,7 +6119,23 @@ Up:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;uptime_short&lt;
 services: EC2 for application server, RDS for database, and S3 for
 static files and media files.  AWS does have message service as
 well. But to maintain a fair level of portability, I am not using
-that. Instead, vanilla message broker such …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Deployment strategy for &lt;a href="https://fengxia41103.github.io/myblog/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
+that. Instead, vanilla message broker such as Redis or RabbitMQ is
+used and is deployed on a separate EC2 instance.  In general I tend to
+have concerns over investing a critical system component to a 3rd
+party service because they usually will introduce some customization
+quirks that make it a real pain when migrating to another service
+provider or platform later on. I have not run into such problem with
+AWS, but would like to keep options open.&lt;/p&gt;
+&lt;figure class="col l12 m12 s12"&gt;
+  &lt;img src="images/deployment_architecture.png"
+  &lt;figcaption&gt;Deployment architecture&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Notice that I do not have multiple database in the diagram. First of
+all, I have not had use of DB cluster. Secondly, database replica is
+covered by AWS snapshot which has been a great fail-safe tool for
+system backup and recovery.  This brings up an important point I'd
+like to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Deployment strategy for &lt;a href="https://fengxia41103.github.io/myblog/general system architecture.html"&gt;system architecture&lt;/a&gt; is centered around AWS
 services: EC2 for application server, RDS for database, and S3 for
 static files and media files.  AWS does have message service as
 well. But to maintain a fair level of portability, I am not using
@@ -5685,7 +6174,24 @@ can fit into their platform.&lt;/p&gt;</content><category term="dev"></category>
 &lt;p&gt;The word "system architect" has been puzzling to me.  I was hired to
 be one at one point. But it was not a comfortable position. How much
 do we understand the business?  What is the problem we are to solve?
-How does the current "architecture" fail? What is the downfall …&lt;/p&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
+How does the current "architecture" fail? What is the downfall of this
+(or any) proposal? Overall, I feel an architecture emerges along with
+development and research. The more we start to understand the client's
+needs, habits, workflows, relationships, priorities, the more
+information we have when evaluating and making decisions on whether
+one piece in the stack fits or not, and why so. It is, IMHO, a
+backwards process when an architecture is pre-defined as if it is set
+in stone. We need to start from somewhere, but keeping in mind that it
+evolves and shifts like a living organ.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;System architecture evolves and shifts like a living organ.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is a system architecture I have been using recently in
+projects. It is divided into four components:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;foreground service provider&lt;/strong&gt;: this includes machinery that
+  interface with …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="col l6 m6 s12"&gt;
   &lt;img src="images/architecture_joke.jpg"
        class="center img-responsive"&gt;
 &lt;/figure&gt;
@@ -5771,7 +6277,34 @@ application to halt.&lt;/p&gt;</content><category term="dev"></category></entry>
 site. But like any software engineer who hold a high standard to his
 work, I got turned off by all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.  "Ugly",
 "Where is the document?", "Why my translation is not shown?", I felt
-running in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is definitely a winner for our blog
+running in a maze where there were reflections of exit everywhere, but
+none was real. "Well, if it's in Python, we can make one." Solution is
+that simple.  Besides, we love &lt;a href="http://jinja.pocoo.org/docs/dev/"&gt;Jinja2&lt;/a&gt; template systems, and
+Pelican has spelled out &lt;a href="http://docs.getpelican.com/en/3.6.3/themes.html#templates-and-variables"&gt;everything&lt;/a&gt; we need.&lt;/p&gt;
+&lt;p&gt;Quickly we wrote down a few on wish list:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The design must be based on &lt;a href="http://getbootstrap.com/components/"&gt;Bootstrap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Includes &lt;a href="http://fontawesome.io/icons/"&gt;Fontawesome&lt;/a&gt;, &lt;a href="https://datatables.net/"&gt;Datatable&lt;/a&gt;, &lt;a href="http://lokeshdhakar.com/projects/lightbox2/"&gt;Lightbox2&lt;/a&gt;, and &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/"&gt;SyntaxHighlighter&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Reuse elements I have designed for &lt;a href="https://fengxia41103.github.io/myblog/demo.html"&gt;showcases&lt;/a&gt;, such as layout, CSS and images.&lt;/li&gt;
+&lt;li&gt;Colors we like: &lt;font color="#337ab7"&gt;blue(#337ab7)&lt;/font&gt; and &lt;span class="myhighlight"&gt;red(#d52349)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fonts.google.com/"&gt;Google fonts&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The actual work was pretty straightforward. Follow Pelican official document
+to set up a working directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;├── static
+│   ├── bower_components
+│   ├── css
+│   │   └── my.css
+│   └── js
+│       ├── html5shiv.min.js
+│       └── respond.min.js
+└── templates
+    ├── article.html
+    ├── author.html
+    ├── category.html
+    ├── index.html
+    ├── layout.html
+    ├── page …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;As a Python house, &lt;a href="http://blog.getpelican.com"&gt;Pelican&lt;/a&gt; is definitely a winner for our blog
 site. But like any software engineer who hold a high standard to his
 work, I got turned off by all the &lt;a href="http://www.pelicanthemes.com/)"&gt;available themes&lt;/a&gt;.  "Ugly",
 "Where is the document?", "Why my translation is not shown?", I felt
@@ -5815,7 +6348,35 @@ block content %}&lt;/code&gt; with relevant content and you are done.  &lt;/p&gt
 the path between a verbal or written requirement, and an actionable
 application that reflects an implementation of this requirement. Therefore,
 it becomes crucial to set up an CI environment not only to facilitate
-development and testing, but to enforce our …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
+development and testing, but to enforce our practice of agile prototyping
+by setting up a complete automated test instance for our clients that closely
+mirrors development progress. Once achieved, clients and developers can now
+truely accalaim that they are &lt;em&gt;on the same page&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;Buildbot&lt;/h1&gt;
+&lt;p&gt;We chose &lt;a href="http://buildbot.net/"&gt;buildbot&lt;/a&gt; as our CI tool.
+Another common choice is the &lt;a href="https://jenkins.io/"&gt;jenkins&lt;/a&gt;. Jenkins
+is in Java. So in order to maintain a technology stack as consistent as
+we can, we opted to buildbot for this purpose.&lt;/p&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Create a python virtualenv and use pip is all it takes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ workon build
+$ pip install buildbot
+$ pip install buildbot-slave
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For configuration, you can refer to&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.buildbot.net/current/tutorial/firstrun.html"&gt;buildbot tutorial&lt;/a&gt;
+for more details.&lt;/p&gt;
+&lt;p&gt;On our test server, I have set the paths to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;master: ~/build-master&lt;/li&gt;
+&lt;li&gt;slave: ~/build-slave&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Run service&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;activate &lt;em&gt;build&lt;/em&gt; virtualenv.&lt;/li&gt;
+&lt;li&gt;to …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;The whole point of quick development cycle is to shorten
 the path between a verbal or written requirement, and an actionable
 application that reflects an implementation of this requirement. Therefore,
 it becomes crucial to set up an CI environment not only to facilitate
@@ -6073,7 +6634,25 @@ public sites. Data crawling is an exciting business. On one hand, it
 is easy to develop a crawler these days. In the Python world,
 plenty tutorials will show you how to build
 a simple crawler using the &lt;a href="https://docs.python.org/2/library/urllib.html"&gt;Python urllib&lt;/a&gt;,
-or building …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many projects I have done involved harvesting data from
+or building upon some more sophisticate tool like
+&lt;a href="http://doc.scrapy.org/en/latest/intro/tutorial.html"&gt;Scrapy&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/regular_expressions.png"/&gt;
+  &lt;figcaption&gt;Fun with regular expression&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;But before carried away by the fun and the power,
+let's lay down a ground rule &amp;mdash; to respect
+ peer server and try hard being a good web citizen.
+We surely learned a few lessons here. So please
+take notes and hopefully you won't fall into the same pit.&lt;/p&gt;
+&lt;h1&gt;Banned&lt;/h1&gt;
+&lt;p&gt;We used to joke about this &amp;mdash; if you haven't been banned by a server,
+you haven't hit it hard enough. Well, we were banned.&lt;/p&gt;
+&lt;p&gt;Our first version was a simple urllib based agent and could be run
+in multiprocessing mode. Target was a public site run
+by a small startup firm, which by rumor consisted mostly of
+developers, too. So we took this on almost …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many projects I have done involved harvesting data from
 public sites. Data crawling is an exciting business. On one hand, it
 is easy to develop a crawler these days. In the Python world,
 plenty tutorials will show you how to build

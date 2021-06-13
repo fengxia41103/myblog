@@ -103,7 +103,40 @@ But how to access the Juju GUI? Launching it is easy
 enough with <code>$ juju gui</code> from juju host; 
 accessing it from anywhere outside
 the host is a challenge. One way is through <code>$ ssh -X</code> to 
-the …</p>
+the LXD and launch firefox. </p>
+<p>Another option is to use <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/"><code>nginx</code> to proxy</a> the GUI service. The
+quirk here is to enable <code>ssl</code> proxy (notice the <code>https</code>?)</p>
+<figure class="col s12 center">
+  <img src="images/juju%20gui%20nginx.png"/>
+  <figcaption>Juju GUI with Nginx proxy</figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Get SSL cert in <code>/etc/nginx</code>. This will create two files in this
+   directory: <code>cert.key</code> and <code>cert.crt</code>.</p>
+<div class="highlight"><pre><span></span>```shell
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>In LXD host, use <code>$ juju gui</code> to find out its server address and
+   port, for example:</p>
+<div class="highlight"><pre><span></span>```shell
+(dev) fengxia@ubuntu:~$ juju gui
+GUI 2.10.2 for model &quot;admin/default&quot; is enabled at:
+https://10.175.135.193:17070/gui/u/admin/default
+Your login credential is:
+username: admin
+password: 049ab8c2284b3b7fa7e87933df18da15
+```
+</pre></div>
+
+
+<p>So the server's …</p></li></ol>
       </p>
   </div>
 

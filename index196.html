@@ -123,7 +123,23 @@
 <p>I have been building Django based web application for a while now. One
 design/request I get often is a REST API. Once the model data is
 exposed in REST, one can truly build a complete separate frontend
-using things like Angular, react, and whatever you fancy. I have tried …</p>
+using things like Angular, react, and whatever you fancy. I have tried
+a couple times myself following this architecture. On one hand it
+gives a lot of flexibility and it looks nice, too &larr; front end
+technology is a lot of "{}", but it does look quite nice, and
+responsive, too. But on the other, REST is a thing few understands
+well except it is an API through which you can CRUD. Honestly, I don't
+even understand yet how authentication is done, what is a good balance
+between massaging data (in Tastypie's term, (de)-hydration) and
+exposing data model raw.</p>
+<p>Anyway, here I want to document a practice I use, a really rudimentary
+one, of making django model available as REST resource through
+Tastypie.</p>
+<ol>
+<li><a href="https://docs.djangoproject.com/en/2.0/ref/models/fields/">Django model reference</a></li>
+<li><a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a></li>
+</ol>
+<p>Let's say you are building a site called <code>mysite</code>, and in …</p>
 </p>
 
 <p style="margin-top: 3em;">

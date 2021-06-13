@@ -125,7 +125,33 @@
 <p>Posted a challenge to build a <em>search</em>/browser for movie
 fan. Initially was given a static data set to display. So on top of
 that, I start to pull in a few other data sources to spice things
-up. Coded in React …</p>
+up. Coded in React, which I found the ES6 syntax much cleaner.</p>
+<h1>Development</h1>
+<ol>
+<li>Install <code>nvm</code> and node (tested 9.4, 12.1).</li>
+<li><code>npm install</code>: to pull all dependencies.</li>
+<li><code>npm run build</code> because static files will be served from <code>/dist</code>
+   (defined in <code>webpack.config</code>) by default. However, they can also be
+   served outside the application entirely. See <code>Deploy</code> section for
+   more info.</li>
+<li><code>npm run dev</code>.</li>
+<li>Browse <code>localhost:8080</code>, browser will auto-refresh when webpack
+   detects a change to source files.</li>
+</ol>
+<h1>Deploy</h1>
+<h2>using github pages</h2>
+<ol>
+<li>Setup your github repo to allow pages, select using <code>MASTER</code>.</li>
+<li>Setup <code>develop</code> as default branch.</li>
+<li><code>npm run deploy</code></li>
+<li>At prompt, login your github account.</li>
+<li>Go to <code>&lt;yourname&gt;.github.com/&lt;repo&gt;</code>.</li>
+</ol>
+<h2>using your static file hosting</h2>
+<ol>
+<li><code>npm run build</code></li>
+<li>Push <code>/dist</code> to your static file hosting service.</li>
+<li>Verify …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">

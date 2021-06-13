@@ -83,7 +83,47 @@ name="_favicon" /&amp;gt;&lt;/code&gt; in `.jsp.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Put the cluster in &lt;strong&gt;global maintenance mode&lt;/strong&gt; by login any brain
    server, and &lt;code&gt;hosted-engine --set-maintenance --mode=global&lt;/code&gt;. &lt;/p&gt;
-&lt;p&gt;To verify, login in a brain node and &lt;code&gt;hosted-engine …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This document describes procedure to shutdown an IBB brain instance.&lt;/p&gt;
+&lt;p&gt;To verify, login in a brain node and &lt;code&gt;hosted-engine --vm-status&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+[root@lmorlct0207brain3 ~]# hosted-engine --vm-status
+
+!! Cluster is in GLOBAL MAINTENANCE mode !!
+
+--== Host 1 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : lmorlct0203brain3.labs.lenovo.com
+Host ID                            : 1
+Engine status                      : {&amp;quot;health&amp;quot;: &amp;quot;good&amp;quot;, &amp;quot;vm&amp;quot;: &amp;quot;up&amp;quot;, &amp;quot;detail&amp;quot;: &amp;quot;up&amp;quot;}
+Score                              : 3400
+stopped                            : False
+Local maintenance                  : False
+crc32                              : 8eb75a80
+local_conf_timestamp               : 3249288
+Host timestamp                     : 3249287
+Extra metadata (valid at timestamp):
+    metadata_parse_version=1
+    metadata_feature_version=1
+    timestamp=3249287 (Fri Nov 16 15:57:39 2018)
+    host-id=1
+    score=3400
+    vm_conf_refresh_time=3249288 (Fri Nov 16 15:57:40 2018)
+    conf_on_shared_storage=True
+    maintenance=False
+    state=GlobalMaintenance
+    stopped=False
+
+--== Host 2 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : 10.240.41.235
+Host ID                            : 2
+Engine status                      : {&amp;quot;reason&amp;quot;: &amp;quot;vm not running on this host&amp;quot;, &amp;quot;health&amp;quot;: &amp;quot;bad&amp;quot;, &amp;quot;vm&amp;quot;: &amp;quot;down&amp;quot;, &amp;quot;detail&amp;quot;: &amp;quot;unknown&amp;quot;}
+Score                              : 3400
+stopped                            : False
+Local …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This document describes procedure to shutdown an IBB brain instance.&lt;/p&gt;
 &lt;h1&gt;Shutdown procedure&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -360,7 +400,16 @@ to config disks into RAID.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;usage:
     storage -config vol -option &lt;span class="o"&gt;[&lt;/span&gt;-options&lt;span class="o"&gt;]&lt;/span&gt; -target target_id
 options:
-    -remove …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;If you are like me who dislikes any GUI and mouse clicks, CLI via a
+    -remove                     - remove one volume.
+    -set                        - modify one volume&lt;span class="s1"&gt;&amp;#39;s properties.&lt;/span&gt;
+&lt;span class="s1"&gt;        -N volume_name          - volume name (optional).&lt;/span&gt;
+&lt;span class="s1"&gt;        -w &amp;lt;0|1|2&amp;gt;              - cache write policy (optional, 0 - Write Through, 1 - Always Write Back, 2 - Write with BBU).&lt;/span&gt;
+&lt;span class="s1"&gt;        -r &amp;lt;0|1|2&amp;gt;              - cache read policy (optional, 0 - No Read Ahead, 1 - Read Ahead, 2 - Adaptive Read Ahead).&lt;/span&gt;
+&lt;span class="s1"&gt;        -i &amp;lt;0|1&amp;gt;                - cache I/O policy (optional, 0 - Direct I/O, 1 - Cached I/O).&lt;/span&gt;
+&lt;span class="s1"&gt;        -a &amp;lt;0|2|3&amp;gt;              - access policy (optional, 0 - Read Write, 2 - Read Only, 3 - Blocked).&lt;/span&gt;
+&lt;span class="s1"&gt;        -d &amp;lt;0|1|2&amp;gt;              - disk cache policy (optional, 0 - Unchanged, 1 - Enable, 2 - Disable. 1 - Enable doesn&amp;#39;&lt;/span&gt;t support mirror RAID level&lt;span class="o"&gt;)&lt;/span&gt;.
+        -b &amp;lt;0&lt;span class="p"&gt;|&lt;/span&gt;1&amp;gt;                - background initialization &lt;span class="o"&gt;(&lt;/span&gt;optional, &lt;span class="m"&gt;0&lt;/span&gt; - Enable, &lt;span class="m"&gt;1&lt;/span&gt; - Disable&lt;span class="o"&gt;)&lt;/span&gt;.
+    -add                        - create one volume with new storage pool when the …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;If you are like me who dislikes any GUI and mouse clicks, CLI via a
 SSH session to IMM is a fun way to get things done. This one shows how
 to config disks into RAID.&lt;/p&gt;
 &lt;p&gt;CLI manual is &lt;a href="http://systemx.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.sysx.imm2.doc%2Fnn1iv_c_server_mgmt_local_storage.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -485,7 +534,32 @@ Background Initialization: Enable
 &lt;p&gt;Have fun~~&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Network switch</title><link href="https://fengxia41103.github.io/myblog/switches.html" rel="alternate"></link><published>2018-06-08T14:00:00-04:00</published><updated>2018-10-04T11:15:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-06-08:/myblog/switches.html</id><summary type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Network_switch"&gt;Network switch&lt;/a&gt; is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is &lt;a href="https://pexpect.readthedocs.io/en/stable/"&gt;pexpect&lt;/a&gt;, but even that gives you
 jinx sometimes when each switch can return you some random garbages
-once a while that makes &lt;code&gt;session.expect("your regex pattern")&lt;/code&gt; to time …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Network_switch"&gt;Network switch&lt;/a&gt; is a gold mine. You will need (ip, username, pwd) to get to it,
+once a while that makes &lt;code&gt;session.expect("your regex pattern")&lt;/code&gt; to time
+out and you don't know why.&lt;/p&gt;
+&lt;h1&gt;enos vs. cnos&lt;/h1&gt;
+&lt;p&gt;Not much to say. These are two switch OS seen on Feng switches. They
+are all closely looked like Cisco's &lt;a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html"&gt;IOS&lt;/a&gt;, but different. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf"&gt;CNOS manual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf"&gt;ENOS commands&lt;/a&gt; (Googling &lt;code&gt;enos manual&lt;/code&gt; shows Feng switch
+   types, eg. G8272. So I guess the term is applicable on a model basis.)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Anyway, the biggest difference to be aware is that CNOS device uses &lt;code&gt;display&lt;/code&gt;
+while ENOS device uses &lt;code&gt;show&lt;/code&gt;. To get a list of commands available:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;CNOS: &lt;code&gt;display ?&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+LCTC-R1U37-SW&amp;gt;display ?
+  aaa               AAA Model
+  access            access parameters
+  access-lists      List IP access lists
+  arp               IP ARP table
+  banner            Show current motd banner message
+  bfd               Bidirectional Forwarding Detection (BFD)
+  bgp               Border Gateway Protocol (BGP)
+  cee               Converged Enhanced Ethernet
+  class-map         Class map entry …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Network_switch"&gt;Network switch&lt;/a&gt; is a gold mine. You will need (ip, username, pwd) to get to it,
 using Telnet(!). Your friend is &lt;a href="https://pexpect.readthedocs.io/en/stable/"&gt;pexpect&lt;/a&gt;, but even that gives you
 jinx sometimes when each switch can return you some random garbages
 once a while that makes &lt;code&gt;session.expect("your regex pattern")&lt;/code&gt; to time

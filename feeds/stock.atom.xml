@@ -8,7 +8,31 @@ assessment. This will go over trend analysis.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
-and 6m as time range, this tool can select any …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Continue from &lt;a href="{filename}/workspace/stock/stock%20detail.md"&gt;last article&lt;/a&gt;. That one focused on value
+and 6m as time range, this tool can select any date-to-date as you
+wish, and all following analysis will be done over this selected
+range.&lt;/p&gt;
+&lt;h1&gt;Daily return %&lt;/h1&gt;
+&lt;p&gt;Daily return is defined as &lt;code&gt;(close-open)/close&lt;/code&gt; of that day. This
+value is pre-computed as a strategy value.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/daily%20return.png"/&gt;
+  &lt;figcaption&gt;Example of daily return&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Overnight return %&lt;/h1&gt;
+&lt;p&gt;Overnight return is defined as &lt;code&gt;(today's open - yesterday's
+close)/yesterday's close&lt;/code&gt;. This is also a pre-computed strategy value.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/overnight%20return.png"/&gt;
+  &lt;figcaption&gt;Example of overnight return&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I noticed that there is always some &lt;strong&gt;after market&lt;/strong&gt; news or earning&lt;/p&gt;
+&lt;p&gt;calls that will sway the market. Further, apparently trading is going
+on after the market is closed to me! Therefore, there is a dark period
+when the price is moving, but I can not participate until the next
+morning. Using this value together with daily return, I'm hoping to
+gain …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Continue from &lt;a href="{filename}/workspace/stock/stock%20detail.md"&gt;last article&lt;/a&gt;. That one focused on value
 assessment. This will go over trend analysis.&lt;/p&gt;
 &lt;h1&gt;Select a period &amp;amp; price&lt;/h1&gt;
 &lt;figure class="col s12"&gt;
@@ -216,7 +240,36 @@ information we have got.&amp;#160;&lt;a class="footnote-backref" href="#fnref-2"
 one-stop-shop of its numbers. Instead of duplicating common layouts
 such as Google Finance, Finviz, I'm hoping to provide a &lt;em&gt;better&lt;/em&gt; user
 experience that focuses on how a reader of this page is to consume the
-information, not just …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Detail of a stock is the primary research tool where you get
+information, not just throwing at him pile of facts &amp;amp; data, which,
+though always impressive to begin with, is often overwhelming and
+creating a diminishing return of these information quickly.&lt;/p&gt;
+&lt;h1&gt;Select a stock&lt;/h1&gt;
+&lt;p&gt;To look at detail of a stock, select a symbol of list:&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock%20list.png"/&gt;
+  &lt;figcaption&gt;Stock list&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Upon typing on the search bar, case-sensitive matching takes place
+automatically with a 1-second debounce. Matched one will then be
+highlighted. To return to the full list, simply clear the search bar.&lt;/p&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock%20list%20filtered.png"/&gt;
+  &lt;figcaption&gt;Stock list filtered&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;figure class="col s12"&gt;
+  &lt;img src="images/stock/stock%20detail%20summary.png"/&gt;
+  &lt;figcaption&gt;Stock detail summary section&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Three values that are less intuitive than others are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;DuPont ROE&lt;/code&gt;: ROE computed using the Dupont model. This is based on
+  company's financial statements. If happened to be that this stock
+  doesn't have statement data, value will be 0, equivalent to an …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Detail of a stock is the primary research tool where you get
 one-stop-shop of its numbers. Instead of duplicating common layouts
 such as Google Finance, Finviz, I'm hoping to provide a &lt;em&gt;better&lt;/em&gt; user
 experience that focuses on how a reader of this page is to consume the
@@ -582,7 +635,17 @@ being troubled, and then its name won't be worth much.&amp;#160;&lt;a class="foo
 &lt;p&gt;The app is a complete rewrite of one which I wrote five years
 ago. At the time Jookun approached me that he had some wise strategies
 of investment. I was intrigued by his passion, but wanted to verify
-its worth using some simulation. Thus a Django was created with …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
+its worth using some simulation. Thus a Django was created with Yahoo
+finance daily data as the input, and some data crunch based on his
+idea. Like all other ideas, I started to come up some of my own while
+working on it, and gradually it let me deep down into the rabbit hole
+&amp;mdash; for the first time in my career, I had computation so intense
+that it would overheat my laptop and had it shut down! I felt I was on
+track of something. However, it had then been left to rot
+since. Though I had tried to revive it over the years, some of the
+code was done in such a complex manner that I didn't have the heart to
+read it again. One impression, however, always left me with a hope,
+the difficulty …&lt;/p&gt;</summary><content type="html">&lt;figure class="col s12"&gt;
   &lt;img src="images/stock/ui.png"/&gt;
 &lt;/figure&gt;
 

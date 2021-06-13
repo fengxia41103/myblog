@@ -103,7 +103,55 @@ access &larr; so what the heck!?</p>
 <h1>Method 1: modify image directly</h1>
 <p>Really ugly solution. Anyway. On a Ubuntu 16.04, install <code>guestfish</code>
 and <code>libguesttools</code>, then:</p>
-<h2>create root …</h2>
+<h2>create root password</h2>
+<ol>
+<li>
+<p>Create a password to use. Note it is "digit 1", not a "l"
+   (as in love):</p>
+<div class="highlight"><pre><span></span>```shell
+$ openssl passwd -1 natalie
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Modify the image directly:</p>
+<div class="highlight"><pre><span></span>```shell
+$ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
+&gt;&lt;fs&gt; run
+&gt;&lt;fs&gt; list-filesystems
+&gt;&lt;fs&gt; mount /dev/sda1 /
+&gt;&lt;fs&gt; vi /etc/shadow
+```
+</pre></div>
+
+
+</li>
+</ol>
+<p>Now replace the "!!" on line <code>root:...</code> with your password you just
+created in step 1, save,</p>
+<h2>allow ssh root &amp; password</h2>
+<p>Modify <code>/etc/ssh/sshd_config</code> and uncomment two places:</p>
+<div class="highlight"><pre><span></span>&gt;&lt;fs&gt; vi /etc/ssh/sshd_config
+
+# Authentication:
+
+#LoginGraceTime 2m
+PermitRootLogin yes &lt;--- uncomment
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes &lt;-- uncomment
+#PermitEmptyPasswords no
+</pre></div>
+
+
+<h2>disable cloud-init</h2>
+<p>This is the single gottcha that held me back for weeks. It turned out
+that <code>cloud-init</code> has …</p>
       </p>
   </div>
 

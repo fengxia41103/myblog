@@ -100,7 +100,38 @@
         <p><a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> is something new to me, and it sounds awesome. The experience
 I want to have is a local dev that I can copy &amp; paste from some base
 image in case I forgot to take a snapshot at milestone. This way I
-feel comfortable to stand up a sandbox, try …</p>
+feel comfortable to stand up a sandbox, try out crazy things, then
+discard it entirely at done, and repeat. So this means something
+minimal, fast.</p>
+<p>First thing first, get <code>kvm</code> and a few tools:</p>
+<div class="highlight"><pre><span></span>$ apt kvm libvirt-bin bridge-utils cloud-utils cloud-init libguestfs-tools
+</pre></div>
+
+
+<h1>Cloud image</h1>
+<p>Don't bother with full blown <code>.iso</code>, use cloud images,
+eg. <a href="https://cloud-images.ubuntu.com/releases/16.04/release/">xenial 16.04</a>, my de faco at writing. It's &lt; 300M
+and boots fast. Key to know at this point is the file format &larr;
+use <code>qemu-img info [.img]</code> for <code>file format:</code>.</p>
+<div class="highlight"><pre><span></span>$ wget <span class="o">[</span>.img url<span class="o">]</span>
+
+To get file format:
+$ qemu-img info <span class="o">[</span>.img<span class="o">]</span>
+---------------------
+image: xenial-server-cloudimg-amd64-disk1.img
+file format: qcow2
+virtual size: 2.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
+disk size: 277M
+cluster_size: 65536
+Format specific information:
+    compat: 0.10
+    refcount bits: 16
+</pre></div>
+
+
+<h2>Resize disk</h2>
+<p>One caveat caught me is that snapshot using <a href="https://wiki.qemu.org/Documentation/CreateSnapshot">backing file</a> inherits
+the …</p>
       </p>
   </div>
 

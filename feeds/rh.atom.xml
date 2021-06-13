@@ -5,7 +5,55 @@ access &amp;larr; so what the heck!?&lt;/p&gt;
 &lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
 &lt;p&gt;Really ugly solution. Anyway. On a Ubuntu 16.04, install &lt;code&gt;guestfish&lt;/code&gt;
 and &lt;code&gt;libguesttools&lt;/code&gt;, then:&lt;/p&gt;
-&lt;h2&gt;create root …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
+&lt;h2&gt;create root password&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a password to use. Note it is "digit 1", not a "l"
+   (as in love):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+$ openssl passwd -1 natalie
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modify the image directly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+$ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
+&amp;gt;&amp;lt;fs&amp;gt; run
+&amp;gt;&amp;lt;fs&amp;gt; list-filesystems
+&amp;gt;&amp;lt;fs&amp;gt; mount /dev/sda1 /
+&amp;gt;&amp;lt;fs&amp;gt; vi /etc/shadow
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now replace the "!!" on line &lt;code&gt;root:...&lt;/code&gt; with your password you just
+created in step 1, save,&lt;/p&gt;
+&lt;h2&gt;allow ssh root &amp;amp; password&lt;/h2&gt;
+&lt;p&gt;Modify &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; and uncomment two places:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;lt;fs&amp;gt; vi /etc/ssh/sshd_config
+
+# Authentication:
+
+#LoginGraceTime 2m
+PermitRootLogin yes &amp;lt;--- uncomment
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes &amp;lt;-- uncomment
+#PermitEmptyPasswords no
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;disable cloud-init&lt;/h2&gt;
+&lt;p&gt;This is the single gottcha that held me back for weeks. It turned out
+that &lt;code&gt;cloud-init&lt;/code&gt; has …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
 &lt;a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software"&gt;here&lt;/a&gt;). This image has disabled root password, and disabled SSH
 access &amp;larr; so what the heck!?&lt;/p&gt;
 &lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
@@ -95,7 +143,27 @@ have a good understanding of the Satellite models and procedures.&lt;/p&gt;
 &lt;h1&gt;Architecture&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;One&lt;/strong&gt; satellite server (master server), and &lt;strong&gt;1+&lt;/strong&gt; capsule servers.&lt;/li&gt;
-&lt;li&gt;The Satellite Server is …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
+&lt;li&gt;The Satellite Server is required to connect to Red Hat
+   Customer Portal &amp;larr; main source of RH packags, errata,
+   Puppet modules.&lt;/li&gt;
+&lt;li&gt;The Satellite Server organizes the life cycle management by
+   using &lt;code&gt;organizations&lt;/code&gt; as principal division units &amp;larr; one
+   subscription manifest per org.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;org&lt;/code&gt; &amp;rarr; &lt;code&gt;location&lt;/code&gt; creates a matrix &amp;rarr; 
+   3 org and 4 location will create &lt;code&gt;3x4=12&lt;/code&gt; management contexts.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;location&lt;/code&gt; is then tied to a capsule server (isolated).&lt;/li&gt;
+&lt;li&gt;Info flow: external source &amp;rarr; main server &amp;rarr; capsule
+    server &amp;rarr; managed host.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="images/rh%20satellite%20overall%20architecture%20official.png"
+     class="col s12"&gt;&lt;/p&gt;
+&lt;h1&gt;Content view&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Content Views&lt;/code&gt; are subsets of content from the &lt;code&gt;Library&lt;/code&gt; (master copy of all contents).&lt;/li&gt;
+&lt;li&gt;Multiple content views can be applied to one capsule server.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Content Views&lt;/code&gt; can be combined to create &lt;code&gt;Composite Content Views&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Composite view is just a grouping. Individual content view, once
+   updated, shall still be promoted, but the composite …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
 between 6.2 and 6.3. Grasp the concept here, and hopefully you will
 have a good understanding of the Satellite models and procedures.&lt;/p&gt;
 &lt;h1&gt;Architecture&lt;/h1&gt;

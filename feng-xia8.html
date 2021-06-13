@@ -106,7 +106,31 @@ assessment. This will go over trend analysis.</p>
 </figure>
 
 <p>Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
-and 6m as time range, this tool can select any …</p>
+and 6m as time range, this tool can select any date-to-date as you
+wish, and all following analysis will be done over this selected
+range.</p>
+<h1>Daily return %</h1>
+<p>Daily return is defined as <code>(close-open)/close</code> of that day. This
+value is pre-computed as a strategy value.</p>
+<figure class="col s12">
+  <img src="images/stock/daily%20return.png"/>
+  <figcaption>Example of daily return</figcaption>
+</figure>
+
+<h1>Overnight return %</h1>
+<p>Overnight return is defined as <code>(today's open - yesterday's
+close)/yesterday's close</code>. This is also a pre-computed strategy value.</p>
+<figure class="col s12">
+  <img src="images/stock/overnight%20return.png"/>
+  <figcaption>Example of overnight return</figcaption>
+</figure>
+
+<p>I noticed that there is always some <strong>after market</strong> news or earning</p>
+<p>calls that will sway the market. Further, apparently trading is going
+on after the market is closed to me! Therefore, there is a dark period
+when the price is moving, but I can not participate until the next
+morning. Using this value together with daily return, I'm hoping to
+gain …</p>
       </p>
   </div>
 

@@ -106,7 +106,31 @@
 <p><a href="https://github.com/hakimel/reveal.js/">reveal.js</a> is pretty awesome. I have been using it for the last 9
 months now and love it. It was a bit of hassle to set it up
 initially. Once you have an example, yo can replicate and be
-productive by copying and pasting existing one, and getting a …</p>
+productive by copying and pasting existing one, and getting a
+consistent look and workflow. And the results? amazing.</p>
+<ul>
+<li>as photo album: <a href="https://fengxia41103.github.io/moment/1236/">momoent</a></li>
+<li>as for work: <a href="https://fengxia41103.github.io/moment/netbox/">netbox</a></li>
+</ul>
+<h1>To create a new presentation</h1>
+<p>The easiest way to create a new slides for your topic is to copy an
+existing folder, eg. <code>netbox</code>, and make modifications to your
+contents.</p>
+<p>Each folder should have the following contents:</p>
+<div class="highlight"><pre><span></span>.
+├── images
+├── index.html
+├── my.css
+└── slides.md
+</pre></div>
+
+
+<p>Only <code>index.html</code> and <code>.md</code> are essential. <code>index.html</code> is the overall
+HTML shell that will be loaded by browser, and <code>.md</code> are slide
+contents that will be converted from Markdown into HTML and included
+in <code>index.html</code>. You can split your contents into multiple <code>.md</code>
+files, which we will cover in more details next.</p>
+<p><code>my.css</code> is used to make customized CSS change per …</p>
       </p>
   </div>
 

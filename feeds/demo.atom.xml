@@ -13,7 +13,38 @@
 &lt;p&gt;Project SPA Dashboard is a weekend fun. The idea came from Lenovo Open
 Cloud project, in which we have developed auto deployment of a complex
 stack on three physical servers. Services are Red Hat software
-deployed on a RHHI instance. Previously we have maintained …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+deployed on a RHHI instance. Previously we have maintained a table
+(shown below) of URLs to these services since VM's IP and hostname are
+pre-determined. &lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/ibb%20rack%201%20cheatsheet.png" /&gt;
+    &lt;figcaption&gt;IBB example cheatsheet&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;However, since we have achieved daily deployment using playbook and
+&lt;code&gt;extra_vars&lt;/code&gt; as input, it is possible to generate a &lt;em&gt;dashboard&lt;/em&gt;
+representing a deployment instance with these actual config values,
+thus eliminating manual maintenance of a static wiki page.&lt;/p&gt;
+&lt;p&gt;For example, here is part of the config file of&lt;code&gt;Satellite&lt;/code&gt; VM:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;vm_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite &amp;lt;-- host name&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;qcow_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel75_qcow_satellite&lt;/span&gt;
+
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;cloud_init_nics&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.41.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_netmask&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.252.0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_gateway&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.40.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.101&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_netmask&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_gateway&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.1&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_name&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth2&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/spa%20dashboard%20demo.png" /&gt;
     &lt;figcaption&gt;Project SPA Dashboard demo&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -151,7 +182,20 @@ architecture is shown below:&lt;/p&gt;
 &lt;p&gt;The joy of making graphs in a data-driven web application has been the
 highlight that kept me going from project to project. Once all things
 are hooked up and data can be created in a meaningful way, the
-ultimate presentation are &lt;em&gt;reports&lt;/em&gt; and &lt;em&gt;graphs …&lt;/em&gt;&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+ultimate presentation are &lt;em&gt;reports&lt;/em&gt; and &lt;em&gt;graphs&lt;/em&gt;. In most cased, I
+have found graphs are far better than reports &amp;mdash; reports often
+fall into a table form which looks impressive because it is filled
+with data. But who is to the analysis and draw a conclusion!?  On the
+other hand, graph, even using the same data set as that of the
+report/table, is one step closer to a conclusive message &amp;mdash; KPI
+is above or below threshold, department A is doing better than
+department B, sales of this month dropped comparing to last month's...&lt;/p&gt;
+&lt;h1&gt;Data sources&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://dhsprogram.com/data/"&gt;DHS&lt;/a&gt;: &lt;a href="http://dhsprogram.com/data/"&gt;DHS&lt;/a&gt; data set is published by &lt;a href="https://www.usaid.gov/"&gt;US AID&lt;/a&gt;. Following its &lt;a href="http://api.dhsprogram.com/#/index.html"&gt;API&lt;/a&gt;
+   documents, &lt;a href="http://api.dhsprogram.com/#/api-indicators.cfm"&gt;indicators&lt;/a&gt; are selected to depict a country's well doing.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries"&gt;The World Bank&lt;/a&gt;:  Another comprehensive data set is &lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries"&gt;The World Bank&lt;/a&gt; set.
+   Check out its …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
   &lt;img src="images/country_1.png"/&gt;
     &lt;figcaption&gt;World Snapshot&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -219,7 +263,21 @@ data source, or using &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/
 &lt;p&gt;Car leasing rooted in my own experience while researching for a new
 car.  After putting together an Excel to model the car leasing
 process, I started to think how to make the lesson learned available
-for other buyers. Also, I figure this …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+for other buyers. Also, I figure this is a perfect candidate for a
+single page application (SPA).&lt;/p&gt;
+&lt;p&gt;Two versions have been created &amp;mdash; one in &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt;, and another
+in &lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt;. This ties to my belief that however wonderful a tool may
+be, it is also important how well it fits &lt;em&gt;your way of thinking and
+typing&lt;/em&gt;. So this project gives a case to evaluate which one I'd like
+to invest into for more development.&lt;/p&gt;
+&lt;h1&gt;Leasing deciphered&lt;/h1&gt;
+&lt;p&gt;Sad reality is, all the leverages one can pull in a car leasing deal
+have been made &lt;em&gt;intentionally&lt;/em&gt; complicated so to confuse
+buyers. Jargon are everywhere, and everything is connected so one
+number changed seems to be changing everything, and some changes are
+more significant than others. How could one to figure out which is
+which!?&lt;/p&gt;
+&lt;p&gt;I …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_car.png"/&gt;
     &lt;figcaption&gt;Project Car Leasing Calculator&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -523,7 +581,19 @@ trading company who specializes fashion products. Main functions of
 the application include product management, customer and vendor
 database, order management (both sales and purchase), and inventory
 management.&lt;/p&gt;
-&lt;p&gt;The company is based …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+&lt;p&gt;The company is based in US with two subsidiaries in mainland China.
+Its challenges lied in multiple folds. First, orders and updates are emailed
+back and forth which is error prone and can be quickly out of sync with
+reality. Second, operation becomes
+unaccountable when critical data points are missing, eg. who made
+the last modification 2of a sales order? Third, vendors are operating
+in Europe and North America time zones while the company's customers
+are in China. The time difference and geographical separation between
+the two ends make information flow difficult without a centrally maintained
+information repository. Cloud drives were tried but still they
+lack the capability to provide a coherent view for both sides.&lt;/p&gt;
+&lt;p&gt;On top of these issues, the company was to launch an initiative
+to …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_fashion.png" /&gt;
     &lt;figcaption&gt;Project Fashion front page&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -574,7 +644,18 @@ and design considerations in these articles:&lt;/p&gt;
 &lt;p&gt;This project started at lunch with a friend who has been trading
 stocks as hobby for years. None of us has worked in a trading house
 playing with some serious money. Nonetheless, he believed that he has
-found a winner strategy and I …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+found a winner strategy and I felt there is only one way to prove it
+&amp;mdash; data and test.&lt;/p&gt;
+&lt;p&gt;So here it is, a tool that can test a trading strategy over S&amp;amp;P 500
+daily data and a few other data sets. The cool thing about this
+application is that simulation is done as background process and
+report has not only statistics compared against some index such as the
+S&amp;amp;P 500, but a detailed step-by-step transaction trace that is ready
+for a replay.&lt;/p&gt;
+&lt;p&gt;The bad news is that his winner strategy doesn't seem to be a winner
+yet.  The good news is that we now have a framework that can host much
+more data set and strategies, and running data set in this scale is
+fun.&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_jk.png"/&gt;
     &lt;figcaption&gt;Project Stock frontpage&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -613,7 +694,18 @@ fun.&lt;/p&gt;</content></entry><entry><title>Project GKP Demo</title><link href
 &lt;p&gt;Project GKP is an interesting one.  It is a web tool that helps high
 school graduates in China to find a right college.  The grand vision
 is to make it a one-stop shop to get information that are mostly
-relevant at …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+relevant at each step of research.&lt;/p&gt;
+&lt;p&gt;When we first conceived this idea, the leader in this field was a
+Chinese startup company, &lt;a href="http://www.gaokaopi.com/"&gt;高考派&lt;/a&gt;(aka. GKP). It was rumored that
+the company was facing a pending acquisition with a enticing price
+tag. After diving into their site for a few weeks, we came to realize
+that beneath the skin of their application, its baseline data was
+seriously broken. For example, GKP's core feature was its historical
+exam data. However, we found a dozen similar sources all claimed to
+have the same data set. But surprisingly there have been hard reached
+to find agreement between any of the two data sets! This cast a
+serious doubt on the validity of these services. Further analysis of
+them made it clear …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
     &lt;img src="images/demo_gkp.png"/&gt;
     &lt;figcaption&gt;Project GKP frontpage&lt;/figcaption&gt;
 &lt;/figure&gt;

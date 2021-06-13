@@ -103,7 +103,31 @@ control node, etc. &mdash; naming convention aside, it is the brain
 that tracks others nodes in the cloud, applications installed and
 their status.</p>
 <h1>Screencast</h1>
-<p>Through research I want to learn about its …</p>
+<p>Through research I want to learn about its process, internal
+mechanism, how this command triggers off other juju components, what
+is the minimum take to simulate a successful bootstrap, and if things
+go south, what is the minimum to simulate a clean state so we can run
+<code>juju bootstrap</code> again as if from scratch. This last point is
+particuarly useful for development and troubleshooting.</p>
+<figure class="s12 center">
+    <img src="images/juju%20bootstrap.gif" />
+    <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
+</figure>
+
+<p>First thing first, if we have create a cloud or are using a stock
+cloud type:</p>
+<div class="highlight"><pre><span></span>$ juju bootstrap <span class="o">[</span>cloudname<span class="o">]</span> <span class="o">[</span>machine-0 name<span class="o">]</span>
+
+<span class="k">for</span> example:
+$ juju bootstrap devx test-1
+</pre></div>
+
+
+<p>This will create a state controller (machine-0) that will be the
+management node within juju's cloud environment.</p>
+<h1>Develop a new provider</h1>
+<p>Case in point is to develop a new provider. Juju's <a href="https://github.com/juju/juju/wiki/Implementing-environment-providers">document</a> is
+helpful to …</p>
       </p>
   </div>
 

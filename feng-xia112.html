@@ -107,7 +107,35 @@ document for work. Here is some tips of how I'm using it.</p>
 <h1>doc header</h1>
 <p>Things that are specific to that document. This, thus, is context
 sensitive &mdash; <code>title</code>, <code>subtitle</code>, <code>author</code>, <code>bibliography</code>,
-<code>abstract</code>, <code>keywords …</code></p>
+<code>abstract</code>, <code>keywords</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Open Cloud  Reference Architecture</span>
+<span class="l l-Scalar l-Scalar-Plain">subtitle</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Version 1.0</span>
+<span class="l l-Scalar l-Scalar-Plain">author</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Feng Xia</span>
+
+<span class="l l-Scalar l-Scalar-Plain">bibliography</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">feng.bib</span>
+<span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">Open Cloud</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">abstract</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+
+  <span class="no">Anything goes here.</span>
+</pre></div>
+
+
+<p>One catch is semicolon in <code>title</code>! Unbelievably, which I haven't
+figured out why, that including a ":" in the title string will mess
+up export to PDF. The symptom you will see is that all your
+reference in <code>.bib</code> will not be found!!</p>
+<h1>LaTex setting</h1>
+<p>A universal setting to latex export. This is additional to the LaTex
+template file I use. Supposedly I can set all these in the template
+also.</p>
+<p>But if I'm using multiple template, this can be looked as the common
+settings for all the PDF I write.</p>
+<p>Here is <a href="/downloads/pandoc/latex.yaml">current version</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="l l-Scalar l-Scalar-Plain">documentclass</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">scrreprt</span>
+<span class="l l-Scalar l-Scalar-Plain">papersize</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">a4 …</span></pre></div>
       </p>
   </div>
 

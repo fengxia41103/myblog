@@ -5,7 +5,40 @@ But how to access the Juju GUI? Launching it is easy
 enough with &lt;code&gt;$ juju gui&lt;/code&gt; from juju host; 
 accessing it from anywhere outside
 the host is a challenge. One way is through &lt;code&gt;$ ssh -X&lt;/code&gt; to 
-the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
+the LXD and launch firefox. &lt;/p&gt;
+&lt;p&gt;Another option is to use &lt;a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/"&gt;&lt;code&gt;nginx&lt;/code&gt; to proxy&lt;/a&gt; the GUI service. The
+quirk here is to enable &lt;code&gt;ssl&lt;/code&gt; proxy (notice the &lt;code&gt;https&lt;/code&gt;?)&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/juju%20gui%20nginx.png"/&gt;
+  &lt;figcaption&gt;Juju GUI with Nginx proxy&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get SSL cert in &lt;code&gt;/etc/nginx&lt;/code&gt;. This will create two files in this
+   directory: &lt;code&gt;cert.key&lt;/code&gt; and &lt;code&gt;cert.crt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In LXD host, use &lt;code&gt;$ juju gui&lt;/code&gt; to find out its server address and
+   port, for example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```shell
+(dev) fengxia@ubuntu:~$ juju gui
+GUI 2.10.2 for model &amp;quot;admin/default&amp;quot; is enabled at:
+https://10.175.135.193:17070/gui/u/admin/default
+Your login credential is:
+username: admin
+password: 049ab8c2284b3b7fa7e87933df18da15
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So the server's …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju local LXD.html"&gt;LXD on localhost&lt;/a&gt; we introduced using
 LXD container to bootstrap a Juju controller. 
 But how to access the Juju GUI? Launching it is easy
 enough with &lt;code&gt;$ juju gui&lt;/code&gt; from juju host; 
@@ -100,7 +133,20 @@ $ juju change-user-password
 experience of Juju and its charms. However, if you have done charm
 development for a while, you know making a one line of code change,
 deploying charm, then wait to see the &lt;em&gt;new&lt;/em&gt; code got executed &amp;larr;
-it's good 5-10 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
+it's good 5-10 minutes per cycle. These add up quickly when you are in
+the middle of churning out code to get your ideas written. Not to
+mention creating a new &lt;code&gt;machine&lt;/code&gt; is 2x slower, and bootstraping a new
+controller is even worse. I had experience in Shanghai sitting 30+
+minutes for a new controller due to the location's unreliable
+connections, and sometimes it just failed w/ a timeout. &lt;/p&gt;
+&lt;p&gt;What to do? The goal is to create a way to reduce this trial-error
+cycle as much as possible so to speed up code development.&lt;/p&gt;
+&lt;h1&gt;Challenge&lt;/h1&gt;
+&lt;p&gt;If you watch &lt;code&gt;juju debug-log&lt;/code&gt; while it deploys a charm, you start to
+realize that there are roughly seven steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;creating a container (will discuss &lt;code&gt;--to&lt;/code&gt; switch later)&lt;/li&gt;
+&lt;li&gt;update/upgrade the new container …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Using Juju's &lt;a href="https://jujucharms.com/docs/2.0/clouds-LXD"&gt;LXD provider&lt;/a&gt; is the least-hassle way to start an
 experience of Juju and its charms. However, if you have done charm
 development for a while, you know making a one line of code change,
 deploying charm, then wait to see the &lt;em&gt;new&lt;/em&gt; code got executed &amp;larr;
@@ -364,7 +410,32 @@ of coding in charm's Python files.&lt;/p&gt;
 &lt;p&gt;Design objectives:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Design as reusable &lt;a href="https://jujucharms.com/docs/2.1/developer-layers"&gt;layer(s)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Be compatible with Ubuntu and …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
+&lt;li&gt;Be compatible with Ubuntu and CentOS&lt;/li&gt;
+&lt;li&gt;Simple pattern to execute a playbook&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Assumption:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Playbooks will be local (in charm) so to maintain the
+   atomic nature of a HW charm &amp;mdash; the model contains both the
+   declaration of attributes and actions to handle runtime state transitions.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Method 1: layer-ansible&lt;/h1&gt;
+&lt;p&gt;Method 1 is to use an existing project, &lt;a href="https://github.com/chuckbutler/charms.ansible"&gt;layer-ansible&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Examine its code reveals a typical pattern one would use to introduce
+a new function:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Ansible. The approach it took is to use a
+   &lt;code&gt;ppa:ansible/ansible&lt;/code&gt; source and installed by calling
+   &lt;code&gt;charmhelpers.fetch.apt_install&lt;/code&gt;. The key issue here is using &lt;code&gt;ppa&lt;/code&gt;
+   which is an &lt;strong&gt;hardcoded&lt;/strong&gt; Ubuntu approach.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
+def install_ansible_support(from_ppa=True, ppa_location=&amp;#39;ppa:ansible/ansible&amp;#39;):
+  if from_ppa:
+      charmhelpers.fetch.add_source(ppa_location)
+      charmhelpers.fetch.apt_update(fatal=True)
+  charmhelpers.fetch.apt_install(&amp;#39;ansible&amp;#39;)
+  with …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Let's face it. Ansible has the mouth (and market) share these
 days. For our modeling purpose, we are to utilize its procedural
 strength to carry out actions, which provides an abstraction instead
 of coding in charm's Python files.&lt;/p&gt;
@@ -648,7 +719,48 @@ charm needs to include it? In this article we will take a look
 at its code base to decipher this mystery.&lt;/p&gt;
 &lt;h1&gt;Hooks&lt;/h1&gt;
 &lt;p&gt;We already know hooks are hardcoded. Juju expects certain hooks and
-hook sequence is always executed in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
+hook sequence is always executed in an order that is dictated by Juju
+code.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/charm%20hooks.png" /&gt;
+  &lt;figcaption&gt;Sequence of charm hooks&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;What do we see in hooks? If you run &lt;code&gt;charm build&lt;/code&gt; and examine the &lt;code&gt;dist&lt;/code&gt; folder,
+hooks live in &lt;code&gt;dist/yourcharm/hooks&lt;/code&gt; folder:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+├── config-changed
+├── hook.template
+├── install
+├── leader-elected
+├── leader-settings-changed
+├── relations
+│   └── rack-pdu
+│       ├── __init__.py
+│       ├── interface.yaml
+│       ├── provides.py
+│       └── requires.py
+├── start
+├── stop
+├── update-status
+└── upgrade-charm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We know we haven't defined any custom hook code for this charm,
+so how were they generated? Even more interesting is
+that all hooks are strangely &lt;strong&gt;identical&lt;/strong&gt;.
+Take &lt;code&gt;install&lt;/code&gt; hook script for example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python3&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Load modules from $JUJU_CHARM_DIR/lib&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;charms.layer&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;basic&lt;/span&gt;
+
+&lt;span class="c1"&gt;# This will load and run the appropriate @hook and other decorated&lt;/span&gt;
+&lt;span class="c1"&gt;# handlers from $JUJU_CHARM_DIR/reactive, $JUJU_CHARM_DIR/hooks/reactive,&lt;/span&gt;
+&lt;span class="c1"&gt;# and $JUJU_CHARM_DIR/hooks …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Have you ever wondered what &lt;a href="https://github.com/juju-solutions/layer-basic.git"&gt;layer-basic&lt;/a&gt; is for? and why every
 charm needs to include it? In this article we will take a look
 at its code base to decipher this mystery.&lt;/p&gt;
 &lt;h1&gt;Hooks&lt;/h1&gt;
@@ -1501,7 +1613,27 @@ watch is reset and will be count from 0 again during next iteration
 charm. Chained states is essentially mirroring a pattern of any sequential
 execution in a workflow. Potentially each execution block can also
 have conditions to set the next state, even though this type of knowledge
-should be exposed outside function element …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
+should be exposed outside function element, if possible, and to be
+handled by something better than pure code (eg. BPMN).&lt;/p&gt;
+&lt;p&gt;The model for this experiment is straightforward. We create a layer
+with three states: &lt;code&gt;state.1&lt;/code&gt;, &lt;code&gt;state.2&lt;/code&gt;, and &lt;code&gt;state.3&lt;/code&gt;. Upon start
+charm kicks off execution of &lt;code&gt;state.1&lt;/code&gt;, which then transit itself to
+the &lt;code&gt;state.2&lt;/code&gt;, then to &lt;code&gt;state.3&lt;/code&gt;, and then loop back to &lt;code&gt;state.1&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class="s6 m6 s12 center"&gt;
+  &lt;img src="images/charm%20chain%20states.png" /&gt;
+  &lt;figcaption&gt;Charm design pattern: chain states&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The key questions to answer in this experiment are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;What is the entry point to start the first state?&lt;/li&gt;
+&lt;li&gt;If setting two states true, are they executed serially or
+   in parallel?&lt;/li&gt;
+&lt;li&gt;Can a blocking command halt state transition even if there are
+   states being true and can be acted upon? &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Screencast&lt;/h1&gt;
+&lt;p&gt;Top left window shows the &lt;code&gt;juju …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;This charm is created to demonstrate chained states using Juju
 charm. Chained states is essentially mirroring a pattern of any sequential
 execution in a workflow. Potentially each execution block can also
 have conditions to set the next state, even though this type of knowledge
@@ -1607,7 +1739,26 @@ behavior can not be interruptted either.&lt;/p&gt;</content><category term="leno
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires
-that the manager is aware of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
+that the manager is aware of the existence of the baremetal, and has
+acquired necessary information of the server so that these two things
+are now possible:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Power cycle the server&lt;/li&gt;
+&lt;li&gt;Install a software such as operating system&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The general process of managing a baremetal is straightforward.
+Baremetal life cycle can be viewed in the following states. Names and
+details of each state and state transitions differ, but the concept
+remains valid. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;unknown&lt;/span&gt;: Baremetal is not managed.&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;enlisted&lt;/span&gt;: Manager is now aware of
+   the existence of the baremetal. It does not yet have sufficient
+   information to cycle its power or loading anything to execute on it.&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;ready for provisioning&lt;/span&gt;: Sometimes
+   also called &lt;em&gt;hardware inventory&lt;/em&gt; phase, in which the manager has
+   acquired capability to control the server's power. Knowing other
+   server characteristics …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This article is to analyze Openstack Ironic and Canonical MAAS, both
 are tools to turn baremetal into a pool of managed resources that are
 ready for consumption by upstream srervice.  On the highest level, a
 baremetal is either managed or not-managed. Being &lt;strong&gt;managed&lt;/strong&gt; requires
@@ -2358,7 +2509,19 @@ service such as Neutron. This leaves Ironic not suffering from the
 same risk that MAAS setup may have.&lt;/p&gt;</content><category term="lenovo"></category></entry><entry><title>Baremetal provisioning</title><link href="https://fengxia41103.github.io/myblog/baremetal%20provisioning.html" rel="alternate"></link><published>2017-03-22T15:45:00-04:00</published><updated>2017-03-22T15:45:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-03-22:/myblog/baremetal provisioning.html</id><summary type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
 point in life. It is easy to perceive inserting a disk or USB key to
 make this happen because the OS files are &lt;em&gt;there&lt;/em&gt;. A fancier version
-is to boot from network using PXE boot option, which …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
+is to boot from network using PXE boot option, which seems like a
+magic (when the environment has been setup) &amp;mdash; it somehow finds
+the OS image and start installing, all over a &lt;em&gt;network&lt;/em&gt;!&lt;/p&gt;
+&lt;p&gt;Now if we move to the world of servers, it works the same
+way. Baremetal is another name referring to a server that has no
+operating system (or hypervisor) installed yet. But the challenge is
+to physically access to it to insert that OS disk &amp;mdash; in a data
+center setting, I think the walking part is neither fun nor
+desired. Remote provisioning is, therefore, the way to go.&lt;/p&gt;
+&lt;p&gt;First, let's define &lt;strong&gt;provisioning&lt;/strong&gt;. Here we mean to have installed
+an operating system or hypervisor on a baremetal so it is available
+for further software installation.  In the simplest term, one needs to
+answer …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Everyone of us has installed an operating system to a computer at some
 point in life. It is easy to perceive inserting a disk or USB key to
 make this happen because the OS files are &lt;em&gt;there&lt;/em&gt;. A fancier version
 is to boot from network using PXE boot option, which seems like a
@@ -2761,7 +2924,19 @@ behind the scene from BIOS to a PXE:&lt;/p&gt;
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &amp;mdash; start an instance on demand, then build those
 REST requests into Juju provider code. After playing with Ironic API
-and Openstack's Devstack for …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
+and Openstack's Devstack for two weeks, I start to realize that Ironic
+by itself doesn't do much. Instead, it heavily relies on other
+Openstack services to provision a baremetal &amp;mdash; Keystone to
+generate a token which will be used in all HTTP calls, Neutron to
+provide network/&lt;em&gt;port&lt;/em&gt;, Ironic itself to manage a &lt;em&gt;node&lt;/em&gt;, Glance to
+get kernel image, ramdisk image, and actual OS image, and Nova to
+&lt;em&gt;orchestrate&lt;/em&gt; these information for Ironic API to consume.&lt;/p&gt;
+&lt;p&gt;Ironic &lt;a href="https://docs.openstack.org/developer/ironic/deploy/user-guide.html"&gt;user guide&lt;/a&gt; has some good information on basic technology
+and Ironic design. A &lt;a href="https://www.openstack.org/videos/vancouver-2015/isn-and-039t-it-ironic-the-bare-metal-cloud"&gt;talk&lt;/a&gt; &amp;amp; &lt;a href="https://github.com/devananda/talks/blob/master/isnt-it-ironic.html"&gt;slides&lt;/a&gt; by &lt;a href="https://github.com/devananda"&gt;devananda&lt;/a&gt; on 2015
+Vancouver Summit is also a good point to start.&lt;/p&gt;
+&lt;p&gt;In the following sections I'd like to use the questions I have
+encountered in research to create a newbie-oriented tutorial on
+Ironic. In particular, I'd …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is an outcome of my writing a Juju-Ironic provider. The
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &amp;mdash; start an instance on demand, then build those
 REST requests into Juju provider code. After playing with Ironic API
@@ -3727,7 +3902,24 @@ that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
 the charm world to learn its design.&lt;/p&gt;
 &lt;h1&gt;Bundle, charm, service, application&lt;/h1&gt;
-&lt;p&gt;Juju &lt;a href="https://jujucharms.com/docs/stable/juju-concepts"&gt;terms&lt;/a&gt; can …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
+&lt;p&gt;Juju &lt;a href="https://jujucharms.com/docs/stable/juju-concepts"&gt;terms&lt;/a&gt; can be confusing. Approximately they can be viewed in
+a tree model, where a bundle can have multiple charms, a charm can
+contain multiple &lt;a href="https://jujucharms.com/docs/2.0/authors-subordinate-services"&gt;services&lt;/a&gt;, a service is composed of one or more
+applications and a group of &lt;a href="https://jujucharms.com/docs/1.24/charms-relations"&gt;relations&lt;/a&gt;, and a relation, if
+defined, must be one of the two types:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;provide&lt;/strong&gt; (eg. I am MySQL and I provide a SQL database relation).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;require&lt;/strong&gt; (eg. I'm Mediawiki and I require a SQL database).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/juju%20control%20modeling.png" /&gt;
+  &lt;figcaption&gt;Juju control modeling&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In term of deployment, a service can be deployed to more than one
+machine so as to achieve HA; a machine can also have more than one
+services. Here we use the term machine broadly because it can also be
+a single LXD container, so in this case there can …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Juju &lt;a href="https://jujucharms.com/"&gt;charms&lt;/a&gt; are, charming. It promises a selection of blueprints
 that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
 the charm world to learn its design.&lt;/p&gt;
@@ -3878,7 +4070,22 @@ including what makes a node eligible as a target and what files will
 be put on by the deployer.If you recall, there were four steps in a
 deploy process:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Add a new machine to the cloud environment. In …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
+&lt;li&gt;Add a new machine to the cloud environment. In the &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;demo&lt;/a&gt;, we
+   added this machine manually using &lt;code&gt;juju add-machine&lt;/code&gt; command.&lt;/li&gt;
+&lt;li&gt;Machine-0 recognizes the new node.&lt;/li&gt;
+&lt;li&gt;CLI issues a deploy command.&lt;/li&gt;
+&lt;li&gt;Charm gets deployed.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This usecase, however, is somewhat backwards -- we have provisioned a
+machine prior to the deploy command. Wouldn't it be better if the
+command will signal the cloud provider to create a new machine on the
+fly? MAAS provider can almost do just that.&lt;/p&gt;
+&lt;h1&gt;MAAS way of a deploy&lt;/h1&gt;
+&lt;p&gt;We have briefly touched upon &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;the MAAS way&lt;/a&gt;.  By default, Juju
+deploy will request for a new machine unless using the &lt;code&gt;--to [machine
+number]&lt;/code&gt; flag. While using MAAS it is seen that MAAS will turn a
+&lt;code&gt;READY&lt;/code&gt; machine into &lt;code&gt;ALLOCATED&lt;/code&gt; then &lt;code&gt;DEPLOYING&lt;/code&gt;. Once a Juju agent
+is installed (provisioned), the agent executes application …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/juju deploy.html"&gt;this&lt;/a&gt; article, we have demonstrated how Juju deploys a charm,
 including what makes a node eligible as a target and what files will
 be put on by the deployer.If you recall, there were four steps in a
 deploy process:&lt;/p&gt;
@@ -3999,7 +4206,37 @@ continue our research into another important function &amp;mdash; juju
 deploy.&lt;/p&gt;
 &lt;p&gt;Deploy will command a node to pull down requested charm and install
 whatever needed based the charm's instruction. As the bootstrap
-research, I'm interested in the internal mechanism of this …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
+research, I'm interested in the internal mechanism of this process,
+the bare minimum to simulate a successful run, and the minimum steps
+to repeat this for development and troubleshooting.&lt;/p&gt;
+&lt;h1&gt;Screencast&lt;/h1&gt;
+&lt;p&gt;See the process in action:&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/juju%20deploy%20jenkins.gif" /&gt;
+    &lt;figcaption&gt;Screencast of juju deploying Jenkins&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Juju + MAAS&lt;/h2&gt;
+&lt;p&gt;We have already covered state machine of &lt;a href="https://fengxia41103.github.io/myblog/maas target.html"&gt;MAAS target node&lt;/a&gt;. In the
+context of deploying a charm driven by Juju, we can take a look MAAS
+internals how those states are related.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/juju%20deploy%20target%20node%20state%20diagram.png" /&gt;
+    &lt;figcaption&gt;MAAS target node state diagram during Juju deploy process&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Deploy steps illustrated&lt;/h1&gt;
+&lt;p&gt;This is a more detailed view of juju deploying a charm broken down
+into three steps.&lt;/p&gt;
+&lt;figure class="s12 center"&gt; 
+    &lt;img src="images/juju%20deploy%20original.png" /&gt;
+    &lt;figcaption&gt;
+        Illustration of a Juju cloud environment before a deployment
+    &lt;/figcaption&gt; 
+&lt;/figure&gt;
+
+&lt;p&gt;In this environment, we have a CLI controller where we will type in
+juju commands, one state controller who manages the cloud, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We have covered Juju's &lt;a href="https://fengxia41103.github.io/myblog/juju bootstrap.html"&gt;bootstrap&lt;/a&gt; phase. In this article, we will
 continue our research into another important function &amp;mdash; juju
 deploy.&lt;/p&gt;
 &lt;p&gt;Deploy will command a node to pull down requested charm and install
@@ -4429,7 +4666,31 @@ control node, etc. &amp;mdash; naming convention aside, it is the brain
 that tracks others nodes in the cloud, applications installed and
 their status.&lt;/p&gt;
 &lt;h1&gt;Screencast&lt;/h1&gt;
-&lt;p&gt;Through research I want to learn about its …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
+&lt;p&gt;Through research I want to learn about its process, internal
+mechanism, how this command triggers off other juju components, what
+is the minimum take to simulate a successful bootstrap, and if things
+go south, what is the minimum to simulate a clean state so we can run
+&lt;code&gt;juju bootstrap&lt;/code&gt; again as if from scratch. This last point is
+particuarly useful for development and troubleshooting.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/juju%20bootstrap.gif" /&gt;
+    &lt;figcaption&gt;Screencast of juju bootstraping a cloud environment&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;First thing first, if we have create a cloud or are using a stock
+cloud type:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ juju bootstrap &lt;span class="o"&gt;[&lt;/span&gt;cloudname&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;machine-0 name&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; example:
+$ juju bootstrap devx test-1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will create a state controller (machine-0) that will be the
+management node within juju's cloud environment.&lt;/p&gt;
+&lt;h1&gt;Develop a new provider&lt;/h1&gt;
+&lt;p&gt;Case in point is to develop a new provider. Juju's &lt;a href="https://github.com/juju/juju/wiki/Implementing-environment-providers"&gt;document&lt;/a&gt; is
+helpful to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The very first command user will encounter is the &lt;code&gt;juju bootstrap&lt;/code&gt;. It
 createa a special machine &amp;mdash; state controller, &lt;code&gt;machine-0&lt;/code&gt;,
 control node, etc. &amp;mdash; naming convention aside, it is the brain
 that tracks others nodes in the cloud, applications installed and
@@ -4948,7 +5209,27 @@ network design/configuration?&lt;/li&gt;
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of
 them makes sense after a while. Its &lt;a href="https://jujucharms.com/docs/2.0/glossary"&gt;terminology&lt;/a&gt; page helps on
-understanding individual …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
+understanding individual term. But like other Canonical documents, it
+needs a design level diagram to help user grasp the structure of this
+wealth of knowledge.&lt;/p&gt;
+&lt;p&gt;So here it is my attemp to show the relationship between these
+terms. Instead of drawing a tree to reflect 1-N relationship, I used
+an outer enclosure which can have multiple of its inner enclosures,
+eg. a bundle can have N charms.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/juju%20control%20modeling.png"/&gt;
+  &lt;figcaption&gt;Juju control models&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;A few interesting points besides the 1-N relationships. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A single application can be deployed on multiple machines,
+  eg. Application #2 has two units. This is how one application can be
+  scaled out horizontally.&lt;/li&gt;
+&lt;li&gt;One machine, in turn, can host multiple applications, eg. one unit
+  of application #2 and #3 both live on the same machine.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By default …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This article is a high level view of Juju's internal modelings. For me
 it was fairly confusing when looking at its document which has an army
 of these concepts: charm, bundle, model, unit.... of course, each of
 them makes sense after a while. Its &lt;a href="https://jujucharms.com/docs/2.0/glossary"&gt;terminology&lt;/a&gt; page helps on
@@ -4982,7 +5263,28 @@ they must support PXE boot.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1&gt;PXE boot&lt;/h1&gt;
 &lt;p&gt;The MAAS machine functions as both the DHCP server and the TFTP
-server …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
+server, both are required to facilitate PXE booting. First, we creat a
+blank VM. The important things are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Under &lt;em&gt;System &amp;rarr; Mother board &amp;rarr; Boot order&lt;/em&gt;, check the
+    &lt;em&gt;Network&lt;/em&gt;. However, it is not necessary to move the &lt;em&gt;Network&lt;/em&gt; boot
+    above &lt;em&gt;Hard Disk&lt;/em&gt;. When there is no OS deployed yet on the hard
+    disk, boot process will fall through to PXE anyway. Once an OS has
+    been installed, the machine will boot normally from HD.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you put PXE as the first order, this target will not boot
+into HD image at all.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set &lt;em&gt;Network &amp;rarr; Adapter 1 &amp;rarr; Internal Network&lt;/em&gt;, named
+    &lt;em&gt;intnet&lt;/em&gt;. This corresponds to the MAAS managed subnet of
+    192.168.8.0/24.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After this, start the target VM and it should PXE boot and will shut
+itself …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After setting up the MAAS server and its subnet, bringing up a target
 node is simple.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;All nodes must be on the same &lt;strong&gt;192.168.8.0/24&lt;/strong&gt; subnet, and
@@ -5083,7 +5385,20 @@ taget has to be PXE-booted in order to be managed by the MAAS server.&lt;/p&gt;
 life by putting an OS on it. Working together with &lt;a href="https://www.ubuntu.com/cloud/juju"&gt;Juju&lt;/a&gt;, they can
 setup a cluster of applications quite quickly. Think of them as a
 package manage like Ubuntu's &lt;code&gt;apt-get&lt;/code&gt;, but in the context of a
-cloud. Interesting …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
+cloud. Interesting.&lt;/p&gt;
+&lt;p&gt;This article shows how to setup a virtual lab so one can play with
+these two tools and get a sense of what they do. The whole setup is
+based on Virtualbox. One thing I found out the hard way is that
+despite their nice looking website and rather recent project history,
+there is no single document that can bring this environment live from
+A to Z. All official documents have out-of-date commands here and
+there which made following them useless. I consulted countless blogs,
+posts, chasing down bugs (or I thought they were bugs), and finally
+when everything works, it became so obvious and simple. Hopefully this
+article will shorten this journey for readers and they can have this
+environment easily.&lt;/p&gt;
+&lt;h1&gt;Baseline environment&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Virtualbox …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Canonical &lt;a href="http://maas.io/"&gt;MAAS&lt;/a&gt; is a deployment tool that can give a bare metal
 life by putting an OS on it. Working together with &lt;a href="https://www.ubuntu.com/cloud/juju"&gt;Juju&lt;/a&gt;, they can
 setup a cluster of applications quite quickly. Think of them as a
 package manage like Ubuntu's &lt;code&gt;apt-get&lt;/code&gt;, but in the context of a

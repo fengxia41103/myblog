@@ -120,7 +120,30 @@
 code base to pick up interested artifacts &larr; brand
 indicator. Definition of these artifacts are highly contextual,
 meaning that a string <code>feng</code> can mean a variable, or a string literal,
-or something else. Think of it, how …</p>
+or something else. Think of it, how many programming languages in your
+application stack, and how many different comment styles there are!?
+Crazy.</p>
+<p>So let's start w/ the most basic &mdash; string literal &mdash; if I
+find a string <code>whatever</code> (old brand), replace it w/ <code>feng</code> (new
+brand).</p>
+<h1>the how</h1>
+<p>The script can be found <a href="https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py">here</a>. The idea is to:</p>
+<ol>
+<li>Walk through <code>root</code> folder and its subfolders and files.</li>
+<li>File is selected by its extension &mdash;  an exclusion list and an inclusion
+   list. Exclusion has a default list to exclude all binary formats,
+   eg. <code>.png</code>.</li>
+<li>
+<p>Open the file as text file, search line by line whether interested
+   pattern in found.</p>
+</li>
+<li>
+<p>If found, log down the file full path, line number, and original
+     line text.</p>
+</li>
+<li>
+<p>Identify <code>reference</code>, which is defined as <code>/&lt;.....&gt;</code> &mdash; this
+   covers reference to a …</p></li></ol>
 </p>
 
 <p style="margin-top: 3em;">

@@ -104,7 +104,40 @@
 <p>In my previous notes on <a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html">analyzing Angular 1.x code</a>, I have stuck at
 how to create snapshots of rendered components for my documentation
 purpose. In the manual data file <code>.json</code>, I allowed an entry to plug
-in snapshot file taken by human testers. As an example, the code below …</p>
+in snapshot file taken by human testers. As an example, the code below
+shows a block documenting:</p>
+<ol>
+<li>module: <code>mwc.mapping</code></li>
+<li>its components as a LIST, and each has a key <code>screenshot</code> that is a
+   path to the snapshot file.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;components&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;source file&quot;</span><span class="p">:</span> <span class="s2">&quot;../app/topology/components/mappings.component.ts&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc-mappings&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;screenshot&quot;</span><span class="p">:</span> <span class="s2">&quot;./screenshots/mwc-mappings.png&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;used by&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;using&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;mwc-create-flash-pool-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-flash-pool-actions-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-create-migration-zone-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-migration-zone-actions-button&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;MappingsComponent&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc.mappings&quot;</span>
+<span class="p">}</span><span class="err">,</span>
+</pre></div>
+
+
+<p>Well, this gets me going to create the <a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf">example doc</a>, but to have
+human hunting down screenshots always give me a fishy feeling &mdash;
+you know how deeply I do not trust human to be <strong>exhaustive</strong> and
+<strong>deterministic</strong> &mdash; on a good day or w/ a capable person, yes,
+you get a pretty satisfactory result, but even then, it's no guarantee
+his/her next day's delivery will be the same. Not to mention …</p>
       </p>
   </div>
 

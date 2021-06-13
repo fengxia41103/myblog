@@ -127,7 +127,20 @@ traffic from A to B, much quicker than X-windows.</p>
 <li>
 <p>On A, <code>ssh -vv -ND 8080 root@&lt;B's IP&gt;</code>, then SSH login.</p>
 <ol>
-<li><code>-N</code>: Do …</li></ol></li></ol>
+<li><code>-N</code>: Do not execute a remote command.  This is useful for
+   just forwarding ports.`</li>
+<li>
+<p><code>-D [bind_address:]port</code>:</p>
+<p>Specifies a local “dynamic” application-level port forwarding.  This works by
+allocating a socket to listen to port on the local side, optionally bound to
+the specified bind_address.  Whenever a connection is made to this port, the
+connection is forwarded over the secure channel, and the application protocol
+is then used to determine where to connect to from the remote machine.  Cur‐
+rently the SOCKS4 and SOCKS5 protocols are supported, and ssh will act as a
+SOCKS server.  Only root can forward privileged ports.  Dynamic port forward‐
+ings can also be specified in the configuration file.</p>
+<p>IPv6 addresses can be specified by enclosing the address in square brackets.
+Only the superuser …</p></li></ol></li></ol>
 </p>
 
 <p style="margin-top: 3em;">

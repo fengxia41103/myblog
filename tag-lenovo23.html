@@ -102,7 +102,22 @@ including what makes a node eligible as a target and what files will
 be put on by the deployer.If you recall, there were four steps in a
 deploy process:</p>
 <ol>
-<li>Add a new machine to the cloud environment. In …</li></ol>
+<li>Add a new machine to the cloud environment. In the <a href="https://fengxia41103.github.io/myblog/juju deploy.html">demo</a>, we
+   added this machine manually using <code>juju add-machine</code> command.</li>
+<li>Machine-0 recognizes the new node.</li>
+<li>CLI issues a deploy command.</li>
+<li>Charm gets deployed.</li>
+</ol>
+<p>This usecase, however, is somewhat backwards -- we have provisioned a
+machine prior to the deploy command. Wouldn't it be better if the
+command will signal the cloud provider to create a new machine on the
+fly? MAAS provider can almost do just that.</p>
+<h1>MAAS way of a deploy</h1>
+<p>We have briefly touched upon <a href="https://fengxia41103.github.io/myblog/juju deploy.html">the MAAS way</a>.  By default, Juju
+deploy will request for a new machine unless using the <code>--to [machine
+number]</code> flag. While using MAAS it is seen that MAAS will turn a
+<code>READY</code> machine into <code>ALLOCATED</code> then <code>DEPLOYING</code>. Once a Juju agent
+is installed (provisioned), the agent executes application …</p>
       </p>
   </div>
 

@@ -3,7 +3,19 @@
 noticing is the slowness when ODOO first boot up.  We are observing up
 to minutes of a bootup time. This plainly is too slow.  Watching debug
 prints indicates that ODOO scans through all modules listed on Python
-path and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
+path and builds a &lt;em&gt;map&lt;/em&gt; in memory before dev server starts responding
+to request. Intuitively I suspected such loading practice is causing
+an unnecessary delay.  This aggravates further when ODOO server
+becomes completly unusable if any of the module chokes during this
+loading process. But this is too common a scenario during
+development. One consequence of this is that debugging becomes
+difficult. Often enough ODOO doesn't yield useful trace track to help
+determine the root cause of an error.  Another problem of such
+approach is the availability of servic becoming binary &amp;mdash; it
+either fully works or nothing runs. By analogy, the ODOO loading
+process is like compiling phase in running a C code. No executable is
+available until the compiler and linker are happy.&lt;/p&gt;
+&lt;p&gt;Under this light …&lt;/p&gt;</summary><content type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
 noticing is the slowness when ODOO first boot up.  We are observing up
 to minutes of a bootup time. This plainly is too slow.  Watching debug
 prints indicates that ODOO scans through all modules listed on Python

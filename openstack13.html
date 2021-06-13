@@ -102,7 +102,37 @@ continue our research into another important function &mdash; juju
 deploy.</p>
 <p>Deploy will command a node to pull down requested charm and install
 whatever needed based the charm's instruction. As the bootstrap
-research, I'm interested in the internal mechanism of this …</p>
+research, I'm interested in the internal mechanism of this process,
+the bare minimum to simulate a successful run, and the minimum steps
+to repeat this for development and troubleshooting.</p>
+<h1>Screencast</h1>
+<p>See the process in action:</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20jenkins.gif" />
+    <figcaption>Screencast of juju deploying Jenkins</figcaption>
+</figure>
+
+<h2>Juju + MAAS</h2>
+<p>We have already covered state machine of <a href="https://fengxia41103.github.io/myblog/maas target.html">MAAS target node</a>. In the
+context of deploying a charm driven by Juju, we can take a look MAAS
+internals how those states are related.</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
+</figure>
+
+<h1>Deploy steps illustrated</h1>
+<p>This is a more detailed view of juju deploying a charm broken down
+into three steps.</p>
+<figure class="s12 center"> 
+    <img src="images/juju%20deploy%20original.png" />
+    <figcaption>
+        Illustration of a Juju cloud environment before a deployment
+    </figcaption> 
+</figure>
+
+<p>In this environment, we have a CLI controller where we will type in
+juju commands, one state controller who manages the cloud, and …</p>
       </p>
   </div>
 

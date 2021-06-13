@@ -122,7 +122,27 @@ have a good understanding of the Satellite models and procedures.</p>
 <h1>Architecture</h1>
 <ol>
 <li><strong>One</strong> satellite server (master server), and <strong>1+</strong> capsule servers.</li>
-<li>The Satellite Server is …</li></ol>
+<li>The Satellite Server is required to connect to Red Hat
+   Customer Portal &larr; main source of RH packags, errata,
+   Puppet modules.</li>
+<li>The Satellite Server organizes the life cycle management by
+   using <code>organizations</code> as principal division units &larr; one
+   subscription manifest per org.</li>
+<li><code>org</code> &rarr; <code>location</code> creates a matrix &rarr; 
+   3 org and 4 location will create <code>3x4=12</code> management contexts.</li>
+<li><code>location</code> is then tied to a capsule server (isolated).</li>
+<li>Info flow: external source &rarr; main server &rarr; capsule
+    server &rarr; managed host.</li>
+</ol>
+<p><img src="images/rh%20satellite%20overall%20architecture%20official.png"
+     class="col s12"></p>
+<h1>Content view</h1>
+<ol>
+<li><code>Content Views</code> are subsets of content from the <code>Library</code> (master copy of all contents).</li>
+<li>Multiple content views can be applied to one capsule server.</li>
+<li><code>Content Views</code> can be combined to create <code>Composite Content Views</code>.</li>
+<li>Composite view is just a grouping. Individual content view, once
+   updated, shall still be promoted, but the composite …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">

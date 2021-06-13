@@ -101,7 +101,19 @@
 plan was to first figure out Ironic APIs that will achieve what Juju
 provider needs &mdash; start an instance on demand, then build those
 REST requests into Juju provider code. After playing with Ironic API
-and Openstack's Devstack for …</p>
+and Openstack's Devstack for two weeks, I start to realize that Ironic
+by itself doesn't do much. Instead, it heavily relies on other
+Openstack services to provision a baremetal &mdash; Keystone to
+generate a token which will be used in all HTTP calls, Neutron to
+provide network/<em>port</em>, Ironic itself to manage a <em>node</em>, Glance to
+get kernel image, ramdisk image, and actual OS image, and Nova to
+<em>orchestrate</em> these information for Ironic API to consume.</p>
+<p>Ironic <a href="https://docs.openstack.org/developer/ironic/deploy/user-guide.html">user guide</a> has some good information on basic technology
+and Ironic design. A <a href="https://www.openstack.org/videos/vancouver-2015/isn-and-039t-it-ironic-the-bare-metal-cloud">talk</a> &amp; <a href="https://github.com/devananda/talks/blob/master/isnt-it-ironic.html">slides</a> by <a href="https://github.com/devananda">devananda</a> on 2015
+Vancouver Summit is also a good point to start.</p>
+<p>In the following sections I'd like to use the questions I have
+encountered in research to create a newbie-oriented tutorial on
+Ironic. In particular, I'd …</p>
       </p>
   </div>
 

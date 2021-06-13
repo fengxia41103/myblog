@@ -121,7 +121,24 @@ that hold magic to make an application deployment easy. But devils are
 in the details, as always the case. In this article we will walk in
 the charm world to learn its design.</p>
 <h1>Bundle, charm, service, application</h1>
-<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can …</p>
+<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can be confusing. Approximately they can be viewed in
+a tree model, where a bundle can have multiple charms, a charm can
+contain multiple <a href="https://jujucharms.com/docs/2.0/authors-subordinate-services">services</a>, a service is composed of one or more
+applications and a group of <a href="https://jujucharms.com/docs/1.24/charms-relations">relations</a>, and a relation, if
+defined, must be one of the two types:</p>
+<ol>
+<li><strong>provide</strong> (eg. I am MySQL and I provide a SQL database relation).</li>
+<li><strong>require</strong> (eg. I'm Mediawiki and I require a SQL database).</li>
+</ol>
+<figure class="s12 center">
+  <img src="images/juju%20control%20modeling.png" />
+  <figcaption>Juju control modeling</figcaption>
+</figure>
+
+<p>In term of deployment, a service can be deployed to more than one
+machine so as to achieve HA; a machine can also have more than one
+services. Here we use the term machine broadly because it can also be
+a single LXD container, so in this case there can …</p>
 </p>
 
 <p style="margin-top: 3em;">

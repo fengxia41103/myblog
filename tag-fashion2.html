@@ -102,7 +102,19 @@ shown the design and function behind Product and Inventory management.
 In this article I'll talk about orders.</p>
 <p>Sales order and purchase order are like two sides of the same coin.
 Each sales order(SO) can include a mixed bag of products from
-different vendors. Once …</p>
+different vendors. Once a SO has been created, application will parse
+it into multiple purchase order (PO) and route them to their
+vendor. Reversely, company can place a PO with a vendor, and purchased
+products can be used to fulfill multiple sales orders later.</p>
+<h1>Order life cycle</h1>
+<p>To understand the design of orders, one has to first grasp the life
+cycle of an order. I'd like to divide its functions into roughly two
+areas: <em>about physical good</em> and <em>about money</em>.</p>
+<p>The area of physical goods takes care of the acquisition of products
+on order. This includes shipping, receiving, reconciliation,
+inventory, product return and substitution. Like what we did in
+inventory, we maintain a theoretical list which comes from the sales
+order itself (think of it as a wish …</p>
       </p>
   </div>
 

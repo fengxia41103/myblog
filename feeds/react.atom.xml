@@ -9,7 +9,33 @@
 &lt;p&gt;Posted a challenge to build a &lt;em&gt;search&lt;/em&gt;/browser for movie
 fan. Initially was given a static data set to display. So on top of
 that, I start to pull in a few other data sources to spice things
-up. Coded in React …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
+up. Coded in React, which I found the ES6 syntax much cleaner.&lt;/p&gt;
+&lt;h1&gt;Development&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;code&gt;nvm&lt;/code&gt; and node (tested 9.4, 12.1).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm install&lt;/code&gt;: to pull all dependencies.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run build&lt;/code&gt; because static files will be served from &lt;code&gt;/dist&lt;/code&gt;
+   (defined in &lt;code&gt;webpack.config&lt;/code&gt;) by default. However, they can also be
+   served outside the application entirely. See &lt;code&gt;Deploy&lt;/code&gt; section for
+   more info.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run dev&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Browse &lt;code&gt;localhost:8080&lt;/code&gt;, browser will auto-refresh when webpack
+   detects a change to source files.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Deploy&lt;/h1&gt;
+&lt;h2&gt;using github pages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Setup your github repo to allow pages, select using &lt;code&gt;MASTER&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Setup &lt;code&gt;develop&lt;/code&gt; as default branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run deploy&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;At prompt, login your github account.&lt;/li&gt;
+&lt;li&gt;Go to &lt;code&gt;&amp;lt;yourname&amp;gt;.github.com/&amp;lt;repo&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;using your static file hosting&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;npm run build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Push &lt;code&gt;/dist&lt;/code&gt; to your static file hosting service.&lt;/li&gt;
+&lt;li&gt;Verify …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
 &lt;figure class="s12 center"&gt;
   &lt;img src="images/movie.gif"/&gt;
     &lt;figcaption&gt;Movie browser demo&lt;/figcaption&gt;
@@ -275,7 +301,19 @@ make each episode a link to a better information.&lt;/p&gt;</content><category t
 &lt;p&gt;While fixing my &lt;a href="https://github.com/fengxia41103/jk"&gt;stock project&lt;/a&gt;, I hit a road block, that Yahoo's 
 free finance API is &lt;a href="https://forums.yahoo.net/t5/Yahoo-Finance-help/Is-Yahoo-Finance-API-broken/td-p/250503"&gt;gone!&lt;/a&gt;, no more. This is quite a bummer. How
 to get daily quotes so to reestablish the data stream? Well, as a the
-beauty of free market, someone is always up to the …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+beauty of free market, someone is always up to the service if there is
+a demand. So I ended up using &lt;a href="https://www.alphavantage.co/documentation/"&gt;Alpha Advantage API&lt;/a&gt; for a change.&lt;/p&gt;
+&lt;p&gt;Tagging on top the &lt;a href="https://fengxia41103.github.io/myblog/data visualization.html"&gt;World Snapshot&lt;/a&gt; project, this one is
+essentially a graph browser that takes the API data stream based on
+user selected company symbol, and draw all the data index on a single page.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"&gt;live demo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;code&gt;architecture&lt;/code&gt;/&lt;code&gt;design&lt;/code&gt; is shown below, and &lt;a href="https://github.com/fengxia41103/sp500"&gt;github code&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/sp500%20architecture.png"/&gt;
+  &lt;figcaption&gt;SP500 SPA architecture&lt;/figcaption&gt;
+&lt;/figure&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
   &lt;img src="images/alpha%20advantage%20sp500.png"/&gt;
     &lt;figcaption&gt;SP500&lt;/figcaption&gt;
 &lt;/figure&gt;

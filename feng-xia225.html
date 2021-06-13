@@ -101,7 +101,31 @@
 <h1>Install Linux</h1>
 <p>You can do a dual boot or just wipe the whole disk. Window's boot
 manager will interfere, somehow, which I don't remember the details
-anymore. Google it. Eventually it will work. The rest assumes you …</p>
+anymore. Google it. Eventually it will work. The rest assumes you have
+Linux installed.</p>
+<p>Also, follow <a href="https://fengxia41103.github.io/myblog/emacs.html">these steps</a> to get your Linux in a good shape.</p>
+<h1>VPN</h1>
+<p>Most importantly, you need VPN.</p>
+<ol>
+<li>Go to <code>otp.company.com</code> to register your phone number.</li>
+<li>Install <code>Company OTP</code> from your app store.</li>
+<li>Keep <code>Company OTP</code> app running so you can see the active OTP.</li>
+<li><code>apt install openconnect screen tmux</code></li>
+<li>
+<p>In a screen, <code>sudo openconnect -u [username] webvpn.us.company.com</code></p>
+<ol>
+<li>first password: your regular domain login pwd</li>
+<li>second one: OTP</li>
+</ol>
+</li>
+</ol>
+<p>If works, you should see something like this:</p>
+<div class="highlight"><pre><span></span>root@fengxia-company:~# openconnect -u fxia1 webvpn.us.company.com
+POST https://webvpn.us.company.com/
+Attempting to connect to server 104.232.254.247:443
+SSL negotiation with webvpn.us.company.com
+Connected to HTTPS on webvpn.us.company.com
+Got …</pre></div>
       </p>
   </div>
 

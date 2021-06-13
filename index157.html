@@ -130,7 +130,38 @@
 <p>Project SPA Dashboard is a weekend fun. The idea came from Lenovo Open
 Cloud project, in which we have developed auto deployment of a complex
 stack on three physical servers. Services are Red Hat software
-deployed on a RHHI instance. Previously we have maintained …</p>
+deployed on a RHHI instance. Previously we have maintained a table
+(shown below) of URLs to these services since VM's IP and hostname are
+pre-determined. </p>
+<figure class="s12 center">
+    <img src="images/ibb%20rack%201%20cheatsheet.png" />
+    <figcaption>IBB example cheatsheet</figcaption>
+</figure>
+
+<p>However, since we have achieved daily deployment using playbook and
+<code>extra_vars</code> as input, it is possible to generate a <em>dashboard</em>
+representing a deployment instance with these actual config values,
+thus eliminating manual maintenance of a static wiki page.</p>
+<p>For example, here is part of the config file of<code>Satellite</code> VM:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">vm_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">brain1-satellite &lt;-- host name</span>
+<span class="l l-Scalar l-Scalar-Plain">qcow_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rhel75_qcow_satellite</span>
+
+<span class="l l-Scalar l-Scalar-Plain">cloud_init_nics</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth0</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.41.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.252.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.40.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.101</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.255.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth2</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20 …</span></pre></div>
 </p>
 
 <p style="margin-top: 3em;">

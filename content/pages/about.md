@@ -5,7 +5,7 @@ Author: Feng Xia
 Modified: 2018-10-06 10:40
 
 <figure class="col l6 m6 s12">
-  <img src="/images/funny/wtf-code.png"/>
+  <img src="images/funny/wtf-code.png"/>
 </figure>
 
 
@@ -50,7 +50,7 @@ actual foundation to make your solution, in this example buying
 grocery, so effective. This pattern applies to all other shoppings you
 do. It is this hidden knowledge that you have (but not necessarily
 communicated to anyone else) is making buying off the shelf product a
-valid solution. 
+valid solution.
 
 Now imagine you don't know these. There are zillion tools, products
 you can buy, but it will futile to state that any can satisfy you,
@@ -59,7 +59,7 @@ business approaches technology while not analyzing its own problem
 first, or not communicating this list of attributes (brand, flavor,
 crunchiness of a cereal) to your evaluation. Then, what to buy!? These
 tools and products will never replace the analysis and the matrix of
-attributes. 
+attributes.
 
 Here comes in the value of POC. POC is a technique to manifest
 attributes and capture your preference in as short an iteration as
@@ -71,7 +71,7 @@ summarize the business objective, assumptions, and the characteristics
 that matter to the user and stakeholders. POC is not solution; rather,
 it is a method, like methods adopted in science research, to give you
 a path to remove noise, identify fallacy, and moving inches by inches
-towards, facts and truth. 
+towards, facts and truth.
 
 In this process, therefore, developer is the one who understands the
 tools and the process, and is a translator to map a knowledge from
@@ -92,7 +92,7 @@ feel confident to take them further if they choose. All these have
 been written in a matter of 24 hours when the first iteration was
 complete, in which the UI you see, and the data models standing behind
 to support the case, have mostly done. It will be an exaggeration that
-24 hour is all you need; but it is close. 
+24 hour is all you need; but it is close.
 
 Again, it is the process, and the capability to understand the problem
 and to map them into a technical solution that I'm advocating, not a

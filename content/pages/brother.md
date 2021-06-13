@@ -30,12 +30,12 @@ Author: Feng Xia
      },this);
 
      return (
-       <div className="col l4 m4 s12">
+       <div className="col s12">
          {imageThumbs}
          <div>
            <strong>Tips</strong>: use keyboard &larr; & &rarr; to flip.
          </div>
-         
+
        </div>
      );
    }
@@ -43,7 +43,7 @@ Author: Feng Xia
 
  var OneBox = React.createClass({
    componentDidMount: function(){
-     j$('.materialboxed').materialbox();  
+     j$('.materialboxed').materialbox();
    },
    render: function(){
      return(
@@ -52,12 +52,12 @@ Author: Feng Xia
             <div id="showMore"
                  onClick={this.props.onClick}>
               <i className="fa fa-expand"></i>
-              Show all 
+              Show all
             </div> :null }
 
           <div className="row center-align">
             <img src={this.props.image.full}
-                 className="col l8 m8 s12 z-depth-5 materialboxed"/>
+                 className="col s12 z-depth-5 materialboxed"/>
 
             <DisplayListBox displayList={this.props.displayList}
                             onClick={this.props.setImage} />
@@ -213,5 +213,5 @@ ReactDOM.render(
    <PresentationBox images={images} />,
    document.getElementById("sth")
 );
- 
+
 </script>

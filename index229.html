@@ -104,40 +104,52 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-09-06
+        2017-10-04
 
     </em>
-    <h3>Juju local LXD</h3>
+    <h3>Sensitive touchpad</h3>
 
     <blockquote>
-        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
-experience of Juju and its charms. However, if you have done charm
-development for a while, you know making a one line of code change,
-deploying charm, then wait to see the <em>new</em> code got executed &larr;
-it's good 5-10 minutes per cycle. These add up quickly when you are in
-the middle of churning out code to get your ideas written. Not to
-mention creating a new <code>machine</code> is 2x slower, and bootstraping a new
-controller is even worse. I had experience in Shanghai sitting 30+
-minutes for a new controller due to the location's unreliable
-connections, and sometimes it just failed w/ a timeout. </p>
-<p>What to do? The goal is to create a way to reduce this trial-error
-cycle as much as possible so to speed up code development.</p>
-<h1>Challenge</h1>
-<p>If you watch <code>juju debug-log</code> while it deploys a charm, you start to
-realize that there are roughly seven steps:</p>
+    <p>The symptom is that typing jumps all over the place.</p>
+<h1>Tune sensitivity</h1>
+<p>The idea here is to use <code>xinput</code> command to tune finger sensitivity
+values so to find a good balance. Also, we are to <strong>disable</strong> touch
+point (the little read dot rubber thingy on Lenovo's laptops) since I
+don't ever use it.</p>
 <ol>
-<li>creating a container (will discuss <code>--to</code> switch later)</li>
-<li>update/upgrade the new container …</li></ol>
+<li>
+<p><code>xinput list</code> to get a list (uses the <code>ssh -X</code> if on remote
+   machine):</p>
+<div class="highlight"><pre><span></span>```shell
+(dev) fengxia@fengxia-lenovo:~/workspace/wss$ xinput list
+⎡ Virtual core pointer                      id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ SynPS/2 Synaptics TouchPad                id=11   [slave  pointer  (2)]
+⎜   ↳ TPPS/2 IBM TrackPoint                     id=13   [slave  pointer  (2)]
+⎣ Virtual core keyboard                     id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    ↳ Power Button                              id=6    [slave  keyboard (3)]
+    ↳ Video Bus                                 id=7    [slave  keyboard (3)]
+    ↳ Sleep Button                              id=8    [slave  keyboard (3)]
+    ↳ Integrated Camera                         id=9    [slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard              id=10   [slave  keyboard (3)]
+    ↳ ThinkPad Extra Buttons                    id=12   [slave  keyboard (3)]
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>To disable …</p></li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="juju local LXD.html">
+    <a class="btn btn-default button" href="sensitive touchpad.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

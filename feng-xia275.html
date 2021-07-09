@@ -86,40 +86,53 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2016-12-08
+      2017-01-11
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Setup a MAAS Virtualbox lab
+      Juju bootstrap process
     </h4>
 
       <p>
-        <p>Canonical <a href="http://maas.io/">MAAS</a> is a deployment tool that can give a bare metal
-life by putting an OS on it. Working together with <a href="https://www.ubuntu.com/cloud/juju">Juju</a>, they can
-setup a cluster of applications quite quickly. Think of them as a
-package manage like Ubuntu's <code>apt-get</code>, but in the context of a
-cloud. Interesting.</p>
-<p>This article shows how to setup a virtual lab so one can play with
-these two tools and get a sense of what they do. The whole setup is
-based on Virtualbox. One thing I found out the hard way is that
-despite their nice looking website and rather recent project history,
-there is no single document that can bring this environment live from
-A to Z. All official documents have out-of-date commands here and
-there which made following them useless. I consulted countless blogs,
-posts, chasing down bugs (or I thought they were bugs), and finally
-when everything works, it became so obvious and simple. Hopefully this
-article will shorten this journey for readers and they can have this
-environment easily.</p>
-<h1>Baseline environment</h1>
-<p><strong>Virtualbox …</strong></p>
+        <p>The very first command user will encounter is the <code>juju bootstrap</code>. It
+createa a special machine &mdash; state controller, <code>machine-0</code>,
+control node, etc. &mdash; naming convention aside, it is the brain
+that tracks others nodes in the cloud, applications installed and
+their status.</p>
+<h1>Screencast</h1>
+<p>Through research I want to learn about its process, internal
+mechanism, how this command triggers off other juju components, what
+is the minimum take to simulate a successful bootstrap, and if things
+go south, what is the minimum to simulate a clean state so we can run
+<code>juju bootstrap</code> again as if from scratch. This last point is
+particuarly useful for development and troubleshooting.</p>
+<figure class="s12 center">
+    <img src="images/juju%20bootstrap.gif" />
+    <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
+</figure>
+
+<p>First thing first, if we have create a cloud or are using a stock
+cloud type:</p>
+<div class="highlight"><pre><span></span>$ juju bootstrap <span class="o">[</span>cloudname<span class="o">]</span> <span class="o">[</span>machine-0 name<span class="o">]</span>
+
+<span class="k">for</span> example:
+$ juju bootstrap devx test-1
+</pre></div>
+
+
+<p>This will create a state controller (machine-0) that will be the
+management node within juju's cloud environment.</p>
+<h1>Develop a new provider</h1>
+<p>Case in point is to develop a new provider. Juju's <a href="https://github.com/juju/juju/wiki/Implementing-environment-providers">document</a> is
+helpful to …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/maas virtualbox.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju bootstrap.html">
       read more
     </a>
   </div>

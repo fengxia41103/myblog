@@ -86,39 +86,63 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2019-09-01
+      2019-09-25
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Analyzing Angular 1.x code
+      Snapshot anything w/ Selenium
     </h4>
 
       <p>
-        <p><a href="https://github.com/compodoc/compodoc">Compodoc</a> can generate component hierarchy diagrams, call chains,
-but it didn't work for Angular 1.x code. </p>
-<p>The goal is to <strong>create a lookup/catalogue between code and visual</strong>
-because everyone on the team, including UI devs, can only engage a
-discussion using the visual (the rendered look) &mdash; so far, I
-haven't been able to develop the capability to <em>see</em> how it will look
-like by just staring at code.</p>
-<p>This issue gets compounded when components are calling each other
-&mdash; some pages are calling all kinds of components, and these
-components are in turn used in all sorts of <em>parent</em> pages. This
-presents an issue how to knows its effect when, say, I'm taking a task
-to change this component? Without such a cross reference, I'm
-completely in the dark. Think about this, if component A is used in 3
-places, we should have 3 test cases just to be sure it doesn't break
-the visual.</p>
-<p>This leads me to a google search and I think the term for what I'm
-thinking is <a href="https://storybook.js.org/docs/testing/automated-visual-testing/">visual regression …</a></p>
+        <figure class="col l6 m6 s12">
+  <img src="images/back%20rub.jpg"/>
+</figure>
+
+<p>In my previous notes on <a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html">analyzing Angular 1.x code</a>, I have stuck at
+how to create snapshots of rendered components for my documentation
+purpose. In the manual data file <code>.json</code>, I allowed an entry to plug
+in snapshot file taken by human testers. As an example, the code below
+shows a block documenting:</p>
+<ol>
+<li>module: <code>mwc.mapping</code></li>
+<li>its components as a LIST, and each has a key <code>screenshot</code> that is a
+   path to the snapshot file.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;components&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;source file&quot;</span><span class="p">:</span> <span class="s2">&quot;../app/topology/components/mappings.component.ts&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc-mappings&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;screenshot&quot;</span><span class="p">:</span> <span class="s2">&quot;./screenshots/mwc-mappings.png&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;used by&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;using&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;mwc-create-flash-pool-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-flash-pool-actions-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-create-migration-zone-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-migration-zone-actions-button&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;MappingsComponent&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc.mappings&quot;</span>
+<span class="p">}</span><span class="err">,</span>
+</pre></div>
+
+
+<p>Well, this gets me going to create the <a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf">example doc</a>, but to have
+human hunting down screenshots always give me a fishy feeling &mdash;
+you know how deeply I do not trust human to be <strong>exhaustive</strong> and
+<strong>deterministic</strong> &mdash; on a good day or w/ a capable person, yes,
+you get a pretty satisfactory result, but even then, it's no guarantee
+his/her next day's delivery will be the same. Not to mention …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/snapshot selenium.html">
       read more
     </a>
   </div>

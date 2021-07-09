@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2021-02-14
+        2021-03-03
 
     </em>
-    <h3>Impeachment</h3>
+    <h3>Stock Trend Analysis</h3>
 
     <blockquote>
     </blockquote>
@@ -115,16 +115,44 @@
 
 
 <p>
-    <figure class="col s12">
-  <img src="images/mitch.jpg"/>
+    <p>Continue from <a href="{filename}/workspace/stock/stock%20detail.md">last article</a>. That one focused on value
+assessment. This will go over trend analysis.</p>
+<h1>Select a period &amp; price</h1>
+<figure class="col s12">
+  <img src="images/stock/trend%20price.png"/>
+  <figcaption>Select a time range for trend analysis</figcaption>
 </figure>
 
-<p>I have to say, this is very disappointing. Listening to the calls of these senators to say guilty or not guilty, was very disheartening, when so many say not guilty. This was very puzzling to me. I mean, what would you do when there were somebody pointed a gun at your head? And isn't this capitol hill building like their home? So? We ordinary people were all taught that if someone invaded your private property, you can just fire and shoot. But here, their home was invaded by these mobs, and yet, they played so called politics! I don't understand, really, <strong>what is going on</strong>!?</p>
-<p>When I was young, I learned that those so called 世纪审判 by Soviet were all staged. I remember reading them in a book from my college library, and it was quite a shocker to me. I had little life experience then, and nothing of my own opinion on this subject. But over the years I have always believed that such trials won't happen in America. Not that I believe politics …</p>
+<p>Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
+and 6m as time range, this tool can select any date-to-date as you
+wish, and all following analysis will be done over this selected
+range.</p>
+<h1>Daily return %</h1>
+<p>Daily return is defined as <code>(close-open)/close</code> of that day. This
+value is pre-computed as a strategy value.</p>
+<figure class="col s12">
+  <img src="images/stock/daily%20return.png"/>
+  <figcaption>Example of daily return</figcaption>
+</figure>
+
+<h1>Overnight return %</h1>
+<p>Overnight return is defined as <code>(today's open - yesterday's
+close)/yesterday's close</code>. This is also a pre-computed strategy value.</p>
+<figure class="col s12">
+  <img src="images/stock/overnight%20return.png"/>
+  <figcaption>Example of overnight return</figcaption>
+</figure>
+
+<p>I noticed that there is always some <strong>after market</strong> news or earning</p>
+<p>calls that will sway the market. Further, apparently trading is going
+on after the market is closed to me! Therefore, there is a dark period
+when the price is moving, but I can not participate until the next
+morning. Using this value together with daily return, I'm hoping to
+gain …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="impeachment.html">
+    <a class="btn btn-default button" href="stock trend analysis.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

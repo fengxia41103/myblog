@@ -86,57 +86,62 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-10-11
+      2017-10-22
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      KVM
+      Juju GUI nginx proxy
     </h4>
 
       <p>
-        <p><a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> is something new to me, and it sounds awesome. The experience
-I want to have is a local dev that I can copy &amp; paste from some base
-image in case I forgot to take a snapshot at milestone. This way I
-feel comfortable to stand up a sandbox, try out crazy things, then
-discard it entirely at done, and repeat. So this means something
-minimal, fast.</p>
-<p>First thing first, get <code>kvm</code> and a few tools:</p>
-<div class="highlight"><pre><span></span>$ apt kvm libvirt-bin bridge-utils cloud-utils cloud-init libguestfs-tools
+        <p>In <a href="https://fengxia41103.github.io/myblog/juju local LXD.html">LXD on localhost</a> we introduced using
+LXD container to bootstrap a Juju controller. 
+But how to access the Juju GUI? Launching it is easy
+enough with <code>$ juju gui</code> from juju host; 
+accessing it from anywhere outside
+the host is a challenge. One way is through <code>$ ssh -X</code> to 
+the LXD and launch firefox. </p>
+<p>Another option is to use <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/"><code>nginx</code> to proxy</a> the GUI service. The
+quirk here is to enable <code>ssl</code> proxy (notice the <code>https</code>?)</p>
+<figure class="col s12 center">
+  <img src="images/juju%20gui%20nginx.png"/>
+  <figcaption>Juju GUI with Nginx proxy</figcaption>
+</figure>
+
+<ol>
+<li>
+<p>Get SSL cert in <code>/etc/nginx</code>. This will create two files in this
+   directory: <code>cert.key</code> and <code>cert.crt</code>.</p>
+<div class="highlight"><pre><span></span>```shell
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+```
 </pre></div>
 
 
-<h1>Cloud image</h1>
-<p>Don't bother with full blown <code>.iso</code>, use cloud images,
-eg. <a href="https://cloud-images.ubuntu.com/releases/16.04/release/">xenial 16.04</a>, my de faco at writing. It's &lt; 300M
-and boots fast. Key to know at this point is the file format &larr;
-use <code>qemu-img info [.img]</code> for <code>file format:</code>.</p>
-<div class="highlight"><pre><span></span>$ wget <span class="o">[</span>.img url<span class="o">]</span>
-
-To get file format:
-$ qemu-img info <span class="o">[</span>.img<span class="o">]</span>
----------------------
-image: xenial-server-cloudimg-amd64-disk1.img
-file format: qcow2
-virtual size: 2.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
-disk size: 277M
-cluster_size: 65536
-Format specific information:
-    compat: 0.10
-    refcount bits: 16
+</li>
+<li>
+<p>In LXD host, use <code>$ juju gui</code> to find out its server address and
+   port, for example:</p>
+<div class="highlight"><pre><span></span>```shell
+(dev) fengxia@ubuntu:~$ juju gui
+GUI 2.10.2 for model &quot;admin/default&quot; is enabled at:
+https://10.175.135.193:17070/gui/u/admin/default
+Your login credential is:
+username: admin
+password: 049ab8c2284b3b7fa7e87933df18da15
+```
 </pre></div>
 
 
-<h2>Resize disk</h2>
-<p>One caveat caught me is that snapshot using <a href="https://wiki.qemu.org/Documentation/CreateSnapshot">backing file</a> inherits
-the …</p>
+<p>So the server's …</p></li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/kvm.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju gui nginx proxy.html">
       read more
     </a>
   </div>

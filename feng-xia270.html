@@ -86,67 +86,45 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-01-21
+      2017-02-28
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Spectrwm
+      Introduction of Juju charms
     </h4>
 
       <p>
-        <p>My favourate <a href="https://wiki.archlinux.org/index.php/spectrwm">desktop manage</a> which tiles windows neatly so I never
-worry about cluttered view while opening and closing windows. </p>
-<p>Here is the <a href="https://fengxia41103.github.io/myblog/downloads/spectrwm.conf">config</a> file I'm using.</p>
-<div class="highlight"><pre><span></span><span class="c1"># PLEASE READ THE MAN PAGE BEFORE EDITING THIS FILE!</span>
-<span class="c1"># http://opensource.conformal.com/cgi-bin/man-cgi?spectrwm</span>
+        <p>Juju <a href="https://jujucharms.com/">charms</a> are, charming. It promises a selection of blueprints
+that hold magic to make an application deployment easy. But devils are
+in the details, as always the case. In this article we will walk in
+the charm world to learn its design.</p>
+<h1>Bundle, charm, service, application</h1>
+<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can be confusing. Approximately they can be viewed in
+a tree model, where a bundle can have multiple charms, a charm can
+contain multiple <a href="https://jujucharms.com/docs/2.0/authors-subordinate-services">services</a>, a service is composed of one or more
+applications and a group of <a href="https://jujucharms.com/docs/1.24/charms-relations">relations</a>, and a relation, if
+defined, must be one of the two types:</p>
+<ol>
+<li><strong>provide</strong> (eg. I am MySQL and I provide a SQL database relation).</li>
+<li><strong>require</strong> (eg. I'm Mediawiki and I require a SQL database).</li>
+</ol>
+<figure class="s12 center">
+  <img src="images/juju%20control%20modeling.png" />
+  <figcaption>Juju control modeling</figcaption>
+</figure>
 
-<span class="c1"># colors for focussed and unfocussed window borders</span>
-<span class="c1"># NOTE: all colors in this file are in hex! see XQueryColor for examples</span>
-<span class="nv">color_focus</span>     <span class="o">=</span> red
-<span class="nv">color_unfocus</span>       <span class="o">=</span> rgb:88/88/88
-
-<span class="c1"># bar settings</span>
-<span class="nv">bar_enabled</span>     <span class="o">=</span> 1
-<span class="nv">bar_border_width</span>    <span class="o">=</span> 1
-bar_border<span class="o">[</span>1<span class="o">]</span>       <span class="o">=</span> rgb:00/80/80
-bar_color<span class="o">[</span>1<span class="o">]</span>        <span class="o">=</span> black
-bar_font_color<span class="o">[</span>1<span class="o">]</span>   <span class="o">=</span> rgb:a0/a0/a0
-<span class="nv">bar_font</span>        <span class="o">=</span> -*-terminus-medium-*-*-*-*-*-*-*-*-*-*-*
-<span class="c1">#bar_action     = baraction.sh</span>
-<span class="nv">bar_action</span>      <span class="o">=</span> conky
-<span class="nv">bar_delay</span>       <span class="o">=</span> 1
-<span class="nv">bar_justify</span>     <span class="o">=</span> right
-<span class="nv">bar_at_bottom</span>       <span class="o">=</span> 0
-<span class="nv">stack_enabled</span>           <span class="o">=</span> 1
-<span class="nv">clock_enabled</span>           <span class="o">=</span> 1
-<span class="nv">clock_format</span>            <span class="o">=</span> %a %b %d %R %Z %Y
-<span class="nv">title_name_enabled</span>      <span class="o">=</span> 0
-<span class="nv">title_class_enabled</span>     <span class="o">=</span> 0
-<span class="nv">window_name_enabled</span>     <span class="o">=</span> 0
-<span class="nv">verbose_layout</span>          <span class="o">=</span> 1
-<span class="nv">focus_mode</span>              <span class="o">=</span> default
-<span class="nv">disable_border</span>          <span class="o">=</span> 1
-<span class="nv">border_width</span>            <span class="o">=</span> 1
-<span class="nv">urgent_enabled</span>          <span class="o">=</span> 1
-
-<span class="c1"># spawn app</span>
-program<span class="o">[</span>term<span class="o">]</span>           <span class="o">=</span> terminator
-<span class="c1">#program[screenshot_all]        = screenshot.sh full</span>
-<span class="c1">#program[screenshot_wind]= screenshot.sh window</span>
-<span class="c1">#program[lock]          = xlock</span>
-<span class="c1">#program[initscr]       = initscreen.sh</span>
-program<span class="o">[</span>menu<span class="o">]</span>           <span class="o">=</span> dmenu_run -fn <span class="nv">$bar_font</span> -nb <span class="nv">$bar_color</span> -nf <span class="nv">$bar_font_color</span> -sb <span class="nv">$bar_border</span> -sf <span class="nv">$bar_color</span>
-<span class="nv">spawn_term</span>              <span class="o">=</span> terminator
-
-<span class="c1"># dialog box size ratio .3 &gt;= r &lt; 1 …</span></pre></div>
+<p>In term of deployment, a service can be deployed to more than one
+machine so as to achieve HA; a machine can also have more than one
+services. Here we use the term machine broadly because it can also be
+a single LXD container, so in this case there can …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/spectrwm.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju charm layers.html">
       read more
     </a>
   </div>

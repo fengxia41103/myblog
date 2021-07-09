@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-09-08
+        2016-10-15
 
     </em>
-    <h3>General system architecture</h3>
+    <h3>SPA: World Snapshot</h3>
 
     <blockquote>
     </blockquote>
@@ -115,36 +115,37 @@
 
 
 <p>
-    <figure class="col l6 m6 s12">
-  <img src="images/architecture_joke.jpg"
-       class="center img-responsive">
+    <figure class="s12 center">
+  <img src="images/country_1.png"/>
+    <figcaption>World Snapshot</figcaption>
 </figure>
 
-<p>The word "system architect" has been puzzling to me.  I was hired to
-be one at one point. But it was not a comfortable position. How much
-do we understand the business?  What is the problem we are to solve?
-How does the current "architecture" fail? What is the downfall of this
-(or any) proposal? Overall, I feel an architecture emerges along with
-development and research. The more we start to understand the client's
-needs, habits, workflows, relationships, priorities, the more
-information we have when evaluating and making decisions on whether
-one piece in the stack fits or not, and why so. It is, IMHO, a
-backwards process when an architecture is pre-defined as if it is set
-in stone. We need to start from somewhere, but keeping in mind that it
-evolves and shifts like a living organ.</p>
 <blockquote>
-<p>System architecture evolves and shifts like a living organ.</p>
+<ul>
+<li><a href="http://snapshots.world/">live demo</a>, and <a href="https://github.com/fengxia41103/worldsnapshot">github</a></li>
+</ul>
 </blockquote>
-<p>This is a system architecture I have been using recently in
-projects. It is divided into four components:</p>
+<p>The joy of making graphs in a data-driven web application has been the
+highlight that kept me going from project to project. Once all things
+are hooked up and data can be created in a meaningful way, the
+ultimate presentation are <em>reports</em> and <em>graphs</em>. In most cased, I
+have found graphs are far better than reports &mdash; reports often
+fall into a table form which looks impressive because it is filled
+with data. But who is to the analysis and draw a conclusion!?  On the
+other hand, graph, even using the same data set as that of the
+report/table, is one step closer to a conclusive message &mdash; KPI
+is above or below threshold, department A is doing better than
+department B, sales of this month dropped comparing to last month's...</p>
+<h1>Data sources</h1>
 <ol>
-<li>
-<p><strong>foreground service provider</strong>: this includes machinery that
-  interface with …</p></li></ol>
+<li><a href="http://dhsprogram.com/data/">DHS</a>: <a href="http://dhsprogram.com/data/">DHS</a> data set is published by <a href="https://www.usaid.gov/">US AID</a>. Following its <a href="http://api.dhsprogram.com/#/index.html">API</a>
+   documents, <a href="http://api.dhsprogram.com/#/api-indicators.cfm">indicators</a> are selected to depict a country's well doing.</li>
+<li><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries">The World Bank</a>:  Another comprehensive data set is <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries">The World Bank</a> set.
+   Check out its …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="general system architecture.html">
+    <a class="btn btn-default button" href="data visualization.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

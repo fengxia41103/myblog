@@ -104,50 +104,52 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-09-30
+        2016-12-09
 
     </em>
-    <h3>SPA: car leasing calculator</h3>
+    <h3>Targets in MAAS lab</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="s12 center">
-    <img src="images/demo_car.png"/>
-    <figcaption>Project Car Leasing Calculator</figcaption>
-</figure>
-
+    <p>After setting up the MAAS server and its subnet, bringing up a target
+node is simple.</p>
 <blockquote>
-<ul>
-<li><a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator angular.html">AngularJS version</a></li>
-<li><a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator react.html">REACT version</a></li>
-</ul>
+<p>All nodes must be on the same <strong>192.168.8.0/24</strong> subnet, and
+they must support PXE boot.</p>
 </blockquote>
-<p>Car leasing rooted in my own experience while researching for a new
-car.  After putting together an Excel to model the car leasing
-process, I started to think how to make the lesson learned available
-for other buyers. Also, I figure this is a perfect candidate for a
-single page application (SPA).</p>
-<p>Two versions have been created &mdash; one in <a href="https://angularjs.org/">Angular</a>, and another
-in <a href="https://facebook.github.io/react/docs/getting-started.html">REACT</a>. This ties to my belief that however wonderful a tool may
-be, it is also important how well it fits <em>your way of thinking and
-typing</em>. So this project gives a case to evaluate which one I'd like
-to invest into for more development.</p>
-<h1>Leasing deciphered</h1>
-<p>Sad reality is, all the leverages one can pull in a car leasing deal
-have been made <em>intentionally</em> complicated so to confuse
-buyers. Jargon are everywhere, and everything is connected so one
-number changed seems to be changing everything, and some changes are
-more significant than others. How could one to figure out which is
-which!?</p>
-<p>I …</p>
+<h1>PXE boot</h1>
+<p>The MAAS machine functions as both the DHCP server and the TFTP
+server, both are required to facilitate PXE booting. First, we creat a
+blank VM. The important things are:</p>
+<ol>
+<li>
+<p>Under <em>System &rarr; Mother board &rarr; Boot order</em>, check the
+    <em>Network</em>. However, it is not necessary to move the <em>Network</em> boot
+    above <em>Hard Disk</em>. When there is no OS deployed yet on the hard
+    disk, boot process will fall through to PXE anyway. Once an OS has
+    been installed, the machine will boot normally from HD.</p>
+<blockquote>
+<p>If you put PXE as the first order, this target will not boot
+into HD image at all.</p>
+</blockquote>
+</li>
+<li>
+<p>Set <em>Network &rarr; Adapter 1 &rarr; Internal Network</em>, named
+    <em>intnet</em>. This corresponds to the MAAS managed subnet of
+    192.168.8.0/24.</p>
+</li>
+</ol>
+<p>After this, start the target VM and it should PXE boot and will shut
+itself …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="car leasing.html">
+    <a class="btn btn-default button" href="maas target.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2020-03-06
+        2020-03-21
 
     </em>
-    <h3>Sherlock Holmes, and modern man</h3>
+    <h3>Git strategy</h3>
 
     <blockquote>
     </blockquote>
@@ -115,29 +115,32 @@
 
 
 <p>
-    <figure class="col l6 m6 s12">
-  <img src="images/love%20triangle.jpg"/>
+    <figure class="col s12 center">
+  <img src="images/funny/a%20lot%20of%20cats.jpg"/>
 </figure>
 
-<p>Haven't been much a fan of Sherlock Holmes, but watched a <a href="https://www.imdb.com/title/tt0988045/">movie</a>,
-which in the days of <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">COVID19</a> all over the news and thoughts after
-writing <a href="https://fengxia41103.github.io/myblog/virus is coming.html">virus is coming</a>, what Sherlock said made me think more on
-what marks a modern man &mdash; "There is no magic."</p>
-<p>I have ranted many times that there is no magic in engineering, in
-coding, in anything that is concrete, material, real. Life itself has
-no magic, it's messy, lots of loose gears fitting together, with a lot
-of trial and error, and a lot of luck. So, there isn't magic in
-becoming a modern man.</p>
-<p>What is a modern man? What makes one qualified as one? I don't have
-answer, nor there is any better than what I will be laying out
-below. Living in the 21st century gives a perception that everyone is
-now a modern man, because we are all living in a <em>modern</em> society,
-most of us at least, and cold war is over, we haven't slaughtered in a
-global sense since the WWII, and more …</p>
+<p><a href="https://fengxia41103.github.io/myblog/git.html">git</a> is wonderful, but its workflow is very confusing. Surprised?
+Then I would dare to say that you haven't had first hand experience
+using it in a full blown enterprise environment &mdash; when in such
+environment, the challenge isn't about git itself, but what the
+content of a release are, and how we are testing/CICD them.</p>
+<p>You would think it sounds rather cliche that this problem even
+exists. After all, these are what a software engineering is all about,
+aren't they? But take a step back and consider this scenario:</p>
+<ol>
+<li>We just did a release 5.0.0.</li>
+<li>We have two features: 1 &amp; 2.</li>
+<li>Initially they were all targeting the next release, say <code>5.1</code>.</li>
+<li>We create a <strong>staging</strong> branch, <code>5.1-staging</code> and point our CICD to
+   this so to QA them (more on this later).</li>
+<li>Feature 1 &amp; 2 have been merged into <code>5.1-staging</code>. Their source
+   branches, eg. <code>feature-1</code>, have been deleted &larr; at merge
+   request, select to delete source branch.</li>
+<li>Time is slipping, 5.1 is up this Friday, but one feature is failing …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="sherlock.html">
+    <a class="btn btn-default button" href="git strategy.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

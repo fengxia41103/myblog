@@ -86,41 +86,46 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2020-03-06
+      2020-04-01
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Sherlock Holmes, and modern man
+      Git strategy for backward compatibility
     </h4>
 
       <p>
-        <figure class="col l6 m6 s12">
-  <img src="images/love%20triangle.jpg"/>
+        <figure class="col s12 center">
+  <img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/>
+  <figcaption>
+  Git strategy for a backward-compatible release
+  </figcaption>
 </figure>
 
-<p>Haven't been much a fan of Sherlock Holmes, but watched a <a href="https://www.imdb.com/title/tt0988045/">movie</a>,
-which in the days of <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">COVID19</a> all over the news and thoughts after
-writing <a href="https://fengxia41103.github.io/myblog/virus is coming.html">virus is coming</a>, what Sherlock said made me think more on
-what marks a modern man &mdash; "There is no magic."</p>
-<p>I have ranted many times that there is no magic in engineering, in
-coding, in anything that is concrete, material, real. Life itself has
-no magic, it's messy, lots of loose gears fitting together, with a lot
-of trial and error, and a lot of luck. So, there isn't magic in
-becoming a modern man.</p>
-<p>What is a modern man? What makes one qualified as one? I don't have
-answer, nor there is any better than what I will be laying out
-below. Living in the 21st century gives a perception that everyone is
-now a modern man, because we are all living in a <em>modern</em> society,
-most of us at least, and cold war is over, we haven't slaughtered in a
-global sense since the WWII, and more …</p>
+<p>As a sequel to our discussion on <a href="https://fengxia41103.github.io/myblog/git strategy.html">git strategy</a>, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how <strong>backwards compatibility</strong> of releases may not be true
+if we are introducing long-term-support on releases, that hot fixes
+and bugs can only <strong>roll forward</strong>, eg. V4 bugs can be patched to V5
+(assuming V5 was released after V4, time wise and git commit wise),
+but not from V5 &rarr; V4 without introducing some V5 contents into V4
+(whether this is desired or not is the focal of the discussion,
+essentially, how much control you want to have over the release
+content!?)</p>
+<p>Now, let's build on top of this and say that <strong>we want backwards
+compatibility</strong> &mdash; all newer releases are always backwards
+compatible? This is certainly a desired outcome because this makes
+upgrade and maintenance easier (who wants to maintain a 10-year-old
+code when a customer <em>frozen in time</em> call you of a bug which you
+probably don't even remember who wrote that crap …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/sherlock.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/git rebase strategy.html">
       read more
     </a>
   </div>

@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-12-09
+        2017-01-19
 
     </em>
-    <h3>Targets in MAAS lab</h3>
+    <h3>Juju charm deployment</h3>
 
     <blockquote>
         <span class="myhighlight">Copyright @ Lenovo US</span>
@@ -116,40 +116,46 @@
 
 
 <p>
-    <p>After setting up the MAAS server and its subnet, bringing up a target
-node is simple.</p>
-<blockquote>
-<p>All nodes must be on the same <strong>192.168.8.0/24</strong> subnet, and
-they must support PXE boot.</p>
-</blockquote>
-<h1>PXE boot</h1>
-<p>The MAAS machine functions as both the DHCP server and the TFTP
-server, both are required to facilitate PXE booting. First, we creat a
-blank VM. The important things are:</p>
-<ol>
-<li>
-<p>Under <em>System &rarr; Mother board &rarr; Boot order</em>, check the
-    <em>Network</em>. However, it is not necessary to move the <em>Network</em> boot
-    above <em>Hard Disk</em>. When there is no OS deployed yet on the hard
-    disk, boot process will fall through to PXE anyway. Once an OS has
-    been installed, the machine will boot normally from HD.</p>
-<blockquote>
-<p>If you put PXE as the first order, this target will not boot
-into HD image at all.</p>
-</blockquote>
-</li>
-<li>
-<p>Set <em>Network &rarr; Adapter 1 &rarr; Internal Network</em>, named
-    <em>intnet</em>. This corresponds to the MAAS managed subnet of
-    192.168.8.0/24.</p>
-</li>
-</ol>
-<p>After this, start the target VM and it should PXE boot and will shut
-itself …</p>
+    <p>We have covered Juju's <a href="https://fengxia41103.github.io/myblog/juju bootstrap.html">bootstrap</a> phase. In this article, we will
+continue our research into another important function &mdash; juju
+deploy.</p>
+<p>Deploy will command a node to pull down requested charm and install
+whatever needed based the charm's instruction. As the bootstrap
+research, I'm interested in the internal mechanism of this process,
+the bare minimum to simulate a successful run, and the minimum steps
+to repeat this for development and troubleshooting.</p>
+<h1>Screencast</h1>
+<p>See the process in action:</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20jenkins.gif" />
+    <figcaption>Screencast of juju deploying Jenkins</figcaption>
+</figure>
+
+<h2>Juju + MAAS</h2>
+<p>We have already covered state machine of <a href="https://fengxia41103.github.io/myblog/maas target.html">MAAS target node</a>. In the
+context of deploying a charm driven by Juju, we can take a look MAAS
+internals how those states are related.</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
+</figure>
+
+<h1>Deploy steps illustrated</h1>
+<p>This is a more detailed view of juju deploying a charm broken down
+into three steps.</p>
+<figure class="s12 center"> 
+    <img src="images/juju%20deploy%20original.png" />
+    <figcaption>
+        Illustration of a Juju cloud environment before a deployment
+    </figcaption> 
+</figure>
+
+<p>In this environment, we have a CLI controller where we will type in
+juju commands, one state controller who manages the cloud, and …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="maas target.html">
+    <a class="btn btn-default button" href="juju deploy.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

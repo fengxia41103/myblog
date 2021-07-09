@@ -86,48 +86,39 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-01-21
+      2017-03-15
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Emacs
+      Openstack Ironic
     </h4>
 
       <p>
-        <p>What a wonderful editor!</p>
-<p>I wouldn't even call it an editor because it can do so much beyond
-text editing. Still on the learning curve to get a grasp of what it
-can do in my daily development workflow.</p>
-<h1>install emacs26</h1>
-<p>The easiest way to get this: <code>sudo add-apt-repository
-ppa:kelleyk/emacs</code>, then <code>apt remove emacs emacs25 &amp;&amp; apt update &amp;&amp;
-apt install emacs26</code>, then verify <code>emacs --version</code>.</p>
-<h1>bootstrap &amp; config</h1>
-<p>Welcome the wonderful <code>org-mode</code> and the <a href="https://fengxia41103.github.io/myblog/downloads/emacs/emacs_setup.html">config file in org-mode</a>. Bootstrap is easy:</p>
-<ol>
-<li>backup your current emacs: <code>mv ~/.emacs.d ~/.emacs.d.bak</code></li>
-<li>create <code>.emacs</code>, or copy <a href="https://fengxia41103.github.io/myblog/downloads/emacs/dot_emacs.el">.emacs</a> to <code>~</code>.</li>
-<li>launch emacs, sit back, and once all packages are downloaded and
-   compiled, you are done.</li>
-</ol>
-<h1>replace in files</h1>
-<p>Replacing a string match in multiple files is common, but
-tricky. Emacs doesn't make this intuitive at all. Follow these steps
-to get there:</p>
-<ol>
-<li><code>M-x find-grep-dired</code></li>
-<li><code>Find-grep (directory)</code>: is to select the root folder for the scan</li>
-<li><code>Find-grep (grep regexp)</code>: is the regex for the string pattern you
-   are searching, eg. <code>"images/</code> is to find anything starts with a
-   double …</li></ol>
+        <p>This article is an outcome of my writing a Juju-Ironic provider. The
+plan was to first figure out Ironic APIs that will achieve what Juju
+provider needs &mdash; start an instance on demand, then build those
+REST requests into Juju provider code. After playing with Ironic API
+and Openstack's Devstack for two weeks, I start to realize that Ironic
+by itself doesn't do much. Instead, it heavily relies on other
+Openstack services to provision a baremetal &mdash; Keystone to
+generate a token which will be used in all HTTP calls, Neutron to
+provide network/<em>port</em>, Ironic itself to manage a <em>node</em>, Glance to
+get kernel image, ramdisk image, and actual OS image, and Nova to
+<em>orchestrate</em> these information for Ironic API to consume.</p>
+<p>Ironic <a href="https://docs.openstack.org/developer/ironic/deploy/user-guide.html">user guide</a> has some good information on basic technology
+and Ironic design. A <a href="https://www.openstack.org/videos/vancouver-2015/isn-and-039t-it-ironic-the-bare-metal-cloud">talk</a> &amp; <a href="https://github.com/devananda/talks/blob/master/isnt-it-ironic.html">slides</a> by <a href="https://github.com/devananda">devananda</a> on 2015
+Vancouver Summit is also a good point to start.</p>
+<p>In the following sections I'd like to use the questions I have
+encountered in research to create a newbie-oriented tutorial on
+Ironic. In particular, I'd …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/emacs.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/ironic intro.html">
       read more
     </a>
   </div>

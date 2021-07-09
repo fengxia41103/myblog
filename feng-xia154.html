@@ -86,49 +86,72 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2018-11-08
+      2018-11-16
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Addiction
+      IBB brain shutdown procedure
     </h4>
 
       <p>
-        <figure class="col l5 m6 s12">
-  <img src="images/understand%20fashion.jpg"/>
-</figure>
-
-<p>What is an addiction then!? and why is this word negative!? I
-think when we talk about this word, the implied message logic is that
-<em>it is bad because it puts a person into an <strong>extreme</strong> condition,
-thus is not sustainable, thus is not healthy</em> &larr; so there are
-quite a few assumptions:</p>
+        <p>This document describes procedure to shutdown an IBB brain instance.</p>
+<h1>Shutdown procedure</h1>
 <ol>
 <li>
-<p>Extreme state is, bad (but is it bad because of #2 below, that it
-   is not sustainable!? or, regardless it is sustainable or not, it is
-   just bad being in any kind of extreme? and is there such a thing as
-   "extreme &amp; good"?).</p>
+<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
 </li>
 <li>
-<p>Unsustainable is no good. Well, this is actually interesting then,
-   because then I would ask, what is the sustainable state!? Is
-   drinking water instead of being an alcoholic more sustainable!? Is
-   it defined as being able to live longer, thus more <em>sustainable</em>?
-   or less likely to be bored of!? This last one must not be true
-   then, because alcoholics don't get bore of liquors, thus definition
-   of this word, alcoholic!</p>
-</li>
-</ol>
-<p>So, it is not whether you will be tire of …</p>
+<p>Put the cluster in <strong>global maintenance mode</strong> by login any brain
+   server, and <code>hosted-engine --set-maintenance --mode=global</code>. </p>
+<p>To verify, login in a brain node and <code>hosted-engine --vm-status</code>:</p>
+<div class="highlight"><pre><span></span>```shell
+[root@lmorlct0207brain3 ~]# hosted-engine --vm-status
+
+!! Cluster is in GLOBAL MAINTENANCE mode !!
+
+--== Host 1 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : lmorlct0203brain3.labs.lenovo.com
+Host ID                            : 1
+Engine status                      : {&quot;health&quot;: &quot;good&quot;, &quot;vm&quot;: &quot;up&quot;, &quot;detail&quot;: &quot;up&quot;}
+Score                              : 3400
+stopped                            : False
+Local maintenance                  : False
+crc32                              : 8eb75a80
+local_conf_timestamp               : 3249288
+Host timestamp                     : 3249287
+Extra metadata (valid at timestamp):
+    metadata_parse_version=1
+    metadata_feature_version=1
+    timestamp=3249287 (Fri Nov 16 15:57:39 2018)
+    host-id=1
+    score=3400
+    vm_conf_refresh_time=3249288 (Fri Nov 16 15:57:40 2018)
+    conf_on_shared_storage=True
+    maintenance=False
+    state=GlobalMaintenance
+    stopped=False
+
+--== Host 2 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : 10.240.41.235
+Host ID                            : 2
+Engine status                      : {&quot;reason&quot;: &quot;vm not running on this host&quot;, &quot;health&quot;: &quot;bad&quot;, &quot;vm&quot;: &quot;down&quot;, &quot;detail&quot;: &quot;unknown&quot;}
+Score                              : 3400
+stopped                            : False
+Local …</pre></div></li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/addiction.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/ibb brain shutdown procedure.html">
       read more
     </a>
   </div>

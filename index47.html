@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2020-03-01
+        2020-03-18
 
     </em>
-    <h3>Virus is coming</h3>
+    <h3>Feng's movie browser</h3>
 
     <blockquote>
     </blockquote>
@@ -115,29 +115,47 @@
 
 
 <p>
-    <figure class="col s12">
-  <img src="images/bucharest%20status.jpg"/>
+    <p><a href="https://fengxia41103.github.io/movie/">Go to live demo</a></p>
+<figure class="s12 center">
+  <img src="images/movie.gif"/>
+    <figcaption>Movie browser demo</figcaption>
 </figure>
 
-<p>News of the new virus coming to the States is all over the place now,
-and the stock market has been dropping like a stone. Panic?</p>
-<p>I haven't heard many people talking about it, life is rather running
-as usual, but I think this is hanging on everyone's mind now, that we
-are just waiting for a phone call from school that school is shutting
-down, or an email from company that you are all required to work from
-home for the next two weeks.. then what? what about food? drink?
-necessities in life, gas, internet? &mdash; there are so much
-supports to make a modern life possible, that it's difficult to image
-what it will be like when everyone, shuts down &larr; even though I
-felt quite annoyed by China's shutting down Wuhan city and locked down
-its ten million residents on the issue of a government order, I don't
-see other way around this. The difference probably will be, how people
-fare well in this situation, not that whether we can dodge such
-situation entirely …</p>
+<h1>Background</h1>
+<p>Posted a challenge to build a <em>search</em>/browser for movie
+fan. Initially was given a static data set to display. So on top of
+that, I start to pull in a few other data sources to spice things
+up. Coded in React, which I found the ES6 syntax much cleaner.</p>
+<h1>Development</h1>
+<ol>
+<li>Install <code>nvm</code> and node (tested 9.4, 12.1).</li>
+<li><code>npm install</code>: to pull all dependencies.</li>
+<li><code>npm run build</code> because static files will be served from <code>/dist</code>
+   (defined in <code>webpack.config</code>) by default. However, they can also be
+   served outside the application entirely. See <code>Deploy</code> section for
+   more info.</li>
+<li><code>npm run dev</code>.</li>
+<li>Browse <code>localhost:8080</code>, browser will auto-refresh when webpack
+   detects a change to source files.</li>
+</ol>
+<h1>Deploy</h1>
+<h2>using github pages</h2>
+<ol>
+<li>Setup your github repo to allow pages, select using <code>MASTER</code>.</li>
+<li>Setup <code>develop</code> as default branch.</li>
+<li><code>npm run deploy</code></li>
+<li>At prompt, login your github account.</li>
+<li>Go to <code>&lt;yourname&gt;.github.com/&lt;repo&gt;</code>.</li>
+</ol>
+<h2>using your static file hosting</h2>
+<ol>
+<li><code>npm run build</code></li>
+<li>Push <code>/dist</code> to your static file hosting service.</li>
+<li>Verify …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="virus is coming.html">
+    <a class="btn btn-default button" href="movie browser.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

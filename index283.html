@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-07-20
+        2016-09-04
 
     </em>
-    <h3>Buildbot continuous integration setup</h3>
+    <h3>DIY Pelican theme</h3>
 
     <blockquote>
     </blockquote>
@@ -115,43 +115,42 @@
 
 
 <p>
-    <p>The whole point of quick development cycle is to shorten
-the path between a verbal or written requirement, and an actionable
-application that reflects an implementation of this requirement. Therefore,
-it becomes crucial to set up an CI environment not only to facilitate
-development and testing, but to enforce our practice of agile prototyping
-by setting up a complete automated test instance for our clients that closely
-mirrors development progress. Once achieved, clients and developers can now
-truely accalaim that they are <em>on the same page</em>.</p>
-<h1>Buildbot</h1>
-<p>We chose <a href="http://buildbot.net/">buildbot</a> as our CI tool.
-Another common choice is the <a href="https://jenkins.io/">jenkins</a>. Jenkins
-is in Java. So in order to maintain a technology stack as consistent as
-we can, we opted to buildbot for this purpose.</p>
-<h2>Installation</h2>
-<p>Create a python virtualenv and use pip is all it takes:</p>
-<div class="highlight"><pre><span></span>$ workon build
-$ pip install buildbot
-$ pip install buildbot-slave
-</pre></div>
-
-
-<p>For configuration, you can refer to</p>
-<p><a href="http://docs.buildbot.net/current/tutorial/firstrun.html">buildbot tutorial</a>
-for more details.</p>
-<p>On our test server, I have set the paths to:</p>
-<ul>
-<li>master: ~/build-master</li>
-<li>slave: ~/build-slave</li>
-</ul>
-<h2>Run service</h2>
+    <p>As a Python house, <a href="http://blog.getpelican.com">Pelican</a> is definitely a winner for our blog
+site. But like any software engineer who hold a high standard to his
+work, I got turned off by all the <a href="http://www.pelicanthemes.com/)">available themes</a>.  "Ugly",
+"Where is the document?", "Why my translation is not shown?", I felt
+running in a maze where there were reflections of exit everywhere, but
+none was real. "Well, if it's in Python, we can make one." Solution is
+that simple.  Besides, we love <a href="http://jinja.pocoo.org/docs/dev/">Jinja2</a> template systems, and
+Pelican has spelled out <a href="http://docs.getpelican.com/en/3.6.3/themes.html#templates-and-variables">everything</a> we need.</p>
+<p>Quickly we wrote down a few on wish list:</p>
 <ol>
-<li>activate <em>build</em> virtualenv.</li>
-<li>to …</li></ol>
+<li>The design must be based on <a href="http://getbootstrap.com/components/">Bootstrap</a></li>
+<li>Includes <a href="http://fontawesome.io/icons/">Fontawesome</a>, <a href="https://datatables.net/">Datatable</a>, <a href="http://lokeshdhakar.com/projects/lightbox2/">Lightbox2</a>, and <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a>.</li>
+<li>Reuse elements I have designed for <a href="https://fengxia41103.github.io/myblog/demo.html">showcases</a>, such as layout, CSS and images.</li>
+<li>Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <span class="myhighlight">red(#d52349)</span>.</li>
+<li><a href="https://fonts.google.com/">Google fonts</a></li>
+</ol>
+<p>The actual work was pretty straightforward. Follow Pelican official document
+to set up a working directory:</p>
+<div class="highlight"><pre><span></span>├── static
+│   ├── bower_components
+│   ├── css
+│   │   └── my.css
+│   └── js
+│       ├── html5shiv.min.js
+│       └── respond.min.js
+└── templates
+    ├── article.html
+    ├── author.html
+    ├── category.html
+    ├── index.html
+    ├── layout.html
+    ├── page …</pre></div>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="buildbot.html">
+    <a class="btn btn-default button" href="pelican theme.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

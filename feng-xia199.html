@@ -86,42 +86,47 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2018-02-15
+      2018-03-22
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Science disease
+      Django to REST
     </h4>
 
       <p>
-        <p>Another Chinese new year. But what came to my mind this morning was
-something quite peculiar, if not irrelevant to the scene &mdash; what
-is science, or being scientific? Noah is taking some <em>science</em> class
-on rock and mineral, and I have just written about
-<a href="https://fengxia41103.github.io/myblog/euphemism.html">euphemism</a>. This word, science, has been lingering on my mind and
-I wonder whether I'm telling Noah the right thing about it.</p>
-<p>So what is science? I always had this hunch that <strong>it certainly is not
-truth</strong> (but what is a truth, or anyone can possibly possess such
-thing as truth? I doubt it, if not completly refuting it). So the next
-closest thing is, fact!? Here is what <a href="https://www.merriam-webster.com/dictionary/science">webster</a> says:</p>
-<blockquote>
-<p>the state of knowing : knowledge as distinguished from ignorance or misunderstanding</p>
-</blockquote>
-<p>So it has something to do with <em>knowledge</em>. What is a knowledge?
-<a href="https://www.merriam-webster.com/dictionary/fact">webster</a> definition:</p>
-<blockquote>
-<p>(1) : the fact or condition of knowing something with familiarity gained through experience or association (2) : acquaintance with or understanding of a science, art, or technique
-</p>
-</blockquote>
-<p>If I'm reading it right, even knowledge is not …</p>
+        <figure class="col l6 m6 s12">
+  <img src="images/funny/the%20art%20of%20programming.jpg"
+       class="center img-responsive">
+</figure>
+
+<p>I have been building Django based web application for a while now. One
+design/request I get often is a REST API. Once the model data is
+exposed in REST, one can truly build a complete separate frontend
+using things like Angular, react, and whatever you fancy. I have tried
+a couple times myself following this architecture. On one hand it
+gives a lot of flexibility and it looks nice, too &larr; front end
+technology is a lot of "{}", but it does look quite nice, and
+responsive, too. But on the other, REST is a thing few understands
+well except it is an API through which you can CRUD. Honestly, I don't
+even understand yet how authentication is done, what is a good balance
+between massaging data (in Tastypie's term, (de)-hydration) and
+exposing data model raw.</p>
+<p>Anyway, here I want to document a practice I use, a really rudimentary
+one, of making django model available as REST resource through
+Tastypie.</p>
+<ol>
+<li><a href="https://docs.djangoproject.com/en/2.0/ref/models/fields/">Django model reference</a></li>
+<li><a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a></li>
+</ol>
+<p>Let's say you are building a site called <code>mysite</code>, and in …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/science.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/django to rest.html">
       read more
     </a>
   </div>

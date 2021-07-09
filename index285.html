@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-06-06
+        2016-07-23
 
     </em>
-    <h3>Fashion ERP &mdash; orders</h3>
+    <h3>ODOO8 native server loading process</h3>
 
     <blockquote>
     </blockquote>
@@ -115,28 +115,27 @@
 
 
 <p>
-    <p>In <a href="https://fengxia41103.github.io/myblog/fashion introduction.html">part one</a> I have
-shown the design and function behind Product and Inventory management.
-In this article I'll talk about orders.</p>
-<p>Sales order and purchase order are like two sides of the same coin.
-Each sales order(SO) can include a mixed bag of products from
-different vendors. Once a SO has been created, application will parse
-it into multiple purchase order (PO) and route them to their
-vendor. Reversely, company can place a PO with a vendor, and purchased
-products can be used to fulfill multiple sales orders later.</p>
-<h1>Order life cycle</h1>
-<p>To understand the design of orders, one has to first grasp the life
-cycle of an order. I'd like to divide its functions into roughly two
-areas: <em>about physical good</em> and <em>about money</em>.</p>
-<p>The area of physical goods takes care of the acquisition of products
-on order. This includes shipping, receiving, reconciliation,
-inventory, product return and substitution. Like what we did in
-inventory, we maintain a theoretical list which comes from the sales
-order itself (think of it as a wish …</p>
+    <p>During daily development of ODOO8 modules, one thing I have been
+noticing is the slowness when ODOO first boot up.  We are observing up
+to minutes of a bootup time. This plainly is too slow.  Watching debug
+prints indicates that ODOO scans through all modules listed on Python
+path and builds a <em>map</em> in memory before dev server starts responding
+to request. Intuitively I suspected such loading practice is causing
+an unnecessary delay.  This aggravates further when ODOO server
+becomes completly unusable if any of the module chokes during this
+loading process. But this is too common a scenario during
+development. One consequence of this is that debugging becomes
+difficult. Often enough ODOO doesn't yield useful trace track to help
+determine the root cause of an error.  Another problem of such
+approach is the availability of servic becoming binary &mdash; it
+either fully works or nothing runs. By analogy, the ODOO loading
+process is like compiling phase in running a C code. No executable is
+available until the compiler and linker are happy.</p>
+<p>Under this light …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="fashion orders.html">
+    <a class="btn btn-default button" href="odoo8 server loading process.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

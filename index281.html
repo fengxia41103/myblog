@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-09-01
+        2016-09-09
 
     </em>
-    <h3>Prototype needed</h3>
+    <h3>Deployment architecture</h3>
 
     <blockquote>
     </blockquote>
@@ -115,15 +115,31 @@
 
 
 <p>
-    <p>Building a prototype is a must-have for any new project
-and new business idea. It is not only a way to test out
-the initial thoughts so we know it is feasible, it also builds a
-common platform for client and developers to communicate while they
-are looking at the same thing.</p>
+    <p>Deployment strategy for <a href="https://fengxia41103.github.io/myblog/general system architecture.html">system architecture</a> is centered around AWS
+services: EC2 for application server, RDS for database, and S3 for
+static files and media files.  AWS does have message service as
+well. But to maintain a fair level of portability, I am not using
+that. Instead, vanilla message broker such as Redis or RabbitMQ is
+used and is deployed on a separate EC2 instance.  In general I tend to
+have concerns over investing a critical system component to a 3rd
+party service because they usually will introduce some customization
+quirks that make it a real pain when migrating to another service
+provider or platform later on. I have not run into such problem with
+AWS, but would like to keep options open.</p>
+<figure class="col l12 m12 s12">
+  <img src="images/deployment_architecture.png"
+  <figcaption>Deployment architecture</figcaption>
+</figure>
+
+<p>Notice that I do not have multiple database in the diagram. First of
+all, I have not had use of DB cluster. Secondly, database replica is
+covered by AWS snapshot which has been a great fail-safe tool for
+system backup and recovery.  This brings up an important point I'd
+like to …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="thoughts-on-prototype.html">
+    <a class="btn btn-default button" href="deployment architecture.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

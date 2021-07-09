@@ -104,41 +104,40 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-08-12
+        2017-09-06
 
     </em>
-    <h3>Modern slavery</h3>
+    <h3>Juju local LXD</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="col l6 m6 s12">
-  <img src="images/traffic%20god.jpg"/>
-</figure>
-
-<p>I'm convinced now that the number one problem I am annoyed by the
-modern Chinese culture is that it create self-contradictory
-person. They speak in logics however they see fit without being aware
-of that two points coming out of their mouth are actually
-contradictory. Take it further, they took a one-sided view of history
-in such a self-confidence that they completly fail to realize that what
-they are bragging and broadcasting are exactly the same thing in
-history they vow to be a terrible deed by any measure.</p>
-<h1>Trade</h1>
-<p>A case in point is the popular place such as the <a href="http://www.baike.com/wiki/%E5%A5%B6%E5%A5%B6%E5%BA%99">奶奶庙</a>. I think
-the debate of it in the context of pop art or even pioneer art is
-completly a walk-around. Can people idol these objects? of
-course. Can they bring peace and love? Doesn't matter, and to some,
-yes, so be it. Are they arts? Yes. Are they art I like? No. Should I
-respect its right to be there? Yes, as long as I don't go there, and
-it doesn't come close …</p>
+    <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code change,
+deploying charm, then wait to see the <em>new</em> code got executed &larr;
+it's good 5-10 minutes per cycle. These add up quickly when you are in
+the middle of churning out code to get your ideas written. Not to
+mention creating a new <code>machine</code> is 2x slower, and bootstraping a new
+controller is even worse. I had experience in Shanghai sitting 30+
+minutes for a new controller due to the location's unreliable
+connections, and sometimes it just failed w/ a timeout. </p>
+<p>What to do? The goal is to create a way to reduce this trial-error
+cycle as much as possible so to speed up code development.</p>
+<h1>Challenge</h1>
+<p>If you watch <code>juju debug-log</code> while it deploys a charm, you start to
+realize that there are roughly seven steps:</p>
+<ol>
+<li>creating a container (will discuss <code>--to</code> switch later)</li>
+<li>update/upgrade the new container …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="modern slavery.html">
+    <a class="btn btn-default button" href="juju local LXD.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

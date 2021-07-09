@@ -86,39 +86,48 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2016-07-23
+      2016-09-08
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      ODOO8 native server loading process
+      General system architecture
     </h4>
 
       <p>
-        <p>During daily development of ODOO8 modules, one thing I have been
-noticing is the slowness when ODOO first boot up.  We are observing up
-to minutes of a bootup time. This plainly is too slow.  Watching debug
-prints indicates that ODOO scans through all modules listed on Python
-path and builds a <em>map</em> in memory before dev server starts responding
-to request. Intuitively I suspected such loading practice is causing
-an unnecessary delay.  This aggravates further when ODOO server
-becomes completly unusable if any of the module chokes during this
-loading process. But this is too common a scenario during
-development. One consequence of this is that debugging becomes
-difficult. Often enough ODOO doesn't yield useful trace track to help
-determine the root cause of an error.  Another problem of such
-approach is the availability of servic becoming binary &mdash; it
-either fully works or nothing runs. By analogy, the ODOO loading
-process is like compiling phase in running a C code. No executable is
-available until the compiler and linker are happy.</p>
-<p>Under this light …</p>
+        <figure class="col l6 m6 s12">
+  <img src="images/architecture_joke.jpg"
+       class="center img-responsive">
+</figure>
+
+<p>The word "system architect" has been puzzling to me.  I was hired to
+be one at one point. But it was not a comfortable position. How much
+do we understand the business?  What is the problem we are to solve?
+How does the current "architecture" fail? What is the downfall of this
+(or any) proposal? Overall, I feel an architecture emerges along with
+development and research. The more we start to understand the client's
+needs, habits, workflows, relationships, priorities, the more
+information we have when evaluating and making decisions on whether
+one piece in the stack fits or not, and why so. It is, IMHO, a
+backwards process when an architecture is pre-defined as if it is set
+in stone. We need to start from somewhere, but keeping in mind that it
+evolves and shifts like a living organ.</p>
+<blockquote>
+<p>System architecture evolves and shifts like a living organ.</p>
+</blockquote>
+<p>This is a system architecture I have been using recently in
+projects. It is divided into four components:</p>
+<ol>
+<li>
+<p><strong>foreground service provider</strong>: this includes machinery that
+  interface with …</p></li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/odoo8 server loading process.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/general system architecture.html">
       read more
     </a>
   </div>

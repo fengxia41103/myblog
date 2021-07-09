@@ -104,44 +104,50 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2019-08-26
+        2019-09-11
 
-        <i class="fa fa-heart myhighlight"></i>
     </em>
-    <h3>Nagasaki</h3>
+    <h3>Rebranding</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <div class="col s12" style="margin-right: 2em;">
-<video width="100%" height="100%" controls="controls">
-  <source src="images/noah%20at%20mit.mp4 "
-          type="video/mp4" />
-  Your browser does not support the video tag.
-  /* instead of the last line you could also add the flash player*/
-</video>
-</div>
-
-<p>What a fine early Autumn day, nice weather, nice temperature, nice
-breeze. Noah's first day to the middle school. His bus left at 7:36,
-so the day all started early, which feels, great, that I have done the
-gym and have checked my emails, and now can write down some thoughts
-before noon. Like it, except for the mosquito who just bited me, but
-unfortunately it landed on the seat next to mine, and SQUASH, it's
-now, dead &larr; does monk kill mosquitoes? I mean, do they consider
-them a form of life also, so that by their religious code that they
-shouldn't harm them either? or, they classify mosquitoes as a
-different kind, like 妖魔鬼怪 in 西游记, that can be killed at will?</p>
-<p>Talking about 西游记， this is what brought me to write this article
-&larr; Noah and I were riding back from Reader's Corner (btw, I picked
-up a book, Russel's <a href="https://en.wikipedia.org/wiki/Why_I_Am_Not_a_Christian">why I am …</a></p>
+    <p>Rebranding is a common task. The core of it is how to evaluate your
+code base to pick up interested artifacts &larr; brand
+indicator. Definition of these artifacts are highly contextual,
+meaning that a string <code>feng</code> can mean a variable, or a string literal,
+or something else. Think of it, how many programming languages in your
+application stack, and how many different comment styles there are!?
+Crazy.</p>
+<p>So let's start w/ the most basic &mdash; string literal &mdash; if I
+find a string <code>whatever</code> (old brand), replace it w/ <code>feng</code> (new
+brand).</p>
+<h1>the how</h1>
+<p>The script can be found <a href="https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py">here</a>. The idea is to:</p>
+<ol>
+<li>Walk through <code>root</code> folder and its subfolders and files.</li>
+<li>File is selected by its extension &mdash;  an exclusion list and an inclusion
+   list. Exclusion has a default list to exclude all binary formats,
+   eg. <code>.png</code>.</li>
+<li>
+<p>Open the file as text file, search line by line whether interested
+   pattern in found.</p>
+</li>
+<li>
+<p>If found, log down the file full path, line number, and original
+     line text.</p>
+</li>
+<li>
+<p>Identify <code>reference</code>, which is defined as <code>/&lt;.....&gt;</code> &mdash; this
+   covers reference to a …</p></li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="nagasaki.html">
+    <a class="btn btn-default button" href="rebranding.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

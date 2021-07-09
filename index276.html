@@ -104,48 +104,47 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-10-15
+        2017-01-03
 
     </em>
-    <h3>SPA: World Snapshot</h3>
+    <h3>Juju charm  model</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="s12 center">
-  <img src="images/country_1.png"/>
-    <figcaption>World Snapshot</figcaption>
+    <p>This article is a high level view of Juju's internal modelings. For me
+it was fairly confusing when looking at its document which has an army
+of these concepts: charm, bundle, model, unit.... of course, each of
+them makes sense after a while. Its <a href="https://jujucharms.com/docs/2.0/glossary">terminology</a> page helps on
+understanding individual term. But like other Canonical documents, it
+needs a design level diagram to help user grasp the structure of this
+wealth of knowledge.</p>
+<p>So here it is my attemp to show the relationship between these
+terms. Instead of drawing a tree to reflect 1-N relationship, I used
+an outer enclosure which can have multiple of its inner enclosures,
+eg. a bundle can have N charms.</p>
+<figure class="s12 center">
+  <img src="images/juju%20control%20modeling.png"/>
+  <figcaption>Juju control models</figcaption>
 </figure>
 
-<blockquote>
+<p>A few interesting points besides the 1-N relationships. </p>
 <ul>
-<li><a href="http://snapshots.world/">live demo</a>, and <a href="https://github.com/fengxia41103/worldsnapshot">github</a></li>
+<li>A single application can be deployed on multiple machines,
+  eg. Application #2 has two units. This is how one application can be
+  scaled out horizontally.</li>
+<li>One machine, in turn, can host multiple applications, eg. one unit
+  of application #2 and #3 both live on the same machine.</li>
 </ul>
-</blockquote>
-<p>The joy of making graphs in a data-driven web application has been the
-highlight that kept me going from project to project. Once all things
-are hooked up and data can be created in a meaningful way, the
-ultimate presentation are <em>reports</em> and <em>graphs</em>. In most cased, I
-have found graphs are far better than reports &mdash; reports often
-fall into a table form which looks impressive because it is filled
-with data. But who is to the analysis and draw a conclusion!?  On the
-other hand, graph, even using the same data set as that of the
-report/table, is one step closer to a conclusive message &mdash; KPI
-is above or below threshold, department A is doing better than
-department B, sales of this month dropped comparing to last month's...</p>
-<h1>Data sources</h1>
-<ol>
-<li><a href="http://dhsprogram.com/data/">DHS</a>: <a href="http://dhsprogram.com/data/">DHS</a> data set is published by <a href="https://www.usaid.gov/">US AID</a>. Following its <a href="http://api.dhsprogram.com/#/index.html">API</a>
-   documents, <a href="http://api.dhsprogram.com/#/api-indicators.cfm">indicators</a> are selected to depict a country's well doing.</li>
-<li><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries">The World Bank</a>:  Another comprehensive data set is <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries">The World Bank</a> set.
-   Check out its …</li></ol>
+<p>By default …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="data visualization.html">
+    <a class="btn btn-default button" href="juju charm model.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

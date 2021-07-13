@@ -86,53 +86,58 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-01-11
+      2017-01-19
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Juju bootstrap process
+      Juju charm deployment
     </h4>
 
       <p>
-        <p>The very first command user will encounter is the <code>juju bootstrap</code>. It
-createa a special machine &mdash; state controller, <code>machine-0</code>,
-control node, etc. &mdash; naming convention aside, it is the brain
-that tracks others nodes in the cloud, applications installed and
-their status.</p>
+        <p>We have covered Juju's <a href="https://fengxia41103.github.io/myblog/juju bootstrap.html">bootstrap</a> phase. In this article, we will
+continue our research into another important function &mdash; juju
+deploy.</p>
+<p>Deploy will command a node to pull down requested charm and install
+whatever needed based the charm's instruction. As the bootstrap
+research, I'm interested in the internal mechanism of this process,
+the bare minimum to simulate a successful run, and the minimum steps
+to repeat this for development and troubleshooting.</p>
 <h1>Screencast</h1>
-<p>Through research I want to learn about its process, internal
-mechanism, how this command triggers off other juju components, what
-is the minimum take to simulate a successful bootstrap, and if things
-go south, what is the minimum to simulate a clean state so we can run
-<code>juju bootstrap</code> again as if from scratch. This last point is
-particuarly useful for development and troubleshooting.</p>
+<p>See the process in action:</p>
 <figure class="s12 center">
-    <img src="images/juju%20bootstrap.gif" />
-    <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
+    <img src="images/juju%20deploy%20jenkins.gif" />
+    <figcaption>Screencast of juju deploying Jenkins</figcaption>
 </figure>
 
-<p>First thing first, if we have create a cloud or are using a stock
-cloud type:</p>
-<div class="highlight"><pre><span></span>$ juju bootstrap <span class="o">[</span>cloudname<span class="o">]</span> <span class="o">[</span>machine-0 name<span class="o">]</span>
+<h2>Juju + MAAS</h2>
+<p>We have already covered state machine of <a href="https://fengxia41103.github.io/myblog/maas target.html">MAAS target node</a>. In the
+context of deploying a charm driven by Juju, we can take a look MAAS
+internals how those states are related.</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
+</figure>
 
-<span class="k">for</span> example:
-$ juju bootstrap devx test-1
-</pre></div>
+<h1>Deploy steps illustrated</h1>
+<p>This is a more detailed view of juju deploying a charm broken down
+into three steps.</p>
+<figure class="s12 center"> 
+    <img src="images/juju%20deploy%20original.png" />
+    <figcaption>
+        Illustration of a Juju cloud environment before a deployment
+    </figcaption> 
+</figure>
 
-
-<p>This will create a state controller (machine-0) that will be the
-management node within juju's cloud environment.</p>
-<h1>Develop a new provider</h1>
-<p>Case in point is to develop a new provider. Juju's <a href="https://github.com/juju/juju/wiki/Implementing-environment-providers">document</a> is
-helpful to …</p>
+<p>In this environment, we have a CLI controller where we will type in
+juju commands, one state controller who manages the cloud, and …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju bootstrap.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju deploy.html">
       read more
     </a>
   </div>

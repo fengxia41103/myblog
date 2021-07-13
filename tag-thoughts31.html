@@ -86,44 +86,46 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2020-03-21
+      2020-04-01
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Git strategy
+      Git strategy for backward compatibility
     </h4>
 
       <p>
         <figure class="col s12 center">
-  <img src="images/funny/a%20lot%20of%20cats.jpg"/>
+  <img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/>
+  <figcaption>
+  Git strategy for a backward-compatible release
+  </figcaption>
 </figure>
 
-<p><a href="https://fengxia41103.github.io/myblog/git.html">git</a> is wonderful, but its workflow is very confusing. Surprised?
-Then I would dare to say that you haven't had first hand experience
-using it in a full blown enterprise environment &mdash; when in such
-environment, the challenge isn't about git itself, but what the
-content of a release are, and how we are testing/CICD them.</p>
-<p>You would think it sounds rather cliche that this problem even
-exists. After all, these are what a software engineering is all about,
-aren't they? But take a step back and consider this scenario:</p>
-<ol>
-<li>We just did a release 5.0.0.</li>
-<li>We have two features: 1 &amp; 2.</li>
-<li>Initially they were all targeting the next release, say <code>5.1</code>.</li>
-<li>We create a <strong>staging</strong> branch, <code>5.1-staging</code> and point our CICD to
-   this so to QA them (more on this later).</li>
-<li>Feature 1 &amp; 2 have been merged into <code>5.1-staging</code>. Their source
-   branches, eg. <code>feature-1</code>, have been deleted &larr; at merge
-   request, select to delete source branch.</li>
-<li>Time is slipping, 5.1 is up this Friday, but one feature is failing …</li></ol>
+<p>As a sequel to our discussion on <a href="https://fengxia41103.github.io/myblog/git strategy.html">git strategy</a>, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how <strong>backwards compatibility</strong> of releases may not be true
+if we are introducing long-term-support on releases, that hot fixes
+and bugs can only <strong>roll forward</strong>, eg. V4 bugs can be patched to V5
+(assuming V5 was released after V4, time wise and git commit wise),
+but not from V5 &rarr; V4 without introducing some V5 contents into V4
+(whether this is desired or not is the focal of the discussion,
+essentially, how much control you want to have over the release
+content!?)</p>
+<p>Now, let's build on top of this and say that <strong>we want backwards
+compatibility</strong> &mdash; all newer releases are always backwards
+compatible? This is certainly a desired outcome because this makes
+upgrade and maintenance easier (who wants to maintain a 10-year-old
+code when a customer <em>frozen in time</em> call you of a bug which you
+probably don't even remember who wrote that crap …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/git strategy.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/git rebase strategy.html">
       read more
     </a>
   </div>

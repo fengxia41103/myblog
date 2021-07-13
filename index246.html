@@ -104,55 +104,38 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-07-06
+        2017-07-07
 
     </em>
-    <h3>Charm Ansible integration</h3>
+    <h3>Can you innovate?</h3>
 
     <blockquote>
-        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <p>Let's face it. Ansible has the mouth (and market) share these
-days. For our modeling purpose, we are to utilize its procedural
-strength to carry out actions, which provides an abstraction instead
-of coding in charm's Python files.</p>
-<p>Design objectives:</p>
-<ol>
-<li>Design as reusable <a href="https://jujucharms.com/docs/2.1/developer-layers">layer(s)</a></li>
-<li>Be compatible with Ubuntu and CentOS</li>
-<li>Simple pattern to execute a playbook</li>
-</ol>
-<p>Assumption:</p>
-<ol>
-<li>Playbooks will be local (in charm) so to maintain the
-   atomic nature of a HW charm &mdash; the model contains both the
-   declaration of attributes and actions to handle runtime state transitions.</li>
-</ol>
-<h1>Method 1: layer-ansible</h1>
-<p>Method 1 is to use an existing project, <a href="https://github.com/chuckbutler/charms.ansible">layer-ansible</a>.</p>
-<p>Examine its code reveals a typical pattern one would use to introduce
-a new function:</p>
-<ol>
-<li>
-<p>Install Ansible. The approach it took is to use a
-   <code>ppa:ansible/ansible</code> source and installed by calling
-   <code>charmhelpers.fetch.apt_install</code>. The key issue here is using <code>ppa</code>
-   which is an <strong>hardcoded</strong> Ubuntu approach.</p>
-<div class="highlight"><pre><span></span>```python
-def install_ansible_support(from_ppa=True, ppa_location=&#39;ppa:ansible/ansible&#39;):
-  if from_ppa:
-      charmhelpers.fetch.add_source(ppa_location)
-      charmhelpers.fetch.apt_update(fatal=True)
-  charmhelpers.fetch.apt_install(&#39;ansible&#39;)
-  with …</pre></div></li></ol>
+    <p>This has been a topic on my mind for quite some time now ever since I
+worked in Shanghai in 2016 and witnessed things that quite annoyed me,
+especially from a software engineer prospective. </p>
+<p>So the backdrop is that Chinese people have been encouraged by
+the country's phenomenal success in economy and are now moving from <em>made in
+china</em> to <em>created in china</em> &mdash; a sound idea, just like
+<em>socialism</em> or any other idea someone around the corner has. The
+idea is not the problem, the implementer is.</p>
+<p>Ideas are cheap. There is a problem xyz, easy. The challenge is how we
+are gonna find a solution for this problem, let alone a <em>satisfactory</em>
+one? Well, no one can really define that. Even when you talk about a
+<em>working</em> solution, the immediate argument will be what you mean by
+<em>working</em>? How do you prove it works? This sounds more and more like
+an attorney's job now, doesn't it? Well, let's leave this
+philosophical dilemma and rant about why I was annoyed by this
+innovation wave.</p>
+<h1>Pls …</h1>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="charm ansible integration.html">
+    <a class="btn btn-default button" href="can you innovate.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

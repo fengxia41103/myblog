@@ -107,37 +107,36 @@
         2019-09-01
 
     </em>
-    <h3>Internet</h3>
+    <h3>Analyzing Angular 1.x code</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="col s12">
-  <img src="images/anime%20guitar%20and%20girl.jpg"/>
-</figure>
-
-<p>I started this article a few days, but didn't finish it. A few mixed
-thoughts have been lingering around my mind for quite some. But they
-are rather elusive &mdash; they come and go, and on the moment when I
-felt them, I was always busy with something else. Then by the time I
-sat down to write, I couldn't think of them anymore. So let me try
-them again.</p>
-<p>This is a topic I have long been writing, that I think the internet is
-in trouble.</p>
-<p>What's the value of the Internet these days? I used to think, and I
-think most people will take it as the No. 1 value of the Internet, is
-that it has made information (<strong>not knowledge, and leave alone truth,
-fact, reality, those kind of words</strong>) readily available at your finger
-tip. But then, we do have to ask, what is the use of information? The
-answer will be, it depends &mdash; certainly an information of the
-a sale going on in a McDonald's next door will not help you …</p>
+    <p><a href="https://github.com/compodoc/compodoc">Compodoc</a> can generate component hierarchy diagrams, call chains,
+but it didn't work for Angular 1.x code. </p>
+<p>The goal is to <strong>create a lookup/catalogue between code and visual</strong>
+because everyone on the team, including UI devs, can only engage a
+discussion using the visual (the rendered look) &mdash; so far, I
+haven't been able to develop the capability to <em>see</em> how it will look
+like by just staring at code.</p>
+<p>This issue gets compounded when components are calling each other
+&mdash; some pages are calling all kinds of components, and these
+components are in turn used in all sorts of <em>parent</em> pages. This
+presents an issue how to knows its effect when, say, I'm taking a task
+to change this component? Without such a cross reference, I'm
+completely in the dark. Think about this, if component A is used in 3
+places, we should have 3 test cases just to be sure it doesn't break
+the visual.</p>
+<p>This leads me to a google search and I think the term for what I'm
+thinking is <a href="https://storybook.js.org/docs/testing/automated-visual-testing/">visual regression …</a></p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="internet.html">
+    <a class="btn btn-default button" href="analyzing angular 1x.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

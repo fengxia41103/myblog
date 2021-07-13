@@ -93,40 +93,16 @@
   </div>
   <div class="col s12">
     <h4>
-      Charm chained states
+      Charm Reactive
     </h4>
 
       <p>
-        <p>This charm is created to demonstrate chained states using Juju
-charm. Chained states is essentially mirroring a pattern of any sequential
-execution in a workflow. Potentially each execution block can also
-have conditions to set the next state, even though this type of knowledge
-should be exposed outside function element, if possible, and to be
-handled by something better than pure code (eg. BPMN).</p>
-<p>The model for this experiment is straightforward. We create a layer
-with three states: <code>state.1</code>, <code>state.2</code>, and <code>state.3</code>. Upon start
-charm kicks off execution of <code>state.1</code>, which then transit itself to
-the <code>state.2</code>, then to <code>state.3</code>, and then loop back to <code>state.1</code>.</p>
-<figure class="s6 m6 s12 center">
-  <img src="images/charm%20chain%20states.png" />
-  <figcaption>Charm design pattern: chain states</figcaption>
-</figure>
-
-<p>The key questions to answer in this experiment are:</p>
-<ol>
-<li>What is the entry point to start the first state?</li>
-<li>If setting two states true, are they executed serially or
-   in parallel?</li>
-<li>Can a blocking command halt state transition even if there are
-   states being true and can be acted upon? </li>
-</ol>
-<h1>Screencast</h1>
-<p>Top left window shows the <code>juju …</code></p>
+        <p>Charm's reactive framework is the core of charm design and</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju charm chained states.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju charm reactive.html">
       read more
     </a>
   </div>

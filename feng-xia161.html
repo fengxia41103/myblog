@@ -86,41 +86,68 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2018-10-06
+      2018-10-15
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Law
+      SPA: a cofiguration Dashboard
     </h4>
 
       <p>
-        <figure class="col l6 m6 s12">
-  <img src="images/russian%20poster.jpg"/>
+        <figure class="s12 center">
+    <img src="images/spa%20dashboard%20demo.png" />
+    <figcaption>Project SPA Dashboard demo</figcaption>
 </figure>
 
-<p>It is, I think, the darkest moment in history, that I have been
-experienced in this great country. Listening to senator hearing for
-the first time last Thursday, and I was both impressed by the
-capability to grasp the core of the issue that these senators
-demonstrated, and the disturbing display by this guy who is bitter,
-angry, aggressive, eager to please his boss, and not hesitating to
-express a statement in the form of a conspiracy, even linking it to
-"the Clintons", who, regardless what type of opponent they have been
-in the presidential race, not to mention that Mr. Clinton has been a
-real president elected and was doing a good job by the measure of
-economy. What type of person would this guy be that he is now being
-bestowed the <strong>super power</strong> of being a life-long employed judge
-sitting on the bench of a sacred institution, which I have always
-viewed with awe and respect, because I thought it holds all the wisdom
-in this world despite how hard, how difficult …</p>
+<blockquote>
+<ul>
+<li><a href="https://fengxia41103.github.io/spa-dashboard/">Demo</a></li>
+<li><a href="https://github.com/fengxia41103/spa-dashboard">Code</a></li>
+</ul>
+</blockquote>
+<p>Project SPA Dashboard is a weekend fun. The idea came from Lenovo Open
+Cloud project, in which we have developed auto deployment of a complex
+stack on three physical servers. Services are Red Hat software
+deployed on a RHHI instance. Previously we have maintained a table
+(shown below) of URLs to these services since VM's IP and hostname are
+pre-determined. </p>
+<figure class="s12 center">
+    <img src="images/ibb%20rack%201%20cheatsheet.png" />
+    <figcaption>IBB example cheatsheet</figcaption>
+</figure>
+
+<p>However, since we have achieved daily deployment using playbook and
+<code>extra_vars</code> as input, it is possible to generate a <em>dashboard</em>
+representing a deployment instance with these actual config values,
+thus eliminating manual maintenance of a static wiki page.</p>
+<p>For example, here is part of the config file of<code>Satellite</code> VM:</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">vm_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">brain1-satellite &lt;-- host name</span>
+<span class="l l-Scalar l-Scalar-Plain">qcow_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">rhel75_qcow_satellite</span>
+
+<span class="l l-Scalar l-Scalar-Plain">cloud_init_nics</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth0</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.41.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.252.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10.240.40.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.101</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_netmask</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">255.255.255.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_gateway</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20.20.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_on_boot</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nic_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eth2</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_boot_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">static</span>
+    <span class="l l-Scalar l-Scalar-Plain">nic_ip_address</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">172.20 …</span></pre></div>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/law.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/project spa dashboard demo.html">
       read more
     </a>
   </div>

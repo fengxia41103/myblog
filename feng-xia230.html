@@ -86,41 +86,53 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-09-28
+      2017-10-04
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Say, no
+      Sensitive touchpad
     </h4>
 
       <p>
-        <figure class="col l6 m6 s12 center">
-  <img src="images/funny/weekend%20life.png"/>
-</figure>
+        <p>The symptom is that typing jumps all over the place.</p>
+<h1>Tune sensitivity</h1>
+<p>The idea here is to use <code>xinput</code> command to tune finger sensitivity
+values so to find a good balance. Also, we are to <strong>disable</strong> touch
+point (the little read dot rubber thingy on Lenovo's laptops) since I
+don't ever use it.</p>
+<ol>
+<li>
+<p><code>xinput list</code> to get a list (uses the <code>ssh -X</code> if on remote
+   machine):</p>
+<div class="highlight"><pre><span></span>```shell
+(dev) fengxia@fengxia-lenovo:~/workspace/wss$ xinput list
+⎡ Virtual core pointer                      id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ SynPS/2 Synaptics TouchPad                id=11   [slave  pointer  (2)]
+⎜   ↳ TPPS/2 IBM TrackPoint                     id=13   [slave  pointer  (2)]
+⎣ Virtual core keyboard                     id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    ↳ Power Button                              id=6    [slave  keyboard (3)]
+    ↳ Video Bus                                 id=7    [slave  keyboard (3)]
+    ↳ Sleep Button                              id=8    [slave  keyboard (3)]
+    ↳ Integrated Camera                         id=9    [slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard              id=10   [slave  keyboard (3)]
+    ↳ ThinkPad Extra Buttons                    id=12   [slave  keyboard (3)]
+```
+</pre></div>
 
-<p>Browsing wechat friend posts, and one image, as common as it actually
-is, the <strong>never say no</strong> type of moral pump, suddenly got me thinking.</p>
-<p>I used to think the <em>can do</em> attitude is so positive, energetic,
-optimistic, worth holding on, worth broadcasting, worth preaching,
-worth teaching, worth affecting everyone around me. After all, wasn't
-that my motto and I tried to teach Noah that, too, that the <em>never
-give up</em> spirit? But when it is used <em>broadly</em>
-within a context just about anything you can think of, in job, in life,
-it feels so, vain, so going into a battle while disregarding the odds
-in reality. What about cut loss and run?</p>
-<p>Why never say no!? How do you know the condition permits you to say
-yes? shouldn't we just quit, sometimes, when our judgement tells us
-it's not a good idea to go forward? Like yesterday when Noah and I
-played openra and the rush AI just threw at me an army of artileries 
-while my defense was not up to hold on …</p>
+
+</li>
+<li>
+<p>To disable …</p></li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/say no.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/sensitive touchpad.html">
       read more
     </a>
   </div>

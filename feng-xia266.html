@@ -93,39 +93,40 @@
   </div>
   <div class="col s12">
     <h4>
-      You got mail
+      Charm chained states
     </h4>
 
       <p>
-        <figure class="col l5 m6 s12">
-  <img src="images/hahn.png"
-       class="center img-responsive">
+        <p>This charm is created to demonstrate chained states using Juju
+charm. Chained states is essentially mirroring a pattern of any sequential
+execution in a workflow. Potentially each execution block can also
+have conditions to set the next state, even though this type of knowledge
+should be exposed outside function element, if possible, and to be
+handled by something better than pure code (eg. BPMN).</p>
+<p>The model for this experiment is straightforward. We create a layer
+with three states: <code>state.1</code>, <code>state.2</code>, and <code>state.3</code>. Upon start
+charm kicks off execution of <code>state.1</code>, which then transit itself to
+the <code>state.2</code>, then to <code>state.3</code>, and then loop back to <code>state.1</code>.</p>
+<figure class="s6 m6 s12 center">
+  <img src="images/charm%20chain%20states.png" />
+  <figcaption>Charm design pattern: chain states</figcaption>
 </figure>
 
-<p>After becoming an Emacs user for the last few months, I acquired a
-burning desire to migrate as much as my daily text editing activities
-into Emacs environment, in particular, emails.</p>
-<p>Having tried <a href="https://fengxia41103.github.io/myblog/downloads/davmail.properties">offlineimap</a> for a bit, I ended up battling its
-configuration to make it work (sort of) with Hotmail's IMAP. Gmail
-worked flawlessly, but boy, Microsoft, get a grip. No wonder hotmail
-is dying. But in the end I'm just one guy who holds on something
-linking my youth days, for sentimental purpose. So without being able
-to win the battle with offlineimap, I started searching for
-alternatives, then I found <a href="http://isync.sourceforge.net/mbsync.html">mbsync</a>.</p>
-<p>Its <a href="http://isync.sourceforge.net/mbsync.html">man page</a> is worth a read. It looks intimidating at first
-glance, but it isn't really. In a nutshell, it defines three things:</p>
+<p>The key questions to answer in this experiment are:</p>
 <ol>
-<li><strong>A remote store</strong>: this also links to an <strong>Account</strong>, which of
-   course holds your email credentials.</li>
-<li><strong>A local store</strong>: this defines local file structure where you want
-   to emails to be downloaded to.</li>
-<li><strong>A channel</strong>: a link that connects the a remote store with a local
-   store …</li></ol>
+<li>What is the entry point to start the first state?</li>
+<li>If setting two states true, are they executed serially or
+   in parallel?</li>
+<li>Can a blocking command halt state transition even if there are
+   states being true and can be acted upon? </li>
+</ol>
+<h1>Screencast</h1>
+<p>Top left window shows the <code>juju …</code></p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/juju charm chained states.html">
       read more
     </a>
   </div>

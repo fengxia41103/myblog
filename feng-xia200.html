@@ -86,42 +86,47 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2018-03-06
+      2018-03-22
 
-      <i class="fa fa-heart myhighlight"></i>
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Moving, and a big trip
+      Django to REST
     </h4>
 
       <p>
         <figure class="col l6 m6 s12">
-  <img src="images/funny/moving.jpg"/>
+  <img src="images/funny/the%20art%20of%20programming.jpg"
+       class="center img-responsive">
 </figure>
 
-<p>The past weekend was the big moving day. Things actually went pretty
-well, except the morning pick up of U-Haul. What a terrible customer
-service they had! Well, it started with my fault really by forgetting
-to bring my driver license. Nonetheless, the only service was not
-helpful &larr; and it's just another example of <a href="https://fengxia41103.github.io/myblog/euphemism.html">euphemism</a> that
-it gave an error message to retry during business hours of the
-self-service pickup location (which was closed for Sunday, btw, wtf!),
-and what it really meant, thanks for the last representative who
-revealed it to me, was that my account was blocked for any further
-self-service and my only option was to find a U-Haul location that was
-open and have a real person to help me. Really, once again, euphemism
-never works for anybody because <strong>it doesn't specify action to take to
-move things forward!</strong> Make it clear, as precise and actionable as
-possible, so to remove and minimize lost in translation. An ambiguity
-like that isn't a sign of politeness. Instead, it is a sign of …</p>
+<p>I have been building Django based web application for a while now. One
+design/request I get often is a REST API. Once the model data is
+exposed in REST, one can truly build a complete separate frontend
+using things like Angular, react, and whatever you fancy. I have tried
+a couple times myself following this architecture. On one hand it
+gives a lot of flexibility and it looks nice, too &larr; front end
+technology is a lot of "{}", but it does look quite nice, and
+responsive, too. But on the other, REST is a thing few understands
+well except it is an API through which you can CRUD. Honestly, I don't
+even understand yet how authentication is done, what is a good balance
+between massaging data (in Tastypie's term, (de)-hydration) and
+exposing data model raw.</p>
+<p>Anyway, here I want to document a practice I use, a really rudimentary
+one, of making django model available as REST resource through
+Tastypie.</p>
+<ol>
+<li><a href="https://docs.djangoproject.com/en/2.0/ref/models/fields/">Django model reference</a></li>
+<li><a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a></li>
+</ol>
+<p>Let's say you are building a site called <code>mysite</code>, and in …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/moving.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/django to rest.html">
       read more
     </a>
   </div>

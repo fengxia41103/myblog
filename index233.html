@@ -104,41 +104,40 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-08-31
+        2017-09-06
 
     </em>
-    <h3>sharing economy</h3>
+    <h3>Juju local LXD</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="col l4 m4 s12">
-  <img src="images/bike.gif"/>
-</figure>
-
-<p><a href="https://www.wikiwand.com/en/Sharing_economy">Sharing economy</a> is hot. Looking around, one can't help feeling
-just about everything can be shared. But then, you can't help asking
-yourself, "where does it end?"</p>
-<p>Really, so cars can be shared, houses can be shared, <a href="http://www.scmp.com/news/china/society/article/2106688/shared-folding-stool-service-launched-beijing-over-half-go">stools</a> can
-be shared, <a href="https://www.cnbc.com/2017/07/18/bike-sharing-boom-in-china-pedals-to-new-heights.html">bikes</a> can be shared... so what can not be? Practically
-nothing. I think the generalization roots in the word <strong>share</strong> as
-itself really doesn't rule out all the confusions out there &mdash;
-are bike sharing really "sharing"? or are they just a leasing in
-disguise? what makes you think one way or the other? what is sharing?
-I told Noah to share his toys, but to think of it, he didn't
-necessarily own the toys (for example, when he was in preschool), so
-the <strong>sharing</strong> was really an intention, a spiritual openness with
-benefiting others in mind. Since he is a kid, sharing toys is
-encouraged; but what if he is an adult and I'm encouraging him to
-share something that doesn't even belong to him at the first place?
-What's the message then? What …</p>
+    <p>Using Juju's <a href="https://jujucharms.com/docs/2.0/clouds-LXD">LXD provider</a> is the least-hassle way to start an
+experience of Juju and its charms. However, if you have done charm
+development for a while, you know making a one line of code change,
+deploying charm, then wait to see the <em>new</em> code got executed &larr;
+it's good 5-10 minutes per cycle. These add up quickly when you are in
+the middle of churning out code to get your ideas written. Not to
+mention creating a new <code>machine</code> is 2x slower, and bootstraping a new
+controller is even worse. I had experience in Shanghai sitting 30+
+minutes for a new controller due to the location's unreliable
+connections, and sometimes it just failed w/ a timeout. </p>
+<p>What to do? The goal is to create a way to reduce this trial-error
+cycle as much as possible so to speed up code development.</p>
+<h1>Challenge</h1>
+<p>If you watch <code>juju debug-log</code> while it deploys a charm, you start to
+realize that there are roughly seven steps:</p>
+<ol>
+<li>creating a container (will discuss <code>--to</code> switch later)</li>
+<li>update/upgrade the new container …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="sharing economy.html">
+    <a class="btn btn-default button" href="juju local LXD.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

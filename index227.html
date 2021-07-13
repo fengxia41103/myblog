@@ -104,39 +104,57 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-10-07
+        2017-10-11
 
     </em>
-    <h3>Art &gt; tech</h3>
+    <h3>KVM</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="col l6 m6 s12">
-  <img src="images/lalaland.jpg"/>
-</figure>
+    <p><a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> is something new to me, and it sounds awesome. The experience
+I want to have is a local dev that I can copy &amp; paste from some base
+image in case I forgot to take a snapshot at milestone. This way I
+feel comfortable to stand up a sandbox, try out crazy things, then
+discard it entirely at done, and repeat. So this means something
+minimal, fast.</p>
+<p>First thing first, get <code>kvm</code> and a few tools:</p>
+<div class="highlight"><pre><span></span>$ apt kvm libvirt-bin bridge-utils cloud-utils cloud-init libguestfs-tools
+</pre></div>
 
-<p>I'm obsessed by <a href="https://en.wikipedia.org/wiki/La_La_Land_(film)">La la land</a>. How many times have I watched and
-listened to this film? I'm playing it everyday now at work as it is
-also the only movie I loaded on this computer. While I was doing it, I
-was thinking what I would like to hear when I need a little sound, and
-it was the only one I wanted then.</p>
-<p>Got curious of its reviews, I know, I haven't read any of others'
-reviews of it till now. But honestly, like the guy in the film, why do
-I care what other people say about it, if myself enjoys it already?
-Who the hell care what they say? So what surprised me, as well as
-impressed me, was that it was done with 30 million dollars, and the
-director's first film, <a href="https://en.wikipedia.org/wiki/Whiplash_(2014_film)">Whipsplash</a>, was done in 3. What am I
-trying to say? is that whenever I was hearing the piano theme of La la
-land, I felt deeply moved as if the sweet and bitter memory came into
-life, dancing …</p>
+
+<h1>Cloud image</h1>
+<p>Don't bother with full blown <code>.iso</code>, use cloud images,
+eg. <a href="https://cloud-images.ubuntu.com/releases/16.04/release/">xenial 16.04</a>, my de faco at writing. It's &lt; 300M
+and boots fast. Key to know at this point is the file format &larr;
+use <code>qemu-img info [.img]</code> for <code>file format:</code>.</p>
+<div class="highlight"><pre><span></span>$ wget <span class="o">[</span>.img url<span class="o">]</span>
+
+To get file format:
+$ qemu-img info <span class="o">[</span>.img<span class="o">]</span>
+---------------------
+image: xenial-server-cloudimg-amd64-disk1.img
+file format: qcow2
+virtual size: 2.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
+disk size: 277M
+cluster_size: 65536
+Format specific information:
+    compat: 0.10
+    refcount bits: 16
+</pre></div>
+
+
+<h2>Resize disk</h2>
+<p>One caveat caught me is that snapshot using <a href="https://wiki.qemu.org/Documentation/CreateSnapshot">backing file</a> inherits
+the …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="art is better.html">
+    <a class="btn btn-default button" href="kvm.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

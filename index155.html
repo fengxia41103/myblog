@@ -107,37 +107,69 @@
         2018-11-16
 
     </em>
-    <h3>Bad words</h3>
+    <h3>IBB brain shutdown procedure</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="col l6 m6 s12">
-  <img src="images/social%20norm.jpg"/>
-</figure>
+    <p>This document describes procedure to shutdown an IBB brain instance.</p>
+<h1>Shutdown procedure</h1>
+<ol>
+<li>
+<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
+</li>
+<li>
+<p>Put the cluster in <strong>global maintenance mode</strong> by login any brain
+   server, and <code>hosted-engine --set-maintenance --mode=global</code>. </p>
+<p>To verify, login in a brain node and <code>hosted-engine --vm-status</code>:</p>
+<div class="highlight"><pre><span></span>```shell
+[root@lmorlct0207brain3 ~]# hosted-engine --vm-status
 
-<p>So Noah's school called yesterday. During lunch the kids at his table
-played truth or dare. Noah dared, a girl, to <code>rape</code>..... geee.. I was
-totally speechless and didn't even understand where he could have
-picked up that concept. Teacher said she felt this is a topic she
-should leave to parents to talk him about... so he and I had a talk on
-the way to Kumon.</p>
-<p>The good things is that he admitted he said so, not like before that
-he would try to get out of it by denying or finding other excuses
-like "but the other kid started it". So where did he get that idea? He
-said I told him that!!.. what!? How? where? .. "you remember the movie
-we watched yesterday?" "which movie!?" "The Japanese samurai movie."
-"Samurai movie?.... oh, you mean, the one in which that guy killed
-someone for a girl, and he then attacked that girl?...." "yes"</p>
-<p>Oh mine mine.... so he is referring to this movie &mdash; <a href="https://www.youtube.com/watch?v=MdIm_i5vAzU">Satan's
-Sword: The Dragon God (1960)- Raizō Ichikawa</a>, in which …</p>
+!! Cluster is in GLOBAL MAINTENANCE mode !!
+
+--== Host 1 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : lmorlct0203brain3.labs.lenovo.com
+Host ID                            : 1
+Engine status                      : {&quot;health&quot;: &quot;good&quot;, &quot;vm&quot;: &quot;up&quot;, &quot;detail&quot;: &quot;up&quot;}
+Score                              : 3400
+stopped                            : False
+Local maintenance                  : False
+crc32                              : 8eb75a80
+local_conf_timestamp               : 3249288
+Host timestamp                     : 3249287
+Extra metadata (valid at timestamp):
+    metadata_parse_version=1
+    metadata_feature_version=1
+    timestamp=3249287 (Fri Nov 16 15:57:39 2018)
+    host-id=1
+    score=3400
+    vm_conf_refresh_time=3249288 (Fri Nov 16 15:57:40 2018)
+    conf_on_shared_storage=True
+    maintenance=False
+    state=GlobalMaintenance
+    stopped=False
+
+--== Host 2 status ==--
+
+conf_on_shared_storage             : True
+Status up-to-date                  : True
+Hostname                           : 10.240.41.235
+Host ID                            : 2
+Engine status                      : {&quot;reason&quot;: &quot;vm not running on this host&quot;, &quot;health&quot;: &quot;bad&quot;, &quot;vm&quot;: &quot;down&quot;, &quot;detail&quot;: &quot;unknown&quot;}
+Score                              : 3400
+stopped                            : False
+Local …</pre></div></li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="bad words.html">
+    <a class="btn btn-default button" href="ibb brain shutdown procedure.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

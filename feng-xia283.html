@@ -86,54 +86,48 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2016-09-04
+      2016-09-08
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      DIY Pelican theme
+      General system architecture
     </h4>
 
       <p>
-        <p>As a Python house, <a href="http://blog.getpelican.com">Pelican</a> is definitely a winner for our blog
-site. But like any software engineer who hold a high standard to his
-work, I got turned off by all the <a href="http://www.pelicanthemes.com/)">available themes</a>.  "Ugly",
-"Where is the document?", "Why my translation is not shown?", I felt
-running in a maze where there were reflections of exit everywhere, but
-none was real. "Well, if it's in Python, we can make one." Solution is
-that simple.  Besides, we love <a href="http://jinja.pocoo.org/docs/dev/">Jinja2</a> template systems, and
-Pelican has spelled out <a href="http://docs.getpelican.com/en/3.6.3/themes.html#templates-and-variables">everything</a> we need.</p>
-<p>Quickly we wrote down a few on wish list:</p>
+        <figure class="col l6 m6 s12">
+  <img src="images/architecture_joke.jpg"
+       class="center img-responsive">
+</figure>
+
+<p>The word "system architect" has been puzzling to me.  I was hired to
+be one at one point. But it was not a comfortable position. How much
+do we understand the business?  What is the problem we are to solve?
+How does the current "architecture" fail? What is the downfall of this
+(or any) proposal? Overall, I feel an architecture emerges along with
+development and research. The more we start to understand the client's
+needs, habits, workflows, relationships, priorities, the more
+information we have when evaluating and making decisions on whether
+one piece in the stack fits or not, and why so. It is, IMHO, a
+backwards process when an architecture is pre-defined as if it is set
+in stone. We need to start from somewhere, but keeping in mind that it
+evolves and shifts like a living organ.</p>
+<blockquote>
+<p>System architecture evolves and shifts like a living organ.</p>
+</blockquote>
+<p>This is a system architecture I have been using recently in
+projects. It is divided into four components:</p>
 <ol>
-<li>The design must be based on <a href="http://getbootstrap.com/components/">Bootstrap</a></li>
-<li>Includes <a href="http://fontawesome.io/icons/">Fontawesome</a>, <a href="https://datatables.net/">Datatable</a>, <a href="http://lokeshdhakar.com/projects/lightbox2/">Lightbox2</a>, and <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a>.</li>
-<li>Reuse elements I have designed for <a href="https://fengxia41103.github.io/myblog/demo.html">showcases</a>, such as layout, CSS and images.</li>
-<li>Colors we like: <font color="#337ab7">blue(#337ab7)</font> and <span class="myhighlight">red(#d52349)</span>.</li>
-<li><a href="https://fonts.google.com/">Google fonts</a></li>
-</ol>
-<p>The actual work was pretty straightforward. Follow Pelican official document
-to set up a working directory:</p>
-<div class="highlight"><pre><span></span>├── static
-│   ├── bower_components
-│   ├── css
-│   │   └── my.css
-│   └── js
-│       ├── html5shiv.min.js
-│       └── respond.min.js
-└── templates
-    ├── article.html
-    ├── author.html
-    ├── category.html
-    ├── index.html
-    ├── layout.html
-    ├── page …</pre></div>
+<li>
+<p><strong>foreground service provider</strong>: this includes machinery that
+  interface with …</p></li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/pelican theme.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/general system architecture.html">
       read more
     </a>
   </div>

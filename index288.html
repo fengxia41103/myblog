@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-06-06
+        2016-06-12
 
     </em>
-    <h3>Fashion ERP &mdash; orders</h3>
+    <h3>Fashion ERP &mdash; reports</h3>
 
     <blockquote>
     </blockquote>
@@ -115,28 +115,40 @@
 
 
 <p>
-    <p>In <a href="https://fengxia41103.github.io/myblog/fashion introduction.html">part one</a> I have
-shown the design and function behind Product and Inventory management.
-In this article I'll talk about orders.</p>
-<p>Sales order and purchase order are like two sides of the same coin.
-Each sales order(SO) can include a mixed bag of products from
-different vendors. Once a SO has been created, application will parse
-it into multiple purchase order (PO) and route them to their
-vendor. Reversely, company can place a PO with a vendor, and purchased
-products can be used to fulfill multiple sales orders later.</p>
-<h1>Order life cycle</h1>
-<p>To understand the design of orders, one has to first grasp the life
-cycle of an order. I'd like to divide its functions into roughly two
-areas: <em>about physical good</em> and <em>about money</em>.</p>
-<p>The area of physical goods takes care of the acquisition of products
-on order. This includes shipping, receiving, reconciliation,
-inventory, product return and substitution. Like what we did in
-inventory, we maintain a theoretical list which comes from the sales
-order itself (think of it as a wish …</p>
+    <p>In <a href="https://fengxia41103.github.io/myblog/fashion introduction.html">part one</a> and
+<a href="https://fengxia41103.github.io/myblog/fashion orders.html">part two</a>, we have
+reviewed inventory management and order management. Their functions
+are meant for operator to book-keep information of daily operations.
+Once these data points have been captured, the power of the application
+shines in term of data analysis and reporting.</p>
+<p>Reports can be grouped into three categories:</p>
+<ol>
+<li><span class="myhighlight">reports at product level</span>: top
+   seller, top purchased, top profitable</li>
+<li><span class="myhighlight">reports at order level</span>: top SO by
+   qty balance, top SO in-progress fulfills</li>
+<li><span class="myhighlight">reports of seller/buyer account
+   level</span>: customer AR, vendor AP</li>
+</ol>
+<p>Data points are essentially rolled up following this pattern: product level &rarr; order level
+&rarr; account level.</p>
+<h1>Product level reports</h1>
+<h2>Top selling product</h2>
+<p>Knowing the top seller is the most important thing for any business.
+The report is compiled from sales orders to show which product is high in demand.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_19.png">
+    <figcaption>Top seller report</figcaption>
+</figure>
+
+<h2>Top profitable product</h2>
+<p>Your best seller shows the demand, but they are not necessarily
+the best for your business if their margin is low. Instead, a high margin
+item may be the target that your next market campaign …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="fashion orders.html">
+    <a class="btn btn-default button" href="fashion reports.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

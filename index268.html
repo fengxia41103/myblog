@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-03-22
+        2017-03-30
 
     </em>
-    <h3>Baremetal provisioning</h3>
+    <h3>MAAS vs. Ironic</h3>
 
     <blockquote>
         <span class="myhighlight">Copyright @ Lenovo US</span>
@@ -116,26 +116,34 @@
 
 
 <p>
-    <p>Everyone of us has installed an operating system to a computer at some
-point in life. It is easy to perceive inserting a disk or USB key to
-make this happen because the OS files are <em>there</em>. A fancier version
-is to boot from network using PXE boot option, which seems like a
-magic (when the environment has been setup) &mdash; it somehow finds
-the OS image and start installing, all over a <em>network</em>!</p>
-<p>Now if we move to the world of servers, it works the same
-way. Baremetal is another name referring to a server that has no
-operating system (or hypervisor) installed yet. But the challenge is
-to physically access to it to insert that OS disk &mdash; in a data
-center setting, I think the walking part is neither fun nor
-desired. Remote provisioning is, therefore, the way to go.</p>
-<p>First, let's define <strong>provisioning</strong>. Here we mean to have installed
-an operating system or hypervisor on a baremetal so it is available
-for further software installation.  In the simplest term, one needs to
-answer …</p>
+    <p>This article is to analyze Openstack Ironic and Canonical MAAS, both
+are tools to turn baremetal into a pool of managed resources that are
+ready for consumption by upstream srervice.  On the highest level, a
+baremetal is either managed or not-managed. Being <strong>managed</strong> requires
+that the manager is aware of the existence of the baremetal, and has
+acquired necessary information of the server so that these two things
+are now possible:</p>
+<ol>
+<li>Power cycle the server</li>
+<li>Install a software such as operating system</li>
+</ol>
+<p>The general process of managing a baremetal is straightforward.
+Baremetal life cycle can be viewed in the following states. Names and
+details of each state and state transitions differ, but the concept
+remains valid. </p>
+<ol>
+<li><span class="myhighlight">unknown</span>: Baremetal is not managed.</li>
+<li><span class="myhighlight">enlisted</span>: Manager is now aware of
+   the existence of the baremetal. It does not yet have sufficient
+   information to cycle its power or loading anything to execute on it.</li>
+<li><span class="myhighlight">ready for provisioning</span>: Sometimes
+   also called <em>hardware inventory</em> phase, in which the manager has
+   acquired capability to control the server's power. Knowing other
+   server characteristics …</li></ol>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="baremetal provisioning.html">
+    <a class="btn btn-default button" href="maas and ironic.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

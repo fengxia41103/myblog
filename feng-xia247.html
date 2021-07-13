@@ -86,46 +86,55 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-06-05
+      2017-07-06
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      AI
+      Charm Ansible integration
     </h4>
 
       <p>
-        <figure class="col l6 m6 s12">
-  <img src="images/funny/empror%20clothes.jpg"/>
-</figure>
-
-<p>I have pretty low tolerance of BS. The hot topic of AI bothers me
-a great deal, because it is being discussed by too many ppl who have no
-context. It is becoming just another buzz word rolling off your tongue
-to make you sound sophisticated and smart. But no, AI is neither
-magic nor intimidating. I think it is a great example for human being
-to looking at things with a straight face, cut to the core, no more
-BS, no more hand waving and using some abstract, ideological fuzziness
-to fool ppl.</p>
-<p>At least 20 years ago I have read a line about artificial
-intelligence, which cleared formed my view on this &mdash; There are
-two ways to define <strong>intelligence</strong>:</p>
+        <p>Let's face it. Ansible has the mouth (and market) share these
+days. For our modeling purpose, we are to utilize its procedural
+strength to carry out actions, which provides an abstraction instead
+of coding in charm's Python files.</p>
+<p>Design objectives:</p>
 <ol>
-<li>Machine emulate human's train of thoughts, and derives
-   the same conclusion.</li>
-<li>Machine ignores your human brain, finds its own way, and
-   arrive the same conclusion.</li>
+<li>Design as reusable <a href="https://jujucharms.com/docs/2.1/developer-layers">layer(s)</a></li>
+<li>Be compatible with Ubuntu and CentOS</li>
+<li>Simple pattern to execute a playbook</li>
 </ol>
-<p>The key is, <span class="myhighlight">the final result is the
-same</span>. So how can you distinguish the difference? does process
-even matter? If we both doing math, <code>4 x 8</code>, human …</p>
+<p>Assumption:</p>
+<ol>
+<li>Playbooks will be local (in charm) so to maintain the
+   atomic nature of a HW charm &mdash; the model contains both the
+   declaration of attributes and actions to handle runtime state transitions.</li>
+</ol>
+<h1>Method 1: layer-ansible</h1>
+<p>Method 1 is to use an existing project, <a href="https://github.com/chuckbutler/charms.ansible">layer-ansible</a>.</p>
+<p>Examine its code reveals a typical pattern one would use to introduce
+a new function:</p>
+<ol>
+<li>
+<p>Install Ansible. The approach it took is to use a
+   <code>ppa:ansible/ansible</code> source and installed by calling
+   <code>charmhelpers.fetch.apt_install</code>. The key issue here is using <code>ppa</code>
+   which is an <strong>hardcoded</strong> Ubuntu approach.</p>
+<div class="highlight"><pre><span></span>```python
+def install_ansible_support(from_ppa=True, ppa_location=&#39;ppa:ansible/ansible&#39;):
+  if from_ppa:
+      charmhelpers.fetch.add_source(ppa_location)
+      charmhelpers.fetch.apt_update(fatal=True)
+  charmhelpers.fetch.apt_install(&#39;ansible&#39;)
+  with …</pre></div></li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/ai.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/charm ansible integration.html">
       read more
     </a>
   </div>

@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2020-03-31
+        2020-04-01
 
     </em>
-    <h3>Corvid-19 Summit</h3>
+    <h3>Git strategy for backward compatibility</h3>
 
     <blockquote>
     </blockquote>
@@ -115,12 +115,34 @@
 
 
 <p>
-    <p>Spot a Chinese forum on Corvid-19 in WeChat, which says
-something about the mentality of the Chiense elite circle.</p>
+    <figure class="col s12 center">
+  <img
+  src="images/olympia/git%20strategy%20rebase%20for%20release.png"/>
+  <figcaption>
+  Git strategy for a backward-compatible release
+  </figcaption>
+</figure>
+
+<p>As a sequel to our discussion on <a href="https://fengxia41103.github.io/myblog/git strategy.html">git strategy</a>, we have started w/
+an objective that we want to "control the release content". Further, I
+discussed how <strong>backwards compatibility</strong> of releases may not be true
+if we are introducing long-term-support on releases, that hot fixes
+and bugs can only <strong>roll forward</strong>, eg. V4 bugs can be patched to V5
+(assuming V5 was released after V4, time wise and git commit wise),
+but not from V5 &rarr; V4 without introducing some V5 contents into V4
+(whether this is desired or not is the focal of the discussion,
+essentially, how much control you want to have over the release
+content!?)</p>
+<p>Now, let's build on top of this and say that <strong>we want backwards
+compatibility</strong> &mdash; all newer releases are always backwards
+compatible? This is certainly a desired outcome because this makes
+upgrade and maintenance easier (who wants to maintain a 10-year-old
+code when a customer <em>frozen in time</em> call you of a bug which you
+probably don't even remember who wrote that crap …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="summit.html">
+    <a class="btn btn-default button" href="git rebase strategy.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

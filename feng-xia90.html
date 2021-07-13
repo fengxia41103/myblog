@@ -86,42 +86,63 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2019-09-13
+      2019-09-25
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Emotional AI
+      Snapshot anything w/ Selenium
     </h4>
 
       <p>
-        <figure class="col l7 m7 s12">
-  <img src="images/classic%20beauty.jpg"/>
+        <figure class="col l6 m6 s12">
+  <img src="images/back%20rub.jpg"/>
 </figure>
 
-<p>While at gym, the thought just came to me, that all the talks about AI
-have been about how it will obsolete human and jobs, how much
-acceleration it travels in term of cracking the challenges we throw at
-it/them, therefore how much we will be behind once the AI train passes
-us &mdash; louder, louder, louder.. and it's, gone! and we will never
-catch up again, ever. Then the world will be dominated by AI and its
-creations (robots?), and human, likely will become slaves, or like in
-the Matrix, some sort of utilitarian object, fertilizer, maybe.</p>
-<p>Then, the talks inevitably lead to gaps that AI can not yet do, and
-even argue that they will never able to. Two common threads &mdash;
-language, and emotion.</p>
-<p>Language that there are too much subtlety in our conversation (and the
-Chinese especially think they are the master of such, in their eyes,
-arts, in my eyes, annoyance, see my elaboration on <a href="https://fengxia41103.github.io/myblog/irresponsible response.html">irresponsible
-response</a>), that AI/computer is yet to understand that much depth
-&mdash; Siri and its siblings …</p>
+<p>In my previous notes on <a href="https://fengxia41103.github.io/myblog/analyzing angular 1x.html">analyzing Angular 1.x code</a>, I have stuck at
+how to create snapshots of rendered components for my documentation
+purpose. In the manual data file <code>.json</code>, I allowed an entry to plug
+in snapshot file taken by human testers. As an example, the code below
+shows a block documenting:</p>
+<ol>
+<li>module: <code>mwc.mapping</code></li>
+<li>its components as a LIST, and each has a key <code>screenshot</code> that is a
+   path to the snapshot file.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;components&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;source file&quot;</span><span class="p">:</span> <span class="s2">&quot;../app/topology/components/mappings.component.ts&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc-mappings&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;screenshot&quot;</span><span class="p">:</span> <span class="s2">&quot;./screenshots/mwc-mappings.png&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;used by&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&quot;using&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;mwc-create-flash-pool-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-flash-pool-actions-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-create-migration-zone-button&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mwc-migration-zone-actions-button&quot;</span>
+      <span class="p">],</span>
+      <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;MappingsComponent&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;mwc.mappings&quot;</span>
+<span class="p">}</span><span class="err">,</span>
+</pre></div>
+
+
+<p>Well, this gets me going to create the <a href="https://fengxia41103.github.io/myblog/downloads/webapp.pdf">example doc</a>, but to have
+human hunting down screenshots always give me a fishy feeling &mdash;
+you know how deeply I do not trust human to be <strong>exhaustive</strong> and
+<strong>deterministic</strong> &mdash; on a good day or w/ a capable person, yes,
+you get a pretty satisfactory result, but even then, it's no guarantee
+his/her next day's delivery will be the same. Not to mention …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/emotional ai.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/snapshot selenium.html">
       read more
     </a>
   </div>

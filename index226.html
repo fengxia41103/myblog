@@ -104,57 +104,40 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-10-11
+        2017-10-12
 
     </em>
-    <h3>KVM</h3>
+    <h3>Bad day</h3>
 
     <blockquote>
-        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <p><a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> is something new to me, and it sounds awesome. The experience
-I want to have is a local dev that I can copy &amp; paste from some base
-image in case I forgot to take a snapshot at milestone. This way I
-feel comfortable to stand up a sandbox, try out crazy things, then
-discard it entirely at done, and repeat. So this means something
-minimal, fast.</p>
-<p>First thing first, get <code>kvm</code> and a few tools:</p>
-<div class="highlight"><pre><span></span>$ apt kvm libvirt-bin bridge-utils cloud-utils cloud-init libguestfs-tools
-</pre></div>
+    <figure class="col l6 m6 s12">
+  <img src="images/hemlet.jpg"
+       class="responsive-image">
+</figure>
 
-
-<h1>Cloud image</h1>
-<p>Don't bother with full blown <code>.iso</code>, use cloud images,
-eg. <a href="https://cloud-images.ubuntu.com/releases/16.04/release/">xenial 16.04</a>, my de faco at writing. It's &lt; 300M
-and boots fast. Key to know at this point is the file format &larr;
-use <code>qemu-img info [.img]</code> for <code>file format:</code>.</p>
-<div class="highlight"><pre><span></span>$ wget <span class="o">[</span>.img url<span class="o">]</span>
-
-To get file format:
-$ qemu-img info <span class="o">[</span>.img<span class="o">]</span>
----------------------
-image: xenial-server-cloudimg-amd64-disk1.img
-file format: qcow2
-virtual size: 2.2G <span class="o">(</span><span class="m">2361393152</span> bytes<span class="o">)</span>
-disk size: 277M
-cluster_size: 65536
-Format specific information:
-    compat: 0.10
-    refcount bits: 16
-</pre></div>
-
-
-<h2>Resize disk</h2>
-<p>One caveat caught me is that snapshot using <a href="https://wiki.qemu.org/Documentation/CreateSnapshot">backing file</a> inherits
-the …</p>
+<p>Have you ever been caught in a mode that you just feel the whole life
+is collapsing, not necessarily things are really bad, just that you
+feel the mind is on a edge pissed off by something at that moment that
+you just want to get out, to scream, to even kill somebody!? You will
+be like <strong>wtf</strong> let's just bring it on, sink me to the bottom of
+whatever life has it for me, trash me to the ground, and better just
+kill me so I won't bounce back up again to suffer more by dragging it
+on and on and on.....</p>
+<p>That's exactly how I feel right now, today! WTF! really? How could
+this be soooo damn hard? I just want to move on my life, and here it
+is, somehow, somewhere, some dark energy in this universe just want to
+anchor me right back to where I am. And seriously, if only there is an
+archor in my life, in my mind, wouldn't I have taken this step in the
+first place …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="kvm.html">
+    <a class="btn btn-default button" href="bad day.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

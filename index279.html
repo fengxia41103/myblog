@@ -104,48 +104,40 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-10-15
+        2016-12-08
 
     </em>
-    <h3>SPA: World Snapshot</h3>
+    <h3>Setup a MAAS Virtualbox lab</h3>
 
     <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <figure class="s12 center">
-  <img src="images/country_1.png"/>
-    <figcaption>World Snapshot</figcaption>
-</figure>
-
-<blockquote>
-<ul>
-<li><a href="http://snapshots.world/">live demo</a>, and <a href="https://github.com/fengxia41103/worldsnapshot">github</a></li>
-</ul>
-</blockquote>
-<p>The joy of making graphs in a data-driven web application has been the
-highlight that kept me going from project to project. Once all things
-are hooked up and data can be created in a meaningful way, the
-ultimate presentation are <em>reports</em> and <em>graphs</em>. In most cased, I
-have found graphs are far better than reports &mdash; reports often
-fall into a table form which looks impressive because it is filled
-with data. But who is to the analysis and draw a conclusion!?  On the
-other hand, graph, even using the same data set as that of the
-report/table, is one step closer to a conclusive message &mdash; KPI
-is above or below threshold, department A is doing better than
-department B, sales of this month dropped comparing to last month's...</p>
-<h1>Data sources</h1>
-<ol>
-<li><a href="http://dhsprogram.com/data/">DHS</a>: <a href="http://dhsprogram.com/data/">DHS</a> data set is published by <a href="https://www.usaid.gov/">US AID</a>. Following its <a href="http://api.dhsprogram.com/#/index.html">API</a>
-   documents, <a href="http://api.dhsprogram.com/#/api-indicators.cfm">indicators</a> are selected to depict a country's well doing.</li>
-<li><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries">The World Bank</a>:  Another comprehensive data set is <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries">The World Bank</a> set.
-   Check out its …</li></ol>
+    <p>Canonical <a href="http://maas.io/">MAAS</a> is a deployment tool that can give a bare metal
+life by putting an OS on it. Working together with <a href="https://www.ubuntu.com/cloud/juju">Juju</a>, they can
+setup a cluster of applications quite quickly. Think of them as a
+package manage like Ubuntu's <code>apt-get</code>, but in the context of a
+cloud. Interesting.</p>
+<p>This article shows how to setup a virtual lab so one can play with
+these two tools and get a sense of what they do. The whole setup is
+based on Virtualbox. One thing I found out the hard way is that
+despite their nice looking website and rather recent project history,
+there is no single document that can bring this environment live from
+A to Z. All official documents have out-of-date commands here and
+there which made following them useless. I consulted countless blogs,
+posts, chasing down bugs (or I thought they were bugs), and finally
+when everything works, it became so obvious and simple. Hopefully this
+article will shorten this journey for readers and they can have this
+environment easily.</p>
+<h1>Baseline environment</h1>
+<p><strong>Virtualbox …</strong></p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="data visualization.html">
+    <a class="btn btn-default button" href="maas virtualbox.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

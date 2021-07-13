@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-11-08
+        2017-11-12
 
     </em>
-    <h3>A mature technology</h3>
+    <h3>Alpha Advantage SP500 API</h3>
 
     <blockquote>
     </blockquote>
@@ -115,35 +115,31 @@
 
 
 <p>
-    <figure class="col s12">
-  <img src="images/a%20cute%20cat.jpg"
-       class="responsive-img">
+    <figure class="s12 center">
+  <img src="images/alpha%20advantage%20sp500.png"/>
+    <figcaption>SP500</figcaption>
 </figure>
 
-<p>This notion of <em>技术已经很成熟</em> (it is a <a href="https://en.wikipedia.org/wiki/Mature_technology">mature technology</a>?  a
-well known technology? huh? I don't even know how to translate this
-line.)  bothers me a LOT! What do you mean by that? There are loads
-questions to be clarified, don't you think!?</p>
-<ul>
-<li>that the technology has already been developed? </li>
-<li>that can be easily copied and re-implemented, with the same wonderful results?</li>
-<li>or has been in existence for a while and everybody in the room
-understands what it means, and what it takes!? </li>
-<li>Are we talking about the principle of this technology here? or a
-  version of implementation? </li>
-<li>or some other customized idea based on it? </li>
-<li>and how do you know it works for you in your application context?
-  Have you done a POC? and to what degree your POC was built and
-  tested and proven to give you confidence? How far apart is your POC
-  from what you envision of the <strong>real</strong> thing? How did you derive
-  that conclusioin?</li>
-</ul>
-<p>Really, whenever ppl use such a <strong>vain, vague, meaningless</strong>
-line as to set the theme …</p>
+<p>While fixing my <a href="https://github.com/fengxia41103/jk">stock project</a>, I hit a road block, that Yahoo's 
+free finance API is <a href="https://forums.yahoo.net/t5/Yahoo-Finance-help/Is-Yahoo-Finance-API-broken/td-p/250503">gone!</a>, no more. This is quite a bummer. How
+to get daily quotes so to reestablish the data stream? Well, as a the
+beauty of free market, someone is always up to the service if there is
+a demand. So I ended up using <a href="https://www.alphavantage.co/documentation/">Alpha Advantage API</a> for a change.</p>
+<p>Tagging on top the <a href="https://fengxia41103.github.io/myblog/data visualization.html">World Snapshot</a> project, this one is
+essentially a graph browser that takes the API data stream based on
+user selected company symbol, and draw all the data index on a single page.</p>
+<blockquote>
+<p><a href="http://sp500chart.s3-website-us-east-1.amazonaws.com">live demo</a></p>
+</blockquote>
+<p>The <code>architecture</code>/<code>design</code> is shown below, and <a href="https://github.com/fengxia41103/sp500">github code</a>.</p>
+<figure class="s12 center">
+  <img src="images/sp500%20architecture.png"/>
+  <figcaption>SP500 SPA architecture</figcaption>
+</figure>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="mature tech.html">
+    <a class="btn btn-default button" href="alpha sp500.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

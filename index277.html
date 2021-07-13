@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-12-09
+        2017-01-03
 
     </em>
-    <h3>Targets in MAAS lab</h3>
+    <h3>Juju charm  model</h3>
 
     <blockquote>
         <span class="myhighlight">Copyright @ Lenovo US</span>
@@ -116,40 +116,35 @@
 
 
 <p>
-    <p>After setting up the MAAS server and its subnet, bringing up a target
-node is simple.</p>
-<blockquote>
-<p>All nodes must be on the same <strong>192.168.8.0/24</strong> subnet, and
-they must support PXE boot.</p>
-</blockquote>
-<h1>PXE boot</h1>
-<p>The MAAS machine functions as both the DHCP server and the TFTP
-server, both are required to facilitate PXE booting. First, we creat a
-blank VM. The important things are:</p>
-<ol>
-<li>
-<p>Under <em>System &rarr; Mother board &rarr; Boot order</em>, check the
-    <em>Network</em>. However, it is not necessary to move the <em>Network</em> boot
-    above <em>Hard Disk</em>. When there is no OS deployed yet on the hard
-    disk, boot process will fall through to PXE anyway. Once an OS has
-    been installed, the machine will boot normally from HD.</p>
-<blockquote>
-<p>If you put PXE as the first order, this target will not boot
-into HD image at all.</p>
-</blockquote>
-</li>
-<li>
-<p>Set <em>Network &rarr; Adapter 1 &rarr; Internal Network</em>, named
-    <em>intnet</em>. This corresponds to the MAAS managed subnet of
-    192.168.8.0/24.</p>
-</li>
-</ol>
-<p>After this, start the target VM and it should PXE boot and will shut
-itself …</p>
+    <p>This article is a high level view of Juju's internal modelings. For me
+it was fairly confusing when looking at its document which has an army
+of these concepts: charm, bundle, model, unit.... of course, each of
+them makes sense after a while. Its <a href="https://jujucharms.com/docs/2.0/glossary">terminology</a> page helps on
+understanding individual term. But like other Canonical documents, it
+needs a design level diagram to help user grasp the structure of this
+wealth of knowledge.</p>
+<p>So here it is my attemp to show the relationship between these
+terms. Instead of drawing a tree to reflect 1-N relationship, I used
+an outer enclosure which can have multiple of its inner enclosures,
+eg. a bundle can have N charms.</p>
+<figure class="s12 center">
+  <img src="images/juju%20control%20modeling.png"/>
+  <figcaption>Juju control models</figcaption>
+</figure>
+
+<p>A few interesting points besides the 1-N relationships. </p>
+<ul>
+<li>A single application can be deployed on multiple machines,
+  eg. Application #2 has two units. This is how one application can be
+  scaled out horizontally.</li>
+<li>One machine, in turn, can host multiple applications, eg. one unit
+  of application #2 and #3 both live on the same machine.</li>
+</ul>
+<p>By default …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="maas target.html">
+    <a class="btn btn-default button" href="juju charm model.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

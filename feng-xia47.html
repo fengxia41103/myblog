@@ -86,59 +86,44 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2020-03-18
+      2020-03-21
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Feng's movie browser
+      Git strategy
     </h4>
 
       <p>
-        <p><a href="https://fengxia41103.github.io/movie/">Go to live demo</a></p>
-<figure class="s12 center">
-  <img src="images/movie.gif"/>
-    <figcaption>Movie browser demo</figcaption>
+        <figure class="col s12 center">
+  <img src="images/funny/a%20lot%20of%20cats.jpg"/>
 </figure>
 
-<h1>Background</h1>
-<p>Posted a challenge to build a <em>search</em>/browser for movie
-fan. Initially was given a static data set to display. So on top of
-that, I start to pull in a few other data sources to spice things
-up. Coded in React, which I found the ES6 syntax much cleaner.</p>
-<h1>Development</h1>
+<p><a href="https://fengxia41103.github.io/myblog/git.html">git</a> is wonderful, but its workflow is very confusing. Surprised?
+Then I would dare to say that you haven't had first hand experience
+using it in a full blown enterprise environment &mdash; when in such
+environment, the challenge isn't about git itself, but what the
+content of a release are, and how we are testing/CICD them.</p>
+<p>You would think it sounds rather cliche that this problem even
+exists. After all, these are what a software engineering is all about,
+aren't they? But take a step back and consider this scenario:</p>
 <ol>
-<li>Install <code>nvm</code> and node (tested 9.4, 12.1).</li>
-<li><code>npm install</code>: to pull all dependencies.</li>
-<li><code>npm run build</code> because static files will be served from <code>/dist</code>
-   (defined in <code>webpack.config</code>) by default. However, they can also be
-   served outside the application entirely. See <code>Deploy</code> section for
-   more info.</li>
-<li><code>npm run dev</code>.</li>
-<li>Browse <code>localhost:8080</code>, browser will auto-refresh when webpack
-   detects a change to source files.</li>
-</ol>
-<h1>Deploy</h1>
-<h2>using github pages</h2>
-<ol>
-<li>Setup your github repo to allow pages, select using <code>MASTER</code>.</li>
-<li>Setup <code>develop</code> as default branch.</li>
-<li><code>npm run deploy</code></li>
-<li>At prompt, login your github account.</li>
-<li>Go to <code>&lt;yourname&gt;.github.com/&lt;repo&gt;</code>.</li>
-</ol>
-<h2>using your static file hosting</h2>
-<ol>
-<li><code>npm run build</code></li>
-<li>Push <code>/dist</code> to your static file hosting service.</li>
-<li>Verify …</li></ol>
+<li>We just did a release 5.0.0.</li>
+<li>We have two features: 1 &amp; 2.</li>
+<li>Initially they were all targeting the next release, say <code>5.1</code>.</li>
+<li>We create a <strong>staging</strong> branch, <code>5.1-staging</code> and point our CICD to
+   this so to QA them (more on this later).</li>
+<li>Feature 1 &amp; 2 have been merged into <code>5.1-staging</code>. Their source
+   branches, eg. <code>feature-1</code>, have been deleted &larr; at merge
+   request, select to delete source branch.</li>
+<li>Time is slipping, 5.1 is up this Friday, but one feature is failing …</li></ol>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/movie browser.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/git strategy.html">
       read more
     </a>
   </div>

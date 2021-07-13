@@ -93,62 +93,33 @@
   </div>
   <div class="col s12">
     <h4>
-      Charm layer-basic
+      Girl's love
     </h4>
 
       <p>
-        <p>Have you ever wondered what <a href="https://github.com/juju-solutions/layer-basic.git">layer-basic</a> is for? and why every
-charm needs to include it? In this article we will take a look
-at its code base to decipher this mystery.</p>
-<h1>Hooks</h1>
-<p>We already know hooks are hardcoded. Juju expects certain hooks and
-hook sequence is always executed in an order that is dictated by Juju
-code.</p>
-<figure class="s12 center">
-  <img src="images/charm%20hooks.png" />
-  <figcaption>Sequence of charm hooks</figcaption>
+        <figure class="col l4 m4 s12">
+  <img src="images/funny/bookcover.jpg"/>
 </figure>
 
-<p>What do we see in hooks? If you run <code>charm build</code> and examine the <code>dist</code> folder,
-hooks live in <code>dist/yourcharm/hooks</code> folder:</p>
-<div class="highlight"><pre><span></span>.
-├── config-changed
-├── hook.template
-├── install
-├── leader-elected
-├── leader-settings-changed
-├── relations
-│   └── rack-pdu
-│       ├── __init__.py
-│       ├── interface.yaml
-│       ├── provides.py
-│       └── requires.py
-├── start
-├── stop
-├── update-status
-└── upgrade-charm
-</pre></div>
-
-
-<p>We know we haven't defined any custom hook code for this charm,
-so how were they generated? Even more interesting is
-that all hooks are strangely <strong>identical</strong>.
-Take <code>install</code> hook script for example:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
-
-<span class="c1"># Load modules from $JUJU_CHARM_DIR/lib</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="kn">from</span> <span class="nn">charms.layer</span> <span class="kn">import</span> <span class="n">basic</span>
-
-<span class="c1"># This will load and run the appropriate @hook and other decorated</span>
-<span class="c1"># handlers from $JUJU_CHARM_DIR/reactive, $JUJU_CHARM_DIR/hooks/reactive,</span>
-<span class="c1"># and $JUJU_CHARM_DIR/hooks …</span></pre></div>
+<p>Watching all the little kids running around at this public square in
+a summer evening, I was thinking to myself, "boy, that's a lot of kids. And
+each one of them came from a man and a woman, and they had to have sex
+at some point to make this happen, and that moment was supposed to be
+a time they were so attracted to each other and trusted each other
+that especially the woman was willing to bear the seed so to make this
+baby." But then looking at the couples around the kids, I couldn't
+help wondering how could the guy be attractive to the girl, and vice
+versa. I mean, many of them don't look that match. But somehow, the
+woman liked the guy, and the guy liked the woman. Well, I suppose
+there was love, or there is love, at least at the moment of the
+sex.</p>
+<p>So if I look at the guys (and most of the women), they are not that
+attractive at all. Especially for the guys, many …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/charm layer-basic.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/girl love.html">
       read more
     </a>
   </div>

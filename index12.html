@@ -107,7 +107,7 @@
         2021-03-03
 
     </em>
-    <h3>Valuation of a Stock</h3>
+    <h3>Stock Trend Analysis</h3>
 
     <blockquote>
     </blockquote>
@@ -115,44 +115,44 @@
 
 
 <p>
-    <p>Detail of a stock is the primary research tool where you get
-one-stop-shop of its numbers. Instead of duplicating common layouts
-such as Google Finance, Finviz, I'm hoping to provide a <em>better</em> user
-experience that focuses on how a reader of this page is to consume the
-information, not just throwing at him pile of facts &amp; data, which,
-though always impressive to begin with, is often overwhelming and
-creating a diminishing return of these information quickly.</p>
-<h1>Select a stock</h1>
-<p>To look at detail of a stock, select a symbol of list:</p>
+    <p>Continue from <a href="{filename}/workspace/stock/stock%20detail.md">last article</a>. That one focused on value
+assessment. This will go over trend analysis.</p>
+<h1>Select a period &amp; price</h1>
 <figure class="col s12">
-  <img src="images/stock/stock%20list.png"/>
-  <figcaption>Stock list</figcaption>
+  <img src="images/stock/trend%20price.png"/>
+  <figcaption>Select a time range for trend analysis</figcaption>
 </figure>
 
-<p>Upon typing on the search bar, case-sensitive matching takes place
-automatically with a 1-second debounce. Matched one will then be
-highlighted. To return to the full list, simply clear the search bar.</p>
+<p>Unlike other websites where you usually have choice of 1d, 5d, 1m, 3m,
+and 6m as time range, this tool can select any date-to-date as you
+wish, and all following analysis will be done over this selected
+range.</p>
+<h1>Daily return %</h1>
+<p>Daily return is defined as <code>(close-open)/close</code> of that day. This
+value is pre-computed as a strategy value.</p>
 <figure class="col s12">
-  <img src="images/stock/stock%20list%20filtered.png"/>
-  <figcaption>Stock list filtered</figcaption>
+  <img src="images/stock/daily%20return.png"/>
+  <figcaption>Example of daily return</figcaption>
 </figure>
 
-<h1>Summary</h1>
+<h1>Overnight return %</h1>
+<p>Overnight return is defined as <code>(today's open - yesterday's
+close)/yesterday's close</code>. This is also a pre-computed strategy value.</p>
 <figure class="col s12">
-  <img src="images/stock/stock%20detail%20summary.png"/>
-  <figcaption>Stock detail summary section</figcaption>
+  <img src="images/stock/overnight%20return.png"/>
+  <figcaption>Example of overnight return</figcaption>
 </figure>
 
-<p>Three values that are less intuitive than others are:</p>
-<ul>
-<li>
-<p><code>DuPont ROE</code>: ROE computed using the Dupont model. This is based on
-  company's financial statements. If happened to be that this stock
-  doesn't have statement data, value will be 0, equivalent to an …</p></li></ul>
+<p>I noticed that there is always some <strong>after market</strong> news or earning</p>
+<p>calls that will sway the market. Further, apparently trading is going
+on after the market is closed to me! Therefore, there is a dark period
+when the price is moving, but I can not participate until the next
+morning. Using this value together with daily return, I'm hoping to
+gain …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="stock valuation.html">
+    <a class="btn btn-default button" href="stock trend analysis.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

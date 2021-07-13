@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2018-04-15
+        2018-04-16
 
     </em>
-    <h3>Satellite</h3>
+    <h3>Use RHEL server qcow2 as sandbox</h3>
 
     <blockquote>
         <span class="myhighlight">Copyright @ Lenovo US</span>
@@ -116,37 +116,65 @@
 
 
 <p>
-    <p>These notes are based on Satellite 6.3. There are minor difference
-between 6.2 and 6.3. Grasp the concept here, and hopefully you will
-have a good understanding of the Satellite models and procedures.</p>
-<h1>Architecture</h1>
+    <p>The closest thing RHEL has to a cloud image is a qcow (download from
+<a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software">here</a>). This image has disabled root password, and disabled SSH
+access &larr; so what the heck!?</p>
+<h1>Method 1: modify image directly</h1>
+<p>Really ugly solution. Anyway. On a Ubuntu 16.04, install <code>guestfish</code>
+and <code>libguesttools</code>, then:</p>
+<h2>create root password</h2>
 <ol>
-<li><strong>One</strong> satellite server (master server), and <strong>1+</strong> capsule servers.</li>
-<li>The Satellite Server is required to connect to Red Hat
-   Customer Portal &larr; main source of RH packags, errata,
-   Puppet modules.</li>
-<li>The Satellite Server organizes the life cycle management by
-   using <code>organizations</code> as principal division units &larr; one
-   subscription manifest per org.</li>
-<li><code>org</code> &rarr; <code>location</code> creates a matrix &rarr; 
-   3 org and 4 location will create <code>3x4=12</code> management contexts.</li>
-<li><code>location</code> is then tied to a capsule server (isolated).</li>
-<li>Info flow: external source &rarr; main server &rarr; capsule
-    server &rarr; managed host.</li>
+<li>
+<p>Create a password to use. Note it is "digit 1", not a "l"
+   (as in love):</p>
+<div class="highlight"><pre><span></span>```shell
+$ openssl passwd -1 natalie
+```
+</pre></div>
+
+
+</li>
+<li>
+<p>Modify the image directly:</p>
+<div class="highlight"><pre><span></span>```shell
+$ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
+&gt;&lt;fs&gt; run
+&gt;&lt;fs&gt; list-filesystems
+&gt;&lt;fs&gt; mount /dev/sda1 /
+&gt;&lt;fs&gt; vi /etc/shadow
+```
+</pre></div>
+
+
+</li>
 </ol>
-<p><img src="images/rh%20satellite%20overall%20architecture%20official.png"
-     class="col s12"></p>
-<h1>Content view</h1>
-<ol>
-<li><code>Content Views</code> are subsets of content from the <code>Library</code> (master copy of all contents).</li>
-<li>Multiple content views can be applied to one capsule server.</li>
-<li><code>Content Views</code> can be combined to create <code>Composite Content Views</code>.</li>
-<li>Composite view is just a grouping. Individual content view, once
-   updated, shall still be promoted, but the composite …</li></ol>
+<p>Now replace the "!!" on line <code>root:...</code> with your password you just
+created in step 1, save,</p>
+<h2>allow ssh root &amp; password</h2>
+<p>Modify <code>/etc/ssh/sshd_config</code> and uncomment two places:</p>
+<div class="highlight"><pre><span></span>&gt;&lt;fs&gt; vi /etc/ssh/sshd_config
+
+# Authentication:
+
+#LoginGraceTime 2m
+PermitRootLogin yes &lt;--- uncomment
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes &lt;-- uncomment
+#PermitEmptyPasswords no
+</pre></div>
+
+
+<h2>disable cloud-init</h2>
+<p>This is the single gottcha that held me back for weeks. It turned out
+that <code>cloud-init</code> has …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="satellite.html">
+    <a class="btn btn-default button" href="use rhel server qcow2 as sandbox.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

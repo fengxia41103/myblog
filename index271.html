@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2017-02-08
+        2017-02-28
 
     </em>
-    <h3>Juju deploy and Provider</h3>
+    <h3>Introduction of Juju charms</h3>
 
     <blockquote>
         <span class="myhighlight">Copyright @ Lenovo US</span>
@@ -116,31 +116,33 @@
 
 
 <p>
-    <p>In <a href="https://fengxia41103.github.io/myblog/juju deploy.html">this</a> article, we have demonstrated how Juju deploys a charm,
-including what makes a node eligible as a target and what files will
-be put on by the deployer.If you recall, there were four steps in a
-deploy process:</p>
+    <p>Juju <a href="https://jujucharms.com/">charms</a> are, charming. It promises a selection of blueprints
+that hold magic to make an application deployment easy. But devils are
+in the details, as always the case. In this article we will walk in
+the charm world to learn its design.</p>
+<h1>Bundle, charm, service, application</h1>
+<p>Juju <a href="https://jujucharms.com/docs/stable/juju-concepts">terms</a> can be confusing. Approximately they can be viewed in
+a tree model, where a bundle can have multiple charms, a charm can
+contain multiple <a href="https://jujucharms.com/docs/2.0/authors-subordinate-services">services</a>, a service is composed of one or more
+applications and a group of <a href="https://jujucharms.com/docs/1.24/charms-relations">relations</a>, and a relation, if
+defined, must be one of the two types:</p>
 <ol>
-<li>Add a new machine to the cloud environment. In the <a href="https://fengxia41103.github.io/myblog/juju deploy.html">demo</a>, we
-   added this machine manually using <code>juju add-machine</code> command.</li>
-<li>Machine-0 recognizes the new node.</li>
-<li>CLI issues a deploy command.</li>
-<li>Charm gets deployed.</li>
+<li><strong>provide</strong> (eg. I am MySQL and I provide a SQL database relation).</li>
+<li><strong>require</strong> (eg. I'm Mediawiki and I require a SQL database).</li>
 </ol>
-<p>This usecase, however, is somewhat backwards -- we have provisioned a
-machine prior to the deploy command. Wouldn't it be better if the
-command will signal the cloud provider to create a new machine on the
-fly? MAAS provider can almost do just that.</p>
-<h1>MAAS way of a deploy</h1>
-<p>We have briefly touched upon <a href="https://fengxia41103.github.io/myblog/juju deploy.html">the MAAS way</a>.  By default, Juju
-deploy will request for a new machine unless using the <code>--to [machine
-number]</code> flag. While using MAAS it is seen that MAAS will turn a
-<code>READY</code> machine into <code>ALLOCATED</code> then <code>DEPLOYING</code>. Once a Juju agent
-is installed (provisioned), the agent executes application …</p>
+<figure class="s12 center">
+  <img src="images/juju%20control%20modeling.png" />
+  <figcaption>Juju control modeling</figcaption>
+</figure>
+
+<p>In term of deployment, a service can be deployed to more than one
+machine so as to achieve HA; a machine can also have more than one
+services. Here we use the term machine broadly because it can also be
+a single LXD container, so in this case there can …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="juju deploy provider.html">
+    <a class="btn btn-default button" href="juju charm layers.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

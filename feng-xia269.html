@@ -86,39 +86,38 @@
   <div class="col s12">
     <div class="label label-default">
       <i class="fa fa-calendar" style="opacity:0.5;">&nbsp;</i>
-      2017-03-15
+      2017-03-22
 
     </div>
 
   </div>
   <div class="col s12">
     <h4>
-      Openstack Ironic
+      Baremetal provisioning
     </h4>
 
       <p>
-        <p>This article is an outcome of my writing a Juju-Ironic provider. The
-plan was to first figure out Ironic APIs that will achieve what Juju
-provider needs &mdash; start an instance on demand, then build those
-REST requests into Juju provider code. After playing with Ironic API
-and Openstack's Devstack for two weeks, I start to realize that Ironic
-by itself doesn't do much. Instead, it heavily relies on other
-Openstack services to provision a baremetal &mdash; Keystone to
-generate a token which will be used in all HTTP calls, Neutron to
-provide network/<em>port</em>, Ironic itself to manage a <em>node</em>, Glance to
-get kernel image, ramdisk image, and actual OS image, and Nova to
-<em>orchestrate</em> these information for Ironic API to consume.</p>
-<p>Ironic <a href="https://docs.openstack.org/developer/ironic/deploy/user-guide.html">user guide</a> has some good information on basic technology
-and Ironic design. A <a href="https://www.openstack.org/videos/vancouver-2015/isn-and-039t-it-ironic-the-bare-metal-cloud">talk</a> &amp; <a href="https://github.com/devananda/talks/blob/master/isnt-it-ironic.html">slides</a> by <a href="https://github.com/devananda">devananda</a> on 2015
-Vancouver Summit is also a good point to start.</p>
-<p>In the following sections I'd like to use the questions I have
-encountered in research to create a newbie-oriented tutorial on
-Ironic. In particular, I'd …</p>
+        <p>Everyone of us has installed an operating system to a computer at some
+point in life. It is easy to perceive inserting a disk or USB key to
+make this happen because the OS files are <em>there</em>. A fancier version
+is to boot from network using PXE boot option, which seems like a
+magic (when the environment has been setup) &mdash; it somehow finds
+the OS image and start installing, all over a <em>network</em>!</p>
+<p>Now if we move to the world of servers, it works the same
+way. Baremetal is another name referring to a server that has no
+operating system (or hypervisor) installed yet. But the challenge is
+to physically access to it to insert that OS disk &mdash; in a data
+center setting, I think the walking part is neither fun nor
+desired. Remote provisioning is, therefore, the way to go.</p>
+<p>First, let's define <strong>provisioning</strong>. Here we mean to have installed
+an operating system or hypervisor on a baremetal so it is available
+for further software installation.  In the simplest term, one needs to
+answer …</p>
       </p>
   </div>
 
   <div class="col s12 right-align">
-    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/ironic intro.html">
+    <a class="btn wave-effect" href="https://fengxia41103.github.io/myblog/baremetal provisioning.html">
       read more
     </a>
   </div>

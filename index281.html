@@ -104,10 +104,10 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2016-09-09
+        2016-09-30
 
     </em>
-    <h3>Deployment architecture</h3>
+    <h3>SPA: car leasing calculator</h3>
 
     <blockquote>
     </blockquote>
@@ -115,31 +115,39 @@
 
 
 <p>
-    <p>Deployment strategy for <a href="https://fengxia41103.github.io/myblog/general system architecture.html">system architecture</a> is centered around AWS
-services: EC2 for application server, RDS for database, and S3 for
-static files and media files.  AWS does have message service as
-well. But to maintain a fair level of portability, I am not using
-that. Instead, vanilla message broker such as Redis or RabbitMQ is
-used and is deployed on a separate EC2 instance.  In general I tend to
-have concerns over investing a critical system component to a 3rd
-party service because they usually will introduce some customization
-quirks that make it a real pain when migrating to another service
-provider or platform later on. I have not run into such problem with
-AWS, but would like to keep options open.</p>
-<figure class="col l12 m12 s12">
-  <img src="images/deployment_architecture.png"
-  <figcaption>Deployment architecture</figcaption>
+    <figure class="s12 center">
+    <img src="images/demo_car.png"/>
+    <figcaption>Project Car Leasing Calculator</figcaption>
 </figure>
 
-<p>Notice that I do not have multiple database in the diagram. First of
-all, I have not had use of DB cluster. Secondly, database replica is
-covered by AWS snapshot which has been a great fail-safe tool for
-system backup and recovery.  This brings up an important point I'd
-like to …</p>
+<blockquote>
+<ul>
+<li><a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator angular.html">AngularJS version</a></li>
+<li><a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator react.html">REACT version</a></li>
+</ul>
+</blockquote>
+<p>Car leasing rooted in my own experience while researching for a new
+car.  After putting together an Excel to model the car leasing
+process, I started to think how to make the lesson learned available
+for other buyers. Also, I figure this is a perfect candidate for a
+single page application (SPA).</p>
+<p>Two versions have been created &mdash; one in <a href="https://angularjs.org/">Angular</a>, and another
+in <a href="https://facebook.github.io/react/docs/getting-started.html">REACT</a>. This ties to my belief that however wonderful a tool may
+be, it is also important how well it fits <em>your way of thinking and
+typing</em>. So this project gives a case to evaluate which one I'd like
+to invest into for more development.</p>
+<h1>Leasing deciphered</h1>
+<p>Sad reality is, all the leverages one can pull in a car leasing deal
+have been made <em>intentionally</em> complicated so to confuse
+buyers. Jargon are everywhere, and everything is connected so one
+number changed seems to be changing everything, and some changes are
+more significant than others. How could one to figure out which is
+which!?</p>
+<p>I …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="deployment architecture.html">
+    <a class="btn btn-default button" href="car leasing.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

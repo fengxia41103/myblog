@@ -104,72 +104,55 @@
 <div>
     <i class="fa fa-calendar" style="opacity:0.5;"></i>
     <em>
-        2018-11-16
+        2018-11-27
 
     </em>
-    <h3>IBB brain shutdown procedure</h3>
+    <h3>Reveal slides</h3>
 
     <blockquote>
-        <span class="myhighlight">Copyright @ Lenovo US</span>
     </blockquote>
 </div>
 
 
 <p>
-    <p>This document describes procedure to shutdown an IBB brain instance.</p>
-<h1>Shutdown procedure</h1>
-<ol>
-<li>
-<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
-</li>
-<li>
-<p>Put the cluster in <strong>global maintenance mode</strong> by login any brain
-   server, and <code>hosted-engine --set-maintenance --mode=global</code>. </p>
-<p>To verify, login in a brain node and <code>hosted-engine --vm-status</code>:</p>
-<div class="highlight"><pre><span></span>```shell
-[root@lmorlct0207brain3 ~]# hosted-engine --vm-status
+    <div class="iframe-container">
+  <iframe src="https://fengxia41103.github.io/moment/1236/"
+          allowfullscreen></iframe>
 
-!! Cluster is in GLOBAL MAINTENANCE mode !!
+</div>
 
---== Host 1 status ==--
+<p><a href="https://github.com/hakimel/reveal.js/">reveal.js</a> is pretty awesome. I have been using it for the last 9
+months now and love it. It was a bit of hassle to set it up
+initially. Once you have an example, yo can replicate and be
+productive by copying and pasting existing one, and getting a
+consistent look and workflow. And the results? amazing.</p>
+<ul>
+<li>as photo album: <a href="https://fengxia41103.github.io/moment/1236/">momoent</a></li>
+<li>as for work: <a href="https://fengxia41103.github.io/moment/netbox/">netbox</a></li>
+</ul>
+<h1>To create a new presentation</h1>
+<p>The easiest way to create a new slides for your topic is to copy an
+existing folder, eg. <code>netbox</code>, and make modifications to your
+contents.</p>
+<p>Each folder should have the following contents:</p>
+<div class="highlight"><pre><span></span>.
+├── images
+├── index.html
+├── my.css
+└── slides.md
+</pre></div>
 
-conf_on_shared_storage             : True
-Status up-to-date                  : True
-Hostname                           : lmorlct0203brain3.labs.lenovo.com
-Host ID                            : 1
-Engine status                      : {&quot;health&quot;: &quot;good&quot;, &quot;vm&quot;: &quot;up&quot;, &quot;detail&quot;: &quot;up&quot;}
-Score                              : 3400
-stopped                            : False
-Local maintenance                  : False
-crc32                              : 8eb75a80
-local_conf_timestamp               : 3249288
-Host timestamp                     : 3249287
-Extra metadata (valid at timestamp):
-    metadata_parse_version=1
-    metadata_feature_version=1
-    timestamp=3249287 (Fri Nov 16 15:57:39 2018)
-    host-id=1
-    score=3400
-    vm_conf_refresh_time=3249288 (Fri Nov 16 15:57:40 2018)
-    conf_on_shared_storage=True
-    maintenance=False
-    state=GlobalMaintenance
-    stopped=False
 
---== Host 2 status ==--
-
-conf_on_shared_storage             : True
-Status up-to-date                  : True
-Hostname                           : 10.240.41.235
-Host ID                            : 2
-Engine status                      : {&quot;reason&quot;: &quot;vm not running on this host&quot;, &quot;health&quot;: &quot;bad&quot;, &quot;vm&quot;: &quot;down&quot;, &quot;detail&quot;: &quot;unknown&quot;}
-Score                              : 3400
-stopped                            : False
-Local …</pre></div></li></ol>
+<p>Only <code>index.html</code> and <code>.md</code> are essential. <code>index.html</code> is the overall
+HTML shell that will be loaded by browser, and <code>.md</code> are slide
+contents that will be converted from Markdown into HTML and included
+in <code>index.html</code>. You can split your contents into multiple <code>.md</code>
+files, which we will cover in more details next.</p>
+<p><code>my.css</code> is used to make customized CSS change per …</p>
 </p>
 
 <p style="margin-top: 3em;">
-    <a class="btn btn-default button" href="ibb brain shutdown procedure.html">
+    <a class="btn btn-default button" href="reveal slides.html">
         <i class="fa fa-coffee" style="opacity:0.5;"></i>
         continue reading
     </a>

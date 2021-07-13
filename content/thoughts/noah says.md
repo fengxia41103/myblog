@@ -3,7 +3,7 @@ Date: 2019-11-07 07:58
 Tags: thoughts
 Slug: noah says
 Author: Feng Xia
-Modified: 2020-12-28 15:44
+Modified: 2021-07-12 20:19
 
 This is to keep track what Noah says these days, some smart
 remarks. But first of all, let me vent what this kid is like, this
@@ -127,3 +127,25 @@ been burned off by fire. So I asked what happened to it, he replied:
     his, probably early 40s, and Noah pointed it out, "这是也爷爷!"
     "Not bad. How do u know?" "Because 他在 sporting 他现在的
     look"... hahaha!
+
+17. Saturday morning, asked Noah to help w/ breakfast &mdash; cutting
+    an apple, and a grapefruit. I guessed I said "orange" when I
+    handed the grapefruit to him. So he **peeled** it, the way he
+    always wanted to do.. I held my tongue this time, "let him do
+    this, and it should be fine".. then, I put some on his plates,
+    knowing grapefruit isn't his thing. But, behold! He took a bite,
+    and gave me a looking of eating a poison! "爸！！！你为什么说这是
+    orange! 这是grapefruit!" "我说了！""你没有!!""咋了吧!?" I asked. "
+    如果这是grapefruit, 我刚才cut的时侯会更严肃点!!""what do mean by
+    严肃点!?"... so it turned out, by peeling his way, he left some
+    those soft skins, which, according to him, is bitter, and his 更严
+    肃点 is to remove more, if not all of, those skins... hahaha!! 更
+    严肃点~~~
+
+18. Trying to solicit him taking interest in Chinese. So I let him
+    watch the romance of the three kingdom by 横山光辉, w/ English
+    subtitle. So it calls "字“ as _style name_. So I was trying to
+    teach him what a 字 means in a name, then, he pointed at the
+    screen, "萌的!!!" (the sound), and it is showing 曹操， "style
+    name: Mengde".... hahahaha!!! Noah noah noah, what am I gonna do
+    w/ your Chinese!?

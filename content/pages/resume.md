@@ -26,7 +26,7 @@ Modified: 2018-07-23 12:04
 ## Skills
 
 <table class="bordered striped">
-  
+
   <tr><td>
     <strong>Software development</strong>
   </td><td class="row">
@@ -43,7 +43,7 @@ Modified: 2018-07-23 12:04
     <span class="col l3 m4 s6">Yeoman</span>
     <span class="col l3 m4 s6">Jira</span>
   </td></tr>
-  
+
   <tr><td>
     <strong>Web application</strong>
   </td><td class="row">
@@ -58,7 +58,7 @@ Modified: 2018-07-23 12:04
     <span class="col l3 m4 s6">Pelican</span>
   </td>
   </tr>
-  
+
   <tr><td>
     <strong>Data visualization</strong>
   </td><td class="row">
@@ -169,24 +169,24 @@ Modified: 2018-07-23 12:04
   maintain AngularJS legacy code, and direct next gen design in
   ReactJS based Material UI. Have global team across three
   geographical locations.
-  
+
     - **Tools**: AngularJS, Typescript, ReactJS, Docker
     - **Sample writing**: [official portal][27], [git strategy][30]
-  
+
 * `ThinkAgile CP` product. UI lead. Developed Python scripts for
   rebranding analysis, and to build catalog of Angular components to
   link code to its visual results.
-  
+
     - **Tools**: Python, Selenium, Pandoc
-    - **Sample writing**: 
+    - **Sample writing**:
         1. [rebranding analysis][28]
         2. [Angular component catalog][29]
-        
+
 
 * Author of the `Lenovo Open Cloud` reference architecture and `Red
   Hat Hyperverged Infrastructure for Virtalization` reference
   architecture. Published on 5/5/2019.
-  
+
     - **Tools**: Pandoc, Markdown, BibTex, XeLaTex, GNU make, CSS
     - **Sample writing**:
         1. Lenovo Open Cloud Reference Architecture: [pretty
@@ -194,7 +194,7 @@ Modified: 2018-07-23 12:04
         2. Red Hat Hyperconverged Infrastructure for Virtualization
            Reference Architecture: [pretty draft in PDF][24], [official
            version][26]
-      
+
 * `Lenovo Open Cloud` product. Led overall design of the product
   including architecture, service implementation, CICD. Developed
   playbooks and Python scripts automating RHHI deployment on
@@ -203,7 +203,7 @@ Modified: 2018-07-23 12:04
 
     - **Tools**: RedHat RHHI, RedHat Satellite, RedHat Ansible Tower,
                  RHEL 7 server cloud image, KVM/virsh
-    - **Sample writings**: 
+    - **Sample writings**:
         1. [ Config Lenovo switches ENOS & CNOS][16]
         2. [Config Lenovo server to RAID][17]
         3. [RH Satellite][19]
@@ -223,14 +223,14 @@ Modified: 2018-07-23 12:04
 
     - **Tools**: Django, Tastypie, Celery, Redis, Ansible, Canonical charms, Docker
     - **PPT**: Architecture of [VX Installer][14]
-    
+
 * `Workload Solution Store` project. Evaluated service orchestration
   technologies and developed Lenovo's core competence in automating
   baremetal provisioning.
 
     - **Tools**: Openstack, Ironic, Juju, MaaS, Canonical charms,
                  Python, LXD, KVM, Virtualbox
-    - **Sample writings**: 
+    - **Sample writings**:
         1. [MAAS lab][5]
         2. Juju charm's [reactive framework][6]
         3. introduction of [Openstack Ironic][8]
@@ -328,7 +328,7 @@ Modified: 2018-07-23 12:04
   systems.
 
     * **Tools**: Python, ODOO, Buildbot
-    * **Reports (in Chinese)**: 
+    * **Reports (in Chinese)**:
         1. [晋能集团数据中心建设分析 – 规模和成本][11]
         2. [晋能集团云平台建设和使用咨询报告][12]
 

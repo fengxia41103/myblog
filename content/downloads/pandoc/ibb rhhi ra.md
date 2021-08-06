@@ -1,7 +1,7 @@
 ---
 title: Red Hat Hyperconverged Infrastructure for Virtualization
 subtitle: Version 1.0
-author: 
+author:
   - Feng Xia
   - Miro Halas
 
@@ -77,7 +77,7 @@ Management
   the capability of collect and monitor its subordinates, and to
   create and delete workloads, and to have an UI or API that
   communicates to the world outside itself.
-  
+
 Workloads
 : These are software worker bees that makes up the actual application.
   It responds to customer input, performs business logic, and reads
@@ -192,7 +192,7 @@ other virtualization environment, eg. VMware and KVM.
 
 @. As a cloud user, I want to deploy application in virtual machine(s),
    so that the deployment is portable to VMware and KVM.
-   
+
 @. As a cloud user, I want to create VM from disk image, so that I can
    reuse an existing VM image.
 
@@ -267,7 +267,7 @@ disruption of service:
    connection automatically if the one it is on is broken.
 
 However, some part of the Red Hat Hyperconverged Infrastructure for Virtualization is highly sensitive to networking
-disruption, which is intrinsic to its underline technology.  
+disruption, which is intrinsic to its underline technology.
 
 
 ### Maintenance
@@ -304,7 +304,7 @@ an infrastructure for their own use or for their customer.
 2. As a cloud admin, I want to rebuild the infrastructure to the same
    state each time if the configuration inputs remain the same, so
    that the construction process is deterministic.
-   
+
 3. As a cloud admin, I want to automate the entire installation, so
    that building one takes single input &mdash; the configuration
    file, and one CLI or a button click.
@@ -316,7 +316,7 @@ In general, one can expect from this architecture that:
 1. As a cloud admin, I want to create `>1,000` VMs that has 2 CPU
    core, 8G memory, and 100 GB disk space, so that I can support these
    many workloads of the size.
-   
+
 2. As a cloud admin, I want to have `>200 MB/s` write throughput and
    `>500 MB/s` read throughput seen by a virtual machine showing
    `<50%` CPU idleness.
@@ -333,7 +333,7 @@ and switches. Figure below shows an overview using three servers.
 ![Lenovo Open Cloud RHHI-v Architecture of a 3-server Configuration](../../images/ibb/ibb%20rhhi%20overview.png){#fig:rhhi-arch-diagram}
 
 Red Hat Hyperconverged Infrastructure for Virtualization offers four configurations (see [BOM](#bom)):
-  
+
   1. 3-server configuration
   2. 6-server configuration
   3. 9-server configuration
@@ -367,40 +367,40 @@ Physical networks
 : They represent the actual physical network connections between
   switches and servers. Based on their primary purpose, it can be
   further broken down into:
-  
+
   1. **Management networks**: These carry administrative functions of the
      cluster such as the admin portal, remote access to host, and API.
-     
- 2. **Storage networks**: These are the data traffic to retrieve from and
+
+  2. **Storage networks**: These are the data traffic to retrieve from and
     write to storage backend. In use cases in which storage
     performance is the key, this will be the determining factor in
     design to support high data throughput.
-  
+
   3. **Workload networks**: Networks to support applications
      (aka. workloads) deployed on the infrastructure.
-     
+
  Storage
  : RHHI-v provides four types of storage:
-   
+
    1. **Distributed storage**: This is a network storage. The key
       difference between this and other network storage such as NFS,
       is that it has built-in capability to distribute data read &
       write to multiple storage endpoints, and to create data
       replication. This can not only improve throughput performance,
       but is the key design factor to support fault tolerance and HA.
-      
+
       However, redundancy comes with penalty &mdash; the storage
       capacity will not always linearly grow by adding more disks to
       the cluster. See section [Gluster volume type](#gluster-type)
       for details.
- 
+
    2. **Network storage**: Unlike distributed storage above, this storage
       does not offer data replication or data distribution. This fit
       for application who has already considered these functions in
       its design without depending on the storage itself. Benefit of
       such simplification is that storage capacity will grow linearly
       with the number of disks.
-      
+
    3. **Storage cache**: Along the storage data path, one would find many
       data caches &mdash; RAID cache, OS kernel cache, file system
       cache, database cache, and so on. We use this term to describe
@@ -409,56 +409,56 @@ Physical networks
       beyond a user's access. However, their existence and their
       configurations have much effect on the infrastructure's
       performance and stability.
-      
+
    4. **Local only storage**: These are un-shared storages by either a host
       or an application.
-      
+
  Hypervisor
  : is the virtualization layer of the infrastructure, in which
    hardware resources will be represented as virtual resources.
-   
+
    1. **Virtual machines**: These are virtualized compute
       resources. There are two types of virtual machine on the RHHI-v
       infrastructure — workloads, and management.
-      
+
       1. Workloads: Any software deployed on the infrastructure is a
          workload.
       2. Management: VMs are for administrating the RHHI-v
          infrastructure’s.
-         
+
    2. **Networks**: Physical networks are virtualized so a server'
       physical NICs and cable connections are shareable by virtual
       machines.
-      
+
       Virtual networks are not associated with any particular physical
       server. Thus regardless where the virtual machine is running,
       these networks can be available to it. In order for this to
       work, however, all servers in a cluster must have identical
       physical networks. See section [Network
       Configurations](#platform-network) for details.
-  
+
    3. **Files**: There are three important types of files in RHHI-v:
-   
+
       1. **VM disk image**: A virtual machine consists of one or many
          disk images. They function more or less like the physical
          disk in a server. But since they are file based, there can be
          features VM disk can do that are impossible for a physical
          disk.
-   
+
       2. **VM snapshot**: A key motivation of the RHHI-v is to
          virtualize a workload, thus allowing user to take snapshot
          &mdash; freeze the states of a virtual machine in time, and
          recover and resume from a snapshot.
-         
+
       3. **Static files**: As an infrastructure, RHHI-v can be the
          source of truth of static files such as ISO images..
-         
+
    4. **Support services**: There are many support services for the
       infrastructure. Three key services are:
-      
+
       1. **VDSM**: Daemon running on each host to support the admin
          application.
-        
+
       2. **HA services**: responsible to keep the admin application
          running on a healthy host so that administrative capability
          of the infrastructure has high availability.
@@ -470,16 +470,16 @@ Physical networks
 Interfaces
 : These are entry points through which the infrastructure admin or
   user can access the infrastructure's function.
-  
+
   1. **Admin interfaces**: There are three interfaces for the
      infrastructure admin &mdash; a web portal, a RESTful API, and a
      CLI. They cover both the hypervisor and the gluster storage.
-  
+
   2. **OS portal**: RHEL 7 has a built-in portal, the `cockpit`, that
      makes it easy to administrate a RHEL-based host.
-     
+
  3. **OOB portal/CLI**: Interface to manage hardware when they are not
-     yet provisioned. This includes admin portal and CLI of switches. 
+     yet provisioned. This includes admin portal and CLI of switches.
 
 
 # Operational model
@@ -559,7 +559,7 @@ The following sections describe the Top-of-Rack (ToR) switches used in
 this reference architecture. The Networking Operating System (see
 [switch firmware BOM](#bom-switch-firmware))software features of these
 Lenovo switches deliver seamless, standards-based integration into
-upstream switches.  
+upstream switches.
 
 Two 10Gb switches and two 1Gb switches are recommended in this
 architecture. For high throughput workloads, we recommend Lenovo 25Gb
@@ -603,7 +603,7 @@ requirements. Unlike most rack equipment that cools from side-to-side,
 the G8052 has rear-to-front or front-to-rear airflow that matches
 server airflow.
 
-For more information, see product guide[@lenovo-g8052-product-guide]. 
+For more information, see product guide[@lenovo-g8052-product-guide].
 
 #### Lenovo ThinkSystem NE2572 (25Gb)
 
@@ -645,7 +645,7 @@ architecture diagram]
 > infrastructure - including hosts, virtual machines, networks,
 > storage, and users - from a centralized graphical user interface or
 > RESTful API. (source: [@redhat-rhv-4.1-product-guide])
-> 
+>
 
 RHV has three key components:
 
@@ -662,7 +662,7 @@ RHV has three key components:
 
 There are two deployment modes: standalone or self-hosted engine. In
 this reference architecture, we are using the `self-hosted engine`
-method (+@fig:rh-rhv-deployment-diagram): 
+method (+@fig:rh-rhv-deployment-diagram):
 
 > The Red Hat Virtualization Manager runs as a virtual machine on
 > self-hosted engine nodes (specialized hosts) in the same environment
@@ -670,7 +670,7 @@ method (+@fig:rh-rhv-deployment-diagram):
 > physical server, but requires more administrative overhead to deploy
 > and manage. The Manager is highly available without external HA
 > management. (source: [@redhat-rhv-4.2-planning-prerequisite-guide])
-> 
+>
 
 ![Red Hat Virtualization Self-Hosted Engine Architecture (source:
 [@redhat-rhv-self-hosted-engine-architecture-diagram])](https://access.redhat.com/webassets/avalon/d/Red_Hat_Virtualization-4.2-Product_Guide-en-US/images/894aaa576d2f26123a3b3149a5e18159/RHV_SHE_ARCHITECTURE1.png){#fig:rh-rhv-deployment-diagram}
@@ -689,8 +689,8 @@ experience.
 > enterprise. Red Hat Gluster Storage 3.4 provides new opportunities to
 > unify data storage and infrastructure, increase performance, and
 > improve availability and manageability in order to meet a broader set
-> of an organization’s storage challenges and requirements.  
-> 
+> of an organization’s storage challenges and requirements.
+>
 > GlusterFS, a key building block of Red Hat Gluster Storage, is based
 > on a stackable user space design and can deliver exceptional
 > performance for diverse workloads. GlusterFS aggregates various
@@ -790,7 +790,7 @@ been simplified:
 > module. After the power is restored to the RAID controller, the
 > content of the NAND flash is transferred back to the DRAM, which is
 > flushed to disk. (source: [@lenovo-raid-930-product-guide])
-> 
+>
 
 Therefore, setting the write policy to `Always Write Back` is
 recommended.
@@ -883,12 +883,12 @@ a well-planned network.
 ### Topology
 
 Overall topology of Red Hat Hyperconverged Infrastructure for Virtualization networking is shown in
-+@fig:loc-topology-diagram. 
++@fig:loc-topology-diagram.
 
 ![Lenovo Open Cloud RHHI-v network topology][ibb platform network overview]
 
 1. One of LOC's 1Gb switch is connected to uplink to allow management
-   access from external network. 
+   access from external network.
 2. LOC switches are paired via inter-switch-link (ISL).
 3. Except BMC connection, all server to switch links are in pairs on
    switch side.
@@ -917,7 +917,7 @@ manage and operate these functional aspects.
 Campus internal
 : aka. public network. A common case is a web application that is
   accessible by general audience remotely within a data center or even
-  from the Internet. 
+  from the Internet.
 
     In a typical RHHI-v deployment, `ovirt` management network serves the
     admin UI. Therefore it seems redundant to have another network for
@@ -942,7 +942,7 @@ ovirt management
 : is the network linking RHHI-v management console to RHHI-v
   clusters. This is the default network serving RHHI-v admin portal and
   ovirt API.
-  
+
     As mentioned above, a standard deployment will use `ovirt` network
     for public access. However, we recommend treating it as an internal
     while establishing a `Campus` network for public consumption. To
@@ -954,7 +954,7 @@ ovirt management
 GlusterFS
 : is a private network for `Gluster` data storage.   The Gluster
   cluster is highly sensitive to network interruption.
-  
+
     In this design we dedicate two 10G ports on each server for this
     network. Further, we are to take measures in server configs and
     switch configs (shown in section [Map Server NIC to
@@ -971,8 +971,8 @@ Physical server management
 RHHI provisioning
 : is to support data traffic of installing the OS on a physical
   server. This is highly depending on the technology of server
-  provisioning you are choosing. 
-  
+  provisioning you are choosing.
+
     The most common method is PXE. PXE is a broadcast protocol, thus
     isolating it to this network avoids cross-talk.
 
@@ -996,7 +996,7 @@ their network environment.
 | Campus internal            | 1    |
 | BMC                        | 2    |
 | Physical server management | 3    |
-| RHHI provisioning        | 10   |
+| RHHI provisioning          | 10   |
 | OVIRT management           | 100  |
 | GlusterFS                  | 400  |
 
@@ -1151,7 +1151,7 @@ Table: Red Hat Hyperconverged Infrastructure for Virtualization
 Lenovo networking switches are highly configurable. We have developed
 tools for switch administrators including CLI and Ansible module. See
 [Switch Port Configuration Methods](#switch-config-method) for more
-information. 
+information.
 
 Following the cable schema in previous section, switch port configs
 are now ready to be applied:
@@ -1277,7 +1277,7 @@ capacity is limited to:
 
 1. Purchase disk of larger capacity than what is suggested in the
    [BOM](#bom).
-2. Use RAID10 instead of RAID6 on gluster disks. 
+2. Use RAID10 instead of RAID6 on gluster disks.
 
 All these, however, are only applicable to a single server. If growing
 storage is a priority, one should replace `replicated` mode with
@@ -1314,14 +1314,14 @@ NFS](../../images/ibb/ibb%20nfs%20host%20logical%20volumes.png){#fig:ibb-host-nf
 
 ### RHV storage domains
 
-All storages are made available in RHV as storage domains. 
+All storages are made available in RHV as storage domains.
 
 > A storage domain is a collection of images that have a common storage
 > interface. A storage domain contains complete images of templates and
 > virtual machines (including snapshots), or ISO files. A storage domain
 > can be made of either block devices (SAN - iSCSI or FCP) or a file
 > system (NAS - NFS or other POSIX compliant file systems).
-> 
+>
 
 There are two [domains types][@ovirt-storage-domains] to
 consider^[`Export` domain is deprecated and replaced by `Data`
@@ -1334,13 +1334,13 @@ domain.]:
 
    **There must be at least one data domain in each Red Hat
    Hyperconverged Infrastructure for Virtualization deployment.**
-   
+
 2. `ISO` domain: ISO domains store ISO files (or logical CDs) used to
    install and boot operating systems and applications for the virtual
    machines. An ISO domain removes the data center's need for physical
    media. An ISO domain can be shared across different data
-   centers. ISO domains can only be NFS-based. 
-   
+   centers. ISO domains can only be NFS-based.
+
    **Only one ISO domain can be added to a data center**.
 
 | RHHI-v Storage           | RHV Domain Name | Domain Type |
@@ -1364,7 +1364,7 @@ Table: Red Hat Hyperconverged Infrastructure for Virtualization
 > level. Additionally, as space in the cache allows, writes are made
 > initially to the cache layer. The results can be better Input/Output
 > (I/O) performance improvements for many workloads.
-> 
+>
 
 In general, enabling cache will improve I/O performance. [LVM cache
 for Red Hat Gluster storage][@gluster-lvm-cache] has more details on
@@ -1375,17 +1375,17 @@ this feature takes:
 
 1. In [disk configuration](#disk-configuration) and [BOM](#bom),
    two 800GB SSD disks are set in RAID1 for this purpose.
-   
+
    ![Red Hat Hyperconverged Infrastructure for Virtualization node
    disk configurations w/ LVM cache
    enabled](../../images/ibb/ibb%20lvm%20cache.png){#fig:lvm-cache-storage}
 
-   
+
 2. In [deployment template](#loc-rhhi-deployment-tempalte):
   1. Set `storage/lvm/size` to the size of cache in GB. It should be an
      integer value `<=800`.
   2. Set `storage/lvm/mounting_point`, eg. `sdb`.
-  
+
   Leaving the value of `storage/lvm` blank is to skip setting up the
   cache on all hosts in deployment even though disks are in place.
 
@@ -1395,7 +1395,7 @@ this feature takes:
 Traditionally deploying RHHI-v on servers have two options: using an ISO
 image, or using RHEL and Red Hat `yum` package manager like installing
 other Red Hat software. Lenovo Open Cloud has developed a `bootstrap`
-appliance to make RHHI-v deployment fully automated. 
+appliance to make RHHI-v deployment fully automated.
 
 ## Prerequisite
 
@@ -1593,7 +1593,7 @@ designed to provide hardware-based, security-related functions and is
 used extensively by Microsoft in Windows Server 2016 technologies
 including BitLocker, Device Guard, Credential Guard, UEFI Secure Boot,
 and others. **There is no additional cost to enable TPM 2.0 on Lenovo
-ThinkSystem servers**. 
+ThinkSystem servers**.
 
 For the SR650, order Feature Code `AUK7`.
 
@@ -1606,7 +1606,7 @@ Standard  Level includes  many  important  manageability features,  we
 recommend upgrading to the XCC Enterprise Level of functionality. This
 enhanced  set  of  features  includes Virtual  Console  (out  of  band
 browser-based  remote  control),  Virtual Media  mounting,  and  other
-remote  management capabilities.  
+remote  management capabilities.
 
 For the  SR650, order  Feature Codes `B173`.
 
@@ -1624,43 +1624,43 @@ suggested [disk configurations](#disk-configuration) but without
 additional SSDs for LVM cache:
 
 ---------------------------------------------------------------------------------------
-Slot   Updatable Unit                                               Installed Version 
------- ------------------------------------------------------------ ------------------- 
- 0     Drive(ST1000NM0045)                                          LK86              
+Slot   Updatable Unit                                               Installed Version
+------ ------------------------------------------------------------ -------------------
+ 0     Drive(ST1000NM0045)                                          LK86
 
- 1     Drive(ST1000NM0045)                                          LK86              
+ 1     Drive(ST1000NM0045)                                          LK86
 
- 2     Drive(ST1000NM0023)                                          LC5H              
+ 2     Drive(ST1000NM0023)                                          LC5H
 
- 3     Drive(ST1000NM0045)                                          LK86              
+ 3     Drive(ST1000NM0045)                                          LK86
 
- 4     Drive(ST1000NM0045)                                          LK86              
+ 4     Drive(ST1000NM0045)                                          LK86
 
- 4     Intel X710 2x10GbE SFP+ Adapter (Etrack ID)                  80002A0A          
+ 4     Intel X710 2x10GbE SFP+ Adapter (Etrack ID)                  80002A0A
 
- 4     Intel X710 2x10GbE SFP+ Adapter                              1.1313.0          
+ 4     Intel X710 2x10GbE SFP+ Adapter                              1.1313.0
        (Combined Option ROM Image)
 
- 5     Drive(ST1000NM0045)                                          LK86              
+ 5     Drive(ST1000NM0045)                                          LK86
 
- 6     Drive(ST1000NM0045)                                          LK86              
+ 6     Drive(ST1000NM0045)                                          LK86
 
- 7     Drive(ST1000NM0045)                                          LK86              
+ 7     Drive(ST1000NM0045)                                          LK86
 
- 9     ServeRAID M5210 (10140454)                                   24.16.0-0104      
+ 9     ServeRAID M5210 (10140454)                                   24.16.0-0104
 
- 9     ServeRAID M5210  (10140454)                                  24.16.0-0104      
+ 9     ServeRAID M5210  (10140454)                                  24.16.0-0104
 
- N/A   IMM2 Firmware                                                TCOO46F-5.11      
+ N/A   IMM2 Firmware                                                TCOO46F-5.11
 
- N/A   IMM2 Backup Firmware                                         TCOO26H-3.70      
+ N/A   IMM2 Backup Firmware                                         TCOO26H-3.70
 
- N/A   UEFI Firmware/BIOS                                           TCE138D-2.80      
+ N/A   UEFI Firmware/BIOS                                           TCE138D-2.80
 
- N/A   UEFI Backup Firmware/BIOS                                    TCE128I-2.31      
+ N/A   UEFI Backup Firmware/BIOS                                    TCE128I-2.31
 
- N/A   DSA Diagnostic Software                                      DSALB2Q-10.3      
------- ------------------------------------------------------------ ------------------- 
+ N/A   DSA Diagnostic Software                                      DSALB2Q-10.3
+------ ------------------------------------------------------------ -------------------
 Table: Red Hat Hyperconverged Infrastructure for Virtualization SR650 server best recipe
 
 Please consult with the Lenovo sales and support for the best recipe
@@ -1687,7 +1687,7 @@ Table: Implementation Worksheet &mdash; Switches
 This worksheet is to assist network admin to determine switch port
 sizing based on RHHI-v configuration. Dedicating the Lenovo switches
 in the [BOM](#bom) section will have enough ports to support the
-largest configuration (12-node deployment). 
+largest configuration (12-node deployment).
 
 However, in many cases deployment is sharing switches with other
 infrastructure. Thus, the admin can use this worksheet to look up how

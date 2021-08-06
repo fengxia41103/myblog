@@ -23,14 +23,16 @@
   "If the current buffer is 'init.org' the code-blocks are tangled,
 and the tangled file is compiled."
   (when (equal (buffer-file-name)
-               (expand-file-name "~/Emacs/fengxia.org"))
+               (expand-file-name "~/Emacs/emacs_setup.org"))
     ;; Avoid running hooks when tangling.
     (let ((prog-mode-hook nil))
       (org-babel-tangle)
-      (byte-compile-file "~/Emacs/fengxia.el"))))
+      (byte-compile-file "~/Emacs/emacs_setup.el"))))
 
 ;; auto-tangle hook
 (add-hook 'after-save-hook 'tangle-init)
+
+(custom-set-variables '(ad-redefinition-action (quote accept)))
 
 (use-package all-the-icons
   :ensure)
@@ -1578,6 +1580,9 @@ If given prefix arg ARG, skips markdown conversion."
   (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-css-colorization t))
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
 
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -1611,21 +1616,10 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package prettier-js
   :ensure
   :config
-  (setq prettier-js-args '(
-                           "--trailing-comma" "es5"
-                           "--single-quote" "false"
-                           "--print-width" "80"
-                           "--tab-width" "2"
-                           )));
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'json-mode-hook 'prettier-js-mode)
 (add-hook 'js-mode-hook 'prettier-js-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
-
-(eval-after-load 'web-mode
-  '(progn
-     (add-hook 'web-mode-hook #'add-node-modules-path)
-     (add-hook 'web-mode-hook #'prettier-js-mode)))
 
 (use-package js-doc
   :ensure

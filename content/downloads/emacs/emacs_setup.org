@@ -95,7 +95,7 @@ repository. The config setup is maintained purely in the
 In your =~/.emacs= file, all you need to add is
 
 #+NAME: emacs_bootstrap
-#+BEGIN_SRC emacs-lisp :tangle dot_emacs.el
+#+BEGIN_SRC emacs-lisp :tangle ./dot_emacs.el
   ;; Loads Feng's emacs setup with bootstrap
   (load-file "~/Emacs/emacs_setup.el")
 #+END_SRC
@@ -225,15 +225,22 @@ init file as soon as I save it.
     "If the current buffer is 'init.org' the code-blocks are tangled,
   and the tangled file is compiled."
     (when (equal (buffer-file-name)
-                 (expand-file-name "~/Emacs/fengxia.org"))
+                 (expand-file-name "~/Emacs/emacs_setup.org"))
       ;; Avoid running hooks when tangling.
       (let ((prog-mode-hook nil))
         (org-babel-tangle)
-        (byte-compile-file "~/Emacs/fengxia.el"))))
+        (byte-compile-file "~/Emacs/emacs_setup.el"))))
 
   ;; auto-tangle hook
   (add-hook 'after-save-hook 'tangle-init)
 #+END_SRC
+
+#+RESULTS:
+
+** surpress "add-handle-definition..." error
+#+begin_src emacs-lisp
+(custom-set-variables '(ad-redefinition-action (quote accept)))
+#+end_src
 
 * base packages
 
@@ -2976,6 +2983,9 @@ web-mode with config for Polymer editing
     (setq web-mode-enable-current-element-highlight t)
     (setq web-mode-enable-current-column-highlight t)
     (setq web-mode-enable-css-colorization t))
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
 #+END_SRC
 
 Who should use this mode:
@@ -3051,22 +3061,14 @@ Link js2-mode to prettier to beautify my code.
   (use-package prettier-js
     :ensure
     :config
-    (setq prettier-js-args '(
-                             "--trailing-comma" "es5"
-                             "--single-quote" "false"
-                             "--print-width" "80"
-                             "--tab-width" "2"
-                             )));
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'json-mode-hook 'prettier-js-mode)
   (add-hook 'js-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
 
-  (eval-after-load 'web-mode
-    '(progn
-       (add-hook 'web-mode-hook #'add-node-modules-path)
-       (add-hook 'web-mode-hook #'prettier-js-mode)))
 #+end_SRC
+
+#+RESULTS:
 
 **** js-doc
 Nothing is complete without a doc solution.

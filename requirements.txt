@@ -109,7 +109,7 @@ futures==3.2.0
 futurist==1.8.1
 ghp-import==0.5.5
 glance-store==0.28.0
-Glances==3.0.2
+Glances==3.2.1
 googlemaps==2.1.1
 greenlet==0.4.9
 gunicorn==19.3.0

@@ -50,7 +50,7 @@ that movie very much, just to have a starting point of reading
 novel. I am still struggling w/ arts, though I have long been in love
 with music, many kinds, really, almost like women &mdash; there is
 always someone you find appealing, interesting, tempting, even
-beautiful, among any crowd &mdas; so is music, on a given day, there
+beautiful, among any crowd &mdash; so is music, on a given day, there
 might be a tune on your mind, and can vibrate a chord in your heart,
 and make you cry.
 
@@ -64,7 +64,7 @@ human core they have penetrated, have the eyes and ears to see and
 hear, have skill to describe, have the desire to share, have the
 courage to face.
 
-STEM and English majors, are sense, and sensibility. 
+STEM and English majors, are sense, and sensibility.
 
 [1]: https://news.slashdot.org/story/19/10/23/1851224/the-worlds-top-economists-just-made-the-case-for-why-we-still-need-english-majors
 

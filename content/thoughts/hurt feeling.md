@@ -52,7 +52,7 @@ intentionally and unintentionally!?
 
 I don't know. I feel this logic goes round and round without an
 ending, and sometimes I feel I'm paralyzed by it. I feel the sensible
-thing, if at all, is to be honest to yourself and to the othe person, 
+thing, if at all, is to be honest to yourself and to the othe person,
 be sincere at the moment of your do and say, speak from your inner
 belief, and live on. If others find you positive, great; if negative,
 they are not for you and you are not for them. I think this is the
@@ -60,7 +60,7 @@ only possible outcome, that people love you, love you; people don't,
 don't.
 
 I have always argued that love is not given by the other person. It is
-a creation of yourself &mdas; you make yourself feel the love. When
+a creation of yourself &mdash; you make yourself feel the love. When
 you are in love, any "flaw" becomes a virtue, any cumbersome becomes a
 thrill and cuteness; when love is gone &mdash; I don't believe person changes
 much, if at all, at least the primary attributes simply don't change
@@ -73,7 +73,7 @@ So along this line, I think at the end of day, you can't be
 responsible for others' feeling, you are in control of your own,
 whether it is love or anything else. You can hurt others, even if you
 are sincere and truthful, because perception is something you don't
-have control, and should not try to control. In my opinion, 
+have control, and should not try to control. In my opinion,
 controlling is a far worse version than hurting someone on purpose
 &rarr; the former is lying, the latter is a claimed war so at least
 you know what you are dealing with.

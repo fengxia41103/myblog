@@ -95,7 +95,7 @@ But you see, this is the exact danger that I will argue to watch out
 for. I wish Huawei will fail the battle just like ZTE did, so it
 doesn't propel this smoking curtain of China's confidence in
 technology (well, technology is a big word, so let me limit myself to
-things I know &mdas; cloud using Openstack or container, quick
+things I know &mdash; cloud using Openstack or container, quick
 prototyping using any programming language, networking design to
 separate management traffic from data traffic.. sounds pretty boring,
 right? But that's exactly my point, engineering, and technology,

@@ -22,7 +22,7 @@ time a better card will be in hand.
 
 All in all, this is a true irony, that the social networking giant is
 facing a social force that it both created, and in an arena he is the
-king. 
+king.
 
 But really, what I want to talk about is something even more
 fundamental than privacy, and more worthwhile to debate and reflect,
@@ -84,15 +84,15 @@ This level of **anxiety**, yes, if you are a social networking user,
 **you are anxious**, is just bizzare! This is worse than mid-age
 crisis, because it does not care whether your true age is mid or
 not. The anxiety to see a response to your `message in a bottle` is
-getting to your nerve &mdas; oh mine mine mine, did s/he say something
-to my post? ... oh nothing yet... <20 seconds later> .... didn't I
-feel the phone just lighted up? there is new message!....<20 seconds
-later>... maybe it's here now... I'm always watching such strange
-reality show with an urge to laugh and to pity &mdash; at the end of
-day, why put yourself through such a misery by torturing yourself with
-anxiety, by caring so much how others react to you, how they comment
-on a conversation, how they view your activity, how they think about
-you, how they like or dislike you!?
+getting to your nerve &mdash; oh mine mine mine, did s/he say
+something to my post? ... oh nothing yet... <20 seconds later>
+.... didn't I feel the phone just lighted up? there is new
+message!....<20 seconds later>... maybe it's here now... I'm always
+watching such strange reality show with an urge to laugh and to pity
+&mdash; at the end of day, why put yourself through such a misery by
+torturing yourself with anxiety, by caring so much how others react to
+you, how they comment on a conversation, how they view your activity,
+how they think about you, how they like or dislike you!?
 
 I understand the argument that as a social member, as all human are
 meant to be one, and gively I agree with this statement, thus a person
@@ -154,7 +154,7 @@ because he reacts slooooooooowly!
 
 > Then why the heck you want to slow down your brain by forcing it to
 > context switching every 20 seconds!!!!????
-> 
+>
 > Isn't this, stupid, or what!?
 >
 
@@ -200,12 +200,12 @@ us, not chosen by us**.
 > feeling not too few, but too many choices. But if not careful, this
 > exactly fact is driving us into the other extreme, that we will still
 > have more than ever to choose from, just they are becoming the same!!
-> 
+>
 > Remember Ford's T-model? that we can make it any color you want, as
 > long as it is black.
-> 
+>
 > Wow.
-> 
+>
 
 
 # who am I, and who are you
@@ -222,7 +222,7 @@ man or whatever, another who enjoys computer, another who loves
 family, another who cares your ex girlfriend(s), ..... you get the
 picture. There isn't, has never been, a single YOU. There has always
 been a bundle of different you, that is being simplified, labeled as,
-you. 
+you.
 
 What the social networking does is to bubble these sides of you up and
 manifest them so that now you are member of a history group because
@@ -256,7 +256,7 @@ for you to do so? After all, look, math is pretty clear here, 100%
 overlapping is an impossibility, so we all have to live with a gap
 here &mdash; this actually feels right, because we have all know that
 no one is perfect, and some will even take this further to state that
-no one is perfect for you... haha.... 
+no one is perfect for you... haha....
 
 > Well, so when I talk you next time, or work with you, or having a
 > coffee, which part of you am I talking to? looking at? having a
@@ -265,9 +265,9 @@ no one is perfect for you... haha....
 > and even with such possibility, what if you disagree, but willing to
 > give me the "I love fashion" side of you to be with my "let go for a
 > movie" side of me!? Is this a mismatch? or just fine?
-> 
+>
 
 
-This is just, weird. 
+This is just, weird.
 
 [1]: https://en.wikipedia.org/wiki/Context_switch

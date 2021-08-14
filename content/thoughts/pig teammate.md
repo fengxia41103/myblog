@@ -1,6 +1,5 @@
 Title: Pig teammate
 Date: 2021-08-05 21:39
-Tags: thoughts
 Slug: pig teammate
 Author: Feng Xia
 

@@ -330,6 +330,7 @@ Make Emacs request UTF-8 first when pasting stuff
   (setenv "LANG" "en_US.UTF-8")
   (setenv "LC_ALL" "en_US.UTF-8")
   (setenv "LC_CTYPE" "en_US.UTF-8")
+  (set-language-environment "UTF-8")
 #+end_SRC
 ** browser (default: chrome)
 
@@ -2897,13 +2898,10 @@ Setup an IDE:
 
 #+begin_SRC emacs-lisp
 (use-package elpy
-  :ensure
+  :ensure t
   :init
-  (advice-add 'python-mode :before 'elpy-enable))
-(elpy-enable)
+  (elpy-enable))
 #+end_SRC
-
-#+RESULTS:
 
 ELPY has its own indentation mode, which is overriding the one I use
 globally, so disable this one:
@@ -2921,6 +2919,16 @@ Auto black on save:
 #+begin_SRC emacs-lisp
 (add-hook 'before-save-hook #'elpy-black-fix-code nil t)
 #+end_SRC
+
+Force UTF-8 encoding. Otherwise, elpy will complain w/ some exit 1 abnormal
+error.
+
+#+begin_src emacs-lisp
+(setenv "PYTHONIOENCODING" "utf-8")
+(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
+#+end_src
 
 **** py-autopep8
 
@@ -2998,7 +3006,6 @@ Who should use this mode:
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
 #+end_SRC
-*** web-beautify
 This is actually depending on =js-beautify=. See [[https://github.com/yasuyk/web-beautify][web-beautify]] for
 details.
 
@@ -3048,27 +3055,29 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
   (use-package js2-mode
       :ensure
       :config)
-
+  (setq js2-indent-level 2)
   (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
   (add-hook 'js2-mode-hook #'smartparens-mode)
   (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 #+end_SRC
 
-**** prettier-js
-Link js2-mode to prettier to beautify my code.
-#+begin_SRC emacs-lisp
-  (use-package prettier-js
-    :ensure
-    :config
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'json-mode-hook 'prettier-js-mode)
-  (add-hook 'js-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-
-#+end_SRC
-
 #+RESULTS:
+
+**** prettier
+Link js2-mode to prettier to beautify my code.
+Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
+
+#+begin_SRC emacs-lisp
+  (use-package prettier
+    :ensure
+    :config)
+    (add-hook 'js2-mode-hook 'prettier-mode)
+    (add-hook 'json-mode-hook 'prettier-mode)
+    (add-hook 'js-mode-hook 'prettier-mode)
+    (add-hook 'web-mode-hook 'prettier-mode)
+    (setq indent-tabs-mode nil js-indent-level 2)
+#+end_SRC
 
 **** js-doc
 Nothing is complete without a doc solution.

@@ -3,6 +3,7 @@ Date: 2018-06-06 21:00
 Tags: dev, lenovo
 Slug: screencast
 Author: Feng Xia
+Modified: 2021-08-13 08:32
 Summary: Introduce tools to create screencast.
 
 <video width="100%" height="100%" controls="controls">
@@ -18,6 +19,67 @@ There are time that I need to create screencasts:
 3. Can convert to mp4
 
 After a few tries I find a couple ones I like.
+
+# ffmpeg
+
+Is the most feature rick video tool on Linux. Check out its
+[doc](https://wiki.archlinux.org/title/FFmpeg#Screen_capture) for
+details.
+
+First of all, find out your screen size if you intend to capture the
+whole screen. There is a way to specify area using window ID which can
+be googled. I'm going to show whole desktop capture here. Once you
+have the resolution values, plug them into the commands below after
+the `-video_size` flag. Otherwise, the capture will be in a wrong
+resolution, which visually the capture is a zoomed in version of the
+desktop **but cropped**.
+
+```shell
+xdpyinfo | grep 'dimensions'
+
+Resp:
+dimensions:    2560x1440 pixels (677x381 millimeters)
+
+```
+
+For lossless .mkv format:
+
+```shell
+ffmpeg -f x11grab \
+       -video_size 1920x1080 \
+       -framerate 25 \
+       -i $DISPLAY \
+       -c:v ffvhuff \
+       screen.mkv
+```
+
+For .mp4 w/ audio:
+
+```shell
+ffmpeg -f x11grab \
+       -video_size 1920x1080 \
+       -framerate 25 \
+       -i $DISPLAY \
+       -f alsa \
+       -i default \
+       -c:v libx264 \
+       -preset ultrafast \
+       -c:a aac \
+       screen.mp4
+```
+
+For .mp4 w/o audio:
+
+```shell
+ffmpeg -f x11grab \
+       -video_size 1920x1080 \
+       -framerate 25 \
+       -i $DISPLAY \
+       -c:v libx264 \
+       -preset ultrafast \
+       -c:a aac \
+       screen.mp4
+```
 
 # recordmydesktop
 
@@ -128,4 +190,4 @@ Application Options:
 
 The two mostly useful are `-d` (duration) and `--delay=SECS` for a
 delay. Duration is a trial-and-error iteration since usually I don't
-know how long the screencast will run. 
+know how long the screencast will run.

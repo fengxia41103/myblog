@@ -66,6 +66,7 @@ and the tangled file is compiled."
 (setenv "LANG" "en_US.UTF-8")
 (setenv "LC_ALL" "en_US.UTF-8")
 (setenv "LC_CTYPE" "en_US.UTF-8")
+(set-language-environment "UTF-8")
 
 (setq browse-url-generic-program (executable-find "google-chrome")
   browse-url-browser-function 'browse-url-generic)
@@ -1541,16 +1542,20 @@ If given prefix arg ARG, skips markdown conversion."
   (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
 (use-package elpy
-  :ensure
+  :ensure t
   :init
-  (advice-add 'python-mode :before 'elpy-enable))
-(elpy-enable)
+  (elpy-enable))
 
 (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
 
 (add-hook 'elpy-mode-hook #'yas-minor-mode)
 
 (add-hook 'before-save-hook #'elpy-black-fix-code nil t)
+
+(setenv "PYTHONIOENCODING" "utf-8")
+(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
 
 (use-package
   py-autopep8
@@ -1607,19 +1612,20 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package js2-mode
     :ensure
     :config)
-
+(setq js2-indent-level 2)
 (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
 (add-hook 'js2-mode-hook #'smartparens-mode)
 (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 
-(use-package prettier-js
+(use-package prettier
   :ensure
-  :config
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'json-mode-hook 'prettier-js-mode)
-(add-hook 'js-mode-hook 'prettier-js-mode)
-(add-hook 'web-mode-hook 'prettier-js-mode)
+  :config)
+  (add-hook 'js2-mode-hook 'prettier-mode)
+  (add-hook 'json-mode-hook 'prettier-mode)
+  (add-hook 'js-mode-hook 'prettier-mode)
+  (add-hook 'web-mode-hook 'prettier-mode)
+  (setq indent-tabs-mode nil js-indent-level 2)
 
 (use-package js-doc
   :ensure

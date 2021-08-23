@@ -473,7 +473,7 @@ code {
 
 /* new CSS for grid layout */
 
-@media (min-width: 800px) {
+@media (min-width: 1200px) {
     .split-screen {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -502,7 +502,7 @@ code {
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
     .split-screen {
         width: 100%;
     }

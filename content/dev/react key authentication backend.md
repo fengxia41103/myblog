@@ -1,7 +1,7 @@
-Title: REACT Key Authentication
-Date: 2021-08-22 10:39
+Title: REACT Key Authentication (1/2) - API side
+Date: 2021-08-22 10:38
 Tags: dev
-Slug: react key authentication
+Slug: react key authentication backend
 Author: Feng Xia
 
 I'm very much surprised that not much information can be found on this

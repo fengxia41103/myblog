@@ -194,7 +194,7 @@ pdoc==0.3.2
 pelican==3.7.1
 pep8==1.5.7
 phonenumbers==6.3.0
-Pillow==2.7.0
+Pillow==8.3.2
 pip-upgrade==0.0.6
 pip-upgrader==1.4.6
 pluggy==0.9.0

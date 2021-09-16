@@ -41,7 +41,8 @@ class Tipue_Search_JSON_Generator(object):
         if getattr(page, 'status', 'published') != 'published':
             return
 
-        soup_title = BeautifulSoup(page.title.replace('&nbsp;', ' '), 'html.parser')
+        soup_title = BeautifulSoup(
+            page.title.replace('&nbsp;', ' '), 'html.parser')
         page_title = soup_title.get_text(' ', strip=True).replace(
             '“', '"').replace('”', '"').replace('’', "'").replace('^', '&#94;')
 
@@ -50,7 +51,8 @@ class Tipue_Search_JSON_Generator(object):
             '”', '"').replace('’', "'").replace('¶', ' ').replace('^', '&#94;')
         page_text = ' '.join(page_text.split())
 
-        page_category = page.category.name if getattr(page, 'category', 'None') != 'None' else ''
+        page_category = page.category.name if getattr(
+            page, 'category', 'None') != 'None' else ''
 
         page_url = page.url if page.url else '.'
 
@@ -58,7 +60,7 @@ class Tipue_Search_JSON_Generator(object):
         # urljoin("http://me.co/this", "that") => http://me.co/that!
         # urljoin("http://me.co/this/", "that") => http://me.co/this/that
         page_url = urljoin(self.siteurl + "/",
-                           urllib.quote(page_url))
+                           urllib.parse.quote(page_url))
 
         node = {'title': page_title,
                 'text': page_text,
@@ -72,7 +74,8 @@ class Tipue_Search_JSON_Generator(object):
 
         Not sure when it will hit this function. Was in original plugin code.
         """
-        srcfile = open(os.path.join(self.output_path, self.tpages[srclink]), encoding='utf-8')
+        srcfile = open(os.path.join(self.output_path,
+                                    self.tpages[srclink]), encoding='utf-8')
         soup = BeautifulSoup(srcfile, 'html.parser')
         page_title = soup.title.string if soup.title is not None else ''
         page_text = soup.get_text()

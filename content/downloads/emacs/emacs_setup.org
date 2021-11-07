@@ -2349,11 +2349,16 @@ Save attachment to:
 #+END_SRC
 
 To open HTML in browser:
+
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'mu4e-view-actions
-               '("ViewInBrowser" . mu4e-action-view-in-browser)
-               t)
+  (setq mu4e-view-use-gnus t)
+  ;(add-to-list 'mu4e-view-actions
+  ;             '("ViewInBrowser" . mu4e-action-view-in-browser)
+  ;             t)
+  ;(setq mu4e-html2text-command "html2text -b 72 --mark-code")
 #+END_SRC
+
+To open a link in email, press ~g~.
 
 Attempt to show images when viewing messages:
 
@@ -2367,6 +2372,7 @@ Use imagemagick, if available:
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
 #+END_SRC
+
 *** write new
 My signature line:
 

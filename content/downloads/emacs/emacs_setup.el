@@ -1224,9 +1224,11 @@ and the tangled file is compiled."
 
 (setq mu4e-attachment-dir "~/Downloads")
 
-(add-to-list 'mu4e-view-actions
-             '("ViewInBrowser" . mu4e-action-view-in-browser)
-             t)
+(setq mu4e-view-use-gnus t)
+;(add-to-list 'mu4e-view-actions
+;             '("ViewInBrowser" . mu4e-action-view-in-browser)
+;             t)
+;(setq mu4e-html2text-command "html2text -b 72 --mark-code")
 
 (setq mu4e-view-show-images t)
 

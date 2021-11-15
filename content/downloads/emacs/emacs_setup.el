@@ -56,11 +56,6 @@ and the tangled file is compiled."
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 (set-language-environment "UTF-8")
 
-(use-package exec-path-from-shell
-  :ensure
-  :config
-  (exec-path-from-shell-initialize))
-
 (prefer-coding-system 'utf-8)
 
 (setenv "LANG" "en_US.UTF-8")

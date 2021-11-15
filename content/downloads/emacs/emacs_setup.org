@@ -317,7 +317,7 @@ Make Emacs request UTF-8 first when pasting stuff
 
 *** shell env
 
-#+begin_SRC emacs-lisp
+#+begin_SRC emacs-lisp :tangle no
 (use-package exec-path-from-shell
   :ensure
   :config

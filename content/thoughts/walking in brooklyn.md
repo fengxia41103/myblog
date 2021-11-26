@@ -6,7 +6,6 @@ Author: Feng Xia
 
 <figure class="col s12">
   <img src="images/walking%20nyc.jpg"/>
-  <figcaption>First photo of the Earth taken by NASA in 1968</figcaption>
 </figure>
 
 We walked a lot today, all the way to the uptown, ground zero, Empire

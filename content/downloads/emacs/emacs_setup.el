@@ -8,7 +8,7 @@
                          ("stable-melpa" . "https://stable.melpa.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "https://elpa.gnu.org/packages/")
-                         ; ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
                         ))
 
 ;; make sure use-package is installed
@@ -1122,18 +1122,18 @@ and the tangled file is compiled."
   ;; 1. 光标只有在注释里面时，才可以输入中文。
   ;; 2. 光标前是汉字字符时，才能输入中文。
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-  (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-dynamic-english
-                  pyim-probe-isearch-mode
-                  pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
+  ;; (setq-default pyim-english-input-switch-functions
+  ;;               '(pyim-probe-dynamic-english
+  ;;                 pyim-probe-isearch-mode
+  ;;                 pyim-probe-program-mode
+  ;;                 pyim-probe-org-structure-template))
 
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+  ;; (setq-default pyim-punctuation-half-width-functions
+  ;;               '(pyim-probe-punctuation-line-beginning
+  ;;                 pyim-probe-punctuation-after-punctuation))
 
   ;; 开启拼音搜索功能
-  ;; (pyim-isearch-mode 1)
+  (pyim-isearch-mode 1)
 
   ;; 使用 pupup-el 来绘制选词框
   (setq pyim-page-tooltip 'popup)
@@ -1148,9 +1148,15 @@ and the tangled file is compiled."
   (;与 pyim-probe-dynamic-english 配合
   ("M-j" . pyim-convert-code-at-point)
 
-   ("C-;" . pyim-delete-word-from-personal-buffer)))
-   (setq default-input-method "pyim")
-   (global-set-key (kbd "C-\\") 'toggle-input-method)
+  ("C-;" . pyim-delete-word-from-personal-buffer)))
+
+;; Basedict
+(use-package pyim-basedict
+  :ensure t)
+
+(global-set-key (kbd "C-\\") 'toggle-input-method)
+(pyim-basedict-enable)
+(setq default-input-method "pyim")
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
@@ -1220,9 +1226,8 @@ and the tangled file is compiled."
 (setq mu4e-attachment-dir "~/Downloads")
 
 (setq mu4e-view-use-gnus t)
-;(add-to-list 'mu4e-view-actions
-;             '("ViewInBrowser" . mu4e-action-view-in-browser)
-;             t)
+(add-to-list 'mu4e-view-actions
+'("ViewInBrowser" . mu4e-action-view-in-browser) t)
 ;(setq mu4e-html2text-command "html2text -b 72 --mark-code")
 
 (setq mu4e-view-show-images t)
@@ -1553,6 +1558,8 @@ If given prefix arg ARG, skips markdown conversion."
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
+
+(setq elpy-rpc-virtualenv-path 'current)
 
 (use-package
   py-autopep8

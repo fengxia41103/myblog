@@ -1178,7 +1178,7 @@ and the tangled file is compiled."
 
 (setq mu4e-get-mail-command "mbsync -a")
 
-(setq mu4e-update-interval 600)
+(setq mu4e-update-interval 300)
 
 (setq mu4e-drafts-folder "/drafts"
       mu4e-sent-folder   "/sent"
@@ -1239,15 +1239,15 @@ and the tangled file is compiled."
       (concat
        "Best regards,\n\n"
        "Feng Xia\n"
-       "W: http://www.mycompany.com\n"))
+       "W: http://www.lenovo.com\n"))
 
 ;;(use-package smtpmail
 ;;  :ensure t
 ;;  :config
   (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "fxia1@mycompany.com"
+        user-mail-address "fxia1@lenovo.com"
         smtpmail-debug-info t
-        smtpmail-smtp-user "fxia1@mycompany.com"
+        smtpmail-smtp-user "fxia1@lenovo.com"
         smtpmail-default-smtp-server "localhost"
         smtpmail-auth-credentials (expand-file-name "~/.authinfo")
         smtpmail-smtp-service 1025
@@ -1259,8 +1259,8 @@ and the tangled file is compiled."
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
-      user-mail-address "fxia1@mycompany.com"
+(setq mu4e-compose-reply-to-address "fxia1@lenovo.com"
+      user-mail-address "fxia1@lenovo.com"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
@@ -1634,9 +1634,9 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "fxia1@mycompany.com")
+  (setq js-doc-mail-address "fxia1@lenovo.com")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-url "http://www.lenovo.com")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook

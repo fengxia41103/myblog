@@ -8,7 +8,6 @@
                          ("stable-melpa" . "https://stable.melpa.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
                         ))
 
 ;; make sure use-package is installed
@@ -55,6 +54,14 @@ and the tangled file is compiled."
   :init
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 (set-language-environment "UTF-8")
+
+(setq exec-path-from-shell-debug t)
+(setenv "SHELL" "/usr/bin/zsh")
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
 
 (prefer-coding-system 'utf-8)
 
@@ -118,7 +125,14 @@ and the tangled file is compiled."
   :bind ("C-M-x n" . 'nyan-mode))
 
 (use-package delight
-  :ensure t)
+   :ensure t)
+
+(delight '((abbrev-mode " Abv" abbrev)
+           (smart-tab-mode " \\t" smart-tab)
+           (eldoc-mode nil "eldoc")
+           (rainbow-mode)
+           (overwrite-mode " Ov" t)
+           (emacs-lisp-mode "Elisp" :major)))
 
 (use-package multiple-cursors
   :ensure t
@@ -342,8 +356,9 @@ and the tangled file is compiled."
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
- '(org-block-begin-line ((t (:background "RoyalBlue3"))))
- '(org-block-end-line ((t (:background "RoyalBlue3"))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow"))))
+ '(org-block-background ((t (:background "cornsilk"))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow"))))
 )
 
 (use-package deft
@@ -1178,7 +1193,7 @@ and the tangled file is compiled."
 
 (setq mu4e-get-mail-command "mbsync -a")
 
-(setq mu4e-update-interval 600)
+(setq mu4e-update-interval 300)
 
 (setq mu4e-drafts-folder "/drafts"
       mu4e-sent-folder   "/sent"
@@ -1628,7 +1643,6 @@ If given prefix arg ARG, skips markdown conversion."
   (add-hook 'js2-mode-hook 'prettier-mode)
   (add-hook 'json-mode-hook 'prettier-mode)
   (add-hook 'js-mode-hook 'prettier-mode)
-  (add-hook 'web-mode-hook 'prettier-mode)
   (setq indent-tabs-mode nil js-indent-level 2)
 
 (use-package js-doc
@@ -1659,6 +1673,10 @@ If given prefix arg ARG, skips markdown conversion."
 (add-hook 'yaml-mode-hook
           '(lambda ()
         (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+(use-package jenkinsfile-mode
+  :ensure
+  :config)
 
 (defun my-setup-indent (n)
   ;; java/c/c++
@@ -1703,6 +1721,7 @@ If given prefix arg ARG, skips markdown conversion."
 (add-hook 'js2-mode-hook 'my-personal-code-style)
 (add-hook 'react-mode-hook 'my-personal-code-style)
 (add-hook 'sh-mode-hook 'my-personal-code-style)
+(add-hook 'groovy-mode-hook 'my-personal-code-style)
 
 (use-package pandoc-mode
   :ensure)

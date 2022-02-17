@@ -179,7 +179,6 @@ Adding my choice of packages repositories.
                          ("stable-melpa" . "https://stable.melpa.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
                         ))
 #+END_SRC
 
@@ -317,11 +316,15 @@ Make Emacs request UTF-8 first when pasting stuff
 
 *** shell env
 
-#+begin_SRC emacs-lisp :tangle no
+#+begin_SRC emacs-lisp
+(setq exec-path-from-shell-debug t)
+(setenv "SHELL" "/usr/bin/zsh")
 (use-package exec-path-from-shell
-  :ensure
+  :ensure t
+  :if (memq window-system '(mac ns x))
   :config
   (exec-path-from-shell-initialize))
+
 #+end_SRC
 ** UTF-8 env
 #+begin_SRC emacs-lisp
@@ -486,6 +489,13 @@ Package to remove some info from the mode-line for minor-modes.
 #+BEGIN_SRC emacs-lisp
   (use-package delight
     :ensure t)
+
+ (delight '((abbrev-mode " Abv" abbrev)
+            (smart-tab-mode " \\t" smart-tab)
+            (eldoc-mode nil "eldoc")
+            (rainbow-mode)
+            (overwrite-mode " Ov" t)
+            (emacs-lisp-mode "Elisp" :major)))
 #+END_SRC
 *** multiple-cursors
 
@@ -901,8 +911,9 @@ Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautify
    '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-   '(org-block-begin-line ((t (:background "RoyalBlue3"))))
-   '(org-block-end-line ((t (:background "RoyalBlue3"))))
+   '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow"))))
+   '(org-block-background ((t (:background "cornsilk"))))
+   '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow"))))
   )
 #+end_SRC
 
@@ -2291,7 +2302,7 @@ Sync email by calling =mbsync=:
 
 How often should I check? Value in seconds:
 #+BEGIN_SRC emacs-lisp
-  (setq mu4e-update-interval 600)
+  (setq mu4e-update-interval 300)
 #+END_SRC
 
 Setup some common folders:
@@ -3057,6 +3068,7 @@ details.
               (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
 #+end_SRC
 *** [[https://github.com/smihica/emmet-mode][emmet-mode]]
+
 Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencoding][zencoding]] for details.
 
 #+BEGIN_SRC emacs-lisp
@@ -3102,7 +3114,6 @@ Follow [[https://github.com/jscheid/prettier.el][official site]] to install and 
     (add-hook 'js2-mode-hook 'prettier-mode)
     (add-hook 'json-mode-hook 'prettier-mode)
     (add-hook 'js-mode-hook 'prettier-mode)
-    (add-hook 'web-mode-hook 'prettier-mode)
     (setq indent-tabs-mode nil js-indent-level 2)
 #+end_SRC
 
@@ -3154,6 +3165,13 @@ Details are [[https://github.com/yoshiki/yaml-mode][here]].
             '(lambda ()
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+end_SRC
+*** jenkins
+#+BEGIN_SRC emacs-lisp
+  (use-package jenkinsfile-mode
+    :ensure
+    :config)
+
+#+END_SRC
 ** LAST: enforce my tab style
 
 Found this [[https://github.com/syl20bnr/spacemacs/issues/5923][here]], and I like it, to set my styles in a central
@@ -3215,6 +3233,7 @@ So, to enfore this on some modes:
   (add-hook 'js2-mode-hook 'my-personal-code-style)
   (add-hook 'react-mode-hook 'my-personal-code-style)
   (add-hook 'sh-mode-hook 'my-personal-code-style)
+  (add-hook 'groovy-mode-hook 'my-personal-code-style)
 #+end_SRC
 * My doc writing
 

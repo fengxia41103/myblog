@@ -3,8 +3,8 @@ mainfont: DejaVu Serif
 monofont: DejaVu Sans Mono
 titlepage: false
 papersize: a4
-fontsize: 11pt
-geometry: margin=1.3in
+fontsize: 10pt
+geometry: margin=1.4in
 linkstyle: slanted
 urlcolor: RoyalBlue
 subparagraph: yes
@@ -36,6 +36,11 @@ header-includes: |
 - 20+ years experience in research and development with a proven track
   of records of design and implementing mission-critical systems from
   lab to production.
+
+- 10+ years experience designing and implementing full-stack
+  application. Specialize in HA & high scalability architecture,
+  relational data modeling, Python Django backend, ReacJS frontend,
+  RESTful interface & integration, responsive/mobile-ready UI.
 
 - 10+ years experience in working closely with customer and project
   stakeholders to balance product requirement, delivery quality, and
@@ -76,7 +81,7 @@ header-includes: |
   cloud (`OpenStack`).
 
 
-- Top presentation skill. Avid Github contributor.
+- Top presentation skill.
 
 # Experience
 
@@ -121,27 +126,29 @@ Lenovo US, P9, Senior Solution Architect, Team Lead
 PY Consulting, Founder & Consultant
 
 - Engaged the World Bank's "Digital Development Partnership" program,
-  and built the `World's Snapshot`, a data-driven ReactJS application
+  and built the [`World's Snapshot`][30], a data-driven ReactJS application
   featuring API integration with the World Bank and the DHS, and
   visualization using eight different Javascript-based charting tools.
 
 - Engaged "Wei Fashion Group", a Shanghai showroom company
   specializing high fashion import and distribution with subsidiaries
   in US, Europe and China. Designed and built its e-commerce store,
-  inventory management system, and invoice & order tracking system.
+  [inventory management system, and invoice & order tracking
+  system][20].
 
 - Engaged "Shang Xue Tang", a Beijing high education service
-  company. Built a full-stack application serving its core business
-  with RESTful API, data streaming, chat room, and forum.
+  company. Built a [full-stack application][21] serving its core
+  business with RESTful API, data streaming, chat room, and forum.
 
 - Engaged "Linkage", a Shanghai startup specializing `ODOO`(`OpenERP`)
   module development. Led business analyst and engineering team to two
   releases. Grew customer base by 200%.  Architected its "2016-17
   Technology Roadmap".
 
-- Engaged a US financial startup specializing quantitative trading. Built
-  the `SP500 Analysis`, a Django full-stack application, with data
-  ingestion from Yahoo!Finance, Alpha Advantage.
+- Engaged a US financial startup specializing quantitative
+  trading. Built the [`SP500 Analysis`][22], a Django full-stack
+  application, with data ingestion from Yahoo!Finance, Alpha
+  Advantage.
 
 ## 11/2013 - 01/2015
 
@@ -195,8 +202,13 @@ Instron Corp., Senior Engineer
 - M. Sc., (09/1995 - 05/1997), Ohio University
 - B. Sc., (09/1990 - 07/1994), Shanghai JiaoTong University, China
 
+# Sample writings & projects
 
-
+1. [https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture
+][26]
+2. [https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture][25]
+4. [https://fengxia41103.github.io/stock/][31]
+5. [https://github.com/fengxia41103/worldsnapshot][30]
 
 [101]: https://www.linkedin.com/in/fengxia41103
 [102]: https://fengxia41103.github.io/myblog/downloads/resume.pdf
@@ -229,3 +241,5 @@ Instron Corp., Senior Engineer
 [27]: https://cp.lenovo.com/login#/
 [28]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py
 [29]: https://fengxia41103.github.io/myblog/downloads/webapp.pdf
+[30]: https://github.com/fengxia41103/worldsnapshot
+[31]: https://fengxia41103.github.io/stock/#/

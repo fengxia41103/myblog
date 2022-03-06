@@ -4,6 +4,7 @@ monofont: DejaVu Sans Mono
 titlepage: false
 papersize: a4
 fontsize: 10pt
+geometry: margin=1.4in
 linkstyle: slanted
 urlcolor: RoyalBlue
 subparagraph: yes
@@ -32,154 +33,182 @@ header-includes: |
 
 # Summary
 
-* Strong scripting capability, especially to design system automation
-  and/or integration using Python and webservice API.
-* Can deliver any web application from napkin idea to Django-based POC in 48 hours.
-* Full-stack capable.
-* Welcome challenging problem.
-* Have a high standard in work quality.
+- 20+ years experience in research and development with a proven track
+  of records of design and implementing mission-critical systems from
+  lab to production.
 
-# Skills
+- 10+ years experience designing and implementing full-stack
+  application. Specialize in HA & high scalability architecture,
+  relational data modeling, Python Django backend, ReacJS frontend,
+  RESTful interface & integration, responsive/mobile-ready UI.
 
-Software Development
-: Python, Ansible, Git, Jira, ODOO/OpenERP, SQL, Salesforce APEX
+- 10+ years experience in working closely with customer and project
+  stakeholders to balance product requirement, delivery quality, and
+  financial success.
 
-Web Application Backend
-: Django, Flask, Tastypie, Django REST Framework, Swagger, Jinja2, Pelican, Jekyll
+- 10+ years experience in building and leading top engineering talent
+  and high-performance product engineering teams. Well rounded
+  knowledge and skill in managing teams and projects, interfacing with
+  executive and client, handling product requirements, and mentoring
+  junior staffs. Familiar with methodoligies including Agile, waterfall,
+  Extreme, and PM tools such as Jira and Trello.
 
-Web Frontend/UI
-: React, Angular, Material UI, Bootstrap
+- 10+ years experience leading projects with a global team (China,
+  Europe, India, US) and remote management. Familiar with its
+  challenges and mitigation.
 
-Data Visualization
-: Graphviz, Cytoscape.js, netjsongraph.js, D3plus, Highcharts, Google
-  chart, MetricsGraphics, chart.js, Plotly.js, dygraphs
+- Deep understanding of software development cycle (SDLC) including git
+  workflow, code quality control, and security vulnerability
+  auditing. Built a full end-2-end CICD pipeline using `Jenkins`, `Docker`
+  and `Ansible` from the ground up.
 
-QA
-: Selenium, HP LoadRunner, SonarQube, Cucumber, Redmine, Bugzilla
+- Expert in SOA, MVC, microservice architecture and container
+  technologies. Fluent with `Docker`, `LXC/LXD`, and
+  `docker-compose`.
 
-System design
-: pencil & paper, UML, PlantUML, Dia, Visio
+- Expert in Infrastructure-as-code(IaC) technologies (`Ansible`, `Helm`,
+  `Terraform`). Led design and development of Lenovo's
+  IaC solution &mdash; [Lenovo Open Cloud Automation][25].
 
-System deployment/packaging
-: Ansible, Docker, Amazon EC2/RDS/S3, uWSGI, Nginx, Apache2, Builtbot, Fabric
+- Fluent in `Python`, `Django`, `ReactJS`, `Material UI`. Expert in data
+  modeling. Expert in building data-driven full-stack application from
+  the ground up. Experienced with data ingestion, RESTful API design &
+  integration, data processing, data visualization, and ML.
 
-System monitoring
-: ELK stack, InfluxDB, Grafana, Cacti, Nagios
+- Extensive hands-on experience in cloud-native technologies, build
+  and manage highly available, highly scalable applications and
+  microservice on hybrid/public cloud (`AWS/Azure/GCP`) and private
+  cloud (`OpenStack`).
 
-System administration
-: Salesforce, Red Hat Satellite, Red Hat RHHI, Red Hat Ansible Tower,
-  AWS
 
-Documentation
-: Confluence, Markdown, Pandoc, LaTex, reveal.js
+- Top presentation skill.
 
 # Experience
 
 ## 11/2016 - present
 
-Lenovo US, Advisory Engineer
+Lenovo US, P9, Senior Solution Architect, Team Lead
 
-* Built Git+Jira analysis tool from scratch using Django, React, and
-  Python scripting. Backend provides RESTful API. Python scripts will
-  scan Jira API and git commits to build cross reference, and audit
-  code development such Git branching strategy. In use in
-  production. Demo available.
-  
-* `ThinkAgile CP` product. UI lead. Maintain legacy Java Spring and
-   AngularJS UI deployed in Docker, Wildfly and Nginx in
-   production. Lead design and prototyping of next Gen UI and backend
-   REST API. Built UI component catalog using Python, Selenium, and
-   Pandoc.
-        
-* `Lenovo Open Cloud` (LOC) product. Architect and primary author of
-  two reference architecture papers published on 5/5/2019. Designed
-  its public and private networking. Developed Ansible and Python code
-  to automate deployment, configuration, and operation of 11
-  applications including RedHat RHHI, RedHat Satellite, RedHat Ansible
-  Tower, Lenovo xClarity, GitLab. In production.
+- Principal architect of the [Lenovo Open Cloud Automation][25]
+  solution. Author of its reference architecture. Led a global team of
+  twelve developers from design to implementation. The product won a
+  $100M contract in its first year.
+- Author of the [Red Hat Hyperconverged Infrastructure (RHHI)
+  Reference Architecture][26]. Principal architect and primary code
+  contributor of RHHI's automated end-2-end deployment.
+- Principal architect of the Lenovo Workload Solution Store (WSS). Its
+  orchestration technology forms the core of the ThinkAgile VX product
+  line.
+- Seed member and principal system architect of the ThinkAgile CP
+  product, a private cloud solution. Played a key role in third-party
+  IP evaluation and acquisition. Led UI/UX team of five and DevOps
+  team of four in six major releases and production deployment to AWS
+  and Cloudfare.
+- Principal architect of Lenovo's Datacenter Inventory Management System
+  (DCIM), and is the top code contributor to it.
+- Collaborated with Lenovo's OpenStack team in defining the "Lenovo
+  OpenStack Reference Architecture" and "Lenovo Ceph Reference
+  Architecture" by providing design feedback, code review and DevOps
+  automation.
+- Led team in containerization Lenovo's ML application used by medical
+  research and high education. Reduced deployment cycle from six hours
+  to thirty minutes.
+- Designed and developed a full-stack web application integrating
+  Gitlab and Atlassian, providing visualization to PM tracking a
+  requirement throughout SDLC from Jira to deployment.
+- Support pre-sale and customer engagements, RFPs as an SME in the
+  area of containerization, microservice design pattern, cloud native
+  solution, SDLC, DevOps, CICD, and orchestration.
 
-* `Lenovo Open Cloud` product. Extended [Netbox][18] using Python,
-  Redis to fully automate hardware discovery, inventory, and
-  configuration. In production.
-    
-* `Workload Solution Store` project. Architect. Built prototype of
-  Lenovo's orchestration engine to integrate internal manufacturing
-  and sales systems, and to automate deployment of complex system such
-  as OpenStack with little overhead. 
 
 ## 01/2015 - 11/2016
 
 PY Consulting, Founder & Consultant
 
-* `World's Snapshot` project. React based SPA integrated with DHS and
-  World Bank data APIs. Rich data visualization. Demo available.
-  
-* `Wei Fashion Group` project. Designed and built an inventory
-  management and order tracking system in Django and MySQL, eliminated
-  90% of overhead of offline operations. Demo available.
+- Engaged the World Bank's "Digital Development Partnership" program,
+  and built the [`World's Snapshot`][30], a data-driven ReactJS application
+  featuring API integration with the World Bank and the DHS, and
+  visualization using eight different Javascript-based charting tools.
 
-* `GKP` project. Built a web application in Django, MySQL, Redis, and
-  Python web crawler. Featured REST API. Deployment by Fabric in
-  Heroku. Demo available.
+- Engaged "Wei Fashion Group", a Shanghai showroom company
+  specializing high fashion import and distribution with subsidiaries
+  in US, Europe and China. Designed and built its e-commerce store,
+  [inventory management system, and invoice & order tracking
+  system][20].
 
-* `SP500 Analysis` project. Built a web application in Django, Postgre
-  SQL, Redis, and external data API. Intense data crunching
-  capability. Demo available.
-  
+- Engaged "Shang Xue Tang", a Beijing high education service
+  company. Built a [full-stack application][21] serving its core
+  business with RESTful API, data streaming, chat room, and forum.
+
+- Engaged "Linkage", a Shanghai startup specializing `ODOO`(`OpenERP`)
+  module development. Led business analyst and engineering team to two
+  releases. Grew customer base by 200%.  Architected its "2016-17
+  Technology Roadmap".
+
+- Engaged a US financial startup specializing quantitative
+  trading. Built the [`SP500 Analysis`][22], a Django full-stack
+  application, with data ingestion from Yahoo!Finance, Alpha
+  Advantage.
+
 ## 11/2013 - 01/2015
 
 Beijing Lean Strategy Consulting Group, Director
 
-* Designed and built a distributed system in Java. Led QA
-  team to automate regression tests using TDD, Python Unittest and
-  Selenium. Deployed SonarCube for static code analysis, and Jenkins
-  for CICD.
+- Led RFP of a $3M contract with a Fortune 500 company. Responsible
+  for P&L.
+- Architected the system design and its implementation including
+  selecting business partnership and outsourcing. Supervised on-site
+  deployment and training.
+- Doubled engineering team over one year. Established training and
+  mentoring program.
 
 ## 07/2010 - 11/2013
 CrunchTime! Information Technology, Project Manager
 
-* Customized Salesforce Customer Portal using APEX, Visualforce and
-  jQuery. The portal won Bronze in the _"2011 Steve Awards for Sales &
-  Customer Service"_.
-* Built the company's first mobile application prototype using
-  Cordova, HTML5 and jQuery Mobile.
-* Built user-acceptance-test(UAT) library using Python Selenium.
+- Led business engagement with Yum!China in a $10M RFP. Responsible
+  for P&L. Led business analysis, scoping requirements, and customer
+  training.
+- Led development of the company's Customer Portal in SalesForce. The
+  portal won Bronze prize of the "2011 Steve Awards for Sales &
+  Customer Service" award.
+- Led team designed and built the company's first mobile application
+  prototype using Cordova, HTML5 and jQuery Mobile.
+- Initiated and led team build CICD using Jenkins, Selenium, and Python.
 
 ## 04/2009 - 04/2010
 China Everbright Bank, Business Manager
 
-* Supervised two vendor invitation-for-bids. In charge of a $2-million
-  purchase of a software system. Managed system implementation,
-  customization, training and administration.
+- Managed two rounds of vendor invitation-for-bids. Responsible for a
+  $2M RFP of core business system.
+- Managed BA department. Responsible for due diligence and loan
+  application review.
+- Built a new IT branch from the ground up.
+- Led negotiation with vendor. Worked closed with executives.
 
 ## 04/2004 - 05/2007
-Bit 9 Inc. (Carbon Black), Team Lead
+Bit 9 Inc. (Carbon Black), Tech Lead
 
-* Wrote Windows kernel code. Lots of C, link lists, pointers, and
-  opaque data structs.
+- Led security research of Windows NT kernel. The research won $6M
+  A-round VC.
 
 ## 07/1998 - 04/2004
 Instron Corp., Senior Engineer
 
-* Wrote firmware in C and RTOS. Familiar w/ DMA, interrupt, low level debugging.
+- Designed and implemented core module of its new impact testing
+  line. Sales reached $1M in the first year.
 
 # Education
+- MBA, (04/2007 - 09/2008), Boston University
+- M. Sc., (09/1995 - 05/1997), Ohio University
+- B. Sc., (09/1990 - 07/1994), Shanghai JiaoTong University, China
 
-## 04/2007 - 09/2008
-MBA, Boston University
+# Sample writings & projects
 
-* **Major**: International Management Program
-* GPA: 3.75/4.0
-* Recipient of _"High Honor and Dean's Achievement Scholarship"_
-* _"Certificate of International Management Program"_
-* 2nd place in the _"13th Annual Net Impact Case Competition"_
-
-## 09/1995 - 05/1997
-Master of Science, Ohio University
-
-* **Major**: Power System Automation
-* GPA: 3.15/4.0
-
+1. [https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture
+][26]
+2. [https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture][25]
+4. [https://fengxia41103.github.io/stock/][31]
+5. [https://github.com/fengxia41103/worldsnapshot][30]
 
 [101]: https://www.linkedin.com/in/fengxia41103
 [102]: https://fengxia41103.github.io/myblog/downloads/resume.pdf
@@ -212,3 +241,5 @@ Master of Science, Ohio University
 [27]: https://cp.lenovo.com/login#/
 [28]: https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py
 [29]: https://fengxia41103.github.io/myblog/downloads/webapp.pdf
+[30]: https://github.com/fengxia41103/worldsnapshot
+[31]: https://fengxia41103.github.io/stock/#/

@@ -30,8 +30,8 @@ that today would be alright, and 猪 will be alright.
 陪伴，多谢你带来的那么多的欢笑，多谢你当model，多谢你的好胃口，多谢你。
 让你最后受了苦了，对不起。还是要跟你说一句，多谢款待。
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/VXOv0qqADx0?controls=0"
-title="YouTube video player" frameborder="0" allow="accelerometer;
-autoplay; clipboard-write; encrypted-media; gyroscope;
-picture-in-picture" allowfullscreen></iframe>
+<video width="100%" height="100%" controls="controls">
+  <source src="images/zhuwawa.webm" type="video/webm" />
+  Your browser does not support the video tag.
+  /* instead of the last line you could also add the flash player*/
+</video>

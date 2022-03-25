@@ -885,7 +885,7 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 #+END_SRC
 
 *** org-bullets
-#+begin_SRC emacs-lisp
+#+begin_SRC emacs-lisp :tangle no
   (use-package org-bullets
     :ensure
     :hook (org-mode . org-bullets-mode))
@@ -1545,7 +1545,6 @@ close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.
     :config
     (setq aw-ignore-current t)
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    (setq aw-ignore-current nil)
     (setq aw-minibuffer-flag nil)
     (setq aw-background t)
     (global-set-key (kbd "C-x C-o") 'ace-window)
@@ -2225,7 +2224,7 @@ First, install pyim.
     (setq pyim-page-tooltip 'popup)
 
     ;; 选词框显示5个候选词
-    (setq pyim-page-length 5)
+    (setq pyim-page-length 7)
 
     ;; 让 Emacs 启动时自动加载 pyim 词库
     (add-hook 'emacs-startup-hook
@@ -2242,14 +2241,13 @@ Add a basic dictionary.
   ;; Basedict
   (use-package pyim-basedict
     :ensure t)
-
+  (pyim-basedict-enable)
 #+end_SRC
 
 Last, a couple global settins.
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-\\") 'toggle-input-method)
-(pyim-basedict-enable)
 (setq default-input-method "pyim")
 #+end_src
 * Office stuff

@@ -520,7 +520,7 @@ cue. However, I found that it can be ugly depending the theme.
     :config
     (dimmer-configure-which-key)
     (dimmer-configure-helm)
-    (setq dimmer-fraction 0.6))
+    (setq dimmer-fraction 0.4))
   (dimmer-mode t)
 #+end_SRC
 

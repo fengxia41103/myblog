@@ -2570,6 +2570,11 @@ Read news:
 
 Big part of my life is taken by coding. So here it is, all the coding
 related stuff.
+** set authinfo as source
+
+#+BEGIN_SRC emacs-lisp
+(setq auth-sources '("~/.authinfo"))
+#+END_SRC
 ** taskjuggler-mode (tj3-mode)
 #+BEGIN_SRC emacs-lisp
   (use-package tj3-mode
@@ -2645,7 +2650,16 @@ Have a single binding to call the most appropriate tool given the repository.
 
 #+RESULTS:
 : paf/vcs-status
-
+*** forge
+#+BEGIN_SRC emacs-lisp
+(use-package forge
+  :after magit)
+#+END_SRC
+*** code review
+#+BEGIN_SRC emacs-lisp
+(use-package code-review
+  :ensure t)
+#+END_SRC
 ** Projectile
 
 Start using projectile. It has the documentation [[https://docs.projectile.mx/en/latest/][here]].

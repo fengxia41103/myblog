@@ -519,8 +519,7 @@ cue. However, I found that it can be ugly depending the theme.
     :ensure
     :config
     (dimmer-configure-which-key)
-    (dimmer-configure-helm)
-    (setq dimmer-fraction 0.4))
+    (dimmer-configure-helm))
   (dimmer-mode t)
 #+end_SRC
 

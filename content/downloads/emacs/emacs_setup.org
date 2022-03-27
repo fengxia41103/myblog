@@ -461,9 +461,9 @@ Loading a theme I like.
 
 #+BEGIN_SRC emacs-lisp
   (use-package sublime-themes
-    :ensure
+    :ensure t
     :config)
-(add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
+  (add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
 #+END_SRC
 
 *** mode lines
@@ -2611,6 +2611,13 @@ Add the Magit-copy for Mercurial 'monky'
     :defer
     :bind ("C-x m" . 'monky-status))
 #+END_SRC
+*** forge
+
+#+BEGIN_SRC emacs-lisp
+(use-package forge
+  :after magit)
+#+END_SRC
+
 *** git informations in gutter
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter-fringe+

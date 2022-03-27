@@ -519,7 +519,8 @@ cue. However, I found that it can be ugly depending the theme.
     :ensure
     :config
     (dimmer-configure-which-key)
-    (dimmer-configure-helm))
+    (dimmer-configure-helm)
+    (setq dimmer-fraction 0.6))
   (dimmer-mode t)
 #+end_SRC
 
@@ -2611,13 +2612,6 @@ Add the Magit-copy for Mercurial 'monky'
     :defer
     :bind ("C-x m" . 'monky-status))
 #+END_SRC
-*** forge
-
-#+BEGIN_SRC emacs-lisp
-(use-package forge
-  :after magit)
-#+END_SRC
-
 *** git informations in gutter
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter-fringe+

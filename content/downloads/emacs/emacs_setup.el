@@ -109,8 +109,8 @@ and the tangled file is compiled."
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
 
 (use-package sublime-themes
-    :ensure
-    :config)
+  :ensure t
+  :config)
 (add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
 
 (use-package doom-modeline
@@ -336,10 +336,6 @@ and the tangled file is compiled."
 (setq org-startup-folded t)
 (setq org-ellipsis "...")
 (setq org-hide-emphasis-markers t)
-
-(use-package org-bullets
-  :ensure
-  :hook (org-mode . org-bullets-mode))
 
 (custom-theme-set-faces
  'user
@@ -720,6 +716,350 @@ and the tangled file is compiled."
 
 (org-mode-restart)
 
+(setq auth-sources '("~/.authinfo"))
+
+(use-package tj3-mode
+  :ensure t
+  :after org-plus-contrib
+  :config
+  (require 'ox-taskjuggler)
+  (custom-set-variables
+   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+   '(org-taskjuggler-project-tag "PRJ")))
+
+(use-package magit
+  :ensure t
+  :defer
+  :config
+  (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+  :bind ("C-x g" . 'magit-status))
+(use-package magit-todos
+  :ensure t
+  :defer)
+(use-package
+  magit-gitflow
+
+  :ensure
+  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+
+(use-package monky
+  :ensure t
+  :defer
+  :bind ("C-x m" . 'monky-status))
+
+(use-package git-gutter-fringe+
+  :ensure t
+  :defer
+  :if window-system
+  :bind ("C-c g" . 'git-gutter+-mode))
+
+(defvar locate-dominating-stop-dir-regexp
+  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
+
+(defun paf/vcs-status ()
+     (interactive)
+     (condition-case nil
+         (magit-status-setup-buffer)
+       (error (monky-status))))
+
+(global-set-key (kbd "C-M-x v") 'paf/vcs-status)
+
+(use-package forge
+  :after magit)
+
+(use-package code-review
+  :ensure t)
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'helm)
+  (projectile-mode +1))
+
+(use-package helm-projectile
+  :ensure t
+  :after projectile
+  :requires projectile
+  :delight projectile-mode
+  :config
+  (helm-projectile-on))
+
+(use-package helm-ag
+  :ensure t
+  :config)
+
+(global-set-key (kbd "M-?") 'helm-ag)
+
+(setq gdb-many-windows t)
+(setq gdb-use-separate-io-buffer t)
+
+(defun easy-gdb-top-of-stack-and-restore-windows ()
+  (interactive)
+  (switch-to-buffer (gdb-stack-buffer-name))
+  (goto-char (point-min))
+  (gdb-select-frame)
+  (gdb-restore-windows)
+  (other-window 2))
+
+(global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
+
+; This unfortunately also messes up the regular frame navigation of source code.
+;(add-to-list 'display-buffer-alist
+;             (cons 'cdb-source-code-buffer-p
+;                   (cons 'display-source-code-buffer nil)))
+
+(defun cdb-source-code-buffer-p (bufName action)
+  "Return whether BUFNAME is a source code buffer."
+  (let ((buf (get-buffer bufName)))
+    (and buf
+         (with-current-buffer buf
+           (derived-mode-p buf 'c++-mode 'c-mode 'csharp-mode 'nxml-mode)))))
+
+(defun display-source-code-buffer (sourceBuf alist)
+  "Find a window with source code and set sourceBuf inside it."
+  (let* ((curbuf (current-buffer))
+         (wincurbuf (get-buffer-window curbuf))
+         (win (if (and wincurbuf
+                       (derived-mode-p sourceBuf 'c++-mode 'c-mode 'nxml-mode)
+                       (derived-mode-p (current-buffer) 'c++-mode 'c-mode 'nxml-mode))
+                  wincurbuf
+                (get-window-with-predicate
+                 (lambda (window)
+                   (let ((bufName (buffer-name (window-buffer window))))
+                     (or (cdb-source-code-buffer-p bufName nil)
+                         (assoc bufName display-buffer-alist)
+                         ))))))) ;; derived-mode-p doesn't work inside this, don't know why...
+    (set-window-buffer win sourceBuf)
+    win))
+
+(use-package vdiff
+  :ensure t
+  :config
+  ; This binds commands under the prefix when vdiff is active.
+  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
+
+(autoload 'comment-out-region "comment" nil t)
+(global-set-key (kbd "C-c q") 'comment-out-region)
+
+(defun uniquify-region-lines (beg end)
+  "Remove duplicate adjacent lines in region."
+  (interactive "*r")
+  (save-excursion
+    (goto-char beg)
+    (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
+      (replace-match "\\1"))))
+
+(defun paf/sort-and-uniquify-region ()
+  "Remove duplicates and sort lines in region."
+  (interactive)
+  (sort-lines nil (region-beginning) (region-end))
+  (uniquify-region-lines (region-beginning) (region-end)))
+
+(global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
+
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+(use-package
+  circe
+    :ensure
+    :config(
+            setq circe-network-options '((
+                                          "Freenode" :tls t
+                                          :nick "fengxia41103"
+                                          :channels ("#emacs"
+                                                     "#python"
+                                                     "#odoo"
+                                                     "#reactjs"
+                                                     "#latex")))))
+(use-package
+  helm-circe
+
+  :ensure
+  :config)
+
+(use-package restclient
+  :ensure)
+
+(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+(require 'ob-restclient)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
+
+(use-package writegood-mode
+  :ensure
+  :config)
+
+(use-package
+  markdown-mode
+
+  :ensure
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              (visual-line-mode t)
+              (writegood-mode t)
+              (auto-fill-mode t)
+              (flyspell-mode t)))))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+
+(use-package google-c-style
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+
+(setenv "PYTHONIOENCODING" "utf-8")
+(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
+
+(use-package
+  py-isort
+
+  :ensure
+  :config
+  (add-hook 'before-save-hook 'py-isort-before-save)
+  (setq py-isort-options '("-sl --profile black --filter-files")))
+
+(use-package imenu-list
+:ensure)
+
+(add-hook 'python-mode-hook #'smartparens-mode)
+
+(use-package python-black
+  :ensure)
+
+(use-package web-mode
+  :ensure t
+  :config
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (setq web-mode-enable-css-colorization t))
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+
+(use-package emmet-mode
+  :ensure t
+  :after(web-mode css-mode scss-mode)
+  :config)
+(setq emmet-expand-jsx-className? t)
+(setq emmet-move-cursor-between-quotes t)
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'scss-mode-hook  'emmet-mode)
+
+(use-package js2-mode
+    :ensure
+    :config)
+(setq js2-indent-level 2)
+(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+(add-hook 'js2-mode-hook #'smartparens-mode)
+(add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
+
+(use-package prettier
+  :ensure
+  :config)
+  (add-hook 'js2-mode-hook 'prettier-mode)
+  (add-hook 'json-mode-hook 'prettier-mode)
+  (add-hook 'js-mode-hook 'prettier-mode)
+  (setq indent-tabs-mode nil js-indent-level 2)
+
+(use-package js-doc
+  :ensure
+  :config
+  (setq js-doc-mail-address "feng.xia@mycompany.io")
+  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
+  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-license "Company License")
+)
+(add-hook 'js2-mode-hook
+          #'(lambda ()
+              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
+(use-package csv-mode
+  :ensure t
+  :mode "\\.csv\\'")
+
+(use-package json-mode
+  :ensure
+  :config)
+
+(use-package yaml-mode
+  :ensure
+  :config)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+(use-package jenkinsfile-mode
+  :ensure
+  :config)
+
+(defun my-setup-indent (n)
+  ;; java/c/c++
+  (setq-local standard-indent n)
+  (setq-local c-basic-offset n)
+
+  ;; javascript family
+  (setq-local javascript-indent-level n) ; javascript-mode
+  (setq-local js-indent-level n) ; js-mode
+  (setq-local js2-basic-offset n) ; js2-mode
+  (setq-local js-switch-indent-offset n) ; js-mode
+  (setq-local javascript-indent-level n) ; javacript-mode
+  (setq-local react-indent-level n) ; react-mode
+  (setq-local js2-basic-offset n)
+
+  ;; html, css
+  (setq-local web-mode-attr-indent-offset n) ; web-mode
+  (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq-local web-mode-sql-indent-offset n) ; web-mode
+  (setq-local web-mode-attr-value-indent-offset n) ; web-mode
+  (setq web-mode-comment-style 2) ;; web-mode
+  (setq-local css-indent-offset n) ; css-mode
+
+  ;; shells
+  (setq-local sh-basic-offset n) ; shell scripts
+  (setq-local sh-indentation n))
+
+(defun my-personal-code-style ()
+  (interactive)
+  (message "My personal code style!")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 2 spaces width
+  (my-setup-indent 2))
+
+;; it would be lovely if this was enough, but it gets stomped on by modes.
+(my-personal-code-style)
+
+(add-hook 'css-mode-hook 'my-personal-code-style)
+(add-hook 'js2-mode-hook 'my-personal-code-style)
+(add-hook 'react-mode-hook 'my-personal-code-style)
+(add-hook 'sh-mode-hook 'my-personal-code-style)
+(add-hook 'groovy-mode-hook 'my-personal-code-style)
+
 (use-package eyebrowse
     :ensure t)
 (eyebrowse-mode t)
@@ -729,7 +1069,6 @@ and the tangled file is compiled."
   :config
   (setq aw-ignore-current t)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-ignore-current nil)
   (setq aw-minibuffer-flag nil)
   (setq aw-background t)
   (global-set-key (kbd "C-x C-o") 'ace-window)
@@ -1154,7 +1493,7 @@ and the tangled file is compiled."
   (setq pyim-page-tooltip 'popup)
 
   ;; 选词框显示5个候选词
-  (setq pyim-page-length 5)
+  (setq pyim-page-length 7)
 
   ;; 让 Emacs 启动时自动加载 pyim 词库
   (add-hook 'emacs-startup-hook
@@ -1168,9 +1507,9 @@ and the tangled file is compiled."
 ;; Basedict
 (use-package pyim-basedict
   :ensure t)
+(pyim-basedict-enable)
 
 (global-set-key (kbd "C-\\") 'toggle-input-method)
-(pyim-basedict-enable)
 (setq default-input-method "pyim")
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
@@ -1253,16 +1592,16 @@ and the tangled file is compiled."
 (setq mu4e-compose-signature
       (concat
        "Best regards,\n\n"
-       "Feng Xia\n"
-       "W: http://www.mycompany.com\n"))
+       "Feng Xia\n\n"
+       "W: http://www.mycompany.io\n"))
 
 ;;(use-package smtpmail
 ;;  :ensure t
 ;;  :config
   (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "fxia1@mycompany.com"
+        user-mail-address "feng.xia@mycompany.io"
         smtpmail-debug-info t
-        smtpmail-smtp-user "fxia1@mycompany.com"
+        smtpmail-smtp-user "feng.xia@mycompany.io"
         smtpmail-default-smtp-server "localhost"
         smtpmail-auth-credentials (expand-file-name "~/.authinfo")
         smtpmail-smtp-service 1025
@@ -1274,12 +1613,12 @@ and the tangled file is compiled."
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
-      user-mail-address "fxia1@mycompany.com"
+(setq mu4e-compose-reply-to-address "feng.xia@mycompany.io"
+      user-mail-address "feng.xia@mycompany.io"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
-                          "http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/\n")
+                          "W: http://www.mycompany.io\n")
       message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
       message-citation-line-function 'message-insert-formatted-citation-line
       mu4e-headers-results-limit 500)
@@ -1367,361 +1706,6 @@ If given prefix arg ARG, skips markdown conversion."
   (custom-set-variables
    '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
    '(org-taskjuggler-project-tag "PRJ")))
-
-(use-package tj3-mode
-  :ensure t
-  :after org-plus-contrib
-  :config
-  (require 'ox-taskjuggler)
-  (custom-set-variables
-   '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
-   '(org-taskjuggler-project-tag "PRJ")))
-
-(use-package magit
-  :ensure t
-  :defer
-  :config
-  (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
-  :bind ("C-x g" . 'magit-status))
-(use-package magit-todos
-  :ensure t
-  :defer)
-(use-package
-  magit-gitflow
-
-  :ensure
-  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
-
-(use-package monky
-  :ensure t
-  :defer
-  :bind ("C-x m" . 'monky-status))
-
-(use-package git-gutter-fringe+
-  :ensure t
-  :defer
-  :if window-system
-  :bind ("C-c g" . 'git-gutter+-mode))
-
-(defvar locate-dominating-stop-dir-regexp
-  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
-
-(defun paf/vcs-status ()
-     (interactive)
-     (condition-case nil
-         (magit-status-setup-buffer)
-       (error (monky-status))))
-
-(global-set-key (kbd "C-M-x v") 'paf/vcs-status)
-
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-completion-system 'helm)
-  (projectile-mode +1))
-
-(use-package helm-projectile
-  :ensure t
-  :after projectile
-  :requires projectile
-  :delight projectile-mode
-  :config
-  (helm-projectile-on))
-
-(use-package helm-ag
-  :ensure t
-  :config)
-
-(global-set-key (kbd "M-?") 'helm-ag)
-
-(setq gdb-many-windows t)
-(setq gdb-use-separate-io-buffer t)
-
-(defun easy-gdb-top-of-stack-and-restore-windows ()
-  (interactive)
-  (switch-to-buffer (gdb-stack-buffer-name))
-  (goto-char (point-min))
-  (gdb-select-frame)
-  (gdb-restore-windows)
-  (other-window 2))
-
-(global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
-
-; This unfortunately also messes up the regular frame navigation of source code.
-;(add-to-list 'display-buffer-alist
-;             (cons 'cdb-source-code-buffer-p
-;                   (cons 'display-source-code-buffer nil)))
-
-(defun cdb-source-code-buffer-p (bufName action)
-  "Return whether BUFNAME is a source code buffer."
-  (let ((buf (get-buffer bufName)))
-    (and buf
-         (with-current-buffer buf
-           (derived-mode-p buf 'c++-mode 'c-mode 'csharp-mode 'nxml-mode)))))
-
-(defun display-source-code-buffer (sourceBuf alist)
-  "Find a window with source code and set sourceBuf inside it."
-  (let* ((curbuf (current-buffer))
-         (wincurbuf (get-buffer-window curbuf))
-         (win (if (and wincurbuf
-                       (derived-mode-p sourceBuf 'c++-mode 'c-mode 'nxml-mode)
-                       (derived-mode-p (current-buffer) 'c++-mode 'c-mode 'nxml-mode))
-                  wincurbuf
-                (get-window-with-predicate
-                 (lambda (window)
-                   (let ((bufName (buffer-name (window-buffer window))))
-                     (or (cdb-source-code-buffer-p bufName nil)
-                         (assoc bufName display-buffer-alist)
-                         ))))))) ;; derived-mode-p doesn't work inside this, don't know why...
-    (set-window-buffer win sourceBuf)
-    win))
-
-(use-package vdiff
-  :ensure t
-  :config
-  ; This binds commands under the prefix when vdiff is active.
-  (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-
-(autoload 'comment-out-region "comment" nil t)
-(global-set-key (kbd "C-c q") 'comment-out-region)
-
-(defun uniquify-region-lines (beg end)
-  "Remove duplicate adjacent lines in region."
-  (interactive "*r")
-  (save-excursion
-    (goto-char beg)
-    (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
-      (replace-match "\\1"))))
-
-(defun paf/sort-and-uniquify-region ()
-  "Remove duplicates and sort lines in region."
-  (interactive)
-  (sort-lines nil (region-beginning) (region-end))
-  (uniquify-region-lines (region-beginning) (region-end)))
-
-(global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
-
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-
-(use-package
-  circe
-    :ensure
-    :config(
-            setq circe-network-options '((
-                                          "Freenode" :tls t
-                                          :nick "fengxia41103"
-                                          :channels ("#emacs"
-                                                     "#python"
-                                                     "#odoo"
-                                                     "#reactjs"
-                                                     "#latex")))))
-(use-package
-  helm-circe
-
-  :ensure
-  :config)
-
-(use-package restclient
-  :ensure)
-
-(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
-(require 'ob-restclient)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((restclient . t)))
-
-(use-package writegood-mode
-  :ensure
-  :config)
-
-(use-package
-  markdown-mode
-
-  :ensure
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
-  (add-hook 'markdown-mode-hook
-            (lambda ()
-              (visual-line-mode t)
-              (writegood-mode t)
-              (auto-fill-mode t)
-              (flyspell-mode t)))))
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
-
-(use-package google-c-style
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
-
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
-
-(add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
-
-(add-hook 'elpy-mode-hook #'yas-minor-mode)
-
-(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
-
-(setenv "PYTHONIOENCODING" "utf-8")
-(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
-(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
-(add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
-
-(setq elpy-rpc-virtualenv-path 'current)
-
-(use-package
-  py-autopep8
-  :ensure)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-(setq py-autopep8-options '("--max-line-length=79"))
-
-(use-package
-  py-isort
-
-  :ensure
-  :config
-  (add-hook 'before-save-hook 'py-isort-before-save)
-  (setq py-isort-options '("-sl")))
-
-(use-package imenu-list
-:ensure)
-
-(add-hook 'python-mode-hook #'smartparens-mode)
-
-(use-package python-black
-  :ensure)
-
-(use-package web-mode
-  :ensure t
-  :config
-  (setq web-mode-enable-current-element-highlight t)
-  (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-css-colorization t))
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
-
-(use-package emmet-mode
-  :ensure t
-  :after(web-mode css-mode scss-mode)
-  :config)
-(setq emmet-expand-jsx-className? t)
-(setq emmet-move-cursor-between-quotes t)
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode)
-(add-hook 'scss-mode-hook  'emmet-mode)
-
-(use-package js2-mode
-    :ensure
-    :config)
-(setq js2-indent-level 2)
-(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
-(add-hook 'js2-mode-hook #'smartparens-mode)
-(add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
-
-(use-package prettier
-  :ensure
-  :config)
-  (add-hook 'js2-mode-hook 'prettier-mode)
-  (add-hook 'json-mode-hook 'prettier-mode)
-  (add-hook 'js-mode-hook 'prettier-mode)
-  (setq indent-tabs-mode nil js-indent-level 2)
-
-(use-package js-doc
-  :ensure
-  :config
-  (setq js-doc-mail-address "fxia1@mycompany.com")
-  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
-  (setq js-doc-license "Company License")
-)
-(add-hook 'js2-mode-hook
-          #'(lambda ()
-              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
-              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
-
-(use-package csv-mode
-  :ensure t
-  :mode "\\.csv\\'")
-
-(use-package json-mode
-  :ensure
-  :config)
-
-(use-package yaml-mode
-  :ensure
-  :config)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-hook 'yaml-mode-hook
-          '(lambda ()
-        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-
-(use-package jenkinsfile-mode
-  :ensure
-  :config)
-
-(defun my-setup-indent (n)
-  ;; java/c/c++
-  (setq-local standard-indent n)
-  (setq-local c-basic-offset n)
-
-  ;; javascript family
-  (setq-local javascript-indent-level n) ; javascript-mode
-  (setq-local js-indent-level n) ; js-mode
-  (setq-local js2-basic-offset n) ; js2-mode
-  (setq-local js-switch-indent-offset n) ; js-mode
-  (setq-local javascript-indent-level n) ; javacript-mode
-  (setq-local react-indent-level n) ; react-mode
-  (setq-local js2-basic-offset n)
-
-  ;; html, css
-  (setq-local web-mode-attr-indent-offset n) ; web-mode
-  (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
-  (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
-  (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-  (setq-local web-mode-sql-indent-offset n) ; web-mode
-  (setq-local web-mode-attr-value-indent-offset n) ; web-mode
-  (setq web-mode-comment-style 2) ;; web-mode
-  (setq-local css-indent-offset n) ; css-mode
-
-  ;; shells
-  (setq-local sh-basic-offset n) ; shell scripts
-  (setq-local sh-indentation n))
-
-(defun my-personal-code-style ()
-  (interactive)
-  (message "My personal code style!")
-  ;; use space instead of tab
-  (setq indent-tabs-mode nil)
-  ;; indent 2 spaces width
-  (my-setup-indent 2))
-
-;; it would be lovely if this was enough, but it gets stomped on by modes.
-(my-personal-code-style)
-
-(add-hook 'css-mode-hook 'my-personal-code-style)
-(add-hook 'js2-mode-hook 'my-personal-code-style)
-(add-hook 'react-mode-hook 'my-personal-code-style)
-(add-hook 'sh-mode-hook 'my-personal-code-style)
-(add-hook 'groovy-mode-hook 'my-personal-code-style)
 
 (use-package pandoc-mode
   :ensure)

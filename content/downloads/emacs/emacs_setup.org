@@ -1512,6 +1512,689 @@ solution:
 #+BEGIN_SRC emacs-lisp
   (org-mode-restart)
 #+END_SRC
+* Coding
+
+Big part of my life is taken by coding. So here it is, all the coding
+related stuff.
+** set authinfo as source
+
+#+BEGIN_SRC emacs-lisp
+(setq auth-sources '("~/.authinfo"))
+#+END_SRC
+** taskjuggler-mode (tj3-mode)
+#+BEGIN_SRC emacs-lisp
+  (use-package tj3-mode
+    :ensure t
+    :after org-plus-contrib
+    :config
+    (require 'ox-taskjuggler)
+    (custom-set-variables
+     '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
+     '(org-taskjuggler-project-tag "PRJ")))
+#+END_SRC
+** Version control
+*** magit
+
+Add the powerful Magit
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t
+    :defer
+    :config
+    (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+    :bind ("C-x g" . 'magit-status))
+  (use-package magit-todos
+    :ensure t
+    :defer)
+  (use-package
+    magit-gitflow
+
+    :ensure
+    :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+#+END_SRC
+*** monky
+Add the Magit-copy for Mercurial 'monky'
+
+#+BEGIN_SRC emacs-lisp
+  (use-package monky
+    :ensure t
+    :defer
+    :bind ("C-x m" . 'monky-status))
+#+END_SRC
+*** git informations in gutter
+#+BEGIN_SRC emacs-lisp
+(use-package git-gutter-fringe+
+  :ensure t
+  :defer
+  :if window-system
+  :bind ("C-c g" . 'git-gutter+-mode))
+#+END_SRC
+*** speedup VCS
+Regexp matching directory names that are not under VC's control. The
+default regexp prevents fruitless and time-consuming attempts to
+determine the VC status in directories in which filenames are
+interpreted as hostnames.
+
+#+BEGIN_SRC emacs-lisp
+(defvar locate-dominating-stop-dir-regexp
+  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
+#+END_SRC
+*** global caller
+
+Have a single binding to call the most appropriate tool given the repository.
+
+#+BEGIN_SRC emacs-lisp
+  (defun paf/vcs-status ()
+       (interactive)
+       (condition-case nil
+           (magit-status-setup-buffer)
+         (error (monky-status))))
+
+  (global-set-key (kbd "C-M-x v") 'paf/vcs-status)
+#+END_SRC
+
+#+RESULTS:
+: paf/vcs-status
+*** forge
+#+BEGIN_SRC emacs-lisp
+(use-package forge
+  :after magit)
+#+END_SRC
+*** code review
+#+BEGIN_SRC emacs-lisp
+(use-package code-review
+  :ensure t)
+#+END_SRC
+** Projectile
+
+Start using projectile. It has the documentation [[https://docs.projectile.mx/en/latest/][here]].
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (setq projectile-completion-system 'helm)
+    (projectile-mode +1))
+
+  (use-package helm-projectile
+    :ensure t
+    :after projectile
+    :requires projectile
+    :delight projectile-mode
+    :config
+    (helm-projectile-on))
+#+END_SRC
+
+Search the entire project with =C-c p s s= for a regexp. This let's
+you turn the matching results into an editable buffer using =C-c
+C-e=. Other keys are listed [[https://github.com/syohex/emacs-helm-ag#keymap][here]].
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-ag
+    :ensure t
+    :config)
+#+END_SRC
+
+I havae used it by a =M-?= binding. It's just old habit:
+#+begin_SRC emacs-lisp
+(global-set-key (kbd "M-?") 'helm-ag)
+#+end_SRC
+
+** debug w/ GDB
+*** TODO Make it so that the source frame placement is forced only when using gdb.
+
+#+BEGIN_SRC emacs-lisp
+  (setq gdb-many-windows t)
+  (setq gdb-use-separate-io-buffer t)
+
+  (defun easy-gdb-top-of-stack-and-restore-windows ()
+    (interactive)
+    (switch-to-buffer (gdb-stack-buffer-name))
+    (goto-char (point-min))
+    (gdb-select-frame)
+    (gdb-restore-windows)
+    (other-window 2))
+
+  (global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
+#+END_SRC
+
+This should display the source code always in the same window when debugging.
+Found on [[https://stackoverflow.com/questions/39762833/emacsgdb-customization-how-to-display-source-buffer-in-one-window][Stack Overflow]].
+#+BEGIN_SRC emacs-lisp
+  ; This unfortunately also messes up the regular frame navigation of source code.
+  ;(add-to-list 'display-buffer-alist
+  ;             (cons 'cdb-source-code-buffer-p
+  ;                   (cons 'display-source-code-buffer nil)))
+
+  (defun cdb-source-code-buffer-p (bufName action)
+    "Return whether BUFNAME is a source code buffer."
+    (let ((buf (get-buffer bufName)))
+      (and buf
+           (with-current-buffer buf
+             (derived-mode-p buf 'c++-mode 'c-mode 'csharp-mode 'nxml-mode)))))
+
+  (defun display-source-code-buffer (sourceBuf alist)
+    "Find a window with source code and set sourceBuf inside it."
+    (let* ((curbuf (current-buffer))
+           (wincurbuf (get-buffer-window curbuf))
+           (win (if (and wincurbuf
+                         (derived-mode-p sourceBuf 'c++-mode 'c-mode 'nxml-mode)
+                         (derived-mode-p (current-buffer) 'c++-mode 'c-mode 'nxml-mode))
+                    wincurbuf
+                  (get-window-with-predicate
+                   (lambda (window)
+                     (let ((bufName (buffer-name (window-buffer window))))
+                       (or (cdb-source-code-buffer-p bufName nil)
+                           (assoc bufName display-buffer-alist)
+                           ))))))) ;; derived-mode-p doesn't work inside this, don't know why...
+      (set-window-buffer win sourceBuf)
+      win))
+#+END_SRC
+
+Here is my cheatsheet for the keyboard commands:
+
+All prefixed with =C-x C-a=
+
+|------------+----------------------+---------|
+| Domain     | Command              | C-<key> |
+| <l>        | <l>                  |   <c>   |
+|------------+----------------------+---------|
+| Breakpoint | set                  |    b    |
+|            | temporary            |    t    |
+|            | delete               |    d    |
+|------------+----------------------+---------|
+| Execute    | Next                 |    n    |
+|            | Step Into            |    s    |
+|            | Return / Finish      |    f    |
+|            | Continue (run)       |    r    |
+|------------+----------------------+---------|
+| Stack      | Up                   |    <    |
+|            | Down                 |    >    |
+|------------+----------------------+---------|
+| Execute    | Until current line   |    u    |
+| (rarer)    | Single instruction   |    i    |
+|            | Jump to current line |    j    |
+|------------+----------------------+---------|
+** editing
+*** diffing
+[[https://github.com/justbur/emacs-vdiff][
+vdiff]] let's one compare buffers or files.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package vdiff
+    :ensure t
+    :config
+    ; This binds commands under the prefix when vdiff is active.
+    (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
+#+END_SRC
+
+*** yasnippet
+Let's first see how far I get with file-based capture templates and yankpad.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package yasnippet
+    :ensure t)
+  (yas-reload-all)
+
+  (use-package yasnippet-snippets
+    :ensure t)
+#+END_SRC
+
+*** commenting out
+Easy commenting out of lines.
+
+#+BEGIN_SRC emacs-lisp
+  (autoload 'comment-out-region "comment" nil t)
+  (global-set-key (kbd "C-c q") 'comment-out-region)
+#+END_SRC
+
+*** deduplicate and sort
+Help cleanup the includes and using lists.
+[[http://www.emacswiki.org/emacs/DuplicateLines][found here]]
+
+#+BEGIN_SRC emacs-lisp
+  (defun uniquify-region-lines (beg end)
+    "Remove duplicate adjacent lines in region."
+    (interactive "*r")
+    (save-excursion
+      (goto-char beg)
+      (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
+        (replace-match "\\1"))))
+
+  (defun paf/sort-and-uniquify-region ()
+    "Remove duplicates and sort lines in region."
+    (interactive)
+    (sort-lines nil (region-beginning) (region-end))
+    (uniquify-region-lines (region-beginning) (region-end)))
+#+END_SRC
+
+Simplify cleanup of =#include= / =typedef= / =using= blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
+#+END_SRC
+*** selective display (default: off)
+Will fold all text indented more than the position of the cursor at
+the time the keys are pressed.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(defun set-selective-display-dlw (&optional level)
+  "Fold text indented more than the cursor.
+   If level is set, set the indent level to level.
+   0 displays the entire buffer."
+  (interactive "P")
+  (set-selective-display (or level (current-column))))
+
+(global-set-key "\C-x$" 'set-selective-display-dlw)
+#+END_SRC
+*** hightlight-indent-guids-mode
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+end_src
+
+#+RESULTS:
+
+** IRC
+Use =circe=.
+#+BEGIN_SRC emacs-lisp
+  (use-package
+    circe
+      :ensure
+      :config(
+              setq circe-network-options '((
+                                            "Freenode" :tls t
+                                            :nick "fengxia41103"
+                                            :channels ("#emacs"
+                                                       "#python"
+                                                       "#odoo"
+                                                       "#reactjs"
+                                                       "#latex")))))
+  (use-package
+    helm-circe
+
+    :ensure
+    :config)
+#+END_SRC
+
+** restclient
+
+#+begin_SRC emacs-lisp
+(use-package restclient
+  :ensure)
+#+end_SRC
+
+Then wrap it w/ this, you can then embed restcall in org!
+
+#+begin_SRC emacs-lisp
+(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+(require 'ob-restclient)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
+#+end_SRC
+
+** languages
+
+These are minor modes to handle programming language specifics which
+are often termed as development rules agreed by the team.
+*** markdown
+Enough to handle my Markdown needs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package writegood-mode
+    :ensure
+    :config)
+
+  (use-package
+    markdown-mode
+
+    :ensure
+    :config
+    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
+    (add-hook 'markdown-mode-hook
+              (lambda ()
+                (visual-line-mode t)
+                (writegood-mode t)
+                (auto-fill-mode t)
+                (flyspell-mode t)))))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+*** C/C++
+**** header/implementation toggle
+
+Switch from header to implementation file quickly.
+#+BEGIN_SRC emacs-lisp
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+#+END_SRC
+**** no indentation of namespaces in C++
+Essentially, use the Google C++ style formatting.
+#+BEGIN_SRC emacs-lisp
+  (use-package google-c-style
+    :ensure t
+    :config
+    (add-hook 'c-mode-common-hook 'google-set-c-style)
+    (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+
+#+END_SRC
+*** python
+
+Setup an IDE:
+
+#+begin_SRC emacs-lisp :tangle no
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+#+end_SRC
+
+ELPY has its own indentation mode, which is overriding the one I use
+globally, so disable this one:
+
+#+begin_SRC emacs-lisp :tangle no
+  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
+#+end_SRC
+
+Link to yasnippet mode:
+#+begin_SRC emacs-lisp :tangle no
+(add-hook 'elpy-mode-hook #'yas-minor-mode)
+#+end_SRC
+
+Auto black on save:
+#+begin_SRC emacs-lisp :tangle no
+(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
+#+end_SRC
+
+Force UTF-8 encoding. Otherwise, elpy will complain w/ some exit 1 abnormal
+error.
+
+#+begin_src emacs-lisp
+(setenv "PYTHONIOENCODING" "utf-8")
+(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
+(add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
+#+end_src
+
+And set up virtualenv path:
+#+begin_src emacs-lisp :tangle no
+;; workon home
+(setenv "WORKON_HOME" "/home/fengxia/.virtualenvs/")
+(setq elpy-rpc-virtualenv-path 'current)
+#+end_src
+
+**** py-autopep8
+
+Add hook to reformat python code based on pep8 spec. You need to
+install =pip install autopep8= offline.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package
+    py-autopep8
+    :ensure)
+  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+  (setq py-autopep8-options '("--max-line-length=88"))
+#+END_SRC
+
+#+RESULTS:
+| --max-line-length=79 |
+
+**** py-isort
+Sort python import. Need to install =pip install isort= offline.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package
+    py-isort
+
+    :ensure
+    :config
+    (add-hook 'before-save-hook 'py-isort-before-save)
+    (setq py-isort-options '("-sl --profile black --filter-files")))
+#+END_SRC
+**** imenu-list
+
+#+begin_SRC emacs-lisp
+  (use-package imenu-list
+  :ensure)
+#+end_SRC
+
+**** smartparens
+#+begin_SRC emacs-lisp
+(add-hook 'python-mode-hook #'smartparens-mode)
+#+end_SRC
+**** python-black
+
+I installed ~black~ using ~apt install black~ because my default
+virtualenv is still on python 2.7. If you have 3.x, you should follow
+their [[https://github.com/psf/black][official instruction]]. Anyway, I think either should be fine.
+
+Now use the emacs wrapper:
+
+#+begin_src emacs-lisp
+(use-package python-black
+  :ensure)
+#+end_src
+
+*** web-mode
+web-mode with config for Polymer editing
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :config
+    (setq web-mode-enable-current-element-highlight t)
+    (setq web-mode-enable-current-column-highlight t)
+    (setq web-mode-enable-css-colorization t))
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+#+END_SRC
+
+Who should use this mode:
+#+begin_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+#+end_SRC
+This is actually depending on =js-beautify=. See [[https://github.com/yasuyk/web-beautify][web-beautify]] for
+details.
+
+#+begin_SRC emacs-lisp :tangle no
+  (use-package web-beautify
+    :ensure
+    :config)
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+  (add-hook 'css-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+  (add-hook 'html-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
+#+end_SRC
+*** [[https://github.com/smihica/emmet-mode][emmet-mode]]
+
+Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencoding][zencoding]] for details.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package emmet-mode
+    :ensure t
+    :after(web-mode css-mode scss-mode)
+    :config)
+  (setq emmet-expand-jsx-className? t)
+  (setq emmet-move-cursor-between-quotes t)
+  (add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'scss-mode-hook  'emmet-mode)
+#+END_SRC
+*** javascript family: .js .ts .jsx
+There are a couple packages for .js files.
+
+**** js2-mode
+First, use =js2-mode= to handle =.js= and =.jsx= files.
+
+#+begin_SRC emacs-lisp
+  (use-package js2-mode
+      :ensure
+      :config)
+  (setq js2-indent-level 2)
+  (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+  (add-hook 'js2-mode-hook #'smartparens-mode)
+  (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
+#+end_SRC
+
+#+RESULTS:
+
+**** prettier
+Link js2-mode to prettier to beautify my code.
+Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
+
+#+begin_SRC emacs-lisp
+  (use-package prettier
+    :ensure
+    :config)
+    (add-hook 'js2-mode-hook 'prettier-mode)
+    (add-hook 'json-mode-hook 'prettier-mode)
+    (add-hook 'js-mode-hook 'prettier-mode)
+    (setq indent-tabs-mode nil js-indent-level 2)
+#+end_SRC
+
+**** js-doc
+Nothing is complete without a doc solution.
+
+#+begin_SRC emacs-lisp
+(use-package js-doc
+  :ensure
+  :config
+  (setq js-doc-mail-address "feng.xia@mycompany.io")
+  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
+  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-license "Company License")
+)
+(add-hook 'js2-mode-hook
+          #'(lambda ()
+              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
+#+end_SRC
+*** csv
+mode to edit CSV files.
+#+BEGIN_SRC emacs-lisp
+  (use-package csv-mode
+    :ensure t
+    :mode "\\.csv\\'")
+#+END_SRC
+*** json
+
+This should be installed before the javascript stuff because I'll be
+using the =prettier= as beautifier.
+
+#+begin_SRC emacs-lisp
+  (use-package json-mode
+    :ensure
+    :config)
+#+end_SRC
+*** yaml
+
+Details are [[https://github.com/yoshiki/yaml-mode][here]].
+
+#+begin_SRC emacs-lisp
+  (use-package yaml-mode
+    :ensure
+    :config)
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-hook 'yaml-mode-hook
+            '(lambda ()
+          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+#+end_SRC
+*** jenkins
+#+BEGIN_SRC emacs-lisp
+  (use-package jenkinsfile-mode
+    :ensure
+    :config)
+
+#+END_SRC
+** LAST: enforce my tab style
+
+Found this [[https://github.com/syl20bnr/spacemacs/issues/5923][here]], and I like it, to set my styles in a central
+location. This was researched while battling the .js tab level. I
+don't want to use the =customize= way since that will be a hidden
+manual step after a fresh install.
+
+First, define a func to include my indent settings. It takes an input
+argument:
+
+#+begin_SRC emacs-lisp
+    (defun my-setup-indent (n)
+      ;; java/c/c++
+      (setq-local standard-indent n)
+      (setq-local c-basic-offset n)
+
+      ;; javascript family
+      (setq-local javascript-indent-level n) ; javascript-mode
+      (setq-local js-indent-level n) ; js-mode
+      (setq-local js2-basic-offset n) ; js2-mode
+      (setq-local js-switch-indent-offset n) ; js-mode
+      (setq-local javascript-indent-level n) ; javacript-mode
+      (setq-local react-indent-level n) ; react-mode
+      (setq-local js2-basic-offset n)
+
+      ;; html, css
+      (setq-local web-mode-attr-indent-offset n) ; web-mode
+      (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+      (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+      (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+      (setq-local web-mode-sql-indent-offset n) ; web-mode
+      (setq-local web-mode-attr-value-indent-offset n) ; web-mode
+      (setq web-mode-comment-style 2) ;; web-mode
+      (setq-local css-indent-offset n) ; css-mode
+
+      ;; shells
+      (setq-local sh-basic-offset n) ; shell scripts
+      (setq-local sh-indentation n))
+#+end_SRC
+
+Now set the tabs:
+
+#+begin_SRC emacs-lisp
+  (defun my-personal-code-style ()
+    (interactive)
+    (message "My personal code style!")
+    ;; use space instead of tab
+    (setq indent-tabs-mode nil)
+    ;; indent 2 spaces width
+    (my-setup-indent 2))
+
+  ;; it would be lovely if this was enough, but it gets stomped on by modes.
+  (my-personal-code-style)
+#+end_SRC
+
+So, to enfore this on some modes:
+#+begin_SRC emacs-lisp
+  (add-hook 'css-mode-hook 'my-personal-code-style)
+  (add-hook 'js2-mode-hook 'my-personal-code-style)
+  (add-hook 'react-mode-hook 'my-personal-code-style)
+  (add-hook 'sh-mode-hook 'my-personal-code-style)
+  (add-hook 'groovy-mode-hook 'my-personal-code-style)
+#+end_SRC
 * buffers
 
 There are three concepts seem to me: desktop, window config, and buffers.
@@ -1944,7 +2627,6 @@ take effect on all of them.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-M-i") 'iedit-mode)
 #+END_SRC
-
 * navigate file & dir
 
 I'm not quite used to using emacs as file manager yet. To me, it's
@@ -2119,7 +2801,6 @@ enable it.
         (string= file ".pyc"))
       (push #'treemacs-ignore-gitignore treemacs-ignored-file-predicates))
   #+end_SRC
-
 * Helm
 
 Helm should really has its own section because it touches everything!
@@ -2405,8 +3086,8 @@ My signature line:
   (setq mu4e-compose-signature
         (concat
          "Best regards,\n\n"
-         "Feng Xia\n"
-         "W: http://www.mycompany.com\n"))
+         "Feng Xia\n\n"
+         "W: http://www.mycompany.io\n"))
 #+END_SRC
 *** send
 Sending email is to use SMTP. Here I'm showing to use the company one
@@ -2418,9 +3099,9 @@ use Gmail/hotmail:
   ;;  :ensure t
   ;;  :config
     (setq send-mail-function 'smtpmail-send-it
-          user-mail-address "fxia1@mycompany.com"
+          user-mail-address "feng.xia@mycompany.io"
           smtpmail-debug-info t
-          smtpmail-smtp-user "fxia1@mycompany.com"
+          smtpmail-smtp-user "feng.xia@mycompany.io"
           smtpmail-default-smtp-server "localhost"
           smtpmail-auth-credentials (expand-file-name "~/.authinfo")
           smtpmail-smtp-service 1025
@@ -2441,12 +3122,12 @@ just write, then queue, then when reconnected to the internect, send.
 *** reply
 When replying an email, auto fill in my info:
 #+BEGIN_SRC emacs-lisp
-  (setq mu4e-compose-reply-to-address "fxia1@mycompany.com"
-        user-mail-address "fxia1@mycompany.com"
+  (setq mu4e-compose-reply-to-address "feng.xia@mycompany.io"
+        user-mail-address "feng.xia@mycompany.io"
         user-full-name "Feng Xia"
         message-signature  (concat
                             "Feng Xia\n"
-                            "http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/\n")
+                            "W: http://www.mycompany.io\n")
         message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
         message-citation-line-function 'message-insert-formatted-citation-line
         mu4e-headers-results-limit 500)
@@ -2565,688 +3246,6 @@ Read news:
      '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
      '(org-taskjuggler-project-tag "PRJ")))
 #+END_SRC
-
-* Coding
-
-Big part of my life is taken by coding. So here it is, all the coding
-related stuff.
-** set authinfo as source
-
-#+BEGIN_SRC emacs-lisp
-(setq auth-sources '("~/.authinfo"))
-#+END_SRC
-** taskjuggler-mode (tj3-mode)
-#+BEGIN_SRC emacs-lisp
-  (use-package tj3-mode
-    :ensure t
-    :after org-plus-contrib
-    :config
-    (require 'ox-taskjuggler)
-    (custom-set-variables
-     '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
-     '(org-taskjuggler-project-tag "PRJ")))
-#+END_SRC
-** Version control
-*** magit
-
-Add the powerful Magit
-
-#+BEGIN_SRC emacs-lisp
-  (use-package magit
-    :ensure t
-    :defer
-    :config
-    (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
-    :bind ("C-x g" . 'magit-status))
-  (use-package magit-todos
-    :ensure t
-    :defer)
-  (use-package
-    magit-gitflow
-
-    :ensure
-    :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
-#+END_SRC
-*** monky
-Add the Magit-copy for Mercurial 'monky'
-
-#+BEGIN_SRC emacs-lisp
-  (use-package monky
-    :ensure t
-    :defer
-    :bind ("C-x m" . 'monky-status))
-#+END_SRC
-*** git informations in gutter
-#+BEGIN_SRC emacs-lisp
-(use-package git-gutter-fringe+
-  :ensure t
-  :defer
-  :if window-system
-  :bind ("C-c g" . 'git-gutter+-mode))
-#+END_SRC
-*** speedup VCS
-Regexp matching directory names that are not under VC's control. The
-default regexp prevents fruitless and time-consuming attempts to
-determine the VC status in directories in which filenames are
-interpreted as hostnames.
-
-#+BEGIN_SRC emacs-lisp
-(defvar locate-dominating-stop-dir-regexp
-  "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
-#+END_SRC
-*** global caller
-
-Have a single binding to call the most appropriate tool given the repository.
-
-#+BEGIN_SRC emacs-lisp
-  (defun paf/vcs-status ()
-       (interactive)
-       (condition-case nil
-           (magit-status-setup-buffer)
-         (error (monky-status))))
-
-  (global-set-key (kbd "C-M-x v") 'paf/vcs-status)
-#+END_SRC
-
-#+RESULTS:
-: paf/vcs-status
-*** forge
-#+BEGIN_SRC emacs-lisp
-(use-package forge
-  :after magit)
-#+END_SRC
-*** code review
-#+BEGIN_SRC emacs-lisp
-(use-package code-review
-  :ensure t)
-#+END_SRC
-** Projectile
-
-Start using projectile. It has the documentation [[https://docs.projectile.mx/en/latest/][here]].
-
-#+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :ensure t
-    :config
-    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-    (setq projectile-completion-system 'helm)
-    (projectile-mode +1))
-
-  (use-package helm-projectile
-    :ensure t
-    :after projectile
-    :requires projectile
-    :delight projectile-mode
-    :config
-    (helm-projectile-on))
-#+END_SRC
-
-Search the entire project with =C-c p s s= for a regexp. This let's
-you turn the matching results into an editable buffer using =C-c
-C-e=. Other keys are listed [[https://github.com/syohex/emacs-helm-ag#keymap][here]].
-
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-ag
-    :ensure t
-    :config)
-#+END_SRC
-
-I havae used it by a =M-?= binding. It's just old habit:
-#+begin_SRC emacs-lisp
-(global-set-key (kbd "M-?") 'helm-ag)
-#+end_SRC
-
-** debug w/ GDB
-*** TODO Make it so that the source frame placement is forced only when using gdb.
-
-#+BEGIN_SRC emacs-lisp
-  (setq gdb-many-windows t)
-  (setq gdb-use-separate-io-buffer t)
-
-  (defun easy-gdb-top-of-stack-and-restore-windows ()
-    (interactive)
-    (switch-to-buffer (gdb-stack-buffer-name))
-    (goto-char (point-min))
-    (gdb-select-frame)
-    (gdb-restore-windows)
-    (other-window 2))
-
-  (global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
-#+END_SRC
-
-This should display the source code always in the same window when debugging.
-Found on [[https://stackoverflow.com/questions/39762833/emacsgdb-customization-how-to-display-source-buffer-in-one-window][Stack Overflow]].
-#+BEGIN_SRC emacs-lisp
-  ; This unfortunately also messes up the regular frame navigation of source code.
-  ;(add-to-list 'display-buffer-alist
-  ;             (cons 'cdb-source-code-buffer-p
-  ;                   (cons 'display-source-code-buffer nil)))
-
-  (defun cdb-source-code-buffer-p (bufName action)
-    "Return whether BUFNAME is a source code buffer."
-    (let ((buf (get-buffer bufName)))
-      (and buf
-           (with-current-buffer buf
-             (derived-mode-p buf 'c++-mode 'c-mode 'csharp-mode 'nxml-mode)))))
-
-  (defun display-source-code-buffer (sourceBuf alist)
-    "Find a window with source code and set sourceBuf inside it."
-    (let* ((curbuf (current-buffer))
-           (wincurbuf (get-buffer-window curbuf))
-           (win (if (and wincurbuf
-                         (derived-mode-p sourceBuf 'c++-mode 'c-mode 'nxml-mode)
-                         (derived-mode-p (current-buffer) 'c++-mode 'c-mode 'nxml-mode))
-                    wincurbuf
-                  (get-window-with-predicate
-                   (lambda (window)
-                     (let ((bufName (buffer-name (window-buffer window))))
-                       (or (cdb-source-code-buffer-p bufName nil)
-                           (assoc bufName display-buffer-alist)
-                           ))))))) ;; derived-mode-p doesn't work inside this, don't know why...
-      (set-window-buffer win sourceBuf)
-      win))
-#+END_SRC
-
-Here is my cheatsheet for the keyboard commands:
-
-All prefixed with =C-x C-a=
-
-|------------+----------------------+---------|
-| Domain     | Command              | C-<key> |
-| <l>        | <l>                  |   <c>   |
-|------------+----------------------+---------|
-| Breakpoint | set                  |    b    |
-|            | temporary            |    t    |
-|            | delete               |    d    |
-|------------+----------------------+---------|
-| Execute    | Next                 |    n    |
-|            | Step Into            |    s    |
-|            | Return / Finish      |    f    |
-|            | Continue (run)       |    r    |
-|------------+----------------------+---------|
-| Stack      | Up                   |    <    |
-|            | Down                 |    >    |
-|------------+----------------------+---------|
-| Execute    | Until current line   |    u    |
-| (rarer)    | Single instruction   |    i    |
-|            | Jump to current line |    j    |
-|------------+----------------------+---------|
-** editing
-*** diffing
-[[https://github.com/justbur/emacs-vdiff][
-vdiff]] let's one compare buffers or files.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package vdiff
-    :ensure t
-    :config
-    ; This binds commands under the prefix when vdiff is active.
-    (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-#+END_SRC
-
-*** yasnippet
-Let's first see how far I get with file-based capture templates and yankpad.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (use-package yasnippet
-    :ensure t)
-  (yas-reload-all)
-
-  (use-package yasnippet-snippets
-    :ensure t)
-#+END_SRC
-
-*** commenting out
-Easy commenting out of lines.
-
-#+BEGIN_SRC emacs-lisp
-  (autoload 'comment-out-region "comment" nil t)
-  (global-set-key (kbd "C-c q") 'comment-out-region)
-#+END_SRC
-
-*** deduplicate and sort
-Help cleanup the includes and using lists.
-[[http://www.emacswiki.org/emacs/DuplicateLines][found here]]
-
-#+BEGIN_SRC emacs-lisp
-  (defun uniquify-region-lines (beg end)
-    "Remove duplicate adjacent lines in region."
-    (interactive "*r")
-    (save-excursion
-      (goto-char beg)
-      (while (re-search-forward "^\\(.*\n\\)\\1+" end t)
-        (replace-match "\\1"))))
-
-  (defun paf/sort-and-uniquify-region ()
-    "Remove duplicates and sort lines in region."
-    (interactive)
-    (sort-lines nil (region-beginning) (region-end))
-    (uniquify-region-lines (region-beginning) (region-end)))
-#+END_SRC
-
-Simplify cleanup of =#include= / =typedef= / =using= blocks.
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
-#+END_SRC
-*** selective display (default: off)
-Will fold all text indented more than the position of the cursor at
-the time the keys are pressed.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(defun set-selective-display-dlw (&optional level)
-  "Fold text indented more than the cursor.
-   If level is set, set the indent level to level.
-   0 displays the entire buffer."
-  (interactive "P")
-  (set-selective-display (or level (current-column))))
-
-(global-set-key "\C-x$" 'set-selective-display-dlw)
-#+END_SRC
-*** hightlight-indent-guids-mode
-#+begin_src emacs-lisp
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-#+end_src
-
-#+RESULTS:
-
-** IRC
-Use =circe=.
-#+BEGIN_SRC emacs-lisp
-  (use-package
-    circe
-      :ensure
-      :config(
-              setq circe-network-options '((
-                                            "Freenode" :tls t
-                                            :nick "fengxia41103"
-                                            :channels ("#emacs"
-                                                       "#python"
-                                                       "#odoo"
-                                                       "#reactjs"
-                                                       "#latex")))))
-  (use-package
-    helm-circe
-
-    :ensure
-    :config)
-#+END_SRC
-
-** restclient
-
-#+begin_SRC emacs-lisp
-(use-package restclient
-  :ensure)
-#+end_SRC
-
-Then wrap it w/ this, you can then embed restcall in org!
-
-#+begin_SRC emacs-lisp
-(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
-(require 'ob-restclient)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((restclient . t)))
-#+end_SRC
-
-** languages
-
-These are minor modes to handle programming language specifics which
-are often termed as development rules agreed by the team.
-*** markdown
-Enough to handle my Markdown needs.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package writegood-mode
-    :ensure
-    :config)
-
-  (use-package
-    markdown-mode
-
-    :ensure
-    :config
-    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
-    (add-hook 'markdown-mode-hook
-              (lambda ()
-                (visual-line-mode t)
-                (writegood-mode t)
-                (auto-fill-mode t)
-                (flyspell-mode t)))))
-#+END_SRC
-
-#+RESULTS:
-: t
-
-*** C/C++
-**** header/implementation toggle
-
-Switch from header to implementation file quickly.
-#+BEGIN_SRC emacs-lisp
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
-#+END_SRC
-**** no indentation of namespaces in C++
-Essentially, use the Google C++ style formatting.
-#+BEGIN_SRC emacs-lisp
-  (use-package google-c-style
-    :ensure t
-    :config
-    (add-hook 'c-mode-common-hook 'google-set-c-style)
-    (add-hook 'c-mode-common-hook 'google-make-newline-indent))
-
-#+END_SRC
-*** python
-
-Setup an IDE:
-
-#+begin_SRC emacs-lisp
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
-#+end_SRC
-
-ELPY has its own indentation mode, which is overriding the one I use
-globally, so disable this one:
-
-#+begin_SRC emacs-lisp
-  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
-#+end_SRC
-
-Link to yasnippet mode:
-#+begin_SRC emacs-lisp
-(add-hook 'elpy-mode-hook #'yas-minor-mode)
-#+end_SRC
-
-Auto black on save:
-#+begin_SRC emacs-lisp
-(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
-#+end_SRC
-
-Force UTF-8 encoding. Otherwise, elpy will complain w/ some exit 1 abnormal
-error.
-
-#+begin_src emacs-lisp
-(setenv "PYTHONIOENCODING" "utf-8")
-(add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
-(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
-(add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
-#+end_src
-
-And set up virtualenv path:
-#+begin_src emacs-lisp
-(setq elpy-rpc-virtualenv-path 'current)
-#+end_src
-
-**** py-autopep8
-
-Add hook to reformat python code based on pep8 spec. You need to
-install =pip install autopep8= offline.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package
-    py-autopep8
-    :ensure)
-  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  (setq py-autopep8-options '("--max-line-length=79"))
-#+END_SRC
-
-#+RESULTS:
-| --max-line-length=79 |
-
-**** py-isort
-Sort python import. Need to install =pip install isort= offline.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package
-    py-isort
-
-    :ensure
-    :config
-    (add-hook 'before-save-hook 'py-isort-before-save)
-    (setq py-isort-options '("-sl")))
-#+END_SRC
-**** imenu-list
-
-#+begin_SRC emacs-lisp
-  (use-package imenu-list
-  :ensure)
-#+end_SRC
-
-**** smartparens
-#+begin_SRC emacs-lisp
-(add-hook 'python-mode-hook #'smartparens-mode)
-#+end_SRC
-**** python-black
-
-I installed ~black~ using ~apt install black~ because my default
-virtualenv is still on python 2.7. If you have 3.x, you should follow
-their [[https://github.com/psf/black][official instruction]]. Anyway, I think either should be fine.
-
-Now use the emacs wrapper:
-
-#+begin_src emacs-lisp
-(use-package python-black
-  :ensure)
-#+end_src
-
-*** web-mode
-web-mode with config for Polymer editing
-#+BEGIN_SRC emacs-lisp
-  (use-package web-mode
-    :ensure t
-    :config
-    (setq web-mode-enable-current-element-highlight t)
-    (setq web-mode-enable-current-column-highlight t)
-    (setq web-mode-enable-css-colorization t))
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-#+END_SRC
-
-Who should use this mode:
-#+begin_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
-#+end_SRC
-This is actually depending on =js-beautify=. See [[https://github.com/yasuyk/web-beautify][web-beautify]] for
-details.
-
-#+begin_SRC emacs-lisp :tangle no
-  (use-package web-beautify
-    :ensure
-    :config)
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-  (add-hook 'json-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-  (add-hook 'css-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
-  (add-hook 'html-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-#+end_SRC
-*** [[https://github.com/smihica/emmet-mode][emmet-mode]]
-
-Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencoding][zencoding]] for details.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package emmet-mode
-    :ensure t
-    :after(web-mode css-mode scss-mode)
-    :config)
-  (setq emmet-expand-jsx-className? t)
-  (setq emmet-move-cursor-between-quotes t)
-  (add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook  'emmet-mode)
-  (add-hook 'scss-mode-hook  'emmet-mode)
-#+END_SRC
-*** javascript family: .js .ts .jsx
-There are a couple packages for .js files.
-
-**** js2-mode
-First, use =js2-mode= to handle =.js= and =.jsx= files.
-
-#+begin_SRC emacs-lisp
-  (use-package js2-mode
-      :ensure
-      :config)
-  (setq js2-indent-level 2)
-  (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
-  (add-hook 'js2-mode-hook #'smartparens-mode)
-  (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
-#+end_SRC
-
-#+RESULTS:
-
-**** prettier
-Link js2-mode to prettier to beautify my code.
-Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
-
-#+begin_SRC emacs-lisp
-  (use-package prettier
-    :ensure
-    :config)
-    (add-hook 'js2-mode-hook 'prettier-mode)
-    (add-hook 'json-mode-hook 'prettier-mode)
-    (add-hook 'js-mode-hook 'prettier-mode)
-    (setq indent-tabs-mode nil js-indent-level 2)
-#+end_SRC
-
-**** js-doc
-Nothing is complete without a doc solution.
-
-#+begin_SRC emacs-lisp
-(use-package js-doc
-  :ensure
-  :config
-  (setq js-doc-mail-address "fxia1@mycompany.com")
-  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
-  (setq js-doc-license "Company License")
-)
-(add-hook 'js2-mode-hook
-          #'(lambda ()
-              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
-              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
-
-#+end_SRC
-*** csv
-mode to edit CSV files.
-#+BEGIN_SRC emacs-lisp
-  (use-package csv-mode
-    :ensure t
-    :mode "\\.csv\\'")
-#+END_SRC
-*** json
-
-This should be installed before the javascript stuff because I'll be
-using the =prettier= as beautifier.
-
-#+begin_SRC emacs-lisp
-  (use-package json-mode
-    :ensure
-    :config)
-#+end_SRC
-*** yaml
-
-Details are [[https://github.com/yoshiki/yaml-mode][here]].
-
-#+begin_SRC emacs-lisp
-  (use-package yaml-mode
-    :ensure
-    :config)
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-hook 'yaml-mode-hook
-            '(lambda ()
-          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-#+end_SRC
-*** jenkins
-#+BEGIN_SRC emacs-lisp
-  (use-package jenkinsfile-mode
-    :ensure
-    :config)
-
-#+END_SRC
-** LAST: enforce my tab style
-
-Found this [[https://github.com/syl20bnr/spacemacs/issues/5923][here]], and I like it, to set my styles in a central
-location. This was researched while battling the .js tab level. I
-don't want to use the =customize= way since that will be a hidden
-manual step after a fresh install.
-
-First, define a func to include my indent settings. It takes an input
-argument:
-
-#+begin_SRC emacs-lisp
-    (defun my-setup-indent (n)
-      ;; java/c/c++
-      (setq-local standard-indent n)
-      (setq-local c-basic-offset n)
-
-      ;; javascript family
-      (setq-local javascript-indent-level n) ; javascript-mode
-      (setq-local js-indent-level n) ; js-mode
-      (setq-local js2-basic-offset n) ; js2-mode
-      (setq-local js-switch-indent-offset n) ; js-mode
-      (setq-local javascript-indent-level n) ; javacript-mode
-      (setq-local react-indent-level n) ; react-mode
-      (setq-local js2-basic-offset n)
-
-      ;; html, css
-      (setq-local web-mode-attr-indent-offset n) ; web-mode
-      (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
-      (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
-      (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-      (setq-local web-mode-sql-indent-offset n) ; web-mode
-      (setq-local web-mode-attr-value-indent-offset n) ; web-mode
-      (setq web-mode-comment-style 2) ;; web-mode
-      (setq-local css-indent-offset n) ; css-mode
-
-      ;; shells
-      (setq-local sh-basic-offset n) ; shell scripts
-      (setq-local sh-indentation n))
-#+end_SRC
-
-Now set the tabs:
-
-#+begin_SRC emacs-lisp
-  (defun my-personal-code-style ()
-    (interactive)
-    (message "My personal code style!")
-    ;; use space instead of tab
-    (setq indent-tabs-mode nil)
-    ;; indent 2 spaces width
-    (my-setup-indent 2))
-
-  ;; it would be lovely if this was enough, but it gets stomped on by modes.
-  (my-personal-code-style)
-#+end_SRC
-
-So, to enfore this on some modes:
-#+begin_SRC emacs-lisp
-  (add-hook 'css-mode-hook 'my-personal-code-style)
-  (add-hook 'js2-mode-hook 'my-personal-code-style)
-  (add-hook 'react-mode-hook 'my-personal-code-style)
-  (add-hook 'sh-mode-hook 'my-personal-code-style)
-  (add-hook 'groovy-mode-hook 'my-personal-code-style)
-#+end_SRC
 * My doc writing
 
 Writing doc is painful, not because I don't like writing, but because

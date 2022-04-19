@@ -105,7 +105,7 @@ In your =~/.emacs= file, all you need to add is
 
 Put this in the =~/Emacs/emacs_setup.el=, and viola, it will regnerate itself!
 
-#+begin_SRC emacs-lisp :tangle /tmp/emacs_setup.el
+#+BEGIN_SRC emacs-lisp :tangle /tmp/emacs_setup.el
 
 ;; This is the initial state of the file to be loaded.
 ;; It will replace itself with the actual configuration at first run.
@@ -119,7 +119,8 @@ Put this in the =~/Emacs/emacs_setup.el=, and viola, it will regnerate itself!
 (org-babel-tangle)                             ; tangle it
 (load-file (concat config_base ".el"))         ; load it
 (byte-compile-file (concat config_base ".el")) ; finally byte-compile it
-#+end_SRC
+#+END_SRC
+
 * reset
 
 Reset takes two steps, but you can do either or both, depending on
@@ -238,9 +239,10 @@ init file as soon as I save it.
 #+RESULTS:
 
 ** surpress "add-handle-definition..." error
-#+begin_src emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
 (custom-set-variables '(ad-redefinition-action (quote accept)))
-#+end_src
+#+END_SRC
 
 * base packages
 
@@ -251,10 +253,11 @@ available. For example, the .
 ** all-the-icons
 
 Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
-#+begin_SRC emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
   (use-package all-the-icons
     :ensure)
-#+end_SRC
+#+END_SRC
 
 You would have to run =M-x all-the-icons-install-fonts= manually at
 least once to install fonts to your system.
@@ -268,6 +271,7 @@ Colorize color names and codes in the correct color.
     :ensure t
     :delight)
 #+END_SRC
+
 ** Hydra
 :PROPERTIES:
 :CUSTOM_ID: hydra
@@ -277,16 +281,18 @@ Colorize color names and codes in the correct color.
   (use-package hydra
     :ensure t)
 #+END_SRC
+
 ** whichkey
 
 Give me a hint when I'm entering a keybinding:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure
     :config
     (which-key-setup-side-window-right))
   (which-key-mode)
-#+end_SRC
+#+END_SRC
+
 * global stuff
 
 Some global settings such as line number. Well, just about everything
@@ -317,7 +323,7 @@ Make Emacs request UTF-8 first when pasting stuff
 
 *** shell env
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq exec-path-from-shell-debug t)
 (setenv "SHELL" "/usr/bin/zsh")
 (use-package exec-path-from-shell
@@ -325,17 +331,19 @@ Make Emacs request UTF-8 first when pasting stuff
   :if (memq window-system '(mac ns x))
   :config
   (exec-path-from-shell-initialize))
+#+END_SRC
 
-#+end_SRC
 ** UTF-8 env
-#+begin_SRC emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
   (prefer-coding-system 'utf-8)
 
   (setenv "LANG" "en_US.UTF-8")
   (setenv "LC_ALL" "en_US.UTF-8")
   (setenv "LC_CTYPE" "en_US.UTF-8")
   (set-language-environment "UTF-8")
-#+end_SRC
+#+END_SRC
+
 ** browser (default: chrome)
 
 I like Chrome. Period.
@@ -382,9 +390,9 @@ modified in the buffer.
 
 Change all prompts to y or n:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
-#+end_SRC
+#+END_SRC
 
 ** hide menu bar & toolbar
 Using i3 is forcing me to use keyboard.
@@ -395,6 +403,7 @@ Using i3 is forcing me to use keyboard.
   (tool-bar-mode -1)
   (blink-cursor-mode -1)
 #+END_SRC
+
 ** alternate key mappings
 
 Letting one enter chars that are otherwise difficult in e.g. the
@@ -406,19 +415,22 @@ minibuffer.
   (global-set-key [delete] 'delete-char)
   (global-set-key [kp-delete] 'delete-char)
 #+END_SRC
+
 ** macros (default: off)
+
 #+BEGIN_SRC emacs-lisp :tangle no
   (global-set-key [f3] 'start-kbd-macro)
   (global-set-key [f4] 'end-kbd-macro)
   (global-set-key [f5] 'call-last-kbd-macro)
 #+END_SRC
+
 ** linum
 
 For now, I'm doing it globally.
 
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (global-display-line-numbers-mode t)
-#+end_SRC
+#+END_SRC
 
 
 Yes I like having line numbers, but turnning it on globally makes some
@@ -428,7 +440,7 @@ brings value. *Note* that the ones I skip are:
 1. mu4e-compose-mode: when writing email, it's better not to count for line num.
 2. markdown: for the same reason. I'm writing.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
   (add-hook 'org-mode-hook 'display-line-numbers-mode)
   (add-hook 'python-mode-hook 'display-line-numbers-mode)
@@ -437,14 +449,15 @@ brings value. *Note* that the ones I skip are:
   (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
   (add-hook 'json-mode-hook 'display-line-numbers-mode)
   (add-hook 'java-mode-hook 'display-line-numbers-mode)
-#+end_SRC
+#+END_SRC
+
 ** disable electric-indent
 
 This is very annoying that it keeps indenting.
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (electric-indent-mode -1)
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
-#+end_SRC
+#+END_SRC
 
 * font, theme
 
@@ -469,24 +482,32 @@ Loading a theme I like.
 
 *** mode lines
 **** doom-modeline
-#+begin_SRC emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
-#+end_SRC
+#+END_SRC
+
 **** remove some modelines
+
 #+BEGIN_SRC emacs-lisp
   (use-package eldoc
     :delight)
 #+END_SRC
+
 **** nyan-mode
+
 #+BEGIN_SRC emacs-lisp
 (use-package nyan-mode
   :ensure t
   :bind ("C-M-x n" . 'nyan-mode))
 #+END_SRC
+
 *** delight
+
 Package to remove some info from the mode-line for minor-modes.
+
 #+BEGIN_SRC emacs-lisp
   (use-package delight
     :ensure t)
@@ -498,6 +519,7 @@ Package to remove some info from the mode-line for minor-modes.
             (overwrite-mode " Ov" t)
             (emacs-lisp-mode "Elisp" :major)))
 #+END_SRC
+
 *** multiple-cursors
 
 Configure the shortcuts for multiple cursors.
@@ -510,28 +532,31 @@ Configure the shortcuts for multiple cursors.
          ("C-<" . 'mc/mark-previous-like-this)
          ("C-c C->" . 'mc/mark-all-like-this)))
 #+END_SRC
+
 *** dimmer
 
 This will dim the buffer that is not the current. Sort of a visual
 cue. However, I found that it can be ugly depending the theme.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package dimmer
     :ensure
     :config
     (dimmer-configure-which-key)
     (dimmer-configure-helm))
   (dimmer-mode t)
-#+end_SRC
+#+END_SRC
 
 *** highlight indent
-#+begin_SRC emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
   (use-package highlight-indent-guides
   :ensure
   :config
   (setq highlight-indent-guides-method 'character))
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-#+end_SRC
+#+END_SRC
+
 ** fontlock
 
 This gets the font coloring switched on for all buffers.
@@ -564,19 +589,24 @@ Remove bell and dings.
          (message "The answer is 42...")))
 (setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
 #+END_SRC
+
 ** In terminal mode
+
 #+BEGIN_SRC emacs-lisp
 (when (display-graphic-p)
   (set-background-color "#ffffff")
   (set-foreground-color "#141312"))
 #+END_SRC
+
 ** In X11 mode: mouse and window title
+
 #+BEGIN_SRC emacs-lisp
 (setq frame-title-format "emacs @ %b - %f")
 (when window-system
   (mouse-wheel-mode)  ;; enable wheelmouse support by default
   (set-selection-coding-system 'compound-text-with-extensions))
 #+END_SRC
+
 ** dynamic cursor colors
 
 The cursor is displayed in different colors, depending on overwrite or
@@ -601,6 +631,7 @@ insert mode.
 
 (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
 #+END_SRC
+
 * the big Org
 
 Org-mode is, overwhelming! It can do a lot, and it takes a long time
@@ -678,6 +709,7 @@ Make the display of images a simple key-stroke away.
                                (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
                               )))
 #+END_SRC
+
 *** snippets found online
 
 Some helper snippets found online.
@@ -711,6 +743,7 @@ Then you can use the keyboard shortcut to open that dir.
   "Compute an expanded absolute file path for org files"
   (expand-file-name filename org-directory))
 #+END_SRC
+
 **** Adjust tags on the right
 
 Dynamically adjust tag position [[https://orgmode.org/worg/org-hacks.html#org0560357][source on worg]]
@@ -826,6 +859,7 @@ Collect properties into tables. See documentation in the file.
 #+BEGIN_SRC emacs-lisp :tangle no
   (load-file "~/Emacs/org-collector.el")
 #+END_SRC
+
 **** access org file remotely via SSH
 
 Let's bind this to a key, so I can open remote dirs. I suually put
@@ -855,6 +889,7 @@ this in my =.emacs= as it is host- and user-specific.
                )))
 
 #+END_SRC
+
 ** key mappings
 
 #+BEGIN_SRC emacs-lisp
@@ -871,6 +906,7 @@ this in my =.emacs= as it is host- and user-specific.
               (local-set-key (kbd "C-c C-l") 'org-insert-link)))
 
 #+END_SRC
+
 ** display settings
 Some config for display. Some of these are borrowed from [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
 
@@ -884,11 +920,11 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 #+END_SRC
 
 *** org-bullets
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package org-bullets
     :ensure
     :hook (org-mode . org-bullets-mode))
-#+end_SRC
+#+END_SRC
 
 *** headline font
 
@@ -916,6 +952,7 @@ This will make headline and text body different font size.
      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
      `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
 #+END_SRC
+
 *** custom font
 Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
 
@@ -1014,14 +1051,15 @@ This lets one write links as e.g. [ [b:123457] ]
         ("go" . "http://go/")
         ("cl" . "http://cr/")))
 #+END_SRC
+
 *** auto line wrap
 
 Wrap around after 80 columns. The key is auto-fill mode.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
-#+end_SRC
+#+END_SRC
 
 ** export
 
@@ -1055,15 +1093,19 @@ What kind of code block languages do I need
 #+END_SRC
 
 *** markdown
+
 #+BEGIN_SRC emacs-lisp
   (use-package ox-md
     :defer)
 #+END_SRC
+
 *** beamer
+
 #+BEGIN_SRC emacs-lisp
   (use-package ox-beamer
     :defer)
 #+END_SRC
+
 *** org-reveal
 
 You need to install =reveal.js= offline, then specify its path here.
@@ -1077,16 +1119,21 @@ You need to install =reveal.js= offline, then specify its path here.
   (use-package htmlize
     :ensure t)
 #+END_SRC
+
 *** odt
+
 #+BEGIN_SRC emacs-lisp
   (use-package ox-odt
     :defer)
 #+END_SRC
+
 *** taskjuggler
+
 #+BEGIN_SRC emacs-lisp
   (use-package ox-taskjuggler
     :defer)
 #+END_SRC
+
 *** confluence
 #+BEGIN_SRC emacs-lisp
   (use-package ox-confluence
@@ -1108,7 +1155,9 @@ This enables a more fine-grained filtering of the agenda items.
     :config
     (org-super-agenda-mode t))
 #+END_SRC
+
 **** org-clock-convenience
+
 #+BEGIN_SRC emacs-lisp
   (use-package org-clock-convenience
     :ensure t
@@ -1118,7 +1167,9 @@ This enables a more fine-grained filtering of the agenda items.
              ("[" . org-clock-convenience-fill-gap)
              ("]" . org-clock-convenience-fill-gap-both)))
 #+END_SRC
+
 **** org-habit
+
 #+BEGIN_SRC emacs-lisp
 (use-package org-habit
   :delight
@@ -1128,6 +1179,7 @@ This enables a more fine-grained filtering of the agenda items.
   (setq org-habit-following-days 10)
   (setq org-habit-show-habits-only-for-today nil))
 #+END_SRC
+
 **** org-secretary
 
 This package is good, but it does not do it simply. I re-modeled it
@@ -1163,6 +1215,7 @@ This is my version of the org-secretary
                             ("VC" . ?v))))
 #+END_SRC
 **** org-duration
+
 #+BEGIN_SRC emacs-lisp
   (use-package org-duration
     :config
@@ -1176,6 +1229,7 @@ This is my version of the org-secretary
           )
     (org-duration-set-regexps))
 #+END_SRC
+
 *** keywords & status state machine
 
 TODO doesn't have to have a special keyword. However, once you have a
@@ -1240,11 +1294,12 @@ it's a necessary evil.
 *** priorities
 
 Set color for priorities based on [[http://pragmaticemacs.com/emacs/org-mode-basics-vi-a-simple-todo-list/][this]].
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
                            (?B . (:foreground "LightSteelBlue"))
                            (?C . (:foreground "OliveDrab"))))
-#+end_SRC
+#+END_SRC
+
 *** capture & refile
 
 Capture and refile stuff, with some templates that I think are useful.
@@ -1307,6 +1362,7 @@ in Files]].
     (not (member (nth 2 (org-heading-components)) org-done-keywords)))
   (setq org-refile-target-verify-function 'bh/verify-refile-target)
 #+END_SRC
+
 *** task tracking
 
 Track task dependencies, and dim them in the agenda.
@@ -1315,6 +1371,7 @@ Track task dependencies, and dim them in the agenda.
   (setq org-enforce-todo-dependencies t)
   (setq org-agenda-dim-blocked-tasks 'invisible)
 #+END_SRC
+
 *** effort & columns mode
 
 #+BEGIN_SRC emacs-lisp
@@ -1386,10 +1443,12 @@ F12 open the first agenda file
 
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 2)
 #+END_SRC
+
 **** delight
 #+BEGIN_SRC emacs-lisp
   (delight 'org-agenda-mode)
 #+END_SRC
+
 **** colors and faces
 
 Make the calendar day info a bit more visible and contrasted.
@@ -1401,6 +1460,7 @@ Make the calendar day info a bit more visible and contrasted.
    '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
    '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold)))))
 #+END_SRC
+
 **** now marker
 
 A more visible current-time marker in the agenda
@@ -1408,6 +1468,7 @@ A more visible current-time marker in the agenda
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-current-time-string ">>>>>>>>>> NOW <<<<<<<<<<")
 #+END_SRC
+
 **** auto-refresh
 
 #+BEGIN_SRC emacs-lisp
@@ -1417,6 +1478,7 @@ A more visible current-time marker in the agenda
   ;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
 #+END_SRC
 
+
 This would open the agenda if any org file was opened. In the end, I
 don't like this feature, so it is disabled by not tangling it.
 
@@ -1425,6 +1487,7 @@ don't like this feature, so it is disabled by not tangling it.
   (add-hook 'org-mode-hook
             (lambda () (run-with-idle-timer 600 t 'jump-to-org-agenda)))
 #+END_SRC
+
 **** auto-save org files when idle
 
 This will save them regularly when the idle for more than a minute.
@@ -1433,6 +1496,7 @@ This will save them regularly when the idle for more than a minute.
   (add-hook 'org-mode-hook
             (lambda () (run-with-idle-timer 600 t 'org-save-all-org-buffers)))
 #+END_SRC
+
 **** export
 
 That's the export function to update the agenda view.
@@ -1452,6 +1516,7 @@ That's the export function to update the agenda view.
         (org-agenda-list)
         (org-agenda-write file)))))
 #+END_SRC
+
 **** Auto-Refresh Agenda
 
 Refresh org-mode agenda regularly.  [[https://orgmode.org/worg/org-hacks.html#orgab827a7][source on worg]] There are two
@@ -1472,6 +1537,7 @@ functions that supposedly do the same.
     (if buf
         (org-agenda-redo))))
 #+END_SRC
+
 **** Display Agenda when idle
 
 Show the agenda when emacs left idle.  [[https://orgmode.org/worg/org-hacks.html#orgaea636d][source on worg]]
@@ -1500,6 +1566,7 @@ Show the agenda when emacs left idle.  [[https://orgmode.org/worg/org-hacks.html
   ;;    (org-agenda-goto-calendar)))
   )
 #+END_SRC
+
 **** Display location in agenda
 
 From some help on [[https://emacs.stackexchange.com/questions/26249/customize-text-after-task-in-custom-org-agenda-view][this page]] I think this could work:
@@ -1513,12 +1580,14 @@ From some help on [[https://emacs.stackexchange.com/questions/26249/customize-te
         "")))
 #+END_SRC
 
+
 Also, to set this after org-mode has loaded ([[https://emacs.stackexchange.com/questions/19091/how-to-set-org-agenda-prefix-format-before-org-agenda-starts][see here]]):
 #+BEGIN_SRC emacs-lisp :tangle no
   (with-eval-after-load 'org-agenda
     (add-to-list 'org-agenda-prefix-format
                  '(agenda . "  %-12:c%?-12t %(paf/org-agenda-get-location)% s"))
 #+END_SRC
+
 *** org-clock properties
 clock stuff into a drawer.
 #+BEGIN_SRC emacs-lisp
@@ -1526,6 +1595,7 @@ clock stuff into a drawer.
   (setq org-log-into-drawer t)
   (setq org-clock-int-drawer "CLOCK")
 #+END_SRC
+
 ** LAST step: reload org
 
 Ran into a [[https://github.com/seagle0128/.emacs.d/issues/129][strange error]], and reloading org at the end is the
@@ -1534,6 +1604,7 @@ solution:
 #+BEGIN_SRC emacs-lisp
   (org-mode-restart)
 #+END_SRC
+
 * Coding
 
 Big part of my life is taken by coding. So here it is, all the coding
@@ -1543,6 +1614,7 @@ related stuff.
 #+BEGIN_SRC emacs-lisp
 (setq auth-sources '("~/.authinfo"))
 #+END_SRC
+
 ** taskjuggler-mode (tj3-mode)
 #+BEGIN_SRC emacs-lisp
   (use-package tj3-mode
@@ -1554,6 +1626,7 @@ related stuff.
      '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
      '(org-taskjuggler-project-tag "PRJ")))
 #+END_SRC
+
 ** Version control
 *** magit
 
@@ -1575,6 +1648,7 @@ Add the powerful Magit
     :ensure
     :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 #+END_SRC
+
 *** monky
 Add the Magit-copy for Mercurial 'monky'
 
@@ -1584,6 +1658,7 @@ Add the Magit-copy for Mercurial 'monky'
     :defer
     :bind ("C-x m" . 'monky-status))
 #+END_SRC
+
 *** git informations in gutter
 #+BEGIN_SRC emacs-lisp
 (use-package git-gutter-fringe+
@@ -1592,6 +1667,7 @@ Add the Magit-copy for Mercurial 'monky'
   :if window-system
   :bind ("C-c g" . 'git-gutter+-mode))
 #+END_SRC
+
 *** speedup VCS
 Regexp matching directory names that are not under VC's control. The
 default regexp prevents fruitless and time-consuming attempts to
@@ -1602,6 +1678,7 @@ interpreted as hostnames.
 (defvar locate-dominating-stop-dir-regexp
   "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'")
 #+END_SRC
+
 *** global caller
 
 Have a single binding to call the most appropriate tool given the repository.
@@ -1616,6 +1693,7 @@ Have a single binding to call the most appropriate tool given the repository.
   (global-set-key (kbd "C-M-x v") 'paf/vcs-status)
 #+END_SRC
 
+
 #+RESULTS:
 : paf/vcs-status
 *** forge
@@ -1623,11 +1701,13 @@ Have a single binding to call the most appropriate tool given the repository.
 (use-package forge
   :after magit)
 #+END_SRC
+
 *** code review
 #+BEGIN_SRC emacs-lisp
 (use-package code-review
   :ensure t)
 #+END_SRC
+
 ** Projectile
 
 Start using projectile. It has the documentation [[https://docs.projectile.mx/en/latest/][here]].
@@ -1649,6 +1729,7 @@ Start using projectile. It has the documentation [[https://docs.projectile.mx/en
     (helm-projectile-on))
 #+END_SRC
 
+
 Search the entire project with =C-c p s s= for a regexp. This let's
 you turn the matching results into an editable buffer using =C-c
 C-e=. Other keys are listed [[https://github.com/syohex/emacs-helm-ag#keymap][here]].
@@ -1659,10 +1740,11 @@ C-e=. Other keys are listed [[https://github.com/syohex/emacs-helm-ag#keymap][he
     :config)
 #+END_SRC
 
+
 I havae used it by a =M-?= binding. It's just old habit:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "M-?") 'helm-ag)
-#+end_SRC
+#+END_SRC
 
 ** debug w/ GDB
 *** TODO Make it so that the source frame placement is forced only when using gdb.
@@ -1681,6 +1763,7 @@ I havae used it by a =M-?= binding. It's just old habit:
 
   (global-set-key (kbd "C-x C-a C-t") 'easy-gdb-top-of-stack-and-restore-windows)
 #+END_SRC
+
 
 This should display the source code always in the same window when debugging.
 Found on [[https://stackoverflow.com/questions/39762833/emacsgdb-customization-how-to-display-source-buffer-in-one-window][Stack Overflow]].
@@ -1714,6 +1797,7 @@ Found on [[https://stackoverflow.com/questions/39762833/emacsgdb-customization-h
       (set-window-buffer win sourceBuf)
       win))
 #+END_SRC
+
 
 Here is my cheatsheet for the keyboard commands:
 
@@ -1792,11 +1876,13 @@ Help cleanup the includes and using lists.
     (uniquify-region-lines (region-beginning) (region-end)))
 #+END_SRC
 
+
 Simplify cleanup of =#include= / =typedef= / =using= blocks.
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-M-x s") 'paf/sort-and-uniquify-region)
 #+END_SRC
+
 *** selective display (default: off)
 Will fold all text indented more than the position of the cursor at
 the time the keys are pressed.
@@ -1811,10 +1897,12 @@ the time the keys are pressed.
 
 (global-set-key "\C-x$" 'set-selective-display-dlw)
 #+END_SRC
+
 *** hightlight-indent-guids-mode
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-#+end_src
+#+END_SRC
+
 
 #+RESULTS:
 
@@ -1825,14 +1913,14 @@ Use =circe=.
     circe
       :ensure
       :config(
-              setq circe-network-options '((
-                                            "Freenode" :tls t
-                                            :nick "fengxia41103"
-                                            :channels ("#emacs"
-                                                       "#python"
-                                                       "#odoo"
-                                                       "#reactjs"
-                                                       "#latex")))))
+      setq circe-network-options '((
+      "Freenode" :tls t
+      :nick "fengxia41103"
+      :channels ("#emacs"
+      "#python"
+      "#odoo"
+      "#reactjs"
+      "#latex")))))
   (use-package
     helm-circe
 
@@ -1840,22 +1928,25 @@ Use =circe=.
     :config)
 #+END_SRC
 
+
 ** restclient
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (use-package restclient
   :ensure)
-#+end_SRC
+#+END_SRC
+
 
 Then wrap it w/ this, you can then embed restcall in org!
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
 (require 'ob-restclient)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((restclient . t)))
-#+end_SRC
+#+END_SRC
+
 
 ** languages
 
@@ -1883,8 +1974,29 @@ Enough to handle my Markdown needs.
                 (flyspell-mode t)))))
 #+END_SRC
 
-#+RESULTS:
-: t
+
+Tweak the section header fonts a bit:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+
+(let* ((variable-tuple
+          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (headline           `(:inherit default :weight bold :foreground "#F5F5F5")))
+
+(custom-set-faces
+ '(markdown-header-face ((t (,@headline ,@variable-tuple :height 1.0))))
+ '(markdown-header-face-1 ((t (,@headline ,@variable-tuple :height 1.3)))
+ '(markdown-header-face-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "#8BC34A"))))
+ '(markdown-header-face-3 ((t (,@headline ,@variable-tuple :height 1.1 :foreground "#FEB236"))))
+)
+
+#+END_SRC
+
 
 *** C/C++
 **** header/implementation toggle
@@ -1895,6 +2007,7 @@ Switch from header to implementation file quickly.
           (lambda ()
             (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
 #+END_SRC
+
 **** no indentation of namespaces in C++
 Essentially, use the Google C++ style formatting.
 #+BEGIN_SRC emacs-lisp
@@ -1905,50 +2018,56 @@ Essentially, use the Google C++ style formatting.
     (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
 #+END_SRC
+
 *** python
 
 Setup an IDE:
 
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package elpy
   :ensure t
   :init
   (elpy-enable))
-#+end_SRC
+#+END_SRC
+
 
 ELPY has its own indentation mode, which is overriding the one I use
 globally, so disable this one:
 
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
   (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
-#+end_SRC
+#+END_SRC
+
 
 Link to yasnippet mode:
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (add-hook 'elpy-mode-hook #'yas-minor-mode)
-#+end_SRC
+#+END_SRC
+
 
 Auto black on save:
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 (add-hook 'before-save-hook #'elpy-black-fix-code nil t)
-#+end_SRC
+#+END_SRC
+
 
 Force UTF-8 encoding. Otherwise, elpy will complain w/ some exit 1 abnormal
 error.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setenv "PYTHONIOENCODING" "utf-8")
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
-#+end_src
+#+END_SRC
+
 
 And set up virtualenv path:
-#+begin_src emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; workon home
 (setenv "WORKON_HOME" "/home/fengxia/.virtualenvs/")
 (setq elpy-rpc-virtualenv-path 'current)
-#+end_src
+#+END_SRC
 
 **** py-autopep8
 
@@ -1962,6 +2081,7 @@ install =pip install autopep8= offline.
   (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
   (setq py-autopep8-options '("--max-line-length=88"))
 #+END_SRC
+
 
 #+RESULTS:
 | --max-line-length=79 |
@@ -1978,17 +2098,19 @@ Sort python import. Need to install =pip install isort= offline.
     (add-hook 'before-save-hook 'py-isort-before-save)
     (setq py-isort-options '("-sl --profile black --filter-files")))
 #+END_SRC
+
 **** imenu-list
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package imenu-list
   :ensure)
-#+end_SRC
+#+END_SRC
 
 **** smartparens
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (add-hook 'python-mode-hook #'smartparens-mode)
-#+end_SRC
+#+END_SRC
+
 **** python-black
 
 I installed ~black~ using ~apt install black~ because my default
@@ -1997,10 +2119,10 @@ their [[https://github.com/psf/black][official instruction]]. Anyway, I think ei
 
 Now use the emacs wrapper:
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (use-package python-black
   :ensure)
-#+end_src
+#+END_SRC
 
 *** web-mode
 web-mode with config for Polymer editing
@@ -2016,8 +2138,9 @@ web-mode with config for Polymer editing
     (setq web-mode-code-indent-offset 2)
 #+END_SRC
 
+
 Who should use this mode:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -2025,11 +2148,12 @@ Who should use this mode:
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
-#+end_SRC
+#+END_SRC
+
 This is actually depending on =js-beautify=. See [[https://github.com/yasuyk/web-beautify][web-beautify]] for
 details.
 
-#+begin_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package web-beautify
     :ensure
     :config)
@@ -2048,7 +2172,8 @@ details.
   (add-hook 'html-mode-hook
             (lambda ()
               (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-#+end_SRC
+#+END_SRC
+
 *** [[https://github.com/smihica/emmet-mode][emmet-mode]]
 
 Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencoding][zencoding]] for details.
@@ -2066,13 +2191,14 @@ Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencod
   (add-hook 'css-mode-hook  'emmet-mode)
   (add-hook 'scss-mode-hook  'emmet-mode)
 #+END_SRC
+
 *** javascript family: .js .ts .jsx
 There are a couple packages for .js files.
 
 **** js2-mode
 First, use =js2-mode= to handle =.js= and =.jsx= files.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package js2-mode
       :ensure
       :config)
@@ -2081,7 +2207,8 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
   (add-hook 'js2-mode-hook #'smartparens-mode)
   (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
-#+end_SRC
+#+END_SRC
+
 
 #+RESULTS:
 
@@ -2089,7 +2216,7 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
 Link js2-mode to prettier to beautify my code.
 Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package prettier
     :ensure
     :config)
@@ -2097,12 +2224,12 @@ Follow [[https://github.com/jscheid/prettier.el][official site]] to install and 
     (add-hook 'json-mode-hook 'prettier-mode)
     (add-hook 'js-mode-hook 'prettier-mode)
     (setq indent-tabs-mode nil js-indent-level 2)
-#+end_SRC
+#+END_SRC
 
 **** js-doc
 Nothing is complete without a doc solution.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (use-package js-doc
   :ensure
   :config
@@ -2116,7 +2243,8 @@ Nothing is complete without a doc solution.
               (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
               (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
-#+end_SRC
+#+END_SRC
+
 *** csv
 mode to edit CSV files.
 #+BEGIN_SRC emacs-lisp
@@ -2124,21 +2252,23 @@ mode to edit CSV files.
     :ensure t
     :mode "\\.csv\\'")
 #+END_SRC
+
 *** json
 
 This should be installed before the javascript stuff because I'll be
 using the =prettier= as beautifier.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package json-mode
     :ensure
     :config)
-#+end_SRC
+#+END_SRC
+
 *** yaml
 
 Details are [[https://github.com/yoshiki/yaml-mode][here]].
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package yaml-mode
     :ensure
     :config)
@@ -2146,7 +2276,8 @@ Details are [[https://github.com/yoshiki/yaml-mode][here]].
   (add-hook 'yaml-mode-hook
             '(lambda ()
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-#+end_SRC
+#+END_SRC
+
 *** jenkins
 #+BEGIN_SRC emacs-lisp
   (use-package jenkinsfile-mode
@@ -2154,6 +2285,7 @@ Details are [[https://github.com/yoshiki/yaml-mode][here]].
     :config)
 
 #+END_SRC
+
 ** LAST: enforce my tab style
 
 Found this [[https://github.com/syl20bnr/spacemacs/issues/5923][here]], and I like it, to set my styles in a central
@@ -2164,7 +2296,7 @@ manual step after a fresh install.
 First, define a func to include my indent settings. It takes an input
 argument:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
     (defun my-setup-indent (n)
       ;; java/c/c++
       (setq-local standard-indent n)
@@ -2192,11 +2324,12 @@ argument:
       ;; shells
       (setq-local sh-basic-offset n) ; shell scripts
       (setq-local sh-indentation n))
-#+end_SRC
+#+END_SRC
+
 
 Now set the tabs:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun my-personal-code-style ()
     (interactive)
     (message "My personal code style!")
@@ -2207,16 +2340,18 @@ Now set the tabs:
 
   ;; it would be lovely if this was enough, but it gets stomped on by modes.
   (my-personal-code-style)
-#+end_SRC
+#+END_SRC
+
 
 So, to enfore this on some modes:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'css-mode-hook 'my-personal-code-style)
   (add-hook 'js2-mode-hook 'my-personal-code-style)
   (add-hook 'react-mode-hook 'my-personal-code-style)
   (add-hook 'sh-mode-hook 'my-personal-code-style)
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
-#+end_SRC
+#+END_SRC
+
 * buffers
 
 There are three concepts seem to me: desktop, window config, and buffers.
@@ -2244,7 +2379,7 @@ close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.
 
 *** select buffer
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package ace-window
     :ensure
     :config
@@ -2261,7 +2396,8 @@ close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.
        :overline t
        :box nil)))))
   )
-#+end_SRC
+#+END_SRC
+
 
 #+RESULTS:
 : t
@@ -2272,6 +2408,7 @@ close buffers, or =C-x b= a lot anymore. Look for details [[https://depp.brause.
   :init
   (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
 #+END_SRC
+
 ** save & restore buffers
 
 First, you need to create a folder =~/.emacs.d/savehist=. If not, upon
@@ -2295,8 +2432,9 @@ will not then be saved.
 
 #+END_SRC
 
+
 But skip the followings:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq desktop-buffers-not-to-save
        (concat "\\("
                "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
@@ -2306,17 +2444,18 @@ But skip the followings:
   (add-to-list 'desktop-modes-not-to-save 'Info-mode)
   (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
   (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-#+end_SRC
+#+END_SRC
+
 
 See [[https://github.com/thierryvolpiatto/psession][here]]:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package psession
     :ensure)
   (psession-mode 1)
   (psession-savehist-mode 1)
   (psession-autosave-mode 1)
-#+end_SRC
+#+END_SRC
 
 ** switch window config: winner-mode
 
@@ -2330,6 +2469,7 @@ Enables =winner-mode=. Navigate buffer-window configs with =C-c left= and
 #+BEGIN_SRC emacs-lisp :tangle no
   (winner-mode 1)
 #+END_SRC
+
 
 However, with eyebrowse, I think this is redundant function. Maybe I should skip
 this?
@@ -2348,6 +2488,7 @@ Temporarily maximize a buffer.  [[https://gist.github.com/mads379/3402786][found
       (delete-other-windows))))
 #+END_SRC
 
+
 Map it to a key.
 
 #+BEGIN_SRC emacs-lisp
@@ -2362,6 +2503,7 @@ Setup the visual cues about the current editing buffer
   (setq scroll-step 1)
   (setq-default transient-mark-mode t)  ;; highlight selection
 #+END_SRC
+
 * editing
 
 The heart of editor is, well, editing. Many things are determining the
@@ -2373,17 +2515,18 @@ less typing essentially.
 
 A good auto completion thing. See details [[https://company-mode.github.io/][here]].
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (use-package company
   :ensure t
   :config)
 (add-hook 'prog-mode-hook 'global-company-mode)
-#+end_SRC
+#+END_SRC
+
 *** undo tree
 
 More [[https://elpa.gnu.org/packages/undo-tree.html][undos]]?
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
     ;; (use-package undo-tree
     ;;   :ensure t
     ;;   :config
@@ -2399,47 +2542,52 @@ More [[https://elpa.gnu.org/packages/undo-tree.html][undos]]?
     (undo-tree-visualizer-diff t)
     (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
     (undo-tree-visualizer-timestamps t))
-#+end_SRC
+#+END_SRC
+
 *** search & jump
 **** ag
 Use the silversearcher.
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package ag
     :ensure
     :config
     (setq ag-highlight-search t)
     (setq ag-reuse-buffers t))
-#+end_SRC
+#+END_SRC
+
 
 Follow the [[https://github.com/emacsorphanage/helm-ag][helm-ag manual]], "Insert thing at point as default search
 pattern, if this value is non nil":
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq helm-ag-insert-at-point 'symbol)
   (setq helm-ag-use-temp-buffer t)
-#+end_SRC
+#+END_SRC
+
 **** dumb-jump
 
 First, let's make sure we have =xref= because we will hook into the
 xref backend:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package xref
     :ensure
     :config)
-#+end_SRC
+#+END_SRC
+
 
 Now install =dumb-jump=:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package dumb-jump
     :ensure
     :config
     (setq dumb-jump-prefer-searcher 'ag))
-#+end_SRC
+#+END_SRC
+
 
 Some hydra:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defhydra dumb-jump-hydra (:color blue :columns 3)
     "Dumb Jump"
     ("j" dumb-jump-go "Go")
@@ -2449,13 +2597,15 @@ Some hydra:
     ("i" dumb-jump-go-prompt "Prompt")
     ("l" dumb-jump-quick-look "Quick look")
     ("b" dumb-jump-back "Back"))
-#+end_SRC
+#+END_SRC
+
 
 Last, hook to =xref= to use =M.= bind:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-#+end_SRC
+#+END_SRC
+
 **** ripgrep
 This enables searching recursively in projects.
 
@@ -2476,8 +2626,11 @@ This enables searching recursively in projects.
     :bind ("C-c m" . 'column-enforce-mode))
   ;; column-enforce-face
 #+END_SRC
+
 *** highlight whitespace & lines > 80 long
+
 Highlight unnecessary chars and lines over 80.
+
 #+BEGIN_SRC emacs-lisp :tangle no
 (use-package whitespace
   :ensure
@@ -2489,7 +2642,7 @@ Highlight unnecessary chars and lines over 80.
 
 Don't use =popup-kill-ring= as it's dead. Use the [[https://github.com/browse-kill-ring/browse-kill-ring][browse-kill-ring]]:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package browse-kill-ring
     :ensure
     :config
@@ -2497,12 +2650,13 @@ Don't use =popup-kill-ring= as it's dead. Use the [[https://github.com/browse-ki
     (setq browse-kill-ring-highlight-inserted-item t))
 
   (browse-kill-ring-default-keybindings)
-#+end_SRC
+#+END_SRC
+
 *** parenthesis
 
 Borrowing from old init.el:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (show-paren-mode t)
 (set-face-attribute 'region nil
                     :background "#666"
@@ -2511,7 +2665,7 @@ Borrowing from old init.el:
 (set-face-foreground 'show-paren-match "#d52349")
 (set-face-attribute 'show-paren-match nil
                     :weight 'extra-bold)
-#+end_SRC
+#+END_SRC
 
 **** show matching delimiters (default: on)
 
@@ -2520,30 +2674,32 @@ Use [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiter]]. Do not 
 the following brackets when there is a mismatch, like a xmas lights,
 and it's distracting to find out the actual mismatch!
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
     :ensure
     :config
     (set-face-attribute 'rainbow-delimiters-unmatched-face nil
                         :background "GhostWhite"))
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-#+end_SRC
+#+END_SRC
+
 **** type using smartparens (default: on)
 
 Well, who wants to type parenthesis.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package smartparens
     :ensure
     :config
     (require 'smartparens-config))
   (add-hook 'prog-mode-hook #'smartparens-mode)
-#+end_SRC
+#+END_SRC
+
 *** string inflection (default: some modes)
 
 This is useful in coding to change a string to snake, camel and so on.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package string-inflection
     :ensure
     :config)
@@ -2563,7 +2719,7 @@ This is useful in coding to change a string to snake, camel and so on.
               '(lambda ()
                  (local-set-key (kbd "C-q C-u")
                                 'string-inflection-python-style-cycle)))
-  #+end_SRC
+  #+END_SRC
 
 *** annotate-mode (default: some modes)
 
@@ -2625,12 +2781,12 @@ Looks convenient [[https://github.com/emacsfodder/move-text][here]]:
 - =Meta-up= move-text-up (line or active region)
 - =Meta-down= move-text-down (line or active region)
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package move-text
     :ensure
     :config)
 (move-text-default-bindings)
-#+end_SRC
+#+END_SRC
 
 *** tabs to 2
 
@@ -2638,17 +2794,22 @@ These are global tab settings. Since TAB is such a sensitive thing,
 each coding mode may have a different style/preference that will
 override this.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
   (setq require-final-newline t)
   (setq indent-line-function 'insert-tab)
   (setq-default tab-width 2)
-#+end_SRC
+#+END_SRC
+
 ** no trailing spaces
+
+Delete all trailing white space in the buffer.
+
 #+BEGIN_SRC emacs-lisp
 (setq next-line-add-newlines nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
+
 ** iedit mode
 
 Instead of using the string replacement, use this edit mode will
@@ -2658,6 +2819,7 @@ take effect on all of them.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-M-i") 'iedit-mode)
 #+END_SRC
+
 * navigate file & dir
 
 I'm not quite used to using emacs as file manager yet. To me, it's
@@ -2671,7 +2833,7 @@ The most dramatic thing is [[#treemacs][treemacs]], which I need some time to ge
 used to. It looks nice, but feels a bit, exaggerated to my taste.
 
 ** dir hack
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package dash
     :ensure
     :config)
@@ -2679,12 +2841,13 @@ used to. It looks nice, but feels a bit, exaggerated to my taste.
   (use-package dired-hacks-utils
     :ensure
     :config)
-#+end_SRC
+#+END_SRC
+
 ** dired-rainbow
 
 Make the dired coloful. Copied from [[https://github.com/Fuco1/dired-hacks][dired-hacks]].
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package dired-rainbow
     :ensure
     :config
@@ -2711,25 +2874,31 @@ Make the dired coloful. Copied from [[https://github.com/Fuco1/dired-hacks][dire
       (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
       ))
 
-#+end_SRC
+#+END_SRC
+
 ** dired-narrow
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package dired-narrow
     :ensure
     :config)
-#+end_SRC
+#+END_SRC
+
 ** dired-collapse
-#+begin_SRC emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
   (use-package dired-collapse
     :ensure
     :config)
-#+end_SRC
+#+END_SRC
+
 ** dired-filter
-#+begin_SRC emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
   (use-package dired-filter
     :ensure
     :config)
-#+end_SRC
+#+END_SRC
+
 ** treemacs (default: off)
 :PROPERTIES:
 :CUSTOM_ID: treemacs
@@ -2738,7 +2907,7 @@ Make the dired coloful. Copied from [[https://github.com/Fuco1/dired-hacks][dire
 Copied from [[https://github.com/Alexander-Miller/treemacs#installation][here]]. I'm leaving this mode off by default. =C-c t t= to
 enable it.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package treemacs
     :ensure t
     :defer t
@@ -2822,16 +2991,18 @@ enable it.
     (use-package treemacs-magit
       :after treemacs magit
       :ensure t)
-  #+end_SRC
+  #+END_SRC
+
 
   Add some files to ignore, eg. ~.pyc`:
 
-  #+begin_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (with-eval-after-load 'treemacs
       (defun treemacs-ignore-gitignore (file _)
         (string= file ".pyc"))
       (push #'treemacs-ignore-gitignore treemacs-ignored-file-predicates))
-  #+end_SRC
+  #+END_SRC
+
 * Helm
 
 Helm should really has its own section because it touches everything!
@@ -2881,24 +3052,22 @@ I just took over the config described in this [[https://tuhdo.github.io/helm-int
     (global-set-key (kbd "C-x C-m") 'helm-M-x))
 #+END_SRC
 
-#+RESULTS:
-: t
 
 Found [[https://www.reddit.com/r/emacs/comments/30yer0/helm_and_recentf_tips/][this reddit post]] of using =helm-mini=:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq helm-mini-default-sources '(helm-source-buffers-list
                                   helm-source-recentf
                                   helm-source-bookmarks
                                   helm-source-buffer-not-found))
-#+end_SRC
+#+END_SRC
 
 * Write chinese
 I have been using this one w/ reasonable success.
 
 First, install pyim.
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package pyim
     :ensure
     :defer 10
@@ -2946,22 +3115,25 @@ First, install pyim.
     ("M-j" . pyim-convert-code-at-point)
 
     ("C-;" . pyim-delete-word-from-personal-buffer)))
-#+end_SRC
+#+END_SRC
+
 
 Add a basic dictionary.
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   ;; Basedict
   (use-package pyim-basedict
     :ensure t)
   (pyim-basedict-enable)
-#+end_SRC
+#+END_SRC
+
 
 Last, a couple global settins.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 (setq default-input-method "pyim")
-#+end_src
+#+END_SRC
+
 * Office stuff
 Using emacs in a corporate env can be daunting.
 
@@ -2976,6 +3148,7 @@ First thing first, load the package. As you can see, I have used =apt-get= insta
   (require 'mu4e)
 #+END_SRC
 
+
 Then we load =maildirs-extension=:
 
 #+BEGIN_SRC emacs-lisp
@@ -2985,35 +3158,41 @@ Then we load =maildirs-extension=:
   (mu4e-maildirs-extension)
 #+END_SRC
 
+
 Now, we tell emacs I want to use =mu4e= as email client:
 
 #+BEGIN_SRC emacs-lisp
   (setq mail-user-agent 'mu4e-user-agent)
 #+END_SRC
 
+
 Link to a couple modes to help me writing good emails:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'mu4e-compose-mode-hook
                 (lambda ()
                   (visual-line-mode t)
                   (writegood-mode t)
                   (flyspell-mode t)))
-#+end_SRC
+#+END_SRC
+
 *** how to get mails
 Setup location of my maildir.
 #+BEGIN_SRC emacs-lisp
   (setq mu4e-maildir (expand-file-name "~/Maildir"))
 #+END_SRC
 
+
 Sync email by calling =mbsync=:
 #+BEGIN_SRC emacs-lisp
   (setq mu4e-get-mail-command "mbsync -a")
 #+END_SRC
 
+
 How often should I check? Value in seconds:
 #+BEGIN_SRC emacs-lisp
   (setq mu4e-update-interval 300)
 #+END_SRC
+
 
 Setup some common folders:
 #+BEGIN_SRC emacs-lisp
@@ -3021,6 +3200,7 @@ Setup some common folders:
         mu4e-sent-folder   "/sent"
         mu4e-trash-folder  "/trash")
 #+END_SRC
+
 
 Setup some shortcuts as bookmarks:
 #+BEGIN_SRC emacs-lisp
@@ -3054,11 +3234,13 @@ Customize the list view header:
                               (:thread-subject . nil)))
 #+END_SRC
 
+
 Skip duplicates:
 
 #+BEGIN_SRC emacs-lisp
   (setq mu4e-headers-skip-duplicates t)
 #+END_SRC
+
 
 Showing related in a tree fashion so I know the context:
 
@@ -3066,8 +3248,9 @@ Showing related in a tree fashion so I know the context:
  (setq mu4e-headers-include-related t)
 #+END_SRC
 
+
 Here is a fun one. I noticed that the email thread grows like that greedy snake game, a pretty good sign that the team is malfunctioning :) So we add a displayed number on the number of recipients, and just watch it grow:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-to-list 'mu4e-header-info-custom
                '(:recipnum .
                            ( :name "Number of recipients"  ;; long name, as seen in the message-view
@@ -3078,13 +3261,15 @@ Here is a fun one. I noticed that the email thread grows like that greedy snake 
                                                        (+ (length (mu4e-message-field msg :to))
                                                           (length (mu4e-message-field msg :cc))))))))
 
-#+end_SRC
+#+END_SRC
+
 *** read & attachment
 Save attachment to:
 
 #+BEGIN_SRC emacs-lisp
   (setq mu4e-attachment-dir "~/Downloads")
 #+END_SRC
+
 
 To open HTML in browser:
 
@@ -3095,6 +3280,7 @@ To open HTML in browser:
   ;(setq mu4e-html2text-command "html2text -b 72 --mark-code")
 #+END_SRC
 
+
 To open a link in email, press ~g~.
 
 Attempt to show images when viewing messages:
@@ -3102,6 +3288,7 @@ Attempt to show images when viewing messages:
 #+BEGIN_SRC emacs-lisp
   (setq mu4e-view-show-images t)
 #+END_SRC
+
 
 Use imagemagick, if available:
 
@@ -3120,6 +3307,7 @@ My signature line:
          "Feng Xia\n\n"
          "W: http://www.mycompany.io\n"))
 #+END_SRC
+
 *** send
 Sending email is to use SMTP. Here I'm showing to use the company one
 through =davmail= which runs smtp listen on port =1025=. You can also
@@ -3142,6 +3330,7 @@ use Gmail/hotmail:
   ;;)
 #+END_SRC
 
+
 There is a toggle where you can queue the sending email first instead
 of sending to server immediately. This is useful for travel when you
 just write, then queue, then when reconnected to the internect, send.
@@ -3150,6 +3339,7 @@ just write, then queue, then when reconnected to the internect, send.
   (setq smtpmail-queue-mail nil
         smtpmail-queue-dir "~/Maildir/queue/cur")
 #+END_SRC
+
 *** reply
 When replying an email, auto fill in my info:
 #+BEGIN_SRC emacs-lisp
@@ -3164,27 +3354,30 @@ When replying an email, auto fill in my info:
         message-citation-line-function 'message-insert-formatted-citation-line
         mu4e-headers-results-limit 500)
 #+END_SRC
+
 *** kill all buffer upon exit
 mu4e can open a lot of writing buffers. Just kill them all when we exit mu4e:
 
 #+BEGIN_SRC emacs-lisp
   (setq message-kill-buffer-on-exit t)
 #+END_SRC
+
 *** write html
 Emacs doesn't like html email body. Nor do I. But one thing I found
 out is that markdown mode table will look terrible as plain text on
 receiving end. There are a couple ways to work around.
 
 **** write in org
+
 So we now write email in org mode, then call =M-x org-mime-htmlize= to
 convert either the whole buffer or a region to html before sending:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package org-mime
     :ensure
     :config
     (setq org-mime-export-ascii 'utf-8))
-#+end_SRC
+#+END_SRC
 
 **** write in markdown
 
@@ -3192,7 +3385,7 @@ How about writing it in markdown? You don't need to do much. Switch to
 =markdown-mode= to write, then switch back to =mu4e-compose-mode= and
 then =C-c C-c= to send:
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun multipart-html-message (plain html)
     "Creates a multipart HTML email with a text part and an html part."
     (concat "<#multipart type=alternative>\n"
@@ -3253,19 +3446,20 @@ then =C-c C-c= to send:
   (with-eval-after-load 'message
    (define-key message-mode-map (kbd "C-c C-s") #'message-md-send)
    (define-key message-mode-map (kbd "C-c C-c") #'message-md-send-and-exit))
- #+end_SRC
+ #+END_SRC
+
 * Hobbies
 ** elfeed
 
 Read news:
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package elfeed
     :ensure
     :config)
   (setq elfeed-feeds
         '(("http://rss.slashdot.org/Slashdot/slashdotMain" dev)
           ("https://fengxia41103.github.io/myblog/feeds/all.atom.xml" me)))
-#+end_SRC
+#+END_SRC
 
 ** taskjuggler
 #+BEGIN_SRC emacs-lisp
@@ -3278,6 +3472,7 @@ Read news:
      '(org-taskjuggler-process-command "/usr/local/bin/tj3 --silent --no-color --output-dir %o %f")
      '(org-taskjuggler-project-tag "PRJ")))
 #+END_SRC
+
 * My doc writing
 
 Writing doc is painful, not because I don't like writing, but because
@@ -3293,8 +3488,10 @@ customize, and so on. So I'll stick to it for now.
 
 ** pandoc
 
-#+begin_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (use-package pandoc-mode
     :ensure)
   (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
-#+end_SRC
+#+END_SRC
+
+* THE END

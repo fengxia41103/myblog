@@ -885,14 +885,14 @@ and the tangled file is compiled."
   circe
     :ensure
     :config(
-            setq circe-network-options '((
-                                          "Freenode" :tls t
-                                          :nick "fengxia41103"
-                                          :channels ("#emacs"
-                                                     "#python"
-                                                     "#odoo"
-                                                     "#reactjs"
-                                                     "#latex")))))
+    setq circe-network-options '((
+    "Freenode" :tls t
+    :nick "fengxia41103"
+    :channels ("#emacs"
+    "#python"
+    "#odoo"
+    "#reactjs"
+    "#latex")))))
 (use-package
   helm-circe
 

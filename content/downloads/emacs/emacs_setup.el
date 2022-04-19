@@ -111,7 +111,7 @@ and the tangled file is compiled."
 (use-package sublime-themes
   :ensure t
   :config)
-(add-hook 'after-init-hook (lambda () (load-theme 'spolsky t)))
+(load-theme 'spolsky t)
 
 (use-package doom-modeline
   :ensure t
@@ -198,7 +198,7 @@ and the tangled file is compiled."
   :delight org-mode
   :config
   :hook ((org-mode . visual-line-mode)
-         (org-mode . variable-patch-mode)
+         (org-mode . variable-pitch-mode)
          (org-mode . org-indent-mode)))
 
 (require 'org-protocol)
@@ -337,6 +337,27 @@ and the tangled file is compiled."
 (setq org-ellipsis "...")
 (setq org-hide-emphasis-markers t)
 
+(let* ((variable-tuple
+          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (headline           `(:inherit default :weight bold :foreground "#F5F5F5")))
+
+    (custom-theme-set-faces
+     'user
+     `(org-level-8 ((t (,@headline ,@variable-tuple))))
+     `(org-level-7 ((t (,@headline ,@variable-tuple))))
+     `(org-level-6 ((t (,@headline ,@variable-tuple))))
+     `(org-level-5 ((t (,@headline ,@variable-tuple))))
+     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.0))))
+     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1 :foreground "#FEB236"))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "#8BC34A"))))
+     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
+     `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
+
 (custom-theme-set-faces
  'user
  '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
@@ -352,9 +373,9 @@ and the tangled file is compiled."
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow"))))
- '(org-block-background ((t (:background "cornsilk"))))
- '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow"))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "#EAEAFF" :extend t))))
+ '(org-block-background ((t (:background "#FFFFEA"))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "#EAEAFF" :extend t))))
 )
 
 (use-package deft
@@ -1132,12 +1153,21 @@ and the tangled file is compiled."
   :config)
 (add-hook 'prog-mode-hook 'global-company-mode)
 
+;; (use-package undo-tree
+  ;;   :ensure t
+  ;;   :config
+  ;;   (setq undo-tree-visualizer-timestamps t)
+  ;;   (setq undo-tree-visualizer-diff t))
+  ;; (global-undo-tree-mode)
+
 (use-package undo-tree
-  :ensure t
-  :config
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-diff t))
-(global-undo-tree-mode)
+  :defer t
+  :diminish undo-tree-mode
+  :init (global-undo-tree-mode)
+  :custom
+  (undo-tree-visualizer-diff t)
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (undo-tree-visualizer-timestamps t))
 
 (use-package ag
   :ensure
@@ -1618,6 +1648,7 @@ and the tangled file is compiled."
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"
+
                           "W: http://www.mycompany.io\n")
       message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
       message-citation-line-function 'message-insert-formatted-citation-line

@@ -791,6 +791,10 @@ and the tangled file is compiled."
 (use-package code-review
   :ensure t)
 
+(setq code-review-fill-column 80)
+(setq code-review-new-buffer-window-strategy #'switch-to-buffer)
+(setq code-review-download-dir "/tmp/code-review/")
+
 (use-package projectile
   :ensure t
   :config
@@ -1006,9 +1010,9 @@ and the tangled file is compiled."
 (use-package js-doc
   :ensure
   :config
-  (setq js-doc-mail-address "feng.xia@mycompany.io")
+  (setq js-doc-mail-address "feng_xia@med.unc.edu")
   (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
+  (setq js-doc-url "http://www.med.unc.edu")
   (setq js-doc-license "Company License")
 )
 (add-hook 'js2-mode-hook
@@ -1629,9 +1633,9 @@ and the tangled file is compiled."
 ;;  :ensure t
 ;;  :config
   (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "feng.xia@mycompany.io"
+        user-mail-address "feng_xia@med.unc.edu"
         smtpmail-debug-info t
-        smtpmail-smtp-user "feng.xia@mycompany.io"
+        smtpmail-smtp-user "feng_xia@med.unc.edu"
         smtpmail-default-smtp-server "localhost"
         smtpmail-auth-credentials (expand-file-name "~/.authinfo")
         smtpmail-smtp-service 1025
@@ -1643,8 +1647,8 @@ and the tangled file is compiled."
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "feng.xia@mycompany.io"
-      user-mail-address "feng.xia@mycompany.io"
+(setq mu4e-compose-reply-to-address "feng_xia@med.unc.edu"
+      user-mail-address "feng_xia@med.unc.edu"
       user-full-name "Feng Xia"
       message-signature  (concat
                           "Feng Xia\n"

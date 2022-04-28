@@ -373,9 +373,9 @@ and the tangled file is compiled."
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "#EAEAFF" :extend t))))
- '(org-block-background ((t (:background "#FFFFEA"))))
- '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "#EAEAFF" :extend t))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
+ '(org-block-background ((t (:background "gray10"))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "#gray30" :extend t))))
 )
 
 (use-package deft
@@ -955,6 +955,12 @@ and the tangled file is compiled."
 
 (use-package python-black
   :ensure)
+
+(use-package sphinx-doc
+  :ensure)
+  (add-hook 'python-mode-hook (lambda ()
+  (require 'sphinx-doc)
+  (sphinx-doc-mode t)))
 
 (use-package web-mode
   :ensure t
@@ -1721,6 +1727,72 @@ If given prefix arg ARG, skips markdown conversion."
 (with-eval-after-load 'message
  (define-key message-mode-map (kbd "C-c C-s") #'message-md-send)
  (define-key message-mode-map (kbd "C-c C-c") #'message-md-send-and-exit))
+
+(use-package slack
+  :ensure t
+  :defer 4
+  :init (make-directory "/tmp/emacs-slack-images/" t)
+  :bind (:map slack-mode-map
+              (("@" . slack-message-embed-mention)
+               ("#" . slack-message-embed-channel)))
+  :custom
+  (slack-buffer-emojify t)
+  (slack-prefer-current-team t)
+  (slack-image-file-directory "/tmp/emacs-slack-images/")
+  (slack-buffer-create-on-notify t)
+  :config
+    (slack-register-team
+     :name "mycompanyio"
+     :default t
+     :token (auth-source-pick-first-password
+             :host "mycompanyio.slack.com"
+             :user "feng.xia@mycompany.io^token")
+     :cookie (auth-source-pick-first-password
+             :host "mycompanyio.slack.com"
+             :user "feng.xia@mycompany.io^cookie")
+     :subscribed-channels '((eng-chat software_dev))
+     :full-and-display-names t)
+    (add-to-list 'org-agenda-files "~/workspace/me/org/slack.org"))
+
+;; global start slack
+ (slack-start)
+
+;; display a nice timestamp in slack
+(setq lui-time-stamp-format "[%Y-%m-%d %H:%M]")
+(setq lui-time-stamp-only-when-changed-p t)
+(setq lui-time-stamp-position 'right)
+(setq lui-time-stamp-face '((t (:foreground "light gray" :weight normal))))
+
+(global-set-key (kbd "C-c <f3>")
+  (defhydra slack-hydra (:hint nil)
+    "
+      Channel: _c_:channel _l_:update
+      Message: _i_:im _u_:update _r_:reaction _e_:edit msg _M-p_:prev _M-n_:next
+        Slack: _S_:start _C_: leave
+        _q_:cancel
+    "
+
+
+    ("c" slack-channel-select "channel")
+    ("l" slack-channel-list-update "channel update")
+
+    ("i" slack-im-select "im")
+    ("u" slack-im-list-update "im update")
+    ("r" slack-message-add-reaction "reaction")
+    ("e" slack-message-edit "edit msg")
+    ("M-p" slack-buffer-goto-prev-message)
+    ("M-n" slack-buffer-goto-next-message)
+
+    ("S" slack-start "Start")
+    ("C" slack-ws-close "Leave")
+
+    ("q"  nil "cancel" :color yellow)))
+
+(use-package alert
+  :commands (alert)
+  :init
+  (setq alert-default-style 'libnotify)
+)
 
 (use-package elfeed
   :ensure

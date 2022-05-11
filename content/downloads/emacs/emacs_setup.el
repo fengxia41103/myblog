@@ -161,6 +161,14 @@ and the tangled file is compiled."
  '(highlight ((t (:background "forest green"))))
  '(region ((t (:background "forest green")))))
 
+(add-to-list 'default-frame-alist
+             '(font . "Ubuntu Mono-14"))
+
+(custom-theme-set-faces
+ 'user
+ '(fixed-pitch ((t ( :family "Fira Code" :height 160))))
+)
+
 (setq ring-bell-function
       '(lambda ()
          (message "The answer is 42...")))
@@ -372,10 +380,10 @@ and the tangled file is compiled."
  '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "white" :background "royal blue"))))
  '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
  '(org-block-background ((t (:background "gray10"))))
- '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "#gray30" :extend t))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
 )
 
 (use-package deft
@@ -860,6 +868,13 @@ and the tangled file is compiled."
   ; This binds commands under the prefix when vdiff is active.
   (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
 
+(use-package yasnippet
+  :ensure t)
+(yas-reload-all)
+(yas-global-mode 1)
+(use-package yasnippet-snippets
+  :ensure t)
+
 (autoload 'comment-out-region "comment" nil t)
 (global-set-key (kbd "C-c q") 'comment-out-region)
 
@@ -924,6 +939,11 @@ and the tangled file is compiled."
               (writegood-mode t)
               (auto-fill-mode t)
               (flyspell-mode t)))))
+
+(custom-theme-set-faces
+ 'user
+ '(markdown-code-face ((t (:background "gray10"))))
+)
 
 (add-hook 'c-mode-common-hook
           (lambda ()

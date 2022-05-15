@@ -370,7 +370,7 @@ and the tangled file is compiled."
  'user
  '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
  '(org-bold ((t (:foreground "#d52349"))))
- '(org-code ((t (:inherit (shadow fixed-pitch)))))
+ '(org-code ((t (:inherit (shadow fixed-pitch) :foregroud "tomato"))))
  '(org-document-info ((t (:foreground "dark orange"))))
  '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))

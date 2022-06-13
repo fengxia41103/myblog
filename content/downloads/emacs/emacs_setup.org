@@ -449,6 +449,12 @@ brings value. *Note* that the ones I skip are:
   (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
   (add-hook 'json-mode-hook 'display-line-numbers-mode)
   (add-hook 'java-mode-hook 'display-line-numbers-mode)
+  (add-hook 'groovy-mode-hook 'display-line-numbers-mode)
+#+END_SRC
+
+Format the line no and add a solid line as separation:
+#+BEGIN_SRC emacs-lisp
+(setq linum-format "%4d ")
 #+END_SRC
 
 ** disable electric-indent
@@ -601,6 +607,13 @@ Set default mono font:
              '(font . "Ubuntu Mono-14"))
 #+END_SRC
 
+Set default font to monospace:
+#+BEGIN_SRC emacs-lisp
+;; set a default font
+(when (member "Ubuntu Mono-14" (font-family-list))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+#+END_SRC
+
 **** custome theme font
 
 Remember to install =apt install fonts-firacode=.
@@ -608,7 +621,7 @@ Remember to install =apt install fonts-firacode=.
 #+BEGIN_SRC emacs-lisp
   (custom-theme-set-faces
    'user
-   '(fixed-pitch ((t ( :family "Fira Code" :height 160))))
+   '(fixed-pitch ((t (:family "Fira Code" :height 140))))
   )
 #+END_SRC
 
@@ -993,7 +1006,6 @@ Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautify
    'user
    '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
    '(org-bold ((t (:foreground "#d52349"))))
-   '(org-code ((t (:inherit (shadow fixed-pitch) :foregroud "tomato"))))
    '(org-document-info ((t (:foreground "dark orange"))))
    '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
@@ -1003,7 +1015,8 @@ Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautify
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
-   '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "white" :background "royal blue"))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foregSround "tomato"))))
+   '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
    '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
    '(org-block-background ((t (:background "gray10"))))
    '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
@@ -1340,44 +1353,44 @@ Very nice post on how to get capture templats from a file: [[https://joshrollins
 in Files]].
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (org-relative-file "~/org/tasks.org"))
+  (setq org-default-notes-file (org-relative-file "~/workspace/me/org/tasks.org"))
 
   (setq org-capture-templates
         `(("t" "Task"
-           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Tasks")
+           entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Tasks")
            "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
            :clock-resume t)
           ;;
           ("i" "Idea"
-           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Ideas")
+           entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Ideas")
            "* SOMEDAY %?\n%U\n\n%x"
            :clock-resume t)
           ;;
           ("m" "Meeting"
-           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
+           entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
            "* %?  :MTG:\n%U\n%^{with}p"
            :clock-in t
            :clock-resume t)
           ;;
           ("s" "Stand-up"
-           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
+           entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
            "* Stand-up  :MTG:\n%U\n\n%?"
            :clock-in t
            :clock-resume t)
           ;;
           ("1" "1:1"
-           entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
+           entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
            "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
            :clock-in t
            :clock-resume t)
           ;;
           ("p" "Talking Point"
-           entry (file+headline ,(org-relative-file "~/org/refile.org") "Talking Points")
+           entry (file+headline ,(org-relative-file "~/workspace/me/org/refile.org") "Talking Points")
            "* %?  :TALK:\n%U\n%^{dowith}p"
            :clock-keep t)
           ;;
           ("j" "Journal"
-           entry (file+olp+datetree ,(org-relative-file "~/org/journal.org"))
+           entry (file+olp+datetree ,(org-relative-file "~/workspace/me/org/journal.org"))
            "* %?\n%U"
            :clock-in t
            :clock-resume t
@@ -1680,6 +1693,25 @@ Add the powerful Magit
     :ensure
     :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 #+END_SRC
+
+Add local workspace to manage multiple repositories:
+
+#+BEGIN_SRC emacs-lisp
+(setq magit-repository-directories
+      `(("~/workspace/mycompany" . 2)))
+(setq magit-repolist-columns
+      '(("Name"    30 magit-repolist-column-ident ())
+        ("Local On" 35 magit-repolist-column-branch ())
+        ("Bch" 3 magit-repolist-column-branches ())
+        ("B<U"      3 magit-repolist-column-unpulled-from-upstream
+         ((:right-align t)
+          (:help-echo "Upstream changes not in branch")))
+        ("B>U"      3 magit-repolist-column-unpushed-to-upstream
+         ((:right-align t)
+          (:help-echo "Local changes not in upstream")))
+       ))
+#+END_SRC
+
 
 *** monky
 Add the Magit-copy for Mercurial 'monky'
@@ -2206,18 +2238,18 @@ details.
   (use-package web-beautify
     :ensure
     :config)
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
-  (add-hook 'json-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+  ;; (add-hook 'js2-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
+  ;; (add-hook 'json-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))
   (add-hook 'web-mode-hook
             (lambda ()
               (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
-  (add-hook 'css-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
+  ;; (add-hook 'css-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))
   (add-hook 'html-mode-hook
             (lambda ()
               (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))
@@ -2253,7 +2285,7 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
       :config)
   (setq js2-indent-level 2)
   (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . js2-mode))
   (add-hook 'js2-mode-hook #'smartparens-mode)
   (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 #+END_SRC
@@ -2273,6 +2305,11 @@ Follow [[https://github.com/jscheid/prettier.el][official site]] to install and 
     (add-hook 'json-mode-hook 'prettier-mode)
     (add-hook 'js-mode-hook 'prettier-mode)
     (setq indent-tabs-mode nil js-indent-level 2)
+    (add-hook
+    'js22-mode-hook
+    (lambda ()
+    (when (string-match "\.tsx?$" buffer-file-name)
+    (setq-local prettier-parsers '(typescript)))))
 #+END_SRC
 
 **** js-doc
@@ -3648,7 +3685,7 @@ plain. Then of course there is the big-org which can be converted. But
 since I have been writing a lot of Markdown for my blogs, I don't feel
 like converting all my writings into `.org` just fo the sake of org
 mode. So instead, I have had success in writing the Pandoc version of
-Markdown for my two Mycompany reference architecture papers, and I think
+Markdown for my two Mycompanyi reference architecture papers, and I think
 it gives me more control of the LaTex template, the CSS file I can
 customize, and so on. So I'll stick to it for now.
 

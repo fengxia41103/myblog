@@ -104,6 +104,9 @@ and the tangled file is compiled."
 (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
 (add-hook 'json-mode-hook 'display-line-numbers-mode)
 (add-hook 'java-mode-hook 'display-line-numbers-mode)
+(add-hook 'groovy-mode-hook 'display-line-numbers-mode)
+
+(setq linum-format "%4d ")
 
 (electric-indent-mode -1)
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
@@ -164,9 +167,13 @@ and the tangled file is compiled."
 (add-to-list 'default-frame-alist
              '(font . "Ubuntu Mono-14"))
 
+;; set a default font
+(when (member "Ubuntu Mono-14" (font-family-list))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+
 (custom-theme-set-faces
  'user
- '(fixed-pitch ((t ( :family "Fira Code" :height 160))))
+ '(fixed-pitch ((t (:family "Fira Code" :height 140))))
 )
 
 (setq ring-bell-function
@@ -370,7 +377,6 @@ and the tangled file is compiled."
  'user
  '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
  '(org-bold ((t (:foreground "#d52349"))))
- '(org-code ((t (:inherit (shadow fixed-pitch) :foregroud "tomato"))))
  '(org-document-info ((t (:foreground "dark orange"))))
  '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
@@ -380,7 +386,8 @@ and the tangled file is compiled."
  '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "white" :background "royal blue"))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foregSround "tomato"))))
+ '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
  '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
  '(org-block-background ((t (:background "gray10"))))
  '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
@@ -565,44 +572,44 @@ and the tangled file is compiled."
                            (?B . (:foreground "LightSteelBlue"))
                            (?C . (:foreground "OliveDrab"))))
 
-(setq org-default-notes-file (org-relative-file "~/org/tasks.org"))
+(setq org-default-notes-file (org-relative-file "~/workspace/me/org/tasks.org"))
 
 (setq org-capture-templates
       `(("t" "Task"
-         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Tasks")
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Tasks")
          "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
          :clock-resume t)
         ;;
         ("i" "Idea"
-         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Ideas")
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Ideas")
          "* SOMEDAY %?\n%U\n\n%x"
          :clock-resume t)
         ;;
         ("m" "Meeting"
-         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
          "* %?  :MTG:\n%U\n%^{with}p"
          :clock-in t
          :clock-resume t)
         ;;
         ("s" "Stand-up"
-         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
          "* Stand-up  :MTG:\n%U\n\n%?"
          :clock-in t
          :clock-resume t)
         ;;
         ("1" "1:1"
-         entry (file+headline ,(org-relative-file "~/org/tasks.org") "Meetings")
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
          "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
          :clock-in t
          :clock-resume t)
         ;;
         ("p" "Talking Point"
-         entry (file+headline ,(org-relative-file "~/org/refile.org") "Talking Points")
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/refile.org") "Talking Points")
          "* %?  :TALK:\n%U\n%^{dowith}p"
          :clock-keep t)
         ;;
         ("j" "Journal"
-         entry (file+olp+datetree ,(org-relative-file "~/org/journal.org"))
+         entry (file+olp+datetree ,(org-relative-file "~/workspace/me/org/journal.org"))
          "* %?\n%U"
          :clock-in t
          :clock-resume t
@@ -770,6 +777,20 @@ and the tangled file is compiled."
 
   :ensure
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+
+(setq magit-repository-directories
+      `(("~/workspace/mycompany" . 2)))
+(setq magit-repolist-columns
+      '(("Name"    30 magit-repolist-column-ident ())
+        ("Local On" 35 magit-repolist-column-branch ())
+        ("Bch" 3 magit-repolist-column-branches ())
+        ("B<U"      3 magit-repolist-column-unpulled-from-upstream
+         ((:right-align t)
+          (:help-echo "Upstream changes not in branch")))
+        ("B>U"      3 magit-repolist-column-unpushed-to-upstream
+         ((:right-align t)
+          (:help-echo "Local changes not in upstream")))
+       ))
 
 (use-package monky
   :ensure t
@@ -1017,7 +1038,7 @@ and the tangled file is compiled."
     :config)
 (setq js2-indent-level 2)
 (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . js2-mode))
 (add-hook 'js2-mode-hook #'smartparens-mode)
 (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 
@@ -1028,6 +1049,11 @@ and the tangled file is compiled."
   (add-hook 'json-mode-hook 'prettier-mode)
   (add-hook 'js-mode-hook 'prettier-mode)
   (setq indent-tabs-mode nil js-indent-level 2)
+  (add-hook
+  'js22-mode-hook
+  (lambda ()
+  (when (string-match "\.tsx?$" buffer-file-name)
+  (setq-local prettier-parsers '(typescript)))))
 
 (use-package js-doc
   :ensure

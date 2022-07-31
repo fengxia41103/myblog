@@ -81,12 +81,19 @@ NETBOX_INPUTS = $(netbox_md) $(REFERENCES)
 netbox_pdf := netbox.pdf
 netbox_docx := netbox.docx
 
+# UNC article
+unc_md := unc.md
+UNC_INPUTS = $(unc_md) $(REFERENCES)
+unc_pdf := unc.pdf
+unc_docx := unc.docx
+
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
 resume: resume_pdf
 git: git_pdf
 netbox: netbox_pdf netbox_docx
+unc: unc_pdf unc_docx
 
 all: rhhi_ra loc_ra webapp resume git netbox
 
@@ -167,6 +174,16 @@ netbox_pdf: $(NETBOX_INPUTS) $(LATEX_ARTICLE_CONFIG)
 netbox_docx: $(NETBOX_INPUTS) $(LATEX_REPORT_CONFIG)
 	pandoc $(LATEX_REPORT_CONFIG) $(NETBOX_INPUTS) \
 	-o $(netbox_docx) \
+	$(DOCX_FLAGS)
+
+unc_pdf: $(UNC_INPUTS) $(LATEX_ARTICLE_CONFIG)
+	pandoc $(LATEX_ARTICLE_CONFIG) $(UNC_INPUTS) \
+	-o $(unc_pdf) \
+	$(PDF_FLAGS)
+
+unc_docx: $(UNC_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(UNC_INPUTS) \
+	-o $(unc_docx) \
 	$(DOCX_FLAGS)
 
 

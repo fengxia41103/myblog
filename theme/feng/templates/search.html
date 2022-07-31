@@ -1,12 +1,38 @@
-{% extends "article.html" %} {% block main_content %}
+{% extends "article.html" %}
+
+{% block main_content %}
 <div id="sth"></div>
-{% endblock %} {# reset related section on purpose #} {% block related %} {%
-endblock %} {% block reactjs %}
+{% endblock %}
+
+{# reset related section on purpose #}
+{% block related %}
+{% endblock %}
+
+{% block reactjs %}
 <script type="text/babel">
+  import React from "react";
+
   var randomId = function () {
     return "MY" + (Math.random() * 1e32).toString(12);
   };
 
+  function ItemBox(props){
+      return (
+        <div className="row">
+          <div className="col l2 m2 s12">
+            <i className="fa fa-tag">&nbsp;</i>
+            {this.props.tags}
+          </div>
+          <div className="col l7 m7 s9 myhighlight">{this.props.title}</div>
+          <div className="col l3 m3 s3 right-align">
+            <a href={this.props.url}>read more</a>
+          </div>
+          <br />
+          <div className="divider"></div>
+        </div>
+        );
+
+  }
   var ItemBox = React.createClass({
     render: function () {
       return (

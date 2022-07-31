@@ -16,36 +16,11 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    {% block core_library %}
-    <script src="{{ SITEURL }}/theme/js/html5shiv.min.js"></script>
-    <script src="{{ SITEURL }}/theme/js/respond.min.js"></script>
-
     {# Fontawesome #}
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ SITEURL }}/theme/bower_components/font-awesome/css/font-awesome.min.css"
-    />
-
-    {# DataTable #}
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ SITEURL }}/theme/bower_components/datatables/media/css/dataTables.bootstrap.min.css"
-    />
-
-    {# lightbox #}
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ SITEURL }}/theme/bower_components/lightbox2/dist/css/lightbox.min.css"
-    />
-
-    {# tether #}
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ SITEURL }}/theme/bower_components/tether/dist/css/tether.min.css"
+      href="{{ SITEURL }}/theme/node_modules/font-awesome/css/font-awesome.min.css"
     />
 
     {# highlight.js #}
@@ -81,15 +56,20 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"
     ></script>
-    {% endblock %} {# page title #} {% block title %}
+
+    {# page title #}
+
+    {% block title %}
     <title>{{SITENAME}}</title>
     {% endblock %}
   </head>
 
   <body>
-    {# static pages #} {% block navbar %}
+    {# static pages #}
+    {% block navbar %}
     <header id="mypage-index">
       <a href="{{SITEURL}}/">{{ SITENAME }} </a>
+
       {% for p in pages %}
       <a href="{{SITEURL}}/{{ p.url }}"> . {{ p.title }} </a>
       {% endfor %}
@@ -100,15 +80,26 @@
     {% block main %}
     <div class="split-screen">
       <div class="split-left-pane">
-        {# front page intro section #} {% block introduction %} {% endblock %}
+        {# front page intro section #}
+        {% block introduction %}
+        {% endblock %}
       </div>
 
       <div class="split-right-pane">
         {# main content #}
         <div id="content" class="container">
-          {% block content %} {% endblock %} {# pagination #} {% block
-          pagination %} {% endblock %} {# block of related contents #}
-          <div id="related">{% block related %} {% endblock %}</div>
+          {% block content %}
+          {% endblock %}
+
+          {# pagination #}
+          {% block pagination %}
+          {% endblock %}
+
+          {# block of related contents #}
+          <div id="related">
+            {% block related %}
+            {% endblock %}
+          </div>
         </div>
       </div>
     </div>
@@ -187,8 +178,7 @@
         <div class="row">
           <div class="col l8 m8 s12">
             <p>
-              2016-2021 PY Consulting Ltd. 1236 Beacon Street, Brookline, MA
-              02146
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
             </p>
 
             <p>
@@ -219,21 +209,15 @@
         </div>
       </div>
     </div>
-    {% endblock %} {# block push #} {% block push %} {% endblock %}
+    {% endblock %}
+
+    {# block push #}
+    {% block push %}
+    {% endblock %}
     <!-- end of block main -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-    {% block Javascripts %} {# jquery-ui #}
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/jquery-ui/jquery-ui.min.js"
-    ></script>
-
-    {# tether #}
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/tether/dist/js/tether.min.js"
-    ></script>
+    {% block Javascripts %}
 
     {# material css #}
     <script
@@ -241,84 +225,45 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
     ></script>
 
-    {# DataTable #}
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/datatables/media/js/jquery.dataTables.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/datatables/media/js/dataTables.bootstrap.min.js"
-    ></script>
-
-    {# lightbox: http://ashleydw.github.io/lightbox
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/lightbox2/dist/js/lightbox.min.js"
-    ></script>
-
-    {# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/jquery.tableofcontents/js/jquery.tableofcontents.min.js"
-    ></script>
-
     {# financejs #}
     <script
       type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/financejs/finance.js"
+      src="{{ SITEURL }}/theme/node_modules/financejs/finance.js"
     ></script>
 
     {# Highcharts #}
     <script
       type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/highcharts/highcharts.js"
+      src="{{ SITEURL }}/theme/node_modules/highcharts/highcharts.js"
     ></script>
 
     {# Lodash #}
     <script
       type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/lodash/dist/lodash.min.js"
+      src="{{ SITEURL }}/theme/node_modules/lodash/lodash.min.js"
     ></script>
 
     {# https://github.com/JedWatson/classnames #}
     <script
       type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/classnames/index.js"
+      src="{{ SITEURL }}/theme/node_modules/classnames/index.js"
     ></script>
 
     {# REACT #}
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/react/react.js"
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+      crossorigin
     ></script>
     <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/react/react-dom.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/babel/browser.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/remarkable/dist/remarkable.min.js"
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      crossorigin
     ></script>
 
-    {# d3 and d3plus #}
+    {# ray photo album #}
     <script
       type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/d3/d3.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/js/d3plus.full.min.js"
-    ></script>
-
-    {# TOC https://github.com/ndabas/toc #}
-    <script
-      type="text/javascript"
-      src="{{ SITEURL }}/theme/bower_components/jquery.toc/jquery.toc.js"
+      src="{{ SITEURL }}/theme/js/bundle.js"
     ></script>
 
     {# highlight.js #}
@@ -358,59 +303,32 @@
 
     {# application js #}
     <script type="text/javascript">
-      var j$ = jQuery.noConflict();
+     var exports = {};
+     var j$ = jQuery.noConflict();
 
-      j$(document).ready(function () {
-        // common global widget initializations
-        var table = j$("table.my-datatable").dataTable({
-          paging: false,
-          info: false,
-          pagingType: "simple",
-        });
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
 
-        // lightbox
-        j$(document).delegate(
-          '[data-type="attachment-thumbnail"]',
-          "click",
-          function (e) {
-            var url = j$(this).attr("src");
-            j$(this)
-              .closest("div.row")
-              .find('[data-toggle="lightbox"]')
-              .attr("href", url);
-            j$(this)
-              .closest("div.row")
-              .find('[data-toggle="lightbox"]')
-              .find("img:first-child")
-              .attr("src", url);
-          }
-        );
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
 
-        // highlight.js initialization
-        hljs.initHighlightingOnLoad();
-        j$("pre").each(function (i, block) {
-          hljs.highlightBlock(block);
-        });
-
-        // tooltips
-        j$('[data-toggle="tooltip"]').tooltip();
-
-        // image materialbox
-        j$(".materialboxed").materialbox();
-
-        // carousel
-        j$(".carousel").carousel();
-
-        // slider
-        j$(".slider").slider({
-          height: "90%",
-        });
-      });
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
     </script>
     {% endblock %}
     <!-- end of block JS -->
 
-    {# extra javascript code #} {% block theme_js %} {% endblock %} {% block
-    custom_js %} {% endblock %} {% block reactjs %} {% endblock %}
+    {# extra javascript code #}
+    {% block theme_js %}
+    {% endblock %}
+    {% block custom_js %}
+    {% endblock %}
+    {% block reactjs %}
+    {% endblock %}
   </body>
 </html>

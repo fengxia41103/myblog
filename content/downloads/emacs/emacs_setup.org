@@ -466,6 +466,15 @@ This is very annoying that it keeps indenting.
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
 #+END_SRC
 
+** set clipboard to utf-8
+
+This makes copy & paste from terminal to emacs buffer
+work. Otherwise, some utf-8 symbols will be scrambled.
+
+#+BEGIN_SRC emacs-lisp
+(set-clipboard-coding-system 'utf-8)
+#+END_SRC
+
 * font, theme
 
 The whole point of using emacs is that I like the user experience, and
@@ -1015,7 +1024,7 @@ Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautify
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
-   '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foregSround "tomato"))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
    '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
    '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
    '(org-block-background ((t (:background "gray10"))))
@@ -2306,7 +2315,7 @@ Follow [[https://github.com/jscheid/prettier.el][official site]] to install and 
     (add-hook 'js-mode-hook 'prettier-mode)
     (setq indent-tabs-mode nil js-indent-level 2)
     (add-hook
-    'js22-mode-hook
+    'js2-mode-hook
     (lambda ()
     (when (string-match "\.tsx?$" buffer-file-name)
     (setq-local prettier-parsers '(typescript)))))
@@ -3552,6 +3561,7 @@ both*!
   (slack-prefer-current-team t)
   (slack-image-file-directory "/tmp/emacs-slack-images/")
   (slack-buffer-create-on-notify t)
+  (slack-thread-also-send-to-room t)
   :config
     (slack-register-team
      :name "mycompanyio"

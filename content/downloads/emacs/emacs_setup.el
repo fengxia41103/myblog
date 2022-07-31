@@ -111,6 +111,8 @@ and the tangled file is compiled."
 (electric-indent-mode -1)
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
 
+(set-clipboard-coding-system 'utf-8)
+
 (use-package sublime-themes
   :ensure t
   :config)
@@ -386,7 +388,7 @@ and the tangled file is compiled."
  '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foregSround "tomato"))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
  '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
  '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
  '(org-block-background ((t (:background "gray10"))))
@@ -1050,7 +1052,7 @@ and the tangled file is compiled."
   (add-hook 'js-mode-hook 'prettier-mode)
   (setq indent-tabs-mode nil js-indent-level 2)
   (add-hook
-  'js22-mode-hook
+  'js2-mode-hook
   (lambda ()
   (when (string-match "\.tsx?$" buffer-file-name)
   (setq-local prettier-parsers '(typescript)))))
@@ -1786,6 +1788,7 @@ If given prefix arg ARG, skips markdown conversion."
   (slack-prefer-current-team t)
   (slack-image-file-directory "/tmp/emacs-slack-images/")
   (slack-buffer-create-on-notify t)
+  (slack-thread-also-send-to-room t)
   :config
     (slack-register-team
      :name "mycompanyio"

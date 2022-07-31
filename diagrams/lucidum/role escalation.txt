@@ -1,0 +1,32 @@
+@startuml
+
+autonumber "<font color=red><b>Step 00:"
+
+Actor User
+participant "Frontend" as frontend
+participant "Backend" as backend
+
+
+User -> frontend: navigate to view a dashboard
+note right
+    A dashboard can be top-level URL or
+    as a sub-component of a page/component.
+    Actual role escalation is controlled at API
+    handler and lower.
+end note
+frontend -> backend: GET `/api/dashboards/<id>`
+
+== Escalation Scope Start ==
+
+backend -> backend: enter API handler for `/api/dashboard/<id>`
+backend -> backend: get caller's roles
+backend -> backend: get dashboard's recorded author roles
+backend -> backend: merge two sets to one
+backend -> DB: use this role super-set to retrieve & filter data
+
+== Escalation Scope End ==
+
+backend -> frontend: return data
+frontend -> User: render dashboard & charts
+
+@enduml

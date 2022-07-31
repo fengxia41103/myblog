@@ -1,15 +1,22 @@
-{% extends "layout.html" %} {% block introduction %}
+{% extends "layout.html" %}
+
+{% block introduction %}
 <!-- <video autoplay muted loop id="myVideo">
      <source src="downloads/polina.mp4" type="video/mp4" />}
      </video>
 -->
-{% endblock %} {% block content %} {% include 'pagination.html' %} {% for
-article in articles_page.object_list %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'pagination.html' %}
+{% for article in articles_page.object_list %}
 <div>
   <i class="fa fa-calendar" style="opacity: 0.5"></i>
   <em>
-    {{ article.date|strftime('%Y-%m-%d')}} {% if
-    article.tags|tags_contain("love") %}
+    {{ article.date|strftime('%Y-%m-%d')}}
+
+    {% if article.tags|tags_contain("love") %}
     <i class="fa fa-heart myhighlight"></i>
     {% endif %}
   </em>
@@ -31,4 +38,6 @@ article in articles_page.object_list %}
     continue reading
   </a>
 </p>
-{% endfor %} {% endblock %}
+{% endfor %}
+
+{% endblock %}

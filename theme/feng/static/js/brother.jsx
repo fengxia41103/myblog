@@ -64,7 +64,7 @@ export default function PresentationBox(props) {
         const pad = "0000";
         const str = "" + i;
         const name = pad.substring(0, pad.length - str.length) + str;
-        return {x
+        return {
           key: i,
           thumb: "images/memory/" + name + "-small.jpg",
           full: "images/memory/" + name + ".jpg",
@@ -181,9 +181,11 @@ export default function PresentationBox(props) {
 }
 
 const rootElem = document.getElementById("sth");
-const root = createRoot(rootElem);
-root.render(
-  <StrictMode>
-    <PresentationBox />
-  </StrictMode>
-);
+if (rootElem) {
+  const root = createRoot(rootElem);
+  root.render(
+    <StrictMode>
+      <PresentationBox />
+    </StrictMode>
+  );
+}

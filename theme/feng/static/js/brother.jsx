@@ -64,7 +64,7 @@ export default function PresentationBox(props) {
         const pad = "0000";
         const str = "" + i;
         const name = pad.substring(0, pad.length - str.length) + str;
-        return {x
+        return {
           key: i,
           thumb: "images/memory/" + name + "-small.jpg",
           full: "images/memory/" + name + ".jpg",

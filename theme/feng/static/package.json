@@ -24,6 +24,7 @@
     "d3": "^4.2.6",
     "datatables": "^1.10.18",
     "fetch": "^1.0.0",
+    "fetch-jsonp": "^1.2.1",
     "financejs": "^4.0.1",
     "font-awesome": "^4.6.3",
     "highcharts": "^4.2.6",

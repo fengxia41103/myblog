@@ -181,9 +181,11 @@ export default function PresentationBox(props) {
 }
 
 const rootElem = document.getElementById("sth");
-const root = createRoot(rootElem);
-root.render(
-  <StrictMode>
-    <PresentationBox />
-  </StrictMode>
-);
+if (rootElem) {
+  const root = createRoot(rootElem);
+  root.render(
+    <StrictMode>
+      <PresentationBox />
+    </StrictMode>
+  );
+}

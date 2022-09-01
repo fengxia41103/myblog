@@ -7,7 +7,7 @@ import replace from "@rollup/plugin-replace";
 export default {
   input: "index.jsx",
   output: {
-    file: "../../../../output/theme/js/bundle.js",
+    file: "bundle.js",
     format: "iife",
     sourcemap: true,
   },

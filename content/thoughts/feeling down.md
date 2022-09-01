@@ -4,6 +4,10 @@ Tags: thoughts
 Slug: feeling down
 Author: Feng Xia
 
+<figure class="col s12">
+  <img src="images/DSC_1280653.JPG"/>
+</figure>
+
 Haven't written anything for a while. I had moments that I felt I
 wanted to say something. But those moments were all moment of sadness
 suddenly hitting me &mdash; they made me miss zhuzhu, miss dad, and

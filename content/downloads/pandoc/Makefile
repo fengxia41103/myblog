@@ -87,6 +87,13 @@ UNC_INPUTS = $(unc_md) $(REFERENCES)
 unc_pdf := unc.pdf
 unc_docx := unc.docx
 
+# lucidum
+lucidum_md := lucidum.md
+LUCIDUM_INPUTS = $(lucidum_md) $(REFERENCES)
+lucidum_pdf := lucidum.pdf
+lucidum_docx := lucidum.docx
+lucidum_html := lucidum.html
+
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
@@ -94,6 +101,7 @@ resume: resume_pdf
 git: git_pdf
 netbox: netbox_pdf netbox_docx
 unc: unc_pdf unc_docx
+lucidum: lucidum_pdf lucidum_docx lucidum_html
 
 all: rhhi_ra loc_ra webapp resume git netbox
 
@@ -185,6 +193,21 @@ unc_docx: $(UNC_INPUTS) $(LATEX_REPORT_CONFIG)
 	pandoc $(LATEX_REPORT_CONFIG) $(UNC_INPUTS) \
 	-o $(unc_docx) \
 	$(DOCX_FLAGS)
+
+lucidum_pdf: $(LUCIDUM_INPUTS) $(LATEX_ARTICLE_CONFIG)
+	pandoc $(LATEX_ARTICLE_CONFIG) $(LUCIDUM_INPUTS) \
+	-o $(lucidum_pdf) \
+	$(PDF_FLAGS)
+
+lucidum_docx: $(LUCIDUM_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(LUCIDUM_INPUTS) \
+	-o $(lucidum_docx) \
+	$(DOCX_FLAGS)
+
+lucidum_html: $(LUCIDUM_INPUTS)
+	pandoc $(LUCIDUM_INPUTS) \
+	-o $(lucidum_html) \
+	$(HTML_FLAGS)
 
 
 clean:

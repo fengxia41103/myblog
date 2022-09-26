@@ -167,11 +167,11 @@ and the tangled file is compiled."
  '(region ((t (:background "forest green")))))
 
 (add-to-list 'default-frame-alist
-             '(font . "Ubuntu Mono-14"))
+             '(font . "Ubuntu Mono-15"))
 
 ;; set a default font
-(when (member "Ubuntu Mono-14" (font-family-list))
-  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+(when (member "Ubuntu Mono-15" (font-family-list))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-15"))
 
 (custom-theme-set-faces
  'user
@@ -822,6 +822,14 @@ and the tangled file is compiled."
 (use-package code-review
   :ensure t)
 
+(use-package github-review
+  :ensure t
+  :config
+  (setq github-review-view-comments-in-code-lines t)
+  (setq github-review-view-comments-in-code-lines-outdated t)
+  (setq github-review-reply-inline-comments t)
+)
+
 (use-package projectile
   :ensure t
   :config
@@ -1070,10 +1078,6 @@ and the tangled file is compiled."
               (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
               (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
-(use-package csv-mode
-  :ensure t
-  :mode "\\.csv\\'")
-
 (use-package json-mode
   :ensure
   :config)
@@ -1206,22 +1210,6 @@ and the tangled file is compiled."
   :ensure t
   :config)
 (add-hook 'prog-mode-hook 'global-company-mode)
-
-;; (use-package undo-tree
-  ;;   :ensure t
-  ;;   :config
-  ;;   (setq undo-tree-visualizer-timestamps t)
-  ;;   (setq undo-tree-visualizer-diff t))
-  ;; (global-undo-tree-mode)
-
-(use-package undo-tree
-  :defer t
-  :diminish undo-tree-mode
-  :init (global-undo-tree-mode)
-  :custom
-  (undo-tree-visualizer-diff t)
-  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
-  (undo-tree-visualizer-timestamps t))
 
 (use-package ag
   :ensure

@@ -613,14 +613,14 @@ Set default mono font:
 
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'default-frame-alist
-             '(font . "Ubuntu Mono-14"))
+             '(font . "Ubuntu Mono-15"))
 #+END_SRC
 
 Set default font to monospace:
 #+BEGIN_SRC emacs-lisp
 ;; set a default font
-(when (member "Ubuntu Mono-14" (font-family-list))
-  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+(when (member "Ubuntu Mono-15" (font-family-list))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-15"))
 #+END_SRC
 
 **** custome theme font
@@ -1781,6 +1781,19 @@ Have a single binding to call the most appropriate tool given the repository.
   :ensure t)
 #+END_SRC
 
+*** github review
+
+I have been using [[https://github.com/charignon/github-review][this]] for a while daily, and it's wonderful!
+#+BEGIN_SRC emacs-lisp
+(use-package github-review
+  :ensure t
+  :config
+  (setq github-review-view-comments-in-code-lines t)
+  (setq github-review-view-comments-in-code-lines-outdated t)
+  (setq github-review-reply-inline-comments t)
+)
+#+END_SRC
+
 ** Projectile
 
 Start using projectile. It has the documentation [[https://docs.projectile.mx/en/latest/][here]].
@@ -2342,7 +2355,7 @@ Nothing is complete without a doc solution.
 
 *** csv
 mode to edit CSV files.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package csv-mode
     :ensure t
     :mode "\\.csv\\'")
@@ -2621,7 +2634,7 @@ A good auto completion thing. See details [[https://company-mode.github.io/][her
 
 More [[https://elpa.gnu.org/packages/undo-tree.html][undos]]?
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
     ;; (use-package undo-tree
     ;;   :ensure t
     ;;   :config

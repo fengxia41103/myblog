@@ -457,7 +457,6 @@ and the tangled file is compiled."
    (emacs-lisp . t)
    (gnuplot . t)
    (python . t)
-   (ledger . t)
    ;;(sh . t)
    (latex . t)
    (shell . t)
@@ -821,12 +820,12 @@ and the tangled file is compiled."
 
 (use-package code-review
   :ensure t)
+(add-hook 'code-review-mode-hook #'emojify-mode)
+(setq code-review-fill-column 80)
 
 (use-package github-review
   :ensure t
   :config
-  (setq github-review-view-comments-in-code-lines t)
-  (setq github-review-view-comments-in-code-lines-outdated t)
   (setq github-review-reply-inline-comments t)
 )
 
@@ -1584,8 +1583,9 @@ and the tangled file is compiled."
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 (setq default-input-method "pyim")
 
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
+(require 'mu4e-contrib)
 
 (use-package mu4e-maildirs-extension
   :ensure
@@ -1599,6 +1599,89 @@ and the tangled file is compiled."
                 (visual-line-mode t)
                 (writegood-mode t)
                 (flyspell-mode t)))
+
+(setq mu4e-contexts
+   `( ,(make-mu4e-context
+         :name "Hotmail"
+         :enter-func (lambda () (mu4e-message "Entering hotmail context"))
+         :leave-func (lambda () (mu4e-message "Leaving hotmail context"))
+         ;; we match based on the contact-fields of the message
+         :match-func (lambda (msg)
+                       (when msg
+                         (mu4e-message-contact-field-matches msg
+                           :to "feng_xia41103@hotmail.com")))
+         :vars '( ( user-mail-address	    . "feng_xia41103@hotmail.com" )
+                  ( user-full-name	    . "Feng Xia" )
+                  ( smtpmail-smtp-user . "feng_xia41103@hotmail.com" )
+                  ( smtpmail-default-smtp-server . "smtp-mail.outlook.com" )
+                  ( smtpmail-smtp-server . "smtp-mail.outlook.com" )
+                  ( smtpmail-smtp-service . 587 )
+                  ( starttls-use-gnutls . t)
+                  ( message-user-organization . "Hotmail" )
+                  ( mu4e-compose-reply-to-address . "feng_xia41103@hotmail.com" )
+                  ( mu4e-compose-signature .
+                    (concat
+                      "Best,\n"
+                      "feng\n"))))
+
+      ,(make-mu4e-context
+         :name "Work"
+         :enter-func (lambda () (mu4e-message "Switch to the Work context"))
+         ;; no leave-func
+         ;; we match based on the maildir of the message
+         ;; this matches maildir /Arkham and its sub-directories
+         :match-func (lambda (msg)
+                       (when msg
+                         (string-match-p "^/Mycompany" (mu4e-message-field msg :maildir))))
+         :vars '( ( user-mail-address	     . "feng.xia@mycompany.io" )
+                  ( user-full-name	     . "Feng Xia" )
+                  ( message-user-organization . "Mycompany Inc." )
+                  ( smtpmail-smtp-user . "feng.xia@mycompany.io" )
+                  ( smtpmail-default-smtp-server . "localhost" )
+                  ( smtpmail-smtp-server . "localhost" )
+                  ( smtpmail-smtp-service . 1025 )
+                  ( starttls-use-gnutls . nil)
+                  ( mu4e-compose-reply-to-address . "feng.xia@mycompany.io" )
+                  ( mu4e-compose-signature  .
+                    (concat
+                     "Best regards,\n\n"
+                     "Feng Xia\n\n"
+                     "W: http://www.mycompany.io\(not )"))))
+
+      ,(make-mu4e-context
+         :name "gmail"
+         :enter-func (lambda () (mu4e-message "Entering gmail context"))
+         :leave-func (lambda () (mu4e-message "Leaving gmail context"))
+         ;; we match based on the contact-fields of the message
+         :match-func (lambda (msg)
+                       (when msg
+                         (mu4e-message-contact-field-matches msg
+                           :to "fengxia41103@gmail.com")))
+         :vars '( ( user-mail-address	    . "fengxia41103@gmail.com" )
+                  ( user-full-name	    . "Feng Xia" )
+                    ( smtpmail-smtp-user . "fengxia41103@gmail.com" )
+                    ( smtpmail-default-smtp-server . "smtp.gmail.com" )
+                    ( smtpmail-smtp-server . "smtp.gmail.com" )
+                    ( smtpmail-smtp-service . 587 )
+                    ( starttls-use-gnutls . t)
+                    ( mu4e-compose-reply-to-address . "fengxia41103@gmail.com" )
+                    ( message-user-organization . "Gmail" )
+                    ( mu4e-compose-signature .
+                      (concat
+                       "Best,\n"
+                       "feng\n"))))
+))
+
+ ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
+ ;; guess or ask the correct context, e.g.
+
+ ;; start with the first (default) context;
+ ;; default is to ask-if-none (ask when there's no context yet, and none match)
+ ;; (setq mu4e-context-policy 'pick-first)
+
+ ;; compose with the current context is no context matches;
+ ;; default is to ask
+ ;; (setq mu4e-compose-context-policy nil)
 
 (setq mu4e-maildir (expand-file-name "~/Maildir"))
 
@@ -1661,40 +1744,34 @@ and the tangled file is compiled."
 (when (fboundp 'imagemagick-register-types)
   (imagemagick-register-types))
 
-(setq mu4e-compose-signature
-      (concat
-       "Best regards,\n\n"
-       "Feng Xia\n\n"
-       "W: http://www.mycompany.io\n"))
-
 ;;(use-package smtpmail
 ;;  :ensure t
 ;;  :config
-  (setq send-mail-function 'smtpmail-send-it
-        user-mail-address "feng.xia@mycompany.io"
-        smtpmail-debug-info t
-        smtpmail-smtp-user "feng.xia@mycompany.io"
-        smtpmail-default-smtp-server "localhost"
-        smtpmail-auth-credentials (expand-file-name "~/.authinfo")
-        smtpmail-smtp-service 1025
-        smtpmail-stream-type nil
-        starttls-use-gnutls nil
-        starttls-extra-arguments nil)
 ;;)
+;; user-mail-address "feng.xia@mycompany.io"
+;; smtpmail-smtp-user "feng.xia@mycompany.io"
+;; smtpmail-default-smtp-server "localhost"
+;; smtpmail-smtp-service 1025
+;; starttls-use-gnutls nil
+  (setq send-mail-function 'smtpmail-send-it
+        smtpmail-debug-info t
+        smtpmail-auth-credentials (expand-file-name "~/.authinfo")
+        smtpmail-stream-type nil
+        starttls-extra-arguments nil)
 
 (setq smtpmail-queue-mail nil
       smtpmail-queue-dir "~/Maildir/queue/cur")
 
-(setq mu4e-compose-reply-to-address "feng.xia@mycompany.io"
-      user-mail-address "feng.xia@mycompany.io"
-      user-full-name "Feng Xia"
-      message-signature  (concat
-                          "Feng Xia\n"
-
-                          "W: http://www.mycompany.io\n")
-      message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
-      message-citation-line-function 'message-insert-formatted-citation-line
-      mu4e-headers-results-limit 500)
+;; mu4e-compose-reply-to-address "feng.xia@mycompany.io"
+;; user-mail-address "feng.xia@mycompany.io"
+;; user-full-name "Feng Xia"
+;; message-signature  (concat
+;;                     "Feng Xia\n\n"
+;;                     "W: http://www.mycompany.io\n")
+(setq
+        message-citation-line-format "On %Y-%m-%d %H:%M:%S, %f wrote:"
+        message-citation-line-function 'message-insert-formatted-citation-line
+        mu4e-headers-results-limit 500)
 
 (setq message-kill-buffer-on-exit t)
 

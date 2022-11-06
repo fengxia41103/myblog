@@ -5,8 +5,7 @@ Slug: saturday swimming
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/1968%20earth.jpg"/>
-  <figcaption>First photo of the Earth taken by NASA in 1968</figcaption>
+  <img src="images/DSC_4152.JPG"/>
 </figure>
 
 Noah's swimming training is going well. Though the kid struggles from

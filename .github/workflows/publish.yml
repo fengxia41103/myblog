@@ -25,8 +25,8 @@ jobs:
 
     - name: Build
       run: |
-        pelican-themes -r feng
-        pelican-themes -i theme/feng
+        pelican-themes -r feng && \
+        pelican-themes -i theme/feng && \
         pelican content
 
     - name: Deploy 🚀

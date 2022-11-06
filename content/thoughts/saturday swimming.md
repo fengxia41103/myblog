@@ -1,5 +1,5 @@
 Title: Saturday swimming
-Date: 2022-1105 09:14
+Date: 2022-11-05 09:14
 Tags: thoughts
 Slug: saturday swimming
 Author: Feng Xia

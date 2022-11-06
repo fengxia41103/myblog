@@ -20,14 +20,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pelican pelican-themes
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 
     - name: Build
       run: |
-        pelican-themes -r feng && \
-        pelican-themes -i theme/feng && \
+        pelican-themes -r feng
+        pelican-themes -i theme/feng
         pelican content
 
     - name: Deploy 🚀

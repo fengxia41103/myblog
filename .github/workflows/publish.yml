@@ -24,10 +24,7 @@ jobs:
 
 
     - name: Build
-      run: |
-        pelican-themes -r feng && \
-        pelican-themes -i theme/feng && \
-        make html
+      run: make html
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4

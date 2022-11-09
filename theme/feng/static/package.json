@@ -28,7 +28,7 @@
     "financejs": "^4.0.1",
     "font-awesome": "^4.6.3",
     "highcharts": "^9.0.0",
-    "jquery-ui": "^1.12.0",
+    "jquery-ui": "^1.13.2",
     "jquery.toc": "^0.4.0",
     "js-marker-clusterer": "*",
     "ladda": "^1.0.0",

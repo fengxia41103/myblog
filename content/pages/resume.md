@@ -510,7 +510,7 @@ Modified: 2018-07-23 12:04
     * **Tools**: RTOS, C, Python
 
 * Developed embedded controller of two million-dollar projects. Led
-  system training. 　　
+  system training.
 
     * **Tools**: RTOS, C, PLC
 
@@ -605,10 +605,7 @@ Modified: 2018-07-23 12:04
  j$(document).ready(function() {
    // toggle resume exp content by clicking on its header
    j$('.my-resume-header').click(function() {
-     j$(this).next('ul').toggle("slide", {
-       direction: "right"
-     }, 1000);
-
+     j$(this).next("ul").slideToggle(700);
      j$(this).find('i').last().toggleClass('fa-angle-double-up');
      j$(this).find('i').last().toggleClass('fa-angle-double-down');
    });
@@ -621,9 +618,7 @@ Modified: 2018-07-23 12:04
    // quick time line nav, click to open collapsed section
    j$('[data-toggle="myexp"]').click(function(){
      var id = j$(this).attr('href');
-     j$(id).next('ul').toggle("slide", {
-       direction: "right"
-     }, 1000);
+     j$(this).next("ul").slideToggle(700);
    });
  });
 </script>

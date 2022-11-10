@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@500&family=Source+Sans+Pro:wght@400&display=swap");
+html {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 22px;
+}
+
 h1,
 h2,
 h3,
@@ -6,7 +13,7 @@ h5,
 h6 {
     font-family: 'Montserrat', sans-serif;
     color: #634f33;
-    font-weight: 120;
+    font-weight: 400;
     font-size: 1.5rem;
     word-wrap: break-word;
 }
@@ -270,13 +277,14 @@ label {
 
 .button {
     display: inline-block;
+    height: 2em;
     text-decoration: none;
     cursor: pointer;
     border: 0;
     border-radius: 5px;
     background: #d52349;
     color: #fff !important;
-    font-weight: 700;
+    font-weight: 200;
     outline: 0;
     -moz-transition: background-color .25s ease-in-out;
     -webkit-transition: background-color .25s ease-in-out;

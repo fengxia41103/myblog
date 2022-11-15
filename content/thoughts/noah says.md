@@ -136,8 +136,8 @@ been burned off by fire. So I asked what happened to it, he replied:
     knowing grapefruit isn't his thing. But, behold! He took a bite,
     and gave me a looking of eating a poison! "爸！！！你为什么说这是
     orange! 这是grapefruit!" "我说了！""你没有!!""咋了吧!?" I asked. "
-    如果这是grapefruit, 我刚才cut的时侯会更严肃点!!""what do mean by
-    严肃点!?"... so it turned out, by peeling his way, he left some
+    如果这是grapefruit, 我刚才cut的时侯会更严肃点!!""what do mean by严
+    肃点!?"... so it turned out, by peeling his way, he left some
     those soft skins, which, according to him, is bitter, and his 更严
     肃点 is to remove more, if not all of, those skins... hahaha!! 更
     严肃点~~~
@@ -149,3 +149,14 @@ been burned off by fire. So I asked what happened to it, he replied:
     screen, "萌的!!!" (the sound), and it is showing 曹操， "style
     name: Mengde".... hahahaha!!! Noah noah noah, what am I gonna do
     w/ your Chinese!?
+
+19. 11/15/2022 Sitting in Starbuck and he just finished his math
+    homeworks. Asking him to throw away a leftover box to trash. Guess
+    what!? He turned around w/ a stack of triangometry problem sheets
+    in hand, and immediately he started working on it!? ... is this
+    the same guy I know!? Unbelievable! and he looked quite happy
+    working on the sheets. What a surprise! I asked him why, and he
+    said he just wants to do more.. and 2nd trip to the same trash can
+    he picked up yet another stack! hahaha... we joked about some kid
+    throwing away his/her math homeworks that way so to avoid working
+    on it and had a good laugh out of this. Wonderful time!

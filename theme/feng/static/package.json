@@ -50,6 +50,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "rollup": "^2.77.2",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^2.0.0"
+    "rollup-plugin-serve": "^2.0.0",
+    "sass": "^1.56.0"
   }
 }

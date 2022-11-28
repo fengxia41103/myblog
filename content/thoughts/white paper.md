@@ -1,12 +1,11 @@
 Title: white paper
-Date: 2022-11-2811:12
+Date: 2022-11-28 11:12
 Tags: thoughts
 Slug: white paper
 Author: Feng Xia
 
 <figure class="col s12">
-  <img src="images/1968%20earth.jpg"/>
-  <figcaption>First photo of the Earth taken by NASA in 1968</figcaption>
+  <img src="images/white%20paper.jpeg"/>
 </figure>
 
 The news clip of Shanghai's protest was a surprise when I first saw it

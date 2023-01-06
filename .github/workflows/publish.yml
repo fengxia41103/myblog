@@ -26,10 +26,13 @@ jobs:
     - name: Build
       run: make html
 
+
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:
+        GITHUB_TOKEN: ${{ github.token }}
+        branch: gh-pages
         folder: output
-        clean: true
+        clean: true # Automatically remove deleted files from the deploy branch
         single-commit: true
-        force: true
+        commit-message: "docs: Deploy github page [skip ci]"

@@ -106,6 +106,7 @@ and the tangled file is compiled."
 (add-hook 'java-mode-hook 'display-line-numbers-mode)
 (add-hook 'groovy-mode-hook 'display-line-numbers-mode)
 
+(setq display-line-numbers-width nil)
 (setq linum-format "%4d ")
 
 (electric-indent-mode -1)
@@ -769,6 +770,8 @@ and the tangled file is compiled."
   :defer
   :config
   (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+  :custom ((magit-diff-refine-hunk 'all)
+           (magit-process-finish-apply-ansi-colors t))
   :bind ("C-x g" . 'magit-status))
 (use-package magit-todos
   :ensure t

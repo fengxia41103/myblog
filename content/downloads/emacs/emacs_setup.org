@@ -453,7 +453,9 @@ brings value. *Note* that the ones I skip are:
 #+END_SRC
 
 Format the line no and add a solid line as separation:
+
 #+BEGIN_SRC emacs-lisp
+(setq display-line-numbers-width nil)
 (setq linum-format "%4d ")
 #+END_SRC
 
@@ -1691,6 +1693,8 @@ Add the powerful Magit
     :defer
     :config
     (add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+    :custom ((magit-diff-refine-hunk 'all)
+             (magit-process-finish-apply-ansi-colors t))
     :bind ("C-x g" . 'magit-status))
   (use-package magit-todos
     :ensure t
@@ -3804,7 +3808,7 @@ plain. Then of course there is the big-org which can be converted. But
 since I have been writing a lot of Markdown for my blogs, I don't feel
 like converting all my writings into `.org` just fo the sake of org
 mode. So instead, I have had success in writing the Pandoc version of
-Markdown for my two Mycompanyi reference architecture papers, and I think
+Markdown for my two Lenovo reference architecture papers, and I think
 it gives me more control of the LaTex template, the CSS file I can
 customize, and so on. So I'll stick to it for now.
 

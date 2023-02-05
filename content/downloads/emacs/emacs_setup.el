@@ -1598,10 +1598,10 @@ and the tangled file is compiled."
 (setq mail-user-agent 'mu4e-user-agent)
 
 (add-hook 'mu4e-compose-mode-hook
-              (lambda ()
-                (visual-line-mode t)
-                (writegood-mode t)
-                (flyspell-mode t)))
+(lambda ()
+(visual-line-mode t)
+(writegood-mode t)
+(flyspell-mode t)))
 
 (setq mu4e-contexts
    `( ,(make-mu4e-context

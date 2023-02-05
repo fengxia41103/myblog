@@ -3284,10 +3284,10 @@ Now, we tell emacs I want to use =mu4e= as email client:
 Link to a couple modes to help me writing good emails:
 #+BEGIN_SRC emacs-lisp
   (add-hook 'mu4e-compose-mode-hook
-                (lambda ()
-                  (visual-line-mode t)
-                  (writegood-mode t)
-                  (flyspell-mode t)))
+  (lambda ()
+  (visual-line-mode t)
+  (writegood-mode t)
+  (flyspell-mode t)))
   #+END_SRC
 
 *** context
@@ -3454,7 +3454,10 @@ Showing related in a tree fashion so I know the context:
 #+END_SRC
 
 
-Here is a fun one. I noticed that the email thread grows like that greedy snake game, a pretty good sign that the team is malfunctioning :) So we add a displayed number on the number of recipients, and just watch it grow:
+Here is a fun one. I noticed that the email thread grows like that greedy snake
+game, a pretty good sign that the team is malfunctioning :) So we add a
+displayed number on the number of recipients, and just watch it grow:
+
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'mu4e-header-info-custom
                '(:recipnum .
@@ -3503,6 +3506,7 @@ Use imagemagick, if available:
 #+END_SRC
 
 *** write new
+
 My signature line:
 
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -3547,6 +3551,7 @@ just write, then queue, then when reconnected to the internect, send.
 
 *** reply
 When replying an email, auto fill in my info:
+
 #+BEGIN_SRC emacs-lisp
   ;; mu4e-compose-reply-to-address "feng.xia@mycompany.io"
   ;; user-mail-address "feng.xia@mycompany.io"

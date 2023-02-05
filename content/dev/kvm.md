@@ -3,6 +3,7 @@ Date: 2017-10-11 14:41
 Tags: lenovo
 Slug: kvm
 Author: Feng Xia
+Modified: 2022-02-04
 
 [KVM][1] is something new to me, and it sounds awesome. The experience
 I want to have is a local dev that I can copy & paste from some base
@@ -66,9 +67,9 @@ how-to.
     $ qemu-img resize orig.img +20G
     $ qemu-img info orig.img <-- confirm new "virtual size"
     ```
-   
+
 2. Make a copy:
- 
+
     ```shell
     $ cp orig.img orig-copy.qcow2
     ```
@@ -105,7 +106,7 @@ commits and branches, isn't it?
 > is then updated, and a 4th guest is then cloned off the updated base
 > image. With all 5 virtual machines, the storage needs is only about
 > 4.4 GB (the size of the base image).
-> 
+>
 
 <figure class="center-align responsive-image">
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -312,7 +313,7 @@ $ qemu-img create -f qcow2 -b resized-orig.img mydev.snap
 To verify:
 
 ```shell
-(dev) fengxia@fengxia-lenovo:~/workspace/tmp$ qemu-img info mydev.snap 
+(dev) fengxia@fengxia-lenovo:~/workspace/tmp$ qemu-img info mydev.snap
 image: mydev.snap
 file format: qcow2
 virtual size: 22G (23836229632 bytes)
@@ -399,7 +400,7 @@ and `<target dev=` index is unique.
 ## cloud-init in ISO
 ```shell
 $ genisoimage --output my-seed.iso -volid cidata -joliet -rock my-user-data [my-meta-data]
-```  
+```
 
 The key here is `-volid` value <span class="myhighlight">must be `cidata`</span>!
 Example KVM xml below. Again, `<target dev=` index should be unique.
@@ -422,7 +423,7 @@ snapshots as our dev sandbox:
 3. Create a snapshot with backing file
 4. Add `.snap` as a disk in kvm xml
 5. Create `user-data`
-6. Create `seed.img` from user-data 
+6. Create `seed.img` from user-data
 7. Add `seed.img` as a disk in kvm xml
 8. `virsh create [your xml]`
 
@@ -471,3 +472,22 @@ To start a kvm reusing an existing backing file:
 $ python startmykvm.py -b <backing>.qcow2 mydev.xml
 ```
 
+# Migrate to another host
+
+If you need to migrate VM to another host, follow this:
+
+1. `virsh shutdown` the VMs
+2. `virsh dumpxml guest_name > guest_name.xml`
+3. `scp` four files, for example. Depending on the size of the VM,
+   this can take a while.
+
+      ```shell
+      -rw-rw-r-- 1 fengxia      fengxia        4919 Feb  4 18:17 x83lvdw0at
+      -rw-rw-r-- 1 libvirt-qemu kvm          378880 Feb  4 18:17 x83lvdw0at.seed
+      -rw-r--r-- 1 libvirt-qemu kvm     65200717824 Feb  4 21:25 x83lvdw0at.snap
+      -rw-rw-r-- 1 fengxia      fengxia        4140 Feb  4 18:56 x83lvdw0at.xml
+      ```
+4. SSH to the destination host, `virsh define <guest_name>.xml`
+5. `virsh list --all`
+
+Now you should see the VM, and `virsh start <guest_name>`.

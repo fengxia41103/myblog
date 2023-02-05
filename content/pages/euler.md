@@ -7,67 +7,67 @@ Modified: 2018-07-29 21:00
 ---
 # Code
 
-[1]({filename}/downloads/euler/p1.py)
-[2]({filename}/downloads/euler/p2.py)
-[3]({filename}/downloads/euler/p3.py)
-[4]({filename}/downloads/euler/p4.py)
-[5]({filename}/downloads/euler/p5.py)
-[6]({filename}/downloads/euler/p6.py)
-[7]({filename}/downloads/euler/p7.py)
-[8]({filename}/downloads/euler/p8.py)
-[9]({filename}/downloads/euler/p9.py)
-[10]({filename}/downloads/euler/p10.py)
-[11]({filename}/downloads/euler/p11.py)
-[12]({filename}/downloads/euler/p12.py)
-[13]({filename}/downloads/euler/p13.py)
-[14]({filename}/downloads/euler/p14.py)
-[15]({filename}/downloads/euler/p15.py)
-[16]({filename}/downloads/euler/p16.py)
-[17]({filename}/downloads/euler/p17.py)
-[18]({filename}/downloads/euler/p18.py)
-[19]({filename}/downloads/euler/p19.py)
-[20]({filename}/downloads/euler/p20.py)
-[21]({filename}/downloads/euler/p21.py)
-[22]({filename}/downloads/euler/p22.py)
-[23]({filename}/downloads/euler/p23.py)
-[24]({filename}/downloads/euler/p24.py)
-[25]({filename}/downloads/euler/p25.py)
-[26]({filename}/downloads/euler/p26.py)
-[27]({filename}/downloads/euler/p27.py)
-[28]({filename}/downloads/euler/p28.py)
-[29]({filename}/downloads/euler/p29.py)
-[30]({filename}/downloads/euler/p30.py)
-[31]({filename}/downloads/euler/p31.py)
-[32]({filename}/downloads/euler/p32.py)
-[33]({filename}/downloads/euler/p33.py)
-[34]({filename}/downloads/euler/p34.py)
-[35]({filename}/downloads/euler/p35.py)
-[36]({filename}/downloads/euler/p36.py)
-[37]({filename}/downloads/euler/p37.py)
-[38]({filename}/downloads/euler/p38.py)
-[39]({filename}/downloads/euler/p39.py)
-[40]({filename}/downloads/euler/p40.py)
-[41]({filename}/downloads/euler/p41.py)
-[42]({filename}/downloads/euler/p42.py)
-[43]({filename}/downloads/euler/p43.py)
-[44]({filename}/downloads/euler/p44.py)
-[45]({filename}/downloads/euler/p45.py)
-[46]({filename}/downloads/euler/p46.py)
-[47]({filename}/downloads/euler/p47.py)
-[48]({filename}/downloads/euler/p48.py)
-[49]({filename}/downloads/euler/p49.py)
-[50]({filename}/downloads/euler/p50.py)
-[51]({filename}/downloads/euler/p51.py)
-[52]({filename}/downloads/euler/p52.py)
-[53]({filename}/downloads/euler/p53.py)
-[54]({filename}/downloads/euler/p54.py)
-[55]({filename}/downloads/euler/p55.py)
-[56]({filename}/downloads/euler/p56.py)
-[57]({filename}/downloads/euler/p57.py)
-[58]({filename}/downloads/euler/p58.py)
-[59]({filename}/downloads/euler/p59.py)
-[60]({filename}/downloads/euler/p60.py)
-[61]({filename}/downloads/euler/p61.py)
+[1]({static}/downloads/euler/p1.py)
+[2]({static}/downloads/euler/p2.py)
+[3]({static}/downloads/euler/p3.py)
+[4]({static}/downloads/euler/p4.py)
+[5]({static}/downloads/euler/p5.py)
+[6]({static}/downloads/euler/p6.py)
+[7]({static}/downloads/euler/p7.py)
+[8]({static}/downloads/euler/p8.py)
+[9]({static}/downloads/euler/p9.py)
+[10]({static}/downloads/euler/p10.py)
+[11]({static}/downloads/euler/p11.py)
+[12]({static}/downloads/euler/p12.py)
+[13]({static}/downloads/euler/p13.py)
+[14]({static}/downloads/euler/p14.py)
+[15]({static}/downloads/euler/p15.py)
+[16]({static}/downloads/euler/p16.py)
+[17]({static}/downloads/euler/p17.py)
+[18]({static}/downloads/euler/p18.py)
+[19]({static}/downloads/euler/p19.py)
+[20]({static}/downloads/euler/p20.py)
+[21]({static}/downloads/euler/p21.py)
+[22]({static}/downloads/euler/p22.py)
+[23]({static}/downloads/euler/p23.py)
+[24]({static}/downloads/euler/p24.py)
+[25]({static}/downloads/euler/p25.py)
+[26]({static}/downloads/euler/p26.py)
+[27]({static}/downloads/euler/p27.py)
+[28]({static}/downloads/euler/p28.py)
+[29]({static}/downloads/euler/p29.py)
+[30]({static}/downloads/euler/p30.py)
+[31]({static}/downloads/euler/p31.py)
+[32]({static}/downloads/euler/p32.py)
+[33]({static}/downloads/euler/p33.py)
+[34]({static}/downloads/euler/p34.py)
+[35]({static}/downloads/euler/p35.py)
+[36]({static}/downloads/euler/p36.py)
+[37]({static}/downloads/euler/p37.py)
+[38]({static}/downloads/euler/p38.py)
+[39]({static}/downloads/euler/p39.py)
+[40]({static}/downloads/euler/p40.py)
+[41]({static}/downloads/euler/p41.py)
+[42]({static}/downloads/euler/p42.py)
+[43]({static}/downloads/euler/p43.py)
+[44]({static}/downloads/euler/p44.py)
+[45]({static}/downloads/euler/p45.py)
+[46]({static}/downloads/euler/p46.py)
+[47]({static}/downloads/euler/p47.py)
+[48]({static}/downloads/euler/p48.py)
+[49]({static}/downloads/euler/p49.py)
+[50]({static}/downloads/euler/p50.py)
+[51]({static}/downloads/euler/p51.py)
+[52]({static}/downloads/euler/p52.py)
+[53]({static}/downloads/euler/p53.py)
+[54]({static}/downloads/euler/p54.py)
+[55]({static}/downloads/euler/p55.py)
+[56]({static}/downloads/euler/p56.py)
+[57]({static}/downloads/euler/p57.py)
+[58]({static}/downloads/euler/p58.py)
+[59]({static}/downloads/euler/p59.py)
+[60]({static}/downloads/euler/p60.py)
+[61]({static}/downloads/euler/p61.py)
 
 ---
 # problem 1 {#problem1}
@@ -76,9 +76,9 @@ Modified: 2018-07-29 21:00
 
 > If we list all the natural numbers below 10 that are multiples of 3 or
 > 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
-> 
+>
 > Find the sum of all the multiples of 3 or 5 below 1000.
-> 
+>
 
 
 I'm forming a pattern on strategy:
@@ -139,9 +139,9 @@ def main():
 > Each new term in the Fibonacci sequence is generated by adding the
 > previous two terms. By starting with 1 and 2, the first 10 terms
 > will be:
-> 
+>
 > 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
-> 
+>
 > By considering the terms in the Fibonacci sequence whose values do
 > not exceed four million, find the sum of the even-valued terms.
 
@@ -184,7 +184,7 @@ approach is simply counting the ``sum`` value as we go &rarr; `count
 [Question](https://projecteuler.net/problem=3):
 
 > The prime factors of 13195 are 5, 7, 13 and 29.
-> 
+>
 > What is the largest prime factor of the number 600851475143 ?
 
 I certainly learned a lot from this seemingly simple question!
@@ -270,8 +270,8 @@ That's a waste! There is a smarter way to this problem.
 3. next, instead finding prime factors, we are to **eliminate** all
    non-prime factors! If given a divisible prime, say `2`, we can
    keep looping `n /= 2` until it is not divisible by 2 any
-   further. 
-   
+   further.
+
 This would have eliminated all factors that are multiple of 2. By this
 point, `n` has probably been reduced quite a bit.
 
@@ -313,7 +313,7 @@ def method_2(n):
 > A palindromic number reads the same both ways. The largest
 > palindrome made from the product of two 2-digit numbers is 9009 = 91
 > × 99.
-> 
+>
 > Find the largest palindrome made from the product of two 3-digit
 > numbers.
 
@@ -363,7 +363,7 @@ A couple thoughts for improvement:
 
 > 2520 is the smallest number that can be divided by each of the
 > numbers from 1 to 10 without any remainder.
-> 
+>
 > What is the smallest positive number that is evenly divisible by all
 > of the numbers from 1 to 20?
 
@@ -444,19 +444,19 @@ def method_2(target):
 [Question](https://projecteuler.net/problem=6):
 
 > The sum of the squares of the first ten natural numbers is,
-> 
+>
 > 1<sup>2</sup> + 2<sup>2</sup> + ... + 10<sup>2</sup> = 385
-> 
+>
 > The square of the sum of the first ten natural numbers is,
-> 
+>
 > (1 + 2 + ... + 10)<sup>2</sup> = 55<sup>2</sup> = 3025
-> 
+>
 > Hence the difference between the sum of the squares of the first ten
 > natural numbers and the square of the sum is 3025 − 385 = 2640.
-> 
+>
 > Find the difference between the sum of the squares of the first one
 > hundred natural numbers and the square of the sum.
-> 
+>
 
 * **problem space**: `int < 100`
 * **test criteria**: none
@@ -483,9 +483,9 @@ def main():
 
 > By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can
 > see that the 6th prime is 13.
-> 
+>
 > What is the 10 001st prime number?
-> 
+>
 
 Another prime number problem.
 
@@ -626,7 +626,7 @@ more.
 
 > A Pythagorean triplet is a set of three natural numbers, `a>b>c`, for
 > which, a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>.
-> 
+>
 > For example, 3<sup>2</sup> + 4<sup>2</sup> = 9 + 16 = 25 = 5<sup>2</sup>.
 > There exists exactly one Pythagorean triplet for which `a+b+c = 1000`.
 > Find the product `abc`.
@@ -692,7 +692,7 @@ def method_2(n):
 [Question](https://projecteuler.net/problem=10):
 
 > The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
-> 
+>
 > Find the sum of all the primes below two million.
 
 * **problem space**: `int < 2000,000`
@@ -932,7 +932,7 @@ def main():
 ## method 1
 
 In this method, we count index in a brute force fashion &rarr; 4
-directions to count: 
+directions to count:
 
 1. horizontal
 2. vertical
@@ -1211,7 +1211,7 @@ def method_1(n):
 [Question](https://projecteuler.net/problem=13):
 
 > <p>Work out the first ten digits of the sum of the following
-> one-hundred 50-digit numbers.</p> 
+> one-hundred 50-digit numbers.</p>
 > <div style="font-family:'courier new';font-size:10pt;text-align:center;">
 > 37107287533902102798797998220837590246510135740250<br>
 > 46376937677490009712648124896970078050417018260538<br>
@@ -1335,16 +1335,16 @@ def main():
     m = 10
     matrix = n.strip().split('\n')
 
-    # flip and transpose 
+    # flip and transpose
     # flip: start computing from lower digit and
-    # up, like human does 
+    # up, like human does
     #
     # transpose: computing as a horizontal list
     # instead of visually vertical
     matrix = [list(reversed(x)) for x in matrix]
     matrix = zip(*matrix)
 
-    overflow = 0      
+    overflow = 0
     result = []
     for l in matrix:
         total = sum([int(x) for x in l]) + overflow
@@ -1418,14 +1418,14 @@ def chain(n):
 > Starting in the top left corner of a 2×2 grid, and only being able to
 > move to the right and down, there are exactly 6 routes to the bottom
 > right corner.
-> 
+>
 > <figure class="col s12 center">
 >   <img src="../downloads/euler/P015.gif"
 >        class="responsive-image">
 > </figure>
-> 
+>
 > How many such routes are there through a 20×20 grid?
-> 
+>
 
 This is a typical [dynamic
 programming](https://en.wikipedia.org/wiki/Dynamic_programming)
@@ -1457,7 +1457,7 @@ is `40!/(20!*20!)`, what!!!!?
 > movements. As there are only two possible movements (down, right) we
 > can represent these paths as binary strings with a 0 indicating a down
 > move and a 1 for a right.
-> 
+>
 > Consider two sets, P and B. P will be the set of all paths from the
 > starting position to the finish position consisting of only downward
 > and rightward movements (shortest paths). B will be the set of all
@@ -1465,13 +1465,13 @@ is `40!/(20!*20!)`, what!!!!?
 > 1's. Clearly the cardinality of P is the solution to the problem. If
 > we can establish a bijection from P to B, then we can say, by the
 > bijective principle, that |B| = |P|.
-> 
+>
 > Consider an arbitrary path, p, in P. We can clearly create a binary
 > string representation of p using the rules mentioned above. Therefore
 > our map M:P -> B is surjective. And the fact that every binary string
 > representation represents a unique path implies that M is
 > injective. Therefore M is bijective.
-> 
+>
 > We can calculate the cardinality of B, |B|, by labeling each digit in
 > a given string with an index. The question is then simplified into
 > "How many ways can 20 digits, identified by their indices, of a binary
@@ -1479,7 +1479,7 @@ is `40!/(20!*20!)`, what!!!!?
 > many ways can we scatter the 20 downward (or rightward) movements
 > throughout the path? The answer to which is 40 choose 20,
 > or 137846528820.
-> 
+>
 
 and someone mentioned [Pascal's triangle](https://en.wikipedia.org/wiki/Pascal%27s_triangle), but I don't get this.
 
@@ -1634,7 +1634,7 @@ def main():
 >     63 66 04 68 89 53 67 30 73 16 69 87 40 31<br>
 >     04 62 98 27 23 09 70 98 73 93 38 53 60 04 23</p>
 > </div>
-> 
+>
 > **NOTE**: As there are only 16384 routes, it is possible to solve this
 > problem by trying every route. However, Problem 67 is the same
 > challenge with a triangle containing one-hundred rows; it cannot be
@@ -1745,7 +1745,7 @@ def main():
 >     31 Dec 2000)?  </p>
 
 * **problem space**: `1/1/1901 - 12/31/2000`
-* **test criteria**: 
+* **test criteria**:
     1. is 1st day of a month?
     2. is Sunday?
 
@@ -1859,11 +1859,11 @@ def main():
 > alphabetical order. Then working out the alphabetical value for each
 > name, multiply this value by its alphabetical position in the list
 > to obtain a name score.
-> 
+>
 > For example, when the list is sorted into alphabetical order, COLIN,
 > which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the
 > list.  So, COLIN would obtain a score of 938 × 53 = 49714.
-> 
+>
 > What is the total of all the name scores in the file?
 
 -   problem space: given .txt file
@@ -1906,11 +1906,11 @@ will find the ordinal value of character **A**.
 > number for which the sum of its proper divisors is exactly equal to
 > the number. For example, the sum of the proper divisors of 28 would
 > be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
-> 
+>
 > A number <var>n</var> is called deficient if the sum of its proper
 > divisors is less than <var>n</var> and it is called abundant if this
 > sum exceeds <var>n</var>.
-> 
+>
 > As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the
 > smallest number that can be written as the sum of two abundant
 > numbers is 24. By mathematical analysis, it can be shown that all
@@ -1919,10 +1919,10 @@ will find the ordinal value of character **A**.
 > further by analysis even though it is known that the greatest number
 > that cannot be expressed as the sum of two abundant numbers is less
 > than this limit.
-> 
+>
 > Find the sum of all the positive integers which cannot be written as
 > the sum of two abundant numbers.
-> 
+>
 > </div>
 
 -   problem space: `int < 28123`
@@ -1976,9 +1976,9 @@ def main():
 > of the permutations are listed numerically or alphabetically, we
 > call it lexicographic order. The lexicographic permutations of 0, 1
 > and 2 are:
-> 
+>
 > 012   021   102   120   201   210
-> 
+>
 > What is the millionth lexicographic permutation of the digits 0, 1, 2,
 > 3, 4, 5, 6, 7, 8 and 9?
 
@@ -2173,7 +2173,7 @@ times of *n*.
 
 [Question](https://projecteuler.net/problem=27):
 
-![]({filename}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
+![]({static}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
 
 -   problem space: `|a| < 1000 and |b| < 1000`
 -   test criteria: n*n+a*n+b, n=0,1.... is prime?
@@ -2220,7 +2220,7 @@ See [problem 10](#problem10) for `get_primes` and `is_prime` methods.
 
 > Starting with the number 1 and moving to the right in a clockwise
 > direction a 5 by 5 spiral is formed as follows:
-> 
+>
 > <span style="color:#ff0000;font-family:'courier
 > new';"><b>21</b></span> 22 23 24 <span
 > style="color:#ff0000;font-family:'courier new';"><b>25</b></span>\
@@ -2235,10 +2235,10 @@ See [problem 10](#problem10) for `get_primes` and `is_prime` methods.
 > style="color:#ff0000;font-family:'courier new';"><b>17</b></span> 16
 > 15 14 <span style="color:#ff0000;font-family:'courier
 > new';"><b>13</b></span>
-> 
+>
 > It can be verified that the sum of the numbers on the diagonals is
 > 101.
-> 
+>
 > What is the sum of the numbers on the diagonals in a 1001 by 1001
 > spiral formed in the same way?
 
@@ -2338,7 +2338,7 @@ def main():
 [Question](https://projecteuler.net/problem=30):
 
 > <div class="problem_content" role="problem">
-> 
+>
 > <p>Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:</p>
 > <blockquote>1634 = 1<sup>4</sup> + 6<sup>4</sup> + 3<sup>4</sup> + 4<sup>4</sup><br>
 > 8208 = 8<sup>4</sup> + 2<sup>4</sup> + 0<sup>4</sup> + 8<sup>4</sup><br>
@@ -2346,9 +2346,9 @@ def main():
 > <p class="info">As 1 = 1<sup>4</sup> is not a sum it is not included.</p>
 > <p>The sum of these numbers is 1634 + 8208 + 9474 = 19316.</p>
 > <p>Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.</p>
-> 
+>
 > </div>
-> 
+>
 
 * problem space: infinite &rarr; how are we to bound search range?
 * test criteria: defined clearly in the problem, sum(fifth power of
@@ -2363,7 +2363,7 @@ with the growing number of digits anymore. So **problem space is
 max-ed at 199999**!
 
 ![Max by digits vs. Max from sum() of 5th power of each
-digits]({filename}/downloads/euler/Euler_p30.png "Max by digits vs. Max from
+digits]({static}/downloads/euler/Euler_p30.png "Max by digits vs. Max from
 sum() of 5th power of each digits"){.col .s12}
 
 
@@ -2386,18 +2386,18 @@ def main():
 > <div class="problem_content" role="problem">
 > In England the currency is made up of pound, £, and pence, p, and there
 > are eight coins in general circulation:
-> 
+>
 > > 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
-> 
+>
 > It is possible to make £2 in the following way:
-> 
+>
 > > 1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
-> 
+>
 > How many different ways can £2 be made using any number of coins?
-> 
+>
 > </div>
 
-![PE overview]({filename}/downloads/euler/031_overview.pdf "PE overview")
+![PE overview]({static}/downloads/euler/031_overview.pdf "PE overview")
 
 -   problem space: max number of `1p(=200) * max of
     2p(=100)`.... &mdash; it's a large number, but does represent the
@@ -2456,7 +2456,7 @@ def main():
 ```
 
 ![Dynamic programming on coin change
-problem]({filename}/downloads/euler/Dyn_prog.pdf "Dynamic programming on coin change problem")
+problem]({static}/downloads/euler/Dyn_prog.pdf "Dynamic programming on coin change problem")
 
 This led me to Google for solution (not being cheap, but eager to be
 enlightened), I came across a [great
@@ -2631,14 +2631,14 @@ def main():
 > We shall say that an <var>n</var>-digit number is pandigital if it makes
 > use of all the digits 1 to <var>n</var> exactly once; for example, the
 > 5-digit number, 15234, is 1 through 5 pandigital.
-> 
+>
 > The product 7254 is unusual, as the identity, 39 × 186 = 7254,
 > containing multiplicand, multiplier, and product is 1 through 9
 > pandigital.
-> 
+>
 > Find the sum of all products whose multiplicand/multiplier/product
 > identity can be written as a 1 through 9 pandigital.
-> 
+>
 > <div class="note">
 > HINT: Some products can be obtained in more than one way so be sure to
 > only include it once in your sum.
@@ -2716,7 +2716,7 @@ def main():
 > digits in the numerator and denominator.</p> <p>If the product of
 > these four fractions is given in its lowest common terms, find the
 > value of the denominator.</p>
-> 
+>
 
 - problem space: numerator and denominator are 2-digit number &rarr;
   both < 99, pretty small space
@@ -2758,10 +2758,10 @@ def main():
 
 
 > 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
-> 
+>
 > Find the sum of all numbers which are equal to the sum of the
 > factorial of their digits.
-> 
+>
 > Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 
@@ -2821,10 +2821,10 @@ post found in discussion:
 
 > The number, 197, is called a circular prime because all rotations of
 > the digits: 197, 971, and 719, are themselves prime.
-> 
+>
 > There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17,
 > 31, 37, 71, 73, 79, and 97.
-> 
+>
 > How many circular primes are there below one million?
 
 - problem space: int < `1000,000`
@@ -2925,7 +2925,7 @@ def main():
   [palindromic](https://en.wikipedia.org/wiki/Palindromic_number)?
 
 ![Overview posted in PE
-threads]({filename}/downloads/euler/036_overview.pdf "Overview posted in PE threads")
+threads]({static}/downloads/euler/036_overview.pdf "Overview posted in PE threads")
 
 A palindromic number is **symmetrical**. A more mathematical
 description can be found
@@ -2987,12 +2987,12 @@ print sum(filter(lambda x: x%10 !=0 and str(x)==str(x)[::-1] and bin(x)[2:]==bin
 > possible to continuously remove digits from left to right, and remain
 > prime at each stage: 3797, 797, 97, and 7. Similarly we can work from
 > right to left: 3797, 379, 37, and 3.
-> 
+>
 > Find the sum of the only eleven primes that are both truncatable from
 > left to right and right to left.
-> 
+>
 > NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
-> 
+>
 
 - **problem space**: unknown, this is problematic
 - **test criteria**: is prime? is truncated version also prime?
@@ -3101,7 +3101,7 @@ def method_3():
 > <p>What is the largest 1 to 9 pandigital 9-digit number that can be
 > formed as the concatenated product of an integer with (1,2, ... ,
 > <var>n</var>) where <var>n</var> &gt; 1?</p>
-> 
+>
 
 - problem space: 100,000,000 < product < 999,999,999, because
   product must be a 9-digit number
@@ -3179,12 +3179,12 @@ def method_2():
 > If <i>p</i> is the perimeter of a right angle triangle with integral
 > length sides, {<i>a</i>,<i>b</i>,<i>c</i>}, there are exactly three
 > solutions for <i>p</i> = 120.
-> 
+>
 > {20,48,52}, {24,45,51}, {30,40,50}
-> 
+>
 > For which value of <i>p</i> ≤ 1000, is the number of solutions
 > maximised?
-> 
+>
 
 
 - problem space: `a+b+c < 1,000`
@@ -3397,7 +3397,7 @@ def main():
 > we form a word value. For example, the word value for SKY is 19 +
 > 11 + 25 = 55 = <i>t</i><sub>10</sub>. If the word value is a
 > triangle number then we shall call the word a triangle word.</p>
-> <p>Using [P042 words.txt]({filename}/downloads/euler/P042_words.txt), a 16K
+> <p>Using [P042 words.txt]({static}/downloads/euler/P042_words.txt), a 16K
 > text file containing nearly two-thousand common English words, how
 > many are triangle words?</p>
 
@@ -3605,7 +3605,7 @@ iterations:
 > 22, 35, ...</td> </tr><tr><td>Hexagonal</td>
 > <td>H<sub><i>n</i></sub>=<i>n</i>(2<i>n</i>−1)</td> <td>1, 6, 15,
 > 28, 45, ...</td> </tr></table>
-> 
+>
 > <p>It can be verified that T<sub>285</sub> = P<sub>165</sub> =
 > H<sub>143</sub> = 40755.</p> <p>Find the next triangle number that
 > is also pentagonal and hexagonal.</p>
@@ -3841,7 +3841,7 @@ more challenging.
 > the three terms in this sequence?</p>
 
 - **problem space**: 4-digit number
-- **test criteria**: 
+- **test criteria**:
   1. all terms are prime
   2. are permutation of each other
 
@@ -3868,10 +3868,10 @@ def main():
 It was not clear to me that 3 numbers had to be separated by `3,330`. So
 using the other two criteria would generate more than 2 sets of
 candidates by iterating 4-digit prime. Once this test criteria was
-added, there are only 2 left. 
+added, there are only 2 left.
 
 ```
-1487 4817 8147 
+1487 4817 8147
 2969 6299 9629
 ```
 
@@ -4103,7 +4103,7 @@ Taking this a bit further, I searched benchmark vs. count to analyze
 how quickly this relationship will converge. To my surprise it is
 quite linear!
 
-![]({filename}/downloads/euler/P53.png){.col .s12}
+![]({static}/downloads/euler/P53.png){.col .s12}
 
 ---
 
@@ -4466,24 +4466,24 @@ def rank(s, val_dict={c:i for i, c in enumerate('23456789TJQKA', 2)},
     '''
     Give a tuple showing the rank of the hand; higher is better.
 
-    vals are the card values, sorted by importance -- a 2 has value 2, 
+    vals are the card values, sorted by importance -- a 2 has value 2,
     A has value 14.
 
     counts[0] is the highest frequency; 3 if there is three of a kind, etc.
     If it's bigger than 1,  the hand won't be straight or flush.
-    
+
     pair_dict keys for duplicates are the two highest frequencies of card
     values, so (2, 1) means one pair, (3, 2) is full house, etc.
-    
+
     If there are no duplicate cards, algorithm is as follows:
     check for straight and flush.  If neither, assign 0; if straight, 4; if
     flush, 5, if straight/royal flush, 8.
     '''
-    
+
     repeats = [(s[::3].count(c), val_dict[c], suit) for c, suit in s.split()]
     repeats.sort(reverse=True)
     counts, vals, suits = zip(*repeats)
-    if counts[0] > 1: rk = pair_dict[(counts[0], counts[counts[0]])]    
+    if counts[0] > 1: rk = pair_dict[(counts[0], counts[counts[0]])]
     else: rk = no_pair_dict[(vals[0] - vals[-1] == 4, len(set(suits)) == 1)]
     return (rk,) + vals
 
@@ -4786,7 +4786,7 @@ Math is not the issue here. If we could get the message right, we could easily c
 
 ## method 1
 
-This approach is messy. 
+This approach is messy.
 
 1. separated given data into 3 sets &rarr; `msg[::3]`, `msg[1::3]`, `msg[2::3]`
 2. test ASCII value 32-127 and rule out those that will generate
@@ -4807,7 +4807,7 @@ This approach is messy.
 I know this is not `clever`. But I failed to see a hard test criteria
 to know that decoded message is correct.
 
-![]({filename}/downloads/euler/P59.png){.col .l6 .m6 .s12}
+![]({static}/downloads/euler/P59.png){.col .l6 .m6 .s12}
 
 ## method 2
 
@@ -4964,7 +4964,7 @@ def method_1():
 Graph below shows that the length of candidate list grows almost
 `linearly` with the growing of primes generated.
 
-![]({filename}/downloads/euler/P60.png){.col .s12}
+![]({static}/downloads/euler/P60.png){.col .s12}
 
 When stopped at break condition, we had two pairs:
 

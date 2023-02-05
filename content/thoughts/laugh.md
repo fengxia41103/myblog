@@ -71,5 +71,5 @@ to say, its mind, and heart, still are. Total shame.
 
 
 [1]: https://www.youtube.com/watch?v=bS0ER79x9AI
-[2]: {filename}/thoughts/china20nationalism.md
+[2]: {filename}/thoughts/china%20nationalism.md
 [3]: https://www.youtube.com/watch?v=KCDu88kE5Wk

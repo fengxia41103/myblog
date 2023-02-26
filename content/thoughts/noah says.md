@@ -3,7 +3,7 @@ Date: 2019-11-07 07:58
 Tags: thoughts
 Slug: noah says
 Author: Feng Xia
-Modified: 2021-07-12 20:19
+Modified: 2023-02-26 11:21
 
 This is to keep track what Noah says these days, some smart
 remarks. But first of all, let me vent what this kid is like, this
@@ -160,3 +160,10 @@ been burned off by fire. So I asked what happened to it, he replied:
     he picked up yet another stack! hahaha... we joked about some kid
     throwing away his/her math homeworks that way so to avoid working
     on it and had a good laugh out of this. Wonderful time!
+
+20. 2/23/2023 On our way to his swimming. "Did you eat something?"
+    "yeah I had salmon" "哦， 是吧，家里有salmon啊!!" "现在没了"
+    ... hahaha... such an American way of understanding Chinese. No
+    Chinese native would have interpreted the line on such a face
+    value, but he did.. it was just halirious! I think this will be a
+    great item for some foreigner's TOEFL test someday.

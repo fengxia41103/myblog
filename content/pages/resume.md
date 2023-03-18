@@ -6,19 +6,18 @@ Modified: 2018-07-23 12:04
 
 ## Summary
 
-* Python dev since 1998.
-* MBA, and delivered million $ software project w/ success.
-* Build any web application from napkin design to Django POC in 72 hours.
-* Full-stack capable.
-* Welcome challenging problem.
-* Have a high standard in work quality (see work samples below).
-* SalesForce advocate.
+* Full stack engineer, tech lead
+* Designed & delivered million $ projects
+* Git workflow & CICD expert
+* Quick learner, analytical
+* Have a high standard in the quality of deliverables
+
 * **Also available in**:
 <a href="https://www.linkedin.com/in/fengxia41103">
   <i class="fa fa-linkedin-square"></i>
   LinkedIn
 </a>
-<a href="{filename}/downloads/resume.pdf">
+<a href="{static}/downloads/resume.pdf">
   <i class="fa fa-file-pdf-o"></i>
   PDF
 </a>
@@ -28,18 +27,19 @@ Modified: 2018-07-23 12:04
 <table class="bordered striped">
 
   <tr><td>
-    <strong>Software development</strong>
+    <strong>Programming</strong>
   </td><td class="row">
     <span class="col l3 m4 s6">Python</span>
+    <span class="col l3 m4 s6">Javascript</span>
+    <span class="col l3 m4 s6">Ansible</span>
+    <span class="col l3 m4 s6"></span>
+
     <span class="col l3 m4 s6">C</span>
     <span class="col l3 m4 s6">ODOO/OpenERP</span>
     <span class="col l3 m4 s6">SQL</span>
     <span class="col l3 m4 s6">Salesforce APEX</span>
-    <span class="col l3 m4 s6">Cordova</span>
     <span class="col l3 m4 s6">Google app engine</span>
     <span class="col l3 m4 s6">Git</span>
-    <span class="col l3 m4 s6">SVN</span>
-    <span class="col l3 m4 s6">Bower</span>
     <span class="col l3 m4 s6">Yeoman</span>
     <span class="col l3 m4 s6">Jira</span>
   </td></tr>

@@ -804,7 +804,7 @@ Then you can use the keyboard shortcut to open that dir.
 
 Dynamically adjust tag position [[https://orgmode.org/worg/org-hacks.html#org0560357][source on worg]]
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (defun ba/org-adjust-tags-column-reset-tags ()
   "In org-mode buffers it will reset tag position according to
 `org-tags-column'."
@@ -1724,6 +1724,18 @@ Add local workspace to manage multiple repositories:
        ))
 #+END_SRC
 
+Turn on ANSI-COLOR:
+
+#+BEGIN_SRC emacs-lisp
+(defun color-buffer (proc &rest args)
+  (interactive)
+  (with-current-buffer (process-buffer proc)
+    (read-only-mode -1)
+    (ansi-color-apply-on-region (point-min) (point-max))
+    (read-only-mode 1)))
+
+(advice-add 'magit-process-filter :after 'color-buffer)
+#+END_SRC
 *** monky
 Add the Magit-copy for Mercurial 'monky'
 
@@ -2142,7 +2154,7 @@ Link to yasnippet mode:
 
 
 Auto black on save:
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
 (add-hook 'before-save-hook #'elpy-black-fix-code nil t)
 #+END_SRC
 
@@ -2164,6 +2176,21 @@ And set up virtualenv path:
 (setenv "WORKON_HOME" "/home/fengxia/.virtualenvs/")
 (setq elpy-rpc-virtualenv-path 'current)
 #+END_SRC
+
+**** auto-virtualenv
+
+#+BEGIN_SRC
+(use-package auto-virtualenv
+  :ensure t
+  :init
+  (use-package pyvenv
+    :ensure t)
+  :config
+  (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+  (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
+  )
+#+END_SRC
+
 
 **** py-autopep8
 
@@ -3666,7 +3693,7 @@ then =C-c C-c= to send:
 Install slack client. It's a bit involved to get token and cookie, and *you need
 both*!
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package slack
   :ensure t
   :defer 4
@@ -3706,7 +3733,7 @@ both*!
 
 Add a hydra:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (global-set-key (kbd "C-c <f3>")
   (defhydra slack-hydra (:hint nil)
     "
@@ -3735,7 +3762,7 @@ Add a hydra:
 
 Add alert:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package alert
   :commands (alert)
   :init

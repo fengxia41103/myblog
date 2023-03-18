@@ -33,18 +33,23 @@ header-includes: |
 
 # Summary
 
+- Top full stack capability. Specialize in designing high availability
+  & high scalability system in cloud environment.
+
+- Strong tech lead in building and mentoring high-performance
+  engineering teams. Well rounded technical knowledge and personal
+  skills in meeting needs of
+
 - 20+ years experience in research and development with a proven track
   of records of design and implementing mission-critical systems from
   lab to production.
 
-- 10+ years experience designing and implementing full-stack
-  application. Specialize in HA & high scalability architecture,
-  relational data modeling, Python Django backend, ReacJS frontend,
-  RESTful interface & integration, responsive/mobile-ready UI.
+- 15+ years experience in MVC, MVVM, data modeling, relational
+  database (MySQL, Postgres), RESTful API, Django/Flask, REACT, Redux, MUI.
 
-- 10+ years experience in working closely with customer and project
-  stakeholders to balance product requirement, delivery quality, and
-  financial success.
+- 15+ years experience in working closely with customer and
+  stakeholders to balance product requirement, deliver quality
+  results, and achieve financial success.
 
 - 10+ years experience in building and leading top engineering talent
   and high-performance product engineering teams. Well rounded

@@ -258,66 +258,6 @@ and the tangled file is compiled."
   "Compute an expanded absolute file path for org files"
   (expand-file-name filename org-directory))
 
-(defun ba/org-adjust-tags-column-reset-tags ()
-  "In org-mode buffers it will reset tag position according to
-`org-tags-column'."
-  (when (and
-         (not (string= (buffer-name) "*Remember*"))
-         (eql major-mode 'org-mode))
-    (let ((b-m-p (buffer-modified-p)))
-      (condition-case nil
-          (save-excursion
-            (goto-char (point-min))
-            (command-execute 'outline-next-visible-heading)
-            ;; disable (message) that org-set-tags generates
-            (cl-letf (((symbol-function 'message) #'format))
-              (org-set-tags 1 t))
-            (set-buffer-modified-p b-m-p))
-        (error nil)))))
-
-(defun ba/org-adjust-tags-column-now ()
-  "Right-adjust `org-tags-column' value, then reset tag position."
-  (set (make-local-variable 'org-tags-column)
-       (- (- (window-width) (length org-ellipsis))))
-  (ba/org-adjust-tags-column-reset-tags))
-
-(defun ba/org-adjust-tags-column-maybe ()
-  "If `ba/org-adjust-tags-column' is set to non-nil, adjust tags."
-  (when ba/org-adjust-tags-column
-    (ba/org-adjust-tags-column-now)))
-
-(defun ba/org-adjust-tags-column-before-save ()
-  "Tags need to be left-adjusted when saving."
-  (when ba/org-adjust-tags-column
-     (setq org-tags-column 1)
-     (ba/org-adjust-tags-column-reset-tags)))
-
-(defun ba/org-adjust-tags-column-after-save ()
-  "Revert left-adjusted tag position done by before-save hook."
-  (ba/org-adjust-tags-column-maybe)
-  (set-buffer-modified-p nil))
-
-;; between invoking org-refile and displaying the prompt (which
-;; triggers window-configuration-change-hook) tags might adjust,
-;; which invalidates the org-refile cache
-(defadvice org-refile (around org-refile-disable-adjust-tags)
-  "Disable dynamically adjusting tags"
-  (let ((ba/org-adjust-tags-column nil))
-    ad-do-it))
-(ad-activate 'org-refile)
-
-;; Now set it up
-(setq ba/org-adjust-tags-column t)
-;; automatically align tags on right-hand side
-;; TODO(fleury): Does not seem to work as of 2017/12/18
-;; Seems to work again 2018/11/01
-(add-hook 'window-configuration-change-hook
-          'ba/org-adjust-tags-column-maybe)
-(add-hook 'before-save-hook 'ba/org-adjust-tags-column-before-save)
-(add-hook 'after-save-hook 'ba/org-adjust-tags-column-after-save)
-(add-hook 'org-agenda-mode-hook (lambda ()
-                                  (setq org-agenda-tags-column (- (window-width)))))
-
 (defun my-org-inherited-no-file-tags ()
   (let ((tags (org-entry-get nil "ALLTAGS" 'selective))
         (ltags (org-entry-get nil "TAGS")))
@@ -796,6 +736,15 @@ and the tangled file is compiled."
           (:help-echo "Local changes not in upstream")))
        ))
 
+(defun color-buffer (proc &rest args)
+  (interactive)
+  (with-current-buffer (process-buffer proc)
+    (read-only-mode -1)
+    (ansi-color-apply-on-region (point-min) (point-max))
+    (read-only-mode 1)))
+
+(advice-add 'magit-process-filter :after 'color-buffer)
+
 (use-package monky
   :ensure t
   :defer
@@ -987,6 +936,8 @@ and the tangled file is compiled."
   :config
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+
+(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
 
 (setenv "PYTHONIOENCODING" "utf-8")
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
@@ -1843,73 +1794,6 @@ If given prefix arg ARG, skips markdown conversion."
 (with-eval-after-load 'message
  (define-key message-mode-map (kbd "C-c C-s") #'message-md-send)
  (define-key message-mode-map (kbd "C-c C-c") #'message-md-send-and-exit))
-
-(use-package slack
-  :ensure t
-  :defer 4
-  :init (make-directory "/tmp/emacs-slack-images/" t)
-  :bind (:map slack-mode-map
-              (("@" . slack-message-embed-mention)
-               ("#" . slack-message-embed-channel)))
-  :custom
-  (slack-buffer-emojify t)
-  (slack-prefer-current-team t)
-  (slack-image-file-directory "/tmp/emacs-slack-images/")
-  (slack-buffer-create-on-notify t)
-  (slack-thread-also-send-to-room t)
-  :config
-    (slack-register-team
-     :name "mycompanyio"
-     :default t
-     :token (auth-source-pick-first-password
-             :host "mycompanyio.slack.com"
-             :user "feng.xia@mycompany.io^token")
-     :cookie (auth-source-pick-first-password
-             :host "mycompanyio.slack.com"
-             :user "feng.xia@mycompany.io^cookie")
-     :subscribed-channels '((eng-chat software_dev))
-     :full-and-display-names t)
-    (add-to-list 'org-agenda-files "~/workspace/me/org/slack.org"))
-
-;; global start slack
- (slack-start)
-
-;; display a nice timestamp in slack
-(setq lui-time-stamp-format "[%Y-%m-%d %H:%M]")
-(setq lui-time-stamp-only-when-changed-p t)
-(setq lui-time-stamp-position 'right)
-(setq lui-time-stamp-face '((t (:foreground "light gray" :weight normal))))
-
-(global-set-key (kbd "C-c <f3>")
-  (defhydra slack-hydra (:hint nil)
-    "
-      Channel: _c_:channel _l_:update
-      Message: _i_:im _u_:update _r_:reaction _e_:edit msg _M-p_:prev _M-n_:next
-        Slack: _S_:start _C_: leave
-        _q_:cancel
-    "
-
-
-    ("c" slack-channel-select "channel")
-    ("l" slack-channel-list-update "channel update")
-
-    ("i" slack-im-select "im")
-    ("u" slack-im-list-update "im update")
-    ("r" slack-message-add-reaction "reaction")
-    ("e" slack-message-edit "edit msg")
-    ("M-p" slack-buffer-goto-prev-message)
-    ("M-n" slack-buffer-goto-next-message)
-
-    ("S" slack-start "Start")
-    ("C" slack-ws-close "Leave")
-
-    ("q"  nil "cancel" :color yellow)))
-
-(use-package alert
-  :commands (alert)
-  :init
-  (setq alert-default-style 'libnotify)
-)
 
 (use-package elfeed
   :ensure

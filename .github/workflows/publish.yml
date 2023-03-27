@@ -24,7 +24,7 @@ jobs:
 
 
     - name: Build
-      run: make html
+      run: make publish
 
 
     - name: Deploy 🚀

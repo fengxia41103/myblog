@@ -222,6 +222,9 @@ body .footer-copyright {
   border-color: #ea6153;
   background-color: #ea6153;
 }
+#content #article-content li {
+  list-style-type: "-";
+}
 #content #sth h2 {
   border-bottom: none;
 }
@@ -461,9 +464,6 @@ body .footer-copyright {
 }
 #content .reveal * .mywhite {
   color: #efefec;
-}
-#content .reveal * code {
-  font-family: "Inconsolata", monospace;
 }
 #content .reveal section img {
   border: none;

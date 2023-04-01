@@ -23,7 +23,6 @@ Author: Feng Xia
 |---------------------|---------------------------|--------------|
 | Feng Xia            | fengxia41103@gmail.com    | 508/801-1794 |
 | Feng Xia            | feng_xia41103@hotmail.com |              |
-|---------------------|---------------------------|--------------|
 | Ann Zhang           | zhangny@gmail.com         | 508/801-8337 |
 | Ping Zhang          | pingtravel66@hotmail.com  | 919/345-0110 |
 | Bin Zhou            | lakerzhou@gmail.com       | 919/937-8470 |

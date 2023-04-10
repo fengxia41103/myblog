@@ -148,12 +148,63 @@ Modified: 2018-07-23 12:04
 <div class="my-resume-header" id="lenovo">
   <div class="row">
     <div class="text-left col l6 m6 s6">
-      Advisory Engineer<br />
+      Principal System Architect<br />
+      <span style="opacity:0.5;">Lucidum</span>
+    </div>
+    <div class="text-right col l5 m5 s5">
+      <i class="fa fa-calendar"></i>
+      3/2022 - 3/2023<br />
+      <span style="opacity:0.5;">RTP, NC</span>
+    </div>
+    <div  class="text-right col l1 m1 s1"
+          data-toggle="tooltip"
+          title="Click to expand and collapse">
+      <br />
+      <i class="fa fa-angle-double-down"></i>
+    </div>
+  </div>
+</div>
+
+- Laid out new architecture of the system and its development
+  roadmap to evolve it from being on-premise only to being
+  cloud-native.
+
+- Oversaw global engineering team of 5 in US (PM, UX, python, devops,
+  CICD, AWS), 11 in China (4 Java backend, 3 React frontend, 3 QA, 1
+  local team lead), 1 in Ukraine (Python). Report to CTO. Oversaw 1
+  major release, 6 minor releases, and 12 patch releases.
+
+- Responsible for daily PR reviews across 50+ github repos including
+  Java, Python, Javascript, React, Groovy, Ansible, Terraform, shell
+  scripts.
+
+- Streamlined CICD pipelines, reducing iteration time from 1.5 hours to
+  27 minutes.
+
+- Complete rewrote 800+ Cypress e2e tests in 6 weeks. Added
+  `cypress-tags` and `cypress-grep` to fine tune code&rarr;test
+  cycle. Added `Cypress studio` to allow non-technical stakeholders
+  contributing to test suite, lowering time to create new test case
+  from 4-8 hours to less than 5 minutes, and achieved near 100%
+  automation coverage in UAT.
+
+- Implemented new semantic release in github action, which enabled
+  full backend-frontend split in both development and deployment. This
+  in turn allowed flexible component release, continuous integration,
+  testing, and production upgrade. Applied to all production
+  instances.
+
+- Contributed a lot of code in React, Cypress, Python, and Ansible.
+
+<div class="my-resume-header" id="lenovo">
+  <div class="row">
+    <div class="text-left col l6 m6 s6">
+      P9, Senior Solution Architect, Team Lead<br />
       <span style="opacity:0.5;">Lenovo US</span>
     </div>
     <div class="text-right col l5 m5 s5">
       <i class="fa fa-calendar"></i>
-      11/2016 - present<br />
+      11/2016 - 3/2022<br />
       <span style="opacity:0.5;">RTP, NC</span>
     </div>
     <div  class="text-right col l1 m1 s1"

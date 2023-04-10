@@ -32,6 +32,5 @@ header-includes:
   - \lstset{framesep=4pt}
   - \lstset{numbers=left}
   - \lstset{numberstyle=\tiny\ttfamily}
-  -
-    \lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+  - \lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
 ---

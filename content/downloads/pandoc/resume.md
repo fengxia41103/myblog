@@ -94,7 +94,7 @@ Lucidum, Principal System Architect, Director
 
 
 ## 11/2016 - 3/2022
-Lenovo US, P9, Senior Solution Architect, Team Lead
+Lenovo US, P8, Senior Solution Architect, Team Lead
 
 - Principal architect of the [Lenovo Open Cloud Automation][25]
   solution, first author of its reference architecture paper. It was

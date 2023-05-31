@@ -1,25 +1,35 @@
 Hi,
 
-I love technology. I have been the primary architect for Lenovo Open
-Cloud, which is an infrastructure for cloud computing and IoT
-workloads. So this gives me insight to both hardware and software
-stack that will be used to support them.
+If you are looking for a candidate of a technology expert and strong
+project management acumen, look no further.
 
-Further, I have a MBA and have built and managed projects in capacity
-of a tech lead in a startup, a PM in a mid-size company, a Director of
-a consulting firm that coordinates 40+ person team and a million
-dollar contract, and a founder bootstraping my own business. These
-experience gave me unique spectrum of understanding both of technology
-and of its business value. I have found it necessary in role of
-designing a quality architecture and development process. After all,
-technology is not an isolation in vacuum. Instead, a good software and
-its development is like writing a book -- you don't be a good writer
-by just knowing how to write the letter, but by being a thinker in
-life whose mind is curious, analytical, and productive.
+I have been in the IT area for 20+ years. From embedded system,
+high-performance computing, cloud, full stack, migration of legacy
+system, I have done them all. With seniority grows I have been taking
+on more and more of team management role. However, I kept myself
+hands-on because I wanted to be subject expert of the task at hand so
+that my lead were practical, efficient, and down-to-earth.
 
-I think I have much to offer to this position, shall there be mutual
-interest in my background and quality. Looking forward to hearing from
-you soon.
+In the past years I have been tech lead of a system security startup,
+a PM of a mid-size ERP software company, a Managing Director of a
+technology consulting firm overseeing a $3M contract, a System
+Architect of a global firm w/ two published reference architecture
+papers still in production today, and recently a Principal System
+Architect and Director of a data security firm. I can fairly claim
+that I know a lot of technologies and can learn new ones quickly. I am
+a top level expert on software development and deployment, and am good
+at streamlining workflows and processes, defining SOPs, so to improve
+the whole user experience and resource utilization score. I feel
+equally comfortable working w/ a developer who has a specific
+programming bug to resolve, and w/ an executive who focuses on program
+strategy and roadmap, because I have been in both roles and know
+exactly how to communicate well in their individual context.
+
+Devils are in the details. I would like to learn more of this
+opportunity and the challenges you are facing, see if my skills could
+bring solution or suggestion to the table. If so, I am confident there
+would be some aspects of the issue I could provide that will move the
+needle forward. Looking forward to hearing from you soon.
 
 Best regards,
 Feng Xia

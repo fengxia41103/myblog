@@ -4,7 +4,7 @@ monofont: DejaVu Sans Mono
 titlepage: false
 papersize: a4
 fontsize: 10pt
-geometry: margin=1.45in
+geometry: margin=1.30in
 linkstyle: slanted
 urlcolor: RoyalBlue
 subparagraph: yes
@@ -30,163 +30,255 @@ header-includes: |
 
 ---
 
-# Summary
+# Technology Highlights
 
-- Top knowledge in full stack technologies including methodologies
-  (MVC, MVVM, micro service, SOA), DB and proxy (ORM, MySQL, PG,
-  Mongo), RESTful API (OpenAPI, Swagger, DRF), framework
-  (Django/Flask/Spring Boot), cache/messaging (Redis/Rabbit MQ),
-  frontend (Storybook, React, Redux, Angular, material), packaging
-  (Docker), cloud (AWS, Azure), infrastructure as code (TF, Pulumi),
-  DevOps (Ansible), CICD (Jenkins, github action, bitbucket pipeline),
-  e2e test (Cypress, Selenium, pytest), secrets (Hashicorp Vault,
-  Ansible Vault).
+- Extensive expertise in full stack technologies, encompassing various
+  design patterns (MVC, MVVM, microservices, SOA).
 
-- Top engineering team lead/management experience and continuous
-  contribution in any role. Led team of small (<10) and medium scale
-  (40+) as Director, PM, team lead, principal system architect, and
-  individual developer.
+- Proficient in building RESTful APIs using OpenAPI, Swagger, and DRF,
+  and experienced in working with popular frameworks such as Django,
+  Flask, Express, and Spring Boot.
 
-- Top flexibility in participating project at different
-  maturity/phase, including new projects from design to production,
-  and legacy projects migrating frameworks, libraries, deployment
-  (on-premise, cloud, hybrid), CICD, security audit.
+- Adept at frontend development using Storybook, React, Redux,
+  Angular, Vue, Material UI, Bootstrap, and jQuery.
 
-- Top expert in managing day-2-day activities of software development
-  across SDLC including git (branch, merge/rebase, PR review, tag,
-  conflicts), semantic release, bug tracking, Jira, CICD, DevOps, QA.
+- Strong command of DB and proxy technologies (ORM, MySQL, PG, Mongo).
 
-- Top experience in setting up, integrating, and mentoring global
-  teams located in different geos/timezones.
+- Well-versed in containerization with Docker, cloud platforms like
+  AWS and Azure, infrastructure as code tools such as Terraform and
+  Pulumi, and proficient in DevOps tools such as Ansible.
+
+- Skilled in implementing scalable and efficient solution using cache
+  and messaging systems such as Redis and RabbitMQ.
+
+- Experienced in setting up and maintaining CI/CD pipelines using
+  Jenkins, GitHub Actions, and Bitbucket Pipelines.
+
+- Knowledgeable in end-to-end testing frameworks like Cypress, Mocha,
+  Jest, Karma, Selenium, pytest, TDD/BDD.
+
+# Development Leadership Highlights
+
+- Extensive experience leading and managing engineering teams,
+  consistently driving impactful contributions in any role
+  undertaken. Demonstrated leadership skills through successfully
+  leading teams of varying sizes, ranging from small (<10) to medium
+  scale (40+), while serving as a Director, Project Manager, Team
+  Lead, Principal System Architect, and individual developer.
+
+- Proven versatility in engaging with projects at different stages of
+  maturity and phases, showcasing adaptability in handling a wide
+  range of responsibilities. Experience includes active involvement in
+  new projects, from design to production, as well as revitalizing
+  legacy projects through framework and library migrations, deployment
+  transformations (on-premise, cloud, hybrid), CICD implementation,
+  and security audits.
+
+- Highly skilled in efficiently overseeing day-to-day activities of
+  software development throughout the entire SDLC. Proficient in
+  utilizing Git for tasks such as branch management, merging/rebasing,
+  PR reviews, tagging, and conflict resolution. Experienced in
+  implementing semantic release strategies and proficient in bug
+  tracking systems like Jira. Well-versed in CICD methodologies,
+  DevOps practices, and ensuring seamless collaboration between
+  development and QA teams.
+
+- Extensive experience in successfully establishing, integrating, and
+  mentoring global teams situated across diverse geographical
+  locations and time zones. Proficient in effectively navigating the
+  challenges associated with managing remote teams, fostering
+  collaboration, and promoting cohesive teamwork.
+
+- Extensive experience in mentoring and guiding junior team members to
+  enhance overall team quality and efficiency.
+
 
 # Experience
 
 ## 3/2022 - 3/2023
 Lucidum, Principal System Architect, Director
 
-- Laid out next-gen architecture of the system and its development
-  roadmap, supporting on-premise, cloud-native (AWS, Azure), and
-  hybrid.
+- Led the design of the next-generation product architecture and
+  deployment model, overseeing a successful transition from
+  on-premise-only to a hybrid infrastructure that supports both
+  on-premises and cloud-native environments.
 
-- Oversaw global engineering team of 17 &mdash; 5 in US (PM, UX, python, DevOps,
-  CICD, AWS), 11 in China (4 Java backend, 3 React frontend, 3 QA, 1
-  local team lead), 1 in Ukraine (Python). Report to CTO. Oversaw 2
-  major release, 6 minor releases, and 12 patch releases.
+- Provided leadership and management  for a diverse global engineering
+  team    consisting    of    17   professionals    across    multiple
+  locations. Managed a  team of 5 in the US,  comprising roles such as
+  Project  Manager, UX  Designer, Python  Developer, DevOps  Engineer,
+  CICD Specialist, and AWS expert.  Additionally, oversaw a team of 11
+  in China, consisting of 4  Java backend developers, 3 React frontend
+  developers, 3 QA  testers, and 1 local team  lead. Directly reported
+  to the CTO.
 
-- Oversaw SOC2 compliance. Responsible for daily PR reviews across 50+
-  github repos including Java, Python, Javascript, React, Groovy,
-  Ansible, Terraform, shell scripts.
+- Managed the successful execution of 2 major releases, 6 minor
+  releases, and 12 patch releases, ensuring timely and high-quality
+  deliveries to meet customer expectations.
 
-- Restructured and rewrote 800+ Cypress e2e tests in 6 weeks to
-  achieve 100% automation in UAT. Developed new automation tool to
-  lower time of creating a new test case from 4-8 hours to < 5
-  minutes.
+- Demonstrated a keen attention to detail and accountability by
+  conducting daily PR (Pull Request) reviews across a portfolio of 50+
+  GitHub repositories spanning various languages and technologies,
+  such as Java, Python, JavaScript, React, Groovy, Ansible, Terraform,
+  and shell scripting.
 
-- Implemented semantic release. Fully automated component
-  release including release versioning, code tagging, changelog,
-  packaging publishing, regression, and continuous component-level upgrade in
-  production.
+- Drove substantial improvements in test automation efficiency and
+  effectiveness. Revamped and redesigned 800+ Cypress end-to-end (e2e)
+  tests within a tight timeframe of 6 weeks, resulting in a remarkable
+  achievement of achieving 100% automation in User Acceptance Testing
+  (UAT). Leveraged Cypress Studio reducing the time required to create
+  a new test case from 4-8 hours to less than 5 minutes.
 
-- Optimized DevOps, reducing iteration time from 1.5 hours to 27
-  minutes, and AWS VM footprint/cost from $2k/month to < $400/month.
+- Implemented a comprehensive semantic release strategy, optimizing
+  the release process for components. Achieved full automation of the
+  entire component release workflow, encompassing critical tasks such
+  as release versioning, code tagging, changelog generation, packaging
+  publishing, regression testing, and continuous component-level
+  upgrades in production.
 
-- Contributed a lot of code in React, Cypress, Python, and Ansible.
+- Implemented robust optimizations in the DevOps practices, resulting
+  in a significant reduction of iteration time from 1.5 hours to just
+  27 minutes.
+
+- Achieved notable cost savings by optimizing the AWS resources and
+  leveraging cloud-native best practices, slashing monthly expenses
+  from $2,000 to less than $400.
+
+- Made substantial contributions to codebases across multiple
+  technologies, including React, Cypress, Python, and
+  Ansible. Actively participated in developing and enhancing features,
+  implementing improvements, and ensuring code quality and
+  maintainability in these respective functions and languages.
+
+- Led the oversight and management of SOC2 compliance initiatives,
+  ensuring adherence to rigorous security and privacy
+  standards.
 
 
 ## 11/2016 - 3/2022
-Lenovo US, P8, Senior Solution Architect, Team Lead
+Lenovo US, P8, Advisor Engineer, Senior Solution Architect, Team Lead
 
-- Principal architect of the [Lenovo Open Cloud Automation][25]
-  solution, first author of its reference architecture paper. It was
-  productized in 13 months, and has won $100M+ contracts after launch.
+- Served as the principal architect for the groundbreaking [Lenovo
+  Open Cloud Automation][25] solution, taking on a leadership role in
+  its conceptualization and development. Authored the influential
+  reference architecture paper, providing essential guidelines for its
+  implementation. Successfully transformed the solution into a
+  market-ready product within a remarkable 13-month timeframe. The
+  solution's exceptional quality and value proposition played a
+  pivotal role in securing contracts worth over $100 million following
+  its launch.
 
-- First author of the [Red Hat Hyperconverged Infrastructure (RHHI)
-  Reference Architecture][26]. Principal architect and primary code
-  contributor of RHHI's automated end-2-end deployment.
+- Distinguished as the first author of the highly regarded [Red Hat
+  Hyperconverged Infrastructure (RHHI) Reference
+  Architecture][26]. Led the architectural design and development of
+  RHHI's automated end-to-end deployment, assuming a principal
+  architect role.
 
-- Principal architect of the Lenovo Workload Solution Store (WSS). Its
-  orchestration technology forms the core of the ThinkAgile VX
-  product.
+- As the principal architect of the Lenovo Workload Solution Store
+  (WSS), played a pivotal role in shaping the platform's architecture
+  and design. The orchestration technology developed under WSS serves
+  as the core foundation of the ThinkAgile VX product. Product was a
+  Django & React full stack.
 
-- Principal system architect of the ThinkAgile CP product, a private
-  cloud solution. Played a key role in third-party IP evaluation and
-  acquisition. Led UI/UX team of five and DevOps team of four in six
-  major releases and production deployment to AWS and Cloudfare.
+- As the UI lead of the ThinkAgile CP product, led a dedicated team of
+  five UI/UX professionals and a DevOps team of four, fostering
+  collaboration and driving successful outcomes in six major
+  releases. Development was in Figma, AngularJS, Angular, and Redux.
 
-- Principal architect of Lenovo's Datacenter Inventory Management System
-  (DCIM), and is its top code contributor.
+- Contributor of Netbox upstream. Customized Netbox significantly to
+  manage a diverse infrastructure comprising over 300 servers and
+  switches located across multiple regions, including the US, Europe,
+  and India. Employed advanced automation techniques to achieve
+  seamless server onboard discovery, provisioning, and reconfiguration
+  processes. Code were in Django, Python, Ansible, and Bash.
 
-- Second author of the "Lenovo OpenStack Reference Architecture" and
-  "Lenovo Ceph Reference Architecture".
-
-- Contributor of Netbox upstream. Managed 300+
-  servers and switches spanning across US, Europe and India. Achieved
-  fully automated server onboard discovery, provisioning, and
-  reconfiguration. In production.
-
-- Developed a Django application integrating Gitlab and Jira so that a
-  feature request can be tracked at git commit level from
-  implementation to deployment, giving PM unprecedented insight of a
-  SDLC.
-
-- Support pre-sale and customer engagements, RFPs as an SME in the
-  area of containerization, microservice design pattern, cloud native
-  solution, SDLC, DevOps, CICD, and orchestration.
-
+- Created a robust Django application that seamlessly integrates
+  GitLab and Jira, enabling the tracking of feature requests at the
+  git commit level throughout the entire software development
+  lifecycle (SDLC). This integration provided project managers with
+  unprecedented visibility and insight into the progression of feature
+  implementation, deployment, and overall SDLC stages.
 
 ## 01/2015 - present
 PY Consulting, Founder, Freelance
 
-- Contractor, UNC Chapel Hill, School of Medicine. Revived three
-  legacy apps used daily by doctors and researchers. All in
-  production. Setup the organization's first containerized deployment
-  and its first CICD pipeline. Provide training courses on Git
-  workflow, Docker, Python, Javascript, Cypress, Jenkins, Ansible,
+- Contractor, UNC Chapel Hill, School of Medicine. Successfully
+  modernized and brought back into production three Python
+  applications that are critical to the daily operations of doctors
+  and researchers. Pioneered the establishment of the organization's
+  inaugural containerized deployment, facilitating improved
+  scalability, portability, and resource utilization. Additionally,
+  spearheaded the implementation of its first Continuous Integration
+  and Continuous Deployment (CICD) pipeline, ensuring streamlined and
+  automated software delivery processes. Provide training courses on
+  Git workflow, Docker, Python, Javascript, Cypress, Jenkins, Ansible,
   Github action, Bitbucket pipeline.
 
-- Volunteer, Mass General Hospital. Created Dockerfile and
-  `docker-compose` to install `deeplabcut` and `simba`, two machine
-  learning tools used by clinic researchers. Mentored team of 3 of
-  Python, version control, Docker. Saved the team hundreds of
+- Volunteer, Mass General Hospital. Containerized the deployment of
+  essential machine learning tools, namely `deeplabcut` and `simba`,
+  utilized by clinic researchers. As a mentor, provided guidance and
+  support to a team of three Python developers, imparting expertise in
+  Python programming, version control, and Docker. The mentorship
+  empowered the team to adopt best practices and optimize their
+  workflow, resulting in significant time savings of hundreds of
   men-hours.
 
 - Contributor of the World Bank's "Digital Development Partnership"
-  program.  Built the [`World's Snapshot`][30], a data analysis tool
-  in React w/ APIs by the World Bank and the DHS data. It features
-  rich charts using D3, Highcharts, Google charts, eCharts, plotly,
-  Dygraphs.
+  program. Built the [World's Snapshot][30], a data analysis tool
+  using React, leveraging powerful APIs provided by the World Bank and
+  DHS to ensure accurate and up-to-date data integration. Implemented
+  rich and interactive visualizations by utilizing a diverse range of
+  charting libraries such as D3, Highcharts, Google Charts, eCharts,
+  Plotly, and Dygraphs.
 
-- Contractor, "Wei Fashion Group", a Shanghai-based fashion company
-  with subsidiaries in US, Europe and China. Built its ERP and
-  e-commerce store.
+- Contractor, "Wei Fashion Group", a renowned Shanghai-based fashion
+  company with global subsidiaries in the US and Europe. Played a key
+  role in developing and implementing their Enterprise Resource
+  Planning (ERP) system and e-commerce store using Django & React,
+  driving digital transformation across the organization.
 
-- Contractor, "Shang Xue Tang", a Beijing high education service
-  company. Built a [Django application][21] featuring data crawler,
-  RESTful API, data streaming, chat room, and forum.
+- Contractor, "Shang Xue Tang", a prominent Beijing-based higher
+  education service company. Spearheaded the development of a robust
+  [Django application][21] that served as a versatile platform for
+  various functionalities featuring RESTful API, data streaming, chat
+  room, and forum.
 
-- Contractor, "Linkage", a Shanghai startup specializing
-  `ODOO`(`OpenERP`) customization. Managed 1 business analyst and 3
-  engineers over two releases. Authored its "2016-17 Technology
-  Roadmap".
+- Contractor, "Linkage", a dynamic Shanghai-based startup specializing
+  in ODOO (OpenERP) customization. Effectively managed a team
+  comprised of one business analyst and three engineers, overseeing
+  their work and ensuring the successful delivery of project
+  milestones. Additionally, I authored the "2016-17 Technology
+  Roadmap" for the company, providing a comprehensive and
+  forward-thinking vision for the technological advancements and
+  initiatives to be pursued during that period.
 
 ## 11/2013 - 01/2015
 Beijing Lean Strategy Consulting Group, Associate Director
 
-- Responsible for a $3M RFP w/ a Fortune 500 company to design its ERP
-  system. Won the contract.
+- Led the successful completion of a high-value Request for Proposal
+  (RFP) worth $3 million with a Fortune 500 company, assuming full
+  responsibility for designing their Enterprise Resource Planning
+  (ERP) system.
 
-- Oversight project execution. Responsible for P&L. Designed the
-  system architecture. Setup the team's SDLC from
-  ground up. Doubled the team in a year.
+- Demonstrated exceptional leadership as an overseer of project
+  execution, shouldering the responsibility for the project's profit
+  and loss (P&L) performance. Additionally, played a pivotal role in
+  designing the system architecture, shaping the foundation for a
+  robust and scalable solution.
 
 ## 07/2010 - 11/2013
 CrunchTime! Information Technology, Project Manager
 
-- Responsible for a $10M RFP w/ Yum!China.
+- Managed a significant Request for Proposal (RFP) valued at $10
+  million with Yum! China. This included understanding Yum! China's
+  specific requirements, crafting a compelling proposal, and
+  effectively presenting the value proposition of solution.
 
-- Led development of the company's Customer Portal in SalesForce. Won
-  Bronze prize of the "2011 Steve Awards for Sales & Customer Service"
-  award.
+- Led the successful development of the company's SalesForce Customer
+  Portal, a key project that significantly enhanced the customer
+  experience and streamlined sales processes. The portal were
+  recognized with the prestigious Bronze prize at the "2011 Steve
+  Awards for Sales & Customer Service."
 
 - Designed and built the company's first mobile application
   prototype using Cordova, HTML5 and jQuery Mobile.
@@ -195,19 +287,23 @@ CrunchTime! Information Technology, Project Manager
 China Everbright Bank, Business Manager
 
 - Responsible for a $2M RFP.
-- Built the division's IT branch from the ground up.
+- Established and built the division's IT branch from the ground up,
+  demonstrating exceptional leadership and organizational skills.
 
 ## 04/2004 - 05/2007
 Bit 9 Inc. (Carbon Black), Researcher, Tech Lead
 
-- Reverse-engineering Windows NT kernel. One breakthrough won the
-  company a $6M A-round VC.
+- Led a groundbreaking initiative in reverse-engineering the Windows
+  NT kernel, which resulted in a significant breakthrough that secured
+  the company a remarkable $6 million A-round venture capital
+  investment.
+
 
 ## 07/1998 - 04/2004
 Instron Corp., Senior Engineer
 
 - Single-handed firmware of its new impact testing line. Sales reached
-  $1M in the first year.
+  $1M in its first year.
 
 # Education
 - MBA, (04/2007 - 09/2008), Boston University

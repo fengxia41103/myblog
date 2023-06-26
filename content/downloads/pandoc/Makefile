@@ -70,6 +70,11 @@ resume_md := resume.md
 RESUME_INPUTS = $(resume_md)
 resume_pdf := ../resume.pdf
 
+# cover letter
+cover_letter_md := cover\ letter.md
+COVER_LETTER_INPUTS = $(cover_letter_md)
+cover_letter_tex := cover_letter.tex
+
 # git startegy article
 git_md := git\ strategy.md
 GIT_INPUTS = $(git_md) $(REFERENCES)
@@ -98,6 +103,7 @@ rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
 resume: resume_pdf
+cover_letter: cover_letter_tex
 git: git_pdf
 netbox: netbox_pdf netbox_docx
 unc: unc_pdf unc_docx
@@ -168,6 +174,14 @@ resume_pdf: $(RESUME_INPUTS)
 	-o $(resume_pdf) \
 	--pdf-engine=xelatex \
 	$(RESUME_INPUTS)
+
+cover_letter_tex: $(COVER_LETTER_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(cover_letter_tex) \
+	--pdf-engine=xelatex \
+	$(COVER_LETTER_INPUTS)
 
 git_pdf: $(GIT_INPUTS) $(LATEX_ARTICLE_CONFIG)
 	pandoc $(LATEX_ARTICLE_CONFIG) $(GIT_INPUTS) \

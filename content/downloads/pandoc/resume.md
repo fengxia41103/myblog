@@ -103,13 +103,13 @@ Lucidum, Principal System Architect, Director
   on-premise-only to a hybrid infrastructure that supports both
   on-premises and cloud-native environments.
 
-- Provided leadership and management  for a diverse global engineering
-  team    consisting    of    17   professionals    across    multiple
-  locations. Managed a  team of 5 in the US,  comprising roles such as
-  Project  Manager, UX  Designer, Python  Developer, DevOps  Engineer,
+- Provided leadership and management for a diverse global engineering
+  team consisting of 17 professionals across multiple
+  locations. Managed a team of 5 in the US, comprising roles such as
+  Project Manager, UX Designer, Python Developer, DevOps Engineer,
   CICD Specialist, and AWS expert.  Additionally, oversaw a team of 11
-  in China, consisting of 4  Java backend developers, 3 React frontend
-  developers, 3 QA  testers, and 1 local team  lead. Directly reported
+  in China, consisting of 4 Java backend developers, 3 React frontend
+  developers, 3 QA testers, and 1 local team lead. Directly reported
   to the CTO.
 
 - Managed the successful execution of 2 major releases, 6 minor

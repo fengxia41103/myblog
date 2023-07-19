@@ -68,7 +68,11 @@ webapp_tex := webapp.tex
 # resume source and target
 resume_md := resume.md
 RESUME_INPUTS = $(resume_md)
-resume_pdf := ../resume.pdf
+resume_pdf := ../feng\ xia\ resume.pdf
+
+resume_devops_md := resume-devops.md
+RESUME_DEVOPS_INPUTS = $(resume_devops_md)
+resume_devops_pdf := ../feng\ xia\ resume\ devops.pdf
 
 # cover letter
 cover_letter_md := cover\ letter.md
@@ -102,7 +106,7 @@ lucidum_html := lucidum.html
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
-resume: resume_pdf
+resume: resume_pdf resume_devops_pdf
 cover_letter: cover_letter_tex
 git: git_pdf
 netbox: netbox_pdf netbox_docx
@@ -174,6 +178,14 @@ resume_pdf: $(RESUME_INPUTS)
 	-o $(resume_pdf) \
 	--pdf-engine=xelatex \
 	$(RESUME_INPUTS)
+
+resume_devops_pdf: $(RESUME_DEVOPS_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(resume_devops_pdf) \
+	--pdf-engine=xelatex \
+	$(RESUME_DEVOPS_INPUTS)
 
 cover_letter_tex: $(COVER_LETTER_INPUTS)
 	pandoc \

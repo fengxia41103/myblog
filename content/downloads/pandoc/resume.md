@@ -132,7 +132,7 @@ Lucidum, Principal System Architect, Director
 - Implemented a comprehensive semantic release strategy, optimizing
   the release process for components. Achieved full automation of the
   entire component release workflow, encompassing critical tasks such
-  as release versioning, code tagging, changelog generation, packaging
+  as release versioning, code tagging, changelog generation, package
   publishing, regression testing, and continuous component-level
   upgrades in production.
 
@@ -306,9 +306,10 @@ Instron Corp., Senior Engineer
   $1M in its first year.
 
 # Education
-- MBA, (04/2007 - 09/2008), Boston University
-- M. Sc., (09/1995 - 05/1997), Ohio University
-- B. Sc., (09/1990 - 07/1994), Shanghai JiaoTong University, China
+- MBA, (04/2007 - 09/2008), International Management & Finance, Boston University
+- M. Sc., (09/1995 - 05/1997), Electrical Engineering
+  (Telecommunication & Digital Signal Processing), Ohio University
+- B. Sc., (09/1990 - 07/1994), Electrical Engineering, Shanghai JiaoTong University, China
 
 # Sample writings & projects
 

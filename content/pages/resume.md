@@ -17,7 +17,7 @@ Modified: 2018-07-23 12:04
   <i class="fa fa-linkedin-square"></i>
   LinkedIn
 </a>
-<a href="{static}/downloads/resume.pdf">
+<a href="{static}/downloads/feng%20xia%20resume.pdf">
   <i class="fa fa-file-pdf-o"></i>
   PDF
 </a>

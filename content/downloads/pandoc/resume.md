@@ -104,8 +104,8 @@ Lucidum, Principal System Architect
   on-premises and cloud-native environments.
 
 - Provided leadership and management for a diverse global engineering
-  team consisting of 17 professionals across multiple
   locations. Managed a team of 5 in the US, comprising roles such as
+  team consisting of 17 professionals across multiple
   Project Manager, UX Designer, Python Developer, DevOps Engineer,
   CICD Specialist, and AWS expert.  Additionally, oversaw a team of 11
   in China, consisting of 4 Java backend developers, 3 React frontend
@@ -119,41 +119,26 @@ Lucidum, Principal System Architect
 - Demonstrated a keen attention to detail and accountability by
   conducting daily PR (Pull Request) reviews across a portfolio of 50+
   GitHub repositories spanning various languages and technologies,
-  such as Java, Python, JavaScript, React, Groovy, Ansible, Terraform,
-  and shell scripting.
+  such as Java, Python, JavaScript, React, Groovy, Ansible, and
+  Terraform.
 
 - Drove substantial improvements in test automation efficiency and
   effectiveness. Revamped and redesigned 800+ Cypress end-to-end (e2e)
-  tests within a tight timeframe of 6 weeks, resulting in a remarkable
-  achievement of achieving 100% automation in User Acceptance Testing
-  (UAT). Leveraged Cypress Studio reducing the time required to create
-  a new test case from 4-8 hours to less than 5 minutes.
+  tests within a tight timeframe of 6 weeks, achieving 100% automation
+  in User Acceptance Testing (UAT). Leveraged Cypress Studio reducing
+  the time required to create a new test case from 4-8 hours to less
+  than 5 minutes.
 
-- Implemented a comprehensive semantic release strategy, optimizing
-  the release process for components. Achieved full automation of the
-  entire component release workflow, encompassing critical tasks such
-  as release versioning, code tagging, changelog generation, package
-  publishing, regression testing, and continuous component-level
-  upgrades in production.
+- Implemented a comprehensive semantic release strategy. Achieved full
+  automation of the entire component release workflow, encompassing
+  critical tasks such as release versioning, code tagging, changelog
+  generation, package publishing, and regression testing.
 
-- Implemented robust optimizations in the DevOps practices, resulting
-  in a significant reduction of iteration time from 1.5 hours to just
-  27 minutes.
+- Implemented robust optimizations in the DevOps practices, reducing
+  iteration time from 1.5 hours to 27 minutes.
 
 - Achieved notable cost savings by optimizing the AWS resources and
-  leveraging cloud-native best practices, slashing monthly expenses
-  from $2,000 to less than $400.
-
-- Made substantial contributions to codebases across multiple
-  technologies, including React, Cypress, Python, and
-  Ansible. Actively participated in developing and enhancing features,
-  implementing improvements, and ensuring code quality and
-  maintainability in these respective functions and languages.
-
-- Led the oversight and management of SOC2 compliance initiatives,
-  ensuring adherence to rigorous security and privacy
-  standards.
-
+  leveraging cloud-native best practices.
 
 ## 11/2016 - 3/2022
 Lenovo US, P8, Advisor Engineer, Senior Solution Architect, Team Lead

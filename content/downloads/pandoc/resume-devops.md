@@ -96,7 +96,7 @@ header-includes: |
 # Experience
 
 ## 3/2022 - 3/2023
-Lucidum, Principal System Architect, Director
+Lucidum, Principal System Architect
 
 - Led the design of the next-generation product architecture and
   deployment model, overseeing a successful transition from

@@ -25,6 +25,7 @@ node. Assuming you have the following installed already:
       ```shell
       Enter file in which to save the key (/home/fengxia/.ssh/id_rsa):
       ```
+
 5. Create a `$HOME/.kube`.
 
 6. Install `kubectl`. I may ansible this later as well. For now a

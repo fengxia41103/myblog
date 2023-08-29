@@ -193,7 +193,69 @@ color of this filter. So, there is 总有人想害朕. The world is hating
 China. US is targeting China. All are barbarians at gate, 图我的钱财或
 是美貌.... so on and on. The bottom line is, I am always 对的.
 
-Give me a fxxx break.
+Give me a break.
+
+## 自古以来
+
+I have already reasoned that introducing a time dimension such as the
+5000-year-history is problematic. But at least there is a fixed
+number. With a phrase of 自古以来, there is no boundary. Futher, the "
+古" can be thought for 盘古, the mythical figure who split heaven from
+earth out of a big chaos, **the very first being**, the start of this
+earth life as we know it. Therefore, this carries an ambiguous tone
+that can be easily extended to that far. But that just means it
+includes absolutely anything human has ever known since the clock
+started. So no wonder using this is convenient for the Chinese to feel
+that anything humanly possible is, his.
+
+Even with its _constrained_ form, there is simply no rule of how much
+further such a backtracing can go &mdash; 100 years? 200
+years?.... thus, it becomes completely arbitrary as the argument
+needs. Slapping this time decorator onto any topic, it becomes a
+_historical "fact"_! But it certainly invites a question whenever it's
+used &rarr; why stop here!? Why not trace further back? If Tibet is so
+as "自古以来" since the Qing dynasty, well, how about it at Ming's
+time? or Qin's time? of 盘古's time? Really. What determines your
+time-of-choice being the one while all others are invalid? Such is the
+BS. I always joked about that according to such time magic, not only
+自古以来Austria is China's, but our history will be enriched by such
+historical figures &mdash; Beethoven, Mozart, and quite recently,
+Hitler.
+
+Do you really want this? I don't.
+
+## 华人
+
+This is a flexible term whose scope shifts constantly, just like the
+Yellow River's pass. I don't know what dimension it operated on. Since
+I have already discussed geo, race, time, culture, let me touch upon
+another one here, which is used/implied by this term to manifest its
+weight &mdash; bloodline.
+
+If ever you had a _Chinese_ ascendants, and god knows how far you
+trace, you get the _blood_, thus. This makes me wonder, does relative
+count? how far out of my family tree can I go until I invalidate such
+identity? For immigrants this is a pretty real question, and it's
+really a math question &larr; keep dividing by 2, the bloodline draws
+pretty thin after, say, 10 generation, and forget about 64 generations
+and beyond. And what if, 23th generation down the line, my guy/girl
+marries another full-blood chinese (if there were even such a thing!)?
+Does it reset the counter? or prorate `(1/(2^23)+1)/2`? Compounded?
+
+But it's not quite right, either. Looking at the Qing Dynasty, the
+ruling class, at least the royal family, kept their bloodline
+_pure_. So, were they 华人? If no, what was theirs, whether good or
+evil, wasn't 华人's, either. So, why should I feel proud of theirs
+achievement, or shame of their wrong doings? As a matter of fact, they
+were the 鞑虏, weresn't they? The convenience of this term is that it
+shares all the honor you earn, and bears no responsibility of any kind
+&mdash; if you get a recognition, well, you are a 华人, regardless
+where you are, who you are, what your ancestors were, when they ever
+left the land, as long you have that Mongol look, you are 华人.
+
+So, I would say, this is a category of your "look" &rarr; sounds
+racist now, doesn't it!?
+
 
 ## laundry list
 
@@ -218,6 +280,5 @@ Give me a fxxx break.
     编语言、高级语言？
 18. 南京的没落主要是由于什么造成的？
 19. 如何反驳元清非中国的谬论？
-20. 美国很早就获得光刻技术专利，为何没有诞生ASML这样的公司？
 
 [1]: https://en.wikipedia.org/wiki/Civilization

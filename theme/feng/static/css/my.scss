@@ -132,6 +132,7 @@ body {
 }
 
 #content {
+  counter-reset: h1 h2 h3 h4 h5 h6 figures;
   padding-bottom: 3em;
   color: $color_13;
   width: 90%;
@@ -179,13 +180,11 @@ body {
     word-wrap: break-word;
   }
   #article-content {
-    counter-reset: h1;
-    counter-reset: figures;
     h1 {
       counter-reset: h2;
       border-bottom: 1px solid $color_1;
       font-size: 1.5em !important;
-      &:before {
+      &::before {
         counter-increment: h1;
         content: counter(h1) ". ";
       }
@@ -196,7 +195,7 @@ body {
       font-size: 1.2em;
       font-size: 1em;
       border-bottom: 1px solid $color_1;
-      &:before {
+      &::before {
         counter-increment: h2;
         content: counter(h1) "." counter(h2) " ";
       }
@@ -206,7 +205,7 @@ body {
       font-size: 1.2em;
       font-size: 1em;
       border-bottom: 1px solid $color_1;
-      &:before {
+      &::before {
         counter-increment: h3;
         content: counter(h1) "." counter(h2) "." counter(h3) " ";
       }
@@ -216,7 +215,7 @@ body {
       font-size: 1em;
       font-size: 1em;
       border-bottom: 1px solid $color_1;
-      &:before {
+      &::before {
         counter-increment: h4;
         content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) " ";
       }
@@ -225,14 +224,14 @@ body {
       counter-reset: h6;
       font-size: 1em;
       border-bottom: 1px solid $color_1;
-      &:before {
+      &::before {
         counter-increment: h5;
         content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
           counter(h5) " ";
       }
     }
     h6 {
-      &:before {
+      &::before {
         counter-increment: h6;
         content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
           counter(h5) "." counter(h6) " ";
@@ -241,31 +240,31 @@ body {
       border-bottom: 1px solid $color_1;
     }
     h2.nocount {
-      &:before {
+      &::before {
         content: "";
         counter-increment: none;
       }
     }
     h3.nocount {
-      &:before {
+      &::before {
         content: "";
         counter-increment: none;
       }
     }
     h4.nocount {
-      &:before {
+      &::before {
         content: "";
         counter-increment: none;
       }
     }
     h5.nocount {
-      &:before {
+      &::before {
         content: "";
         counter-increment: none;
       }
     }
     h6.nocount {
-      &:before {
+      &::before {
         content: "";
         counter-increment: none;
       }
@@ -491,7 +490,7 @@ body {
     margin-bottom: 1em;
     color: $color_8;
     text-align: left;
-    &:before {
+    &::before {
       content: "Fig." counter(figures) ": ";
     }
   }
@@ -505,7 +504,7 @@ body {
     margin-bottom: 1em;
     color: $color_8;
     text-align: left;
-    &:before {
+    &::before {
       content: "Fig." counter(figures) ": ";
     }
   }

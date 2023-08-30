@@ -86,6 +86,7 @@ body .footer-copyright {
 }
 
 #content {
+  counter-reset: h1 h2 h3 h4 h5 h6 figures;
   padding-bottom: 3em;
   color: rgb(52, 52, 52);
   width: 90%;
@@ -132,16 +133,12 @@ body .footer-copyright {
   font-size: 1.5rem;
   word-wrap: break-word;
 }
-#content #article-content {
-  counter-reset: h1;
-  counter-reset: figures;
-}
 #content #article-content h1 {
   counter-reset: h2;
   border-bottom: 1px solid #634f33;
   font-size: 1.5em !important;
 }
-#content #article-content h1:before {
+#content #article-content h1::before {
   counter-increment: h1;
   content: counter(h1) ". ";
 }
@@ -151,7 +148,7 @@ body .footer-copyright {
   font-size: 1em;
   border-bottom: 1px solid #634f33;
 }
-#content #article-content h2:before {
+#content #article-content h2::before {
   counter-increment: h2;
   content: counter(h1) "." counter(h2) " ";
 }
@@ -161,7 +158,7 @@ body .footer-copyright {
   font-size: 1em;
   border-bottom: 1px solid #634f33;
 }
-#content #article-content h3:before {
+#content #article-content h3::before {
   counter-increment: h3;
   content: counter(h1) "." counter(h2) "." counter(h3) " ";
 }
@@ -171,7 +168,7 @@ body .footer-copyright {
   font-size: 1em;
   border-bottom: 1px solid #634f33;
 }
-#content #article-content h4:before {
+#content #article-content h4::before {
   counter-increment: h4;
   content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) " ";
 }
@@ -180,7 +177,7 @@ body .footer-copyright {
   font-size: 1em;
   border-bottom: 1px solid #634f33;
 }
-#content #article-content h5:before {
+#content #article-content h5::before {
   counter-increment: h5;
   content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " ";
 }
@@ -188,27 +185,27 @@ body .footer-copyright {
   font-size: 1em;
   border-bottom: 1px solid #634f33;
 }
-#content #article-content h6:before {
+#content #article-content h6::before {
   counter-increment: h6;
   content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) " ";
 }
-#content #article-content h2.nocount:before {
+#content #article-content h2.nocount::before {
   content: "";
   counter-increment: none;
 }
-#content #article-content h3.nocount:before {
+#content #article-content h3.nocount::before {
   content: "";
   counter-increment: none;
 }
-#content #article-content h4.nocount:before {
+#content #article-content h4.nocount::before {
   content: "";
   counter-increment: none;
 }
-#content #article-content h5.nocount:before {
+#content #article-content h5.nocount::before {
   content: "";
   counter-increment: none;
 }
-#content #article-content h6.nocount:before {
+#content #article-content h6.nocount::before {
   content: "";
   counter-increment: none;
 }
@@ -418,7 +415,7 @@ body .footer-copyright {
   color: #545454;
   text-align: left;
 }
-#content img:before {
+#content img::before {
   content: "Fig." counter(figures) ": ";
 }
 #content figure {
@@ -432,7 +429,7 @@ body .footer-copyright {
   color: #545454;
   text-align: left;
 }
-#content figcaption:before {
+#content figcaption::before {
   content: "Fig." counter(figures) ": ";
 }
 #content .fa-expand:hover {

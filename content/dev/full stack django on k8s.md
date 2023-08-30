@@ -140,49 +140,49 @@ In order to bake dotenv into frontend image:
    `envs/` folder. Also, parameter `$ENV` so that cli becomes
    `ENV=blah yarn start`. Same goes to `build:`.
 
-      ```json
-      "scripts": {
-        "start": "env-cmd -f envs/$ENV craco start",
-      },
-      ```
+        ```json
+        "scripts": {
+          "start": "env-cmd -f envs/$ENV craco start",
+        },
+        ```
 
 3. Add `arg` to Dockerfile. There is a good [article][6] about ARG
    vs. ENV. To build, `docker build --build-arg BUILD_FOR=a_value...`.
 
-      ```
-      # build environment
-      FROM node:16.15.1 as builder
+        ```
+        # build environment
+        FROM node:16.15.1 as builder
 
-      ARG NPM_TOKEN  <== private npm registry token
-      ARG BUILD_FOR  <== env parameter
+        ARG NPM_TOKEN  <== private npm registry token
+        ARG BUILD_FOR  <== env parameter
 
-      ...
+        ...
 
-      # npmrc
-      RUN echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
-      RUN echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.yarnrc
-      ...
+        # npmrc
+        RUN echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+        RUN echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.yarnrc
+        ...
 
-      # build
-      RUN env-cmd -f envs/${BUILD_FOR} yarn run build  <== use env parameter
-      ...
-      ```
+        # build
+        RUN env-cmd -f envs/${BUILD_FOR} yarn run build  <== use env parameter
+        ...
+        ```
 
 4. (optional) Add the same Dockerfile args to `docker-compose`. This
    is really for convenience and consistency so that using compose
    will achieve the same effect as above. To use, `BUILD_FOR=blah
    NPM_TOKEN=blah docker-compose up --build frontend`.
 
-      ```yaml
-      frontend:
-        image: frontend_stock
-        build:
-          context: ./frontend
-          dockerfile: ./Dockerfile
-          args:
-            BUILD_FOR: ${BUILD_FOR}
-            NPM_TOKEN: ${NPM_TOKEN}
-      ```
+        ```yaml
+        frontend:
+          image: frontend_stock
+          build:
+            context: ./frontend
+            dockerfile: ./Dockerfile
+            args:
+              BUILD_FOR: ${BUILD_FOR}
+              NPM_TOKEN: ${NPM_TOKEN}
+        ```
 
 Now you can build the image, tag it, then push to harbor. However you
 are earmarking the image to be client-A's vs. B's is your choice
@@ -223,65 +223,64 @@ default:blah@redis-master.redis.svc.cluster.local
 # Provide env from k8s
 
 1. Save the values in two files. Keys should be the env's key, thus be
-   sure it's the same as the Python code `os.env["blah"]" key.
+   sure it's the same as the Python code `os.env["blah"]` key.
 
-      ```
+        ```conf
+        # configmap
 
-      # configmap
+        DJANGO_DEBUG=1
+        MYSQL_DATABASE=
+        DEPLOY_TYPE=dev
+        DJANGO_DB_HOST=
+        DJANGO_DB_PORT=
 
-      DJANGO_DEBUG=1
-      MYSQL_DATABASE=
-      DEPLOY_TYPE=dev
-      DJANGO_DB_HOST=
-      DJANGO_DB_PORT=
+        # secret
 
-      # secret
-
-      MYSQL_USER=
-      MYSQL_PASSWORD=
-      MYSQL_ROOT_PASSWORD=
-      DJANGO_DB_USER=
-      DJANGO_DB_PWD=
-      DJANGO_REDIS_HOST=
-      ```
+        MYSQL_USER=
+        MYSQL_PASSWORD=
+        MYSQL_ROOT_PASSWORD=
+        DJANGO_DB_USER=
+        DJANGO_DB_PWD=
+        DJANGO_REDIS_HOST=
+        ```
 
 2. Create configmap and secret from the files. Note the names
    `stock-backend-env` and `stock-backend-secret`. They will be used
    next.
 
-      ```
-      kubectl create configmap stock-backend-env \
-        --from-env-file=config-dotenv \
-        --namespace client-a
+        ```shell
+        kubectl create configmap stock-backend-env \
+          --from-env-file=config-dotenv \
+          --namespace client-a
 
-      k create secret generic stock-backend-secret \
-        --from-env-file=secret-dotenv \
-        --namespace client-a
-      ```
+        k create secret generic stock-backend-secret \
+          --from-env-file=secret-dotenv \
+          --namespace client-a
+        ```
 
 3. In helm's `values.yaml`:
 
-      ```yml
-      env:
-        configmap: stock-backend-env
-        secret: stock-backend-secret
-      ```
+        ```yml
+        env:
+          configmap: stock-backend-env
+          secret: stock-backend-secret
+        ```
 
 4. In helm's `deployment.yaml`, use `envFrom` in the container section:
 
-      ```yml
-      containers:
-        - name: {{ .Chart.Name }}
-          envFrom:  <== Import k8s configmap & secret as env!!!
-          {{- with .Values.env.configmap }}
-          - configMapRef:
-              name: "{{- toYaml . }}"
-          {{- end }}
-          {{- with .Values.env.secret }}
-          - secretRef:
-              name: "{{- toYaml . }}"
-          {{- end }}
-      ```
+        ```yml
+        containers:
+          - name: {{ .Chart.Name }}
+            envFrom:  <== Import k8s configmap & secret as env!!!
+            {{- with .Values.env.configmap }}
+            - configMapRef:
+                name: "{{- toYaml . }}"
+            {{- end }}
+            {{- with .Values.env.secret }}
+            - secretRef:
+                name: "{{- toYaml . }}"
+            {{- end }}
+        ```
 
 # frontend helm
 
@@ -290,29 +289,29 @@ A few special considerations:
 1. By default I'm disabling ingress. This is just an extra layer of
    protection against accident in deployment.
 
-      ```yml
-      ingress:
-        enabled: false
-      ```
+        ```yml
+        ingress:
+          enabled: false
+        ```
 
 2. Then, I create a `profiles/` folder to hold ingress profile for
    each client. For example, client A's will be
    `profiles/client-a.yaml` as:
 
-      ```yml
-      ingress:
-        enabled: true
-        className: "nginx"
-        annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /
-        hosts:
-          - host: client-a.blah.com  <== A's domain
-            paths:
-              - path: /
-                pathType: Prefix
+        ```yml
+        ingress:
+          enabled: true
+          className: "nginx"
+          annotations:
+            nginx.ingress.kubernetes.io/rewrite-target: /
+          hosts:
+            - host: client-a.blah.com  <== A's domain
+              paths:
+                - path: /
+                  pathType: Prefix
 
-        tls: []
-      ```
+          tls: []
+        ```
 
 Now when I deploy for A using and enable its ingress:
 
@@ -332,44 +331,44 @@ By now I have three helms: backend api, celery, and frontend.
    you **must use -f path/to/values.yaml` &larr; this is a helm known
    limitation.
 
-      ```shell
-      helm install stock-backend-api helm-stock-backend-api \
-        -n client-a \
-        -f helm-stock-backend-api/values.yaml \
-        --set "ingress.hosts[0].host=client-a.blah.com" \
-        --set image.tag="blah"
-      ```
+        ```shell
+        helm install stock-backend-api helm-stock-backend-api \
+          -n client-a \
+          -f helm-stock-backend-api/values.yaml \
+          --set "ingress.hosts[0].host=client-a.blah.com" \
+          --set image.tag="blah"
+        ```
 
 4. Backend celery. Easy.
 
-      ```shell
-      helm install stock-backend-celery helm-stock-backend-celery \
-        -n client-a \
-        --set image.tag="blah"
-      ```
+        ```shell
+        helm install stock-backend-celery helm-stock-backend-celery \
+          -n client-a \
+          --set image.tag="blah"
+        ```
 
 5. Frontend.
 
-      ```shell
-      helm install stock-frontend helm \
-        -n client-a \
-        -f helm/profiles/client-a.yaml \
-        --set image.tag="blah"
-      ```
+        ```shell
+        helm install stock-frontend helm \
+          -n client-a \
+          -f helm/profiles/client-a.yaml \
+          --set image.tag="blah"
+        ```
 
 6. If using an external nginx as LB to cluster nodes, add a `server`
    block:
 
-      ```
-      server {
-        server_name client-a.blah.com;
+        ```conf
+        server {
+          server_name client-a.blah.com;
 
-        location / {
-          include /etc/nginx/proxy_params;
-          proxy_pass http://k8s;
+          location / {
+            include /etc/nginx/proxy_params;
+            proxy_pass http://k8s;
+          }
         }
-      }
-      ```
+        ```
 
 Reload the LB nginx, and visit `http://client-a.blah.com`. You should
 be good to go.

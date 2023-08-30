@@ -79,6 +79,9 @@ are going onto k8s: frontend, backend, celery.
          production this will be customer's full domain.
       3. The api's url will be baked into frontend image via dotenv.
 
+# End state
+
+After everything is done:
 
 ![](images/django%20fullstack%20on%20k8s.png)
 
@@ -158,14 +161,13 @@ In order to bake dotenv into frontend image:
       # npmrc
       RUN echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
       RUN echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.yarnrc
-
       ...
 
       # build
       RUN env-cmd -f envs/${BUILD_FOR} yarn run build  <== use env parameter
-
       ...
       ```
+
 4. (optional) Add the same Dockerfile args to `docker-compose`. This
    is really for convenience and consistency so that using compose
    will achieve the same effect as above. To use, `BUILD_FOR=blah
@@ -223,7 +225,8 @@ default:blah@redis-master.redis.svc.cluster.local
 1. Save the values in two files. Keys should be the env's key, thus be
    sure it's the same as the Python code `os.env["blah"]" key.
 
-      ```conf
+      ```
+
       # configmap
 
       DJANGO_DEBUG=1
@@ -258,7 +261,7 @@ default:blah@redis-master.redis.svc.cluster.local
 
 3. In helm's `values.yaml`:
 
-      ```yaml
+      ```yml
       env:
         configmap: stock-backend-env
         secret: stock-backend-secret
@@ -266,7 +269,7 @@ default:blah@redis-master.redis.svc.cluster.local
 
 4. In helm's `deployment.yaml`, use `envFrom` in the container section:
 
-      ```yaml
+      ```yml
       containers:
         - name: {{ .Chart.Name }}
           envFrom:  <== Import k8s configmap & secret as env!!!
@@ -287,7 +290,7 @@ A few special considerations:
 1. By default I'm disabling ingress. This is just an extra layer of
    protection against accident in deployment.
 
-      ```yaml
+      ```yml
       ingress:
         enabled: false
       ```
@@ -296,7 +299,7 @@ A few special considerations:
    each client. For example, client A's will be
    `profiles/client-a.yaml` as:
 
-      ```yaml
+      ```yml
       ingress:
         enabled: true
         className: "nginx"
@@ -347,12 +350,12 @@ By now I have three helms: backend api, celery, and frontend.
 
 5. Frontend.
 
-```
-helm install stock-frontend helm \
-  -n client-a \
-  -f helm/profiles/client-a.yaml \
-  --set image.tag="blah"
-```
+      ```shell
+      helm install stock-frontend helm \
+        -n client-a \
+        -f helm/profiles/client-a.yaml \
+        --set image.tag="blah"
+      ```
 
 6. If using an external nginx as LB to cluster nodes, add a `server`
    block:

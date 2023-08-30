@@ -30,118 +30,114 @@ header-includes: |
 
 ---
 
-# Technology Highlights
+# Highlights
 
-- Extensive expertise in full stack technologies, encompassing various
-  design patterns (MVC, MVVM, microservices, SOA).
+- **Full Stack Frameworks & Design Patterns**
 
-- Proficient in building RESTful APIs using OpenAPI, Swagger, and DRF,
-  and experienced in working with popular frameworks such as Django,
-  Flask, Express, and Spring Boot.
+  - Experienced with frameworks: Python Django, Flask, and Spring
+    Boot.
+  - Well versed in design patterns: micro services, MVC, MVVM, SOA.
 
-- Adept at frontend development using Storybook, React, Redux,
-  Angular, Vue, Material UI, Bootstrap, and jQuery.
+- **Virtualization, Containerization & Cloud Platforms**
 
-- Strong command of DB and proxy technologies (ORM, MySQL, PG, Mongo).
+  - Proficient in KVM, Virtualbox, VMWare, Vagrant, libvirt.
+  - Proficient in Helm, Kubernetes, Docker, Containerd, AWS, Azure;
+    Infrastructure as Code: Terraform, Pulumi.
 
-- Well-versed in containerization with Docker, cloud platforms like
-  AWS and Azure, infrastructure as code tools such as Terraform and
-  Pulumi, and proficient in DevOps tools such as Ansible.
+- **CI/CD Pipelines & Testing**
 
-- Skilled in implementing scalable and efficient solution using cache
-  and messaging systems such as Redis and RabbitMQ.
+  - Proficient in initiating/maintaining CI/CD pipelines: Jenkins,
+    GitHub Actions, Bitbucket Pipelines.
+  - Skilled with DevOps tools: Jenkins, Ansible; GitOps: Helm,
+    Kubernetes, Harbor, ArgoCD.
+  - Skilled in testing: Postman, Cypress, Selenium, Mocha, Jest,
+    Karma, pytest, TDD/BDD.
 
-- Experienced in setting up and maintaining CI/CD pipelines using
-  Jenkins, GitHub Actions, and Bitbucket Pipelines.
+- **Frontend Mastery**
 
-- Knowledgeable in end-to-end testing frameworks like Cypress, Mocha,
-  Jest, Karma, Selenium, pytest, TDD/BDD.
+  - Adept at frontend development using Typescript, Javascript,
+    Storybook, React, Redux, Angular, Material UI, Antd, Bootstrap,
+    and jQuery.
 
-# Development Leadership Highlights
+- **API Development & Integration**
 
-- Extensive experience leading and managing engineering teams,
-  consistently driving impactful contributions in any role
-  undertaken. Demonstrated leadership skills through successfully
-  leading teams of varying sizes, ranging from small (<10) to medium
-  scale (40+), while serving as a Director, Project Manager, Team
-  Lead, Principal System Architect, and individual developer.
+  - Proficient in creating RESTful APIs using OpenAPI, Swagger, and
+    Django Rest Framework (DRF).
+  - Proficient in API integration: auth, RESTful, JSON, XML, SOAP.
 
-- Proven versatility in engaging with projects at different stages of
-  maturity and phases, showcasing adaptability in handling a wide
-  range of responsibilities. Experience includes active involvement in
-  new projects, from design to production, as well as revitalizing
-  legacy projects through framework and library migrations, deployment
-  transformations (on-premise, cloud, hybrid), CICD implementation,
-  and security audits.
+- **Scalable Solutions & Database Tech**
 
-- Highly skilled in efficiently overseeing day-to-day activities of
-  software development throughout the entire SDLC. Proficient in
-  utilizing Git for tasks such as branch management, merging/rebasing,
-  PR reviews, tagging, and conflict resolution. Experienced in
-  implementing semantic release strategies and proficient in bug
-  tracking systems like Jira. Well-versed in CICD methodologies,
-  DevOps practices, and ensuring seamless collaboration between
-  development and QA teams.
+  - Proficient in scalable solutions using Celery, Redis, RabbitMQ;
+    Strong DB and proxy skills: ORM, MySQL, PostgreSQL , Mongo.
 
-- Extensive experience in successfully establishing, integrating, and
-  mentoring global teams situated across diverse geographical
-  locations and time zones. Proficient in effectively navigating the
-  challenges associated with managing remote teams, fostering
-  collaboration, and promoting cohesive teamwork.
+- **Development Leadership**
 
-- Extensive experience in mentoring and guiding junior team members to
-  enhance overall team quality and efficiency.
+  - Efficiently overseeing software dev throughout SDLC; Proficient in
+    Git, DevOps, GitOps, semantic release, Jira.
+  - Leading and managing engineering teams, varying sizes; Roles: PM,
+    Team Lead, System Architect, Developer.
 
+- **Global Team Management& Team Enhancement**
+
+  - Proficient in development best practices and tooling.
+  - Rich experience in managing global teams across geo and time zones.
+  - Mentorship for junior team members, enhancing overall team quality
+    and efficiency.
 
 # Experience
 
 ## 3/2022 - 3/2023
 Lucidum, Principal System Architect
 
-- Led the design of the next-generation product architecture and
-  deployment model, overseeing a successful transition from
+- Worked closely with executives in designing the next-generation
+  product architecture, overseeing a successful transition from
   on-premise-only to a hybrid infrastructure that supports both
-  on-premises and cloud-native environments.
+  on-premises and cloud-native environments, and driving expansion of
+  target industry and customer base.
 
-- Provided leadership and management for a diverse global engineering
-  locations. Managed a team of 5 in the US, comprising roles such as
-  team consisting of 17 professionals across multiple
-  Project Manager, UX Designer, Python Developer, DevOps Engineer,
-  CICD Specialist, and AWS expert.  Additionally, oversaw a team of 11
-  in China, consisting of 4 Java backend developers, 3 React frontend
-  developers, 3 QA testers, and 1 local team lead. Directly reported
-  to the CTO.
+- Managed a global engineering team. Provided oversight to roles
+  including Project Manager, UX designer, ML scientist, developers
+  (Python, Java, React), QA, and DevOps engineer. Held a direct
+  reporting line to the CTO.
 
 - Managed the successful execution of 2 major releases, 6 minor
-  releases, and 12 patch releases, ensuring timely and high-quality
-  deliveries to meet customer expectations.
+  releases, and 12 patch releases. Implemented GitOps practices using
+  GitHub Action, GitHub Package Registry, and Semantic Release.
 
-- Demonstrated a keen attention to detail and accountability by
-  conducting daily PR (Pull Request) reviews across a portfolio of 50+
-  GitHub repositories spanning various languages and technologies,
-  such as Java, Python, JavaScript, React, Groovy, Ansible, and
-  Terraform.
+- Actively participated in coding across every facet of the
+  engineering endeavor, spanning the entire product stack (Python,
+  Java, Typescript, React), QA utilizing Cypress, as well as DevOps
+  involving Jenkins, Ansible, Python, Terraform, and Pulumi.
+
+- Took the lead in conducting daily PR (Pull Request) reviews across
+  an extensive portfolio of more than 50 GitHub repositories. This
+  encompassed a wide spectrum of programming languages and
+  technologies, ranging from Java, Python, React, Jenkins, Ansible,
+  and Terraform.
+
+- Established CI/CD Jenkins pipelines w/ multi-branch building, matrix
+  testing, A/B deployment, and integration w/ Github code, Github
+  action, Github package, AWS, and Azure. Implemented robust
+  optimizations in the DevOps practices, resulting in a significant
+  reduction of iteration time from 1.5 hours to 27 minutes.
+
+- Hardened security in DevOps workflows by adding CVE scanner (code,
+  docker image), and secret managers including Hashicorp Vault and
+  Ansible Vault.
 
 - Drove substantial improvements in test automation efficiency and
   effectiveness. Revamped and redesigned 800+ Cypress end-to-end (e2e)
   tests within a tight timeframe of 6 weeks, achieving 100% automation
-  in User Acceptance Testing (UAT). Leveraged Cypress Studio reducing
-  the time required to create a new test case from 4-8 hours to less
-  than 5 minutes.
+  in User Acceptance Testing (UAT).
 
-- Implemented a comprehensive semantic release strategy. Achieved full
-  automation of the entire component release workflow, encompassing
-  critical tasks such as release versioning, code tagging, changelog
-  generation, package publishing, and regression testing.
+- One of the two company's AWS and Azure administrators. Spearheaded
+  the automation of management and deployment processes, harnessing
+  the power of tools such as SSO, ACR, ECR, ECS, RDS, EC2, spot
+  instances, Lambda, CloudWatch, SNS, and S3.
 
-- Implemented robust optimizations in the DevOps practices, reducing
-  iteration time from 1.5 hours to 27 minutes.
-
-- Achieved notable cost savings by optimizing the AWS resources and
-  leveraging cloud-native best practices.
 
 ## 11/2016 - 3/2022
-Lenovo US, P8, Advisor Engineer, Senior Solution Architect, Team Lead
+Lenovo US, P8, Advisory Engineer, Senior Solution Architect, Team Lead
 
 - Served as the principal architect for the groundbreaking [Lenovo
   Open Cloud Automation][25] solution, taking on a leadership role in

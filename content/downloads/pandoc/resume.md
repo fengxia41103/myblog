@@ -139,46 +139,41 @@ Lucidum, Principal System Architect
 ## 11/2016 - 3/2022
 Lenovo US, P8, Advisory Engineer, Senior Solution Architect, Team Lead
 
-- Served as the principal architect for the groundbreaking [Lenovo
-  Open Cloud Automation][25] solution, taking on a leadership role in
-  its conceptualization and development. Authored the influential
-  reference architecture paper, providing essential guidelines for its
-  implementation. Successfully transformed the solution into a
-  market-ready product within a remarkable 13-month timeframe. The
-  solution's exceptional quality and value proposition played a
-  pivotal role in securing contracts worth over $100 million following
-  its launch.
+- As the principal system architect and the first author of the
+  groundbreaking ["Lenovo Open Cloud Automation Reference
+  Architecture"][25] (link below). Led a global team of six developers
+  successfully transformed the concept into a market-ready product
+  within a remarkable 13-month timeframe. The solution's exceptional
+  quality and value proposition played a pivotal role in securing
+  contracts worth over $100 million following its launch.
 
-- Distinguished as the first author of the highly regarded [Red Hat
-  Hyperconverged Infrastructure (RHHI) Reference
-  Architecture][26]. Led the architectural design and development of
-  RHHI's automated end-to-end deployment, assuming a principal
-  architect role.
+- As the principal system architect and the first author of the
+  ["RedHat Hyperconverged Infrastructure (RHHI) Reference
+  Architecture"][26] (link below), a virtualization solution based on
+  Lenovo hardware including 3-12 server configuration, Glusterfs
+  storage, layer-3 networking, HA, fault tolerance, zero-touch
+  automation of node discovery and provisioning. Key technology stack
+  included RHHI, Glusterfs, Netbox, Cloudform, Python, Ansible,
+  Javascript, Jenkins.
 
-- As the principal architect of the Lenovo Workload Solution Store
-  (WSS), played a pivotal role in shaping the platform's architecture
-  and design. The orchestration technology developed under WSS serves
-  as the core foundation of the ThinkAgile VX product. Product was a
-  Django & React full stack.
+- As the principal architect of the "Lenovo Workload Solution Store",
+  an baremetal orchestration solution based on declarative
+  taxonomy. The technology serves as the core foundation of the
+  ThinkAgile VX product. Key technology stack included Python Django,
+  React, Ansible, Canonical MAAS and Juju.
 
-- As the UI lead of the ThinkAgile CP product, led a dedicated team of
-  five UI/UX professionals and a DevOps team of four, fostering
-  collaboration and driving successful outcomes in six major
-  releases. Development was in Figma, AngularJS, Angular, and Redux.
+- As team lead of the ThinkAgile CP product, a hybrid cloud platform
+  with on-prem infrastructure and AWS-based management plane. Led a
+  global team of five UI/UX developers and a DevOps team of four,
+  fostering collaboration and driving successful outcomes in six major
+  releases. Development was mainly in Java, Python, AngularJS,
+  Angular, Redux, Jenkins, and production deployment in AWS.
 
-- Contributor of Netbox upstream. Customized Netbox significantly to
-  manage a diverse infrastructure comprising over 300 servers and
-  switches located across multiple regions, including the US, Europe,
-  and India. Employed advanced automation techniques to achieve
-  seamless server onboard discovery, provisioning, and reconfiguration
-  processes. Code were in Django, Python, Ansible, and Bash.
-
-- Created a robust Django application that seamlessly integrates
-  GitLab and Jira, enabling the tracking of feature requests at the
-  git commit level throughout the entire software development
-  lifecycle (SDLC). This integration provided project managers with
-  unprecedented visibility and insight into the progression of feature
-  implementation, deployment, and overall SDLC stages.
+- Spearheaded customization of a Datacenter Infrastructure Management
+  system &mdash; Netbox, to manage a diverse portfolio of in-house
+  infrastructure comprising over 300 servers and switches located
+  globally. Technology stack included Kubernetes, Docker, Python
+  Django, Celery, Redis, MySQL, Ansible, ENOS/NOS cli.
 
 ## 01/2015 - present
 PY Consulting, Founder, Freelance

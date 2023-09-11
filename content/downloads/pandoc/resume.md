@@ -16,10 +16,12 @@ header-includes: |
     \usepackage{fancyhdr}
     \fancyhead[LO,LE]{
         \textbf{Feng Xia}\\
-        \url{github.com/fengxia41103}}
+        \url{github.com/fengxia41103}
+    }
     \fancyhead[RO,RE]{
         (508) 801-1794\\
-        fengxia41103@gmail.com}
+        fengxia41103@gmail.com
+    }
     \pagestyle{fancy}
     \usepackage{pifont}
     \renewcommand{\labelitemi}{\ding{125}}
@@ -31,6 +33,10 @@ header-includes: |
     \titlespacing{\subsection}{5em}{1em}{1pc}
 
 ---
+
+Seeking _System Architect, Senior Fullstack Dev, DevOps_
+&mdash; I welcome challenges, and am genuinely interested in solving
+practical problems using technologies.
 
 # Highlights
 
@@ -298,7 +304,7 @@ Instron Corp., Senior Engineer
 | Stambach, Ricky       | rstambach@lenovo.com         | Peer     |
 | Li, Jian              | jianli@lenovo.com            | Peer     |
 | Khullar, Lakhesh      | lakhesh\_khullar@med.unc.edu | Manager  |
-| Steere, Steere        | sylvia\_steere@med.unc.edu   | PM       |
+| Steere, Sylvia Irene  | sylvia\_steere@med.unc.edu   | PM       |
 | Harrold, Matthew Kyle | matthew_harrold@med.unc.edu  | Peer     |
 
 [1]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture

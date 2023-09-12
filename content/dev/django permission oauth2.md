@@ -104,7 +104,7 @@ John has no permission on this data.
 
 What influence the exact behavior in this scenario also depends on:
 
-- the default DRF permission in the `settings.py`:
+1. the default DRF permission in the `settings.py`:
 
         ```python
         # settings.py
@@ -116,14 +116,14 @@ What influence the exact behavior in this scenario also depends on:
         }
         ```
 
-        In this case, John must be authenticated and has the "feng"
-        scope. Since OAuth2 always requires authentication, so this is
-        a given. However, DRF has a list of other built-in
-        permissions, and some would tie into model permission, which
-        then enforce a permission on top of scope.
+      In this case, John must be authenticated and has the "feng"
+      scope. Since OAuth2 always requires authentication, so this is
+      a given. However, DRF has a list of other built-in
+      permissions, and some would tie into model permission, which
+      then enforce a permission on top of scope.
 
 
-- and `permission_classes=` per DRF view:
+2. and `permission_classes=` per DRF view:
 
         ```python
         # views.py
@@ -139,11 +139,11 @@ What influence the exact behavior in this scenario also depends on:
             permission_classes = [....]  <== logical AND
         ```
 
-        Besides the default above, each view can have a list, which is
-        a logical AND. Only when user has all the permissions will he
-        be allowed access to the view/API. This is essentially the
-        mechanism how `django-oauth-toolkit` checks its scope together
-        w/ other DRF permissions.
+      Besides the default above, each view can have a list, which is
+      a logical AND. Only when user has all the permissions will he
+      be allowed access to the view/API. This is essentially the
+      mechanism how `django-oauth-toolkit` checks its scope together
+      w/ other DRF permissions.
 
 
 ## Scope & permission work together
@@ -166,7 +166,7 @@ and add some custom scope, say `music`, to protect all the
 music-related APIs.
 
 ```python
-In `settings.py`:
+In `settings.py` by django-auth-toolkit:
 
 OAUTH2_PROVIDER = {
     'SCOPES': {
@@ -262,24 +262,24 @@ super set of `D`.
 
 We code name them as `ABCDE`. So, how to control who can do what?
 
-| Control                      | Read          | Write         | Enforce Model Permission |
-|------------------------------+---------------+---------------+--------------------------|
-| AllowAny                     | A,B           | A,B           | none                     |
-| IsAuthenticated              | B             | B             | none                     |
-| IsAuthenticatedOrReadOnly    | A,B           | B             | none                     |
-| IsAdminUser                  | D             | D             | none                     |
-| DjangoModelPermissions       | permission(B) | permission(B) | CRUD                     |
-| DjangoModelPermissionsOrAnon | A,B           | permission(B) | CUD                      |
-| DjangoObjectPermissions      | permission(B) | permission(B) | CRUD                     |
+| Permission                   | Anon can use | Can Read      | Can Write     | Enforce Model Permission |
+|------------------------------|--------------|---------------|---------------|--------------------------|
+| AllowAny                     | yes          | A,B           | A,B           | none                     |
+| IsAuthenticated              | no           | B             | B             | none                     |
+| IsAuthenticatedOrReadOnly    | yes          | A,B           | B             | none                     |
+| IsAdminUser                  | no           | D             | D             | none                     |
+| DjangoModelPermissions       | no           | permission(B) | permission(B) | B's CRUD                 |
+| DjangoModelPermissionsOrAnon | yes          | A,B           | permission(B) | B's CUD                  |
+| DjangoObjectPermissions      | no           | permission(B) | permission(B) | B's CRUD                 |
 
 ## django-oauth-toolkit access control by scope
 
 Finally, we can look at the ACL of [`django-auto-toolkit`][2], which
-is just a list of [permissions on top of the DRF][11]! This extension
-focuses on checking the oauth scope by the token, and **can be
-combined in AND w/ all other DRF permissions**, and then through DRF's
-`DjangoModelPermissions`, it will be further tied into Django model
-permissions:
+is just a list of [permissions][11] in addition to DRF permissions!
+This extension focuses on checking the oauth scope by the token, and
+**can be combined in AND w/ all other DRF permissions**, and then
+through DRF's `DjangoModelPermissions`, it will be further tied into
+Django model permissions:
 
 
 ```python
@@ -289,6 +289,18 @@ class SongView(views.APIView):
     required_scopes = ['music']
 
 ```
+
+Below shows the behavior of toolkit permission behaviors. Because OAuth2 user
+must have been authenticated, all these are **not applicable** to anonymous users.
+
+| Control                        | required_scopes                        | authentication_classes          | Read                                    | Write                                    | Enforce Model Permission                                                                  |
+|--------------------------------|----------------------------------------|---------------------------------|-----------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------|
+| TokenHasScope                  | required                               | `[OAuth2Authentication]`        | has all `required_scopes`               | has all `required_scopes`                | none                                                                                      |
+| TokenHasReadWriteScope         | optional                               | `[OAuth2Authentication]`        | has `read` scope                        | has `write` scope                        | none                                                                                      |
+| TokenHasResourceScope          | required                               | `[OAuth2Authentication]`        | has `music:read` scope                  | has `music:write` scope                  | none                                                                                      |
+| IsAuthenticatedOrTokenHasScope | required                               | DRF's                           | has `music:read` scope or authenticated | has `music:write` scope or authenticated | should use `permission_classes = [IsAuthenticatedOrTokenHasScope, DjangoModelPermission]` |
+| TokenMatchesOASRequirements    | `required_alternate_scopes` per method |`[OAuth2Authentication]`  |has all scopes by the HTTP verb | has all scopes by the HTTP verrb        | no    |
+
 
 Complicated, isn't it!?
 

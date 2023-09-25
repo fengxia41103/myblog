@@ -3,6 +3,10 @@ LATEX_TEMPLATE := feng.tex
 LATEX_REPORT_CONFIG := latex.yaml
 LATEX_ARTICLE_CONFIG := article-latex.yaml
 
+# if writing letter
+LATEX_LETTER_TEMPLATE := template-letter.tex
+LATEX_LETTER_CONFIG := letter-latex.yaml
+
 # Links to images, and bibtex reference section header
 REFERENCES := references.md
 
@@ -38,6 +42,13 @@ PDF_FLAGS = $(COMMON_FLAGS) \
 
 DOCX_FLAGS = $(COMMON_FLAGS) \
 	--columns 10
+
+LETTER_FLAGS = +RTS -M3000m -RTS\
+	--from markdown \
+	--highlight-style pygments \
+	-M date="`date "+%B %e, %Y"`" \
+	--template $(LATEX_LETTER_TEMPLATE) \
+	--pdf-engine=xelatex
 
 # RHHI source and target
 rhhi_ra_md := ibb\ rhhi\ ra.md
@@ -79,6 +90,12 @@ resume_devops_pdf := ../feng\ xia\ resume\ devops.pdf
 cover_letter_md := cover\ letter.md
 COVER_LETTER_INPUTS = $(cover_letter_md)
 cover_letter_tex := cover_letter.tex
+cover_letter_pdf := cover_letter.pdf
+
+# personal referral
+personal_referral_md := personal\ referral.md
+PERSONAL_REFERRAL_INPUTS = $(personal_referral_md)
+personal_referral_pdf := personal_referral.pdf
 
 # git startegy article
 git_md := git\ strategy.md
@@ -108,13 +125,14 @@ rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
 resume: resume_pdf resume_docx resume_devops_pdf
-cover_letter: cover_letter_tex
+cover_letter: cover_letter_pdf
 git: git_pdf
 netbox: netbox_pdf netbox_docx
 unc: unc_pdf unc_docx
 lucidum: lucidum_pdf lucidum_docx lucidum_html
+personal_referral: personal_referral_pdf
 
-all: rhhi_ra loc_ra webapp resume git netbox
+all: rhhi_ra loc_ra webapp resume git netbox unc cover_letter personal_referral
 
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
@@ -185,6 +203,14 @@ resume_docx: $(RESUME_INPUTS) $(LATEX_REPORT_CONFIG)
 	-o $(resume_docx) \
 	$(DOCX_FLAGS)
 
+personal_referral_pdf: $(PERSONAL_REFERRAL_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(personal_referral_pdf) \
+	--pdf-engine=xelatex \
+	$(PERSONAL_REFERRAL_INPUTS)
+
 resume_devops_pdf: $(RESUME_DEVOPS_INPUTS)
 	pandoc \
 	-s \
@@ -193,13 +219,11 @@ resume_devops_pdf: $(RESUME_DEVOPS_INPUTS)
 	--pdf-engine=xelatex \
 	$(RESUME_DEVOPS_INPUTS)
 
-cover_letter_tex: $(COVER_LETTER_INPUTS)
-	pandoc \
-	-s \
-	-t latex \
-	-o $(cover_letter_tex) \
-	--pdf-engine=xelatex \
-	$(COVER_LETTER_INPUTS)
+cover_letter_pdf: $(COVER_LETTER_INPUTS) $(LATEX_LETTER_CONFIG)
+	pandoc $(LATEX_LETTER_CONFIG) $(COVER_LETTER_INPUTS) \
+	-o $(cover_letter_pdf) \
+	$(LETTER_FLAGS)
+
 
 git_pdf: $(GIT_INPUTS) $(LATEX_ARTICLE_CONFIG)
 	pandoc $(LATEX_ARTICLE_CONFIG) $(GIT_INPUTS) \

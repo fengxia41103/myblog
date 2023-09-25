@@ -1,69 +1,46 @@
-Hi,
+If you are looking for a candidate with strong software development
+experience and research capability solving complex
+problems, look no further.
 
-If you are looking for a candidate of a technology expert and strong
-project management acumen, look no further.
+I have been doing software development for over 20 years. I am a
+full-stack developer including infrastructure and DevOps. I am
+familiar with nearly all domains of a software system, both from
+technology aspect and from development life cycle aspect. In one
+project at Lenovo I was the UI lead responsible to deliver work in
+Angular and React.  In another project there I was the team lead
+working in Python Django, Ansible and Helm. At Lucidum, I wrote code
+for React frontend, Java Sprint backend, Python for machine learning
+and data API integration, Selenium and Cypress for e2e testing, Groovy
+for Jenkins, Terraform for IaC. I was also designated the primary code
+reviewer responsible for all PRs across 50+ GitHub
+repositories. Working at UNC School of Medicine I created their first
+Docker deployment in production, and was a main driver of their DevOps
+projects.
 
-With over 20 years of experience in the IT industry, I have gained
-extensive expertise across a wide range of domains. From working with
-embedded systems and high-performance computing to navigating the
-realm of cloud technologies and full stack development, I have
-successfully tackled diverse projects, including legacy system
-migrations.
+I'm good at approaching challenges when no solution has yet to be
+found. I was a seeding member of Lenovo's cloud-computing research
+team. We were to create a solution for data center market from the
+ground up. In that period I published two Reference Architecture paper
+on Lenovo's website, worked with a team of 12 engineers on prototype
+and refinement. One of these designs became "Lenovo Open Cloud
+Automation" (LOCA), the first cloud-computing software offering by the
+company. It was featured in Mobile World Conference 2019 in Barcelona,
+and won a substantial commercial contract.
 
-My analytical mindset, honed through continuous learning and training,
-enables me to grasp complex business requirements and break them down
-into logical, manageable, and actionable tasks. I pride myself on my
-ability to translate these requirements into successful
-implementations.
+In 2020 I worked with a medical researcher at Mass General
+Hospital. His research team at the time were strugglling to use two
+opensource software, both written in Python. By then they had spent
+weeks to get them run on their lab servers without success. I was able
+to Dockerize these two projects over a weekend, unblocking the team so
+that they could focus on their research whereas their expertise. This
+experience prompted me to take interest in research and academic
+environment where I could help similar cases. In these places projects
+are often research oriented, laying a foundation work for the
+future. They may not bring immediate commercial rewards, but they have
+a long term impact. Therefore, when I saw this position, I feel this
+is a perfect fit for both my skills and my interest.
 
-While taking on increasing responsibilities in team management over
-the years, I have consciously maintained a hands-on approach. This
-allows me to stay connected with the task at hand and retain my status
-as a subject expert. By doing so, I ensure that my leadership
-decisions are practical, efficient, and grounded in real-world
-experiences.
-
-Throughout my career, I have held diverse roles that have allowed me
-to gain extensive experience in various areas. I have served as a tech
-lead for a system security startup, a project manager for a mid-sized
-ERP software company, a Managing Director overseeing a $3M contract at
-a technology consulting firm, a System Architect for a global firm
-with two published reference architecture papers that are still in
-production, and most recently, a Principal System Architect and
-Director at a data security firm.
-
-Having worked across these different positions, I have acquired a
-broad knowledge of technologies and possess a remarkable ability to
-quickly learn new ones. I am recognized as an expert in software
-development and deployment, and I excel in streamlining workflows,
-optimizing processes, and defining Standard Operating Procedures
-(SOPs) to enhance the overall user experience and maximize resource
-utilization.
-
-
-What sets me apart is my versatility and adaptability. I am equally
-comfortable collaborating with developers to troubleshoot specific
-programming bugs as I am engaging with executives to discuss program
-strategy and roadmap. Having personally experienced both roles, I
-possess a deep understanding of their unique contexts, enabling me to
-communicate effectively and bridge the gap between technical details
-and strategic objectives.
-
-
-Attention to detail is crucial, and I firmly believe that it is in the
-details where challenges are often uncovered and resolved. I am
-genuinely interested in learning more about the opportunity at hand
-and the specific challenges you are currently facing. By understanding
-the nuances of the situation, I can determine how my skills and
-expertise can contribute with innovative solutions and suggestions.
-
-I am confident that I can bring valuable insights and actionable ideas
-to the table. My goal is to make a tangible impact and drive progress
-in areas that matter. I eagerly await the opportunity to engage in
-further discussions and explore how I can contribute to moving the
-needle forward. Please do not hesitate to reach out. I look forward to
-hearing from you soon.
-
-
-Best regards,
-Feng Xia
+I am confident that there are much value I will bring to this
+position. I will be looking forward to having an opportunity to engage
+a discussion, and exploring how I can contribute to move the needle
+forward. Please do not hesitate to reach out.

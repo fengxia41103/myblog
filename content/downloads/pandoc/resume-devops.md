@@ -297,7 +297,7 @@ Instron Corp., Senior Engineer
 | Stambach, Ricky       | rstambach@lenovo.com         | Peer     |
 | Li, Jian              | jianli@lenovo.com            | Peer     |
 | Khullar, Lakhesh      | lakhesh\_khullar@med.unc.edu | Manager  |
-| Steere, Steere        | sylvia\_steere@med.unc.edu   | PM       |
+| Steere, Sylvia Irene  | sylvia\_steere@med.unc.edu   | PM       |
 | Harrold, Matthew Kyle | matthew_harrold@med.unc.edu  | Peer     |
 
 [1]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture

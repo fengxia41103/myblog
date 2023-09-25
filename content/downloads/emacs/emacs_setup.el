@@ -289,7 +289,10 @@ and the tangled file is compiled."
             (local-set-key (kbd "C-c C-l") 'org-insert-link)))
 
 (setq org-hide-leading-stars t)
+
+;; auto log a clock when task is closed
 (setq org-log-done t)
+
 (setq org-startup-indented t)
 (setq org-startup-folded t)
 (setq org-ellipsis "...")
@@ -316,25 +319,57 @@ and the tangled file is compiled."
      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
      `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
 
-(custom-theme-set-faces
- 'user
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :foreground "#D52349" :height 1000 :overline t :box nil))))
+ '(fixed-pitch ((t (:family "Fira Code" :height 140))))
+ '(font-lock-comment-face ((t (:foreground "dim gray" :slant oblique))))
+ '(highlight ((t (:background "forest green"))))
+ '(magit-branch-current ((t (:foreground "red" :box 1 :weight bold :height 2.0))))
+ '(magit-branch-local ((t (:foreground "tomato" :weight bold))))
+ '(magit-branch-remote ((t (:foreground "yellow"))))
+ '(magit-diff-context-highlight ((t (:background "#ffffff" :foreground "dim gray"))))
+ '(magit-diff-file-heading-highlight ((t (:background "#ffffff" :foreground "black" :weight bold))))
+ '(magit-diff-hunk-heading ((t (:background "gainsboro" :foreground "tomato"))))
+ '(magit-diff-hunk-heading-highlight ((t (:background "DarkGoldenrod3" :foreground "black"))))
+ '(magit-diff-revision-summary ((t (:inherit magit-diff-hunk-heading :foreground "black"))))
+ '(magit-diff-revision-summary-highlight ((t (:foreground "gold"))))
+ '(magit-section-heading-selection ((t (:foreground "dark red" :weight bold))))
+ '(magit-section-highlight ((t (:background "tan4"))))
+ '(markdown-code-face ((t (:background "gray10"))))
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
+ '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
+ '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold))))
  '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+ '(org-block-background ((t (:background "gray10"))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
  '(org-bold ((t (:foreground "#d52349"))))
+ '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
  '(org-document-info ((t (:foreground "dark orange"))))
  '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.5 :underline nil))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
- '(org-link ((t (:foreground "royal blue" :underline t))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.3))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.2 :foreground "#8BC34A"))))
+ '(org-level-3 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.1 :foreground "#FEB236"))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.0))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
+ '(org-link ((t (:inherit fixed-pitch :foreground "royal blue" :underline t))))
  '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
  '(org-property-value ((t (:inherit fixed-pitch))) t)
  '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
- '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
- '(org-block-background ((t (:background "gray10"))))
- '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
-)
+ '(region ((t (:background "forest green")))))
 
 (use-package deft
   :ensure t)
@@ -692,6 +727,9 @@ and the tangled file is compiled."
 (setq org-log-into-drawer t)
 (setq org-clock-int-drawer "CLOCK")
 
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
 (org-mode-restart)
 
 (setq auth-sources '("~/.authinfo"))
@@ -769,11 +807,6 @@ and the tangled file is compiled."
 
 (use-package forge
   :after magit)
-
-(use-package code-review
-  :ensure t)
-(add-hook 'code-review-mode-hook #'emojify-mode)
-(setq code-review-fill-column 80)
 
 (use-package github-review
   :ensure t
@@ -1047,6 +1080,51 @@ and the tangled file is compiled."
   :ensure
   :config)
 
+(use-package sqlformat
+  :ensure
+  :config)
+
+(setq sqlformat-command 'pgformatter)
+(setq sqlformat-args '("-s4" "-B" "-w150" "-k" "-f2" "-U2" "--extra-keyword=/home/fengxia/workspace/tmp/oracle-keywords"))
+
+(setq sqlformat-command 'sqlformat)
+(setq sqlformat-args '("-k" "upper" "-i" "upper" "-s" "-r" "--indent_width=4"))
+
+(add-hook 'sql-mode-hook '(lambda()
+  (define-key sql-mode-map (kbd "C-c C-f") 'sqlformat-buffer)))
+
+(load "~/.emacs.d/dax-mode/dax-mode.el")
+
+(defun dax-pretty-print ()
+  "Pretty print the DAX buffer via DaxFormatter API."
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward ";" nil t)
+    (replace-match ","))
+  (goto-char (point-min))
+  (setq payload (make-hash-table))
+  (setf (gethash "Dax" payload) `(delete-and-extract-region (point-min) (point-max)))
+  (setf (gethash "l" payload) "short")
+  (let* (
+         (url-request-method "POST")
+         (url-request-extra-headers '(("Content-Type" . "application/json")))
+         (url-request-data (json-encode `(("Dax" ., (delete-and-extract-region (point-min) (point-max)) ))))
+         ;; (url-request-data (json-encode ,payload))
+         (buf (current-buffer))
+         (newbuff (url-retrieve-synchronously "http://www.daxformatter.com/api/daxformatter/DaxFormat/"))
+         )
+    (set-buffer newbuff)
+    (goto-char (point-min))
+    (re-search-forward "^$")
+    (delete-region (point) (point-min))
+    (setq noQuotes (substring (buffer-string) 1 nil))
+    (setq noRN (replace-regexp-in-string "\r\n" "\n" noQuotes))
+    (setq noBars (replace-regexp-in-string "\\\\" "" noRN))
+    (princ noBars buf)
+    (kill-buffer newbuff)
+    )
+  )
+
 (defun my-setup-indent (n)
   ;; java/c/c++
   (setq-local standard-indent n)
@@ -1298,6 +1376,9 @@ and the tangled file is compiled."
 (setq next-line-add-newlines nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(use-package iedit
+  :ensure)
+
 (global-set-key (kbd "C-M-i") 'iedit-mode)
 
 (use-package dash
@@ -1439,7 +1520,7 @@ and the tangled file is compiled."
  :ensure t
  :delight helm-mode
  :config
-  (require 'helm-config)
+  ;; (require 'helm-config)
   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
   ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
   ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
@@ -1473,8 +1554,7 @@ and the tangled file is compiled."
 (setq helm-apropos-fuzzy-match t)
 (setq helm-lisp-fuzzy-completion t)
 (helm-mode 1)
-
-  (global-set-key (kbd "C-x C-m") 'helm-M-x))
+(global-set-key (kbd "C-x C-m") 'helm-M-x))
 
 (setq helm-mini-default-sources '(helm-source-buffers-list
                                   helm-source-recentf

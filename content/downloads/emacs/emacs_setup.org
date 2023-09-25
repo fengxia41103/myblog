@@ -101,7 +101,7 @@ In your =~/.emacs= file, all you need to add is
   (load-file "~/Emacs/emacs_setup.el")
 #+END_SRC
 
-** bootstrap .el
+** bootstrap.el
 
 Put this in the =~/Emacs/emacs_setup.el=, and viola, it will regnerate itself!
 
@@ -968,7 +968,10 @@ Some config for display. Some of these are borrowed from [[https://zzamboni.org/
 
 #+BEGIN_SRC emacs-lisp
   (setq org-hide-leading-stars t)
+
+  ;; auto log a clock when task is closed
   (setq org-log-done t)
+
   (setq org-startup-indented t)
   (setq org-startup-folded t)
   (setq org-ellipsis "...")
@@ -1004,7 +1007,7 @@ This will make headline and text body different font size.
      `(org-level-5 ((t (,@headline ,@variable-tuple))))
      `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.0))))
      `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1 :foreground "#FEB236"))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "#8BC34A"))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "burleywood"))))
      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
      `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
 #+END_SRC
@@ -1013,25 +1016,58 @@ This will make headline and text body different font size.
 Tweaks to customize font faces in org found [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][here]]:
 
 #+BEGIN_SRC emacs-lisp
-  (custom-theme-set-faces
-   'user
-   '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
-   '(org-bold ((t (:foreground "#d52349"))))
-   '(org-document-info ((t (:foreground "dark orange"))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-   '(org-link ((t (:foreground "royal blue" :underline t))))
-   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-property-value ((t (:inherit fixed-pitch))) t)
-   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
-   '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
-   '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
-   '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
-   '(org-block-background ((t (:background "gray10"))))
-   '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
-  )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :foreground "#D52349" :height 1000 :overline t :box nil))))
+ '(fixed-pitch ((t (:family "Fira Code" :height 140))))
+ '(font-lock-comment-face ((t (:foreground "dim gray" :slant oblique))))
+ '(highlight ((t (:background "forest green"))))
+ '(magit-branch-current ((t (:foreground "red" :box 1 :weight bold :height 2.0))))
+ '(magit-branch-local ((t (:foreground "tomato" :weight bold))))
+ '(magit-branch-remote ((t (:foreground "yellow"))))
+ '(magit-diff-context-highlight ((t (:background "#ffffff" :foreground "dim gray"))))
+ '(magit-diff-file-heading-highlight ((t (:background "#ffffff" :foreground "black" :weight bold))))
+ '(magit-diff-hunk-heading ((t (:background "gainsboro" :foreground "tomato"))))
+ '(magit-diff-hunk-heading-highlight ((t (:background "DarkGoldenrod3" :foreground "black"))))
+ '(magit-diff-revision-summary ((t (:inherit magit-diff-hunk-heading :foreground "black"))))
+ '(magit-diff-revision-summary-highlight ((t (:foreground "gold"))))
+ '(magit-section-heading-selection ((t (:foreground "dark red" :weight bold))))
+ '(magit-section-highlight ((t (:background "tan4"))))
+ '(markdown-code-face ((t (:background "gray10"))))
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
+ '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
+ '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold))))
+ '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+ '(org-block-background ((t (:background "gray10"))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
+ '(org-bold ((t (:foreground "#d52349"))))
+ '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
+ '(org-document-info ((t (:foreground "dark orange"))))
+ '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.5 :underline nil))))
+ '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#F5F5F5" :height 1.3))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "seashell" :height 1.2))))
+ '(org-level-3 ((t (:inherit default :weight bold :height 1.1 :foreground "#FEB236"))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-link ((t (:inherit fixed-pitch :foreground "royal blue" :underline t))))
+ '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-property-value ((t (:inherit fixed-pitch))) t)
+ '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+ '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
+ '(org-column ((t (:inherit fixed-pitch))))
+ '(region ((t (:background "forest green")))))
 #+END_SRC
 
 ** writing stuff
@@ -1126,6 +1162,7 @@ I still don't know how to use it for schedule management. This feels
 like latex, it's wonderful, but not common among non-org-mode folks.
 
 Add a few formats to the export functionality of org-mode.
+
 *** org-babel
 
 What kind of code block languages do I need
@@ -1346,11 +1383,12 @@ it's a necessary evil.
           ("ACTIVE" . (:foreground "darkgreen" :weight bold))
           ))
 #+END_SRC
+
 *** priorities
 
 Set color for priorities based on [[http://pragmaticemacs.com/emacs/org-mode-basics-vi-a-simple-todo-list/][this]].
 #+BEGIN_SRC emacs-lisp
-(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+(setq org-priority-faces '((?A . (:foreground "OrangeRed" :weight bold))
                            (?B . (:foreground "LightSteelBlue"))
                            (?C . (:foreground "OliveDrab"))))
 #+END_SRC
@@ -1644,13 +1682,21 @@ Also, to set this after org-mode has loaded ([[https://emacs.stackexchange.com/q
 #+END_SRC
 
 *** org-clock properties
-clock stuff into a drawer.
+
+Clock stuff into a drawer.
+
 #+BEGIN_SRC emacs-lisp
   (setq org-clock-into-drawer t)
   (setq org-log-into-drawer t)
   (setq org-clock-int-drawer "CLOCK")
 #+END_SRC
 
+And according to [[https://orgmode.org/manual/Clocking-Work-Time.html][this]], set clock history:
+
+#+begin_src emacs-lisp
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+#+end_src
 ** LAST step: reload org
 
 Ran into a [[https://github.com/seagle0128/.emacs.d/issues/129][strange error]], and reloading org at the end is the
@@ -1784,6 +1830,7 @@ Have a single binding to call the most appropriate tool given the repository.
 #+RESULTS:
 : paf/vcs-status
 *** forge
+
 #+BEGIN_SRC emacs-lisp
 (use-package forge
   :after magit)
@@ -1794,7 +1841,7 @@ Have a single binding to call the most appropriate tool given the repository.
 This is really cool. It has fancier UI than the =github-review= tool.
 Give it a shot!
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package code-review
   :ensure t)
 (add-hook 'code-review-mode-hook #'emojify-mode)
@@ -1804,6 +1851,7 @@ Give it a shot!
 *** github review
 
 I have been using [[https://github.com/charignon/github-review][this]] for a while daily, and it's wonderful!
+
 #+BEGIN_SRC emacs-lisp
 (use-package github-review
   :ensure t
@@ -2191,7 +2239,6 @@ And set up virtualenv path:
   )
 #+END_SRC
 
-
 **** py-autopep8
 
 Add hook to reformat python code based on pep8 spec. You need to
@@ -2352,6 +2399,12 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
 Link js2-mode to prettier to beautify my code.
 Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
 
+Set which prettier to use:
+
+#+begin_src emacs-lisp :tangle no
+(setenv "NODE_PATH" "/home/fengxia/.nvm/versions/node/v17.0.0/bin")
+#+end_src
+
 #+BEGIN_SRC emacs-lisp
   (use-package prettier
     :ensure
@@ -2420,12 +2473,96 @@ Details are [[https://github.com/yoshiki/yaml-mode][here]].
 #+END_SRC
 
 *** jenkins
+
 #+BEGIN_SRC emacs-lisp
   (use-package jenkinsfile-mode
     :ensure
     :config)
 
 #+END_SRC
+
+*** SQL
+
+I guess I would have to deal w/ SQL eventually. See the [[https://github.com/purcell/sqlformat][instructions here]]. You
+need to install =apt install pgformatter= offline.
+
+#+begin_src emacs-lisp
+  (use-package sqlformat
+    :ensure
+    :config)
+#+end_src
+
+If using =pg_format=, set the configs:
+
+#+begin_src emacs-lisp
+(setq sqlformat-command 'pgformatter)
+(setq sqlformat-args '("-s4" "-B" "-w150" "-k" "-f2" "-U2" "--extra-keyword=/home/fengxia/workspace/tmp/oracle-keywords"))
+#+end_src
+
+If using =sqlformat=, set the configs:
+#+begin_src emacs-lisp :tango no
+(setq sqlformat-command 'sqlformat)
+(setq sqlformat-args '("-k" "upper" "-i" "upper" "-s" "-r" "--indent_width=4"))
+#+end_src
+
+And define a keybind for formatting:
+
+#+begin_src emacs-lisp
+(add-hook 'sql-mode-hook '(lambda()
+  (define-key sql-mode-map (kbd "C-c C-f") 'sqlformat-buffer)))
+#+end_src
+
+*** Microsoft DAX
+
+Load the =dax-mode= by [[https://github.com/fpvmorais/dax-mode/tree/master][github]]:
+
+#+begin_src emacs-lisp
+(load "~/.emacs.d/dax-mode/dax-mode.el")
+#+end_src
+
+
+Add a formatter function by the [[https://fpvmorais.com/post/emacs-major-modes-for-power-bi/][blog]]:
+
+#+begin_src emacs-lisp
+(defun dax-pretty-print ()
+  "Pretty print the DAX buffer via DaxFormatter API."
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward ";" nil t)
+    (replace-match ","))
+  (goto-char (point-min))
+  (setq payload (make-hash-table))
+  (setf (gethash "Dax" payload) `(delete-and-extract-region (point-min) (point-max)))
+  (setf (gethash "l" payload) "short")
+  (let* (
+         (url-request-method "POST")
+         (url-request-extra-headers '(("Content-Type" . "application/json")))
+         (url-request-data (json-encode `(("Dax" ., (delete-and-extract-region (point-min) (point-max)) ))))
+         ;; (url-request-data (json-encode ,payload))
+         (buf (current-buffer))
+         (newbuff (url-retrieve-synchronously "http://www.daxformatter.com/api/daxformatter/DaxFormat/"))
+         )
+    (set-buffer newbuff)
+    (goto-char (point-min))
+    (re-search-forward "^$")
+    (delete-region (point) (point-min))
+    (setq noQuotes (substring (buffer-string) 1 nil))
+    (setq noRN (replace-regexp-in-string "\r\n" "\n" noQuotes))
+    (setq noBars (replace-regexp-in-string "\\\\" "" noRN))
+    (princ noBars buf)
+    (kill-buffer newbuff)
+    )
+  )
+#+end_src
+
+Last, define a keyboard bind for formatting:
+
+#+begin_src emacs-lisp :tangle no
+
+(add-hook dax-mode-hook '(lambda()
+  (define-key sql-mode-map (kbd "C-c C-f") 'dax-pretty-print)))
+
+#+end_src
 
 ** LAST: enforce my tab style
 
@@ -2492,6 +2629,7 @@ So, to enfore this on some modes:
   (add-hook 'sh-mode-hook 'my-personal-code-style)
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
 #+END_SRC
+
 
 * buffers
 
@@ -2958,6 +3096,9 @@ highlight all the occurances in the buffer, and now your editing will
 take effect on all of them.
 
 #+BEGIN_SRC emacs-lisp
+  (use-package iedit
+    :ensure)
+
   (global-set-key (kbd "C-M-i") 'iedit-mode)
 #+END_SRC
 
@@ -3155,7 +3296,7 @@ I just took over the config described in this [[https://tuhdo.github.io/helm-int
    :ensure t
    :delight helm-mode
    :config
-    (require 'helm-config)
+    ;; (require 'helm-config)
     ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
     ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
     ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
@@ -3189,8 +3330,7 @@ I just took over the config described in this [[https://tuhdo.github.io/helm-int
   (setq helm-apropos-fuzzy-match t)
   (setq helm-lisp-fuzzy-completion t)
   (helm-mode 1)
-
-    (global-set-key (kbd "C-x C-m") 'helm-M-x))
+  (global-set-key (kbd "C-x C-m") 'helm-M-x))
 #+END_SRC
 
 

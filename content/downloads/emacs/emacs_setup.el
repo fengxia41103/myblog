@@ -315,7 +315,7 @@ and the tangled file is compiled."
      `(org-level-5 ((t (,@headline ,@variable-tuple))))
      `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.0))))
      `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1 :foreground "#FEB236"))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "#8BC34A"))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "burleywood"))))
      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
      `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
 
@@ -354,14 +354,14 @@ and the tangled file is compiled."
  '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
  '(org-document-title ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.5 :underline nil))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
- '(org-level-1 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.3))))
- '(org-level-2 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.2 :foreground "#8BC34A"))))
- '(org-level-3 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.1 :foreground "#FEB236"))))
- '(org-level-4 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.0))))
- '(org-level-5 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
- '(org-level-6 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
- '(org-level-7 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
- '(org-level-8 ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif"))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#F5F5F5" :height 1.3))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "seashell" :height 1.2))))
+ '(org-level-3 ((t (:inherit default :weight bold :height 1.1 :foreground "#FEB236"))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
  '(org-link ((t (:inherit fixed-pitch :foreground "royal blue" :underline t))))
  '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
  '(org-property-value ((t (:inherit fixed-pitch))) t)
@@ -369,6 +369,7 @@ and the tangled file is compiled."
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
+ '(org-column ((t (:inherit fixed-pitch))))
  '(region ((t (:background "forest green")))))
 
 (use-package deft
@@ -545,7 +546,7 @@ and the tangled file is compiled."
         ("ACTIVE" . (:foreground "darkgreen" :weight bold))
         ))
 
-(setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+(setq org-priority-faces '((?A . (:foreground "OrangeRed" :weight bold))
                            (?B . (:foreground "LightSteelBlue"))
                            (?C . (:foreground "OliveDrab"))))
 

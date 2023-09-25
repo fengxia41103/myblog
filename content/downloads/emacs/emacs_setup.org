@@ -442,7 +442,7 @@ brings value. *Note* that the ones I skip are:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
-  (add-hook 'org-mode-hook 'display-line-numbers-mode)
+  ;; (add-hook 'org-mode-hook 'display-line-numbers-mode)
   (add-hook 'python-mode-hook 'display-line-numbers-mode)
   (add-hook 'web-mode-hook 'display-line-numbers-mode)
   (add-hook 'js2-mode-hook 'display-line-numbers-mode)

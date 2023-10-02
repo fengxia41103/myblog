@@ -114,7 +114,7 @@ To push an image to harbor:
 1. List the docker images you have on the server/dev machine, `docker
    image ls`.
 2. Tag an image: `docker tag e6bbf5e4d606
-   harbor.feng.local:9800/library/frontend_stock:v1.0.0`:
+   harbor.feng.local:9800/library/frontend_stock:v1.0.0`
 
       1. `e6...`: is the image digest
       2. `harbor.feng.local:9800`: the harbor server & port. You should
@@ -328,7 +328,7 @@ By now I have three helms: backend api, celery, and frontend.
 1. Create/pick a namespace, say `client-a`.
 2. Create envs as configmap & secret.
 3. Backend api. In order to override list value `ingress.hosts[0]`,
-   you **must use -f path/to/values.yaml` &larr; this is a helm known
+   you **must use `-f path/to/values.yaml`** &larr; this is a helm known
    limitation.
 
         ```shell
@@ -357,7 +357,7 @@ By now I have three helms: backend api, celery, and frontend.
         ```
 
 6. If using an external nginx as LB to cluster nodes, add a `server`
-   block:
+   block in nginx conf:
 
         ```conf
         server {

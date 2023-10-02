@@ -1,4 +1,4 @@
-#+TITLE: Feng's Emacs configuration
++TITLE: Feng's Emacs configuration
 #+AUTHOR: Feng Xia
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
@@ -1683,6 +1683,8 @@ Also, to set this after org-mode has loaded ([[https://emacs.stackexchange.com/q
 
 *** org-clock properties
 
+Good [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][note about using the clock.]]
+
 Clock stuff into a drawer.
 
 #+BEGIN_SRC emacs-lisp
@@ -1697,6 +1699,16 @@ And according to [[https://orgmode.org/manual/Clocking-Work-Time.html][this]], s
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 #+end_src
+
+Set clock out upon task done and prettify:
+
+#+begin_src emacs-lisp
+;; Clock out when moving task to a done state
+(setq org-clock-out-when-done t)
+;; use pretty things for the clocktable
+(setq org-pretty-entities t)
+#+end_src
+
 ** LAST step: reload org
 
 Ran into a [[https://github.com/seagle0128/.emacs.d/issues/129][strange error]], and reloading org at the end is the
@@ -2050,13 +2062,36 @@ the time the keys are pressed.
 (global-set-key "\C-x$" 'set-selective-display-dlw)
 #+END_SRC
 
-*** hightlight-indent-guids-mode
+*** hightlight-indent-guide-mode
+
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 #+END_SRC
 
+*** folding by indent level
 
-#+RESULTS:
+This is very useful when browsing long yaml such as heml's values.
+
+#+begin_src emacs-lisp
+(use-package origami
+  :bind ("C-c h o" . hydra-origami/body)
+  :config
+
+ (defhydra hydra-origami(:color red)
+   "
+  _o_pen node    _n_ext fold       toggle _f_orward  _s_how current only
+  _c_lose node   _p_revious fold   toggle _a_ll
+  "
+   ("o" origami-open-node)
+   ("c" origami-close-node)
+   ("n" origami-next-fold)
+   ("p" origami-previous-fold)
+   ("f" origami-forward-toggle-node)
+   ("a" origami-toggle-all-nodes)
+   ("s" origami-show-only-node))
+)
+
+#+end_src
 
 ** IRC
 Use =circe=.
@@ -2472,6 +2507,16 @@ Details are [[https://github.com/yoshiki/yaml-mode][here]].
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
 
+Add [[https://github.com/iquiw/lsp-yaml][lsp-yaml]]:
+
+#+begin_src emacs-lisp
+(use-package lsp-yaml
+  :after lsp
+  :config
+  (add-hook 'yaml-mode-hook #'lsp))
+#+end_src
+
+
 *** jenkins
 
 #+BEGIN_SRC emacs-lisp
@@ -2629,7 +2674,6 @@ So, to enfore this on some modes:
   (add-hook 'sh-mode-hook 'my-personal-code-style)
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
 #+END_SRC
-
 
 * buffers
 
@@ -3101,6 +3145,15 @@ take effect on all of them.
 
   (global-set-key (kbd "C-M-i") 'iedit-mode)
 #+END_SRC
+
+** ediff
+
+#+begin_src emacs-lisp
+(custom-set-variables
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(ediff-diff-options "-w")
+ '(ediff-split-window-function 'split-window-horizontally))
+#+end_src
 
 * navigate file & dir
 

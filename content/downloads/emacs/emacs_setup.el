@@ -97,7 +97,7 @@ and the tangled file is compiled."
 (global-set-key [kp-delete] 'delete-char)
 
 (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
-(add-hook 'org-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'org-mode-hook 'display-line-numbers-mode)
 (add-hook 'python-mode-hook 'display-line-numbers-mode)
 (add-hook 'web-mode-hook 'display-line-numbers-mode)
 (add-hook 'js2-mode-hook 'display-line-numbers-mode)
@@ -730,6 +730,11 @@ and the tangled file is compiled."
 
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
+
+;; Clock out when moving task to a done state
+(setq org-clock-out-when-done t)
+;; use pretty things for the clocktable
+(setq org-pretty-entities t)
 
 (org-mode-restart)
 
@@ -1381,6 +1386,11 @@ and the tangled file is compiled."
   :ensure)
 
 (global-set-key (kbd "C-M-i") 'iedit-mode)
+
+(custom-set-variables
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(ediff-diff-options "-w")
+ '(ediff-split-window-function 'split-window-horizontally))
 
 (use-package dash
   :ensure

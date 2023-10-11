@@ -917,6 +917,24 @@ and the tangled file is compiled."
 
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
+(use-package origami
+  :bind ("C-c h o" . hydra-origami/body)
+  :config
+
+ (defhydra hydra-origami(:color red)
+   "
+  _o_pen node    _n_ext fold       toggle _f_orward  _s_how current only
+  _c_lose node   _p_revious fold   toggle _a_ll
+  "
+   ("o" origami-open-node)
+   ("c" origami-close-node)
+   ("n" origami-next-fold)
+   ("p" origami-previous-fold)
+   ("f" origami-forward-toggle-node)
+   ("a" origami-toggle-all-nodes)
+   ("s" origami-show-only-node))
+)
+
 (use-package
   circe
     :ensure
@@ -1036,8 +1054,8 @@ and the tangled file is compiled."
 (add-hook 'scss-mode-hook  'emmet-mode)
 
 (use-package js2-mode
-    :ensure
-    :config)
+  :ensure
+  :config)
 (setq js2-indent-level 2)
 (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . js2-mode))
@@ -1047,15 +1065,15 @@ and the tangled file is compiled."
 (use-package prettier
   :ensure
   :config)
-  (add-hook 'js2-mode-hook 'prettier-mode)
-  (add-hook 'json-mode-hook 'prettier-mode)
-  (add-hook 'js-mode-hook 'prettier-mode)
-  (setq indent-tabs-mode nil js-indent-level 2)
-  (add-hook
-  'js2-mode-hook
-  (lambda ()
-  (when (string-match "\.tsx?$" buffer-file-name)
-  (setq-local prettier-parsers '(typescript)))))
+(add-hook 'js2-mode-hook 'prettier-mode)
+(add-hook 'json-mode-hook 'prettier-mode)
+(add-hook 'js-mode-hook 'prettier-mode)
+(setq indent-tabs-mode nil js-indent-level 2)
+(add-hook
+ 'js2-mode-hook
+ (lambda ()
+   (when (string-match "\\.[tj]sx?$" buffer-file-name)
+     (setq-local prettier-parsers '(typescript)))))
 
 (use-package js-doc
   :ensure
@@ -1081,6 +1099,11 @@ and the tangled file is compiled."
 (add-hook 'yaml-mode-hook
           '(lambda ()
         (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+(use-package lsp-yaml
+  :after lsp
+  :config
+  (add-hook 'yaml-mode-hook #'lsp))
 
 (use-package jenkinsfile-mode
   :ensure

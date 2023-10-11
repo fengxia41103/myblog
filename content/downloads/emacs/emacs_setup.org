@@ -2418,8 +2418,8 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
 
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
-      :ensure
-      :config)
+    :ensure
+    :config)
   (setq js2-indent-level 2)
   (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . js2-mode))
@@ -2427,32 +2427,31 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
   (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
 #+END_SRC
 
-
-#+RESULTS:
-
 **** prettier
 Link js2-mode to prettier to beautify my code.
 Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
 
-Set which prettier to use:
+Set which prettier to use. Note that w/ NVM, you must set =nvm use 16.15.1= in
+=.bashrc= or =.zshrc= so that shell will use the right path, also. You can check
+which is the default node path in effect in Emacs by =M-x prettier-info=.
 
 #+begin_src emacs-lisp :tangle no
-(setenv "NODE_PATH" "/home/fengxia/.nvm/versions/node/v17.0.0/bin")
+(setenv "NODE_PATH" "/home/fengxia/.nvm/versions/node/v16.15.1/bin")
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
   (use-package prettier
     :ensure
     :config)
-    (add-hook 'js2-mode-hook 'prettier-mode)
-    (add-hook 'json-mode-hook 'prettier-mode)
-    (add-hook 'js-mode-hook 'prettier-mode)
-    (setq indent-tabs-mode nil js-indent-level 2)
-    (add-hook
-    'js2-mode-hook
-    (lambda ()
-    (when (string-match "\.tsx?$" buffer-file-name)
-    (setq-local prettier-parsers '(typescript)))))
+  (add-hook 'js2-mode-hook 'prettier-mode)
+  (add-hook 'json-mode-hook 'prettier-mode)
+  (add-hook 'js-mode-hook 'prettier-mode)
+  (setq indent-tabs-mode nil js-indent-level 2)
+  (add-hook
+   'js2-mode-hook
+   (lambda ()
+     (when (string-match "\\.[tj]sx?$" buffer-file-name)
+       (setq-local prettier-parsers '(typescript)))))
 #+END_SRC
 
 **** js-doc
@@ -2515,7 +2514,6 @@ Add [[https://github.com/iquiw/lsp-yaml][lsp-yaml]]:
   :config
   (add-hook 'yaml-mode-hook #'lsp))
 #+end_src
-
 
 *** jenkins
 
@@ -2607,6 +2605,16 @@ Last, define a keyboard bind for formatting:
 (add-hook dax-mode-hook '(lambda()
   (define-key sql-mode-map (kbd "C-c C-f") 'dax-pretty-print)))
 
+#+end_src
+
+*** Terraform
+
+#+begin_src emacs-lis
+  (use-package terraform-mode
+    :ensure
+    :config)
+(add-hook 'terraform-mode-hook #'outline-minor-mode)
+(setq terraform-format-on-sav t)
 #+end_src
 
 ** LAST: enforce my tab style

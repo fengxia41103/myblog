@@ -98,18 +98,19 @@ configure`, or using `aws-sso-util`.
    can also just copy and paste to `~/.aws/config` directly if you
    know what you are doing.
 
-      ```shell
-      fengxia@fl5wvhzxat:~/aws$ aws configure sso
-      SSO start URL [None]: <https://d-<.....>.awsapps.com/start>
-      SSO Region [None]: us-east-1
-      There are 12 AWS accounts available to you.
-      Using the account ID <......>
-      The only role available to you is: ReadOnly
-      Using the role name "ReadOnly"
-      CLI default client Region [None]: us-east-1
-      CLI default output format [None]: json
-      CLI profile name [ReadOnly-<account id>]: give-it-a-name
-      ```
+        ```shell
+        fengxia@fl5wvhzxat:~/aws$ aws configure sso
+        SSO start URL [None]: <https://d-<.....>.awsapps.com/start>
+        SSO Region [None]: us-east-1
+        There are 12 AWS accounts available to you.
+        Using the account ID <......>
+        The only role available to you is: ReadOnly
+        Using the role name "ReadOnly"
+        CLI default client Region [None]: us-east-1
+        CLI default output format [None]: json
+        CLI profile name [ReadOnly-<account id>]: give-it-a-name
+        ```
+
 2. Now use the profile to login: `aws sso login --profile <your
    profile>`. Click the `Allow` on the browser.
 
@@ -119,19 +120,19 @@ configure`, or using `aws-sso-util`.
    short-life token) to run all the followup calls. Thus you need to
    **acquire** profile's credential:
 
-      ```shell
-      aws sts get-caller-identity --profile SaaS-Dev.Administrator
-      ```
+        ```shell
+        aws sts get-caller-identity --profile SaaS-Dev.Administrator
+        ```
 
     Expect to see an output like this:
 
-       ```json
-       {
-           "UserId": "xxxxxxx:feng.xia@lucidum.io",
-           "Account": "xxxxxx",
-           "Arn": "arn:aws:sts::xxxxxxx:assumed-role/AWSReservedSSO_Administrator_xxxxxx/<email>"
-       }
-       ```
+         ```json
+         {
+             "UserId": "xxxxxxx:feng.xia@lucidum.io",
+             "Account": "xxxxxx",
+             "Arn": "arn:aws:sts::xxxxxxx:assumed-role/AWSReservedSSO_Administrator_xxxxxx/<email>"
+         }
+         ```
 
 4. Now you are ready to launch CLI that will bear the AWS profile you
    choose and have access to the resources this profile is allowed to.

@@ -1143,6 +1143,14 @@ and the tangled file is compiled."
 (writegood-mode t)
 (flyspell-mode t)))
 
+(use-package mu4e-column-faces
+  :after mu4e
+  :config (mu4e-column-faces-mode))
+
+(custom-set-faces
+ '(mu4e-header-highlight-face ((t (:foreground "tomato" :weight bold))))
+ )
+
 (setq mu4e-contexts
    `( ,(make-mu4e-context
          :name "Hotmail"

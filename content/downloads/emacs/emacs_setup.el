@@ -211,533 +211,6 @@ and the tangled file is compiled."
 
 (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
 
-(use-package org
-  :ensure nil
-  :delight org-mode
-  :config
-  :hook ((org-mode . visual-line-mode)
-         (org-mode . variable-pitch-mode)
-         (org-mode . org-indent-mode)))
-
-(require 'org-protocol)
-
-(use-package org-board
-  :ensure t
-  :config
-  (global-set-key (kbd "C-c o") org-board-keymap))
-
-(defun paf/org-toggle-iimage-in-org ()
-  "display images in your org file"
-  (interactive)
-  (if (face-underline-p 'org-link)
-      (set-face-underline 'org-link nil)
-    (set-face-underline 'org-link t))
-  (iimage-mode 'toggle))
-
-(use-package iimage
-  :config
-  (add-to-list 'iimage-mode-image-regex-alist
-               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
-                             "\\)\\]")  1))
-  (add-hook 'org-mode-hook (lambda ()
-                             ;; display images
-                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
-                            )))
-
-(defcustom remote-org-directory "~/OrgFiles"
-  "Location of remove OrgFile directory, should you have one."
-  :type 'string
-  :group 'paf)
-(defun paf/open-remote-org-directory ()
-  (interactive)
-  (find-file remote-org-directory))
-
-(global-set-key (kbd "C-M-x r o") 'paf/open-remote-org-directory)
-
-(defun org-relative-file (filename)
-  "Compute an expanded absolute file path for org files"
-  (expand-file-name filename org-directory))
-
-(defun my-org-inherited-no-file-tags ()
-  (let ((tags (org-entry-get nil "ALLTAGS" 'selective))
-        (ltags (org-entry-get nil "TAGS")))
-    (mapc (lambda (tag)
-            (setq tags
-                  (replace-regexp-in-string (concat tag ":") "" tags)))
-          (append org-file-tags (when ltags (split-string ltags ":" t))))
-    (if (string= ":" tags) nil tags)))
-
-(setq org-babel-sh-command "bash")
-
-(setq org-roam-capture-templates
-      `(("m" "Meeting" entry (function org-roam--capture-get-point)
-             "* %?\n%U\n%^{with}\n"
-             :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
-             :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
-             )))
-
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'org-iswitchb)
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-<up>") 'org-move-subtree-up)
-            (local-set-key (kbd "C-<down>") 'org-move-subtree-down)
-            (local-set-key (kbd "C-c l") 'org-store-link)
-            (local-set-key (kbd "C-c C-l") 'org-insert-link)))
-
-(setq org-hide-leading-stars t)
-
-;; auto log a clock when task is closed
-(setq org-log-done t)
-
-(setq org-startup-indented t)
-(setq org-startup-folded t)
-(setq org-ellipsis "...")
-(setq org-hide-emphasis-markers t)
-
-(let* ((variable-tuple
-          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
-                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-                ((x-list-fonts "Verdana")         '(:font "Verdana"))
-                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-         (headline           `(:inherit default :weight bold :foreground "#F5F5F5")))
-
-    (custom-theme-set-faces
-     'user
-     `(org-level-8 ((t (,@headline ,@variable-tuple))))
-     `(org-level-7 ((t (,@headline ,@variable-tuple))))
-     `(org-level-6 ((t (,@headline ,@variable-tuple))))
-     `(org-level-5 ((t (,@headline ,@variable-tuple))))
-     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.0))))
-     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1 :foreground "#FEB236"))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "burleywood"))))
-     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
-     `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background nil))))
- '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :foreground "#D52349" :height 1000 :overline t :box nil))))
- '(fixed-pitch ((t (:family "Fira Code" :height 140))))
- '(font-lock-comment-face ((t (:foreground "dim gray" :slant oblique))))
- '(highlight ((t (:background "forest green"))))
- '(magit-branch-current ((t (:foreground "red" :box 1 :weight bold :height 2.0))))
- '(magit-branch-local ((t (:foreground "tomato" :weight bold))))
- '(magit-branch-remote ((t (:foreground "yellow"))))
- '(magit-diff-context-highlight ((t (:background "#ffffff" :foreground "dim gray"))))
- '(magit-diff-file-heading-highlight ((t (:background "#ffffff" :foreground "black" :weight bold))))
- '(magit-diff-hunk-heading ((t (:background "gainsboro" :foreground "tomato"))))
- '(magit-diff-hunk-heading-highlight ((t (:background "DarkGoldenrod3" :foreground "black"))))
- '(magit-diff-revision-summary ((t (:inherit magit-diff-hunk-heading :foreground "black"))))
- '(magit-diff-revision-summary-highlight ((t (:foreground "gold"))))
- '(magit-section-heading-selection ((t (:foreground "dark red" :weight bold))))
- '(magit-section-highlight ((t (:background "tan4"))))
- '(markdown-code-face ((t (:background "gray10"))))
- '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
- '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
- '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold))))
- '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
- '(org-block-background ((t (:background "gray10"))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
- '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
- '(org-bold ((t (:foreground "#d52349"))))
- '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
- '(org-document-info ((t (:foreground "dark orange"))))
- '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
- '(org-document-title ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.5 :underline nil))))
- '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
- '(org-level-1 ((t (:inherit default :weight bold :foreground "#F5F5F5" :height 1.3))))
- '(org-level-2 ((t (:inherit default :weight bold :foreground "seashell" :height 1.2))))
- '(org-level-3 ((t (:inherit default :weight bold :height 1.1 :foreground "#FEB236"))))
- '(org-level-4 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
- '(org-level-5 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
- '(org-level-6 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
- '(org-level-7 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
- '(org-level-8 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
- '(org-link ((t (:inherit fixed-pitch :foreground "royal blue" :underline t))))
- '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
- '(org-property-value ((t (:inherit fixed-pitch))) t)
- '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
- '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
- '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
- '(org-column ((t (:inherit fixed-pitch))))
- '(region ((t (:background "forest green")))))
-
-(use-package deft
-  :ensure t)
-(use-package avy
-  :ensure t)
-
-(use-package zetteldeft
-  :ensure t
-  :after (org deft avy)
-
-  :config
-  (setq deft-extensions '("org" "md" "txt"))
-  (setq deft-directory (org-relative-file "Zettelkasten"))
-  (setq deft-recursive t)
-
-  :bind (("C-c z d" . deft)
-         ("C-c z D" . zetteldeft-deft-new-search)
-         ("C-c z R" . deft-refresh)
-         ("C-c z s" . zetteldeft-search-at-point)
-         ("C-c z c" . zetteldeft-search-current-id)
-         ("C-c z f" . zetteldeft-follow-link)
-         ("C-c z F" . zetteldeft-avy-file-search-ace-window)
-         ("C-c z l" . zetteldeft-avy-link-search)
-         ("C-c z t" . zetteldeft-avy-tag-search)
-         ("C-c z T" . zetteldeft-tag-buffer)
-         ("C-c z i" . zetteldeft-find-file-id-insert)
-         ("C-c z I" . zetteldeft-find-file-full-title-insert)
-         ("C-c z o" . zetteldeft-find-file)
-         ("C-c z n" . zetteldeft-new-file)
-         ("C-c z N" . zetteldeft-new-file-and-link)
-         ("C-c z r" . zetteldeft-file-rename))
-)
-
-(use-package plantuml-mode
- :ensure t
- :config
-  (setq plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
-  (setq org-plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
-  ;; Let us edit PlantUML snippets in plantuml-mode within orgmode
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-  ;; make it load this language (for export ?)
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
-  ;; Enable plantuml-mode for PlantUML files
-  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
-
-(setq org-link-abbrev-alist
-      '(("b" . "http://b/")
-        ("go" . "http://go/")
-        ("cl" . "http://cr/")))
-
-(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-
-(setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (R . t)
-   (dot . t)
-   (emacs-lisp . t)
-   (gnuplot . t)
-   (python . t)
-   ;;(sh . t)
-   (latex . t)
-   (shell . t)
-  ))
-
-(use-package ox-md
-  :defer)
-
-(use-package ox-beamer
-  :defer)
-
-(use-package ox-reveal
-  :ensure t
-  :after (htmlize)
-  :config
-  (setq org-reveal-root (expand-file-name "~/reveal.js")))
-
-(use-package htmlize
-  :ensure t)
-
-(use-package ox-odt
-  :defer)
-
-(use-package ox-taskjuggler
-  :defer)
-
-(use-package ox-confluence
-  :defer)
-
-(use-package org-super-agenda
-  :ensure t
-  :config
-  (org-super-agenda-mode t))
-
-(use-package org-clock-convenience
-  :ensure t
-  :bind (:map org-agenda-mode-map
-           ("<S-right>" . org-clock-convenience-timestamp-up)
-           ("<S-left>" . org-clock-convenience-timestamp-down)
-           ("[" . org-clock-convenience-fill-gap)
-           ("]" . org-clock-convenience-fill-gap-both)))
-
-(use-package org-habit
-  :delight
-  :config
-  (setq org-habit-graph-column 38)
-  (setq org-habit-preceding-days 35)
-  (setq org-habit-following-days 10)
-  (setq org-habit-show-habits-only-for-today nil))
-
-(use-package paf-secretary
-  :load-path "~/Emacs"
-  :bind (("\C-cw" . paf-sec-set-with)
-         ("\C-cW" . paf-sec-set-where)
-         ("\C-cj" . paf-sec-tag-entry))
-  :config
-  (setq paf-sec-me "paf")
-  (setq org-tag-alist '(("PRJ" . ?p)
-                        ("DESIGNDOC" . ?D)
-                        ("Milestone" . ?m)
-                        ("DESK" . ?d)
-                        ("HOME" . ?h)
-                        ("VC" . ?v))))
-
-(use-package org-duration
-  :config
-  (setq org-duration-units
-        `(("min" . 1)
-          ("h" . 60)
-          ("d" . ,(* 60 8))
-          ("w" . ,(* 60 8 5))
-          ("m" . ,(* 60 8 5 4))
-          ("y" . ,(* 60 8 5 4 10)))
-        )
-  (org-duration-set-regexps))
-
-(setq org-todo-keywords
-      '((sequence "TODO(t!)" "WORKING(w!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
-        (sequence "TASK(m!)" "ACTIVE" "|" "DONE(d!)" "CANCELLED(C@)" )))
-
-(setq org-tags-exclude-from-inheritance '("PRJ" "REGULAR")
-      org-use-property-inheritance '("PRIORITY")
-      org-stuck-projects '("+PRJ/-DONE-CANCELLED"
-                           ;; it is considered stuck if there is no next action
-                           (;"TODO"
-                            "WORKING" "ACTIVE" "TASK") ()))
-
-(setq org-todo-keyword-faces
-      '(
-        ("TODO" . (:foreground "GhostWhite" :weight bold))
-        ("TASK" . (:foreground "steelblue" :weight bold))
-        ("NEXT" . (:foreground "red" :weight bold))
-        ("STARTED" . (:foreground "green" :weight bold))
-        ("WAITING" . (:foreground "orange" :weight bold))
-        ("FLAG_GATED" . (:foreground "orange" :weight bold))
-        ("SOMEDAY" . (:foreground "steelblue" :weight bold))
-        ("MAYBE" . (:foreground "steelblue" :weight bold))
-        ("AI" . (:foreground "red" :weight bold))
-        ("NEW" . (:foreground "orange" :weight bold))
-        ("RUNNING" . (:foreground "orange" :weight bold))
-        ("WORKED" . (:foreground "green" :weight bold))
-        ("FAILED" . (:foreground "red" :weight bold))
-        ("REFILED" . (:foreground "gray"))
-        ;; For publications
-        ("APPLIED" . (:foreground "orange" :weight bold))
-        ("ACCEPTED" . (:foreground "orange" :weight bold))
-        ("REJECTED" . (:foreground "red" :weight bold))
-        ("PUBLISHED" . (:foreground "green" :weight bold))
-        ;; Other stuff
-        ("ACTIVE" . (:foreground "darkgreen" :weight bold))
-        ))
-
-(setq org-priority-faces '((?A . (:foreground "OrangeRed" :weight bold))
-                           (?B . (:foreground "LightSteelBlue"))
-                           (?C . (:foreground "OliveDrab"))))
-
-(setq org-default-notes-file (org-relative-file "~/workspace/me/org/tasks.org"))
-
-(setq org-capture-templates
-      `(("t" "Task"
-         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Tasks")
-         "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
-         :clock-resume t)
-        ;;
-        ("i" "Idea"
-         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Ideas")
-         "* SOMEDAY %?\n%U\n\n%x"
-         :clock-resume t)
-        ;;
-        ("m" "Meeting"
-         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
-         "* %?  :MTG:\n%U\n%^{with}p"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("s" "Stand-up"
-         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
-         "* Stand-up  :MTG:\n%U\n\n%?"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("1" "1:1"
-         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
-         "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?"
-         :clock-in t
-         :clock-resume t)
-        ;;
-        ("p" "Talking Point"
-         entry (file+headline ,(org-relative-file "~/workspace/me/org/refile.org") "Talking Points")
-         "* %?  :TALK:\n%U\n%^{dowith}p"
-         :clock-keep t)
-        ;;
-        ("j" "Journal"
-         entry (file+olp+datetree ,(org-relative-file "~/workspace/me/org/journal.org"))
-         "* %?\n%U"
-         :clock-in t
-         :clock-resume t
-         :kill-buffer t)))
-
-;; show up to 2 levels for refile targets, in all agenda files
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
-(setq org-log-refile t)  ;; will add timestamp when refiled.
-
-;; from: http://doc.norang.ca/org-mode.html
-;; Exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets"
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-(setq org-refile-target-verify-function 'bh/verify-refile-target)
-
-(setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks 'invisible)
-
-(setq org-global-properties
-      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 4:00 8:00 16:00")))
-(setq org-columns-default-format
-      "%TODO %30ITEM %3PRIORITY %6Effort{:} %10DEADLINE")
-
-(defun org-get-first-agenda-file ()
-  (interactive)
-  (find-file (elt org-agenda-files 0)))
-(global-set-key [f12] 'org-get-first-agenda-file)
-; F12 on Mac OSX displays the dashboard....
-(global-set-key [C-f12] 'org-get-first-agenda-file)
-
-(setq org-agenda-custom-commands
-      '(("t" "Hot Today" ((agenda "" ((org-agenda-span 'day)))
-                          (tags-todo "-with={.+}/WAITING")
-                          (tags-todo "-with={.+}+TODO=\"STARTED\"")
-                          (tags-todo "/NEXT")))
-        ("T" "Team Today" ((agenda "" ((org-agenda-span 'day)))
-                           (tags-todo "with={.+}"
-                                    ((org-super-agenda-groups
-                                      '((:auto-property "with"))))
-                                    )))
-        ("r" "Recurring" ((tags "REGULAR")
-                          (tags-todo "/WAITING")
-                          (tags-todo "TODO=\"STARTED\"")
-                          (tags-todo "/NEXT")))
-        ("n" "Agenda and all TODO's" ((agenda "")
-                                      (alltodo "")))
-        ("N" "Next actions" tags-todo "-dowith={.+}/!-TASK-TODO"
-         ((org-agenda-todo-ignore-scheduled t)))
-        ("h" "Work todos" tags-todo "-dowith={.+}/!-TASK"
-         ((org-agenda-todo-ignore-scheduled t)))
-        ("H" "All work todos" tags-todo "-personal/!-TASK-CANCELLED"
-         ((org-agenda-todo-ignore-scheduled nil)))
-        ("A" "Work todos with doat or dowith" tags-todo
-         "dowith={.+}/!-TASK"
-         ((org-agenda-todo-ignore-scheduled nil)))
-
-        ("p" "Tasks with current WITH and WHERE"
-         ((tags-todo (paf-sec-replace-with-where "with={$WITH}" ".+")
-                     ((org-agenda-overriding-header
-                       (paf-sec-replace-with-where "Tasks with $WITH in $WHERE" "anyone" "any place"))
-                      (org-super-agenda-groups
-                       '((:name "" :pred paf-sec-limit-to-with-where)
-                         (:discard (:anything t)))))
-                     )))
-        ("j" "TODO dowith and TASK with"
-         ((org-sec-with-view "TODO dowith")
-          (org-sec-stuck-with-view "TALK with")
-          (org-sec-where-view "TODO doat")
-          (org-sec-assigned-with-view "TASK with")
-          (org-sec-stuck-with-view "STUCK with")
-          (todo "STARTED")))
-        ("J" "Interactive TODO dowith and TASK with"
-         ((org-sec-who-view "TODO dowith")))))
-
-(setq org-agenda-skip-deadline-prewarning-if-scheduled 2)
-
-(delight 'org-agenda-mode)
-
-;; Faces to make the calendar more colorful.
-(custom-set-faces
- '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
- '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
- '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold)))))
-
-(setq org-agenda-current-time-string ">>>>>>>>>> NOW <<<<<<<<<<")
-
-;; will refresh it only if already visible
-(run-at-time nil 180 'update-agenda-if-visible)
-;;(add-hook 'org-mode-hook
-;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
-
-(defun kiwon/org-agenda-redo-in-other-window ()
-  "Call org-agenda-redo function even in the non-agenda buffer."
-  (interactive)
-  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
-    (when agenda-window
-      (with-selected-window agenda-window (org-agenda-redo)))))
-
-(defun update-agenda-if-visible ()
-  (interactive)
-  (let ((buf (get-buffer "*Org Agenda*"))
-        wind)
-    (if buf
-        (org-agenda-redo))))
-
-(defun jump-to-org-agenda ()
-  (interactive)
-  (let ((buf (get-buffer "*Org Agenda*"))
-        wind)
-    (if buf
-        (if (setq wind (get-buffer-window buf))
-            (select-window wind)
-          (if (called-interactively-p 'any)
-              (progn
-                (select-window (display-buffer buf t t))
-                (org-fit-window-to-buffer)
-                (org-agenda-redo)
-                )
-            (with-selected-window (display-buffer buf)
-              (org-fit-window-to-buffer)
-              ;;(org-agenda-redo)
-              )))
-      (call-interactively 'org-agenda-list)))
-  ;;(let ((buf (get-buffer "*Calendar*")))
-  ;;  (unless (get-buffer-window buf)
-  ;;    (org-agenda-goto-calendar)))
-  )
-
-(defun paf/org-agenda-get-location()
-  "Gets the value of the LOCATION property"
-  (let ((loc (org-entry-get (point) "LOCATION")))
-    (if (> (length loc) 0)
-        loc
-      "")))
-
-(setq org-clock-into-drawer t)
-(setq org-log-into-drawer t)
-(setq org-clock-int-drawer "CLOCK")
-
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-
-;; Clock out when moving task to a done state
-(setq org-clock-out-when-done t)
-;; use pretty things for the clocktable
-(setq org-pretty-entities t)
-
-(org-mode-restart)
-
 (setq auth-sources '("~/.authinfo"))
 
 (use-package tj3-mode
@@ -1153,6 +626,8 @@ and the tangled file is compiled."
     (kill-buffer newbuff)
     )
   )
+
+
 
 (defun my-setup-indent (n)
   ;; java/c/c++
@@ -1909,6 +1384,9 @@ If given prefix arg ARG, skips markdown conversion."
  (define-key message-mode-map (kbd "C-c C-s") #'message-md-send)
  (define-key message-mode-map (kbd "C-c C-c") #'message-md-send-and-exit))
 
+(define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
+(define-key mu4e-view-mode-map    (kbd "C-c c") 'mu4e-org-store-and-capture)
+
 (use-package elfeed
   :ensure
   :config)
@@ -1928,3 +1406,531 @@ If given prefix arg ARG, skips markdown conversion."
 (use-package pandoc-mode
   :ensure)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+
+(use-package org
+  :ensure nil
+  :delight org-mode
+  :config
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . variable-pitch-mode)
+         (org-mode . org-indent-mode)))
+
+(require 'org-protocol)
+
+(use-package org-board
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c o") org-board-keymap))
+
+(defun paf/org-toggle-iimage-in-org ()
+  "display images in your org file"
+  (interactive)
+  (if (face-underline-p 'org-link)
+      (set-face-underline 'org-link nil)
+    (set-face-underline 'org-link t))
+  (iimage-mode 'toggle))
+
+(use-package iimage
+  :config
+  (add-to-list 'iimage-mode-image-regex-alist
+               (cons (concat "\\[\\[file:\\(~?" iimage-mode-image-filename-regex
+                             "\\)\\]")  1))
+  (add-hook 'org-mode-hook (lambda ()
+                             ;; display images
+                             (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
+                            )))
+
+(defcustom remote-org-directory "~/OrgFiles"
+  "Location of remove OrgFile directory, should you have one."
+  :type 'string
+  :group 'paf)
+(defun paf/open-remote-org-directory ()
+  (interactive)
+  (find-file remote-org-directory))
+
+(global-set-key (kbd "C-M-x r o") 'paf/open-remote-org-directory)
+
+(defun org-relative-file (filename)
+  "Compute an expanded absolute file path for org files"
+  (expand-file-name filename org-directory))
+
+(defun my-org-inherited-no-file-tags ()
+  (let ((tags (org-entry-get nil "ALLTAGS" 'selective))
+        (ltags (org-entry-get nil "TAGS")))
+    (mapc (lambda (tag)
+            (setq tags
+                  (replace-regexp-in-string (concat tag ":") "" tags)))
+          (append org-file-tags (when ltags (split-string ltags ":" t))))
+    (if (string= ":" tags) nil tags)))
+
+(setq org-babel-sh-command "bash")
+
+(setq org-roam-capture-templates
+      `(("m" "Meeting" entry (function org-roam--capture-get-point)
+             "* %?\n%U\n%^{with}\n"
+             :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
+             :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
+             )))
+
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-iswitchb)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-<up>") 'org-move-subtree-up)
+            (local-set-key (kbd "C-<down>") 'org-move-subtree-down)
+            (local-set-key (kbd "C-c C-l") 'org-insert-link)))
+
+(setq org-hide-leading-stars t)
+
+;; auto log a clock when task is closed
+(setq org-log-done t)
+
+(setq org-startup-indented t)
+(setq org-startup-folded t)
+(setq org-ellipsis "...")
+(setq org-hide-emphasis-markers t)
+
+(let* ((variable-tuple
+          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (headline           `(:inherit default :weight bold :foreground "#F5F5F5")))
+
+    (custom-theme-set-faces
+     'user
+     `(org-level-8 ((t (,@headline ,@variable-tuple))))
+     `(org-level-7 ((t (,@headline ,@variable-tuple))))
+     `(org-level-6 ((t (,@headline ,@variable-tuple))))
+     `(org-level-5 ((t (,@headline ,@variable-tuple))))
+     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.0))))
+     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.1 :foreground "#FEB236"))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.2 :foreground "burleywood"))))
+     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.3))))
+     `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :foreground "#D52349" :height 1000 :overline t :box nil))))
+ '(fixed-pitch ((t (:family "Fira Code" :height 140))))
+ '(font-lock-comment-face ((t (:foreground "dim gray" :slant oblique))))
+ '(highlight ((t (:background "forest green"))))
+ '(magit-branch-current ((t (:foreground "red" :box 1 :weight bold :height 2.0))))
+ '(magit-branch-local ((t (:foreground "tomato" :weight bold))))
+ '(magit-branch-remote ((t (:foreground "yellow"))))
+ '(magit-diff-context-highlight ((t (:background "#ffffff" :foreground "dim gray"))))
+ '(magit-diff-file-heading-highlight ((t (:background "#ffffff" :foreground "black" :weight bold))))
+ '(magit-diff-hunk-heading ((t (:background "gainsboro" :foreground "tomato"))))
+ '(magit-diff-hunk-heading-highlight ((t (:background "DarkGoldenrod3" :foreground "black"))))
+ '(magit-diff-revision-summary ((t (:inherit magit-diff-hunk-heading :foreground "black"))))
+ '(magit-diff-revision-summary-highlight ((t (:foreground "gold"))))
+ '(magit-section-heading-selection ((t (:foreground "dark red" :weight bold))))
+ '(magit-section-highlight ((t (:background "tan4"))))
+ '(markdown-code-face ((t (:background "gray10"))))
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
+ '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
+ '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold))))
+ '(org-block ((t (:inherit fixed-pitch :foreground "light gray"))))
+ '(org-block-background ((t (:background "gray10"))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
+ '(org-block-end-line ((t (:underline "#A7A6AA" :foreground "GreenYellow" :background "gray30" :extend t))))
+ '(org-bold ((t (:foreground "#d52349"))))
+ '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
+ '(org-document-info ((t (:foreground "dark orange"))))
+ '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#F5F5F5" :family "Sans Serif" :height 1.5 :underline nil))))
+ '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#F5F5F5" :height 1.3))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "seashell" :height 1.2))))
+ '(org-level-3 ((t (:inherit default :weight bold :height 1.1 :foreground "#FEB236"))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#F5F5F5"))))
+ '(org-link ((t (:inherit fixed-pitch :foreground "royal blue" :underline t))))
+ '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-property-value ((t (:inherit fixed-pitch))) t)
+ '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+ '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch) :foreground "tomato"))))
+ '(org-column ((t (:inherit fixed-pitch))))
+ '(region ((t (:background "forest green")))))
+
+(use-package deft
+  :ensure t)
+(use-package avy
+  :ensure t)
+
+(use-package zetteldeft
+  :ensure t
+  :after (org deft avy)
+
+  :config
+  (setq deft-extensions '("org" "md" "txt"))
+  (setq deft-directory (org-relative-file "Zettelkasten"))
+  (setq deft-recursive t)
+
+  :bind (("C-c z d" . deft)
+         ("C-c z D" . zetteldeft-deft-new-search)
+         ("C-c z R" . deft-refresh)
+         ("C-c z s" . zetteldeft-search-at-point)
+         ("C-c z c" . zetteldeft-search-current-id)
+         ("C-c z f" . zetteldeft-follow-link)
+         ("C-c z F" . zetteldeft-avy-file-search-ace-window)
+         ("C-c z l" . zetteldeft-avy-link-search)
+         ("C-c z t" . zetteldeft-avy-tag-search)
+         ("C-c z T" . zetteldeft-tag-buffer)
+         ("C-c z i" . zetteldeft-find-file-id-insert)
+         ("C-c z I" . zetteldeft-find-file-full-title-insert)
+         ("C-c z o" . zetteldeft-find-file)
+         ("C-c z n" . zetteldeft-new-file)
+         ("C-c z N" . zetteldeft-new-file-and-link)
+         ("C-c z r" . zetteldeft-file-rename))
+)
+
+(use-package plantuml-mode
+ :ensure t
+ :config
+  (setq plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
+  (setq org-plantuml-jar-path "~/workspace/me/myblog/content/downloads/plantuml.jar")
+  ;; Let us edit PlantUML snippets in plantuml-mode within orgmode
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  ;; make it load this language (for export ?)
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+  ;; Enable plantuml-mode for PlantUML files
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
+
+(setq org-link-abbrev-alist
+      '(("b" . "http://b/")
+        ("go" . "http://go/")
+        ("cl" . "http://cr/")))
+
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+(setq org-confirm-babel-evaluate 'nil) ; Don't ask before executing
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (R . t)
+   (dot . t)
+   (emacs-lisp . t)
+   (gnuplot . t)
+   (python . t)
+   ;;(sh . t)
+   (latex . t)
+   (shell . t)
+  ))
+
+(use-package ox-md
+  :defer)
+
+(use-package ox-beamer
+  :defer)
+
+(use-package ox-reveal
+  :ensure t
+  :after (htmlize)
+  :config
+  (setq org-reveal-root (expand-file-name "~/reveal.js")))
+
+(use-package htmlize
+  :ensure t)
+
+(use-package ox-odt
+  :defer)
+
+(use-package ox-taskjuggler
+  :defer)
+
+(use-package ox-confluence
+  :defer)
+
+(setq org-agenda-files   (list "~/workspace/me/org/")
+      org-log-done 'time
+)
+
+(use-package org-super-agenda
+  :ensure t
+  :config
+  (org-super-agenda-mode t))
+
+(use-package org-clock-convenience
+  :ensure t
+  :bind (:map org-agenda-mode-map
+           ("<S-right>" . org-clock-convenience-timestamp-up)
+           ("<S-left>" . org-clock-convenience-timestamp-down)
+           ("[" . org-clock-convenience-fill-gap)
+           ("]" . org-clock-convenience-fill-gap-both)))
+
+(use-package org-habit
+  :delight
+  :config
+  (setq org-habit-graph-column 38)
+  (setq org-habit-preceding-days 35)
+  (setq org-habit-following-days 10)
+  (setq org-habit-show-habits-only-for-today nil))
+
+(use-package paf-secretary
+  :load-path "~/Emacs"
+  :bind (("\C-cw" . paf-sec-set-with)
+         ("\C-cW" . paf-sec-set-where)
+         ("\C-cj" . paf-sec-tag-entry))
+  :config
+  (setq paf-sec-me "paf")
+  (setq org-tag-alist '(("PRJ" . ?p)
+                        ("DESIGNDOC" . ?D)
+                        ("Milestone" . ?m)
+                        ("DESK" . ?d)
+                        ("HOME" . ?h)
+                        ("VC" . ?v))))
+
+(use-package org-duration
+  :config
+  (setq org-duration-units
+        `(("min" . 1)
+          ("h" . 60)
+          ("d" . ,(* 60 8))
+          ("w" . ,(* 60 8 5))
+          ("m" . ,(* 60 8 5 4))
+          ("y" . ,(* 60 8 5 4 10)))
+        )
+  (org-duration-set-regexps))
+
+(setq org-todo-keywords
+      '((sequence "TODO(t!)" "WORKING(w!)" "|" "DONE(d!)" "CANCELLED(C@)" "DEFERRED(D@)" "SOMEDAY(S!)" "FAILED(F!)" "REFILED(R!)")
+        (sequence "TASK(m!)" "ACTIVE" "|" "DONE(d!)" "CANCELLED(C@)" )))
+
+(setq org-tags-exclude-from-inheritance '("PRJ" "REGULAR")
+      org-use-property-inheritance '("PRIORITY")
+      org-stuck-projects '("+PRJ/-DONE-CANCELLED"
+                           ;; it is considered stuck if there is no next action
+                           (;"TODO"
+                            "WORKING" "ACTIVE" "TASK") ()))
+
+(setq org-todo-keyword-faces
+      '(
+        ("TODO" . (:foreground "GhostWhite" :weight bold))
+        ("TASK" . (:foreground "steelblue" :weight bold))
+        ("NEXT" . (:foreground "red" :weight bold))
+        ("STARTED" . (:foreground "green" :weight bold))
+        ("WAITING" . (:foreground "orange" :weight bold))
+        ("FLAG_GATED" . (:foreground "orange" :weight bold))
+        ("SOMEDAY" . (:foreground "steelblue" :weight bold))
+        ("MAYBE" . (:foreground "steelblue" :weight bold))
+        ("AI" . (:foreground "red" :weight bold))
+        ("NEW" . (:foreground "orange" :weight bold))
+        ("RUNNING" . (:foreground "orange" :weight bold))
+        ("WORKED" . (:foreground "green" :weight bold))
+        ("FAILED" . (:foreground "red" :weight bold))
+        ("REFILED" . (:foreground "gray"))
+        ;; For publications
+        ("APPLIED" . (:foreground "orange" :weight bold))
+        ("ACCEPTED" . (:foreground "orange" :weight bold))
+        ("REJECTED" . (:foreground "red" :weight bold))
+        ("PUBLISHED" . (:foreground "green" :weight bold))
+        ;; Other stuff
+        ("ACTIVE" . (:foreground "darkgreen" :weight bold))
+        ))
+
+(setq org-priority-faces '((?A . (:foreground "OrangeRed" :weight bold))
+                           (?B . (:foreground "LightSteelBlue"))
+                           (?C . (:foreground "OliveDrab"))))
+
+(setq org-default-notes-file (org-relative-file "~/workspace/me/org/tasks.org"))
+
+(setq org-capture-templates
+      `(("t" "Task"
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Tasks")
+         "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
+         :clock-resume t)
+        ;;
+        ("i" "Idea"
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Ideas")
+         "* SOMEDAY %?\n%U\n\n%x"
+         :clock-resume t)
+        ;;
+        ("m" "Meeting"
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/meeting.org") "Meetings")
+         "* %?  :MTG:\n%U\n%^{with}p")
+
+        ;;
+        ("s" "Stand-up"
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/tasks.org") "Meetings")
+         "* Stand-up  :MTG:\n%U\n\n%?")
+
+        ;;
+        ("1" "1:1"
+         entry (file+headline ,(org-relative-file "~/workspace/me/org/meeting.org") "Meetings")
+         "* 1:1 %^{With}  :MTG:\n%U\n:PROPERTIES:\n:with: %\\1\n:END:\n\n%?")
+
+        ;;
+        ("e" "Emails" entry (file+headline "~/workspace/me/org/tasks.org" "Emails")
+         "* TODO %:fromname: %a %?\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))")
+        ;;
+        ("j" "Jobs" entry (file+headline "~/workspace/me/org/jobs.org" "Interviews")
+         "* TODO %:fromname: %a %?\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))")
+        ;;
+        ("j" "Journal"
+         entry (file+olp+datetree ,(org-relative-file "~/workspace/me/org/journal.org"))
+         "* %?\n%U"
+         :clock-in t
+         :clock-resume t
+         :kill-buffer t)))
+
+;; show up to 2 levels for refile targets, in all agenda files
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
+(setq org-log-refile t)  ;; will add timestamp when refiled.
+
+;; from: http://doc.norang.ca/org-mode.html
+;; Exclude DONE state tasks from refile targets
+(defun bh/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets"
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+(setq org-refile-target-verify-function 'bh/verify-refile-target)
+
+(setq org-enforce-todo-dependencies t)
+(setq org-agenda-dim-blocked-tasks 'invisible)
+
+(setq org-global-properties
+      '(("Effort_ALL". "0 0:10 0:30 1:00 2:00 4:00 8:00 16:00")))
+(setq org-columns-default-format
+      "%TODO %30ITEM %3PRIORITY %6Effort{:} %10DEADLINE")
+
+(defun org-get-first-agenda-file ()
+  (interactive)
+  (find-file (elt org-agenda-files 0)))
+(global-set-key [f12] 'org-get-first-agenda-file)
+; F12 on Mac OSX displays the dashboard....
+(global-set-key [C-f12] 'org-get-first-agenda-file)
+
+(setq org-agenda-custom-commands
+      '(("t" "Hot Today" ((agenda "" ((org-agenda-span 'day)))
+                          (tags-todo "-with={.+}/WAITING")
+                          (tags-todo "-with={.+}+TODO=\"STARTED\"")
+                          (tags-todo "/NEXT")))
+        ("T" "Team Today" ((agenda "" ((org-agenda-span 'day)))
+                           (tags-todo "with={.+}"
+                                    ((org-super-agenda-groups
+                                      '((:auto-property "with"))))
+                                    )))
+        ("r" "Recurring" ((tags "REGULAR")
+                          (tags-todo "/WAITING")
+                          (tags-todo "TODO=\"STARTED\"")
+                          (tags-todo "/NEXT")))
+        ("n" "Agenda and all TODO's" ((agenda "")
+                                      (alltodo "")))
+        ("N" "Next actions" tags-todo "-dowith={.+}/!-TASK-TODO"
+         ((org-agenda-todo-ignore-scheduled t)))
+        ("h" "Work todos" tags-todo "-dowith={.+}/!-TASK"
+         ((org-agenda-todo-ignore-scheduled t)))
+        ("H" "All work todos" tags-todo "-personal/!-TASK-CANCELLED"
+         ((org-agenda-todo-ignore-scheduled nil)))
+        ("A" "Work todos with doat or dowith" tags-todo
+         "dowith={.+}/!-TASK"
+         ((org-agenda-todo-ignore-scheduled nil)))
+
+        ("p" "Tasks with current WITH and WHERE"
+         ((tags-todo (paf-sec-replace-with-where "with={$WITH}" ".+")
+                     ((org-agenda-overriding-header
+                       (paf-sec-replace-with-where "Tasks with $WITH in $WHERE" "anyone" "any place"))
+                      (org-super-agenda-groups
+                       '((:name "" :pred paf-sec-limit-to-with-where)
+                         (:discard (:anything t)))))
+                     )))
+        ("j" "TODO dowith and TASK with"
+         ((org-sec-with-view "TODO dowith")
+          (org-sec-stuck-with-view "TALK with")
+          (org-sec-where-view "TODO doat")
+          (org-sec-assigned-with-view "TASK with")
+          (org-sec-stuck-with-view "STUCK with")
+          (todo "STARTED")))
+        ("J" "Interactive TODO dowith and TASK with"
+         ((org-sec-who-view "TODO dowith")))))
+
+(setq org-agenda-skip-deadline-prewarning-if-scheduled 2)
+
+(delight 'org-agenda-mode)
+
+;; Faces to make the calendar more colorful.
+(custom-set-faces
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "yellow" :weight bold))))
+ '(org-agenda-date ((t (:inherit org-agenda-structure :background "pale green" :foreground "black" :weight bold))))
+ '(org-agenda-date-weekend ((t (:inherit org-agenda-date :background "light blue" :weight bold)))))
+
+(setq org-agenda-current-time-string ">>>>>>>>>> NOW <<<<<<<<<<")
+
+;; will refresh it only if already visible
+(run-at-time nil 180 'update-agenda-if-visible)
+;;(add-hook 'org-mode-hook
+;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
+
+(defun kiwon/org-agenda-redo-in-other-window ()
+  "Call org-agenda-redo function even in the non-agenda buffer."
+  (interactive)
+  (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+    (when agenda-window
+      (with-selected-window agenda-window (org-agenda-redo)))))
+
+(defun update-agenda-if-visible ()
+  (interactive)
+  (let ((buf (get-buffer "*Org Agenda*"))
+        wind)
+    (if buf
+        (org-agenda-redo))))
+
+(defun jump-to-org-agenda ()
+  (interactive)
+  (let ((buf (get-buffer "*Org Agenda*"))
+        wind)
+    (if buf
+        (if (setq wind (get-buffer-window buf))
+            (select-window wind)
+          (if (called-interactively-p 'any)
+              (progn
+                (select-window (display-buffer buf t t))
+                (org-fit-window-to-buffer)
+                (org-agenda-redo)
+                )
+            (with-selected-window (display-buffer buf)
+              (org-fit-window-to-buffer)
+              ;;(org-agenda-redo)
+              )))
+      (call-interactively 'org-agenda-list)))
+  ;;(let ((buf (get-buffer "*Calendar*")))
+  ;;  (unless (get-buffer-window buf)
+  ;;    (org-agenda-goto-calendar)))
+  )
+
+(defun paf/org-agenda-get-location()
+  "Gets the value of the LOCATION property"
+  (let ((loc (org-entry-get (point) "LOCATION")))
+    (if (> (length loc) 0)
+        loc
+      "")))
+
+(setq org-clock-into-drawer t)
+(setq org-log-into-drawer t)
+(setq org-clock-int-drawer "CLOCK")
+
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+;; Clock out when moving task to a done state
+(setq org-clock-out-when-done t)
+;; use pretty things for the clocktable
+(setq org-pretty-entities t)
+
+(org-mode-restart)

@@ -34,7 +34,7 @@ and the tangled file is compiled."
 (custom-set-variables '(ad-redefinition-action (quote accept)))
 
 (use-package all-the-icons
-  :ensure)
+  :if (display-graphic-p))
 
 (use-package rainbow-mode
   :ensure t
@@ -435,6 +435,86 @@ and the tangled file is compiled."
  'org-babel-load-languages
  '((restclient . t)))
 
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (XXX-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((css-mode-hook . lsp-deferred)
+         (html-mode-hook . lsp-deferred)
+         (web-mode-hook . lsp-deferred)
+         (js2-mode-hook . lsp-deferred)
+         (c++-mode-hook . lsp-deferred)
+         (c-mode-hook . lsp-deferred)
+         (java-mode-hook . lsp-deferred)
+         (lsp-mode-hook . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred)
+  :bind (:map lsp-mode-map
+              ("M-<RET>" . lsp-execute-code-action)))
+
+(use-package lsp-ui
+  :ensure t
+  :defer t
+  :config
+  (setq lsp-ui-sideline-enable nil)
+  :hook (lsp-mode-hook . lsp-ui-mode)
+  :bind (:map lsp-ui-mode-map
+              ("C-c i" . lsp-ui-imenu)))
+
+;; LSP integration with treemacs
+
+(use-package lsp-treemacs
+  :ensure t
+  :defer t
+  :after lsp)
+
+;; Debugger
+
+(use-package dap-mode
+  :ensure t
+  :defer t
+  :after lsp-mode
+  :config
+  (dap-auto-configure-mode)
+  :bind (:map dap-mode-map
+              ("C-c C-c" . dap-java-debug)
+              ("C-c R" . dap-java-run-test-class)
+              ("C-c d" . dap-java-debug-test-method)
+              ("C-c r" . dap-java-run-test-method)))
+
+;; Requires lsp-mode
+
+(use-package lsp-java
+  :ensure t
+  :defer t
+  :after lsp
+  :config
+  (setq lsp-java-format-on-type-enabled nil)
+  (defun my/java-mode-hook ()
+    (setq c-basic-offset 2
+          c-label-offset 0
+          tab-width 2
+          indent-tabs-mode nil
+          require-final-newline nil))
+  :hook (java-mode-hook . (lsp my/java-mode-hook)))
+
+;; Requires dap-mode
+
+(use-package dap-java
+  :ensure nil
+  :defer t
+  :after (lsp-java))
+
 (use-package writegood-mode
   :ensure
   :config)
@@ -627,7 +707,92 @@ and the tangled file is compiled."
     )
   )
 
+(use-package lsp-java
+  :after java
+  :config
+  (add-hook 'java-mode-hook #'lsp))
 
+(use-package projectile)
+(use-package flycheck)
+(use-package lsp-mode :hook ((lsp-mode . lsp-enable-which-key-integration)))
+(use-package company)
+(use-package lsp-ui)
+(use-package which-key :config (which-key-mode))
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+(use-package dap-java :ensure nil)
+(use-package lsp-treemacs)
+
+;;; lsp-java-lombok.el --- Description -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) 2021 Kevin Ziegler
+;;
+;; Author: Kevin Ziegler <https://github.com/kevinziegler>
+;; Maintainer: Kevin Ziegler
+;; Created: February 12, 2021
+;; Modified: February 12, 2021
+;; Version: 0.0.1
+;; Homepage: https://github.com/kevinziegler/lsp-java-lombok
+;; Package-Requires: ((emacs "24.3"))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;  Helper library for setting up Lombok with LSP-java
+;;
+;;; Code:
+(require 'lsp-java)
+
+(defvar lsp-java-lombok/enabled nil
+  "Indicates the LSP server should be started with Lombok.")
+
+(defvar lsp-java-lombok/version nil
+  "When non-nil, use the specified Lombok version, otherwise use the latest.")
+
+(defvar lsp-java-lombok/jar-url-base "https://projectlombok.org/downloads/"
+  "The base path to download Lombok jars from.")
+
+(defvar lsp-java-lombok/dir user-emacs-directory
+  "The path on disk where lombok jars are saved.")
+
+(defun lsp-java-lombok/jar-file ()
+  "Get the filename for the Lombok jar."
+  (concat "lombok"
+          (when lsp-java-lombok/version "-")
+          lsp-java-lombok/version
+          ".jar"))
+
+(defun lsp-java-lombok/jar-path ()
+  "Generate the path on disk for the Lombok jar."
+  (concat user-emacs-directory (lsp-java-lombok/jar-file)))
+
+(defun lsp-java-lombok/download-jar ()
+  "Download the latest lombok jar for use with LSP."
+  (let* ((lombok-url (url-generic-parse-url lsp-java-lombok/jar-url-base))
+         (base-path (file-name-as-directory (url-filename lombok-url)))
+         (file-path (concat base-path (lsp-java-lombok/jar-file))))
+    (setf (url-filename lombok-url) file-path)
+    (url-copy-file lombok-url (lsp-java-lombok/jar-path))))
+
+(defun lsp-java-lombok/append-vmargs ()
+  "Apply lombok args to lsp-java-vmargs."
+  (setq lsp-java-vmargs
+        (append lsp-java-vmargs
+                (concat "-javaagent:" (lsp-java-lombok/jar-path)))))
+
+(defun lsp-java-lombok/setup ()
+  "Download Lombok if it hasn't been downloaded already."
+  (when (not (file-exists-p (lsp-java-lombok/jar-path)))
+    (message "Could not find lombok for lsp-java.  Downloading...")
+    (lsp-java-lombok/download-jar)))
+
+(defun lsp-java-lombok/init ()
+  "Initialize lsp-java-lombok."
+  (when lsp-java-lombok/enabled
+    (lsp-java-lombok/setup)
+    (lsp-java-lombok/append-vmargs)))
+
+(provide 'lsp-java-lombok)
+;;; lsp-java-lombok.el ends here
 
 (defun my-setup-indent (n)
   ;; java/c/c++
@@ -1668,7 +1833,7 @@ If given prefix arg ARG, skips markdown conversion."
 
 (setq org-agenda-files   (list "~/workspace/me/org/")
       org-log-done 'time
-)
+      )
 
 (use-package org-super-agenda
   :ensure t

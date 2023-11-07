@@ -15,7 +15,7 @@ a bit, confusing. So I'm to take his copy and rearrange it so it fits
 my way of thinking. I will not change the fundamental things such as
 =tangle=, but will clarify what the packages and configs are about.
 
-* the idea
+* The idea
 
 This idea is actually a bit chicken-egg: in order to tangle, you must
 first fire up emacs, then convert this org to =.el=, then load it back
@@ -33,7 +33,7 @@ The key here are relying on two things:
    end of it, it will call to [[#recompile-packages][recompile packages]], thus kicking off the
    entire download, compiling, installation and configuration.
 
-* deps
+* Deps
 
 There are some host packages/tools you need to install. These are not
 hard dependencies, but really, it works better that way if they are there.
@@ -64,7 +64,7 @@ I'll simply keep a list:
 7. [[https://packages.ubuntu.com/search?keywords=mu4e][mu4e]] & [[https://packages.ubuntu.com/search?keywords=isync][isync]] (this give you =mbsync=)
 8. [[https://github.com/mguessan/davmail][davmail]]
 
-* clean start
+* Clean start
 
 *ASSUMPTION*:
 
@@ -121,7 +121,7 @@ Put this in the =~/Emacs/emacs_setup.el=, and viola, it will regnerate itself!
 (byte-compile-file (concat config_base ".el")) ; finally byte-compile it
 #+END_SRC
 
-* reset
+* Reset
 
 Reset takes two steps, but you can do either or both, depending on
 what you are trying to reset.
@@ -152,7 +152,7 @@ or simply =C-x C-e= at the end of that line.
 *Note* that by setting =:tangle no=, this piece of code will be included
 into the =.el= file. So it stays inside this org. Nice.
 
-* initialize emacs
+* Initialize emacs
 
 ** info header
 
@@ -244,7 +244,7 @@ init file as soon as I save it.
 (custom-set-variables '(ad-redefinition-action (quote accept)))
 #+END_SRC
 
-* base packages
+* Base packages
 
 There are some packages you'd better load prior to everything else, so
 that when other packages are being configured, they are already
@@ -256,7 +256,7 @@ Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
 
 #+BEGIN_SRC emacs-lisp
   (use-package all-the-icons
-    :ensure)
+    :if (display-graphic-p))
 #+END_SRC
 
 You would have to run =M-x all-the-icons-install-fonts= manually at
@@ -293,7 +293,7 @@ Give me a hint when I'm entering a keybinding:
   (which-key-mode)
 #+END_SRC
 
-* global stuff
+* Global stuff
 
 Some global settings such as line number. Well, just about everything
 of emacs are global in a sense, say, a package, will affect the look
@@ -477,7 +477,7 @@ work. Otherwise, some utf-8 symbols will be scrambled.
 (set-clipboard-coding-system 'utf-8)
 #+END_SRC
 
-* font, theme
+* Font, theme
 
 The whole point of using emacs is that I like the user experience, and
 a big part of it is the color and look. There are too many ways to
@@ -1103,6 +1103,90 @@ Then wrap it w/ this, you can then embed restcall in org!
  '((restclient . t)))
 #+END_SRC
 
+** lsp
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "C-c l")
+    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+           (XXX-mode . lsp)
+           ;; if you want which-key integration
+           (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+
+  (use-package lsp-mode
+    :ensure t
+    :defer t
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :hook ((css-mode-hook . lsp-deferred)
+           (html-mode-hook . lsp-deferred)
+           (web-mode-hook . lsp-deferred)
+           (js2-mode-hook . lsp-deferred)
+           (c++-mode-hook . lsp-deferred)
+           (c-mode-hook . lsp-deferred)
+           (java-mode-hook . lsp-deferred)
+           (lsp-mode-hook . lsp-enable-which-key-integration))
+    :commands (lsp lsp-deferred)
+    :bind (:map lsp-mode-map
+                ("M-<RET>" . lsp-execute-code-action)))
+
+  (use-package lsp-ui
+    :ensure t
+    :defer t
+    :config
+    (setq lsp-ui-sideline-enable nil)
+    :hook (lsp-mode-hook . lsp-ui-mode)
+    :bind (:map lsp-ui-mode-map
+                ("C-c i" . lsp-ui-imenu)))
+
+  ;; LSP integration with treemacs
+
+  (use-package lsp-treemacs
+    :ensure t
+    :defer t
+    :after lsp)
+
+  ;; Debugger
+
+  (use-package dap-mode
+    :ensure t
+    :defer t
+    :after lsp-mode
+    :config
+    (dap-auto-configure-mode)
+    :bind (:map dap-mode-map
+                ("C-c C-c" . dap-java-debug)
+                ("C-c R" . dap-java-run-test-class)
+                ("C-c d" . dap-java-debug-test-method)
+                ("C-c r" . dap-java-run-test-method)))
+
+  ;; Requires lsp-mode
+
+  (use-package lsp-java
+    :ensure t
+    :defer t
+    :after lsp
+    :config
+    (setq lsp-java-format-on-type-enabled nil)
+    (defun my/java-mode-hook ()
+      (setq c-basic-offset 2
+            c-label-offset 0
+            tab-width 2
+            indent-tabs-mode nil
+            require-final-newline nil))
+    :hook (java-mode-hook . (lsp my/java-mode-hook)))
+
+  ;; Requires dap-mode
+
+  (use-package dap-java
+    :ensure nil
+    :defer t
+    :after (lsp-java))
+#+end_src
+
 ** languages
 
 These are minor modes to handle programming language specifics which
@@ -1593,6 +1677,100 @@ Ah, the one language I promised myself not to learn. But finally, I read about
 Java and Spring. It's just, that.
 
 #+begin_src emacs-lisp
+  (use-package lsp-java
+    :after java
+    :config
+    (add-hook 'java-mode-hook #'lsp))
+#+end_src
+
+Some additional packages according to [[https://github.com/emacs-lsp/lsp-java][this]]:
+
+#+begin_src emacs-lisp
+  (use-package projectile)
+  (use-package flycheck)
+  (use-package lsp-mode :hook ((lsp-mode . lsp-enable-which-key-integration)))
+  (use-package company)
+  (use-package lsp-ui)
+  (use-package which-key :config (which-key-mode))
+  (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+  (use-package dap-java :ensure nil)
+  (use-package lsp-treemacs)
+#+end_src
+
+**** lombok
+
+#+begin_src emacs-lisp
+  ;;; lsp-java-lombok.el --- Description -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyright (C) 2021 Kevin Ziegler
+  ;;
+  ;; Author: Kevin Ziegler <https://github.com/kevinziegler>
+  ;; Maintainer: Kevin Ziegler
+  ;; Created: February 12, 2021
+  ;; Modified: February 12, 2021
+  ;; Version: 0.0.1
+  ;; Homepage: https://github.com/kevinziegler/lsp-java-lombok
+  ;; Package-Requires: ((emacs "24.3"))
+  ;;
+  ;; This file is not part of GNU Emacs.
+  ;;
+  ;;; Commentary:
+  ;;  Helper library for setting up Lombok with LSP-java
+  ;;
+  ;;; Code:
+  (require 'lsp-java)
+
+  (defvar lsp-java-lombok/enabled nil
+    "Indicates the LSP server should be started with Lombok.")
+
+  (defvar lsp-java-lombok/version nil
+    "When non-nil, use the specified Lombok version, otherwise use the latest.")
+
+  (defvar lsp-java-lombok/jar-url-base "https://projectlombok.org/downloads/"
+    "The base path to download Lombok jars from.")
+
+  (defvar lsp-java-lombok/dir user-emacs-directory
+    "The path on disk where lombok jars are saved.")
+
+  (defun lsp-java-lombok/jar-file ()
+    "Get the filename for the Lombok jar."
+    (concat "lombok"
+            (when lsp-java-lombok/version "-")
+            lsp-java-lombok/version
+            ".jar"))
+
+  (defun lsp-java-lombok/jar-path ()
+    "Generate the path on disk for the Lombok jar."
+    (concat user-emacs-directory (lsp-java-lombok/jar-file)))
+
+  (defun lsp-java-lombok/download-jar ()
+    "Download the latest lombok jar for use with LSP."
+    (let* ((lombok-url (url-generic-parse-url lsp-java-lombok/jar-url-base))
+           (base-path (file-name-as-directory (url-filename lombok-url)))
+           (file-path (concat base-path (lsp-java-lombok/jar-file))))
+      (setf (url-filename lombok-url) file-path)
+      (url-copy-file lombok-url (lsp-java-lombok/jar-path))))
+
+  (defun lsp-java-lombok/append-vmargs ()
+    "Apply lombok args to lsp-java-vmargs."
+    (setq lsp-java-vmargs
+          (append lsp-java-vmargs
+                  (concat "-javaagent:" (lsp-java-lombok/jar-path)))))
+
+  (defun lsp-java-lombok/setup ()
+    "Download Lombok if it hasn't been downloaded already."
+    (when (not (file-exists-p (lsp-java-lombok/jar-path)))
+      (message "Could not find lombok for lsp-java.  Downloading...")
+      (lsp-java-lombok/download-jar)))
+
+  (defun lsp-java-lombok/init ()
+    "Initialize lsp-java-lombok."
+    (when lsp-java-lombok/enabled
+      (lsp-java-lombok/setup)
+      (lsp-java-lombok/append-vmargs)))
+
+  (provide 'lsp-java-lombok)
+  ;;; lsp-java-lombok.el ends here
 
 #+end_src
 
@@ -1662,7 +1840,7 @@ So, to enfore this on some modes:
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
 #+END_SRC
 
-* buffers
+* Buffers
 
 There are three concepts seem to me: desktop, window config, and buffers.
 
@@ -1814,7 +1992,7 @@ Setup the visual cues about the current editing buffer
   (setq-default transient-mark-mode t)  ;; highlight selection
 #+END_SRC
 
-* editing
+* Editing
 
 The heart of editor is, well, editing. Many things are determining the
 experience. Here are the ones I use to make editing quicker, easier,
@@ -2142,7 +2320,7 @@ take effect on all of them.
  '(ediff-split-window-function 'split-window-horizontally))
 #+end_src
 
-* navigate file & dir
+* Navigate file & dir
 
 I'm not quite used to using emacs as file manager yet. To me, it's
 much easier to just start a shell and type.
@@ -3615,9 +3793,9 @@ Part 3 of org, managing TODOs.
 *** where are my agenda files
 
 #+begin_src emacs-lisp
-(setq org-agenda-files   (list "~/workspace/me/org/")
-      org-log-done 'time
-)
+  (setq org-agenda-files   (list "~/workspace/me/org/")
+        org-log-done 'time
+        )
 #+end_src
 
 *** by packages

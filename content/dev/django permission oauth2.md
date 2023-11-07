@@ -262,7 +262,7 @@ super set of `D`.
 
 We code name them as `ABCDE`. So, how to control who can do what?
 
-| Permission                   | Anon can use | Can Read      | Can Write     | Enforce Model Permission |
+| DRF Permission                   | Anon can use | Can Read      | Can Write     | Enforce Model Permission |
 |------------------------------|--------------|---------------|---------------|--------------------------|
 | AllowAny                     | yes          | A,B           | A,B           | none                     |
 | IsAuthenticated              | no           | B             | B             | none                     |

@@ -1,5 +1,7 @@
 @import "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap";
 @import "https://fonts.googleapis.com/css2?family=Mitr:wght@500&family=Source+Sans+Pro:wght@400&display=swap";
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@500&family=Montserrat:wght@900&family=Source+Sans+Pro:wght@400&family=Raleway:wght@900&family=Ubuntu+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&family=Noto+Serif+SC&family=Roboto&display=swap");
 /* Customize Bootstrap default CSS
    -------------------------------------------------- */
 /* Lastly, apply responsive CSS fixes as necessary */
@@ -219,8 +221,16 @@ body .footer-copyright {
   border-color: #ea6153;
   background-color: #ea6153;
 }
-#content #article-content li {
-  list-style-type: "-";
+#content #article-content ul li {
+  list-style-type: tibetan;
+}
+#content #article-content li:not(:last-child) {
+  margin-bottom: 0em;
+}
+#content #article-content li::marker {
+  color: #636472;
+  font-weight: bold;
+  background-color: #323232;
 }
 #content #sth h2 {
   border-bottom: none;

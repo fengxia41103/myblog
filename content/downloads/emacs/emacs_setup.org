@@ -2691,7 +2691,7 @@ work for some reason!
 
 #+begin_src emacs-lisp
   (custom-set-faces
-   '(mu4e-header-highlight-face ((t (:foreground "tomato" :weight bold))))
+   '(mu4e-header-highlight-face ((t (:foreground "tomato" :weight bold :overline t :underline t))))
    )
 #+end_src
 

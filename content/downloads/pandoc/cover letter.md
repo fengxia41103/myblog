@@ -1,14 +1,14 @@
 If you are looking for a candidate with strong software development
-experience and research capability solving complex
-problems, look no further.
+experience and research capability solving complex problems, look no
+further.
 
 I have been doing software development for over 20 years. I am a
 full-stack developer with strength in frontend (React), DevOps,
 GitOps, and infrastructure. I am familiar with nearly all domains of a
 complex software system, both from technology aspect and from
-development life cycle aspect. In one project at Lenovo I was the UI
-lead responsible to deliver work in Angular and React.  In another
-project there I was the team lead working in Python Django, Ansible
+development life cycle aspect. In one project at Lenovo, I was the UI
+lead responsible to deliver work in Angular and React. In another
+project there, I was the team lead working in Python Django, Ansible
 and Helm. At Lucidum, besides system architect design, I also wrote
 code for React frontend w/ Redux, Selenium and Cypress for e2e
 testing, Groovy for Jenkins, Terraform for IaC. For code quality

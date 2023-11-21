@@ -1313,7 +1313,7 @@ and the tangled file is compiled."
   :config (mu4e-column-faces-mode))
 
 (custom-set-faces
- '(mu4e-header-highlight-face ((t (:foreground "tomato" :weight bold))))
+ '(mu4e-header-highlight-face ((t (:foreground "tomato" :weight bold :overline t :underline t))))
  )
 
 (setq mu4e-contexts
@@ -2093,17 +2093,3 @@ If given prefix arg ARG, skips markdown conversion."
     (if (> (length loc) 0)
         loc
       "")))
-
-(setq org-clock-into-drawer t)
-(setq org-log-into-drawer t)
-(setq org-clock-int-drawer "CLOCK")
-
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-
-;; Clock out when moving task to a done state
-(setq org-clock-out-when-done t)
-;; use pretty things for the clocktable
-(setq org-pretty-entities t)
-
-(org-mode-restart)

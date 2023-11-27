@@ -72,7 +72,7 @@ Slide contents are written in Markdown in separate files,
 eg. `slides.md`. To include a markdown file into slides:
 
 ```html
-<section data-markdown="slides.md"  
+<section data-markdown="slides.md"
          data-separator="^---"
          data-vertical="^--"
          data-notes="^Note:"
@@ -98,10 +98,37 @@ present them in different combinations based on audience.
 1. You can follow the [official guide][4] by `reveal.js`.
 2. Or, using the [desktape][5]: `decktape reveal <url> <filename>.pdf`
 
+# TOC
 
+Automatically generate a humburg nav as TOC using [reveal.js-menu][6].
+
+1. Install using `yarn add` or `npm install`.
+2. In `index.html`, link to css:
+
+        ```html
+        <link
+          rel="stylesheet"
+          href="../node_modules/reveal.js-menu/menu.css"
+        />
+        ```
+
+3. In `index.html`, link to js:
+
+        ```html
+        <script src="../node_modules/reveal.js-menu/menu.js"></script>
+        ```
+
+4. Last, add this to `Reveal.initialize({...})`:
+
+        ```js
+        menu:{
+          numbers: true
+        }
+        ```
 
 [1]: https://github.com/hakimel/reveal.js/
 [2]: https://fengxia41103.github.io/moment/1236/
 [3]: https://fengxia41103.github.io/moment/netbox/
 [4]: https://github.com/hakimel/reveal.js#pdf-export
 [5]: https://github.com/astefanutti/decktape
+[6]: https://github.com/denehyg/reveal.js-menu

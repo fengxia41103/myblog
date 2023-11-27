@@ -958,6 +958,49 @@ All prefixed with =C-x C-a=
 |            | Jump to current line |    j    |
 |------------+----------------------+---------|
 ** editing
+*** yasnippet
+
+Let's first see how far I get with file-based capture templates and yankpad.
+Install and config by [[https://www.reddit.com/r/emacs/comments/8vdhb4/tip_how_to_integrate_snippets_with_yasnippets/][reddit post]]:
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package yasnippet
+    :defer 1
+    :diminish yas-minor-mode
+    :config (yas-global-mode))
+
+  (use-package yasnippet-snippets
+    :after yasnippet
+    :config (yasnippet-snippets-initialize))
+
+  (yas-reload-all)
+  (yas-global-mode 1)
+#+END_SRC
+
+Add a hydra:
+
+#+begin_src emacs-lisp
+  (use-package hydra
+    :defer 2
+    :bind ("C-c y" . hydra-yasnippet/body))
+
+  (defhydra hydra-yasnippet (:color blue)
+    "
+    ^
+    ^YASnippet^          ^Do^
+    ^─────────^──────────^──^────────
+    _q_ quit             _i_ insert
+    ^^                   _m_ mode
+    ^^                   _n_ new
+    ^^                   ^^
+    "
+    ("q" nil)
+    ("i" yas-insert-snippet)
+    ("m" yas-minor-mode)
+    ("n" yas-new-snippet))
+#+end_src
+
 *** diffing
 [[https://github.com/justbur/emacs-vdiff][
 vdiff]] let's one compare buffers or files.
@@ -968,18 +1011,6 @@ vdiff]] let's one compare buffers or files.
     :config
     ; This binds commands under the prefix when vdiff is active.
     (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-#+END_SRC
-
-*** yasnippet
-Let's first see how far I get with file-based capture templates and yankpad.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package yasnippet
-    :ensure t)
-  (yas-reload-all)
-  (yas-global-mode 1)
-  (use-package yasnippet-snippets
-    :ensure t)
 #+END_SRC
 
 *** commenting out

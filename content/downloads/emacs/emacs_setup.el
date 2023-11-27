@@ -356,18 +356,42 @@ and the tangled file is compiled."
     (set-window-buffer win sourceBuf)
     win))
 
+(use-package yasnippet
+  :defer 1
+  :diminish yas-minor-mode
+  :config (yas-global-mode))
+
+(use-package yasnippet-snippets
+  :after yasnippet
+  :config (yasnippet-snippets-initialize))
+
+(yas-reload-all)
+(yas-global-mode 1)
+
+(use-package hydra
+  :defer 2
+  :bind ("C-c y" . hydra-yasnippet/body))
+
+(defhydra hydra-yasnippet (:color blue)
+  "
+  ^
+  ^YASnippet^          ^Do^
+  ^─────────^──────────^──^────────
+  _q_ quit             _i_ insert
+  ^^                   _m_ mode
+  ^^                   _n_ new
+  ^^                   ^^
+  "
+  ("q" nil)
+  ("i" yas-insert-snippet)
+  ("m" yas-minor-mode)
+  ("n" yas-new-snippet))
+
 (use-package vdiff
   :ensure t
   :config
   ; This binds commands under the prefix when vdiff is active.
   (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map))
-
-(use-package yasnippet
-  :ensure t)
-(yas-reload-all)
-(yas-global-mode 1)
-(use-package yasnippet-snippets
-  :ensure t)
 
 (autoload 'comment-out-region "comment" nil t)
 (global-set-key (kbd "C-c q") 'comment-out-region)
@@ -2093,3 +2117,17 @@ If given prefix arg ARG, skips markdown conversion."
     (if (> (length loc) 0)
         loc
       "")))
+
+(setq org-clock-into-drawer t)
+(setq org-log-into-drawer t)
+(setq org-clock-int-drawer "CLOCK")
+
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+;; Clock out when moving task to a done state
+(setq org-clock-out-when-done t)
+;; use pretty things for the clocktable
+(setq org-pretty-entities t)
+
+(org-mode-restart)

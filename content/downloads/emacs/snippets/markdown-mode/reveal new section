@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Reveal section
+# contributor: feng xia
+# key: .section
+# --
+
+---
+## ${1: Topic}
+<!-- .element: class="row" -->
+
+$0

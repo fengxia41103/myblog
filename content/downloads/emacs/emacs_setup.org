@@ -1,4 +1,4 @@
-+TITLE: Feng's Emacs configuration
+o+TITLE: Feng's Emacs configuration
 #+AUTHOR: Feng Xia
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
@@ -974,7 +974,7 @@ Install and config by [[https://www.reddit.com/r/emacs/comments/8vdhb4/tip_how_t
     :after yasnippet
     :config (yasnippet-snippets-initialize))
 
-  (yas-reload-all)
+  ;; (yas-reload-all)
   (yas-global-mode 1)
 #+END_SRC
 

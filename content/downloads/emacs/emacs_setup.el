@@ -365,7 +365,7 @@ and the tangled file is compiled."
   :after yasnippet
   :config (yasnippet-snippets-initialize))
 
-(yas-reload-all)
+;; (yas-reload-all)
 (yas-global-mode 1)
 
 (use-package hydra

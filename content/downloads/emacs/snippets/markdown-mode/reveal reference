@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Reveal source reference link
+# contributor: feng xia
+# key: .ref
+# --
+
+
+Ref: [source]($1)
+<!-- .element: class="col s12 myref" -->

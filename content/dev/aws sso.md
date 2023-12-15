@@ -90,7 +90,7 @@ sso login --profile default`, and complete the login process.
 
 Three ways: copy & paste directly to `~/.aws/config` (at least for the
 `default` one, this is the easiest way!), go through `aws sso
-configure`, or using `aws-sso-util`.
+configure`, or using [`aws-sso-util`][3].
 
 ## Use `aws sso configure`
 
@@ -128,7 +128,7 @@ configure`, or using `aws-sso-util`.
 
          ```json
          {
-             "UserId": "xxxxxxx:feng.xia@lucidum.io",
+             "UserId": "xxxxxxx:feng.xia@blah.io",
              "Account": "xxxxxx",
              "Arn": "arn:aws:sts::xxxxxxx:assumed-role/AWSReservedSSO_Administrator_xxxxxx/<email>"
          }
@@ -188,7 +188,6 @@ use. Success of the CLI is controlled by whether this profile has the
 permission or not.
 
 [1]: https://ben11kehoe.medium.com/you-only-need-to-call-aws-sso-login-once-for-all-your-profiles-41a334e1b37e
-
 [2]: https://aws.amazon.com/single-sign-on/
 [3]: https://github.com/benkehoe/aws-sso-util
 [4]: https://github.com/99designs/aws-vault

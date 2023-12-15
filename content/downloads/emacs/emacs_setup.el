@@ -504,17 +504,17 @@ and the tangled file is compiled."
 
 ;; Debugger
 
-(use-package dap-mode
-  :ensure t
-  :defer t
-  :after lsp-mode
-  :config
-  (dap-auto-configure-mode)
-  :bind (:map dap-mode-map
-              ("C-c C-c" . dap-java-debug)
-              ("C-c R" . dap-java-run-test-class)
-              ("C-c d" . dap-java-debug-test-method)
-              ("C-c r" . dap-java-run-test-method)))
+;; (use-package dap-mode
+;;   :ensure t
+;;   :defer t
+;;   :after lsp-mode
+;;   :config
+;;   (dap-auto-configure-mode)
+;;   :bind (:map dap-mode-map
+;;               ("C-c C-c" . dap-java-debug)
+;;               ("C-c R" . dap-java-run-test-class)
+;;               ("C-c d" . dap-java-debug-test-method)
+;;               ("C-c r" . dap-java-run-test-method)))
 
 ;; Requires lsp-mode
 
@@ -534,10 +534,10 @@ and the tangled file is compiled."
 
 ;; Requires dap-mode
 
-(use-package dap-java
-  :ensure nil
-  :defer t
-  :after (lsp-java))
+;; (use-package dap-java
+;;   :ensure nil
+;;   :defer t
+;;   :after (lsp-java))
 
 (use-package writegood-mode
   :ensure

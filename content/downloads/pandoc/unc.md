@@ -5,7 +5,7 @@ author:
   - Feng Xia
 
 bibliography: feng.bib
-logo: "../../images/unc-logo.png"
+logo: "../../images/dhhs-logo.png"
 keywords: [UNC, Schema]
 draft: True
 abstract: |

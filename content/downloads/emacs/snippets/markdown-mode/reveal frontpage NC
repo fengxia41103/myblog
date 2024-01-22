@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Reveal frontpage NC
+# contributor: feng xia
+# key: .frontpage
+# --
+
+<section data-background-image="${1:images/nc-seal.png}"
+         data-background-opacity="0.8">
+  <div class="side-overlay">
+  </div>
+
+  <div class="mytitle">
+  <strong>${2:NCDHHS}</strong>
+
+  <h1>
+      ${3:Default Title}
+  </h1>
+  <p>
+    <a href="mail:feng.xia@dhhs.nc.gov">Feng Xia</a> | `(format-time-string "%Y-%m-%d")`
+  </p>
+  </div>
+</section>
+
+---
+
+<h3 class="menu-title">
+  Table of contents
+</h3>
+
+1. ${4:topic}
+2. ${5:topic}
+
+---
+
+## ${6: First topic}
+
+$0

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2020-05-01
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+
+    <h1 class="myhighlight">Git & Jira</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><h1>Introduction</h1>
+<p>We use Jira for project manage, and git for code. W/ a plugin, Jira is
+able to integrate w/ Gitlab such as create a link to git commit as
+comment. However, it has not the capability to create statistic
+analysis of git commits within Jira, for example, how to know the
+number of line changes of a Jira (number of line changes are a good
+indicator of workload as well as a hotspot of bugs), and vice versa,
+how to know a commit is part of a release 5.1.1 (the <code>fix version</code>
+attribute in Jira)? If we are to generate a <strong>release note</strong> of a
+release, wouldn't it be nice if it listed out:</p>
+<ul>
+<li>list of Jira &rarr; tasks the team wants to achieve in planning</li>
+<li>list of commits &rarr; actual code changes/contributions</li>
+<li>statistics of grouped information such as number of commits by Jira
+component, or label</li>
+<li>developer contributions: who changed which file, and how much was
+changed</li>
+</ul>
+<p>Further, when team follows a development workflow, such as the
+<em>popular</em> <a href="https://nvie.com/posts/a-successful-git-branching-model/">git
+strategy</a>,
+it is impossible for manager to identify violation w/o bringing
+information from both Jira and git together for cross reference,
+whether manually or automated. Once we follow the development chain
+from dev to CICD to various version of testing/QA, this dilemma is
+compounded even more &mdash; how do I know CICD is building the right
+source? how do I know QA is testing the right feature? and how do I
+know what is deployed on a stack is the right code?</p>
+<p>Essentially, if we agree that QA is a <strong>MUST</strong> to protect code
+quality, then QA is also a <strong>MUST</strong> to protect process quality. Such
+QA for management is harder than code's because it is less well
+understood, thus more difficult to quantify, to standardize, and to be
+assisted by system &mdash; if CICD is now a cliche in any software
+development project, a management version of CICD is not yet an
+essence.</p>
+<p>This tool is to solve this.</p>
+<h1>Strategy</h1>
+<p>Building cross reference is an information asymmetry challenge &mdash;
+we have multiple information sources scattered in different form,
+place, by different owner. Logically, their data have relation to each
+other as the status of one becomes the trigger/input for another. The
+strategy to solve this challenge is:</p>
+<ol>
+<li>Develop data extractor that brings these scattered  information
+into one place &larr; 1st tier data.</li>
+<li>Checking consistency of cross reference, eg. a Jira status of "work
+in progress" should not find an associated git commit already lived
+in a release, not to mention already deployed into production!</li>
+<li>Derive 2nd tier data, such as aggregated statistics following their
+logical relationships, so to provide insight to the overall
+development activities measured by management expectation.</li>
+</ol>
+<p>Following the <a href="">five-level capability model</a>, this strategy will
+fulfill level 1-3:</p>
+<ul>
+<li>level 1 inventory: have mechanism to collect needed information bits</li>
+<li>level 2 expectation &amp; reality: map out models and relationships
+between expectation and reality. For example, management expectation
+is represented by Jira items while development reality represented
+by code in git. The tool will build cross reference of the two. With
+growth of knowledge, we can bring in more related information bits,
+thus extending the scope these cross references.</li>
+<li>level 3 diff = expectation - reality: Identify gap between an
+expectation and the reality, thus signaling an execution gap that
+requires management attention.</li>
+</ul>
+<h1>Information bits</h1>
+<p>What information do we have? Following the development pipeline described
+in the diagram below, pretending we are development for a release
+called <code>5.1.1</code>, let's focus on what is in Jira and what is in Git:</p>
+<ul>
+<li>
+<p>Jira: two buckets &mdash; 5.1.1 related vs. non-5.1.1 related</p>
+<ol>
+<li>
+<p>5.1.1 items: three kinds</p>
+<ol>
+<li>5.1.1 features</li>
+<li>
+<p>Bugs: two types of bugs:</p>
+<ol>
+<li>bugs found in other version, and will be fixed in this release.</li>
+<li>bugs found in <code>5.1.1</code> (maybe during development), and needs to
+   be fixed in this release.</li>
+</ol>
+</li>
+<li>
+<p>5.1.1 non-code related activities &mdash; managerial, logistics</p>
+</li>
+</ol>
+</li>
+<li>
+<p>non-5.1.1 items</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Git: two buckets &mdash; code/branch that will be included in 5.1.1 build
+  vs. those that will not be included.</p>
+<ol>
+<li>
+<p>Release 5.1.1 branches/code: two types:</p>
+<ol>
+<li>
+<p>new code: including newly added code, deleted and/or
+   modified old code that was done for the purpose of
+   5.1.1. Following the Jira categories above, there are two
+   types, and within each, there is Jira tracked
+   vs. not-tracked.</p>
+<ol>
+<li>
+<p>features: new code for implementing a feature:</p>
+<ul>
+<li>jira tracked: has logical relationship between the
+   code work and a Jira ticket</li>
+<li><strong>not-tracked</strong>: code was made either w/o a Jira,
+   eg. ad-hoc code change not linked to a planned
+   activity, or a missing cross reference between the
+   two which made this change
+   difficult to trace in term of management visibility. <br>
+            2. bugs: new code for fixing a bug (remember, two types of
+               bugs). Similar to the feature code changes, they can be
+               either Jira tracked, or not-tracked.</li>
+<li>jira tracked</li>
+<li>not-tracked</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>old code that didn't change, but will be part of 5.1.1
+   &larr; regression.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Non-5.1.1 branches: these code will not be part of the 5.1.1
+   release in term of build and release. Similarly, it can be
+   divided into new code vs. old code.</p>
+<ul>
+<li>new code</li>
+<li>old code </li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="col s12">
+  <img src="images/gitjira/git%20and%20jira.png" />
+  <figcaption>
+    Git & Jira information bit of a release v5.1.1
+  </figcaption>
+</figure>
+
+<p>If we could harness all these information bits and categorize them, we
+will be able to answer:</p>
+<table>
+<thead>
+<tr>
+<th>Creator</th>
+<th>Information</th>
+<th>Info Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manager</td>
+<td>What 5.1.1 items to work on &rarr; todo list</td>
+<td>Jira, filtered by <code>release</code></td>
+</tr>
+<tr>
+<td>Dev</td>
+<td>What is in the 5.1.1 code?</td>
+<td>Git</td>
+</tr>
+<tr>
+<td>CICD</td>
+<td>Which 5.1.1 code is in build? Is build clean?</td>
+<td>Jenkins, artifacts</td>
+</tr>
+<tr>
+<td>devops</td>
+<td>Which instance has the 5.1.1 build?</td>
+<td></td>
+</tr>
+<tr>
+<td>QA</td>
+<td>Test coverage of 5.1.1 code?  Is 5.1.1 affecting older functions?</td>
+<td>QA repo, report</td>
+</tr>
+</tbody>
+</table>
+<h1>Application design</h1>
+<p>The application is a modern data driven web application divided into
+three components: backend, frontend, and data collector.</p>
+<figure class="col s12 center">
+  <img src="images/gitjira/high%20level%20design.png" />
+  <figcaption>High level architecture</figcaption>
+</figure>
+
+<h2>data model</h2>
+<p>Everything starts w/ data model. It tells what information bits will
+be collected and stored, and the logical relationships among them.</p>
+<figure class="col s12 center">
+    <img src="images/gitjira/jirra.png"/>
+    <figcaption>Django data model</figcaption>
+</figure>
+
+<h2>data collector</h2>
+<p>Can be any tool/script to pull information from interested information
+source. <code>Gitpython</code> and <code>jira-python</code> are self-explanatory. The
+<code>git-jira-analyzer</code> script is to use these two libraries to extract
+information from Jira and a clone of a git on your local system.</p>
+<p>The collectors are, however, only a library. The extracted data must
+be persisted to the DB in the backend. However, instead of speaking to
+DB directly, we are to take advantage of Django's <a href="https://docs.djangoproject.com/en/3.0/howto/custom-management-commands/">custom
+command</a>,
+so the extractor is fully in sync w/ the backend data model, and can
+use Django's powerful query and ORM for data manipulation.</p>
+<p><a href="git_jira_analyzer.py">source</a></p>
+<h2>backend</h2>
+<p>Backend is Django+Gunicorn. We use
+<a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a> to
+provide RESTful API based on Django models. Aggregated stats can be
+either processed on the client side (by frontend), or on the server
+side (by backend). In this design, we opted for backend for the job.</p>
+<p>Further, we keep the backend as a pure API provider, meaning that we
+avoid building any custom URL endpoint that participates backend-front
+action &larr; every single bit the frontend needs is obtainable via
+exposed and documented REST API, no more and no less.</p>
+<p>As of writing (5/22/2020), API is not enforcing user
+authentication. However, backend has capability to provide <a href="https://django-tastypie.readthedocs.io/en/latest/authentication.html">various
+types of
+authentication</a>
+when the time comes.</p>
+<h3>tastypie vs. DRF</h3>
+<p><a href="https://www.django-rest-framework.org/">Django Rest Framework</a> is a
+more powerful REST API toolset than
+<a href="https://django-tastypie.readthedocs.io/en/latest/">Tastypie</a>. By my
+experience, Tastypie is easier to produce de facto API by using
+<code>ModelResource</code>, which maps neatly 1:1 between Django model to an API
+resource. If you need lots of special massage of data between raw
+model data to its JSON version, eg. mapping date to some special
+format, DRF gives you more machinery along the hydration/dehydration
+path.</p>
+<h2>frontend</h2>
+<p>Frontend is based on REACT + <a href="https://materializecss.com/">materialize
+CSS</a>. The setup is also ready to use <a href="https://react-bootstrap.github.io/">React
+Bootstrap</a>. For more sophisticated
+UI layout and function, a Bootstrap-based approach will be better.</p>
+<figure class="col s12 center">
+  <img src="images/gitjira/frontend.png"/>
+  <figcaption>Frontend main page</figcaption>
+</figure>
+
+<p>Roughly there is a 1:1 mapping between REACT component and <a href="http://10.240.43.48:8001/api/v1/">API
+resource</a>, simply for the reason
+that each resource needs rendering at some point of a UI. Thus even
+for simple component such as <code>Branch</code> which is only rendering the
+branch name, we created a separate component (as place holder) so the
+code structure is ready to be extended.</p>
+<h3>JWT authentication</h3>
+<p>not implemented yet</p>
+<h3>routing</h3>
+<p>not implemented yet</p>
+<h1>Development</h1>
+<p>Everything has been dockerized. Use it for both development &amp;
+deployment. </p>
+<p><strong>Prerequisite</strong>: <a href="https://docs.docker.com/compose/install/">install <code>docker-compose</code></a>.</p>
+<ul>
+<li>
+<p>for backend: in <code>backend/</code> folder, <code>docker-compose up --build</code> if
+  you are running it for the first time. You can omit the <code>--build</code>
+  once the image has been built.</p>
+</li>
+<li>
+<p>for frontend: in <code>frontend/</code> folder, run <code>npm install &amp;&amp; npm run
+  dev</code>, then browser to <code>localhost:8080</code>.</p>
+</li>
+</ul>
+<p>Alternatively, you can use <code>docker-compose up --build</code>. Here
+  <strong><code>--build</code> is required</strong> because the REACT source needs a
+  compilation. However, you lose the <code>webpack hot reload</code> in this
+  method because the compilation is happening inside the docker on a
+  fresh copy of your <code>/src</code> each time its <code>docker-compose up</code>, so
+  there is nothing to <em>reload</em>. This is good for deployment, but
+  doesn't work well for frontend dev.</p>
+<h2>manual intervention</h2>
+<p>There are always  configs needed tweaking to fit  your environment . In
+particular you want to pay attention to:</p>
+<ol>
+<li>
+<p>port mapping: expose Docker port to host. For example, MySQL port
+   <code>3306</code> is mapped to host <code>3306</code> by default as shown below.</p>
+<p><code>yaml
+    ports:
+      - "3306:3306"</code></p>
+</li>
+<li>
+<p>IP mapping: in <code>frontend/src/root.jsx</code>, class function
+   <code>constructor</code>:</p>
+</li>
+<li><code>SERVER</code>: set to the API server IP or hostname</li>
+<li><code>PORT</code>: API server port</li>
+</ol>
+<p>For example, when we are setting them to <code>localhost</code> &amp; <code>8002</code>
+   because we are assuming the backend dockers are living on the same
+   host (thus <code>localhost</code>) and is available on port <code>8002</code> (which is
+   listened by the backend nginx).</p>
+<ol>
+<li>CORS whitelisting: in <code>backend/gitt/settings.py</code>,
+   <code>CORS_ORIGIN_WHITELIST</code>, adds the API server IP and port. This is
+   <strong>critical</strong>.</li>
+</ol>
+<p>Of course, the values in <code>docker-compose</code> can be changed such as
+<code>enviroment</code> that defines DB port, user name, password, even the
+application's database name, and so on. They are fairly
+self-explanatory. Therefore I'm skipping them here.</p>
+<h1>Deployment</h1>
+<p>The <code>docker-compose</code> way is production ready. </p>
+<p>There certainly can be different ways to deploy depending on the
+underline platform this is deployed unto. For example, using <code>uwsgi</code>
+instead of <code>gunicorn</code>, or tweaking the number of <code>gunicorn</code> workers,
+and so on. These topics are beyond the scope of this document.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

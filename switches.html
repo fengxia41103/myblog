@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2018-06-08
+
+
+    <a class="wave-effect" href="lenovo.html">
+      <i class="fa fa-folder-open-o"></i>
+      lenovo
+    </a>
+
+    <a class="wave-effect" href="tag-feng.html">
+      <i class="fa fa-tag"></i>
+      feng
+    </a>
+
+    <h1 class="myhighlight">Network switch</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p><a href="https://en.wikipedia.org/wiki/Network_switch">Network switch</a> is a gold mine. You will need (ip, username, pwd) to get to it,
+using Telnet(!). Your friend is <a href="https://pexpect.readthedocs.io/en/stable/">pexpect</a>, but even that gives you
+jinx sometimes when each switch can return you some random garbages
+once a while that makes <code>session.expect("your regex pattern")</code> to time
+out and you don't know why.</p>
+<h1>enos vs. cnos</h1>
+<p>Not much to say. These are two switch OS seen on Feng switches. They
+are all closely looked like Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html">IOS</a>, but different. </p>
+<ol>
+<li><a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf">CNOS manual</a></li>
+<li><a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_CR_8-4.pdf">ENOS commands</a> (Googling <code>enos manual</code> shows Feng switch
+   types, eg. G8272. So I guess the term is applicable on a model basis.)</li>
+</ol>
+<p>Anyway, the biggest difference to be aware is that CNOS device uses <code>display</code>
+while ENOS device uses <code>show</code>. To get a list of commands available:</p>
+<ol>
+<li>
+<p>CNOS: <code>display ?</code></p>
+<div class="highlight"><pre><span></span><code><span class="err">``</span><span class="no">`shell</span>
+<span class="n">LCTC</span><span class="o">-</span><span class="n">R1U37</span><span class="o">-</span><span class="n">SW</span><span class="o">&gt;</span><span class="n">display</span><span class="w"> </span><span class="o">?</span>
+<span class="w">  </span><span class="n">aaa</span><span class="w">               </span><span class="n">AAA</span><span class="w"> </span><span class="n">Model</span>
+<span class="w">  </span><span class="n">access</span><span class="w">            </span><span class="n">access</span><span class="w"> </span><span class="n">parameters</span>
+<span class="w">  </span><span class="n">access</span><span class="o">-</span><span class="n">lists</span><span class="w">      </span><span class="n">List</span><span class="w"> </span><span class="n">IP</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="n">lists</span>
+<span class="w">  </span><span class="n">arp</span><span class="w">               </span><span class="n">IP</span><span class="w"> </span><span class="n">ARP</span><span class="w"> </span><span class="k">table</span>
+<span class="w">  </span><span class="n">banner</span><span class="w">            </span><span class="n">Show</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">motd</span><span class="w"> </span><span class="n">banner</span><span class="w"> </span><span class="n">message</span>
+<span class="w">  </span><span class="n">bfd</span><span class="w">               </span><span class="n">Bidirectional</span><span class="w"> </span><span class="n">Forwarding</span><span class="w"> </span><span class="n">Detection</span><span class="w"> </span><span class="p">(</span><span class="n">BFD</span><span class="p">)</span>
+<span class="w">  </span><span class="n">bgp</span><span class="w">               </span><span class="n">Border</span><span class="w"> </span><span class="n">Gateway</span><span class="w"> </span><span class="n">Protocol</span><span class="w"> </span><span class="p">(</span><span class="n">BGP</span><span class="p">)</span>
+<span class="w">  </span><span class="n">cee</span><span class="w">               </span><span class="n">Converged</span><span class="w"> </span><span class="n">Enhanced</span><span class="w"> </span><span class="n">Ethernet</span>
+<span class="w">  </span><span class="n">class</span><span class="o">-</span><span class="n">map</span><span class="w">         </span><span class="n">Class</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">entry</span>
+<span class="w">  </span><span class="n">cli</span><span class="w">               </span><span class="n">Show</span><span class="w"> </span><span class="n">CLI</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">mode</span>
+<span class="w">  </span><span class="n">dbg</span><span class="w">               </span><span class="n">Debugging</span><span class="w"> </span><span class="n">functions</span>
+<span class="w">  </span><span class="n">dot1q</span><span class="o">-</span><span class="n">tunnel</span><span class="w">      </span><span class="n">Display</span><span class="w"> </span><span class="n">dot1q</span><span class="w"> </span><span class="n">tunnel</span>
+<span class="w">  </span><span class="n">env</span><span class="w">               </span><span class="n">Show</span><span class="w"> </span><span class="n">environment</span>
+<span class="w">  </span><span class="n">errdisable</span><span class="w">        </span><span class="n">Error</span><span class="w"> </span><span class="k">disable</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">hardware</span><span class="w">          </span><span class="n">Show</span><span class="w"> </span><span class="n">hardware</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">hostname</span><span class="w">          </span><span class="n">Hostname</span>
+<span class="w">  </span><span class="n">interface</span><span class="w">         </span><span class="n">Interface</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">configuration</span>
+<span class="w">  </span><span class="n">inventory</span><span class="w">         </span><span class="n">Show</span><span class="w"> </span><span class="n">inventory</span>
+<span class="w">  </span><span class="n">ip</span><span class="w">                </span><span class="n">Configure</span><span class="w"> </span><span class="n">ip</span><span class="w"> </span><span class="n">features</span>
+<span class="w">  </span><span class="n">ipv6</span><span class="w">              </span><span class="n">Internet</span><span class="w"> </span><span class="n">Protocol</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="mh">6</span><span class="w"> </span><span class="p">(</span><span class="n">IPv6</span><span class="p">)</span>
+<span class="w">  </span><span class="n">lacp</span><span class="w">              </span><span class="n">Show</span><span class="w"> </span><span class="n">LACP</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">license</span><span class="w">           </span><span class="n">FoD</span><span class="w"> </span><span class="n">license</span>
+<span class="w">  </span><span class="n">lldp</span><span class="w">              </span><span class="n">Show</span><span class="w"> </span><span class="n">LLDP</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">logging</span><span class="w">           </span><span class="n">Logging</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">data</span>
+<span class="w">  </span><span class="n">mac</span><span class="w">               </span><span class="n">MAC</span>
+<span class="w">  </span><span class="n">monitor</span><span class="w">           </span><span class="n">Show</span><span class="w"> </span><span class="n">Ethernet</span><span class="w"> </span><span class="n">SPAN</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">npa</span><span class="w">               </span><span class="n">Network</span><span class="w"> </span><span class="n">Policy</span><span class="w"> </span><span class="n">Agent</span>
+<span class="w">  </span><span class="n">ntp</span><span class="w">               </span><span class="n">Network</span><span class="w"> </span><span class="kt">time</span><span class="w"> </span><span class="n">protocol</span>
+<span class="w">  </span><span class="n">policy</span><span class="o">-</span><span class="n">map</span><span class="w">        </span><span class="n">Policy</span><span class="w"> </span><span class="n">Map</span><span class="w"> </span><span class="n">Entry</span>
+<span class="w">  </span><span class="n">port</span><span class="o">-</span><span class="n">aggregation</span><span class="w">  </span><span class="n">Port</span><span class="w"> </span><span class="n">aggregation</span><span class="w"> </span><span class="n">interface</span>
+<span class="w">  </span><span class="n">privilege</span><span class="w">         </span><span class="n">Show</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">privilege</span><span class="w"> </span><span class="n">level</span>
+<span class="w">  </span><span class="n">queuing</span><span class="w">           </span><span class="n">Egress</span><span class="w"> </span><span class="n">Queuing</span><span class="w"> </span><span class="n">Information</span>
+<span class="w">  </span><span class="n">radius</span><span class="o">-</span><span class="n">server</span><span class="w">     </span><span class="n">Specify</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">RADIUS</span><span class="w"> </span><span class="n">server</span>
+<span class="w">  </span><span class="n">restApi</span><span class="w">           </span><span class="n">RestApi</span>
+<span class="w">  </span><span class="n">rib</span><span class="w">               </span><span class="n">RIB</span>
+<span class="w">  </span><span class="n">role</span><span class="w">              </span><span class="n">Show</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="n">configuration</span>
+<span class="w">  </span><span class="n">router</span><span class="o">-</span><span class="n">id</span><span class="w">         </span><span class="n">Router</span><span class="w"> </span><span class="n">ID</span>
+<span class="w">  </span><span class="n">routing</span><span class="w">           </span><span class="n">Display</span><span class="w"> </span><span class="n">routing</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">running</span><span class="o">-</span><span class="n">config</span><span class="w">    </span><span class="n">Running</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">snmp</span><span class="w">              </span><span class="n">Snmp</span><span class="w"> </span><span class="n">service</span>
+<span class="w">  </span><span class="n">spanning</span><span class="o">-</span><span class="n">tree</span><span class="w">     </span><span class="n">Show</span><span class="w"> </span><span class="n">spanning</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">ssh</span><span class="w">               </span><span class="n">Ssh</span>
+<span class="w">  </span><span class="n">statistics</span><span class="w">        </span><span class="n">Statistics</span>
+<span class="w">  </span><span class="n">switchname</span><span class="w">        </span><span class="n">Display</span><span class="w"> </span><span class="n">switch</span><span class="w"> </span><span class="n">name</span>
+<span class="w">  </span><span class="n">sys</span><span class="o">-</span><span class="n">info</span><span class="w">          </span><span class="n">show</span><span class="w"> </span><span class="n">sys</span><span class="o">-</span><span class="n">info</span>
+<span class="w">  </span><span class="n">system</span><span class="w">            </span><span class="n">System</span><span class="o">-</span><span class="n">related</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">commands</span>
+<span class="w">  </span><span class="n">tacacs</span><span class="o">-</span><span class="n">server</span><span class="w">     </span><span class="n">Display</span><span class="w"> </span><span class="n">tacacs</span><span class="w"> </span><span class="n">configuration</span>
+<span class="w">  </span><span class="n">tech</span><span class="o">-</span><span class="n">support</span><span class="w">      </span><span class="n">Show</span><span class="w"> </span><span class="n">router</span><span class="w"> </span><span class="n">technical</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">telnet</span><span class="w">            </span><span class="n">Telnet</span>
+<span class="w">  </span><span class="n">user</span><span class="o">-</span><span class="n">account</span><span class="w">      </span><span class="n">User</span><span class="w"> </span><span class="n">Account</span><span class="w"> </span><span class="n">Management</span>
+<span class="w">  </span><span class="n">users</span><span class="w">             </span><span class="n">Display</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="n">lines</span>
+<span class="w">  </span><span class="n">vdm</span><span class="w">               </span><span class="n">Display</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Domain</span><span class="w"> </span><span class="n">Manager</span><span class="w"> </span><span class="n">Information</span>
+<span class="w">  </span><span class="n">version</span><span class="w">           </span><span class="n">Display</span><span class="w"> </span><span class="n">NOS</span><span class="w"> </span><span class="n">version</span>
+<span class="w">  </span><span class="n">virtual</span><span class="o">-</span><span class="n">machine</span><span class="w">   </span><span class="n">Display</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="n">machine</span>
+<span class="w">  </span><span class="n">vlag</span><span class="w">              </span><span class="n">VLAG</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Link</span><span class="w"> </span><span class="n">Aggregator</span>
+<span class="w">  </span><span class="n">vlan</span><span class="w">              </span><span class="n">Display</span><span class="w"> </span><span class="n">VLAN</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">vnetworks</span><span class="w">         </span><span class="n">Display</span><span class="w"> </span><span class="n">virtual</span><span class="w"> </span><span class="n">networks</span>
+<span class="w">  </span><span class="n">vrrp</span><span class="w">              </span><span class="n">Show</span><span class="w"> </span><span class="n">vrrp</span><span class="w"> </span><span class="n">information</span>
+<span class="w">  </span><span class="n">zerotouch</span><span class="w">         </span><span class="n">Display</span><span class="w"> </span><span class="n">zerotouch</span><span class="w"> </span><span class="n">parameters</span>
+
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>ENOS: <code>show ?</code></p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="nx">shell</span>
+<span class="nx">RS</span><span class="w"> </span><span class="nx">G8272</span><span class="p">&gt;</span><span class="nx">show</span><span class="w"> </span><span class="p">?</span>
+<span class="nx">Show</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">system</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">access</span><span class="o">-</span><span class="nx">control</span><span class="w">     </span><span class="nx">Show</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">control</span><span class="w"> </span>
+<span class="w">  </span><span class="nx">arp</span><span class="w">                </span><span class="nx">IP</span><span class="w"> </span><span class="nx">ARP</span><span class="w"> </span><span class="nx">table</span>
+<span class="w">  </span><span class="nx">boot</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">boot</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">cee</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">CEE</span><span class="w"> </span><span class="nx">Information</span>
+<span class="w">  </span><span class="nx">clock</span><span class="w">              </span><span class="nx">Display</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">switch</span><span class="w"> </span><span class="nx">date</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">time</span>
+<span class="w">  </span><span class="nx">counters</span><span class="w">           </span><span class="nx">Show</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">statistics</span>
+<span class="w">  </span><span class="nx">custom</span><span class="o">-</span><span class="nx">dst</span><span class="w">         </span><span class="nx">Show</span><span class="w"> </span><span class="nx">custom</span><span class="w"> </span><span class="nx">DST</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">dcbx</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">DCBX</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">dot1x</span><span class="w">              </span><span class="nx">Show</span><span class="w"> </span><span class="m m-Double">802.1</span><span class="nx">x</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">ecp</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">Edge</span><span class="w"> </span><span class="nx">Contrl</span><span class="w"> </span><span class="nx">Protocol</span><span class="w"> </span><span class="p">(</span><span class="nx">ECP</span><span class="p">)</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">environment</span><span class="w">        </span><span class="nx">Show</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">environment</span>
+<span class="w">  </span><span class="nx">errdisable</span><span class="w">         </span><span class="nx">Show</span><span class="w"> </span><span class="nx">Errdisable</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">etherchannel</span><span class="w">       </span><span class="nx">Show</span><span class="w"> </span><span class="nx">etherchannel</span>
+<span class="w">  </span><span class="nx">failover</span><span class="w">           </span><span class="nx">Show</span><span class="w"> </span><span class="nx">failover</span><span class="w"> </span><span class="nx">state</span>
+<span class="w">  </span><span class="nx">fcalias</span><span class="w">            </span><span class="nx">Show</span><span class="w"> </span><span class="nx">fc</span><span class="o">-</span><span class="kd">alias</span><span class="w"> </span><span class="nx">configurations</span><span class="w"> </span><span class="nx">per</span><span class="w"> </span><span class="nx">vlan</span>
+<span class="w">  </span><span class="nx">fcf</span><span class="w">                </span><span class="nx">Display</span><span class="w"> </span><span class="nx">details</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">FCF</span>
+<span class="w">  </span><span class="nx">fcns</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">Name</span><span class="w"> </span><span class="nx">Server</span>
+<span class="w">  </span><span class="nx">fcoe</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">FCOE</span><span class="w"> </span><span class="nx">Information</span>
+<span class="w">  </span><span class="nx">fcs</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">Fabric</span><span class="w"> </span><span class="nx">Configuration</span><span class="w"> </span><span class="nx">Server</span>
+<span class="w">  </span><span class="nx">fdmi</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">FDMI</span>
+<span class="w">  </span><span class="nx">flogi</span><span class="w">              </span><span class="nx">Show</span><span class="w"> </span><span class="nx">FLOGI</span><span class="w"> </span><span class="nx">database</span>
+<span class="w">  </span><span class="nx">history</span><span class="w">            </span><span class="nx">Show</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">history</span>
+<span class="w">  </span><span class="nx">hotlinks</span><span class="w">           </span><span class="nx">Show</span><span class="w"> </span><span class="nx">Hot</span><span class="w"> </span><span class="nx">Links</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">https</span><span class="w">              </span><span class="nx">Show</span><span class="w"> </span><span class="nx">HTTPS</span><span class="w"> </span><span class="nx">related</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">ikev2</span><span class="w">              </span><span class="nx">Show</span><span class="w"> </span><span class="nx">IKEv2</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">information</span><span class="o">-</span><span class="nx">dump</span><span class="w">   </span><span class="nx">Show</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="kd">interface</span><span class="w">          </span><span class="nx">Show</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">ip</span><span class="w">                 </span><span class="nx">Show</span><span class="w"> </span><span class="nx">IP</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">ipsec</span><span class="w">              </span><span class="nx">Show</span><span class="w"> </span><span class="nx">IPsec</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">ipv6</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">IPv6</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">lacp</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">LACP</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">layer2</span><span class="w">             </span><span class="nx">Show</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nx">related</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">layer3</span><span class="w">             </span><span class="nx">Show</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nx">related</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">line</span><span class="w">               </span><span class="nx">Line</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">lldp</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">LLDP</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">logging</span><span class="w">            </span><span class="nx">Show</span><span class="w"> </span><span class="nx">syslog</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">messages</span>
+<span class="w">  </span><span class="nx">mac</span><span class="o">-</span><span class="nx">address</span><span class="o">-</span><span class="nx">table</span><span class="w">  </span><span class="nx">Show</span><span class="w"> </span><span class="nx">MAC</span><span class="w"> </span><span class="nx">forwarding</span><span class="w"> </span><span class="nx">table</span>
+<span class="w">  </span><span class="nx">microburst</span><span class="w">         </span><span class="nx">Show</span><span class="w"> </span><span class="nx">microburst</span><span class="w"> </span><span class="nx">statistics</span><span class="p">.</span>
+<span class="w">  </span><span class="nx">mp</span><span class="w">                 </span><span class="nx">Show</span><span class="w"> </span><span class="nx">management</span><span class="w"> </span><span class="nx">processor</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">statistics</span>
+<span class="w">  </span><span class="nx">ntp</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">NTP</span><span class="w"> </span><span class="nx">information</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">statistics</span>
+<span class="w">  </span><span class="nx">nwv</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">Networking</span><span class="w"> </span><span class="nx">Virtualization</span><span class="w"> </span><span class="nx">Information</span>
+<span class="w">  </span><span class="nx">oam</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">OAM</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">openflow</span><span class="w">           </span><span class="nx">Show</span><span class="w"> </span><span class="nx">Openflow</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">status</span>
+<span class="w">  </span><span class="nx">pki</span><span class="w">                </span><span class="nx">Display</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">certificate</span>
+<span class="w">  </span><span class="nx">port</span><span class="o">-</span><span class="nx">mirroring</span><span class="w">     </span><span class="nx">Show</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">mirroring</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">PortChannel</span><span class="w">        </span><span class="nx">Show</span><span class="w"> </span><span class="nx">PortChannel</span>
+<span class="w">  </span><span class="nx">processes</span><span class="w">          </span><span class="nx">Show</span><span class="w"> </span><span class="nx">management</span><span class="w"> </span><span class="nx">processor</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">statistics</span>
+<span class="w">  </span><span class="nx">protocol</span><span class="o">-</span><span class="nx">vlan</span><span class="w">      </span><span class="nx">Show</span><span class="w"> </span><span class="nx">protocol</span><span class="w"> </span><span class="nx">VLAN</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">ptp</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">PTP</span><span class="w"> </span><span class="nx">informations</span>
+<span class="w">  </span><span class="nx">qos</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">quality</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">service</span>
+<span class="w">  </span><span class="nx">rmon</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">RMON</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">route</span><span class="o">-</span><span class="nx">map</span><span class="w">          </span><span class="nx">Show</span><span class="w"> </span><span class="nx">route</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="nx">configuration</span>
+<span class="w">  </span><span class="nx">rscn</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">commands</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">RSCN</span>
+<span class="w">  </span><span class="nx">scheduler</span><span class="w">          </span><span class="nx">Show</span><span class="w"> </span><span class="nx">scheduler</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span>
+<span class="w">  </span><span class="nx">script</span><span class="w">             </span><span class="nx">Show</span><span class="w"> </span><span class="nx">installed</span><span class="w"> </span><span class="nx">scripts</span>
+<span class="w">  </span><span class="nx">script</span><span class="o">-</span><span class="nx">log</span><span class="w">         </span><span class="nx">Show</span><span class="w"> </span><span class="nx">script</span><span class="w"> </span><span class="nx">logs</span>
+<span class="w">  </span><span class="nx">sflow</span><span class="w">              </span><span class="nx">Show</span><span class="w"> </span><span class="nx">sflow</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">snmp</span><span class="o">-</span><span class="nx">server</span><span class="w">        </span><span class="nx">Show</span><span class="w"> </span><span class="nx">SNMP</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">information</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">statistics</span>
+<span class="w">  </span><span class="nx">software</span><span class="o">-</span><span class="nx">key</span><span class="w">       </span><span class="nx">Show</span><span class="w"> </span><span class="nx">software</span><span class="w"> </span><span class="nx">licensing</span><span class="w"> </span><span class="nx">keys</span>
+<span class="w">  </span><span class="nx">spanning</span><span class="o">-</span><span class="nx">tree</span><span class="w">      </span><span class="nx">Show</span><span class="w"> </span><span class="nx">spanning</span><span class="w"> </span><span class="nx">tree</span><span class="w"> </span><span class="nx">topology</span>
+<span class="w">  </span><span class="nx">ssh</span><span class="o">-</span><span class="nx">clienthostkey</span><span class="w">  </span><span class="nx">Show</span><span class="w"> </span><span class="nx">SFTP</span><span class="o">/</span><span class="nx">SSH</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">keys</span>
+<span class="w">  </span><span class="nx">ssh</span><span class="o">-</span><span class="nx">clientpubkey</span><span class="w">   </span><span class="nx">Show</span><span class="w"> </span><span class="nx">SSH</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="nx">public</span><span class="w"> </span><span class="nx">key</span>
+<span class="w">  </span><span class="nx">sys</span><span class="o">-</span><span class="nx">info</span><span class="w">           </span><span class="nx">Show</span><span class="w"> </span><span class="nx">general</span><span class="w"> </span><span class="nx">system</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">terminal</span><span class="o">-</span><span class="nx">length</span><span class="w">    </span><span class="nx">Show</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">terminal</span><span class="w"> </span><span class="nx">length</span>
+<span class="w">  </span><span class="nx">transceiver</span><span class="w">        </span><span class="nx">Show</span><span class="w"> </span><span class="nx">Port</span><span class="w"> </span><span class="nx">Transceiver</span><span class="w"> </span><span class="nx">status</span>
+<span class="w">  </span><span class="nx">trustpoint</span><span class="w">         </span><span class="nx">Show</span><span class="w"> </span><span class="nx">trustpoint</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">CA</span><span class="w"> </span><span class="nx">store</span>
+<span class="w">  </span><span class="nx">udld</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">UDLD</span><span class="w"> </span><span class="nx">dump</span>
+<span class="w">  </span><span class="nx">ufp</span><span class="w">                </span><span class="nx">Show</span><span class="w"> </span><span class="nx">UFP</span><span class="w"> </span><span class="nx">feature</span><span class="w"> </span><span class="nx">information</span>
+<span class="w">  </span><span class="nx">user</span><span class="w">               </span><span class="nx">Currently</span><span class="w"> </span><span class="nx">logged</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">users</span>
+<span class="w">  </span><span class="nx">version</span><span class="w">            </span><span class="nx">Show</span><span class="w"> </span><span class="nx">system</span><span class="w"> </span><span class="nx">version</span>
+<span class="w">  </span><span class="nx">virt</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="kd">virtual</span><span class="w"> </span><span class="nx">machine</span>
+<span class="w">  </span><span class="nx">vlag</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">vLAG</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">statistics</span>
+<span class="w">  </span><span class="nx">vlan</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">VLAN</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">status</span>
+<span class="w">  </span><span class="nx">who</span><span class="w">                </span><span class="nx">Currently</span><span class="w"> </span><span class="nx">logged</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">users</span>
+<span class="w">  </span><span class="nx">zone</span><span class="w">               </span><span class="nx">Show</span><span class="w"> </span><span class="nx">zone</span><span class="w"> </span><span class="nx">configurations</span><span class="w"> </span><span class="nx">per</span><span class="w"> </span><span class="nx">vlan</span>
+<span class="w">  </span><span class="nx">zoneset</span><span class="w">            </span><span class="nx">Show</span><span class="w"> </span><span class="nx">zoneset</span><span class="w"> </span><span class="nx">configurations</span><span class="w"> </span><span class="nx">per</span><span class="w"> </span><span class="nx">vlan</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h1>login</h1>
+<p>A typical login session looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>dev<span class="o">)</span><span class="w"> </span>fengxia@fengxia-feng:~$<span class="w"> </span>telnet<span class="w"> </span><span class="m">10</span>.240.43.29
+Trying<span class="w"> </span><span class="m">10</span>.240.43.29...
+Connected<span class="w"> </span>to<span class="w"> </span><span class="m">10</span>.240.43.29.
+Escape<span class="w"> </span>character<span class="w"> </span>is<span class="w"> </span><span class="s1">&#39;^]&#39;</span>.
+
+Feng<span class="w"> </span>RackSwitch<span class="w"> </span>G8272.
+
+
+Enter<span class="w"> </span>login<span class="w"> </span>username:<span class="w"> </span>admin
+Enter<span class="w"> </span>login<span class="w"> </span>password:<span class="w"> </span>
+------------------------------------------------------------------
+NOTE:<span class="w"> </span>System<span class="w"> </span>dump<span class="w"> </span>exists<span class="w"> </span><span class="k">in</span><span class="w"> </span>FLASH.
+<span class="w">      </span>The<span class="w"> </span>dump<span class="w"> </span>was<span class="w"> </span>saved<span class="w"> </span>at<span class="w"> </span><span class="m">18</span>:44:14<span class="w"> </span>Wed<span class="w"> </span>Apr<span class="w"> </span><span class="m">11</span>,<span class="w"> </span><span class="m">2018</span>.
+<span class="w">      </span>Use<span class="w"> </span><span class="s1">&#39;copy flash-dump&#39;</span><span class="w"> </span>to<span class="w"> </span>extract<span class="w"> </span>the<span class="w"> </span>dumps<span class="w"> </span><span class="k">for</span><span class="w"> </span>analysis<span class="w"> </span>and
+<span class="w">      </span><span class="s1">&#39;clear flash-dump&#39;</span><span class="w"> </span>to<span class="w"> </span>clear<span class="w"> </span>the<span class="w"> </span>FLASH<span class="w"> </span>region.
+------------------------------------------------------------------
+RS<span class="w"> </span>G8272&gt;
+</code></pre></div>
+
+<p>Before we go further on how we are doing it, there is one important
+catch: <strong>switch may not allow multiple SSH session</strong>! Therefore, it's
+much better to share a session instead of each task opens its own.</p>
+<p>Using <a href="https://pexpect.readthedocs.io/en/stable/"><code>pexpect</code></a> is tedious, rigid (as it expects a certain
+sequence in text output from remote device, so randomly shown alert
+messages are the worst offender.), but it works.</p>
+<ol>
+<li>Telnet to IP.</li>
+<li>Enter username and pwd. <strong>Note</strong> that sometimes it will skip asking
+   username and will only require password. </li>
+<li>Once you logged in, you may be greeted by a prompt, eg <code>RS G8272&gt;</code>,
+   the only reliable piece is the "&gt;", the rest can change because it
+   is just a switch name.</li>
+<li>Send <code>en\n</code> to put this login session into a superuser mode. I
+   think this is optional because the login user may already be
+   configured to be a super user.</li>
+<li>For Enos, Send <code>no console\n</code> to turn off alerts. <strong>This is
+   important</strong>. Otherwise switch will throw at you all kinds of
+   messages, such as topology changed, detected logged in from IP
+   (actually that's you!). Anyway, just a best practice.</li>
+</ol>
+<p>I have to say that after so many tries, there isn't a reliable way to
+handle login session with confidence.</p>
+<h1>MAC table</h1>
+<p>Commands to use:</p>
+<ol>
+<li>ENOS: <code>show mac</code></li>
+<li>CNOS: <code>display mac address-table</code></li>
+</ol>
+<blockquote>
+<p>MAC table is saying: I see this <code>MAC</code> on <code>VLAN</code> on <code>port #</code>.</p>
+</blockquote>
+<p>MAC address table is the core of a switch &mdash; all the MACs it has
+learned by seeing it from a traffic. </p>
+<p>These MACs, however, are not necessarily from a device you know of!
+For example, a traffic from some external device flowing through this
+switch will certainly show up in this table with its MAC, but we have
+no way to derive information of the device who owns this MAC (a
+switch? a server? a router?). Further, MAC table changes ALL THE
+TIME. It is built up from traffic, thus its contents only reflects
+what this switch has seen (based on its update algorithm). We use it
+as a exhaustive list (everything this switch knows of), and relying to
+match with other meta, eg. I found this MAC to be an interface in this
+server, to connect the dots. <strong>This is the key of constructing a reality
+view of a physical topology</strong>.</p>
+<p>So from a traffic, we can capture:</p>
+<ol>
+<li>MAC of the source. Again, we know the MAC, but don't know who owns
+   it.</li>
+<li>VLAN id.</li>
+<li>Port number.</li>
+</ol>
+<h2>ENOS</h2>
+<p>Example of output:</p>
+<div class="highlight"><pre><span></span><code>RS<span class="w"> </span>G8272&gt;show<span class="w"> </span>mac
+Mac<span class="w"> </span>address<span class="w"> </span>Aging<span class="w"> </span>Time:<span class="w"> </span><span class="m">300</span><span class="w"> </span>
+
+<span class="w">     </span>MAC<span class="w"> </span>address<span class="w">       </span>VLAN<span class="w">     </span>Port<span class="w">    </span>Trnk<span class="w">  </span>State<span class="w">  </span>Permanent<span class="w">  </span>Openflow
+<span class="w">  </span>-----------------<span class="w">  </span>--------<span class="w">  </span>-------<span class="w">  </span>----<span class="w">  </span>-----<span class="w">  </span>---------<span class="w">  </span>--------
+<span class="w">  </span><span class="m">00</span>:00:0c:9f:f0:2f<span class="w">       </span><span class="m">1</span><span class="w">    </span><span class="m">48</span><span class="w">             </span>FWD<span class="w">                  </span>N<span class="w">    </span>
+<span class="w">  </span><span class="m">00</span>:00:0c:9f:f0:46<span class="w">     </span><span class="m">100</span><span class="w">    </span><span class="m">48</span><span class="w">             </span>FWD<span class="w">                  </span>N<span class="w">    </span>
+</code></pre></div>
+
+<h2>CNOS</h2>
+<p>Example of output:</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U37-SW&gt;display<span class="w"> </span>mac<span class="w"> </span>address-table
+<span class="w"> </span>VLAN<span class="w">     </span>MAC<span class="w"> </span>Address<span class="w">     </span>Type<span class="w">      </span>Ports<span class="w"> </span>
+<span class="w">  </span>-----+----------------+---------+-----------------------+
+<span class="w">  </span><span class="m">1</span><span class="w">      </span><span class="m">0000</span>.0c9f.f02f<span class="w">   </span>dynamic<span class="w">   </span>Ethernet1/54<span class="w"> </span>
+<span class="w">  </span><span class="m">1</span><span class="w">      </span><span class="m">0001</span>.7302.5c96<span class="w">   </span>dynamic<span class="w">   </span>Ethernet1/54<span class="w"> </span>
+</code></pre></div>
+
+<h1>switch name</h1>
+<p>Get switch name (if there is one, oh well). </p>
+<ol>
+<li>ENOS: <code>show run</code></li>
+<li>CNOS: <code>display run</code></li>
+</ol>
+<p>In both cases, search for pattern <code>hostname\s(?P&lt;hostname&gt;.*)</code> in
+<code>re.MULTILINE</code> mode. If there is no match, then the switch's hostname
+has not been set.</p>
+<h1>switch neighbors</h1>
+<ol>
+<li>ENOS: <code>show lldp remote-device</code></li>
+<li>CNOS: <code>display lldp neighbors</code></li>
+</ol>
+<p>This is an interesting one. Switch-to-switch links (we are talking
+about physical cable connections from A port to B port) can be pulled
+from a switch &larr; they refer to devices connected to a switch
+<strong>neighbors</strong>. This information is the foundation to draw a (physical)
+network topology such as:</p>
+<figure class="s12 center">
+    <img src="images/switch%20network%20topology.png"/>
+    <figcaption>Example of a switch-switch topology</figcaption>
+</figure>
+
+<h2>ENOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code>RS<span class="w"> </span>G8272#show<span class="w"> </span>lldp<span class="w"> </span>remote-device
+LLDP<span class="w"> </span>Remote<span class="w"> </span>Devices<span class="w"> </span>Information
+Legend<span class="o">(</span>possible<span class="w"> </span>values<span class="w"> </span><span class="k">in</span><span class="w"> </span>DMAC<span class="w"> </span>column<span class="o">)</span><span class="w"> </span>:
+NB<span class="w">   </span>-<span class="w"> </span>Nearest<span class="w"> </span>Bridge<span class="w">          </span>-<span class="w"> </span><span class="m">01</span>-80-C2-00-00-0E
+NnTB<span class="w"> </span>-<span class="w"> </span>Nearest<span class="w"> </span>non-TPMR<span class="w"> </span>Bridge<span class="w"> </span>-<span class="w"> </span><span class="m">01</span>-80-C2-00-00-03
+NCB<span class="w">  </span>-<span class="w"> </span>Nearest<span class="w"> </span>Customer<span class="w"> </span>Bridge<span class="w"> </span>-<span class="w"> </span><span class="m">01</span>-80-C2-00-00-00
+Total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>current<span class="w"> </span>entries:<span class="w"> </span><span class="m">19</span>
+
+LocalPort<span class="w"> </span><span class="p">|</span><span class="w"> </span>Index<span class="w"> </span><span class="p">|</span><span class="w"> </span>Remote<span class="w"> </span>Chassis<span class="w"> </span>ID<span class="w">         </span><span class="p">|</span><span class="w"> </span>Remote<span class="w"> </span>Port<span class="w">          </span><span class="p">|</span><span class="w"> </span>Remote<span class="w"> </span>System<span class="w"> </span>Name<span class="w">            </span><span class="p">|</span><span class="w"> </span>DMAC<span class="w">     </span>
+----------<span class="p">|</span>-------<span class="p">|</span>---------------------------<span class="p">|</span>----------------------<span class="p">|</span>-------------------------------<span class="p">|</span>---------
+<span class="m">1</span><span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">5</span><span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">68</span><span class="w"> </span><span class="m">05</span><span class="w"> </span>ca<span class="w"> </span><span class="m">62</span><span class="w"> </span>ef<span class="w"> </span>a5<span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">68</span>-05-ca-62-ef-a5<span class="w">    </span><span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w"> </span>NB<span class="w"> </span>
+<span class="m">2</span><span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">4</span><span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">68</span><span class="w"> </span><span class="m">05</span><span class="w"> </span>ca<span class="w"> </span><span class="m">62</span><span class="w"> </span>ef<span class="w"> </span>a4<span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">68</span>-05-ca-62-ef-a4<span class="w">    </span><span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w"> </span>NB<span class="w"> </span>
+<span class="m">3</span><span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">6</span><span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">68</span><span class="w"> </span><span class="m">05</span><span class="w"> </span>ca<span class="w"> </span><span class="m">62</span><span class="w"> </span>ee<span class="w"> </span>7d<span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">68</span>-05-ca-62-ee-7d<span class="w">    </span><span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w"> </span>NB<span class="w"> </span>
+<span class="m">4</span><span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">7</span><span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">68</span><span class="w"> </span><span class="m">05</span><span class="w"> </span>ca<span class="w"> </span><span class="m">62</span><span class="w"> </span>ee<span class="w"> </span>7c<span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">68</span>-05-ca-62-ee-7c<span class="w">    </span><span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w"> </span>NB<span class="w"> </span>
+<span class="m">5</span><span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">8</span><span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">68</span><span class="w"> </span><span class="m">05</span><span class="w"> </span>ca<span class="w"> </span><span class="m">62</span><span class="w"> </span>f3<span class="w"> </span>fd<span class="w">         </span><span class="p">|</span><span class="w"> </span><span class="m">68</span>-05-ca-62-f3-fd<span class="w">    </span><span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w"> </span>NB<span class="w"> </span>
+</code></pre></div>
+
+<h2>CNOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U37-SW&gt;display<span class="w"> </span>lldp<span class="w"> </span>neighbors
+Capability<span class="w"> </span>codes:
+<span class="w">  </span><span class="o">(</span>R<span class="o">)</span><span class="w"> </span>Router,<span class="w"> </span><span class="o">(</span>B<span class="o">)</span><span class="w"> </span>Bridge,<span class="w"> </span><span class="o">(</span>T<span class="o">)</span><span class="w"> </span>Telephone,<span class="w"> </span><span class="o">(</span>C<span class="o">)</span><span class="w"> </span>DOCSIS<span class="w"> </span>Cable<span class="w"> </span>Device
+<span class="w">  </span><span class="o">(</span>W<span class="o">)</span><span class="w"> </span>WLAN<span class="w"> </span>Access<span class="w"> </span>Point,<span class="w"> </span><span class="o">(</span>P<span class="o">)</span><span class="w"> </span>Repeater,<span class="w"> </span><span class="o">(</span>S<span class="o">)</span><span class="w"> </span>Station,<span class="w"> </span><span class="o">(</span>O<span class="o">)</span><span class="w"> </span>Other
+Device<span class="w"> </span>ID<span class="w">            </span>Local<span class="w"> </span>Intf<span class="w">      </span>Hold-time<span class="w">  </span>Capability<span class="w">  </span>Port<span class="w"> </span>ID<span class="w">        </span>
+<span class="w">                     </span>Ethernet1/7<span class="w">     </span><span class="m">120</span><span class="w">                                   </span>
+LCTC-R1U39-SW<span class="w">        </span>Ethernet1/48<span class="w">    </span><span class="m">120</span><span class="w">        </span>BR<span class="w">          </span>XGE4<span class="w">           </span>
+LCTC-R3U38-SW<span class="w">        </span>Ethernet1/54<span class="w">    </span><span class="m">120</span><span class="w">        </span>BR<span class="w">          </span><span class="m">1</span><span class="w">              </span>
+LCTC-R1U39-SW<span class="w">        </span>mgmt0<span class="w">           </span><span class="m">120</span><span class="w">        </span>BR<span class="w">          </span><span class="m">47</span><span class="w">             </span>
+
+Total<span class="w"> </span>entries<span class="w"> </span>displayed:<span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+
+<h1>switch port list</h1>
+<ol>
+<li>ENOS: <code>show lldp port</code></li>
+<li>CNOS: <code>display lldp interface all</code></li>
+</ol>
+<p>Each switch port represents an interface that has:</p>
+<ol>
+<li>A port number &mdash; in nearl all cases they are an <code>int</code>, but
+   switch management port can be in string such as <code>mgmt0</code> (I don't
+   think there is convention/default here.) So we need to treat this
+   value as <code>string</code>.</li>
+<li>A MAC. <blockquote>
+<p>Internally, MAC is normalized to format <code>AA:BB:CC</code> &larr; all capital</p>
+</blockquote>
+</li>
+<li><code>vlan</code> ID.</li>
+</ol>
+<h2>ENOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code>RS<span class="w"> </span>G8272&gt;show<span class="w"> </span>lldp<span class="w"> </span>port
+LLDP<span class="w"> </span>Port<span class="w"> </span>Info
+-<span class="w">  </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span>-
+Port<span class="w">    </span>MAC<span class="w"> </span>address<span class="w">       </span>MTU<span class="w">  </span>PortEnabled<span class="w"> </span>AdminStatus<span class="w"> </span>RxChange<span class="w"> </span><span class="nv">TrapNotify</span>
+<span class="o">=======</span><span class="w"> </span><span class="o">=================</span><span class="w"> </span><span class="o">====</span><span class="w"> </span><span class="o">===========</span><span class="w"> </span><span class="o">===========</span><span class="w"> </span><span class="o">========</span><span class="w"> </span><span class="o">==========</span>
+<span class="m">1</span><span class="w">       </span>a4:8c:db:9b:01:00<span class="w"> </span><span class="m">9216</span><span class="w"> </span>enabled<span class="w">     </span>tx_rx<span class="w">       </span>no<span class="w">       </span>disabled<span class="w"> </span>
+<span class="m">2</span><span class="w">       </span>a4:8c:db:9b:01:00<span class="w"> </span><span class="m">9216</span><span class="w"> </span>enabled<span class="w">     </span>tx_rx<span class="w">       </span>no<span class="w">       </span>disabled<span class="w"> </span>
+</code></pre></div>
+
+<h2>CNOS</h2>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U37-SW&gt;display<span class="w"> </span>lldp<span class="w"> </span>interface<span class="w"> </span>all
+Interface<span class="w"> </span>Name:<span class="w"> </span>Ethernet1/1
+--------------
+Interface<span class="w"> </span>Information<span class="w"> </span>
+<span class="w"> </span>Enable<span class="w"> </span><span class="o">(</span>tx/rx/trap<span class="o">)</span>:<span class="w"> </span>Y/Y/N<span class="w">   </span>Port<span class="w"> </span>Mac<span class="w"> </span>address:<span class="w"> </span>a4:8c:db:34:b2:03
+
+Interface<span class="w"> </span>Name:<span class="w"> </span>Ethernet1/2
+--------------
+Interface<span class="w"> </span>Information<span class="w"> </span>
+<span class="w"> </span>Enable<span class="w"> </span><span class="o">(</span>tx/rx/trap<span class="o">)</span>:<span class="w"> </span>Y/Y/N<span class="w">   </span>Port<span class="w"> </span>Mac<span class="w"> </span>address:<span class="w"> </span>a4:8c:db:34:b2:04
+
+Interface<span class="w"> </span>Name:<span class="w"> </span>mgmt0
+--------------
+Interface<span class="w"> </span>Information<span class="w"> </span>
+<span class="w"> </span>Enable<span class="w"> </span><span class="o">(</span>tx/rx/trap<span class="o">)</span>:<span class="w"> </span>Y/Y/N<span class="w">   </span>Port<span class="w"> </span>Mac<span class="w"> </span>address:<span class="w"> </span>a4:8c:db:34:b2:00
+</code></pre></div>
+
+<h3>management port</h3>
+<p>In CNOS, you can get management port directly (name, MAC) by using
+<code>display interface mgmt 0</code>:</p>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">LCTC</span><span class="o">-</span><span class="nx">R1U37</span><span class="o">-</span><span class="nx">SW</span><span class="p">&gt;</span><span class="w">  </span><span class="nx">display</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">mgmt</span><span class="w"> </span><span class="mi">0</span>
+<span class="nx">Interface</span><span class="w"> </span><span class="nx">mgmt0</span>
+<span class="w">  </span><span class="nx">Hardware</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">Management</span><span class="w"> </span><span class="nx">Ethernet</span><span class="w">  </span><span class="nx">Current</span><span class="w"> </span><span class="nx">HW</span><span class="w"> </span><span class="kd">addr</span><span class="p">:</span><span class="w"> </span><span class="nx">a48c</span><span class="p">.</span><span class="nx">db34</span><span class="p">.</span><span class="nx">b200</span>
+<span class="w">  </span><span class="nx">Physical</span><span class="p">:</span><span class="nx">a48c</span><span class="p">.</span><span class="nx">db34</span><span class="p">.</span><span class="nx">b200</span><span class="w">  </span><span class="nx">Logical</span><span class="p">:(</span><span class="k">not</span><span class="w"> </span><span class="nx">set</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">index</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nx">metric</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nx">MTU</span><span class="w"> </span><span class="mi">1500</span><span class="w"> </span><span class="nx">Bandwidth</span><span class="w"> </span><span class="mi">1000000</span><span class="w"> </span><span class="nx">Kbit</span>
+<span class="w">  </span><span class="nx">no</span><span class="w"> </span><span class="nx">bridge</span><span class="o">-</span><span class="nx">port</span>
+<span class="w">  </span><span class="nx">arp</span><span class="w"> </span><span class="nx">ageing</span><span class="w"> </span><span class="nx">timeout</span><span class="w"> </span><span class="mi">1500</span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nx">UP</span><span class="p">,</span><span class="nx">BROADCAST</span><span class="p">,</span><span class="nx">RUNNING</span><span class="p">,</span><span class="nx">ALLMULTI</span><span class="p">,</span><span class="nx">MULTICAST</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="nx">VRF</span><span class="w"> </span><span class="nx">Binding</span><span class="p">:</span><span class="w"> </span><span class="nx">Associated</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">management</span>
+<span class="w">  </span><span class="nx">Speed</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="nx">Mb</span><span class="o">/</span><span class="nx">s</span><span class="w"> </span><span class="nx">Duplex</span><span class="w"> </span><span class="nx">full</span>
+<span class="w">  </span><span class="nx">IPV6</span><span class="w"> </span><span class="nx">DHCP</span><span class="w"> </span><span class="nx">IA</span><span class="o">-</span><span class="nx">NA</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">enabled</span><span class="p">.</span>
+<span class="w">  </span><span class="nx">inet</span><span class="w"> </span><span class="m m-Double">10.240.41.147</span><span class="o">/</span><span class="mi">22</span><span class="w"> </span><span class="nx">broadcast</span><span class="w"> </span><span class="m m-Double">10.240.43.255</span>
+<span class="w">  </span><span class="nx">inet6</span><span class="w"> </span><span class="nx">fe80</span><span class="o">::</span><span class="nx">a68c</span><span class="p">:</span><span class="nx">dbff</span><span class="p">:</span><span class="nx">fe34</span><span class="p">:</span><span class="nx">b200</span><span class="o">/</span><span class="mi">64</span>
+<span class="w">  </span><span class="nx">RX</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="nx">input</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span><span class="mi">18446744073706907944</span><span class="w"> </span><span class="nx">unicast</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span><span class="mi">3025224</span><span class="w"> </span><span class="nx">multicast</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">2693333</span><span class="w"> </span><span class="nx">broadcast</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span><span class="mi">910620066</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span>
+<span class="w">  </span><span class="nx">TX</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">84138</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span><span class="mi">39832</span><span class="w"> </span><span class="nx">unicast</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span><span class="mi">44276</span><span class="w"> </span><span class="nx">multicast</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">30</span><span class="w"> </span><span class="nx">broadcast</span><span class="w"> </span><span class="nx">packets</span><span class="w"> </span><span class="mi">9839336</span><span class="w"> </span><span class="nx">bytes</span><span class="w"> </span>
+
+<span class="nx">Automatic</span><span class="w"> </span><span class="nx">policy</span><span class="w"> </span><span class="nx">provisioning</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">disabled</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="kd">interface</span>
+</code></pre></div>
+
+<h1>config a port's VLAN</h1>
+<p>There are 3 things we are interested in setting a switch port:</p>
+<ol>
+<li><strong>mode</strong>: two choices &mdash; <code>trunk</code> vs. <code>access</code>. In <code>trunk</code>
+   mode, you can then set <code>allowed vlans</code>; in <code>access</code> mode, this port
+   allows only ONE vlan, and that is its native vlan (see next).</li>
+<li><strong>native vlan</strong>: also called <code>untagged vlan</code> (in Netbox, for example)</li>
+<li><strong>allowed vlans</strong>: this is a list of VLAN ids that can flow through
+   this port. In order to set this, <code>mode</code> must be in <code>trunk</code> mode.</li>
+</ol>
+<h2>ENOS</h2>
+<p>To set configs in <code>trunk</code> mode:</p>
+<div class="highlight"><pre><span></span><code>en<span class="w">  </span>&lt;--<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>admin<span class="w"> </span>mode
+config<span class="w"> </span>terminal<span class="w">  </span>&lt;--<span class="w"> </span>to<span class="w"> </span>enter<span class="w"> </span>config<span class="w"> </span>mode
+interface<span class="w"> </span>port<span class="w"> </span>&lt;port<span class="w"> </span>id&gt;<span class="w">  </span>&lt;--<span class="w"> </span>to<span class="w"> </span><span class="k">select</span><span class="w"> </span>the<span class="w"> </span>port<span class="w"> </span>to<span class="w"> </span>config
+
+switchport<span class="w"> </span>mode<span class="w"> </span>trunk
+switchport<span class="w"> </span>trunk<span class="w"> </span>allow<span class="w"> </span>vlan<span class="w"> </span>&lt;<span class="m">1</span>,2,3...&gt;
+switchport<span class="w"> </span>trunk<span class="w"> </span>native<span class="w"> </span>vlan<span class="w"> </span>&lt;vlan<span class="w"> </span>id&gt;
+</code></pre></div>
+
+<p><strong>Note</strong>: you must set the native vlan last, and also must be sure
+that native vlan id is also part of the allowed vlans. For example, if
+we are to set native vlan to 1, and current allowed is "2,3,4,5", it
+will fail because 1 is not part of "2,3,4,5". Instead, you should set
+allowed to "1,2,3,4,5" first, then set native to 1.</p>
+<p>To set in <code>access</code> mode &rarr; <code>allowed vlan</code> is applicable anymore!</p>
+<div class="highlight"><pre><span></span><code>en
+config terminal
+interface port &lt;port id&gt;
+swithport mode access
+switchport access vlan &lt;vlan id&gt;
+</code></pre></div>
+
+<h3>check port config</h3>
+<p>Use <code>show interface port &lt;port id&gt;</code>. Example output:</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U39-SW#show<span class="w"> </span>interface<span class="w"> </span>port<span class="w"> </span><span class="m">10</span>
+Current<span class="w"> </span>port<span class="w"> </span><span class="m">10</span><span class="w"> </span>configuration:<span class="w"> </span>enabled,<span class="w"> </span>PVID/Native-VLAN<span class="w"> </span><span class="m">19</span>,<span class="w"> </span>Tagging/Trunk-mode
+<span class="w">    </span>ErrDisable<span class="w"> </span>recovery<span class="w"> </span>enabled
+<span class="w">    </span>Switch<span class="w"> </span>port
+<span class="w">    </span>STP:<span class="w"> </span>non-edge,<span class="w"> </span>auto<span class="w"> </span>link-type,<span class="w"> </span>global<span class="w"> </span>loop<span class="w"> </span>guard
+<span class="w">    </span>The<span class="w"> </span>Unicast<span class="w"> </span>storm<span class="w"> </span>control<span class="w"> </span>currently<span class="w"> </span>turned<span class="w"> </span>off
+<span class="w">    </span>The<span class="w"> </span>Multicast<span class="w"> </span>storm<span class="w"> </span>control<span class="w"> </span>currently<span class="w"> </span>turned<span class="w"> </span>off
+<span class="w">    </span>The<span class="w"> </span>Broadcast<span class="w"> </span>storm<span class="w"> </span>control<span class="w"> </span>currently<span class="w"> </span>turned<span class="w"> </span>off
+<span class="w">    </span><span class="m">802</span>.1p<span class="w"> </span>priority:<span class="w"> </span><span class="m">0</span>
+<span class="w">    </span>DSCP<span class="w"> </span>remarking<span class="w"> </span><span class="k">for</span><span class="w"> </span>port:<span class="w"> </span>disabled
+<span class="w">    </span>BPDU<span class="w"> </span>guard:<span class="w"> </span>disabled
+<span class="w">    </span>Static<span class="w"> </span>trunk<span class="w"> </span>distribution:<span class="w"> </span>disabled
+<span class="w">    </span>Flood<span class="w"> </span>blocking:<span class="w"> </span>disabled
+<span class="w">    </span>MAC<span class="w"> </span>address<span class="w"> </span>notification:<span class="w"> </span>disabled
+<span class="w">    </span>Tag<span class="w"> </span>ingress<span class="w"> </span>check<span class="w"> </span>skipping:<span class="w"> </span>disabled
+<span class="w">    </span>Tag<span class="w"> </span>egress<span class="w"> </span>check<span class="w"> </span>skipping:<span class="w"> </span>disabled
+<span class="w">    </span>L2<span class="w"> </span>Learning:<span class="w"> </span>enabled
+<span class="w">    </span>ACL<span class="w"> </span>Port<span class="w"> </span>config<span class="w"> </span>is<span class="w"> </span>empty
+<span class="w">    </span>UDLD:<span class="w"> </span>disabled,<span class="w"> </span>mode<span class="w"> </span>normal
+<span class="w">    </span>OAM:<span class="w"> </span>disabled,<span class="w"> </span>mode<span class="w"> </span>active
+<span class="w">    </span>EVB<span class="w"> </span>Profile:<span class="w"> </span><span class="m">0</span>
+<span class="w">    </span>Reflective<span class="w"> </span>Relay<span class="w"> </span>is<span class="w"> </span>configured<span class="w"> </span>off
+<span class="w">    </span>DHCP<span class="w"> </span>Snooping<span class="w"> </span>trust<span class="w"> </span>disable,<span class="w"> </span>limit<span class="w"> </span>rate:<span class="w"> </span>none
+<span class="w">    </span>Openflow:<span class="w"> </span>disabled
+<span class="w">    </span>VLANs:<span class="w"> </span><span class="m">2</span>-4,6,8-19
+<span class="w">    </span>Private-VLAN:<span class="w"> </span>disabled
+
+
+Current<span class="w"> </span>Port<span class="w"> </span><span class="m">10</span><span class="w"> </span>Gig<span class="w"> </span>link<span class="w"> </span>configuration:
+<span class="w">    </span>speed<span class="w"> </span><span class="m">10</span>/100/1000,<span class="w"> </span>mode<span class="w"> </span>auto,<span class="w"> </span>fctl<span class="w"> </span>none,<span class="w"> </span>auto<span class="w"> </span>on
+</code></pre></div>
+
+<h2>CNOS</h2>
+<p>Quite similar to ENOS commands. To set in <code>trunk</code> mode:</p>
+<div class="highlight"><pre><span></span><code>en<span class="w"> </span>&lt;--<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>admin<span class="w"> </span>mode
+configure<span class="w"> </span>&lt;--<span class="w"> </span>to<span class="w"> </span>enter<span class="w"> </span>config<span class="w"> </span>mode
+interface<span class="w"> </span>ethernet<span class="w"> </span><span class="m">1</span>/&lt;port<span class="w"> </span>id&gt;<span class="w">  </span>&lt;--<span class="w"> </span><span class="k">select</span><span class="w"> </span>port<span class="w"> </span>to<span class="w"> </span>config
+bridge-port<span class="w"> </span>mode<span class="w"> </span>trunk
+bridge-port<span class="w"> </span>trunk<span class="w"> </span>allowed<span class="w"> </span>vlan<span class="w"> </span>&lt;<span class="m">1</span>,2,3...&gt;
+bridge-port<span class="w"> </span>trunk<span class="w"> </span>native<span class="w"> </span>vlan<span class="w"> </span>&lt;vlan<span class="w"> </span>id&gt;
+</code></pre></div>
+
+<p>To set in <code>access</code> mode:</p>
+<div class="highlight"><pre><span></span><code>en<span class="w"> </span>&lt;--<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>admin<span class="w"> </span>mode
+configure<span class="w"> </span>&lt;--<span class="w"> </span>to<span class="w"> </span>enter<span class="w"> </span>config<span class="w"> </span>mode
+interface<span class="w"> </span>ethernet<span class="w"> </span><span class="m">1</span>/&lt;port<span class="w"> </span>id&gt;<span class="w">  </span>&lt;--<span class="w"> </span><span class="k">select</span><span class="w"> </span>port<span class="w"> </span>to<span class="w"> </span>config
+bridge-port<span class="w"> </span>mode<span class="w"> </span>access
+bridge-port<span class="w"> </span>access<span class="w"> </span>vlan<span class="w"> </span>&lt;vlan<span class="w"> </span>id&gt;
+</code></pre></div>
+
+<h3>check port config</h3>
+<p>Use <code>display interface ethernet 1/&lt;port id&gt;</code>. Example output:</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U37-SW<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#display interface ethernet 1/10</span>
+Interface<span class="w"> </span>Ethernet1/10
+<span class="w">  </span>Hardware<span class="w"> </span>is<span class="w"> </span>Ethernet<span class="w">  </span>Current<span class="w"> </span>HW<span class="w"> </span>addr:<span class="w"> </span>a48c.db34.b20c
+<span class="w">  </span>Physical:a48c.db34.b20c<span class="w">  </span>Logical:<span class="o">(</span>not<span class="w"> </span><span class="nb">set</span><span class="o">)</span>
+<span class="w">  </span>index<span class="w"> </span><span class="m">410100</span><span class="w"> </span>metric<span class="w"> </span><span class="m">1</span><span class="w"> </span>MTU<span class="w"> </span><span class="m">9216</span><span class="w"> </span>Bandwidth<span class="w"> </span><span class="m">10000000</span><span class="w"> </span>Kbit
+<span class="w">  </span>Port<span class="w"> </span>Mode<span class="w"> </span>is<span class="w"> </span>trunk
+<span class="w">  </span>&lt;UP,BROADCAST,RUNNING,ALLMULTI,MULTICAST&gt;
+<span class="w">  </span>VRF<span class="w"> </span>Binding:<span class="w"> </span>Not<span class="w"> </span>bound
+<span class="w">  </span>Speed<span class="w"> </span><span class="m">10000</span><span class="w"> </span>Mb/s<span class="w"> </span>Duplex<span class="w"> </span>full
+<span class="w">  </span>lacp<span class="w"> </span>suspend-individual<span class="w">  </span>admin:<span class="w"> </span>Individual<span class="w"> </span>-<span class="w"> </span>oper:<span class="w"> </span>Individual
+<span class="w">  </span>Last<span class="w"> </span>link<span class="w"> </span>flapped<span class="w"> </span><span class="m">05</span>:30:14<span class="w"> </span>
+<span class="w">  </span>Last<span class="w"> </span>clearing<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;display interface&quot;</span><span class="w"> </span>counters<span class="w"> </span><span class="m">05</span>:30:14<span class="w"> </span>
+<span class="w">  </span><span class="m">30</span><span class="w"> </span>seconds<span class="w"> </span>input<span class="w"> </span>rate<span class="w"> </span><span class="m">0</span><span class="w"> </span>bits/sec,<span class="w"> </span><span class="m">0</span><span class="w"> </span>bytes/sec,<span class="w"> </span><span class="m">0</span><span class="w"> </span>packets/sec<span class="w"> </span>
+<span class="w">  </span><span class="m">30</span><span class="w"> </span>seconds<span class="w"> </span>output<span class="w"> </span>rate<span class="w"> </span><span class="m">54779</span><span class="w"> </span>bits/sec,<span class="w"> </span><span class="m">6847</span><span class="w"> </span>bytes/sec,<span class="w"> </span><span class="m">74</span><span class="w"> </span>packets/sec<span class="w"> </span>
+<span class="w">  </span>Load-Interval<span class="w"> </span><span class="c1">#2: 5 minute (300 seconds) </span>
+<span class="w">     </span>input<span class="w"> </span>rate<span class="w"> </span><span class="m">0</span><span class="w"> </span>bps,<span class="w"> </span><span class="m">0</span><span class="w"> </span>pps<span class="p">;</span><span class="w"> </span>output<span class="w"> </span>rate<span class="w"> </span><span class="m">52657</span><span class="w"> </span>bps,<span class="w"> </span><span class="m">71</span><span class="w"> </span>pps<span class="w"> </span>
+<span class="w">  </span>RX<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>unicast<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>multicast<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>broadcast<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>bytes<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>jumbo<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>storm<span class="w"> </span>suppression<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>giants<span class="w">  </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>error<span class="w">  </span><span class="m">0</span><span class="w"> </span>short<span class="w"> </span>frame<span class="w">  </span><span class="m">0</span><span class="w"> </span>overrun<span class="w">  </span><span class="m">0</span><span class="w"> </span>underrun<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>watchdog<span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>down<span class="w"> </span>drop<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>with<span class="w"> </span>dribble<span class="w">  </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>discard<span class="o">(</span>includes<span class="w"> </span>ACL<span class="w"> </span>drops<span class="o">)</span><span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>Rx<span class="w"> </span>pause<span class="w"> </span>
+<span class="w">  </span>TX<span class="w"> </span>
+<span class="w">    </span><span class="m">2084</span><span class="w"> </span>unicast<span class="w"> </span>packets<span class="w">  </span><span class="m">1082832</span><span class="w"> </span>multicast<span class="w"> </span>packets<span class="w">  </span><span class="m">320046</span><span class="w"> </span>broadcast<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">1404962</span><span class="w"> </span>output<span class="w"> </span>packets<span class="w">  </span><span class="m">126644641</span><span class="w"> </span>bytes<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>jumbo<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>output<span class="w"> </span>errors<span class="w">  </span><span class="m">0</span><span class="w"> </span>collision<span class="w">  </span><span class="m">0</span><span class="w"> </span>deferred<span class="w">  </span><span class="m">0</span><span class="w"> </span>late<span class="w"> </span>collision<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>lost<span class="w"> </span>carrier<span class="w">  </span><span class="m">0</span><span class="w"> </span>no<span class="w"> </span>carrier<span class="w">  </span><span class="m">0</span><span class="w"> </span>babble<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>Tx<span class="w"> </span>pause<span class="w"> </span>
+<span class="w">  </span><span class="m">645</span><span class="w"> </span>interface<span class="w"> </span>resets<span class="w"> </span>
+
+Automatic<span class="w"> </span>policy<span class="w"> </span>provisioning<span class="w"> </span>is<span class="w"> </span>disabled<span class="w"> </span>on<span class="w"> </span>this<span class="w"> </span>interface
+</code></pre></div>
+
+<h1>Setup LACP</h1>
+<h2>ENOS</h2>
+<p>Official application guide is <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-xe-3se-5700-cr-book/sec-s1-xe-3se-5700-cr-book_chapter_010.html">here</a>.</p>
+<h3>enter config mode</h3>
+<p>First thing first, enter so called "config" mode:</p>
+<ol>
+<li>enter super user mode: <code>en</code></li>
+<li>enter config terminal: <code>config terminal</code></li>
+</ol>
+<div class="highlight"><pre><span></span><code>NOS<span class="w"> </span>version<span class="w"> </span><span class="m">10</span>.3.2.0<span class="w"> </span>FENG<span class="w"> </span>G8272,<span class="w"> </span>Wed<span class="w"> </span>Mar<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">12</span>:20:39<span class="w"> </span>PDT<span class="w"> </span><span class="m">2017</span>
+LCTC-R1U37-SW&gt;en
+LCTC-R1U37-SW#config
+Enter<span class="w"> </span>configuration<span class="w"> </span>commands,<span class="w"> </span>one<span class="w"> </span>per<span class="w"> </span>line.<span class="w">  </span>End<span class="w"> </span>with<span class="w"> </span>CNTL/Z.
+LCTC-R1U37-SW<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
+</code></pre></div>
+
+<h3>show LACP settings</h3>
+<p>To examine LACP setup: <code>show lacp info</code>. Example output is, for
+example, when enabled port 17 (while server side is not configured
+yet, thus showing as <em>suspended</em>):</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U39-SW<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#show lacp info</span>
+port<span class="w">    </span>mode<span class="w">    </span>adminkey<span class="w">  </span>operkey<span class="w">   </span>selected<span class="w">   </span>prio<span class="w">  </span>aggr<span class="w">  </span>trunk<span class="w">  </span>status<span class="w">  </span>minlinks
+----------------------------------------------------------------------------------
+<span class="m">1</span><span class="w">       </span>off<span class="w">            </span><span class="m">1</span><span class="w">        </span><span class="m">1</span><span class="w">     </span>no<span class="w">      </span><span class="m">32768</span><span class="w">    </span>--<span class="w">     </span>--<span class="w">    </span>--<span class="w">        </span><span class="m">1</span>
+<span class="m">17</span><span class="w">      </span>active<span class="w">        </span><span class="m">17</span><span class="w">       </span><span class="m">17</span><span class="w">  </span>suspended<span class="w">  </span><span class="m">32768</span><span class="w">    </span>--<span class="w">     </span>--<span class="w">   </span>down<span class="w">       </span><span class="m">1</span>
+</code></pre></div>
+
+<h3>link two ENOS switches</h3>
+<p>You need two ports on each switch to enable VLAG.</p>
+<p>On each switch:</p>
+<ol>
+<li>set STP: <code>spanning­tree mode pvrst</code></li>
+<li>remove existing ISL key if we are setting a new key: <code>no vlag isl adminkey</code></li>
+</ol>
+<p>On each port on this switch:</p>
+<ol>
+<li>select port: <code>interface port &lt;1-52&gt;</code></li>
+<li>set trunk mode: <code>switchport mode trunk</code></li>
+<li>set native vlan: <code>switchport trunk native vlan &lt;1-4094&gt;</code></li>
+<li>set allowed vlan: <code>switchport trunk allow vlan &lt;1,2,3,4...&gt;</code></li>
+<li>set LACP mode active: <code>lacp mode active</code></li>
+<li>set LACP key: <code>lacp key &lt;key&gt;</code> (the same key for all ports).</li>
+<li>to remove an existing key: <code>default lacp key</code>. <strong>Note</strong> that this
+     will succeed if you have removed ISL key first!</li>
+</ol>
+<p>Then on each switch:</p>
+<ol>
+<li>set to the same <code>vlag tier-id &lt;id&gt;</code>.</li>
+<li>set <code>vlag isl adminkey &lt;key&gt;</code>. This key <strong>must be
+   the same</strong> as the LACP keys.</li>
+<li>set <code>vlag hlthchk peer-ip &lt;ip&gt;</code> to the other switch's IP.</li>
+<li>enable vlag globally &larr; <code>vlag enable</code></li>
+</ol>
+<p>Example from <code>show running-config</code>:</p>
+<div class="highlight"><pre><span></span><code>interface<span class="w"> </span>port<span class="w"> </span><span class="m">45</span>
+
+<span class="w">        </span>lacp<span class="w"> </span>mode<span class="w"> </span>active
+
+<span class="w">        </span>lacp<span class="w"> </span>key<span class="w"> </span><span class="m">100</span>
+
+!
+
+interface<span class="w"> </span>port<span class="w"> </span><span class="m">46</span>
+
+<span class="w">        </span>lacp<span class="w"> </span>mode<span class="w"> </span>active
+
+<span class="w">        </span>lacp<span class="w"> </span>key<span class="w"> </span><span class="m">100</span>
+
+vlag<span class="w"> </span><span class="nb">enable</span>
+vlag<span class="w"> </span>tier-id<span class="w"> </span><span class="m">222</span>
+vlag<span class="w"> </span>hlthchk<span class="w"> </span>peer-ip<span class="w"> </span><span class="m">10</span>.240.43.54
+vlag<span class="w"> </span>isl<span class="w"> </span>adminkey<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+
+<h3>Link two ports on the same switch</h3>
+<p>There is another way to bind ports together. In ENOS world, it's
+called <code>PortChannel</code> (in CNOS it's called <code>port-aggregation</code>, see
+section next). See <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_AG_8-4.pdf">manual</a> page 178.</p>
+<ol>
+<li>Remove existing portchannel: <code>no portchannel &lt;id&gt;</code></li>
+<li>Select interface: <code>interface port &lt;id&gt;</code></li>
+<li>Setup each port that will be inlcuded in this bind. According to
+   <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/G8272_AG_8-4.pdf">manual</a>, all ports must have identical settings. This makes sense:</li>
+<li>mode: <code>switchport mode trunk</code> &larr; I think it must be trunk</li>
+<li>allowed vlans: <code>switchport trunk allow vlan &lt;1,2,3,4..&gt;</code></li>
+<li>native vlan: <code>switchport trunk native vlan &lt;id&gt;</code></li>
+<li>Add to bind: <code>portchannel &lt;channel id&gt; port &lt;port list 1,2,3,4&gt;</code></li>
+<li>Enable: <code>portchannel &lt;channel id&gt; enable</code></li>
+</ol>
+<h2>CNOS</h2>
+<h3>Link two ports on the same switch</h3>
+<p>It's called <code>aggregation-group</code> (see <a href="http://systemx.lenovofiles.com/help/topic/com.lenovo.rackswitch.g8272.doc/CNOS_AG_10-3.pdf">manual</a>). </p>
+<p>First, create and setup an <code>aggregation-group</code> (note that CLI uses <code>port-aggregation</code>!):</p>
+<ol>
+<li>Create aggregation group: <code>interface port-aggregation &lt;1-4096&gt;</code>.</li>
+<li>Set this LAG port to trunk mode: <code>bridge-port mode trunk</code>.</li>
+<li>Assign allowed vlans: <code>bridge-port trunk allowed
+   vlan &lt;comma delimiter list&gt;</code>, eg. <code>1-19,100-109,3999</code>.</li>
+<li><code>exit</code> &larr; so you can select other things to config.</li>
+</ol>
+<p>Second, set up the port you want to add to this aggregation:</p>
+<ol>
+<li>Select port to config: <code>interface ethernet 1/&lt;port&gt;</code>, eg. <code>1/17</code>
+   to select port #17.</li>
+<li>Set port in trunk mode: <code>bridge-port mode trunk</code></li>
+<li>Remove native vlan from port: <code>no bridge-port trunk native vlan</code>
+   &larr; this is super important. Otherwise, <code>aggregation-group &lt;id&gt;
+   mode on</code> will complain of <code>MISMATCH VLAN</code>.</li>
+<li>Assign proper list of allowed vlans: <code>bridge-port trunk allow vlan
+   ...</code> &larr; <strong>use the same VLAN list as above!</strong></li>
+<li>Add interface to aggregation group: <code>aggregation-group &lt;id&gt; mode
+   active</code>.</li>
+<li><code>exit</code> &larr; so you can select another port to run this config.</li>
+</ol>
+<p>To check status: <code>display interface port-aggregation &lt;1-4096&gt;</code> (or
+<code>display lacp internal info all</code>). Example output:</p>
+<div class="highlight"><pre><span></span><code>LCTC-R1U37-SW&gt;display<span class="w"> </span>interface<span class="w"> </span>port-aggregation<span class="w"> </span><span class="m">1</span>
+Interface<span class="w"> </span>po1
+<span class="w">  </span>Hardware<span class="w"> </span>is<span class="w"> </span>AGGREGATE<span class="w">  </span>Current<span class="w"> </span>HW<span class="w"> </span>addr:<span class="w"> </span>a48c.db34.b203
+<span class="w">  </span>Physical:<span class="o">(</span>not<span class="w"> </span><span class="nb">set</span><span class="o">)</span><span class="w">  </span>Logical:<span class="o">(</span>not<span class="w"> </span><span class="nb">set</span><span class="o">)</span>
+<span class="w">  </span>index<span class="w"> </span><span class="m">100001</span><span class="w"> </span>metric<span class="w"> </span><span class="m">1</span><span class="w"> </span>MTU<span class="w"> </span><span class="m">1500</span><span class="w"> </span>Bandwidth<span class="w"> </span><span class="m">20000000</span><span class="w"> </span>Kbit
+<span class="w">  </span>Port<span class="w"> </span>Mode<span class="w"> </span>is<span class="w"> </span>trunk
+<span class="w">  </span>&lt;UP,BROADCAST,MULTICAST&gt;
+<span class="w">  </span>VRF<span class="w"> </span>Binding:<span class="w"> </span>Not<span class="w"> </span>bound
+<span class="w">  </span>Members<span class="w"> </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>port-aggregation:<span class="w"> </span>
+<span class="w">    </span>Ethernet1/1,<span class="w"> </span>Ethernet1/17<span class="w"> </span>&lt;-----------------------------<span class="w"> </span>bond<span class="w"> </span>ports!
+<span class="w">  </span>lacp<span class="w"> </span>suspend-individual<span class="w">  </span>admin:<span class="w"> </span>Individual
+<span class="w">  </span>Last<span class="w"> </span>clearing<span class="w"> </span>of<span class="w"> </span><span class="s2">&quot;display interface&quot;</span><span class="w"> </span>counters<span class="w"> </span>never<span class="w"> </span>
+<span class="w">  </span><span class="m">30</span><span class="w"> </span>seconds<span class="w"> </span>input<span class="w"> </span>rate<span class="w"> </span><span class="m">1127679</span><span class="w"> </span>bits/sec,<span class="w"> </span><span class="m">140959</span><span class="w"> </span>bytes/sec,<span class="w"> </span><span class="m">151</span><span class="w"> </span>packets/sec<span class="w"> </span>
+<span class="w">  </span><span class="m">30</span><span class="w"> </span>seconds<span class="w"> </span>output<span class="w"> </span>rate<span class="w"> </span><span class="m">547359</span><span class="w"> </span>bits/sec,<span class="w"> </span><span class="m">68419</span><span class="w"> </span>bytes/sec,<span class="w"> </span><span class="m">325</span><span class="w"> </span>packets/sec<span class="w"> </span>
+<span class="w">  </span>Load-Interval<span class="w"> </span><span class="c1">#2: 5 minute (300 seconds) </span>
+<span class="w">     </span>input<span class="w"> </span>rate<span class="w"> </span><span class="m">9484929</span><span class="w"> </span>bps,<span class="w"> </span><span class="m">1001</span><span class="w"> </span>pps<span class="p">;</span><span class="w"> </span>output<span class="w"> </span>rate<span class="w"> </span><span class="m">16114524</span><span class="w"> </span>bps,<span class="w"> </span><span class="m">1761</span><span class="w"> </span>pps<span class="w"> </span>
+<span class="w">  </span>RX<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>unicast<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>multicast<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>broadcast<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>bytes<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>jumbo<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>storm<span class="w"> </span>suppression<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>giants<span class="w">  </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>error<span class="w">  </span><span class="m">0</span><span class="w"> </span>short<span class="w"> </span>frame<span class="w">  </span><span class="m">0</span><span class="w"> </span>overrun<span class="w">  </span><span class="m">0</span><span class="w"> </span>underrun<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>watchdog<span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>down<span class="w"> </span>drop<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>with<span class="w"> </span>dribble<span class="w">  </span><span class="m">0</span><span class="w"> </span>input<span class="w"> </span>discard<span class="o">(</span>includes<span class="w"> </span>ACL<span class="w"> </span>drops<span class="o">)</span><span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>Rx<span class="w"> </span>pause<span class="w"> </span>
+<span class="w">  </span>TX<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>unicast<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>multicast<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>broadcast<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>output<span class="w"> </span>packets<span class="w">  </span><span class="m">0</span><span class="w"> </span>bytes<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>jumbo<span class="w"> </span>packets<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>output<span class="w"> </span>errors<span class="w">  </span><span class="m">0</span><span class="w"> </span>collision<span class="w">  </span><span class="m">0</span><span class="w"> </span>deferred<span class="w">  </span><span class="m">0</span><span class="w"> </span>late<span class="w"> </span>collision<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>lost<span class="w"> </span>carrier<span class="w">  </span><span class="m">0</span><span class="w"> </span>no<span class="w"> </span>carrier<span class="w">  </span><span class="m">0</span><span class="w"> </span>babble<span class="w"> </span>
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>Tx<span class="w"> </span>pause<span class="w"> </span>
+<span class="w">  </span><span class="m">0</span><span class="w"> </span>interface<span class="w"> </span>resets<span class="w"> </span>
+
+Automatic<span class="w"> </span>policy<span class="w"> </span>provisioning<span class="w"> </span>is<span class="w"> </span>disabled<span class="w"> </span>on<span class="w"> </span>this<span class="w"> </span>interface
+</code></pre></div>
+
+<p>Have fun w/ switches ~~</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

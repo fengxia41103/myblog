@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2021-03-03
+
+
+    <a class="wave-effect" href="stock.html">
+      <i class="fa fa-folder-open-o"></i>
+      stock
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">Valuation of a Stock</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>Detail of a stock is the primary research tool where you get
+one-stop-shop of its numbers. Instead of duplicating common layouts
+such as Google Finance, Finviz, I'm hoping to provide a <em>better</em> user
+experience that focuses on how a reader of this page is to consume the
+information, not just throwing at him pile of facts &amp; data, which,
+though always impressive to begin with, is often overwhelming and
+creating a diminishing return of these information quickly.</p>
+<h1>Select a stock</h1>
+<p>To look at detail of a stock, select a symbol of list:</p>
+<figure class="col s12">
+  <img src="images/stock/stock%20list.png"/>
+  <figcaption>Stock list</figcaption>
+</figure>
+
+<p>Upon typing on the search bar, case-sensitive matching takes place
+automatically with a 1-second debounce. Matched one will then be
+highlighted. To return to the full list, simply clear the search bar.</p>
+<figure class="col s12">
+  <img src="images/stock/stock%20list%20filtered.png"/>
+  <figcaption>Stock list filtered</figcaption>
+</figure>
+
+<h1>Summary</h1>
+<figure class="col s12">
+  <img src="images/stock/stock%20detail%20summary.png"/>
+  <figcaption>Stock detail summary section</figcaption>
+</figure>
+
+<p>Three values that are less intuitive than others are:</p>
+<ul>
+<li>
+<p><code>DuPont ROE</code>: ROE computed using the Dupont model. This is based on
+  company's financial statements. If happened to be that this stock
+  doesn't have statement data, value will be 0, equivalent to an
+  invalid.</p>
+</li>
+<li>
+<p><code>ROE Gap %</code>: Since there is also <em>published</em> ROE, this value
+  indicates how far off the Dupont ROE from published one: <code>% =
+  (published-dupont)/published</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. Negative value will indicate that
+  consensus opinion is more <em>conservative</em> on this stock than I am.</p>
+</li>
+<li>
+<p><code>Top 10 Institution Owned %</code>: Counting the ownership of top 10
+  largest institutional owner/investor in this stock.</p>
+</li>
+</ul>
+<h1>Dupont ROE</h1>
+<p><a href="https://www.investopedia.com/terms/d/dupontanalysis.asp">Dupont model</a> is a <strong>decomposition</strong> of ROE.</p>
+<blockquote>
+<p>There are three major financial metrics that drive return on equity
+(ROE): operating efficiency, asset use efficiency and financial
+leverage. Operating efficiency is represented by net profit margin
+or net income divided by total sales or revenue. Asset use
+efficiency is measured by the asset turnover ratio. Leverage is
+measured by the equity multiplier, which is equal to average assets
+divided by average equity.</p>
+</blockquote>
+<p>What I like about this is the distinction of three different business models:</p>
+<ol>
+<li>
+<p><strong>high margin</strong>: reflected in high profit margin. Their unit profit
+   is good, think of high-end fashion. Downside of this type is that
+   increasing volume will work against high unit margin. Thus scaling
+   up by producing more is not the right strategy.</p>
+</li>
+<li>
+<p><strong>high turn over</strong>: think of Walmart, low unit margin, but huge
+   volume. This is the opposite of high margin model, and is the
+   dominant strategy by nearly all new entrants of an industry &larr;
+   selling things cheap is always a eyeball catcher.</p>
+</li>
+<li>
+<p><strong>high leverage</strong>: don't know yet how to read this value because it
+   feels a double-edge sword &mdash; can be interpreted as having the
+   good credit to borrow (assuming banks are not stupid), or, on the
+   other hand, loaded w/ debt and is in trouble. Further, this is
+   highly dependent on the macro when debt is cheap or expansive, and
+   I would even say the personality of CFO, as we all know, gamblers
+   stack high leverage, and conservative grandpa hates debt. A common
+   example of this model is the financial industry, whose foundation
+   is leverage.</p>
+</li>
+</ol>
+<p>ROE, or the published ROE you find online, is usually based on an
+averaged sales over multiple reporting periods, averaged assets, and
+so on, thus resulting a single number.  This tool, however, computes
+ROE for each reporting period, thus shedding lights on how ROE has
+changed over time<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<figure class="col s12">
+  <img src="images/stock/dupont%20roe%20chart.png"/>
+  <img src="images/stock/dupont%20roe%20values.png"/>
+  <figcaption>Example of Dupont Period-to-Period</figcaption>
+</figure>
+
+<p>Chart is normalized so to see its change easily. In this example
+above, MSFT's ROE runs around 30 year to year. Profit margin and asset
+turnover all went up in 2020 report, indicating a healthy business
+operation. Its equity multiplier dropped a bit, indicating it is
+taking on more debt than before. Considering MSFT's reputation, I
+wouldn't then worry about its increased debt, and further considering
+the cheap interest rate, it's likely a good strategy to leverage up in
+this period. For example, if you google <code>msft bond rate</code>, MSFT is
+running at <a href="https://cbonds.com/bonds/87917/#:~:text=International%20bonds%3A%20Microsoft%2C%203.625%25%2015dec2023%2C%20USD%20(US594918AW47)"><code>3.625%</code></a>, making borrowing money quite cheap for MSFT.</p>
+<h1>Net Asset per Share</h1>
+<p><a href="https://www.investopedia.com/terms/a/asset-based-approach.asp">Net asset</a> valuation is often applied to company that will be
+liquidated. Here I'm applying a simple version: <code>(total asset - total
+liabilities)/shares</code>. The idea is that if I pay off all liabilities,
+what's left for stockholder, assuming you get asset for its book
+value. Of course, this is a very rough estimation.</p>
+<figure class="col s12">
+  <img src="images/stock/net%20asset.png"/>
+  <figcaption>Example of Net Asset per Share</figcaption>
+</figure>
+
+<p>However, there is also an important underline assumption that <strong>asset
+will grow together with business</strong> &larr; essentially the company is
+becoming bigger and bigger, and that biggness is in term of its
+assets. Therefore, if it is deemed a healthy business, growing net
+assets per share should be an indicator of its success. Using the
+example above, BFAM's NAV grew from $12 to $21. Considering it is
+acquiring more daycare centers and probably equipment with them, I am
+taking this trend as a healthy growth of the business.</p>
+<h1>DCF</h1>
+<p>Yeah I did quite some DCFs back in the MBA days, and sadly, I almost
+forgot how to do it. So here it is, bringing back some memories.</p>
+<figure class="col s12">
+  <img src="images/stock/dcf.png"/>
+  <figcaption>Example of DCF</figcaption>
+</figure>
+
+<p>DCF has a <strong>lot of assumptions</strong>. So I really don't see how to verify
+or beat the market on all these dials single-handedly. Play with your
+scenario by tweaking the input fields see how it will affect the
+valuation<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>. <strong>Note</strong> that terminal rate has a dramatic impact on the
+valuation. So be prudent in your projection. Also, if your target is
+an ETF, there won't be a DCF because it doesn't have balance sheet.</p>
+<h1>Balance Sheet</h1>
+<p>Balance sheet data are the largest data set. See <a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#balance_sheet">yahooquery doc</a>
+for available data points. I found raw numbers on a balance sheet are
+rather pointless because human brain isn't good at processing
+them. Further, knowing one's asset is 2.3B is meaningless, but its
+changing from 2.3B to 2300B in one period is revealing! Therefore, for
+balance sheet analysis, I'm not listing any reported numbers, but are
+focusing on % of a total, and the same index change % from one period
+to next.</p>
+<figure class="col s12">
+  <img src="images/stock/balance%20sheet.png"/>
+  <figcaption>Example of balance sheet</figcaption>
+</figure>
+
+<p>I want to be conservative. Therefore, more attention is given to debt
+and liability.</p>
+<ul>
+<li>
+<p><code>equity multiplier</code>: <code>= asset / equity</code>. Since <code>asset=debt+equity</code>,
+  the higher this multiplier is, the more debt this company is taking,
+  thus more leveraged. This, of course, is a double edged sword. It
+  can mean that it has capability to raise debt (w/ lenders), thus
+  using less equity to do business; it an also mean it's loaded w/
+  debt and is in trouble.</p>
+</li>
+<li>
+<p><code>debt to equity ratio</code>: <code>= total debt/equity</code>.  Similar to the
+  equity multiplier, I'm trying to understand how bad the company is
+  relying on debt. So, if debt is 60%, and equity is 40%, it will be
+  6:4=1.5. Therefore, the higher this number is, the more leveraged
+  this company is.</p>
+</li>
+<li>
+<p><code>liability/asset %</code>: <code>= total liability/total assets</code>. I'm assuming
+  if the company is liquidating, will its asset enough to pay off its
+  liability<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. Without consideration of discount, relative change
+  among periods are still valid.</p>
+</li>
+</ul>
+<h2>period-to-period changes</h2>
+<ul>
+<li>
+<p><code>debt % of asset</code>: <code>= total debt / total assets</code>. Debt is long-term
+  liability. Ideally you also need to discount liability for its
+  market value, not using its book value. In the example above, about
+  50% of assets are debts. Debts are often renewed so a company
+  constantly borrows. So my understanding is that a stable % is fine;
+  a sudden change will signal health issue or a strategy shift.</p>
+</li>
+<li>
+<p><code>debt %</code>: <code>= growth of total debt</code> from p1 to p1. Value of the first
+  reporting period will be set to 0 as it has no <em>previous</em>
+  one. Similar to the <code>debt % of asset</code> above, it measures how quickly
+  a company is accruing debts. Negative value will be highlighted
+  because the debt is decreasing, a good sign.</p>
+</li>
+<li>
+<p><code>account payable %</code>: <code>= growth of AP</code>. AP is a liability. I feel in
+  business AP can grow for two reasons: company is not paying off
+  vendors because it's poor, or being greedy to use AP as free deposit
+  for interest. AP decrease may either be a healthy sign that company
+  has money to pay, or that vendors are losing faith in this business.</p>
+</li>
+<li>
+<p><code>account receivable %</code>: <code>= growth of AC</code>. The counterpart of AP. If
+  it grows, it's a bad sign that customers are not paying.</p>
+</li>
+<li>
+<p><code>cash %</code>: <code>= growth of cash, cash equivalents, and short-term
+  investment</code>. In other words, anything one an quickly turn into cash
+  are counted. If it grows, I take it as a positive sign.</p>
+</li>
+<li>
+<p><code>working capital %</code>: as name. Working capital = current assets -
+  current liabilities. In other words, this measures how much a
+  company needs to keep its business going, like a filler. If it
+  grows, then the gap is enlarging, which puts more burden in
+  borrowing to get a bigger filler.</p>
+</li>
+<li>
+<p><code>net PP&amp;E %</code>: as name.  PP&amp;E is a long-term investment. It's a
+  signal how much they are investing into the future production.</p>
+<p>Think about this. If you are going to run away, will u want to
+  invest into a factory, or keep cash? So, I think a positive
+  change is a good thing.</p>
+</li>
+</ul>
+<h1>Income Statement</h1>
+<p>See <a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#income_statement">yahooquery doc</a> for available data points. Again, raw numbers are not helpful. Instead, % of a total is useful, eg. profit margin.</p>
+<figure class="col s12">
+  <img src="images/stock/income%20statement.png"/>
+  <img src="images/stock/income%20statement%20values.png"/>
+  <figcaption>Example of income statement</figcaption>
+</figure>
+
+<ul>
+<li>
+<p><code>COGS margin %</code>: <code>= cogs/revenue</code>. Total cost to bring in that much
+  revenue. I'm expecting it to be rather stable if a business is run
+  well.</p>
+</li>
+<li>
+<p><code>operating income margin %</code>: <code>= operating income/operating
+  revenue</code>. The higher it is, the higher operating margin there are,
+  thus more efficient.</p>
+</li>
+<li>
+<p><code>operating expanse margin %</code>: <code>= operating expanse/operating
+  revenue</code>. These are direct cost to earn those revenue. The lower,
+  the better. However, if we look at <code>operating income margin</code>
+  together with this, you will find their sum is not 100%! What is
+  missing is the operation overhead.</p>
+</li>
+<li>
+<p><code>OPEX margin %</code>: <code>= OPEX/revenue</code>.</p>
+</li>
+<li>
+<p><code>EBIT margin %</code>: <code>= EBIT/revenue</code>.</p>
+</li>
+<li>
+<p><code>total expanse margin</code>: <code>= total expanse/revenue</code>.</p>
+</li>
+</ul>
+<h1>Cash Flow Statement</h1>
+<p>See <a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#cash_flow">yahooquery doc</a> for available data points. In this analysis,
+all values are converted to <code>B</code>. As a layman, I think the more cash
+you have, the better.</p>
+<figure class="col s12">
+  <img src="images/stock/cash%20flow.png"/>
+  <img src="images/stock/cash%20flow%20values.png"/>
+  <figcaption>Example of Cash Flow Statement</figcaption>
+</figure>
+
+<ul>
+<li>
+<p><code>cash growth from beginning</code>: <code>= (ending cash - beginning
+  cash)/beginning</code>. This measures how much cash grew in that reporting
+  period. I take this as a sign of how profitable the business is.</p>
+</li>
+<li>
+<p><code>operating cash from prev %</code>: how much operating cash grew from
+  previous report. I focus on operating cash because it represents
+  what this business is about. Income, on the other hand, can be
+  generated not through its core business, but some fancy accounting
+  or financial activity (eg. bought bitcoin early) &larr; these are
+  not what this business is, but luck. So if this index is growing, I
+  take the biz is growing stronger.</p>
+</li>
+<li>
+<p><code>FCF/operating CF</code>: how much operating cash ended up being free
+  cash. The higher, the less overhead/debt one needs to pay off from
+  operating cash flow, thus healthier.</p>
+</li>
+<li>
+<p><code>FCF/net income</code>: a good explanation <a href="https://www.morningstar.com/invglossary/cash_flow_from_operations.aspx">here</a>:</p>
+<blockquote>
+<p>If net income is much larger than cash flow from operations, it's a
+signal that the company's earnings quality-the usefulness of
+earnings-is questionable. If cash flow from operations exceeds net
+income, on the other hand, the company may be much healthier than
+its net income suggests.</p>
+</blockquote>
+</li>
+<li>
+<p><code>operating CF/net income</code>: just because.</p>
+</li>
+</ul>
+<h1>valuation ratios</h1>
+<p>These are published ratios taken from <a href="https://yahooquery.dpguthrie.com/guide/ticker/financials/#valuation_measures">yahooquery</a>. I'm taking them
+on face value as a reference point.</p>
+<figure class="col s12">
+  <img src="images/stock/valuation%20ratios.png"/>
+  <img src="images/stock/valuation%20ratios%20values.png"/>
+  <figcaption>Example of valuation ratios</figcaption>
+</figure>
+
+<p>In this example, BFAM's PE grew from 49.76 in 12/31/2019 to now 364.38
+on 3/3/2021. Alarming, isn't it!? If accepting this, we are saying
+this business grew 7x more valuable in just one year, 2020, and don't
+forget 2020 was the Corvid year! Doesn't make sense, does it?</p>
+<p>On the other hand, P/B decreased from 9.73 &rarr; 7.76 over the same
+period. Therefore, we actually need to find out what these <em>book
+values</em> came from, as it must have grown a lot in 2020. If they are
+assets useful for operation, it's a good thing; otherwise, remember,
+liability is part of asset also (since debt can actually be sold, thus
+has value!). So growing asset can also be that it's taking on more
+debts, which, in my opinion, is not a good thing.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Whenever there is a published alternative to a computed one, it
+will always cast doubt when the two are different. Comparison as
+this is an attempt to measure how accurate source data are, and
+how accurate my computation is. Even assuming these two are
+perfect, a substantial gap would imply that I'm missing
+information which the concensus value has included (of course,
+here I'm assuming the published value is itself dependable).&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Smoothing always troubles me because it can mask outliers
+without good reasoning. An outlier can either be a noise that
+skews result, or a signal that something is wrong. Overall, I
+prefer a business who runs rather like a stable ship, not a bumper
+cart.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>I thought of building a sensitivity analysis. However, the
+general impact of each factor can be understood without using a
+specific stock. Further, combination of these factors can grow to
+a large matrix, and presenting all of them may seem impressive,
+but defeats the purpose making data consumable by a user.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Asset value is using its book value. In reality, this should be
+discounted as some assets may have no buyer. Further, intangible
+asset such as reputation should be heavily discounted or removed
+entirely since I'm really thinking of this in case of the company
+being troubled, and then its name won't be worth much.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

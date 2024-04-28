@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: Reveal frontpage
+# name: Reveal frontpage personal
 # contributor: feng xia
-# key: .frontpage
+# key: .frontpage-personal
 # --
 
 <section data-background-image="${1:images/DSC_1280730.JPG}"

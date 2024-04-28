@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
 # name: Reveal frontpage NC
 # contributor: feng xia
-# key: .frontpage
+# key: .frontpage-nc
 # --
 
-<section data-background-image="${1:images/nc-seal.png}"
+<section data-background-image="${1:../images/nc-seal.png}"
          data-background-opacity="0.8">
   <div class="side-overlay">
   </div>
@@ -16,7 +16,7 @@
       ${3:Default Title}
   </h1>
   <p>
-    <a href="mail:feng.xia@dhhs.nc.gov">Feng Xia</a> | `(format-time-string "%Y-%m-%d")`
+    <a href="mail:feng.xia@dhhs.nc.gov">CWIS Architecture Team</a> | `(format-time-string "%Y-%m-%d")`
   </p>
   </div>
 </section>
@@ -35,3 +35,7 @@
 ## ${6: First topic}
 
 $0
+
+---
+
+Thank you

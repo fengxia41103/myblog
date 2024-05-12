@@ -738,7 +738,7 @@ Add local workspace to manage multiple repositories:
 
 #+BEGIN_SRC emacs-lisp
 (setq magit-repository-directories
-      `(("~/workspace/mycompany" . 2)))
+      `(("~/workspace/dhhs" . 2)))
 (setq magit-repolist-columns
       '(("Name"    30 magit-repolist-column-ident ())
         ("Local On" 35 magit-repolist-column-branch ())
@@ -764,6 +764,14 @@ Turn on ANSI-COLOR:
 
 (advice-add 'magit-process-filter :after 'color-buffer)
 #+END_SRC
+
+
+Based on [[https://emacs.stackexchange.com/questions/19176/manage-several-git-repositories-from-magit][SO]]:
+#+begin_src emacs-lisp
+(magit-add-section-hook 'magit-status-sections-hook
+                        'magit-insert-modules
+                        'magit-insert-unpulled-from-pushremote)
+#+end_src
 *** monky
 Add the Magit-copy for Mercurial 'monky'
 
@@ -3105,7 +3113,6 @@ It is possible to capture an email to org as todo shown [[https://www.djcbsoftwa
   (define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
   (define-key mu4e-view-mode-map    (kbd "C-c c") 'mu4e-org-store-and-capture)
 #+end_src
-
 
 
 ** slack

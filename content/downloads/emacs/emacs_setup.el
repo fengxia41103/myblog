@@ -240,7 +240,7 @@ and the tangled file is compiled."
   :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
 
 (setq magit-repository-directories
-      `(("~/workspace/mycompany" . 2)))
+      `(("~/workspace/dhhs" . 2)))
 (setq magit-repolist-columns
       '(("Name"    30 magit-repolist-column-ident ())
         ("Local On" 35 magit-repolist-column-branch ())
@@ -261,6 +261,10 @@ and the tangled file is compiled."
     (read-only-mode 1)))
 
 (advice-add 'magit-process-filter :after 'color-buffer)
+
+(magit-add-section-hook 'magit-status-sections-hook
+                        'magit-insert-modules
+                        'magit-insert-unpulled-from-pushremote)
 
 (use-package monky
   :ensure t

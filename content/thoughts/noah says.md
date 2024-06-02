@@ -3,7 +3,7 @@ Date: 2019-11-07 07:58
 Tags: thoughts
 Slug: noah says
 Author: Feng Xia
-Modified: 2023-02-26 11:21
+Modified: 2024-06-02 17:39
 
 This is to keep track what Noah says these days, some smart
 remarks. But first of all, let me vent what this kid is like, this
@@ -167,3 +167,11 @@ been burned off by fire. So I asked what happened to it, he replied:
     Chinese native would have interpreted the line on such a face
     value, but he did.. it was just halirious! I think this will be a
     great item for some foreigner's TOEFL test someday.
+
+21. 5/29/2024 Sitting at a high table McDonald's after his swim
+    training at night. I said, "I'm thinking to get a 大house, you
+    know, with a big yard...你觉得这主意怎么样?" He shook his head. "
+    不好吗？" Shaking head.. "为啥?" "你一take eyes off,它就跑了
+    "... huh? I couldn't understand what he was saying.. "huh? 为啥它
+    就跑了?" "你看，你不是说大hao4 (s)zi1 么，你不看它它就跑了".. then
+    I suddenly realized, he meant 大house as 大耗子. Hahahaha!!!!

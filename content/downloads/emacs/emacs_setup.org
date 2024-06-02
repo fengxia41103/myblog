@@ -1,4 +1,4 @@
-o+TITLE: Feng's Emacs configuration
++TITLE: Feng's Emacs configuration
 #+AUTHOR: Feng Xia
 #+BABEL: :cache yes
 #+PROPERTY: header-args :tangle yes
@@ -742,11 +742,11 @@ Add local workspace to manage multiple repositories:
 (setq magit-repolist-columns
       '(("Name"    30 magit-repolist-column-ident ())
         ("Local On" 35 magit-repolist-column-branch ())
-        ("Bch" 3 magit-repolist-column-branches ())
-        ("B<U"      3 magit-repolist-column-unpulled-from-upstream
+        ("B" 4 magit-repolist-column-branches ())
+        ("L<U" 3 magit-repolist-column-unpulled-from-upstream
          ((:right-align t)
           (:help-echo "Upstream changes not in branch")))
-        ("B>U"      3 magit-repolist-column-unpushed-to-upstream
+        ("L>U" 3 magit-repolist-column-unpushed-to-upstream
          ((:right-align t)
           (:help-echo "Local changes not in upstream")))
        ))

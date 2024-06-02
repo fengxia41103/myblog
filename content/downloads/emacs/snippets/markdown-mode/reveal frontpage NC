@@ -16,7 +16,7 @@
       ${3:Default Title}
   </h1>
   <p>
-    <a href="mail:feng.xia@dhhs.nc.gov">CWIS Architecture Team</a> | `(format-time-string "%Y-%m-%d")`
+  <a href="mail:CWIS_Architecture_Team@dhhs.nc.gov">CWIS Architecture Team</a> | `(format-time-string "%Y-%m-%d")`
   </p>
   </div>
 </section>

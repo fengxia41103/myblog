@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2016-12-08
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Setup a MAAS Virtualbox lab</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>Canonical <a href="http://maas.io/">MAAS</a> is a deployment tool that can give a bare metal
+life by putting an OS on it. Working together with <a href="https://www.ubuntu.com/cloud/juju">Juju</a>, they can
+setup a cluster of applications quite quickly. Think of them as a
+package manage like Ubuntu's <code>apt-get</code>, but in the context of a
+cloud. Interesting.</p>
+<p>This article shows how to setup a virtual lab so one can play with
+these two tools and get a sense of what they do. The whole setup is
+based on Virtualbox. One thing I found out the hard way is that
+despite their nice looking website and rather recent project history,
+there is no single document that can bring this environment live from
+A to Z. All official documents have out-of-date commands here and
+there which made following them useless. I consulted countless blogs,
+posts, chasing down bugs (or I thought they were bugs), and finally
+when everything works, it became so obvious and simple. Hopefully this
+article will shorten this journey for readers and they can have this
+environment easily.</p>
+<h1>Baseline environment</h1>
+<p><strong>Virtualbox 5.1.10 and its extension pack</strong>. I could not verify why
+this particular version worked. I had 5.1.8 and the first
+successful trial occurred after I upgraded to 5.1.10. Was that a
+coincidence? Without being able to reproduce this, I am merely
+documenting what I have.</p>
+<h1>Network topology</h1>
+<p>Getting network configurations right is the key for success. The
+biggest <strong>gotcha</strong> is that MAAS server <strong>must</strong> be the DHCP server on
+its managing subnet! The official document talks about "if there is an
+existing DHCP, points it to the MAAS server", huh? I never figured
+that out, so don't listen to that.</p>
+<p>There will be two VMs and one internal network, <code>intnet1</code>.</p>
+<ol>
+<li><strong>VM #1</strong>: is the MAAS server. Use Xenial 16.04 desktop image.</li>
+<li><strong>VM #2</strong>: is an emulated BM.</li>
+<li><code>intnet1</code>: is a subnet (192.168.8.0/24) that MAAS server will
+   live together with its managed nodes (I call them targets).</li>
+</ol>
+<figure class="s12 center">
+  <img src="images/maas_networking_topology.png"/>
+  <figcaption>MAAS Virtualbox lab networking topology</figcaption>
+</figure>
+
+<h1>Setup instructions</h1>
+<p>Personally I dislike those step-by-step instructions because first of
+all, it is intimidating; secondly, each environment is a bit
+different, so how confident user will feel to duplicate other's
+success? Not much. I'll explain thoughts and lessons learned along the
+way. I think that is more useful even from the point that Google may
+pick up a few words here and will help others if they search.</p>
+<h2>Install MAAS server, admin account, subnet</h2>
+<p>MAAS server uses Ubuntu 16.04 Xenial image. Setup the
+networking to have two interfaces &mdash; one uses default NAT so you
+have internet access, while the other uses <strong>Internal Network</strong> with
+name <code>intnet1</code>.</p>
+<blockquote>
+<p>Defining the subnet managed by MAAS server is the most imporant step
+  in MAAS configuration.</p>
+</blockquote>
+<ol>
+<li>
+<p>Config subnet <code>intnet1</code>. Define it as <code>192.168.8.x</code> (This is
+   completly arbitrary. Use whatever network range you want to
+   use). Use <code>ifconfig</code> to find out interface name that corresponds to
+   <code>intnet1</code> (a clue: the one that has no IP assigned):</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="nx">shell</span>
+<span class="err">$</span><span class="w"> </span><span class="nx">nano</span><span class="w"> </span><span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">network</span><span class="o">/</span><span class="nx">interfaces</span>
+
+<span class="kt">auto</span><span class="w"> </span><span class="nx">enp0s9</span>
+<span class="nx">iface</span><span class="w"> </span><span class="nx">enp0s9</span><span class="w"> </span><span class="nx">inet</span><span class="w"> </span><span class="nx">static</span>
+<span class="nx">address</span><span class="w"> </span><span class="m m-Double">192.168.8.1</span>
+<span class="nx">netmask</span><span class="w"> </span><span class="m m-Double">255.255.255.0</span>
+<span class="nx">gateway</span><span class="w"> </span><span class="m m-Double">192.168.8.1</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">setup</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">MAAS</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">gateway</span><span class="p">!</span>
+<span class="err">```</span>
+</code></pre></div>
+
+<p>At Virtualbox level we have added an interface to this VM using
+<code>Internal Network</code>, we need then define this network in VM. Also,
+defining this before installing MAAS will have MAAS installer pick
+up this subnet automatically so to save some manual work down the
+road.</p>
+</li>
+<li>
+<p>Install MAAS is simple. Don't bother with other methods.</p>
+<div class="highlight"><pre><span></span><code>```shell
+sudo add-apt-repository ppa:maas/stable
+sudo apt update
+sudo apt install maas
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Create MAAS admin: </p>
+<div class="highlight"><pre><span></span><code>```shell
+sudo maas createadmin
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Create SSH key and copy content from <code>~/.ssh/id_rsa.pub</code>:</p>
+<div class="highlight"><pre><span></span><code>```shell
+mkdir .ssh
+ssh-keygen -t rsa
+less ~/.ssh/id_rsa.pub
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Login in <code>http://localhost:5240/MAAS</code> using admin created in step
+  3, goto user preference (click <strong>user name</strong>).
+  select <code>upload</code> and paste step 4's content into the text box. This is
+  the public key that will be copied to each MAAS target at
+  deployment so later you can SSH into these targets without knowing
+  the password.</p>
+<p><figure class="s12 center">
+  <img src="images/maas%20ssh%20key.png"/>
+  <figcaption>MAAS upload SSH key</figcaption>
+</figure></p>
+</li>
+<li>
+<p>Setup MAAS gateway. This was actually asked when installing MAAS
+    server. But I missed this and ended up spending 5 days debugging a
+    <em>strange</em> issue where provisioned node can not ping outside world.
+    In short, set MAAS default gateway to be the IP of the MAAS
+    server, in our case, <code>192.168.8.1</code>!</p>
+<p><figure class="s12 center">
+  <img src="images/maas%20default%20gateway.png"/>
+  <figcaption>MAAS default gateway</figcaption>
+</figure></p>
+</li>
+</ol>
+<p>At this point, the MAAS server is installed and user can login the web
+admin console. Next, setup firewall rules on MAAS server so it can be
+the router for managed subnet.</p>
+<h2>MAAS server firewall rules</h2>
+<p>Install <a href="https://help.ubuntu.com/community/UFW">UFW</a>. UFW is infinitely easier to use than iptables. Making
+the MAAS server as a router is necessary because targets, once
+acquired an OS, will need internet access in order to APT other
+things. (If using real metal server, the server can be connected to
+multiple VLANs among which one is providing internet access.)</p>
+<h3>Masquerading</h3>
+<p>Following the <a href="https://help.ubuntu.com/lts/serverguide/firewall.html">instructions</a> to enable default port forwarding:</p>
+<ol>
+<li>
+<p>Packet forwarding needs to be enabled in ufw. Two configuration
+   files will need to be adjusted, in <code>/etc/default/ufw</code> change the
+   <code>DEFAULT_FORWARD_POLICY</code> to <code>ACCEPT</code>:</p>
+<div class="highlight"><pre><span></span><code>```shell
+DEFAULT_FORWARD_POLICY=&quot;ACCEPT&quot;
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Then edit <code>/etc/ufw/sysctl.conf</code> and uncomment:</p>
+<div class="highlight"><pre><span></span><code>```shell
+net/ipv4/ip_forward=1
+net/ipv6/conf/default/forwarding=1
+```
+</code></pre></div>
+
+</li>
+</ol>
+<h3>Firewall policies</h3>
+<blockquote>
+<p>Enabling UFW will deny all access (except the current ssh
+session). So before anything, allow port 22!</p>
+</blockquote>
+<p>To config MAAS server to route 192.168.8.x subnet traffic to internet
+using UFW is simple. Using <code>ifconfig</code> to find the interface name that
+is connected to the internet(NAT), in this example, <code>enp0s3</code>:</p>
+<div class="highlight"><pre><span></span><code>    ```shell
+    nano /etc/ufw/before.rules
+    ```
+</code></pre></div>
+
+<p>Paste this at the bottom of the file, <strong>after</strong> the <code>COMMIT</code> that has
+already been in that document:</p>
+<div class="highlight"><pre><span></span><code>    ```shell
+    # nat Table rules
+    *nat
+    :POSTROUTING ACCEPT [0:0]
+    -A POSTROUTING -s 192.168.8.0/24 -o enp0s3 -j MASQUERADE
+    COMMIT
+    ```
+</code></pre></div>
+
+<p>What this does is to make <code>enp0s3</code> as the router for subnet
+192.168.8.x &larr; welcome the internet!</p>
+<h3>Ports</h3>
+<p><a href="https://help.ubuntu.com/community/UFW">UFW</a> will erect a firewall that blocks everything by default! We
+have poked holes for port 22 to allow SSH. More need to be done:</p>
+<ol>
+<li>Allow http 80: ufw allow http</li>
+<li>Allow ping: ufw allow 53</li>
+<li>Allow region controller API port: 5240</li>
+<li>Allow Bootp server and client: 67, 68</li>
+<li>Allow Img service: 5248</li>
+<li>Allow tftp: 69, 5244</li>
+<li>Allow domain service: 5246</li>
+<li>Allow rndc service: 5247</li>
+<li>Allow iscsi: 3260</li>
+<li>Allow ntp: 123</li>
+<li>Allow MAAS bootstrap sever: 8000</li>
+</ol>
+<p>Finally, <code>sudo ufw enable</code>. Our GFW is up.</p>
+<h2>MAAS as DHCP server</h2>
+<blockquote>
+<p>As I have mentioned, the MAAS server node <strong>must</strong> be the DHCP
+server on subnet 192.168.8.x. No exception!</p>
+</blockquote>
+<p>MAAS admin web is the tool to use for this configuration. </p>
+<ol>
+<li>
+<p>Login into <code>http://192.168.8.1/MAAS/</code>, goto <code>Subnets</code> and select
+   the <code>VLAN</code> &larr; this is how you can turn on DHCP on a subnet:</p>
+<p><figure class="row">
+  <img src="images/maas_vlan_config.png"
+       class="col s6" />
+  <img src="images/maas_subnet_config.png"
+       class="col s6" />  <br>
+  <figcaption>MAAS  DHCP config</figcaption>
+</figure></p>
+</li>
+<li>
+<p>Click <code>Vlan</code> column on <code>192.168.8.0/24</code> subnet row to get to the
+   Vlan configuration page. <code>Take action</code> to enable DHCP. Change the
+   gateway to 192.168.8.1, which is this server's static IP on this
+   subnet.</p>
+<p><figure class="s12 center">
+  <img src="images/maas_dhcp_config.png"/>
+  <figcaption>MAAS admin DHCP config</figcaption>
+</figure></p>
+</li>
+</ol>
+<p>We have done the hard part &mdash; setting up the MAAS server. In our
+<a href="https://fengxia41103.github.io/myblog/maas target.html">next article</a>, I'll show you what MAAS can do for fun &rarr;
+brining up a bare metal machine to life. Stay tuned.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

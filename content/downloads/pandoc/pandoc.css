@@ -247,6 +247,16 @@ table td {
   vertical-align: top;
 }
 
+table caption {
+  display: table-caption;
+  text-align: left;
+}
+
+table caption:before {
+  content: "Table: "
+}
+
+
 .author {
   font-size: 1.2em;
   text-align: center;

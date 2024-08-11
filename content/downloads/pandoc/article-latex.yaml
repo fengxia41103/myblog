@@ -14,7 +14,7 @@ titlepage-rule-color: "5C68C0"
 toc: true
 toc-depth: 5
 toc-own-page: true
-lof: true
+# lof: true
 lot: true
 link-citations: true
 header-includes:

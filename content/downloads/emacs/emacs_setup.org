@@ -1349,9 +1349,18 @@ error.
 And set up virtualenv path:
 #+BEGIN_SRC emacs-lisp :tangle no
 ;; workon home
-(setenv "WORKON_HOME" "/home/fengxia/.virtualenvs/")
+(setenv "WORKON_HOME" "/home/fengxia/workspace/me/python-venv/")
 (setq elpy-rpc-virtualenv-path 'current)
 #+END_SRC
+
+Add [[https://github.com/naiquevin/sphinx-doc.el][sphinx-doc]] to generate docstrings:
+#+begin_src emacs-lisp
+(use-package sphinx-doc
+  :ensure t)
+(add-hook 'python-mode-hook (lambda ()
+                              (require 'sphinx-doc)
+                              (sphinx-doc-mode t)))
+#+end_src
 
 **** auto-virtualenv
 

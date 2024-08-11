@@ -379,93 +379,93 @@ Physical networks
   3. **Workload networks**: Networks to support applications
      (aka. workloads) deployed on the infrastructure.
 
- Storage
- : RHHI-v provides four types of storage:
+Storage
+: RHHI-v provides four types of storage:
 
-   1. **Distributed storage**: This is a network storage. The key
-      difference between this and other network storage such as NFS,
-      is that it has built-in capability to distribute data read &
-      write to multiple storage endpoints, and to create data
-      replication. This can not only improve throughput performance,
-      but is the key design factor to support fault tolerance and HA.
+  1. **Distributed storage**: This is a network storage. The key
+     difference between this and other network storage such as NFS,
+     is that it has built-in capability to distribute data read &
+     write to multiple storage endpoints, and to create data
+     replication. This can not only improve throughput performance,
+     but is the key design factor to support fault tolerance and HA.
 
-      However, redundancy comes with penalty &mdash; the storage
-      capacity will not always linearly grow by adding more disks to
-      the cluster. See section [Gluster volume type](#gluster-type)
-      for details.
+     However, redundancy comes with penalty &mdash; the storage
+     capacity will not always linearly grow by adding more disks to
+     the cluster. See section [Gluster volume type](#gluster-type)
+     for details.
 
-   2. **Network storage**: Unlike distributed storage above, this storage
-      does not offer data replication or data distribution. This fit
-      for application who has already considered these functions in
-      its design without depending on the storage itself. Benefit of
-      such simplification is that storage capacity will grow linearly
-      with the number of disks.
+  2. **Network storage**: Unlike distributed storage above, this storage
+     does not offer data replication or data distribution. This fit
+     for application who has already considered these functions in
+     its design without depending on the storage itself. Benefit of
+     such simplification is that storage capacity will grow linearly
+     with the number of disks.
 
-   3. **Storage cache**: Along the storage data path, one would find many
-      data caches &mdash; RAID cache, OS kernel cache, file system
-      cache, database cache, and so on. We use this term to describe
-      include all these caches that will hold data, even
-      temporarily. They are usually working behind the scene and are
-      beyond a user's access. However, their existence and their
-      configurations have much effect on the infrastructure's
-      performance and stability.
+  3. **Storage cache**: Along the storage data path, one would find many
+     data caches &mdash; RAID cache, OS kernel cache, file system
+     cache, database cache, and so on. We use this term to describe
+     include all these caches that will hold data, even
+     temporarily. They are usually working behind the scene and are
+     beyond a user's access. However, their existence and their
+     configurations have much effect on the infrastructure's
+     performance and stability.
 
-   4. **Local only storage**: These are un-shared storages by either a host
-      or an application.
+  4. **Local only storage**: These are un-shared storages by either a host
+     or an application.
 
- Hypervisor
- : is the virtualization layer of the infrastructure, in which
-   hardware resources will be represented as virtual resources.
+Hypervisor
+: is the virtualization layer of the infrastructure, in which
+  hardware resources will be represented as virtual resources.
 
-   1. **Virtual machines**: These are virtualized compute
-      resources. There are two types of virtual machine on the RHHI-v
-      infrastructure — workloads, and management.
+  1. **Virtual machines**: These are virtualized compute
+     resources. There are two types of virtual machine on the RHHI-v
+     infrastructure — workloads, and management.
 
-      1. Workloads: Any software deployed on the infrastructure is a
-         workload.
-      2. Management: VMs are for administrating the RHHI-v
-         infrastructure’s.
+     1. Workloads: Any software deployed on the infrastructure is a
+        workload.
+     2. Management: VMs are for administrating the RHHI-v
+        infrastructure’s.
 
-   2. **Networks**: Physical networks are virtualized so a server'
-      physical NICs and cable connections are shareable by virtual
-      machines.
+  2. **Networks**: Physical networks are virtualized so a server'
+     physical NICs and cable connections are shareable by virtual
+     machines.
 
-      Virtual networks are not associated with any particular physical
-      server. Thus regardless where the virtual machine is running,
-      these networks can be available to it. In order for this to
-      work, however, all servers in a cluster must have identical
-      physical networks. See section [Network
-      Configurations](#platform-network) for details.
+     Virtual networks are not associated with any particular physical
+     server. Thus regardless where the virtual machine is running,
+     these networks can be available to it. In order for this to
+     work, however, all servers in a cluster must have identical
+     physical networks. See section [Network
+     Configurations](#platform-network) for details.
 
-   3. **Files**: There are three important types of files in RHHI-v:
+  3. **Files**: There are three important types of files in RHHI-v:
 
-      1. **VM disk image**: A virtual machine consists of one or many
-         disk images. They function more or less like the physical
-         disk in a server. But since they are file based, there can be
-         features VM disk can do that are impossible for a physical
-         disk.
+     1. **VM disk image**: A virtual machine consists of one or many
+        disk images. They function more or less like the physical
+        disk in a server. But since they are file based, there can be
+        features VM disk can do that are impossible for a physical
+        disk.
 
-      2. **VM snapshot**: A key motivation of the RHHI-v is to
-         virtualize a workload, thus allowing user to take snapshot
-         &mdash; freeze the states of a virtual machine in time, and
-         recover and resume from a snapshot.
+     2. **VM snapshot**: A key motivation of the RHHI-v is to
+        virtualize a workload, thus allowing user to take snapshot
+        &mdash; freeze the states of a virtual machine in time, and
+        recover and resume from a snapshot.
 
-      3. **Static files**: As an infrastructure, RHHI-v can be the
-         source of truth of static files such as ISO images..
+     3. **Static files**: As an infrastructure, RHHI-v can be the
+        source of truth of static files such as ISO images..
 
-   4. **Support services**: There are many support services for the
-      infrastructure. Three key services are:
+  4. **Support services**: There are many support services for the
+     infrastructure. Three key services are:
 
-      1. **VDSM**: Daemon running on each host to support the admin
-         application.
+     1. **VDSM**: Daemon running on each host to support the admin
+        application.
 
-      2. **HA services**: responsible to keep the admin application
-         running on a healthy host so that administrative capability
-         of the infrastructure has high availability.
+     2. **HA services**: responsible to keep the admin application
+        running on a healthy host so that administrative capability
+        of the infrastructure has high availability.
 
-      3. **VM console server**: gives remote console access to the virtual
-         machines. Before VM's network is created, this is the only
-         mean to gain access to the VM for administrative tasks.
+     3. **VM console server**: gives remote console access to the virtual
+        machines. Before VM's network is created, this is the only
+        mean to gain access to the VM for administrative tasks.
 
 Interfaces
 : These are entry points through which the infrastructure admin or

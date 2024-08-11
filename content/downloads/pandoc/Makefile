@@ -3,6 +3,10 @@ LATEX_TEMPLATE := feng.tex
 LATEX_REPORT_CONFIG := latex.yaml
 LATEX_ARTICLE_CONFIG := article-latex.yaml
 
+# DHHS
+LATEX_DHHS_TEMPLATE := dhhs-template.tex
+LATEX_DHHS_CONFIG := dhhs-latex.yaml
+
 # if writing letter
 LATEX_LETTER_TEMPLATE := template-letter.tex
 LATEX_LETTER_CONFIG := letter-latex.yaml
@@ -38,6 +42,18 @@ HTML_FLAGS = $(COMMON_FLAGS) \
 PDF_FLAGS = $(COMMON_FLAGS) \
 	--listings \
 	--template $(LATEX_TEMPLATE) \
+	--pdf-engine=xelatex
+
+DHHS_PDF_FLAGS = +RTS -M3000m -RTS\
+	--number-sections \
+	--from markdown \
+	--highlight-style pygments \
+	--filter pandoc-fignos \
+	-M date="`date "+%B %e, %Y"`" \
+	--filter pandoc-citeproc \
+	--csl $(CSL) \
+	--toc \
+	--template $(LATEX_DHHS_TEMPLATE) \
 	--pdf-engine=xelatex
 
 DOCX_FLAGS = $(COMMON_FLAGS) \
@@ -121,6 +137,14 @@ lucidum_pdf := lucidum.pdf
 lucidum_docx := lucidum.docx
 lucidum_html := lucidum.html
 
+# cwis
+cwis_md := cwis.md
+CWIS_INPUTS = $(cwis_md) $(REFERENCES)
+cwis_pdf := cwis.pdf
+cwis_docx := cwis.docx
+cwis_html := cwis.html
+cwis_tex := cwis.tex
+
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
@@ -131,8 +155,9 @@ netbox: netbox_pdf netbox_docx
 unc: unc_pdf unc_docx
 lucidum: lucidum_pdf lucidum_docx lucidum_html
 personal_referral: personal_referral_pdf
+cwis: cwis_html cwis_tex cwis_pdf
 
-all: rhhi_ra loc_ra webapp resume git netbox unc cover_letter personal_referral
+all: rhhi_ra loc_ra webapp resume git netbox unc cover_letter personal_referral cwis
 
 
 rhhi_ra_html: $(RHHI_RA_INPUTS)
@@ -265,6 +290,25 @@ lucidum_html: $(LUCIDUM_INPUTS)
 	-o $(lucidum_html) \
 	$(HTML_FLAGS)
 
+cwis_docx: $(CWIS_INPUTS) $(LATEX_REPORT_CONFIG)
+	pandoc $(LATEX_REPORT_CONFIG) $(CWIS_INPUTS) \
+	-o $(cwis_docx) \
+	$(DOCX_FLAGS)
+
+cwis_html: $(CWIS_INPUTS)
+	pandoc $(CWIS_INPUTS) \
+	-o $(cwis_html) \
+	$(HTML_FLAGS)
+
+cwis_pdf: $(CWIS_INPUTS) $(LATEX_ARTICLE_CONFIG)
+	pandoc $(LATEX_DHHS_CONFIG) $(CWIS_INPUTS) \
+	-o $(cwis_pdf) \
+	$(DHHS_PDF_FLAGS)
+
+cwis_tex: $(CWIS_INPUTS) $(LATEX_ARTICLE_CONFIG)
+	pandoc $(LATEX_DHHS_CONFIG) $(CWIS_INPUTS) \
+	-o $(cwis_tex) \
+  $(DHHS_PDF_FLAGS)
 
 clean:
 	rm -f *.pdf *.docx *.html

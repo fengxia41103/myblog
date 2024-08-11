@@ -1,0 +1,5 @@
+(use-package terraform-mode
+    :ensure
+    :config)
+(add-hook 'terraform-mode-hook #'outline-minor-mode)
+(setq terraform-format-on-sav t)

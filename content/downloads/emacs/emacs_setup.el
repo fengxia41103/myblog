@@ -244,11 +244,11 @@ and the tangled file is compiled."
 (setq magit-repolist-columns
       '(("Name"    30 magit-repolist-column-ident ())
         ("Local On" 35 magit-repolist-column-branch ())
-        ("Bch" 3 magit-repolist-column-branches ())
-        ("B<U"      3 magit-repolist-column-unpulled-from-upstream
+        ("B" 4 magit-repolist-column-branches ())
+        ("L<U" 3 magit-repolist-column-unpulled-from-upstream
          ((:right-align t)
           (:help-echo "Upstream changes not in branch")))
-        ("B>U"      3 magit-repolist-column-unpushed-to-upstream
+        ("L>U" 3 magit-repolist-column-unpushed-to-upstream
          ((:right-align t)
           (:help-echo "Local changes not in upstream")))
        ))
@@ -581,6 +581,12 @@ and the tangled file is compiled."
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
+
+(use-package sphinx-doc
+  :ensure t)
+(add-hook 'python-mode-hook (lambda ()
+                              (require 'sphinx-doc)
+                              (sphinx-doc-mode t)))
 
 (use-package
   py-isort

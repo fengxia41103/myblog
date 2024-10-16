@@ -36,6 +36,15 @@ and the tangled file is compiled."
 (use-package all-the-icons
   :if (display-graphic-p))
 
+(use-package delight :ensure t)
+
+ (delight '((abbrev-mode " Abv" abbrev)
+            (smart-tab-mode " \\t" smart-tab)
+            (eldoc-mode nil "eldoc")
+            (rainbow-mode)
+            (overwrite-mode " Ov" t)
+            (emacs-lisp-mode "Elisp" :major)))
+
 (use-package rainbow-mode
   :ensure t
   :delight)
@@ -130,16 +139,6 @@ and the tangled file is compiled."
   :ensure t
   :bind ("C-M-x n" . 'nyan-mode))
 
-(use-package delight
-   :ensure t)
-
-(delight '((abbrev-mode " Abv" abbrev)
-           (smart-tab-mode " \\t" smart-tab)
-           (eldoc-mode nil "eldoc")
-           (rainbow-mode)
-           (overwrite-mode " Ov" t)
-           (emacs-lisp-mode "Elisp" :major)))
-
 (use-package multiple-cursors
   :ensure t
   :bind (("C-S-c C-S-c" . 'mc/edit-lines)
@@ -210,6 +209,11 @@ and the tangled file is compiled."
       (setq hcz-set-cursor-color-buffer (buffer-name)))))
 
 (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
+
+(use-package flycheck
+  :ensure t)
+
+(global-flycheck-mode)
 
 (setq auth-sources '("~/.authinfo"))
 
@@ -543,6 +547,73 @@ and the tangled file is compiled."
 ;;   :defer t
 ;;   :after (lsp-java))
 
+;; (require 'cl)
+;; (let ((pkg-list '(use-package
+;; 		          s
+;; 		          dash
+;; 		          editorconfig
+;;               company)))
+;;   (package-initialize)
+;;   (when-let ((to-install (map-filter (lambda (pkg _) (not (package-installed-p pkg))) pkg-list)))
+;;     (package-refresh-contents)
+;;     (mapc (lambda (pkg) (package-install pkg)) pkg-list)))
+
+;; install copilot.el
+(add-to-list 'load-path "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
+(require 'copilot)
+
+;; enable mode
+(add-hook 'prog-mode-hook 'copilot-mode)
+
+;; add keyboard shortcuts
+(define-key copilot-completion-map (kbd "M-<tab>") 'copilot-accept-completion)
+(define-key copilot-completion-map (kbd "M-TAB") 'copilot-accept-completion)
+
+(defun rk/copilot-complete-or-accept ()
+  "Command that either triggers a completion or accepts one if one
+is available. Useful if you tend to hammer your keys like I do."
+  (interactive)
+  (if (copilot--overlay-visible)
+      (progn
+        (copilot-accept-completion)
+        (open-line 1)
+        (next-line))
+    (copilot-complete)))
+
+(define-key copilot-mode-map (kbd "M-C-<next>") #'copilot-next-completion)
+(define-key copilot-mode-map (kbd "M-C-<prior>") #'copilot-previous-completion)
+(define-key copilot-mode-map (kbd "M-C-<right>") #'copilot-accept-completion-by-word)
+(define-key copilot-mode-map (kbd "M-C-<down>") #'copilot-accept-completion-by-line)
+(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
+
+(defun rk/copilot-tab ()
+  "Tab command that will complet with copilot if a completion is
+available. Otherwise will try company, yasnippet or normal
+tab-indent."
+  (interactive)
+  (or (copilot-accept-completion)
+      (indent-for-tab-command)))
+
+(define-key global-map (kbd "M-<tab>") #'rk/copilot-tab)
+
+(defun rk/copilot-quit ()
+  "Run `copilot-clear-overlay' or `keyboard-quit'. If copilot is
+cleared, make sure the overlay doesn't come back too soon."
+  (interactive)
+  (condition-case err
+      (when copilot--overlay
+        (lexical-let ((pre-copilot-disable-predicates copilot-disable-predicates))
+          (setq copilot-disable-predicates (list (lambda () t)))
+          (copilot-clear-overlay)
+          (run-with-idle-timer
+           1.0
+           nil
+           (lambda ()
+             (setq copilot-disable-predicates pre-copilot-disable-predicates)))))
+    (error handler)))
+
+(advice-add 'keyboard-quit :before #'rk/copilot-quit)
+
 (use-package writegood-mode
   :ensure
   :config)
@@ -579,14 +650,17 @@ and the tangled file is compiled."
 
 (setenv "PYTHONIOENCODING" "utf-8")
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
-(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
 
-(use-package sphinx-doc
-  :ensure t)
-(add-hook 'python-mode-hook (lambda ()
-                              (require 'sphinx-doc)
-                              (sphinx-doc-mode t)))
+(use-package auto-virtualenv
+  :ensure t
+  :init
+  (use-package pyvenv
+    :ensure t)
+  :config
+  (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+  (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
+  )
 
 (use-package
   py-isort

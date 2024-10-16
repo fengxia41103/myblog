@@ -244,454 +244,24 @@ init file as soon as I save it.
 (custom-set-variables '(ad-redefinition-action (quote accept)))
 #+END_SRC
 
-* Base packages
-
-There are some packages you'd better load prior to everything else, so
-that when other packages are being configured, they are already
-available. For example, the .
-
-** all-the-icons
-
-Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
-
-#+BEGIN_SRC emacs-lisp
-  (use-package all-the-icons
-    :if (display-graphic-p))
-#+END_SRC
-
-You would have to run =M-x all-the-icons-install-fonts= manually at
-least once to install fonts to your system.
-
-** rainbow-mode
-
-Colorize color names and codes in the correct color.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode
-    :ensure t
-    :delight)
-#+END_SRC
-
-** Hydra
-:PROPERTIES:
-:CUSTOM_ID: hydra
-:END:
-
-#+BEGIN_SRC emacs-lisp
-  (use-package hydra
-    :ensure t)
-#+END_SRC
-
-** whichkey
-
-Give me a hint when I'm entering a keybinding:
-#+BEGIN_SRC emacs-lisp
-  (use-package which-key
-    :ensure
-    :config
-    (which-key-setup-side-window-right))
-  (which-key-mode)
-#+END_SRC
-
-* Global stuff
-
-Some global settings such as line number. Well, just about everything
-of emacs are global in a sense, say, a package, will affect the look
-and behavior when loaded. Even though the mode could be refined to be
-loaded only for some file pattern, but hey, the fun is about loading
-these funky modes, and with them, a million funky keybinding combos to
-remember.
-
-So here, just some obvious value settings. If I find some to be more
-topic specific, I will move them into that topic's section instead.
-
-** by packages
-
-These are achieved by using someone's package.
-
-*** UTF-8
-
-Make Emacs request UTF-8 first when pasting stuff
-
-#+BEGIN_SRC emacs-lisp
-(use-package unicode-escape
-  :ensure t
-  :init
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
-(set-language-environment "UTF-8")
-#+END_SRC
-
-*** shell env
-
-#+BEGIN_SRC emacs-lisp
-(setq exec-path-from-shell-debug t)
-(setenv "SHELL" "/usr/bin/zsh")
-(use-package exec-path-from-shell
-  :ensure t
-  :if (memq window-system '(mac ns x))
-  :config
-  (exec-path-from-shell-initialize))
-#+END_SRC
-
-** UTF-8 env
-
-#+BEGIN_SRC emacs-lisp
-  (prefer-coding-system 'utf-8)
-
-  (setenv "LANG" "en_US.UTF-8")
-  (setenv "LC_ALL" "en_US.UTF-8")
-  (setenv "LC_CTYPE" "en_US.UTF-8")
-  (set-language-environment "UTF-8")
-#+END_SRC
-
-** browser (default: chrome)
-
-I like Chrome. Period.
-
-#+BEGIN_SRC emacs-lisp
-(setq browse-url-generic-program (executable-find "google-chrome")
-  browse-url-browser-function 'browse-url-generic)
-#+END_SRC
-
-** emacs server (default: off)
-
-Start the background server, so we can use emacsclient.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(server-start)
-#+END_SRC
-
-** newline (only Unix wanted)
-
-This should automatically convert any files with dos or Mac line
-endings into Unix style ones. Code found [[https://www.emacswiki.org/emacs/EndOfLineTips][here]].
-
-#+BEGIN_SRC emacs-lisp
-  (defun no-junk-please-we-are-unixish ()
-    (let ((coding-str (symbol-name buffer-file-coding-system)))
-      (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
-        (set-buffer-file-coding-system 'unix))))
-
-  (add-hook 'find-file-hook 'no-junk-please-we-are-unixish)
-#+END_SRC
-
-** auto revert
-
-Use =auto-revert=, which reloads a file if it's updated on disk and not
-modified in the buffer.
-
-#+BEGIN_SRC emacs-lisp
-(global-auto-revert-mode 1)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-#+END_SRC
-
-** yes-or-no
-
-Change all prompts to y or n:
-
-#+BEGIN_SRC emacs-lisp
-(fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
-
-** hide menu bar & toolbar
-Using i3 is forcing me to use keyboard.
-
-#+BEGIN_SRC emacs-lisp
-  (menu-bar-mode -1)
-  (toggle-scroll-bar -1)
-  (tool-bar-mode -1)
-  (blink-cursor-mode -1)
-#+END_SRC
-
-** alternate key mappings
-
-Letting one enter chars that are otherwise difficult in e.g. the
-minibuffer.
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-m") 'newline-and-indent)
-  (global-set-key (kbd "C-j") 'newline)
-  (global-set-key [delete] 'delete-char)
-  (global-set-key [kp-delete] 'delete-char)
-#+END_SRC
-
-** macros (default: off)
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (global-set-key [f3] 'start-kbd-macro)
-  (global-set-key [f4] 'end-kbd-macro)
-  (global-set-key [f5] 'call-last-kbd-macro)
-#+END_SRC
-
-** linum
-
-For now, I'm doing it globally.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(global-display-line-numbers-mode t)
-#+END_SRC
-
-
-Yes I like having line numbers, but turnning it on globally makes some
-buffers look strange. So let's limit it to the ones that I think
-brings value. *Note* that the ones I skip are:
-
-1. mu4e-compose-mode: when writing email, it's better not to count for line num.
-2. markdown: for the same reason. I'm writing.
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
-  ;; (add-hook 'org-mode-hook 'display-line-numbers-mode)
-  (add-hook 'python-mode-hook 'display-line-numbers-mode)
-  (add-hook 'web-mode-hook 'display-line-numbers-mode)
-  (add-hook 'js2-mode-hook 'display-line-numbers-mode)
-  (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
-  (add-hook 'json-mode-hook 'display-line-numbers-mode)
-  (add-hook 'java-mode-hook 'display-line-numbers-mode)
-  (add-hook 'groovy-mode-hook 'display-line-numbers-mode)
-#+END_SRC
-
-Format the line no and add a solid line as separation:
-
-#+BEGIN_SRC emacs-lisp
-(setq display-line-numbers-width nil)
-(setq linum-format "%4d ")
-#+END_SRC
-
-** disable electric-indent
-
-This is very annoying that it keeps indenting.
-
-#+BEGIN_SRC emacs-lisp
-(electric-indent-mode -1)
-(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
-#+END_SRC
-
-** set clipboard to utf-8
-
-This makes copy & paste from terminal to emacs buffer
-work. Otherwise, some utf-8 symbols will be scrambled.
-
-#+BEGIN_SRC emacs-lisp
-(set-clipboard-coding-system 'utf-8)
-#+END_SRC
-
-* Font, theme
-
-The whole point of using emacs is that I like the user experience, and
-a big part of it is the color and look. There are too many ways to
-tweak it. So I'll try not to run wild on this one. Most are inherited
-from the original post, and I added some while playing with this
-setting. Enjoy ~~
-
-** by packages
-
-*** sublime themes (default: spolsky)
-
-Loading a theme I like.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package sublime-themes
-    :ensure t
-    :config)
-  (load-theme 'spolsky t)
-#+END_SRC
-
-*** mode lines
-**** doom-modeline
-
-#+BEGIN_SRC emacs-lisp
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-#+END_SRC
-
-**** remove some modelines
-
-#+BEGIN_SRC emacs-lisp
-  (use-package eldoc
-    :delight)
-#+END_SRC
-
-**** nyan-mode
-
-#+BEGIN_SRC emacs-lisp
-(use-package nyan-mode
-  :ensure t
-  :bind ("C-M-x n" . 'nyan-mode))
-#+END_SRC
-
-*** delight
-
-Package to remove some info from the mode-line for minor-modes.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package delight
-    :ensure t)
-
- (delight '((abbrev-mode " Abv" abbrev)
-            (smart-tab-mode " \\t" smart-tab)
-            (eldoc-mode nil "eldoc")
-            (rainbow-mode)
-            (overwrite-mode " Ov" t)
-            (emacs-lisp-mode "Elisp" :major)))
-#+END_SRC
-
-*** multiple-cursors
-
-Configure the shortcuts for multiple cursors.
-
-#+BEGIN_SRC emacs-lisp
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
-         ("C->" . 'mc/mark-next-like-this)
-         ("C-<" . 'mc/mark-previous-like-this)
-         ("C-c C->" . 'mc/mark-all-like-this)))
-#+END_SRC
-
-*** dimmer
-
-This will dim the buffer that is not the current. Sort of a visual
-cue. However, I found that it can be ugly depending the theme.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package dimmer
-    :ensure
-    :config
-    (dimmer-configure-which-key)
-    (dimmer-configure-helm))
-  (dimmer-mode t)
-#+END_SRC
-
-*** highlight indent
-
-#+BEGIN_SRC emacs-lisp
-  (use-package highlight-indent-guides
-  :ensure
-  :config
-  (setq highlight-indent-guides-method 'character))
-  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-#+END_SRC
-
-** fontlock
-
-This gets the font coloring switched on for all buffers.
-
-I have encountered a strange case when a mal-formatted Java file
-caused Emacs to crash. After many research, the remedy is to use
-[[https://github.com/jhipster/prettier-java][prettier-java]] to reformat this file first, then emacs is happy.
-
-#+BEGIN_SRC emacs-lisp
-  (global-font-lock-mode t)
-#+END_SRC
-
-** faces
-**** list all the fonts
-
-To list all the fonts available to your emacs, put this snippet to scratch, and
-run =C-x C-e=:
-
-#+BEGIN_SRC emacs-list :tangle no
-(dolist (font (x-list-fonts "*"))
-  (insert (format "%s\n" font)))
-#+END_SRC
-
-**** highlight, region
-
-This makes some of the faces a bit more contrasted.
-
-#+BEGIN_SRC emacs-lisp
-  ;; faces for general region highlighting zenburn is too low-key.
-  (custom-set-faces
-   '(highlight ((t (:background "forest green"))))
-   '(region ((t (:background "forest green")))))
-#+END_SRC
-
-**** mono font
-
-Set default mono font:
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'default-frame-alist
-             '(font . "Ubuntu Mono-15"))
-#+END_SRC
-
-Set default font to monospace:
-#+BEGIN_SRC emacs-lisp
-;; set a default font
-(when (member "Ubuntu Mono-15" (font-family-list))
-  (set-face-attribute 'default nil :font "Ubuntu Mono-15"))
-#+END_SRC
-
-**** custome theme font
-
-Remember to install =apt install fonts-firacode=.
-
-#+BEGIN_SRC emacs-lisp
-  (custom-theme-set-faces
-   'user
-   '(fixed-pitch ((t (:family "Fira Code" :height 140))))
-  )
-#+END_SRC
-
-** be quiet
-Remove bell and dings.
-
-#+BEGIN_SRC emacs-lisp
-(setq ring-bell-function
-      '(lambda ()
-         (message "The answer is 42...")))
-(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
-#+END_SRC
-
-** In terminal mode
-
-#+BEGIN_SRC emacs-lisp
-(when (display-graphic-p)
-  (set-background-color "#ffffff")
-  (set-foreground-color "#141312"))
-#+END_SRC
-
-** In X11 mode: mouse and window title
-
-#+BEGIN_SRC emacs-lisp
-(setq frame-title-format "emacs @ %b - %f")
-(when window-system
-  (mouse-wheel-mode)  ;; enable wheelmouse support by default
-  (set-selection-coding-system 'compound-text-with-extensions))
-#+END_SRC
-
-** dynamic cursor colors
-
-The cursor is displayed in different colors, depending on overwrite or
-insert mode.
-
-#+BEGIN_SRC emacs-lisp
-(setq hcz-set-cursor-color-color "")
-(setq hcz-set-cursor-color-buffer "")
-
-(defun hcz-set-cursor-color-according-to-mode ()
-  "change cursor color according to some minor modes."
-  ;; set-cursor-color is somewhat costly, so we only call it when needed:
-  (let ((color
-         (if buffer-read-only "orange"
-           (if overwrite-mode "red"
-             "green"))))
-    (unless (and
-             (string= color hcz-set-cursor-color-color)
-             (string= (buffer-name) hcz-set-cursor-color-buffer))
-      (set-cursor-color (setq hcz-set-cursor-color-color color))
-      (setq hcz-set-cursor-color-buffer (buffer-name)))))
-
-(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
-#+END_SRC
-
 * Coding
 
 Big part of my life is taken by coding. So here it is, all the coding
 related stuff.
+
+** Global linter
+
+*** flycheck
+
+[[https://www.flycheck.org/en/latest/][Official doc]]
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :ensure t)
+
+(global-flycheck-mode)
+#+end_src
+
 ** set authinfo as source
 
 #+BEGIN_SRC emacs-lisp
@@ -1226,6 +796,90 @@ Then wrap it w/ this, you can then embed restcall in org!
   ;;   :after (lsp-java))
 #+end_src
 
+** GH Copilot
+
+Setting up emacs w/ GH copilot by [[https://robert.kra.hn/posts/2023-02-22-copilot-emacs-setup/][blog]].
+
+#+begin_src emacs-lisp
+  ;; (require 'cl)
+  ;; (let ((pkg-list '(use-package
+  ;; 		          s
+  ;; 		          dash
+  ;; 		          editorconfig
+  ;;               company)))
+  ;;   (package-initialize)
+  ;;   (when-let ((to-install (map-filter (lambda (pkg _) (not (package-installed-p pkg))) pkg-list)))
+  ;;     (package-refresh-contents)
+  ;;     (mapc (lambda (pkg) (package-install pkg)) pkg-list)))
+
+  ;; install copilot.el
+  (add-to-list 'load-path "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
+  (require 'copilot)
+
+  ;; enable mode
+  (add-hook 'prog-mode-hook 'copilot-mode)
+
+  ;; add keyboard shortcuts
+  (define-key copilot-completion-map (kbd "M-<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "M-TAB") 'copilot-accept-completion)
+#+end_src
+
+Copilot specific keys.
+
+#+begin_src emacs-lisp
+(defun rk/copilot-complete-or-accept ()
+  "Command that either triggers a completion or accepts one if one
+is available. Useful if you tend to hammer your keys like I do."
+  (interactive)
+  (if (copilot--overlay-visible)
+      (progn
+        (copilot-accept-completion)
+        (open-line 1)
+        (next-line))
+    (copilot-complete)))
+
+(define-key copilot-mode-map (kbd "M-C-<next>") #'copilot-next-completion)
+(define-key copilot-mode-map (kbd "M-C-<prior>") #'copilot-previous-completion)
+(define-key copilot-mode-map (kbd "M-C-<right>") #'copilot-accept-completion-by-word)
+(define-key copilot-mode-map (kbd "M-C-<down>") #'copilot-accept-completion-by-line)
+(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
+#+end_src
+
+Tab keys.
+
+#+begin_src emacs-lisp
+  (defun rk/copilot-tab ()
+    "Tab command that will complet with copilot if a completion is
+  available. Otherwise will try company, yasnippet or normal
+  tab-indent."
+    (interactive)
+    (or (copilot-accept-completion)
+        (indent-for-tab-command)))
+
+  (define-key global-map (kbd "M-<tab>") #'rk/copilot-tab)
+#+end_src
+
+Ctrl-g key to cancel.
+
+#+begin_src emacs-lisp
+(defun rk/copilot-quit ()
+  "Run `copilot-clear-overlay' or `keyboard-quit'. If copilot is
+cleared, make sure the overlay doesn't come back too soon."
+  (interactive)
+  (condition-case err
+      (when copilot--overlay
+        (lexical-let ((pre-copilot-disable-predicates copilot-disable-predicates))
+          (setq copilot-disable-predicates (list (lambda () t)))
+          (copilot-clear-overlay)
+          (run-with-idle-timer
+           1.0
+           nil
+           (lambda ()
+             (setq copilot-disable-predicates pre-copilot-disable-predicates)))))
+    (error handler)))
+
+(advice-add 'keyboard-quit :before #'rk/copilot-quit)
+#+end_src
 ** languages
 
 These are minor modes to handle programming language specifics which
@@ -1305,66 +959,18 @@ Essentially, use the Google C++ style formatting.
 
 *** python
 
-Setup an IDE:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
-#+END_SRC
-
-
-ELPY has its own indentation mode, which is overriding the one I use
-globally, so disable this one:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (add-hook 'elpy-mode-hook (lambda () (highlight-indentation-mode -1)))
-#+END_SRC
-
-
-Link to yasnippet mode:
-#+BEGIN_SRC emacs-lisp :tangle no
-(add-hook 'elpy-mode-hook #'yas-minor-mode)
-#+END_SRC
-
-
-Auto black on save:
-#+BEGIN_SRC emacs-lisp
-(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
-#+END_SRC
-
-
 Force UTF-8 encoding. Otherwise, elpy will complain w/ some exit 1 abnormal
 error.
 
 #+BEGIN_SRC emacs-lisp
 (setenv "PYTHONIOENCODING" "utf-8")
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
-(add-to-list 'process-coding-system-alist '("elpy" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
 #+END_SRC
 
-
-And set up virtualenv path:
-#+BEGIN_SRC emacs-lisp :tangle no
-;; workon home
-(setenv "WORKON_HOME" "/home/fengxia/workspace/me/python-venv/")
-(setq elpy-rpc-virtualenv-path 'current)
-#+END_SRC
-
-Add [[https://github.com/naiquevin/sphinx-doc.el][sphinx-doc]] to generate docstrings:
-#+begin_src emacs-lisp
-(use-package sphinx-doc
-  :ensure t)
-(add-hook 'python-mode-hook (lambda ()
-                              (require 'sphinx-doc)
-                              (sphinx-doc-mode t)))
-#+end_src
-
 **** auto-virtualenv
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
 (use-package auto-virtualenv
   :ensure t
   :init
@@ -1375,23 +981,6 @@ Add [[https://github.com/naiquevin/sphinx-doc.el][sphinx-doc]] to generate docst
   (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
   )
 #+END_SRC
-
-**** py-autopep8
-
-Add hook to reformat python code based on pep8 spec. You need to
-install =pip install autopep8= offline.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (use-package
-    py-autopep8
-    :ensure)
-  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-  (setq py-autopep8-options '("--max-line-length=88"))
-#+END_SRC
-
-
-#+RESULTS:
-| --max-line-length=79 |
 
 **** py-isort
 Sort python import. Need to install =pip install isort= offline.
@@ -1886,6 +1475,449 @@ So, to enfore this on some modes:
   (add-hook 'react-mode-hook 'my-personal-code-style)
   (add-hook 'sh-mode-hook 'my-personal-code-style)
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
+#+END_SRC
+
+* Base packages
+
+There are some packages you'd better load prior to everything else, so
+that when other packages are being configured, they are already
+available. For example, the .
+
+** all-the-icons
+
+Want fancy [[https://github.com/domtronn/all-the-icons.el#installation][icons]]:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons
+    :if (display-graphic-p))
+#+END_SRC
+
+You would have to run =M-x all-the-icons-install-fonts= manually at
+least once to install fonts to your system.
+** delight
+
+Package to remove some info from the mode-line for minor-modes.
+
+#+BEGIN_SRC emacs-lisp
+(use-package delight :ensure t)
+
+ (delight '((abbrev-mode " Abv" abbrev)
+            (smart-tab-mode " \\t" smart-tab)
+            (eldoc-mode nil "eldoc")
+            (rainbow-mode)
+            (overwrite-mode " Ov" t)
+            (emacs-lisp-mode "Elisp" :major)))
+#+END_SRC
+
+** rainbow-mode
+
+Colorize color names and codes in the correct color.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :ensure t
+    :delight)
+#+END_SRC
+
+** Hydra
+:PROPERTIES:
+:CUSTOM_ID: hydra
+:END:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :ensure t)
+#+END_SRC
+
+** whichkey
+
+Give me a hint when I'm entering a keybinding:
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure
+    :config
+    (which-key-setup-side-window-right))
+  (which-key-mode)
+#+END_SRC
+
+* Global stuff
+
+Some global settings such as line number. Well, just about everything
+of emacs are global in a sense, say, a package, will affect the look
+and behavior when loaded. Even though the mode could be refined to be
+loaded only for some file pattern, but hey, the fun is about loading
+these funky modes, and with them, a million funky keybinding combos to
+remember.
+
+So here, just some obvious value settings. If I find some to be more
+topic specific, I will move them into that topic's section instead.
+
+** by packages
+
+These are achieved by using someone's package.
+
+*** UTF-8
+
+Make Emacs request UTF-8 first when pasting stuff
+
+#+BEGIN_SRC emacs-lisp
+(use-package unicode-escape
+  :ensure t
+  :init
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+(set-language-environment "UTF-8")
+#+END_SRC
+
+*** shell env
+
+#+BEGIN_SRC emacs-lisp
+(setq exec-path-from-shell-debug t)
+(setenv "SHELL" "/usr/bin/zsh")
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
+#+END_SRC
+
+** UTF-8 env
+
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+
+  (setenv "LANG" "en_US.UTF-8")
+  (setenv "LC_ALL" "en_US.UTF-8")
+  (setenv "LC_CTYPE" "en_US.UTF-8")
+  (set-language-environment "UTF-8")
+#+END_SRC
+
+** browser (default: chrome)
+
+I like Chrome. Period.
+
+#+BEGIN_SRC emacs-lisp
+(setq browse-url-generic-program (executable-find "google-chrome")
+  browse-url-browser-function 'browse-url-generic)
+#+END_SRC
+
+** emacs server (default: off)
+
+Start the background server, so we can use emacsclient.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(server-start)
+#+END_SRC
+
+** newline (only Unix wanted)
+
+This should automatically convert any files with dos or Mac line
+endings into Unix style ones. Code found [[https://www.emacswiki.org/emacs/EndOfLineTips][here]].
+
+#+BEGIN_SRC emacs-lisp
+  (defun no-junk-please-we-are-unixish ()
+    (let ((coding-str (symbol-name buffer-file-coding-system)))
+      (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+        (set-buffer-file-coding-system 'unix))))
+
+  (add-hook 'find-file-hook 'no-junk-please-we-are-unixish)
+#+END_SRC
+
+** auto revert
+
+Use =auto-revert=, which reloads a file if it's updated on disk and not
+modified in the buffer.
+
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode 1)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+#+END_SRC
+
+** yes-or-no
+
+Change all prompts to y or n:
+
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** hide menu bar & toolbar
+Using i3 is forcing me to use keyboard.
+
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (toggle-scroll-bar -1)
+  (tool-bar-mode -1)
+  (blink-cursor-mode -1)
+#+END_SRC
+
+** alternate key mappings
+
+Letting one enter chars that are otherwise difficult in e.g. the
+minibuffer.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-m") 'newline-and-indent)
+  (global-set-key (kbd "C-j") 'newline)
+  (global-set-key [delete] 'delete-char)
+  (global-set-key [kp-delete] 'delete-char)
+#+END_SRC
+
+** macros (default: off)
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (global-set-key [f3] 'start-kbd-macro)
+  (global-set-key [f4] 'end-kbd-macro)
+  (global-set-key [f5] 'call-last-kbd-macro)
+#+END_SRC
+
+** linum
+
+For now, I'm doing it globally.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(global-display-line-numbers-mode t)
+#+END_SRC
+
+
+Yes I like having line numbers, but turnning it on globally makes some
+buffers look strange. So let's limit it to the ones that I think
+brings value. *Note* that the ones I skip are:
+
+1. mu4e-compose-mode: when writing email, it's better not to count for line num.
+2. markdown: for the same reason. I'm writing.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c-mode-common-hook 'display-line-numbers-mode)
+  ;; (add-hook 'org-mode-hook 'display-line-numbers-mode)
+  (add-hook 'python-mode-hook 'display-line-numbers-mode)
+  (add-hook 'web-mode-hook 'display-line-numbers-mode)
+  (add-hook 'js2-mode-hook 'display-line-numbers-mode)
+  (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
+  (add-hook 'json-mode-hook 'display-line-numbers-mode)
+  (add-hook 'java-mode-hook 'display-line-numbers-mode)
+  (add-hook 'groovy-mode-hook 'display-line-numbers-mode)
+#+END_SRC
+
+Format the line no and add a solid line as separation:
+
+#+BEGIN_SRC emacs-lisp
+(setq display-line-numbers-width nil)
+(setq linum-format "%4d ")
+#+END_SRC
+
+** disable electric-indent
+
+This is very annoying that it keeps indenting.
+
+#+BEGIN_SRC emacs-lisp
+(electric-indent-mode -1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+#+END_SRC
+
+** set clipboard to utf-8
+
+This makes copy & paste from terminal to emacs buffer
+work. Otherwise, some utf-8 symbols will be scrambled.
+
+#+BEGIN_SRC emacs-lisp
+(set-clipboard-coding-system 'utf-8)
+#+END_SRC
+
+* Font, theme
+
+The whole point of using emacs is that I like the user experience, and
+a big part of it is the color and look. There are too many ways to
+tweak it. So I'll try not to run wild on this one. Most are inherited
+from the original post, and I added some while playing with this
+setting. Enjoy ~~
+
+** by packages
+
+*** sublime themes (default: spolsky)
+
+Loading a theme I like.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sublime-themes
+    :ensure t
+    :config)
+  (load-theme 'spolsky t)
+#+END_SRC
+
+*** mode lines
+**** doom-modeline
+
+#+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+#+END_SRC
+
+**** remove some modelines
+
+#+BEGIN_SRC emacs-lisp
+  (use-package eldoc
+    :delight)
+#+END_SRC
+
+**** nyan-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package nyan-mode
+  :ensure t
+  :bind ("C-M-x n" . 'nyan-mode))
+#+END_SRC
+
+
+*** multiple-cursors
+
+Configure the shortcuts for multiple cursors.
+
+#+BEGIN_SRC emacs-lisp
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
+         ("C->" . 'mc/mark-next-like-this)
+         ("C-<" . 'mc/mark-previous-like-this)
+         ("C-c C->" . 'mc/mark-all-like-this)))
+#+END_SRC
+
+*** dimmer
+
+This will dim the buffer that is not the current. Sort of a visual
+cue. However, I found that it can be ugly depending the theme.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dimmer
+    :ensure
+    :config
+    (dimmer-configure-which-key)
+    (dimmer-configure-helm))
+  (dimmer-mode t)
+#+END_SRC
+
+*** highlight indent
+
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-indent-guides
+  :ensure
+  :config
+  (setq highlight-indent-guides-method 'character))
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+END_SRC
+
+** fontlock
+
+This gets the font coloring switched on for all buffers.
+
+I have encountered a strange case when a mal-formatted Java file
+caused Emacs to crash. After many research, the remedy is to use
+[[https://github.com/jhipster/prettier-java][prettier-java]] to reformat this file first, then emacs is happy.
+
+#+BEGIN_SRC emacs-lisp
+  (global-font-lock-mode t)
+#+END_SRC
+
+** faces
+**** list all the fonts
+
+To list all the fonts available to your emacs, put this snippet to scratch, and
+run =C-x C-e=:
+
+#+BEGIN_SRC emacs-list :tangle no
+(dolist (font (x-list-fonts "*"))
+  (insert (format "%s\n" font)))
+#+END_SRC
+
+**** highlight, region
+
+This makes some of the faces a bit more contrasted.
+
+#+BEGIN_SRC emacs-lisp
+  ;; faces for general region highlighting zenburn is too low-key.
+  (custom-set-faces
+   '(highlight ((t (:background "forest green"))))
+   '(region ((t (:background "forest green")))))
+#+END_SRC
+
+**** mono font
+
+Set default mono font:
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist
+             '(font . "Ubuntu Mono-15"))
+#+END_SRC
+
+Set default font to monospace:
+#+BEGIN_SRC emacs-lisp
+;; set a default font
+(when (member "Ubuntu Mono-15" (font-family-list))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-15"))
+#+END_SRC
+
+**** custome theme font
+
+Remember to install =apt install fonts-firacode=.
+
+#+BEGIN_SRC emacs-lisp
+  (custom-theme-set-faces
+   'user
+   '(fixed-pitch ((t (:family "Fira Code" :height 140))))
+  )
+#+END_SRC
+
+** be quiet
+Remove bell and dings.
+
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function
+      '(lambda ()
+         (message "The answer is 42...")))
+(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
+#+END_SRC
+
+** In terminal mode
+
+#+BEGIN_SRC emacs-lisp
+(when (display-graphic-p)
+  (set-background-color "#ffffff")
+  (set-foreground-color "#141312"))
+#+END_SRC
+
+** In X11 mode: mouse and window title
+
+#+BEGIN_SRC emacs-lisp
+(setq frame-title-format "emacs @ %b - %f")
+(when window-system
+  (mouse-wheel-mode)  ;; enable wheelmouse support by default
+  (set-selection-coding-system 'compound-text-with-extensions))
+#+END_SRC
+
+** dynamic cursor colors
+
+The cursor is displayed in different colors, depending on overwrite or
+insert mode.
+
+#+BEGIN_SRC emacs-lisp
+(setq hcz-set-cursor-color-color "")
+(setq hcz-set-cursor-color-buffer "")
+
+(defun hcz-set-cursor-color-according-to-mode ()
+  "change cursor color according to some minor modes."
+  ;; set-cursor-color is somewhat costly, so we only call it when needed:
+  (let ((color
+         (if buffer-read-only "orange"
+           (if overwrite-mode "red"
+             "green"))))
+    (unless (and
+             (string= color hcz-set-cursor-color-color)
+             (string= (buffer-name) hcz-set-cursor-color-buffer))
+      (set-cursor-color (setq hcz-set-cursor-color-color color))
+      (setq hcz-set-cursor-color-buffer (buffer-name)))))
+
+(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
 #+END_SRC
 
 * Buffers

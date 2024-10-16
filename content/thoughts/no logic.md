@@ -17,8 +17,8 @@ the _captains_ on the ship, and I suppose it was received well, thus
 it's really a good start of my day in this org. But towards the end of
 Friday, I felt my entire system was slowing down, and I was even too
 tired to play the phone. Maybe it's just a relaxing time after a
-highly focused session, like a running training on sprint, that needs
-a break to rest.
+highly focused session, like a running train on sprint, that needs a
+break to rest.
 
 So this morning, all I want to do is to sit in OpenEye and dump brain,
 on the events that is happening, that, from any way I could think of,
@@ -28,7 +28,7 @@ on Zhihu yesterday totally made me wonder, how my such maybe naive
 view of human being, or to be more specific, of the subset of human
 being living on that land, governed by that team, could be so off!?
 
-It is not secret that the so called **-ism** is living on fostering
+It is no secret that the so called **-ism** is living on fostering
 nothing but hatred, that it feeds off a sentiment of humiliation
 &rarr; agony &rarr; revenge. The script they have in mind is
 essentially of a slave turning to a master. Not that this is

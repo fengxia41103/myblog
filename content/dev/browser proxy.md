@@ -14,9 +14,10 @@ traffic from A to B, much quicker than X-windows.
 </figure>
 
 1. On A, `ssh -vv -ND 8080 root@<B's IP>`, then SSH login.
-   
+
     1. `-N`: Do not execute a remote command.  This is useful for
-       just forwarding ports.`
+       just forwarding ports.
+
     2. `-D [bind_address:]port`:
 
         Specifies a local “dynamic” application-level port forwarding.  This works by
@@ -35,22 +36,22 @@ traffic from A to B, much quicker than X-windows.
         bind_address of “localhost” indicates that the listening port be bound for
         local use only, while an empty address or ‘*’ indicates that the port should
         be available from all interfaces.
-   
+
 2. On A, open Firefox, and setup proxy as shown below:
-  1. Goto `Preferences/networking settings`.
-  2. `Manual proxy configuration`
-  3. `SOCKS Host` to `localhost`, and port to `8080` (whatever the
-     port you set above).
-  4. Select `socks v5`.
-  5. Clear `No proxy for`, because sometimes `localhost` and
-     `127.0.0.1` are listed. We want to use `localhost`!
- 
-<figure class="col s12">
-  <img src="images/browser%20proxy%20firefox%20setting.png"
-       class="center img-responsive">
-  <figcaption>Setting up proxy in Firefox</figcaption>
-</figure>
- 
+
+    1. Goto `Preferences/networking settings`.
+    2. `Manual proxy configuration`
+    3. `SOCKS Host` to `localhost`, and port to `8080` (whatever the
+       port you set above).
+    4. Select `socks v5`.
+    5. Clear `No proxy for`, because sometimes `localhost` and
+       `127.0.0.1` are listed. We want to use `localhost`!
+
+        <figure class="col s12">
+          <img src="images/browser%20proxy%20firefox%20setting.png"
+               class="center img-responsive">
+          <figcaption>Setting up proxy in Firefox</figcaption>
+        </figure>
+
 This is it. Then anything on this browser will be routed to localhost
 port 8080, which by the `ssh`, will be forwarded to B.
-

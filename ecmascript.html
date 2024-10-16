@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-07-03
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-thoughts.html">
+      <i class="fa fa-tag"></i>
+      thoughts
+    </a>
+
+    <h1 class="myhighlight">ECMAScript</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>Isn't this confusing &mdash; <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, ES6, Javascript,
+<a href="https://en.wikipedia.org/wiki/JScript">JScript</a>, <a href="https://en.wikipedia.org/wiki/CoffeeScript">CoffeeScript</a>, <a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript">TypeScript</a>... what the heck!?</p>
+<figure class="col s12">
+  <img src="images/ecmascript%20relationship.png"/>
+  <figcaption>Feng's view of how these confusing Javascript words are
+  linked together</figcaption>
+</figure>
+
+<h1>spec</h1>
+<p>The mother of all is the <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a>, which is the spec. It has
+some wild release notion and cycles. The important one for me is the
+<a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ES2015</a>, and I think starting from that release, the schedule
+becomes annual, thus we have <code>ECMAScript 2016</code> and so on. Since the
+2015 release is the <strong>6th</strong> revision of the spec, thus also created
+the notion <code>ES6</code> (<code>ES2015</code> ==  <code>ES6</code>).</p>
+<h1>spec implementation</h1>
+<p>Javascript, together with <a href="https://en.wikipedia.org/wiki/JScript">JScript</a>, <a href="https://en.wikipedia.org/wiki/ActionScript">ActionScript</a>, are
+implementation of this spec, and of course, by different
+companies. The problem is, each implements some subset of the spec,
+thus there are overlaps as well as incompatibilities. Sucks!
+Therefore, when reading some Javascript articles, there is always
+reference to <code>ES6</code> compatible or a feature, which means whether the
+Javascript implementation is up to that spec's release, or not.</p>
+<h1>javascript engine and compatibility</h1>
+<p>Ok. Here comes the giant twist &mdash; starting when the spec
+committee decides that before I put feature into writing, there needs
+to at least two implementations &rarr; browser's Javacript engines
+(and dont' get confused w/ <a href="https://en.wikipedia.org/wiki/Browser_engine">browser engine</a>, which itself is
+includes an Javascript engine, but do other things such as rendering
+HTML), that can make this feature work. So some engine implements a
+feature that will be added into ES6, for example, while others then
+have to play the catch up game once the spec is out, and even when a
+<em>feature</em> is usable in a browser, it doesn't necessarily in the spec
+yet &rarr; isn't this logic circular!? Anway. So this leads the
+browser's <a href="https://kangax.github.io/compat-table/es6/">compatibility hell</a>, check it out.</p>
+<h1>superset &amp; transpiler</h1>
+<p>Then, nobody likes coding in plain Javascript (why!?), so there comes
+the <strong>supersets</strong> &mdash; <a href="https://en.wikipedia.org/wiki/CoffeeScript">CoffeeScript</a>, <a href="https://en.wikipedia.org/wiki/Microsoft_TypeScript">TypeScript</a>... and
+then, Angular decides to use <code>typescript</code> to write itself. How
+wonderful! The reason they call themselves superset is that any plain
+Javascript is legitimate superset codes, but not the other way around
+&mdash; it's like you can write assembly in C code, but can't add a C
+function in assembly. </p>
+<p>Oh well, so enters the compilers (and the Javascript world must give
+it a new name, <code>transpiler</code>, hell) &mdash; they covert these superset
+code into, plain javascripts.. .well, you can translate many
+programming languages into many others (see <a href="https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS">the list</a>). So it's
+really in your development pipeline to use some tooling to make this
+compilation so <strong>at the end of the day, you are getting
+javascript</strong>. But wait, there is more.</p>
+<p>Not only they translate superset into javascript, it can <strong>downgrade</strong>
+your code from ES15 to some really basics. An example in <a href="https://scotch.io/tutorials/javascript-transpilers-what-they-are-why-we-need-them">this
+article</a> which I'm showing below:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">Planet</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="w"> </span><span class="p">(</span><span class="nx">mass</span><span class="p">,</span><span class="w"> </span><span class="nx">moons</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">mass</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nx">mass</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">moons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moons</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">reportMoons</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`I have </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">moons</span><span class="si">}</span><span class="sb"> moons.`</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="c1">// Yeah, Jupiter really does have (at least) 67 moons.</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">jupiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Planet</span><span class="p">(</span><span class="s1">&#39;Pretty Big&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">67</span><span class="p">);</span>
+<span class="nx">jupiter</span><span class="p">.</span><span class="nx">reportMoons</span><span class="p">();</span>
+</code></pre></div>
+
+<p>will be translated to:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Everything below is Babel&#39;s output.</span>
+<span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">_createClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">defineProperties</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">props</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">props</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nx">descriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">props</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">enumerable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">enumerable</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">configurable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">)</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">writable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">Constructor</span><span class="p">,</span><span class="w"> </span><span class="nx">protoProps</span><span class="p">,</span><span class="w"> </span><span class="nx">staticProps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">protoProps</span><span class="p">)</span><span class="w"> </span><span class="nx">defineProperties</span><span class="p">(</span><span class="nx">Constructor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span><span class="w"> </span><span class="nx">protoProps</span><span class="p">);</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">staticProps</span><span class="p">)</span><span class="w"> </span><span class="nx">defineProperties</span><span class="p">(</span><span class="nx">Constructor</span><span class="p">,</span><span class="w"> </span><span class="nx">staticProps</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">Constructor</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="p">}();</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">_classCallCheck</span><span class="p">(</span><span class="nx">instance</span><span class="p">,</span><span class="w"> </span><span class="nx">Constructor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">instance</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nx">Constructor</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot call a class as a function&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">Planet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">Planet</span><span class="p">(</span><span class="nx">mass</span><span class="p">,</span><span class="w"> </span><span class="nx">moons</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_classCallCheck</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">Planet</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mass</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">moons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moons</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">_createClass</span><span class="p">(</span><span class="nx">Planet</span><span class="p">,</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;reportMoons&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">reportMoons</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;I have &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">moons</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39; moons.&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">Planet</span><span class="p">;</span>
+<span class="p">}();</span>
+</code></pre></div>
+
+<blockquote>
+<p>You'll notice that there are no ES2015 features. const variables get
+converted to carefully scoped var declarations; class is converted to
+an old-school function constructor; and the template string desugars
+to simple string concatenation.
+</p>
+</blockquote>
+<p>Therefore, transpiler is also a way to map these advanced features
+into more vanilla form so it will improve compatibility (and
+reliability?). The one name I have seen over and over is the
+<a href="https://babeljs.io/">Babel</a>, and there is even an <a href="https://babeljs.io/repl/">live babel</a>.</p>
+<h1>module loader</h1>
+<p>Coding is complex, and you need to break them up into
+<strong>modules</strong>, but then, who is going to piece them together!? That's
+the module loader. Two dominant ones &mdash;
+<a href="https://en.wikipedia.org/wiki/CommonJS">CommonJS</a>, and <a href="https://en.wikipedia.org/wiki/Asynchronous_module_definition">Asynchronous Module Definition</a> (AMD). This
+<a href="https://auth0.com/blog/javascript-module-systems-showdown/">article</a> explains it very well. </p>
+<p>So, these two are again, just methodologies, philosophies. An
+implementation of <code>commonJS</code> is <code>Node.js</code>, and for AMD you get
+<a href="https://requirejs.org/">require.js</a>.</p>
+<p>I bet by now you start to see how these names fall into its own place
+and start to make sense, hopefully.</p>
+<h1>Reference</h1>
+<ol>
+<li><a href="https://bytearcher.com/articles/es6-vs-es2015-name/">ES6 vs ES2015 - What to call a JavaScript version?</a></li>
+<li><a href="https://auth0.com/blog/javascript-module-systems-showdown/">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></li>
+<li><a href="https://scotch.io/tutorials/javascript-transpilers-what-they-are-why-we-need-them">avaScript Transpilers: What They Are &amp; Why We Need Them</a></li>
+</ol></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

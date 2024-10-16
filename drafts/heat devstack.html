@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-02-27
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Devstack & Heat</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>Setting up <a href="https://wiki.openstack.org/wiki/Heat">Heat</a> with <a href="https://docs.openstack.org/developer/devstack/">Openstack Devstack</a> is straightforward
+once user realizes that the official <a href="https://docs.openstack.org/developer/heat/getting_started/on_devstack.html">instructions</a> is not
+up to date. In the doc there are two ways to enable Heat service:</p>
+<ol>
+<li>
+<p>Enable as a service:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[[local|localrc]]</span>
+
+<span class="c1"># Enable heat services</span>
+<span class="na">enable_service h-eng h-api h-api-cfn h-api-cw</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Enable as a plugin:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[[local|localrc]]</span>
+
+<span class="c1">#Enable heat plugin</span>
+<span class="na">enable_plugin heat https</span><span class="o">:</span><span class="s">//git.openstack.org/openstack/heat</span>
+</code></pre></div>
+
+</li>
+</ol>
+<p>The gotcha is that <strong>do not use both</strong>! As a matter of fact, for newer
+devstack, the only method that works is the plugin.</p>
+<p>Devstack takes a long time to stand up. As a newbie, once you have
+created a stack, you also need to issue the following commands in
+devstack VM in order to enable SSH to your new VMs:</p>
+<div class="highlight"><pre><span></span><code>openstack<span class="w"> </span>security<span class="w"> </span>group<span class="w"> </span>rule<span class="w"> </span>create<span class="w"> </span>--proto<span class="w"> </span>icmp<span class="w"> </span>--dst-port<span class="w"> </span><span class="m">0</span><span class="w"> </span>default
+openstack<span class="w"> </span>security<span class="w"> </span>group<span class="w"> </span>rule<span class="w"> </span>create<span class="w"> </span>--proto<span class="w"> </span>tcp<span class="w"> </span>--dst-port<span class="w"> </span><span class="m">22</span><span class="w"> </span>default
+</code></pre></div>
+
+<p>Again, not that <a href="https://docs.openstack.org/developer/devstack/networking.html">official document</a> didn't tell you. It's just
+buried deep and hard to find.</p>
+<p>Here is the <strong>local.conf</strong> used:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#OFFLINE=true</span>
+
+<span class="c1"># Credentials</span>
+<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">DATABASE_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">RABBIT_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">SERVICE_PASSWORD</span><span class="o">=</span>natalie
+<span class="nv">SERVICE_TOKEN</span><span class="o">=</span>natalie
+<span class="nv">SWIFT_HASH</span><span class="o">=</span>natalie
+<span class="nv">SWIFT_TEMPURL_KEY</span><span class="o">=</span>natalie
+
+
+<span class="c1"># Enable Ironic plugin</span>
+enable_plugin<span class="w"> </span>ironic<span class="w"> </span>git://git.openstack.org/openstack/ironic
+
+<span class="c1"># Enable Neutron which is required by Ironic and disable nova-network.</span>
+disable_service<span class="w"> </span>n-net
+disable_service<span class="w"> </span>n-novnc
+enable_service<span class="w"> </span>q-svc
+enable_service<span class="w"> </span>q-agt
+enable_service<span class="w"> </span>q-dhcp
+enable_service<span class="w"> </span>q-l3
+enable_service<span class="w"> </span>q-meta
+enable_service<span class="w"> </span>neutron
+​
+<span class="c1"># Enable Swift for agent_* drivers</span>
+enable_service<span class="w"> </span>s-proxy
+enable_service<span class="w"> </span>s-object
+enable_service<span class="w"> </span>s-container
+enable_service<span class="w"> </span>s-account
+
+<span class="c1"># Swift temp URL&#39;s are required for agent_* drivers.</span>
+<span class="nv">SWIFT_ENABLE_TEMPURLS</span><span class="o">=</span>True
+
+<span class="c1"># Create 3 virtual machines to pose as Ironic&#39;s baremetal nodes.</span>
+<span class="nv">IRONIC_VM_COUNT</span><span class="o">=</span><span class="m">3</span>
+<span class="nv">IRONIC_VM_SSH_PORT</span><span class="o">=</span><span class="m">22</span>
+<span class="nv">IRONIC_BAREMETAL_BASIC_OPS</span><span class="o">=</span>True
+<span class="nv">DEFAULT_INSTANCE_TYPE</span><span class="o">=</span>baremetal
+
+<span class="c1"># Enable Ironic drivers.</span>
+<span class="nv">IRONIC_ENABLED_DRIVERS</span><span class="o">=</span>fake,agent_ssh,agent_ipmitool,pxe_ssh,pxe_ipmitool
+
+<span class="c1"># Change this to alter the default driver for nodes created by devstack.</span>
+<span class="c1"># This driver should be in the enabled list above.</span>
+<span class="nv">IRONIC_DEPLOY_DRIVER</span><span class="o">=</span>agent_ipmitool
+
+<span class="c1"># The parameters below represent the minimum possible values to create</span>
+<span class="c1"># functional nodes.</span>
+<span class="nv">IRONIC_VM_SPECS_RAM</span><span class="o">=</span><span class="m">1280</span>
+<span class="nv">IRONIC_VM_SPECS_DISK</span><span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># Size of the ephemeral partition in GB. Use 0 for no ephemeral partition.</span>
+<span class="nv">IRONIC_VM_EPHEMERAL_DISK</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># To build your own IPA ramdisk from source, set this to True</span>
+<span class="nv">IRONIC_BUILD_DEPLOY_RAMDISK</span><span class="o">=</span>False
+
+<span class="nv">VIRT_DRIVER</span><span class="o">=</span>ironic
+
+<span class="c1"># By default, DevStack creates a 10.0.0.0/24 network for instances.</span>
+<span class="c1"># If this overlaps with the hosts network, you may adjust with the</span>
+<span class="c1"># following.</span>
+<span class="nv">NETWORK_GATEWAY</span><span class="o">=</span><span class="m">10</span>.1.0.1
+<span class="nv">FIXED_RANGE</span><span class="o">=</span><span class="m">10</span>.1.0.0/24
+<span class="nv">FIXED_NETWORK_SIZE</span><span class="o">=</span><span class="m">256</span>
+
+<span class="c1"># Log all output to files</span>
+<span class="nv">LOGFILE</span><span class="o">=</span>/tmp/devstack.log
+<span class="nv">LOGDIR</span><span class="o">=</span><span class="nv">$HOME</span>/logs
+<span class="nv">IRONIC_VM_LOG_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/ironic-bm-logs
+
+<span class="o">[[</span>local<span class="p">|</span>localrc<span class="o">]]</span>
+<span class="c1">#Enable heat services</span>
+<span class="c1">#enable_service h-eng h-api h-api-cfn h-api-cw</span>
+<span class="c1">#Enable heat plugin</span>
+enable_plugin<span class="w"> </span>heat<span class="w"> </span>https://git.openstack.org/openstack/heat
+<span class="nv">ENABLED_SERVICES</span><span class="o">+=</span>,heat,h-api,h-api-cfn,h-api-cw,h-eng
+<span class="nv">IMAGE_URL_SITE</span><span class="o">=</span><span class="s2">&quot;http://download.fedoraproject.org&quot;</span>
+<span class="nv">IMAGE_URL_PATH</span><span class="o">=</span><span class="s2">&quot;/pub/fedora/linux/releases/25/CloudImages/x86_64images/&quot;</span>
+<span class="nv">IMAGE_URL_FILE</span><span class="o">=</span><span class="s2">&quot;Fedora-Cloud-Base-25-1.3.x86_64.qcow2&quot;</span>
+<span class="nv">IMAGE_URLS</span><span class="o">+=</span><span class="s2">&quot;,&quot;</span><span class="nv">$IMAGE_URL_SITE$IMAGE_URL_PATH$IMAGE_URL_FILE</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - REACT</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/react.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2020-03-18T09:25:00-04:00</updated><subtitle></subtitle><entry><title>Feng's movie browser</title><link href="https://fengxia41103.github.io/myblog/movie%20browser.html" rel="alternate"></link><published>2020-03-18T09:25:00-04:00</published><updated>2020-03-18T09:25:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2020-03-18:/myblog/movie browser.html</id><summary type="html">&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/movie.gif"/&gt;
+    &lt;figcaption&gt;Movie browser demo&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Background&lt;/h1&gt;
+&lt;p&gt;Posted a challenge to build a &lt;em&gt;search&lt;/em&gt;/browser for movie
+fan. Initially was given a static data set to display. So on top of
+that, I start to pull in a few other data sources to spice things
+up. Coded in React, which I found the ES6 syntax much cleaner.&lt;/p&gt;
+&lt;h1&gt;Development&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;code&gt;nvm&lt;/code&gt; and node (tested 9.4, 12.1).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm install&lt;/code&gt;: to pull all dependencies.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run build&lt;/code&gt; because static files will be served from &lt;code&gt;/dist&lt;/code&gt;
+   (defined in &lt;code&gt;webpack.config&lt;/code&gt;) by default. However, they can also be
+   served outside the application entirely. See &lt;code&gt;Deploy&lt;/code&gt; section for
+   more info.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run dev&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Browse &lt;code&gt;localhost:8080&lt;/code&gt;, browser will auto-refresh when webpack
+   detects a change to source files.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Deploy&lt;/h1&gt;
+&lt;h2&gt;using github pages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Setup your github repo to allow pages, select using &lt;code&gt;MASTER&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Setup &lt;code&gt;develop&lt;/code&gt; as default branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run deploy&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;At prompt, login your github account.&lt;/li&gt;
+&lt;li&gt;Go to &lt;code&gt;&amp;lt;yourname&amp;gt;.github.com/&amp;lt;repo&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;using your static file hosting&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;npm run build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Push &lt;code&gt;/dist&lt;/code&gt; to your static file hosting service.&lt;/li&gt;
+&lt;li&gt;Verify …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://fengxia41103.github.io/movie/"&gt;Go to live demo&lt;/a&gt;&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/movie.gif"/&gt;
+    &lt;figcaption&gt;Movie browser demo&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Background&lt;/h1&gt;
+&lt;p&gt;Posted a challenge to build a &lt;em&gt;search&lt;/em&gt;/browser for movie
+fan. Initially was given a static data set to display. So on top of
+that, I start to pull in a few other data sources to spice things
+up. Coded in React, which I found the ES6 syntax much cleaner.&lt;/p&gt;
+&lt;h1&gt;Development&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;code&gt;nvm&lt;/code&gt; and node (tested 9.4, 12.1).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm install&lt;/code&gt;: to pull all dependencies.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run build&lt;/code&gt; because static files will be served from &lt;code&gt;/dist&lt;/code&gt;
+   (defined in &lt;code&gt;webpack.config&lt;/code&gt;) by default. However, they can also be
+   served outside the application entirely. See &lt;code&gt;Deploy&lt;/code&gt; section for
+   more info.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run dev&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Browse &lt;code&gt;localhost:8080&lt;/code&gt;, browser will auto-refresh when webpack
+   detects a change to source files.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Deploy&lt;/h1&gt;
+&lt;h2&gt;using github pages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Setup your github repo to allow pages, select using &lt;code&gt;MASTER&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Setup &lt;code&gt;develop&lt;/code&gt; as default branch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run deploy&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;At prompt, login your github account.&lt;/li&gt;
+&lt;li&gt;Go to &lt;code&gt;&amp;lt;yourname&amp;gt;.github.com/&amp;lt;repo&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;using your static file hosting&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;npm run build&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Push &lt;code&gt;/dist&lt;/code&gt; to your static file hosting service.&lt;/li&gt;
+&lt;li&gt;Verify on a browser.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: static data JSONs can be hosted in other locations instead
+of packaged in this application. In that case, you need to modify the
+&lt;code&gt;json_data_server&lt;/code&gt; setting in &lt;code&gt;movie.jsx&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;json_data_server&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;change&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;an&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;absolute&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;URL&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, this value can be further manifested in a config so the
+source code has minimal change. This, for the time being, is really
+minor so I'm letting it be assuming all data json will be packaged
+together. Fundamentally, the app is also a set of static files, so
+serving them and data using the same mechanics seem quite logical if
+we own both the app and the data anyway.&lt;/p&gt;
+&lt;h1&gt;Design&lt;/h1&gt;
+&lt;p&gt;This is a SPA w/o routing. Idea is to integrate multiple data sources
+into a single view. Internal data is hoisted in top level component so
+its change will trickle down to all subcomponent which is responsible
+for render its content.&lt;/p&gt;
+&lt;h2&gt;Data sources&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://ibm.box.com/s/ufnb4dlv5hmfln58lt37563l0yvdw4xt"&gt;JSON data set&lt;/a&gt;: data set composed offline.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.omdbapi.com/"&gt;OMDB API&lt;/a&gt;: When speaking of movies, one immediately thinks
+   of &lt;a href="https://www.imdb.com/"&gt;IMDB&lt;/a&gt;, Surprisingly IMDB doesn't have an official
+   API. There is an third-party offering called &lt;a href="http://www.omdbapi.com/"&gt;omdbapi&lt;/a&gt;,
+   sounds pretty copycat. Data set is fairly simple once you get an
+   &lt;a href="http://www.omdbapi.com/apikey.aspx"&gt;API key&lt;/a&gt; (free for 1000 calls per day) and examine
+   the data comparing to what is displayed on a IMDB page.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```javascript
+api = http://www.omdbapi.com/?apikey=c6638eb9&amp;amp;t=Wall%20E
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Toolset&lt;/h2&gt;
+&lt;figure class="col l8 m8 s12 center"&gt;
+  &lt;img src="images/movie/technology.png"/&gt;
+    &lt;figcaption&gt;Toolset stack&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;It's always amazing to me how many different technologies/libraries
+one has to pull together in order to make an application, even a
+simple one like this. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://facebook.github.io/react/"&gt;REACT&lt;/a&gt;: core&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://react-bootstrap.github.io/"&gt;React Bootstrap&lt;/a&gt;: map boostrap components into React,
+  eg. use &lt;code&gt;&amp;lt;Button&lt;/code&gt; which will render bootstrap buttons.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://materializecss.com/"&gt;Materialize CSS&lt;/a&gt;: "A modern responsive front-end framework based on Material Design" by their words.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://lodash.com/"&gt;lodash&lt;/a&gt;: nice lib for data struct manipulation.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://webpack.github.io/"&gt;webpack&lt;/a&gt;: new module builder that is making lot of buzz these days.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt;: a new way to talk to API endpoints instead of &lt;code&gt;jQuery AJAX&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Presentation Layout &amp;amp; Components&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Naming following &lt;code&gt;&amp;lt;name&amp;gt;Box&lt;/code&gt; is a Component.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Layout follows 3-section approach: header, content, and footer, in a
+vertical split. The &lt;code&gt;Content&lt;/code&gt; is a logical group of a list of sub
+components and some static information (displayed in
+YELLOW). &lt;/p&gt;
+&lt;figure class="col l6 m6 s12 center"&gt;
+  &lt;img src="images/movie/layout.png"/&gt;
+    &lt;figcaption&gt;View layout&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HeaderBox&lt;/code&gt;: Place to put things such as navigation, logos. Stick to
+  top.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FooterBox&lt;/code&gt;: Place to put more navigation to external resources,
+  static pagers such as credits. Stick to bottom. &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SearchBox&lt;/code&gt;: Search movie by title. Multiple matches will result in
+  multiple &lt;code&gt;MovieBox&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MovieBox&lt;/code&gt;: Represent content of a single movie, thus it has movie's data.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Movie title&lt;/code&gt;: Title is rendered as static information. No component is needed.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SubtitleBox&lt;/code&gt;: Subtitle includes a mix of facts and opinionated info:&lt;/li&gt;
+&lt;li&gt;movie rating by IMDB and other sources (Note: these are
+    opinionated scores, mostly by voluntary voters).&lt;/li&gt;
+&lt;li&gt;time length&lt;/li&gt;
+&lt;li&gt;production year&lt;/li&gt;
+&lt;li&gt;movie &lt;a href="https://en.wikipedia.org/wiki/Motion_picture_content_rating_system"&gt;rating&lt;/a&gt; (&lt;strong&gt;Note&lt;/strong&gt;: since contents cover international movies,
+    not all of them have this info).&lt;/li&gt;
+&lt;li&gt;original language released (&lt;strong&gt;Note&lt;/strong&gt;: this does not cover
+    translated versions done after its release).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Description&lt;/code&gt;: Description is rendered as static information. No
+  component is needed.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GalleryBox&lt;/code&gt;: Movie poster and other images.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CrewBox&lt;/code&gt;: Component for genre, director, starring, and writer.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RatingBox&lt;/code&gt;: Component for opinionated ratings, eg. IMDB rating.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LocationBox&lt;/code&gt;: Location where scenes were taken. Presented as fun
+  facts.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;QuoteBox&lt;/code&gt;: Critic reviews.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SnippetsBox&lt;/code&gt;: Make a fun quiz game using lines from the movie.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EpisodeBox&lt;/code&gt;: For series, list episodes and their ratings.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;SearchBox&lt;/h2&gt;
+&lt;p&gt;Search is case insensitive. Given movie title (and this can be
+partial) will result in either a list of IMDB IDs, or nothing. The
+more precise your query is, the more likely it will return what you
+are looking for. &lt;/p&gt;
+&lt;p&gt;There are two error conditions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;No match&lt;/strong&gt;: I have no control over the content of the search API
+   backend. Thus not only a meaningless query such as "lkjsljdflkj"
+   will result in an empty result, some seemingly useful one will
+   result in the same no hit. For example, try an international title.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Too many&lt;/strong&gt;: Given an ambiguous query such as a two-letter &lt;code&gt;st&lt;/code&gt;
+   will result in a "too many results" error. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So overall, search is an act of art. Suggestion to get you going:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;star&lt;/code&gt; or &lt;code&gt;star war&lt;/code&gt; &amp;rarr; no explanation needed&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wall&lt;/code&gt;: &amp;rarr; Wall E&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sound&lt;/code&gt; &amp;rarr; Sound of Music&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/movie/search%20sequence.png"/&gt;
+    &lt;figcaption&gt;SearchBox sequence diagram&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;MovieBox&lt;/h2&gt;
+&lt;p&gt;This represents a single movie. When given an IMDB ID, it will
+retrieve movie meta data from external sources such as OMDB API. If
+not it will load local data source file, eg. &lt;code&gt;data/en-US.json&lt;/code&gt;. In
+general, it knows how to get data from different data sources and
+how to handle their info.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/movie/movie%20box%20sequence.png"/&gt;
+    &lt;figcaption&gt;MovieBox sequence diagram&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;A key piece of this entire application is an internal data structure
+representing a movie's info. When dealing w/ multiple data sources,
+normalizing data is a MUST to make it clean, as well as to make error
+handler possible (just about any piece of info can be &lt;code&gt;null&lt;/code&gt; or
+&lt;code&gt;undefined&lt;/code&gt;, or having no value &lt;code&gt;[]{}""&lt;/code&gt;! But I don't want to have all
+those inline &lt;code&gt;if-else&lt;/code&gt; littering inside the &lt;code&gt;jsx&lt;/code&gt; sections), thus
+trying to assigning them a valid value. This is especially important
+to &lt;code&gt;undefined&lt;/code&gt; because React render will fail silently w/o much
+meaning error stack trace. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;normalized&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;description&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;description&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Plot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;locations&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;locations&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[],&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;quote&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;quote&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{},&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;snippets&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;snippets&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[],&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;gallery&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;src&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Poster&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;}],&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;video&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;video-embed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[],&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;episodes&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;episode-list&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[],&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;year&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Year&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;runtime&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Runtime&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;director&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Director&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;released&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Released&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;genres&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Genre&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;writers&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Writer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;actors&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Actors&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;language&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Language&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;country&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Country&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;awards&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Awards&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;ratings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Ratings&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[],&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;metaScore&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Metascore&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;imdbRating&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;parseFloat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;imdbRating&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;imdbVotes&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;imdbVotes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;imdbID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;imdbID&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;dvd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;DVD&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;boxOffice&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;BoxOffice&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;production&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Production&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;rated&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Rated&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Apparently there are many loop holes in this. &lt;strong&gt;The only assumption I'm
+making is that &lt;code&gt;data.imdbID&lt;/code&gt; won't be null, so that we are looking at
+a real movie&lt;/strong&gt;. Fair?&lt;/p&gt;
+&lt;h2&gt;GalleryBox&lt;/h2&gt;
+&lt;p&gt;There are many ways to implement a gallery box, eg. carousel. I chose
+to write one myself that will:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;display one image as main&lt;/li&gt;
+&lt;li&gt;if there are multiple image, mouse over or click will switch to the
+   next one.&lt;/li&gt;
+&lt;li&gt;it circles back to the beginning of the array once at the end&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I haven't spent much time to get image into the same size so view
+doesn't shift when it displays a longer or wider image. A quick google
+revealed &lt;code&gt;object-fit&lt;/code&gt; CSS. Later.&lt;/p&gt;
+&lt;h2&gt;SnippetsBox&lt;/h2&gt;
+&lt;p&gt;Snippets are fun. Instead of displaying them as static strings, I
+decided to make a quiz game out of it by randomly taking out a few
+words from the snippet, then ask user to fill them in.&lt;/p&gt;
+&lt;p&gt;The game is a bit rudimentary that it has to be an exact match
+including symbols &lt;code&gt;'&lt;/code&gt; and such, which is quite annoying. However as
+POC, this is sufficient.&lt;/p&gt;
+&lt;figure class="col l6 m6 s12 center"&gt;
+  &lt;img src="images/movie/snippet.png"/&gt;
+    &lt;figcaption&gt;Snippet game components&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;part 1 &amp;amp; 2&lt;/code&gt;: are what are left of the snippet line after taking out
+  the riddle piece.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;riddle&lt;/code&gt;: randomly select a section of the snippet line as riddle.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;show hint&lt;/code&gt; will break down the riddle into a list of words, and
+  show one at a time. Hints will be displayed, but not replacing the
+  user input, so user still needs to type them in.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;EpisodeBox&lt;/h2&gt;
+&lt;p&gt;Episode data are rather pale &amp;mdash; it has episode name and a rating
+number. So I decided to try out two different presentations: as a
+list, and as a chart. So far I like the list format better.&lt;/p&gt;
+&lt;p&gt;Rating are sorted in descending order. Chart is using Highcharts
+&lt;code&gt;bar&lt;/code&gt;. I'd like to have a better data source for this, or a way to
+make each episode a link to a better information.&lt;/p&gt;</content><category term="REACT"></category><category term="react"></category></entry><entry><title>Alpha Advantage SP500 API</title><link href="https://fengxia41103.github.io/myblog/alpha%20sp500.html" rel="alternate"></link><published>2017-11-12T19:00:00-05:00</published><updated>2017-11-12T19:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2017-11-12:/myblog/alpha sp500.html</id><content type="html">&lt;figure class="s12 center"&gt;
+  &lt;img src="images/alpha%20advantage%20sp500.png"/&gt;
+    &lt;figcaption&gt;SP500&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;While fixing my &lt;a href="https://github.com/fengxia41103/jk"&gt;stock project&lt;/a&gt;, I hit a road block, that Yahoo's 
+free finance API is &lt;a href="https://forums.yahoo.net/t5/Yahoo-Finance-help/Is-Yahoo-Finance-API-broken/td-p/250503"&gt;gone!&lt;/a&gt;, no more. This is quite a bummer. How
+to get daily quotes so to reestablish the data stream? Well, as a the
+beauty of free market, someone is always up to the service if there is
+a demand. So I ended up using &lt;a href="https://www.alphavantage.co/documentation/"&gt;Alpha Advantage API&lt;/a&gt; for a change.&lt;/p&gt;
+&lt;p&gt;Tagging on top the &lt;a href="https://fengxia41103.github.io/myblog/data visualization.html"&gt;World Snapshot&lt;/a&gt; project, this one is
+essentially a graph browser that takes the API data stream based on
+user selected company symbol, and draw all the data index on a single page.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"&gt;live demo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;code&gt;architecture&lt;/code&gt;/&lt;code&gt;design&lt;/code&gt; is shown below, and &lt;a href="https://github.com/fengxia41103/sp500"&gt;github code&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/sp500%20architecture.png"/&gt;
+  &lt;figcaption&gt;SP500 SPA architecture&lt;/figcaption&gt;
+&lt;/figure&gt;</content><category term="REACT"></category><category term="react"></category></entry></feed>

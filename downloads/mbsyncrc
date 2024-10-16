@@ -1,0 +1,329 @@
+# mbsyncrc based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+# ACCOUNT INFORMATION
+
+############################################
+#
+#       Accounts
+#
+###########################################
+# Hotmail account
+IMAPAccount hotmail
+# Address to connect to
+Host imap.outlook.com
+User feng_xia41103@hotmail.com
+Pass xxxx2530
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+
+# Gmail account
+IMAPAccount gmail
+# Address to connect to
+Host imap.gmail.com
+User fengxia41103@gmail.com
+Pass xxxx2539
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Gmail account for noah
+IMAPAccount noah
+# Address to connect to
+Host imap.gmail.com
+User noahxiaqq@gmail.com
+Pass xxxx909
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPAccount tianqinoah
+# Address to connect to
+Host imap.gmail.com
+User tnxiaqq@gmail.com
+Pass xxxx909-
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+
+IMAPAccount lenovo
+# Address to connect to
+Host localhost # using davmail as gateway
+User fxia1@lenovo.com
+Pass xxxx2535
+Port 1143
+SSLType None
+AuthMechs LOGIN
+
+
+
+############################################
+#
+#       IMAP stores
+#
+###########################################
+
+# THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE
+# - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE
+#   SPECIFICATION OF AN IMAP ACCOUNT)
+# - THE LOCAL STORAGE IS WHERE WE STORE THE EMAIL ON OUR COMPUTER
+
+# REMOTE STORAGE (USE THE IMAP ACCOUNT SPECIFIED ABOVE)
+IMAPStore gmail-remote
+Account gmail
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/Gmail)
+MaildirStore gmail-local
+Path ~/Maildir/Gmail/
+Inbox ~/Maildir/Gmail/inbox/
+Subfolders Verbatim
+
+IMAPStore hotmail-remote
+Account hotmail
+
+
+MaildirStore hotmail-local
+Path ~/Maildir/Hotmail/
+Inbox ~/Maildir/Hotmail/inbox/
+Subfolders Verbatim
+
+IMAPStore lenovo-remote
+Account lenovo
+
+MaildirStore lenovo-local
+Path ~/Maildir/Lenovo/
+Inbox ~/Maildir/Lenovo/inbox/
+Subfolders Verbatim
+
+IMAPStore noah-remote
+Account noah
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/noah)
+MaildirStore noah-local
+Path ~/Maildir/noah/
+Inbox ~/Maildir/noah/inbox/
+Subfolders Verbatim
+
+############################################
+#
+#       gmail channels
+#
+###########################################
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel gmail-inbox
+Master :gmail-remote:
+Slave :gmail-local:inbox
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:trash
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:sent
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+Channel gmail-all
+Master :gmail-remote:"[Gmail]/All Mail"
+Slave :gmail-local:all
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel gmail-starred
+Master :gmail-remote:"[Gmail]/Starred"
+Slave :gmail-local:starred
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+
+############################################
+#
+#       hotmail channels
+#
+###########################################
+
+Channel hotmail-trash
+Master :hotmail-remote:"Trash"
+Slave :hotmail-local:trash
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel hotmail-inbox
+Master :hotmail-remote:"Inbox"
+Slave :hotmail-local:inbox
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel hotmail-inbox-sub
+Master :hotmail-remote:"Inbox/"
+Slave :hotmail-local:inbox/
+Pattern *
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel hotmail-sent
+Master :hotmail-remote:"Sent"
+Slave :hotmail-local:sent
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+
+############################################
+#
+#       lenovo channels
+#
+###########################################
+Channel lenovo-inbox
+Master :lenovo-remote:
+Slave :lenovo-local:
+Patterns *
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+############################################
+#
+#       noah channels
+#
+###########################################
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+Channel noah-inbox
+Master :noah-remote:
+Slave :noah-local:inbox
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel noah-trash
+Master :noah-remote:"[Gmail]/Trash"
+Slave :noah-local:trash
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel noah-sent
+Master :noah-remote:"[Gmail]/Sent Mail"
+Slave :noah-local:sent
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel noah-all
+Master :noah-remote:"[Gmail]/All Mail"
+Slave :noah-local:all
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+Channel noah-starred
+Master :noah-remote:"[Gmail]/Starred"
+Slave :noah-local:starred
+Create Both
+Remove Both
+Expunge Both
+CopyArrivalDate yes
+SyncState *
+
+
+############################################
+#
+#       groups -- they are batch commands
+#
+###########################################
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync hotmail" GETS MAIL FROM
+# "hotmail-inbox", "hotmail-sent", and "hotmail-trash"
+
+Group gmail
+Channel gmail-trash
+Channel gmail-inbox
+Channel gmail-sent
+Channel gmail-all
+Channel gmail-starred
+
+Group noah
+Channel noah-trash
+Channel noah-inbox
+Channel noah-sent
+Channel noah-all
+Channel noah-starred
+
+Group hotmail
+Channel hotmail-trash
+Channel hotmail-inbox
+Channel hotmail-inbox-sub
+Channel hotmail-sent
+
+Group lenovo
+Channel lenovo-inbox

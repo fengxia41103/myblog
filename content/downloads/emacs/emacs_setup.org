@@ -1724,6 +1724,16 @@ work. Otherwise, some utf-8 symbols will be scrambled.
 (set-clipboard-coding-system 'utf-8)
 #+END_SRC
 
+** always horizontal split pane
+
+Get idea from [[https://www.reddit.com/r/emacs/comments/16jdd64/always_split_windows_horizontally/][reddit]]:
+
+#+begin_src emacs-lisp
+(setq window-combination-resize t
+      split-width-threshold 100)
+#+end_src
+
+
 * Font, theme
 
 The whole point of using emacs is that I like the user experience, and

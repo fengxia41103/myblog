@@ -1,0 +1,20 @@
+---
+documentclass: letter
+papersize: a4
+mainfont: FreeSerif
+monofont: FreeMono
+fontsize: 12pt
+geometry: margin=1in
+linkstyle: slanted
+linkcolor: #d52349
+titlepage: true
+links-as-notes: true
+author: Feng Xia
+opening: To whom it may concern,
+closing: Sincerely,
+return-address:
+- Feng Xia
+- 127 Longchamp Ln.
+- Cary, NC 27519
+
+---

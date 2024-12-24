@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - gkp</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/gkp.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2015-09-12T19:00:00-04:00</updated><subtitle></subtitle><entry><title>GKP — major details</title><link href="https://fengxia41103.github.io/myblog/gkp%20majors.html" rel="alternate"></link><published>2015-09-12T19:00:00-04:00</published><updated>2015-09-12T19:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-12:/myblog/gkp majors.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
+two&lt;/a&gt;, I have introduced functions
+to assist students get to know about the schools from multiple
+aspects. In this article, we will touch upon another important factor
+when going to college &amp;mdash; major.&lt;/p&gt;
+&lt;p&gt;In China, majors are split into three layers: category, subcategory,
+and majors. Similar to the &lt;em&gt;state-city-school&lt;/em&gt; configuration,
+functions at category and subcategory level focus on statistic
+analysis so to offer an overview, where major level contains details
+that are relevant to that particular major which students would find
+useful.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_major_setup.png"/&gt;
+    &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;According to &lt;a href="https://fengxia41103.github.io/myblog/downloads/20121012084054830.pdf"&gt;document&lt;/a&gt;
+published by the &lt;a href="http://www.moe.gov.cn/publicfiles/business/htmlfiles/moe/s3882/201210/xxgk_143152.html"&gt;Department of Education&lt;/a&gt; in 2012, there are 12
+categories, 92 subcategories and 506 majors.&lt;/p&gt;
+&lt;h1&gt;Category and subcategory&lt;/h1&gt;
+&lt;p&gt;At this level, focus was to provide statistics which is similar to
+what is done for schools at &lt;em&gt;State level&lt;/em&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_18.png"/&gt;
+    &lt;figcaption&gt;Major category and subcategory&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Students can quickly browse through category and subcategory to locate
+area of interest she wants to drill further down.&lt;/p&gt;
+&lt;h1&gt;Major&lt;/h1&gt;
+&lt;p&gt;At this level, we think the most relevant information students want to
+know is the job …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part
+two&lt;/a&gt;, I have introduced functions
+to assist students get to know about the schools from multiple
+aspects. In this article, we will touch upon another important factor
+when going to college &amp;mdash; major.&lt;/p&gt;
+&lt;p&gt;In China, majors are split into three layers: category, subcategory,
+and majors. Similar to the &lt;em&gt;state-city-school&lt;/em&gt; configuration,
+functions at category and subcategory level focus on statistic
+analysis so to offer an overview, where major level contains details
+that are relevant to that particular major which students would find
+useful.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_major_setup.png"/&gt;
+    &lt;figcaption&gt;Majors are split into 3 layers&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;According to &lt;a href="https://fengxia41103.github.io/myblog/downloads/20121012084054830.pdf"&gt;document&lt;/a&gt;
+published by the &lt;a href="http://www.moe.gov.cn/publicfiles/business/htmlfiles/moe/s3882/201210/xxgk_143152.html"&gt;Department of Education&lt;/a&gt; in 2012, there are 12
+categories, 92 subcategories and 506 majors.&lt;/p&gt;
+&lt;h1&gt;Category and subcategory&lt;/h1&gt;
+&lt;p&gt;At this level, focus was to provide statistics which is similar to
+what is done for schools at &lt;em&gt;State level&lt;/em&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_18.png"/&gt;
+    &lt;figcaption&gt;Major category and subcategory&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Students can quickly browse through category and subcategory to locate
+area of interest she wants to drill further down.&lt;/p&gt;
+&lt;h1&gt;Major&lt;/h1&gt;
+&lt;p&gt;At this level, we think the most relevant information students want to
+know is the job market datat.  So we built an integration point with
+popular job posting sites. Dynamically the application will query
+these sites and compile the most recent 50 job posts that matches this
+major.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_19.png"/&gt;
+    &lt;figcaption&gt;Job title cloud&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Based on these data stream, a &lt;em&gt;job title keyword cloud&lt;/em&gt; is compiled
+taht shows the job titles used by the industry, and they are further
+grouped into cities so they provide another geo reference for
+students.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_20.png"/&gt;
+    &lt;figcaption&gt;Schools grouped by job locations&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Below listed jobs, application will conveniently show schools that are
+located in those cities since local graduate usually have an advantage
+competing for jobs in local market. Another feature is that a toggle
+switch will turn user's preference on and off so researcher can easily
+search either by major and jobs alone, or by combination of the market
+data and her own criteria.&lt;/p&gt;</content><category term="gkp"></category><category term="gkp"></category></entry><entry><title>GKP — school details</title><link href="https://fengxia41103.github.io/myblog/gkp%20schools.html" rel="alternate"></link><published>2015-09-07T14:00:00-04:00</published><updated>2015-09-07T14:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-07:/myblog/gkp schools.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
+introduced functions that will help school
+research at nation level, state and city level. In this article
+I'll talk about features built to help research at &lt;em&gt;school level&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;Bookmark&lt;/h1&gt;
+&lt;p&gt;While research schools, it is useful to bookmark a page for later
+use. That's where the &lt;em&gt;bookmark&lt;/em&gt; feature comes in. User can save
+unlimited bookmarks and manage them by &lt;em&gt;x-out&lt;/em&gt;(remove) it from saved
+list. Convenient.&lt;/p&gt;
+&lt;figure class="row"&gt;
+    &lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_9.png" /&gt;
+    &lt;/div&gt;&lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_10.png" /&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;Bookmark a school&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;School summary&lt;/h1&gt;
+&lt;p&gt;School summary are mostly text extracted from multiple sources.  The
+first page contains an introduction, or a quick view, of the school.
+It contains many meta data that can be extracted to form more data
+dimensions.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_11.png"/&gt;
+    &lt;figcaption&gt;School summary&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;School detail page expands on top of the introduction. One small feature
+concerning development is that TOC is auto generated.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_12.png"/&gt;
+    &lt;figcaption&gt;School wiki&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Historical admission scores&lt;/h1&gt;
+&lt;p&gt;This page lists historical cutoff scores that the school has applied
+in past admissions. GKP has collected over 2,000,000 data records
+between 2010 and 2014 and covering 3,000 schools.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_13.png"/&gt;
+    &lt;figcaption&gt;School historical cutoff scores&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Students …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt;, we have
+introduced functions that will help school
+research at nation level, state and city level. In this article
+I'll talk about features built to help research at &lt;em&gt;school level&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;Bookmark&lt;/h1&gt;
+&lt;p&gt;While research schools, it is useful to bookmark a page for later
+use. That's where the &lt;em&gt;bookmark&lt;/em&gt; feature comes in. User can save
+unlimited bookmarks and manage them by &lt;em&gt;x-out&lt;/em&gt;(remove) it from saved
+list. Convenient.&lt;/p&gt;
+&lt;figure class="row"&gt;
+    &lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_9.png" /&gt;
+    &lt;/div&gt;&lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_10.png" /&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;Bookmark a school&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;School summary&lt;/h1&gt;
+&lt;p&gt;School summary are mostly text extracted from multiple sources.  The
+first page contains an introduction, or a quick view, of the school.
+It contains many meta data that can be extracted to form more data
+dimensions.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_11.png"/&gt;
+    &lt;figcaption&gt;School summary&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;School detail page expands on top of the introduction. One small feature
+concerning development is that TOC is auto generated.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_12.png"/&gt;
+    &lt;figcaption&gt;School wiki&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Historical admission scores&lt;/h1&gt;
+&lt;p&gt;This page lists historical cutoff scores that the school has applied
+in past admissions. GKP has collected over 2,000,000 data records
+between 2010 and 2014 and covering 3,000 schools.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_13.png"/&gt;
+    &lt;figcaption&gt;School historical cutoff scores&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Students can then use these scores as reference compared to her
+estimated exam score in order to get a sense of how likely she will be
+admitted.&lt;/p&gt;
+&lt;h1&gt;Social life&lt;/h1&gt;
+&lt;p&gt;One important factor to consider, also a unique feature of this
+application, is the campus social life. Here we created an advanced
+backend engine to tap into popular social media facilities and pull in
+live chat stream at &lt;strong&gt;50,000 new posts per minute&lt;/strong&gt;. This gives
+students a rich information on how the campus life is like.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_14.png"/&gt;
+    &lt;figcaption&gt;School social media data stream&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Data stream is being updated every 60 seconds. So for a user it is
+convenient to leave the window open and watch new posts appear on the
+screen instead of refreshing page manually.  Also, there is a voting
+mechanism behind the scene so that the more users a page is being
+viewed (thus indicating more popularity), the higher priority the page
+has in term of receiving the next update.&lt;/p&gt;
+&lt;figure class="row"&gt;
+  &lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_15.png"/&gt;
+  &lt;/div&gt;&lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_16.png"/&gt;
+  &lt;/div&gt;
+  &lt;figcaption&gt;Social media keyword cloud and news ticker&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Based on these streamed social media data, the application provides a
+&lt;em&gt;Keyword Cloud&lt;/em&gt;(shown on the left) that reflects hot topics in the
+most recent 100 threads.  Further, the &lt;em&gt;Live Campus&lt;/em&gt;(shown on the
+right) section shows thread summaries in a scrolling news ticker
+fashion which makes monitoring these threads simple and fun.&lt;/p&gt;
+&lt;h1&gt;Wechat channels&lt;/h1&gt;
+&lt;p&gt;Wechat is a &lt;em&gt;whatsapp&lt;/em&gt; equivalent in China. It has a dominating role
+especially among young people. Here user will find a list of Wechat
+channels that are affiliated with the candidate school, including
+school news, clubs, communities and activities. Connecting to them is
+as simple as scanning the barcode with her phone. It is another unique
+feature that makes acquiring school information as painless as
+possible.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_17.png"/&gt;
+    &lt;figcaption&gt;School Wechat channels&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Major&lt;/h1&gt;
+&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;part one&lt;/a&gt; and this
+article, we have introduced research functions that assist user at
+different level of interest. Here comes another important
+consideration that any student must have &amp;mdash; majors.  What to
+study is often driven by interest, but also it is closely affected by
+its future job seeking prospective. In &lt;a href="https://fengxia41103.github.io/myblog/gkp majors.html"&gt;part three &amp;mdash;
+majors&lt;/a&gt; we will go over these
+topics.&lt;/p&gt;</content><category term="gkp"></category><category term="gkp"></category></entry><entry><title>GKP — introduction</title><link href="https://fengxia41103.github.io/myblog/gkp%20introduction.html" rel="alternate"></link><published>2015-09-04T10:00:00-04:00</published><updated>2015-09-04T10:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-09-04:/myblog/gkp introduction.html</id><summary type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
+Mr.Zhang, back in Jan, 2015.  Mr.Zhang has been in China's college
+education business for 15 year. He has succeeded in building a couple
+online training services and is also the head of a private
+college. The GKP project is to consolidate multiple data sources into
+one place so to facilitate high school graduates and their parents
+searching and evaluating college and university.&lt;/p&gt;
+&lt;p&gt;In this article I'll give a brief introduction of core functions and
+thoughts behind each design. It also illustrates how we have
+approached each problem with the solution you are currently seeing.&lt;/p&gt;
+&lt;h1&gt;User preference&lt;/h1&gt;
+&lt;p&gt;An important tool is the &lt;code&gt;user preference&lt;/code&gt;. Each user can specify her own
+searching criteria so to narrow down from a general search to a more
+customized version.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_2.png" /&gt;
+    &lt;figcaption&gt;Set up user preferences&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;These settings are related directly to how Chinese college categorize
+students. Take the &lt;strong&gt;Geo requirement&lt;/strong&gt; setting for example.  Let's say
+that MIT takes 3,000 freshmen each year. Instead of accepting
+application nation …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GKP project was conceived from a meeting with a friend of mine,
+Mr.Zhang, back in Jan, 2015.  Mr.Zhang has been in China's college
+education business for 15 year. He has succeeded in building a couple
+online training services and is also the head of a private
+college. The GKP project is to consolidate multiple data sources into
+one place so to facilitate high school graduates and their parents
+searching and evaluating college and university.&lt;/p&gt;
+&lt;p&gt;In this article I'll give a brief introduction of core functions and
+thoughts behind each design. It also illustrates how we have
+approached each problem with the solution you are currently seeing.&lt;/p&gt;
+&lt;h1&gt;User preference&lt;/h1&gt;
+&lt;p&gt;An important tool is the &lt;code&gt;user preference&lt;/code&gt;. Each user can specify her own
+searching criteria so to narrow down from a general search to a more
+customized version.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_2.png" /&gt;
+    &lt;figcaption&gt;Set up user preferences&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;These settings are related directly to how Chinese college categorize
+students. Take the &lt;strong&gt;Geo requirement&lt;/strong&gt; setting for example.  Let's say
+that MIT takes 3,000 freshmen each year. Instead of accepting
+application nation wide, MIT assigns a fixed quota to each state. Some
+states get more quota comparing to their share of the student
+population, while others get less. A student from a low
+quota-to-student ratio state will then have a reduced chance of
+getting into MIT even though she meets the school's qualification.&lt;/p&gt;
+&lt;p&gt;To enforce this arrangement, it is a hard requirement that student can
+only attend national entrance exam in the state that her &lt;strong&gt;birth place
+is registered (户口)&lt;/strong&gt; (This is a simplified version, but is generally
+true). Therefore, regardless where she lives now, she is locked in to
+the quota assigned to her &lt;em&gt;home&lt;/em&gt; state. This is a sad reality.&lt;/p&gt;
+&lt;h1&gt;Nation level: a school map&lt;/h1&gt;
+&lt;p&gt;The drive behind this function is that students often have a geo
+preference in mind.  This function is to make it easy when she wants
+to browse schools based on its geo location.&lt;/p&gt;
+&lt;p&gt;Initially I was to build a Google map view with overlayed filter.  Geo
+code was looked up first using Google map API. This alone took about a
+week to resolve limited by the upper limit Google imposed on each API
+account and the initial trial and error time. Drawing the map was
+straightforward using &lt;a href="https://developers.google.com/maps/documentation/javascript/tutorial"&gt;Google map API&lt;/a&gt; and &lt;a href="https://github.com/googlemaps/js-marker-clusterer"&gt;marker cluster&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/gkp_21.png"/&gt;
+    &lt;figcaption&gt;Using Google map to browse schools&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;However, a couple issues with this approach:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Computing markers within the view bound was time consuming. This is
+   especially so when user has few filtering criteria.  This will
+   result in displaying all schools on the map. Zooming in will reduce
+   the number of markers. So a potential solution is to set the
+   initial zoom large enough to view only a section of the country's
+   territory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some addresses were not resolved or resolved incorrectly. They were
+   viewable on Google map itself, but the returned geo code was
+   different. It feels like Google uses a better version for his own
+   use and serves the rest of us with a lower quality data set. A way
+   to resolve this is to check the address with other geo decoding
+   services. So I tried Baidu map API. That's when all hell broke
+   loose.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;First of all, two systems yielded two different geo codes for the same
+school address!  How could this be? Are they having two different GPS
+systems? My guess is that their data providers are different. But
+whose data is correct?&lt;/p&gt;
+&lt;p&gt;Further, displayed location on the map are different, sometimes not
+even close. Then I tried swapping geo code for the purpose of
+experiment &amp;mdash; using Google's geo code to plot on Baidu map. The
+result was even stranger. This made me to think that either Google or
+Baidu has massaged their data on purpose in order to create this
+incompatibility.&lt;/p&gt;
+&lt;p&gt;Considering the GFW, I abandoned both maps and back to a simple
+Chart. Map is drawn using &lt;a href="https://ecomfe.github.io/echarts/index-en.html"&gt;Echarts&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_1.png"/&gt;
+    &lt;figcaption&gt;School map using Echarts&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Legend on the bottom left corner shows school counts categorized into
+different shades of color. The darker an area is, the more schools
+there are.  Schools in each state are further grouped by its city
+(shown on the right) and can be drilled down.&lt;/p&gt;
+&lt;h1&gt;State level: statistics&lt;/h1&gt;
+&lt;p&gt;Next layer below a national view of all schools on a country map is at
+state level.  Most people have a general idea of state, such as its
+climate, culture, food, and so forth. So here instead of these
+information, we focused on aggregated data analysis. In short, schools
+within the same state boundary will be grouped along different
+dimensions. Statistics are then computed on the fly to provide quick
+facts.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_3.png"/&gt;
+    &lt;figcaption&gt;School statistics quickview at State level&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Each dimension can be drilled down to reveal more stats. Among them,
+two important dimensions are important for a student
+&amp;mdash; Bachelor's vs. Associate program, and tiers.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_4.png"/&gt;
+    &lt;figcaption&gt;School statistics drill down by programs and admission tiers&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The distinction in the degrees are simple to understand. Some schools
+and programs offer certificate program while others are accredited by
+the government to issue degrees.&lt;/p&gt;
+&lt;p&gt;A unique concept here is the &lt;em&gt;admission tier&lt;/em&gt;.  In China, all college
+admissions fall into one of the four tiers listed in descending time
+order &amp;mdash; &lt;em&gt;pre tier, 1st tier, 2nd tier and 3rd tier&lt;/em&gt;.  Tiers work
+in a waterfall mode. School start with top tier in an admission cycle
+and moves down the tiers until all spots are filled. Therefore the
+lower the tier is, the less likely a top school will come by. On the
+other hand, lower tier has a lower score requirement.  Pre tier is for
+school with specialized program, eg. military schools. Often, it is
+also the time when elite students get picked by school. For all
+others, they have to make a decision prior to the exam day which tier
+she is going into, and the primary reference is her estimated score.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_5.png"/&gt;
+    &lt;figcaption&gt;School statistics drill down by school types&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Another dimension is the type of school. Students who want to study
+arts can quickly find schools specializing in that.&lt;/p&gt;
+&lt;h1&gt;City level&lt;/h1&gt;
+&lt;p&gt;What would student want to know about a city? First of all, some
+general data imported from wikipedia. Since wikipedia does not have an
+API for keyword search, the challenge was to have the computer
+matching city name to a wiki page and parse the page for imported data
+bits.&lt;/p&gt;
+&lt;figure class="row"&gt;
+  &lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_6.png"/&gt;
+  &lt;/div&gt;
+  &lt;div class="col s6"&gt;
+    &lt;img class="img-responsive center" src="images/gkp_7.png"/&gt;
+  &lt;/div&gt;
+  &lt;figcaption&gt;City wiki&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Next, an interesting idea came up during our discussion. &lt;em&gt;How
+convenient is it to get to the city from where I live?&lt;/em&gt; So we decided
+to build a train schedule that will show exactly which train are
+available to take, all stops in between, and the actual time elapse.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/gkp_8.png"/&gt;
+    &lt;figcaption&gt;City to city train schedule search engine&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Considering that no map API or travel search engine can mix up flight
+with train to generate a complete door-to-door route, this function
+has a great potential to be extended into a service of its own where
+flight, train, bus and subway data are matched up.&lt;/p&gt;
+&lt;h1&gt;School level&lt;/h1&gt;
+&lt;p&gt;Everything comes down to school level where school specific details
+are laid out to assist prospective students evaluate not only the
+future academic life but also its social life. Read on our &lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;part two
+&amp;mdash; school details&lt;/a&gt;.&lt;/p&gt;</content><category term="gkp"></category><category term="gkp"></category></entry></feed>

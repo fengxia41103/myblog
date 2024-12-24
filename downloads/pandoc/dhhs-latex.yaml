@@ -1,0 +1,25 @@
+---
+documentclass: scrreprt
+papersize: a4
+mainfont: FreeSerif
+monofont: FreeMono
+fontsize: 12pt
+geometry: margin=1in
+linkstyle: slanted
+linkcolor: #d52349
+titlepage: true
+titlepage-color: "FFFFFF"
+titlepage-text-color: "5C68C0"
+titlepage-rule-color: "5C68C0"
+toc: true
+toc-depth: 5
+toc-own-page: true
+lof: false
+lot: false
+link-citations: true
+logo: "../../images/dhhs-logo.png"
+draft: false
+header-includes:
+  - \usepackage{setspace}
+  - \usepackage{tocloft}
+---

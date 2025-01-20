@@ -1,0 +1,5 @@
+{{/* table template */ -}}
+{{$w := sub termWidth 100 -}}
+{{ range .issues -}}
+  | {{ .key | printf "%-7s"}} | {{ .fields.summary | abbrev 48 | printf (printf "%%-%ds" 48) }} | {{.fields.issuetype.name | printf "%-5s" }} | {{.fields.status.name | abbrev 8 | printf "%-8s" }} | <unassigned> | {{.fields.priority.name | printf "%-2s"}}  | {{ .fields.created | age}}
+{{ end -}}

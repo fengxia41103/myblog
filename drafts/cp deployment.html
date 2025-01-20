@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-10-02
+
+
+    <a class="wave-effect" href="lenovo.html">
+      <i class="fa fa-folder-open-o"></i>
+      lenovo
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">ThinkAgile CP Deployment</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>Follow these instructions to deploy a ThinkAgile CP stack.</p>
+<h1>Prerequisite</h1>
+<ol>
+<li>Stacks have been cabled.</li>
+<li>Network planning worksheet has been filled out.</li>
+<li>Uplink switches have been configured according the worksheet.</li>
+<li>Connect a bootstrap (Linux) machine, eg. your laptop, with a serial
+   to USB adapter cable. Serial cable is connected to the primary
+   interconnect.</li>
+</ol>
+<h1>Bootstrap</h1>
+<p>On Ubuntu 18.04, </p>
+<ol>
+<li>
+<p><code>sudo screen /dev/ttyUSB0 115200 cs8</code>, wait for prompt <code>XorPlus
+   login:</code>. Now you are connected to the primary interconnect.</p>
+<ul>
+<li>login: (manager, cloudistics)</li>
+</ul>
+</li>
+<li>
+<p>Setup uplink IP, DNS server, and NTP server:</p>
+<div class="highlight"><pre><span></span><code>```shell
+sudo cldtx_set_switch_oob_ip -v &lt;oob vlan&gt; \
+  -i &lt;oob ip&gt; \
+  -m &lt;oob netmask&gt; \
+  -g &lt;oob gateway&gt; \
+  -n &lt;primary DNS server, default to 8.8.8.8&gt; \
+  -d &lt;2nd DNS server, default to 8.8.4.4&gt; \
+  -t &lt;primary NTP server, default to &quot;time1.google.com&quot;&gt; \
+  -p &lt;2nd NTP server, default to &quot;time2.google.com&quot;&gt;
+```
+</code></pre></div>
+
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span>
+<span class="w">                  </span><span class="k">set</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">management</span><span class="o">-</span><span class="n">ethernet</span><span class="w"> </span><span class="n">eth0</span><span class="w"> </span><span class="n">ip</span><span class="o">-</span><span class="n">gateway</span><span class="w"> </span><span class="n">IPv4</span><span class="w"> </span><span class="mf">10.240.22.1</span><span class="p">.</span>
+<span class="n">The</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ss">&quot;system management-ethernet eth0 ip-gateway IPv4&quot;</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span>
+<span class="w">                  </span><span class="k">commit</span><span class="p">.</span>
+<span class="k">Commit</span><span class="w"> </span><span class="n">OK</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span>
+<span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="n">Synchronizing</span><span class="w"> </span><span class="n">configuration</span><span class="p">...</span><span class="n">OK</span><span class="p">.</span>
+<span class="n">Pica8</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="mf">2.11.5</span><span class="p">.</span><span class="n">cloudistics</span><span class="mf">.1</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">XorPlus</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="n">configure</span><span class="p">.</span>
+<span class="n">Entering</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">dns</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ip</span><span class="w"> </span><span class="mf">8.8.8.8</span><span class="o">^</span><span class="n">M</span><span class="p">.</span>
+<span class="nl">Deleting</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="mf">8.8.8.8</span>
+
+<span class="n">OK</span><span class="w"> </span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span>
+<span class="p">.</span>
+<span class="k">Commit</span><span class="w"> </span><span class="n">OK</span><span class="p">.</span>
+<span class="k">Save</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="n">Synchronizing</span><span class="w"> </span><span class="n">configuration</span><span class="p">...</span><span class="n">OK</span><span class="p">.</span>
+<span class="n">Pica8</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="mf">2.11.5</span><span class="p">.</span><span class="n">cloudistics</span><span class="mf">.1</span>
+<span class="n">OK</span><span class="w"> </span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span>
+<span class="p">.</span>
+<span class="k">Commit</span><span class="w"> </span><span class="n">OK</span><span class="p">.</span>
+<span class="k">Save</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="n">Synchronizing</span><span class="w"> </span><span class="n">configuration</span><span class="p">...</span><span class="n">OK</span><span class="p">.</span>
+<span class="n">Pica8</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="mf">2.11.5</span><span class="p">.</span><span class="n">cloudistics</span><span class="mf">.1</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">XorPlus</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="n">configure</span><span class="p">.</span>
+<span class="n">Entering</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">dns</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ip</span><span class="w"> </span><span class="mf">8.8.8.8</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">commit</span>
+<span class="p">.</span>
+<span class="k">Commit</span><span class="w"> </span><span class="n">OK</span><span class="p">.</span>
+<span class="k">Save</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="n">Synchronizing</span><span class="w"> </span><span class="n">configuration</span><span class="p">...</span><span class="n">OK</span><span class="p">.</span>
+<span class="n">Pica8</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="mf">2.11.5</span><span class="p">.</span><span class="n">cloudistics</span><span class="mf">.1</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">XorPlus</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="n">configure</span><span class="p">.</span>
+<span class="n">Entering</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">dns</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ip</span><span class="w"> </span><span class="mf">8.8.4.4</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">commit</span>
+<span class="n">Synchronizing</span><span class="w"> </span><span class="n">configuration</span><span class="p">...</span><span class="n">OK</span><span class="p">.</span>
+<span class="n">Pica8</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="mf">2.11.5</span><span class="p">.</span><span class="n">cloudistics</span><span class="mf">.1</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">XorPlus</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="n">configure</span><span class="p">.</span>
+<span class="n">Entering</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">dns</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ip</span><span class="w"> </span><span class="mf">8.8.8.8</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">commit</span>
+<span class="p">.</span>
+<span class="k">Commit</span><span class="w"> </span><span class="n">OK</span><span class="p">.</span>
+<span class="k">Save</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="n">Synchronizing</span><span class="w"> </span><span class="n">configuration</span><span class="p">...</span><span class="n">OK</span><span class="p">.</span>
+<span class="n">Pica8</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="mf">2.11.5</span><span class="p">.</span><span class="n">cloudistics</span><span class="mf">.1</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">PicOS</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">XorPlus</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="n">configure</span><span class="p">.</span>
+<span class="n">Entering</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="n">dns</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">ip</span><span class="w"> </span><span class="mf">8.8.4.4</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="k">Execute</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="k">commit</span>
+<span class="p">.</span>
+<span class="k">Commit</span><span class="w"> </span><span class="n">OK</span><span class="p">.</span>
+<span class="k">Save</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
+<span class="n">root</span><span class="nv">@XorPlus</span><span class="err">#</span><span class="w"> </span>
+<span class="n">Stopping</span><span class="w"> </span><span class="n">NTP</span><span class="w"> </span><span class="nl">server</span><span class="p">:</span><span class="w"> </span><span class="n">ntpd</span><span class="p">.</span>
+<span class="n">Starting</span><span class="w"> </span><span class="n">NTP</span><span class="w"> </span><span class="nl">server</span><span class="p">:</span><span class="w"> </span><span class="n">ntpd</span><span class="p">.</span>
+<span class="n">Checking</span><span class="w"> </span><span class="n">connectivity</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">host</span><span class="err">:</span><span class="w">   </span><span class="nl">port</span><span class="p">:</span><span class="w"> </span>
+<span class="n">Cloudistics</span><span class="w"> </span><span class="n">Portal</span><span class="w"> </span><span class="k">connection</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="n">failed</span><span class="w">    </span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h1>mwc wildfly local dev</h1>
+<h2>anaconda</h2>
+<p><a href="https://docs.anaconda.com/anaconda/install/linux/">Official instruction</a>.</p>
+<ol>
+<li>
+<p>install system packages:</p>
+<div class="highlight"><pre><span></span><code>```shell
+apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>download <a href="https://www.anaconda.com/download/#linux">installer</a>.</p>
+</li>
+<li>
+<p><code>source ~/.bashrc</code>. If you are curious, this is what that
+   initialization step put in this file:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="n">__conda_setup</span><span class="o">=</span><span class="s2">&quot;$(&#39;/home/fengxia/anaconda2/bin/conda&#39; &#39;shell.bash&#39; &#39;hook&#39; 2&gt; /dev/null)&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">$</span><span class="err">?</span><span class="w"> </span><span class="o">-</span><span class="n">eq</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">];</span><span class="w"> </span><span class="n">then</span>
+<span class="w">    </span><span class="n">eval</span><span class="w"> </span><span class="s2">&quot;$__conda_setup&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="s2">&quot;/home/fengxia/anaconda2/etc/profile.d/conda.sh&quot;</span><span class="w"> </span><span class="p">];</span><span class="w"> </span><span class="n">then</span>
+<span class="w">        </span><span class="o">.</span><span class="w"> </span><span class="s2">&quot;/home/fengxia/anaconda2/etc/profile.d/conda.sh&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="s2">&quot;/home/fengxia/anaconda2/bin:$PATH&quot;</span>
+<span class="w">    </span><span class="n">fi</span>
+<span class="n">fi</span>
+<span class="n">unset</span><span class="w"> </span><span class="n">__conda_setup</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p><code>conda -version</code>. You should see sth like <code>conda 4.7.10</code>.</p>
+</li>
+<li>
+<p><code>conda config --add channels conda-forge</code>.</p>
+</li>
+<li>
+<p><code>conda create -n mwc_scripts python=2.7 psycopg2 sqlparse
+   cassandra-driver</code>. This message <code>Collecting package metadata
+   (current_repodata.json):</code> will take a while to complete. Be
+   patient. You can execute this multiple times, which <code>conda</code> is
+   smart enough to ask whethe you want to scratch the virtual env
+   <code>mwc_script</code> and rebuild it. Further, <code>pip install</code> will not
+   install the package properly even though <code>which pip</code> shows you are
+   using the virtulenv's one.</p>
+</li>
+</ol>
+<h2>docker &amp; docker-compose</h2>
+<ol>
+<li>Just follow <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04">this</a>.</li>
+<li><code>sudo usermod -a -G docker $USER</code>, then exit SSH and login again.</li>
+<li><code>docker run hello-world</code> as test.</li>
+<li><code>apt install docker-compose</code>.</li>
+</ol>
+<h2>mwc</h2>
+<p>Anything in <code>.sh</code>, you have the option to execute them manually, line
+by line.</p>
+<ol>
+<li>
+<p>In <code>.bashrc</code>, append to the end:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="k">export</span><span class="w"> </span><span class="n">CLDTX_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">you</span><span class="o">&gt;/</span><span class="n">workspace</span><span class="o">/</span><span class="n">ignite</span>
+<span class="k">export</span><span class="w"> </span><span class="n">CLDTX_CONFIG</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">cloudistics</span>
+<span class="k">export</span><span class="w"> </span><span class="n">PYTHON_HOME</span><span class="o">=/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">you</span><span class="o">&gt;/</span><span class="n">anaconda2</span>
+<span class="err">```</span>
+</code></pre></div>
+
+<p>This is critical because following <code>.sh</code> will all be referencing
+these variable values. Worse comes to worst, just run the contents
+of the <code>.sh</code> manually.</p>
+</li>
+<li>
+<p>Make <code>/etc/cloudistics</code> and set permissions:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="c1"># They initialize configuration and database directories.</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cloudistics</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">chown</span><span class="w"> </span><span class="o">-</span><span class="n">R</span><span class="w"> </span><span class="s2">&quot;$USER&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cloudistics</span>
+<span class="n">echo</span><span class="w"> </span><span class="s1">&#39;export CLDTX_CONFIG=/etc/cloudistics&#39;</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">bashrcHome</span><span class="p">}</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">/</span><span class="n">temp</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">chown</span><span class="w"> </span><span class="o">-</span><span class="n">R</span><span class="w"> </span><span class="s2">&quot;$USER&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">temp</span>
+<span class="err">```</span>
+</code></pre></div>
+
+<ol>
+<li><code>source ~/.bashrc</code>.</li>
+</ol>
+</li>
+<li>
+<p><code>mwc/maintenance/unix/setup/init-mwc-builder.sh</code>. This will build
+   docker images.</p>
+<div class="highlight"><pre><span></span><code>```bash
+#!/bin/bash
+
+#<span class="w"> </span>Create<span class="w"> </span>mwc-builder<span class="w"> </span>container<span class="w"> </span>for<span class="w"> </span>building<span class="w"> </span>MWC.
+docker<span class="w"> </span>build<span class="w"> </span>--file<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/mwc/docker/Dockerfile.dev&quot;<span class="w"> </span>--tag<span class="w"> </span>mwc-builder<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/mwc/docker&quot;
+
+#<span class="w"> </span>Create<span class="w"> </span>a<span class="w"> </span>Docker<span class="w"> </span>volume<span class="w"> </span>for<span class="w"> </span>caching<span class="w"> </span>Maven<span class="w"> </span>dependencies.
+docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>maven-cache
+```
+</code></pre></div>
+
+</li>
+<li>
+<p><code>mwc/maintenance/unix/setup/init-config.sh</code>.</p>
+<div class="highlight"><pre><span></span><code>```bash
+#!/bin/bash
+
+#<span class="w"> </span>Copy<span class="w"> </span>notification<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span>to<span class="w"> </span>/etc/cloudistics<span class="w"> </span>directory.
+cp<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/deployment/management/notifications/notification.rc.json&quot;<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_CONFIG</span><span class="cp">}</span>&quot;
+
+#<span class="w"> </span>Copy<span class="w"> </span>configuration<span class="w"> </span>properties<span class="w"> </span>to<span class="w"> </span>/etc/cloudistics<span class="w"> </span>directory.
+cd<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/mwc/src/main/resources/&quot;
+cp<span class="w"> </span>*.xml<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_CONFIG</span><span class="cp">}</span>&quot;
+cp<span class="w"> </span>*.properties<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_CONFIG</span><span class="cp">}</span>&quot;
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Go to <code>mwc/docker</code> and spin up database: <code>docker-compose up -d
+   postgres scylla</code>.</p>
+</li>
+<li>
+<p>Append "host all all 0.0.0.0/0 trust" to
+   <code>/var/lib/docker/volumes/docker_postgres-data/_data/pg_hba.conf</code>.</p>
+</li>
+<li>
+<p>Restart PG2: <code>docker-compose restart postgres scylla</code></p>
+</li>
+<li>
+<p>Init database w/ data: <code>mwc/maintenance/unit/setup/init-database.sh</code></p>
+<div class="highlight"><pre><span></span><code>```bash
+#!/bin/bash
+
+#<span class="w"> </span>Copy<span class="w"> </span>management<span class="w"> </span>database<span class="w"> </span>migrations<span class="w"> </span>that<span class="w"> </span>are<span class="w"> </span>temporarily<span class="w"> </span>in<span class="w"> </span>a<span class="w"> </span>
+#<span class="w"> </span>&quot;management_changes&quot;<span class="w"> </span>file<span class="w"> </span>until<span class="w"> </span>they<span class="w"> </span>are<span class="w"> </span>given<span class="w"> </span>a<span class="w"> </span>number<span class="w"> </span>in<span class="w"> </span>master.
+cp<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/management_changes.sql&quot;<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/migrations.d/111111111.sql&quot;
+
+#<span class="w"> </span>Reset<span class="w"> </span>the<span class="w"> </span>Postgres<span class="w"> </span>database.
+&quot;<span class="cp">${</span><span class="n">PYTHON_HOME</span><span class="cp">}</span>/envs/mwc_scripts/bin/python&quot;<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/perform_database_migration.py&quot;<span class="w"> </span>--db_host<span class="w"> </span>localhost<span class="w"> </span>--db_port<span class="w"> </span>5432<span class="w"> </span>--db_user_name<span class="w"> </span>cldtx<span class="w"> </span>--db_user_password<span class="w"> </span>cldtx<span class="w"> </span>--db_init<span class="w"> </span>--db_init_mwc_test_data
+
+#<span class="w"> </span>Remove<span class="w"> </span>the<span class="w"> </span>temporary<span class="w"> </span>management<span class="w"> </span>database<span class="w"> </span>migration<span class="w"> </span>script.
+rm<span class="w"> </span>-f<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-mgmt/migrations.d/111111111.sql&quot;
+
+#<span class="w"> </span>Copy<span class="w"> </span>stats<span class="w"> </span>database<span class="w"> </span>migrations<span class="w"> </span>that<span class="w"> </span>are<span class="w"> </span>temporarily<span class="w"> </span>in<span class="w"> </span>a<span class="w"> </span>&quot;management_changes&quot;<span class="w"> </span>
+#<span class="w"> </span>file<span class="w"> </span>until<span class="w"> </span>they<span class="w"> </span>are<span class="w"> </span>given<span class="w"> </span>a<span class="w"> </span>number<span class="w"> </span>in<span class="w"> </span>master.
+cp<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/management_changes.cql&quot;<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/migrations.d/111111111.cql&quot;
+
+#<span class="w"> </span>Reset<span class="w"> </span>the<span class="w"> </span>Cassandra<span class="w"> </span>database.
+&quot;<span class="cp">${</span><span class="n">PYTHON_HOME</span><span class="cp">}</span>/envs/mwc_scripts/bin/python&quot;<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/perform_database_migration.py&quot;<span class="w"> </span>--db_init
+
+#<span class="w"> </span>Remove<span class="w"> </span>the<span class="w"> </span>temporary<span class="w"> </span>stats<span class="w"> </span>database<span class="w"> </span>migration<span class="w"> </span>script.
+rm<span class="w"> </span>-f<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">CLDTX_HOME</span><span class="cp">}</span>/db-stats/migrations.d/111111111.cql&quot;
+
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Launch mwc: <code>docker-compose up -d wildfly</code></p>
+</li>
+</ol>
+<h1>Build webapp (Angular) code locally</h1>
+<ol>
+<li>
+<p>Install <a href="https://github.com/nvm-sh/nvm"><code>nvm</code></a></p>
+<div class="highlight"><pre><span></span><code>```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+```
+</code></pre></div>
+
+<ol>
+<li>
+<p>Check <code>.bashrc</code> for the snippets below, then <code>source ~/.bashrc</code> to load NVM env.</p>
+<p>```shell
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] &amp;&amp; . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion</p>
+<p>```</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Install node: <code>nvm install node</code> will pull down the latest. You can
+   also specify version, eg. <code>nvm install 8.0.0</code>.</p>
+</li>
+<li>
+<p>To check which version you have: <code>nvm list</code>.</p>
+</li>
+<li>
+<p>To use a version: <code>nvm use 8.0.0</code>.</p>
+</li>
+<li>
+<p>Install/upgrade npm: <code>npm install npm@latest -g</code></p>
+</li>
+<li>
+<p>Go to <code>mwc/src/main/webapp</code>, and <code>npm install</code>. This will take a
+   while and create <code>/node_modules</code> folder. <strong>Note</strong>: the version it
+   installs changes each time, and is also depending on the node
+   version selected. So to run different version of node, just delete
+   the <code>node_modules</code> folder and <code>npm install</code> from scratch.</p>
+</li>
+<li>
+<p>Set MWC instance. Edit <code>webpack-dev.config.js</code> and replace <code>target</code>
+   to a MWC instance (the Java middleware this frontend instance will
+   be using):</p>
+<div class="highlight"><pre><span></span><code>```javascript
+proxy: {
+  &#39;/&#39;: {
+    target: &quot;http://&lt;your mwc ip&gt;:8080&quot; // common dev
+  }
+
+```
+</code></pre></div>
+
+<p>A few common values for the MWC instance:</p>
+<ol>
+<li>LTCT lab instance: <code>http://cldtx-build.labs.&lt;company&gt;.com:8080</code>,
+   internal use only.</li>
+<li>Local dev instance: <code>http://&lt;your IP&gt;:8080</code>, if you are running
+   a local MWC docker on your machine.</li>
+</ol>
+</li>
+<li>
+<p>Run <code>npm start</code> should compile w/o error and opens a
+   <code>localhost:3000</code> on your default browser.</p>
+</li>
+</ol>
+<h2>Hot reloading</h2>
+<p><code>webpack dev server</code> will auto compile code upon a detected file
+<code>webpack-dev.config.js</code> for details.
+change and refresh browser window. See settings in</p>
+<p>On Linux, you need to check system watcher value (see <a href="https://github.com/webpack/webpack-dev-server/issues/724">bug</a>) and
+increase it if hot reloading is not working.</p>
+<div class="highlight"><pre><span></span><code>echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p
+</code></pre></div>
+
+<h3>hot reload does not cover</h3>
+<ol>
+<li>images in <code>app/share/images</code>.</li>
+<li>any <code>.jsp</code></li>
+<li>setting <code>js</code> files such as <code>webpack-&lt;...&gt;.js</code>.</li>
+</ol>
+<p>You have to rebuild MWC's <code>.war</code>, then relaunch the <code>wildfly</code>
+container to see the effect. Therefore, it's necessary to have a local
+MWC build env and change the <code>webpack-dev.config.js</code> dev server to
+your local instance for dev &amp; test in these cases.</p>
+<h2>Development conventions</h2>
+<ol>
+<li>Tab width: 2, for <code>.html</code>, <code>.ts</code>, <code>.js</code>, <code>.scss</code>.</li>
+<li>HTML attributes should be one-per-line, and they should line up:<div class="highlight"><pre><span></span><code>```html
+<span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;navbar-header&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;a</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;navbar-brand on-hover-show-text-bg-child-elements&quot;</span>
+<span class="w">     </span><span class="na">ui-sref=</span><span class="s">&quot;auth.authentication.login&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;img</span><span class="w"> </span><span class="na">src=</span><span class="s">&quot;/app/shared/images/lenovologo-pos-red-vertical.png&quot;</span>
+<span class="w">         </span><span class="na">class=</span><span class="s">&quot;inline&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+```
+</code></pre></div>
+
+<ol>
+<li>Never use inline style in HTML.</li>
+<li>When changing <code>.scss</code>, search all <code>.html</code> to know the side effect.</li>
+<li>Merge request of HTML changes should update <code>/doc</code> including such
+   as screenshot.</li>
+</ol>
+</li>
+</ol>
+<h1>Knowledge</h1>
+<h2>Usage of <code>webapp/public-marketplace/src/assets/icons</code></h2>
+<ol>
+<li>android-chrome-192x192.png, android-chrome-512x512.png and apple-touch-icon</li>
+</ol>
+<p>Used in manifest.json in the same directory. To quote, "The web app
+   manifest is a simple JSON file that tells the browser about your web
+   application and how it should behave when 'installed' on the user's
+   mobile device or desktop.".</p>
+<p>In order to test those icons, we can use chrome dev tools
+   (Application - Manifest)</p>
+<p>To learn more about this topic, check the following links: <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">Mozilla
+   docs</a> ,<a href="https://developers.google.com/web/fundamentals/app-install-banners/">Google docs</a>.</p>
+<ol>
+<li>favicon-16x16.png, favicon-32x32.png, favicon.ico</li>
+</ol>
+<p>Used to set the favicon for the website. This can be checked easily,
+   look at the icon shown on the browser tab where the portal is opened</p>
+<ol>
+<li>mstile-70x70.png, mstile-144x144png, mstile-150x150.png,
+   mstile-310x150.png,mstile-310x310.png</li>
+</ol>
+<p>Used in browserconfig.xml in the same directory. As we can learn
+   more in <a href="https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/dn320426(v=vs.85)?redirectedfrom=MSDN">this</a>, those icons are used when we pin a website in
+   windows (Start menu or taskbar)</p>
+<p>The easiest way to test this is using Edge Browser. Navigate to the
+   portal, click the 'three dots' option in the top right corner and
+   select where you want the website to be pinned.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

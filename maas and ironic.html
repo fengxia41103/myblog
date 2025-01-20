@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-03-30
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">MAAS vs. Ironic</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>This article is to analyze Openstack Ironic and Canonical MAAS, both
+are tools to turn baremetal into a pool of managed resources that are
+ready for consumption by upstream srervice.  On the highest level, a
+baremetal is either managed or not-managed. Being <strong>managed</strong> requires
+that the manager is aware of the existence of the baremetal, and has
+acquired necessary information of the server so that these two things
+are now possible:</p>
+<ol>
+<li>Power cycle the server</li>
+<li>Install a software such as operating system</li>
+</ol>
+<p>The general process of managing a baremetal is straightforward.
+Baremetal life cycle can be viewed in the following states. Names and
+details of each state and state transitions differ, but the concept
+remains valid. </p>
+<ol>
+<li><span class="myhighlight">unknown</span>: Baremetal is not managed.</li>
+<li><span class="myhighlight">enlisted</span>: Manager is now aware of
+   the existence of the baremetal. It does not yet have sufficient
+   information to cycle its power or loading anything to execute on it.</li>
+<li><span class="myhighlight">ready for provisioning</span>: Sometimes
+   also called <em>hardware inventory</em> phase, in which the manager has
+   acquired capability to control the server's power. Knowing other
+   server characteristics is not really <em>required if using PXE boot</em> during
+   provisioning because the first image loaded can potentially does
+   more inventory when it runs.</li>
+<li><span class="myhighlight">provisioned</span>: an operating system
+   or a bootable file systems have been written to a disk that
+   will be used by the server from this point on. </li>
+<li><span class="myhighlight">in use</span>: The server is running user
+   workload.</li>
+<li><span class="myhighlight">maintenance mode</span>: a catch-all
+   state that a baremetal is not available for use in normal states and needs
+   operator intervene.</li>
+</ol>
+<figure class="s12 center">
+    <img src="images/baremetal%20lifecycle.png" />
+    <figcaption>General baremetal life cycle</figcaption>
+</figure>
+
+<h1>Comparison framework</h1>
+<p>Using their APIs as reference, we have grouped their functions into
+the following subject domains for discussion purpose:</p>
+<ul>
+<li>minimal setup</li>
+<li>power</li>
+<li>select boot order</li>
+<li>new server discovery and enlisting</li>
+<li>server inventory</li>
+<li>image</li>
+<li>OS provisioning</li>
+<li>networking</li>
+<li>storage and partition</li>
+<li>deployment customization</li>
+<li>server grouping</li>
+<li>multi-tenant</li>
+</ul>
+<h1>Minimal setup</h1>
+<table>
+<thead>
+<tr>
+<th>Minimal setup</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DHCP service</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>TFTP service</td>
+<td>y "no" is using diskless image</td>
+<td>y "no" if using iSCSI drivers</td>
+</tr>
+<tr>
+<td>External image repo</td>
+<td>n</td>
+<td>y</td>
+</tr>
+<tr>
+<td>BMC network</td>
+<td>depends on driver</td>
+<td>depends on driver</td>
+</tr>
+<tr>
+<td>Tenant network</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Provision network</td>
+<td>y</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<div class="my-multicol-2">
+<figure class="col s12">
+    <img class="img-responsive center"
+    src="images/maas%20minimum%20setup.png" />
+    <figcaption>MAAS minimal setup</figcaption>
+</figure>
+<figure class="col s12">
+    <img class="img-responsive center"
+    src="images/ironic%20minimal%20setup.png" />
+    <figcaption>Ironic minimal setup</figcaption>
+</figure>
+</div>
+
+<h1>Power</h1>
+<p>The minimum capability in managing power includes two aspects:
+querying current power state and set power state.  Both <a href="https://wiki.openstack.org/wiki/Ironic/Drivers">Ironic</a>
+and <a href="https://docs.ubuntu.com/maas/2.1/en/installconfig-power-types">MAAS</a> support IPMI interface. MAAS's has more vendor centric
+implementations where Ironic's are more general purposed.</p>
+<table>
+<thead>
+<tr>
+<th>Power type</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intel AMT</td>
+<td>using <code>amttool</code>,<code>amtterm</code> or <code>wsman</code>, <code>wsmancli</code></td>
+<td></td>
+</tr>
+<tr>
+<td>American Power Conversion (APC) -PDU</td>
+<td>using <code>snmpset</code>, <code>snmp</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Digital Loggers, Inc. - PDU</td>
+<td>HTTP GET, state is parsed from a HTML</td>
+<td></td>
+</tr>
+<tr>
+<td>Facebook's Wedge</td>
+<td>SSH, run command <code>/usr/local/bin/wedge_power.sh</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Fence CDU (Redhat cluster)</td>
+<td>using <code>fence-agents</code></td>
+<td></td>
+</tr>
+<tr>
+<td>IBM Hardware Management Console (HMC)</td>
+<td>SSH, run command <code>chsysstate</code></td>
+<td></td>
+</tr>
+<tr>
+<td>General IPMI</td>
+<td><code>freeipmi-tools</code></td>
+<td><a href="http://ipmitool.sourceforge.net/"><code>ipmitool</code></a>, <a href="https://github.com/openstack/pyghmi">pyghmi</a></td>
+</tr>
+<tr>
+<td>Microsoft OCS - Chassis Manager</td>
+<td>using HTTP GET, can set next boot device</td>
+<td></td>
+</tr>
+<tr>
+<td>HP Moonshot - iLO4</td>
+<td><code>ipmitool</code></td>
+<td></td>
+</tr>
+<tr>
+<td>HP Moonshot - iLO Chassis Manager</td>
+<td>SSH, run command</td>
+<td></td>
+</tr>
+<tr>
+<td>SeaMicro 15000</td>
+<td><a href="http://ipmitool.sourceforge.net/"><code>ipmitool</code></a></td>
+<td>x</td>
+</tr>
+<tr>
+<td>Cisco UCS Manager</td>
+<td>HTTP GET, parameters in url</td>
+<td></td>
+</tr>
+<tr>
+<td>OpenStack Nova</td>
+<td>NOVA API</td>
+<td></td>
+</tr>
+<tr>
+<td>VMware</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>KVM/Virsh</td>
+<td><code>virsh</code>, <code>virt-login-shell</code>, <code>libvirt-bin</code>.</td>
+<td>SSH</td>
+</tr>
+<tr>
+<td>Manual</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dell Remote Access Controller (DRAC)</td>
+<td></td>
+<td><code>drac</code> driver</td>
+</tr>
+<tr>
+<td>HP ProLiant servers</td>
+<td></td>
+<td><code>ilo</code> driver</td>
+</tr>
+<tr>
+<td>Cisco IMC</td>
+<td></td>
+<td><a href="https://github.com/CiscoUcs/imcsdk">imcsck</a></td>
+</tr>
+<tr>
+<td>iRMC SerView Common Command Interface</td>
+<td></td>
+<td><a href="https://github.com/openstack/python-scciclient">scciclient</a></td>
+</tr>
+<tr>
+<td>HPE OneView</td>
+<td></td>
+<td><a href="https://github.com/openstack/python-oneviewclient">oneviewclient</a></td>
+</tr>
+<tr>
+<td>General SNMP</td>
+<td></td>
+<td>x</td>
+</tr>
+<tr>
+<td>VirtualBox</td>
+<td></td>
+<td>SSH</td>
+</tr>
+<tr>
+<td>iboot</td>
+<td></td>
+<td>x</td>
+</tr>
+<tr>
+<td>Wake-On-Lan</td>
+<td></td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h1>Boot order</h1>
+<table>
+<thead>
+<tr>
+<th>Select boot order</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Using IPMI driver</td>
+<td>n</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Using vendor specific driver</td>
+<td>Mirosoft OCS driver only</td>
+<td>vendor passthru</td>
+</tr>
+</tbody>
+</table>
+<p>Except Microsoft OCS driver, MAAS has no support to select or change
+boot order, even in its IPMI-based drivers.</p>
+<p>Ironic, however, supports selecting <a href="https://docs.openstack.org/developer/ironic-inspector/workflow.html#state-machine-diagram">boot device</a> using
+<code>*_ipmitool</code> drivers. It also has <em>vendor passthrough</em> feature which
+allows passing in vendor specific instructions in driver, thus giving
+the possibility to manipulate the server beyond standard functions.</p>
+<h1>New server discovery and enlisting</h1>
+<table>
+<thead>
+<tr>
+<th>Server discovery and enlisting</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discover new server</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>Enlisting MAC address</td>
+<td>auto</td>
+<td>manual</td>
+</tr>
+</tbody>
+</table>
+<p>MAAS can discover new server by monitoring  DHCP data packet given that MAAS is
+the DHCP server serving the subnet that baremetals are
+connected to. Discovered server will be registered as <em>NEW</em>
+and is ready for inventory. At this point MAAS has only the MAC
+address that was broadcasted from DHCPREQUEST.</p>
+<p>Ironic has no method to auto-discover a new server. It can only
+register them through command line or its API interface. So it
+requires either a manual process (command line) or programming.
+But because of this enlisting a node in Ironic term can include a
+wealthy of information more than its MAC address.</p>
+<h1>Server inventory</h1>
+<table>
+<thead>
+<tr>
+<th>Server inventory</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Memory size</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Partition size</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Network interface</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Mechanism</td>
+<td>cloud-init running scripts</td>
+<td>special ramdisk</td>
+</tr>
+</tbody>
+</table>
+<p>Server inventory is to inspect the server for hardware features such
+as the number of CPUs, memory size, disk size and partition. MAAS
+handles this in a separate step, <strong>Commission</strong>, after
+discovery, where this is optional in Ironic.</p>
+<p>MAAS does so by loading a minimal Ubuntu image at next boot
+and run commissioning scripts to harvest
+system information:</p>
+<ol>
+<li>DHCP server is contacted</li>
+<li>kernel and initrd are received over TFTP</li>
+<li>machine boots</li>
+<li>initrd mounts a Squashfs image ephemerally over iSCSI</li>
+<li>cloud-init runs commissioning scripts</li>
+<li>machine shuts down</li>
+</ol>
+<p>Ironic, on the other hand, relies on a separate setup, <a href="https://docs.openstack.org/developer/ironic-inspector/">Ironic
+Inspector</a> to orchestrate this process (see <a href="https://docs.openstack.org/developer/ironic-inspector/workflow.html#state-machine-diagram">steps</a> below). The
+principle is the same that Inspector will acquire credentials to
+manage the node power from Ironic, then using that to PXE rebooting
+the node and load a ramdisk. The difference is, however, that ramdisk
+is not limited to Ubuntu.</p>
+<ol>
+<li>Operator sends nodes on introspection using ironic-inspector API or CLI</li>
+<li>On receiving node UUID ironic-inspector:<ul>
+<li>validates node power credentials, current power and provisioning states,</li>
+<li>allows firewall access to PXE boot service for the nodes,</li>
+<li>issues reboot command for the nodes, so that they boot the ramdisk.</li>
+<li>The ramdisk collects the required information and posts it back to ironic-inspector.</li>
+</ul>
+</li>
+<li>On receiving data from the ramdisk, ironic-inspector:<ul>
+<li>validates received data,</li>
+<li>finds the node in Ironic database using it’s BMC address (MAC address in case of SSH driver),</li>
+<li>fills missing node properties with received data and creates
+  missing ports.</li>
+</ul>
+</li>
+</ol>
+<h1>Image</h1>
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Build-in image repo</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>Ubuntu</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>CentOS</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>SUSE</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Windows server</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>RHEL</td>
+<td>n</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<p>MAAS has built-in capability to work as an image repository. Ironic
+relies on helper service, such as Glance, to handle images.</p>
+<p>In <code>src/provisioningservers/drivers/osystem/__init__.py</code>, MAAS
+categories images into five usages: commissioning, install (regular
+ISO image), xinstall (.tgz of root <code>/</code>), diskless(<code>tgt-admin</code>) and
+bootloader.</p>
+<p>MAAS has a fair restricted list of what it supports, where Ironic is
+happy to use any bootable image since it delegates this management to
+other service such as Glance. Details of MAAS image handling can be
+found in <code>src/provisioningservers/drivers/osystem</code>. Here is a list
+defaults MAAS supports:</p>
+<ul>
+<li>Ubuntu: all LTS releases</li>
+<li>CentOS: 6.5</li>
+<li>SUSE: openSUSE 13.1 </li>
+<li>Windows:<ul>
+<li>Windows Server 2012</li>
+<li>Windows Server 2012 R2</li>
+<li>Windows Hyper-V Server 2012</li>
+<li>Windows Hyper-V Server 2012 R2</li>
+<li>Windows Server 2016</li>
+<li>Windows Nano Server 2016</li>
+</ul>
+</li>
+</ul>
+<p>One can also use MAAS CLI to add <em>custom</em> images to repo, where <code>name</code>
+must in format <code>custom/xxx</code>. For CentOS, the name must be in format
+<code>centos72</code> for example because of MAAS's regex parser.</p>
+<div class="highlight"><pre><span></span><code>maas<span class="w"> </span><span class="nb">local</span><span class="w"> </span>boot-resources<span class="w"> </span>create<span class="w"> </span><span class="nv">name</span><span class="o">=</span>custom/foo<span class="w"> </span><span class="nv">title</span><span class="o">=</span><span class="s2">&quot;Title is not important&quot;</span><span class="w"> </span><span class="nv">architecture</span><span class="o">=</span>amd64/generic<span class="w"> </span>content@<span class="o">=</span>/path/to/your/image
+maas<span class="w"> </span><span class="nb">local</span><span class="w"> </span>boot-resources<span class="w"> </span>import
+</code></pre></div>
+
+<h1>OS provisioning</h1>
+<table>
+<thead>
+<tr>
+<th>OS provisioning</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PXE</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>iSCSI</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Select boot order</td>
+<td>n</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Agent-based deployment</td>
+<td>n/a</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Post-seed operation</td>
+<td>cloud-init</td>
+<td>cloud configdrive</td>
+</tr>
+</tbody>
+</table>
+<p>First of all, both support PXE. This is standard and not much to talk
+about. In term of iSCSI, both has implementation, but with different
+objectives.  Ironic conductor(<a href="https://docs.openstack.org/developer/ironic/_modules/ironic/drivers/modules/iscsi_deploy.html">code</a>) will use the SCSI disk to
+write image data; MAAS, on the other hand, uses <code>tgt-admin</code> for the
+job, and its objective is to <strong><a href="https://blueprints.launchpad.net/maas/+spec/t-cloud-maas-diskless">re-use</a></strong> an existing root <code>/</code>
+file system.</p>
+<p>Second, MAAS lacks the capability to change boot order. Therefore, a
+provisioned server will be seemed <em>out of management</em> from that point
+on because booting from HD is now preferred instead of PXE.  It solves
+this chicken-egg problem by installing a default account and SSH
+credential so they can continue management. Instead, Ironic can use
+IPMI driver to set boot device so it does not create such artificial
+user account in the system.</p>
+<p>Third, Ironic has an agent-based deployment method that a ramdisk with
+<a href="https://docs.openstack.org/developer/ironic-python-agent/">IPA</a> installed will be loaded first. Once the agent is running,
+it can take further commands including partitioning (<code>parted</code>),
+mounting remote disk (iSCSI), cleaning disk, and write OS image to
+disk.</p>
+<p>Fourth, post-seed operation. MAAS API can accept a <code>Base64</code> encoded
+<code>user-data</code> string used by cloud-init in next boot, where Ironic API
+can accept cloud <a href="https://developer.openstack.org/api-ref/baremetal/?expanded=change-node-provision-state-detail#change-node-provision-state">configdrive</a> string.</p>
+<h1>Networking</h1>
+<table>
+<thead>
+<tr>
+<th>Networking</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serve DHCP</td>
+<td>y</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Use static IP</td>
+<td>y</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Limite IP ranges</td>
+<td>y</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Store node's IP</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>Store subnet</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>Store VLAN</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>Concept of subnet grouping</td>
+<td>space</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Concept of VLAN grouping</td>
+<td>fabric</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<p>Ironic does not handle networking. In Openstack, Neutron will be
+providing this service.</p>
+<p>MAAS understands <code>subnet</code> and <code>vlan</code>. Subnets can be further grouped
+into <code>space</code> and vlans into <code>fabric</code>. It also
+supports <a href="https://wiki.ubuntu.com/FanNetworking?_ga=1.139973107.197000268.1480367852">container fan network</a>, which Neutron has no support either.</p>
+<p>Further, MAAS can reserve IP ranges to assign to discovered nodes, CRUD interface on a
+particular node, link an interface to a VLAN, and even create a bridge
+interface on node. None of these Ironic can do or care.</p>
+<h1>Storage and partition</h1>
+<table>
+<thead>
+<tr>
+<th>Storage and partition</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Can configure disk partitions</td>
+<td>y</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Can deploy partition image</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>Can put partition on logical volume</td>
+<td>n</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<p>MAAS API supports CRUD operations for partitions. According to its
+<a href="https://docs.ubuntu.com/maas/2.1/en/installconfig-partitions">document</a>, it bears a few limitations:</p>
+<ul>
+<li>An EFI partition is required to be on the boot disk for UEFI.</li>
+<li>You cannot place partitions on logical volumes.</li>
+<li>You cannot use a logical volume as a Bcache backing device.</li>
+</ul>
+<p>Ironic has <strong>no</strong> API in this regards. By default it will only deploy
+image to full disk. A <a href="https://specs.openstack.org/openstack/ironic-specs/specs/kilo/partition-image-support-for-agent-driver.html">spec</a> has been called for to handle
+partition image implemented through <a href="https://docs.openstack.org/developer/ironic-python-agent/">IPA</a>.</p>
+<h1>Deployment customization</h1>
+<table>
+<thead>
+<tr>
+<th>Deployment customization</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>use custom image</td>
+<td>y</td>
+<td>y</td>
+</tr>
+<tr>
+<td>user scripts</td>
+<td>during inspection, commissioning scripts</td>
+<td>n</td>
+</tr>
+<tr>
+<td>cloud-init</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>cloud configdrive</td>
+<td>n</td>
+<td>y</td>
+</tr>
+<tr>
+<td>kernel options</td>
+<td>y</td>
+<td>n</td>
+</tr>
+</tbody>
+</table>
+<p>Both can boot from a custom image (see "Image" for details).  MAAS
+provides three more entry points to influence the result:
+commissioning scripts, <a href="https://docs.ubuntu.com/maas/2.1/en/installconfig-nodes-kernel-boot-options">kernel option</a>, and cloud-init
+<code>user-data</code>. Commissioning scripts are run to collect server hardware
+information. Kernel options can be either global or per-node based.
+One can also pass on a cloud-init <code>user-data</code> string that MAAS will
+use in booting.</p>
+<p>Similarly, Ironic API accepts cloud configdrive string. Since it can
+have an agent-based deployment, it is also possible to instruct the
+agent to run some commands or scripts. However, there is no method to
+pass in kernel options.</p>
+<h1>Server grouping</h1>
+<table>
+<thead>
+<tr>
+<th>Server grouping</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chassis</td>
+<td>n</td>
+<td>y</td>
+</tr>
+<tr>
+<td>rack</td>
+<td>n</td>
+<td>n</td>
+</tr>
+<tr>
+<td>region</td>
+<td>y</td>
+<td>n</td>
+</tr>
+<tr>
+<td>zone</td>
+<td>y</td>
+<td>n</td>
+</tr>
+</tbody>
+</table>
+<p>MAAS has created concept of <code>zone</code> and zones can be further grouped
+into <code>region</code>. As a matter of fact, MAAS also has a concept of <em>region
+controller</em> which can then manage multiple <em>rack controller</em>.</p>
+<p>From MAAS <a href="https://docs.ubuntu.com/maas/2.1/en/intro-concepts#zones">document</a>:</p>
+<blockquote>
+<p>Zone:
+A physical zone, or just zone, is an organizational unit that contains
+nodes where each node is in one, and only one, zone. Later, while in
+production, a node can be taken (allocated) from a specific zone (or
+not from a specific zone). Since zones, by nature, are custom-designed
+(with the exception of the 'default' zone), they provide more
+flexibility than a similar feature offered by a public cloud service
+(ex: availability zones).</p>
+<p>Some prime examples of how zones can be put to use include
+fault-tolerance, service performance, and power management. </p>
+<p>A newly installed MAAS comes with a default zone, and unless a new
+zone is created all nodes get placed within it. You can therefore
+safely ignore the entire concept if you're not interested in
+leveraging zones.</p>
+<p>The 'default' zone cannot be removed and its name cannot be edited.</p>
+</blockquote>
+<p>Ironic provides no similar grouping concept. That level of management
+is left for other service (eg. NOVA) to handle.</p>
+<h1>Multi-tenant</h1>
+<table>
+<thead>
+<tr>
+<th>Multi-tenant</th>
+<th>MAAS</th>
+<th>Ironic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Support multi-tenant separation</td>
+<td>n</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<p>MAAS has no capability to manipulate an existing network layout. Its
+concept of fabric and space are artificial groupings only. Therefore,
+it has no say in multi-tenant support. In many cases, baremetal
+servers are put on the same network &mdash; provisioning network
+&mdash; as the MAAS server because that's how MAAS can discover and
+enlist new servers, thus exposing all tenants to each other (see
+section "Minimal setup" for details.)</p>
+<p>Ironic has not concept of multi-tenant either. However, it can
+dynamically <em>bind</em> a port to use, where port is then managed by
+service such as Neutron. This leaves Ironic not suffering from the
+same risk that MAAS setup may have.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-10-11
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">KVM</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p><a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> is something new to me, and it sounds awesome. The experience
+I want to have is a local dev that I can copy &amp; paste from some base
+image in case I forgot to take a snapshot at milestone. This way I
+feel comfortable to stand up a sandbox, try out crazy things, then
+discard it entirely at done, and repeat. So this means something
+minimal, fast.</p>
+<p>First thing first, get <code>kvm</code> and a few tools:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>apt<span class="w"> </span>kvm<span class="w"> </span>libvirt-bin<span class="w"> </span>bridge-utils<span class="w"> </span>cloud-utils<span class="w"> </span>cloud-init<span class="w"> </span>libguestfs-tools
+</code></pre></div>
+
+<h1>Cloud image</h1>
+<p>Don't bother with full blown <code>.iso</code>, use cloud images,
+eg. <a href="https://cloud-images.ubuntu.com/releases/16.04/release/">xenial 16.04</a>, my de faco at writing. It's &lt; 300M
+and boots fast. Key to know at this point is the file format &larr;
+use <code>qemu-img info [.img]</code> for <code>file format:</code>.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>wget<span class="w"> </span><span class="o">[</span>.img<span class="w"> </span>url<span class="o">]</span>
+
+To<span class="w"> </span>get<span class="w"> </span>file<span class="w"> </span>format:
+$<span class="w"> </span>qemu-img<span class="w"> </span>info<span class="w"> </span><span class="o">[</span>.img<span class="o">]</span>
+---------------------
+image:<span class="w"> </span>xenial-server-cloudimg-amd64-disk1.img
+file<span class="w"> </span>format:<span class="w"> </span>qcow2
+virtual<span class="w"> </span>size:<span class="w"> </span><span class="m">2</span>.2G<span class="w"> </span><span class="o">(</span><span class="m">2361393152</span><span class="w"> </span>bytes<span class="o">)</span>
+disk<span class="w"> </span>size:<span class="w"> </span>277M
+cluster_size:<span class="w"> </span><span class="m">65536</span>
+Format<span class="w"> </span>specific<span class="w"> </span>information:
+<span class="w">    </span>compat:<span class="w"> </span><span class="m">0</span>.10
+<span class="w">    </span>refcount<span class="w"> </span>bits:<span class="w"> </span><span class="m">16</span>
+</code></pre></div>
+
+<h2>Resize disk</h2>
+<p>One caveat caught me is that snapshot using <a href="https://wiki.qemu.org/Documentation/CreateSnapshot">backing file</a> inherits
+the maximum disk space from its base image. Looking at the output
+above, <code>virtual size</code> (<code>2.2G</code>) is the maxium disk space this image can
+grow to; <code>disk size</code> is just the <code>.img</code> file's size on disk when you
+do <code>ls -lh</code>. We want to increase base image's virtual size and here is
+how-to.</p>
+<ol>
+<li>
+<p>Resize original image <span class="myhighlight">in
+   place</span>. This will add <code>20G</code> to <code>virtual size</code>. But this is
+   not sufficient, the <em>disk</em> inside this image needs to be <em>expanded</em>
+   also (see step #3 below). So think of this step as a <em>wish</em> to the disk
+   size I want to have, and step 3 is the actual implementation to
+   make it a reality.</p>
+<p><code>shell
+$ qemu-img resize orig.img +20G
+$ qemu-img info orig.img &lt;-- confirm new "virtual size"</code></p>
+</li>
+<li>
+<p>Make a copy:</p>
+<p><code>shell
+$ cp orig.img orig-copy.qcow2</code></p>
+</li>
+<li>
+<p>Resize disk <strong>inside</strong> the qcow2 image, and save (in this case, we
+save newly expanded image back to <code>orig.img</code>, but you can save to any
+file name you want.):</p>
+<p><code>shell
+$ sudo virt-resize --expand /dev/sda1 orig-copy.qcow2 orig.img</code></p>
+</li>
+</ol>
+<h1>Backing files</h1>
+<p><a href="https://wiki.qemu.org/Documentation/CreateSnapshot">Backing files</a> is awesome! The idea is also referred as <em>external
+snapshots</em>. A few useful references to understand this concept
+&mdash; <a href="https://kashyapc.fedorapeople.org/virt/infra.next-2015/Advanced-Snapshots-with-libvirt-and-QEMU.pdf">Advanced snapshots w/ libvirt</a> by
+Redhat, <a href="https://wiki.qemu.org/Documentation/CreateSnapshot">QEMU snapshot doc</a>, and a <a href="http://blog.programster.org/kvm-creating-thinly-provisioned-guests">blog</a> whose diagram I'm
+copying below which explained well what these snapshots are related.
+In a nutshell, external snapshot keeps a <em>pointer</em> to its base image
+(<strong>backing files</strong>). Any new writes will then be applied to the
+snapshot image, not the backing file &rarr; this feels like git
+commits and branches, isn't it?</p>
+<blockquote>
+<p>An example diagram is shown below in which 3 guests are cloned from a
+base image, which is then updated, and a 4th guest is then cloned off
+the updated base image. With all 5 virtual machines, the storage needs
+is only about 4.4 GB (the size of the base image).An example diagram
+is shown below in which 3 guests are cloned from a base image, which
+is then updated, and a 4th guest is then cloned off the updated base
+image. With all 5 virtual machines, the storage needs is only about
+4.4 GB (the size of the base image).
+</p>
+</blockquote>
+<figure class="center-align responsive-image">
+  <svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" width="389px"
+  height="509px" version="1.1" content="<mxfile
+  userAgent=&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36
+  (KHTML, like Gecko) Chrome/56.0.2924.88 Safari/537.36
+  Vivaldi/1.7.735.46&quot; version=&quot;6.2.4&quot;
+  editor=&quot;www.draw.io&quot;
+  type=&quot;device&quot;><diagram>7Vzfc6o4FP5rnNl9aIcQQHy8dnvv7sOd2Znuj3sfI0TMFIkTYrX7128iAQlBxArYVu1D5RCS8J3vnHxJwBF8WG6/MbRafKchjke2FW5H8LeRbQPxEf+k5TWzjG0vM0SMhKrQ3vBE/sPKaCnrmoQ41QpySmNOVroxoEmCA67ZEGN0oxeb01hvdYUibBieAhSb1n9JyBeZ1c/vQtp/xyRa5C0Db5KdmaHgOWJ0naj2Rjac7z7Z6SXK61I3mi5QSDclE3wcwQdGKc++LbcPOJbY5rBl1309cLboN8MJb3OBnV3wguK1uvW/Z+uEr4UNePeWI/5/W+OUy+OR7aHlagSnySyV/8RxLBqZhuRFfI3kV/9e1va9OCUaLp1Vt8xfc5g53kr7gi9jYQDia8oZfcYPNKZMWBKaiJLTOYnjignFJErEYSDuEwv79AUzToQDv6gTSxKGspnpZkE4flqhQLa5EXSVFdKEf0VLEkt6/oNZiBKkzIqLwM6PVW+Vv2QzeHsQbFC4UIQGpkvM2asooi5wVSUqKHw3O9zsGTZRJRYlcuVXIcXpqKh371fxRbm23s2wvZvtm1vPcyvInTiAX532foU3v57nV2gNF6+u4VfDGXKUkeAwyhEnVIIoegOnYkjkiCQS5Z2LDgKhxk40y2u0TgVo4urEhybxaxGyYQcQee0h6hQS9xTO3Lk1kDh1kPgdQDI+Dom4QGioQ4FWiuxyEEsR4wc4CIyIF2dmvuu4kngRQyERMJWvyqSPSdJC9jS6owy71wg7gL5ORWDi7tXA7nWAut8f6iHC/rwWdS/w8Wx+KdQHQHXSI6ou9kOnDlXfnkHP6xO5C/Azb6qXtODKv1qC7j4DQFkk6SGgNPXWFAnYbMuQXX/h5SpGXJ77Yylnm8cnT7849zvBNv31WvXYkSRv6XrDNfUYgK7p+S4EGThBkQ2owICjQ+IPKTdACwn2YfUGaNZ5lxQcoEedd3HFcQj3IXDtU8kNoTkOYXcJjvao3wYRHUewHFJ11Kze3VRHl6tAR1L9BWVHzQLfJxpiG2G3faiPsDXLqr1FXAu193FH2Ga2H1eUvY0ZoAXqSfhF7u/JLBKjNCWBDra4S/b6Q4b+vZsf/txlAnGwJbx0Shz9zK8KI5znDMr4gkY0QfHj3joN1uwFhxrM8qJmkEXP6ZoFWI9ljliEeZlojWrHrUE7tzEskj150btR5wLVwp+UJLwUYkD39Z1d8WLWfXXV3pFmRZ5eUXV9N7tlox7hSfRaKraSBdKG/kK9GWNz80j5XADt+Zj1YM/OwgXt0kSblZUbYW+EfTeE7XHGPswM56Sxa0jJAOzrywXNy3V2RTeDmilTU644IS24lTCrhnPbtACqO5rV/HIgL7wlFK9Q7Nz4cgZf+tzcHWRB5aTUDa0BU7e5vvLpQ3Hc7I0WT3a881BsK+neEopXONTf+HIGX9rsK7xjvrSbE560tlcd6mt2Jrrhy7jyPBaw3soXu1JTtS+fdcrYZiPnI5O3eKS/LXk9nQhOX9QtgiL3bLWKttR16zvcfaLLU+in5cr4VK5UoK95GvR9c8Wop0OymBPg267mYM+2G47Oh5EhdjVhGwF9HbuazoDzXNjpPFdLzkVC/pGXU8k5O/PGfJvzpD28EOjw9phxPf0BMKc6rLbeigB6RXDSX8o1nyZYr0KRWNNrT4fFclPD8lNv7+b1+LDBfI69+mwYjiczy7rAyt6gGc/c7zr4fpxzez/uPHFb59jeYuYzv+p0moJwbVO59RZPF1vJaqEgcrWgKYizl6ac3pYyq3ND8EYBASpjl1P1dIcCotPFoI4VZK3/T56xQ7uiIL2+/H+wpVMJUK3IqTKpOwLkIrdEAIZReEeTWGKYJmiVLqj6tYjrHh2h8TDKcK+PO+baygE3mfF75W5yBnzL3zHXQYI12/XctkKSPsuy2YKXtWFkN0+zIipzHL2/OU6fN7s1A3VHjhOH+1/kybLm/meP4OP/</diagram></mxfile>"><defs><linearGradient
+  x1="0%" y1="0%" x2="0%" y2="100%"
+  id="mx-gradient-f8cecc-1-ffffff-1-s-0"><stop offset="0%"
+  style="stop-color:#f8cecc"></stop><stop offset="100%"
+  style="stop-color:#ffffff"></stop></linearGradient><linearGradient
+  x1="0%" y1="0%" x2="0%" y2="100%"
+  id="mx-gradient-dae8fc-1-ffffff-1-s-0"><stop offset="0%"
+  style="stop-color:#dae8fc"></stop><stop offset="100%"
+  style="stop-color:#ffffff"></stop></linearGradient></defs><g
+  transform="translate(0.5,0.5)"><g
+  transform="translate(0.5,9.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="40"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">Ubuntu
+  16.04 Guest 1&nbsp;<div>8.2 MB</div></div></div></foreignObject><text
+  x="44" y="26" fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">[Not supported by viewer]</text></switch></g><g
+  transform="translate(0.5,114.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="40"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">Ubuntu
+  16.04 Guest 2<div>8.2 MB</div></div></div></foreignObject><text x="44"
+  y="26" fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">[Not supported by viewer]</text></switch></g><g
+  transform="translate(0.5,229.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="40"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">Ubuntu
+  16.04 Guest 3<div>8.2 MB</div></div></div></foreignObject><text x="44"
+  y="26" fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">[Not supported by
+  viewer]</text></switch></g><ellipse cx="263" cy="140" rx="30" ry="30"
+  fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,263,140)"
+  opacity="0.25"></ellipse><ellipse cx="263" cy="140" rx="30" ry="30"
+  fill="url(#mx-gradient-f8cecc-1-ffffff-1-s-0)" stroke="#b85450"
+  transform="rotate(90,263,140)"
+  pointer-events="none"></ellipse><ellipse cx="125" cy="30" rx="30"
+  ry="30" fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,125,30)"
+  opacity="0.25"></ellipse><ellipse cx="125" cy="30" rx="30" ry="30"
+  fill="url(#mx-gradient-dae8fc-1-ffffff-1-s-0)" stroke="#6c8ebf"
+  transform="rotate(90,125,30)" pointer-events="none"></ellipse><ellipse
+  cx="125" cy="140" rx="30" ry="30" fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,125,140)"
+  opacity="0.25"></ellipse><ellipse cx="125" cy="140" rx="30" ry="30"
+  fill="#d5e8d4" stroke="#82b366" transform="rotate(90,125,140)"
+  pointer-events="none"></ellipse><ellipse cx="125" cy="250" rx="30"
+  ry="30" fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,125,250)"
+  opacity="0.25"></ellipse><ellipse cx="125" cy="250" rx="30" ry="30"
+  fill="#f5f5f5" stroke="#666666" transform="rotate(90,125,250)"
+  pointer-events="none"></ellipse><path d="M 233 140 Q 185 140 185 85 Q
+  185 30 161.37 30" fill="none" stroke="#000000" stroke-miterlimit="10"
+  pointer-events="none"></path><path d="M 156.12 30 L 163.12 26.5 L
+  161.37 30 L 163.12 33.5 Z" fill="#000000" stroke="#000000"
+  stroke-miterlimit="10" pointer-events="none"></path><path d="M 233 140
+  Q 233 140 161.37 140" fill="none" stroke="#000000"
+  stroke-miterlimit="10" pointer-events="none"></path><path d="M 156.12
+  140 L 163.12 136.5 L 161.37 140 L 163.12 143.5 Z" fill="#000000"
+  stroke="#000000" stroke-miterlimit="10"
+  pointer-events="none"></path><path d="M 233 140 Q 194 140 194 195 Q
+  194 250 161.37 250" fill="none" stroke="#000000"
+  stroke-miterlimit="10" pointer-events="none"></path><path d="M 156.12
+  250 L 163.12 246.5 L 161.37 250 L 163.12 253.5 Z" fill="#000000"
+  stroke="#000000" stroke-miterlimit="10"
+  pointer-events="none"></path><g
+  transform="translate(200.5,59.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="133" height="40"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 133px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">Base
+  Ubuntu 16.04 Template Image&nbsp;<div>(4.4
+  GB)</div></div></div></foreignObject><text x="67" y="26"
+  fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">[Not supported by
+  viewer]</text></switch></g><ellipse cx="263" cy="350" rx="30" ry="30"
+  fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,263,350)"
+  opacity="0.25"></ellipse><ellipse cx="263" cy="350" rx="30" ry="30"
+  fill="url(#mx-gradient-f8cecc-1-ffffff-1-s-0)" stroke="#b85450"
+  transform="rotate(90,263,350)" pointer-events="none"></ellipse><path
+  d="M 263 170 L 263 313.63" fill="none" stroke="#000000"
+  stroke-miterlimit="10" pointer-events="none"></path><path d="M 263
+  318.88 L 259.5 311.88 L 263 313.63 L 266.5 311.88 Z" fill="#000000"
+  stroke="#000000" stroke-miterlimit="10"
+  pointer-events="none"></path><g
+  transform="translate(270.5,238.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="48" height="12"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 48px; white-space:
+  nowrap; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">updates</div></div></foreignObject><text
+  x="24" y="12" fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">updates</text></switch></g><ellipse cx="125"
+  cy="350" rx="30" ry="30" fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,125,350)"
+  opacity="0.25"></ellipse><ellipse cx="125" cy="350" rx="30" ry="30"
+  fill="#ffe6cc" stroke="#d79b00" transform="rotate(90,125,350)"
+  pointer-events="none"></ellipse><g
+  transform="translate(0.5,324.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="40"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">Ubuntu
+  16.04 Guest 4<div>8.2 MB</div></div></div></foreignObject><text x="44"
+  y="26" fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">[Not supported by
+  viewer]</text></switch></g><ellipse cx="263" cy="475" rx="30" ry="30"
+  fill="#000000" stroke="#000000"
+  transform="translate(2,3)rotate(90,263,475)"
+  opacity="0.25"></ellipse><ellipse cx="263" cy="475" rx="30" ry="30"
+  fill="url(#mx-gradient-f8cecc-1-ffffff-1-s-0)" stroke="#b85450"
+  transform="rotate(90,263,475)" pointer-events="none"></ellipse><path
+  d="M 233 350 L 161.37 350" fill="none" stroke="#000000"
+  stroke-miterlimit="10" pointer-events="none"></path><path d="M 156.12
+  350 L 163.12 346.5 L 161.37 350 L 163.12 353.5 Z" fill="#000000"
+  stroke="#000000" stroke-miterlimit="10"
+  pointer-events="none"></path><path d="M 263 380 L 263 438.63"
+  fill="none" stroke="#000000" stroke-miterlimit="10"
+  pointer-events="none"></path><path d="M 263 443.88 L 259.5 436.88 L
+  263 438.63 L 266.5 436.88 Z" fill="#000000" stroke="#000000"
+  stroke-miterlimit="10" pointer-events="none"></path><g
+  transform="translate(295.5,126.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="26"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">read-only
+  snapshot 1</div></div></foreignObject><text x="44" y="19"
+  fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">read-only snapshot 1</text></switch></g><g
+  transform="translate(295.5,336.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="26"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">read-only
+  snapshot 2</div></div></foreignObject><text x="44" y="19"
+  fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">read-only snapshot 2</text></switch></g><g
+  transform="translate(298.5,454.5)"><switch><foreignObject
+  style="overflow:visible;" pointer-events="all" width="88" height="40"
+  requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div
+  xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block;
+  font-size: 12px; font-family: Verdana; color: rgb(0, 0, 0);
+  line-height: 1.2; vertical-align: top; width: 88px; white-space:
+  normal; word-wrap: normal; text-align: center;"><div
+  xmlns="http://www.w3.org/1999/xhtml"
+  style="display:inline-block;text-align:inherit;text-decoration:inherit;">current
+  disk image writes go to.</div></div></foreignObject><text x="44"
+  y="26" fill="#000000" text-anchor="middle" font-size="12px"
+  font-family="Verdana">current disk image writes go
+  to.</text></switch></g></g></svg>
+</figure>
+
+<p>To create one using backing file:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>qemu-img<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>qcow2<span class="w"> </span>-b<span class="w"> </span>resized-orig.img<span class="w"> </span>mydev.snap
+</code></pre></div>
+
+<p>To verify:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>dev<span class="o">)</span><span class="w"> </span>fengxia@fengxia-lenovo:~/workspace/tmp$<span class="w"> </span>qemu-img<span class="w"> </span>info<span class="w"> </span>mydev.snap
+image:<span class="w"> </span>mydev.snap
+file<span class="w"> </span>format:<span class="w"> </span>qcow2
+virtual<span class="w"> </span>size:<span class="w"> </span>22G<span class="w"> </span><span class="o">(</span><span class="m">23836229632</span><span class="w"> </span>bytes<span class="o">)</span>
+disk<span class="w"> </span>size:<span class="w"> </span><span class="m">3</span>.4G
+cluster_size:<span class="w"> </span><span class="m">65536</span>
+backing<span class="w"> </span>file:<span class="w"> </span>resized-orig.img<span class="w"> </span>&lt;&lt;--<span class="w"> </span>here!
+Format<span class="w"> </span>specific<span class="w"> </span>information:
+<span class="w">    </span>compat:<span class="w"> </span><span class="m">1</span>.1
+<span class="w">    </span>lazy<span class="w"> </span>refcounts:<span class="w"> </span><span class="nb">false</span>
+<span class="w">    </span>refcount<span class="w"> </span>bits:<span class="w"> </span><span class="m">16</span>
+<span class="w">    </span>corrupt:<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+
+<p>Then in KVM xml, use <code>mydev.snap</code> as your primary disk:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;disk</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;file&#39;</span><span class="w"> </span><span class="na">device=</span><span class="s">&#39;disk&#39;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;driver</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;qemu&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;qcow2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;source</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;/home/fengxia/workspace/tmp/mydev.snap&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;target</span><span class="w"> </span><span class="na">dev=</span><span class="s">&#39;vda&#39;</span><span class="w"> </span><span class="na">bus=</span><span class="s">&#39;virtio&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;alias</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;virtio-disk0&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;address</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;pci&#39;</span><span class="w"> </span><span class="na">domain=</span><span class="s">&#39;0x0000&#39;</span><span class="w"> </span><span class="na">bus=</span><span class="s">&#39;0x00&#39;</span><span class="w"> </span><span class="na">slot=</span><span class="s">&#39;0x07&#39;</span><span class="w"> </span><span class="na">function=</span><span class="s">&#39;0x0&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/disk&gt;</span>
+</code></pre></div>
+
+<h1>cloud-init</h1>
+<p>Using cloud images, however, is tricky, because it doesn't allow user
+login (SSH only) and is expecting a <a href="http://cloudinit.readthedocs.io/en/latest/"><code>cloud-init</code></a>. Without it,
+snapshots we made above will boot, but you can't login (tried "ubuntu,
+passw0rd", "ubuntu, ubuntu", "ubuntu, [no password]", none works).</p>
+<p>To use <a href="http://cloudinit.readthedocs.io/en/latest/">cloud-init</a>, we need to create a <code>user-data</code> file which
+is actually a <code>cloud-config</code> in YAML format. <a href="http://cloudinit.readthedocs.io/en/latest/">cloud-init</a>
+can use other <a href="http://cloudinit.readthedocs.io/en/latest/topics/format.html#user-data-script">formats</a>. Take a look.
+A minimal version of <code>cloud-config</code> is shown below, which allows
+<code>ubuntu</code> user login using the <code>password</code> value you defined here, eg. <code>whatever001</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#cloud-config</span>
+<span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whatever001</span>
+<span class="nt">chpasswd</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">expire</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">ssh_pwauth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+
+<p>Now how <code>cloud-init</code> works? Essentially you make <code>user-data</code> into
+a disk or iso that <span class="myhighlight">can be mounted</span> to
+your VM at boot. Your VM's OS image should have had <code>cloud-init</code>
+installed (and configured?) so when it boots it will <strong>search for
+user-data &amp; meta-data</strong>, and run their instructions.</p>
+<h2>cloud-init in raw</h2>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cloud-localds<span class="w"> </span>-m<span class="w"> </span><span class="nb">local</span><span class="w"> </span>my-seed.img<span class="w"> </span>my-user-data<span class="w"> </span><span class="o">[</span>my-meta-data<span class="o">]</span>
+</code></pre></div>
+
+<p>When using <code>cloud-localds</code>, make sure to use <code>-m local</code> so to enable
+the <a href="http://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html"><code>NoCloud</code></a> data source (otherwise, booting will stuck with
+error <strong>url_helper.py[WARNING]: Calling
+'http://169.254.169.254/2009-04-04/meta-data/instance-id failed...</strong>
+because <code>cloud-init</code> by default will expect a server somewhere serving
+user-data and meta-data files. <code>NoCloud</code> says they are on a local disk).</p>
+<p>Example as used in KVM's xml. Make sure <code>slot=</code> index is unique,
+and <code>&lt;target dev=</code> index is unique.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;disk</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;file&#39;</span><span class="w"> </span><span class="na">device=</span><span class="s">&#39;disk&#39;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;driver</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;qemu&#39;</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;raw&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;source</span><span class="w"> </span><span class="na">file=</span><span class="s">&#39;/home/fengxia/workspace/tmp/my-seed.img&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;backingStore/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;target</span><span class="w"> </span><span class="na">dev=</span><span class="s">&#39;vdb&#39;</span><span class="w"> </span><span class="na">bus=</span><span class="s">&#39;virtio&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;alias</span><span class="w"> </span><span class="na">name=</span><span class="s">&#39;virtio-disk1&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;address</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;pci&#39;</span><span class="err">1</span><span class="w"> </span><span class="na">domain=</span><span class="s">&#39;0x0000&#39;</span><span class="w"> </span><span class="na">bus=</span><span class="s">&#39;0x00&#39;</span><span class="w"> </span><span class="na">slot=</span><span class="s">&#39;0x09&#39;</span><span class="w"> </span><span class="na">function=</span><span class="s">&#39;0x0&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/disk&gt;</span>
+</code></pre></div>
+
+<h2>cloud-init in ISO</h2>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>genisoimage<span class="w"> </span>--output<span class="w"> </span>my-seed.iso<span class="w"> </span>-volid<span class="w"> </span>cidata<span class="w"> </span>-joliet<span class="w"> </span>-rock<span class="w"> </span>my-user-data<span class="w"> </span><span class="o">[</span>my-meta-data<span class="o">]</span>
+</code></pre></div>
+
+<p>The key here is <code>-volid</code> value <span class="myhighlight">must be <code>cidata</code></span>!
+Example KVM xml below. Again, <code>&lt;target dev=</code> index should be unique.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;disk</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;file&#39;</span><span class="w"> </span><span class="na">device=</span><span class="s">&#39;cdrom&#39;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;source</span><span class="w"> </span><span class="na">file=</span><span class="s">&#39;/home/fengxia/workspace/tmp/my-seed.iso&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;target</span><span class="w"> </span><span class="na">dev=</span><span class="s">&#39;vdb&#39;</span><span class="w"> </span><span class="na">bus=</span><span class="s">&#39;ide&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;readonly/&gt;</span>
+<span class="nt">&lt;/disk&gt;</span>
+</code></pre></div>
+
+<h1>Sum it up</h1>
+<p>So back to our mission &mdash; to use cloud image as base and external
+snapshots as our dev sandbox:</p>
+<ol>
+<li>Download a cloud image</li>
+<li>Resize image</li>
+<li>Create a snapshot with backing file</li>
+<li>Add <code>.snap</code> as a disk in kvm xml</li>
+<li>Create <code>user-data</code></li>
+<li>Create <code>seed.img</code> from user-data</li>
+<li>Add <code>seed.img</code> as a disk in kvm xml</li>
+<li><code>virsh create [your xml]</code></li>
+</ol>
+<p>Enjoy.</p>
+<h1>helper files</h1>
+<p>Everything you need is <a href="http://github.com/fengxia41103/dev/kvm">here</a>.To start a kvm from scratch. This
+will download a <a href="https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-arm64-disk1.img">16.04 amd64 cloud image</a> by default.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>startmykvm.py<span class="w"> </span>--help
+
+usage:<span class="w"> </span>startmykvm.py<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--backing<span class="w"> </span><span class="o">[</span>BACKING<span class="o">]]</span><span class="w"> </span><span class="o">[</span>--user-data<span class="w"> </span><span class="o">[</span>USER_DATA<span class="o">]]</span>
+<span class="w">                     </span><span class="o">[</span>--cloudimg<span class="w"> </span><span class="o">[</span>CLOUDIMG<span class="o">]]</span>
+<span class="w">                     </span><span class="o">[</span>--download-cloudimg<span class="w"> </span><span class="o">[</span>DOWNLOAD_CLOUDIMG<span class="o">]]</span><span class="w"> </span><span class="o">[</span>--delete<span class="o">]</span>
+<span class="w">                     </span>xml
+
+Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>KVM<span class="w"> </span><span class="k">for</span><span class="w"> </span>me
+
+positional<span class="w"> </span>arguments:
+<span class="w">  </span>xml<span class="w">                   </span>My<span class="w"> </span>XML<span class="w"> </span>template.
+
+optional<span class="w"> </span>arguments:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>--backing<span class="w"> </span><span class="o">[</span>BACKING<span class="o">]</span>,<span class="w"> </span>-b<span class="w"> </span><span class="o">[</span>BACKING<span class="o">]</span>
+<span class="w">                        </span>Backfile<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>when<span class="w"> </span>creating<span class="w"> </span>a<span class="w"> </span>snapshot.
+<span class="w">  </span>--user-data<span class="w"> </span><span class="o">[</span>USER_DATA<span class="o">]</span>,<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>USER_DATA<span class="o">]</span>
+<span class="w">                        </span>Cloud-config<span class="w"> </span>user-data<span class="w"> </span>file.
+<span class="w">  </span>--cloudimg<span class="w"> </span><span class="o">[</span>CLOUDIMG<span class="o">]</span>,<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>CLOUDIMG<span class="o">]</span>
+<span class="w">                        </span>A<span class="w"> </span>cloud<span class="w"> </span>image<span class="w"> </span>file.
+<span class="w">  </span>--download-cloudimg<span class="w"> </span><span class="o">[</span>DOWNLOAD_CLOUDIMG<span class="o">]</span>,<span class="w"> </span>-d<span class="w"> </span><span class="o">[</span>DOWNLOAD_CLOUDIMG<span class="o">]</span>
+<span class="w">                        </span>URL<span class="w"> </span>to<span class="w"> </span>download<span class="w"> </span>cloud<span class="w"> </span>image.<span class="w"> </span>The<span class="w"> </span>downloaded<span class="w"> </span>file<span class="w"> </span>will
+<span class="w">                        </span>be<span class="w"> </span>deleted<span class="w"> </span>at<span class="w"> </span>the<span class="w"> </span>end<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>bootstrap.
+<span class="w">  </span>--delete,<span class="w"> </span>-D<span class="w">          </span>Set<span class="w"> </span>to<span class="w"> </span>delete<span class="w"> </span>VM<span class="w"> </span>defined<span class="w"> </span><span class="k">in</span><span class="w"> </span>xml.
+</code></pre></div>
+
+<p>To start a kvm reusing an existing backing file:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>startmykvm.py<span class="w"> </span>-b<span class="w"> </span>&lt;backing&gt;.qcow2<span class="w"> </span>mydev.xml
+</code></pre></div>
+
+<h1>Migrate to another host</h1>
+<p>If you need to migrate VM to another host, follow this:</p>
+<ol>
+<li><code>virsh shutdown</code> the VMs</li>
+<li><code>virsh dumpxml guest_name &gt; guest_name.xml</code></li>
+<li>
+<p><code>scp</code> four files, for example. Depending on the size of the VM,
+   this can take a while.</p>
+<p><code>shell
+  -rw-rw-r-- 1 fengxia      fengxia        4919 Feb  4 18:17 x83lvdw0at
+  -rw-rw-r-- 1 libvirt-qemu kvm          378880 Feb  4 18:17 x83lvdw0at.seed
+  -rw-r--r-- 1 libvirt-qemu kvm     65200717824 Feb  4 21:25 x83lvdw0at.snap
+  -rw-rw-r-- 1 fengxia      fengxia        4140 Feb  4 18:56 x83lvdw0at.xml</code>
+4. SSH to the destination host, <code>virsh define &lt;guest_name&gt;.xml</code>
+5. <code>virsh list --all</code></p>
+</li>
+</ol>
+<p>Now you should see the VM, and <code>virsh start &lt;guest_name&gt;</code>.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

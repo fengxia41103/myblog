@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2018-11-16
+
+
+    <a class="wave-effect" href="lenovo.html">
+      <i class="fa fa-folder-open-o"></i>
+      lenovo
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">IBB brain shutdown procedure</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>This document describes procedure to shutdown an IBB brain instance.</p>
+<h1>Shutdown procedure</h1>
+<ol>
+<li>
+<p>On RHV admin portal, shutdown all virtual machines but not the <code>hosted-engine</code>.</p>
+</li>
+<li>
+<p>Put the cluster in <strong>global maintenance mode</strong> by login any brain
+   server, and <code>hosted-engine --set-maintenance --mode=global</code>. </p>
+<p>To verify, login in a brain node and <code>hosted-engine --vm-status</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="o">[</span><span class="n">root@lmorlct0207brain3 ~</span><span class="o">]</span><span class="err">#</span><span class="w"> </span><span class="n">hosted</span><span class="o">-</span><span class="n">engine</span><span class="w"> </span><span class="c1">--vm-status</span>
+
+<span class="err">!!</span><span class="w"> </span><span class="n">Cluster</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">MAINTENANCE</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="err">!!</span>
+
+<span class="c1">--== Host 1 status ==--</span>
+
+<span class="n">conf_on_shared_storage</span><span class="w">             </span><span class="err">:</span><span class="w"> </span><span class="k">True</span>
+<span class="n">Status</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="k">to</span><span class="o">-</span><span class="nc">date</span><span class="w">                  </span><span class="err">:</span><span class="w"> </span><span class="k">True</span>
+<span class="n">Hostname</span><span class="w">                           </span><span class="err">:</span><span class="w"> </span><span class="n">lmorlct0203brain3</span><span class="p">.</span><span class="n">labs</span><span class="p">.</span><span class="n">lenovo</span><span class="p">.</span><span class="n">com</span>
+<span class="k">Host</span><span class="w"> </span><span class="n">ID</span><span class="w">                            </span><span class="err">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">Engine</span><span class="w"> </span><span class="n">status</span><span class="w">                      </span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;health&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;good&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;vm&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;up&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;detail&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;up&quot;</span><span class="err">}</span>
+<span class="n">Score</span><span class="w">                              </span><span class="err">:</span><span class="w"> </span><span class="mi">3400</span>
+<span class="n">stopped</span><span class="w">                            </span><span class="err">:</span><span class="w"> </span><span class="k">False</span>
+<span class="k">Local</span><span class="w"> </span><span class="n">maintenance</span><span class="w">                  </span><span class="err">:</span><span class="w"> </span><span class="k">False</span>
+<span class="n">crc32</span><span class="w">                              </span><span class="err">:</span><span class="w"> </span><span class="mi">8</span><span class="n">eb75a80</span>
+<span class="n">local_conf_timestamp</span><span class="w">               </span><span class="err">:</span><span class="w"> </span><span class="mi">3249288</span>
+<span class="k">Host</span><span class="w"> </span><span class="nc">timestamp</span><span class="w">                     </span><span class="err">:</span><span class="w"> </span><span class="mi">3249287</span>
+<span class="n">Extra</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">valid</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nc">timestamp</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">metadata_parse_version</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">metadata_feature_version</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="nc">timestamp</span><span class="o">=</span><span class="mi">3249287</span><span class="w"> </span><span class="p">(</span><span class="n">Fri</span><span class="w"> </span><span class="n">Nov</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">15</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">39</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span>
+<span class="w">    </span><span class="k">host</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">score</span><span class="o">=</span><span class="mi">3400</span>
+<span class="w">    </span><span class="n">vm_conf_refresh_time</span><span class="o">=</span><span class="mi">3249288</span><span class="w"> </span><span class="p">(</span><span class="n">Fri</span><span class="w"> </span><span class="n">Nov</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">15</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">40</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span>
+<span class="w">    </span><span class="n">conf_on_shared_storage</span><span class="o">=</span><span class="k">True</span>
+<span class="w">    </span><span class="n">maintenance</span><span class="o">=</span><span class="k">False</span>
+<span class="w">    </span><span class="k">state</span><span class="o">=</span><span class="n">GlobalMaintenance</span>
+<span class="w">    </span><span class="n">stopped</span><span class="o">=</span><span class="k">False</span>
+
+<span class="c1">--== Host 2 status ==--</span>
+
+<span class="n">conf_on_shared_storage</span><span class="w">             </span><span class="err">:</span><span class="w"> </span><span class="k">True</span>
+<span class="n">Status</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="k">to</span><span class="o">-</span><span class="nc">date</span><span class="w">                  </span><span class="err">:</span><span class="w"> </span><span class="k">True</span>
+<span class="n">Hostname</span><span class="w">                           </span><span class="err">:</span><span class="w"> </span><span class="mf">10.240.41.235</span>
+<span class="k">Host</span><span class="w"> </span><span class="n">ID</span><span class="w">                            </span><span class="err">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">Engine</span><span class="w"> </span><span class="n">status</span><span class="w">                      </span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;reason&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;vm not running on this host&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;health&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;bad&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;vm&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;down&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;detail&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;unknown&quot;</span><span class="err">}</span>
+<span class="n">Score</span><span class="w">                              </span><span class="err">:</span><span class="w"> </span><span class="mi">3400</span>
+<span class="n">stopped</span><span class="w">                            </span><span class="err">:</span><span class="w"> </span><span class="k">False</span>
+<span class="k">Local</span><span class="w"> </span><span class="n">maintenance</span><span class="w">                  </span><span class="err">:</span><span class="w"> </span><span class="k">False</span>
+<span class="n">crc32</span><span class="w">                              </span><span class="err">:</span><span class="w"> </span><span class="mi">3711533</span><span class="n">b</span>
+<span class="n">local_conf_timestamp</span><span class="w">               </span><span class="err">:</span><span class="w"> </span><span class="mi">3249303</span>
+<span class="k">Host</span><span class="w"> </span><span class="nc">timestamp</span><span class="w">                     </span><span class="err">:</span><span class="w"> </span><span class="mi">3249303</span>
+<span class="n">Extra</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">valid</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nc">timestamp</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">metadata_parse_version</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">metadata_feature_version</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="nc">timestamp</span><span class="o">=</span><span class="mi">3249303</span><span class="w"> </span><span class="p">(</span><span class="n">Fri</span><span class="w"> </span><span class="n">Nov</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">15</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">33</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span>
+<span class="w">    </span><span class="k">host</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="mi">2</span>
+<span class="w">    </span><span class="n">score</span><span class="o">=</span><span class="mi">3400</span>
+<span class="w">    </span><span class="n">vm_conf_refresh_time</span><span class="o">=</span><span class="mi">3249303</span><span class="w"> </span><span class="p">(</span><span class="n">Fri</span><span class="w"> </span><span class="n">Nov</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">15</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">33</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span>
+<span class="w">    </span><span class="n">conf_on_shared_storage</span><span class="o">=</span><span class="k">True</span>
+<span class="w">    </span><span class="n">maintenance</span><span class="o">=</span><span class="k">False</span>
+<span class="w">    </span><span class="k">state</span><span class="o">=</span><span class="n">GlobalMaintenance</span>
+<span class="w">    </span><span class="n">stopped</span><span class="o">=</span><span class="k">False</span>
+
+<span class="c1">--== Host 3 status ==--</span>
+
+<span class="n">conf_on_shared_storage</span><span class="w">             </span><span class="err">:</span><span class="w"> </span><span class="k">True</span>
+<span class="n">Status</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="k">to</span><span class="o">-</span><span class="nc">date</span><span class="w">                  </span><span class="err">:</span><span class="w"> </span><span class="k">True</span>
+<span class="n">Hostname</span><span class="w">                           </span><span class="err">:</span><span class="w"> </span><span class="mf">10.240.41.236</span>
+<span class="k">Host</span><span class="w"> </span><span class="n">ID</span><span class="w">                            </span><span class="err">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">Engine</span><span class="w"> </span><span class="n">status</span><span class="w">                      </span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;reason&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;vm not running on this host&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;health&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;bad&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;vm&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;down&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;detail&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;unknown&quot;</span><span class="err">}</span>
+<span class="n">Score</span><span class="w">                              </span><span class="err">:</span><span class="w"> </span><span class="mi">3400</span>
+<span class="n">stopped</span><span class="w">                            </span><span class="err">:</span><span class="w"> </span><span class="k">False</span>
+<span class="k">Local</span><span class="w"> </span><span class="n">maintenance</span><span class="w">                  </span><span class="err">:</span><span class="w"> </span><span class="k">False</span>
+<span class="n">crc32</span><span class="w">                              </span><span class="err">:</span><span class="w"> </span><span class="n">b05b67cb</span>
+<span class="n">local_conf_timestamp</span><span class="w">               </span><span class="err">:</span><span class="w"> </span><span class="mi">3249295</span>
+<span class="k">Host</span><span class="w"> </span><span class="nc">timestamp</span><span class="w">                     </span><span class="err">:</span><span class="w"> </span><span class="mi">3249295</span>
+<span class="n">Extra</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">valid</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nc">timestamp</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">metadata_parse_version</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">metadata_feature_version</span><span class="o">=</span><span class="mi">1</span>
+<span class="w">    </span><span class="nc">timestamp</span><span class="o">=</span><span class="mi">3249295</span><span class="w"> </span><span class="p">(</span><span class="n">Fri</span><span class="w"> </span><span class="n">Nov</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">15</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">42</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span>
+<span class="w">    </span><span class="k">host</span><span class="o">-</span><span class="n">id</span><span class="o">=</span><span class="mi">3</span>
+<span class="w">    </span><span class="n">score</span><span class="o">=</span><span class="mi">3400</span>
+<span class="w">    </span><span class="n">vm_conf_refresh_time</span><span class="o">=</span><span class="mi">3249295</span><span class="w"> </span><span class="p">(</span><span class="n">Fri</span><span class="w"> </span><span class="n">Nov</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">15</span><span class="err">:</span><span class="mi">57</span><span class="err">:</span><span class="mi">42</span><span class="w"> </span><span class="mi">2018</span><span class="p">)</span>
+<span class="w">    </span><span class="n">conf_on_shared_storage</span><span class="o">=</span><span class="k">True</span>
+<span class="w">    </span><span class="n">maintenance</span><span class="o">=</span><span class="k">False</span>
+<span class="w">    </span><span class="k">state</span><span class="o">=</span><span class="n">GlobalMaintenance</span>
+<span class="w">    </span><span class="n">stopped</span><span class="o">=</span><span class="k">False</span>
+
+<span class="err">!!</span><span class="w"> </span><span class="n">Cluster</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">MAINTENANCE</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="err">!!</span><span class="w">   </span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>On RHV admin portal, go to <code>Data Center/Storage</code> tab, select a
+   storage domain and click <code>maintenance</code> on menu bar, or right-click
+   then select <code>maintenance</code>.</p>
+<ul>
+<li>
+<p><strong>Note</strong> that you will not be able shutdown the one that
+  hosted-engine is using (usually named <code>master</code> or
+  <code>hosted_storage</code>) by mistake because software will prevents you
+  with an error.</p>
+</li>
+<li>
+<p><strong>Note</strong> that this step can take some time as storage goes
+  through <code>locked</code> &rarr; <code>preparing maintenance</code> &rarr;
+  <code>maintenance</code>:</p>
+</li>
+</ul>
+<p><figure class="col s12">
+  <img src="images/ibb/shutdown%20rhv%20storage%20domain.png"/>
+</figure></p>
+</li>
+<li>
+<p>Shutdown <code>hosted-engine</code> VM.</p>
+</li>
+<li>
+<p>Shutdown the hosted-engine's storage (should be the only one left), eg. <code>master</code>.</p>
+</li>
+<li>
+<p>SSH to each brain node and shutdown ovirt HA:</p>
+</li>
+<li>
+<p>shutdown ovirt HA agent: <code>systemctl  stop ovirt-ha-agent</code></p>
+</li>
+<li>
+<p>shutdown ovirt HA broker: <code>systemctl  stop ovirt-ha-broker</code></p>
+</li>
+<li>
+<p>On any brain node, disconnect RHV from its storage: <code>hosted-engine
+   --disconnect-storage</code></p>
+</li>
+<li>
+<p>SSH to each brain and stop gluster volumes:</p>
+</li>
+<li>
+<p>get volume list: <code>gluster volume list</code></p>
+</li>
+<li>
+<p>stop one: <code>gluster volume stop &lt;volume name&gt;</code></p>
+<p><figure class="col s12">
+  <img src="images/ibb/shutdown%20gluster%20volume.png"/>
+</figure></p>
+</li>
+<li>
+<p>Power off brain nodes.</p>
+</li>
+</ol>
+<h1>Bringup procedure</h1>
+<ol>
+<li>
+<p>Login any brain node and start gluster volumes. Order is not important.</p>
+<div class="highlight"><pre><span></span><code>```shell
+$ gluster volume start data
+$ gluster volume start engine
+$ gluster volume start vmstore
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Verify <code>gluster volume status</code>. You should see all bricks.</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="nx">shell</span>
+<span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">lmorlct0203brain3</span><span class="w"> </span><span class="o">~</span><span class="p">]</span><span class="err">#</span><span class="w"> </span><span class="nx">gluster</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="nx">status</span>
+<span class="nx">Status</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">volume</span><span class="p">:</span><span class="w"> </span><span class="nx">data</span>
+<span class="nx">Gluster</span><span class="w"> </span><span class="nx">process</span><span class="w">                             </span><span class="nx">TCP</span><span class="w"> </span><span class="nx">Port</span><span class="w">  </span><span class="nx">RDMA</span><span class="w"> </span><span class="nx">Port</span><span class="w">  </span><span class="nx">Online</span><span class="w">  </span><span class="nx">Pid</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.234</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">data</span><span class="o">/</span><span class="nx">dat</span>
+<span class="nx">a</span><span class="w">                                           </span><span class="mi">49152</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">5582</span><span class="w"> </span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">data</span><span class="o">/</span><span class="nx">dat</span>
+<span class="nx">a</span><span class="w">                                           </span><span class="mi">49152</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">1816</span><span class="w"> </span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">data</span><span class="o">/</span><span class="nx">dat</span>
+<span class="nx">a</span><span class="w">                                           </span><span class="mi">49152</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">47247</span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="w">                     </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="w">               </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">6074</span><span class="w"> </span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="w">                  </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="w">            </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">47654</span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="w">                  </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="w">            </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">2257</span>
+
+<span class="nx">Task</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">Volume</span><span class="w"> </span><span class="nx">data</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="nx">There</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="nx">tasks</span>
+
+<span class="nx">Status</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">volume</span><span class="p">:</span><span class="w"> </span><span class="nx">engine</span>
+<span class="nx">Gluster</span><span class="w"> </span><span class="nx">process</span><span class="w">                             </span><span class="nx">TCP</span><span class="w"> </span><span class="nx">Port</span><span class="w">  </span><span class="nx">RDMA</span><span class="w"> </span><span class="nx">Port</span><span class="w">  </span><span class="nx">Online</span><span class="w">  </span><span class="nx">Pid</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.234</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">engine</span><span class="o">/</span><span class="nx">e</span>
+<span class="nx">ngine</span><span class="w">                                       </span><span class="mi">49153</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">5785</span><span class="w"> </span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">engine</span><span class="o">/</span><span class="nx">e</span>
+<span class="nx">ngine</span><span class="w">                                       </span><span class="mi">49153</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">2006</span><span class="w"> </span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">engine</span><span class="o">/</span><span class="nx">e</span>
+<span class="nx">ngine</span><span class="w">                                       </span><span class="mi">49153</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">47414</span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="w">                     </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="w">               </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">6074</span><span class="w"> </span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="w">                  </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="w">            </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">2257</span><span class="w"> </span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="w">                  </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="w">            </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">47654</span>
+
+<span class="nx">Task</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">Volume</span><span class="w"> </span><span class="nx">engine</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="nx">There</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="nx">tasks</span>
+
+<span class="nx">Status</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">volume</span><span class="p">:</span><span class="w"> </span><span class="nx">vmstore</span>
+<span class="nx">Gluster</span><span class="w"> </span><span class="nx">process</span><span class="w">                             </span><span class="nx">TCP</span><span class="w"> </span><span class="nx">Port</span><span class="w">  </span><span class="nx">RDMA</span><span class="w"> </span><span class="nx">Port</span><span class="w">  </span><span class="nx">Online</span><span class="w">  </span><span class="nx">Pid</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.234</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">vmstore</span><span class="o">/</span>
+<span class="nx">vmstore</span><span class="w">                                     </span><span class="mi">49154</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">6030</span><span class="w"> </span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">vmstore</span><span class="o">/</span>
+<span class="nx">vmstore</span><span class="w">                                     </span><span class="mi">49154</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">2103</span><span class="w"> </span>
+<span class="nx">Brick</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="p">:</span><span class="o">/</span><span class="nx">gluster_bricks</span><span class="o">/</span><span class="nx">vmstore</span><span class="o">/</span>
+<span class="nx">vmstore</span><span class="w">                                     </span><span class="mi">49154</span><span class="w">     </span><span class="mi">0</span><span class="w">          </span><span class="nx">Y</span><span class="w">       </span><span class="mi">47496</span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="w">                     </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="w">               </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">6074</span><span class="w"> </span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="w">                  </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.235</span><span class="w">            </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">2257</span><span class="w"> </span>
+<span class="nx">NFS</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="w">                  </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">N</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">  </span>
+<span class="k">Self</span><span class="o">-</span><span class="nx">heal</span><span class="w"> </span><span class="nx">Daemon</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="m m-Double">172.24.0.236</span><span class="w">            </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">       </span><span class="nx">N</span><span class="o">/</span><span class="nx">A</span><span class="w">        </span><span class="nx">Y</span><span class="w">       </span><span class="mi">47654</span>
+
+<span class="nx">Task</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">Volume</span><span class="w"> </span><span class="nx">vmstore</span>
+<span class="o">------------------------------------------------------------------------------</span>
+<span class="nx">There</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="nx">tasks</span>
+
+<span class="err">```</span>
+</code></pre></div>
+
+<ol>
+<li>
+<p>On any brain, use <code>hosted-engine --vm-start</code> to start the hosted
+   engine VM.</p>
+</li>
+<li>
+<p>If there is an error &mdash; <code>VM is not present</code>,  then switch
+   to a different host and give the command. One of the three brain
+   node shall be able to start the engine.</p>
+</li>
+<li>Use <code>hosted-engine --vm-status</code> to check engine status.</li>
+<li>The hosted-engine will come up in <strong>global maintenance</strong> mode.</li>
+</ol>
+</li>
+<li>
+<p>Login in the RHV admin portal, select <code>System &amp;rarr; Storage</code>, the
+   domain of hosted-engine, eg. <code>hosted-storage</code> should be in green,
+   and all others are in maintenance mode (a lock symbol) or down (red
+   down arrow).</p>
+<ol>
+<li>Activate the domain that has <code>(Master)</code> tag on <code>Data Center</code> tab
+   below the storage list pane.</li>
+<li>Once <code>(Master)</code> domain started, activated other domains. Order
+   is unimportant.</li>
+<li>Starting storage can take a while.</li>
+</ol>
+<p><figure class="col s12">
+  <img src="images/ibb/rhhi%20activate%20domain.png"/>
+</figure></p>
+</li>
+<li>
+<p>Remove global maintenance mode: <code>hosted-engine --set-maintenance
+   --mode=none</code>.</p>
+</li>
+<li>
+<p>Starting VMs you need, and you are back to business.</p>
+</li>
+</ol></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

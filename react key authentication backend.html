@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2021-08-22
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">REACT Key Authentication (1/2) - API side</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>I'm very much surprised that not much information can be found on this
+topic. As a matter of fact, there are very few examples on how to
+handle two most common tasks that every single frontend must face:
+<strong>login</strong> and <strong>logout</strong> &mdash; I mean, there are too many code
+examples out there which talks from one aspect of things, namely
+either from the frontend or the backend, but the code hows too much
+details on the how-to, but lacks illustration of how pieces are fit
+together. In other words, it has all the implementations but little
+design. So after days of trial, let me write down what I learned, and
+hopefully will put this task to sleep once for all.</p>
+<h1>API Backend</h1>
+<p>In my case, backend is Django w/ <a href="https://django-tastypie.readthedocs.io/en/v0.9.11/authentication_authorization.html">Tastypie</a> REST API and frontend
+in REACT. <a href="https://django-tastypie.readthedocs.io/en/v0.9.11/authentication_authorization.html">Tastypie</a> is just a matter of convenience. Here in
+essence I'm assuming there is a RESTful backend serving data and
+supports API key authentication. If you were not fullstack, you may
+not need to bother how backend is coded. But Tastypie doesn't come w/
+login/logout touch points out of box, so I had to write code for that.</p>
+<h2>API &amp; data model</h2>
+<p>I have a strong opinion <strong>against</strong> this type of APIs. In my view,
+they should not call themselves APIs even.</p>
+<p>These APIs are designed <strong>artificially</strong>, meaning they are not
+generated from data models, but instead is coded from scratch by some
+dev &larr; this kind is the worst because this adds another layer of
+translation (and I'm talking about knowledge translation, not coding
+language translation) from backend's data model (which is the source of all
+truth, especially about data's logical relationships) to yet another
+data presentation (in form of web accessible URLs)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<blockquote>
+<p>In short, backend API should only be a (de)serialization of the
+underline data. It <strong>should not</strong> change the meaning of the data,
+and absolutely not modifiy their logical relationships.
+</p>
+</blockquote>
+<h2>three types of auth &amp; data model</h2>
+<p>It's quite confusing when one talks about authentication,
+authorization, and sometimes, role-based. How are they fit into a
+single picture? In essence the purpose of auth is to answer two
+questions: <strong>data ownership</strong> and <strong>CRUD mapping</strong>.</p>
+<figure class="col s12">
+  <img src="images/backend%20auth.png"/>
+  <figcaption>Backend authentication & authorization</figcaption>
+</figure>
+
+<ul>
+<li>
+<p><strong>Type 1</strong>: Fit for public data API whereas user management can be
+  optional. There might still be authentication step, but essentially
+  backend doesn't distinguish difference between two users &mdash; A &amp;
+  B users have the same right within the data domain. The idea here is
+  to focus on the models that support functions of your application,
+  so don't get distracted yet by user management.</p>
+</li>
+<li>
+<p><strong>Type 2</strong>: Now to introduce user A vs. B because of two things in
+  mind:</p>
+</li>
+<li>
+<p>data ownership: a data record may now have a <code>User</code> key, thus A
+     can't see B's data.</p>
+</li>
+<li>CRUD: anonymous user is READONLY, vs. logged in user can
+     CRUD. This is essentially a <code>role</code>, but without yet separate it
+     into its own entity.</li>
+</ul>
+<p>The key is that <code>user</code> hierarchy is <strong>flat</strong>. As soon as you are
+  thinking hierarchy in user, you need now move to type 3.</p>
+<ul>
+<li>
+<p><strong>Type 3</strong>: On top of type 2, introduce a role management. If Role
+  is flat, type 3 is just a fancy version of type 2. However, role can
+  be hierarchical, also.</p>
+</li>
+<li>
+<p>data ownership: w/ role, ownership can be <code>User</code> based, or <code>role</code>
+     based (think of your boss can see your data).</p>
+</li>
+<li>CRUD: instead of linked to <code>user</code> in type 2, now linked to
+     <code>role</code>. This is the same as <code>position</code> in an org &mdash; that
+     employee can change, but function of the position doesn't.</li>
+</ul>
+<p>In the end, there is really only one design, the type 3 &mdash; Type 1
+is a special case of 2 (when every user is the same user), and 2 a
+special case of 3 (when every user is the same role).</p>
+<h2>Top down vs. bottom up</h2>
+<p>Here is the disconnect &mdash; In dev/POC, I find it much better to do
+the bottom up way by starting w/ type 1, the bare minimum, so to focus
+on the functions first. Once the application is doing what I want, we
+can slap on top of these auth to make it fancy.  But in
+meetings/projects, type 3 is often the talk because it is
+<strong>theoretically correct</strong> &larr; how can any design be ok w/o thinking
+upfront of auth?</p>
+<blockquote>
+<p>But what they don't realize is that type 1 isn't defected at all.
+It's only a simplified version of type 3, but it doesn't skip any of
+the critical ingredients in the design, just that assigning them a
+<em>default</em> value for the time being.
+</p>
+</blockquote>
+<p>Top down is fine for experienced designer who know how these are fit
+together, and what default values are used and what they mean. But too
+often than not, the inexperienced  will take the top down approach,
+but function, or the foundation of the application, suffers exactly
+because of the complexity it introduces at each turn. This is like
+teaching 1st graders college math, yes college math is a better
+version than <code>1+1</code>, then?</p>
+<h1>API Authentication Proxy</h1>
+<p>It should be clear by now that <strong>API level authentication is a
+proxy</strong>. In the end it will invoke some backend's native
+authentication mechanism for user checking. Hypothetically speaking
+API proxy can integrate multiple backend/data sources, thus may
+present multiple ways to authenticate a user<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. But assuming you are
+authenticated, the key question remains &mdash; what is the data
+ownership and CRUD mapping within each application?</p>
+<h2>API key</h2>
+<p>Tastypie creates a new model <code>ApiKey</code> w/ <code>1:1</code> relationship to
+<code>User</code>. When using this authentication, client/frontend is to call w/
+username and pwd with a <code>POST</code>, then server/api authenticate this
+user, and return the key. All subsequent client HTTP calls will have
+this in the HTTP header, and that's it.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">Authorization</span><span class="o">:</span><span class="w"> </span><span class="sb">`ApiKey </span><span class="si">${</span><span class="nx">user</span><span class="si">}</span><span class="sb">:</span><span class="si">${</span><span class="nx">api_key</span><span class="si">}</span><span class="sb">`</span>
+</code></pre></div>
+
+<p>Remember, because user management is a backend thing, whether the key
+expires or not is irrelevant in authentication itself. If it expires
+somehow, client gets an error code/msg. How it handles is a function
+discussion by itself.</p>
+<h2>Create a Tastypie Auth resource</h2>
+<p>Now as you can see, even Tastypie can neatly package Django model into
+a <a href="https://django-tastypie.readthedocs.io/en/v0.9.7/resources.html">resource</a>, a <a href="https://django-tastypie.readthedocs.io/en/v0.9.7/resources.html">resource</a> doesn't by itself
+authenticate. Instead, you build a touch point for client to call,
+<strong>whether the URL is <code>/api/v1/&lt;whatever</code> or a dedicated view at
+<code>/me/blahblah</code></strong> is irrelevant. Below I'm choosing the former because
+then auth URLs will be part of <code>/api/v1</code> schema instead of a made-up
+URL, feels cleaner.</p>
+<h3>An auth dummy resource</h3>
+<p>In some blogs login is exposed w/ <code>User</code> resource/model. However, I
+think it's better to create a dummy resource for auth purpose
+only. Therefore, one can abuse this touch point and feel safe because
+there is model data behind this!</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AuthResource</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">allowed_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="s2">&quot;post&quot;</span><span class="p">]</span>
+        <span class="n">resource_name</span> <span class="o">=</span> <span class="s2">&quot;auth&quot;</span>
+        <span class="n">authentication</span> <span class="o">=</span> <span class="n">ApiKeyAuthentication</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Here I allow both <code>post</code> and <code>get</code>, for we are to login w/ <code>post</code>, and
+logout with <code>get</code>. For using <code>get</code> to logout, since I'm not passing
+any user data in post body, I need to use the API key to identify this
+user, thus it needs <code>authentication=ApiKeyAuthentication</code> so that
+Tastypie workflow will observe the header for API key.</p>
+<h3>prepend url</h3>
+<p>There is very little info on the <a href="https://django-tastypie.readthedocs.io/en/latest/api.html#prepend-urls">doc</a>, but this is the key. The
+question is, once I have created a resource, how will call to this
+resource trigger a login!? This is what you do:</p>
+<ol>
+<li>In the resource, define a class method to handle login details.</li>
+<li>Use <code>prepend_url</code> to assign a URL linked to this method! In other
+   words, you get your resource URL, ie. <code>/api/v1/auth</code>, but you can
+   define a <code>/auth/whatever</code> in your resource and link to a class
+   method as the handler. So as you can see, this isn't much different
+   from creating a Django view and link to a URL.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.conf.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">url</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AuthResource</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">allowed_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="s2">&quot;post&quot;</span><span class="p">]</span>
+        <span class="n">resource_name</span> <span class="o">=</span> <span class="s2">&quot;auth&quot;</span>
+        <span class="n">authentication</span> <span class="o">=</span> <span class="n">ApiKeyAuthentication</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">prepend_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">url</span><span class="p">(</span>
+                <span class="sa">r</span><span class="s2">&quot;^(?P&lt;resource_name&gt;</span><span class="si">%s</span><span class="s2">)/login</span><span class="si">%s</span><span class="s2">$&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">resource_name</span><span class="p">,</span> <span class="n">trailing_slash</span><span class="p">()),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wrap_view</span><span class="p">(</span><span class="s2">&quot;login&quot;</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;api_login&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span>
+                <span class="sa">r</span><span class="s2">&quot;^(?P&lt;resource_name&gt;</span><span class="si">%s</span><span class="s2">)/logout</span><span class="si">%s</span><span class="s2">$&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">resource_name</span><span class="p">,</span> <span class="n">trailing_slash</span><span class="p">()),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wrap_view</span><span class="p">(</span><span class="s2">&quot;logout&quot;</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;api_logout&quot;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+</code></pre></div>
+
+<p>So, the key is <code>self.wrap_view("login")</code>, whereas <code>login</code> is actually
+a class method which I'll do next. The URL pattern is up to whatever
+you imagine really. By doing the <code>self._meta.resource_name</code>, you are
+creating a pattern <code>/&lt;your resource name&gt;/login</code>. Same applies to the
+logout function.</p>
+<h3>login</h3>
+<p>I wouldn't go into details of the code. The key here is the
+<code>self.deserialize</code> which gives you a way to extract username and
+password in the JSON body. Once  you have them, call Django's built-in
+<code>authenticate</code> for the actual work. Here is where you can see proxy
+hooking up w/ other backends for authentication calls if so.</p>
+<p>The <code>ApiKey</code> part is to create a key for the user if not
+presented. Tastypie recommends using model signal so that each new
+user gets a key always. They all achieve the same end state &mdash;
+<strong>one user, one key</strong>, therefore key becomes the user. Period.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">method_check</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">allowed</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;post&quot;</span><span class="p">])</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">,</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;CONTENT_TYPE&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+            <span class="c1"># login(request, user)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">ApiKey</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+                    <span class="n">key</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">ApiKey</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">ApiKey</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response</span><span class="p">(</span>
+                <span class="n">request</span><span class="p">,</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response</span><span class="p">(</span>
+                <span class="n">request</span><span class="p">,</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;User is not active&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">HttpForbidden</span><span class="p">,</span>
+            <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response</span><span class="p">(</span>
+            <span class="n">request</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Login failed&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">HttpUnauthorized</span><span class="p">,</span>
+</code></pre></div>
+
+<h3>logout</h3>
+<p>The key is <code>self.is_authenticated(request)</code>. This will populate
+<code>request.user</code> w/ the key's user. Otherwise you will always get
+<code>request.user</code> being <code>AnonymousUser</code>.</p>
+<p>Of course, you can choose to use <code>post</code>, and have frontend pass back
+the <code>(user,key)</code>, and have code here to look up the identity. But
+since I have added <code>authentication = ApiKeyAuthentication()</code> in the
+resource Meta, the key in the HTTP header will be picked up by
+Tastypie's <code>get</code> already. Thus making the call a bit cleaner. Further,
+<code>get</code> is a better shot than <code>post</code> for logging out a user, imho.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">method_check</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">allowed</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">])</span>
+
+    <span class="c1"># MUST: call to populate User</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response</span><span class="p">(</span>
+            <span class="n">request</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">HttpUnauthorized</span>
+        <span class="p">)</span>
+</code></pre></div>
+
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>This is not only risky, but is often than not, wrong! All
+language has lib to transform your data model code into API
+<strong>automagically</strong>. There is simply no reason to  write from
+scratch. If yours can't, you should consider upgrading the
+underline data modeling layer, but not to patch it w/ an
+webservice API.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>In some cases, proxy authenticate is really a convenience to
+bring more users to your application, ie. allow user to use Google
+account in your application w/o doing any user registration.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

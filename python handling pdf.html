@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2023-05-31
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+
+    <h1 class="myhighlight">Python handling PDF</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>It was a task I encountered in the China visa job whereas I need to
+extract info from a PDF file that has been generated from the online
+website. In its reverse, business also needs to generate PDF doc such
+as an invoice so we could email them to customer. Since these tasks
+are handled by backend and my backend is usually Django, it's
+important to figure out a general solution to handle PDF parsing and
+generation.</p>
+<h1>Generate a PDF</h1>
+<p>There are two ways to generate PDF: generate a HTML and print to PDF
+using browser, or generate a PDF in backend and (auto) download. The
+first one is universal. It has no issue of many of the quirks such as
+fonts. It's an WYSIWYG solution. The second one, on the other hand, is
+relying on <a href="https://xhtml2pdf.readthedocs.io/en/latest/">xhtml2pdf</a>, which comes a few things you need to know.</p>
+<p>Why we opt for one versus the other? In short, the printer solution is
+easiest but it keeps no record of a user's action. This is fine for
+docs such as manuals, instructions, those general-purpose docs. But in
+the visa business, we are passing onto prospective customers of some
+docs/forms that we wanted them to fill and used in their later
+application. Therefore, these docs, most of them, bear some customer
+info in the doc such as their name. For these we wanted to keep them
+as a track record of a customer engagement so that we know what have
+been sent to a customer. So the PDF, if sent, was saved. Therefore,
+it makes sense to let backend: generate the file &rarr; storage &rarr;
+link to customer's account w/ timestamp and other meta &rarr; customer
+downloads it (could be on-the-spot or a download link).</p>
+<h2>workflow</h2>
+<p>The general workflow is the same for both solutions because you are
+always generating a HTML version of the doc first. Therefore, in
+Django there is always a template, CSS and so on. The different would
+be that:</p>
+<ol>
+<li>
+<p>templates: <code>xhtml2pdf</code> solution takes some additional CSS in order
+   to work (see "Asian fonts" below). Printer solution, on the other
+   hand, works pretty much as-is because the PDF is rendered as an
+   image (I believe). So as long as the HTML looks right, the PDF will
+   be fine.</p>
+</li>
+<li>
+<p>download/email: these are only available when using <code>xhtml2pdf</code>
+   because backend now has the chance to handle different <em>action</em>
+   depending on the function we want to provide. Printer solution has
+   no control over the generation step, thus having no such capability.</p>
+</li>
+</ol>
+<h2>Asian fonts, inconsistency</h2>
+<p>When using <code>xhtml2pdf</code>, you have to set to use <a href="https://xhtml2pdf.readthedocs.io/en/latest/reference.html#asian-fonts-support">these fonts</a> if
+your doc is in Chinese. This, however, will make the generated doc
+looks <strong>different</strong> from the HTML version! I don't have a solution for
+this. Additionally, because of the fonts I had to enlarge some
+<code>font-size</code> as shown below in order to make them easy to read. These
+are side effects.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="nt">style</span><span class="w"> </span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span><span class="o">&gt;</span>
+<span class="w"> </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="n">STSong-Light</span><span class="p">;</span>
+<span class="w">   </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">cm</span><span class="p">;</span>
+<span class="w">   </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">cm</span><span class="p">;</span>
+<span class="w">   </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">cm</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+
+<span class="w"> </span><span class="nt">h1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">pt</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+
+<span class="w"> </span><span class="nt">li</span><span class="o">,</span><span class="w"> </span><span class="nt">p</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">pt</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+
+<span class="o">&lt;/</span><span class="nt">style</span><span class="o">&gt;</span>
+</code></pre></div>
+
+<h2>html from template</h2>
+<p>I won't go into details of a Django template setup. My basic setup has
+a <code>pdf_layout.html</code> which inherits a <code>base.html</code>. Then, individual PDF
+doc's template is inheriting the <code>pdf_layout.html</code>, mostly just now
+filling in different segments of contents based on the doc's purpose.</p>
+<p>Once you have these, prepare Django for the rendering:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pdf_visa_cancellation</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">application_id</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">application_id</span><span class="p">)</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">application</span><span class="o">.</span><span class="n">for_whom</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="n">application</span><span class="p">,</span> <span class="s2">&quot;person&quot;</span><span class="p">:</span> <span class="n">person</span><span class="p">,</span> <span class="s2">&quot;today&quot;</span><span class="p">:</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()}</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;pdf_visa_cancellation.html&quot;</span>
+
+    <span class="c1"># render html</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>PDF generator class</h2>
+<p>First, we define a generator class as the engine. Given <code>context</code> and
+<code>template</code>, it would have enough info to generate a HTML. Then the
+<code>filename</code> determines the actual file being persisted in file storage
+based on the <code>MEDIA_ROOT</code>. You can read more <a href="https://xhtml2pdf.readthedocs.io/en/latest/usage.html">here</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.staticfiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">finders</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.template.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_template</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xhtml2pdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">pisa</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PDFGenerator</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="n">template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+
+    <span class="c1"># https://xhtml2pdf.readthedocs.io/en/latest/usage.html#using-xhtml2pdf-in-django</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">link_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">rel</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert HTML URIs to absolute system paths so xhtml2pdf can access those</span>
+<span class="sd">        resources</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">finders</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">]</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sUrl</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span>  <span class="c1"># Typically /static/</span>
+            <span class="n">sRoot</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">STATIC_ROOT</span>  <span class="c1"># Typically /home/userX/project_static/</span>
+            <span class="n">mUrl</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_URL</span>  <span class="c1"># Typically /media/</span>
+            <span class="n">mRoot</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_ROOT</span>
+            <span class="p">)</span>  <span class="c1"># Typically /home/userX/project_static/media/</span>
+
+            <span class="k">if</span> <span class="n">uri</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">mUrl</span><span class="p">):</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mRoot</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">mUrl</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">uri</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">sUrl</span><span class="p">):</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sRoot</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sUrl</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">uri</span>
+
+        <span class="c1"># make sure that file exists</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;media URI must start with </span><span class="si">%s</span><span class="s2"> or </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sUrl</span><span class="p">,</span> <span class="n">mUrl</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># proceed to create PDF</span>
+        <span class="c1"># Create a Django response object, and specify content_type as pdf</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/pdf&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span>
+            <span class="s2">&quot;Content-Disposition&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;attachment; filename=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s1">.pdf&quot;&#39;</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+
+        <span class="c1"># create a pdf</span>
+        <span class="n">pisa_status</span> <span class="o">=</span> <span class="n">pisa</span><span class="o">.</span><span class="n">CreatePDF</span><span class="p">(</span>
+            <span class="n">html</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">link_callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">link_callback</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># if error then show some funny view</span>
+        <span class="k">if</span> <span class="n">pisa_status</span><span class="o">.</span><span class="n">err</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;We had some errors &lt;pre&gt;&quot;</span> <span class="o">+</span> <span class="n">html</span> <span class="o">+</span> <span class="s2">&quot;&lt;/pre&gt;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+
+<h2>download immediately</h2>
+<p>Then, generating a PDF and return a <code>HTTPResponse</code> object which will
+trigger an <strong>immediate download</strong> on the browser end.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># find the template and render it.</span>
+<span class="n">pdf_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">application</span><span class="o">.</span><span class="n">cova</span><span class="si">}</span><span class="s2">-visa-cancellation&quot;</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="n">PDFGenerator</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">pdf_filename</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+
+<span class="c1"># download immediately</span>
+<span class="k">return</span> <span class="n">pdf</span>
+</code></pre></div>
+
+<h2>email body &amp; as attachment</h2>
+<p>The HTML template can generate an email body directly. Here I'm
+showing how to attach the generated PDF as an email attachment.</p>
+<div class="highlight"><pre><span></span><code><span class="n">message</span> <span class="o">=</span> <span class="n">EmailMessage</span><span class="p">(</span>
+    <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;Chinese Visa Application Supplementary Doc: Deprecate Old</span>
+    <span class="n">Visa</span><span class="s2">&quot;,</span>
+
+    <span class="c1"># email body generated from template</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">get_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">context</span><span class="p">),</span>
+
+    <span class="n">from_email</span><span class="o">=</span><span class="s2">&quot;chinesevisaexpress1@gmail.com&quot;</span><span class="p">,</span>
+    <span class="n">to</span><span class="o">=</span><span class="p">[</span><span class="n">application</span><span class="o">.</span><span class="n">for_whom</span><span class="o">.</span><span class="n">email</span><span class="p">],</span>
+    <span class="n">reply_to</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chinesevisaexpress1@gmail.com&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">message</span><span class="o">.</span><span class="n">content_subtype</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span>
+
+<span class="c1"># attach generated PDF</span>
+<span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">pdf_filename</span><span class="p">,</span> <span class="n">pdf</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;application/pdf&quot;</span><span class="p">)</span>
+<span class="n">message</span><span class="o">.</span><span class="n">send</span><span class="p">()</span>
+</code></pre></div>
+
+<h1>Parse a PDF</h1>
+<p>Extracting info out of a PDF isn't an easy one. Here I'm using the
+<a href="https://py-pdf-parser.readthedocs.io/en/latest/">py-pdf-parser</a>. The trick mostly lies in the structure of the file
+itself that what you think the element should be isn't.</p>
+<p>There isn't a general solution to this. You will be dealing w/ a lot
+of data anomaly such as index of the info you want, empty/null data,
+matching data broken to multiple lines, things like these. The general
+capability of reading the doc in general is there. I would say it
+works 90+% of the time. Hey, if it could parse a Chinese-made PDF, I
+would certainly expect it to handle other (better structured) docs,
+better.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">py_pdf_parser.loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_file</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">visa.utils.normalizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normalizer</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;visa&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyPDFParser</span><span class="p">(</span><span class="n">Normalizer</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">load_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">,</span>
+        <span class="n">force_to_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;below&quot;</span><span class="p">,</span>
+        <span class="n">split_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing: </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># search</span>
+        <span class="n">full_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">elements</span>
+        <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">full_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">text</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;below&quot;</span><span class="p">:</span>
+                    <span class="n">found</span> <span class="o">=</span> <span class="n">full_list</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span>
+                    <span class="n">found</span> <span class="o">=</span> <span class="n">full_list</span><span class="o">.</span><span class="n">to_the_right_of</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;above&quot;</span><span class="p">:</span>
+                    <span class="n">found</span> <span class="o">=</span> <span class="n">full_list</span><span class="o">.</span><span class="n">above</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+            <span class="c1"># logger.debug([x.text() for x in found])</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">found</span><span class="p">][</span><span class="n">force_to_index</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># cleansing</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)[</span><span class="n">split_index</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">else</span> <span class="n">result</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parseByIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c1"># TODO: no data!?</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s2">: no data&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;：&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parseByKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing: </span><span class="si">{</span><span class="n">keys</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">\s?[:：]\s?(?P&lt;value&gt;\S+)&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">full_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">elements</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">full_list</span><span class="p">):</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">key</span> <span class="ow">in</span> <span class="n">content</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]):</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">full_list</span><span class="p">[</span><span class="n">index</span><span class="p">:]])</span>
+
+                <span class="k">break</span>
+
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">pat</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tmp</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">keys</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

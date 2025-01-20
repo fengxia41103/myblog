@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2023-05-16
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">Fullstack deployment: nginx, dotenv</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><figure class="col l6 m6 s12">
+  <img src="images/architecture_joke.jpg"
+       class="center img-responsive">
+</figure>
+
+<p>Deployment a fullstack requires multiple <strong>special treatments</strong>. First
+of all, the overall umbrella is the separation of configs by the
+deployment targets, eg. dev/test/prod. Nature of these targets in
+practice are quite different. Here I'm identifying some common tasks.</p>
+<h2>nginx.conf</h2>
+<p>I use <code>nginx</code> for both the backend &amp; frontend. It serves three purposes:
+serve static/media files, frontend (eg. bundled React), and backend proxy.</p>
+<h3>http vs. https</h3>
+<p>In dev it's usually a http, but in production it's always
+<code>https</code>. When using https, use this config. The key is the <code>.pem</code>
+which, if using Azure VM as the host, would have these key files
+already. If you are building your own host, you need to generate these
+<code>.pem</code> yourself.</p>
+<div class="highlight"><pre><span></span><code>server {
+  listen 8443 default_server ssl http2;
+  listen [::]:8443 ssl http2;
+
+  ssl_certificate /etc/nginx/waagent/TransportCert.pem;
+  ssl_certificate_key /etc/nginx/waagent/TransportPrivate.pem;
+
+  location ....
+}
+</code></pre></div>
+
+<p>Assuming the <code>.pem</code> is from the docker host, you just need to mount
+them to <code>/etc/nginx/...</code> inside the nginx docker via <code>docker-compose</code>.</p>
+<h3>proxy backend</h3>
+<p>Main use of nginx is to proxy backend. Three pieces needed.</p>
+<p>First, define an <code>upstream</code>, which is the backend app itself. Here
+it's in a docker named <code>web</code> and on the docker's port <code>8001</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">upstream</span><span class="w"> </span><span class="n">django</span><span class="w"> </span><span class="err">{</span>
+<span class="w">  </span><span class="c1"># must be your docker host IP, `localhost` won&#39;t work!</span>
+<span class="w">  </span><span class="k">server</span><span class="w"> </span><span class="n">web</span><span class="o">:</span><span class="mi">8001</span><span class="p">;</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<p>Second, in <code>location /</code> block, define <code>try_files</code>. <code>nginx</code> will try
+serve the request as much as it can, for example the static files, and
+will fallback to <code>@proxy_to_app</code>, then to 404 if all fails, cool!</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="err">{</span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">    </span><span class="n">try_files</span><span class="w"> </span><span class="err">$</span><span class="n">uri</span><span class="w"> </span><span class="nv">@proxy_to_app</span><span class="w"> </span><span class="err">$</span><span class="n">uri</span><span class="o">/</span><span class="w"> </span><span class="o">=</span><span class="mi">404</span><span class="p">;</span><span class="w">  </span><span class="o">&lt;===</span><span class="w"> </span><span class="err">!!</span>
+<span class="w">  </span><span class="err">}</span>
+</code></pre></div>
+
+<p>Last, link proxy to <code>upstream</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nx">location</span><span class="w"> </span><span class="err">@</span><span class="nx">proxy_to_app</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">proxy_pass</span><span class="w"> </span><span class="nx">http</span><span class="p">:</span><span class="c1">//django;  &lt;=== link to upstream</span>
+<span class="w">    </span><span class="nx">proxy_http_version</span><span class="w"> </span><span class="m m-Double">1.1</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">Upgrade</span><span class="w"> </span><span class="err">$</span><span class="nx">http_upgrade</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">proxy_redirect</span><span class="w"> </span><span class="nx">off</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">Host</span><span class="w"> </span><span class="err">$</span><span class="nx">http_host</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Real</span><span class="o">-</span><span class="nx">IP</span><span class="w"> </span><span class="err">$</span><span class="nx">remote_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Forwarded</span><span class="o">-</span><span class="nx">For</span><span class="w"> </span><span class="err">$</span><span class="nx">proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Forwarded</span><span class="o">-</span><span class="nx">Host</span><span class="w"> </span><span class="err">$</span><span class="nx">server_name</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+
+<h3>serve static/media files</h3>
+<p>You need two pieces for serving these type of files: <code>root</code> which
+defines the path on the file system where these files are stored, and
+<code>location</code> which defines uri pattern to match.</p>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="p">;</span>
+
+<span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="k">static</span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">autoindex</span><span class="w"> </span><span class="n">on</span><span class="p">;</span>
+<span class="w">  </span><span class="n">alias</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">another</span><span class="o">/</span><span class="n">place</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="n">media</span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">autoindex</span><span class="w"> </span><span class="n">on</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># root ONLY!!</span>
+<span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1"># catch all domain</span>
+<span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">....</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Three things:</p>
+<ol>
+<li>
+<p>Here <code>root /var/www/html</code> is telling <code>nginx</code> that the file system
+   folder for storing these files is <code>/var/www/html</code>. This could be
+   changed to any other folder one chooses. Now when serving uri
+   <code>/media</code>, nginx will look for the file under <code>&lt;root&gt;/media/</code>.</p>
+</li>
+<li>
+<p>This file storage value can be overridden using the <code>alias</code> per
+   location. Therefore, as shown above, you could serve the static
+   files from <code>/path/to/another/place</code> instead of the
+   <code>&lt;root&gt;</code>. Further, you could capture value from uri regex, and use
+   it to compose a path <strong>dynamically</strong>:</p>
+<p><code>location ~ ^/myapp/([a-zA-Z0-9_-]+)/(.*)$ {
+   alias /var/lib/myapp/$1/static/$2;
+   autoindex on;
+  }</code></p>
+</li>
+<li>
+<p><code>nginx</code> matches uri from top down, but will use the
+   longest matched one.</p>
+</li>
+</ol>
+<h3>match exactly</h3>
+<p>If you want to match a uri <strong>exactly</strong>, use <code>location = &lt;uri&gt;</code>. For
+example, <code>location = /</code> will match only the <code>&lt;domain&gt;/</code>, not
+<code>&lt;domain&gt;/user/1</code>. W/ this you could control exactly the nginx
+behavior.</p>
+<h3>trailing slash</h3>
+<p>Location ends w/ a slash. This is to force a permanent 301
+redirect. This is significant when you define django URL
+<code>APPEND_SLASH</code> which is default to <code>True</code>. In other words, be
+consistent between your proxied django app's url and other urls in
+nginx, using either all ending slash, or not. For me I opt to use
+ending slash throughout.</p>
+<blockquote>
+<p>If a location is defined by a prefix string that ends with the slash
+character, and requests are processed by one of proxy_pass,
+fastcgi_pass, uwsgi_pass, scgi_pass, memcached_pass, or grpc_pass,
+then the special processing is performed. In response to a request
+with URI equal to this string, but without the trailing slash, a
+permanent redirect with the code 301 will be returned to the requested
+URI with the slash appended. If this is not desired, an exact match of
+the URI and location could be defined like this:</p>
+<p>```
+location /user/ {
+    proxy_pass http://user.example.com;
+}</p>
+<p>location = /user {
+    proxy_pass http://login.example.com;
+}
+```
+</p>
+</blockquote>
+<h2>React <code>.env</code></h2>
+<p>If I have a React frontend, how to parameterize it so that I could
+deploy a frontend coupling w/ a specific backend but <strong>without
+changing code</strong>!?  The answer is <a href="https://create-react-app.dev/docs/adding-custom-environment-variables/"><code>.env</code></a> file.</p>
+<blockquote>
+<p>The environment variables are embedded during the build time. Since
+Create React App produces a static HTML/CSS/JS bundle, it can’t
+possibly read them at runtime. To read them at runtime, you would need
+to load HTML into memory on the server and replace placeholders in
+runtime, as described here. Alternatively you can rebuild the app on
+the server anytime you change them.</p>
+<p>Note: You must create custom environment variables beginning with
+<code>REACT_APP_</code>. Any other variables except NODE_ENV will be ignored to
+avoid accidentally exposing a private key on the machine that could
+have the same name. Changing any environment variables will require
+you to restart the development server if it is running.</p>
+<p>These environment variables will be defined for you on
+process.env. For example, having an environment variable named
+REACT_APP_NOT_SECRET_CODE will be exposed in your JS as
+<code>process.env.REACT_APP_NOT_SECRET_CODE</code>.
+</p>
+</blockquote>
+<p>So now I define <code>.env.dev</code> and <code>.env.prod</code>, and specify the backend's
+IP in it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .env.dev:</span>
+
+<span class="nv">REACT_APP_HOST_URL</span><span class="o">=</span>http://192.168.68.106:8003
+
+<span class="c1"># .env.prod:</span>
+
+<span class="nv">REACT_APP_HOST_URL</span><span class="o">=</span>https://104.208.79.231:8443
+</code></pre></div>
+
+<p>Then in REACT code, I read this value in and provide it in a global context:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createContext</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react&quot;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">GlobalContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createContext</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">backend</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">api</span><span class="o">:</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_HOST_URL</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_HOST_URL</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">GlobalContext</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Now, if to build a frontend coupling w/ backend at <code>192.168...</code>, I do
+a symlink <code>.env -&gt; .env.dev</code>, then <code>npm build</code>. This version of the
+frontend can then be deployed to any web server, and it will use use
+the <code>192.168..</code> backend. Similarly, if I build one using <code>.env.prod</code>,
+then I have one using the <code>104.208..</code> backend. With these, I have 3
+benefits:</p>
+<ol>
+<li>Can build a frontend w/ any backend w/o changing frontend code.</li>
+<li>Can deploy frontend to any web server, eg. s3, nginx</li>
+<li>Can release and scale backend and frontend independently.</li>
+</ol>
+<h2>docker-compose <code>.env</code></h2>
+<p>To define <code>env</code> variables in <code>docker-compose</code> such as DB credentials,
+you can either define them directly in the compose. The downside of
+this approach is that sensitive values are saved in git, and a dev
+using this same file but different value would have to make
+modifications directly, and usually these changes got checked in git
+also which then causes conflict.</p>
+<div class="highlight"><pre><span></span><code><span class="n">environment</span><span class="o">:</span>
+<span class="w">  </span><span class="n">HTTP_TYPE</span><span class="o">:</span><span class="w"> </span><span class="n">http</span>
+<span class="w">  </span><span class="n">HOST_SERVER</span><span class="o">:</span><span class="w"> </span><span class="mf">192.168</span><span class="o">.</span><span class="mf">68.110</span><span class="o">:</span><span class="mi">8003</span>
+<span class="w">  </span><span class="n">PYTHONUNBUFFERED</span><span class="o">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">DJANGO_DEBUG</span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">MYSQL_DATABASE</span><span class="o">:</span><span class="w"> </span><span class="n">chinesevisaexpress</span>
+<span class="w">  </span><span class="n">DEPLOY_TYPE</span><span class="o">:</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">prod</span>
+<span class="w">  </span><span class="n">DJANGO_DB_USER</span><span class="o">:</span><span class="w"> </span><span class="n">sldkjflsdj</span>
+<span class="w">  </span><span class="n">DJANGO_DB_PWD</span><span class="o">:</span><span class="w"> </span><span class="n">sdkjflsj</span>
+<span class="w">  </span><span class="n">DJANGO_DB_HOST</span><span class="o">:</span><span class="w"> </span><span class="n">db</span>
+<span class="w">  </span><span class="n">DJANGO_DB_PORT</span><span class="o">:</span><span class="w"> </span><span class="mi">3306</span>
+<span class="w">  </span><span class="n">DJANGO_REDIS_HOST</span><span class="o">:</span><span class="w"> </span><span class="n">redis</span>
+<span class="w">  </span><span class="n">DJANGO_SUPERUSER_USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">dlksjldlfjd</span>
+<span class="w">  </span><span class="n">DJANGO_SUPERUSER_PASSWORD</span><span class="o">:</span><span class="w"> </span><span class="n">sldkjfljdslkj</span>
+<span class="w">  </span><span class="n">DJANGO_SUPERUSER_EMAIL</span><span class="o">:</span><span class="w"> </span><span class="n">feng_xia41103</span><span class="err">@</span><span class="n">hotmail</span><span class="o">.</span><span class="na">com</span>
+</code></pre></div>
+
+<p>Or, you define them as <code>key=val</code> in <code>.env</code>, then <code>docker-compose</code> will
+read in <strong>automagically</strong>. You can check its effect by <code>docker-compose
+config</code> which is essentially a populated compose yaml w/ these values
+plugged in.</p>
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span>.env
+
+HTTP_TYPE=http
+HOST_SERVER=192.168.68.110:8003
+MYSQL_DATABASE=ljlsjdlfkjlsfj
+DEPLOY_TYPE=dev<span class="w"> </span>#<span class="w"> </span>dev<span class="w"> </span>or<span class="w"> </span>prod
+DJANGO_DB_USER=sldkjfljs
+DJANGO_DB_PWD=sldkjfldsjf
+DJANGO_SUPERUSER_USERNAME=sdljkfldsj
+DJANGO_SUPERUSER_PASSWORD=dslkjfljdsl
+DJANGO_SUPERUSER_EMAIL=feng_xia41103@hotmail.com
+
+#<span class="w"> </span>docker-compose
+
+environment:
+
+<span class="w">  </span>HTTP_TYPE:<span class="w"> </span><span class="cp">${</span><span class="n">HTTP_TYPE</span><span class="cp">}</span>
+<span class="w">  </span>HOST_SERVER:<span class="w"> </span><span class="cp">${</span><span class="n">HOST_SERVER</span><span class="cp">}</span>
+<span class="w">  </span>MYSQL_DATABASE:<span class="w"> </span><span class="cp">${</span><span class="n">MYSQL_DATABASE</span><span class="cp">}</span>
+<span class="w">  </span>DJANGO_DB_USER:<span class="w"> </span><span class="cp">${</span><span class="n">DJANGO_DB_USER</span><span class="cp">}</span>
+<span class="w">  </span>DJANGO_DB_PWD:<span class="w"> </span><span class="cp">${</span><span class="n">DJANGO_DB_PWD</span><span class="cp">}</span>
+<span class="w">  </span>DJANGO_SUPERUSER_USERNAME:<span class="w"> </span><span class="cp">${</span><span class="n">DJANGO_SUPERUSER_USERNAME</span><span class="cp">}</span>
+<span class="w">  </span>DJANGO_SUPERUSER_PASSWORD:<span class="w"> </span><span class="cp">${</span><span class="n">DJANGO_SUPERUSER_PASSWORD</span><span class="cp">}</span>
+<span class="w">  </span>DJANGO_SUPERUSER_EMAIL:<span class="w"> </span><span class="cp">${</span><span class="n">DJANGO_SUPERUSER_EMAIL</span><span class="cp">}</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

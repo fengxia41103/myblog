@@ -1,7 +1,7 @@
-Title: Worster Woman
+Title: Worcester Woman
 Date: 2025-05-10 08:31
 Tags: thoughts
-Slug: worster woman
+Slug: worcester woman
 Author: Feng Xia
 
 <figure class="col s12">
@@ -17,7 +17,7 @@ mingling with a crowd, hearing the chatting noise in the background,
 watching the young UNC girls coming in and out studying, another life
 is beautiful, worth going through, at least for one more day.
 
-But, watching the video clips of this Worster woman against this crowd
+But, watching the video clips of this Worcester woman against this crowd
 of, gangsters, Gestapos, mafia, vallians, scrums of a human race,
 wearing a uniform, but hiding their face, and power, and shame, and
 humanity, and a thing, anything, that makes a human a human, behind a
@@ -77,7 +77,7 @@ ourselves _moral_, and determine that having it is THE difference
 between us and _them_ -- cats, dogs, horses, sloths, fish,
 turtle... Yet, this exact word, this exact part of a person, moral, is
 the secret to success, by the tyrants, by the emperors, by the
-Himmlers, by the Lenins, Starlins, Kims, Trumps, Worster polices, and
+Himmlers, by the Lenins, Starlins, Kims, Trumps, Worcester polices, and
 endless such scrums yet to come.
 
 What a thin line! What a fragile defense! What a small buffer the

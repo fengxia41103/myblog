@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-05-27
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Juju charm Python2</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>Python 2. So we dived into charm code to see which feature is blocking
+on P2 so we can run charms in CentOS.</p>
+<p>Why do we want to build Python2 charms? Charms are claimed to built
+for Python3. However, the catch is that charms are also built for
+Ubuntu ecosystems <span class="myhighlight">ONLY</span> if you care to
+examine its code base.</p>
+<p>Take <code>__init__.py</code> in <a href="https://pythonhosted.org/charmhelpers/"><code>charmhelpers/charmhelpers</code></a> for example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">six</span>  <span class="c1"># flake8: noqa</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;apt-get&#39;</span><span class="p">,</span> <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span><span class="p">,</span> <span class="s1">&#39;python-six&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;apt-get&#39;</span><span class="p">,</span> <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span><span class="p">,</span> <span class="s1">&#39;python3-six&#39;</span><span class="p">])</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">six</span>  <span class="c1"># flake8: noqa</span>
+</code></pre></div>
+
+<p>Command line <code>apt-get</code> is a clue, isn't it? There are many such
+hardcoded lines who shout out that Ubuntu is the way to go, and of
+course, charms are developed by Canonical, and you are expected to use
+them the way they were designed for.</p>
+<p>Well, this is fine <span class="myhighlight">
+until you want to deploy them on <strong>CentOS</strong>.</span></p>
+<h1>CentOS challenge</h1>
+<p>CentOS and RHEL remain to dominate enterprise. CentOS7 is shipped with
+Python27. We enabled <code>EPEL-RELEASE</code> repo, but then
+charm install gave us an error <code>no module yum found</code>. The call is made
+in <code>charmhelpers/fetch.centos.py</code>, and python34 has no <code>yum</code> module!</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">yum</span>
+</code></pre></div>
+
+<p>And trace it one step further, it came from
+<code>charm-helpers/charmhelpers/fetch/__init__.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">__platform__</span> <span class="o">==</span> <span class="s2">&quot;ubuntu&quot;</span><span class="p">:</span>
+    <span class="n">apt_cache</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_cache</span>
+    <span class="n">apt_install</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">install</span>
+    <span class="n">apt_update</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">update</span>
+    <span class="n">apt_upgrade</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">upgrade</span>
+    <span class="n">apt_purge</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">purge</span>
+    <span class="n">apt_mark</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_mark</span>
+    <span class="n">apt_hold</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_hold</span>
+    <span class="n">apt_unhold</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_unhold</span>
+    <span class="n">get_upstream_version</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">get_upstream_version</span>
+<span class="k">elif</span> <span class="n">__platform__</span> <span class="o">==</span> <span class="s2">&quot;centos&quot;</span><span class="p">:</span>
+    <span class="n">yum_search</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">yum_search</span>
+</code></pre></div>
+
+<p>Here we are making a mapping between defined function definitions and
+the function names that will be used in other places in the
+lib. Needless to say, CentOS definitions are missing a lot comparing
+to Ubuntu's. So yes, <code>import yum</code> is just the tip of the iceberg,
+execution will break anywhere <code>apt_</code> is called. Take <code>apt_install</code> for
+example, here is a search result where this function is expected:</p>
+<div class="highlight"><pre><span></span><code>-*-<span class="w"> </span>mode:<span class="w"> </span>grep<span class="p">;</span><span class="w"> </span>default-directory:<span class="w"> </span><span class="s2">&quot;~/workspace/wss/hack/charmhelpers-0.15.0/&quot;</span><span class="w"> </span>-*-
+Grep<span class="w"> </span>started<span class="w"> </span>at<span class="w"> </span>Sat<span class="w"> </span>May<span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">22</span>:32:10
+
+find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span><span class="se">\(</span><span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/SCCS<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/RCS<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/CVS<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/MCVS<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/.src<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/.svn<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/.git<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/.hg<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/.bzr<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/_MTN<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/_darcs<span class="w"> </span>-o<span class="w"> </span>-path<span class="w"> </span><span class="se">\*</span>/<span class="se">\{</span>arch<span class="se">\}</span><span class="w"> </span><span class="se">\)</span><span class="w"> </span>-prune<span class="w"> </span>-o<span class="w"> </span><span class="se">\!</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span><span class="se">\(</span><span class="w"> </span>-name<span class="w"> </span>.<span class="se">\#\*</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.beam<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.vee<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.jam<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.hi<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.o<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*\~</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.bin<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lbin<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.so<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.a<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.ln<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.blg<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.bbl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.elc<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lof<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.glo<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.idx<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lot<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fmt<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.tfm<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.class<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fas<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lib<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.mem<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.x86f<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.sparcf<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.dfsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.pfsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.d64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.p64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lx64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lx32fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.dx64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.dx32fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fx64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fx32fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.sx64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.sx32fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.wx64fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.wx32fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fasl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.ufsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fsl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.dxl<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.lo<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.la<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.gmo<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.mo<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.toc<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.aux<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.cp<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fn<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.ky<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.pg<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.tp<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.vr<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.cps<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.fns<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.kys<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.pgs<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.tps<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.vrs<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.pyc<span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.pyo<span class="w"> </span><span class="se">\)</span><span class="w"> </span>-prune<span class="w"> </span>-o<span class="w">  </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\(</span><span class="w"> </span>-name<span class="w"> </span><span class="se">\*</span>.py<span class="w"> </span><span class="se">\)</span><span class="w"> </span>-exec<span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>-nH<span class="w"> </span>-e<span class="w"> </span>apt_install<span class="w"> </span><span class="se">\{\}</span><span class="w"> </span>+
+./charmhelpers/contrib/hardening/host/checks/pam.py:26:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/hardening/host/checks/pam.py:89:<span class="w">            </span>apt_install<span class="o">(</span>pkg<span class="o">)</span>
+./charmhelpers/contrib/hardening/host/checks/pam.py:125:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;libpam-modules&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/hardening/ssh/checks/config.py:27:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/hardening/ssh/checks/config.py:199:<span class="w">        </span>apt_install<span class="o">(</span>settings<span class="o">[</span><span class="s1">&#39;client&#39;</span><span class="o">][</span><span class="s1">&#39;package&#39;</span><span class="o">])</span>
+./charmhelpers/contrib/hardening/ssh/checks/config.py:277:<span class="w">        </span>apt_install<span class="o">(</span>settings<span class="o">[</span><span class="s1">&#39;server&#39;</span><span class="o">][</span><span class="s1">&#39;package&#39;</span><span class="o">])</span>
+./charmhelpers/contrib/hardening/templating.py:27:<span class="w">    </span>from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install
+./charmhelpers/contrib/hardening/templating.py:31:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-jinja2&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/hardening/templating.py:33:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-jinja2&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/storage/linux/ceph.py:64:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/storage/linux/ceph.py:729:<span class="w">    </span>apt_install<span class="o">(</span><span class="s1">&#39;ceph-common&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/context.py:27:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/openstack/context.py:106:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-psutil&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/context.py:108:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-psutil&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/context.py:119:<span class="w">        </span>apt_install<span class="o">(</span>required,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/keystone.py:18:from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install
+./charmhelpers/contrib/openstack/keystone.py:121:<span class="w">                </span>apt_install<span class="o">([</span><span class="s2">&quot;python-keystoneclient&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/keystone.py:123:<span class="w">                </span>apt_install<span class="o">([</span><span class="s2">&quot;python3-keystoneclient&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/keystone.py:155:<span class="w">                </span>apt_install<span class="o">([</span><span class="s2">&quot;python-keystoneclient&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/keystone.py:157:<span class="w">                </span>apt_install<span class="o">([</span><span class="s2">&quot;python3-keystoneclient&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/templating.py:19:from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install,<span class="w"> </span>apt_update
+./charmhelpers/contrib/openstack/templating.py:32:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-jinja2&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/templating.py:34:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-jinja2&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/openstack/templating.py:214:<span class="w">                </span>apt_install<span class="o">(</span><span class="s1">&#39;python-jinja2&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/openstack/templating.py:216:<span class="w">                </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-jinja2&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/openstack/utils.py:85:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/openstack/utils.py:591:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;ubuntu-cloud-keyring&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/database/mysql.py:43:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/database/mysql.py:54:<span class="w">        </span>apt_install<span class="o">(</span>filter_installed_packages<span class="o">([</span><span class="s1">&#39;python-mysqldb&#39;</span><span class="o">])</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/database/mysql.py:56:<span class="w">        </span>apt_install<span class="o">(</span>filter_installed_packages<span class="o">([</span><span class="s1">&#39;python3-mysqldb&#39;</span><span class="o">])</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ovs/__init__.py:20:from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install
+./charmhelpers/contrib/network/ovs/__init__.py:90:<span class="w">            </span>apt_install<span class="o">(</span><span class="s1">&#39;python-netifaces&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ovs/__init__.py:92:<span class="w">            </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-netifaces&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:23:from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install,<span class="w"> </span>apt_update
+./charmhelpers/contrib/network/ip.py:42:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-netifaces&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:44:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-netifaces&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:52:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-netaddr&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:54:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-netaddr&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:447:<span class="w">            </span>apt_install<span class="o">(</span><span class="s1">&#39;python-dnspython&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:449:<span class="w">            </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-dnspython&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:498:<span class="w">                </span>apt_install<span class="o">(</span><span class="s2">&quot;python-dnspython&quot;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/network/ip.py:500:<span class="w">                </span>apt_install<span class="o">(</span><span class="s2">&quot;python3-dnspython&quot;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/ansible/__init__.py:135:<span class="w">    </span>charmhelpers.fetch.apt_install<span class="o">(</span><span class="s1">&#39;ansible&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/templating/jinja.py:19:from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install,<span class="w"> </span>apt_update
+./charmhelpers/contrib/templating/jinja.py:25:<span class="w">        </span>apt_install<span class="o">([</span><span class="s2">&quot;python3-jinja2&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/templating/jinja.py:27:<span class="w">        </span>apt_install<span class="o">([</span><span class="s2">&quot;python-jinja2&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/python/packages.py:23:from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install,<span class="w"> </span>apt_update
+./charmhelpers/contrib/python/packages.py:44:<span class="w">                </span>apt_install<span class="o">(</span><span class="s1">&#39;python-pip&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/python/packages.py:46:<span class="w">                </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-pip&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/python/packages.py:144:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-virtualenv&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/python/packages.py:146:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-virtualenv&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/mellanox/infiniband.py:23:<span class="w">    </span>apt_install,
+./charmhelpers/contrib/mellanox/infiniband.py:36:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python-netifaces&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/mellanox/infiniband.py:38:<span class="w">        </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-netifaces&#39;</span><span class="o">)</span>
+./charmhelpers/contrib/mellanox/infiniband.py:88:<span class="w">    </span>apt_install<span class="o">(</span>REQUIRED_PACKAGES,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/contrib/saltstack/__init__.py:104:<span class="w">    </span>charmhelpers.fetch.apt_install<span class="o">(</span><span class="s1">&#39;salt-common&#39;</span><span class="o">)</span>
+./charmhelpers/fetch/__init__.py:88:<span class="w">    </span><span class="nv">apt_install</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fetch.install
+./charmhelpers/fetch/__init__.py:100:<span class="w">    </span><span class="nv">apt_install</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fetch.install
+./charmhelpers/core/templating.py:43:<span class="w">    </span>installed,<span class="w"> </span>calling<span class="w"> </span>this<span class="w"> </span>will<span class="w"> </span>attempt<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>charmhelpers.fetch.apt_install
+./charmhelpers/core/templating.py:50:<span class="w">            </span>from<span class="w"> </span>charmhelpers.fetch<span class="w"> </span>import<span class="w"> </span>apt_install
+./charmhelpers/core/templating.py:57:<span class="w">            </span>apt_install<span class="o">(</span><span class="s1">&#39;python-jinja2&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./charmhelpers/core/templating.py:59:<span class="w">            </span>apt_install<span class="o">(</span><span class="s1">&#39;python3-jinja2&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./tests/contrib/storage/test_linux_ceph.py:612:<span class="w">    </span>@patch.object<span class="o">(</span>ceph_utils,<span class="w"> </span><span class="s1">&#39;apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/openstack/test_os_contexts.py:2106:<span class="w">    </span>@patch.object<span class="o">(</span>context,<span class="w"> </span><span class="s1">&#39;apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/openstack/test_os_templating.py:59:<span class="w">        </span>self.addCleanup<span class="o">(</span>patch.object<span class="o">(</span>templating,<span class="w"> </span><span class="s1">&#39;apt_install&#39;</span><span class="o">)</span>.start<span class="o">()</span>.stop<span class="o">())</span>
+./tests/contrib/openstack/test_os_templating.py:69:<span class="w">    </span>@patch.object<span class="o">(</span>templating,<span class="w"> </span><span class="s1">&#39;apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/openstack/test_keystone_utils.py:10:<span class="w">    </span><span class="s1">&#39;apt_install&#39;</span>,
+./tests/contrib/openstack/test_openstack_utils.py:496:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.openstack.utils.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:618:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:619:<span class="w">    </span>def<span class="w"> </span>test_get_host_ip_with_hostname<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:627:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:628:<span class="w">    </span>def<span class="w"> </span>test_get_host_ip_with_hostname_no_dns<span class="o">(</span>self,<span class="w"> </span>apt_install,<span class="w"> </span>socket,
+./tests/contrib/network/test_ip.py:640:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:641:<span class="w">    </span>def<span class="w"> </span>test_get_host_ip_with_hostname_fallback<span class="o">(</span>self,<span class="w"> </span>apt_install,<span class="w"> </span>socket,
+./tests/contrib/network/test_ip.py:654:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:655:<span class="w">    </span>def<span class="w"> </span>test_get_host_ip_with_ip<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:661:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:662:<span class="w">    </span>def<span class="w"> </span>test_ns_query_trigger_apt_install<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:667:<span class="w">                </span>apt_install.assert_called_with<span class="o">(</span><span class="s1">&#39;python-dnspython&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./tests/contrib/network/test_ip.py:669:<span class="w">                </span>apt_install.assert_called_with<span class="o">(</span><span class="s1">&#39;python3-dnspython&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./tests/contrib/network/test_ip.py:672:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:673:<span class="w">    </span>def<span class="w"> </span>test_ns_query_ptr_record<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:679:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:680:<span class="w">    </span>def<span class="w"> </span>test_ns_query_a_record<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:687:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:688:<span class="w">    </span>def<span class="w"> </span>test_ns_query_blank_record<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:694:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:695:<span class="w">    </span>def<span class="w"> </span>test_ns_query_lookup_fail<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:701:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:702:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_with_ip<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:708:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:709:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_with_ip_not_fqdn<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:715:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:716:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_with_hostname<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:720:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:721:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_with_hostname_trailingdot<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:725:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:726:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_with_hostname_not_fqdn<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:730:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:731:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_trigger_apt_install<span class="o">(</span>self,<span class="w"> </span>apt_install<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:737:<span class="w">                </span>apt_install.assert_called_with<span class="o">(</span><span class="s1">&#39;python-dnspython&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./tests/contrib/network/test_ip.py:739:<span class="w">                </span>apt_install.assert_called_with<span class="o">(</span><span class="s1">&#39;python3-dnspython&#39;</span>,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+./tests/contrib/network/test_ip.py:745:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:746:<span class="w">    </span>def<span class="w"> </span>test_get_hostname_lookup_fail<span class="o">(</span>self,<span class="w"> </span>apt_install,<span class="w"> </span>ns_query,<span class="w"> </span>socket<span class="o">)</span>:
+./tests/contrib/network/test_ip.py:756:<span class="w">    </span>@patch<span class="o">(</span><span class="s1">&#39;charmhelpers.contrib.network.ip.apt_install&#39;</span><span class="o">)</span>
+./tests/contrib/network/test_ip.py:758:<span class="w">            </span>self,<span class="w"> </span>apt_install,<span class="w"> </span>ns_query,<span class="w"> </span>socket<span class="o">)</span>:
+./tests/contrib/network/test_ovs.py:110:<span class="w">    </span><span class="s2">&quot;apt_install&quot;</span>,
+./tests/contrib/ansible/test_ansible.py:46:<span class="w">        </span>self.mock_fetch.apt_install.assert_called_once_with<span class="o">(</span>
+./tests/contrib/ansible/test_ansible.py:54:<span class="w">        </span>self.mock_fetch.apt_install.assert_called_once_with<span class="o">(</span>
+./tests/contrib/python/test_packages.py:13:<span class="w">    </span><span class="s2">&quot;apt_install&quot;</span>,
+./tests/contrib/python/test_packages.py:27:<span class="w">        </span>self.apt_install.return_value<span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+./tests/contrib/python/test_packages.py:174:<span class="w">            </span>self.apt_install.assert_called_with<span class="o">(</span><span class="s1">&#39;python-virtualenv&#39;</span><span class="o">)</span>
+./tests/contrib/python/test_packages.py:176:<span class="w">            </span>self.apt_install.assert_called_with<span class="o">(</span><span class="s1">&#39;python3-virtualenv&#39;</span><span class="o">)</span>
+./tests/contrib/saltstack/test_saltstates.py:34:<span class="w">        </span>self.mock_charmhelpers_fetch.apt_install.assert_called_once_with<span class="o">(</span>
+./tests/contrib/saltstack/test_saltstates.py:42:<span class="w">        </span>self.mock_charmhelpers_fetch.apt_install.assert_called_once_with<span class="o">(</span>
+./tests/fetch/test_fetch.py:804:<span class="w">        </span>fetch.apt_install<span class="o">(</span>packages,<span class="w"> </span>options<span class="o">)</span>
+./tests/fetch/test_fetch.py:821:<span class="w">        </span>fetch.apt_install<span class="o">(</span>packages<span class="o">)</span>
+./tests/fetch/test_fetch.py:839:<span class="w">        </span>fetch.apt_install<span class="o">(</span>packages,<span class="w"> </span>options<span class="o">)</span>
+./tests/fetch/test_fetch.py:857:<span class="w">        </span>fetch.apt_install<span class="o">(</span>packages,<span class="w"> </span>options,<span class="w"> </span><span class="nv">fatal</span><span class="o">=</span>True<span class="o">)</span>
+
+Grep<span class="w"> </span>finished<span class="w"> </span><span class="o">(</span>matches<span class="w"> </span>found<span class="o">)</span><span class="w"> </span>at<span class="w"> </span>Sat<span class="w"> </span>May<span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">22</span>:32:10
+</code></pre></div>
+
+<p>Enough proof that default charms will break. Let's see how to fix it.</p>
+<h1>Python2 fix</h1>
+<blockquote>
+<p>Strategy: make a charm Python2 compatible.</p>
+</blockquote>
+<p>This can be broken down to the following steps:</p>
+<ol>
+<li>Use  <code>python27</code> (in hooks).</li>
+<li>Change python search path in hooks.</li>
+<li>Map <code>apt_</code> function for CentOS in <code>charmhelpers</code>.</li>
+<li>Update <code>RelationBase</code> class definition <code>charms.reactive</code> lib to use Python2 syntax.</li>
+<li>Update <code>layer-basic</code>.</li>
+</ol>
+<h2>Python27 in  hooks</h2>
+<p>If you run <code>charm build</code> and search <code>python3</code> in dist folder, the
+first offender are hooks:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="n">change</span> <span class="n">to</span><span class="p">:</span>
+
+<span class="c1">#!/usr/bin/env python</span>
+</code></pre></div>
+
+<p>The root cause is actually the <code>hook.template</code>, which is used in a
+copy-paste fashion to create the list of default hooks if user didn't
+define one. Remember, the hooks are hardcoded, and certain hooks will
+always be created!</p>
+<h2><code>sys.path</code> in hooks</h2>
+<p>Update Python search path used in <strong>all</strong> hooks:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Load modules from $JUJU_CHARM_DIR/lib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;lib&#39;</span><span class="p">)</span>
+
+<span class="n">change</span> <span class="n">to</span><span class="p">:</span>
+
+<span class="c1"># Load modules from $JUJU_CHARM_DIR/lib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;lib&#39;</span><span class="p">))</span>
+</code></pre></div>
+
+<p>Btw, don't be fooled by the comment line <strong>$JUJU_CHARM_DIR</strong>,
+there isn't one. Otherwise, there is no need to
+make this change.</p>
+<h2>Function mapping in <code>charmhelpers</code></h2>
+<p>Update <code>charmhelpers/fetch/__init__.py</code> to add CentOS function
+mappings:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">__platform__</span> <span class="o">==</span> <span class="s2">&quot;ubuntu&quot;</span><span class="p">:</span>
+    <span class="n">apt_cache</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_cache</span>
+    <span class="n">apt_install</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">install</span>
+    <span class="n">apt_update</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">update</span>
+    <span class="n">apt_upgrade</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">upgrade</span>
+    <span class="n">apt_purge</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">purge</span>
+    <span class="n">apt_mark</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_mark</span>
+    <span class="n">apt_hold</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_hold</span>
+    <span class="n">apt_unhold</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">apt_unhold</span>
+    <span class="n">get_upstream_version</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">get_upstream_version</span>
+<span class="k">elif</span> <span class="n">__platform__</span> <span class="o">==</span> <span class="s2">&quot;centos&quot;</span><span class="p">:</span>
+    <span class="n">yum_search</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">yum_search</span>
+
+    <span class="c1"># ADD: centos mapping</span>
+    <span class="n">apt_install</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">install</span>
+    <span class="n">apt_upgrade</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">upgrade</span>
+    <span class="n">apt_update</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">update</span>
+    <span class="n">apt_purge</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">purge</span>
+    <span class="n">apt_cache</span> <span class="o">=</span> <span class="n">fetch</span><span class="o">.</span><span class="n">yum_search</span>
+</code></pre></div>
+
+<h2><code>RelationBase</code> in <code>charms.reactive</code></h2>
+<p>Update <code>class RelationBase</code> in
+<code>charms.reactive/charms/reactive/relations.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RelationBase</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">AutoAccessors</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The base class for all relation implementations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="n">change</span> <span class="n">to</span><span class="p">:</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RelationBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">__metaclass__</span><span class="o">=</span><span class="n">AutoAccessors</span>
+</code></pre></div>
+
+<h2><code>layer-basic</code></h2>
+<p><a href="https://github.com/juju-solutions/layer-basic">layer-basic</a> is inherited in all charms. We will have a <a href="https://fengxia41103.github.io/myblog/charm layer-basic.html">separate
+analysis</a> on this lib alone. For now, let's take it for granted and
+work around the issues to make Python2 charms.</p>
+<p>Diff file list:</p>
+<div class="highlight"><pre><span></span><code>Files<span class="w"> </span>layer-basic/bin/layer_option
+Only<span class="w"> </span><span class="k">in</span><span class="w"> </span>/home/fengxia/workspace/wss/charms/layer-basic/lib/charms:<span class="w"> </span>__init__.py
+Files<span class="w"> </span>layer-basic/lib/charms/layer/basic.py<span class="w"> </span>
+Files<span class="w"> </span>layer-basic/lib/charms/layer/execd.py
+</code></pre></div>
+
+<h3><code>sys.path</code> in <code>layer_option</code></h3>
+<p>Update <code>layer-basic/bin/layer-optioin</code>. This is the same change made
+in hooks.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;lib&#39;</span><span class="p">)</span>
+
+<span class="n">change</span> <span class="n">to</span><span class="p">:</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;lib&#39;</span><span class="p">))</span>
+</code></pre></div>
+
+<h3>Python import path</h3>
+<p>Touch an empty file <code>layer-basic/lib/charms/__init__.py</code> &rarr; make Python2
+search path work.</p>
+<h3><code>basic.py</code></h3>
+<p>Changes to this file look intimidating (showing diff -r old
+new). However, the theme is quite straightforward:</p>
+<ol>
+<li>Install python2 modules, eg <code>python-setuptools</code>, as prerequisite to
+prepare the environment (<a href="https://github.com/juju-solutions/layer-basic/issues/97">bug #97</a>).</li>
+<li>The correct binary path for your <code>pip</code>.</li>
+<li>Use <code>platform.linux_distribution()[0]</code> to determine host platform.</li>
+<li><code>apt</code> uses <code>--assume-yes</code>, where <code>yum</code> uses <code>--assumeyes</code>.</li>
+</ol>
+<p>There are mixed <code>apt_install</code> (<a href="https://github.com/juju-solutions/layer-basic/issues/98">bug #98</a>) using the mapped function and direct
+<code>check_call</code> shell calls. Moving forward, we should consolidate all
+package functions to mapped version.</p>
+<div class="highlight"><pre><span></span><code><span class="gu">6a7</span>
+<span class="gi">&gt; import platform</span>
+51,56c52,77
+<span class="gd">&lt;         apt_install([</span>
+<span class="gd">&lt;             &#39;python3-pip&#39;,</span>
+<span class="gd">&lt;             &#39;python3-setuptools&#39;,</span>
+<span class="gd">&lt;             &#39;python3-yaml&#39;,</span>
+<span class="gd">&lt;             &#39;python3-dev&#39;,</span>
+<span class="gd">&lt;         ])</span>
+<span class="gs">---</span>
+<span class="gi">&gt;         me = platform.linux_distribution()[0]</span>
+<span class="gi">&gt;         if &#39;ubuntu&#39; in me.lower():</span>
+<span class="gi">&gt;             apt_install([</span>
+<span class="gi">&gt;                 &#39;python3-pip&#39;,</span>
+<span class="gi">&gt;                 &#39;python3-setuptools&#39;,</span>
+<span class="gi">&gt;                 &#39;python3-yaml&#39;,</span>
+<span class="gi">&gt;                 &#39;python3-dev&#39;,</span>
+<span class="gi">&gt;             ])</span>
+<span class="gi">&gt;         elif &#39;cent&#39; in me.lower():</span>
+<span class="gi">&gt;             # if using python3</span>
+<span class="gi">&gt;             #apt_install([</span>
+<span class="gi">&gt;             #    &#39;redhat-lsb-core&#39;,</span>
+<span class="gi">&gt;             #    &#39;python34-setuptools&#39;,</span>
+<span class="gi">&gt;             #    &#39;python34-pip&#39;,</span>
+<span class="gi">&gt;             #    &#39;python34-yaml&#39;,</span>
+<span class="gi">&gt;             #    &#39;python34-devel&#39;,</span>
+<span class="gi">&gt;             #])</span>
+<span class="gi">&gt;             apt_install([</span>
+<span class="gi">&gt;                 &#39;epel-release&#39;, # must</span>
+<span class="gi">&gt;                 &#39;redhat-lsb-core&#39;,</span>
+<span class="gi">&gt;                 &#39;python-setuptools&#39;,</span>
+<span class="gi">&gt;                 &#39;python-pip&#39;,</span>
+<span class="gi">&gt;                 &#39;python-yaml&#39;,</span>
+<span class="gi">&gt;                 &#39;python-devel&#39;,</span>
+<span class="gi">&gt;             ])</span>
+<span class="gi">&gt; </span>
+64c85,88
+<span class="gd">&lt;                 series = lsb_release()[&#39;DISTRIB_CODENAME&#39;]</span>
+<span class="gs">---</span>
+<span class="gi">&gt;                 try:</span>
+<span class="gi">&gt;                     series = lsb_release()[&#39;DISTRIB_CODENAME&#39;]</span>
+<span class="gi">&gt;                 except:</span>
+<span class="gi">&gt;                     series = &#39;centos7&#39;</span>
+66a91
+<span class="gi">&gt;                     pip = vpip</span>
+68c93,96
+<span class="gd">&lt;                     apt_install([&#39;virtualenv&#39;])</span>
+<span class="gs">---</span>
+<span class="gi">&gt;                     # pip = &#39;pip3&#39; # if using python3</span>
+<span class="gi">&gt;                     pip = &#39;pip&#39;</span>
+<span class="gi">&gt;                     check_call([pip, &#39;install&#39;, &#39;-U&#39;, &#39;--no-index&#39;, &#39;-f&#39;, &#39;wheelhouse&#39;,&#39;pip&#39;])</span>
+<span class="gi">&gt;                     check_call([pip, &#39;install&#39;, &#39;virtualenv&#39;])</span>
+74d101
+<span class="gd">&lt;             pip = vpip</span>
+76c103,104
+<span class="gd">&lt;             pip = &#39;pip3&#39;</span>
+<span class="gs">---</span>
+<span class="gi">&gt;             # pip = &#39;pip3&#39; # if using python3</span>
+<span class="gi">&gt;             pip = vpip</span>
+83,84c111,114
+<span class="gd">&lt;         check_call([pip, &#39;install&#39;, &#39;-U&#39;, &#39;--no-index&#39;, &#39;-f&#39;, &#39;wheelhouse&#39;,</span>
+<span class="gd">&lt;                     &#39;pip&#39;])</span>
+<span class="gs">---</span>
+<span class="gi">&gt;     </span>
+<span class="gi">&gt;         # TODO: feng</span>
+<span class="gi">&gt;         pip = &#39;pip&#39; # this is a hack to use Python2</span>
+<span class="gi">&gt;         check_call([pip, &#39;install&#39;, &#39;-U&#39;, &#39;--no-index&#39;, &#39;-f&#39;, &#39;wheelhouse&#39;,&#39;pip&#39;])</span>
+86,87c116
+<span class="gd">&lt;         check_call([pip, &#39;install&#39;, &#39;-U&#39;, &#39;--no-index&#39;, &#39;-f&#39;, &#39;wheelhouse&#39;] +</span>
+<span class="gd">&lt;                    glob(&#39;wheelhouse/*&#39;))</span>
+<span class="gs">---</span>
+<span class="gi">&gt;         check_call([pip, &#39;install&#39;, &#39;-U&#39;, &#39;--no-index&#39;, &#39;-f&#39;, &#39;wheelhouse&#39;] + glob(&#39;wheelhouse/*&#39;))</span>
+113c142,143
+<span class="gd">&lt;         sys.path.append(&#39;lib&#39;)</span>
+<span class="gs">---</span>
+<span class="gi">&gt;         import os</span>
+<span class="gi">&gt;         sys.path.append(os.path.join(os.getcwd(),&#39;lib&#39;))</span>
+157c187,190
+<span class="gd">&lt;     cmd = [&#39;apt-get&#39;,</span>
+<span class="gs">---</span>
+<span class="gi">&gt;     me = platform.linux_distribution()[0]</span>
+<span class="gi">&gt;     if &#39;ubuntu&#39; in me.lower():</span>
+<span class="gi">&gt;         my_cmd = &#39;apt-get&#39;</span>
+<span class="gi">&gt;         cmd = [my_cmd,</span>
+160a194,199
+<span class="gi">&gt;     elif &#39;cent&#39; in me.lower():</span>
+<span class="gi">&gt;         my_cmd = &#39;yum&#39;</span>
+<span class="gi">&gt;         cmd = [my_cmd,</span>
+<span class="gi">&gt;            &#39;--assumeyes&#39;,</span>
+<span class="gi">&gt;            &#39;install&#39;]</span>
+<span class="gi">&gt;   </span>
+</code></pre></div>
+
+<h3><code>execd.py</code></h3>
+<p>A formatting error?</p>
+<div class="highlight"><pre><span></span><code>17a18
+&gt;<span class="w"> </span>from<span class="w"> </span>__future__<span class="w"> </span>import<span class="w"> </span>print_function
+<span class="m">114</span>,115c115
+&lt;<span class="w">             </span>print<span class="o">(</span><span class="s2">&quot;ERROR ({}) running {}&quot;</span>.format<span class="o">(</span>e.returncode,<span class="w"> </span>e.cmd<span class="o">)</span>,
+&lt;<span class="w">                   </span><span class="nv">file</span><span class="o">=</span>stderr<span class="o">)</span>
+---
+&gt;<span class="w">             </span>print<span class="o">(</span><span class="s2">&quot;ERROR ({}) running {}&quot;</span>.format<span class="o">(</span>e.returncode,<span class="w"> </span>e.cmd<span class="o">)</span>,file<span class="o">=</span>stderr<span class="o">)</span>
+</code></pre></div>
+
+<h1>How to build</h1>
+<ol>
+<li>git clone <code>http://hpcgitlab.labs.lenovo.com/WSS/wss.git</code>.</li>
+<li>Copy (or symlink) <code>wss/hack/layer-basic</code> to <code>LAYER_PATH</code>.</li>
+<li><code>charm build</code> your charm as usual.</li>
+<li>Copy <code>wss/hack/charmhelpers....tar.gz</code> and
+   <code>charms.reactive....tar.gz</code> to <code>dist/trusty(or
+   centos)/yourcharm/wheelhouse</code>.</li>
+<li>Copy <code>wss/hack/hooks</code> to <code>dist/.../hooks</code>. However, if you have
+   customized hooks, you need to make modifications manually. </li>
+</ol>
+<p>Have fun with CentOS.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

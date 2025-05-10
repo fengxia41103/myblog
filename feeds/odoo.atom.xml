@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - odoo</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/odoo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2017-06-07T08:31:00-04:00</updated><subtitle></subtitle><entry><title>ODOO8 native server loading process</title><link href="https://fengxia41103.github.io/myblog/odoo8%20server%20loading%20process.html" rel="alternate"></link><published>2016-07-23T00:00:00-04:00</published><updated>2017-06-07T08:31:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-07-23:/myblog/odoo8 server loading process.html</id><summary type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
+noticing is the slowness when ODOO first boot up.  We are observing up
+to minutes of a bootup time. This plainly is too slow.  Watching debug
+prints indicates that ODOO scans through all modules listed on Python
+path and builds a &lt;em&gt;map&lt;/em&gt; in memory before dev server starts responding
+to request. Intuitively I suspected such loading practice is causing
+an unnecessary delay.  This aggravates further when ODOO server
+becomes completly unusable if any of the module chokes during this
+loading process. But this is too common a scenario during
+development. One consequence of this is that debugging becomes
+difficult. Often enough ODOO doesn't yield useful trace track to help
+determine the root cause of an error.  Another problem of such
+approach is the availability of servic becoming binary &amp;mdash; it
+either fully works or nothing runs. By analogy, the ODOO loading
+process is like compiling phase in running a C code. No executable is
+available until the compiler and linker are happy.&lt;/p&gt;
+&lt;p&gt;Under this light …&lt;/p&gt;</summary><content type="html">&lt;p&gt;During daily development of ODOO8 modules, one thing I have been
+noticing is the slowness when ODOO first boot up.  We are observing up
+to minutes of a bootup time. This plainly is too slow.  Watching debug
+prints indicates that ODOO scans through all modules listed on Python
+path and builds a &lt;em&gt;map&lt;/em&gt; in memory before dev server starts responding
+to request. Intuitively I suspected such loading practice is causing
+an unnecessary delay.  This aggravates further when ODOO server
+becomes completly unusable if any of the module chokes during this
+loading process. But this is too common a scenario during
+development. One consequence of this is that debugging becomes
+difficult. Often enough ODOO doesn't yield useful trace track to help
+determine the root cause of an error.  Another problem of such
+approach is the availability of servic becoming binary &amp;mdash; it
+either fully works or nothing runs. By analogy, the ODOO loading
+process is like compiling phase in running a C code. No executable is
+available until the compiler and linker are happy.&lt;/p&gt;
+&lt;p&gt;Under this light, this article analyzes this booting process with a
+hope to understand why ODOO takes such an approach and how we could
+improve or circumvent during development in order to gain
+efficiency. Considering a developer lives with this bootup process as
+a daily need, it becomes interesting how we can reduce this bootup
+time.&lt;/p&gt;
+&lt;h1&gt;Quick glance&lt;/h1&gt;
+&lt;p&gt;Tracing through ODOO boot code, we have illustrated steps 
+of ODOO's loading process in diagram below:&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/odoo8_loading.png" /&gt;
+  &lt;figcaption&gt;ODOO8 loading sequence&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Why does ODOO call &lt;code&gt;tools.config.parse_config&lt;/code&gt; twice? The function
+fullfills the same purpose by parsing the configuration file and
+builds the in memory &lt;code&gt;tools.config&lt;/code&gt; global variable. This is redundant.&lt;/p&gt;
+&lt;h1&gt;Server selection&lt;/h1&gt;
+&lt;p&gt;The meat of this loading is to boot up a HTTP server. ODOO offers
+three types of servers:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;ThreadedServer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PreforkServer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GeventServer&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;But which one to use?  If configuration option &lt;code&gt;config['workers']&lt;/code&gt; is
+non zero, it will pick the &lt;code&gt;PreforkServer&lt;/code&gt;; otherwise, it takes
+default &lt;code&gt;ThreadedServer&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;openerp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;evented&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;GeventServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;openerp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wsgi_server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;workers&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PreforkServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;openerp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wsgi_server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ThreadedServer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;openerp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wsgi_server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;ThreadedServer&lt;/code&gt; runs in a single thread, where &lt;code&gt;PreforServer&lt;/code&gt; uses
+&lt;code&gt;select&lt;/code&gt; to handle &lt;em&gt;multiprocessing&lt;/em&gt;. This choice apparently makes the
+prefork server more appealing for production site. ODOO's own manual
+on &lt;em&gt;deployment&lt;/em&gt; also confirms this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Odoo includes built-in HTTP servers, using either multithreading or
+multiprocessing.  For production use, it is recommended to use the
+multiprocessing server as it increases stability, makes somewhat
+better use of computing resources and can be better monitored and
+resource-restricted.  * Multiprocessing is enabled by configuring a
+&lt;em&gt;non-zero number of worker&lt;/em&gt; processes, the number of workers should
+be based on the number of cores in the machine (possibly with some
+room for cron workers depending on how much cron work is predicted) *
+Worker limits can be configured based on the hardware configuration
+to avoid resources exhaustion&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Threaded server&lt;/h2&gt;
+&lt;p&gt;How good is ODOO's default server then?  Diagram below illustrates the
+truth of an ODOO threaded server.  Under layers of function call,
+ODOO's threaded server is simply a Python native &lt;a href="https://docs.python.org/2/library/basehttpserver.html"&gt;HTTPServer&lt;/a&gt;
+instance. So the question boils down to how good Python's native http server
+is comparing to some well known names &amp;mdash; &lt;a href="http://nginx.org/"&gt;nginx&lt;/a&gt;,
+&lt;a href="https://httpd.apache.org/"&gt;Apache&lt;/a&gt;, &lt;a href="http://www.lighttpd.net/"&gt;lighthttpd&lt;/a&gt;, or even further, WSGI servers such
+as &lt;a href="http://gunicorn.org/"&gt;Guicorn&lt;/a&gt; and &lt;a href="http://uwsgi-docs.readthedocs.io/en/latest/"&gt;uwsgi&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/odoo8_server_run.png" /&gt;
+  &lt;figcaption&gt;ODOO8 ThreadedServer&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Runtime call trace&lt;/h1&gt;
+&lt;p&gt;Diagram below illustrates a full
+call trace while ODOO8 boots up. This was
+generated by &lt;a href="http://pycallgraph.slowchop.com/en/develop/guide/command_line_usage.html"&gt;Pycallgraph&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pycallgraph&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;openerp.&lt;span class="se"&gt;\*&lt;/span&gt;
+-e&lt;span class="w"&gt; &lt;/span&gt;openerp.report.&lt;span class="se"&gt;\*&lt;/span&gt;
+-e&lt;span class="w"&gt; &lt;/span&gt;openerp.tools.config.configmanager.&lt;span class="se"&gt;\*&lt;/span&gt;
+-e&lt;span class="w"&gt; &lt;/span&gt;openerp.loglevels.&lt;span class="se"&gt;\*&lt;/span&gt;
+-e&lt;span class="w"&gt; &lt;/span&gt;openerp.tools.&lt;span class="se"&gt;\*&lt;/span&gt;
+--max-depth&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;graphviz
+--output-file&lt;span class="o"&gt;=&lt;/span&gt;odoo8.png
+--&lt;span class="w"&gt; &lt;/span&gt;odoo.py&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;../works/contract/8290.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The decision to exclude these patters, in particular, the
+&lt;code&gt;openerp.report.*&lt;/code&gt; is purely out of layout consideration &amp;mdash; it
+clutters the diagram too much. This, on the other hand, could be
+considered as a clue why bootup is slow.&lt;/p&gt;
+&lt;p&gt;Note that no tool can do &lt;em&gt;static&lt;/em&gt; analysis of code and generate a call
+stack.  The only sure way to create this is to run the code and
+monitor its runtime stack, in which case language such as Python
+shines due its interpreting nature.  The Python GIL will keep track
+the entire call trace in its memory and knows details of call stack.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/odoo8_loading_callgraph.png"/&gt;
+    &lt;figcaption&gt;ODOO 8 loading call trace diagram&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Thoughts&lt;/h1&gt;
+&lt;p&gt;After examining ODOO code and its run time, two areas I would
+recommend ODOO to reconsider its approach:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;how configuration options are being shared among modules&lt;/li&gt;
+&lt;li&gt;using ThreadedServer as default&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Configuration options&lt;/h2&gt;
+&lt;p&gt;First concern coming out of this analysis is how ODOO handles
+values in the configuration file. In &lt;code&gt;openerp.tools&lt;/code&gt; ODOO defined
+a variable &lt;code&gt;config&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;openerp.tools.config&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;thus will expose the config to the caller. This essentially makes
+the configuration object globally. I don't know whether I should call
+this a trick or a bad practice. So in short, ODOO's configuration
+is global.&lt;/p&gt;
+&lt;p&gt;The proper way to handle this is to either set it up as &lt;code&gt;global&lt;/code&gt;, or
+making caller to parse the disk conf file if it needs information.
+The former will build an in memory image. As long as it is in
+read-only mode, no locking mechanism is needed. The downside is that
+disck changes won't necessarily update the in memory object. The
+latter is better, though more expansive since disk file is accessed
+each time.&lt;/p&gt;
+&lt;h2&gt;ThreadedServer&lt;/h2&gt;
+&lt;p&gt;My suspecion is that native server is suitable for development
+environment, but lacks features to be production ready. I'm
+considering features such as plugin loading (think Apache2),
+configuration, security, HTTP protocol support, SSL...?&lt;/p&gt;
+&lt;p&gt;In short, ODOO's &lt;code&gt;ThreadedServer&lt;/code&gt; works fine as development tool,
+but should not be used for production deployment unless, well,
+the client is the least sophisticated (oh boy there are so many
+of them that it is actually creating a whole nine yard
+of different problems than this one) and creates minimal load
+in reality.&lt;/p&gt;</content><category term="odoo"></category><category term="odoo"></category></entry></feed>

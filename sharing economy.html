@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-08-31
+
+
+    <a class="wave-effect" href="thoughts.html">
+      <i class="fa fa-folder-open-o"></i>
+      thoughts
+    </a>
+
+    <a class="wave-effect" href="tag-thoughts.html">
+      <i class="fa fa-tag"></i>
+      thoughts
+    </a>
+
+    <h1 class="myhighlight">sharing economy</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><figure class="col l4 m4 s12">
+  <img src="images/bike.gif"/>
+</figure>
+
+<p><a href="https://www.wikiwand.com/en/Sharing_economy">Sharing economy</a> is hot. Looking around, one can't help feeling
+just about everything can be shared. But then, you can't help asking
+yourself, "where does it end?"</p>
+<p>Really, so cars can be shared, houses can be shared, <a href="http://www.scmp.com/news/china/society/article/2106688/shared-folding-stool-service-launched-beijing-over-half-go">stools</a> can
+be shared, <a href="https://www.cnbc.com/2017/07/18/bike-sharing-boom-in-china-pedals-to-new-heights.html">bikes</a> can be shared... so what can not be? Practically
+nothing. I think the generalization roots in the word <strong>share</strong> as
+itself really doesn't rule out all the confusions out there &mdash;
+are bike sharing really "sharing"? or are they just a leasing in
+disguise? what makes you think one way or the other? what is sharing?
+I told Noah to share his toys, but to think of it, he didn't
+necessarily own the toys (for example, when he was in preschool), so
+the <strong>sharing</strong> was really an intention, a spiritual openness with
+benefiting others in mind. Since he is a kid, sharing toys is
+encouraged; but what if he is an adult and I'm encouraging him to
+share something that doesn't even belong to him at the first place?
+What's the message then? What does it even mean?  It feels, bad,
+doesn't it? After all, I certainly don't want any two Pol just come
+along and decide to <em>share</em> my thing that neither of them owns. I'll
+be like, what the heck?</p>
+<h1>my definitions</h1>
+<p>So I tried to think of a narrower and clearer definition for <strong>sharing</strong>:</p>
+<ol>
+<li>you own the resource that you are sharing</li>
+<li>benefits created are not determined by increase of resource amount, but
+   by better utilization (interchangeably, efficiency) of existing
+   resource. </li>
+</ol>
+<p>I like the 2nd point. It's easier to use a bit math here: <code>over all
+value = unit value * qty</code>.  So to increase the <code>over all value</code>, you
+either increase <code>unit value</code>, thus a unit's efficiency , or <code>qty</code>. I
+think sharing is all about the <code>unit value</code> (utilize an idle
+resource). What we are seeing of the explosive increase of <code>qty</code> is
+just a side effect when more ppl want to participate, but <span
+class="myhighlight"><code>qty</code> is not sharing.</span></p>
+<p>The <strong>owner</strong> prospective, however, bothers me. On one hand it feels
+just right that you can/should only share what you own &mdash; your
+vacant room, your bike, your tools... but on the other hand, can't you
+just share anything? I mean, there just isn't anything you own you can
+not give it a <code>sharing</code> spin &mdash; stuff, time, service, <span
+class="myhighlight">what about prostitutes? If it is the oldest
+profession, isn't it also the oldest sharing economy!?</span> If so,
+why we are condemning them but praising these so called innovations?</p>
+<p>We should not. I think sharing implies a sense of motivated
+willingness and pride, that first of all I <span
+class="myhighlight">like this thing</span> &mdash; I'm taking proud of
+my lovely house, thus wanting to have you experience that (after all,
+who wants to just share <strong>crappy</strong> side of his/her stuff). I would
+almost argue that <span class="myhighlight"> you should like it to the
+point you don't want to share, thus making sharing such an emotional
+experience, that the challenge to overcome unwillingness and to
+convince youself doing it is the true ingredient that makes sharing
+valuable and noble</span>. Without this emotional pride that you
+invest in it, this whole process, being called sharing or not, is
+nothing but another a emotionless, number-matching business
+transaction.</p>
+<p>So here it is, a number 3:</p>
+<ol>
+<li>...</li>
+<li>...</li>
+<li>you like what you are sharing</li>
+</ol>
+<p>Putting this lens on, you will now see how bullshit all these <a href="https://www.cbsnews.com/news/china-popular-sharing-economy-exploding-didi/">China-invented</a>
+<strong>sharing hoax</strong> really are.</p>
+<h1>wiki and quotes</h1>
+<p>I got curious and read about <a href="https://www.wikiwand.com/en/Sharing_economy">sharing economy</a>, boy, wasn't I
+impressed! What a wonderful summary of everything I am feeling about
+this topic but failed to express them well! There are a few slips I
+think they hit nails on the head, which I'll be quoting here:</p>
+<h2>misnomer</h2>
+<blockquote>
+<p>The Harvard Business Review argues that "sharing economy" is a
+misnomer, and that the correct word for this activity is "access
+economy". The authors say, "When "sharing" is market-mediated—when a
+company is an intermediary between consumers who don't know each
+other—it is no longer sharing at all. Rather, consumers are paying to
+access someone else's goods or services."[14] The article goes on to
+show that companies (such as Uber) who understand this, and whose
+marketing highlights the financial benefits to participants, are
+successful, while companies (such as Lyft) whose marketing highlights
+the social benefits of the service are less successful.</p>
+</blockquote>
+<h2>not a gift economy</h2>
+<blockquote>
+<p>Salon writes that "the sharing economy ... [is] not the Internet
+'gift economy' as originally conceived, a utopia in which we all
+benefit from our voluntary contributions. It's something quite
+different—the relentless co-optation of the gift economy by market
+capitalism. The sharing economy, as practiced by Silicon Valley, is
+a betrayal of the gift economy. The potlatch has been paved over,
+and replaced with a digital shopping mall."</p>
+</blockquote>
+<h2>driven by job loss</h2>
+<blockquote>
+<p>New York Magazine wrote that the sharing economy has succeeded in
+large part because the real economy has been
+struggling. Specifically, in the magazine's view, the sharing
+economy succeeds because of a depressed labor market, in which "lots
+of people are trying to fill holes in their income by monetizing
+their stuff and their labor in creative ways", and that in many
+cases, people join the sharing economy because they've recently lost
+a full-time job, including a few cases where the pricing structure
+of the sharing economy may have made their old jobs less profitable
+(e.g. full-time taxi drivers who may have switched to Lyft or
+Uber). The magazine writes that "In almost every case, what compels
+people to open up their homes and cars to complete strangers is
+money, not trust. ... Tools that help people trust in the kindness
+of strangers might be pushing hesitant sharing-economy participants
+over the threshold to adoption. But what's getting them to the
+threshold in the first place is a damaged economy, and harmful
+public policy that has forced millions of people to look to odd jobs
+for sustenance."</p>
+</blockquote>
+<h2>low labor cost</h2>
+<blockquote>
+<p>Andrew Leonard,[106][107][108] Evgeny Morozov,[109] Bernard
+Marszalek,[110] Dean Baker,[111][112] and Andrew Keen[113]
+criticized the for-profit sector of the sharing economy, writing
+that sharing economy businesses "extract" profits from their given
+sector by "successfully [making] an end run around the existing
+costs of doing business" - taxes, regulations, and
+insurance. Similarly, In the context of online freelancing
+marketplaces, there have been worries that the sharing economy could
+result in a 'race to the bottom' in terms or wages and benefits: as
+millions of new workers from low-income countries come online.</p>
+</blockquote>
+<h2>no magic in trust</h2>
+<blockquote>
+<p>the sharing economy "doesn't build trust" because where it builds
+new connections, it often "replicates old patterns of privileged
+access for some, and denial for others".[116] William Alden wrote
+that "The so-called sharing economy is supposed to offer a new kind
+of capitalism, one where regular folks, enabled by efficient online
+platforms, can turn their fallow assets into cash machines ... But
+the reality is that these markets also tend to attract a class of
+well-heeled professional operators, who outperform the amateurs—just
+like the rest of the economy".</p>
+</blockquote>
+<p>And finally, an article on <a href="https://hbr.org/2015/01/the-sharing-economy-isnt-about-sharing-at-all">HBR</a>.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

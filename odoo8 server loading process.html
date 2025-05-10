@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2016-07-23
+
+
+    <a class="wave-effect" href="odoo.html">
+      <i class="fa fa-folder-open-o"></i>
+      odoo
+    </a>
+
+    <a class="wave-effect" href="tag-odoo.html">
+      <i class="fa fa-tag"></i>
+      odoo
+    </a>
+
+    <h1 class="myhighlight">ODOO8 native server loading process</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>During daily development of ODOO8 modules, one thing I have been
+noticing is the slowness when ODOO first boot up.  We are observing up
+to minutes of a bootup time. This plainly is too slow.  Watching debug
+prints indicates that ODOO scans through all modules listed on Python
+path and builds a <em>map</em> in memory before dev server starts responding
+to request. Intuitively I suspected such loading practice is causing
+an unnecessary delay.  This aggravates further when ODOO server
+becomes completly unusable if any of the module chokes during this
+loading process. But this is too common a scenario during
+development. One consequence of this is that debugging becomes
+difficult. Often enough ODOO doesn't yield useful trace track to help
+determine the root cause of an error.  Another problem of such
+approach is the availability of servic becoming binary &mdash; it
+either fully works or nothing runs. By analogy, the ODOO loading
+process is like compiling phase in running a C code. No executable is
+available until the compiler and linker are happy.</p>
+<p>Under this light, this article analyzes this booting process with a
+hope to understand why ODOO takes such an approach and how we could
+improve or circumvent during development in order to gain
+efficiency. Considering a developer lives with this bootup process as
+a daily need, it becomes interesting how we can reduce this bootup
+time.</p>
+<h1>Quick glance</h1>
+<p>Tracing through ODOO boot code, we have illustrated steps 
+of ODOO's loading process in diagram below:</p>
+<figure class="s12 center">
+  <img src="images/odoo8_loading.png" />
+  <figcaption>ODOO8 loading sequence</figcaption>
+</figure>
+
+<p>Why does ODOO call <code>tools.config.parse_config</code> twice? The function
+fullfills the same purpose by parsing the configuration file and
+builds the in memory <code>tools.config</code> global variable. This is redundant.</p>
+<h1>Server selection</h1>
+<p>The meat of this loading is to boot up a HTTP server. ODOO offers
+three types of servers:</p>
+<ol>
+<li><code>ThreadedServer</code></li>
+<li><code>PreforkServer</code></li>
+<li><code>GeventServer</code></li>
+</ol>
+<p>But which one to use?  If configuration option <code>config['workers']</code> is
+non zero, it will pick the <code>PreforkServer</code>; otherwise, it takes
+default <code>ThreadedServer</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">openerp</span><span class="o">.</span><span class="n">evented</span><span class="p">:</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">GeventServer</span><span class="p">(</span><span class="n">openerp</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">wsgi_server</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;workers&#39;</span><span class="p">]:</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">PreforkServer</span><span class="p">(</span><span class="n">openerp</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">wsgi_server</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">ThreadedServer</span><span class="p">(</span><span class="n">openerp</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">wsgi_server</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+</code></pre></div>
+
+<p><code>ThreadedServer</code> runs in a single thread, where <code>PreforServer</code> uses
+<code>select</code> to handle <em>multiprocessing</em>. This choice apparently makes the
+prefork server more appealing for production site. ODOO's own manual
+on <em>deployment</em> also confirms this:</p>
+<blockquote>
+<p>Odoo includes built-in HTTP servers, using either multithreading or
+multiprocessing.  For production use, it is recommended to use the
+multiprocessing server as it increases stability, makes somewhat
+better use of computing resources and can be better monitored and
+resource-restricted.  * Multiprocessing is enabled by configuring a
+<em>non-zero number of worker</em> processes, the number of workers should
+be based on the number of cores in the machine (possibly with some
+room for cron workers depending on how much cron work is predicted) *
+Worker limits can be configured based on the hardware configuration
+to avoid resources exhaustion</p>
+</blockquote>
+<h2>Threaded server</h2>
+<p>How good is ODOO's default server then?  Diagram below illustrates the
+truth of an ODOO threaded server.  Under layers of function call,
+ODOO's threaded server is simply a Python native <a href="https://docs.python.org/2/library/basehttpserver.html">HTTPServer</a>
+instance. So the question boils down to how good Python's native http server
+is comparing to some well known names &mdash; <a href="http://nginx.org/">nginx</a>,
+<a href="https://httpd.apache.org/">Apache</a>, <a href="http://www.lighttpd.net/">lighthttpd</a>, or even further, WSGI servers such
+as <a href="http://gunicorn.org/">Guicorn</a> and <a href="http://uwsgi-docs.readthedocs.io/en/latest/">uwsgi</a>.</p>
+<figure class="s12 center">
+  <img src="images/odoo8_server_run.png" />
+  <figcaption>ODOO8 ThreadedServer</figcaption>
+</figure>
+
+<h1>Runtime call trace</h1>
+<p>Diagram below illustrates a full
+call trace while ODOO8 boots up. This was
+generated by <a href="http://pycallgraph.slowchop.com/en/develop/guide/command_line_usage.html">Pycallgraph</a>.</p>
+<div class="highlight"><pre><span></span><code>pycallgraph<span class="w"> </span>-v<span class="w"> </span>-d<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>openerp.<span class="se">\*</span>
+-e<span class="w"> </span>openerp.report.<span class="se">\*</span>
+-e<span class="w"> </span>openerp.tools.config.configmanager.<span class="se">\*</span>
+-e<span class="w"> </span>openerp.loglevels.<span class="se">\*</span>
+-e<span class="w"> </span>openerp.tools.<span class="se">\*</span>
+--max-depth<span class="o">=</span><span class="m">10</span><span class="w"> </span>graphviz
+--output-file<span class="o">=</span>odoo8.png
+--<span class="w"> </span>odoo.py<span class="w"> </span>-c<span class="w"> </span>../works/contract/8290.conf
+</code></pre></div>
+
+<p>The decision to exclude these patters, in particular, the
+<code>openerp.report.*</code> is purely out of layout consideration &mdash; it
+clutters the diagram too much. This, on the other hand, could be
+considered as a clue why bootup is slow.</p>
+<p>Note that no tool can do <em>static</em> analysis of code and generate a call
+stack.  The only sure way to create this is to run the code and
+monitor its runtime stack, in which case language such as Python
+shines due its interpreting nature.  The Python GIL will keep track
+the entire call trace in its memory and knows details of call stack.</p>
+<figure class="s12 center">
+  <img src="images/odoo8_loading_callgraph.png"/>
+    <figcaption>ODOO 8 loading call trace diagram</figcaption>
+</figure>
+
+<h1>Thoughts</h1>
+<p>After examining ODOO code and its run time, two areas I would
+recommend ODOO to reconsider its approach:</p>
+<ol>
+<li>how configuration options are being shared among modules</li>
+<li>using ThreadedServer as default</li>
+</ol>
+<h2>Configuration options</h2>
+<p>First concern coming out of this analysis is how ODOO handles
+values in the configuration file. In <code>openerp.tools</code> ODOO defined
+a variable <code>config</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">openerp.tools.config</span>
+</code></pre></div>
+
+<p>thus will expose the config to the caller. This essentially makes
+the configuration object globally. I don't know whether I should call
+this a trick or a bad practice. So in short, ODOO's configuration
+is global.</p>
+<p>The proper way to handle this is to either set it up as <code>global</code>, or
+making caller to parse the disk conf file if it needs information.
+The former will build an in memory image. As long as it is in
+read-only mode, no locking mechanism is needed. The downside is that
+disck changes won't necessarily update the in memory object. The
+latter is better, though more expansive since disk file is accessed
+each time.</p>
+<h2>ThreadedServer</h2>
+<p>My suspecion is that native server is suitable for development
+environment, but lacks features to be production ready. I'm
+considering features such as plugin loading (think Apache2),
+configuration, security, HTTP protocol support, SSL...?</p>
+<p>In short, ODOO's <code>ThreadedServer</code> works fine as development tool,
+but should not be used for production deployment unless, well,
+the client is the least sophisticated (oh boy there are so many
+of them that it is actually creating a whole nine yard
+of different problems than this one) and creates minimal load
+in reality.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

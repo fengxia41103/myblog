@@ -196,7 +196,7 @@ First, make sure it gets installed if it is not there yet.
 
 #+BEGIN_SRC emacs-lisp
   ;; make sure use-package is installed
-  (unless (package-installed-p 'use-package)
+  (unless (package-install-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
   (require 'use-package)
@@ -226,11 +226,11 @@ init file as soon as I save it.
     "If the current buffer is 'init.org' the code-blocks are tangled,
   and the tangled file is compiled."
     (when (equal (buffer-file-name)
-                 (expand-file-name "~/Emacs/emacs_setup.org"))
+                 (expand-file-name "~/workspace/me/myblog/content/downloads/emacs/emacs_setup.org"))
       ;; Avoid running hooks when tangling.
       (let ((prog-mode-hook nil))
         (org-babel-tangle)
-        (byte-compile-file "~/Emacs/emacs_setup.el"))))
+        (byte-compile-file "~/workspace/me/myblog/content/downloads/emacs/emacs_setup.el"))))
 
   ;; auto-tangle hook
   (add-hook 'after-save-hook 'tangle-init)
@@ -419,6 +419,16 @@ I have been using [[https://github.com/charignon/github-review][this]] for a whi
   (setq github-review-reply-inline-comments t)
 )
 #+END_SRC
+
+*** git-timeline
+
+[[https://github.com/emacsmirror/git-timemachine][github]], installation
+
+#+begin_src emacs-lisp
+(use-package git-timemachine
+  :ensure t
+)
+#+end_src
 
 ** Projectile
 
@@ -1477,6 +1487,7 @@ So, to enfore this on some modes:
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
 #+END_SRC
 
+
 * Base packages
 
 There are some packages you'd better load prior to everything else, so
@@ -1730,9 +1741,8 @@ Get idea from [[https://www.reddit.com/r/emacs/comments/16jdd64/always_split_win
 
 #+begin_src emacs-lisp
 (setq window-combination-resize t
-      split-width-threshold 100)
+      split-width-threshold 80)
 #+end_src
-
 
 * Font, theme
 

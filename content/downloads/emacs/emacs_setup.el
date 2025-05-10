@@ -11,9 +11,6 @@
                         ))
 
 ;; make sure use-package is installed
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
 (require 'use-package)
 
 (eval-when-compile (require 'use-package))
@@ -22,193 +19,16 @@
   "If the current buffer is 'init.org' the code-blocks are tangled,
 and the tangled file is compiled."
   (when (equal (buffer-file-name)
-               (expand-file-name "~/Emacs/emacs_setup.org"))
+               (expand-file-name "~/workspace/me/myblog/content/downloads/emacs/emacs_setup.org"))
     ;; Avoid running hooks when tangling.
     (let ((prog-mode-hook nil))
       (org-babel-tangle)
-      (byte-compile-file "~/Emacs/emacs_setup.el"))))
+      (byte-compile-file "~/workspace/me/myblog/content/downloads/emacs/emacs_setup.el"))))
 
 ;; auto-tangle hook
 (add-hook 'after-save-hook 'tangle-init)
 
 (custom-set-variables '(ad-redefinition-action (quote accept)))
-
-(use-package all-the-icons
-  :if (display-graphic-p))
-
-(use-package delight :ensure t)
-
- (delight '((abbrev-mode " Abv" abbrev)
-            (smart-tab-mode " \\t" smart-tab)
-            (eldoc-mode nil "eldoc")
-            (rainbow-mode)
-            (overwrite-mode " Ov" t)
-            (emacs-lisp-mode "Elisp" :major)))
-
-(use-package rainbow-mode
-  :ensure t
-  :delight)
-
-(use-package hydra
-  :ensure t)
-
-(use-package which-key
-  :ensure
-  :config
-  (which-key-setup-side-window-right))
-(which-key-mode)
-
-(use-package unicode-escape
-  :ensure t
-  :init
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
-(set-language-environment "UTF-8")
-
-(setq exec-path-from-shell-debug t)
-(setenv "SHELL" "/usr/bin/zsh")
-(use-package exec-path-from-shell
-  :ensure t
-  :if (memq window-system '(mac ns x))
-  :config
-  (exec-path-from-shell-initialize))
-
-(prefer-coding-system 'utf-8)
-
-(setenv "LANG" "en_US.UTF-8")
-(setenv "LC_ALL" "en_US.UTF-8")
-(setenv "LC_CTYPE" "en_US.UTF-8")
-(set-language-environment "UTF-8")
-
-(setq browse-url-generic-program (executable-find "google-chrome")
-  browse-url-browser-function 'browse-url-generic)
-
-(defun no-junk-please-we-are-unixish ()
-  (let ((coding-str (symbol-name buffer-file-coding-system)))
-    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
-      (set-buffer-file-coding-system 'unix))))
-
-(add-hook 'find-file-hook 'no-junk-please-we-are-unixish)
-
-(global-auto-revert-mode 1)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
-(blink-cursor-mode -1)
-
-(global-set-key (kbd "C-m") 'newline-and-indent)
-(global-set-key (kbd "C-j") 'newline)
-(global-set-key [delete] 'delete-char)
-(global-set-key [kp-delete] 'delete-char)
-
-(add-hook 'c-mode-common-hook 'display-line-numbers-mode)
-;; (add-hook 'org-mode-hook 'display-line-numbers-mode)
-(add-hook 'python-mode-hook 'display-line-numbers-mode)
-(add-hook 'web-mode-hook 'display-line-numbers-mode)
-(add-hook 'js2-mode-hook 'display-line-numbers-mode)
-(add-hook 'yaml-mode-hook 'display-line-numbers-mode)
-(add-hook 'json-mode-hook 'display-line-numbers-mode)
-(add-hook 'java-mode-hook 'display-line-numbers-mode)
-(add-hook 'groovy-mode-hook 'display-line-numbers-mode)
-
-(setq display-line-numbers-width nil)
-(setq linum-format "%4d ")
-
-(electric-indent-mode -1)
-(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
-
-(set-clipboard-coding-system 'utf-8)
-
-(use-package sublime-themes
-  :ensure t
-  :config)
-(load-theme 'spolsky t)
-
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-
-(use-package eldoc
-  :delight)
-
-(use-package nyan-mode
-  :ensure t
-  :bind ("C-M-x n" . 'nyan-mode))
-
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
-         ("C->" . 'mc/mark-next-like-this)
-         ("C-<" . 'mc/mark-previous-like-this)
-         ("C-c C->" . 'mc/mark-all-like-this)))
-
-(use-package dimmer
-  :ensure
-  :config
-  (dimmer-configure-which-key)
-  (dimmer-configure-helm))
-(dimmer-mode t)
-
-(use-package highlight-indent-guides
-:ensure
-:config
-(setq highlight-indent-guides-method 'character))
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-
-(global-font-lock-mode t)
-
-;; faces for general region highlighting zenburn is too low-key.
-(custom-set-faces
- '(highlight ((t (:background "forest green"))))
- '(region ((t (:background "forest green")))))
-
-(add-to-list 'default-frame-alist
-             '(font . "Ubuntu Mono-15"))
-
-;; set a default font
-(when (member "Ubuntu Mono-15" (font-family-list))
-  (set-face-attribute 'default nil :font "Ubuntu Mono-15"))
-
-(custom-theme-set-faces
- 'user
- '(fixed-pitch ((t (:family "Fira Code" :height 140))))
-)
-
-(setq ring-bell-function
-      '(lambda ()
-         (message "The answer is 42...")))
-(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
-
-(when (display-graphic-p)
-  (set-background-color "#ffffff")
-  (set-foreground-color "#141312"))
-
-(setq frame-title-format "emacs @ %b - %f")
-(when window-system
-  (mouse-wheel-mode)  ;; enable wheelmouse support by default
-  (set-selection-coding-system 'compound-text-with-extensions))
-
-(setq hcz-set-cursor-color-color "")
-(setq hcz-set-cursor-color-buffer "")
-
-(defun hcz-set-cursor-color-according-to-mode ()
-  "change cursor color according to some minor modes."
-  ;; set-cursor-color is somewhat costly, so we only call it when needed:
-  (let ((color
-         (if buffer-read-only "orange"
-           (if overwrite-mode "red"
-             "green"))))
-    (unless (and
-             (string= color hcz-set-cursor-color-color)
-             (string= (buffer-name) hcz-set-cursor-color-buffer))
-      (set-cursor-color (setq hcz-set-cursor-color-color color))
-      (setq hcz-set-cursor-color-buffer (buffer-name)))))
-
-(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
 
 (use-package flycheck
   :ensure t)
@@ -299,6 +119,10 @@ and the tangled file is compiled."
   :ensure t
   :config
   (setq github-review-reply-inline-comments t)
+)
+
+(use-package git-timemachine
+  :ensure t
 )
 
 (use-package projectile
@@ -646,8 +470,6 @@ cleared, make sure the overlay doesn't come back too soon."
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
-(add-hook 'before-save-hook #'elpy-black-fix-code nil t)
-
 (setenv "PYTHONIOENCODING" "utf-8")
 (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
 (add-to-list 'process-coding-system-alist '("flake8" . (utf-8 . utf-8)))
@@ -946,6 +768,186 @@ cleared, make sure the overlay doesn't come back too soon."
 (add-hook 'react-mode-hook 'my-personal-code-style)
 (add-hook 'sh-mode-hook 'my-personal-code-style)
 (add-hook 'groovy-mode-hook 'my-personal-code-style)
+
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package delight :ensure t)
+
+ (delight '((abbrev-mode " Abv" abbrev)
+            (smart-tab-mode " \\t" smart-tab)
+            (eldoc-mode nil "eldoc")
+            (rainbow-mode)
+            (overwrite-mode " Ov" t)
+            (emacs-lisp-mode "Elisp" :major)))
+
+(use-package rainbow-mode
+  :ensure t
+  :delight)
+
+(use-package hydra
+  :ensure t)
+
+(use-package which-key
+  :ensure
+  :config
+  (which-key-setup-side-window-right))
+(which-key-mode)
+
+(use-package unicode-escape
+  :ensure t
+  :init
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+(set-language-environment "UTF-8")
+
+(setq exec-path-from-shell-debug t)
+(setenv "SHELL" "/usr/bin/zsh")
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
+
+(prefer-coding-system 'utf-8)
+
+(setenv "LANG" "en_US.UTF-8")
+(setenv "LC_ALL" "en_US.UTF-8")
+(setenv "LC_CTYPE" "en_US.UTF-8")
+(set-language-environment "UTF-8")
+
+(setq browse-url-generic-program (executable-find "google-chrome")
+  browse-url-browser-function 'browse-url-generic)
+
+(defun no-junk-please-we-are-unixish ()
+  (let ((coding-str (symbol-name buffer-file-coding-system)))
+    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+      (set-buffer-file-coding-system 'unix))))
+
+(add-hook 'find-file-hook 'no-junk-please-we-are-unixish)
+
+(global-auto-revert-mode 1)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(blink-cursor-mode -1)
+
+(global-set-key (kbd "C-m") 'newline-and-indent)
+(global-set-key (kbd "C-j") 'newline)
+(global-set-key [delete] 'delete-char)
+(global-set-key [kp-delete] 'delete-char)
+
+(add-hook 'c-mode-common-hook 'display-line-numbers-mode)
+;; (add-hook 'org-mode-hook 'display-line-numbers-mode)
+(add-hook 'python-mode-hook 'display-line-numbers-mode)
+(add-hook 'web-mode-hook 'display-line-numbers-mode)
+(add-hook 'js2-mode-hook 'display-line-numbers-mode)
+(add-hook 'yaml-mode-hook 'display-line-numbers-mode)
+(add-hook 'json-mode-hook 'display-line-numbers-mode)
+(add-hook 'java-mode-hook 'display-line-numbers-mode)
+(add-hook 'groovy-mode-hook 'display-line-numbers-mode)
+
+(setq display-line-numbers-width nil)
+(setq linum-format "%4d ")
+
+(electric-indent-mode -1)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+
+(set-clipboard-coding-system 'utf-8)
+
+(setq window-combination-resize t
+      split-width-threshold 80)
+
+(use-package sublime-themes
+  :ensure t
+  :config)
+(load-theme 'spolsky t)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+(use-package eldoc
+  :delight)
+
+(use-package nyan-mode
+  :ensure t
+  :bind ("C-M-x n" . 'nyan-mode))
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
+         ("C->" . 'mc/mark-next-like-this)
+         ("C-<" . 'mc/mark-previous-like-this)
+         ("C-c C->" . 'mc/mark-all-like-this)))
+
+(use-package dimmer
+  :ensure
+  :config
+  (dimmer-configure-which-key)
+  (dimmer-configure-helm))
+(dimmer-mode t)
+
+(use-package highlight-indent-guides
+:ensure
+:config
+(setq highlight-indent-guides-method 'character))
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+(global-font-lock-mode t)
+
+;; faces for general region highlighting zenburn is too low-key.
+(custom-set-faces
+ '(highlight ((t (:background "forest green"))))
+ '(region ((t (:background "forest green")))))
+
+(add-to-list 'default-frame-alist
+             '(font . "Ubuntu Mono-15"))
+
+;; set a default font
+(when (member "Ubuntu Mono-15" (font-family-list))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-15"))
+
+(custom-theme-set-faces
+ 'user
+ '(fixed-pitch ((t (:family "Fira Code" :height 140))))
+)
+
+(setq ring-bell-function
+      '(lambda ()
+         (message "The answer is 42...")))
+(setq echo-keystrokes 0.1 use-dialog-box nil visible-bell t)
+
+(when (display-graphic-p)
+  (set-background-color "#ffffff")
+  (set-foreground-color "#141312"))
+
+(setq frame-title-format "emacs @ %b - %f")
+(when window-system
+  (mouse-wheel-mode)  ;; enable wheelmouse support by default
+  (set-selection-coding-system 'compound-text-with-extensions))
+
+(setq hcz-set-cursor-color-color "")
+(setq hcz-set-cursor-color-buffer "")
+
+(defun hcz-set-cursor-color-according-to-mode ()
+  "change cursor color according to some minor modes."
+  ;; set-cursor-color is somewhat costly, so we only call it when needed:
+  (let ((color
+         (if buffer-read-only "orange"
+           (if overwrite-mode "red"
+             "green"))))
+    (unless (and
+             (string= color hcz-set-cursor-color-color)
+             (string= (buffer-name) hcz-set-cursor-color-buffer))
+      (set-cursor-color (setq hcz-set-cursor-color-color color))
+      (setq hcz-set-cursor-color-buffer (buffer-name)))))
+
+(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
 
 (use-package eyebrowse
     :ensure t)

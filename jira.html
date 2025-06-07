@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-10-23
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+
+    <h1 class="myhighlight">Jira</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><figure class="col s12">
+  <img src="images/jira.gif"/>
+</figure>
+
+<p>Jira is, tough. I have been searching a solution to make my Jira life
+easy. The problems I want to fix are:</p>
+<ol>
+<li>Loading browser is too slow &larr; how many times I just want to
+   get a view of the comment or description so to refresh my memory.</li>
+<li>Navigating from one ticket to another is to open a new tab, but
+   that just clutter my browser. Very soon I don't remember which tab
+   is for which ticket, so ended up openning the same jira over and
+   over.</li>
+<li>To switch its status is again, to load page, click some kind of
+   dropdown, then click to select &rarr; 3 clicks. No, I already know
+   what status I want it to be, so I want to simplify this.</li>
+<li>#3 also applies to reassign a ticket to someone &mdash; there are
+   usually only a handful ppl you deal w/ on a daily basis during
+   development. Instead of waiting for the spinning wheel to come up
+   the name, just memorize the user's name, and assign.</li>
+<li>This is actually the very first reason got me to look into an
+   alternative solution than using a browser &mdash; <strong>create ticket</strong>
+   is very tedious! I dislike filling that form very much. Again,
+   usually I already know the value I want to use, so a cheat was to
+   <em>clone</em> an existing one. But then, finding an adequate existing one
+   is time consuming also. So again, to simplify this is a big win.</li>
+<li>Filters. Too many times there are this view, that view &mdash; I
+   want to see all my stories, or all my bugs, or just high priority
+   bugs, or just the ones created today, or all bugs associated w/ the
+   theme I'm working on because I need to coordinate developers on the
+   work.... the list goes on and on, and I know, there is the filter,
+   which is nothing but a web version of the JQL query. So why the
+   hassle of creating a whole bunch of filters, then the browser takes
+   a long time to load, and that filter gives you a <strong>long list of
+   fields</strong> you can display! But hell, I only care a few fields which
+   the team uses, so even to hunt down the fields that is useful to me
+   is time consuming. I want to use the JQL and a list of fields that
+   has valuable info, no more, no less.</li>
+</ol>
+<p>So the journey goes w/ a weekend try starting w/ <a href="https://github.com/ahungry/org-jira">org-jira</a>, which
+looked very promising! I thought it would also be a good way to learn
+org-mode. But hell, the org-mode itself is really slow! Just a small
+org file of my bugs make the entire emacs choking to death. WTF!</p>
+<p>Long story short. Here is the <a href="https://github.com/go-jira/jira">go-jira</a>, incredibly fast, and
+useful! It's a command line (<a href="https://fengxia41103.github.io/myblog/downloads/jira/jira">download here</a>), just copy it to
+<code>/usr/local/bin</code> and type <code>jira help</code>:</p>
+<div class="highlight"><pre><span></span><code>╰─➤<span class="w">  </span>jira<span class="w"> </span><span class="nb">help</span>
+usage:<span class="w"> </span>jira<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span><span class="w"> </span>&lt;command&gt;<span class="w"> </span><span class="o">[</span>&lt;args&gt;<span class="w"> </span>...<span class="o">]</span>
+
+Jira<span class="w"> </span>Command<span class="w"> </span>Line<span class="w"> </span>Interface
+
+Global<span class="w"> </span>flags:
+<span class="w">      </span>--help<span class="w">                   </span>Show<span class="w"> </span>context-sensitive<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">(</span>also<span class="w"> </span>try<span class="w"> </span>--help-long<span class="w"> </span>and<span class="w"> </span>--help-man<span class="o">)</span>.
+<span class="w">  </span>-v,<span class="w"> </span>--verbose<span class="w"> </span>...<span class="w">            </span>Increase<span class="w"> </span>verbosity<span class="w"> </span><span class="k">for</span><span class="w"> </span>debugging
+<span class="w">  </span>-e,<span class="w"> </span>--endpoint<span class="o">=</span>ENDPOINT<span class="w">      </span>Base<span class="w"> </span>URI<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span><span class="k">for</span><span class="w"> </span>Jira
+<span class="w">  </span>-k,<span class="w"> </span>--insecure<span class="w">               </span>Disable<span class="w"> </span>TLS<span class="w"> </span>certificate<span class="w"> </span>verification
+<span class="w">  </span>-Q,<span class="w"> </span>--quiet<span class="w">                  </span>Suppress<span class="w"> </span>output<span class="w"> </span>to<span class="w"> </span>console
+<span class="w">      </span>--unixproxy<span class="o">=</span>UNIXPROXY<span class="w">    </span>Path<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>unix-socket<span class="w"> </span>proxy
+<span class="w">      </span>--socksproxy<span class="o">=</span>SOCKSPROXY<span class="w">  </span>Address<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>socks<span class="w"> </span>proxy
+<span class="w">  </span>-u,<span class="w"> </span>--user<span class="o">=</span>USER<span class="w">              </span>user<span class="w"> </span>name<span class="w"> </span>used<span class="w"> </span>within<span class="w"> </span>the<span class="w"> </span>Jira<span class="w"> </span>service
+<span class="w">      </span>--login<span class="o">=</span>LOGIN<span class="w">            </span>login<span class="w"> </span>name<span class="w"> </span>that<span class="w"> </span>corresponds<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>user<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>authentication
+
+Commands:
+<span class="w">  </span>help:<span class="w">                </span>Show<span class="w"> </span>help.
+<span class="w">  </span>version:<span class="w">             </span>Prints<span class="w"> </span>version
+<span class="w">  </span>acknowledge:<span class="w">         </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>acknowledge<span class="w"> </span>state
+<span class="w">  </span>assign:<span class="w">              </span>Assign<span class="w"> </span>user<span class="w"> </span>to<span class="w"> </span>issue
+<span class="w">  </span>attach<span class="w"> </span>create:<span class="w">       </span>Attach<span class="w"> </span>file<span class="w"> </span>to<span class="w"> </span>issue
+<span class="w">  </span>attach<span class="w"> </span>get:<span class="w">          </span>Fetch<span class="w"> </span>attachment
+<span class="w">  </span>attach<span class="w"> </span>list:<span class="w">         </span>Prints<span class="w"> </span>attachment<span class="w"> </span>details<span class="w"> </span><span class="k">for</span><span class="w"> </span>issue
+<span class="w">  </span>attach<span class="w"> </span>remove:<span class="w">       </span>Delete<span class="w"> </span>attachment
+<span class="w">  </span>backlog:<span class="w">             </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>Backlog<span class="w"> </span>state
+<span class="w">  </span>block:<span class="w">               </span>Mark<span class="w"> </span>issues<span class="w"> </span>as<span class="w"> </span>blocker
+<span class="w">  </span>browse:<span class="w">              </span>Open<span class="w"> </span>issue<span class="w"> </span><span class="k">in</span><span class="w"> </span>browser
+<span class="w">  </span>close:<span class="w">               </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>close<span class="w"> </span>state
+<span class="w">  </span>comment:<span class="w">             </span>Add<span class="w"> </span>comment<span class="w"> </span>to<span class="w"> </span>issue
+<span class="w">  </span>component<span class="w"> </span>add:<span class="w">       </span>Add<span class="w"> </span>component
+<span class="w">  </span>components:<span class="w">          </span>Show<span class="w"> </span>components<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>project
+<span class="w">  </span>create:<span class="w">              </span>Create<span class="w"> </span>issue
+<span class="w">  </span>createmeta:<span class="w">          </span>View<span class="w"> </span><span class="s1">&#39;create&#39;</span><span class="w"> </span>metadata
+<span class="w">  </span><span class="k">done</span>:<span class="w">                </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>Done<span class="w"> </span>state
+<span class="w">  </span>dup:<span class="w">                 </span>Mark<span class="w"> </span>issues<span class="w"> </span>as<span class="w"> </span>duplicate
+<span class="w">  </span>edit:<span class="w">                </span>Edit<span class="w"> </span>issue<span class="w"> </span>details
+<span class="w">  </span>editmeta:<span class="w">            </span>View<span class="w"> </span><span class="s1">&#39;edit&#39;</span><span class="w"> </span>metadata
+<span class="w">  </span>epic<span class="w"> </span>add:<span class="w">            </span>Add<span class="w"> </span>issues<span class="w"> </span>to<span class="w"> </span>Epic
+<span class="w">  </span>epic<span class="w"> </span>create:<span class="w">         </span>Create<span class="w"> </span>Epic
+<span class="w">  </span>epic<span class="w"> </span>list:<span class="w">           </span>Prints<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>issues<span class="w"> </span><span class="k">for</span><span class="w"> </span>an<span class="w"> </span>epic<span class="w"> </span>with<span class="w"> </span>optional<span class="w"> </span>search<span class="w"> </span>criteria
+<span class="w">  </span>epic<span class="w"> </span>remove:<span class="w">         </span>Remove<span class="w"> </span>issues<span class="w"> </span>from<span class="w"> </span>Epic
+<span class="w">  </span>export-templates:<span class="w">    </span>Export<span class="w"> </span>templates<span class="w"> </span><span class="k">for</span><span class="w"> </span>customizations
+<span class="w">  </span>fields:<span class="w">              </span>Prints<span class="w"> </span>all<span class="w"> </span>fields,<span class="w"> </span>both<span class="w"> </span>System<span class="w"> </span>and<span class="w"> </span>Custom
+<span class="w">  </span><span class="k">in</span>-progress:<span class="w">         </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>Progress<span class="w"> </span>state
+<span class="w">  </span>issuelink:<span class="w">           </span>Link<span class="w"> </span>two<span class="w"> </span>issues
+<span class="w">  </span>issuelinktypes:<span class="w">      </span>Show<span class="w"> </span>the<span class="w"> </span>issue<span class="w"> </span>link<span class="w"> </span>types
+<span class="w">  </span>issuetypes:<span class="w">          </span>Show<span class="w"> </span>issue<span class="w"> </span>types<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>project
+<span class="w">  </span>labels<span class="w"> </span>add:<span class="w">          </span>Add<span class="w"> </span>labels<span class="w"> </span>to<span class="w"> </span>an<span class="w"> </span>issue
+<span class="w">  </span>labels<span class="w"> </span>remove:<span class="w">       </span>Remove<span class="w"> </span>labels<span class="w"> </span>from<span class="w"> </span>an<span class="w"> </span>issue
+<span class="w">  </span>labels<span class="w"> </span>set:<span class="w">          </span>Set<span class="w"> </span>labels<span class="w"> </span>on<span class="w"> </span>an<span class="w"> </span>issue
+<span class="w">  </span>list:<span class="w">                </span>Prints<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>issues<span class="w"> </span><span class="k">for</span><span class="w"> </span>given<span class="w"> </span>search<span class="w"> </span>criteria
+<span class="w">  </span>login:<span class="w">               </span>Attempt<span class="w"> </span>to<span class="w"> </span>login<span class="w"> </span>into<span class="w"> </span>jira<span class="w"> </span>server
+<span class="w">  </span>logout:<span class="w">              </span>Deactivate<span class="w"> </span>session<span class="w"> </span>with<span class="w"> </span>Jira<span class="w"> </span>server
+<span class="w">  </span>rank:<span class="w">                </span>Mark<span class="w"> </span>issues<span class="w"> </span>as<span class="w"> </span>blocker
+<span class="w">  </span>reopen:<span class="w">              </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>reopen<span class="w"> </span>state
+<span class="w">  </span>request:<span class="w">             </span>Open<span class="w"> </span>issue<span class="w"> </span><span class="k">in</span><span class="w"> </span>requestr
+<span class="w">  </span>resolve:<span class="w">             </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>resolve<span class="w"> </span>state
+<span class="w">  </span>start:<span class="w">               </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>start<span class="w"> </span>state
+<span class="w">  </span>stop:<span class="w">                </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>stop<span class="w"> </span>state
+<span class="w">  </span>subtask:<span class="w">             </span>Subtask<span class="w"> </span>issue
+<span class="w">  </span>take:<span class="w">                </span>Assign<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>yourself
+<span class="w">  </span>todo:<span class="w">                </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>To<span class="w"> </span>Do<span class="w"> </span>state
+<span class="w">  </span>transition:<span class="w">          </span>Transition<span class="w"> </span>issue<span class="w"> </span>to<span class="w"> </span>given<span class="w"> </span>state
+<span class="w">  </span>transitions:<span class="w">         </span>List<span class="w"> </span>valid<span class="w"> </span>issue<span class="w"> </span>transitions
+<span class="w">  </span>transmeta:<span class="w">           </span>List<span class="w"> </span>valid<span class="w"> </span>issue<span class="w"> </span>transitions
+<span class="w">  </span>unassign:<span class="w">            </span>Unassign<span class="w"> </span>an<span class="w"> </span>issue
+<span class="w">  </span>unexport-templates:<span class="w">  </span>Remove<span class="w"> </span>unmodified<span class="w"> </span>exported<span class="w"> </span>templates
+<span class="w">  </span>view:<span class="w">                </span>Prints<span class="w"> </span>issue<span class="w"> </span>details
+<span class="w">  </span>vote:<span class="w">                </span>Vote<span class="w"> </span>up/down<span class="w"> </span>an<span class="w"> </span>issue
+<span class="w">  </span>watch:<span class="w">               </span>Add/Remove<span class="w"> </span>watcher<span class="w"> </span>to<span class="w"> </span>issue
+<span class="w">  </span>worklog<span class="w"> </span>add:<span class="w">         </span>Add<span class="w"> </span>a<span class="w"> </span>worklog<span class="w"> </span>to<span class="w"> </span>an<span class="w"> </span>issue
+<span class="w">  </span>worklog<span class="w"> </span>list:<span class="w">        </span>Prints<span class="w"> </span>the<span class="w"> </span>worklog<span class="w"> </span>data<span class="w"> </span><span class="k">for</span><span class="w"> </span>given<span class="w"> </span>issue
+<span class="w">  </span>session:<span class="w">             </span>Attempt<span class="w"> </span>to<span class="w"> </span>login<span class="w"> </span>into<span class="w"> </span>jira<span class="w"> </span>server
+</code></pre></div>
+
+<h1>templates</h1>
+<p>This thing is really sick. It uses YAML template to handle all the
+data posting back to the Jira server. Thus, you are dealing w/ a list
+of yaml files to tweak what data fields you want to use in an
+action. But two most useful ones are: <a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/table">table</a> and <a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/create">create</a>.</p>
+<h2><code>table</code> template</h2>
+<p><a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/table">This</a> is the primary table template to display a list of things, the
+same idea in jira browser when you on a list view. Since this is to
+display on a terminal, nothing fancy is required, just straightforward
+string to compose a <em>table</em> look. The key to success is to:</p>
+<ol>
+<li>know what <code>fields</code> are available</li>
+<li>some knowledge of this strange <a href="https://gohugo.io/templates/introduction/">hugo syntax</a>. It's quite like
+   Jinja2, the concept is the same, just different syntax. One thing I
+   find useful is its <a href="https://gohugo.io/functions/">functions</a>, so you can do a bit of extra in
+   the template. But overall, writing template is not pleasant, but
+   it's a one-time deal, so it's ok.</li>
+</ol>
+<p>What it looks like is pretty slick! &rarr;</p>
+<div class="highlight"><pre><span></span><code><span class="err">╰─➤</span><span class="w">  </span><span class="n">jira</span><span class="w"> </span><span class="n">cp</span><span class="o">-</span><span class="n">bug</span><span class="o">-</span><span class="n">mine</span><span class="w">                                                                                    </span><span class="mi">1</span><span class="w"> </span><span class="err">↵</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3228</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">User</span><span class="w"> </span><span class="n">management</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">incorrectly</span><span class="w"> </span><span class="n">r</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3482</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Nav</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="n">contrast</span><span class="w"> </span><span class="n">enough</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sele</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3453</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Storage</span><span class="w"> </span><span class="n">HA</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="n">notification</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">contact</span><span class="w"> </span><span class="n">info</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sele</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3342</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_chat</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">icon</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">visible</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">login</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sele</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3327</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">Shut</span><span class="w"> </span><span class="n">Down</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="n">inst</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3326</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">Chat</span><span class="w"> </span><span class="n">support</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">grey</span><span class="s1">&#39;ed out         | B | In P | fxia1      | H | 14 days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3241</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">Lenovo</span><span class="w"> </span><span class="n">EULA</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">s</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3560</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_Empty</span><span class="w"> </span><span class="n">extra</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Network</span><span class="w"> </span><span class="n">Reosurces</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3552</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="o">-</span><span class="w"> </span><span class="n">Cloud</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">displaye</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3551</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3549</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_Shows</span><span class="w"> </span><span class="n">cloudistics</span><span class="w"> </span><span class="n">fav</span><span class="w"> </span><span class="n">icon</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">second</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3548</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_Lenovo</span><span class="w"> </span><span class="n">cloud</span><span class="w"> </span><span class="n">market</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">l</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3546</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_change</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="n">color</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3545</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">Lenovo</span><span class="w"> </span><span class="n">logo</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="n">page</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3544</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">links</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Legal</span><span class="w"> </span><span class="n">In</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3532</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Chat</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="n">chat</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">displa</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3530</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_Texts</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">visible</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">calendar</span><span class="w"> </span><span class="n">pop</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">day</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3328</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">Error</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">performi</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3270</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">Trouble</span><span class="w"> </span><span class="n">downloading</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">templat</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3214</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">Can</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="n">having</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3205</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">Invalid</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="nb">range</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="n">dis</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3204</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">An</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">appears</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">corner</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3201</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="w"> </span><span class="n">Unable</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="n">windows</span><span class="w"> </span><span class="n">Instance</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3198</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">No</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">appears</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">white</span><span class="w"> </span><span class="n">borders</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3183</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">Inconsistent</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">assign</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">V</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3182</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910</span><span class="p">:</span><span class="n">The</span><span class="w"> </span><span class="n">window</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">pops</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">ad</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="n">days</span>
+<span class="o">|</span><span class="w"> </span><span class="n">OL</span><span class="o">-</span><span class="mi">3117</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QA_1910_</span><span class="s1">&#39;verify phone number page&#39;</span><span class="w"> </span><span class="n">lenovo</span><span class="w"> </span><span class="n">Log</span><span class="o">...</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Back</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fxia1</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">27</span><span class="w"> </span><span class="n">days</span>
+</code></pre></div>
+
+<h2><code>create</code> template</h2>
+<p>This is to display a YAML file for you to fill in the blanks. This is
+where you can plugin all kinds of <em>hardcoded</em> values to save
+time. It's pretty self-explanatory, so <a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/create">take a look</a>. I don't know
+much about the <a href="https://gohugo.io/templates/introduction/">hugo</a> yet, so most of the contents here are just
+basics.</p>
+<h1>jira server, username</h1>
+<p>In <a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml">config.yml</a>, just define these:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://jira1.labs.company.com:8443</span>
+<span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fxia1</span>
+</code></pre></div>
+
+<p>It will prompt you for password when it tries to connect. Somehow it
+saves (cookie?) so that once you have authenticated, your CLI works
+without asking the password again for a while (good a whole day in my
+situation). I haven't found an option where I can save the pwd, like
+<code>.authinfo</code>. Small inconvenience.</p>
+<h1>custom commands</h1>
+<p>This is really a life-saver, unbelievably powerful! You just define a
+JQL, and it becomes just another command! Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">custom-commands</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mine</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Display issues assigned to me</span>
+<span class="w">    </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">{{jira}} list --template table --query &quot;</span>
+<span class="w">      </span><span class="no">assignee=currentUser()</span>
+<span class="w">        </span><span class="no">AND status not in (DONE,CANCELED)</span>
+<span class="w">      </span><span class="no">ORDER BY</span>
+<span class="w">        </span><span class="no">issuetype ASC,</span>
+<span class="w">        </span><span class="no">status DESC,</span>
+<span class="w">        </span><span class="no">created DESC,</span>
+<span class="w">        </span><span class="no">key DESC</span>
+<span class="w">      </span><span class="no">&quot;</span>
+</code></pre></div>
+
+<p>This says to use the <a href="https://fengxia41103.github.io/myblog/downloads/jira/templates/table">table template</a> for display, and the query
+string is the just whatever you want to speak to jira server. Also by
+using the <code>&gt;-</code> to handle <a href="https://yaml-multiline.info/">yaml multiline string</a>, we can type the
+query in any nice indented format you like, and it will be converted
+into a single string by removing all the newlines in between w/ a
+single white space! Slick, isn't it!?</p>
+<p>With this, you can really just learn the JQL and fly w/ your
+knowledge. The entire jira server is up for your grab at this
+point. Of course you can just copy &amp; paste your filter's SQL query
+string from Jira brower to here!  To give you an idea what it can do,
+here are the <em>filters</em> I'm using:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span>cp-story:<span class="w">            </span>All<span class="w"> </span>CP<span class="w"> </span>stories
+<span class="w">  </span>cp-bug:<span class="w">              </span>All<span class="w"> </span>CP<span class="w"> </span>bugs
+<span class="w">  </span>cp-story-mine:<span class="w">       </span>My<span class="w"> </span>CP<span class="w"> </span>stories
+<span class="w">  </span>cp-bug-mine:<span class="w">         </span>My<span class="w"> </span>CP<span class="w"> </span>bugs
+<span class="w">  </span>cp-mine:<span class="w">             </span>Everything<span class="w"> </span>of<span class="w"> </span>CP<span class="w"> </span>that<span class="w"> </span>is<span class="w"> </span>assigned<span class="w"> </span>to<span class="w"> </span>me
+<span class="w">  </span>cp-done:<span class="w">             </span>CP<span class="w"> </span><span class="k">done</span><span class="w"> </span>items
+<span class="w">  </span>cp-unassigned:<span class="w">       </span>CP<span class="w"> </span>unassigned<span class="w"> </span>items
+</code></pre></div>
+
+<p>If I'm really interested the look, I can give it different <code>--template
+&lt;whatever&gt;</code> to customize that experience. But as of today, I really
+want to a consistent view, the same view, for all the tables, so I
+save on context switching looking at different look for each filter
+(which I found very annoying, and no value add in term of information,
+whatsoever).</p>
+<h1>editor</h1>
+<p>Set in <a href="https://fengxia41103.github.io/myblog/downloads/jira/config.yml"><code>config.yml</code></a>. I think it uses whatever the default editor
+is. I tried <code>nano</code> and for now, using <code>emacsclient</code> will simply reuse
+the existing emacs session and opens a new buffer! &rarr; makes
+editing YAML so much more pleasant. And it is definitely better than
+typing in browser's small text box!</p>
+<h1>commands</h1>
+<p>These are the ones I use the most:</p>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jira mine</td>
+<td>list everything assigned me</td>
+</tr>
+<tr>
+<td>jira today-mine</td>
+<td>everything created today an assigned to me</td>
+</tr>
+<tr>
+<td>jira <custom cmd></td>
+<td>any shortcut you defined</td>
+</tr>
+<tr>
+<td>jira comment OL-1234</td>
+<td>make a comment</td>
+</tr>
+<tr>
+<td>jira view OL-1234</td>
+<td>view a ticket</td>
+</tr>
+<tr>
+<td>jira create -p OL</td>
+<td>create a ticket for project "OL"</td>
+</tr>
+<tr>
+<td>jira view OL-1234 -t debug</td>
+<td>check what fields are available/useful</td>
+</tr>
+<tr>
+<td>jira transitions</td>
+<td>available transition values</td>
+</tr>
+<tr>
+<td>jira transition "<val>" OL-</td>
+<td>move along the workflow</td>
+</tr>
+<tr>
+<td>jira take OL-</td>
+<td>assign it to myself</td>
+</tr>
+<tr>
+<td>jira give <userX> OL-</td>
+<td>give it to him/her</td>
+</tr>
+<tr>
+<td>jira done OL-</td>
+<td>mark it DONE</td>
+</tr>
+</tbody>
+</table>
+<p>So far, soooooooooooooooooooooooo good ~~~~~</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2018-06-06
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Netbox revised</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p><a href="http://netbox.readthedocs.io/en/latest/">Netbox</a> is a nice level 1 tool (for levels, see <a href="https://fengxia41103.github.io/myblog/capability model.html">capability model</a>).
+But we need more. Managing a lab or a rack is more than level 1. On
+top of all these, we talk about automation, which implies capabilities
+at least to level 4. Therefore, we used Netbox code as a starting
+point, and built a POC.</p>
+<h1>Background</h1>
+<p>It has been a painful experience to witness how we are diagnosing
+infrastructure, especially network connections, in a what I would call
+<code>chasing the rabbit</code> fashion in which <code>ping</code>, <code>route</code>, <code>vlan</code>, <code>port</code>
+on a switch, to which port the two ends of a cable plugged into, all
+coming to a single chain of a <code>valid</code> connection. Part of it is to
+verify hardware connections (cablings), part of software
+configurations (many layers deep). A knowledgeable person can traverse
+the link from one end to the other, but even he is faced with a harsh
+reality of which area is to focus on.</p>
+<p>If you think of it in the highest level &mdash; a topology design, its
+mirror image is the reality. Scanning devices to acquire and compose
+the reality is what computer is good at. Therefore, like counting
+inventory, it shall have the capability to <strong>replace</strong> the typing of
+repetitive commands by a human hand, and piece-meal ocean of meta data
+into a <strong>logical, meaningful view</strong> that saves operator mechanical
+efforts. Without knowing the design, at least it should produce, and
+even maintain, the reality view, on demand and continuously.</p>
+<p>Taking this further, if reality can be described, the same syntax
+shall be used to describe <strong>expectation</strong> (design). Now, we will be
+equiped with both views and produce a <strong>diff</strong> &rarr; Previously we
+are relying on an experienced operator to know where to look; in the
+future this diff view highlights it, color-codes it, for anyone who
+wants to look, anytime, and no devop expertise required.</p>
+<p>If you have read <a href="https://fengxia41103.github.io/myblog/capability model.html">system capability model</a>, you must have
+identified that this is a capability approach. This shifts the focus
+of management from bookkeeping to knowledge automation. The goal is
+not to eliminate human factor, but to alleviate waste of their
+bandwidth on things that can be well known, well modeled, and
+scriptable.</p>
+<p>Analysis requires intelligence; SSH to ten machines does not.</p>
+<p>There are essentially two type of models: logical and physical. Logic
+models are logical relationships, eg. device &rarr; tenant. Tenant is
+nothing but a logical concept. Physical models are describing a
+relationship that requires a physical connection, eg. an interface is
+connected to a switch port (via a cable).</p>
+<h1>Device</h1>
+<p>The center piece of Netbox models is the <code>Device</code>, representing a
+physical device such as server and switch. This makes sense as the
+primary physical asset of a data center are certainly these devices. </p>
+<figure class="col s12 center">
+    <img src="images/netbox%20device%20list.png"/>
+    <figcaption>Example list of devices</figcaption>
+</figure>
+
+<h2>Device role</h2>
+<p><code>DeviceRole</code> is a user-defined value list that can be assigned to a
+device. Its common use is to group device by its function, such as
+what we see above &mdash; "Management Switch", "Ceph".</p>
+<p>A device role also defines a color, thus making a color-coded
+presentation of a list of devices possible.</p>
+<h2>Device type</h2>
+<p><code>DeviceType</code> describes attributes such as manufacturer and model. There
+are two important flags that will affect how a device can be used:</p>
+<ol>
+<li>is a <code>network device</code>? &larr; if not, the device will not have
+   an interface &rarr; therefore, it will not be able to link to an IP!</li>
+<li>can have <code>child device</code>? &rarr; if not, it will not have bay device
+   (we model BMC controller as a bay device inside a server).</li>
+</ol>
+<figure class="col s12 center">
+    <img src="images/netbox%20devicetype%20list.png"/>
+    <figcaption>Example list of device types</figcaption>
+</figure>
+
+<h2>Access a device</h2>
+<p>How to access a device? In bare essence
+we need three things: <strong>(IP, username, password)</strong> (we will explain
+Netbox's way to control password in a later section). Further, we use
+<code>platform</code> value to determine access method:</p>
+<ol>
+<li><code>linux</code>: SSH</li>
+<li><code>Lenovo ENOS/CNOS</code>: these are Lenovo switch operating systems, and
+   access method is Telnet (see <a href="https://fengxia41103.github.io/myblog/switches.html">Network switch</a> for details.)</li>
+</ol>
+<figure class="row center">
+    <img src="images/netbox%20device%20section%201.png"
+        class="col s6"/>
+    <img src="images/netbox%20device%20section%202.png"
+        class="col s6"/>
+    <figcaption>Device IP & credential. A device can have multiple
+    IP address but only one primary IP4 & IP6. It can also
+    have multiple credentials. We are using credential type
+    "Nanagement" to highlight the one to use.</figcaption>
+</figure>
+
+<h2>Interface &amp; topology</h2>
+<p>A device whose device type sets <code>is_network_device=True</code> can be linked
+to an <code>Interface</code>, and an interface can be linked to an IP address.</p>
+<figure class="col s12 center">
+    <img src="images/netbox%20device%20interface.png"/>
+    <figcaption>Device interfaces</figcaption>
+</figure>
+
+<p>An <code>InterfaceConnection</code> linking two interfaces is the corner stone
+to describe a network topology:</p>
+<div class="highlight"><pre><span></span><code><span class="n">CONNECTION_STATUS_PLANNED</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">CONNECTION_STATUS_CONNECTED</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">CONNECTION_STATUS_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="n">CONNECTION_STATUS_PLANNED</span><span class="p">,</span> <span class="s1">&#39;Planned&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">CONNECTION_STATUS_CONNECTED</span><span class="p">,</span> <span class="s1">&#39;Connected&#39;</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">InterfaceConnection</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An InterfaceConnection represents a symmetrical, one-to-one</span>
+<span class="sd">    connection between two Interfaces. There is no significant</span>
+<span class="sd">    difference between the interface_a and interface_b fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">interface_a</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+        <span class="s1">&#39;Interface&#39;</span><span class="p">,</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;connected_as_a&#39;</span><span class="p">,</span>
+        <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">interface_b</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+        <span class="s1">&#39;Interface&#39;</span><span class="p">,</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;connected_as_b&#39;</span><span class="p">,</span>
+        <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">connection_status</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span>
+        <span class="n">choices</span><span class="o">=</span><span class="n">CONNECTION_STATUS_CHOICES</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">CONNECTION_STATUS_CONNECTED</span><span class="p">,</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Status&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>In the example topology diagram below, we see:</p>
+<ol>
+<li>Connect between port #34 of a switch (<code>LCTC-R1U39-SW</code>) to a BMC
+   interface (<code>ceph-1</code> is the BMC controller's name).</li>
+<li>
+<p>A server (<code>ceph-node-brain2</code>) has two interfaces &mdash; <code>eno1</code> and
+   <code>ens4f1</code>, where:</p>
+<ol>
+<li><code>eno1</code> is connected to port 2 of a switch (<code>R1U39</code>), and</li>
+<li><code>ens4f1</code> is connected to port 18 of another switch (<code>R1U37</code>).</li>
+</ol>
+</li>
+</ol>
+<figure class="col s12 center">
+    <img src="images/netbox%20device%20topology.png"/>
+    <figcaption>Example device view of a topology</figcaption>
+</figure>
+
+<h2>Children device (<code>DeviceBay</code>)</h2>
+<p>A device can have device bays, which essentially forms a
+<code>parent-children</code> relationship. One use case of this relationship is
+to register BMC controller as a bay device inside a server:</p>
+<figure class="col s12 center">
+    <img src="images/netbox%20device%20bay%20device.png"/>
+    <figcaption>Device bay</figcaption>
+</figure>
+
+<p>Conditions to form a parent-child relationship:</p>
+<ol>
+<li>parent device allows bay/child (defined in <code>DeviceType</code>)</li>
+<li>one can not install into itself</li>
+</ol>
+<h2>Related device</h2>
+<p><code>Related devices</code> is defined as devices that:</p>
+<ol>
+<li>belong to the same <code>site</code></li>
+<li>and has the same device role</li>
+</ol>
+<p>In Netbox this is only a convenience for navigation. However
+we can extend this idea using other definitions.</p>
+<figure class="col s12 center">
+    <img src="images/netbox%20device%20related%20devices.png"/>
+    <figcaption>Related devices</figcaption>
+</figure>
+
+<h2>Grouping</h2>
+<p>Just how many ways one can group devices? Maybe too many. <strong>Note</strong>
+that there are overlapping groups which are very confusing!</p>
+<ol>
+<li>Rack can also be grouped by <code>Site</code>.</li>
+<li>Both rack and site can be grouped by <code>Tenant</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">device_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;DeviceType&#39;</span><span class="p">,</span>
+    <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;instances&#39;</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+<span class="n">device_role</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;DeviceRole&#39;</span><span class="p">,</span>
+    <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;devices&#39;</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+<span class="n">tenant</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s2">&quot;tenancy.Tenant&quot;</span><span class="p">,</span>
+    <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;devices&#39;</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;Platform&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;devices&#39;</span><span class="p">,</span>
+    <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;Site&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;devices&#39;</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+<span class="n">rack</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;Rack&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;devices&#39;</span><span class="p">,</span>
+    <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+</code></pre></div>
+
+<h1>Rack</h1>
+<p>Rack is the physical grouping of devices. The most important thing
+about rack is whether it has availabe space to <strong>contain a device</strong>:</p>
+<ol>
+<li>rack height</li>
+<li>how much have been reserved (<code>RackReservation</code>)?</li>
+<li>what devices does it already have? what are their height and
+   depth? </li>
+</ol>
+<p>Depth comes to play because some devices can be half-depth, thus
+allowing two devices in the same slot &mdash; one facing the front,
+and one facing the back. Also, it is common that top-of-rack switch is
+mounted facing back so that cables can access its port.</p>
+<figure class="col s12 center">
+    <img src="images/netbox%20rack.png"/>
+    <figcaption>Example of a rack</figcaption>
+</figure>
+
+<p>There are four ways to group racks:</p>
+<div class="highlight"><pre><span></span><code><span class="n">site</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;Site&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;racks&#39;</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;RackGroup&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;racks&#39;</span><span class="p">,</span>
+    <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+<span class="n">tenant</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="n">Tenant</span><span class="p">,</span>
+    <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;racks&#39;</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+<span class="n">role</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+    <span class="s1">&#39;RackRole&#39;</span><span class="p">,</span>
+    <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;racks&#39;</span><span class="p">,</span>
+    <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">PROTECT</span><span class="p">)</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

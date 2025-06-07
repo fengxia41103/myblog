@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - demo</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/demo.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-10-15T21:43:00-04:00</updated><subtitle></subtitle><entry><title>SPA: a cofiguration Dashboard</title><link href="https://fengxia41103.github.io/myblog/project%20spa%20dashboard%20demo.html" rel="alternate"></link><published>2018-10-15T21:43:00-04:00</published><updated>2018-10-15T21:43:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-10-15:/myblog/project spa dashboard demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/spa%20dashboard%20demo.png" /&gt;
+    &lt;figcaption&gt;Project SPA Dashboard demo&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/spa-dashboard/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/fengxia41103/spa-dashboard"&gt;Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Project SPA Dashboard is a weekend fun. The idea came from Lenovo Open
+Cloud project, in which we have developed auto deployment of a complex
+stack on three physical servers. Services are Red Hat software
+deployed on a RHHI instance. Previously we have maintained a table
+(shown below) of URLs to these services since VM's IP and hostname are
+pre-determined. &lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/ibb%20rack%201%20cheatsheet.png" /&gt;
+    &lt;figcaption&gt;IBB example cheatsheet&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;However, since we have achieved daily deployment using playbook and
+&lt;code&gt;extra_vars&lt;/code&gt; as input, it is possible to generate a &lt;em&gt;dashboard&lt;/em&gt;
+representing a deployment instance with these actual config values,
+thus eliminating manual maintenance of a static wiki page.&lt;/p&gt;
+&lt;p&gt;For example, here is part of the config file of&lt;code&gt;Satellite&lt;/code&gt; VM:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;vm_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite &amp;lt;-- host name&lt;/span&gt;
+&lt;span class="nt"&gt;qcow_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel75_qcow_satellite&lt;/span&gt;
+
+&lt;span class="nt"&gt;cloud_init_nics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.41.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.252.0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.40.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.101&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth2&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/spa%20dashboard%20demo.png" /&gt;
+    &lt;figcaption&gt;Project SPA Dashboard demo&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/spa-dashboard/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/fengxia41103/spa-dashboard"&gt;Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Project SPA Dashboard is a weekend fun. The idea came from Lenovo Open
+Cloud project, in which we have developed auto deployment of a complex
+stack on three physical servers. Services are Red Hat software
+deployed on a RHHI instance. Previously we have maintained a table
+(shown below) of URLs to these services since VM's IP and hostname are
+pre-determined. &lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/ibb%20rack%201%20cheatsheet.png" /&gt;
+    &lt;figcaption&gt;IBB example cheatsheet&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;However, since we have achieved daily deployment using playbook and
+&lt;code&gt;extra_vars&lt;/code&gt; as input, it is possible to generate a &lt;em&gt;dashboard&lt;/em&gt;
+representing a deployment instance with these actual config values,
+thus eliminating manual maintenance of a static wiki page.&lt;/p&gt;
+&lt;p&gt;For example, here is part of the config file of&lt;code&gt;Satellite&lt;/code&gt; VM:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;vm_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite &amp;lt;-- host name&lt;/span&gt;
+&lt;span class="nt"&gt;qcow_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel75_qcow_satellite&lt;/span&gt;
+
+&lt;span class="nt"&gt;cloud_init_nics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.41.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.252.0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.40.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.101&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.20.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;nic_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eth2&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_boot_protocol&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;static&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_ip_address&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.30.101&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_netmask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;255.255.255.0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_gateway&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;172.20.30.1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;nic_on_boot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+
+&lt;span class="nt"&gt;dns1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.0.10&lt;/span&gt;
+&lt;span class="nt"&gt;dns2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;10.240.0.11&lt;/span&gt;
+&lt;span class="nt"&gt;host_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;brain1-satellite&lt;/span&gt;
+
+
+&lt;span class="nt"&gt;boot_devices&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;hd&lt;/span&gt;
+&lt;span class="nt"&gt;os&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;rhel_7x64&lt;/span&gt;
+&lt;span class="nt"&gt;cpu_cors&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;4&lt;/span&gt;
+&lt;span class="nt"&gt;memory&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;20GiB&lt;/span&gt;
+&lt;span class="nt"&gt;storage_domain_vm&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;iso&lt;/span&gt;
+&lt;span class="nt"&gt;storage_domain_disk&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;vmstore&lt;/span&gt;
+&lt;span class="nt"&gt;disk_format&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;cow&lt;/span&gt;
+&lt;span class="nt"&gt;disk_interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio_scsi&lt;/span&gt;
+&lt;span class="nt"&gt;disk_bootable&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;True&lt;/span&gt;
+
+&lt;span class="nt"&gt;nics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;profile_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;Campus&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;network_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;Campus&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic2&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;profile_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;PhysicalMgmt&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;network_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;PhysicalMgmt&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;nic3&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;interface&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;virtio&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;profile_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;VMMgmt&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;network_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;VMMgmt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Once retrieved, displaying them is really a no brainer.&lt;/p&gt;
+&lt;h1&gt;Design&lt;/h1&gt;
+&lt;p&gt;The design of it is straightforward. Two components:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;config repo server&lt;/strong&gt;: a web server serving YAML configs over
+   HTTP. The source of YAML files are from git. Alternative, we can
+   have github server raw file content directly, thus functioning as
+   the web server &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt; can &lt;code&gt;get&lt;/code&gt; these YAML data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;client side&lt;/strong&gt;: is the single page application who retrieves YAML data
+   and displays them.   &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Code structure is reused of &lt;a href="https://fengxia41103.github.io/myblog/data visualization.html"&gt;data visualization&lt;/a&gt;. Introduced
+&lt;a href="https://github.com/nodeca/js-yaml"&gt;js-yaml&lt;/a&gt; for parsing YAML, we use &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt; API to retrieve YAML
+configs, and map them to individual section for display. The overall
+architecture is shown below:&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/SPA%20dashboard%20design.png" /&gt;
+    &lt;figcaption&gt;SPA Dashboard Design&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Benefits are obvious:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;All values are from YAML config files used by actual
+   deployment. Therefore, it's the EXACT same source of our daily.&lt;/li&gt;
+&lt;li&gt;Consistency is guaranteed.&lt;/li&gt;
+&lt;li&gt;YAMLs are served by a webserver and retrieved by this
+   application. Thus, it is a trivial step away from having a
+   centralized "config repo service" for this EXACT purpose.&lt;/li&gt;
+&lt;li&gt;Application has built-in capability to &lt;code&gt;fetch&lt;/code&gt; data in format of
+   YAML or JSON. Thus, it can speak to any REST API, eg. getting
+   server meta from netbox, or POST a request to Tower to kickoff a
+   &amp;rarr; the possibility of integration is endless.&lt;/li&gt;
+&lt;li&gt;Any displayed config can be turned into a &lt;code&gt;input&lt;/code&gt; box, so we can
+   change config and trigger &lt;em&gt;redeploy&lt;/em&gt; or &lt;em&gt;update&lt;/em&gt;. The frontend
+   (this application) is ready; the function behind the scene is not
+   there yet. But when we ever have such capability, we can
+   demonstrate it quickly.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;Toolset&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://materializecss.com/"&gt;Materialize&lt;/a&gt;: "A modern responsive front-end framework based on Material Design" by their words.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://facebook.github.io/react/"&gt;REACT&lt;/a&gt;: core&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://webpack.github.io/"&gt;webpack&lt;/a&gt;: new module builder that is making lot of buzz these days.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt;: a new way to talk to API endpoints instead of &lt;code&gt;jQuery AJAX&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="demo"></category><category term="lenovo"></category></entry><entry><title>SPA: World Snapshot</title><link href="https://fengxia41103.github.io/myblog/data%20visualization.html" rel="alternate"></link><published>2016-10-15T22:00:00-04:00</published><updated>2016-10-15T22:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-10-15:/myblog/data visualization.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+  &lt;img src="images/country_1.png"/&gt;
+    &lt;figcaption&gt;World Snapshot&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://snapshots.world/"&gt;live demo&lt;/a&gt;, and &lt;a href="https://github.com/fengxia41103/worldsnapshot"&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The joy of making graphs in a data-driven web application has been the
+highlight that kept me going from project to project. Once all things
+are hooked up and data can be created in a meaningful way, the
+ultimate presentation are &lt;em&gt;reports&lt;/em&gt; and &lt;em&gt;graphs&lt;/em&gt;. In most cased, I
+have found graphs are far better than reports &amp;mdash; reports often
+fall into a table form which looks impressive because it is filled
+with data. But who is to the analysis and draw a conclusion!?  On the
+other hand, graph, even using the same data set as that of the
+report/table, is one step closer to a conclusive message &amp;mdash; KPI
+is above or below threshold, department A is doing better than
+department B, sales of this month dropped comparing to last month's...&lt;/p&gt;
+&lt;h1&gt;Data sources&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://dhsprogram.com/data/"&gt;DHS&lt;/a&gt;: &lt;a href="http://dhsprogram.com/data/"&gt;DHS&lt;/a&gt; data set is published by &lt;a href="https://www.usaid.gov/"&gt;US AID&lt;/a&gt;. Following its &lt;a href="http://api.dhsprogram.com/#/index.html"&gt;API&lt;/a&gt;
+   documents, &lt;a href="http://api.dhsprogram.com/#/api-indicators.cfm"&gt;indicators&lt;/a&gt; are selected to depict a country's well doing.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries"&gt;The World Bank&lt;/a&gt;:  Another comprehensive data set is &lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries"&gt;The World Bank&lt;/a&gt; set.
+   Check out its …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+  &lt;img src="images/country_1.png"/&gt;
+    &lt;figcaption&gt;World Snapshot&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://snapshots.world/"&gt;live demo&lt;/a&gt;, and &lt;a href="https://github.com/fengxia41103/worldsnapshot"&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The joy of making graphs in a data-driven web application has been the
+highlight that kept me going from project to project. Once all things
+are hooked up and data can be created in a meaningful way, the
+ultimate presentation are &lt;em&gt;reports&lt;/em&gt; and &lt;em&gt;graphs&lt;/em&gt;. In most cased, I
+have found graphs are far better than reports &amp;mdash; reports often
+fall into a table form which looks impressive because it is filled
+with data. But who is to the analysis and draw a conclusion!?  On the
+other hand, graph, even using the same data set as that of the
+report/table, is one step closer to a conclusive message &amp;mdash; KPI
+is above or below threshold, department A is doing better than
+department B, sales of this month dropped comparing to last month's...&lt;/p&gt;
+&lt;h1&gt;Data sources&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://dhsprogram.com/data/"&gt;DHS&lt;/a&gt;: &lt;a href="http://dhsprogram.com/data/"&gt;DHS&lt;/a&gt; data set is published by &lt;a href="https://www.usaid.gov/"&gt;US AID&lt;/a&gt;. Following its &lt;a href="http://api.dhsprogram.com/#/index.html"&gt;API&lt;/a&gt;
+   documents, &lt;a href="http://api.dhsprogram.com/#/api-indicators.cfm"&gt;indicators&lt;/a&gt; are selected to depict a country's well doing.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries"&gt;The World Bank&lt;/a&gt;:  Another comprehensive data set is &lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-api-indicator-queries"&gt;The World Bank&lt;/a&gt; set.
+   Check out its &lt;a href="http://data.worldbank.org/indicator"&gt;indicators&lt;/a&gt; page for a list of available indexes. Note that
+   &lt;a href="https://datahelpdesk.worldbank.org/knowledgebase/topics/125589"&gt;official document&lt;/a&gt; is still refering to &lt;em&gt;v1&lt;/em&gt; version of the API, which
+   will block on CORS requests. Using &lt;strong&gt;v2/en&lt;/strong&gt; endpoint instead. For example,
+   to get a list of country names:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://api.worldbank.org/v2/en/countries?format=json&amp;amp;per_page=1000&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;Toolset&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://materializecss.com/"&gt;Materialize&lt;/a&gt;: "A modern responsive front-end framework based on Material Design" by their words.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://facebook.github.io/react/"&gt;REACT&lt;/a&gt;: core&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://webpack.github.io/"&gt;webpack&lt;/a&gt;: new module builder that is making lot of buzz these days.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt;: a new way to talk to API endpoints instead of &lt;code&gt;jQuery AJAX&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;REACT components&lt;/h1&gt;
+&lt;p&gt;Following REACT practice, compoents have been designed to handle both the
+data acquisition through 3rd party API, and ploting using the awesome D3 library:&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+  &lt;img src="images/country health.png"/&gt;
+    &lt;figcaption&gt;Data visualization SPA architecture&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The key is to encapsulate data acquisition into &lt;code&gt;AjaxContainer&lt;/code&gt;, data
+source handling into &lt;code&gt;DataSourceContainer&lt;/code&gt; and graphing into its own
+&lt;code&gt;GraphFactoryContainer&lt;/code&gt;.  Therefore, we can swap out any of these
+components, for example, using Google chart for graphing, adding a new
+data source, or using &lt;a href="https://github.com/github/fetch"&gt;fetch&lt;/a&gt; instead of &lt;code&gt;jQuery&lt;/code&gt; for AJAX calls.&lt;/p&gt;</content><category term="demo"></category><category term="demo"></category><category term="react"></category></entry><entry><title>SPA: car leasing calculator</title><link href="https://fengxia41103.github.io/myblog/car%20leasing.html" rel="alternate"></link><published>2016-09-30T21:00:00-04:00</published><updated>2016-09-30T21:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-09-30:/myblog/car leasing.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_car.png"/&gt;
+    &lt;figcaption&gt;Project Car Leasing Calculator&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator angular.html"&gt;AngularJS version&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator react.html"&gt;REACT version&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Car leasing rooted in my own experience while researching for a new
+car.  After putting together an Excel to model the car leasing
+process, I started to think how to make the lesson learned available
+for other buyers. Also, I figure this is a perfect candidate for a
+single page application (SPA).&lt;/p&gt;
+&lt;p&gt;Two versions have been created &amp;mdash; one in &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt;, and another
+in &lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt;. This ties to my belief that however wonderful a tool may
+be, it is also important how well it fits &lt;em&gt;your way of thinking and
+typing&lt;/em&gt;. So this project gives a case to evaluate which one I'd like
+to invest into for more development.&lt;/p&gt;
+&lt;h1&gt;Leasing deciphered&lt;/h1&gt;
+&lt;p&gt;Sad reality is, all the leverages one can pull in a car leasing deal
+have been made &lt;em&gt;intentionally&lt;/em&gt; complicated so to confuse
+buyers. Jargon are everywhere, and everything is connected so one
+number changed seems to be changing everything, and some changes are
+more significant than others. How could one to figure out which is
+which!?&lt;/p&gt;
+&lt;p&gt;I …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_car.png"/&gt;
+    &lt;figcaption&gt;Project Car Leasing Calculator&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator angular.html"&gt;AngularJS version&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/drafts/car leasing calculator react.html"&gt;REACT version&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Car leasing rooted in my own experience while researching for a new
+car.  After putting together an Excel to model the car leasing
+process, I started to think how to make the lesson learned available
+for other buyers. Also, I figure this is a perfect candidate for a
+single page application (SPA).&lt;/p&gt;
+&lt;p&gt;Two versions have been created &amp;mdash; one in &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt;, and another
+in &lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt;. This ties to my belief that however wonderful a tool may
+be, it is also important how well it fits &lt;em&gt;your way of thinking and
+typing&lt;/em&gt;. So this project gives a case to evaluate which one I'd like
+to invest into for more development.&lt;/p&gt;
+&lt;h1&gt;Leasing deciphered&lt;/h1&gt;
+&lt;p&gt;Sad reality is, all the leverages one can pull in a car leasing deal
+have been made &lt;em&gt;intentionally&lt;/em&gt; complicated so to confuse
+buyers. Jargon are everywhere, and everything is connected so one
+number changed seems to be changing everything, and some changes are
+more significant than others. How could one to figure out which is
+which!?&lt;/p&gt;
+&lt;p&gt;I know there are many car leasing tutorials, blogs, articles and so
+on. But here I want to present a different approach.  First of all,
+let's turn those maths into diagram:&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/car leasing.png"/&gt;
+    &lt;figcaption&gt;
+        How do you get a monthly payment
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Now it's obvious, two numbers are the key because they determine monthly payment:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Financing cost: How much you are borrowing from bank? This is
+   determined by how much you can negotiate down the price, how much
+   deduction you can get, eg.  down payment, rebates, trade-ins,
+   credits. The rest will be the money you owe &amp;rarr; borrowing (or in
+   a fancy term, financing).&lt;/li&gt;
+&lt;li&gt;Depreciation cost: How much your lease will cost to the car to be
+   worth &lt;strong&gt;less&lt;/strong&gt; than a new one. This is the actual &lt;em&gt;car&lt;/em&gt; that you
+   are really paying for.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Two numbers are the key: financing cost and depreciation cost&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Financing cost then links APR (interest rate) because this is the
+amount buyer is borrowing from a financing lender, either a bank or
+the dealer itself. First of all, there is mathematical standard to
+compute this. You need a computer or a calculator for this because
+this is not linear math.  Second, believe or not, the effect of
+interest rate is not as significant as one thinks, and I'll show you
+why.&lt;/p&gt;
+&lt;p&gt;On the other hand, &lt;strong&gt;watch out&lt;/strong&gt; for depreciation cost because it is a
+disaster.  There is no standard whatsoever. The best reference is a
+&lt;strong&gt;residue rate&lt;/strong&gt; derived from &lt;em&gt;official flyer&lt;/em&gt; posted on
+manufacturer's website. But then there can be all kinds of excuses to
+void that. Basically each dealer can make up their own
+rules. Terrible. This is exactly the advantage dealer has over
+buyers. Depreciation cost is easy to calculate. For a $20,000 car, 10%
+decrease in residue rate will generate $2,000 more cash for the
+dealer. Spreading that out to 36-month term, it's a $56 more payment
+per month. So when leasing, make sure to use this tool to figure out
+what the residue rate the dealer's offer is implying. If it's too far
+off from the official flyer number, walk away!&lt;/p&gt;
+&lt;h2&gt;Math&lt;/h2&gt;
+&lt;p&gt;This is an example by &lt;a href="http://www.edmunds.com/car-leasing/calculate-your-own-lease-payment.html"&gt;Edmunds&lt;/a&gt;. See if you can follow the math now
+after reading the diagram above. Now by looking at this, I'm wondering
+maybe I should have built using this format. It is more form-like than
+a SPA so this can be easier for user to follow:&lt;/p&gt;
+&lt;table class="table striped bordered"&gt;
+  &lt;tbody&gt;&lt;tr&gt;
+    &lt;td&gt;1. Sticker Price of the car + options&lt;/td&gt;
+    &lt;td&gt;$23,000&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;2. Times the residual value percentage&lt;/td&gt;
+    &lt;td&gt;X 57%&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;3. Equals the residual value&lt;/td&gt;
+    &lt;td&gt;= $13,110&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;4. Invoice price of car minus incentives (net capitalized cost) &lt;/td&gt;
+    &lt;td&gt;$20,000&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;5. Minus the residual (from line 3)&lt;/td&gt;
+    &lt;td&gt;- $13,110&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;6. Equals the depreciation over 36 months&lt;/td&gt;
+    &lt;td&gt;= $6,890&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;7. Depreciation (line 6) divided by term in months&lt;/td&gt;
+    &lt;td&gt;÷ 36&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;8. Equals the monthly depreciation payment&lt;/td&gt;
+    &lt;td&gt;= $191&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;9. Net capitalized cost (From line 4)&lt;/td&gt;
+    &lt;td&gt;$20,000&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;10. Plus the residual (From line 3)&lt;/td&gt;
+    &lt;td&gt;+ $13,110&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;11. Equals&lt;/td&gt;
+    &lt;td&gt;= $33,110&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;12. Times the money factor&lt;/td&gt;
+    &lt;td&gt;X 0.00125 (3 percent)&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;13. Equals money factor (interest) payment portion&lt;/td&gt;
+    &lt;td&gt;= $41&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;14. Monthly depreciation payment (from line 8)&lt;/td&gt;
+    &lt;td&gt;$191&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;15. Plus money factor payment portion (from line 12)&lt;/td&gt;
+    &lt;td&gt;+ $41&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;16. Equals bottom-line monthly lease payment&lt;/td&gt;
+    &lt;td&gt;= $232&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h1&gt;AngularJS&lt;/h1&gt;
+&lt;p&gt;First version was created in &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt;.  In particular, I was
+interested in its &lt;a href="https://docs.angularjs.org/guide/component"&gt;component&lt;/a&gt;. It has been quite interesting to make
+this page design based on component architecture.  Component
+encapsulates logic and view rendering into one piece.  The HTML
+templating capability has saved a lot of typings as well as making
+changing any component a simple task.  For example, we put all form
+input boxes into a component called &lt;code&gt;myinput&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;component&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;myinput&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;bindings&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;label&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;@&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;model&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;=&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;@&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;max&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;@&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;@&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;step&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;@&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="nx"&gt;templateUrl&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/app/car-leasing/form_input.hh&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// Decimal points&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;min&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And the template code &lt;code&gt;form_input.hh&lt;/code&gt; (shown below). The extension
+&lt;code&gt;.hh&lt;/code&gt; is chosen because &lt;code&gt;.html&lt;/code&gt; or &lt;code&gt;.htm&lt;/code&gt; will be picked up by Pelican
+for page rendering and not copied as static file even though its
+parent path is a &lt;em&gt;STATIC&lt;/em&gt;. Oh well.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;row form-group&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;col-xs-6 col-form-label text-right&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;[[&lt;span class="w"&gt; &lt;/span&gt;$ctrl.label&lt;span class="w"&gt; &lt;/span&gt;]]&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;col-xs-5 input-group&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;float:left;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;input-group-addon&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;ng-show=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;$ctrl.type==&amp;#39;$&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;$&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;form-control&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;min=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;[[$ctrl.min]]&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;max=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;[[$ctrl.max]]&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;step=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;[[$ctrl.step]]&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;ng-model=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;$ctrl.model&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;input-group-addon&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;ng-show=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;$ctrl.type==&amp;#39;%&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;%&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;input-group-addon&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;ng-show=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;$ctrl.type==&amp;#39;month&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;month&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With the component in place, rendering an &lt;code&gt;form input&lt;/code&gt; section like this one is a breeze:&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/car_1.png"/&gt;
+  ! &lt;figcaption&gt;
+        AngularJS Component rendered form inputs
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;To complete this, below shows the file structure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;├──&lt;span class="w"&gt; &lt;/span&gt;app.module.js
+└──&lt;span class="w"&gt; &lt;/span&gt;car-leasing
+&lt;span class="w"&gt;    &lt;/span&gt;├──&lt;span class="w"&gt; &lt;/span&gt;assumption.hh
+&lt;span class="w"&gt;    &lt;/span&gt;├──&lt;span class="w"&gt; &lt;/span&gt;car-leasing.module.js
+&lt;span class="w"&gt;    &lt;/span&gt;├──&lt;span class="w"&gt; &lt;/span&gt;form_input.hh
+&lt;span class="w"&gt;    &lt;/span&gt;├──&lt;span class="w"&gt; &lt;/span&gt;form_section_header.hh
+&lt;span class="w"&gt;    &lt;/span&gt;├──&lt;span class="w"&gt; &lt;/span&gt;piechart.hh
+&lt;span class="w"&gt;    &lt;/span&gt;├──&lt;span class="w"&gt; &lt;/span&gt;summary_line_item.hh
+&lt;span class="w"&gt;    &lt;/span&gt;└──&lt;span class="w"&gt; &lt;/span&gt;var_display.hh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This maps directly to the component structure of this page:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summary &amp;larr; a virtual container&lt;ul&gt;
+&lt;li&gt;summary line item &amp;larr; &lt;code&gt;summary_line_item.hh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Charts &amp;larr; a virtual container&lt;ul&gt;
+&lt;li&gt;pie chart &amp;larr; &lt;code&gt;piechart.hh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Form &amp;larr; a virtual container&lt;ul&gt;
+&lt;li&gt;form header &amp;larr; &lt;code&gt;form_section_header.hh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;input boxes &amp;larr; &lt;code&gt;form_input.hh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;derived value display &amp;larr; &lt;code&gt;var_display.hh&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;REACT&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt; is making a lot of buzz in my circle these days. Using this
+project as an exercise I decided to look into building an &lt;em&gt;identical&lt;/em&gt;
+version as the Angular's. Both ended up writing about 700 lines of
+code so typing wise they are almost the same.&lt;/p&gt;
+&lt;p&gt;REACT is done essentially in a big blob of code. I don't see there is
+a templating system for JSX so everything is wired in a single
+file. This is a plus when it's a one-man show because I don't have to
+jump from file to file. But I can see in large-scale project this will
+be a problem.&lt;/p&gt;
+&lt;h2&gt;Component&lt;/h2&gt;
+&lt;p&gt;Similar to Angular's &lt;a href="https://docs.angularjs.org/guide/component"&gt;component&lt;/a&gt;, view and logic are encapsulated
+within a REACT &lt;a href="https://facebook.github.io/react/docs/component-api.html"&gt;react component&lt;/a&gt;. But different from Angular's,
+REACT's philosophy of one-way data flow enforces design to separate
+&lt;em&gt;props&lt;/em&gt; from &lt;em&gt;state&lt;/em&gt;, which makes internal concepts clearer. State
+becomes only necessary if its value will change and the change will
+drive a UI decision.&lt;/p&gt;
+&lt;p&gt;This separation makes sense to me because too often I find myself
+creating an army of variables just to transfer information from module
+to module and there is not distinction between what is to be
+&lt;code&gt;consumed&lt;/code&gt; only in submodule for display or further computation, and
+what is to be modifiable and make the change available else where.
+Even though REACT's &lt;code&gt;onChange&lt;/code&gt; event way of bubbling a change back to
+parent component feels awkward, it does enforce such design decision.&lt;/p&gt;
+&lt;p&gt;Angular, on the other hand, gives you two-way binding for free so
+everything becomes changeable. It's convenient for prototyping. But in
+my opinion it delays these decisions which will surface in refactoring
+phase anyway. So I think REACT helps in this regard to make the
+separation more natural than Angular's way.&lt;/p&gt;
+&lt;h2&gt;View and Control&lt;/h2&gt;
+&lt;p&gt;I have been doing things in MVC pattern all along. But there is a
+devil lurking in background that feels strange and awkward &amp;mdash; how to
+make the UX dynamic? jQuery has been the tool for the last 3-5 years.
+But honestly selecting element makes it tightly coupled with
+HTML presentation layer that it is too fragile to be maintainable! How many
+times you have added outer &lt;code&gt;div&lt;/code&gt; and broke a jQuery action?&lt;/p&gt;
+&lt;p&gt;Angular and REACT both make life easier by tieing an actual variable
+with such task. This goes back to my argument about decision making
+&amp;mdash; despite that it's a UI or a business logic, if there is a
+decision to be made in order to set its &lt;em&gt;state&lt;/em&gt; accordingly, such
+decision needs to be as explicit as possible. jQuery's element
+selection is too depending on the HTML structure to work
+right. Further, jQuery's code lives in its own &lt;code&gt;&amp;lt;script&lt;/code&gt; section that
+it becomes hard to understand which section of the DOM it will
+manipulate. As a matter of fact it has access to the entire DOM so it
+is irrelevant which template it lives in, it can screw up the others
+if it chooses so. It gets even worse when using a templating system
+that DOM details are not known until full rendered so that the query
+line has to observe things like the sequence of the list item so
+picking the &lt;code&gt;next("li")&lt;/code&gt; gives you the one you want. These
+&lt;em&gt;techniques&lt;/em&gt; is simply &lt;strong&gt;counter-productive&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;I like both &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt; and &lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt;. My sense at this moment is
+that &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt; is more developed. Especially with its &lt;a href="https://docs.angularjs.org/guide/component"&gt;component&lt;/a&gt;
+design, one can do the same thing as &lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt;, and with all the other
+good stuff &lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt; can do.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://facebook.github.io/react/docs/getting-started.html"&gt;REACT&lt;/a&gt; is a good choice for SPA. Its one-way data binding is a
+great idea, IMHO, that enforces an important design decision. Putting
+both HTML and JS in one place is a brave attempt to define what a
+component is. Let's face it, in today's web application, all UI
+elements may respond to some user event or data event so leveraging
+Javascript's full power to control presentation from its birth instead
+from jQuery's backwards logic is the right direction.&lt;/p&gt;</content><category term="demo"></category><category term="demo"></category><category term="angular"></category><category term="react"></category></entry><entry><title>Project Fashion Demo</title><link href="https://fengxia41103.github.io/myblog/project%20fashion%20demo.html" rel="alternate"></link><published>2016-03-06T09:00:00-05:00</published><updated>2016-03-06T09:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-03-06:/myblog/project fashion demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_fashion.png" /&gt;
+    &lt;figcaption&gt;Project Fashion front page&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://fengxia.co:8003/wei/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Project Fashion is built to support daily business of an international
+trading company who specializes fashion products. Main functions of
+the application include product management, customer and vendor
+database, order management (both sales and purchase), and inventory
+management.&lt;/p&gt;
+&lt;p&gt;The company is based in US with two subsidiaries in mainland China.
+Its challenges lied in multiple folds. First, orders and updates are emailed
+back and forth which is error prone and can be quickly out of sync with
+reality. Second, operation becomes
+unaccountable when critical data points are missing, eg. who made
+the last modification 2of a sales order? Third, vendors are operating
+in Europe and North America time zones while the company's customers
+are in China. The time difference and geographical separation between
+the two ends make information flow difficult without a centrally maintained
+information repository. Cloud drives were tried but still they
+lack the capability to provide a coherent view for both sides.&lt;/p&gt;
+&lt;p&gt;On top of these issues, the company was to launch an initiative
+to …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_fashion.png" /&gt;
+    &lt;figcaption&gt;Project Fashion front page&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://fengxia.co:8003/wei/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Project Fashion is built to support daily business of an international
+trading company who specializes fashion products. Main functions of
+the application include product management, customer and vendor
+database, order management (both sales and purchase), and inventory
+management.&lt;/p&gt;
+&lt;p&gt;The company is based in US with two subsidiaries in mainland China.
+Its challenges lied in multiple folds. First, orders and updates are emailed
+back and forth which is error prone and can be quickly out of sync with
+reality. Second, operation becomes
+unaccountable when critical data points are missing, eg. who made
+the last modification 2of a sales order? Third, vendors are operating
+in Europe and North America time zones while the company's customers
+are in China. The time difference and geographical separation between
+the two ends make information flow difficult without a centrally maintained
+information repository. Cloud drives were tried but still they
+lack the capability to provide a coherent view for both sides.&lt;/p&gt;
+&lt;p&gt;On top of these issues, the company was to launch an initiative
+to develop an e-Commerce platform for its customers and vendors.
+This calls for a backbone system that can support not only the company's
+currently offline operations, but its strategy going forward.&lt;/p&gt;
+&lt;p&gt;Without a further delay, I will introduce the core functions
+and design considerations in these articles:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;product and inventory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;sales order and purchase order&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/fashion reports.html"&gt;reporting&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="demo"></category></entry><entry><title>Project Stock Backtesting Demo</title><link href="https://fengxia41103.github.io/myblog/project%20stock%20demo.html" rel="alternate"></link><published>2015-08-06T15:00:00-04:00</published><updated>2015-08-06T15:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-08-06:/myblog/project stock demo.html</id><content type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_jk.png"/&gt;
+    &lt;figcaption&gt;Project Stock frontpage&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://fengxia.co:8002/jk/"&gt;Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This project started at lunch with a friend who has been trading
+stocks as hobby for years. None of us has worked in a trading house
+playing with some serious money. Nonetheless, he believed that he has
+found a winner strategy and I felt there is only one way to prove it
+&amp;mdash; data and test.&lt;/p&gt;
+&lt;p&gt;So here it is, a tool that can test a trading strategy over S&amp;amp;P 500
+daily data and a few other data sets. The cool thing about this
+application is that simulation is done as background process and
+report has not only statistics compared against some index such as the
+S&amp;amp;P 500, but a detailed step-by-step transaction trace that is ready
+for a replay.&lt;/p&gt;
+&lt;p&gt;The bad news is that his winner strategy doesn't seem to be a winner
+yet.  The good news is that we now have a framework that can host much
+more data set and strategies, and running data set in this scale is
+fun.&lt;/p&gt;</content><category term="demo"></category></entry><entry><title>Project GKP Demo</title><link href="https://fengxia41103.github.io/myblog/project%20gkp%20demo.html" rel="alternate"></link><published>2015-03-06T09:00:00-05:00</published><updated>2015-03-06T09:00:00-05:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2015-03-06:/myblog/project gkp demo.html</id><summary type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_gkp.png"/&gt;
+    &lt;figcaption&gt;Project GKP frontpage&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://fengxia.co:8001/gaokao/"&gt;Demo (in Chinese)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Project GKP is an interesting one.  It is a web tool that helps high
+school graduates in China to find a right college.  The grand vision
+is to make it a one-stop shop to get information that are mostly
+relevant at each step of research.&lt;/p&gt;
+&lt;p&gt;When we first conceived this idea, the leader in this field was a
+Chinese startup company, &lt;a href="http://www.gaokaopi.com/"&gt;高考派&lt;/a&gt;(aka. GKP). It was rumored that
+the company was facing a pending acquisition with a enticing price
+tag. After diving into their site for a few weeks, we came to realize
+that beneath the skin of their application, its baseline data was
+seriously broken. For example, GKP's core feature was its historical
+exam data. However, we found a dozen similar sources all claimed to
+have the same data set. But surprisingly there have been hard reached
+to find agreement between any of the two data sets! This cast a
+serious doubt on the validity of these services. Further analysis of
+them made …&lt;/p&gt;</summary><content type="html">&lt;figure class="s12 center"&gt;
+    &lt;img src="images/demo_gkp.png"/&gt;
+    &lt;figcaption&gt;Project GKP frontpage&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://fengxia.co:8001/gaokao/"&gt;Demo (in Chinese)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Login: (demo, demopassword)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Project GKP is an interesting one.  It is a web tool that helps high
+school graduates in China to find a right college.  The grand vision
+is to make it a one-stop shop to get information that are mostly
+relevant at each step of research.&lt;/p&gt;
+&lt;p&gt;When we first conceived this idea, the leader in this field was a
+Chinese startup company, &lt;a href="http://www.gaokaopi.com/"&gt;高考派&lt;/a&gt;(aka. GKP). It was rumored that
+the company was facing a pending acquisition with a enticing price
+tag. After diving into their site for a few weeks, we came to realize
+that beneath the skin of their application, its baseline data was
+seriously broken. For example, GKP's core feature was its historical
+exam data. However, we found a dozen similar sources all claimed to
+have the same data set. But surprisingly there have been hard reached
+to find agreement between any of the two data sets! This cast a
+serious doubt on the validity of these services. Further analysis of
+them made it clear that even though China's college admission is
+centralized around test scores, selecting the &lt;em&gt;right&lt;/em&gt; school is
+not. There are rich set of peripheral information that students and
+their families would like to consider besides a test score. But none
+of them offered much help.&lt;/p&gt;
+&lt;p&gt;Therefore, we have shifted our strategy and embarked on a different
+journey. Score is becoming one facet of a multi-dimension information
+repository.  We focused on identifying channels and means students are
+using to acquire information, and the types of information that they
+would want to have access to at different context of research &amp;mdash;
+what is important to know about the city? the school itself? the
+people in school?  how easy to get there and come home?... Utilizing
+advanced techniques we have built data pipeline that finds the answer
+for you.&lt;/p&gt;
+&lt;p&gt;Read on about its functions and design considerations and try your
+hand with demo.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/gkp introduction.html"&gt;state, city and a school map&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/gkp schools.html"&gt;everything about a school&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fengxia41103.github.io/myblog/gkp majors.html"&gt;majors&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="demo"></category></entry></feed>

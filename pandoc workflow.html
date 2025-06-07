@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-04-30
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">Pandoc workflow</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><figure class="col s12">
+  <img src="images/peppa.jpg"/>
+</figure>
+
+<p><a href="https://pandoc.org/MANUAL.html">Pandoc</a> is awesome. I have been using
+it for the last six months now writing a reference architecture
+document for work. Here is some tips of how I'm using it.</p>
+<h1>doc header</h1>
+<p>Things that are specific to that document. This, thus, is context
+sensitive &mdash; <code>title</code>, <code>subtitle</code>, <code>author</code>, <code>bibliography</code>,
+<code>abstract</code>, <code>keywords</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Open Cloud  Reference Architecture</span>
+<span class="nt">subtitle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Version 1.0</span>
+<span class="nt">author</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Feng Xia</span>
+
+<span class="nt">bibliography</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">feng.bib</span>
+<span class="nt">keywords</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Open Cloud</span><span class="p p-Indicator">]</span>
+<span class="nt">abstract</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+
+<span class="w">  </span><span class="no">Anything goes here.</span>
+</code></pre></div>
+
+<p>One catch is semicolon in <code>title</code>! Unbelievably, which I haven't
+figured out why, that including a ":" in the title string will mess
+up export to PDF. The symptom you will see is that all your
+reference in <code>.bib</code> will not be found!!</p>
+<h1>LaTex setting</h1>
+<p>A universal setting to latex export. This is additional to the LaTex
+template file I use. Supposedly I can set all these in the template
+also.</p>
+<p>But if I'm using multiple template, this can be looked as the common
+settings for all the PDF I write.</p>
+<p>Here is <a href="/downloads/pandoc/latex.yaml">current version</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">documentclass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scrreprt</span>
+<span class="nt">papersize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a4</span>
+<span class="nt">mainfont</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ubuntu</span>
+<span class="nt">monofont</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DejaVu Sans Condensed</span>
+<span class="nt">fontsize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12pt</span>
+<span class="nt">geometry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">margin=1in</span>
+<span class="nt">linkstyle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slanted</span>
+<span class="nt">linkcolor</span><span class="p">:</span><span class="w"> </span><span class="c1">#d52349</span>
+<span class="nt">titlepage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">titlepage-color</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;FFFFFF&quot;</span>
+<span class="nt">titlepage-text-color</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5C68C0&quot;</span>
+<span class="nt">titlepage-rule-color</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5C68C0&quot;</span>
+<span class="nt">logo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;../diagrams/company-logo.png&quot;</span>
+<span class="nt">toc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">toc-depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="nt">toc-own-page</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">lof</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">lot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">link-citations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">header-includes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\usepackage{quotchap}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\usepackage{fvextra}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\usepackage{parskip}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\usepackage{fancyhdr}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\pagestyle{fancy}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\fancyhead{}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\fancyfoot{}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\fancyhead[L]{\leftmark}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\fancyhead[R]{\today}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\fancyfoot[R]{\thepage}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\renewcommand{\headrulewidth}{0.4pt}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{breaklines=true}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{language=[Motorola68k]Assembler}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{basicstyle=\small\ttfamily}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{extendedchars=true}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{tabsize=2}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{columns=fixed}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{showstringspaces=false}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{frame=trbl}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{frameround=tttt}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{framesep=4pt}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{numbers=left}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{numberstyle=\tiny\ttfamily}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">\lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}</span>
+<span class="nn">---</span>
+</code></pre></div>
+
+<h1>LaTex template</h1>
+<p>A massive LaTex writing that will be used to generate LaTex and
+PDF. As of writing, there are two templates I like:
+1. <a href="/downloads/pandoc/eisvogel.tex">eisvogel.tex</a>, found <a href="https://github.com/Wandmalfarbe/pandoc-latex-template/blob/master/eisvogel.tex">here</a>.
+2. <a href="/downloads/pandoc/feng.tex">feng.tex</a>, modified based on <code>eisvogel</code>, and modified to my favourate
+   title page.</p>
+<h1>BibTex</h1>
+<p>Lesson learned, though late, is still useful, is the BibTex. <strong>Don't
+be lazy</strong> by using direct Markdown links to reference as hyperlink
+&larr; it doesn't cut it. Instead, use the <code>.bib</code>, it's much better,
+and is <strong>incremental</strong>, meaning your collection will grow, and it
+benefits to any follow up docs you will write and want to use the same
+source for reference! and to generate a bibliography now at the end of
+your doc is a snap, and it looks, beautiful!</p>
+<figure class="col l6 m6 s12">
+  <img src="images/bibliography.png"/>
+  <figcaption>Example of .bib result in PDF</figcaption>
+</figure>
+
+<p>Use the <a href="http://web.mit.edu/rsi/www/pdfs/bibtex-format.pdf">MIT's guide</a> for format references.</p>
+<h2>emacs + RefTex</h2>
+<p>Found it <a href="https://gist.github.com/kleinschmidt/5ab0d3c423a7ee013a2c01b3919b009a#file-reftex-markdown-el">here</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">;; reftex in markdown mode</span>
+
+<span class="c1">;; if this isn&#39;t already set in your .emacs</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">reftex-default-bibliography</span><span class="w"> </span><span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;/path/to/library.bib&quot;</span><span class="p">))</span>
+
+<span class="c1">;; define markdown citation formats</span>
+<span class="p">(</span><span class="nb">defvar</span><span class="w"> </span><span class="nv">markdown-cite-format</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">markdown-cite-format</span>
+<span class="w">      </span><span class="o">&#39;</span><span class="p">(</span>
+<span class="w">        </span><span class="p">(</span><span class="nv">?\C-m</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;[@%l]&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="nv">?p</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;[@%l]&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="nv">?t</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;@%l&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">      </span><span class="p">)</span>
+
+<span class="c1">;; wrap reftex-citation with local variables for markdown format</span>
+<span class="p">(</span><span class="nb">defun</span><span class="w"> </span><span class="nv">markdown-reftex-citation</span><span class="w"> </span><span class="p">()</span>
+<span class="w">  </span><span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">((</span><span class="nv">reftex-cite-format</span><span class="w"> </span><span class="nv">markdown-cite-format</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="nv">reftex-cite-key-separator</span><span class="w"> </span><span class="s">&quot;; @&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">(</span><span class="nv">reftex-citation</span><span class="p">)))</span>
+
+<span class="c1">;; bind modified reftex-citation to C-c[, without enabling reftex-mode</span>
+<span class="c1">;; https://www.gnu.org/software/auctex/manual/reftex/Citations-Outside-LaTeX.html#SEC31</span>
+<span class="p">(</span><span class="nv">add-hook</span>
+<span class="w"> </span><span class="ss">&#39;markdown-mode-hook</span>
+<span class="w"> </span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="p">()</span>
+<span class="w">   </span><span class="p">(</span><span class="nv">define-key</span><span class="w"> </span><span class="nv">markdown-mode-map</span><span class="w"> </span><span class="s">&quot;\C-c[&quot;</span><span class="w"> </span><span class="ss">&#39;markdown-reftex-citation</span><span class="p">)))</span>
+</code></pre></div>
+
+<p>Once restarted emacs, use <code>C-c[</code> then <code>C-M</code> to select a citation
+style, and type in a regex, eg. <code>redhat-</code> and ENTER. Viola, a list of
+matched entries to select, and ENTER again &rarr;
+<code>[@redhat-rhhi-guide]</code>. Nice ~~</p>
+<h2>Styles</h2>
+<p>Wow, I never knew there are so many styles to choose from. The list
+I'm going by is <a href="https://github.com/citation-style-language/styles">here</a>. For web URLs, I found the <a href="https://github.com/citation-style-language/styles/blob/master/ieee-with-url.csl">ieee with
+url</a> is the only one that works.</p>
+<p>The biggest problem I see, is that web page does not have date (well,
+I guess they do, probably in its meta section, but I didn't bother to
+look into it). So other styles will render it as "Red Hat, n.d" &rarr;
+<code>n.d</code> for "no date"? Doesn't look nice.</p>
+<h1>Makefile</h1>
+<p>I can't remember all the pandoc CLI switches. Use <code>make</code> to compile
+multiple versions in one bang. Here is <a href="/downloads/pandoc/Makefile">current version</a>.</p>
+<p>Define macros at the beginning:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">latex_template</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>feng.tex
+<span class="nv">rhhi_ra_pdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>feng<span class="se">\ </span>ra.pdf<span class="w"> </span><span class="c1"># espace white space!</span>
+<span class="nv">rhhi_ra_md</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>feng<span class="se">\ </span>ra.md
+</code></pre></div>
+
+<p>To compile to PDF:</p>
+<div class="highlight"><pre><span></span><code>pandoc<span class="w"> </span>latex.yaml<span class="w"> </span><span class="k">$(</span>rhhi_ra_md<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--number-sections<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--from<span class="w"> </span>markdown<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span><span class="k">$(</span>rhhi_ra_pdf<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--highlight-style<span class="w"> </span>pygments<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filter<span class="w"> </span>pandoc-fignos<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--listings<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--pdf-engine<span class="w"> </span>xelatex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--template<span class="w"> </span><span class="k">$(</span>latex_template<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-M<span class="w"> </span><span class="nv">date</span><span class="o">=</span><span class="s2">&quot;`date &quot;</span>+%B<span class="w"> </span>%e,<span class="w"> </span>%Y<span class="s2">&quot;`&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filter<span class="w"> </span>pandoc-citeproc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--csl<span class="w"> </span><span class="k">$(</span>csl<span class="k">)</span>
+</code></pre></div>
+
+<p>To compile to DOCX:</p>
+<div class="highlight"><pre><span></span><code>pandoc<span class="w"> </span><span class="k">$(</span>rhhi_ra_md<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--from<span class="w"> </span>markdown<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span><span class="k">$(</span>rhhi_ra_docx<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--highlight-style<span class="w"> </span>pygments<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filter<span class="w"> </span>pandoc-fignos<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--listings<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--columns<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filter<span class="w"> </span>pandoc-citeproc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--csl<span class="w"> </span><span class="k">$(</span>csl<span class="k">)</span>
+</code></pre></div>
+
+<h1>Workflow</h1>
+<p>Quite simple: write &rarr; make <whatever> &rarr; view &rarr; repeat.</p>
+<h2>Cursed by WORD, and coworkers</h2>
+<p>The pain, comes in when you need <strong>collaboration</strong> &mdash; ppl insist
+to use DOC and change tracking. Unbelievable. I think the biggest
+curse I have had in my professional training, is that I was introduced
+to the LaTex so early that I simply could not stand the WORD, which
+makes me the super minority in corporate world. I have been battling
+this all my career. I thought pandoc is gonna save the day, since I'm
+now dealing with <em>technical</em> people now.</p>
+<p>No avail. When it comes down to writing a <em>paper</em>, this generation, is
+trained to think of WORD, only. You see emails with attachment, and
+filename with a timestamp "_0409", then "_0410" as the next version
+&mdash; for me who uses SVN then git as the life line of work, this,
+is purely disaster &larr; <strong>every single time</strong>, somebody will do one
+the two things:</p>
+<ol>
+<li>
+<p>Forgot to change the filename after an edit, thus now we have two
+   files of the same name, but different contents.</p>
+</li>
+<li>
+<p>Forgot to send out the latest, review the latest, for, oh well, how
+   would s/he know which is the latest!!? The convention is, of
+   course, the last email attachment you received.</p>
+</li>
+</ol>
+<p>Good luck.</p>
+<p>I give up this battle now at this point. Like teaching a kid &mdash;
+you can't really teach them. You just have to wait for them to grow
+up, if ever. </p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

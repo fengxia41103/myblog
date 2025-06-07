@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2023-06-26
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+
+    <h1 class="myhighlight">k8s lab</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>I'm surprised that no article is giving a clear setup of a home k8s lab
+w/ a Linux host. So here it is.</p>
+<h1>On Dev node</h1>
+<p>On your dev node, which is a machine outside k8s cluster
+node. Assuming you have the following installed already:</p>
+<ol>
+<li>
+<p>Python and python <code>venv</code> module.</p>
+</li>
+<li>
+<p>Ansible. Install it in a <code>venv</code>.</p>
+</li>
+<li>
+<p>KVM stuff. See my dev's <code>kvm</code> project for details. You could also
+   use any VM framework as long as you could create 3 VMs.</p>
+</li>
+<li>
+<p><code>ssh-keygen</code> to create SSH key. If you already have a previous one,
+   you could either use the same key, or create a new one dedicated
+   for automation by changing the default value below:</p>
+<p><code>shell
+  Enter file in which to save the key (/home/fengxia/.ssh/id_rsa):</code></p>
+</li>
+<li>
+<p>Create a <code>$HOME/.kube</code>.</p>
+</li>
+<li>
+<p>Install <code>kubectl</code>. I may ansible this later as well. For now a
+   manual process.</p>
+</li>
+<li>
+<p>In Ansible working directory, dump a vanilla ansible config file:
+   <code>ansible-config init --disabled &gt; ansible.cfg</code>. Change the line
+   <code>private_key_file=/home/fengxia/.ssh/id_rsa_auto</code> to point it to
+   the SSH key we are to use for.</p>
+</li>
+<li>
+<p>Install <code>helm</code>.</p>
+</li>
+</ol>
+<h1>Bootstrap k8s cluster</h1>
+<p>We bootstrap using ansible.</p>
+<ol>
+<li>
+<p>Start three VMs, one control node and two worker nodes. Write their
+   IPs in the <code>hosts</code>. You could either use the <code>cloud-init</code> to bake
+   in the SSH's pub key, or do <code>ssh-copy-id -i ~/.ssh/id_rsa_auto.pub
+   fengxia@ip</code> to copy them manually. Test <code>ssh
+   fengxia@ip</code> after that keys are working.</p>
+</li>
+<li>
+<p>Run ansible: <code>ansible-playbook -i hosts bootstrap.yml</code></p>
+</li>
+<li>
+<p>On your dev node, <code>scp fengxia@ip:~/.kube/config ~/.kube/config</code> to
+   copy the cluster config to the dev machine. IP could be any of the
+   k8s nodes because the same config are on</p>
+</li>
+</ol>
+<h1>k8s storage</h1>
+<p>For local dev purpose, use server disks on worker nodes, aka. local
+storage, for data persistence.</p>
+<h2>provisioner</h2>
+<p><strong>Note</strong> that there is no <code>kubectl</code> command to list installed
+provisioners.</p>
+<ol>
+<li>
+<p>Add static provisioner helm repo:</p>
+<p>```shell
+  helm repo add \
+    sig-storage-local-static-provisioner \
+    https://kubernetes-sigs.github.io/sig-storage-local-static-provisioner</p>
+<p>helm repo update
+  ```</p>
+</li>
+<li>
+<p>Re-generate a provisioner config:</p>
+<p><code>shell
+  helm template --debug \
+     sig-storage-local-static-provisioner/local-static-provisioner \
+     --version 1 \
+     --namespace default \
+     &gt; local-volume-provisioner.generated.yaml`</code></p>
+</li>
+<li>
+<p>Install or delete this provisioner:</p>
+<p><code>shell
+  kubectl apply -f local-volume-provisioner.generated.yaml
+  kubectl delete -f local-volume-provisioner.generated.yaml</code></p>
+</li>
+</ol>
+<h2>storage class</h2>
+<p>The <code>metadata.name</code> value is <strong>important</strong>.</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>storage-class.yml
+
+<span class="c1"># to list all storage classes</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>sc
+
+<span class="c1"># to delete a storage class</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>sc<span class="w"> </span>&lt;name&gt;
+</code></pre></div>
+
+<h2>PV</h2>
+<p>Now create a PV which can be claimed by deployments.</p>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pv.yml
+
+<span class="c1"># to list all PVs</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pv
+</code></pre></div>
+
+<p><strong>Note</strong> that <code>helm uninstall</code> does not delete PVC nor the actual
+data. You could observe it by watching the data mount,
+eg. <code>/mnt/disks</code>. Essentially it is not yet observing PV's retention
+policy <code>Delete</code>. Therefore, it's advised to manually delete PVC first,
+then delete PV, then <code>rm -r /mnt/disks/data</code>, if data cleanup is
+needed.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># to delete a PV</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>pv<span class="w"> </span>&lt;name&gt;
+
+<span class="c1"># delete by force</span>
+kubectl<span class="w"> </span>delete<span class="w"> </span>pv<span class="w"> </span>local-pv-20g<span class="w"> </span>--grace-period<span class="o">=</span><span class="m">0</span><span class="w"> </span>--force
+
+<span class="c1"># clear etcd record</span>
+kubectl<span class="w"> </span>patch<span class="w"> </span>pv<span class="w"> </span>local-pv-20g<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;: {&quot;finalizers&quot;: null}}&#39;</span>
+</code></pre></div>
+
+<h1>Deploy an app</h1>
+<p>This is easy w/ helm. You can set custom configs using a <code>values.yml</code>
+file, eg. <code>wordpress-values.yml</code> in this case to specify the mariadb's
+<code>storageClass</code>. It's deeply nested YAML structure, no fun if typing in
+cmd.</p>
+<div class="highlight"><pre><span></span><code>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>bitnami<span class="w"> </span>https://charts.bitnami.com/bitnami
+helm<span class="w"> </span>repo<span class="w"> </span>update
+
+<span class="c1"># install w/ customized config values</span>
+helm<span class="w"> </span>install<span class="w"> </span>-f<span class="w"> </span>wordpress-values.yml<span class="w"> </span>happy-panda<span class="w"> </span>bitnami/wordpress
+
+<span class="c1"># uninstall</span>
+helm<span class="w"> </span>uninstall<span class="w"> </span>happy-panda
+
+<span class="c1"># if setting configs on CLI:</span>
+helm<span class="w"> </span>install<span class="w"> </span>happy-pada<span class="w"> </span>bitnami/wordpress<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span>mariadb.primary.persistence.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span>mariadb.primary.persistence.storageClass<span class="o">=</span>local-storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span>mariadb.primary.persistence.size<span class="o">=</span>20Gi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--set<span class="w"> </span>persistence.enabled<span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+
+<h1>Expose an app</h1>
+<p>There are two ways, both use nodeport. But who is behind the nodeport
+is different. In the first method, the app itself is listenning a
+nodeport, and in the 2nd method an ingress controller is.</p>
+<h2>Nodeport directly</h2>
+<ol>
+<li>
+<p>Get the name of your app service w/ <code>kubectl get svc</code>:</p>
+<div class="highlight"><pre><span></span><code> ```
+ NAME                                                  TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+ happy-panda-mariadb                                   ClusterIP      10.102.33.53    &lt;none&gt;        3306/TCP                     2d19h
+ happy-panda-wordpress                                 LoadBalancer   10.97.29.91     &lt;pending&gt;     80:31142/TCP,443:30121/TCP   2d19h
+ kubernetes                                            ClusterIP      10.96.0.1       &lt;none&gt;        443/TCP                      3d22h
+ ```
+</code></pre></div>
+
+</li>
+<li>
+<p>You see the <code>80:31142</code> and <code>443:30121</code>. It's read as <code>&lt;container
+   port&gt;:&lt;node port&gt;</code>. So this service is mapped to node port <code>31142</code>
+   for http and <code>30121</code> for https. You can further confirm this w/
+   <code>kubectl describe svc &lt;svc name&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span>
+<span class="err">➜</span><span class="w">  </span><span class="err">~</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">describe</span><span class="w"> </span><span class="n">svc</span><span class="w"> </span><span class="n">happy</span><span class="o">-</span><span class="n">panda</span><span class="o">-</span><span class="n">wordpress</span>
+<span class="n">Name</span><span class="p">:</span><span class="w">                     </span><span class="n">happy</span><span class="o">-</span><span class="n">panda</span><span class="o">-</span><span class="n">wordpress</span>
+<span class="n">Namespace</span><span class="p">:</span><span class="w">                </span><span class="k">default</span>
+<span class="n">Labels</span><span class="p">:</span><span class="w">                   </span><span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">instance</span><span class="o">=</span><span class="n">happy</span><span class="o">-</span><span class="n">panda</span>
+<span class="w">                          </span><span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">managed</span><span class="o">-</span><span class="n">by</span><span class="o">=</span><span class="n">Helm</span>
+<span class="w">                          </span><span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">name</span><span class="o">=</span><span class="n">wordpress</span>
+<span class="w">                          </span><span class="n">helm</span><span class="p">.</span><span class="n">sh</span><span class="o">/</span><span class="n">chart</span><span class="o">=</span><span class="n">wordpress</span><span class="o">-</span><span class="mf">16.1</span><span class="p">.</span><span class="mi">18</span>
+<span class="n">Annotations</span><span class="p">:</span><span class="w">              </span><span class="n">meta</span><span class="p">.</span><span class="n">helm</span><span class="p">.</span><span class="n">sh</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">happy</span><span class="o">-</span><span class="n">panda</span>
+<span class="w">                          </span><span class="n">meta</span><span class="p">.</span><span class="n">helm</span><span class="p">.</span><span class="n">sh</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="n">namespace</span><span class="p">:</span><span class="w"> </span><span class="k">default</span>
+<span class="n">Selector</span><span class="p">:</span><span class="w">                 </span><span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">instance</span><span class="o">=</span><span class="n">happy</span><span class="o">-</span><span class="n">panda</span><span class="p">,</span><span class="n">app</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">name</span><span class="o">=</span><span class="n">wordpress</span>
+<span class="n">Type</span><span class="p">:</span><span class="w">                     </span><span class="n">LoadBalancer</span>
+<span class="n">IP</span><span class="w"> </span><span class="n">Family</span><span class="w"> </span><span class="n">Policy</span><span class="p">:</span><span class="w">         </span><span class="n">SingleStack</span>
+<span class="n">IP</span><span class="w"> </span><span class="n">Families</span><span class="p">:</span><span class="w">              </span><span class="n">IPv4</span>
+<span class="n">IP</span><span class="p">:</span><span class="w">                       </span><span class="mf">10.97</span><span class="p">.</span><span class="mf">29.91</span>
+<span class="n">IPs</span><span class="p">:</span><span class="w">                      </span><span class="mf">10.97</span><span class="p">.</span><span class="mf">29.91</span>
+<span class="n">Port</span><span class="p">:</span><span class="w">                     </span><span class="n">http</span><span class="w">  </span><span class="mi">80</span><span class="o">/</span><span class="n">TCP</span>
+<span class="n">TargetPort</span><span class="p">:</span><span class="w">               </span><span class="n">http</span><span class="o">/</span><span class="n">TCP</span>
+<span class="n">NodePort</span><span class="p">:</span><span class="w">                 </span><span class="n">http</span><span class="w">  </span><span class="mi">31142</span><span class="o">/</span><span class="n">TCP</span><span class="w">   </span><span class="o">&lt;===</span><span class="w"> </span><span class="n">here</span>
+<span class="n">Endpoints</span><span class="p">:</span><span class="w">                </span><span class="mf">10.244</span><span class="p">.</span><span class="mf">2.18</span><span class="p">:</span><span class="mi">8080</span>
+<span class="n">Port</span><span class="p">:</span><span class="w">                     </span><span class="n">https</span><span class="w">  </span><span class="mi">443</span><span class="o">/</span><span class="n">TCP</span><span class="w">    </span><span class="o">&lt;===</span><span class="w"> </span><span class="n">here</span>
+<span class="n">TargetPort</span><span class="p">:</span><span class="w">               </span><span class="n">https</span><span class="o">/</span><span class="n">TCP</span>
+<span class="n">NodePort</span><span class="p">:</span><span class="w">                 </span><span class="n">https</span><span class="w">  </span><span class="mi">30121</span><span class="o">/</span><span class="n">TCP</span>
+<span class="n">Endpoints</span><span class="p">:</span><span class="w">                </span><span class="mf">10.244</span><span class="p">.</span><span class="mf">2.18</span><span class="p">:</span><span class="mi">8443</span>
+<span class="n">Session</span><span class="w"> </span><span class="n">Affinity</span><span class="p">:</span><span class="w">         </span><span class="n">None</span>
+<span class="n">External</span><span class="w"> </span><span class="n">Traffic</span><span class="w"> </span><span class="n">Policy</span><span class="p">:</span><span class="w">  </span><span class="n">Cluster</span>
+<span class="n">Events</span><span class="p">:</span><span class="w">                   </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Now w/ nodeport available, you could directly go to <code>http://&lt;any node's
+   IP&gt;:31142</code> to see the app. The IP could be any of the cluster
+   nodes, control plane or worker nodes, all the same.</p>
+</li>
+</ol>
+<p>The cons of this method is obvious &mdash; you need to keep a book of
+all the apps and their nodeport assignments. If an application is
+uninstalled and redeployed, its ports will change. This will be
+especially so if k8s cluster is used for CICD purpose because
+deployment happens dynamically in this case, thus port assignments
+would be quite difficult to track.</p>
+<p>Another con is that the number of apps deployed will be limited by the
+number of ports (default port range <code>30000-32267</code>). This doesn't seem
+to be an issue for small footprints, but will definitely a scalability
+bottleneck for some good size deployment.</p>
+<p>Last, if each app is listenning on a nodeport, it creates a large
+attack surface in security. Essentially node/server must expose these
+ports.</p>
+<h2>ingress w/ an external LB</h2>
+<p><img alt="" src="images/k8s%20expose%20app%20lb.png"></p>
+<p>A better way is to deploy an ingress controller as a central
+gate. Ingress comes w/ more features such as telemetry so it's
+definitely the way to go.</p>
+<ol>
+<li>
+<p>Install nginx, <code>helm install my-ingress
+   ingress-nginx/ingerss-nginx</code>.</p>
+</li>
+<li>
+<p>Create a <code>ingress.yml</code> and create an ingress rule. The key is
+   <code>ingressClassName</code> must be <code>nginx</code>, and <code>backend.service.name</code> be
+   your app's service, in this case <code>happy-panda-wordpress</code>. Value for
+   the <code>host</code> and <code>path</code> will be explained later.</p>
+<div class="highlight"><pre><span></span><code>```yml
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wp
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: wp.myk8s.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: happy-panda-wordpress
+                port:
+                  number: 80
+
+```
+</code></pre></div>
+
+<p>You can install <code>kubectl apply -f</code>, and delete <code>kubectl delete
+  ingress wp</code> any number of times. No harm. I think behind the
+  scene it adds a nginx rule and loads it automatically.</p>
+</li>
+<li>
+<p>Find the nodeport this ingress is listenning: <code>kubectl describe svc
+   my-ingress-nginx-ingress-controller</code>.</p>
+</li>
+</ol>
+<p>Now you need an <strong>external load balancer</strong>. This will be on your dev
+node using a nginx.</p>
+<ol>
+<li>
+<p>Create a subdomain <code>wp.myk8s.local</code> in <code>/etc/hosts</code> w/ IP of <code>.1</code>
+   (this IP needs to be the IP this dev node on the cluster nodes'
+   network). We are using this dev node as a LB and DNS.</p>
+<div class="highlight"><pre><span></span><code>```
+# /etc/hosts
+
+192.168.122.1   myk8s.local wp.myk8s.local
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Setup LB. The <code>upstream</code> block defines the load balancing
+   act. Default is round-robin. The key is <code>server_name</code> which must
+   match the DNS record above.</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="nx">conf</span>
+<span class="nx">upstream</span><span class="w"> </span><span class="nx">k8s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">server</span><span class="w"> </span><span class="m m-Double">192.168.122.191</span><span class="p">:</span><span class="mi">32536</span><span class="p">;</span><span class="w">   </span><span class="o">&lt;=</span><span class="p">=</span><span class="w"> </span><span class="nx">cluster</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="nx">IP</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">ingress</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="nx">port</span>
+<span class="w">    </span><span class="nx">server</span><span class="w"> </span><span class="m m-Double">192.168.122.153</span><span class="p">:</span><span class="mi">32536</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">server</span><span class="w"> </span><span class="m m-Double">192.168.122.172</span><span class="p">:</span><span class="mi">32536</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">server_name</span><span class="w"> </span><span class="nx">wp</span><span class="p">.</span><span class="nx">myk8s</span><span class="p">.</span><span class="nx">local</span><span class="p">;</span><span class="w">  </span><span class="o">&lt;=</span><span class="p">=</span><span class="w"> </span><span class="nx">dev</span><span class="err">&#39;</span><span class="nx">s</span>
+
+<span class="w">  </span><span class="nx">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">proxy_pass</span><span class="w"> </span><span class="nx">http</span><span class="p">:</span><span class="c1">//k8s;</span>
+<span class="w">    </span><span class="nx">proxy_redirect</span><span class="w"> </span><span class="nx">off</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_http_version</span><span class="w"> </span><span class="m m-Double">1.1</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">Upgrade</span><span class="w"> </span><span class="err">$</span><span class="nx">http_upgrade</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">proxy_redirect</span><span class="w"> </span><span class="nx">off</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">Host</span><span class="w"> </span><span class="err">$</span><span class="nx">host</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Real</span><span class="o">-</span><span class="nx">IP</span><span class="w"> </span><span class="err">$</span><span class="nx">remote_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Forwarded</span><span class="o">-</span><span class="nx">For</span><span class="w"> </span><span class="err">$</span><span class="nx">proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">proxy_set_header</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Forwarded</span><span class="o">-</span><span class="nx">Host</span><span class="w"> </span><span class="err">$</span><span class="nx">host</span><span class="p">;</span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">disable</span><span class="w"> </span><span class="nx">caching</span>
+<span class="w">    </span><span class="nx">add_header</span><span class="w"> </span><span class="nx">Last</span><span class="o">-</span><span class="nx">Modified</span><span class="w"> </span><span class="err">$</span><span class="nx">date_gmt</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">add_header</span><span class="w"> </span><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">no</span><span class="o">-</span><span class="nx">store</span><span class="p">,</span><span class="w"> </span><span class="nx">no</span><span class="o">-</span><span class="nx">cache</span><span class="err">&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">if_modified_since</span><span class="w"> </span><span class="nx">off</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">expires</span><span class="w"> </span><span class="nx">off</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">etag</span><span class="w"> </span><span class="nx">off</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Now on your dev node, <code>http://wp.myk8s.local</code>. Enjoy.</p>
+</li>
+</ol>
+<h2>load balancing</h2>
+<p>k8s document quotes this a way to expose a deployment. However, this
+is rather confusing because it's assuming a <em>cloud provider</em> who then
+assigns an <strong>external IP</strong> to the ingress controller. This is not how
+a home lab dev node will be! Then somewhere it says something about
+ingress controller being load balancer, or kubectl proxy being load
+balancer... ?</p>
+<p>Frist of all, there are three layers of load balancing: of the nodes,
+of service, and of the pods. Request hits the server/node
+eventually.</p>
+<p>Balancing the nodes. So between outside world and the k8s cluster,
+requests are balanced among nodes. This, of course, assumes these
+nodes being <strong>logically identical</strong>, which is exactly how the ingress
+nodeport can achieve!  Perfect. We set up an external nginx to do
+this. This makes the nodeport of the ingress controller the only info
+exposed to the outside world.</p>
+<p>Balancing the services. Once the ingress controller receives the call,
+it uses the ingress rules to know which service this is for by using
+the <code>hostname</code> match, eg. <code>wp.myk8s.local</code>, then routes the
+call. Here, the usage of <em>balance</em> is different. You can spin up v1
+and v2 of the same application but under different service name, then
+ingress can now be used to route some pcnt of traffic to v1 vs. v2. Of
+course, you could also spin up the same application over and over
+under different service name and have them <em>routed/balanced</em>, but I
+don't see a point here because of the next one.</p>
+<p>Balancing the pods. There are number of pods behind a service. k8s is
+doing the balance. So a call to a service will be automatically
+balanced among the number of pods behind the scene. This is k8s
+internal now, and is not of our concern anymore.</p>
+<h1>Troubleshooting</h1>
+<h2>Reinstall Wordpress helm, service shows 503 unavailable</h2>
+<p>First of all, <code>helm uninstall</code> does not clean up PVC! This is a known
+issue, and I have seen github feature request threads.</p>
+<p>I think the cause is the local storage I'm using in lab. After <code>helm
+uninstall</code>, the next <code>helm install</code> would show the web service can't
+connect to DB, and DB service shows no node have <code>pv</code> meeting its
+requirement.</p>
+<p>To clean this up:</p>
+<ol>
+<li>Clean up PVC: <code>kubectl get pvc</code>, then <code>kubectl delete pvc &lt;name&gt;</code>.</li>
+<li>Clean up PV: <code>kubectl delete pv &lt;name&gt;</code>.</li>
+<li>Recreate PV: <code>kubectl apply -f pv.yml</code>.</li>
+</ol>
+<p>In an extreme case, also login worker nodes and delete the static
+storage folders <code>rm -r ...</code>, then <code>mkdir ..</code> again. This, of course,
+will result in data loss.</p>
+<h1>Commands</h1>
+<p>To list cluster nodes' IP:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">nodes</span><span class="w"> </span><span class="o">-</span><span class="nx">o</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">jq</span><span class="w"> </span><span class="o">-</span><span class="nx">rc</span><span class="w"> </span><span class="err">&#39;</span><span class="p">.</span><span class="nx">items</span><span class="p">[].</span><span class="nx">status</span><span class="p">.</span><span class="nx">addresses</span><span class="p">[]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="nx">select</span><span class="w"> </span><span class="p">(.</span><span class="k">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Hostname&quot;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="p">.</span><span class="k">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;InternalIP&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">.</span><span class="nx">address</span><span class="p">)</span><span class="err">&#39;</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

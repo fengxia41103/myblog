@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-04-12
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Enable GlusterFS and Virtualization on CIMP</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><blockquote>
+<p>Pre-requirement:</p>
+<p>All the CIMP nodes have CentOS  installed with basic packages;
+All the CIMP nodes have logical networks configured, and each of them can reach to others via Internal management network;
+All the CIMP nodes have a disk partition configured on /dev/sdb2</p>
+</blockquote>
+<p>In order to support high availability (HA) feature for control plane
+applications, we decided to use GlusterFS to provide file system
+HA. With the help of GlusterFS, we can support live-migration of VMs
+from one CIMP node to another. GlusterFS also helps to replicate the
+snapshots of VMs to othe CIMP nodes, so that no data loss is expected
+even one CIMP node is down.</p>
+<p>Running on CIMP nodes, Openstack Controller VMs already protected with
+HA mechanism build on Pacemaker. Thus, there is little benefit to
+provide file system level HA for Openstack Controller VMs. So
+Openstack Controller images are stored on <code>/var/controller/running</code>
+directory, which is not mounted to glusterFS.</p>
+<p>Roller and XClarity don't have any native HA feature implemented. The
+proposed design is to store Roller and XClarity running image on
+GlusterFS cluster, e.g. <code>/varimages/running</code>. All the snapshots will
+be stored on this directory also. The rest of this document will
+further explain how to setup GlusterFS.</p>
+<h1>Configure Communication Between Nodes</h1>
+<p>Confirm that you can <code>ping</code> all the CIMP nodes using their IP,
+eg. <code>192.0.23.1</code>.  Setup hostname resolution or DNS for all the CIMP
+nodes as shown below.  Now we need to make sure we can communicate
+with the machines by their host name. If you have a DNS server, add
+additional entries for all CIMP ndoes. Alternatively, you'll need to add
+the machines to <code>/etc/hosts</code> on all nodes (<code>cimp-node2</code> shown below):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># cat /etc/hosts</span>
+
+<span class="m">127</span>.0.0.1<span class="w">   </span>cimp-node2<span class="w"> </span>localhost<span class="w"> </span>localhost.localdomain<span class="w"> </span>localhost4<span class="w"> </span>localhost4.localdomain4
+::1<span class="w">         </span>cimp-node2<span class="w"> </span>localhost<span class="w"> </span>localhost.localdomain<span class="w"> </span>localhost6<span class="w"> </span>localhost6.localdomain6
+<span class="m">192</span>.0.23.1<span class="w"> </span>cimp-node1
+<span class="m">192</span>.0.23.2<span class="w"> </span>cimp-node2
+<span class="m">192</span>.0.23.3<span class="w"> </span>cimp-node3
+</code></pre></div>
+
+<p>We can now verify the setup by <code>ping cimp-node[x]</code>.</p>
+<h1>Install GlusterFS package</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<p>GlusterFS version <code>3.8.7</code> is recommended for ThinkAgile CIMP nodes. To
+install GlusterFS, download the compressed file of the following RPMs
+from <a href="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/Lenovo%20ThinkAgile%20Ceph/rpms.tar​">rpm files</a> to <code>/tmp</code> directory and run <code>yum install *.rpm</code> 
+to install all the packages.</p>
+<div class="highlight"><pre><span></span><code>attr-2.4.46-12.el7.x86_64.rpm
+epel-release-latest-7.noarch.rpm
+glusterfs-3.8.7-1.el7.x86_64.rpm
+glusterfs-api-3.8.7-1.el7.x86_64.rpm
+glusterfs-cli-3.8.7-1.el7.x86_64.rpm
+glusterfs-client-xlators-3.8.7-1.el7.x86_64.rpm
+glusterfs-fuse-3.8.7-1.el7.x86_64.rpm
+glusterfs-libs-3.8.7-1.el7.x86_64.rpm
+glusterfs-server-3.8.7-1.el7.x86_64.rpm
+gssproxy-0.4.1-13.el7.x86_64.rpm
+keyutils-1.5.8-3.el7.x86_64.rpm
+libbasicobjects-0.1.1-27.el7.x86_64.rpm
+libcollection-0.6.2-27.el7.x86_64.rpm
+libevent-2.0.21-4.el7.x86_64.rpm
+libini_config-1.3.0-27.el7.x86_64.rpm
+libnfsidmap-0.25-15.el7.x86_64.rpm
+libpath_utils-0.2.1-27.el7.x86_64.rpm
+libref_array-0.1.5-27.el7.x86_64.rpm
+libtalloc-2.1.6-1.el7.x86_64.rpm
+libtevent-0.9.28-1.el7.x86_64.rpm
+libtirpc-0.2.4-0.8.el7.x86_64.rpm
+libverto-tevent-0.2.5-4.el7.x86_64.rpm
+nfs-utils-1.3.0-0.33.el7_3.x86_64.rpm
+psmisc-22.20-11.el7.x86_64.rpm
+quota-4.01-14.el7.x86_64.rpm
+quota-nls-4.01-14.el7.noarch.rpm
+rpcbind-0.2.0-38.el7.x86_64.rpm
+sysstat-10.1.5-7.el7.x86_64.rpm
+tcp_wrappers-7.6-77.el7.x86_64.rpm
+userspace-rcu-0.7.16-1.el7.x86_64.rpm​
+</code></pre></div>
+
+<p>After the installation, use the following command to verify:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gluster<span class="w"> </span>--version
+
+glusterfs<span class="w"> </span><span class="m">3</span>.8.7<span class="w"> </span>built<span class="w"> </span>on<span class="w"> </span>Dec<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">2016</span><span class="w"> </span><span class="m">04</span>:49:31
+Repository<span class="w"> </span>revision:<span class="w"> </span>git://git.gluster.com/glusterfs.git
+...
+</code></pre></div>
+
+<h1>Install KVM/Libvirt package</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>update
+$<span class="w"> </span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>qemu-kvm<span class="w"> </span>qemu-img<span class="w"> </span>virt-manager<span class="w"> </span>libvirt<span class="w"> </span>libvirt-python<span class="w"> </span>libvirt-client<span class="w"> </span>virt-install<span class="w"> </span>virt-viewer
+</code></pre></div>
+
+<h1>Install KVM/Libvirt package</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>libvirtd
+$<span class="w"> </span>sudo<span class="w">  </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>libvirtd
+$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>glusterd
+$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>glusterd
+$<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>glusterd
+</code></pre></div>
+
+<figure class="s12 center">
+<img     src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/glusterfs%20status.png" />
+<figcaption>Install KVM/libvirt packages</figcaption>
+</figure>
+
+<h1>Configure firewall</h1>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--zone<span class="o">=</span>public<span class="w"> </span>--add-port<span class="o">=</span><span class="m">111</span>/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">139</span>/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">445</span>/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">965</span>/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">2049</span>/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">38465</span>-38469/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">24007</span>-24008/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">631</span>/tcp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">111</span>/udp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">963</span>/udp<span class="w"> </span>--add-port<span class="o">=</span><span class="m">49152</span>-49251/tcp<span class="w">  </span>--permanent
+$<span class="w"> </span>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--zone<span class="o">=</span>public<span class="w"> </span>--add-port<span class="o">=</span><span class="m">5900</span>-5910/tcp<span class="w">  </span>--permanent
+$<span class="w"> </span>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
+</code></pre></div>
+
+<figure class="s12 center">
+<img src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/firewall.png" />
+<figcaption>Setup firewall</figcaption>
+</figure>
+
+<h1>Configure GlusterFS</h1>
+<h2>Build GlusterFS brick</h2>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>pvcreate<span class="w"> </span>/dev/sdb2
+$<span class="w"> </span>sudo<span class="w"> </span>vgcreate<span class="w"> </span>vg_gluster<span class="w"> </span>/dev/sdb2
+$<span class="w"> </span>sudo<span class="w"> </span>lvcreate<span class="w"> </span>-l<span class="w"> </span><span class="m">100</span>%FREE<span class="w"> </span>-n<span class="w"> </span>brick-img<span class="w"> </span>vg_gluster
+$<span class="w"> </span>sudo<span class="w"> </span>mkfs.xfs<span class="w"> </span>/dev/vg_gluster/brick-img
+</code></pre></div>
+
+<p>Note: alternatively you can use <code>lvcreate -L 1000G</code> switch if the
+known free space is exactly 1000G. However, if nodes were
+partititioned differently, it is easier to use the <code>-l 100%FREE</code>
+(lower case "L") switch, which will take all the free space available to create a new logic volume <code>brick-img</code>. Snapshot below actually shows both commands, where <code>-L 1000G</code> failed with error <code>insufficient free space</code>.</p>
+<figure class="row">
+    <img class="img-responsive center"
+    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/configure%20glusterfs.png"/>
+    <figcaption>Create logic volume used by Glusterfs</figcaption>
+</figure>
+
+<p>After configure the brick, use <code>lsblk</code> command to verify it. The
+output should look similar to the following:</p>
+<figure class="row">
+    <img class="img-responsive center"
+    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/verify%20logical%20volume.png"/>
+    <figcaption>Verify logical volume</figcaption>
+</figure>
+
+<p>Then, mount the brick to a directory:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>–p<span class="w"> </span>/var/brick-img
+$<span class="w"> </span>sudo<span class="w">  </span>mount<span class="w"> </span>/dev/vg_gluster/brick-img<span class="w"> </span>/var/brick-img
+</code></pre></div>
+
+<p>To make this mount persistent, add the following line in the <code>/etc/fstab</code>:</p>
+<div class="highlight"><pre><span></span><code>/dev/vg_gluster/brick-img<span class="w"> </span>/var/brick-img<span class="w">            </span>xfs<span class="w"> </span>defaults<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+
+<p>Check the mount point:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>-a<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mount
+sysfs<span class="w"> </span>on<span class="w"> </span>/sys<span class="w"> </span><span class="nb">type</span><span class="w"> </span>sysfs<span class="w"> </span><span class="o">(</span>rw,nosuid,nodev,noexec,relatime<span class="o">)</span>
+proc<span class="w"> </span>on<span class="w"> </span>/proc<span class="w"> </span><span class="nb">type</span><span class="w"> </span>proc<span class="w"> </span><span class="o">(</span>rw,nosuid,nodev,noexec,relatime<span class="o">)</span>
+
+...
+
+tmpfs<span class="w"> </span>on<span class="w"> </span>/run/user/1000<span class="w"> </span><span class="nb">type</span><span class="w"> </span>tmpfs<span class="w"> </span><span class="o">(</span>rw,nosuid,nodev,relatime,size<span class="o">=</span>52761800k,mode<span class="o">=</span><span class="m">700</span>,uid<span class="o">=</span><span class="m">1000</span>,gid<span class="o">=</span><span class="m">1000</span><span class="o">)</span>
+/dev/mapper/vg_gluster-brick--img<span class="w"> </span>on<span class="w"> </span>/var/brick-img<span class="w"> </span><span class="nb">type</span><span class="w"> </span>xfs<span class="w"> </span><span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+</code></pre></div>
+
+<h2>Configure trusted pool</h2>
+<blockquote>
+<p>Execute on <code>cimp-node1</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gluster<span class="w"> </span>peer<span class="w"> </span>probe<span class="w"> </span>cimp-node2
+$<span class="w"> </span>gluster<span class="w"> </span>peer<span class="w"> </span>probe<span class="w"> </span>cimp-node3
+$<span class="w"> </span>gluster<span class="w"> </span>peer<span class="w"> </span>status
+</code></pre></div>
+
+<figure class="row">
+    <img class="img-responsive center"
+    src="http://cowork.us.lenovo.com/teams/openstack/SiteAssets/SitePages/GlusterFS-setup/gluster%20peer%20status.png"/>
+    <figcaption>Configure trusted pool</figcaption>
+</figure>
+
+<h2>Create GlusterFS volume</h2>
+<blockquote>
+<p>Execute on <code>cimp-node1</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>gluster<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>vol-1<span class="w"> </span>replica<span class="w"> </span><span class="m">3</span><span class="w"> </span>cimp-node1:/var/brick-img/running<span class="w"> </span>cimp-node2:/var/brick-img/running<span class="w"> </span>cimp-node3:/var/brick-img/running
+$<span class="w"> </span>sudo<span class="w"> </span>gluster<span class="w"> </span>volume<span class="w"> </span>start<span class="w"> </span>vol-1
+</code></pre></div>
+
+<p>Confirm the Gluster volume running:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@cimp-node1<span class="w"> </span>~<span class="o">]</span><span class="c1"># gluster volume info all</span>
+Volume<span class="w"> </span>Name:<span class="w"> </span>vol-1
+Type:<span class="w"> </span>Replicate
+Volume<span class="w"> </span>ID:<span class="w"> </span>e2adeb6c-e0ac-4696-8d9f-940536a6f525
+Status:<span class="w"> </span>Started
+Snapshot<span class="w"> </span>Count:<span class="w"> </span><span class="m">0</span>
+Number<span class="w"> </span>of<span class="w"> </span>Bricks:<span class="w"> </span><span class="m">1</span><span class="w"> </span>x<span class="w"> </span><span class="nv">3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+Transport-type:<span class="w"> </span>tcp
+Bricks:
+Brick1:<span class="w"> </span>cimp-node1:/var/brick-img/running
+Brick2:<span class="w"> </span>cimp-node2:/var/brick-img/running
+Brick3:<span class="w"> </span>cimp-node3:/var/brick-img/running
+Options<span class="w"> </span>Reconfigured:
+transport.address-family:<span class="w"> </span>inet
+performance.readdir-ahead:<span class="w"> </span>on
+nfs.disable:<span class="w"> </span>on
+</code></pre></div>
+
+<h2>Use the GlusterFS volume as a shared storage pool</h2>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<p>The following commands are using <code>cimp-node1</code> as example.  They should
+be executed on each CIMP node by replacing <code>cimp-node[x]</code> with proper
+host name index, eg. <code>cimp-node2</code>.</p>
+<p>Create a new directory as a place holder of all the VM images and
+snapshots that requires GlusterFS as the backend storage pool.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/varimages/running
+</code></pre></div>
+
+<p>Then, mount the GlusterFS volume to the new directory:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>glusterfs<span class="w"> </span>cimp-node1:/vol-1<span class="w"> </span>/varimages/running
+</code></pre></div>
+
+<p>To make the mount persistent, the mount entry should be added to <code>/etc/fstab</code>:</p>
+<div class="highlight"><pre><span></span><code>cimp-node1:vol-1<span class="w">  </span>/varimages/running<span class="w"> </span>glusterfs<span class="w"> </span>defaults,_netdev<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+
+<p>Finally, enable <code>virt_use_fusefs</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>setsebool<span class="w"> </span>-P<span class="w"> </span>virt_use_fusefs<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<h2>Modify default logging configuration</h2>
+<blockquote>
+<p>Execute for each node.</p>
+</blockquote>
+<p>Modify the following configuration at <code>/etc/logrotate.d/glusterfs</code> 
+to keep 4 weeks backlog only.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>nano<span class="w"> </span>/etc/logrotate.d/glusterfs
+
+rotate<span class="w"> </span><span class="m">52</span><span class="w"> </span>--&gt;<span class="w"> </span>rotate<span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+
+<h1>Testing and troubleshooting</h1>
+<p>Test the GlusterFS setup by writing a new file to the 
+<code>/var/imags/running</code> from one CIMP node, and 
+make sure it replicates automatically to all the other CIMP nodes.</p>
+<p>If the directory is read-only, it usually indicates the GlusterFS cluster is not formed either because of networking connection issues or firewall issue.</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@cimp-node1<span class="w"> </span>~<span class="o">]</span><span class="c1"># gluster peer status</span>
+Number<span class="w"> </span>of<span class="w"> </span>Peers:<span class="w"> </span><span class="m">2</span>
+
+Hostname:<span class="w"> </span>cimp-node2
+Uuid:<span class="w"> </span>c20929dd-3ef1-432f-8d51-ca61ac74f9b2
+State:<span class="w"> </span>Peer<span class="w"> </span><span class="k">in</span><span class="w"> </span>Cluster<span class="w"> </span><span class="o">(</span>Connected<span class="o">)</span>
+
+Hostname:<span class="w"> </span>cimp-node3
+Uuid:<span class="w"> </span>31c93891-45da-4162-a27a-63ac87903304
+State:<span class="w"> </span>Peer<span class="w"> </span><span class="k">in</span><span class="w"> </span>Cluster<span class="w"> </span><span class="o">(</span>Connected<span class="o">)</span>
+</code></pre></div>
+
+<p>If all the gluster peers are connected, but the problem is still persistent, you should look into the firewall rules to make sure the port required by the gluster operation is open.</p>
+<p>As a reference, the followings are the firewall ports enabled on my setup:</p>
+<div class="highlight"><pre><span></span><code>Chain<span class="w"> </span>IN_public_allow<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>references<span class="o">)</span>
+
+target<span class="w">     </span>prot<span class="w"> </span>opt<span class="w"> </span><span class="nb">source</span><span class="w">               </span>destination
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:ssh<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpts:24007:24008<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:netbios-ssn<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpts:38465:38469<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:ipp<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpts:rfb:cm<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:965<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:sunrpc<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:microsoft-ds<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpt:nfs<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>udp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>udp<span class="w"> </span>dpt:sunrpc<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>udp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>udp<span class="w"> </span>dpt:963<span class="w"> </span>ctstate<span class="w"> </span>NEW
+ACCEPT<span class="w">     </span>tcp<span class="w">  </span>--<span class="w">  </span>anywhere<span class="w">             </span>anywhere<span class="w">             </span>tcp<span class="w"> </span>dpts:49152:49251<span class="w"> </span>ctstate<span class="w"> </span>NEW
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

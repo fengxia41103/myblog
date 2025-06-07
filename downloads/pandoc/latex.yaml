@@ -1,0 +1,38 @@
+---
+documentclass: scrreprt
+papersize: a4
+mainfont: FreeSerif
+monofont: FreeMono
+fontsize: 12pt
+geometry: margin=1in
+linkstyle: slanted
+linkcolor: #d52349
+titlepage: true
+titlepage-color: "FFFFFF"
+titlepage-text-color: "5C68C0"
+titlepage-rule-color: "5C68C0"
+toc: true
+toc-depth: 5
+toc-own-page: true
+lof: true
+lot: true
+link-citations: true
+header-includes:
+  - \usepackage{quotchap}
+  - \usepackage{fvextra}
+  - \usepackage{parskip}
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  - \lstset{breaklines=true}
+  - \lstset{basicstyle=\small\ttfamily}
+  - \lstset{extendedchars=true}
+  - \lstset{tabsize=2}
+  - \lstset{columns=fixed}
+  - \lstset{showstringspaces=false}
+  - \lstset{frame=trbl}
+  - \lstset{frameround=tttt}
+  - \lstset{framesep=4pt}
+  - \lstset{numbers=left}
+  - \lstset{numberstyle=\tiny\ttfamily}
+  -
+    \lstset{postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}}
+---

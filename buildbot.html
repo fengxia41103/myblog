@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2016-07-20
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">Buildbot continuous integration setup</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>The whole point of quick development cycle is to shorten
+the path between a verbal or written requirement, and an actionable
+application that reflects an implementation of this requirement. Therefore,
+it becomes crucial to set up an CI environment not only to facilitate
+development and testing, but to enforce our practice of agile prototyping
+by setting up a complete automated test instance for our clients that closely
+mirrors development progress. Once achieved, clients and developers can now
+truely accalaim that they are <em>on the same page</em>.</p>
+<h1>Buildbot</h1>
+<p>We chose <a href="http://buildbot.net/">buildbot</a> as our CI tool.
+Another common choice is the <a href="https://jenkins.io/">jenkins</a>. Jenkins
+is in Java. So in order to maintain a technology stack as consistent as
+we can, we opted to buildbot for this purpose.</p>
+<h2>Installation</h2>
+<p>Create a python virtualenv and use pip is all it takes:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>workon<span class="w"> </span>build
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>buildbot
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>buildbot-slave
+</code></pre></div>
+
+<p>For configuration, you can refer to</p>
+<p><a href="http://docs.buildbot.net/current/tutorial/firstrun.html">buildbot tutorial</a>
+for more details.</p>
+<p>On our test server, I have set the paths to:</p>
+<ul>
+<li>master: ~/build-master</li>
+<li>slave: ~/build-slave</li>
+</ul>
+<h2>Run service</h2>
+<ol>
+<li>activate <em>build</em> virtualenv.</li>
+<li>to start master: buildbot start build-master</li>
+<li>to start slave: buildslave start build-slave</li>
+</ol>
+<p>To view and administrate our <a href="http://fengxia.co:8011">CI server</a>:
+* username: admin
+* pwd: xxxxxx</p>
+<p>To restart master and slave:
+* master: buildbot restart build-master
+* slave: buildslave restart build-slave</p>
+<p>If config has been modified, it is useful to run <em>buildbot checkconfig build-master</em>
+to check configurations for error.</p>
+<p>Note that it is recommended to start master before the slave.
+In practice I have not experienced any problem if this order was reversed.</p>
+<h2>Build master configurations</h2>
+<p>We modified the stock <em>master.cfg</em> to make slaves modular. With this,
+adding a new slave only requires two changes:</p>
+<ol>
+<li>import slave's .py</li>
+<li>add slave configurations to master (nearly a copy and paste)</li>
+</ol>
+<p>Sample <em>master.cfg</em> is shown here:</p>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># -*- python -*-</span>
+    <span class="c1"># ex: set syntax=python:</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">steps</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">status</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">html</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.status.web</span><span class="w"> </span><span class="kn">import</span> <span class="n">authz</span><span class="p">,</span> <span class="n">auth</span>
+
+    <span class="c1"># &lt;====================================</span>
+    <span class="c1"># import slave configuration</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">test_gkp</span>
+    <span class="c1"># &lt;====================================</span>
+
+    <span class="c1"># This is the dictionary that the buildmaster pays attention to. We also use</span>
+    <span class="c1"># a shorter alias to save typing.</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">BuildmasterConfig</span> <span class="o">=</span> <span class="p">{</span>
+
+        <span class="c1">####### CHANGESOURCES</span>
+        <span class="c1"># the &#39;change_source&#39; setting tells the buildmaster how it should find out</span>
+        <span class="c1"># about source code changes.  Here we point to the buildbot clone of pyflakes.</span>
+        <span class="s1">&#39;change_source&#39;</span><span class="p">:</span> <span class="p">[],</span>
+
+        <span class="c1">####### SCHEDULERS</span>
+        <span class="c1"># Configure the Schedulers, which decide how to react to incoming changes.  In this</span>
+        <span class="c1"># case, just kick off a &#39;runtests&#39; build</span>
+        <span class="s1">&#39;schedulers&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;builders&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># &lt;====================================</span>
+    <span class="c1"># Add slave configuration to master</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">test_gkp</span><span class="o">.</span><span class="n">MyTarget</span><span class="p">()</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;change_source&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">target</span><span class="o">.</span><span class="n">change_source</span><span class="p">]</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;schedulers&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">target</span><span class="o">.</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">force_scheduler</span><span class="p">]</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;builders&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">target</span><span class="o">.</span><span class="n">builder</span><span class="p">]</span>
+    <span class="c1"># &lt;====================================</span>
+
+    <span class="c1">####### BUILDSLAVES</span>
+
+    <span class="c1"># The &#39;slaves&#39; list defines the set of recognized buildslaves. Each element is</span>
+    <span class="c1"># a BuildSlave object, specifying a unique slave name and password.  The same</span>
+    <span class="c1"># slave name and password must be configured on the slave.</span>
+    <span class="n">slave1</span> <span class="o">=</span> <span class="n">buildslave</span><span class="o">.</span><span class="n">BuildSlave</span><span class="p">(</span><span class="s2">&quot;myslave&quot;</span><span class="p">,</span> <span class="s2">&quot;xxxxxx&quot;</span><span class="p">)</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;slaves&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">slave1</span><span class="p">]</span>
+
+    <span class="c1"># &#39;protocols&#39; contains information about protocols which master will use for</span>
+    <span class="c1"># communicating with slaves.</span>
+    <span class="c1"># You must define at least &#39;port&#39; option that slaves could connect to your master</span>
+    <span class="c1"># with this protocol.</span>
+    <span class="c1"># &#39;port&#39; must match the value configured into the buildslaves (with their</span>
+    <span class="c1"># --master option)</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;protocols&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pb&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">9989</span><span class="p">}}</span>
+
+    <span class="c1"># including web pages, email senders, and IRC bots.</span>
+
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">irc_status</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">IRC</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;irc.freenode.org&quot;</span><span class="p">,</span>
+        <span class="n">nick</span><span class="o">=</span><span class="s2">&quot;TEST-Build&quot;</span><span class="p">,</span>
+        <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#fengxia.co&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">irc_status</span><span class="p">)</span>
+
+    <span class="n">authz_cfg</span><span class="o">=</span><span class="n">authz</span><span class="o">.</span><span class="n">Authz</span><span class="p">(</span>
+        <span class="c1"># change any of these to True to enable; see the manual for more</span>
+        <span class="c1"># options</span>
+        <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="o">.</span><span class="n">BasicAuth</span><span class="p">([(</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span><span class="s2">&quot;xxxxxx&quot;</span><span class="p">)],</span>
+        <span class="n">gracefulShutdown</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">forceBuild</span> <span class="o">=</span> <span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="c1"># use this to test your slave once it is set up</span>
+        <span class="n">forceAllBuilds</span> <span class="o">=</span> <span class="s1">&#39;auth&#39;</span><span class="p">,</span>  <span class="c1"># ..or this</span>
+        <span class="n">pingBuilder</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">stopBuild</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">stopAllBuilds</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">cancelPendingBuild</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1">####### STATUS TARGETS</span>
+    <span class="c1"># &#39;status&#39; is a list of Status Targets. The results of each build will be</span>
+    <span class="c1"># pushed to these targets. buildbot/status/*.py has a variety to choose from,</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">WebStatus</span><span class="p">(</span><span class="n">http_port</span><span class="o">=</span><span class="mi">8010</span><span class="p">,</span> <span class="n">authz</span><span class="o">=</span><span class="n">authz_cfg</span><span class="p">))</span>
+
+    <span class="c1">####### PROJECT IDENTITY</span>
+    <span class="c1"># the &#39;title&#39; string will appear at the top of this buildbot</span>
+    <span class="c1"># installation&#39;s html.WebStatus home page (linked to the</span>
+    <span class="c1"># &#39;titleURL&#39;) and is embedded in the title of the waterfall HTML page.</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Fengxia.co&quot;</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;titleURL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;http://fengxia.co&quot;</span>
+
+    <span class="c1"># the &#39;buildbotURL&#39; string should point to the location where the buildbot&#39;s</span>
+    <span class="c1"># internal web server (usually the html.WebStatus page) is visible. This</span>
+    <span class="c1"># typically uses the port number set in the Waterfall &#39;status&#39; entry, but</span>
+    <span class="c1"># with an externally-visible host name which the buildbot cannot figure out</span>
+    <span class="c1"># without some help.</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;buildbotURL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:8010/&quot;</span>
+
+    <span class="c1">####### DB URL</span>
+    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1"># This specifies what database buildbot uses to store its state.  You can leave</span>
+        <span class="c1"># this at its default for all but the largest installations.</span>
+        <span class="s1">&#39;db_url&#39;</span> <span class="p">:</span> <span class="s2">&quot;sqlite:///state.sqlite&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<p>A couple notes of master.cfg connfigurations:</p>
+<ol>
+<li>slave1 = buildslave.BuildSlave("myslave", "xxxxxx"): the name and password
+must be the same as the ones used to create build-slave.</li>
+<li>auth=auth.BasicAuth([("admin","xxxxx")]: defines the admin username
+and password to buildbot's admin web UI.</li>
+</ol>
+<h2>Build slave configurations</h2>
+<p>We set up a new configuration for each slave, which corresponds to a project.
+Take <em>test_gkp</em> configuration for example:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- python -*-</span>
+<span class="c1"># ex: set syntax=python:</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">steps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">buildbot.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">status</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyTarget</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># project configs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;test-gkp&#39;</span>
+
+        <span class="n">project_configs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;git&#39;</span><span class="p">:</span> <span class="s1">&#39;http://fengxia41103:xxxxxx@github.com/fengxia41103/gkp.git&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;git username&#39;</span><span class="p">:</span> <span class="s1">&#39;fengxia41103&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;git password&#39;</span><span class="p">:</span> <span class="s1">&#39;xxxxxx&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;git source&#39;</span><span class="p">:</span> <span class="s1">&#39;~/build-slave/mybuild-</span><span class="si">%s</span><span class="s1">/build&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;build name&#39;</span><span class="p">:</span> <span class="s1">&#39;mybuild-</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">change_source</span> <span class="o">=</span> <span class="n">changes</span><span class="o">.</span><span class="n">GitPoller</span><span class="p">(</span>
+            <span class="n">project_configs</span><span class="p">[</span><span class="s1">&#39;git&#39;</span><span class="p">],</span>
+            <span class="n">branch</span><span class="o">=</span><span class="s1">&#39;master&#39;</span><span class="p">,</span>
+            <span class="n">pollinterval</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+        <span class="c1">####### SCHEDULERS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">schedulers</span><span class="o">.</span><span class="n">SingleBranchScheduler</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">-all&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">change_filter</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">ChangeFilter</span><span class="p">(</span><span class="n">branch</span><span class="o">=</span><span class="s1">&#39;master&#39;</span><span class="p">),</span>
+            <span class="n">treeStableTimer</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+            <span class="n">builderNames</span><span class="o">=</span><span class="p">[</span><span class="n">project_configs</span><span class="p">[</span><span class="s1">&#39;build name&#39;</span><span class="p">]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_scheduler</span> <span class="o">=</span> <span class="n">schedulers</span><span class="o">.</span><span class="n">ForceScheduler</span><span class="p">(</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-force&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">builderNames</span> <span class="o">=</span> <span class="p">[</span><span class="n">project_configs</span><span class="p">[</span><span class="s1">&#39;build name&#39;</span><span class="p">]])</span>
+
+        <span class="c1">####### BUILDERS</span>
+        <span class="c1"># The &#39;builders&#39; list defines the Builders, which tell Buildbot how to perform a build:</span>
+        <span class="c1"># what steps, and which slaves can execute them.  Note that any particular build will</span>
+        <span class="c1"># only take place on one slave.</span>
+        <span class="n">factory</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">BuildFactory</span><span class="p">()</span>
+
+        <span class="c1"># check out the source</span>
+        <span class="n">get_source</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">Git</span><span class="p">(</span>
+            <span class="n">repourl</span> <span class="o">=</span> <span class="n">project_configs</span><span class="p">[</span><span class="s1">&#39;git&#39;</span><span class="p">],</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span>
+        <span class="p">)</span>
+        <span class="n">restart_nginx</span> <span class="o">=</span> <span class="n">steps</span><span class="o">.</span><span class="n">ShellCommand</span><span class="p">(</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;sudo&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;service&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;nginx&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;restart&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="n">usePTY</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;restarting nginx service&#39;</span><span class="p">,</span>
+            <span class="n">descriptionDone</span> <span class="o">=</span> <span class="s1">&#39;nginx reservice has been restarted&#39;</span>
+        <span class="p">)</span>
+
+        <span class="n">factory</span><span class="o">.</span><span class="n">addStep</span><span class="p">(</span><span class="n">get_source</span><span class="p">)</span>
+        <span class="n">factory</span><span class="o">.</span><span class="n">addStep</span><span class="p">(</span><span class="n">restart_system_service</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">builder</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">BuilderConfig</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">project_configs</span><span class="p">[</span><span class="s1">&#39;build name&#39;</span><span class="p">],</span>
+            <span class="n">slavenames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;myslave&quot;</span><span class="p">],</span>
+            <span class="n">factory</span><span class="o">=</span><span class="n">factory</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Add a new project to CI</h2>
+<p>Adding a new project to CI takes a few steps:</p>
+<ol>
+<li>Create slave configuration .py.</li>
+<li>Add it to build-master/master.cfg.</li>
+<li>Restart build master: buildbot restart build-master.</li>
+<li>Login to buildbot admin web UI to confirm that slave has been added successfully.</li>
+<li>Force a build to test.</li>
+</ol>
+<h2>Daily workflow</h2>
+<p>Once CI has been integrated, developer needs only submit changes to Git
+and wait for the next build to refresh the test environment. For <em>hot fixes</em>
+build master can also kickoff a force build to make the changes avaialbe
+immediately in test environment.</p>
+<h1>Build master admin</h1>
+<ul>
+<li><a href="http://fengxia.co:8011">Build master</a></li>
+</ul></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

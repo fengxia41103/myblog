@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-01-11
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Juju bootstrap process</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>The very first command user will encounter is the <code>juju bootstrap</code>. It
+createa a special machine &mdash; state controller, <code>machine-0</code>,
+control node, etc. &mdash; naming convention aside, it is the brain
+that tracks others nodes in the cloud, applications installed and
+their status.</p>
+<h1>Screencast</h1>
+<p>Through research I want to learn about its process, internal
+mechanism, how this command triggers off other juju components, what
+is the minimum take to simulate a successful bootstrap, and if things
+go south, what is the minimum to simulate a clean state so we can run
+<code>juju bootstrap</code> again as if from scratch. This last point is
+particuarly useful for development and troubleshooting.</p>
+<figure class="s12 center">
+    <img src="images/juju%20bootstrap.gif" />
+    <figcaption>Screencast of juju bootstraping a cloud environment</figcaption>
+</figure>
+
+<p>First thing first, if we have create a cloud or are using a stock
+cloud type:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>juju<span class="w"> </span>bootstrap<span class="w"> </span><span class="o">[</span>cloudname<span class="o">]</span><span class="w"> </span><span class="o">[</span>machine-0<span class="w"> </span>name<span class="o">]</span>
+
+<span class="k">for</span><span class="w"> </span>example:
+$<span class="w"> </span>juju<span class="w"> </span>bootstrap<span class="w"> </span>devx<span class="w"> </span>test-1
+</code></pre></div>
+
+<p>This will create a state controller (machine-0) that will be the
+management node within juju's cloud environment.</p>
+<h1>Develop a new provider</h1>
+<p>Case in point is to develop a new provider. Juju's <a href="https://github.com/juju/juju/wiki/Implementing-environment-providers">document</a> is
+helpful to guide development provides that one is familiar with code
+base and the rest of the Juju environment. The article fill in gap
+between a design document and code itself so not only one defines
+these interfaces, methods and so on, but one understands when these
+methods will be called, how they are called, and what they are to
+achieve.</p>
+<h1>Juju cloud &amp; provider</h1>
+<p>Canonical Juju is a powerful orchestration tool. Its power lies in
+deploying some applications by sending a form of <em>request</em> to
+underline cloud and have the cloud figuring out what type of machine
+should be provisioned, putting an OS on it, installing necessary tools
+and application, and finally putting the desired applications on
+top. It's magic.</p>
+<p>Being able to handle multiple types of cloud, Juju abstracs a <em>cloud</em>
+with <em>an envrionment</em> (we will use "cloud" and "environment"
+interchangeably in this article).  Within an environment, there is a
+special machine, the <code>machine-0</code>, that functions as a management node
+to all other machines.  In essence it is a state controller where
+configurations of all slave nodes, status of deployed applications and
+so on are kept.  The <em>cloud provider</em> is the driver layer where Juju's
+CLI speaks to a cloud. Each cloud has a different API. Juju provides a
+common bootstrap framework to tie these providers into a common
+process.</p>
+<figure class="s12 center">
+  <img src="images/juju%20cloud%20and%20provider.png" />
+    <figcaption>Juju cloud abstraction</figcaption>
+</figure>
+
+<h1>Bootstrap usage</h1>
+<p>Before Juju bootstraps an environment, it needs to know to have basic
+knowledge of <a href="https://jujucharms.com/docs/2.0/clouds">clouds</a>. Off the shelf Juju supports the followings:</p>
+<ol>
+<li>Azure</li>
+<li>Cloudsigma</li>
+<li>Amazon EC2</li>
+<li>GCE</li>
+<li>Joyent</li>
+<li>Openstack</li>
+<li>Rackspace</li>
+<li>Vsphere</li>
+<li>Canonical MAAS</li>
+<li>LXD containers</li>
+<li>Manual</li>
+</ol>
+<p>For the above, nearly everything is built-in(!) The bare minimum to
+bootstrap a machine is user credential (and some cloud, eg. LXD,
+doesn't use credentials). Juju handles everything else. Depending on
+the selected cloud type, Juju commands also offer different
+configurations that can be customized, for example, direct request to
+a particular EC2 region.</p>
+<p>LXD is a special type of cloud because it does not involve another
+machine throughout &mdash; everything is taking place on the same
+machine where CLI are being issued. For all others, it always involves
+some kind of remote API interface for commanding purpose.</p>
+<p>To list all supported cloud types:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>juju<span class="w"> </span>list-clouds
+
+fengxia@ubuntu:~$<span class="w"> </span>./juju<span class="w"> </span>list-clouds
+Cloud<span class="w">        </span>Regions<span class="w">  </span>Default<span class="w">        </span>Type<span class="w">        </span>Description
+aws<span class="w">               </span><span class="m">12</span><span class="w">  </span>us-east-1<span class="w">      </span>ec2<span class="w">         </span>Amazon<span class="w"> </span>Web<span class="w"> </span>Services
+aws-china<span class="w">          </span><span class="m">1</span><span class="w">  </span>cn-north-1<span class="w">     </span>ec2<span class="w">         </span>Amazon<span class="w"> </span>China
+aws-gov<span class="w">            </span><span class="m">1</span><span class="w">  </span>us-gov-west-1<span class="w">  </span>ec2<span class="w">         </span>Amazon<span class="w"> </span><span class="o">(</span>USA<span class="w"> </span>Government<span class="o">)</span>
+azure<span class="w">             </span><span class="m">18</span><span class="w">  </span>centralus<span class="w">      </span>azure<span class="w">       </span>Microsoft<span class="w"> </span>Azure
+azure-china<span class="w">        </span><span class="m">2</span><span class="w">  </span>chinaeast<span class="w">      </span>azure<span class="w">       </span>Microsoft<span class="w"> </span>Azure<span class="w"> </span>China
+cloudsigma<span class="w">         </span><span class="m">5</span><span class="w">  </span>hnl<span class="w">            </span>cloudsigma<span class="w">  </span>CloudSigma<span class="w"> </span>Cloud
+google<span class="w">             </span><span class="m">4</span><span class="w">  </span>us-east1<span class="w">       </span>gce<span class="w">         </span>Google<span class="w"> </span>Cloud<span class="w"> </span>Platform
+joyent<span class="w">             </span><span class="m">6</span><span class="w">  </span>eu-ams-1<span class="w">       </span>joyent<span class="w">      </span>Joyent<span class="w"> </span>Cloud
+rackspace<span class="w">          </span><span class="m">6</span><span class="w">  </span>dfw<span class="w">            </span>rackspace<span class="w">   </span>Rackspace<span class="w"> </span>Cloud
+localhost<span class="w">          </span><span class="m">1</span><span class="w">  </span>localhost<span class="w">      </span>lxd<span class="w">         </span>LXD<span class="w"> </span>Container<span class="w"> </span>Hypervisor
+devmaas<span class="w">            </span><span class="m">0</span><span class="w">                 </span>maas<span class="w">        </span>Metal<span class="w"> </span>As<span class="w"> </span>A<span class="w"> </span>Service
+devx<span class="w">               </span><span class="m">0</span><span class="w">                 </span>xclarity<span class="w">    </span>Lenovo<span class="w"> </span>XClarity
+</code></pre></div>
+
+<p>To bootstrap an environment is simple if everything has been setup
+correctly. It is really up to the underline cloud to provide a
+machine, and this is where we are going to analye in further details.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>juju<span class="w"> </span>bootstrap<span class="w"> </span><span class="o">[</span>cloud<span class="w"> </span>type<span class="o">][</span>any<span class="w"> </span>name<span class="o">]</span>
+</code></pre></div>
+
+<h1>Bootstrap overview</h1>
+<p>Juju offers a generalized framework into which code that drives a
+cloud type is tied. Being the first machine to create in a given
+environment, machine-0 involves tremendous amount of machinary to go
+live.  In a nutshell, all activities can be categorized into the
+followings:</p>
+<figure class="s12 center">
+  <img src="images/juju%20bootstrap%20overview.png" />
+    <figcaption>Juju bootstrap framework</figcaption>
+</figure>
+
+<ul>
+<li>Setup constraints: An umbrella term containing anything from memory
+  size to region to the version of OS itself.</li>
+<li>Pick OS image: For Ubuntu, it does mapping from a name, eg. Precise,
+  to an actual OS version.</li>
+<li>Pick agent/tools: Juju requires to install an agent, <em>jujud</em>, on all
+  slave nodes. Bootstrap will abort if no adequate agent can be located.</li>
+</ul>
+<blockquote>
+<p>Chaning version number to a non-official one, eg. 2.0.1.99, will force Juju binary to use a local jujud (compiled).</p>
+</blockquote>
+<ul>
+<li>Provision OS: Machine is setup for SSH access via public-key
+  (including root). A default user, <em>ubuntu</em>, is created on the
+  machine.</li>
+<li>Set up instance configuration: An instance configuration controls
+  all things beyond a bare OS, such as triggering an OS update &amp; upgrade
+  (eg. apt upgrade), ports Juju agent should listen to, networking
+  configurations, etc..</li>
+<li>Configure node: From the main controller, Juju will SSH into the
+  node, install Juju agent and tools, set up a mongoDB for data
+  persistence and running other chores using cloud-init.</li>
+</ul>
+<blockquote>
+<p>Default Juju agent path: /var/lib/juju</p>
+</blockquote>
+<h1>Bootstrap framework</h1>
+<p>With the overview in mind, let's take a look Juju's actual bootstrap
+process located in <code>juju.juju.environs.Bootstrap</code> function.</p>
+<ul>
+<li><font color="gray">Gray</font> boxes: depicts data inputs to each
+  functional block, and details of data structures.</li>
+<li><font color="green">Green</font> boxes: are integration points with
+  different cloud providers &mdash; how to start an instance from
+  scratch (provisioning), and how to configure an OS-ed machine. The
+  latter can be argued cloud agnostic. However, it is heavily geared
+  towards Ubuntu environment by default.</li>
+<li><font color="blue">Blue</font>: are clearly Canonical dependent due
+  to hard-coded values (eg. simplestream URL).</li>
+</ul>
+<figure class="s12 center">
+  <img src="images/juju%20bootstrap%20process.png" />
+    <figcaption>Juju bootstrap framework</figcaption>
+</figure>
+
+<p>The purpose of this framework is to pre-evaluate constraints and
+requested resources for provider's consumption. For example, it will
+cponstruct a list of Juju agents and tools but delay its final picking
+until providre's code is called. Same for OS images (imageMetadata).</p>
+<p>The Juju tools &amp; agent play such a key role in bootstraping that the
+entire process will abort if no matching tool is located.  The
+assumption is that privisioning OS is the job the cloud and Juju is
+responsible for actions from OS onward. So if there is no tools to
+take the machine to the next stage, why bother installing an OS?</p>
+<p>Now let's drive into a provider's arena and take a look what a provider offers.</p>
+<h1>Illustration of a "common" provider</h1>
+<p>Juju's <em>common</em> provider serves as an example for study. It can looked
+as a <em>standard</em> way to provision and configure a node. As a matter of
+fact, some providers uses its <code>Bootstrap</code> function completly.</p>
+<h2>"common" provisioning &amp; cloud integration</h2>
+<p>If framework has done preliminary sanity checks and collected possible
+resources, provider's task is to make a final pick.  Thing like
+selecting the OS image and juju agent and tools are all taking place
+here. Once ducks are in line, call a provider's <code>BootstrapInstance</code>
+function &larr; and this is the point where underline cloud meets
+Juju.</p>
+<figure class="s12 center">
+  <img src="images/juju%20common%20BootstrapInstance.png" />
+    <figcaption>"common" provider's BootstrapInstance function</figcaption>
+</figure>
+
+<p>What is expected from the cloud? Four things that are all hardware centric:</p>
+<ol>
+<li>hardware characteristics: architecture, memory size, root disk size, CPU cores.</li>
+<li>network information</li>
+<li>storage volume</li>
+<li>storage volume attachment</li>
+</ol>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>StartInstanceResult<span class="w"> </span>holds<span class="w"> </span>the<span class="w"> </span>result<span class="w"> </span>of<span class="w"> </span>an
+//<span class="w"> </span>InstanceBroker.StartInstance<span class="w"> </span>method<span class="w"> </span>call.
+<span class="nb">type</span><span class="w"> </span>StartInstanceResult<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>Instance<span class="w"> </span>is<span class="w"> </span>an<span class="w"> </span>interface<span class="w"> </span>representing<span class="w"> </span>a<span class="w"> </span>cloud<span class="w"> </span>instance.
+<span class="w">    </span>Instance<span class="w"> </span>instance.Instance
+
+<span class="w">    </span>//<span class="w"> </span>Config<span class="w"> </span>holds<span class="w"> </span>the<span class="w"> </span>environment<span class="w"> </span>config<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>any<span class="w"> </span>further
+<span class="w">    </span>//<span class="w"> </span>operations,<span class="w"> </span><span class="k">if</span><span class="w"> </span>the<span class="w"> </span>instance<span class="w"> </span>is<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>controller.
+<span class="w">    </span>Config<span class="w"> </span>*config.Config
+
+<span class="w">    </span>//<span class="w"> </span>HardwareCharacteristics<span class="w"> </span>represents<span class="w"> </span>the<span class="w"> </span>hardware<span class="w"> </span>characteristics
+<span class="w">    </span>//<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>newly<span class="w"> </span>created<span class="w"> </span>instance.
+<span class="w">    </span>Hardware<span class="w"> </span>*instance.HardwareCharacteristics
+
+<span class="w">    </span>//<span class="w"> </span>NetworkInfo<span class="w"> </span>contains<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>how<span class="w"> </span>to<span class="w"> </span>configure<span class="w"> </span>network
+<span class="w">    </span>//<span class="w"> </span>interfaces<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>instance.<span class="w"> </span>Depending<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>provider,<span class="w"> </span>this
+<span class="w">    </span>//<span class="w"> </span>might<span class="w"> </span>be<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>StartInstanceParams.NetworkInfo<span class="w"> </span>or<span class="w"> </span>may<span class="w"> </span>be
+<span class="w">    </span>//<span class="w"> </span>modified<span class="w"> </span>as<span class="w"> </span>needed.
+<span class="w">    </span>NetworkInfo<span class="w"> </span><span class="o">[]</span>network.InterfaceInfo
+
+<span class="w">    </span>//<span class="w"> </span>Volumes<span class="w"> </span>contains<span class="w"> </span>a<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>volumes<span class="w"> </span>created,<span class="w"> </span>each<span class="w"> </span>one<span class="w"> </span>having<span class="w"> </span>the
+<span class="w">    </span>//<span class="w"> </span>same<span class="w"> </span>Name<span class="w"> </span>as<span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>VolumeParams<span class="w"> </span><span class="k">in</span><span class="w"> </span>StartInstanceParams.Volumes.
+<span class="w">    </span>//<span class="w"> </span>VolumeAttachment<span class="w"> </span>information<span class="w"> </span>is<span class="w"> </span>reported<span class="w"> </span>separately.
+<span class="w">    </span>Volumes<span class="w"> </span><span class="o">[]</span>storage.Volume
+
+<span class="w">    </span>//<span class="w"> </span>VolumeAttachments<span class="w"> </span>contains<span class="w"> </span>a<span class="w"> </span>attachment-specific<span class="w"> </span>information<span class="w"> </span>about
+<span class="w">    </span>//<span class="w"> </span>volumes<span class="w"> </span>that<span class="w"> </span>were<span class="w"> </span>attached<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>started<span class="w"> </span>instance.
+<span class="w">    </span>VolumeAttachments<span class="w"> </span><span class="o">[]</span>storage.VolumeAttachment
+<span class="o">}</span>
+</code></pre></div>
+
+<h3>Hardware characteristics</h3>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>HardwareCharacteristics<span class="w"> </span>represents<span class="w"> </span>the<span class="w"> </span>characteristics<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>instance<span class="w"> </span><span class="o">(</span><span class="k">if</span><span class="w"> </span>known<span class="o">)</span>.
+//<span class="w"> </span>Attributes<span class="w"> </span>that<span class="w"> </span>are<span class="w"> </span>nil<span class="w"> </span>are<span class="w"> </span>unknown<span class="w"> </span>or<span class="w"> </span>not<span class="w"> </span>supported.
+<span class="nb">type</span><span class="w"> </span>HardwareCharacteristics<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>Arch<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>architecture<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>processor.
+<span class="w">    </span>Arch<span class="w"> </span>*string<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;arch,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;arch,omitempty&quot;</span><span class="sb">`</span>
+
+<span class="w">    </span>//<span class="w"> </span>Mem<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>size<span class="w"> </span>of<span class="w"> </span>RAM<span class="w"> </span><span class="k">in</span><span class="w"> </span>megabytes.
+<span class="w">    </span>Mem<span class="w"> </span>*uint64<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;mem,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;mem,omitempty&quot;</span><span class="sb">`</span>
+
+<span class="w">    </span>//<span class="w"> </span>RootDisk<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>size<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>disk<span class="w"> </span><span class="k">in</span><span class="w"> </span>megabytes.
+<span class="w">    </span>RootDisk<span class="w"> </span>*uint64<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;root-disk,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;rootdisk,omitempty&quot;</span><span class="sb">`</span>
+
+<span class="w">    </span>//<span class="w"> </span>CpuCores<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>logical<span class="w"> </span>cores<span class="w"> </span>the<span class="w"> </span>processor<span class="w"> </span>has.
+<span class="w">    </span>CpuCores<span class="w"> </span>*uint64<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;cpu-cores,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;cpucores,omitempty&quot;</span><span class="sb">`</span>
+
+<span class="w">    </span>//<span class="w"> </span>CpuPower<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>relative<span class="w"> </span>representation<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>speed<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>processor.
+<span class="w">    </span>CpuPower<span class="w"> </span>*uint64<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;cpu-power,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;cpupower,omitempty&quot;</span><span class="sb">`</span>
+
+<span class="w">    </span>//<span class="w"> </span>Tags<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>strings<span class="w"> </span>that<span class="w"> </span>identify<span class="w"> </span>the<span class="w"> </span>machine.
+<span class="w">    </span>Tags<span class="w"> </span>*<span class="o">[]</span>string<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;tags,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;tags,omitempty&quot;</span><span class="sb">`</span>
+
+<span class="w">    </span>//<span class="w"> </span>AvailabilityZone<span class="w"> </span>defines<span class="w"> </span>the<span class="w"> </span>zone<span class="w"> </span><span class="k">in</span><span class="w"> </span>which<span class="w"> </span>the<span class="w"> </span>machine<span class="w"> </span>resides.
+<span class="w">    </span>AvailabilityZone<span class="w"> </span>*string<span class="w"> </span><span class="sb">`</span>json:<span class="s2">&quot;availability-zone,omitempty&quot;</span><span class="w"> </span>yaml:<span class="s2">&quot;availabilityzone,omitempty&quot;</span><span class="sb">`</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3>Network info</h3>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>InterfaceInfo<span class="w"> </span>describes<span class="w"> </span>a<span class="w"> </span>single<span class="w"> </span>network<span class="w"> </span>interface<span class="w"> </span>available<span class="w"> </span>on<span class="w"> </span>an
+//<span class="w"> </span>instance.<span class="w"> </span>For<span class="w"> </span>providers<span class="w"> </span>that<span class="w"> </span>support<span class="w"> </span>networks,<span class="w"> </span>this<span class="w"> </span>will<span class="w"> </span>be
+//<span class="w"> </span>available<span class="w"> </span>at<span class="w"> </span>StartInstance<span class="o">()</span><span class="w"> </span>time.
+//<span class="w"> </span>TODO<span class="o">(</span>mue<span class="o">)</span>:<span class="w"> </span>Rename<span class="w"> </span>to<span class="w"> </span>InterfaceConfig<span class="w"> </span>due<span class="w"> </span>to<span class="w"> </span>consistency<span class="w"> </span>later.
+<span class="nb">type</span><span class="w"> </span>InterfaceInfo<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>DeviceIndex<span class="w"> </span>specifies<span class="w"> </span>the<span class="w"> </span>order<span class="w"> </span><span class="k">in</span><span class="w"> </span>which<span class="w"> </span>the<span class="w"> </span>network<span class="w"> </span>interface
+<span class="w">    </span>//<span class="w"> </span>appears<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>host.<span class="w"> </span>The<span class="w"> </span>primary<span class="w"> </span>interface<span class="w"> </span>has<span class="w"> </span>an<span class="w"> </span>index<span class="w"> </span>of<span class="w"> </span><span class="m">0</span>.
+<span class="w">    </span>DeviceIndex<span class="w"> </span>int
+
+<span class="w">    </span>//<span class="w"> </span>MACAddress<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>network<span class="w"> </span>interface<span class="s1">&#39;s hardware MAC address</span>
+<span class="s1">    // (e.g. &quot;aa:bb:cc:dd:ee:ff&quot;).</span>
+<span class="s1">    MACAddress string</span>
+
+<span class="s1">    // CIDR of the network, in 123.45.67.89/24 format.</span>
+<span class="s1">    CIDR string</span>
+
+<span class="s1">    // ProviderId is a provider-specific NIC id.</span>
+<span class="s1">    ProviderId Id</span>
+
+<span class="s1">    // ProviderSubnetId is the provider-specific id for the associated</span>
+<span class="s1">    // subnet.</span>
+<span class="s1">    ProviderSubnetId Id</span>
+
+<span class="s1">    // ProviderSpaceId is the provider-specific id for the associated space, if</span>
+<span class="s1">    // known and supported.</span>
+<span class="s1">    ProviderSpaceId Id</span>
+
+<span class="s1">    // ProviderVLANId is the provider-specific id of the VLAN for this</span>
+<span class="s1">    // interface.</span>
+<span class="s1">    ProviderVLANId Id</span>
+
+<span class="s1">    // ProviderAddressId is the provider-specific id of the assigned address.</span>
+<span class="s1">    ProviderAddressId Id</span>
+
+<span class="s1">    // AvailabilityZones describes the availability zones the associated</span>
+<span class="s1">    // subnet is in.</span>
+<span class="s1">    AvailabilityZones []string</span>
+
+<span class="s1">    // VLANTag needs to be between 1 and 4094 for VLANs and 0 for</span>
+<span class="s1">    // normal networks. It&#39;</span>s<span class="w"> </span>defined<span class="w"> </span>by<span class="w"> </span>IEEE<span class="w"> </span><span class="m">802</span>.1Q<span class="w"> </span>standard.
+<span class="w">    </span>VLANTag<span class="w"> </span>int
+
+<span class="w">    </span>//<span class="w"> </span>InterfaceName<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>raw<span class="w"> </span>OS-specific<span class="w"> </span>network<span class="w"> </span>device<span class="w"> </span>name<span class="w"> </span><span class="o">(</span>e.g.
+<span class="w">    </span>//<span class="w"> </span><span class="s2">&quot;eth1&quot;</span>,<span class="w"> </span>even<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>VLAN<span class="w"> </span>eth1.42<span class="w"> </span>virtual<span class="w"> </span>interface<span class="o">)</span>.
+<span class="w">    </span>InterfaceName<span class="w"> </span>string
+
+<span class="w">    </span>//<span class="w"> </span>ParentInterfaceName<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>parent<span class="w"> </span>interface<span class="w"> </span>to<span class="w"> </span>use,<span class="w"> </span><span class="k">if</span><span class="w"> </span>known.
+<span class="w">    </span>ParentInterfaceName<span class="w"> </span>string
+
+<span class="w">    </span>//<span class="w"> </span>InterfaceType<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span><span class="nb">type</span><span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>interface.
+<span class="w">    </span>InterfaceType<span class="w"> </span>InterfaceType
+
+<span class="w">    </span>//<span class="w"> </span>Disabled<span class="w"> </span>is<span class="w"> </span><span class="nb">true</span><span class="w"> </span>when<span class="w"> </span>the<span class="w"> </span>interface<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>disabled<span class="w"> </span>on<span class="w"> </span>the
+<span class="w">    </span>//<span class="w"> </span>machine,<span class="w"> </span>e.g.<span class="w"> </span>not<span class="w"> </span>to<span class="w"> </span>configure<span class="w"> </span>it.
+<span class="w">    </span>Disabled<span class="w"> </span>bool
+
+<span class="w">    </span>//<span class="w"> </span>NoAutoStart<span class="w"> </span>is<span class="w"> </span><span class="nb">true</span><span class="w"> </span>when<span class="w"> </span>the<span class="w"> </span>interface<span class="w"> </span>should<span class="w"> </span>not<span class="w"> </span>be<span class="w"> </span>configured
+<span class="w">    </span>//<span class="w"> </span>to<span class="w"> </span>start<span class="w"> </span>automatically<span class="w"> </span>on<span class="w"> </span>boot.<span class="w"> </span>By<span class="w"> </span>default<span class="w"> </span>and<span class="w"> </span><span class="k">for</span>
+<span class="w">    </span>//<span class="w"> </span>backwards-compatibility,<span class="w"> </span>interfaces<span class="w"> </span>are<span class="w"> </span>configured<span class="w"> </span>to
+<span class="w">    </span>//<span class="w"> </span>auto-start.
+<span class="w">    </span>NoAutoStart<span class="w"> </span>bool
+
+<span class="w">    </span>//<span class="w"> </span>ConfigType<span class="w"> </span>determines<span class="w"> </span>whether<span class="w"> </span>the<span class="w"> </span>interface<span class="w"> </span>should<span class="w"> </span>be
+<span class="w">    </span>//<span class="w"> </span>configured<span class="w"> </span>via<span class="w"> </span>DHCP,<span class="w"> </span>statically,<span class="w"> </span>manually,<span class="w"> </span>etc.<span class="w"> </span>See
+<span class="w">    </span>//<span class="w"> </span>interfaces<span class="o">(</span><span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
+<span class="w">    </span>ConfigType<span class="w"> </span>InterfaceConfigType
+
+<span class="w">    </span>//<span class="w"> </span>Address<span class="w"> </span>contains<span class="w"> </span>an<span class="w"> </span>optional<span class="w"> </span>static<span class="w"> </span>IP<span class="w"> </span>address<span class="w"> </span>to<span class="w"> </span>configure<span class="w"> </span><span class="k">for</span>
+<span class="w">    </span>//<span class="w"> </span>this<span class="w"> </span>network<span class="w"> </span>interface.<span class="w"> </span>The<span class="w"> </span>subnet<span class="w"> </span>mask<span class="w"> </span>to<span class="w"> </span><span class="nb">set</span><span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>inferred
+<span class="w">    </span>//<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>CIDR<span class="w"> </span>value.
+<span class="w">    </span>Address<span class="w"> </span>Address
+
+<span class="w">    </span>//<span class="w"> </span>DNSServers<span class="w"> </span>contains<span class="w"> </span>an<span class="w"> </span>optional<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>IP<span class="w"> </span>addresses<span class="w"> </span>and/or
+<span class="w">    </span>//<span class="w"> </span>hostnames<span class="w"> </span>to<span class="w"> </span>configure<span class="w"> </span>as<span class="w"> </span>DNS<span class="w"> </span>servers<span class="w"> </span><span class="k">for</span><span class="w"> </span>this<span class="w"> </span>network
+<span class="w">    </span>//<span class="w"> </span>interface.
+<span class="w">    </span>DNSServers<span class="w"> </span><span class="o">[]</span>Address
+
+<span class="w">    </span>//<span class="w"> </span>MTU<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>Maximum<span class="w"> </span>Transmission<span class="w"> </span>Unit<span class="w"> </span>controlling<span class="w"> </span>the<span class="w"> </span>maximum<span class="w"> </span>size<span class="w"> </span>of<span class="w"> </span>the
+<span class="w">    </span>//<span class="w"> </span>protocol<span class="w"> </span>packats<span class="w"> </span>that<span class="w"> </span>the<span class="w"> </span>interface<span class="w"> </span>can<span class="w"> </span>pass<span class="w"> </span>through.<span class="w"> </span>It<span class="w"> </span>is<span class="w"> </span>only<span class="w"> </span>used
+<span class="w">    </span>//<span class="w"> </span>when<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span>.
+<span class="w">    </span>MTU<span class="w"> </span>int
+
+<span class="w">    </span>//<span class="w"> </span>DNSSearchDomains<span class="w"> </span>contains<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>DNS<span class="w"> </span>domain<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span><span class="k">for</span><span class="w"> </span>non-FQDN
+<span class="w">    </span>//<span class="w"> </span>lookups.
+<span class="w">    </span>DNSSearchDomains<span class="w"> </span><span class="o">[]</span>string
+
+<span class="w">    </span>//<span class="w"> </span>Gateway<span class="w"> </span>address,<span class="w"> </span><span class="k">if</span><span class="w"> </span>set,<span class="w"> </span>defines<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>gateway<span class="w"> </span>to
+<span class="w">    </span>//<span class="w"> </span>configure<span class="w"> </span><span class="k">for</span><span class="w"> </span>this<span class="w"> </span>network<span class="w"> </span>interface.<span class="w"> </span>For<span class="w"> </span>containers<span class="w"> </span>this
+<span class="w">    </span>//<span class="w"> </span>usually<span class="w"> </span>is<span class="w"> </span><span class="o">(</span>one<span class="w"> </span>of<span class="o">)</span><span class="w"> </span>the<span class="w"> </span>host<span class="w"> </span>address<span class="o">(</span>es<span class="o">)</span>.
+<span class="w">    </span>GatewayAddress<span class="w"> </span>Address
+<span class="o">}</span>
+</code></pre></div>
+
+<h3>Storage volume</h3>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>Volume<span class="w"> </span>identifies<span class="w"> </span>and<span class="w"> </span>describes<span class="w"> </span>a<span class="w"> </span>volume<span class="w"> </span><span class="o">(</span>disk,<span class="w"> </span>logical<span class="w"> </span>volume,<span class="w"> </span>etc.<span class="o">)</span>
+<span class="nb">type</span><span class="w"> </span>Volume<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>Name<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>unique<span class="w"> </span>name<span class="w"> </span>assigned<span class="w"> </span>by<span class="w"> </span>Juju<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>volume.
+<span class="w">    </span>Tag<span class="w"> </span>names.VolumeTag
+
+<span class="w">    </span>VolumeInfo
+<span class="o">}</span>
+
+//<span class="w"> </span>VolumeInfo<span class="w"> </span>describes<span class="w"> </span>a<span class="w"> </span>volume<span class="w"> </span><span class="o">(</span>disk,<span class="w"> </span>logical<span class="w"> </span>volume<span class="w"> </span>etc.<span class="o">)</span>
+<span class="nb">type</span><span class="w"> </span>VolumeInfo<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>VolumeId<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>unique<span class="w"> </span>provider-supplied<span class="w"> </span>ID<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>volume.
+<span class="w">    </span>//<span class="w"> </span>VolumeId<span class="w"> </span>is<span class="w"> </span>required<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>unique<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>lifetime<span class="w"> </span>of<span class="w"> </span>the
+<span class="w">    </span>//<span class="w"> </span>volume,<span class="w"> </span>but<span class="w"> </span>may<span class="w"> </span>be<span class="w"> </span>reused.
+<span class="w">    </span>VolumeId<span class="w"> </span>string
+
+<span class="w">    </span>//<span class="w"> </span>HardwareId<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>volume<span class="err">&#39;</span>s<span class="w"> </span>hardware<span class="w"> </span>ID.<span class="w"> </span>Not<span class="w"> </span>all<span class="w"> </span>volumes<span class="w"> </span>have
+<span class="w">    </span>//<span class="w"> </span>a<span class="w"> </span>hardware<span class="w"> </span>ID,<span class="w"> </span>so<span class="w"> </span>this<span class="w"> </span>may<span class="w"> </span>be<span class="w"> </span>left<span class="w"> </span>blank.
+<span class="w">    </span>HardwareId<span class="w"> </span>string
+
+<span class="w">    </span>//<span class="w"> </span>Size<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>size<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>volume,<span class="w"> </span><span class="k">in</span><span class="w"> </span>MiB.
+<span class="w">    </span>Size<span class="w"> </span>uint64
+
+<span class="w">    </span>//<span class="w"> </span>Persistent<span class="w"> </span>reflects<span class="w"> </span>whether<span class="w"> </span>the<span class="w"> </span>volume<span class="w"> </span>is<span class="w"> </span>destroyed<span class="w"> </span>with<span class="w"> </span>the
+<span class="w">    </span>//<span class="w"> </span>machine<span class="w"> </span>to<span class="w"> </span>which<span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>attached.
+<span class="w">    </span>Persistent<span class="w"> </span>bool
+<span class="o">}</span>
+</code></pre></div>
+
+<h3>Storage volume attachment</h3>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>VolumeAttachment<span class="w"> </span>identifies<span class="w"> </span>and<span class="w"> </span>describes<span class="w"> </span>machine-specific<span class="w"> </span>volume
+//<span class="w"> </span>attachment<span class="w"> </span>information,<span class="w"> </span>including<span class="w"> </span>how<span class="w"> </span>the<span class="w"> </span>volume<span class="w"> </span>is<span class="w"> </span>exposed<span class="w"> </span>on<span class="w"> </span>the
+//<span class="w"> </span>machine.
+<span class="nb">type</span><span class="w"> </span>VolumeAttachment<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>Volume<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>unique<span class="w"> </span>tag<span class="w"> </span>assigned<span class="w"> </span>by<span class="w"> </span>Juju<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>volume
+<span class="w">    </span>//<span class="w"> </span>that<span class="w"> </span>this<span class="w"> </span>attachment<span class="w"> </span>corresponds<span class="w"> </span>to.
+<span class="w">    </span>Volume<span class="w"> </span>names.VolumeTag
+
+<span class="w">    </span>//<span class="w"> </span>Machine<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>unique<span class="w"> </span>tag<span class="w"> </span>assigned<span class="w"> </span>by<span class="w"> </span>Juju<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>machine<span class="w"> </span>that
+<span class="w">    </span>//<span class="w"> </span>this<span class="w"> </span>attachment<span class="w"> </span>corresponds<span class="w"> </span>to.
+<span class="w">    </span>Machine<span class="w"> </span>names.MachineTag
+
+<span class="w">    </span>VolumeAttachmentInfo
+<span class="o">}</span>
+
+//<span class="w"> </span>VolumeAttachmentInfo<span class="w"> </span>describes<span class="w"> </span>machine-specific<span class="w"> </span>volume<span class="w"> </span>attachment
+//<span class="w"> </span>information,<span class="w"> </span>including<span class="w"> </span>how<span class="w"> </span>the<span class="w"> </span>volume<span class="w"> </span>is<span class="w"> </span>exposed<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>machine.
+<span class="nb">type</span><span class="w"> </span>VolumeAttachmentInfo<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>//<span class="w"> </span>DeviceName<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>volume<span class="s1">&#39;s OS-specific device name (e.g. &quot;sdb&quot;).</span>
+<span class="s1">    //</span>
+<span class="s1">    // If the device name may change (e.g. on machine restart), then this</span>
+<span class="s1">    // field must be left blank.</span>
+<span class="s1">    DeviceName string</span>
+
+<span class="s1">    // DeviceLink is an OS-specific device link that must exactly match</span>
+<span class="s1">    // one of the block device&#39;</span>s<span class="w"> </span>links<span class="w"> </span>when<span class="w"> </span>attached.
+<span class="w">    </span>//
+<span class="w">    </span>//<span class="w"> </span>If<span class="w"> </span>no<span class="w"> </span>device<span class="w"> </span>link<span class="w"> </span>is<span class="w"> </span>known,<span class="w"> </span>or<span class="w"> </span>it<span class="w"> </span>may<span class="w"> </span>change<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span>on<span class="w"> </span>machine
+<span class="w">    </span>//<span class="w"> </span>restart<span class="o">)</span>,<span class="w"> </span><span class="k">then</span><span class="w"> </span>this<span class="w"> </span>field<span class="w"> </span>must<span class="w"> </span>be<span class="w"> </span>left<span class="w"> </span>blank.
+<span class="w">    </span>DeviceLink<span class="w"> </span>string
+
+<span class="w">    </span>//<span class="w"> </span>BusAddress<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>bus<span class="w"> </span>address,<span class="w"> </span>where<span class="w"> </span>the<span class="w"> </span>volume<span class="w"> </span>is<span class="w"> </span>attached<span class="w"> </span>to
+<span class="w">    </span>//<span class="w"> </span>the<span class="w"> </span>machine.
+<span class="w">    </span>//
+<span class="w">    </span>//<span class="w"> </span>The<span class="w"> </span>format<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>field<span class="w"> </span>must<span class="w"> </span>match<span class="w"> </span>the<span class="w"> </span>field<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>name
+<span class="w">    </span>//<span class="w"> </span><span class="k">in</span><span class="w"> </span>BlockDevice.
+<span class="w">    </span>BusAddress<span class="w"> </span>string
+
+<span class="w">    </span>//<span class="w"> </span>ReadOnly<span class="w"> </span>signifies<span class="w"> </span>whether<span class="w"> </span>the<span class="w"> </span>volume<span class="w"> </span>is<span class="w"> </span><span class="nb">read</span><span class="w"> </span>only<span class="w"> </span>or<span class="w"> </span>writable.
+<span class="w">    </span>ReadOnly<span class="w"> </span>bool
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>"common" node configuring</h2>
+<p>In code this step is presented as an "interface" function within the
+<code>BootstrapInstance</code>. So it is really part of the provisioning calls.
+However, we are separating it here for discussion purpose.</p>
+<figure class="s12 center">
+  <img src="images/juju%20common%20BootstrapInstance%20finalizer%20func.png" />
+    <figcaption>"common" provider's BootstrapInstance finalizer function</figcaption>
+</figure>
+
+<p>The most critical thing in this step is to install Juju agent. We will
+write more about this agent in other articles. For bootstrap, the
+followings are observed:</p>
+<ul>
+<li>default path: <code>/var/lib/juju</code></li>
+<li>hardcoded log file name: <code>cloud-init-output.log</code></li>
+<li>nonce content (see below)</li>
+</ul>
+<h3>nonce</h3>
+<p>Juju identifies machine-0 by SSH-ing into the machine and matching
+<code>/var/lib/juju/nonce.txt</code> content to a special string:
+<code>user-admin:bootstrap</code>.</p>
+<blockquote>
+<p>Machine-0 must have file (<code>/var/lib/juju/nonce.txt</code>) with content: <span class="myhighlight">user-admin:bootstrap</span></p>
+</blockquote>
+<h1>Wrapup</h1>
+<p>This concludes our humble attempt to decipher Juju's bootstrap
+mechanisms. We have covered quite some grounds. The key take away is
+to understand where provider is expected. However, this is an over
+simplified view because it also depends on how much involvement a
+cloud want to have in this process. Argubly one can say that cloud
+provider is really called for in each of the six steps in this process
+&mdash; it needs to validate constraints, it should pick the OS image,
+it certainly should control the tool and cloud-init process, and
+certainly it is doing the provisioning.</p>
+<p>I think this argument is nearly true if one looks into stock providers
+and pull all their implementation together. For writing a new
+provider, XClarity, it comes down to a design decision then how much
+the underline cloud wants control. The bare minimum (as we have done
+in the simulation, see below) is to rely on default values, <code>common</code>
+provider's <code>Bootstrap</code> functions, and return a <code>StartInstanceResult</code>.</p>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>For<span class="w"> </span>now,<span class="w"> </span>we<span class="w"> </span>are<span class="w"> </span>imitating<span class="w"> </span>a<span class="w"> </span>successful<span class="w"> </span>instance<span class="w"> </span>by<span class="w"> </span>directly<span class="w"> </span>returning<span class="w"> </span>a<span class="w"> </span>result<span class="w"> </span>struct
+var<span class="w"> </span>tmpArch<span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arch.AMD64
+var<span class="w"> </span>tmpMem<span class="w"> </span><span class="nv">uint64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000000</span>
+var<span class="w"> </span>tmpCpuCore<span class="w"> </span><span class="nv">uint64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+var<span class="w"> </span>tmpCpuPower<span class="w"> </span><span class="nv">uint64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+hardware<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>instance.HardwareCharacteristics<span class="o">{</span>
+<span class="w">        </span>Arch:<span class="w"> </span><span class="p">&amp;</span>tmpArch,
+<span class="w">        </span>Mem:<span class="w"> </span><span class="p">&amp;</span>tmpMem,
+<span class="w">        </span>CpuCores:<span class="w"> </span><span class="p">&amp;</span>tmpCpuCore,
+<span class="w">        </span>CpuPower:<span class="w"> </span><span class="p">&amp;</span>tmpCpuPower,
+<span class="o">}</span>
+volumes<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>make<span class="o">([]</span>storage.Volume,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
+networkInfo<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>make<span class="o">([]</span>network.InterfaceInfo,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
+volumeAttachments<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>make<span class="o">([]</span>storage.VolumeAttachment,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
+
+<span class="k">return</span><span class="w"> </span><span class="p">&amp;</span>environs.StartInstanceResult<span class="o">{</span>
+<span class="w">        </span>Instance:<span class="w">          </span>xclarityBootstrapInstance<span class="o">{}</span>,
+<span class="w">        </span>Config:<span class="w">            </span>env.ecfg.Config,
+<span class="w">        </span>Hardware:<span class="w">          </span><span class="p">&amp;</span>hardware,<span class="w"> </span>//<span class="w"> </span><span class="nb">type</span><span class="w"> </span>instance.HardwareCharacteristics<span class="w"> </span>struct
+<span class="w">        </span>NetworkInfo:<span class="w">       </span>networkInfo,<span class="w"> </span>//<span class="w"> </span><span class="nb">type</span><span class="w"> </span>network.InterfaceInfo<span class="w"> </span>struct
+<span class="w">        </span>Volumes:<span class="w">           </span>volumes,<span class="w"> </span>//<span class="w"> </span><span class="nb">type</span><span class="w"> </span>storage.Volume<span class="w"> </span>struct
+<span class="w">        </span>VolumeAttachments:<span class="w"> </span>volumeAttachments,<span class="w"> </span>//<span class="w"> </span><span class="nb">type</span><span class="w"> </span>storageVolumeAttachment<span class="w"> </span>struct
+<span class="o">}</span>,<span class="w"> </span>nil
+</code></pre></div>
+
+<p>There are a few topics that are not covered in this article, but need
+to be studied further:</p>
+<ol>
+<li>Juju agent &amp; tools: What does an agent do? What is the DB look
+like? How is information registered with jujud (aka. agent)? How does
+agent communicates with CLI controller? Why is it an issue to match
+agent with juju binary? How to build a custom agent?</li>
+<li>cloud-init: My understanding at the moment is that the entire node
+configuration is done via <a href="https://launchpad.net/cloud-init">cloud-init</a>. Itself is not
+interesting. But what Juju does to make cloud-init carry out its task
+is interesting. I think there are scripts involved. So who is
+generating these scripts? what type of scripts? Can they be
+customized? This helps us to know how much we can control the final
+state of an instance.</li>
+<li>SimpleStream: I think it is a form of communication protocol. It is
+how one communicates with jujud. What capability does it have? Who is
+providing that in Juju's environment? How it may be affected by other
+network design/configuration?</li>
+</ol>
+<p>Well, stay tuned.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

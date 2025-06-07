@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2021-05-05
+
+
+    <a class="wave-effect" href="thoughts.html">
+      <i class="fa fa-folder-open-o"></i>
+      thoughts
+    </a>
+
+    <a class="wave-effect" href="tag-thoughts.html">
+      <i class="fa fa-tag"></i>
+      thoughts
+    </a>
+
+    <h1 class="myhighlight">Logic Fallacies</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>Ever since I wrote <a href="https://fengxia41103.github.io/myblog/burden of proof.html">burden of proof</a>, I have been longing to take
+notes of this topic &mdash; logic fallacies. Over the last few years I
+found myself more and more sensitive to these fallacies and, like new
+parents who all of sudden seeing kids everywhere which they never
+noticed before theirs was born, I see and hear these fallacies all
+over the place. They are so prevalent that I seriously wonder whether
+there is a way to make these knowledge/training more accessible to
+large population so that people can start applying them in their
+day-2-day life. I know the idea is likely hopeless &larr; after all,
+how many of us even remember or utilize the knowledge and training we
+have had from school years? But still, I think it's worth an effort to
+promote them, and even without leaving a mark and changing a person, I
+believe having a louder voice would eventually make them heard, by a
+few, and the number of those few would be growing.</p>
+<h1>category</h1>
+<ul>
+<li><strong>formal fallacy</strong>: error in argument's form.</li>
+<li><strong>propositional fallacy</strong>: an error that concerns compound
+  propositions. This is an error in compounded bool logics, eg. <code>if A
+  and B</code> can only be True when both A &amp; B are true. Think like coding.</li>
+<li><strong>quantification fallacy</strong>: the quantifiers of the premises are in
+  contradiction to the quantifier of the conclusion.</li>
+<li><strong>formal syllogistic fallacies</strong>: logical fallacies that occur in
+  syllogisms.</li>
+<li><strong>informal fallacy</strong>: premise is weak. This is the most prevalent family
+  of fallacies I see in everyday life.
+  -faulty generalization</li>
+</ul>
+<h1>Faulty generalization</h1>
+<p>Ah, <a href="https://fengxia41103.github.io/myblog/generalization.html">generalization</a>! I thought I was going nuts when I wrote that
+blog, because it felt so common sense so that I felt it is completely
+inevitable. Yet in some many times I felt so, wrong! But I couldn't
+pinpoint what went wrong. I mean, I could argument what the logic
+didn't stand, or at least, was weak/insufficient, but I couldn't
+really categorize it so to know exactly why it was so. But here, <a href="https://en.wikipedia.org/wiki/Faulty_generalization#Hasty_generalization">wiki</a>
+is my friend. At least now I start to learn what these generalizations
+are all about &mdash; in layman's term, this is when we jump to a
+conclusion of a group when only small number of samples have been
+presented so.</p>
+<p>Faulty generalization comes in many flavors which will be discussed in
+details below. The overall theme is that the arguer makes a conclusion
+on a faulty sample &mdash; samples too small, biased, exceptions are
+deliberated ignored or excluded altogether without giving a
+consideration or a reason... therefore, without presenting the entire
+picture, the conclusion is not only skewed, but could have been
+pre-determined, thus the argument isn't even genuine at all but w/
+only an aim to win his argument, so what I would call arguing for
+arguing's sake<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<h2>representative sampling</h2>
+<p>Before going into generalization, let's look at this, sampling. The
+entire category of faulty generalization is pointing to this exact
+concept being misused in various forms.</p>
+<p><a href="https://en.wikipedia.org/wiki/Sampling_(statistics)">Sampling</a> is a deep topic on itself. The key here is that
+<strong>without defining clearly the space of the samples covered in a
+discussion, there has simply no point of further argument</strong> because
+arguer can/will apply techniques to build case, thus inevitably
+committing the faults illustrated below. Continue to argue upon such
+faulty foundation would go nowhere. So, the notes below are to help us
+identify and pinpoint exactly what technique is used in hiding these
+shaky samples.</p>
+<p>So, what is representative sampling? First of all, it is <strong>not always
+random sampling</strong>, because fundamentally it should be determined by
+definition of the <strong>characteristics the group has</strong> in your view! For
+example, if we are to investigate something about man vs. woman in
+this world, random sampling N men vs. N women is only <em>representative</em>
+if we share the <strong>assumption</strong> that population is roughly half men
+vs. half women! But moving this to some geo where the number of men is
+quite more than one of women, random sampling is clearly <strong>not
+representative</strong> anymore!</p>
+<p>Therefore, one should first define these characteristics, thus serving
+as the outter-most boundary of the following argument. Once we are
+both clear about what we are to mean, we then move on to examine these
+samples against its group. Only when we consider the samples being
+representative should we embark the argument. Otherwise, it's just a
+waste of time.</p>
+<h2>hasty generalization</h2>
+<p>Quite a few alternative calling of the same idea:</p>
+<ol>
+<li>proof by example</li>
+<li>Underpowered generalization</li>
+<li>Illicit generalization</li>
+<li>Fallacy of insufficient sample</li>
+<li>Generalization from the particular</li>
+<li>Leaping to a conclusion</li>
+<li>Blanket statement</li>
+<li>Hasty induction</li>
+<li>Law of small numbers</li>
+<li>Unrepresentative sample</li>
+<li><a href="https://en.wikipedia.org/wiki/Secundum_quid">Secundum quid</a></li>
+</ol>
+<p>They all mean the same thing, that:</p>
+<blockquote>
+<p>X is true for A.
+X is true for B.
+Therefore, X is true for C, D, E, etc.</p>
+</blockquote>
+<p>The key here is that <strong>the evidence is not sufficient</strong>. I like the
+example in wiki (below) because I see this played out everywhere in
+form of a tourist commenting a new place, of its people, or the so
+called <strong>bias against 河南人</strong>, etc.</p>
+<blockquote>
+<p>For example, if a person travels through a town for the first time and
+sees 10 people, all of them children, they may erroneously conclude
+that there are no adult residents in the town.
+</p>
+</blockquote>
+<p>What's the cure!? Fundamentally, the challenge should be directed at
+sophist's sample group:</p>
+<ul>
+<li>how many samples out of the group s/he is basing the claim on, and</li>
+<li>how do we know the sample is <strong>representative</strong>, eg. selected
+  randomly. In other words, one must present his/her sample selection
+  criteria and procedure in order to allow examination of sample bias
+  &mdash; this is truly the most common fault of <em>garbage in, garbage
+  out</em> sceario &mdash; if I screwed the sample, whether intentionally
+  or not, I have certainly screwed the result.</li>
+</ul>
+<h3>when it is correct</h3>
+<p>I didn't expect this one! I thought faulty generalization are all,
+wrong. But, boy, am I wrong! There are indeed cases when faulty
+generalization, a logic fallacy, <strong>leads to correct
+conclusion</strong>. However, they are only so under a condition:</p>
+<blockquote>
+<p>if it leads from a singular premise to an existential conclusion
+(i.e. proving that a claim is true for at least one case, instead of
+for all cases)</p>
+<p>-- Ref: <a href="https://en.wikipedia.org/wiki/Proof_by_example">proof by example</a></p>
+</blockquote>
+<p>So, if the claim is only applied to eliminate an absolute
+(eg. absolutely all this or all that), then yes, this works.</p>
+<h2>slothful induction</h2>
+<p>This is the opposite to hasty generalization, <a href="https://en.wikipedia.org/wiki/Slothful_induction">wiki</a> has a pretty
+good example:</p>
+<blockquote>
+<p>An example of slothful induction might be that of a careless man who
+has had twelve accidents in the last six months and it is strongly
+evident that it was due to his negligence or rashness, yet keeps
+insisting that it is just a coincidence and not his fault.</p>
+<p>Its logical form is: evidence suggests X results in Y, yet the person
+in question insists Y was caused by something else.
+</p>
+</blockquote>
+<p>Searching for "how to rebut slothful induction" didn't come up
+much. But I hit on a [tweeter post] about Corvid-19 vs. flu, pretty
+good one, and boy, I feel ashamed now, that I have committed the same
+fallacy as this author has pointed out.</p>
+<p>Here, the author pointed out that we are jumping to conclusion because
+the existing premises are not sufficient to the conclusion.</p>
+<blockquote>
+<p>The argument here is that COVID-19 deaths are less than flu deaths
+therefore COVID-19 is less of a threat. But this argument is logically
+invalid: the conclusion doesn't follow from the premises. Therefore
+you need to add any hidden assumptions that make the argument valid.
+</p>
+</blockquote>
+<p><a href="https://pbs.twimg.com/media/EUoC01uWsBQBvoo?format=jpg&amp;name=900x900"></a></p>
+<p>Rather, there is another <strong>hidden premise (P3)</strong>, that death toll by
+Corvid will continue to be less than the flu, which apparently is not:</p>
+<p><a href="https://pbs.twimg.com/media/EUoDQ9ZWsA8-YuD?format=jpg&amp;name=900x900"></a></p>
+<p>Therefore, by ignoring the evidence of Corvid death, the statement
+that Corvid is less than a flu was committing this slothful induction
+fallacy.</p>
+<p>Brilliant.</p>
+<h2>overwhelming exception</h2>
+<p>This is an interesting one. I can't say where I encounter this. The
+samples by wiki seem to be mostly used in comedies. The key of this
+fallacy is in its <strong>qualifications</strong>, which will eliminate so many
+<em>exceptions</em> of the claim that essentially makes the original claim
+nothing but an empty shell. What comes to mind is the famous model T
+color choice:</p>
+<blockquote>
+<p>Any customer can have a car painted any colour that he wants, so
+long as it is black.</p>
+<p>-- by Henry Ford</p>
+</blockquote>
+<p>So, watch out for qualification that creates exceptions.</p>
+<h2>accident</h2>
+<p>Came across <a href="http://fallacyfiles.org/accident.html">this website</a>, excellent example:</p>
+<blockquote>
+<p>Birds normally can fly.
+Tweety the Penguin is a bird.
+Therefore, Tweety can fly.
+</p>
+</blockquote>
+<p>What went wrong? The key is in the first statement, "Birds normally
+can fly." &mdash; it is a rule of thumb, which is <strong>generally true but
+has exception</strong>, and the 2nd line apparently is that exception!</p>
+<h3>rule of thumb</h3>
+<p>What is a rule of thumb? It's easier to see what it is not:</p>
+<ol>
+<li>
+<p><a href="http://fallacyfiles.org/glossary.html#UniversalGen">universal generalization</a>: A 100% or 0% statistical
+   generalization, that is, a proposition that asserts that something
+   is true of all or none of a class.</p>
+</li>
+<li>
+<p><a href="http://fallacyfiles.org/glossary.html#StatisticalGen">statistical generalization</a>: A proposition which asserts
+   something of a percentage of a class. Universal generalizations are
+   the special cases when the percentage equals 100% or 0%.</p>
+</li>
+</ol>
+<p>Now, rule of thumb vs. universal generalization: the former has
+exception.</p>
+<p>Now, rule of thumb vs. statistical generalization: the former actually
+has a <strong>hidden context</strong>, but that context is not applicable to the
+case in point. In the example above, if we take the context of
+Antarctica alone, Penguin will be the majority <em>bird</em> there, and
+viola, the rule of thumb there should be "birds don't fly!" The rule
+of thumb is often spoken in a context that are close to the speaker
+and his/her audiences' common life experience, therefore, "Clearly,
+then, rules of thumb are specific to a cultural and temporal context."</p>
+<p>All in all, rule of thumb has exception, and it's the exception that
+makes the accident fallacy.</p>
+<h3>no true Scotsman</h3>
+<p>A particular form of Accident fallacy is this, also known as <em>appeal
+to purity</em>, because the key to this fallacy is that the arguer makes a
+generalization w/o considering exception (thus, is an
+Accident). However, rather then admitting the fault, he tries to
+exclude exceptions so to validate his generalization. <a href="https://en.wikipedia.org/wiki/No_true_Scotsman">wiki</a> gives
+a good example:</p>
+<blockquote>
+<p>Person A: "No Scotsman puts sugar on his porridge."
+Person B: "But my uncle Angus is a Scotsman and he puts sugar on his porridge."
+Person A: "But no true Scotsman puts sugar on his porridge."
+</p>
+</blockquote>
+<p>Here, the key is the last line, by using the word <strong>true</strong>, A has
+modified his original generalization (all scotsman) by excluding some
+unwanted samples (now all scotsman are divided into two camps: true
+and not true), but using word such as "emotionally charged but
+nonsubstantive purity platitudes such as 'true, pure, genuine,
+authentic, real'" to hide such modification.</p>
+<p>Therefore, three conditions are needed to identify this fallacy:</p>
+<blockquote>
+<ol>
+<li>not publicly retreating from the initial, falsified assertion</li>
+<li>offering a modified assertion that definitionally excludes a targeted unwanted counterexample</li>
+<li>using rhetoric to hide the modification
+</li>
+</ol>
+</blockquote>
+<p>Sneaky, isn't it?</p>
+<h2>cherry picking</h2>
+<blockquote>
+<p>Cherry picking, suppressing evidence, or the fallacy of incomplete
+evidence is the act of pointing to individual cases or data that seem
+to confirm a particular position while ignoring a significant portion
+of related and similar cases or data that may contradict that
+position.
+</p>
+</blockquote>
+<p>This sounds quite the same as ignoring exceptions. I think the key
+difference is that cherry picking isn't targeted to exclude
+exception. It's simply a fault when samples are ignored. Of course,
+the method and the intention to formulate such ignoring will then make
+the case stronger in name of Accident and so on. Therefore, cherry
+picking can be viewed as a general category of such symptom.</p>
+<h3>anecdotal evidence</h3>
+<p>How <a href="https://en.wikipedia.org/wiki/Anecdotal_evidence">interesting</a>! This is exactly the things I hear all the time,
+and it has a name rings this bell &mdash; <strong>"person who" fallacy</strong>!</p>
+<blockquote>
+<p>"I know a person who..."; "I know of a case where..."</p>
+</blockquote>
+<p>In short, it "is a factual claim relying only on personal observation,
+collected in a casual or non-systematic manner". This evidence is not
+automatically false. Rather, the condition is whether this evidence
+can be verified using <strong>scientific method</strong> &mdash; if it can, then
+evidence may have value (if proved by the investigation). Otherwise,
+it's a fallacy.</p>
+<p>This is a form of cherry picking because the evidence by definition is
+biased &larr; I know somebody... which means my evidence came from my
+close circle, which automatically excluded majority of human race
+whom I don't know ~~~ What a pity.</p>
+<h1>correlative-based fallacies</h1>
+<p>Correlative conjunction "is a relationship between two statements
+where one must be false and the other true". So be careful, it's
+<strong>not</strong> just correlation, but <strong>must be opposite to each other</strong>. In
+coding term, the conditions must be mutually exclusive so that no
+third code path could occur, eg. <code>if A &gt; 10</code> is one side, then a
+correlative conjunction is formed when the other side is: <code>else</code>, or
+<code>if A &lt;=10</code>. But merely <code>if A &lt; 10</code> will be a bug, because when
+<code>A==10</code>, it has no handler.</p>
+<p>Now, these type of fallacies are to play with this correlative
+definition:</p>
+<ol>
+<li>Presenting two as if they are the correlative conjunctions, but
+   they are not &rarr; false dilemma.</li>
+<li>Denying the correlative: introduce a 3rd option into the
+   correlatives. In other words, when presented a Yes-No question, the
+   answer is anything other than Y-N, 答非所问.</li>
+<li>Suppressed correlative: try to redefine one correlative so that
+   they <strong>lose contrast</strong>.</li>
+</ol>
+<h2>false dilemma/false correlative</h2>
+<p><a href="https://en.wikipedia.org/wiki/False_dilemma">This</a> is a good one. It is "based on a premise that erroneously
+limits what options are available". This picture illustrates the point
+well:</p>
+<figure class="col s12">
+  <img
+  src="https://en.wikipedia.org/wiki/False_dilemma#/media/File:Young_America's_dilemma_-_Dalrymple._LCCN2010651418.jpg"/>
+  <figcaption>false dilemma (credit: [wiki][14])</figcaption>
+</figure>
+
+<p>This is also a common case in everyday's communication, when I
+sometimes plays this devil to Noah by presenting to him only two
+options: doing his homework A or homework B ~~ Apparently he would
+grow out of this dilemma by one day realizing he could also go out and
+play, or just ignore me entirely, and I could do nothing about,
+hahaha.</p>
+<p>This isn't cherry picking because the problem isn't in the sample, but
+in its conclusion (only two options presented while more options are
+deliberately excluded by default<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>).</p>
+<h2>denying the correlative</h2>
+<p>Pretty straightforward. When asked a Y/N question, you don't answer w/
+yes or not, but something else, as if it is also an option (which it
+must not be):</p>
+<blockquote>
+<p>Judge: So did you kill your landlord or not?
+Kirk: I fought with him.
+</p>
+</blockquote>
+<h2>suppressed correlative</h2>
+<p>This can be called <em>fallacy of relativity</em>, because the key here is
+one makes the original contrast <strong>impossible</strong> by changing the definition,
+or mudding the definition's scope. This is especially true when
+adjectives are used, eg. "good man" vs. "evil man", well, I could
+claim any man good or evil when I shift around its definition,
+couldn't I!? What a mess.</p>
+<h1>argument to moderation</h1>
+<p>"Also known as false compromise, argument from middle ground, and the
+golden mean fallacy" (ref: <a href="https://en.wikipedia.org/wiki/Argument_to_moderation">wiki</a>). I like the example in wiki:</p>
+<blockquote>
+<p>An example of a fallacious use of the argument to moderation would
+be to regard two opposed arguments &mdash; one person saying that
+the sky is blue, while another claims that the sky is in fact
+yellow, and conclude that the truth is that the sky is green.</p>
+<p>While green is the colour created by combining blue and yellow,
+therefore being a compromise between the two positions, the sky is
+obviously not green, demonstrating that taking the middle ground of
+two positions does not always lead to the truth.</p>
+</blockquote>
+<p>In particular, I like the phrase that "the middle ground between the
+big lie of Soviet propaganda and the truth was itself a lie, and one
+should not be looking for a middle ground between information and
+disinformation."</p>
+<h1>disinformation</h1>
+<p><a href="https://en.wikipedia.org/wiki/Disinformation">Fascinating</a>! It is "false information with the intention to
+deceive public opinion". In today's world, this is synonymous to a lie
+and propaganda.</p>
+<h1>continuum fallacy/wronger than wrong</h1>
+<p><a href="https://rationalwiki.org/wiki/Continuum_fallacy">This</a> is a good explanation.</p>
+<blockquote>
+<p>P1: X is one extreme and Y is the opposite extreme.
+P2: There is no definable point where X becomes Y.
+C: Therefore, there is no difference between X and Y.
+</p>
+</blockquote>
+<p>"In general, the fallacy takes situations where no clear cut-off point
+between X and Y exists, and either a) denies that any distinction
+really exists and commits an equivocation between both or b) takes
+advantage of the lack of distinction by arbitrarily shifting the
+distinction to unrealistic positions."</p>
+<p>The key in this fallacy is to downplay a stopping point between the
+two extremes. In other words, even when there is a clear <em>line</em> when
+one transits from one state/extreme into another, the fallacy says
+<em>there isn't</em>, thus is the trick. But what if the line isn't there?
+Ah! So be careful, this fallacy isn't about definition of the line,
+but that it's ignoring the degree of truthfulness of the two
+extremes. For example, saying "earth is flat" as one extreme and
+"earth is round" as the other, are both actually incorrect (earth
+isn't pure round, but <em>an oblate spheroid</em>). However, the degree of it
+being flat is magnitudely <strong>not truth</strong> than its being
+round. Therefore, it's a fallacy to claim both are <strong>equally false</strong>
+because both are not true.</p>
+<p>This is further discussed in <a href="https://rationalwiki.org/wiki/Wronger_than_wrong">wronger than wrong</a>.</p>
+<h1>argument from ignorance</h1>
+<p>The pattern of this fallacy is this:</p>
+<ul>
+<li>Statement <code>p</code> is unproved &rarr; <code>Not-p</code> is true.</li>
+<li>Statement <code>not-p</code> is unproved &rarr; <code>p</code> is true.</li>
+</ul>
+<p>I think this the exact logic behind the phrase 敌人的敌人一定是朋友
+&larr; of course this is not true, because s/he could also be another
+enemy, or a neutral.  This seems obvious that even in the space of <code>p</code>
+vs. <code>not-p</code>, which form a correlative conjunction, not proving <code>p</code>
+doesn't warrant the <code>not-p</code> is now true &mdash; eg. because you can't
+prove me a male, doesn't automatically make me a female.</p>
+<p>This one is quite confusing because it sound very much to the "If A,
+then B &rarr; if not B, then not A" logic. But they are different. The
+latter is strictly correct, but this fallacy is not. This fallacy is
+saying, if you can't prove <code>not B leads to A</code>, then not B must lead to not A, therefore, becomes correct.</p>
+<p>This fallacy is a common technique to shift the <a href="https://fengxia41103.github.io/myblog/burden of proof.html">burden of proof</a>,
+meaning that arguer takes a position in this fallacy, but without
+backing himself up w/ evidence, simply asking the rebuttal to prove
+the <code>not-p</code>, and if s/he can't, arguer <em>wins</em> &larr; this is pretty
+BS, isn't it?</p>
+<p>But, be careful, this has <strong>non-fallacious uses</strong> in science, law and
+some specific application. For practical reason, one must <em>assume</em> the
+<code>not-p</code> is true is you can't prove the <code>p</code>. For example, "the
+assumption of innocence until proved guilty" is a practical, not a
+logical, process. In this, <code>p=guilty</code>, if you can't prove <code>p</code>, the
+<code>not-p=innocent</code> must be <strong>assumed</strong>.</p>
+<h1>equivocation</h1>
+<p>谐音梗, or 偷换概念.</p>
+<h2>ambiguous middle term</h2>
+<blockquote>
+<p>Since only man [human] is rational.
+And no woman is a man [male].
+Therefore, no woman is rational.
+</p>
+</blockquote>
+<p>"The first instance of "man" implies the entire human species, while
+the second implies just those who are male." Equivocation, however, is
+a great example of humor ~~</p>
+<p>This, in more strict term, is called <a href="https://en.wikipedia.org/wiki/Fallacy_of_four_terms">fallacy of four terms</a>,
+because the double-meaning word introduced a fourth term while
+<strong>exactly three and three alone</strong> can be there. Using the examples
+from <a href="https://en.wikipedia.org/wiki/Fallacy_of_four_terms">wiki</a>:</p>
+<p>Valid, three terms: goldfish, fish, and fin.</p>
+<blockquote>
+<p>Major premise: All fish have fins.
+Minor premise: All goldfish are fish.
+Conclusion: All goldfish have fins.
+</p>
+</blockquote>
+<p>Invalid, fourth term: human.</p>
+<blockquote>
+<p>Major premise: All fish have fins.
+Minor premise: All goldfish are fish.
+Conclusion: All humans have fins.</p>
+</blockquote>
+<p>Now as you can see, in equivocation fallacy, though not a new word is
+introduced, but the meaning of one of the three terms has been changed
+from one context to another, thus make actually 4 instead of 3! Again,
+using the example above:</p>
+<blockquote>
+<p>Since only man [human] is rational.
+And no woman is a man [male].
+Therefore, no woman is rational.
+</p>
+</blockquote>
+<p>On surface, three terms: man, woman, and rational. But the word "man"
+has actually two meanings: human, and male. Therefore, the total terms
+in this have now four: human, male, woman, rational. And by
+definition, two premises are not sufficient to validate the
+conclusion, therefore is a fallacy. Brilliant!</p>
+<h2>Motte &amp; Bailey</h2>
+<p>This is a bit difficult one. By presenting two similar points, one
+controversial and one less so, the arguer is actually promoting the
+controversial one, but when attacked, s/he uses the less controversial
+version (pretending these two are identical) for defense.</p>
+<blockquote>
+<p>Person A asserts [Controversial Interpretation of Viewpoint X].
+Person B critiques [Controversial Interpretation of Viewpoint X].
+Person A asserts that they were actually defending [Common-Sense Interpretation of Viewpoint X].
+Person B no longer has grounds to critique Person A; Person B leaves the discussion.
+Person A claims victory and discreetly reverts to actually supporting
+[Controversial Interpretation of Viewpoint X].
+</p>
+</blockquote>
+<p>This leads to <a href="https://en.wikipedia.org/wiki/Persuasive_definition">persuasive definition</a>, because language can
+"simultaneously communicate information (informative) and feelings
+(expressive)", and the persuasive definition focuses on the expressive
+part, the feeling part. This is where the M&amp;B comes in &mdash; the
+Beiley is the controversial one, the <em>informative</em> piece, where Motte
+is the <em>expressive</em> piece, the non-controversial piece. When Beiley is
+attacked, the arguer evokes the expressive piece for defense, and when
+attacker <em>agrees</em> or <em>gives up</em>, s/he switches to Beiley and claims it
+is valid.</p>
+<p>This strategy is very common when emotionally charged words are used,
+eg. love, freedom, patriotic... they are all imprecise and
+emotional. Therefore, when one says 你不怎样就不是中国人, the Beiley
+is the 事， the 怎样， and the Motte is the 是中国人 &mdash;
+apparently, citizenship is determined by some kind of law, while I can
+disagree w/ the 事儿 however way I want without breaking that law. Now
+writing this, this also feels like a false dilemma, as if my option is
+only either "do the thing and be a 中国人"， or "not do it and not
+being a 中国人". I don't know whether this example is a good M&amp;B one,
+but this is what I understand it to be.</p>
+<h2>false of accent</h2>
+<p>Reminds me the poem when one changes accent to change it's meaning
+entirely.</p>
+<blockquote>
+<p><strong>I</strong> didn't take the test yesterday. (Somebody else did.)
+I <strong>didn't</strong> take the test yesterday. (I did not take it.)
+I didn't <strong>take</strong> the test yesterday. (I did something else with it.)
+I didn't take <strong>the test</strong> yesterday. (I took a different one.)
+I didn't take the <strong>test</strong> yesterday. (I took something else.)
+I didn't take the test <strong>yesterday</strong>. (I took it some other day.)
+</p>
+</blockquote>
+<h1>fallacy of composition</h1>
+<p>This is similar to the hasty generalization. This is also making a
+conclusion only by seeing part of the whole. <a href="https://en.wikipedia.org/wiki/Matthew_effect">wiki</a> has some good
+examples:</p>
+<blockquote>
+<ul>
+<li>If someone stands up out of their seat at a cricket match, they can
+  see better. Therefore, if everyone stands up, they can all see
+  better.</li>
+<li>Some people can become millionaires with the right business
+  concept. Therefore, if everyone has the right business concept,
+  everyone will become a millionaire.</li>
+<li>If a runner runs faster, he can win the race. Therefore, if all the
+  runners run faster, they can all win the race.
+</li>
+</ul>
+</blockquote>
+<p>Now, there are also some examples which are super common (as fallacy):</p>
+<blockquote>
+<ul>
+<li>Since every part of a certain machine is light in weight, the
+  machine as a whole is light in weight.</li>
+</ul>
+</blockquote>
+<p>Here is a tricky one. "In society, if all voters are rational, by
+majority rule their collective choice will be rational." &larr; <strong>not
+true</strong>! So again, the key here is the sum of components don't
+necessarily bear the characteristic the arguer is wishing to promote.</p>
+<p>But then, what does this make education? Also, what about individual's
+abiding laws and being a good citizen, if individual's don't translate
+into the whole? &larr; wouldn't this make better sense if the fallacy
+has a statistical threshold, such as "if over 50% of the parts have
+this trait, the whole is likely to have it, too"? Well, in the weight
+example above, this won't work either.</p>
+<p>I think the problem of this fallacy isn't about composition, but is
+that the conclusion has a hidden assumption which is not examined, and
+will be violated when we move from individual to a whole. For example,
+in the millionaire example, the hidden line is that there are buyers,
+so the fallacy is implying that if you had right biz, all others will
+be buyers... well, even this can be correct, that everyone buys
+someone else' product &amp; service, thus all become millionaire, except
+that million dollars would then become less valuable if everyone had
+it. So it's really its effect, or the hidden assumption, is the
+problem here.</p>
+<h1>fallacy of division</h1>
+<p>This is the opposite to the fallacy of composition. Here we are
+drawing conclusion of a part from characteristic of a whole.</p>
+<blockquote>
+<ol>
+<li>The second grade in Jefferson elementary eats a lot of ice cream</li>
+<li>Carlos is a second-grader in Jefferson elementary</li>
+<li>Therefore, Carlos eats a lot of ice cream
+</li>
+</ol>
+</blockquote>
+<h1>false attribution</h1>
+<p>This fallacy is difficult to eliminate because this is really
+everywhere. Misquoting or crediting to the wrong source is too easily
+happen to be curable.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Matthew_effect">Matthew effect</a> is interesting. Basically it's saying the more
+you have, the more you will; the more famous you are today, the more
+famous you will be tomorrow.... disheartening, isn't this!?</p>
+<h1>false equivalence</h1>
+<p>Ah, <a href="https://en.wikipedia.org/wiki/False_equivalence">this</a> is a good one. This is to compare apple to orange. By
+using a similarity between two, it draws the conclusion that they are
+the same/equivalent. Of course, the equivalence is fallacy if:</p>
+<ul>
+<li>The differences are in different magnitude: being a petty thief and
+  being a murder are both criminals, but drawing the line that they
+  are the same is a fallacy because they are difference degrees of
+  criminality.</li>
+<li>
+<p>Using a similarity which has nothing to do w/ the claim.</p>
+<blockquote>
+<p>"They're both living animals that metabolize chemical
+energy. Therefore there's little difference between having a pet cat
+and a pet snail."</p>
+<p>The "equivalence" is in factors that are not relevant to the
+animals' suitability as pets.</p>
+</blockquote>
+<p>Exactly.</p>
+</li>
+</ul>
+<h1>historian's fallacy</h1>
+<p>This is the <a href="https://en.wikipedia.org/wiki/Historian%27s_fallacy">God's view</a>. We know the consequence of a historical
+event. But the ppl living in that event did not. Therefore, analysis
+and evaluation must be conducted only based on things they knew, not
+we know today.</p>
+<p>I'm surprised that this fallacy is only identified in 1880 and later
+names in 1970!! This is rather quite new, and make me wonder what all
+the analysis before these times were like, I mean, didn't they then
+commit this fallacy, thus requiring a new round of re-evaluation? If
+so, has it been done? and doesn't this lead to that each historical
+work should require a scrutiny/test of all these fallacies? Sounds
+overkill, but is alternative acceptable? I don't know.</p>
+<h2>presentism</h2>
+<p>This sounds very much like the <a href="https://en.wikipedia.org/wiki/Presentism_(literary_and_historical_analysis)">God's view</a>, also. So let me try
+to clarify these two. The historian's fallacy is about judging a
+history as if the consequence had been known by the doers; presentism
+is to pass on a judgment, in particular, in moral sense, using today's
+standard.</p>
+<p>For example, I think Corvid is a case in point of historian's fallacy
+&mdash; I admire fully the story of <a href="https://en.wikipedia.org/wiki/Presentism_(literary_and_historical_analysis)">Dr. Li</a>, but I don't think
+it's not a good evidence to support criticism of Chinese government's
+negligence, because people who might have heard the wind of this virus
+were few, and knowing such <em>news</em> from any unofficial channel was both
+confusing and incredible &mdash; so, I agree that the government
+committed negligence by not making the information public; but I
+disagree using Dr. Li as the pawn to attack its negligence. I think
+the case lies rather suppressing freedom of speech rather than of a
+prophet whose prophecy was ignored.</p>
+<p>Presentism is very difficult, in my opinion, to both avoid or to be
+criticized, even. When we pass on a judgment on a historical event,
+eg. foot bondage was a sin against female, it is inevitable using
+today's moral standard as the reference. I don't defend these
+histories being a sin or even a crime. But I do think it <strong>requires us
+to also include discussion of how it was viewed back then in the
+discussion</strong>. Further, I think the key problem of presentism is in
+selection of evidence &mdash; if one deliberately ignore or downplay a
+set of events <strong>mostly/purely based on his present standard</strong>, then
+presentism is really a cherry picking fallacy.</p>
+<h1>homunculus fallacy</h1>
+<p>This <a href="https://www.logicallyfallacious.com/logicalfallacies/Homunculus-Fallacy">fallacy</a> is a recursion function goes wrong by having a stop
+condition. Response to the question is not answered, but is
+<em>deflected</em>, in a disguise that seems right at first, but if pushing
+to ask more, will reveal that it's an <strong>infinite regression</strong>.</p>
+<p>It seems the popular example used for this one is the vision. If we
+explain how human has vision by saying a man in your brain is watching
+a movie, then this leads to how he is receiving the movie, another man
+in his brain, and so it regression continues.....</p>
+<p>I don't think this a good example, actually. But for now, it's ok. The
+key of this fallacy is that response didn't answer the question, but
+using a <em>middle man</em> figure, the <em>homunculus</em>, as the answer, as if
+it's then self-evident (which is not), therefore creating this
+recursion.</p>
+<h1>inflation of conflict</h1>
+<p>I like <a href="https://www.logicallyfallacious.com/logicalfallacies/Inflation-of-Conflict">this one</a>.</p>
+<blockquote>
+<p>Authority A disagrees with authority B on issue X.</p>
+<p>Therefore, we can say nothing meaningful about issue X.
+</p>
+</blockquote>
+<p>"This is a form of black and white thinking -- either we know the
+exact truth, or we know nothing at all." "A disagreement among experts
+does not mean that both are wrong, the answer is a compromise, or that
+there is no answer to be known; it simply means that there is
+disagreement -- that is all we can infer."</p>
+<h1>relativist fallacy</h1>
+<p>This is <a href="https://en.wikipedia.org/wiki/Relativist_fallacy">庄子</a>, but in a fallacious way.</p>
+<blockquote>
+<p>The relativist fallacy (or subjectivist fallacy) is a logical fallacy
+that occurs when it is asserted that some fact may be true for some
+people but not true for others.
+</p>
+</blockquote>
+<p>This is not to ignore differences in culture, custom and the
+like. Rather, the key feature of this fallacy isn't in it's relative
+position, but in the fact that the person "uses a mid-argument, ad hoc
+switch to a relativistic view of truth in order to defend some
+position, which they had previously asserted was
+objective". Therefore, this makes the argument to halt because this
+makes the claim <strong>unfalsifiable</strong> &larr; what I all arguing to win for
+arguing's sake.</p>
+<h1>incomplete comparison</h1>
+<p>What a <a href="https://en.wikipedia.org/wiki/Incomplete_comparison">fallacy</a>! This is exactly the topic I was saying earlier
+this morning w/ her daughter, that English grammar requires you to
+observer reasoning, such that you have to have a counterpart when
+using "better than" (than what!?), or "best of" (a group of 3 or
+more!).</p>
+<p>But here it is, the fallacy is by breaking these rules, thus making a
+claim "My product is better" &larr; completely unrefutable because it
+is <strong>incomplete</strong>.</p>
+<h1>inconsistent comparison</h1>
+<p>This is interesting.</p>
+<blockquote>
+<p>product X is less expensive than product A, has better quality than
+product B, and has more features than product C
+</p>
+</blockquote>
+<p>What's wrong!? Ah. So the intention is to say that X is the best. But
+by having 3 categories here &mdash; price, quality, and feature, all
+we could derive is that X is not the bottom  of all three categories,
+but it may be 3rd place in all categories, while A might be the ace in
+2 out of three of these categories, thus being a much better product!</p>
+<p>This is the same fallacy, though jokingly, saying that I'm the best
+coder in novelist, the best novelist in chef, and so on ~~</p>
+<h1>kettle logic</h1>
+<p>Forget about Freud's original example. This is a better one:</p>
+<blockquote>
+<p>In the movie "Philomena", Steve Coogan's character, Martin Sixsmith,
+leaves a church ceremony early. When asked why he says, "I don't
+believe in God, and I think he knows."
+</p>
+</blockquote>
+<p>So 前言不搭后语, conflicting to among itself.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Remember, the whole point of argument, or logic, is to seek the
+<strong>truth</strong> of the subject, not to beat down your opponent. Alas! In
+politics and even in life, how many participant would remember
+this when emotion takes hold, or agenda is the boss?&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><strong>By default</strong> is another common pattern one should watch out
+for, because it indicates an assumption. And as any assumption, it
+must be also examined and agreed upon before proceeding w/
+argument. Otherwise, the argument process has no base.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

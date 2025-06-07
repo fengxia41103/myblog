@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-10-08
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">My system</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>Now setting up my Flex Pro from scratch (well, it's too difficult to
+get to its hard drive, so without ruining this beautiful machine, I
+decided to install Ubuntu from scratch), I'm going to document (rather
+a bit catch up) what I need to install in order to get my working
+environment back.</p>
+<h1>system files</h1>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>git<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>terminator<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>conky<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python-pip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fonts-inconsolata<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>texlive-full<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>run-one<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>emacs<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>i3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wicd-curses<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>virtualenvwrapper<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pandoc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dia<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>evince<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gimp<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pidgin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pidgin-sipe<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>git<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dkms<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>openssh-server<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>openssh-client<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>tmux<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python-mysqldb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mysql-client<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libmysqlclient-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>graphviz<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libgraphviz-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>imagemagick<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libssl-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libcurl4-openssl-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkg-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libmemcached-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>zlib1g-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxml2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libxslt1-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>nginx<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mplayer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>vlc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>youtube-dl<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>rsync<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gthumb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libvirt-bin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>virt-manager<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>virtinst<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libvirt-bin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>bridge-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cloud-utils<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cloud-init<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libguestfs-tools<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pkg-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>uwsgi<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>uwsgi-plugin-python<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cpu-checker<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>htop<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>tree<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libffi6<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libffi-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gthumb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>isync<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mu4e<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>default-jre<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>openconnect<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>zsh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>powerline<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fonts-powerline<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>thunderbird<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sshfs<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>apt-transport-https<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>software-properties-common<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>remmina<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pandoc-citeproc<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>xclip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ffmpeg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>recordmydesktop<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>byzanz<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>postgresql-server-dev-all<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>postgresql<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>pgcli<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>postgresql-client<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fcitx-googlepinyin
+</code></pre></div>
+
+<h1>local kvm setup</h1>
+<ol>
+<li><code>sshkey-gen</code>: u can leave the passphrase to none (just ENTER).</li>
+<li><code>git clone http://github.com/fengxia41103/dev</code>.</li>
+<li>paste the content in <code>.ssh/id_rsa.pub</code> to <code>dev/kvm/my-user-data</code>:
+     this will then allow KVM to be accessible using this key.</li>
+</ol>
+<p>For more info on KVM, read <a href="https://fengxia41103.github.io/myblog/kvm.html">here</a>.</p>
+<h1>4k display and font size</h1>
+<p>Fonts will be way too small on a 4k display. The best instruction I
+found and works is <a href="https://wiki.archlinux.org/index.php/HiDPI">by ArchLinux</a>.</p>
+<p>First of all, <strong>don't use <code>xrandr --outout &lt;whatever&gt; --scale
+0.5x0.5</code></strong>. This will only decrease the resolution, which makes the
+screen/font blurry!</p>
+<p>Instead, there are two things you need to do:</p>
+<ol>
+<li>
+<p>Add these to <code>.Xresources</code> (if file doesn't exist, create
+   one). Play w/ the <code>Xft.dpi</code> value &larr; the smaller the value, the
+   smaller the font will be (you can check by evoking i3wm's menu bar
+   <code>WIN+d</code>). No idea what the other values are. Then logout and log
+   back in, you will be super happy!</p>
+<div class="highlight"><pre><span></span><code>```shell
+Xft.dpi: 200
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+```
+</code></pre></div>
+
+<p>Use <code>xdpyinfo</code> to check screen resolution<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
+<ol>
+<li>On X1 gen 8, it's shown <code>2560x1440 pixels (677x381
+    millimeters)</code>. Set <code>dpi=180</code> gives the same exp/size as what was
+    on gen 4 without any tweaking.</li>
+<li>On Flex pro, it gives <code>3840 x 2160</code>, use <code>dpi=200</code> is good; 180
+    is too small.</li>
+</ol>
+</li>
+<li>
+<p>For Gtk applications, eg. dia, add these to our <code>.zshrc</code> or <code>.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="k">export</span><span class="w"> </span><span class="n">QT_AUTO_SCREEN_SCALE_FACTOR</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">export</span><span class="w"> </span><span class="n">GDK_SCALE</span><span class="o">=</span><span class="mi">2</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h1>disable NetworkManager</h1>
+<p>You have to disable NetworkManager service in order for wicd to take
+over cleanly:</p>
+<ol>
+<li>stop service: <code>systemctl stop NetworkManager</code></li>
+<li>disable the service: <code>systemctl disable NetworkManager.service</code></li>
+<li>uninstall: <code>apt remove network-manager-gnome network-manager</code></li>
+<li>purge: <code>dpkg --purge network-manager-gnome network-manager</code></li>
+</ol>
+<p>Without doing so will also mess up the <code>openconnect</code> when it is not
+able to modify <code>/etc/resolv.conf</code> after its connection.</p>
+<h1>nvm and Node.js stuff</h1>
+<ol>
+<li>Install <a href="https://github.com/nvm-sh/nvm">nvm</a>. Then, <code>nvm install node</code> will install the latest
+   version. Or, do <code>nvm install &lt;versaion&gt;</code>. Use <code>nvm ls-remote</code> to
+   find which versions are available for installation.</li>
+<li>Update npm <code>npm install npm@latest -g</code>.</li>
+<li>Install bower, <code>npm install -g bower</code>.</li>
+<li>Now go to <code>myblog/template/feng/static</code>, and run <code>bower install</code>.</li>
+</ol>
+<h1>zsh</h1>
+<p>Follow <a href="https://dev.to/mskian/install-z-shell-oh-my-zsh-on-ubuntu-1804-lts-4cm4">this blog</a>, and you will get a cool looking shell:</p>
+<ol>
+<li><code>git clone https://github.com/robbyrussell/oh-my-zsh.git
+   ~/.oh-my-zsh</code></li>
+<li><code>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</code></li>
+<li>change theme in <code>.zshrc</code> to <code>ZSH_THEME="agnoster"</code></li>
+<li>Set zsh as the default shell: <code>chsh -s /bin/zsh</code></li>
+<li><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+   "$HOME/.zsh-syntax-highlighting" --depth 1</code></li>
+<li><code>echo "source
+   $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" &gt;&gt;
+   "$HOME/.zshrc"</code></li>
+</ol>
+<p>If you want to revert back to bash: <code>chsh -s /bin/bash</code>.</p>
+<h1>sshfs</h1>
+<p>Use this to mount another machine's file system into your local. This
+is a great way to share the same code between your localhost and vms.</p>
+<ol>
+<li><code>apt install sshfs</code></li>
+<li>Uncomment <code>user_allow_other</code> in <code>/etc/fuse.conf</code>.</li>
+<li>to mount: <code>sshfs -o allow_other
+   fengxia@192.168.1.112:/home/fengxia/workspace ./tmp</code> &larr; mount
+   remove <code>workspace/</code> to your local <code>./tmp</code>.</li>
+</ol>
+<h1>i3</h1>
+<p>Under <code>~/.config</code>, find two folder named <code>i3/</code> and <code>i3status</code>. Copy
+<a href="https://fengxia41103.github.io/myblog/downloads/i3.conf">i3.conf</a> to <code>i3/config</code>, and <a href="https://fengxia41103.github.io/myblog/downloads/i3status.conf">i3status.confg</a> to
+<code>i3status/i3status.conf</code>.</p>
+<h1>pandoc</h1>
+<p>Use Pandoc <a href="https://github.com/jgm/pandoc/releases/tag/2.7.3">2.7.3</a>. The v1.9 in Ubuntu 18.04 didn't work for compiling
+<a href="https://fengxia41103.github.io/myblog/downloads/loc ra.pdf">RA PDF</a>. Read <a href="https://fengxia41103.github.io/myblog/pandoc workflow.html">this article</a> for more details of my Pandoc notes.</p>
+<ol>
+<li><code>pip install pandoc-fignos</code></li>
+<li><code>apt install pandoc-citeproc texlive-full</code></li>
+<li>optional: install <code>mermaid-filter</code>: <code>npm install -g mermaid-filter</code></li>
+</ol>
+<h1>system tweak</h1>
+<p>In <code>/etc/sysctl.conf</code>, then <code>sysctl -p</code> to reload:</p>
+<ol>
+<li>
+<p>increase watcher limit, needed for webpack hot reloading:
+   <code>fs.inotify.max_user_watches=524288</code></p>
+</li>
+<li>
+<p>set <a href="https://wiki.archlinux.org/index.php/HiDPI">swappiness</a> to 10: <code>vm.swappiness=10</code></p>
+</li>
+</ol>
+<p>Reboot, of course, will work, too.</p>
+<h1>clear swap script</h1>
+<p>Create a <a href="https://help.ubuntu.com/community/SwapFaq"><code>/usr/local/sbin/swap2ram.sh</code></a> per this Ubuntu's FAQ,
+and paste these lines:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/sh</span>
+
+<span class="nv">mem</span><span class="o">=</span><span class="k">$(</span><span class="nv">LC_ALL</span><span class="o">=</span>C<span class="w"> </span>free<span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/Mem:/ {print $4}&#39;</span><span class="k">)</span>
+<span class="nv">swap</span><span class="o">=</span><span class="k">$(</span><span class="nv">LC_ALL</span><span class="o">=</span>C<span class="w"> </span>free<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/Swap:/ {print $3}&#39;</span><span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$mem</span><span class="w"> </span>-lt<span class="w"> </span><span class="nv">$swap</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: not enough RAM to write swap back, nothing done&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+swapoff<span class="w"> </span>-a<span class="w"> </span><span class="o">&amp;&amp;</span>
+swapon<span class="w"> </span>-a
+</code></pre></div>
+
+<p>Then <code>chmod +x</code> and execute it. It takes a while and has no stdout
+prints of any kind. You can watch <code>glances</code> that swap % is going down
+while RAM % is going up, and eventually swap % will be 0!!</p>
+<h1>enterprise stuff</h1>
+<p>Working in an enterprise means that you need a few tools, eg. emails,
+to work w/ everybody else (which == Microsoft, actually, sigh).</p>
+<ol>
+<li>
+<p>for Cisco's Anyconnect vpn: <a href="https://fengxia41103.github.io/myblog/linux laptop.html">here</a></p>
+</li>
+<li>
+<p>for emails: <a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">mbsync &amp; davmail</a>, or <a href="https://fengxia41103.github.io/myblog/linux laptop.html">thunderbird</a>. But
+   honestly, setting up <a href="https://fengxia41103.github.io/myblog/mbsync mu4e email.html">Davmail</a> is a lot better, and you can
+   have Thunderbird acting as just an email agent off davmail anyway.</p>
+</li>
+<li>
+<p>for Skype business/Lync: use <a href="https://fengxia41103.github.io/myblog/linux laptop.html">pidgin</a>.</p>
+</li>
+</ol>
+<h1>fix a broken upgrade</h1>
+<p>It was a strange experience that by doing <code>do-release-upgrade</code> to
+20.04, my X1 didn't have network manager and <code>wicd</code> after! This made
+it impossible for me to use the wifi. Tried <code>dhclient</code>, <code>iwconfig</code> and
+so on, no avail. So in the end I learned something quite powerful
+&mdash; by booting into the USB live system, you can swap a few things
+so that now the OS is running off your installed folder, thus you can
+do <code>apt-get</code> using the live image (I think it's running in memory)
+while it will use disk files from your installation!</p>
+<ol>
+<li>Boot a Ubuntu live CD in "Try without installing". Make sure you are connected to the internet.</li>
+<li>
+<p>In terminal type:</p>
+<p><code>shell
+  sudo mount --bind /dev /&lt;chrootlocation&gt;/dev
+  sudo mount --bind /proc /&lt;chrootlocation&gt;/proc
+  sudo mount --bind /sys /&lt;chrootlocation&gt;/sys
+  sudo cp /etc/resolv.conf /&lt;chrootlocation&gt;/etc/resolv.conf
+  sudo chroot /&lt;chrootlocation&gt;</code></p>
+<p>You will need to replace <code>&lt;chrootlocation&gt;</code> with the appropriate
+  location of your Ubuntu install, typically the label of the partition
+  it's installed on. The partition must also be mounted so that you can
+  access it.
+3. Edit your <code>/etc/resolve.conf</code> and add at least one nameserver:</p>
+<p><code>shell
+  nameserver 8.8.8.8 # Google Public DNS</code>
+4. Now you can do the <code>apt update</code> and so on.
+5. Exit chroot by simply doing <code>exit</code> in terminal.
+6. If you are done, just <code>reboot now</code>.</p>
+</li>
+</ol>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>To check screen resolution: <code>xdpyinfo | grep dimensions</code>.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

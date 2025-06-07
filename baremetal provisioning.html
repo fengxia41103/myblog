@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-03-22
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Baremetal provisioning</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>Everyone of us has installed an operating system to a computer at some
+point in life. It is easy to perceive inserting a disk or USB key to
+make this happen because the OS files are <em>there</em>. A fancier version
+is to boot from network using PXE boot option, which seems like a
+magic (when the environment has been setup) &mdash; it somehow finds
+the OS image and start installing, all over a <em>network</em>!</p>
+<p>Now if we move to the world of servers, it works the same
+way. Baremetal is another name referring to a server that has no
+operating system (or hypervisor) installed yet. But the challenge is
+to physically access to it to insert that OS disk &mdash; in a data
+center setting, I think the walking part is neither fun nor
+desired. Remote provisioning is, therefore, the way to go.</p>
+<p>First, let's define <strong>provisioning</strong>. Here we mean to have installed
+an operating system or hypervisor on a baremetal so it is available
+for further software installation.  In the simplest term, one needs to
+answer these three questions:</p>
+<figure class="s12 center">
+    <img src="images/baremetal%20provisioning%20intro.png" />
+    <figcaption>Minimal setup for baremetal provisioning</figcaption>
+</figure>
+
+<ol>
+<li><strong>What is my address?</strong>. If using BOOTP, the address will be
+   static; if using DHCP, it can be either static or dynamic.</li>
+<li><strong>Which boot file to use?</strong>. Also referred as <strong>Network Bootstrap
+   Program (NBP)</strong>. This is controlled by a boot service. BOOTP can
+   provide this service, so is DHCP. This can be as simple as a static
+   list mapping client's architecture to a file. But it can also be a
+   very specific so a client can get a completly customized file.
+   Also, the file must be in some pre-determined format based on
+   client's architecture so the client knows how to execute it.</li>
+<li><strong>How to download the file?</strong>. This is handled by TFTP protocol.</li>
+</ol>
+<p>Boot file is often pretty minimal.  Once the file is downloaded and
+loaded in memory, baremetal's firmware will start its execution, which
+can then take over the machine and possibly pull down another image,
+such as the actual OS image, and then hand over the execution to OS's
+bootloader.</p>
+<h1>BOOTP, DHCP &mdash; address and boot file list</h1>
+<p>When a client is connected, it needs an address. Two services are
+created for this task &mdash; BOOTP and DHCP. In addition, both will
+boot service by telling the client which boot file to use.</p>
+<p>BOOTP is an earlier IETF-defined booting protocol that is much less
+flexible than DHCP. However, DHCP has been defined to be upwardly
+compatible with BOOTP and both these protocols can coexist and
+function simultaneously in the same network.  BOOTP is about <font
+color="blue">address determination and bootfile selection</font>.
+From its <a href="https://tools.ietf.org/html/rfc951">spec</a>, we can derive a sequence diagram shown below:</p>
+<figure class="s12 center">
+    <img src="images/bootp%20sequence.png" />
+    <figcaption>BOOTP sequence diagram</figcaption>
+</figure>
+
+<p>One major characteristic of BOOTP is that it is <strong>static</strong>, meaning
+when server looks up the client information, such as its IP address,
+it is using a <strong>static</strong> table (the <em>database</em> referred in the diagram
+above is actually a plain text file). Therefore, everytime client asks
+for its information, it will get the same result. Below shows the
+format of a BOOTP data packet. This same format in both directions.</p>
+<figure class="s12 center">
+    <img src="images/bootp%20packet%20format.png" />
+    <figcaption>BOOTP data packet</figcaption>
+</figure>
+
+<p>DHCP's data packet is nearly identical to BOOTP's for compatibility
+reason. Same ports (67 on the server side &amp; 68 on the client side) are
+used. Below shows a simplified DHCP cycles (<a href="http://facweb.cs.depaul.edu/cwhite/TDC%20365/BOOTP%20and%20DHCP.ppt">source</a>):</p>
+<figure class="s12 center">
+    <img src="images/dhcp%20sequence.png" />
+    <figcaption>Simplified DHCP sequence diagram</figcaption>
+</figure>
+
+<h1>TFTP &mdash; download boot file</h1>
+<p>At this point, client has acquired an address and knows which file to
+download. Next, it needs to contact a <em>file server</em> to get the
+file. Here comes TFTP.</p>
+<p><a href="https://tools.ietf.org/html/rfc1350">TFTP</a> is a very simple protocol used to transfer files.  It is
+from this that its name comes, Trivial File Transfer Protocol or TFTP.
+Each nonterminal packet is acknowledged separately. It has been
+implemented on top of the Internet User Datagram protocol (UDP or
+Datagram) so it may be used to move files between machines on
+different networks implementing UDP.</p>
+<p>The only thing it can do is read and write files (or mail) from/to a
+remote server &rarr; no user authentication.  Two modes of transfer
+are currently supported: ASCII (8-bit) and octet (raw 8-bit bytes).
+<font color="red">Note</font> that <a href="https://tools.ietf.org/html/rfc1350">spec</a> defines 3rd mode
+<em>message</em> but it is obsoleted.</p>
+<p>Between client and server, everything is transported as a <em>data
+packet</em>, and each data packet includes a <code>op code</code> which indicates the
+meaning of this packet as well as the rest of data structure.  The
+<a href="https://tools.ietf.org/html/rfc1350">spec</a> has nice illustration of the data formats so I'll copy &amp;
+paste them here for reference:</p>
+<p>TFTP data packet formats:</p>
+<div class="highlight"><pre><span></span><code>Type<span class="w">   </span>Op<span class="w"> </span><span class="c1">#     Format without header</span>
+----<span class="w">   </span>----<span class="w">     </span>--------------------
+<span class="w">      </span><span class="m">2</span><span class="w"> </span>bytes<span class="w">    </span>string<span class="w">   </span><span class="m">1</span><span class="w"> </span>byte<span class="w">     </span>string<span class="w">   </span><span class="m">1</span><span class="w"> </span>byte
+<span class="w">      </span>-----------------------------------------------
+RRQ/<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">01</span>/02<span class="w"> </span><span class="p">|</span><span class="w">  </span>Filename<span class="w">  </span><span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="p">|</span><span class="w">    </span>Mode<span class="w">    </span><span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="p">|</span>
+WRQ<span class="w">    </span>-----------------------------------------------
+<span class="w">      </span><span class="m">2</span><span class="w"> </span>bytes<span class="w">    </span><span class="m">2</span><span class="w"> </span>bytes<span class="w">       </span>n<span class="w"> </span>bytes
+<span class="w">      </span>---------------------------------
+DATA<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">03</span><span class="w">    </span><span class="p">|</span><span class="w">   </span>Block<span class="w"> </span><span class="c1">#  |    Data    |</span>
+<span class="w">      </span>---------------------------------
+<span class="w">      </span><span class="m">2</span><span class="w"> </span>bytes<span class="w">    </span><span class="m">2</span><span class="w"> </span>bytes
+<span class="w">      </span>-------------------
+ACK<span class="w">   </span><span class="p">|</span><span class="w"> </span><span class="m">04</span><span class="w">    </span><span class="p">|</span><span class="w">   </span>Block<span class="w"> </span><span class="c1">#  |</span>
+<span class="w">      </span>--------------------
+<span class="w">      </span><span class="m">2</span><span class="w"> </span>bytes<span class="w">  </span><span class="m">2</span><span class="w"> </span>bytes<span class="w">        </span>string<span class="w">    </span><span class="m">1</span><span class="w"> </span>byte
+<span class="w">      </span>----------------------------------------
+ERROR<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="m">05</span><span class="w">    </span><span class="p">|</span><span class="w">  </span>ErrorCode<span class="w"> </span><span class="p">|</span><span class="w">   </span>ErrMsg<span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="p">|</span>
+<span class="w">      </span>----------------------------------------
+</code></pre></div>
+
+<p>OP codes:</p>
+<div class="highlight"><pre><span></span><code>opcode<span class="w">  </span>operation
+-----<span class="w">   </span>---------
+<span class="w">  </span><span class="m">1</span><span class="w">     </span>Read<span class="w"> </span>request<span class="w"> </span><span class="o">(</span>RRQ<span class="o">)</span>
+<span class="w">  </span><span class="m">2</span><span class="w">     </span>Write<span class="w"> </span>request<span class="w"> </span><span class="o">(</span>WRQ<span class="o">)</span>
+<span class="w">  </span><span class="m">3</span><span class="w">     </span>Data<span class="w"> </span><span class="o">(</span>DATA<span class="o">)</span>
+<span class="w">  </span><span class="m">4</span><span class="w">     </span>Acknowledgment<span class="w"> </span><span class="o">(</span>ACK<span class="o">)</span>
+<span class="w">  </span><span class="m">5</span><span class="w">     </span>Error<span class="w"> </span><span class="o">(</span>ERROR<span class="o">)</span>
+</code></pre></div>
+
+<p>Error codes:</p>
+<div class="highlight"><pre><span></span><code>Value<span class="w">     </span>Meaning
+-----<span class="w">     </span>-------
+<span class="m">0</span><span class="w">         </span>Not<span class="w"> </span>defined,<span class="w"> </span>see<span class="w"> </span>error<span class="w"> </span>message<span class="w"> </span><span class="o">(</span><span class="k">if</span><span class="w"> </span>any<span class="o">)</span>.
+<span class="m">1</span><span class="w">         </span>File<span class="w"> </span>not<span class="w"> </span>found.
+<span class="m">2</span><span class="w">         </span>Access<span class="w"> </span>violation.
+<span class="m">3</span><span class="w">         </span>Disk<span class="w"> </span>full<span class="w"> </span>or<span class="w"> </span>allocation<span class="w"> </span>exceeded.
+<span class="m">4</span><span class="w">         </span>Illegal<span class="w"> </span>TFTP<span class="w"> </span>operation.
+<span class="m">5</span><span class="w">         </span>Unknown<span class="w"> </span>transfer<span class="w"> </span>ID.
+<span class="m">6</span><span class="w">         </span>File<span class="w"> </span>already<span class="w"> </span>exists.
+<span class="m">7</span><span class="w">         </span>No<span class="w"> </span>such<span class="w"> </span>user.
+</code></pre></div>
+
+<p>Additionally, server always listens to a pre-known port (known as
+<strong>transfer identifier</strong>) to begin with. In its first returning data
+packet, it can change this to a different port by setting the <code>Source
+Port</code>, and client will then only accept packets bearing this port
+number.</p>
+<p>However, client has not such default. Since client is to initialize
+the contact, it's free to tell the server which port it uses.
+UDP header format:</p>
+<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w">                   </span><span class="m">1</span><span class="w">                   </span><span class="m">2</span><span class="w">                   </span><span class="m">3</span>
+<span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+<span class="p">|</span><span class="w">          </span>Source<span class="w"> </span>Port<span class="w">          </span><span class="p">|</span><span class="w">       </span>Destination<span class="w"> </span>Port<span class="w">        </span><span class="p">|</span>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+<span class="p">|</span><span class="w">            </span>Length<span class="w">             </span><span class="p">|</span><span class="w">           </span>Checksum<span class="w">            </span><span class="p">|</span>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre></div>
+
+<p>where the values of fields are:</p>
+<ul>
+<li><code>Source Port</code>: Picked by originator of packet.</li>
+<li><code>Dest. Port</code>: Picked by destination machine (69 for RRQ or WRQ).</li>
+<li><code>Length</code>: Number of bytes in UDP packet, including UDP header.</li>
+<li><code>Checksum</code>: Reference 2 describes rules for computing checksum.  (The
+  implementor of this should be sure that the correct algorithm is used
+  here.)  Field contains zero if unused.</li>
+</ul>
+<figure class="s12 center">
+    <img src="images/tftp%20sequence.png" />
+    <figcaption>TFTP sequence diagram</figcaption>
+</figure>
+
+<h1>Preboote Execution Environment (PXE)</h1>
+<p>Once we put BOOTP/DHCP and TFTP together, we will have an environment
+suitable for client to select PXE boot.  Being such a core technology
+used widely in baremetal provisioning, the <a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">Preboot Execution
+Environment (PXE) Specification Version 2.1</a> should be the first
+document to read. Honestly I'm amazed how well it was written, thought
+through, clearly defined, and neatly illustrated, all dated back in
+1999!</p>
+<p>As its name indicates, PXE provides a runtime environment prior to an
+OS. A detailed step-by-step diagram is reproduced below (remade from
+Figure 2-1 in the <a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">PXE Spec</a>). In a nutshell, it takes three
+services to make a PXE working:</p>
+<ol>
+<li><strong>DHCP service</strong>: This service handles the initial contact by a
+   client. However, its primary function is <strong>not in offering an IP
+   address</strong>. Instead, after the first handshakes, it offers clients a
+   list of Boot services to choose from so client can move on to
+   obtain NBP.</li>
+<li>
+<p><strong>Boot service</strong>: The service essentially maintains a map between
+   client architecture (defined in PXE <a href="https://tools.ietf.org/html/rfc4578">Client System Architecture
+   Type Option Definition</a>, values below) and NBP file names. So in
+   modern term, it would have been called <em>NBP registry</em> or something
+   like that. There can be more than one Boot services co-existed. It
+   is up to the client to choose. According to the <a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">spec</a>, PXE 2.1
+   supports the following client architectures:</p>
+<div class="highlight"><pre><span></span><code>```shell
+Type   Architecture Name
+----   -----------------
+0    Intel x86PC
+1    NEC/PC98
+2    EFI Itanium
+3    DEC Alpha
+4    Arc x86
+5    Intel Lean Client
+6    EFI IA32
+7    EFI BC
+8    EFI Xscale
+9    EFI x86-64
+```
+</code></pre></div>
+
+</li>
+<li>
+<p><strong>TFTP service</strong>: The actual server that will serve the NBP file
+   for client to download.</p>
+</li>
+</ol>
+<figure class="s12 center">
+    <img src="images/pxe%20boot%20sequence.png" />
+    <figcaption>PXE boot sequence diagram</figcaption>
+</figure>
+
+<p>Copying and pasting the detailed explanation from the <a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">PXE Spec</a>
+below with merely a few reformatting.</p>
+<h2>Step 1</h2>
+<p>The client broadcasts a <code>DHCPDISCOVER</code> message to the standard DHCP
+port (67). An option field in this packet contains the following:</p>
+<ol>
+<li>A tag for client identifier (UUID).</li>
+<li>A tag for the client UNDI version.</li>
+<li>A tag for the client system architecture.</li>
+<li>A DHCP option 60, Class ID, set to
+   <code>PXEClient:Arch:xxxxx:UNDI:yyyzzz</code>.</li>
+</ol>
+<h2>Step 2</h2>
+<p>The DHCP or Proxy DHCP Service responds by sending a <code>DHCPOFFER</code>
+message to the client on the standard DHCP reply port (68). If this is
+a Proxy DHCP Service, then the client IP address field is null
+(<code>0.0.0.0</code>). If this is a DHCP Service, then the returned client IP
+address field is valid.</p>
+<p>At this point, other DHCP Services and BOOTP Services also respond
+with DHCP offers or BOOTP reply messages to port (68). Each message
+contains standard DHCP parameters: an IP address for the client and
+any other parameters that the administrator might have configured on
+the DHCP or Proxy DHCP Service.</p>
+<h2>Step 3</h2>
+<p>From the <code>DHCPOFFER(s)</code> that it receives, the client records the
+following:</p>
+<ol>
+<li>The Client IP address (and other parameters) offered by a standard
+   DHCP or BOOTP Service.</li>
+<li>The <code>Boot Server</code> list from the Boot Server field in the PXE tags
+   from the <code>DHCPOFFER</code>.</li>
+<li>The <code>Discovery Control Options</code> (if provided).</li>
+<li>The <code>Multicast Discovery IP</code> address (if provided).</li>
+</ol>
+<h2>Step 4</h2>
+<p>If the client selects an IP address offered by a DHCP Service, then it
+must complete the standard DHCP protocol by sending a request for the
+address back to the Service and then waiting for an acknowledgment
+from the Service. If the client selects an IP address from a BOOTP
+reply, it can simply use the address.</p>
+<h2>Step 5</h2>
+<p>The client selects and discovers a Boot Server. This packet may be
+sent broadcast (port 67), multicast (port 4011), or unicast (port
+4011) depending on discovery control options included in the previous
+DHCPOFFER containing the PXE service extension tags. This packet is
+the same as the initial DHCPDISCOVER in Step 1, except that it is
+coded as a DHCPREQUEST and now contains the following:</p>
+<ol>
+<li>The IP address assigned to the client from a DHCP Service.</li>
+<li>A tag for client identifier (UUID)</li>
+<li>A tag for the client UNDI version.</li>
+<li>A tag for the client system architecture.</li>
+<li>A DHCP option 60, Class ID, set to <code>PXEClient:Arch:xxxxx:UNDI:yyyzzz</code>.</li>
+<li>The Boot Server type in a PXE option field</li>
+</ol>
+<h2>Step 6</h2>
+<p>The Boot Server unicasts a DHCPACK packet back to the client on the
+client source port.  This reply packet contains:</p>
+<ol>
+<li>Boot file name.</li>
+<li>MTFTP1 configuration parameters.</li>
+<li>Any other options the NBP requires before it can be successfully executed.</li>
+</ol>
+<h2>Step 7</h2>
+<p>The client downloads the executable file using either standard TFTP
+(port69) or MTFTP (port assigned in Boot Server Ack packet). The file
+downloaded and the placement of the downloaded code in memory is
+dependent on the client’s CPU architecture.</p>
+<h2>Step 8</h2>
+<p>The PXE client determines whether an authenticity test on the
+downloaded file is required. If the test is required, the client sends
+another DHCPREQUEST message to the boot server requesting a
+credentials file for the previously downloaded boot file, downloads
+the credentials via TFTP or MTFTP, and performs the authenticity test.</p>
+<h2>Step 9</h2>
+<p>Finally, if the authenticity test succeeded or was not required, then
+the PXE client initiates execution of the downloaded code</p>
+<h2>Initial Program Load (IPL)</h2>
+<p>At this step, we have a NBP and is ready to load the image, and this
+all boils down to the good-old days that how to link a hardware
+interrupt with software interrupt so the initial BIOS will be able to
+load register with a specific memory location where the NBP
+image resides. </p>
+<h3>Option ROM</h3>
+<p><strong>Option ROM</strong>: ROM associated with a plug and play device. May be
+located on the device or in non-volatile storage on a system. An
+Option ROM is used to extend the services or capabilities of the BIOS
+prior to IPL. It is the only way, other than directly modifying the
+BIOS, that new devices may be added to the IPL process.  During POST,
+the BIOS scans the Upper Memory area for Option ROMs that have been
+mapped into this space by adapter cards plugged into a system
+expansion bus. A valid Option ROM begins on a 2KB boundary and
+contains a data structure with a signature, the length of the Option
+ROM and an entry point for initialization code.  If a valid Option ROM
+is located by the BIOS, the ROM’s initialization code is
+invoked. Option ROMs replace or filter standard BIOS services by
+replacing the BIOS initialized interrupt vectors.</p>
+<p>There have been various techniques developed to map ROM into memory,
+including hardware mapping, copying to Upper Memory and to Shadow
+Memory. The objective is always to maintain a method that a common
+BIOS runtime can register and later on hand execution over to
+ever-expanding list of hardware without updaing BIOS for each change.</p>
+<h3>BIOS &amp; Option ROM</h3>
+<p>The BIOS maintains an <code>IPL Table</code> listing all of the possible IPL
+sources.  In the 1996 <a href="http://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf">BBS Specification</a>, boot devices are
+categorized into:</p>
+<ol>
+<li><strong>BIOS Aware IPL Devices (BAID)</strong>: have all the code necessary to perform
+IPL resident in the system BIOS. BAID devices include floppy or fixed
+drives.</li>
+<li><strong>Boot Connection Vector (BCV)</strong> devices: use Option ROM on associated
+   device or in non-volatile storage on the motherboard.</li>
+<li><strong>Bootstrap Entry Vector (BEV)</strong> devices: use Option ROM on associated
+   device or in non-volativel storage on the motherboard. 
+   <strong>PXE is implemented as a BEV device</strong>!.</li>
+</ol>
+<p>The BIOS adds IPL devices to the BBS <code>IPL Table</code> already containing
+the BAIDs. These devices are identified during the BIOS Option ROM
+scan process. If the device hardware is detected and the rest of
+Option ROM initialization is successful (in other words, the Option
+ROM initialization code and loader code are placed in upper memory),
+control is returned to the BIOS indicating the Option ROM manages an
+IPL device. Within the ROM, a Plug and Play Expansion header will be
+present for each bootable device supported by the Option ROM. Each PnP
+Expansion header for a PXE IPL device will have a non-zero BEV.</p>
+<p>Once Option ROM scan is complete, the BIOS builds a list of bootable
+devices using the information obtained during the scan. According to
+the <a href="http://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf">BBS</a>, the priority list for these devices is established by
+the enduser through BIOS setup &rarr; thus, the boot order option!</p>
+<h3>PXE Split ROM Architecture</h3>
+<p>So BIOS can find PXE option by finding its Option ROM. Great. Since
+PXE is network dependent, how can it handles different networking
+hardware? Two techniques come into play: <strong>Split ROM</strong> architecture
+and <strong>UNDI</strong>. We will cover UNDI separately. Here, let's look at the
+split architecture.</p>
+<figure class="s12 center">
+    <img src="images/pxe%20option%20rom%20split%20architecture.png" />
+    <figcaption>PXE Option ROM split architecture</figcaption>
+</figure>
+
+<p>Prior to the <a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">PXE Spec</a>, all PXE Option ROMs were implemented as a
+monolithic Option ROM with an option ROM header that encapsulates
+three components:</p>
+<ol>
+<li>PCI init &amp; loader code</li>
+<li>NIC specific code (UNDI driver)</li>
+<li>Base code (BC)</li>
+</ol>
+<p>The PXE Split ROM Architecture specifies three different Option ROMs
+that work cooperatively to create a working PXE that supports one or
+more network interfaces. The three Option ROMs are:</p>
+<ol>
+<li>the Base-Code ROM (BC ROM): is common code to support one or more
+   instances of the other ROMs.  The BC ROM provides the protocol stack
+   in addition to various loader and initialization code. A Base-Code ROM
+   is required.</li>
+<li>the UNDI ROM: provides the network interface specific code. An UNDI
+   ROM is specific to particular network interface hardware. UNDI
+   provides a set of APIs that allow the remotely booted program to use
+   universal protocol drivers. A system must contain at least one (but
+   may contain several) UNDI ROMs, where each ROM would support one
+   network interface.</li>
+<li>the BUSD ROM: provides bus support for CardBus-based network
+   interface cards. BUSD is only required if supporting CardBus. Unlike
+   the Base-Code and UNDI ROMs, BUSD’s call mechanism must be added to
+   the BIOS.</li>
+</ol>
+<h2>Time to boot</h2>
+<p>Now with all the basics out of the way, let's power on the computer!
+Page 77 in the <a href="http://download.intel.com/design/archives/wfm/downloads/pxespec.pdf">PXE Spec</a> has a nice diagram showing the details
+behind the scene from BIOS to a PXE:</p>
+<figure class="s12 center">
+    <img src="images/pxe%20IPL.svg" />
+    <figcaption>PXE IPL (from power on to PXE)</figcaption>
+</figure></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

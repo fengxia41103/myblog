@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - rh</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/rh.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2018-07-19T22:40:00-04:00</updated><subtitle></subtitle><entry><title>Use RHEL server qcow2 as sandbox</title><link href="https://fengxia41103.github.io/myblog/use%20rhel%20server%20qcow2%20as%20sandbox.html" rel="alternate"></link><published>2018-04-16T00:00:00-04:00</published><updated>2018-07-19T22:40:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-16:/myblog/use rhel server qcow2 as sandbox.html</id><summary type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
+&lt;a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software"&gt;here&lt;/a&gt;). This image has disabled root password, and disabled SSH
+access &amp;larr; so what the heck!?&lt;/p&gt;
+&lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
+&lt;p&gt;Really ugly solution. Anyway. On a Ubuntu 16.04, install &lt;code&gt;guestfish&lt;/code&gt;
+and &lt;code&gt;libguesttools&lt;/code&gt;, then:&lt;/p&gt;
+&lt;h2&gt;create root password&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a password to use. Note it is "digit 1", not a "l"
+   (as in love):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```shell
+$ openssl passwd -1 natalie
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modify the image directly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```shell
+$ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
+&amp;gt;&amp;lt;fs&amp;gt; run
+&amp;gt;&amp;lt;fs&amp;gt; list-filesystems
+&amp;gt;&amp;lt;fs&amp;gt; mount /dev/sda1 /
+&amp;gt;&amp;lt;fs&amp;gt; vi /etc/shadow
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now replace the "!!" on line &lt;code&gt;root:...&lt;/code&gt; with your password you just
+created in step 1, save,&lt;/p&gt;
+&lt;h2&gt;allow ssh root &amp;amp; password&lt;/h2&gt;
+&lt;p&gt;Modify &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; and uncomment two places:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;lt;fs&amp;gt; vi /etc/ssh/sshd_config
+
+&lt;span class="gh"&gt;#&lt;/span&gt; Authentication:
+
+&lt;span class="gh"&gt;#&lt;/span&gt;LoginGraceTime 2m
+PermitRootLogin yes &amp;lt;--- uncomment
+&lt;span class="gh"&gt;#&lt;/span&gt;StrictModes yes
+&lt;span class="gh"&gt;#&lt;/span&gt;MaxAuthTries 6
+&lt;span class="gh"&gt;#&lt;/span&gt;MaxSessions 10
+
+&lt;span class="gh"&gt;#&lt;/span&gt; To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes &amp;lt;-- uncomment
+&lt;span class="gh"&gt;#&lt;/span&gt;PermitEmptyPasswords no
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;disable cloud-init&lt;/h2&gt;
+&lt;p&gt;This is the single gottcha that held me back for weeks. It turned out
+that &lt;code&gt;cloud-init&lt;/code&gt; has …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The closest thing RHEL has to a cloud image is a qcow (download from
+&lt;a href="https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.5/x86_64/product-software"&gt;here&lt;/a&gt;). This image has disabled root password, and disabled SSH
+access &amp;larr; so what the heck!?&lt;/p&gt;
+&lt;h1&gt;Method 1: modify image directly&lt;/h1&gt;
+&lt;p&gt;Really ugly solution. Anyway. On a Ubuntu 16.04, install &lt;code&gt;guestfish&lt;/code&gt;
+and &lt;code&gt;libguesttools&lt;/code&gt;, then:&lt;/p&gt;
+&lt;h2&gt;create root password&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a password to use. Note it is "digit 1", not a "l"
+   (as in love):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```shell
+$ openssl passwd -1 natalie
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modify the image directly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```shell
+$ sudo guestfish --rw -a rhel-server-7.5-x86_64-kvm.qcow2 
+&amp;gt;&amp;lt;fs&amp;gt; run
+&amp;gt;&amp;lt;fs&amp;gt; list-filesystems
+&amp;gt;&amp;lt;fs&amp;gt; mount /dev/sda1 /
+&amp;gt;&amp;lt;fs&amp;gt; vi /etc/shadow
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now replace the "!!" on line &lt;code&gt;root:...&lt;/code&gt; with your password you just
+created in step 1, save,&lt;/p&gt;
+&lt;h2&gt;allow ssh root &amp;amp; password&lt;/h2&gt;
+&lt;p&gt;Modify &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; and uncomment two places:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;lt;fs&amp;gt; vi /etc/ssh/sshd_config
+
+&lt;span class="gh"&gt;#&lt;/span&gt; Authentication:
+
+&lt;span class="gh"&gt;#&lt;/span&gt;LoginGraceTime 2m
+PermitRootLogin yes &amp;lt;--- uncomment
+&lt;span class="gh"&gt;#&lt;/span&gt;StrictModes yes
+&lt;span class="gh"&gt;#&lt;/span&gt;MaxAuthTries 6
+&lt;span class="gh"&gt;#&lt;/span&gt;MaxSessions 10
+
+&lt;span class="gh"&gt;#&lt;/span&gt; To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes &amp;lt;-- uncomment
+&lt;span class="gh"&gt;#&lt;/span&gt;PermitEmptyPasswords no
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;disable cloud-init&lt;/h2&gt;
+&lt;p&gt;This is the single gottcha that held me back for weeks. It turned out
+that &lt;code&gt;cloud-init&lt;/code&gt; has a setting to turn &lt;code&gt;PasswordAuthentication&lt;/code&gt; back
+into &lt;code&gt;no&lt;/code&gt; even after I have modified &lt;code&gt;sshd_config&lt;/code&gt;. How wonderful.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;fs&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;vi&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;cloud&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;cloud&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;cfg&lt;/span&gt;
+
+&lt;span class="nx"&gt;users&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;
+
+&lt;span class="nx"&gt;disable_root&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;was&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;!!&lt;/span&gt;
+&lt;span class="nx"&gt;ssh_pwauth&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nx"&gt;disable_ec2_metadata&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;True&lt;/span&gt;
+&lt;span class="nx"&gt;datasource_list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;ConfigDrive&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;None&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nx"&gt;datasource&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;ConfigDrive&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;dsmode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;local&lt;/span&gt;
+
+&lt;span class="nx"&gt;mount_default_fields&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="kt"&gt;auto&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="nx"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;nofail&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nx"&gt;resize_rootfs_tmp&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;dev&lt;/span&gt;
+&lt;span class="nx"&gt;ssh_deletekeys&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="nx"&gt;ssh_genkeytypes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;
+&lt;span class="nx"&gt;syslog_fix_perms&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;
+
+&lt;span class="nx"&gt;cloud_init_modules&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;migrator&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;bootcmd&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;write&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;files&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;growpart&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;resizefs&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now &lt;code&gt;quit&lt;/code&gt; from guetfish terminal. You are done.&lt;/p&gt;</content><category term="rh"></category><category term="lenovo"></category></entry><entry><title>Satellite</title><link href="https://fengxia41103.github.io/myblog/satellite.html" rel="alternate"></link><published>2018-04-15T00:00:00-04:00</published><updated>2018-04-15T00:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2018-04-15:/myblog/satellite.html</id><summary type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
+between 6.2 and 6.3. Grasp the concept here, and hopefully you will
+have a good understanding of the Satellite models and procedures.&lt;/p&gt;
+&lt;h1&gt;Architecture&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;One&lt;/strong&gt; satellite server (master server), and &lt;strong&gt;1+&lt;/strong&gt; capsule servers.&lt;/li&gt;
+&lt;li&gt;The Satellite Server is required to connect to Red Hat
+   Customer Portal &amp;larr; main source of RH packags, errata,
+   Puppet modules.&lt;/li&gt;
+&lt;li&gt;The Satellite Server organizes the life cycle management by
+   using &lt;code&gt;organizations&lt;/code&gt; as principal division units &amp;larr; one
+   subscription manifest per org.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;org&lt;/code&gt; &amp;rarr; &lt;code&gt;location&lt;/code&gt; creates a matrix &amp;rarr; 
+   3 org and 4 location will create &lt;code&gt;3x4=12&lt;/code&gt; management contexts.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;location&lt;/code&gt; is then tied to a capsule server (isolated).&lt;/li&gt;
+&lt;li&gt;Info flow: external source &amp;rarr; main server &amp;rarr; capsule
+    server &amp;rarr; managed host.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="images/rh%20satellite%20overall%20architecture%20official.png"
+     class="col s12"&gt;&lt;/p&gt;
+&lt;h1&gt;Content view&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Content Views&lt;/code&gt; are subsets of content from the &lt;code&gt;Library&lt;/code&gt; (master copy of all contents).&lt;/li&gt;
+&lt;li&gt;Multiple content views can be applied to one capsule server.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Content Views&lt;/code&gt; can be combined to create &lt;code&gt;Composite Content Views&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Composite view is just a grouping. Individual content view, once
+   updated, shall still be promoted, but the composite …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;These notes are based on Satellite 6.3. There are minor difference
+between 6.2 and 6.3. Grasp the concept here, and hopefully you will
+have a good understanding of the Satellite models and procedures.&lt;/p&gt;
+&lt;h1&gt;Architecture&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;One&lt;/strong&gt; satellite server (master server), and &lt;strong&gt;1+&lt;/strong&gt; capsule servers.&lt;/li&gt;
+&lt;li&gt;The Satellite Server is required to connect to Red Hat
+   Customer Portal &amp;larr; main source of RH packags, errata,
+   Puppet modules.&lt;/li&gt;
+&lt;li&gt;The Satellite Server organizes the life cycle management by
+   using &lt;code&gt;organizations&lt;/code&gt; as principal division units &amp;larr; one
+   subscription manifest per org.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;org&lt;/code&gt; &amp;rarr; &lt;code&gt;location&lt;/code&gt; creates a matrix &amp;rarr; 
+   3 org and 4 location will create &lt;code&gt;3x4=12&lt;/code&gt; management contexts.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;location&lt;/code&gt; is then tied to a capsule server (isolated).&lt;/li&gt;
+&lt;li&gt;Info flow: external source &amp;rarr; main server &amp;rarr; capsule
+    server &amp;rarr; managed host.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="images/rh%20satellite%20overall%20architecture%20official.png"
+     class="col s12"&gt;&lt;/p&gt;
+&lt;h1&gt;Content view&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Content Views&lt;/code&gt; are subsets of content from the &lt;code&gt;Library&lt;/code&gt; (master copy of all contents).&lt;/li&gt;
+&lt;li&gt;Multiple content views can be applied to one capsule server.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Content Views&lt;/code&gt; can be combined to create &lt;code&gt;Composite Content Views&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Composite view is just a grouping. Individual content view, once
+   updated, shall still be promoted, but the composite shell does not
+   need to be changed. So from its consumer's POV, it sees the change
+   transparently.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="images/rh%20satellite%20content%20view.png"
+     class="col s12"&gt;&lt;/p&gt;
+&lt;h1&gt;RH subscription model&lt;/h1&gt;
+&lt;p&gt;The center piece of Satellite is RH subscription. This is how
+user/client can run &lt;code&gt;yum install &amp;lt;pkg name&amp;gt;&lt;/code&gt; in RHEL. There can be
+multiple sources for you. In this discussion, we only distinguish them
+between on-premise &lt;code&gt;Satellite&lt;/code&gt; source vs. everything else. &lt;/p&gt;
+&lt;h2&gt;what is my source?&lt;/h2&gt;
+&lt;p&gt;In RHEL, it's easy to find out which source you are pulling these rpms
+from. Look at &lt;code&gt;/etc/yum.repo.d/redhat.repo&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;For&lt;span class="w"&gt; &lt;/span&gt;example:
+&lt;span class="o"&gt;[&lt;/span&gt;rhel-7-server-openstack-11-devtools-debug-rpms&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;metadata_expire&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;86400&lt;/span&gt;
+&lt;span class="nv"&gt;sslclientcert&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/pki/entitlement/2890837266996509363.pem
+
+&lt;span class="c1"&gt;#####&lt;/span&gt;
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;https://cdn.redhat.com/content/dist/rhel/server/7/7Server/&lt;span class="nv"&gt;$basearch&lt;/span&gt;/openstack-devtools/11/debug
+&lt;span class="c1"&gt;#####&lt;/span&gt;
+
+&lt;span class="nv"&gt;ui_repoid_vars&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;basearch
+&lt;span class="nv"&gt;sslverify&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Red&lt;span class="w"&gt; &lt;/span&gt;Hat&lt;span class="w"&gt; &lt;/span&gt;OpenStack&lt;span class="w"&gt; &lt;/span&gt;Platform&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Developer&lt;span class="w"&gt; &lt;/span&gt;Tools&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;RHEL&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;Debug&lt;span class="w"&gt; &lt;/span&gt;RPMs&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;sslclientkey&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/pki/entitlement/2890837266996509363-key.pem
+&lt;span class="nv"&gt;gpgkey&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;sslcacert&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/rhsm/ca/redhat-uep.pem
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You see the &lt;code&gt;baseurl&lt;/code&gt; points to &lt;code&gt;cdn.redhat.com&lt;/code&gt;. This is the
+catch-all Redhat source, meaning you are pulling things directly from
+Red Hat.&lt;/p&gt;
+&lt;p&gt;On a Satellite client, instead, you will something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;Lenovo_IBB_Lenovo_Yum_Repo_Lenovo_yum_repo_SLES11SP4_Default&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;metadata_expire&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;sslclientcert&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/pki/entitlement/3451950880933034925.pem
+
+&lt;span class="c1"&gt;#####&lt;/span&gt;
+&lt;span class="nv"&gt;baseurl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;https://brain4-satellite.labs.lenovo.com/pulp/repos/Lenovo_IBB/...........
+&lt;span class="c1"&gt;#####&lt;/span&gt;
+
+&lt;span class="nv"&gt;sslverify&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Lenovo&lt;span class="w"&gt; &lt;/span&gt;yum&lt;span class="w"&gt; &lt;/span&gt;repo&lt;span class="w"&gt; &lt;/span&gt;SLES11SP4_Default
+&lt;span class="nv"&gt;sslclientkey&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/pki/entitlement/3451950880933034925-key.pem
+&lt;span class="nv"&gt;enabled&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;sslcacert&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/rhsm/ca/katello-server-ca.pem
+&lt;span class="nv"&gt;gpgcheck&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For this one, &lt;code&gt;baseurl&lt;/code&gt; is pointing to a Satellite server named
+&lt;code&gt;brain4-satellite.labs.lenovo.com&lt;/code&gt;. Note that the &lt;code&gt;.pem&lt;/code&gt; (&lt;code&gt;sslcacert&lt;/code&gt;)
+is tied to a particular server (as url is in &lt;code&gt;https&lt;/code&gt;!). Therefore, it
+is possible to switch source from Satellite A to Satellite B (see
+another section below), but cert
+needs to be switched together with url.&lt;/p&gt;
+&lt;h2&gt;Am I registered?&lt;/h2&gt;
+&lt;p&gt;From &lt;a href="https://access.redhat.com/sites/default/files/video/files/summit2015-lightning_talk-subscription-manager.pdf"&gt;talk&lt;/a&gt;, on a RHEL system, &lt;code&gt;ls /etc/pki/product&lt;/code&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;69.pem&lt;/code&gt;: identifies this as a RHEL system, no registration.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cert.pem&lt;/code&gt; and &lt;code&gt;key.pem&lt;/code&gt;: created when you registered the system.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;a long digit string&amp;gt;.pem&lt;/code&gt;: certificates for subscriptions that
+   have been attached to this system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Subscription model&lt;/h2&gt;
+&lt;p&gt;From bottom up,
+&lt;code&gt;package&lt;/code&gt;&amp;rarr;&lt;code&gt;repo&lt;/code&gt;&amp;rarr;&lt;code&gt;product&lt;/code&gt;&amp;rarr;&lt;code&gt;subscription&lt;/code&gt; forms the
+core, each pair has a &lt;code&gt;1-N&lt;/code&gt; relationship;
+&lt;code&gt;subscription&lt;/code&gt;&amp;rarr;&lt;code&gt;entitlement&lt;/code&gt; has a &lt;code&gt;1-1&lt;/code&gt; relationship. From these
+one can derive how many &lt;em&gt;copies&lt;/em&gt; (&lt;code&gt;entitlements&lt;/code&gt;) one can use, and
+last, &lt;code&gt;contract&lt;/code&gt; defines time &amp;larr; expiration dates. In its
+simpliest term, a VM consumes &lt;strong&gt;1 entitlement of a subscription&lt;/strong&gt;. So
+if you assign &lt;code&gt;10 entitlements&lt;/code&gt; to, say &lt;code&gt;RH Enterprise Linux&lt;/code&gt;
+subscription (which as basic RHEL OS rpms), it will support 10 RHEL
+VM, and your 11th one will fail to do even &lt;code&gt;yum update&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/rh%20subscription%20model.png"/&gt;
+  &lt;figcaption&gt;RH subscription model&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;code&gt;package&lt;/code&gt; is a &lt;a href="https://en.wikipedia.org/wiki/Rpm_(software)"&gt;&lt;code&gt;rpm&lt;/code&gt;&lt;/a&gt; (&lt;a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-rpm"&gt;ref&lt;/a&gt;). Essentially &lt;code&gt;package&lt;/code&gt; is
+   a name, eg, &lt;code&gt;libgnomeuimm&lt;/code&gt;, where then there is a file named
+   &lt;code&gt;libgnomeuimm....rpm&lt;/code&gt;. But &lt;code&gt;RPM&lt;/code&gt; can
+   refer to both. So use this term with caution. &lt;code&gt;.rpm&lt;/code&gt; file has
+   format: &lt;code&gt;&amp;lt;name&amp;gt;-&amp;lt;version&amp;gt;-&amp;lt;release&amp;gt;.&amp;lt;architecture&amp;gt;.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Satellite supports 5 types of repos:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;yum&lt;/strong&gt;: RH native repos are in this bucket. So are things like
+   &lt;a href="https://archive.fedoraproject.org/pub/epel/7Server/x86_64/"&gt;Fedora EPEL&lt;/a&gt;. The key is the &lt;code&gt;/repodata&lt;/code&gt; folder which
+   represents meta data for this yum repo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;file&lt;/strong&gt;: One can upload any file to Satellite server. Satellite
+   will create a URL and function as a regular HTTP server &amp;rarr;
+   client can just &lt;code&gt;wget&lt;/code&gt; it from that.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OSTree&lt;/strong&gt;: These are OS images flattened on a file system.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker&lt;/strong&gt;: TBD&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Puppet&lt;/strong&gt;: TBD&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Product: is a grouping of repos (so one can put it on a brochure).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Subscription: is an umbrella term that covers not only the products
+   one bought, but also service, patch, bug fix, and so forth
+   (&lt;a href="https://www.redhat.com/en/about/subscription-model-faq#?"&gt;ref&lt;/a&gt;). It's the unit of software &lt;strong&gt;purchased&lt;/strong&gt; from Red Hat.&lt;/p&gt;
+&lt;p&gt;Subscription does come with a license, which, once installed, is
+with the system for life time. So even subscription expires, the
+system that uses these subscriptions are still functional. The
+difference being that once it's expired, you will stop receiving
+updates, service, and so on (so it's like &lt;code&gt;rpms&lt;/code&gt; frozen in time).&lt;/p&gt;
+&lt;p&gt;There are 2 types of subscriptions to consider: &lt;strong&gt;standard&lt;/strong&gt; and
+&lt;strong&gt;instance-based&lt;/strong&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;standard: qty &lt;code&gt;1-N&lt;/code&gt;, and doesn't matter deployment is BM or
+VM, always consumed 1.&lt;/li&gt;
+&lt;li&gt;instance-based: qty &lt;code&gt;1-N&lt;/code&gt;, BM and VM consumes different
+amount (see "Entitle accounting" below for more details.)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Entitlement: essentially a total number that how many clients can
+   one subscription allows. For this, we need to do some accounting.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Entitlement accounting&lt;/h2&gt;
+&lt;h3&gt;how many we have&lt;/h3&gt;
+&lt;p&gt;From &lt;a href="https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf"&gt;Red Hat Subscription and Entitlement Accounting (pdf)&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In implementation, the subscription service (Customer Portal for
+hosted connectivity or Satellite 6 for on-premise connectivity)
+converts each subscription into a “pool​” of individual entitlements
+that can be attached to an end-system. The attachment process
+“consumes​” an entitlement from the pool thereby “entitling” the
+end-system to access content stores.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;a href="https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf"&gt;pdf&lt;/a&gt; has a clear example to describe this. In a nutshell,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;entitlements&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;subscription&lt;span class="w"&gt; &lt;/span&gt;qty&lt;span class="w"&gt; &lt;/span&gt;*&lt;span class="w"&gt; &lt;/span&gt;entitlement&lt;span class="w"&gt; &lt;/span&gt;qty/sub&lt;span class="w"&gt; &lt;/span&gt;*&lt;span class="w"&gt; &lt;/span&gt;instance&lt;span class="w"&gt; &lt;/span&gt;multiplier
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class="col s12 center"&gt;
+  &lt;img src="images/rh%20entitlement%20accounting.png"/&gt;
+&lt;/figure&gt;
+
+&lt;h3&gt;how many we are using&lt;/h3&gt;
+&lt;p&gt;Now, how are entitlement consumed? From &lt;a href="https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf"&gt;Red Hat Subscription and
+Entitlement Accounting (pdf)&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Each subscription has a consumption rule that determines the number of
+entitlements (rate) that are consumed from a pool to cover the
+end-system.​ The consumption rule depends on several factors including:
+the subscriptions type, the “unit of capacity​” the subscription covers
+(e.g.  sockets, ram, cores), and the deployed system type (physical or
+virtual); thus the consumption rate is governed by the following
+statements:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;“Standard” subscriptions consumed entitlements at a rate of:&lt;ol&gt;
+&lt;li&gt;One per each virtual system deployment&lt;/li&gt;
+&lt;li&gt;One per unit of capacity on the physical system&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;“Instance-based” subscriptions consumed entitlements at a rate of:&lt;ol&gt;
+&lt;li&gt;One per each virtual system deployment&lt;/li&gt;
+&lt;li&gt;The “instance multiplier” per unit of capacity on the physical system.
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So to simply things, if we are looking at VM primarily, &lt;strong&gt;1
+entitlement per VM&lt;/strong&gt;. Period.&lt;/p&gt;
+&lt;h3&gt;Manifest&lt;/h3&gt;
+&lt;p&gt;Satellite has no entitlement to use. The pool is under a user account
+and can be managed in Customer Portal. With the knowledge of
+subscription tyeps, we can create a &lt;code&gt;Subscription Allocation&lt;/code&gt; which
+then can be exported into a &lt;code&gt;manifest&lt;/code&gt; file. Satellite can import this
+file to establish its entitlement pool.&lt;/p&gt;
+&lt;p&gt;Once you have created a &lt;code&gt;subscription allocation&lt;/code&gt;, export manifest
+file to your computer, and see &lt;a href="https://access.redhat.com/solutions/1256693"&gt;ref&lt;/a&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download manifest from Customer Portal (screenshot).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scp&lt;/code&gt; it to Satellite server.&lt;/li&gt;
+&lt;li&gt;On satellite server, &lt;code&gt;hammer -u &amp;lt;sa user&amp;gt; -p &amp;lt;sa pwd&amp;gt; subscription upload --file
+   &amp;lt;manifest zip&amp;gt; --organization "&amp;lt;org name&amp;gt;"&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If getting an error &lt;code&gt;A backend service [ Candlepin ] is unreachable&lt;/code&gt;,
+see &lt;a href="https://access.redhat.com/solutions/1270233"&gt;ref&lt;/a&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;service tomcat6 status&lt;/code&gt;, likely is in error.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;service tomcat6 start&lt;/code&gt;, then check status again, should be fine.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;hammer&lt;/code&gt; upload again. This takes a while for a file size of
+   only 300+k. Don't panic.&lt;/li&gt;
+&lt;li&gt;Now go to &lt;code&gt;Content&lt;/code&gt;/&lt;code&gt;Red Hat Repositories&lt;/code&gt;, it will list repos. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Refresh subscription if allocation changed&lt;/h3&gt;
+&lt;p&gt;If we change subscriptions in the allocation using Portal (add/remove
+subscriptions), we need to SSH back to Satellite server machine, and
+&lt;strong&gt;refresh manifest&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;hammer&lt;span class="w"&gt; &lt;/span&gt;subscription&lt;span class="w"&gt; &lt;/span&gt;refresh-manifest&lt;span class="w"&gt; &lt;/span&gt;--organization&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;org name&amp;gt;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;Enable/disable repo&lt;/h1&gt;
+&lt;p&gt;See &lt;a href="https://access.redhat.com/solutions/265523"&gt;ref&lt;/a&gt;. On Satellite server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;subscription-manager&lt;span class="w"&gt; &lt;/span&gt;repos&lt;span class="w"&gt; &lt;/span&gt;--list
+subscription-manager&lt;span class="w"&gt; &lt;/span&gt;repos&lt;span class="w"&gt; &lt;/span&gt;--enable&lt;span class="o"&gt;=[&lt;/span&gt;repo&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="o"&gt;]&lt;/span&gt;
+subscription-manager&lt;span class="w"&gt; &lt;/span&gt;repos&lt;span class="w"&gt; &lt;/span&gt;--disable&lt;span class="o"&gt;=[&lt;/span&gt;repo&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;Register a client to SA server&lt;/h1&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img class="img-responsive"
+       src="images/katello%20ca.png" /&gt;
+  &lt;figcaption&gt;Download `katello ca` from Satellite 6.3 server&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Two ways to register: activation key, or to an environment.&lt;/p&gt;
+&lt;h2&gt;register with activation keys&lt;/h2&gt;
+&lt;p&gt;On Satellite UI:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;create activation key: It asks to select an &lt;code&gt;environment&lt;/code&gt; and a
+   &lt;code&gt;content view&lt;/code&gt;. By default, 6.3 server has a default &lt;code&gt;environment&lt;/code&gt;
+   called &lt;code&gt;Library&lt;/code&gt;, which includes every subscriptions this SA knows
+   about, and a content view &lt;code&gt;Default content view&lt;/code&gt;, again a catch all
+   version.&lt;/li&gt;
+&lt;li&gt;Go to &lt;code&gt;http://&amp;lt;sa server IP or FQDN&amp;gt;/pub/&lt;/code&gt;, and copy address of
+   &lt;code&gt;katello-ca-consumer-latest.noarch.rpm&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;On client machine:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure it has a host name (hint: &lt;code&gt;/etc/hosts&lt;/code&gt;, and
+   &lt;code&gt;/etc/sysconfig/network&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;If DNS is not resolving SA server's name, you can add it manually
+to &lt;code&gt;/etc/hosts&lt;/code&gt;. For example, SA server is at
+&lt;code&gt;brain4-satellite.labs.lenovo.com&lt;/code&gt; with IP &lt;code&gt;192.168.1.100&lt;/code&gt;, and the
+machine you are to register will be &lt;code&gt;client1.labs.lenovo.com&lt;/code&gt; with
+IP &lt;code&gt;192.168.1.200&lt;/code&gt;, simply add two lines in &lt;code&gt;/etc/hosts&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```shell
+In /etc/hosts:
+192.168.1.100 brain4-satellite.labs.lenovo.coom
+192.168.1.200 client1.labs.lenovo.com
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then restart network services:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;```shell
+systemctl start chronyd
+systemctl enable chronyd
+systemctl start rhsmcertd
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download &lt;code&gt;katello-ca...rpm&lt;/code&gt;, eg. &lt;code&gt;curl -O &amp;lt;link copied above&amp;gt;&lt;/code&gt;
+   (Note: it is a capital O as oliver).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Install, &lt;code&gt;rpm -Uvhi --force katello-ca...rpm&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Register, &lt;code&gt;subscription-manager register --org="&amp;lt;org name&amp;gt;"
+   --activationkey="&amp;lt;key name&amp;gt;"&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Verify, &lt;code&gt;subscription-manager repos --list&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Go to Satellite UI &lt;code&gt;hosts/content hosts&lt;/code&gt;, you should see this
+   machine's host name.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;How contents are used&lt;/h1&gt;
+&lt;p&gt;It is actually quite confusing how to use it. I think the biggest
+pitfall is the mixed use of &lt;code&gt;product&lt;/code&gt;, &lt;code&gt;sub&lt;/code&gt;, &lt;code&gt;repo&lt;/code&gt; on different
+page:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;For content view, you are to select by &lt;code&gt;repo&lt;/code&gt; &amp;larr; same product
+   can have two versions of the same "thing", eg. RedHat OpenStack
+   product can have two repos: &lt;code&gt;Red Hat OpenStack Platform 13 for RHEL
+   7 RPMs x86_64&lt;/code&gt; (OSP 13), and &lt;code&gt;Red Hat OpenStack Platform 10 for
+   RHEL 7 RPMs x86_64 7Server&lt;/code&gt; (OSP 10) at the same time! But from
+   OSP's POV, these two version are &lt;strong&gt;not compatible&lt;/strong&gt;!&lt;/li&gt;
+&lt;li&gt;For environment, you don't get to choose either content view or
+   repo. You get whatever content views give you, and each environment
+   can have N content views.&lt;/li&gt;
+&lt;li&gt;For activation key, you are to add by &lt;code&gt;subsctiption&lt;/code&gt;, and you can
+   &lt;strong&gt;manually&lt;/strong&gt; enable/disable by repo. So following the OSP example above, if
+   you have added both OSP 10 and OSP 13 to the same content view,
+   then this key, which is a (content view, env) combo, will inherit
+   both repos. Well, you can then go in to disable one, but that is
+   hard to manage, don't you think. &lt;strong&gt;It's better you separate them in
+   content view first.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class="col s12 center"&gt;
+  &lt;img class="img-responsive"
+       src="images/rh%20satellite%20content%20hiearchy.png" /&gt;
+  &lt;figcaption&gt;Satellite content hierarchy&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;See also&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/articles/2258471"&gt;&lt;code&gt;hammer&lt;/code&gt; cheatsheet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/sites/default/files/attachments/rh_sm_command_cheatsheet_1214_jcs_print.pdf"&gt;&lt;code&gt;subscription-manager&lt;/code&gt; cheatsheet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.2/pdf/Installation_Guide/Red_Hat_Satellite-6.2-Installation_Guide-en-US.pdf"&gt;Satellite 6.2 installation PDF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/documentation/en-us/red_hat_satellite/6.3/pdf/installation_guide/Red_Hat_Satellite-6.3-Installation_Guide-en-US.pdf"&gt;Satellite 6.3 installation PDF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html-single/using_subscription_asset_manager/index"&gt;subscription manager&lt;/a&gt;, a nice description of Satellite workflow&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/10/html-single/director_installation_and_usage/#sect-Repository_Requirements"&gt;Openstack repo requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.ibm.com/support/knowledgecenter/SSCR9A_2.2.0/doc/iwd/c_redhat_satlitesrv_standup.html"&gt;IBM doc on Satellite&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://linux.lenovo.com/yum/"&gt;Lenovo Yum repo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.redhat.com/en/about/subscription-model-faq#?"&gt;Red Hat Subscription Model FAQ&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="rh"></category><category term="lenovo"></category></entry></feed>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2016-10-12
+
+
+    <a class="wave-effect" href="react.html">
+      <i class="fa fa-folder-open-o"></i>
+      REACT
+    </a>
+
+    <a class="wave-effect" href="tag-demo.html">
+      <i class="fa fa-tag"></i>
+      demo
+    </a>
+    <a class="wave-effect" href="tag-react.html">
+      <i class="fa fa-tag"></i>
+      react
+    </a>
+
+    <h1 class="myhighlight">DHS</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><div id="dhs"></div>
+
+<script type="text/babel">
+
+var FormInput = React.createClass({
+    handleChange: function(event) {
+        var text = event.target.value;
+        this.props.onChange(this.props.id, text);
+    },
+    render: function(){
+        var inputStyle = {
+            float: "left"
+        };
+
+        return (
+            <div className="row form-group my-nobreak">
+                <span className="col-xs-6 col-form-label text-right">
+                    {this.props.label}
+                </span>
+                <div className="col-xs-5 input-group" style={inputStyle}>
+                    <input type="text" className="form-control"
+                        value={this.props.value}
+                        onChange={this.handleChange}/>
+                </div>
+            </div>
+        );
+    }
+});
+
+var FormHeader = React.createClass({
+    handleClick: function(event) {
+        this.props.handleClick();
+    },
+    render: function(){
+        var switchClass = classNames("fa", {
+            "fa-angle-double-up": this.props.showFields,
+            "fa-angle-double-down": !this.props.showFields
+        });
+
+        return (
+            <div className="row my-resume-header" onClick={this.handleClick}>
+                <div className="col-md-11">
+                    <h4>{this.props.title}</h4>
+                </div>
+                <div  className="text-right col-md-1" data-toggle="tooltip" title="Click to expand and collapse">
+                    <br />
+                    <i className={switchClass}></i>
+                </div>
+            </div>
+        );
+    }
+});
+
+var FormBox = React.createClass({
+    getInitialState: function(){
+        return {
+            showFields: true
+        };
+    },
+    handleClick: function(){
+        this.setState({
+            showFields: !this.state.showFields, // toggle
+        });
+    },
+    render: function(){
+        // Input fields
+        var formFields = [];
+        if (typeof this.props.data.fields != "undefined"){
+            formFields = this.props.data.fields.map(function(field) {
+                // This is the magic line to make the state update
+                // in sync with parent's state
+                field.onChange = this.props.onChange;
+
+                field.id = field.name;
+                return <FormInput key={field.label} {...field} />
+            }, this);
+        }
+        var fields = this.state.showFields?
+            <div className="my-multicol-2">{formFields}</div>: null;
+
+        // Render
+        return (
+            <div>
+                <FormHeader title={this.props.data.title} showFields={this.state.showFields} handleClick={this.handleClick} />
+                <button className="btn btn-default"
+                    onClick={this.props.onRedraw}>Graph</button>
+                {fields}
+            </div>
+        );
+    }
+});
+
+var D3GraphContainer = React.createClass({
+    getInitialState: function(){
+        return {
+            title: "",
+            data: [], // graph data
+            dataId: null,
+            redrawCounter: 0
+        }
+    },
+    handleRedraw:function(){
+        var that = this;
+        var queries = this.props.data;
+        var baseUrl = "http://api.dhsprogram.com/rest/dhs/v4/data?";
+        var tmp = [];
+        for (var key in queries){
+            var val = queries[key].value;
+            if (val && (val.length > 0)){
+                tmp.push(key + "=" + val);
+            }
+        }
+        var apiUrl = baseUrl+tmp.join("&");
+        console.log(apiUrl);
+
+        // Get data
+        j$.ajax({
+            url: apiUrl,
+            dataType: "json",
+            method: "GET",
+            success: function(resp){
+                if ((typeof resp != "undefined") && resp){
+                    that.setState({
+                        title: resp.Data[0].Indicator,
+                        data: resp.Data,
+                        dataId: resp.Data[0].IndicatorOrder,
+                        redrawCounter: that.props.redraw
+                    });
+                }
+            } // end of success
+        });
+    },
+    render: function(){
+        if (this.props.redraw > this.state.redrawCounter){
+            this.handleRedraw();
+        }
+        return (
+            <div>
+                {this.state.dataId?
+                    <D3Graph id={this.state.dataId}
+                        data={this.state.data}
+                        title={this.state.title} />
+                    :null}
+            </div>
+        );
+    }
+});
+
+var D3Graph = React.createClass({
+    getInitialState: function(){
+        return {
+            id: "DHS"+this.props.id,
+            prevData: [],
+            viz: null
+        }
+    },
+    cleanData:function(data){
+        var tmp = data.slice();
+        for (var i = 0; i<data.length; i++){
+            tmp[i].SurveyYear = "" + tmp[i].SurveyYear;
+        }
+        return tmp;
+    },
+    makeViz: function(data){
+        this.setState({
+            viz: d3plus.viz().container("#"+this.state.id)
+            .data(this.cleanData(data))
+            .type("bar")
+            .id("CountryName")
+            .color("CountryName")
+            .text("CountryName")
+            .y("Value")
+            .x("SurveyYear")
+            //.shape({
+            //    "interpolate": "basis"  // takes accepted values to change interpolation type
+            //})
+            .draw()
+        });
+        this.debounceUpdate = _.debounce(function(data){
+            this.state.viz.data(this.cleanData(data));
+            this.state.viz.draw();
+
+            // Save data
+            this.setState({
+                prevData: data
+            });
+        }, 500);
+    },
+    componentDidMount: function(){
+        this.setState({
+            prevData: this.props.data
+        });
+        this.makeViz(this.props.data);
+    },
+    render: function(){
+        if (this.state.viz && !_.isEqual(this.state.prevData, this.props.data)){
+            this.debounceUpdate(this.props.data);
+        }
+
+        return (
+            <figure id={this.state.id} style={{minHeight:"500px"}}>
+                <figcaption>{this.props.title}</figcaption>
+            </figure>
+        );
+    }
+});
+
+var DhsBox = React.createClass({
+    getInitialState: function(){
+        return {
+            "countryIds": {
+                label: "Country IDs",
+                value: "KE"
+            },
+            "indicatorIds": {
+                label: "Indicator IDs",
+                value: "FE_FRTR_W_TFR"
+            },
+            "breakdown": {
+                label: "Breakdown level",
+                value: null
+            },
+            "surveyIds": {
+                label: "Survey IDs",
+                value: null
+            },
+            "surveyYear": {
+                label: "Survey Year",
+                value: null
+            },
+            counter: {
+                redraw: 0
+            }
+        }; // end of initial state
+    },
+    getFields: function(pickList){
+        var tmpList = [];
+        for (var i=0; i<pickList.length; i++){
+            var tmp = this.state[pickList[i]];
+            tmp.name = pickList[i];
+
+            if ((typeof tmp.value  == "undefined") || (!tmp.value)){
+                tmp.value = ""; // default input value
+            }
+            tmpList.push(tmp);
+        }
+        return tmpList;
+    },
+    handleFieldChange: function(fieldId, value) {
+        var newState = this.state[fieldId];
+        newState.value = value;
+        this.setState(newState);
+    },
+    handleRedraw: function(){
+        var currentRedrawCounter = this.state.counter.redraw;
+        this.setState({
+            counter: {
+                redraw: currentRedrawCounter+1 // increment counter
+            }
+        });
+    },
+    render: function(){
+        var helper = {
+            getFields: this.getFields
+        };
+        var dhsForm = {
+            title: "DHS data set",
+            fields: helper.getFields(["countryIds", "indicatorIds", "surveyYear"])
+        };
+        return (
+            <div>
+                <FormBox data={dhsForm}
+                    onChange={this.handleFieldChange}
+                    onRedraw={this.handleRedraw}
+                />
+                <D3GraphContainer
+                    data={this.state}
+                    redraw={this.state.counter.redraw}
+                />
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(
+    <DhsBox />,
+    document.getElementById("dhs")
+);
+</script></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

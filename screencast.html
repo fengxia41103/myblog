@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2018-06-06
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Screencast</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><video width="100%" height="100%" controls="controls">
+  <source src="images/publish%20content%20view%20to%20env.mp4 " type="video/mp4" />
+  Your browser does not support the video tag.
+  /* instead of the last line you could also add the flash player*/
+</video>
+
+<p>There are time that I need to create screencasts:</p>
+<ol>
+<li>CLI</li>
+<li>Good video quality</li>
+<li>Can convert to mp4</li>
+</ol>
+<p>After a few tries I find a couple ones I like.</p>
+<h1>ffmpeg</h1>
+<p>Is the most feature rick video tool on Linux. Check out its
+<a href="https://wiki.archlinux.org/title/FFmpeg#Screen_capture">doc</a> for
+details.</p>
+<p>First of all, find out your screen size if you intend to capture the
+whole screen. There is a way to specify area using window ID which can
+be googled. I'm going to show whole desktop capture here. Once you
+have the resolution values, plug them into the commands below after
+the <code>-video_size</code> flag. Otherwise, the capture will be in a wrong
+resolution, which visually the capture is a zoomed in version of the
+desktop <strong>but cropped</strong>.</p>
+<div class="highlight"><pre><span></span><code>xdpyinfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;dimensions&#39;</span>
+
+Resp:
+dimensions:<span class="w">    </span>2560x1440<span class="w"> </span>pixels<span class="w"> </span><span class="o">(</span>677x381<span class="w"> </span>millimeters<span class="o">)</span>
+</code></pre></div>
+
+<p>For lossless .mkv format:</p>
+<div class="highlight"><pre><span></span><code>ffmpeg<span class="w"> </span>-f<span class="w"> </span>x11grab<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-video_size<span class="w"> </span>1920x1080<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-framerate<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-i<span class="w"> </span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-c:v<span class="w"> </span>ffvhuff<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>screen.mkv
+</code></pre></div>
+
+<p>For .mp4 w/ audio:</p>
+<div class="highlight"><pre><span></span><code>ffmpeg<span class="w"> </span>-f<span class="w"> </span>x11grab<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-video_size<span class="w"> </span>1920x1080<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-framerate<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-i<span class="w"> </span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-f<span class="w"> </span>alsa<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-i<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-c:v<span class="w"> </span>libx264<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-preset<span class="w"> </span>ultrafast<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-c:a<span class="w"> </span>aac<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>screen.mp4
+</code></pre></div>
+
+<p>For .mp4 w/o audio:</p>
+<div class="highlight"><pre><span></span><code>ffmpeg<span class="w"> </span>-f<span class="w"> </span>x11grab<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-video_size<span class="w"> </span>1920x1080<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-framerate<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-i<span class="w"> </span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-c:v<span class="w"> </span>libx264<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-preset<span class="w"> </span>ultrafast<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-c:a<span class="w"> </span>aac<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>screen.mp4
+</code></pre></div>
+
+<h1>recordmydesktop</h1>
+<p><a href="http://recordmydesktop.sourceforge.net/about.php">source</a> &amp; <a href="https://linux.die.net/man/1/recordmydesktop">man page</a>. Great for producing video formats:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>recordmydesktop<span class="w"> </span>ffmpeg
+$<span class="w"> </span>recordmydesktop<span class="w"> </span>-o<span class="w"> </span>&lt;f1&gt;.ogv
+$<span class="w"> </span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>&lt;f1&gt;.ogv<span class="w"> </span>-vcodec<span class="w"> </span>libx264<span class="w"> </span>-strict<span class="w"> </span>-4<span class="w"> </span>-ss<span class="w"> </span><span class="m">5</span><span class="w"> </span>&lt;f2&gt;.mp4
+
+Usage:<span class="w"> </span>recordmydesktop<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>^filename
+
+Generic<span class="w"> </span>Options
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">                              </span>Print<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">      </span>--version<span class="w">                           </span>Print<span class="w"> </span>program<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span>exit.
+<span class="w">      </span>--print-config<span class="w">                      </span>Print<span class="w"> </span>info<span class="w"> </span>about<span class="w"> </span>options<span class="w"> </span>selected<span class="w"> </span>during<span class="w"> </span>compilation<span class="w"> </span>and<span class="w"> </span>exit.
+
+Image<span class="w"> </span>Options
+<span class="w">      </span>--windowid<span class="o">=</span>id_of_window<span class="w">             </span>id<span class="w"> </span>of<span class="w"> </span>window<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>recorded.
+<span class="w">      </span>--display<span class="o">=</span>DISPLAY<span class="w">                   </span>Display<span class="w"> </span>to<span class="w"> </span>connect<span class="w"> </span>to.
+<span class="w">  </span>-x,<span class="w"> </span>--x<span class="o">=</span>N&gt;<span class="o">=</span><span class="m">0</span><span class="w">                            </span>Offset<span class="w"> </span><span class="k">in</span><span class="w"> </span>x<span class="w"> </span>direction.
+<span class="w">  </span>-y,<span class="w"> </span>--x<span class="o">=</span>N&gt;<span class="o">=</span><span class="m">0</span><span class="w">                            </span>Offset<span class="w"> </span><span class="k">in</span><span class="w"> </span>y<span class="w"> </span>direction.
+<span class="w">      </span>--width<span class="o">=</span>N&gt;0<span class="w">                         </span>Width<span class="w"> </span>of<span class="w"> </span>recorded<span class="w"> </span>window.
+<span class="w">      </span>--height<span class="o">=</span>N&gt;0<span class="w">                        </span>Height<span class="w"> </span>of<span class="w"> </span>recorded<span class="w"> </span>window.
+<span class="w">      </span>--dummy-cursor<span class="o">=</span>color<span class="w">                </span>Color<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>dummy<span class="w"> </span>cursor<span class="w"> </span><span class="o">[</span>black<span class="p">|</span>white<span class="o">]</span>
+<span class="w">      </span>--no-cursor<span class="w">                         </span>Disable<span class="w"> </span>drawing<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>cursor.
+<span class="w">      </span>--no-shared<span class="w">                         </span>Disable<span class="w"> </span>usage<span class="w"> </span>of<span class="w"> </span>MIT-shared<span class="w"> </span>memory<span class="w"> </span>extension<span class="o">(</span>Not<span class="w"> </span>Recommended!<span class="o">)</span>.
+<span class="w">      </span>--full-shots<span class="w">                        </span>Take<span class="w"> </span>full<span class="w"> </span>screenshot<span class="w"> </span>at<span class="w"> </span>every<span class="w"> </span>frame<span class="o">(</span>Not<span class="w"> </span>recomended!<span class="o">)</span>.
+<span class="w">      </span>--follow-mouse<span class="w">                      </span>Makes<span class="w"> </span>the<span class="w"> </span>capture<span class="w"> </span>area<span class="w"> </span>follow<span class="w"> </span>the<span class="w"> </span>mouse<span class="w"> </span>cursor.<span class="w"> </span>Autoenables<span class="w"> </span>--full-shots.
+<span class="w">      </span>--quick-subsampling<span class="w">                 </span>Do<span class="w"> </span>subsampling<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>chroma<span class="w"> </span>planes<span class="w"> </span>by<span class="w"> </span>discarding,<span class="w"> </span>not<span class="w"> </span>averaging.
+<span class="w">      </span>--fps<span class="o">=</span>N<span class="o">(</span>number&gt;0.0<span class="o">)</span><span class="w">                 </span>A<span class="w"> </span>positive<span class="w"> </span>number<span class="w"> </span>denoting<span class="w"> </span>desired<span class="w"> </span>framerate.
+
+Sound<span class="w"> </span>Options
+<span class="w">      </span>--channels<span class="o">=</span>N<span class="w">                        </span>A<span class="w"> </span>positive<span class="w"> </span>number<span class="w"> </span>denoting<span class="w"> </span>desired<span class="w"> </span>sound<span class="w"> </span>channels<span class="w"> </span><span class="k">in</span><span class="w"> </span>recording.
+<span class="w">      </span>--freq<span class="o">=</span>N<span class="w">                            </span>A<span class="w"> </span>positive<span class="w"> </span>number<span class="w"> </span>denoting<span class="w"> </span>desired<span class="w"> </span>sound<span class="w"> </span>frequency.
+<span class="w">      </span>--buffer-size<span class="o">=</span>N<span class="w">                     </span>A<span class="w"> </span>positive<span class="w"> </span>number<span class="w"> </span>denoting<span class="w"> </span>the<span class="w"> </span>desired<span class="w"> </span>sound<span class="w"> </span>buffer<span class="w"> </span>size<span class="w"> </span><span class="o">(</span><span class="k">in</span><span class="w"> </span>frames,when
+<span class="w">                                          </span>using<span class="w"> </span>ALSA<span class="w"> </span>or<span class="w"> </span>OSS<span class="o">)</span>
+<span class="w">      </span>--ring-buffer-size<span class="o">=</span>N<span class="w">                </span>A<span class="w"> </span>float<span class="w"> </span>number<span class="w"> </span>denoting<span class="w"> </span>the<span class="w"> </span>desired<span class="w"> </span>ring<span class="w"> </span>buffer<span class="w"> </span>size<span class="w"> </span><span class="o">(</span><span class="k">in</span><span class="w"> </span>seconds,when<span class="w"> </span>using
+<span class="w">                                          </span>JACK<span class="w"> </span>only<span class="o">)</span>.
+<span class="w">      </span>--device<span class="o">=</span>SOUND_DEVICE<span class="w">               </span>Sound<span class="w"> </span>device<span class="o">(</span>default<span class="w"> </span>default<span class="o">)</span>.
+<span class="w">      </span>--use-jack<span class="o">=</span>port1<span class="w"> </span>port2...<span class="w"> </span>portn<span class="w">     </span>Record<span class="w"> </span>audio<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>specified<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>space-separated<span class="w"> </span>jack<span class="w"> </span>ports.
+<span class="w">      </span>--no-sound<span class="w">                          </span>Do<span class="w"> </span>not<span class="w"> </span>record<span class="w"> </span>sound.
+
+Encoding<span class="w"> </span>Options
+<span class="w">      </span>--on-the-fly-encoding<span class="w">               </span>Encode<span class="w"> </span>the<span class="w"> </span>audio-video<span class="w"> </span>data,<span class="w"> </span><span class="k">while</span><span class="w"> </span>recording.
+<span class="w">      </span>--v_quality<span class="o">=</span>n<span class="w">                       </span>A<span class="w"> </span>number<span class="w"> </span>from<span class="w"> </span><span class="m">0</span><span class="w"> </span>to<span class="w"> </span><span class="m">63</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>desired<span class="w"> </span>encoded<span class="w"> </span>video<span class="w"> </span>quality<span class="o">(</span>default<span class="w"> </span><span class="m">63</span><span class="o">)</span>.
+<span class="w">      </span>--v_bitrate<span class="o">=</span>n<span class="w">                       </span>A<span class="w"> </span>number<span class="w"> </span>from<span class="w"> </span><span class="m">0</span><span class="w"> </span>to<span class="w"> </span><span class="m">2000000</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>desired<span class="w"> </span>encoded<span class="w"> </span>video<span class="w"> </span>bitrate<span class="o">(</span>default<span class="w"> </span><span class="m">0</span><span class="o">)</span>.
+<span class="w">      </span>--s_quality<span class="o">=</span>n<span class="w">                       </span>Desired<span class="w"> </span>audio<span class="w"> </span>quality<span class="o">(</span>-1<span class="w"> </span>to<span class="w"> </span><span class="m">10</span><span class="o">)</span>.
+
+Misc<span class="w"> </span>Options
+<span class="w">      </span>--rescue<span class="o">=</span>path_to_data<span class="w">               </span>Encode<span class="w"> </span>data<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>previous,<span class="w"> </span>crashed,<span class="w"> </span>session.
+<span class="w">      </span>--no-wm-check<span class="w">                       </span>Do<span class="w"> </span>not<span class="w"> </span>try<span class="w"> </span>to<span class="w"> </span>detect<span class="w"> </span>the<span class="w"> </span>window<span class="w"> </span>manager<span class="o">(</span>and<span class="w"> </span><span class="nb">set</span><span class="w"> </span>options<span class="w"> </span>according<span class="w"> </span>to<span class="w"> </span>it<span class="o">)</span>
+<span class="w">      </span>--no-frame<span class="w">                          </span>Don<span class="w"> </span>not<span class="w"> </span>show<span class="w"> </span>the<span class="w"> </span>frame<span class="w"> </span>that<span class="w"> </span>visualizes<span class="w"> </span>the<span class="w"> </span>recorded<span class="w"> </span>area.
+<span class="w">      </span>--pause-shortcut<span class="o">=</span>MOD+KEY<span class="w">            </span>Shortcut<span class="w"> </span>that<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">(</span>un<span class="o">)</span>pausing<span class="w"> </span><span class="o">(</span>default<span class="w"> </span>Control+Mod1+p<span class="o">)</span>.
+<span class="w">      </span>--stop-shortcut<span class="o">=</span>MOD+KEY<span class="w">             </span>Shortcut<span class="w"> </span>that<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span>to<span class="w"> </span>stop<span class="w"> </span>the<span class="w"> </span>recording<span class="w"> </span><span class="o">(</span>default<span class="w"> </span>Control+Mod1+s<span class="o">)</span>.
+<span class="w">      </span>--compress-cache<span class="w">                    </span>Image<span class="w"> </span>data<span class="w"> </span>are<span class="w"> </span>cached<span class="w"> </span>with<span class="w"> </span>light<span class="w"> </span>compression.
+<span class="w">      </span>--workdir<span class="o">=</span>DIR<span class="w">                       </span>Location<span class="w"> </span>where<span class="w"> </span>a<span class="w"> </span>temporary<span class="w"> </span>directory<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>created<span class="w"> </span>to<span class="w"> </span>hold<span class="w"> </span>project
+<span class="w">                                          </span>files<span class="o">(</span>default<span class="w"> </span><span class="nv">$HOME</span><span class="o">)</span>.
+<span class="w">      </span>--delay<span class="o">=</span>n<span class="o">[</span>H<span class="p">|</span>h<span class="p">|</span>M<span class="p">|</span>m<span class="o">]</span><span class="w">                  </span>Number<span class="w"> </span>of<span class="w"> </span>secs<span class="o">(</span>default<span class="o">)</span>,minutes<span class="w"> </span>or<span class="w"> </span>hours<span class="w"> </span>before<span class="w"> </span>capture<span class="w"> </span>starts<span class="o">(</span>number<span class="w"> </span>can
+<span class="w">                                          </span>be<span class="w"> </span>float<span class="o">)</span>
+<span class="w">      </span>--overwrite<span class="w">                         </span>If<span class="w"> </span>there<span class="w"> </span>is<span class="w"> </span>already<span class="w"> </span>a<span class="w"> </span>file<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>name,<span class="w"> </span>delete<span class="w"> </span>it<span class="w"> </span><span class="o">(</span>default<span class="w"> </span>is<span class="w"> </span>to<span class="w"> </span>add
+<span class="w">                                          </span>a<span class="w"> </span>number<span class="w"> </span>postfix<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>new<span class="w"> </span>one<span class="o">)</span>.
+<span class="w">  </span>-o,<span class="w"> </span>--output<span class="o">=</span>filename<span class="w">                   </span>Name<span class="w"> </span>of<span class="w"> </span>recorded<span class="w"> </span>video<span class="o">(</span>default<span class="w"> </span>out.ogv<span class="o">)</span>.
+
+<span class="w">    </span>If<span class="w"> </span>no<span class="w"> </span>other<span class="w"> </span>options<span class="w"> </span>are<span class="w"> </span>specified,<span class="w"> </span>filename<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>given<span class="w"> </span>without<span class="w"> </span>the<span class="w"> </span>-o<span class="w"> </span>switch.
+</code></pre></div>
+
+<p>Note that <code>-ss 5</code> is to skip the beginning 5 seconds. For some reason,
+ogv &rarr; mp4 conversion sometimes leaves the first few seconds with
+a terrible looking patchy greens. I suspect it is caused my switching
+desktop in spectrwm.</p>
+<h1>byzanz-record</h1>
+<p><a href="https://linux.die.net/man/1/byzanz-record">man page</a>. Great for producing animated <code>gif</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>insteall<span class="w"> </span>byzanz<span class="w"> </span>&lt;--<span class="w"> </span>ubuntu<span class="w"> </span><span class="m">18</span>.04
+
+Usage:
+<span class="w">  </span>byzanz-record<span class="w"> </span><span class="o">[</span>OPTION...<span class="o">]</span><span class="w"> </span>record<span class="w"> </span>your<span class="w"> </span>current<span class="w"> </span>desktop<span class="w"> </span>session
+
+Help<span class="w"> </span>Options:
+<span class="w">  </span>-?,<span class="w"> </span>--help<span class="w">               </span>Show<span class="w"> </span><span class="nb">help</span><span class="w"> </span>options
+<span class="w">  </span>--help-all<span class="w">               </span>Show<span class="w"> </span>all<span class="w"> </span><span class="nb">help</span><span class="w"> </span>options
+<span class="w">  </span>--help-gtk<span class="w">               </span>Show<span class="w"> </span>GTK+<span class="w"> </span>Options
+
+Application<span class="w"> </span>Options:
+<span class="w">  </span>-d,<span class="w"> </span>--duration<span class="o">=</span>SECS<span class="w">      </span>Duration<span class="w"> </span>of<span class="w"> </span>animation<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span><span class="m">10</span><span class="w"> </span>seconds<span class="o">)</span>
+<span class="w">  </span>-e,<span class="w"> </span>--exec<span class="o">=</span>COMMAND<span class="w">       </span>Command<span class="w"> </span>to<span class="w"> </span>execute<span class="w"> </span>and<span class="w"> </span><span class="nb">time</span>
+<span class="w">  </span>--delay<span class="o">=</span>SECS<span class="w">             </span>Delay<span class="w"> </span>before<span class="w"> </span>start<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span><span class="m">1</span><span class="w"> </span>second<span class="o">)</span>
+<span class="w">  </span>-c,<span class="w"> </span>--cursor<span class="w">             </span>Record<span class="w"> </span>mouse<span class="w"> </span>cursor
+<span class="w">  </span>-a,<span class="w"> </span>--audio<span class="w">              </span>Record<span class="w"> </span>audio
+<span class="w">  </span>-x,<span class="w"> </span>--x<span class="o">=</span>PIXEL<span class="w">            </span>X<span class="w"> </span>coordinate<span class="w"> </span>of<span class="w"> </span>rectangle<span class="w"> </span>to<span class="w"> </span>record
+<span class="w">  </span>-y,<span class="w"> </span>--y<span class="o">=</span>PIXEL<span class="w">            </span>Y<span class="w"> </span>coordinate<span class="w"> </span>of<span class="w"> </span>rectangle<span class="w"> </span>to<span class="w"> </span>record
+<span class="w">  </span>-w,<span class="w"> </span>--width<span class="o">=</span>PIXEL<span class="w">        </span>Width<span class="w"> </span>of<span class="w"> </span>recording<span class="w"> </span>rectangle
+<span class="w">  </span>-h,<span class="w"> </span>--height<span class="o">=</span>PIXEL<span class="w">       </span>Height<span class="w"> </span>of<span class="w"> </span>recording<span class="w"> </span>rectangle
+<span class="w">  </span>-v,<span class="w"> </span>--verbose<span class="w">            </span>Be<span class="w"> </span>verbose
+<span class="w">  </span>--display<span class="o">=</span>DISPLAY<span class="w">        </span>X<span class="w"> </span>display<span class="w"> </span>to<span class="w"> </span>use
+</code></pre></div>
+
+<p>The two mostly useful are <code>-d</code> (duration) and <code>--delay=SECS</code> for a
+delay. Duration is a trial-and-error iteration since usually I don't
+know how long the screencast will run.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

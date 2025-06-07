@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-09-11
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Rebranding</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>Rebranding is a common task. The core of it is how to evaluate your
+code base to pick up interested artifacts &larr; brand
+indicator. Definition of these artifacts are highly contextual,
+meaning that a string <code>feng</code> can mean a variable, or a string literal,
+or something else. Think of it, how many programming languages in your
+application stack, and how many different comment styles there are!?
+Crazy.</p>
+<p>So let's start w/ the most basic &mdash; string literal &mdash; if I
+find a string <code>whatever</code> (old brand), replace it w/ <code>feng</code> (new
+brand).</p>
+<h1>the how</h1>
+<p>The script can be found <a href="https://github.com/fengxia41103/dev/blob/master/code%20analysis/fancy_string_search.py">here</a>. The idea is to:</p>
+<ol>
+<li>Walk through <code>root</code> folder and its subfolders and files.</li>
+<li>File is selected by its extension &mdash;  an exclusion list and an inclusion
+   list. Exclusion has a default list to exclude all binary formats,
+   eg. <code>.png</code>.</li>
+<li>
+<p>Open the file as text file, search line by line whether interested
+   pattern in found.</p>
+</li>
+<li>
+<p>If found, log down the file full path, line number, and original
+     line text.</p>
+</li>
+<li>
+<p>Identify <code>reference</code>, which is defined as <code>/&lt;.....&gt;</code> &mdash; this
+   covers reference to a URL or an external file. This is important
+   because it means the string has external dependency of some sort
+   and requires further coordination.</p>
+</li>
+<li>
+<p>Identify <code>emails</code>. Emails can be viewed as another form of external
+   references, eg. <code>support@yourcompany.com</code>. You want to investigate
+   what this email is for, and find an equivalent.</p>
+</li>
+</ol>
+<p>An example to use this tool:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>fancy_string_search.py<span class="w"> </span>check-brand-reference<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--exclude-folders
+<span class="w">  </span>node_modules,fonts,contrib,.git,doc,output,bower_components,plugins<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--search-for<span class="w"> </span>whatever<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--include-extensions<span class="w"> </span>md<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--no-split-target<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>~/workspace/myblog
+</code></pre></div>
+
+<h1>example</h1>
+<p>Below is an example output (in <a href="https://fengxia41103.github.io/myblog/pandoc workflow.html">pandoc</a> .md format):</p>
+<div class="highlight"><pre><span></span><code>---
+<span class="gu">title: Rebranding Analysis Report</span>
+<span class="gu">---</span>
+
+<span class="gh"># Search criteria</span>
+
+
+<span class="k">-</span><span class="w"> </span>root folder: 
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog
+
+<span class="k">-</span><span class="w"> </span>matching key words: 
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>cliche
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>gmail
+
+<span class="k">-</span><span class="w"> </span>include extensions: 
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.md
+
+<span class="k">-</span><span class="w"> </span>exclude extensions: 
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.bz2
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.tar.gz
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.bz
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.gz
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.xz
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.ico
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.png
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.jpg
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.pdf
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.dia
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.db
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.exe
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.war
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.rpm
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.sasldb
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.der
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.p12
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.jar
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.mmdb
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.bak
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.yml_example
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.properties
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.docx
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.doc
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.spec
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.pyc
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.jpeg
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.mp4
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.gif
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.webm
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.autosave
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.ttf
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.svg
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.gzip
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.woff
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.eot
+
+<span class="k">-</span><span class="w"> </span>exclude folder patterns: 
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>node_modules
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>fonts
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>contrib
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>.git
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>doc
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>output
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>bower_components
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>plugins
+
+<span class="k">-</span><span class="w"> </span>exclude string patterns: 
+
+<span class="gh"># Swap needed</span>
+
+
+<span class="gu">## External references</span>
+
+They seem to be some reference to externals such as URLs. Need a value to swap.
+
+<span class="k">1.</span> <span class="sb">`[Gmail]/Starred`</span>
+
+<span class="k">1.</span> <span class="sb">`[Gmail]/All Mail`</span>
+
+<span class="k">1.</span> <span class="sb">`[Gmail]/Trash`</span>
+
+<span class="k">1.</span> <span class="sb">`[Gmail]/Sent Mail`</span>
+
+<span class="gu">### AWS S3</span>
+
+
+<span class="gu">## Emails</span>
+
+
+<span class="k">1.</span> <span class="sb">`yours@gmail.com`</span>
+
+<span class="k">1.</span> <span class="sb">`NARENDRA REDDY &lt;bugbounty10378@gmail.com`</span>
+
+<span class="gh"># Files skipped</span>
+
+<span class="gh"># Matched by &quot;cliche&quot;</span>
+
+
+<span class="gu">## File type: &quot;.md&quot;:</span>
+
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/dev/rebranding.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#66:</span> <span class="sb">`- cliche`</span>
+
+<span class="w">    </span><span class="k">2.</span> on line <span class="ni">#139:</span> <span class="sb">`# Matched by &quot;cliche&quot;`</span>
+
+<span class="w">    </span><span class="k">3.</span> on line <span class="ni">#146:</span> <span class="sb">`1. on line #15: `</span>criticized, hated (no I don&#39;t hate this program, just the cliche``
+
+<span class="w">    </span><span class="k">4.</span> on line <span class="ni">#149:</span> <span class="sb">`1. on line #70: `</span>be. This may sound like a cliche, typical middle age crisis, poor guy.``
+
+<span class="w">    </span><span class="k">5.</span> on line <span class="ni">#152:</span> <span class="sb">`1. on line #68: `</span>traditional political cliches. But now, I feel he is a total disaster,``
+
+<span class="w">    </span><span class="k">6.</span> on line <span class="ni">#155:</span> <span class="sb">`1. on line #96: `</span>The fundamental law here is the cliche that **there is no free``
+
+<span class="w">    </span><span class="k">7.</span> on line <span class="ni">#158:</span> <span class="sb">`1. on line #33: `</span>frustrated, even hatred. This can&#39;t be just a myth, a cliche that``
+
+<span class="w">    </span><span class="k">8.</span> on line <span class="ni">#161:</span> <span class="sb">`1. on line #16: `</span>It&#39;s a cliche when people talk about luck, and someone gets lucky, or``
+
+<span class="w">    </span><span class="k">9.</span> on line <span class="ni">#164:</span> <span class="sb">`1. on line #32: `</span>again, which is often a cliche to my education and my generation, when``
+
+<span class="w">    </span><span class="k">10.</span> on line <span class="ni">#167:</span> <span class="sb">`1. on line #105: `</span>matter, let&#39;s just use the cliche name, <span class="gs">**progress**</span>... then, what are``
+
+<span class="w">    </span><span class="k">11.</span> on line <span class="ni">#170:</span> <span class="sb">`1. on line #17: `</span>On one hand, the cliche is always that mid-age is a tough time because``
+
+<span class="w">    </span><span class="k">12.</span> on line <span class="ni">#173:</span> <span class="sb">`1. on line #52: `</span>becoming a cliche, and are being used freely without clarification nor``
+
+<span class="w">    </span><span class="k">13.</span> on line <span class="ni">#176:</span> <span class="sb">`1. on line #153: `</span>Even further, as we all know the cliche, hate and love are like twins``
+
+<span class="w">    </span><span class="k">14.</span> on line <span class="ni">#179:</span> <span class="sb">`1. on line #91: `</span>cliche in love scene, that if your relationships always go sore in the``
+
+<span class="w">    </span><span class="k">15.</span> on line <span class="ni">#182:</span> <span class="sb">`1. on line #105: `</span>it is an everyday cliche to have wifi and iPhone, but back to 500``
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/a vain debate pattern.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#15:</span> <span class="sb">`criticized, hated (no I don&#39;t hate this program, just the cliche`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/city.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#70:</span> <span class="sb">`be. This may sound like a cliche, typical middle age crisis, poor guy.`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/law.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#68:</span> <span class="sb">`traditional political cliches. But now, I feel he is a total disaster,`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/lost job.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#96:</span> <span class="sb">`The fundamental law here is the cliche that **there is no free`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/love life.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#33:</span> <span class="sb">`frustrated, even hatred. This can&#39;t be just a myth, a cliche that`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/luck.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#16:</span> <span class="sb">`It&#39;s a cliche when people talk about luck, and someone gets lucky, or`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/mind.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#32:</span> <span class="sb">`again, which is often a cliche to my education and my generation, when`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/mob.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#105:</span> <span class="sb">`matter, let&#39;s just use the cliche name, **progress**... then, what are`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/must do.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#17:</span> <span class="sb">`On one hand, the cliche is always that mid-age is a tough time because`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/reflection on technology.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#52:</span> <span class="sb">`becoming a cliche, and are being used freely without clarification nor`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/society.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#153:</span> <span class="sb">`Even further, as we all know the cliche, hate and love are like twins`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/technology responsibility.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#91:</span> <span class="sb">`cliche in love scene, that if your relationships always go sore in the`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/the wrong elite.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#105:</span> <span class="sb">`it is an everyday cliche to have wifi and iPhone, but back to 500`</span>
+
+<span class="gu">## Is a reference</span>
+
+We think they are file reference or URL link. Changing a value needs cross check.
+
+
+None
+
+<span class="gu">## Is an email address</span>
+
+
+None
+
+<span class="gh"># Matched by &quot;gmail&quot;</span>
+
+
+<span class="gu">## File type: &quot;.md&quot;:</span>
+
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/dev/mbsync.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#18:</span> <span class="sb">`configuration to make it work (sort of) with Hotmail&#39;s IMAP. Gmail`</span>
+
+<span class="w">    </span><span class="k">2.</span> on line <span class="ni">#49:</span> <span class="sb">`2. for gmail:`</span>imap.gmail.com``
+
+<span class="w">    </span><span class="k">3.</span> on line <span class="ni">#54:</span> <span class="sb">`Host imap.outlook.com # or imap.gmail.com`</span>
+
+<span class="w">    </span><span class="k">4.</span> on line <span class="ni">#58:</span> <span class="sb">`# These settings work for both gmail and hotmail`</span>
+
+<span class="w">    </span><span class="k">5.</span> on line <span class="ni">#159:</span> <span class="sb">`IMAPStore gmail-remote # &lt;-- user defined name`</span>
+
+<span class="w">    </span><span class="k">6.</span> on line <span class="ni">#160:</span> <span class="sb">`Account gmail # &lt;-- the account name defined in Account section`</span>
+
+<span class="w">    </span><span class="k">7.</span> on line <span class="ni">#169:</span> <span class="sb">`MaildirStore gmail-local`</span>
+
+<span class="w">    </span><span class="k">8.</span> on line <span class="ni">#170:</span> <span class="sb">`Path ~/Maildir/Gmail/`</span>
+
+<span class="w">    </span><span class="k">9.</span> on line <span class="ni">#171:</span> <span class="sb">`Inbox ~/Maildir/Gmail/inbox/`</span>
+
+<span class="w">    </span><span class="k">10.</span> on line <span class="ni">#178:</span> <span class="sb">`Channel gmail-inbox`</span>
+
+<span class="w">    </span><span class="k">11.</span> on line <span class="ni">#179:</span> <span class="sb">`Master :gmail-remote: # &lt;-- remote store`</span>
+
+<span class="w">    </span><span class="k">12.</span> on line <span class="ni">#180:</span> <span class="sb">`Slave :gmail-local:inbox # &lt;-- local dir`</span>
+
+<span class="w">    </span><span class="k">13.</span> on line <span class="ni">#192:</span> <span class="sb">`Group gmail`</span>
+
+<span class="w">    </span><span class="k">14.</span> on line <span class="ni">#193:</span> <span class="sb">`Channel gmail-trash`</span>
+
+<span class="w">    </span><span class="k">15.</span> on line <span class="ni">#194:</span> <span class="sb">`Channel gmail-inbox`</span>
+
+<span class="w">    </span><span class="k">16.</span> on line <span class="ni">#195:</span> <span class="sb">`Channel gmail-sent`</span>
+
+<span class="w">    </span><span class="k">17.</span> on line <span class="ni">#196:</span> <span class="sb">`Channel gmail-all`</span>
+
+<span class="w">    </span><span class="k">18.</span> on line <span class="ni">#197:</span> <span class="sb">`Channel gmail-starred`</span>
+
+<span class="w">    </span><span class="k">19.</span> on line <span class="ni">#206:</span> ``~/Maildir/Gmail`.`
+
+<span class="w">    </span><span class="k">20.</span> on line <span class="ni">#233:</span> <span class="sb">`# Gmail account`</span>
+
+<span class="w">    </span><span class="k">21.</span> on line <span class="ni">#234:</span> <span class="sb">`IMAPAccount gmail`</span>
+
+<span class="w">    </span><span class="k">22.</span> on line <span class="ni">#236:</span> <span class="sb">`Host imap.gmail.com`</span>
+
+<span class="w">    </span><span class="k">23.</span> on line <span class="ni">#237:</span> <span class="sb">`User yours@gmail.com`</span>
+
+<span class="w">    </span><span class="k">24.</span> on line <span class="ni">#255:</span> <span class="sb">`IMAPStore gmail-remote`</span>
+
+<span class="w">    </span><span class="k">25.</span> on line <span class="ni">#256:</span> <span class="sb">`Account gmail`</span>
+
+<span class="w">    </span><span class="k">26.</span> on line <span class="ni">#258:</span> <span class="sb">`# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)`</span>
+
+<span class="w">    </span><span class="k">27.</span> on line <span class="ni">#259:</span> <span class="sb">`MaildirStore gmail-local`</span>
+
+<span class="w">    </span><span class="k">28.</span> on line <span class="ni">#260:</span> <span class="sb">`Path ~/Maildir/Gmail/`</span>
+
+<span class="w">    </span><span class="k">29.</span> on line <span class="ni">#261:</span> <span class="sb">`Inbox ~/Maildir/Gmail/inbox/`</span>
+
+<span class="w">    </span><span class="k">30.</span> on line <span class="ni">#272:</span> <span class="sb">`#       gmail channels`</span>
+
+<span class="w">    </span><span class="k">31.</span> on line <span class="ni">#284:</span> <span class="sb">`Channel gmail-inbox`</span>
+
+<span class="w">    </span><span class="k">32.</span> on line <span class="ni">#285:</span> <span class="sb">`Master :gmail-remote:`</span>
+
+<span class="w">    </span><span class="k">33.</span> on line <span class="ni">#286:</span> <span class="sb">`Slave :gmail-local:inbox`</span>
+
+<span class="w">    </span><span class="k">34.</span> on line <span class="ni">#291:</span> <span class="sb">`Channel gmail-trash`</span>
+
+<span class="w">    </span><span class="k">35.</span> on line <span class="ni">#292:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/Trash&quot;`</span>
+
+<span class="w">    </span><span class="k">36.</span> on line <span class="ni">#293:</span> <span class="sb">`Slave :gmail-local:trash`</span>
+
+<span class="w">    </span><span class="k">37.</span> on line <span class="ni">#298:</span> <span class="sb">`Channel gmail-all`</span>
+
+<span class="w">    </span><span class="k">38.</span> on line <span class="ni">#299:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/All Mail&quot;`</span>
+
+<span class="w">    </span><span class="k">39.</span> on line <span class="ni">#300:</span> <span class="sb">`Slave :gmail-local:all`</span>
+
+<span class="w">    </span><span class="k">40.</span> on line <span class="ni">#305:</span> <span class="sb">`Channel gmail-sent`</span>
+
+<span class="w">    </span><span class="k">41.</span> on line <span class="ni">#306:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/Sent Mail&quot;`</span>
+
+<span class="w">    </span><span class="k">42.</span> on line <span class="ni">#307:</span> <span class="sb">`Slave :gmail-local:sent`</span>
+
+<span class="w">    </span><span class="k">43.</span> on line <span class="ni">#312:</span> <span class="sb">`Channel gmail-allChannel gmail-starred`</span>
+
+<span class="w">    </span><span class="k">44.</span> on line <span class="ni">#313:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/Starred&quot;`</span>
+
+<span class="w">    </span><span class="k">45.</span> on line <span class="ni">#314:</span> <span class="sb">`Slave :gmail-local:starred`</span>
+
+<span class="w">    </span><span class="k">46.</span> on line <span class="ni">#379:</span> <span class="sb">`Group gmail`</span>
+
+<span class="w">    </span><span class="k">47.</span> on line <span class="ni">#380:</span> <span class="sb">`Channel gmail-trash`</span>
+
+<span class="w">    </span><span class="k">48.</span> on line <span class="ni">#381:</span> <span class="sb">`Channel gmail-inbox`</span>
+
+<span class="w">    </span><span class="k">49.</span> on line <span class="ni">#382:</span> <span class="sb">`Channel gmail-sent`</span>
+
+<span class="w">    </span><span class="k">50.</span> on line <span class="ni">#383:</span> <span class="sb">`Channel gmail-all`</span>
+
+<span class="w">    </span><span class="k">51.</span> on line <span class="ni">#384:</span> <span class="sb">`Channel gmail-starred`</span>
+
+<span class="w">    </span><span class="k">52.</span> on line <span class="ni">#465:</span> <span class="sb">`# gmail &amp;mdash; less secured`</span>
+
+<span class="w">    </span><span class="k">53.</span> on line <span class="ni">#467:</span> <span class="sb">`Sending username and pwd to login in Gmail will be blocked. A couple`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/strange fate.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#26:</span> <span class="sb">`KANDULA.VENKATA NARENDRA REDDY &lt;bugbounty10378@gmail.com&gt;`</span>
+
+<span class="gu">## Is a reference</span>
+
+We think they are file reference or URL link. Changing a value needs cross check.
+
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/dev/mbsync.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#292:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/Trash&quot;`</span>
+
+<span class="w">    </span><span class="k">2.</span> on line <span class="ni">#299:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/All Mail&quot;`</span>
+
+<span class="w">    </span><span class="k">3.</span> on line <span class="ni">#306:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/Sent Mail&quot;`</span>
+
+<span class="w">    </span><span class="k">4.</span> on line <span class="ni">#313:</span> <span class="sb">`Master :gmail-remote:&quot;[Gmail]/Starred&quot;`</span>
+
+<span class="gu">## Is an email address</span>
+
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/dev/mbsync.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#237:</span> <span class="sb">`User yours@gmail.com`</span>
+<span class="k">-</span><span class="w"> </span>/home/fengxia/workspace/myblog/content/thoughts/strange fate.md
+
+<span class="w">    </span><span class="k">1.</span> on line <span class="ni">#26:</span> <span class="sb">`KANDULA.VENKATA NARENDRA REDDY &lt;bugbounty10378@gmail.com&gt;`</span>
+</code></pre></div>
+
+<p>Pretty cool, huh!?</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2018-04-15
+
+
+    <a class="wave-effect" href="rh.html">
+      <i class="fa fa-folder-open-o"></i>
+      rh
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Satellite</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>These notes are based on Satellite 6.3. There are minor difference
+between 6.2 and 6.3. Grasp the concept here, and hopefully you will
+have a good understanding of the Satellite models and procedures.</p>
+<h1>Architecture</h1>
+<ol>
+<li><strong>One</strong> satellite server (master server), and <strong>1+</strong> capsule servers.</li>
+<li>The Satellite Server is required to connect to Red Hat
+   Customer Portal &larr; main source of RH packags, errata,
+   Puppet modules.</li>
+<li>The Satellite Server organizes the life cycle management by
+   using <code>organizations</code> as principal division units &larr; one
+   subscription manifest per org.</li>
+<li><code>org</code> &rarr; <code>location</code> creates a matrix &rarr; 
+   3 org and 4 location will create <code>3x4=12</code> management contexts.</li>
+<li><code>location</code> is then tied to a capsule server (isolated).</li>
+<li>Info flow: external source &rarr; main server &rarr; capsule
+    server &rarr; managed host.</li>
+</ol>
+<p><img src="images/rh%20satellite%20overall%20architecture%20official.png"
+     class="col s12"></p>
+<h1>Content view</h1>
+<ol>
+<li><code>Content Views</code> are subsets of content from the <code>Library</code> (master copy of all contents).</li>
+<li>Multiple content views can be applied to one capsule server.</li>
+<li><code>Content Views</code> can be combined to create <code>Composite Content Views</code>.</li>
+<li>Composite view is just a grouping. Individual content view, once
+   updated, shall still be promoted, but the composite shell does not
+   need to be changed. So from its consumer's POV, it sees the change
+   transparently.</li>
+</ol>
+<p><img src="images/rh%20satellite%20content%20view.png"
+     class="col s12"></p>
+<h1>RH subscription model</h1>
+<p>The center piece of Satellite is RH subscription. This is how
+user/client can run <code>yum install &lt;pkg name&gt;</code> in RHEL. There can be
+multiple sources for you. In this discussion, we only distinguish them
+between on-premise <code>Satellite</code> source vs. everything else. </p>
+<h2>what is my source?</h2>
+<p>In RHEL, it's easy to find out which source you are pulling these rpms
+from. Look at <code>/etc/yum.repo.d/redhat.repo</code>:</p>
+<div class="highlight"><pre><span></span><code>For<span class="w"> </span>example:
+<span class="o">[</span>rhel-7-server-openstack-11-devtools-debug-rpms<span class="o">]</span>
+<span class="nv">metadata_expire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">86400</span>
+<span class="nv">sslclientcert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/pki/entitlement/2890837266996509363.pem
+
+<span class="c1">#####</span>
+<span class="nv">baseurl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>https://cdn.redhat.com/content/dist/rhel/server/7/7Server/<span class="nv">$basearch</span>/openstack-devtools/11/debug
+<span class="c1">#####</span>
+
+<span class="nv">ui_repoid_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>basearch
+<span class="nv">sslverify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Red<span class="w"> </span>Hat<span class="w"> </span>OpenStack<span class="w"> </span>Platform<span class="w"> </span><span class="m">11</span><span class="w"> </span>Developer<span class="w"> </span>Tools<span class="w"> </span><span class="k">for</span><span class="w"> </span>RHEL<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="o">(</span>Debug<span class="w"> </span>RPMs<span class="o">)</span>
+<span class="nv">sslclientkey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/pki/entitlement/2890837266996509363-key.pem
+<span class="nv">gpgkey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+<span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="nv">sslcacert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/rhsm/ca/redhat-uep.pem
+<span class="nv">gpgcheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+
+<p>You see the <code>baseurl</code> points to <code>cdn.redhat.com</code>. This is the
+catch-all Redhat source, meaning you are pulling things directly from
+Red Hat.</p>
+<p>On a Satellite client, instead, you will something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>Lenovo_IBB_Lenovo_Yum_Repo_Lenovo_yum_repo_SLES11SP4_Default<span class="o">]</span>
+<span class="nv">metadata_expire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">sslclientcert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/pki/entitlement/3451950880933034925.pem
+
+<span class="c1">#####</span>
+<span class="nv">baseurl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>https://brain4-satellite.labs.lenovo.com/pulp/repos/Lenovo_IBB/...........
+<span class="c1">#####</span>
+
+<span class="nv">sslverify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Lenovo<span class="w"> </span>yum<span class="w"> </span>repo<span class="w"> </span>SLES11SP4_Default
+<span class="nv">sslclientkey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/pki/entitlement/3451950880933034925-key.pem
+<span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">sslcacert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/rhsm/ca/katello-server-ca.pem
+<span class="nv">gpgcheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+
+<p>For this one, <code>baseurl</code> is pointing to a Satellite server named
+<code>brain4-satellite.labs.lenovo.com</code>. Note that the <code>.pem</code> (<code>sslcacert</code>)
+is tied to a particular server (as url is in <code>https</code>!). Therefore, it
+is possible to switch source from Satellite A to Satellite B (see
+another section below), but cert
+needs to be switched together with url.</p>
+<h2>Am I registered?</h2>
+<p>From <a href="https://access.redhat.com/sites/default/files/video/files/summit2015-lightning_talk-subscription-manager.pdf">talk</a>, on a RHEL system, <code>ls /etc/pki/product</code>:</p>
+<ol>
+<li><code>69.pem</code>: identifies this as a RHEL system, no registration.</li>
+<li><code>cert.pem</code> and <code>key.pem</code>: created when you registered the system.</li>
+<li><code>&lt;a long digit string&gt;.pem</code>: certificates for subscriptions that
+   have been attached to this system.</li>
+</ol>
+<h2>Subscription model</h2>
+<p>From bottom up,
+<code>package</code>&rarr;<code>repo</code>&rarr;<code>product</code>&rarr;<code>subscription</code> forms the
+core, each pair has a <code>1-N</code> relationship;
+<code>subscription</code>&rarr;<code>entitlement</code> has a <code>1-1</code> relationship. From these
+one can derive how many <em>copies</em> (<code>entitlements</code>) one can use, and
+last, <code>contract</code> defines time &larr; expiration dates. In its
+simpliest term, a VM consumes <strong>1 entitlement of a subscription</strong>. So
+if you assign <code>10 entitlements</code> to, say <code>RH Enterprise Linux</code>
+subscription (which as basic RHEL OS rpms), it will support 10 RHEL
+VM, and your 11th one will fail to do even <code>yum update</code>.</p>
+<figure class="col s12 center">
+  <img src="images/rh%20subscription%20model.png"/>
+  <figcaption>RH subscription model</figcaption>
+</figure>
+
+<ol>
+<li>
+<p>A <code>package</code> is a <a href="https://en.wikipedia.org/wiki/Rpm_(software)"><code>rpm</code></a> (<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-rpm">ref</a>). Essentially <code>package</code> is
+   a name, eg, <code>libgnomeuimm</code>, where then there is a file named
+   <code>libgnomeuimm....rpm</code>. But <code>RPM</code> can
+   refer to both. So use this term with caution. <code>.rpm</code> file has
+   format: <code>&lt;name&gt;-&lt;version&gt;-&lt;release&gt;.&lt;architecture&gt;.rpm</code></p>
+</li>
+<li>
+<p>Satellite supports 5 types of repos:</p>
+<ol>
+<li><strong>yum</strong>: RH native repos are in this bucket. So are things like
+   <a href="https://archive.fedoraproject.org/pub/epel/7Server/x86_64/">Fedora EPEL</a>. The key is the <code>/repodata</code> folder which
+   represents meta data for this yum repo.</li>
+<li><strong>file</strong>: One can upload any file to Satellite server. Satellite
+   will create a URL and function as a regular HTTP server &rarr;
+   client can just <code>wget</code> it from that.</li>
+<li><strong>OSTree</strong>: These are OS images flattened on a file system.</li>
+<li><strong>Docker</strong>: TBD</li>
+<li><strong>Puppet</strong>: TBD</li>
+</ol>
+</li>
+<li>
+<p>Product: is a grouping of repos (so one can put it on a brochure).</p>
+</li>
+<li>
+<p>Subscription: is an umbrella term that covers not only the products
+   one bought, but also service, patch, bug fix, and so forth
+   (<a href="https://www.redhat.com/en/about/subscription-model-faq#?">ref</a>). It's the unit of software <strong>purchased</strong> from Red Hat.</p>
+<p>Subscription does come with a license, which, once installed, is
+with the system for life time. So even subscription expires, the
+system that uses these subscriptions are still functional. The
+difference being that once it's expired, you will stop receiving
+updates, service, and so on (so it's like <code>rpms</code> frozen in time).</p>
+<p>There are 2 types of subscriptions to consider: <strong>standard</strong> and
+<strong>instance-based</strong>.</p>
+<ol>
+<li>standard: qty <code>1-N</code>, and doesn't matter deployment is BM or
+VM, always consumed 1.</li>
+<li>instance-based: qty <code>1-N</code>, BM and VM consumes different
+amount (see "Entitle accounting" below for more details.)</li>
+</ol>
+</li>
+<li>
+<p>Entitlement: essentially a total number that how many clients can
+   one subscription allows. For this, we need to do some accounting.</p>
+</li>
+</ol>
+<h2>Entitlement accounting</h2>
+<h3>how many we have</h3>
+<p>From <a href="https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf">Red Hat Subscription and Entitlement Accounting (pdf)</a>:</p>
+<blockquote>
+<p>In implementation, the subscription service (Customer Portal for
+hosted connectivity or Satellite 6 for on-premise connectivity)
+converts each subscription into a “pool​” of individual entitlements
+that can be attached to an end-system. The attachment process
+“consumes​” an entitlement from the pool thereby “entitling” the
+end-system to access content stores.</p>
+</blockquote>
+<p>The <a href="https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf">pdf</a> has a clear example to describe this. In a nutshell,</p>
+<div class="highlight"><pre><span></span><code><span class="nv">entitlements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>subscription<span class="w"> </span>qty<span class="w"> </span>*<span class="w"> </span>entitlement<span class="w"> </span>qty/sub<span class="w"> </span>*<span class="w"> </span>instance<span class="w"> </span>multiplier
+</code></pre></div>
+
+<figure class="col s12 center">
+  <img src="images/rh%20entitlement%20accounting.png"/>
+</figure>
+
+<h3>how many we are using</h3>
+<p>Now, how are entitlement consumed? From <a href="https://access.redhat.com/sites/default/files/attachments/subscriptionandentitlementaccounting-v1.1.pdf">Red Hat Subscription and
+Entitlement Accounting (pdf)</a>:</p>
+<blockquote>
+<p>Each subscription has a consumption rule that determines the number of
+entitlements (rate) that are consumed from a pool to cover the
+end-system.​ The consumption rule depends on several factors including:
+the subscriptions type, the “unit of capacity​” the subscription covers
+(e.g.  sockets, ram, cores), and the deployed system type (physical or
+virtual); thus the consumption rate is governed by the following
+statements:</p>
+<ol>
+<li>“Standard” subscriptions consumed entitlements at a rate of:<ol>
+<li>One per each virtual system deployment</li>
+<li>One per unit of capacity on the physical system</li>
+</ol>
+</li>
+<li>“Instance-based” subscriptions consumed entitlements at a rate of:<ol>
+<li>One per each virtual system deployment</li>
+<li>The “instance multiplier” per unit of capacity on the physical system.
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>So to simply things, if we are looking at VM primarily, <strong>1
+entitlement per VM</strong>. Period.</p>
+<h3>Manifest</h3>
+<p>Satellite has no entitlement to use. The pool is under a user account
+and can be managed in Customer Portal. With the knowledge of
+subscription tyeps, we can create a <code>Subscription Allocation</code> which
+then can be exported into a <code>manifest</code> file. Satellite can import this
+file to establish its entitlement pool.</p>
+<p>Once you have created a <code>subscription allocation</code>, export manifest
+file to your computer, and see <a href="https://access.redhat.com/solutions/1256693">ref</a>:</p>
+<ol>
+<li>Download manifest from Customer Portal (screenshot).</li>
+<li><code>scp</code> it to Satellite server.</li>
+<li>On satellite server, <code>hammer -u &lt;sa user&gt; -p &lt;sa pwd&gt; subscription upload --file
+   &lt;manifest zip&gt; --organization "&lt;org name&gt;"</code></li>
+</ol>
+<p>If getting an error <code>A backend service [ Candlepin ] is unreachable</code>,
+see <a href="https://access.redhat.com/solutions/1270233">ref</a>:</p>
+<ol>
+<li><code>service tomcat6 status</code>, likely is in error.</li>
+<li><code>service tomcat6 start</code>, then check status again, should be fine.</li>
+<li>Run <code>hammer</code> upload again. This takes a while for a file size of
+   only 300+k. Don't panic.</li>
+<li>Now go to <code>Content</code>/<code>Red Hat Repositories</code>, it will list repos. </li>
+</ol>
+<h3>Refresh subscription if allocation changed</h3>
+<p>If we change subscriptions in the allocation using Portal (add/remove
+subscriptions), we need to SSH back to Satellite server machine, and
+<strong>refresh manifest</strong>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>hammer<span class="w"> </span>subscription<span class="w"> </span>refresh-manifest<span class="w"> </span>--organization<span class="w"> </span><span class="s2">&quot;&lt;org name&gt;&quot;</span>
+</code></pre></div>
+
+<h1>Enable/disable repo</h1>
+<p>See <a href="https://access.redhat.com/solutions/265523">ref</a>. On Satellite server:</p>
+<div class="highlight"><pre><span></span><code>subscription-manager<span class="w"> </span>repos<span class="w"> </span>--list
+subscription-manager<span class="w"> </span>repos<span class="w"> </span>--enable<span class="o">=[</span>repo<span class="w"> </span>name<span class="o">]</span>
+subscription-manager<span class="w"> </span>repos<span class="w"> </span>--disable<span class="o">=[</span>repo<span class="w"> </span>name<span class="o">]</span>
+</code></pre></div>
+
+<h1>Register a client to SA server</h1>
+<figure class="col s12 center">
+  <img class="img-responsive"
+       src="images/katello%20ca.png" />
+  <figcaption>Download `katello ca` from Satellite 6.3 server</figcaption>
+</figure>
+
+<p>Two ways to register: activation key, or to an environment.</p>
+<h2>register with activation keys</h2>
+<p>On Satellite UI:</p>
+<ol>
+<li>create activation key: It asks to select an <code>environment</code> and a
+   <code>content view</code>. By default, 6.3 server has a default <code>environment</code>
+   called <code>Library</code>, which includes every subscriptions this SA knows
+   about, and a content view <code>Default content view</code>, again a catch all
+   version.</li>
+<li>Go to <code>http://&lt;sa server IP or FQDN&gt;/pub/</code>, and copy address of
+   <code>katello-ca-consumer-latest.noarch.rpm</code>.</li>
+</ol>
+<p>On client machine:</p>
+<ol>
+<li>
+<p>Make sure it has a host name (hint: <code>/etc/hosts</code>, and
+   <code>/etc/sysconfig/network</code>).</p>
+<p>If DNS is not resolving SA server's name, you can add it manually
+to <code>/etc/hosts</code>. For example, SA server is at
+<code>brain4-satellite.labs.lenovo.com</code> with IP <code>192.168.1.100</code>, and the
+machine you are to register will be <code>client1.labs.lenovo.com</code> with
+IP <code>192.168.1.200</code>, simply add two lines in <code>/etc/hosts</code>:</p>
+<div class="highlight"><pre><span></span><code>```shell
+In /etc/hosts:
+192.168.1.100 brain4-satellite.labs.lenovo.coom
+192.168.1.200 client1.labs.lenovo.com
+```
+</code></pre></div>
+
+<p>Then restart network services:</p>
+<div class="highlight"><pre><span></span><code>```shell
+systemctl start chronyd
+systemctl enable chronyd
+systemctl start rhsmcertd
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Download <code>katello-ca...rpm</code>, eg. <code>curl -O &lt;link copied above&gt;</code>
+   (Note: it is a capital O as oliver).</p>
+</li>
+<li>Install, <code>rpm -Uvhi --force katello-ca...rpm</code>.</li>
+<li>Register, <code>subscription-manager register --org="&lt;org name&gt;"
+   --activationkey="&lt;key name&gt;"</code>.</li>
+<li>Verify, <code>subscription-manager repos --list</code>.</li>
+<li>Go to Satellite UI <code>hosts/content hosts</code>, you should see this
+   machine's host name.</li>
+</ol>
+<h1>How contents are used</h1>
+<p>It is actually quite confusing how to use it. I think the biggest
+pitfall is the mixed use of <code>product</code>, <code>sub</code>, <code>repo</code> on different
+page:</p>
+<ol>
+<li>For content view, you are to select by <code>repo</code> &larr; same product
+   can have two versions of the same "thing", eg. RedHat OpenStack
+   product can have two repos: <code>Red Hat OpenStack Platform 13 for RHEL
+   7 RPMs x86_64</code> (OSP 13), and <code>Red Hat OpenStack Platform 10 for
+   RHEL 7 RPMs x86_64 7Server</code> (OSP 10) at the same time! But from
+   OSP's POV, these two version are <strong>not compatible</strong>!</li>
+<li>For environment, you don't get to choose either content view or
+   repo. You get whatever content views give you, and each environment
+   can have N content views.</li>
+<li>For activation key, you are to add by <code>subsctiption</code>, and you can
+   <strong>manually</strong> enable/disable by repo. So following the OSP example above, if
+   you have added both OSP 10 and OSP 13 to the same content view,
+   then this key, which is a (content view, env) combo, will inherit
+   both repos. Well, you can then go in to disable one, but that is
+   hard to manage, don't you think. <strong>It's better you separate them in
+   content view first.</strong></li>
+</ol>
+<figure class="col s12 center">
+  <img class="img-responsive"
+       src="images/rh%20satellite%20content%20hiearchy.png" />
+  <figcaption>Satellite content hierarchy</figcaption>
+</figure>
+
+<h1>See also</h1>
+<ol>
+<li><a href="https://access.redhat.com/articles/2258471"><code>hammer</code> cheatsheet</a></li>
+<li><a href="https://access.redhat.com/sites/default/files/attachments/rh_sm_command_cheatsheet_1214_jcs_print.pdf"><code>subscription-manager</code> cheatsheet</a></li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.2/pdf/Installation_Guide/Red_Hat_Satellite-6.2-Installation_Guide-en-US.pdf">Satellite 6.2 installation PDF</a></li>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_satellite/6.3/pdf/installation_guide/Red_Hat_Satellite-6.3-Installation_Guide-en-US.pdf">Satellite 6.3 installation PDF</a></li>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html-single/using_subscription_asset_manager/index">subscription manager</a>, a nice description of Satellite workflow</li>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/10/html-single/director_installation_and_usage/#sect-Repository_Requirements">Openstack repo requirements</a></li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/SSCR9A_2.2.0/doc/iwd/c_redhat_satlitesrv_standup.html">IBM doc on Satellite</a></li>
+<li><a href="https://linux.lenovo.com/yum/">Lenovo Yum repo</a></li>
+<li><a href="https://www.redhat.com/en/about/subscription-model-faq#?">Red Hat Subscription Model FAQ</a></li>
+</ol></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

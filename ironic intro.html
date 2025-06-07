@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-03-15
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Openstack Ironic</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>This article is an outcome of my writing a Juju-Ironic provider. The
+plan was to first figure out Ironic APIs that will achieve what Juju
+provider needs &mdash; start an instance on demand, then build those
+REST requests into Juju provider code. After playing with Ironic API
+and Openstack's Devstack for two weeks, I start to realize that Ironic
+by itself doesn't do much. Instead, it heavily relies on other
+Openstack services to provision a baremetal &mdash; Keystone to
+generate a token which will be used in all HTTP calls, Neutron to
+provide network/<em>port</em>, Ironic itself to manage a <em>node</em>, Glance to
+get kernel image, ramdisk image, and actual OS image, and Nova to
+<em>orchestrate</em> these information for Ironic API to consume.</p>
+<p>Ironic <a href="https://docs.openstack.org/developer/ironic/deploy/user-guide.html">user guide</a> has some good information on basic technology
+and Ironic design. A <a href="https://www.openstack.org/videos/vancouver-2015/isn-and-039t-it-ironic-the-bare-metal-cloud">talk</a> &amp; <a href="https://github.com/devananda/talks/blob/master/isnt-it-ironic.html">slides</a> by <a href="https://github.com/devananda">devananda</a> on 2015
+Vancouver Summit is also a good point to start.</p>
+<p>In the following sections I'd like to use the questions I have
+encountered in research to create a newbie-oriented tutorial on
+Ironic. In particular, I'd like to illustrate a few Ironic internals
+to show what "managing baremetal" is actually doing.</p>
+<h1>Ironic introduction</h1>
+<figure class="s12 center">
+    <img src="images/ironic_design.png" />
+    <figcaption>Ironic design (<a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/9/html-single/architecture_guide/#comp-ironic">source</a>)</figcaption>
+</figure>
+
+<p>Ironic has three components:</p>
+<ol>
+<li>Ironic <a href="https://developer.openstack.org/api-ref/baremetal/">RESTful API</a></li>
+<li>Ironic conductor: its runtime core</li>
+<li>Ironic CLI (<a href="https://github.com/openstack/python-ironicclient">python-ironicclient</a>)</li>
+</ol>
+<p>There are two other Ironic related projects that, though optional,
+should be included in our discussion also because they play an
+important role in Ironic's workflow: <a href="https://docs.openstack.org/developer/ironic-python-agent/#how-it-works">Ironic Python Agent</a> and
+<a href="https://docs.openstack.org/developer/ironic/deploy/inspection.html">Ironic Inspector</a>.</p>
+<p>Since it stores meta data in a DB, let's take a look at its DB schema:</p>
+<figure class="s12 center">
+    <img src="images/ironic_db_er.png" />
+    <figcaption>Ironic ER diagram</figcaption>
+</figure>
+
+<h1>Create a node = Enroll hardware</h1>
+<blockquote>
+<p>API: <a href="https://developer.openstack.org/api-ref/baremetal/?expanded=show-v1-api-detail,create-node-detail,delete-node-detail,change-node-power-state-detail,list-attached-vifs-of-a-node-detail,agent-heartbeat-detail#create-node">POST v1/nodes</a></p>
+</blockquote>
+<p>Everything starts with creating a node. Ironic node is an abstract
+representation of a baremetal. Creating a node is simply adding
+certain node's parameters to Ironic DB. The term "enrolling hardware"
+(or enrolling a node) can be used interchangeably because it involves
+no image or system running on the node. Whether using <a href="https://github.com/openstack/python-ironicclient">Ironic Python
+Client</a> to import JSON, or using CLI <code>openstack baremetal node
+create</code>, it achieves the same thing &mdash; eventually the command
+chain will call Ironic's API endpoint <a href="https://developer.openstack.org/api-ref/baremetal/?expanded=show-v1-api-detail,create-node-detail,delete-node-detail,change-node-power-state-detail,list-attached-vifs-of-a-node-detail,agent-heartbeat-detail#create-node">POST /v1/nodes</a>.</p>
+<p>An example snippet to create node in Devstack is shown below. We will
+go over details of the input arguments in the next section. <font
+color="red">Note</font>: you must specify the
+<code>X-OpenStack-Ironic-API-Version</code> value in HTTP header.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_node</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">chassis</span><span class="p">,</span> <span class="n">driver_info</span><span class="p">,</span> <span class="n">instance_info</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
+    <span class="c1"># Ironic API: create a node</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://</span><span class="si">%s</span><span class="s1">:6385/v1/nodes&#39;</span> <span class="o">%</span> <span class="n">DEVSTACK_SERVER</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;X-Auth-Token&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">token</span><span class="p">,</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;X-OpenStack-Ironic-API-Version&#39;</span><span class="p">:</span> <span class="mf">1.9</span>  <span class="c1"># must have!</span>
+    <span class="p">}</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;chassis_uuid&#39;</span><span class="p">:</span> <span class="n">chassis</span><span class="p">,</span>
+        <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="s2">&quot;agent_ipmitool&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">randomword</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+        <span class="s2">&quot;driver_info&quot;</span><span class="p">:</span> <span class="n">driver_info</span><span class="p">,</span>
+        <span class="s1">&#39;instance_info&#39;</span><span class="p">:</span> <span class="n">instance_info</span><span class="p">,</span>
+        <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="n">properties</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span>
+        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+    <span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Node details</h2>
+<blockquote>
+<p>API: <a href="https://developer.openstack.org/api-ref/baremetal/?expanded=show-v1-api-detail,delete-node-detail,change-node-power-state-detail,list-attached-vifs-of-a-node-detail,agent-heartbeat-detail#show-node-details">GET v1/nodes/{node_ident}</a></p>
+</blockquote>
+<p>Unfortunately, Ironic's <a href="https://developer.openstack.org/api-ref/baremetal/">API document</a> does not specify which
+field is required. You can <em>create</em> a node without giving it much
+information. Again, the creation does nothing besides creating a
+record in Ironic DB. Run <code>openstack baremetal node show [node_uuid]</code>
+displays details of a node.</p>
+<figure class="s12 center">
+    <img src="images/ironic_node_show.png" />
+    <figcaption>Details of a provisioned node</figcaption>
+</figure>
+
+<ol>
+<li><code>name</code> (<font color="red">required</font>): well, a name.</li>
+<li><code>driver</code> (<font color="red">required</font>): we will discuss more
+   about Ironic drivers. This defines which Ironic driver to use.</li>
+<li>
+<p><code>driver_info</code> (<font color="red">required</font>): All the metadata
+   required by the driver to manage this Node. List of fields varies
+   between drivers, and can be retrieved from the
+   /v1/drivers/<DRIVER_NAME>/properties resource.
+   For example, for <code>_ipmi</code> drivers, one needs:   </p>
+<ul>
+<li><code>ipmi_port</code></li>
+<li><code>ipmi_username</code>  in devstack, default to "admin"</li>
+<li><code>ipmi_password</code>: in devstack, default to "password"</li>
+<li><code>ipmi_address</code>: </li>
+<li><code>deploy_kernel</code>: in devstack, it is "ir-deploy-agent_ipmitool.kernel".</li>
+<li><code>deploy_ramdisk</code>: in devstack, it is "ir-deploy-agent_ipmitool.initramfs"</li>
+</ul>
+<p>Example payload:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="n">driver_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s1">&#39;ipmi_port&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">6230</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;ipmi_username&#39;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;deploy_kernel&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">ir</span><span class="o">-</span><span class="n">deploy</span><span class="o">-</span><span class="n">agent_ipmitool</span><span class="o">.</span><span class="n">kernel</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;deploy_ramdisk&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">ir</span><span class="o">-</span><span class="n">deploy</span><span class="o">-</span><span class="n">agent_ipmitool</span><span class="o">.</span><span class="n">initramfs</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;ipmi_address&#39;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.0.2.15&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;ipmi_password&#39;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;password&quot;</span>
+<span class="p">}</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p><code>driver_internal_info</code> (read-only): this field is not accessible
+   via API. Used by driver to store internal information.</p>
+</li>
+<li><code>agent_url</code>: this is the callback URL to the Ironic Python Agent
+     (IPA) running on the node (when an agent ramdisk image is
+     selected). We will cover more of IPA later. The value is filled
+     in when the IPA calls Ironic's <code>/v1/heartbeat</code> endpoint.</li>
+<li>
+<p><code>instance_info</code>: is populated when the node is
+   provisioned. However, user can also set this field through API.</p>
+<p>Example payload:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="nx">shell</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="s">&quot;ramdisk&quot;</span><span class="p">:</span><span class="s">&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;kernel&quot;</span><span class="p">:</span><span class="s">&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_source&quot;</span><span class="p">:</span><span class="s">&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;ephemeral_gb&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_properties&quot;</span><span class="p">:{</span>
+<span class="w">      </span><span class="s">&quot;kernel_id&quot;</span><span class="p">:</span><span class="s">&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;ramdisk_id&quot;</span><span class="p">:</span><span class="s">&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;virtual_size&quot;</span><span class="p">:</span><span class="nx">null</span>
+<span class="w">   </span><span class="p">},</span>
+<span class="w">   </span><span class="s">&quot;preserve_ephemeral&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;ephemeral_mb&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;local_gb&quot;</span><span class="p">:</span><span class="s">&quot;10&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_disk_format&quot;</span><span class="p">:</span><span class="s">&quot;ami&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_checksum&quot;</span><span class="p">:</span><span class="s">&quot;eb9139e4942121f22bbc2afc0400b2a4&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;nova_host_id&quot;</span><span class="p">:</span><span class="s">&quot;devstack&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;ephemeral_format&quot;</span><span class="p">:</span><span class="nx">null</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;root_gb&quot;</span><span class="p">:</span><span class="s">&quot;10&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;display_name&quot;</span><span class="p">:</span><span class="s">&quot;tt1&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;configdrive&quot;</span><span class="p">:</span><span class="nx">null</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_type&quot;</span><span class="p">:</span><span class="s">&quot;partition&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_tags&quot;</span><span class="p">:[</span>
+<span class="w">   </span><span class="p">],</span>
+<span class="w">   </span><span class="s">&quot;memory_mb&quot;</span><span class="p">:</span><span class="s">&quot;1280&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;vcpus&quot;</span><span class="p">:</span><span class="s">&quot;1&quot;</span><span class="p">,</span><span class="w">           </span><span class="s">&quot;image_url&quot;</span><span class="p">:</span><span class="s">&quot;http://10.0.2.15:8080/v1/AUTH_dbace9b9b039429ab5c2c3e43817ced2/glance/9794e5b3-b3f1-403c-b37a-19c7e07cca4a?temp_url_sig=da4154125d9011e2768bd5591b4d93c217f27d8b&amp;temp_url_expires=1488585783&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;image_container_format&quot;</span><span class="p">:</span><span class="s">&quot;ami&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;root_mb&quot;</span><span class="p">:</span><span class="mi">10240</span><span class="p">,</span>
+<span class="w">   </span><span class="s">&quot;swap_mb&quot;</span><span class="p">:</span><span class="mi">0</span>
+<span class="p">}</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p><code>properties</code> (<font color="red">required</font>): Physical
+   characteristics of this Node. Populated by ironic-inspector during
+   inspection. Can also be set via the REST API at any time. These
+   values are used by NOVA to match flavor &mdash; an important aspect
+   of <em>baremetal management</em> is to filter what a workload wants
+   vs. what we have, and the values in <code>properties</code> define what we
+   have.</p>
+<p>Example payload:</p>
+<div class="highlight"><pre><span></span><code>```shell
+properties = {
+    &#39;cpus&#39;: 1,
+    &#39;memory_mb&#39;: 1280,
+    &#39;local_gb&#39;: 10,
+    &#39;cpu_arch&#39;: &#39;x86_64&#39;,
+    &#39;capabilities&#39;: &#39;memory_mb:1280,local_gb:10,cpu_arch:x86_64,cpus:1,boot_option:local&#39;
+}
+```
+</code></pre></div>
+
+</li>
+</ol>
+<p>The rest of the fields are self-explanatory so I'll skip them for now.</p>
+<h1>Hardware inventory</h1>
+<p>Hardware inventory is to collect characteristics such as the number of
+CPUs, memory size, disk partition, MAC address and so on. There are
+two ways to collect these: out-of-band and in-band. In-band inspection
+involves booting an OS on the target node and fetching information
+directly from it. This process is more fragile and time-consuming than
+the out-of-band inspection, but it is not vendor-specific and works
+across a wide range of hardware.; out-of-band, on the other hand, does
+not involve an OS. Instead, information is collected by a built-in BMC
+controllera on the baremetal box and are then queried through the
+box's IPMI interface.</p>
+<p>So translate these into Ironic, it has two ways to inventory hardware:</p>
+<ol>
+<li>IPA's <a href="https://docs.openstack.org/developer/ironic-python-agent/#hardware-managers">hardware manager</a> &mdash; in-band only. <a href="https://docs.openstack.org/developer/ironic-python-agent/#how-it-works">IPA</a> is a
+   Python client packaged inside a ramdisk that will be run at the
+   beginning of a provisioning process. Hardware manager is part of
+   IPA's capability. They can run together with IPA to collect node
+   information.</li>
+<li><a href="https://docs.openstack.org/developer/ironic/deploy/inspection.html">Ironic Inspector</a> &mdash; in-band and out-of-band. Inspector is
+   a separate service running outside the target node. It exposes a
+   set of <a href="https://docs.openstack.org/developer/ironic-inspector/http-api.html#">API</a>. When caller sends request to its endpoint <code>POST
+   /v1/introspection/&lt;node_indent&gt;</code>, inspector uses the UUID to
+   extract node's <code>drive_info</code> from Ironic DB. With the IPMI
+   credentials it can now query node info from BMC as well controlling
+   its power cycle if it chooses to run a ramdisk as <a href="https://docs.openstack.org/developer/ironic/deploy/inspection.html#in-band-inspection">in-band
+   method</a>.</li>
+</ol>
+<h1>Image [TBD]</h1>
+<p>Two types of images: deploy image and user image. Plenty blogs showing
+how to make them. But I'd like to have an explanation what they are
+and how they are used.</p>
+<p>Devstack image list:</p>
+<div class="highlight"><pre><span></span><code>+--------------------------------------+------------------------------------+--------+
+<span class="p">|</span><span class="w"> </span>ID<span class="w">                                   </span><span class="p">|</span><span class="w"> </span>Name<span class="w">                               </span><span class="p">|</span><span class="w"> </span>Status<span class="w"> </span><span class="p">|</span>
++--------------------------------------+------------------------------------+--------+
+<span class="p">|</span><span class="w"> </span>94e2055e-fcb3-4c2e-a547-918450b060a1<span class="w"> </span><span class="p">|</span><span class="w"> </span>Fedora-Cloud-Base-25-1.3.x86_64<span class="w">    </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>8a1a67b7-4875-457d-9242-16df4c537095<span class="w"> </span><span class="p">|</span><span class="w"> </span>cirros-0.3.4-x86_64-disk<span class="w">           </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>9794e5b3-b3f1-403c-b37a-19c7e07cca4a<span class="w"> </span><span class="p">|</span><span class="w"> </span>cirros-0.3.4-x86_64-uec<span class="w">            </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>ef538456-704c-445c-a98b-c081be22ad71<span class="w"> </span><span class="p">|</span><span class="w"> </span>cirros-0.3.4-x86_64-uec-kernel<span class="w">     </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>1a243f7b-3e96-4140-8408-b82064599cec<span class="w"> </span><span class="p">|</span><span class="w"> </span>cirros-0.3.4-x86_64-uec-ramdisk<span class="w">    </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>9eb37c5a-3021-4eea-93b7-66922eb89152<span class="w"> </span><span class="p">|</span><span class="w"> </span>ir-deploy-agent_ipmitool.initramfs<span class="w"> </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>8d255ece-d66c-43a5-8043-5a6ce8bea4f2<span class="w"> </span><span class="p">|</span><span class="w"> </span>ir-deploy-agent_ipmitool.kernel<span class="w">    </span><span class="p">|</span><span class="w"> </span>active<span class="w"> </span><span class="p">|</span>
++--------------------------------------+------------------------------------+--------+
+</code></pre></div>
+
+<h1>Ironic deploy method: agent &amp; PXE</h1>
+<p>Ironic offers two deploy methods: agent (<a href="https://docs.openstack.org/developer/ironic-python-agent/#how-it-works">Ironic Python Agent
+(IPA)</a>) and PXE. The agent-based deploy method came from
+<a href="https://journal.paul.querna.org/articles/2014/07/02/putting-teeth-in-our-public-cloud/">Rackspace</a> and was [blueprinted].</p>
+<h2>Ironic Agent (IPA)</h2>
+<p>Agent method means to boot a specially made ramdisk image on
+baremetal. Agent will run as <code>systemd</code> service.  The magic is that
+agent knows where the Ironic API is. So it will <strong>lookup</strong> itself by
+sending Ironic API its MAC address. Ironic will send back the node
+UUID. From that point on, IPA will ping home (hearbeat) periodically
+(using UUID) until Ironic commands it to do something. Part of the
+hearbeat payload is a callback URL, so apparently IPA also exposes a
+HTTP service that Ironic conductor can use for commands.</p>
+<figure class="s12 center">
+    <img src="images/ironic_ipa_sequence.png" />
+    <figcaption>Ironic Python Agent (IPA) sequence diagram</figcaption>
+</figure>
+
+<p>Quoting from the <a href="https://journal.paul.querna.org/articles/2014/07/02/putting-teeth-in-our-public-cloud/">Rackspace OnMetal blog</a>:</p>
+<blockquote>
+<p>With IPA the DHCP, PXE and TFTP configurations become the static for
+all baremetal nodes, reducing complexity. Once running, the Agent
+sends a heartbeat to the Ironic Conductors with hardware
+information. Then the Conductors can order the Agent to take
+different actions. For example in the case of provisioning an
+instance, the Conductor sends an HTTP POST to prepare_image with the
+URL for an Image, and the Agent downloads and writes it to disk
+itself, keeping the Ironic Conductor out of the data plane for an
+image download. Once the image is written to disk, the Ironic
+Conductor simply reboots the baremetal node, and it boots from disk,
+removing a runtime dependency on a DHCP or TFTP server.</p>
+</blockquote>
+<h2>Provision process &mdash; Agent</h2>
+<p>Source by <a href="https://github.com/devananda/talks/tree/master/images">devananda github</a>.</p>
+<figure class="s12 center">
+    <img     src="https://github.com/devananda/talks/blob/masterimages/deploy_with_agent.png?raw=true" />
+    <figcaption>Ironic deploy &mdash; Agent</figcaption>
+</figure>
+
+<p>The IPA server is implemented using <a href="https://pecan.readthedocs.io/en/latest/">Python Pecan</a>. The
+long-running process is <code>IronicPythonAgent</code> in
+<code>ironic_python_agent/agent.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsgi</span> <span class="o">=</span> <span class="n">simple_server</span><span class="o">.</span><span class="n">make_server</span><span class="p">(</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">listen_address</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">listen_address</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="p">,</span>
+   <span class="n">server_class</span><span class="o">=</span><span class="n">simple_server</span><span class="o">.</span><span class="n">WSGIServer</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">standalone</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_url</span><span class="p">:</span>
+   <span class="c1"># Don&#39;t start heartbeating until the server is listening</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">heartbeater</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">wsgi</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+   <span class="n">LOG</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;shutting down&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">standalone</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_url</span><span class="p">:</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">heartbeater</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div>
+
+<p>The <code>heartbeater.start()</code> is a thread that expects to receive letter
+<code>'a'</code> from Ironic and will stop upon receiving <code>'b'</code>. IPA also
+implements a RPC using the below syntax:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@base</span><span class="o">.</span><span class="n">async_command</span><span class="p">(</span><span class="s1">&#39;prepare_image&#39;</span><span class="p">,</span> <span class="n">_validate_image_info</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">image_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">configdrive</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</code></pre></div>
+
+<p>The function <code>prepare_image</code> is the key. Ironic's
+<code>xx-Agent</code> driver will call POST to IPA's endpoint
+using the string <code>prepare_image</code> as a RPC call that will 
+envoke the corresponding function on the IPA side, in this case,
+the function <code>prepare_image</code>, which is to write image to disk. The IPA
+implementation of this function is shown below. As one can see,
+it is assuming that a block device is available and it will then run a 
+<code>bash</code> script to write this image to disk. After image is written to
+disk, it can also write a bootloader (eg. grub2). Then IPA will signal
+Ironic that deploy is all done, and Ironic will go ahead to reboot the
+node &mdash; this then completes the provisioning process.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@base</span><span class="o">.</span><span class="n">async_command</span><span class="p">(</span><span class="s1">&#39;prepare_image&#39;</span><span class="p">,</span> <span class="n">_validate_image_info</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">image_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">configdrive</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Asynchronously prepares specified image on local OS install device.</span>
+<span class="sd">    In this case, &#39;prepare&#39; means make local machine completly ready to</span>
+<span class="sd">    reboot to the image specified by image_info.</span>
+<span class="sd">    Downloads and writes an image to disk if necessary. Also writes a</span>
+<span class="sd">    configdrive to disk if the configdrive parameter is specified.</span>
+<span class="sd">    :param image_info: Image information dictionary.</span>
+<span class="sd">    :param configdrive: A string containing the location of the config</span>
+<span class="sd">                        drive as a URL OR the contents (as gzip/base64)</span>
+<span class="sd">                        of the configdrive. Optional, defaults to None.</span>
+<span class="sd">    :raises: ImageDownloadError if the image download encounters an error.</span>
+<span class="sd">    :raises: ImageChecksumError if the checksum of the local image does not</span>
+<span class="sd">         match the checksum as reported by glance in image_info.</span>
+<span class="sd">    :raises: ImageWriteError if writing the image fails.</span>
+<span class="sd">    :raises: InstanceDeployFailure if failed to create config drive.</span>
+<span class="sd">         large to store on the given device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Preparing image </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">image_info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">hardware</span><span class="o">.</span><span class="n">dispatch_to_managers</span><span class="p">(</span><span class="s1">&#39;get_os_install_device&#39;</span><span class="p">)</span>
+    <span class="n">disk_format</span> <span class="o">=</span> <span class="n">image_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disk_format&#39;</span><span class="p">)</span>
+    <span class="n">stream_raw_images</span> <span class="o">=</span> <span class="n">image_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;stream_raw_images&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># don&#39;t write image again if already cached</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_image_id</span> <span class="o">!=</span> <span class="n">image_info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_image_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Already had </span><span class="si">%s</span><span class="s1"> cached, overwriting&#39;</span><span class="p">,</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">cached_image_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">stream_raw_images</span> <span class="ow">and</span> <span class="n">disk_format</span> <span class="o">==</span> <span class="s1">&#39;raw&#39;</span> <span class="ow">and</span>
+            <span class="n">image_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;image_type&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;partition&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stream_raw_image_onto_device</span><span class="p">(</span><span class="n">image_info</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache_and_write_image</span><span class="p">(</span><span class="n">image_info</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+    <span class="c1"># the configdrive creation is taken care by ironic-lib&#39;s</span>
+    <span class="c1"># work_on_disk().</span>
+    <span class="k">if</span> <span class="n">image_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;image_type&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;partition&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">configdrive</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Will use dummy value of &#39;local&#39; for &#39;node_uuid&#39;,</span>
+            <span class="c1"># if it is not available. This is to handle scenario</span>
+            <span class="c1"># wherein new IPA is being used with older version</span>
+            <span class="c1"># of Ironic that did not pass &#39;node_uuid&#39; in &#39;image_info&#39;</span>
+            <span class="n">node_uuid</span> <span class="o">=</span> <span class="n">image_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;node_uuid&#39;</span><span class="p">,</span> <span class="s1">&#39;local&#39;</span><span class="p">)</span>
+            <span class="n">disk_utils</span><span class="o">.</span><span class="n">create_config_drive_partition</span><span class="p">(</span><span class="n">node_uuid</span><span class="p">,</span>
+                                                     <span class="n">device</span><span class="p">,</span>
+                                                     <span class="n">configdrive</span><span class="p">)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;image (</span><span class="si">{}</span><span class="s1">) written to device </span><span class="si">{}</span><span class="s1"> &#39;</span>
+    <span class="n">result_msg</span> <span class="o">=</span> <span class="n">_message_format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">image_info</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">partition_uuids</span><span class="p">)</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">result_msg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_msg</span>
+</code></pre></div>
+
+<h2>Provision process &mdash; PXE</h2>
+<p>Source by <a href="https://github.com/devananda/talks/tree/master/images">devananda github</a>.</p>
+<figure class="row center">
+    <img class="s6"
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-1.png?raw=true" />
+    <img class="s6"
+    src="https://github.com/devananda/talks/blob/masterimages/pxe-deploy-2.png?raw=true" />
+    <figcaption>Ironic deploy &mdash; PXE</figcaption>
+</figure>
+
+<h1>Using NOVA API to create an instance</h1>
+<p>Using Devstack, the easiest way to start an instance is CLI command.</p>
+<div class="highlight"><pre><span></span><code>openstack<span class="w"> </span>server<span class="w"> </span>create<span class="w"> </span>--image<span class="w"> </span>9794e5b3-b3f1-403c-b37a-19c7e07cca4a<span class="w"> </span>--flavor<span class="w"> </span>baremetal<span class="w"> </span>--nic<span class="w"> </span>port-id<span class="o">=</span>22d79b92-0848-4053-ad0d-f182d02d01a0<span class="w"> </span>tt1<span class="w"> </span>--debug
+</code></pre></div>
+
+<p>Where:</p>
+<ul>
+<li><code>--image</code>: using image UUID. Here we use the <code>cirros-0.3.4-x86_64-uec</code>
+  image.</li>
+<li>
+<p><code>--flavor</code>: using <em>baremetal</em> flavor</p>
+<div class="highlight"><pre><span></span><code>```shell
++----------------------------+--------------------------------------+
+| Field                      | Value                                |
++----------------------------+--------------------------------------+
+| OS-FLV-DISABLED:disabled   | False                                |
+| OS-FLV-EXT-DATA:ephemeral  | 0                                    |
+| access_project_ids         | None                                 |
+| disk                       | 10                                   |
+| id                         | a5178caf-6b3a-49ec-ab47-a6daaf05423e |
+| name                       | baremetal                            |
+| os-flavor-access:is_public | True                                 |
+| properties                 | cpu_arch=&#39;x86_64&#39;                    |
+| ram                        | 1280                                 |
+| rxtx_factor                | 1.0                                  |
+| swap                       |                                      |
+| vcpus                      | 1                                    |
++----------------------------+--------------------------------------+
+```
+</code></pre></div>
+
+</li>
+<li>
+<p><code>--port</code>: we create a port on <em>private</em> network using Neutron API
+  <code>POST /v2.0/ports</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">python</span>
+<span class="n">def</span><span class="w"> </span><span class="n">create_port</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="n">network</span><span class="p">):</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randomword</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># Neutron: create a port</span>
+<span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://</span><span class="si">%s</span><span class="s1">:9696/v2.0/ports&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">DEVSTACK_SERVER</span>
+<span class="w">  </span><span class="n">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s1">&#39;X-Auth-Token&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">token</span><span class="p">,</span>
+<span class="w">      </span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="s1">&#39;Accept&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;network_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="n">network</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;admin_state_up&quot;</span><span class="p">:</span><span class="w"> </span><span class="n">True</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;extra_dhcp_opts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">              </span><span class="p">{</span>
+<span class="w">                  </span><span class="s1">&#39;ip_version&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;tftp-server&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_value&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;10.0.2.15&#39;</span>
+<span class="w">              </span><span class="p">},</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="s1">&#39;ip_version&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;tag:!ipxe,bootfile-name&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_value&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;undionly.kpxe&#39;</span>
+<span class="w">              </span><span class="p">},</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="s1">&#39;ip_version&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;tag:ipxe,bootfile-name&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_value&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://10.0.2.15:3928/boot.ipxe&#39;</span>
+<span class="w">              </span><span class="p">},</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                  </span><span class="s1">&#39;ip_version&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;server-ip-address&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s1">&#39;opt_value&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;10.0.2.15&#39;</span>
+<span class="w">              </span><span class="p">}],</span>
+<span class="w">          </span><span class="s2">&quot;binding:vnic_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;normal&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;device_owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;network:dhcp&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+<span class="w">      </span><span class="n">url</span><span class="p">,</span>
+<span class="w">      </span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span>
+<span class="w">      </span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="w">  </span><span class="n">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+</ul>
+<p>Now let's see how this commands utilizes various API calls:</p>
+<h2>Read basic information from Keystone</h2>
+<ul>
+<li>Service: Keystone</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/identity/v3</code></li>
+<li>HTTP header:<ol>
+<li>Accept: <code>application/json</code></li>
+<li>User-Agent: <code>osc-lib/1.3.0 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="nx">shell</span>
+<span class="p">{</span>
+<span class="s">&quot;version&quot;</span><span class="p">:{</span>
+<span class="w">      </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="s">&quot;stable&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;updated&quot;</span><span class="p">:</span><span class="s">&quot;2017-02-22T00:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;media-types&quot;</span><span class="p">:[</span>
+<span class="w">         </span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;base&quot;</span><span class="p">:</span><span class="s">&quot;application/json&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;application/vnd.openstack.identity-v3+json&quot;</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="s">&quot;v3.8&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;links&quot;</span><span class="p">:[</span>
+<span class="w">         </span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;href&quot;</span><span class="p">:</span><span class="s">&quot;http://10.0.2.15/identity/v3/&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;rel&quot;</span><span class="p">:</span><span class="s">&quot;self&quot;</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+</ul>
+<h2>Get security token</h2>
+<p>The token is in response's header <code>X-Subject-Token</code> field.
+We are using "Password authentication with scoped authorization".</p>
+<ul>
+<li>Service: Keystone</li>
+<li>Method: <code>POST</code></li>
+<li>Endpoint: <code>/identity/v3/auth/tokens</code> (<a href="https://developer.openstack.org/api-ref/identity/v3/?expanded=password-authentication-with-scoped-authorization-detail#password-authentication-with-scoped-authorization">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>Content-Type: <code>application/json</code></li>
+</ol>
+</li>
+<li>
+<p>JSON payload:</p>
+<div class="highlight"><pre><span></span><code>```shell
+{
+   &quot;auth&quot;:{
+      &quot;identity&quot;:{
+         &quot;methods&quot;:[
+            &quot;password&quot;
+         ],
+         &quot;password&quot;:{
+            &quot;user&quot;:{
+               &quot;domain&quot;:{
+                  &quot;name&quot;:&quot;Default&quot;
+               },
+               &quot;name&quot;:USERNAME,
+               &quot;password&quot;:PASSWORD
+            }
+         }
+      },
+      &quot;scope&quot;:{
+         &quot;project&quot;:{
+            &quot;domain&quot;:{
+               &quot;name&quot;:&quot;Default&quot;
+            },
+            &quot;name&quot;:PROJECT
+         }
+      }
+   }
+}
+```
+</code></pre></div>
+
+</li>
+<li>
+<p>Response: too long to paste. Not important.</p>
+</li>
+</ul>
+<h2>Get user image meta data</h2>
+<ul>
+<li>Service: <code>Glance</code></li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>Accept-Encoding: <code>gzip, deflate</code></li>
+<li>Accept: <code>*/*</code></li>
+<li>User-Agent: <code>python-glanceclient</code></li>
+<li>Connection: <code>keep-alive</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+<li>Content-Type: <code>application/octet-stream</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;active&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;cirros-0.3.4-x86_64-uec&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;tags&quot;</span>:<span class="o">[</span>
+<span class="w">   </span><span class="o">]</span>,
+<span class="w">   </span><span class="s2">&quot;kernel_id&quot;</span>:<span class="s2">&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;container_format&quot;</span>:<span class="s2">&quot;ami&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2017-03-03T22:38:57Z&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;ramdisk_id&quot;</span>:<span class="s2">&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;disk_format&quot;</span>:<span class="s2">&quot;ami&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2017-03-03T22:38:58Z&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;visibility&quot;</span>:<span class="s2">&quot;public&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;self&quot;</span>:<span class="s2">&quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;min_disk&quot;</span>:0,
+<span class="w">   </span><span class="s2">&quot;protected&quot;</span>:false,
+<span class="w">   </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;size&quot;</span>:25165824,
+<span class="w">   </span><span class="s2">&quot;file&quot;</span>:<span class="s2">&quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;checksum&quot;</span>:<span class="s2">&quot;eb9139e4942121f22bbc2afc0400b2a4&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;owner&quot;</span>:<span class="s2">&quot;3b2594f2569542f694ff346a6db7fa1e&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;virtual_size&quot;</span>:null,
+<span class="w">   </span><span class="s2">&quot;min_ram&quot;</span>:0,
+<span class="w">   </span><span class="s2">&quot;schema&quot;</span>:<span class="s2">&quot;/v2/schemas/image&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Get image schema</h2>
+<p>Gets a JSON-schema document that represents the various entities
+talked about by the Images v2 API.</p>
+<ul>
+<li>Service: Glance</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2/schemas/images</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-images-schema-detail#show-images-schema">ref</a>)</li>
+<li>HTTP header: none</li>
+<li>JSON payload: none</li>
+<li>Response: too long to paste.</li>
+</ul>
+<h2>Get flavor details</h2>
+<ul>
+<li>Service: Nova</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e</code>
+  (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>User-Agent: <code>python-novaclient</code></li>
+<li>Accept: <code>application/json</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;flavor&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;self&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;bookmark&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;ram&quot;</span>:1280,
+<span class="w">      </span><span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span>:false,
+<span class="w">      </span><span class="s2">&quot;os-flavor-access:is_public&quot;</span>:true,
+<span class="w">      </span><span class="s2">&quot;rxtx_factor&quot;</span>:1.0,
+<span class="w">      </span><span class="s2">&quot;disk&quot;</span>:10,
+<span class="w">      </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;baremetal&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;vcpus&quot;</span>:1,
+<span class="w">      </span><span class="s2">&quot;swap&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span>:0
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Get port details</h2>
+<ul>
+<li>Service: Neutron</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2.0/ports/22d79b92-0848-4053-ad0d-f182d02d01a0</code>
+(<a href="https://developer.openstack.org/api-ref/networking/v2/?expanded=show-port-details-detail#show-port-details">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>User-Agent: <code>openstacksdk/0.9.13 keystoneauth1/2.18.0 python-requests/2.12.5 CPython/2.7.12</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;port&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;DOWN&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;binding:host_id&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;description&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;allowed_address_pairs&quot;</span>:<span class="o">[</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;tags&quot;</span>:<span class="o">[</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;extra_dhcp_opts&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;opt_value&quot;</span>:<span class="s2">&quot;http://10.0.2.15:3928/boot.ipxe&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;ip_version&quot;</span>:4,
+<span class="w">            </span><span class="s2">&quot;opt_name&quot;</span>:<span class="s2">&quot;tag:ipxe,bootfile-name&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;opt_value&quot;</span>:<span class="s2">&quot;10.0.2.15&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;ip_version&quot;</span>:4,
+<span class="w">            </span><span class="s2">&quot;opt_name&quot;</span>:<span class="s2">&quot;server-ip-address&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;opt_value&quot;</span>:<span class="s2">&quot;10.0.2.15&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;ip_version&quot;</span>:4,
+<span class="w">            </span><span class="s2">&quot;opt_name&quot;</span>:<span class="s2">&quot;tftp-server&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;opt_value&quot;</span>:<span class="s2">&quot;undionly.kpxe&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;ip_version&quot;</span>:4,
+<span class="w">            </span><span class="s2">&quot;opt_name&quot;</span>:<span class="s2">&quot;tag:!ipxe,bootfile-name&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2017-03-03T23:01:48Z&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;device_owner&quot;</span>:<span class="s2">&quot;network:dhcp&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;revision_number&quot;</span>:9,
+<span class="w">      </span><span class="s2">&quot;port_security_enabled&quot;</span>:false,
+<span class="w">      </span><span class="s2">&quot;binding:profile&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="o">}</span>,
+<span class="w">      </span><span class="s2">&quot;fixed_ips&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;subnet_id&quot;</span>:<span class="s2">&quot;d2c3a067-ccda-45c0-9c8e-b73e88b0402e&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;ip_address&quot;</span>:<span class="s2">&quot;10.0.0.3&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;subnet_id&quot;</span>:<span class="s2">&quot;70ce2eae-bcff-45a5-bf1f-b9720e526e7f&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;ip_address&quot;</span>:<span class="s2">&quot;fdb2:c07c:cdc9:0:f816:3eff:feb3:da44&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;22d79b92-0848-4053-ad0d-f182d02d01a0&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;security_groups&quot;</span>:<span class="o">[</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;device_id&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;LNG&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;admin_state_up&quot;</span>:true,
+<span class="w">      </span><span class="s2">&quot;network_id&quot;</span>:<span class="s2">&quot;980f4a97-0f8e-4347-a324-d9d1247f7c3f&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;tenant_id&quot;</span>:<span class="s2">&quot;3b2594f2569542f694ff346a6db7fa1e&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;binding:vif_details&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="o">}</span>,
+<span class="w">      </span><span class="s2">&quot;binding:vnic_type&quot;</span>:<span class="s2">&quot;normal&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;binding:vif_type&quot;</span>:<span class="s2">&quot;unbound&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;mac_address&quot;</span>:<span class="s2">&quot;fa:16:3e:b3:da:44&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;project_id&quot;</span>:<span class="s2">&quot;3b2594f2569542f694ff346a6db7fa1e&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2017-03-03T23:01:47Z&quot;</span>
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Create a NOVA instance based on image and flavor</h2>
+<ul>
+<li>Service: Nova</li>
+<li>Method: <code>POST</code></li>
+<li>Endpoint: <code>/v2.1/servers</code> (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,create-server-detail#create-server">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>User-Agent: <code>python-novaclient</code></li>
+<li>Content-Type: <code>application/json</code></li>
+<li>Accept: <code>application/json</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+</ol>
+</li>
+<li>JSON payload:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;server&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;tt1&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;imageRef&quot;</span>:<span class="s2">&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;flavorRef&quot;</span>:<span class="s2">&quot;a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;max_count&quot;</span>:1,
+<span class="w">      </span><span class="s2">&quot;min_count&quot;</span>:1,
+<span class="w">      </span><span class="s2">&quot;networks&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;port&quot;</span>:<span class="s2">&quot;22d79b92-0848-4053-ad0d-f182d02d01a0&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<ul>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;server&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;security_groups&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;default&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;OS-DCF:diskConfig&quot;</span>:<span class="s2">&quot;MANUAL&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;3d79d699-16c7-4f99-b034-57403d2d18e6&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;links&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;self&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/servers/3d79d699-16c7-4f99-b034-57403d2d18e6&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;bookmark&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;adminPass&quot;</span>:<span class="s2">&quot;xvcZ3HXf9Zr4&quot;</span>
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Read NOVA instance details</h2>
+<ul>
+<li>Service: Nova</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6</code>
+  (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail,show-server-details-detail#show-server-details">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>User-Agent: <code>python-novaclient</code></li>
+<li>Accept: <code>application/json</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;server&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;OS-EXT-STS:task_state&quot;</span>:<span class="s2">&quot;scheduling&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;addresses&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="o">}</span>,
+<span class="w">      </span><span class="s2">&quot;links&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/v2.1/servers/3d79d699-16c7-4f99-b034-57403d2d18e6&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;self&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/servers/3d79d699-16c7-4f99-b034-57403d2d18e6&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;bookmark&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;image&quot;</span>:<span class="o">{</span>
+<span class="w">         </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">         </span><span class="s2">&quot;links&quot;</span>:<span class="o">[</span>
+<span class="w">            </span><span class="o">{</span>
+<span class="w">               </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">               </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;bookmark&quot;</span>
+<span class="w">            </span><span class="o">}</span>
+<span class="w">         </span><span class="o">]</span>
+<span class="w">      </span><span class="o">}</span>,
+<span class="w">      </span><span class="s2">&quot;OS-EXT-STS:vm_state&quot;</span>:<span class="s2">&quot;building&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;OS-EXT-SRV-ATTR:instance_name&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;OS-SRV-USG:launched_at&quot;</span>:null,
+<span class="w">      </span><span class="s2">&quot;flavor&quot;</span>:<span class="o">{</span>
+<span class="w">         </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">         </span><span class="s2">&quot;links&quot;</span>:<span class="o">[</span>
+<span class="w">            </span><span class="o">{</span>
+<span class="w">               </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">               </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;bookmark&quot;</span>
+<span class="w">            </span><span class="o">}</span>
+<span class="w">         </span><span class="o">]</span>
+<span class="w">      </span><span class="o">}</span>,
+<span class="w">      </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;3d79d699-16c7-4f99-b034-57403d2d18e6&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;user_id&quot;</span>:<span class="s2">&quot;277d3bed50964145998606c8a66982fd&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;OS-DCF:diskConfig&quot;</span>:<span class="s2">&quot;MANUAL&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;accessIPv4&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;accessIPv6&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;progress&quot;</span>:0,
+<span class="w">      </span><span class="s2">&quot;OS-EXT-STS:power_state&quot;</span>:0,
+<span class="w">      </span><span class="s2">&quot;OS-EXT-AZ:availability_zone&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;metadata&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="o">}</span>,
+<span class="w">      </span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;BUILD&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;updated&quot;</span>:<span class="s2">&quot;2017-03-03T23:02:45Z&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;hostId&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;OS-EXT-SRV-ATTR:host&quot;</span>:null,
+<span class="w">      </span><span class="s2">&quot;OS-SRV-USG:terminated_at&quot;</span>:null,
+<span class="w">      </span><span class="s2">&quot;key_name&quot;</span>:null,
+<span class="w">      </span><span class="s2">&quot;OS-EXT-SRV-ATTR:hypervisor_hostname&quot;</span>:null,
+<span class="w">      </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;tt1&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;created&quot;</span>:<span class="s2">&quot;2017-03-03T23:02:45Z&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;tenant_id&quot;</span>:<span class="s2">&quot;3b2594f2569542f694ff346a6db7fa1e&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;os-extended-volumes:volumes_attached&quot;</span>:<span class="o">[</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;config_drive&quot;</span>:<span class="s2">&quot;&quot;</span>
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Get user image detail</h2>
+<ul>
+<li>Service: Glance</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a</code> (<a href="https://developer.openstack.org/api-ref/image/v2/index.html?expanded=show-image-details-detail#show-image-details">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>Accept-Encoding: <code>gzip, deflate</code></li>
+<li>Accept: <code>*/*</code></li>
+<li>User-Agent: <code>python-glanceclient</code></li>
+<li>Connection: <code>keep-alive</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+<li>Content-Type: <code>application/octet-stream</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;active&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;cirros-0.3.4-x86_64-uec&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;tags&quot;</span>:<span class="o">[</span>
+<span class="w">   </span><span class="o">]</span>,
+<span class="w">   </span><span class="s2">&quot;kernel_id&quot;</span>:<span class="s2">&quot;ef538456-704c-445c-a98b-c081be22ad71&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;container_format&quot;</span>:<span class="s2">&quot;ami&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2017-03-03T22:38:57Z&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;ramdisk_id&quot;</span>:<span class="s2">&quot;1a243f7b-3e96-4140-8408-b82064599cec&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;disk_format&quot;</span>:<span class="s2">&quot;ami&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;updated_at&quot;</span>:<span class="s2">&quot;2017-03-03T22:38:58Z&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;visibility&quot;</span>:<span class="s2">&quot;public&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;self&quot;</span>:<span class="s2">&quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;min_disk&quot;</span>:0,
+<span class="w">   </span><span class="s2">&quot;protected&quot;</span>:false,
+<span class="w">   </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;9794e5b3-b3f1-403c-b37a-19c7e07cca4a&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;size&quot;</span>:25165824,
+<span class="w">   </span><span class="s2">&quot;file&quot;</span>:<span class="s2">&quot;/v2images/9794e5b3-b3f1-403c-b37a-19c7e07cca4a/file&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;checksum&quot;</span>:<span class="s2">&quot;eb9139e4942121f22bbc2afc0400b2a4&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;owner&quot;</span>:<span class="s2">&quot;3b2594f2569542f694ff346a6db7fa1e&quot;</span>,
+<span class="w">   </span><span class="s2">&quot;virtual_size&quot;</span>:null,
+<span class="w">   </span><span class="s2">&quot;min_ram&quot;</span>:0,
+<span class="w">   </span><span class="s2">&quot;schema&quot;</span>:<span class="s2">&quot;/v2/schemas/image&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Get flavor detail</h2>
+<ul>
+<li>Service: Nova</li>
+<li>Method: <code>GET</code></li>
+<li>Endpoint: <code>/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e</code> (<a href="https://developer.openstack.org/api-ref/compute/?expanded=show-flavor-details-detail#show-flavor-details">ref</a>)</li>
+<li>HTTP header:<ol>
+<li>User-Agent: <code>python-novaclient</code></li>
+<li>Accept: <code>application/json</code></li>
+<li>X-Auth-Token: <code>ccc5f650029b710c4a3c8f20320afaaed04326f1</code></li>
+</ol>
+</li>
+<li>JSON payload: none</li>
+<li>Response:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">   </span><span class="s2">&quot;flavor&quot;</span>:<span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;links&quot;</span>:<span class="o">[</span>
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/v2.1/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;self&quot;</span>
+<span class="w">         </span><span class="o">}</span>,
+<span class="w">         </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;href&quot;</span>:<span class="s2">&quot;http://10.0.2.15:8774/flavors/a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">            </span><span class="s2">&quot;rel&quot;</span>:<span class="s2">&quot;bookmark&quot;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="w">      </span><span class="o">]</span>,
+<span class="w">      </span><span class="s2">&quot;ram&quot;</span>:1280,
+<span class="w">      </span><span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span>:false,
+<span class="w">      </span><span class="s2">&quot;os-flavor-access:is_public&quot;</span>:true,
+<span class="w">      </span><span class="s2">&quot;rxtx_factor&quot;</span>:1.0,
+<span class="w">      </span><span class="s2">&quot;disk&quot;</span>:10,
+<span class="w">      </span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;a5178caf-6b3a-49ec-ab47-a6daaf05423e&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;baremetal&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;vcpus&quot;</span>:1,
+<span class="w">      </span><span class="s2">&quot;swap&quot;</span>:<span class="s2">&quot;&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span>:0
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

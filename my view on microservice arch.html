@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2020-08-24
+
+
+    <a class="wave-effect" href="thoughts.html">
+      <i class="fa fa-folder-open-o"></i>
+      thoughts
+    </a>
+
+    <a class="wave-effect" href="tag-thoughts.html">
+      <i class="fa fa-tag"></i>
+      thoughts
+    </a>
+
+    <h1 class="myhighlight">My view on microservice arch</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><figure class="col s12">
+  <img src="images/DSC_1100384.JPG"/>
+</figure>
+
+<p>This is an email w/ teammates regarding my thinkings on microservice
+arch and a few other things happening in the project which I
+dislike. </p>
+<p>Read at your convenience ~~</p>
+<h1>SOA is hard, and I haven't seen it working</h1>
+<p>I first learned <a href="https://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> (and an IBM <a href="https://www.redbooks.ibm.com/redbooks/pdfs/sg246303.pdf">book</a>, very comprehensive) in
+2013. I was in charge of designing the architecture of a 3-million $$
+project for a Fortune 500 company. Yes it was SOA-ed, but not, no one
+can implement it.</p>
+<p>I have been in this trade long enough to see these patterns come and go,
+every so many years they come back in a new emperor's
+dress. Microservice arch seems to be the same thing. It's popular in all
+meetings and talks. We assume ourselves ignorant if we can't name a
+single project personally that has successfully pulled it off. But the
+reality, I'm afraid, is that except a few deep pocket giants, no one has
+done it according to book, and it never will.</p>
+<p>SOA requires a ESB (enterprise service bus) for messaging (data), and
+<a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation">BPM</a> engine for workflow orchestration. Both concepts are sound. I
+love them. But they are very difficult to implement. The bottleneck is
+not technology, but to abstract biz workflow so much so it can be
+delegated to BPM engine, and maintenance (BPMN is too hard for client to
+learn) because biz logic is constantly changing.</p>
+<h1>Talk is cheap (rant)</h1>
+<p>It's a cheap word to make one look good and sophisticated. But here is
+my view &mdash; if you propose it, you do it. I'm frustrated that
+<em>architects</em> roll of their tongue these buzz words as if they are ready
+to grab, but they never code any of them, and they usually end the
+sentence "Any question? If no, you do it".</p>
+<p>There is another popular version of the same superficial talk in China,
+<a href="https://fengxia41103.github.io/myblog/mature tech.html">so-and-so technology is mature and simple</a> used to justify the proposal
+is low risk.. just because you can say the word, doesn't make it
+simple. There are different level of credits to this statement (best -&gt;
+worst, in order):</p>
+<ol>
+<li>Yourself has coded it, even as small part of a large proj/module.</li>
+<li>You have a die-hard buddy John, and he has done it and showed to you
+   before.</li>
+<li>Your friend John has a friend Alex who claims he is coding it.</li>
+<li>You and John and Alex all read about it on a SO post, or a book, or a
+   meetup, and know it's a trendy thing to do right now.</li>
+<li>You all know that Google is using this technology and it's
+   awesome (but, are you Google?)</li>
+</ol>
+<p>You get the spirit. I had same conversation w/ my client in 2013. It's a
+common mistake non-engineer make. Just because Google can do it, doesn't
+mean I can, or this team can. There are plenty such example in
+life. Pick up any Physics book, the theory of atomic bomb is
+printed. Can you then build one? Yeah we all know US has built a bunch
+for a while, does it make it easy if you, or your country, to build one?</p>
+<p>Talkers don't care details; but they dont sweat making the claim
+that "it is simple", either.</p>
+<h1>container, microservice</h1>
+<p>Microservice architecture is good, but too good to be true. Forget about
+benefits. Let's talk problems we can perceive.</p>
+<ol>
+<li>
+<p>It's not justified <em>monotholic</em> design is natively bad. One common
+   sales pitch is "your company's systems are all silos, and mine is a
+   one-stop-shop".</p>
+<p>If each micro-service is a full stand-alone thing, aren't we then
+creating a bunch of <em>silos</em>?</p>
+</li>
+<li>
+<p>Modular.</p>
+<p>Code naturally become modular because repetitive pattern emerge
+during coding, and I hate to copy&amp;paste. So up to 10th time, I start
+think to make it a <em>module</em> (whatever the name is) so I write one
+line to call it. I'm sure you echo this.</p>
+<p>I worked w/ an IT woman in 2010. At a lunch break, we were talking
+how tolerant you are before you want to <em>automate</em> sth. I considered
+myself pretty hardcore to eliminate repetitive works using
+scripts. Her answer was, "1". It's an exaggeration I thought. But the
+mentality is sound -- constantly think how to combine things into a
+logical group, thus "module", so to save yourself the trouble.</p>
+</li>
+<li>
+<p>Top down design.</p>
+<p>Top down to do modular in design is great, if the person has deep
+knowledge of the domain, and is responsible. His/her view essentially
+makes decisions that function XYZ should be a service/module on its
+own, or not. It's a very difficult decision. Whoever says it's easy
+is a liar.</p>
+<p>My first job was in a semiconductor company making lithography
+machine. The entire project (300+ people) was directly by this one
+guy. He was an engineer, 60s maybe, gave us a talk every week, and he
+knew everything of that product -- mechanical, real-time control (my
+job), everything. I haven't ever met such situation after. Guru is
+wonderful, if they are real. In 99.999% cases, it's <em>con artist</em> w/
+impressive title.</p>
+</li>
+<li>
+<p>Container.</p>
+<p>Container is a packaging choice. It can't package anything. Some code
+can and benefit from it; some don't. The one single blocker I would
+consider is that it is a single process -- if your thing can live w/
+it, good. Otherwise, you need other trick to scale horizontally,
+which adds complexity in knowledge and maintenance. Therefore,
+speaking "containerizing" sth as if it were a given is ignorant (the
+atomic bomb example above).</p>
+<p>My view is that a container is yesterday's CD/ISO. Fit your music on
+a CD doesn't make your music suddenly good, if it were bad.</p>
+<p>By choosing docker and k8s, it comes an <em>ecosystem</em> that makes things
+<em>easier</em>. But. It shouldn't replace the knowledge if you were to do
+it without them -- if you can't maintain an accounting book using
+paper and ink (let's say all the Excels are dead today), are you
+still an accountant? These ecosystems, like python native and 3rd
+party libraries, require you to learn, to try, and some work out of
+box, others don't as claimed. So, it's same engineering practice, not
+magic.</p>
+</li>
+</ol>
+<p>I know LXCO architecture is microservice <em>oriented</em>, at least some
+components, such as an aggregator (API proxy), access gateway. It's a
+living example to examine. I don't know the status of it, nor how
+good/bad it is. Find it out yourself if you are interested in. Talk to
+engineers who code it, not manager's PPT.</p>
+<h1>in CP?</h1>
+<p>We can't, and we shouldn't.</p>
+<p>Service MUST maintains its own state. Each will have at least an admin
+interface (aka. UI), and an API.</p>
+<p>Therefore, there can't be one UI team coding all these UIs. Each service
+has a UI person to code and maintain and add feature and debug. Same for
+UX.</p>
+<p>This leads to more considerations -- how to reuse components, or not?
+and common technology stack, or not?...</p>
+<p>CP is sort of service-oriented. What can be done is to break up
+components into its own repo, its own build pipeline, its own release
+schedule, and of course, finish each w/ an admin interface and API if
+missing.</p>
+<p>Now, the million $$ problem, is the STATEs. The complexity has been
+hidden by Postgres &amp; Scylla, because <a href="https://www.codeproject.com/Articles/359654/11-important-database-designing-rules-which-I-fo-2">DB's model and constraints</a>
+<strong>guarantee</strong> a logical relationship between two data points. But in a
+group of isolated services, it's fishy. I don't have knowledge to
+suggest further reading or thinking. At least, read <a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">this</a>.</p>
+<p>Remember. Technology might be <em>mature</em>, but until we built one crude
+versioin, that wonderful theory is, theory. </p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

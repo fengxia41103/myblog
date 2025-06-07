@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-07-07
+
+
+    <a class="wave-effect" href="thoughts.html">
+      <i class="fa fa-folder-open-o"></i>
+      thoughts
+    </a>
+
+    <a class="wave-effect" href="tag-thoughts.html">
+      <i class="fa fa-tag"></i>
+      thoughts
+    </a>
+
+    <h1 class="myhighlight">Can you innovate?</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>This has been a topic on my mind for quite some time now ever since I
+worked in Shanghai in 2016 and witnessed things that quite annoyed me,
+especially from a software engineer prospective. </p>
+<p>So the backdrop is that Chinese people have been encouraged by
+the country's phenomenal success in economy and are now moving from <em>made in
+china</em> to <em>created in china</em> &mdash; a sound idea, just like
+<em>socialism</em> or any other idea someone around the corner has. The
+idea is not the problem, the implementer is.</p>
+<p>Ideas are cheap. There is a problem xyz, easy. The challenge is how we
+are gonna find a solution for this problem, let alone a <em>satisfactory</em>
+one? Well, no one can really define that. Even when you talk about a
+<em>working</em> solution, the immediate argument will be what you mean by
+<em>working</em>? How do you prove it works? This sounds more and more like
+an attorney's job now, doesn't it? Well, let's leave this
+philosophical dilemma and rant about why I was annoyed by this
+innovation wave.</p>
+<h1>Pls, stop "buzzing"</h1>
+<figure class="col l6 m6 s12">
+  <img src="images/funny/startup.jpg"/>
+</figure>
+
+<p>First, loading buzz words is not innovation.  These days just walking
+into any coffee shop in Shanghai and locate any group of:</p>
+<ol>
+<li>more than 2 people (2 is more likely love birds chatting), </li>
+<li>age band between 20-40</li>
+<li>using laptop instead of smart phone or tablet</li>
+<li>bonus: it's running a PPT</li>
+<li>super bonus: it's running code</li>
+</ol>
+<p>Yes, you have just found <span class="myhighlight"> Latte
+entrepreneurs</span>(love this name/<a href="https://www.peterjthomson.com/latte-entrepreneur/">ref</a>). Get a cup of coffee and
+eavesdrop for a while, the buzz words are bound to flow in full
+strength: <code>cloud computing</code>, <code>big data</code>, <code>sharing economy</code>, <code>amazon</code>,
+<code>google</code>, <code>BAT</code>, <code>R</code>, <code>AI</code>...  Whatever the problem is, or even the
+solution might be, these are the most common denominators.</p>
+<p>I really shouldn't bash these ppl. After all they are thinking, and
+trying to create a solution. But I was deeply annoyed because &mdash;
+often than not they were using these words <span class="myhighlight">as
+if they were a magic potion</span>! Just drink it and your problem is
+solved. No! Their conversation barely scratched the surface of these
+technologies (which I highly suspect it is because they don't
+understand much of them, let alone first hand experience with them)
+and rarely you hear a voice cautioning about implication, downside,
+assumption and risk. But everybody knows that there is <span
+class="myhighlight">free lunch</span>.</p>
+<p>Let's say <em>cloud computing</em>. Why cloud? what make a cloud? Yes
+there is the <a href="http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf">NIST definition</a>, but that doesn't really mean
+anything to me if you can't relate it to your own context (the problem
+we are to solve) and explain (clearly):</p>
+<ol>
+<li>what will a cloud be used for</li>
+<li>how it is going to help</li>
+<li>which layer is going to help, and</li>
+<li>how that decision was made</li>
+</ol>
+<p>To the minimum, if you are thinking that building a cloud is more of a
+HW investment than SW, then you don't know what you are talking
+about. If you are to rent from services like AWS, 
+then can you tell me <span class="myhighlight">what challenge you 
+are most likely to run into</span> (and I can tell you now it is
+not just money... no, not data security, nor privacy, nor vendor lock
+in... these are all valid points, but the real bummer, is the learning
+curve). <span class="myhighlight">Yes, people, brain</span>.  That
+will be the hardest asset to come by, and the most valuable in your
+org. AWS is a wonderful service. It is a Ferrari with a million
+dials. The magic word <em>cloud computing</em> is not going to just spit out
+a solution for you. It will help, dramatically, if you know how to
+tune those dials.</p>
+<p>Man! I can't tell you how many times I had to battle
+some Chinese IT fella in 2015 who wanted to sell his client
+an Oracle database (the swiss army knife of DB) but
+failed to come up a single example which feature of the Oracle is
+needed in his application, and why alternatives are inferior? Come
+on! if you are too lazy or just not good enough to set up an
+apple-to-apple evaluation, then all what you are saying about the
+wonderful things of Oracle, are just a word-of-mouth speculation.</p>
+<h1>Domain silo</h1>
+<p>The reason they took the buzz words as solution itself is that they
+are taking an easy way out &mdash; a sounded cure-fore-all instead of
+acquiring, analyzing and proving <strong>domain knowledge</strong>:</p>
+<ol>
+<li>How much do you really know the problem?  and the context of the
+   problem?</li>
+<li>What's the assumption you are taking to think of this as a problem?</li>
+<li>What method you used to analyze the cause of this problem?</li>
+<li>How do you support your argument? and how sound is your support,
+   both qualitatively and quantitatively?</li>
+</ol>
+<p>My problem is that many conversations I have participated all went
+with roughly 30-min of problem discussion then went right into
+the grand future of the "what if we get 10% of the
+13-billion population using this!?" How exciting! <span
+class="myhighlight">Of course, even selling a million toilet paper is
+an exciting business, and if you can figure out to sell them by the
+piece instead of roll, man, you will be a legend for sure</span>.
+This is not innovation talk; this is a group opium high.</p>
+<p>Analyzing something is hard. As a matter of fact, any learning is
+hard. To understand the problem is the hardest part, if not the only
+thing it matters in an innovation. Most of us possess domain knowledge
+of some sort. The quick measure I would suggest is how much time you
+have spent in that domain. Time doesn't cheat, and practice does make
+one perfect. So even with a domain expert onboard, the process of
+knowledge sharing so the software guy can <span
+class="myhighlight">internalize</span> the idea and in turn transform
+it into his domain expertise, eg. a software model and code, and
+transfer his thinking back to the team for verification and discussion
+&mdash; this back-and-forth process not only takes time, but is a
+steep learning on both sides. Most importantly, <span
+class="myhighlight">it takes both sides' willingness to learn</span>
+in order to work.</p>
+<p>So for innovation, it's really a process of learning A LOT OF things
+which you have little knowledge before, and each must contribute to
+the pod with his/her sharing. Some of those will be easy to pick up;
+others, will be frustratingly difficult. If it takes 3 years for a
+highschool and a 4 years for a college, this <em>mega-million-dollar big
+problem</em> you are trying to solve can't be easier than those.</p>
+<p>Well, now look around, how many team members are excited about
+learning some coding, or accounting?</p>
+<h1>Stop IT me</h1>
+<p>If there is one theme of the buzz word section, it is
+the dominant relevancy of IT. Yes, software is everywhere; coding is a
+must have. But then, how many times I saw the poor coder sitting on
+the side the table, listening in silence, as if the idea flows one way
+&mdash; from business owner to IT implementation.</p>
+<p>In China, coders and their managers must have a love-hate
+relatinoship. They are needed (somehow), but nobody wants to pay him
+much. Even worse, nobody understands him. He lives without a style and
+is bad at speech; his jokes are dry; his need is not much; his skill
+is witch-like, from fixing an iPhone to writing an app, even sometimes
+a WORD or PPT; and <span class="myhighlight"> the best of all, there
+are a dime of dozen of them</span> in job market and by subway exit;
+whatever their coding language is, they can all do the same thing, and
+with the same quality, too &mdash; <strong>poor</strong>.</p>
+<p>This is really bizzare. Writing software is hard; writing quality one
+is really really really hard. By common sense you won't look at anyone
+speaking English to be a novelist, let alone a Shakespeare. But that's
+exactly the mentality these innovation teams or their investors
+have. So with such thoughts, on the one hand coders are necessity but
+certainly not a worthy <em>investment</em>, on the other hand coders lack proper
+mentorship in work to learn, develop and mature, so their deliveries
+proved the common bias &mdash; "Look, this is scrappy
+produce/code... I'm totally overpaying you..." sad, sad, sad.</p>
+<p>Chinese management and team setup are so used to the hierarchy they
+grow up with in school, in their previous jobs, and in the society
+overall, that this is the only format they know. But innovation, as we
+have argued, is depending on knowledge sharing, cross training, and
+mutual interest in each other's domain. Hierarchy not only makes
+information flow in one direction only, but enforces domain silo and
+ignorance which enpowers the seemingly superior position (mgt? founder? investor?)
+to legitimize its ignorance &mdash; "Hey look, IT guy, I hired you
+because I don't know IT...".</p>
+<p>So how to fix this? Stop using the word "IT"! It's an enormous topic
+under this umbrella that each consists of a technology that can be
+extremely challenging. If you are an IT guy, do you know <code>database</code>?
+how about <code>nosql</code>? and deployment? and performance tuning? clustering?
+modeling?  driver?... and network? server? storage?
+virtualization?... So to make things straight, <span
+class="myhighlight">stop IT me</span>. Let IT's voice be part of the
+contribution, not just a downstream magic pod that will turn idea into
+reality. Let everyone be <span class="myhighlight">practical</span> 
+and <span class="myhighlight">specific</span> in term of their domain &mdash; yes
+I know something about Python and Django web framework; no, I don't
+know much about database, networking and storage. Same goes for HR,
+for business analyst, for product owner, for investor, and for everone
+who takes innovation seriously. </p>
+<h1>Disruptive, not</h1>
+<figure class="col l6 m6 s12">
+  <img src="images/funny/disruptive.jpg"/>
+</figure>
+
+<p>A byproduct of China's economy miracle is an impatience to realize a
+dream. Even worse, urban legends encourage one to be <em>disruptive</em>,
+because, just look around, how many new riches found their fortune by
+disrupting the traditional course with their ignorance and ego alone!
+The mentality of <em>nothing is impossible</em> is not a slogan, it's a
+common sense.</p>
+<p>But no, innovation is not, and can not be, disruptive. We have argued
+innovation is rooted in domain knowledge, and that knowledge forms the
+food chain we see today, which in turn brew the perceived problem. The
+instinct of redrawing the map to remove that problem is absolutely
+correct &mdash; it's like taking fish out of its tank. It will
+die. But the new map will have its own quirks, just you haven't seen
+them yet. <span class="myhighlight">So being disruptive in that sense
+is nothing but replacing the old, visible problems with a promise
+while repeating "no problem no problem no problem..." to your covered
+ears</span>.</p>
+<p>Innovation is not magic. It can only be a system with feedback loop
+that can be continuously tuned. Like writing software, you always
+started with a version 1, and ended up with version 989287429 after
+that many iterations of trial-and-error. If you ignore (or downplay)
+the intermediates, viola, your end result looks absolutely
+<strong>innovative</strong>!  Think about Newton's apple, or Einstein's, or Google,
+or Amazon, great arts, or any disruptive technology/solution you have
+in mind, just look closer, read and research, you will find
+breadcrumbs all over its path. The last push gets all the glory, but
+the truth is that it's standing on the shoulder of a giant, and the
+ladder to climb is the <span class="myhighlight">spirals of continuous try-measure-tune-repeat</span>.</p>
+<h1>Innovating</h1>
+<p>Yes I'm a tech guy and am on a <em>perpetual</em> learning curve of some new
+or unfamiliar technologies. With a growing age, I found myself even
+constantly on a review session of some old technologies &mdash; a
+command line I can't think of anymore after a couple month, a Python
+syntax that now eludes me and I have to google it &mdash; this is not
+even stackoverflow because SO is used only when I can ask a (smart)
+question that has passed Python 101. I'm talking about <em>google python
+built-in function</em> type of basics. Shame. But there are just so many
+pieces one needs to know in order to build a technology stack.  So to
+me I'm constantly learning, constantly thinking, constantly
+re-inventing wheels or copying someone else's wheels, and constantly
+writing something <strong>new</strong> and <strong>fresh</strong> that only my brain is
+producing.</p>
+<p>Those last part, if being original and bearing a thought worth
+talking about, is my solute to innovation.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

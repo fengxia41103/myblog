@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-04-24
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Charm Reactive</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>execution. This article is to dive into its source code in order to
+understand its execution logic and design philosophy.</p>
+<p>In this article we will study charm's <a href="https://pythonhosted.org/charms.reactive/">reactive</a> framework to get a
+firm understanding of what they mean by writing an reactive charm.</p>
+<h1>Hooks</h1>
+<blockquote>
+<p>Decorator: <code>@hook</code>
+Definition: <code>charm.reactive/charms/reactive/decorators.py</code></p>
+</blockquote>
+<p>Hooks give one a dedicated sequence that execution is guaranteed in
+that order and developer can use <code>@hook</code> to define a function block
+to run. </p>
+<figure class="s12 center">
+  <img src="images/charm%20hooks.png" />
+  <figcaption>Sequence of charm hooks</figcaption>
+</figure>
+
+<p>Hooks have a few limitations which affect the usefulness of this
+mechanism:</p>
+<ol>
+<li>
+<p>Hooks are really meant to be used for internal workflow
+   transitions. There are only 8 of them and they represent a specific
+   stage in the life cycle of a charm. There is no mechanism to extend
+   or inherit these built-ins.</p>
+<ol>
+<li>install</li>
+<li>config-changed</li>
+<li>start</li>
+<li>upgrade-charm</li>
+<li>stop</li>
+<li>update-status</li>
+<li>leader-elected</li>
+<li>leader-settings-changed</li>
+</ol>
+</li>
+<li>
+<p>Hook sequence is <strong>hardcoded</strong>. This is defined in 
+  <code>juju/worker/uniter/operation/runhook.go</code>. In other words, the
+  transition from <code>install</code> to <code>upgrade-charm</code> is both guaranteed and
+  mandatory. This limits how we can design our workflows.</p>
+</li>
+</ol>
+<h1>States</h1>
+<blockquote>
+<p>Decorator: <code>@not_unless</code>, <code>@only_once</code>, <code>@when</code>, <code>@when_all</code>, <code>@when_any</code>, <code>@when_file_changed</code>, <code>@when_none</code>, <code>@when_not</code>, <code>@when_not_all</code>
+Definition: <code>charm.reactive/charms/reactive/decorators.py</code></p>
+</blockquote>
+<p>States were probably designed to fix the limitation that Hooks
+present. States can be defined using arbitrary string <span
+class="myhighlight">except</span> two reserved words <code>juju</code> and
+<code>jujud</code>. Further, workflow of states are not fixed. States are
+evaluated iteratively and a <code>true</code> condition will execute 
+associated function block.</p>
+<h2>When a state is true?</h2>
+<p>What defines a <code>true</code>? The code is defined in class <code>StateWatch</code> in
+file <code>charm.reactive/charms/reactive/bus.py</code>. The value <code>changed</code> is
+<code>true</code> when there are states to monitor (<code>set(states)</code> is not empty) and
+there are changes (<code>data['changes]</code> is not empty).</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">StateWatch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="o">...</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">watch</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">watcher</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get</span><span class="p">()</span>
+        <span class="n">iteration</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;iteration&#39;</span><span class="p">]</span>
+        <span class="n">changed</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">states</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;changes&#39;</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">iteration</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">changed</span>
+</code></pre></div>
+
+<p>What defines the values in <code>data['changes']</code>? There are only two
+places to set this value: <code>set_state(...)</code> and <code>remove_state(...)</code>.
+Looking at <code>set_state</code> reveals that if the state is already in
+<code>old_states</code> list, it will not be set to <code>changed</code>, therefore the
+<code>watch</code> will fail to identify this state and will not trigger an
+execution. In other words, if a state becomes <code>true</code>, it will not be
+re-evaluated until it is reset to <code>false</code> first.</p>
+<blockquote>
+<p>Reactive charm triggers only on state transitions:
+<strong>False-&gt;True</strong> (<code>@when</code>) or
+<strong>True-&gt;False</strong> (<code>@when_not</code>).</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the given state as active, optionally associating with a relation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">old_states</span> <span class="o">=</span> <span class="n">get_states</span><span class="p">()</span>
+    <span class="n">unitdata</span><span class="o">.</span><span class="n">kv</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">state</span><span class="p">:</span> <span class="n">value</span><span class="p">},</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;reactive.states.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">old_states</span><span class="p">:</span>
+        <span class="n">StateWatch</span><span class="o">.</span><span class="n">change</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Namespace</h2>
+<p>There isn't really a namespace concept in charm. I'm borrowing the
+term to illustrate state boundaries. The question is that if I can
+define arbitrary states, in which scope are they visible? Can
+<code>state.xyz</code> in charm A trigger an action in charm B? or in another
+layer? or in another unit? or even a bundle?</p>
+<p>To answer this, we need to examine how states are stored. The key
+information can be found in <code>charmhelpers/core/unitdata.py</code> &mdash;
+this is the storage class that is used by charm to store
+states. Clearly the backend is a <code>sqlite3</code> database.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Storage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple key value database for local unit state within charms.</span>
+
+<span class="sd">    Modifications are not persisted unless :meth:`flush` is called.</span>
+
+<span class="sd">    To support dicts, lists, integer, floats, and booleans values</span>
+<span class="sd">    are automatically json encoded/decoded.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;UNIT_STATE_DB&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;UNIT_STATE_DB&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CHARM_DIR&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;.unit-state.db&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="o">....</span>
+</code></pre></div>
+
+<p>Function <code>_init(self)</code> reveals the table schema in this database
+&mdash; three tables: <code>kv</code>,
+<code>kv_revisions</code> and <code>hooks</code>. <code>kv</code> is the primary store as can be seen
+in the <code>set_state</code> function above (<code>unitdata.kv().update(....</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        create table if not exists kv (</span>
+<span class="s1">           key text,</span>
+<span class="s1">           data text,</span>
+<span class="s1">           primary key (key)</span>
+<span class="s1">           )&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        create table if not exists kv_revisions (</span>
+<span class="s1">           key text,</span>
+<span class="s1">           revision integer,</span>
+<span class="s1">           data text,</span>
+<span class="s1">           primary key (key, revision)</span>
+<span class="s1">           )&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        create table if not exists hooks (</span>
+<span class="s1">           version integer primary key autoincrement,</span>
+<span class="s1">           hook text,</span>
+<span class="s1">           date text</span>
+<span class="s1">           )&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div>
+
+<p>What is not obvious is that each unit has its own DB. Therefore, the
+boundary of states are <strong>per charm unit</strong>. In other words, states are
+visible inside a unit. Using layers will package states inside a
+single charm, but in run time it is the unit boundary that matters.</p>
+<blockquote>
+<p>States do not go across charms.
+Using the same charm, states do not go across units either.</p>
+</blockquote>
+<h1>Dispatch</h1>
+<p>Reading function <code>dispatch</code> in
+<code>charms.reactive/charms/reactive/bus.py</code> is interesting because there
+is certainly something no document has mentioned. Dispatch is done in
+two phases: <strong>hooks</strong> and <strong>other</strong>.</p>
+<p>Hooks are run in the <code>hooks</code> phase. 
+Registered hook will run its <code>test()</code> so this scan will test all hooks.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_test</span><span class="p">(</span><span class="n">to_test</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">h</span><span class="o">.</span><span class="n">test</span><span class="p">(),</span> <span class="n">to_test</span><span class="p">))</span>
+
+<span class="o">....</span>
+
+<span class="n">unitdata</span><span class="o">.</span><span class="n">kv</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;reactive.dispatch.phase&#39;</span><span class="p">,</span> <span class="s1">&#39;hooks&#39;</span><span class="p">)</span>
+<span class="n">hook_handlers</span> <span class="o">=</span> <span class="n">_test</span><span class="p">(</span><span class="n">Handler</span><span class="o">.</span><span class="n">get_handlers</span><span class="p">())</span>
+<span class="n">_invoke</span><span class="p">(</span><span class="n">hook_handlers</span><span class="p">)</span>
+</code></pre></div>
+
+<p>States are run in the <code>other</code> phase.
+The magic number <code>100</code> for-loop highlights an underline assumption
+that states can converge within these iterations. Otherwise, state
+watch is reset and will be count from 0 again during next iteration
+&rarr; state effect can then ripple through one single iteration.</p>
+<div class="highlight"><pre><span></span><code><span class="n">unitdata</span><span class="o">.</span><span class="n">kv</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;reactive.dispatch.phase&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">StateWatch</span><span class="o">.</span><span class="n">iteration</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">other_handlers</span> <span class="o">=</span> <span class="n">_test</span><span class="p">(</span><span class="n">Handler</span><span class="o">.</span><span class="n">get_handlers</span><span class="p">())</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">other_handlers</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">_invoke</span><span class="p">(</span><span class="n">other_handlers</span><span class="p">)</span>
+</code></pre></div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

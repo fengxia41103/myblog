@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2023-09-10
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+
+    <h1 class="myhighlight">Django Permission, DRF, OAuth2</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p><a href="https://www.rfc-editor.org/rfc/rfc6749#section-1.2">OAuth2</a> is confusing! Here I'm gonna use Django as the framework
+to how OAuth2 can be implemented. This shall provide a reference point
+for others to see how OAuth2 is meant to work.</p>
+<h1>who is who is who</h1>
+<p>I'm gonna use layman's term instead of the <a href="https://www.rfc-editor.org/rfc/rfc6749#section-1.2">RFC</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Who</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>You</td>
+<td>The user who has a user account w/ Authorization Server.</td>
+</tr>
+<tr>
+<td>Application</td>
+<td>For example, my Stock app. You are delegating this app on your behalf to access resources, thus the "Grant".</td>
+</tr>
+<tr>
+<td>Resource Server</td>
+<td>For example, Gmail is a <em>resource server</em> for my emails, GDrive is another for my drives, etc.</td>
+</tr>
+<tr>
+<td>Authorization Server</td>
+<td>Google as a whole is an Authorization Server. I authenticate w/ <code>google.com</code>. Same for GitHub, FB, etc.</td>
+</tr>
+</tbody>
+</table>
+<h1>OAuth2 is &amp; is-not</h1>
+<p>Read <a href="https://www.rfc-editor.org/rfc/rfc6749#section-1.2">RFC</a>. Some points not clear from the RFC, but are important:</p>
+<ol>
+<li>
+<p><strong>It's a protocol</strong>. In other words it describes a way to
+   <em>negotiate</em> authorization, but doesn't care implementation details,
+   eg. each framework/language has a dozen different implementations,
+   all vary at details but follow the same <em>requirements</em> defined in
+   RFC.  This <a href="https://www.rfc-editor.org/rfc/rfc6749#section-1.2">RFC</a> dictates <strong>a very specific sequence of call
+   flow/workflow</strong>, and it dictates some restrictions, eg. <code>client
+   secret</code> should never be made available to the frontend/browser.</p>
+</li>
+<li>
+<p><strong>Authorization Server is the source-of-truth for user</strong>. This is
+   very important. OAuth2 is meant to allow a user to access
+   <strong>multiple applications</strong> while these applications don't have any
+   data/table of user records! In other words, in today's micro
+   service world, if I have two services and each service is a Django
+   app, I don't want to maintain two separate user name called
+   <code>fengxia</code> in two DBs. Instead, I create 3rd Django app/service just
+   to manage user, and this Django app is also the OAuth2
+   Authorization Server.</p>
+</li>
+<li>
+<p><strong>Resource Server can be separate from Authorization Server</strong>. If
+   thinking of micro service architecture, this is pretty
+   obvious. Individual service is the resource server, and there will
+   be one Authorization Server vs. multiple resource servers. In this
+   case you need to implement <a href="https://datatracker.ietf.org/doc/html/rfc7662">OAuth2 Introspection</a> on the
+   Authorization Server (see later) so that resource server could
+   obtain more information of the user by querying this token, and
+   then use the user's whatever information for its own purpose.</p>
+</li>
+<li>
+<p><strong>If letting ppl use social media account to login your own app,
+   it's OAuth2</strong>. Say you created the Stock app, how to entice ppl to
+   use it? Instead of asking ppl to register w/ your app, you let them
+   login using their Google credential. This, is OAuth2. In this case,
+   Google is the Authorization Server. You will be granting the Stock
+   app a <code>read</code> scope of the <code>user</code> resource, for example, thus now
+   the Stock app can get your name, phone, email, and save them in the
+   Stock's DB, the Stock app can render a HTML template w/ <code>Hello, {{
+   user.name }}</code>. You will also <strong>save the token</strong> in Stock's DB,
+   eg. a field in <code>User</code> model, because all subsequent calls to Google
+   uses this token.</p>
+</li>
+<li>
+<p><strong>You must register application w/ Authorization Server</strong>. If you
+   Stock app is not the Authorization Server, and the Authorization
+   Server has something(aka. resource) your want, register your
+   application w/ the Authorization Server. This is defined in the
+   <a href="https://www.rfc-editor.org/rfc/rfc6749#page-23">protocol</a>, and <strong>must be done</strong>.</p>
+</li>
+</ol>
+<h1>OAuth2 workflow</h1>
+<p><img alt="" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*9R2CC0_HxtzYERiqHyGs-Q.png"></p>
+<h1>OAuth2 scope</h1>
+<p>It's super confusing what OAuth2 <a href="https://www.rfc-editor.org/rfc/rfc6749#page-23">scope is</a>.</p>
+<p>First, scope is just string. The Authorization Server could define any
+scope it wants.</p>
+<blockquote>
+<p>The value of the scope parameter is expressed as a list of space-
+delimited, case-sensitive strings.  The strings are defined by the
+authorization server.  If the value contains multiple space-delimited
+strings, their order does not matter, and each string adds an
+additional access range to the requested scope.</p>
+</blockquote>
+<p>Second, it's definition <strong>isn't completely arbitrary</strong>. Because
+Authorization Server is using scope to control access to registered
+application and its resources, it only makes sense that the <em>scope</em>
+string means something about the <em>access control</em>* of the
+resource. Therefore, naming a scope is rather like naming a variable
+&larr; there is certain <a href="https://www.oauth.com/oauth2-servers/scope/defining-scopes/">best practice</a> involved.</p>
+<p>And this is where Django comes in. For following discussion, we are
+talking about a <em>Resource Server implemented in Django &amp; DRF</em>.</p>
+<h2>Scope can bypass permission</h2>
+<p>OAuth2 only cares scope. Whether the scope is enforcing a permission
+is determined by implementation. Since scope is arbitrary string,
+there is nothing preventing an API assigned a scope called "feng",
+and returns a queryset of sensitive data even though the requesting user
+John has no permission on this data.</p>
+<p>What influence the exact behavior in this scenario also depends on:</p>
+<ol>
+<li>
+<p>the default DRF permission in the <code>settings.py</code>:</p>
+<div class="highlight"><pre><span></span><code>```python
+<span class="gh">#</span> settings.py
+
+REST_FRAMEWORK = {
+    &#39;DEFAULT_PERMISSION_CLASSES&#39;: [
+        &#39;rest_framework.permissions.IsAuthenticated&#39;,  &lt;== default
+    ]
+}
+```
+</code></pre></div>
+
+<p>In this case, John must be authenticated and has the "feng"
+  scope. Since OAuth2 always requires authentication, so this is
+  a given. However, DRF has a list of other built-in
+  permissions, and some would tie into model permission, which
+  then enforce a permission on top of scope.</p>
+</li>
+<li>
+<p>and <code>permission_classes=</code> per DRF view:</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">python</span>
+<span class="c1"># views.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">guardian.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">assign_perm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">DjangoObjectPermissions</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Message</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MessageViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="o">....</span><span class="p">]</span>  <span class="o">&lt;==</span> <span class="n">logical</span> <span class="n">AND</span>
+<span class="err">```</span>
+</code></pre></div>
+
+<p>Besides the default above, each view can have a list, which is
+  a logical AND. Only when user has all the permissions will he
+  be allowed access to the view/API. This is essentially the
+  mechanism how <code>django-oauth-toolkit</code> checks its scope together
+  w/ other DRF permissions.</p>
+</li>
+</ol>
+<h2>Scope &amp; permission work together</h2>
+<p>Permission is the foundation of ACL. Really depending on the framework
+and implementation, there are different level of security you could
+enforce. Ideally the underline permission <strong>is directly translated
+into scope</strong>. In Django's world, this is what it looks like:</p>
+<p><img alt="" src="images/oauth2%20scope%20and%20django%20permissions.png"></p>
+<p>Django model CRUD permissions are created whenever a model is
+created. So you get <code>blog.view_post</code> permission for free, which means
+you could easily use the string <code>blog.view_post</code> as a scope &lrar; a
+1:1 mapping! But, each model generates 4 permissions by default, thus
+using them directly as scope is too tedious.</p>
+<p>Instead, you can define two general scopes called <code>READ</code> and <code>WRITE</code>,
+and add some custom scope, say <code>music</code>, to protect all the
+music-related APIs.</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="err">`</span><span class="n">settings</span><span class="o">.</span><span class="n">py</span><span class="err">`</span> <span class="n">by</span> <span class="n">django</span><span class="o">-</span><span class="n">auth</span><span class="o">-</span><span class="n">toolkit</span><span class="p">:</span>
+
+<span class="n">OAUTH2_PROVIDER</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SCOPES&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;read&#39;</span><span class="p">:</span> <span class="s1">&#39;Read scope&#39;</span><span class="p">,</span>  <span class="o">&lt;==</span> <span class="n">GET</span><span class="p">,</span> <span class="n">HEAD</span><span class="p">,</span> <span class="n">OPTIONS</span>
+        <span class="s1">&#39;write&#39;</span><span class="p">:</span> <span class="s1">&#39;Write scope&#39;</span><span class="p">,</span> <span class="o">&lt;==</span> <span class="n">POST</span><span class="p">,</span> <span class="n">PUT</span><span class="p">,</span> <span class="n">PATCH</span><span class="p">,</span> <span class="n">DELETE</span>
+        <span class="s1">&#39;music&#39;</span><span class="p">:</span> <span class="s1">&#39;Music scope&#39;</span> <span class="o">&lt;==</span> <span class="n">arbitrary</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;CLIENT_ID_GENERATOR_CLASS&#39;</span><span class="p">:</span> <span class="s1">&#39;oauth2_provider.generators.ClientIdGenerator&#39;</span><span class="p">,</span>
+
+<span class="p">}</span>
+
+<span class="n">Then</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">DRF</span> <span class="n">view</span><span class="p">:</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SongView</span><span class="p">(</span><span class="n">views</span><span class="o">.</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">authentication_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">OAuth2Authentication</span><span class="p">]</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">TokenHasScope</span><span class="p">,</span> <span class="n">DjangoModelPermissions</span><span class="p">]</span>  <span class="o">&lt;==</span><span class="n">work</span> <span class="n">together</span><span class="err">!</span>
+    <span class="n">required_scopes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;music&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<h2>publish scope</h2>
+<p>Let's say once you design a list of scopes, you provide them as
+document so client of your Authorization Server knows what to expect,
+for example, <a href="https://developers.google.com/identity/protocols/oauth2/scopes">Google scopes</a>.</p>
+<h1>Django &amp; DRF permission</h1>
+<p>Since the idea of "scope" is to control access to <em>resource</em>, and a
+resource is an API/URL (essentially a <code>view</code> whether DRF-ed or not),
+it'd better be <strong>coherent w/ Django's access control &mdash;
+<a href="https://testdriven.io/blog/django-permissions/">Permission</a></strong>. In other words, Django's fundamental resource are
+those data and data models. Accessing these data are controlled by the
+<a href="https://testdriven.io/blog/django-permissions/">Permission</a>. Therefore, these permissions must be the foundation
+to define a "scope". And they are.</p>
+<h2>Permissions</h2>
+<p>A couple really good articles about Django permissions, <a href="https://testdriven.io/blog/django-permissions/">here</a> &amp;
+<a href="https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544">here</a>. They have good code examples of how to define and
+enforce.</p>
+<p>To define a permission:</p>
+<table>
+<thead>
+<tr>
+<th>Per</th>
+<th>Django</th>
+<th>DRF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arbitrary permission</td>
+<td><code>Permission.objects.create()</code>, then link to <code>User/Group</code></td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Object/row/data record</td>
+<td><a href="https://django-guardian.readthedocs.io/en/stable/"><code>django-guardian</code></a>, <a href="https://github.com/dfunckt/django-rules"><code>django-rules</code></a></td>
+<td><code>DjangoObjectPermissions</code></td>
+</tr>
+<tr>
+<td>Model</td>
+<td>Any Django Model: C(add), R(view), U(change), D(delete)</td>
+<td><code>DjangoModelPermissions</code></td>
+</tr>
+<tr>
+<td>Model custom permission</td>
+<td>Model's <code>Meta</code>: any permission you design</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>View custom permission</td>
+<td>n/a</td>
+<td>extend <code>BasePermission</code></td>
+</tr>
+</tbody>
+</table>
+<p>To enforce a permission:</p>
+<table>
+<thead>
+<tr>
+<th>Per</th>
+<th>Django</th>
+<th>DRF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Group</td>
+<td>1:n to <code>permissions</code> via Admin console</td>
+<td></td>
+</tr>
+<tr>
+<td>User</td>
+<td>1:n to <code>permissions</code> via Admin console, can inherit Group's directly</td>
+<td>DRF Permissions</td>
+</tr>
+<tr>
+<td>Enforcement @ View</td>
+<td><code>PermissionRequiredMixin</code>, <code>UserPassesTestMixin</code>, <code>@permission_required</code></td>
+<td><code>permission_classes</code>, <code>@permission_classes</code></td>
+</tr>
+<tr>
+<td>Enforce @ Template</td>
+<td><code>{% if perms.blog.view_post %}</code>, <code>user.has_perm("blog.view_post")</code></td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h1>Authenticated (Group, Role) vs. Anonymous</h1>
+<p>If you are anonymous, ACL is depending on whether the view is
+<em>protected</em> using an enforcement.</p>
+<p>If you are authenticated, we know the <code>User</code> and his <code>Group</code>, thus the
+permission is enforced by what's assigned to the <code>User</code> or his <code>Group</code>.</p>
+<p>Django does <strong>not have "role"</strong>. Django uses <code>Group</code> to group
+user, and <code>permission</code> can be attached to <code>Group</code> so to be applied
+batchly to all users in this group. Role, if implemented, will
+essentially achieve the same <code>permission</code> control. Therefore, you
+<strong>should treat <code>Group</code> == role</strong> in Django.</p>
+<h2>DRF access control by who you are</h2>
+<p>There are two types of users &mdash; authenticated, and
+anonymous. Authenticated users are further divided in Django
+as. <strong>Note</strong> that staff user could also have <code>Group</code> so <code>D</code> and <code>E</code>
+are <strong>not exclusive</strong> to each other. In the followings I'm treating <code>E</code> as the
+super set of <code>D</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">.</span>
+├──<span class="w"> </span><span class="n">A</span><span class="o">:</span><span class="w"> </span><span class="n">anonymous</span>
+└──<span class="w"> </span><span class="n">B</span><span class="o">:</span><span class="w"> </span><span class="n">authenticated</span>
+<span class="w">    </span>├──<span class="w"> </span><span class="n">C</span><span class="o">:</span><span class="w"> </span><span class="n">super</span>
+<span class="w">    </span>├──<span class="w"> </span><span class="n">D</span><span class="o">:</span><span class="w"> </span><span class="n">staff</span><span class="o">/</span><span class="nf">admin </span><span class="p">(</span><span class="n">User</span><span class="s">&#39;</span><span class="err">s `is_staff=True`)</span>
+<span class="w">    </span>└──<span class="w"> </span><span class="n">E</span><span class="o">:</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="o">&lt;-</span><span class="p">(</span><span class="n">n</span><span class="o">:</span><span class="n">n</span><span class="p">)</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Group</span>
+</code></pre></div>
+
+<p>We code name them as <code>ABCDE</code>. So, how to control who can do what?</p>
+<table>
+<thead>
+<tr>
+<th>DRF Permission</th>
+<th>Anon can use</th>
+<th>Can Read</th>
+<th>Can Write</th>
+<th>Enforce Model Permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AllowAny</td>
+<td>yes</td>
+<td>A,B</td>
+<td>A,B</td>
+<td>none</td>
+</tr>
+<tr>
+<td>IsAuthenticated</td>
+<td>no</td>
+<td>B</td>
+<td>B</td>
+<td>none</td>
+</tr>
+<tr>
+<td>IsAuthenticatedOrReadOnly</td>
+<td>yes</td>
+<td>A,B</td>
+<td>B</td>
+<td>none</td>
+</tr>
+<tr>
+<td>IsAdminUser</td>
+<td>no</td>
+<td>D</td>
+<td>D</td>
+<td>none</td>
+</tr>
+<tr>
+<td>DjangoModelPermissions</td>
+<td>no</td>
+<td>permission(B)</td>
+<td>permission(B)</td>
+<td>B's CRUD</td>
+</tr>
+<tr>
+<td>DjangoModelPermissionsOrAnon</td>
+<td>yes</td>
+<td>A,B</td>
+<td>permission(B)</td>
+<td>B's CUD</td>
+</tr>
+<tr>
+<td>DjangoObjectPermissions</td>
+<td>no</td>
+<td>permission(B)</td>
+<td>permission(B)</td>
+<td>B's CRUD</td>
+</tr>
+</tbody>
+</table>
+<h2>django-oauth-toolkit access control by scope</h2>
+<p>Finally, we can look at the ACL of <a href="https://django-oauth-toolkit.readthedocs.io/"><code>django-auto-toolkit</code></a>, which
+is just a list of <a href="https://django-oauth-toolkit.readthedocs.io/en/latest/rest-framework/permissions.html#">permissions</a> in addition to DRF permissions!
+This extension focuses on checking the oauth scope by the token, and
+<strong>can be combined in AND w/ all other DRF permissions</strong>, and then
+through DRF's <code>DjangoModelPermissions</code>, it will be further tied into
+Django model permissions:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SongView</span><span class="p">(</span><span class="n">views</span><span class="o">.</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">authentication_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">OAuth2Authentication</span><span class="p">]</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">TokenHasScope</span><span class="p">,</span> <span class="n">DjangoModelPermissions</span><span class="p">]</span>  <span class="o">&lt;==</span><span class="n">work</span> <span class="n">together</span><span class="err">!</span>
+    <span class="n">required_scopes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;music&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Below shows the behavior of toolkit permission behaviors. Because OAuth2 user
+must have been authenticated, all these are <strong>not applicable</strong> to anonymous users.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>required_scopes</th>
+<th>authentication_classes</th>
+<th>Read</th>
+<th>Write</th>
+<th>Enforce Model Permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TokenHasScope</td>
+<td>required</td>
+<td><code>[OAuth2Authentication]</code></td>
+<td>has all <code>required_scopes</code></td>
+<td>has all <code>required_scopes</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td>TokenHasReadWriteScope</td>
+<td>optional</td>
+<td><code>[OAuth2Authentication]</code></td>
+<td>has <code>read</code> scope</td>
+<td>has <code>write</code> scope</td>
+<td>none</td>
+</tr>
+<tr>
+<td>TokenHasResourceScope</td>
+<td>required</td>
+<td><code>[OAuth2Authentication]</code></td>
+<td>has <code>music:read</code> scope</td>
+<td>has <code>music:write</code> scope</td>
+<td>none</td>
+</tr>
+<tr>
+<td>IsAuthenticatedOrTokenHasScope</td>
+<td>required</td>
+<td>DRF's</td>
+<td>has <code>music:read</code> scope or authenticated</td>
+<td>has <code>music:write</code> scope or authenticated</td>
+<td>should use <code>permission_classes = [IsAuthenticatedOrTokenHasScope, DjangoModelPermission]</code></td>
+</tr>
+<tr>
+<td>TokenMatchesOASRequirements</td>
+<td><code>required_alternate_scopes</code> per method</td>
+<td><code>[OAuth2Authentication]</code></td>
+<td>has all scopes by the HTTP verb</td>
+<td>has all scopes by the HTTP verrb</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>Complicated, isn't it!?</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

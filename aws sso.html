@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2022-05-10
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">AWS SSO</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p><a href="https://aws.amazon.com/single-sign-on/">AWS SSO</a> is a pretty interesting idea. It's actually a bit confusing
+when I first touched it, namely,</p>
+<ol>
+<li>What is a profile</li>
+<li>How to setup a profile</li>
+<li>How to use a profile</li>
+</ol>
+<p>The <a href="https://ben11kehoe.medium.com/you-only-need-to-call-aws-sso-login-once-for-all-your-profiles-41a334e1b37e">article</a> has good explanation on the concept. I'm gonna quote
+it here so I don't need to reinvent the wheels.</p>
+<h1>What is SSO login</h1>
+<blockquote>
+<p>With AWS SSO, you log in as a human, and the token you receive that
+represent you as a logged-in human can become any of the various IAM
+roles in the various accounts that they have been granted access
+to. Even though you give a profile in the input to aws sso login, the
+resulting session is not scoped to the account and role in that
+profile, by design. In the browser, when you log in through your AWS
+SSO start URL (in this case, https://foo.awsapps.com/start), you are
+logged in for all your access, and can find the account and role and
+clicking through it to get into the AWS web console. When you want to
+switch between accounts and roles, you don't need to log in
+again; you go back to the start page and click through into the
+console as a different account and role. In the CLI, it works the same
+way, you log in as a human using aws sso login, and this permits you
+to use any of the accounts and roles you have access to without
+logging in again.
+</p>
+</blockquote>
+<p>The curious thing is, in order do the SSO login, you <strong>must have</strong> at
+least one profile! Read on.</p>
+<h1>What is a profile</h1>
+<blockquote>
+<p>A profile configured in ~/.aws/config that is not using IAM User
+credentials does not represent a particular human. It represents a
+role that any human with the right permissions may assume, and should
+be named accordingly. The profile is about the activities those
+credentials enable, not who may be performing those activities. A
+profile configured for AWS SSO includes the AWS SSO instance (the
+start URL and the region that AWS SSO is configured in), the account,
+and the role in that account to use, when logged in through AWS SSO as
+some human (and will work only if that human has been granted access
+to that account and role through AWS SSO).
+</p>
+</blockquote>
+<p>A hypothetical profile in <code>~/.aws/config</code> looks something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[profile AcctA-Role1]</span>
+<span class="na">sso_start_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://foo.awsapps.com/start</span>
+<span class="na">sso_region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">us-east-2</span>
+<span class="na">sso_account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">111122223333</span>
+<span class="na">sso_role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Role1</span>
+
+<span class="k">[profile AcctB-Role2]</span>
+<span class="na">sso_start_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://foo.awsapps.com/start</span>
+<span class="na">sso_region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">us-east-2</span>
+<span class="na">sso_account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">777788889999</span>
+<span class="na">sso_role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Role2</span>
+
+<span class="k">[profile AcctB-Role1]</span>
+<span class="na">sso_start_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://foo.awsapps.com/start</span>
+<span class="na">sso_region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">us-east-2</span>
+<span class="na">sso_account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">777788889999</span>
+<span class="na">sso_role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Role1</span>
+</code></pre></div>
+
+<p>In order to do the SSO login in previous section, you must have <strong>at
+least one profile</strong>, let's call it the <code>default</code> profile:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[profile default]</span>
+<span class="na">sso_start_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://foo.awsapps.com/start</span>
+<span class="na">sso_region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">us-east-2</span>
+</code></pre></div>
+
+<p>It only needs the <code>start_url</code> and a <code>region</code>. With this you so <code>aws
+sso login --profile default</code>, and complete the login process.</p>
+<h1>How to setup a profile</h1>
+<p>Three ways: copy &amp; paste directly to <code>~/.aws/config</code> (at least for the
+<code>default</code> one, this is the easiest way!), go through <code>aws sso
+configure</code>, or using <a href="https://github.com/benkehoe/aws-sso-util"><code>aws-sso-util</code></a>.</p>
+<h2>Use <code>aws sso configure</code></h2>
+<ol>
+<li>
+<p>You use <code>aws sso configure</code> to setup a profile. <strong>Note</strong> that you
+   can also just copy and paste to <code>~/.aws/config</code> directly if you
+   know what you are doing.</p>
+<div class="highlight"><pre><span></span><code><span class="err">```</span><span class="n">shell</span>
+<span class="n">fengxia</span><span class="nv">@fl5wvhzxat</span><span class="err">:</span><span class="o">~/</span><span class="n">aws</span><span class="err">$</span><span class="w"> </span><span class="n">aws</span><span class="w"> </span><span class="n">configure</span><span class="w"> </span><span class="n">sso</span>
+<span class="n">SSO</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">d</span><span class="o">-&lt;</span><span class="p">.....</span><span class="o">&gt;</span><span class="p">.</span><span class="n">awsapps</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">start</span><span class="o">&gt;</span>
+<span class="n">SSO</span><span class="w"> </span><span class="n">Region</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"> </span><span class="n">us</span><span class="o">-</span><span class="n">east</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">There</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="n">AWS</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">you</span><span class="p">.</span>
+<span class="k">Using</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="o">&lt;</span><span class="p">......</span><span class="o">&gt;</span>
+<span class="n">The</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">is</span><span class="err">:</span><span class="w"> </span><span class="n">ReadOnly</span>
+<span class="k">Using</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="ss">&quot;ReadOnly&quot;</span>
+<span class="n">CLI</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="n">Region</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"> </span><span class="n">us</span><span class="o">-</span><span class="n">east</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">CLI</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="nf">format</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"> </span><span class="n">json</span>
+<span class="n">CLI</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">[</span><span class="n">ReadOnly-&lt;account id&gt;</span><span class="o">]</span><span class="err">:</span><span class="w"> </span><span class="n">give</span><span class="o">-</span><span class="n">it</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">name</span>
+<span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Now use the profile to login: <code>aws sso login --profile &lt;your
+   profile&gt;</code>. Click the <code>Allow</code> on the browser.</p>
+</li>
+<li>
+<p>Get credential(!). This is a step easily omitted, and is exactly
+   the warning above is about. Login only gets you the <em>I'm a human</em>
+   proof, but the computer doesn't yet have credential (actually a
+   short-life token) to run all the followup calls. Thus you need to
+   <strong>acquire</strong> profile's credential:</p>
+<div class="highlight"><pre><span></span><code>```shell
+aws sts get-caller-identity --profile SaaS-Dev.Administrator
+```
+</code></pre></div>
+
+<p>Expect to see an output like this:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="err">```</span><span class="n">json</span>
+<span class="w"> </span><span class="err">{</span>
+<span class="w">     </span><span class="ss">&quot;UserId&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;xxxxxxx:feng.xia@blah.io&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="ss">&quot;Account&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;xxxxxx&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="ss">&quot;Arn&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;arn:aws:sts::xxxxxxx:assumed-role/AWSReservedSSO_Administrator_xxxxxx/&lt;email&gt;&quot;</span>
+<span class="w"> </span><span class="err">}</span>
+<span class="w"> </span><span class="err">```</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Now you are ready to launch CLI that will bear the AWS profile you
+   choose and have access to the resources this profile is allowed to.</p>
+</li>
+</ol>
+<h2>Use <code>aws-sso-util</code> for batch</h2>
+<p>It's ok to use the manual way for one profile. But in practice you may
+be granted permission on a list of profiles. Use <a href="https://github.com/benkehoe/aws-sso-util">aws-sso-util</a> to
+populate all the profiles you can have:</p>
+<div class="highlight"><pre><span></span><code>aws-sso-util<span class="w"> </span>configure<span class="w"> </span>populate<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>us-west-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--existing-config-action<span class="w"> </span>keep
+</code></pre></div>
+
+<p>This will enumerate through your AWS access to grab all profiles you
+can have, and dump them into the <code>~/.aws/config</code>. From that point on,
+you just pick one and use it.</p>
+<h1>How to use a profile</h1>
+<p>Now I have logged in, what if I have multiple profiles defined? Can I
+switch between them freely? &mdash; pretty much, but read this common
+<em>misunderstanding</em> first!!!</p>
+<blockquote>
+<p>I have seen people get the impression that if they want to use Role1
+in account A (111122223333), they need to call aws sso login --profile
+AcctA-Role1, and that if they subsequently want to use Role2 in
+account B (777788889999), they need to then call aws sso login
+--profile AcctB-Role2. However, this isn't how AWS SSO or the
+CLI works!</p>
+<p>What's critical to note is that aws sso login does not deal
+with accounts or roles at all! You can see the code here; it uses the
+start URL and SSO region only. After calling aws sso login --profile
+AcctA-Role1, there are no credentials for Role1 in account A on your
+system.
+</p>
+</blockquote>
+<p>Using a profile is essentially to run a CLI within the context of a
+profile. Two tools, <a href="https://github.com/99designs/aws-vault">aws-vault</a> and <a href="https://github.com/linaro-its/aws2-wrap">aws2-wrap</a>. Both
+essentially do the same thing. My experience is better w/
+<a href="https://github.com/linaro-its/aws2-wrap">aws2-wrap</a> than <a href="https://github.com/99designs/aws-vault">aws-vault</a>, so I'll use that for illustration.</p>
+<div class="highlight"><pre><span></span><code>aws2-wrap<span class="w"> </span>--profile<span class="o">=</span>SaaS-Dev.Administrator<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>aws<span class="w"> </span>organizations<span class="w"> </span>list-accounts
+</code></pre></div>
+
+<p>Basically any AWS CLI will be executed by the profile you want to
+use. Success of the CLI is controlled by whether this profile has the
+permission or not.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

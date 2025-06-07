@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Be Care Free - fashion</title><link href="https://fengxia41103.github.io/myblog/" rel="alternate"></link><link href="https://fengxia41103.github.io/myblog/feeds/fashion.atom.xml" rel="self"></link><id>https://fengxia41103.github.io/myblog/</id><updated>2016-06-12T10:00:00-04:00</updated><subtitle></subtitle><entry><title>Fashion ERP — reports</title><link href="https://fengxia41103.github.io/myblog/fashion%20reports.html" rel="alternate"></link><published>2016-06-12T10:00:00-04:00</published><updated>2016-06-12T10:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-12:/myblog/fashion reports.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; and
+&lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;part two&lt;/a&gt;, we have
+reviewed inventory management and order management. Their functions
+are meant for operator to book-keep information of daily operations.
+Once these data points have been captured, the power of the application
+shines in term of data analysis and reporting.&lt;/p&gt;
+&lt;p&gt;Reports can be grouped into three categories:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports at product level&lt;/span&gt;: top
+   seller, top purchased, top profitable&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports at order level&lt;/span&gt;: top SO by
+   qty balance, top SO in-progress fulfills&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports of seller/buyer account
+   level&lt;/span&gt;: customer AR, vendor AP&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Data points are essentially rolled up following this pattern: product level &amp;rarr; order level
+&amp;rarr; account level.&lt;/p&gt;
+&lt;h1&gt;Product level reports&lt;/h1&gt;
+&lt;h2&gt;Top selling product&lt;/h2&gt;
+&lt;p&gt;Knowing the top seller is the most important thing for any business.
+The report is compiled from sales orders to show which product is high in demand.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_19.png"&gt;
+    &lt;figcaption&gt;Top seller report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Top profitable product&lt;/h2&gt;
+&lt;p&gt;Your best seller shows the demand, but they are not necessarily
+the best for your business if their margin is low. Instead, a high margin
+item may be the target that your next market campaign …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; and
+&lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;part two&lt;/a&gt;, we have
+reviewed inventory management and order management. Their functions
+are meant for operator to book-keep information of daily operations.
+Once these data points have been captured, the power of the application
+shines in term of data analysis and reporting.&lt;/p&gt;
+&lt;p&gt;Reports can be grouped into three categories:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports at product level&lt;/span&gt;: top
+   seller, top purchased, top profitable&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports at order level&lt;/span&gt;: top SO by
+   qty balance, top SO in-progress fulfills&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;reports of seller/buyer account
+   level&lt;/span&gt;: customer AR, vendor AP&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Data points are essentially rolled up following this pattern: product level &amp;rarr; order level
+&amp;rarr; account level.&lt;/p&gt;
+&lt;h1&gt;Product level reports&lt;/h1&gt;
+&lt;h2&gt;Top selling product&lt;/h2&gt;
+&lt;p&gt;Knowing the top seller is the most important thing for any business.
+The report is compiled from sales orders to show which product is high in demand.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_19.png"&gt;
+    &lt;figcaption&gt;Top seller report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Top profitable product&lt;/h2&gt;
+&lt;p&gt;Your best seller shows the demand, but they are not necessarily
+the best for your business if their margin is low. Instead, a high margin
+item may be the target that your next market campaign should focus on.
+Together with the &lt;em&gt;top seller report&lt;/em&gt;, these two
+can give good insights to guide your pricing strategy and marketing
+efforts.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A negative profit margin is a clear signal that something is
+not correct in either the
+price or the vendor cost of product. It can be a simple typo, but
+can also be an indicator of wrong strategy.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_20.png"&gt;
+    &lt;figcaption&gt;Most profitable product report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Top purchased product&lt;/h2&gt;
+&lt;p&gt;Top purchased product can be a result of a good sales. But it can also
+become staled stocks sitting there. The mismatch between your top seller
+and top purchased should always deserve a further analysis in order to
+ensure that your business is not just piling up inventory without
+an exit plan.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_21.png"&gt;
+    &lt;figcaption&gt;Top purchased product report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Order level reports&lt;/h1&gt;
+&lt;h2&gt;Top sales orders by QTY balance&lt;/h2&gt;
+&lt;p&gt;Purpose of this report is to monitor sales orders whose fulfillment is
+lagging behind.  The higher the QTY balance is, the more risk there is
+that the order fails to fulfill properly. However, it does not
+distinguish between an order that has zero fulfillment rate and the
+ones that are in-progress.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_22.png"&gt;
+    &lt;figcaption&gt;Top sales order by QTY balance report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Top SO in-progress fulfills&lt;/h2&gt;
+&lt;p&gt;This report monitors in-progress sales orders that have received some
+levels of fulfillment. The higher the fulfillment rate is, the
+healthier the order is.  A negative rate is possible when such type of
+sales allows filing product returns without linking it to a
+fulfillment. That's usually the case when filing return and filing
+fulfillment form are handled by two groups of people who are not
+synchronized.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_23.png"&gt;
+    &lt;figcaption&gt;Top sales order in-progress fulfills report&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Account level reports&lt;/h1&gt;
+&lt;p&gt;At account level, we created &lt;em&gt;customer account receivable&lt;/em&gt; report and
+&lt;em&gt;vendor account payable&lt;/em&gt; report. Both are health indicators of how well
+we are maintaining a relationship with our peers.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col s6"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_24.png"&gt;
+    &lt;/div&gt;&lt;div class="col s6"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_25.png"&gt;
+    &lt;/div&gt;&lt;/div&gt;
+    &lt;figcaption&gt;Customer AR and vendor AP report&lt;/figcaption&gt;
+&lt;/figure&gt;</content><category term="fashion"></category><category term="fashion"></category></entry><entry><title>Fashion ERP — orders</title><link href="https://fengxia41103.github.io/myblog/fashion%20orders.html" rel="alternate"></link><published>2016-06-06T10:00:00-04:00</published><updated>2016-06-06T10:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-06:/myblog/fashion orders.html</id><summary type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
+shown the design and function behind Product and Inventory management.
+In this article I'll talk about orders.&lt;/p&gt;
+&lt;p&gt;Sales order and purchase order are like two sides of the same coin.
+Each sales order(SO) can include a mixed bag of products from
+different vendors. Once a SO has been created, application will parse
+it into multiple purchase order (PO) and route them to their
+vendor. Reversely, company can place a PO with a vendor, and purchased
+products can be used to fulfill multiple sales orders later.&lt;/p&gt;
+&lt;h1&gt;Order life cycle&lt;/h1&gt;
+&lt;p&gt;To understand the design of orders, one has to first grasp the life
+cycle of an order. I'd like to divide its functions into roughly two
+areas: &lt;em&gt;about physical good&lt;/em&gt; and &lt;em&gt;about money&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The area of physical goods takes care of the acquisition of products
+on order. This includes shipping, receiving, reconciliation,
+inventory, product return and substitution. Like what we did in
+inventory, we maintain a theoretical list which comes from the sales
+order itself (think of it as a wish …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In &lt;a href="https://fengxia41103.github.io/myblog/fashion introduction.html"&gt;part one&lt;/a&gt; I have
+shown the design and function behind Product and Inventory management.
+In this article I'll talk about orders.&lt;/p&gt;
+&lt;p&gt;Sales order and purchase order are like two sides of the same coin.
+Each sales order(SO) can include a mixed bag of products from
+different vendors. Once a SO has been created, application will parse
+it into multiple purchase order (PO) and route them to their
+vendor. Reversely, company can place a PO with a vendor, and purchased
+products can be used to fulfill multiple sales orders later.&lt;/p&gt;
+&lt;h1&gt;Order life cycle&lt;/h1&gt;
+&lt;p&gt;To understand the design of orders, one has to first grasp the life
+cycle of an order. I'd like to divide its functions into roughly two
+areas: &lt;em&gt;about physical good&lt;/em&gt; and &lt;em&gt;about money&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The area of physical goods takes care of the acquisition of products
+on order. This includes shipping, receiving, reconciliation,
+inventory, product return and substitution. Like what we did in
+inventory, we maintain a theoretical list which comes from the sales
+order itself (think of it as a wish list) and an actual list which
+tracks all the above activities. The ratio between the two is
+&lt;code&gt;full-fill rate&lt;/code&gt;. All products are cleared when full-fill rate hits
+100%.  At this point, seller has fulfilled what the buyer is
+expecting, either by original products or replacement or any other
+forms of settlement in between.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/order life cycle.png"&gt;
+    &lt;figcaption&gt;Order life cycle&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The second area of interest is about money. Depending on the business
+model and industry, some will require a form of payment, either by a
+percentage or in full, before any shipment, while others can live with
+zero down up front. The hinge that links activities handling physical
+goods and the money is the &lt;em&gt;invoice&lt;/em&gt;. Invoice is a detailed record
+(bill) that both the seller and the buyer will eventually agree in
+order to proceed with a financial reconciliation.  Ideally buyer pays
+against an invoice, though I have seen other forms of arrangement in
+different industries.  Therefore, on the money side there are also a
+theoretical represented by invoices and an actual which are actual
+payments. The ratio between these two forms &lt;code&gt;payment ratio&lt;/code&gt;. To
+simplify things here we will regard financial reconciliation is
+complete when payment ratio hits 100%.&lt;/p&gt;
+&lt;h1&gt;Create an order&lt;/h1&gt;
+&lt;p&gt;Sales order can be taken in one of two ways. The &lt;em&gt;quick way&lt;/em&gt; is designed
+for internal staff to create an sales order by directly typing in
+line items using a simple syntax:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Each line starts with SKU number, followed by comma delimited
+  size-qty pairs.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For example, &lt;code&gt;234, S-1, M-2&lt;/code&gt; is to order product &lt;code&gt;SKU# 234&lt;/code&gt;, one &lt;code&gt;small&lt;/code&gt;
+and two &lt;code&gt;medium&lt;/code&gt;. Alternatively one can also create a sales order
+through traditional shopping cart method.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col s6"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_7.png"&gt;
+    &lt;/div&gt;&lt;div class="col s6"&gt;
+      &lt;img class="center img-responsive" src="images/fashion_8.png"&gt;
+    &lt;/div&gt;&lt;/div&gt;
+    &lt;figcaption&gt;
+      One can use a quick way or shopping cart to create a sales order
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Order summary and details&lt;/h2&gt;
+&lt;p&gt;A nice feature here is that for an aggregated information such as total
+quantity and sum, the application offers a dropdown that user can
+easily view a broken-down detail by each vendor.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_9.png"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Order details are grouped by vendor also. Each vendor tab has details
+of products on order. At the bottom of tab, the application computes
+a &lt;em&gt;total qty&lt;/em&gt; and &lt;em&gt;total value&lt;/em&gt; for that vendor.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img class="center img-responsive" src="images/fashion_10.png"&gt;
+  &lt;figcaption&gt;Order detail tabs are a set of shopping basket, one per vendor&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Product receiving and fulfillment&lt;/h1&gt;
+&lt;p&gt;Product receiving is represented by fulfillment in the application.  I
+call an item fulfilled when buyer side has &lt;em&gt;received and accepted&lt;/em&gt;
+that item. In turn, fulfill rate is the count of items that met this
+condition over the total products on order. It is important to note
+that only &lt;em&gt;accepted&lt;/em&gt; one is counted as fulfilled. Received counts are
+inaccurate because item can be received but then returned due to
+damage.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;fulfill rate = count of fulfilled item / total number of items&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure&gt;
+  &lt;img class="center img-responsive" src="images/fashion_11.png"&gt;
+  &lt;figcaption&gt;Create an order fulfillment&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Fulfilling a product is almost like filling in an inventory count
+sheet.  Potentially this can be automated using barcode scanner or
+other form of scanning technology But unlike a count sheet that is
+specific for a vendor, fulfillment form lists all vendors and products
+on order. This accounts for the fact that shipments can come in at
+random order. Therefore, showing them on a single page saves the
+receiving staff from jumping through multiple screens in order to
+record shipments. &lt;code&gt;QTY BALANCE&lt;/code&gt; column shows the remaining quantity
+that the application is expecting. This is the &lt;em&gt;theoretical&lt;/em&gt; value for
+a line time, and the addition of all received fulfillment will be the
+&lt;em&gt;actual&lt;/em&gt;.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_12.png"&gt;
+    &lt;figcaption&gt;Fulfillment summary&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Fulfillment summary is a great way to keep track of receiving status.
+One interesting distinction here is the &lt;em&gt;fulfill rate of quantity
+versus that of value&lt;/em&gt;. This accounts for the fact that products have
+different values.  Therefore, a 90% fulfill rate of quantity may not
+be a good news if in value the fulfill rate is much lower. Monitoring
+this gap can be an early warning sign that the supplier is lagging
+behind.&lt;/p&gt;
+&lt;p&gt;Finalizing a fulfillment is to lock in the receiving status. User can
+either do this on each fulfillment (eg. in a long running order where
+fulfillment come in over a stretched period of time), or close them
+all with a single click. Simple.&lt;/p&gt;
+&lt;h1&gt;Return a product&lt;/h1&gt;
+&lt;p&gt;Product return is a common scenario.  Rule we applied here is that
+&lt;em&gt;quantity available for return is determined by received
+fulfillments&lt;/em&gt;. This also means that a return is always associated with
+an order. This contrasts to the approach where return is checked
+against inventory regardless how that product got into the inventory
+at the first place.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_16.png"&gt;
+    &lt;figcaption&gt;Return a product&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Also, each line item needs a &lt;code&gt;reason&lt;/code&gt;. The list is configurable. An
+important decision to make is who will absorb the damage, seller or
+buyer. For example, if the agreement is that buyer bears damages if it
+was caused by third-party shipper, then no credit will be issued,
+which in the application shows as unchanged &lt;code&gt;account
+payable&lt;/code&gt;. Otherwise, if seller is to pay for this, a credit will be
+deducted from the current &lt;em&gt;account payable&lt;/em&gt; so buyer owes less now due
+to the return.&lt;/p&gt;
+&lt;h1&gt;Make a payment&lt;/h1&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_13.png"&gt;
+    &lt;figcaption&gt;Make a payment&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The application has not yet integrated with a payment system. As of
+now it provides a function to register a payment against an order.
+Also, user can finalize a payment by &lt;em&gt;reviewing&lt;/em&gt; it. This in effect
+locks down the payment so it is not editable anymore.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_14.png"&gt;
+    &lt;figcaption&gt;Review a payment&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Drop shipping&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Drop_shipping"&gt;Drop shipping&lt;/a&gt; is a supply chain management method in which the
+retailer does not keep goods in stock but instead transfers customer
+orders and shipment details to either the manufacturer, another
+retailer, or a wholesaler, who then ships the goods directly to the
+customer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A sales order can include products from different vendors.
+When we shop at Amazon, products do not necessarily come
+from an Amazon warehouse. Instead, the order is routed
+to the actual seller who will fulfill the order
+as if he works for Amazon.&lt;/p&gt;
+&lt;p&gt;The application parses automatically
+a sales order into multiple purchase orders, one per vendor.
+These orders will then be tracked individually for fulfillment, payment
+and so forth.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_15.png"&gt;
+    &lt;figcaption&gt;Keep purchase orders in sync with sales order in drop shipping&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1&gt;Purchase order&lt;/h1&gt;
+&lt;p&gt;I have always viewed purchase as the mirror image of sales. It really
+depends on whose view you are referring to because in any transaction
+there are always two parties, one will sell and the other will buy. So
+from buyer's stand point of view, an order is a PO, and the same order
+is a SO for the seller. In turn, a SO will reduce inventory while PO
+increases inventory.  However, SO and PO bring in some important
+factors in practice besides driving the supply chain in opposite
+directions.&lt;/p&gt;
+&lt;p&gt;First, tax. In most cases seller is responsible for paying tax. In
+application this becomes a requirement that SO has functions to
+compute and track tax.  Because each business model, industry, state
+and country can be quite different in this matter, this is an area I
+have experienced a lot of customization and code refactoring.&lt;/p&gt;
+&lt;p&gt;Second, what is the relationship of a SO and a PO in your business?
+Drop shipping, for example, can be modeled as a back-to-back 1-N model
+where one SO is parsed to create multiple(N) POs.  This provides full
+traceability from sales to purchase.  Retail, on the other hand, may
+purchase in bulk with PO way before a SO takes place. Therefore,
+seller may not be interested in knowing the product just sold came
+from which PO. But on top of this, there are retail business to whom
+such traceability is required, for example, food retailer.  Therefore,
+attempting to answer this question with a single answer will not work!&lt;/p&gt;
+&lt;p&gt;What is missing is a business context, something that provides
+additional information for the application to make such decision.  In
+my client's case, she sells supplier's stock under her name with a
+markup.  Goods are then shipped to her distribution warehouse before
+re-shipped to end client.  Therefore, when the application runs in
+this business context it will enforce a back-to-back SO-PO reference.
+She also runs a wholesale business in which purchase and sales have no
+such strong bound. Thus the application will leave the SO-PO reference
+optional.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_17.png"&gt;
+    &lt;figcaption&gt;Purchase order summary&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;An interesting thing of fashion industry is that product often has
+long lead time. For most vendors a calendar year is divided into two
+seasons &amp;mdash; Spring/Summer season and Fall/Winter season. Buyer
+will place PO in October or even earlier for the Spring/Summer season
+of next year.  So it is not uncommon to see a 6-month lead time, which
+introduces large amount of uncertainties to the buyer's operation. To
+accommodate this, it is wise to keep informed by vendor on which line
+item will be available when. In application we have add a dropdown
+list, &lt;em&gt;"Available In"&lt;/em&gt;, so this information is captured:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;unknown&lt;/span&gt;: default state, vendor has not released information of its availability&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;never&lt;/span&gt;: this product has been dropped out or sold out&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;local&lt;/span&gt;: can be fulfilled right now by vendor's local outlet&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Jan - Dec&lt;/span&gt;: calendar month. Its year is implied.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;
+    &lt;img class="center img-responsive" src="images/fashion_18.png"&gt;
+    &lt;figcaption&gt;Purchase order line item availability&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In this article, I have covered sales order and purchase order.  They
+are the core of the company's operation.  In &lt;a href="https://fengxia41103.github.io/myblog/fashion reports.html"&gt;part
+three&lt;/a&gt;, we will get to the
+exciting part of the application where all these data points will be
+utilized to drive a better operation.&lt;/p&gt;</content><category term="fashion"></category><category term="fashion"></category></entry><entry><title>Fashion ERP — introduction</title><link href="https://fengxia41103.github.io/myblog/fashion%20introduction.html" rel="alternate"></link><published>2016-06-02T10:00:00-04:00</published><updated>2016-06-02T10:00:00-04:00</updated><author><name>Feng Xia</name></author><id>tag:fengxia41103.github.io,2016-06-02:/myblog/fashion introduction.html</id><summary type="html">&lt;p&gt;Project Fashion is an ERP system built from ground up based on
+operations in an international trading company who has a specialty in
+fashion products. Each season there are between 10 and 20 vendors and
+a few thousand new SKUs. Most vendors roll out new designs twice per
+year &amp;mdash; spring/summer season and fall/winter season. Some may
+have new products every month. To keep track of these products and
+keep up with vendor's schedule have been the primarily challenge this
+coompany has.&lt;/p&gt;
+&lt;p&gt;The system's role, therefore, is to replace previously paper-based
+operations with now an online version so that product catelogue can be
+centrally maintained, and multiple subsidaries who are geographically
+separated can coordinate sales, purchase and inventory, and upper
+management can receive instant up-to-date reports and the ability to
+drill down to SKU level details when needed.&lt;/p&gt;
+&lt;p&gt;Unlike a full blown ERP, a decision was made during design to remove
+complexity so user and customer can operate with little training.
+Configurable UI and workflow were scratched off. Instead, hard coded
+workflow and accurate …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Project Fashion is an ERP system built from ground up based on
+operations in an international trading company who has a specialty in
+fashion products. Each season there are between 10 and 20 vendors and
+a few thousand new SKUs. Most vendors roll out new designs twice per
+year &amp;mdash; spring/summer season and fall/winter season. Some may
+have new products every month. To keep track of these products and
+keep up with vendor's schedule have been the primarily challenge this
+coompany has.&lt;/p&gt;
+&lt;p&gt;The system's role, therefore, is to replace previously paper-based
+operations with now an online version so that product catelogue can be
+centrally maintained, and multiple subsidaries who are geographically
+separated can coordinate sales, purchase and inventory, and upper
+management can receive instant up-to-date reports and the ability to
+drill down to SKU level details when needed.&lt;/p&gt;
+&lt;p&gt;Unlike a full blown ERP, a decision was made during design to remove
+complexity so user and customer can operate with little training.
+Configurable UI and workflow were scratched off. Instead, hard coded
+workflow and accurate cross reference were implemented so operator at
+each business function can understand and operate her job
+intutitively.&lt;/p&gt;
+&lt;p&gt;On the broad side, functions are divided into the following categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;CRM&lt;/span&gt;: customer and vendor database&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Product&lt;/span&gt;: product database&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Inventory&lt;/span&gt;: product inventory&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Sales&lt;/span&gt;: sales order&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Purchase&lt;/span&gt;: purchase order&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Invoice&lt;/span&gt;: order invoices&lt;/li&gt;
+&lt;li&gt;&lt;span class="myhighlight"&gt;Report&lt;/span&gt;: management reports&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Product&lt;/h1&gt;
+&lt;p&gt;The key concept I'd like to clarify is the product &lt;a href="https://en.wikipedia.org/wiki/Stock_keeping_unit"&gt;SKU&lt;/a&gt;.  It has
+been a surprise to me how many people who, even have been working in
+this industry for years, do not understand SKU. &lt;em&gt;SKU&lt;/em&gt; is a stock
+unit. In other words, it is the smallest unit the company chooses to
+manage its product.  The more detailed it is, the more accurate the
+rest of the operations can be, but also the more work to set it up
+initially.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/fashion_1.png"&gt;
+    &lt;figcaption&gt;For staffs, search by filter&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;One interesting challenge relates to how one finds a particular
+product in the system. Shoppers are visual animals. During 2015
+Fall/Winter season we followed clients in stores and observed their
+pattern.  All went on by first picking a cloth up from rack and
+looking at it before she seeked out for more concrete information such
+as its vendor or season. On the other hand, staffs can often directly
+recall a product through their familiarity with its attributes such as
+vendor, season, name and style's serial number, instead of seeing it
+physically. Therefore, to staffs filtering by these attributes will be
+more efficient.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img src="images/fashion_3.png"&gt;
+    &lt;figcaption&gt;For customers, browse/search by season and vendor&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The search by season function is built with an e-Commerce interface in
+mind.  Customers are to "browse" instead of "search". Products are
+first grouped by season then by vendor. Customer browse through
+product catelogue as if in a e-shop so it creates a more direct
+experience that filter boxes.  User can drill down from season to
+vendor, and to add product to shopping cart which later turns into a
+sales order.&lt;/p&gt;
+&lt;h1&gt;Inventory&lt;/h1&gt;
+&lt;p&gt;Product inventory are mapped to a 3-layer structure: company &amp;mdash;
+location &amp;mdash; storages.  A location represents a store, and within
+a store there can be multiple storages. Inventory in storage can then
+be rolled up to location level and company level. There is also a
+common setup of &lt;em&gt;region&lt;/em&gt; or &lt;em&gt;district&lt;/em&gt; level that is between company
+and location. It is not implemented but can be added easily.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/fashion_2.png"&gt;
+    &lt;figcaption&gt;Inventory structure diagram&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;For each product, there are two inventory counts: &lt;em&gt;theoretical&lt;/em&gt; and
+&lt;em&gt;actual&lt;/em&gt;. Theoretical counts are derived from sales, purchase, returns
+and so forth; actual counts are directly obtained from physically
+counting products in a storage, also called physical inventory.  As
+you can see, theoretical counts are dynamic because they are
+influenced by business activities. Physical inventory is a snapshot in
+time when a staff walks into the store's storage to count. Therefore,
+it is crucial to understand that comparing the two implies a time
+stamp that both sides have to agree. Otherwise, such comparison is
+meaningless.&lt;/p&gt;
+&lt;table class="table bordered striped"&gt;
+  &lt;thead&gt;
+    &lt;th&gt;Theoretical inventory&lt;/th&gt;
+    &lt;th&gt;Physical inventory&lt;/th&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;
+      Product count will increase and decrease dynamically due to
+      sales and purchase.
+    &lt;/td&gt;&lt;td&gt;
+      Product count is obstained only through counting goods in
+      inventory physically.
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Physical inventory is usually scheduled. Some companies have daily
+count while some have weekly or monthly count. On physical inventory
+page, user can select from a list of storages to do the
+counting. Season and vendor list within each storage are derived from
+products in that storage by the application automatically.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/fashion_4.png"&gt;
+    &lt;figcaption&gt;Select location and vendor to count&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;When taking the physical count, one has two modes to choose from
+depending on how counting is done. &lt;strong&gt;Admin mode&lt;/strong&gt; displays product
+details such as style and size.  They are used as assisting
+information to the counting staff. Counts are default to 0.  Only the
+ones having a non-zero count will be highlighted and saved later.
+However, it is possible that a product has been sold out. So to handle
+this special case we use a &lt;em&gt;star&lt;/em&gt; to indicate this situation.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/fashion_5.png"&gt;
+    &lt;figcaption&gt;Physical inventory admin mode&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;User mode removes product details from the view, leaving only product SKU and
+size information for reference.&lt;/p&gt;
+&lt;figure class="s12 center"&gt;
+    &lt;img  src="images/fashion_6.png"&gt;
+    &lt;figcaption&gt;Physical inventory user mode&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;So far I have covered Product and Inventory functions.  In &lt;a href="https://fengxia41103.github.io/myblog/fashion orders.html"&gt;part
+two&lt;/a&gt;, I will dive into the core
+of this application to talk about how we will handle sales orders and
+purchase orders.&lt;/p&gt;</content><category term="fashion"></category><category term="fashion"></category></entry></feed>

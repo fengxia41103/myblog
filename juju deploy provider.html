@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2017-02-08
+
+
+    <a class="wave-effect" href="openstack.html">
+      <i class="fa fa-folder-open-o"></i>
+      openstack
+    </a>
+
+    <a class="wave-effect" href="tag-lenovo.html">
+      <i class="fa fa-tag"></i>
+      lenovo
+    </a>
+
+    <h1 class="myhighlight">Juju deploy and Provider</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <blockquote>
+        <span class="myhighlight">Copyright @ Lenovo US</span>
+      </blockquote>
+      <p><p>In <a href="https://fengxia41103.github.io/myblog/juju deploy.html">this</a> article, we have demonstrated how Juju deploys a charm,
+including what makes a node eligible as a target and what files will
+be put on by the deployer.If you recall, there were four steps in a
+deploy process:</p>
+<ol>
+<li>Add a new machine to the cloud environment. In the <a href="https://fengxia41103.github.io/myblog/juju deploy.html">demo</a>, we
+   added this machine manually using <code>juju add-machine</code> command.</li>
+<li>Machine-0 recognizes the new node.</li>
+<li>CLI issues a deploy command.</li>
+<li>Charm gets deployed.</li>
+</ol>
+<p>This usecase, however, is somewhat backwards -- we have provisioned a
+machine prior to the deploy command. Wouldn't it be better if the
+command will signal the cloud provider to create a new machine on the
+fly? MAAS provider can almost do just that.</p>
+<h1>MAAS way of a deploy</h1>
+<p>We have briefly touched upon <a href="https://fengxia41103.github.io/myblog/juju deploy.html">the MAAS way</a>.  By default, Juju
+deploy will request for a new machine unless using the <code>--to [machine
+number]</code> flag. While using MAAS it is seen that MAAS will turn a
+<code>READY</code> machine into <code>ALLOCATED</code> then <code>DEPLOYING</code>. Once a Juju agent
+is installed (provisioned), the agent executes application deployment.</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20target%20node%20state%20diagram.png" />
+    <figcaption>MAAS target node state diagram during Juju deploy process</figcaption>
+</figure>
+
+<h1>From CLI to provider</h1>
+<p>We know machine-0 will call MAAS's REST API to kick off the machine
+provisioning process. But we do not know which API endpoint it is
+using, and who is the caller inside machine-0 that makes this call.
+<a href="https://fengxia41103.github.io/myblog/juju deploy.html">Priviously</a> we have analyzed this process from the outside &mdash;
+files generated, states changed, application installed. Here we will
+look into the code to understand how these steps take place.</p>
+<h2>Overview of the agent</h2>
+<p>While looking at this process, one can't help noticing the key role
+the juju agent plays. It seems to have intelligence that, once
+installed, knows how to speak to the state controller (machine-0), how
+to find and download a charm, and how to use it to deploy an
+application. So just how are agents wired together?</p>
+<figure class="s12 center">
+    <img src="images/juju%20agent%20overview.png" />
+    <figcaption>High level view of Juju agents in an environment</figcaption>
+</figure>
+
+<p>The key of this diagram is that the agents are connected in a
+<strong>client-server</strong> configuration, where machine-0's agent is the <em>API
+server</em> and all other agents are its clients. The API server provides
+a <em>facade</em>, a design pattern, which exposes functions for client to
+call. It is not clear yet how function is mapped to a string,
+eg. <code>Deploy</code> RPC will translate to facade's <code>Deploy()</code> function
+call.So Juju CLI is a client, same as a provisioned node.</p>
+<h2>Machine-0, state, and provisioner</h2>
+<p>Now when agent, say the CLI, issues a command, to the API server, what
+happens next? Juju's design maintains an internal state that are
+persisted in a mongo DB. A command will cause a state change, eg. if
+machine XYZ's current state is one that has no MySQL (state A), a
+deploy MySQL command will generate a state B (=state A + MySQL
+installed).  This change is then saved to the DB. There is a
+background loop called <code>provisioner</code>, who monitors this state
+change. The change(set) essentially has all the information the
+provisioner needs to take an action so to bring machine from state A
+&rarr; state B.</p>
+<figure class="s12 center">
+    <img src="images/juju%20machine%200%20state.png" />
+    <figcaption>Machine-0 state & provisioner</figcaption>
+</figure>
+
+<h2>Provisioner and provider</h2>
+<p>Ok, so the provisioner loop is the action taker. How is it aware of
+the cloud provider? This is the final piece of the puzzle &mdash;
+within the <code>provisionTask</code> struct, there is a
+<code>environs.InstanceBroker</code>. Now if you recall, the <code>environs</code> is
+another name for provider, where <code>InstanceBroker</code> is a provider
+interface! Bingo.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">type</span><span class="w"> </span>provisionerTask<span class="w"> </span>struct<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>controllerUUID<span class="w">             </span>string
+<span class="w">    </span>machineTag<span class="w">                 </span>names.MachineTag
+<span class="w">    </span>machineGetter<span class="w">              </span>MachineGetter
+<span class="w">    </span>toolsFinder<span class="w">                </span>ToolsFinder
+<span class="w">    </span>machineChanges<span class="w">             </span>watcher.StringsChannel
+<span class="w">    </span>retryChanges<span class="w">               </span>watcher.NotifyChannel
+--&gt;<span class="w"> </span>broker<span class="w">                     </span>environs.InstanceBroker
+<span class="w">    </span>catacomb<span class="w">                   </span>catacomb.Catacomb
+<span class="w">    </span>auth<span class="w">                       </span>authentication.AuthenticationProvider
+<span class="w">    </span>imageStream<span class="w">                </span>string
+<span class="w">    </span>harvestMode<span class="w">                </span>config.HarvestMode
+<span class="w">    </span>harvestModeChan<span class="w">            </span>chan<span class="w"> </span>config.HarvestMode
+<span class="w">    </span>retryStartInstanceStrategy<span class="w"> </span>RetryStrategy
+<span class="w">    </span>//<span class="w"> </span>instance<span class="w"> </span>id<span class="w"> </span>-&gt;<span class="w"> </span>instance
+<span class="w">    </span>instances<span class="w"> </span>map<span class="o">[</span>instance.Id<span class="o">]</span>instance.Instance
+<span class="w">    </span>//<span class="w"> </span>machine<span class="w"> </span>id<span class="w"> </span>-&gt;<span class="w"> </span>machine
+<span class="w">    </span>machines<span class="w"> </span>map<span class="o">[</span>string<span class="o">]</span>*apiprovisioner.Machine
+<span class="o">}</span>
+</code></pre></div>
+
+<h2>Call chain, and call to provider</h2>
+<p>Back to our initial question then &mdash; how a CLI deploy command can
+kick off provider to create a new machine? The command chain is
+roughly like this:</p>
+<ol>
+<li>CLI will send a RPC request to API server (machine-0).</li>
+<li>RPC figures out what the next state needs to be.</li>
+<li>machine-0's agent write the change to DB.</li>
+<li>Provisioner detects a state change.</li>
+<li>Provisioner task calls <code>environs.broker.StartInstance</code> function to
+   kick off a new machine.</li>
+</ol>
+<p>Mapping everything here into what's in the code, here is a
+illustration showing call chain from one module to the next. Some of
+them are just think wrapper of next function. The mapping between a
+command to a state is taking place in <code>state.AddApplication()</code> which
+I'm highlighting in <font color="green">green</font>.</p>
+<figure class="s12 center">
+    <img src="images/juju%20deploy%20call%20chain.png" />
+    <figcaption>Illustration of call chain by "juju deploy" command</figcaption>
+</figure></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

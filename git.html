@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2019-10-09
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-thoughts.html">
+      <i class="fa fa-tag"></i>
+      thoughts
+    </a>
+
+    <h1 class="myhighlight">Git</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>Too many times I can't remember a particular git command. So here
+let's keep notes on the ones I'd like to use and what they are.</p>
+<h1>.gitconfig</h1>
+<p>Copy this to <code>$HOME</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>alias<span class="o">]</span>
+<span class="w">    </span><span class="nv">lg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!<span class="s2">&quot;git lg1&quot;</span>
+<span class="w">    </span><span class="nv">lg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!<span class="s2">&quot;git lg1-specific --all --simplify-by-decoration&quot;</span>
+<span class="w">    </span><span class="nv">lg2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!<span class="s2">&quot;git lg2-specific --all --simplify-by-decoration&quot;</span>
+<span class="w">    </span><span class="nv">lg3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!<span class="s2">&quot;git lg3-specific --all --simplify-by-decoration&quot;</span>
+
+<span class="w">    </span>lg1-specific<span class="w"> </span><span class="o">=</span><span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--abbrev-commit<span class="w"> </span>--decorate
+<span class="w">    </span>--format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold</span>
+<span class="s1">    green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)-</span>
+<span class="s1">    %an%C(reset)%C(auto)%d%C(reset)&#39;</span>
+
+<span class="w">    </span>lg2-specific<span class="w"> </span><span class="o">=</span><span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--abbrev-commit<span class="w"> </span>--decorate
+<span class="w">    </span>--format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold</span>
+<span class="s1">    cyan)%aD%C(reset) %C(bold</span>
+<span class="s1">    green)(%ar)%C(reset)%C(auto)%d%C(reset)%n&#39;&#39;</span>
+<span class="s1">    %C(white)%s%C(reset) %C(dim white)- %an%C(reset)&#39;</span>
+
+<span class="w">    </span>lg3-specific<span class="w"> </span><span class="o">=</span><span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--abbrev-commit<span class="w"> </span>--decorate
+<span class="w">    </span>--format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold</span>
+<span class="s1">    cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold</span>
+<span class="s1">    cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n&#39;&#39;</span>
+<span class="s1">    %C(white)%s%C(reset)%n&#39;&#39;          %C(dim white)- %an &lt;%ae&gt;</span>
+<span class="s1">    %C(reset) %C(dim white)(committer: %cn &lt;%ce&gt;)%C(reset)&#39;</span>
+
+<span class="w">    </span><span class="nv">hist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--first-parent<span class="w"> </span>--all
+<span class="w">    </span>--pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold</span>
+<span class="s1">    blue)&lt;%an&gt;%Creset&#39;</span><span class="w"> </span>--date<span class="o">=</span>short
+
+<span class="w">    </span><span class="nv">gr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--full-history<span class="w"> </span>--all<span class="w"> </span>--color<span class="w"> </span>--pretty<span class="o">=</span>tformat:<span class="s2">&quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m&quot;</span><span class="w"> </span>--simplify-by-decoration
+</code></pre></div>
+
+<h1>checkout and track</h1>
+<p>One bang, create both a local and track:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-t<span class="w"> </span>origin/&lt;branch<span class="w"> </span>name&gt;
+</code></pre></div>
+
+<h1>log</h1>
+<h2>show file changed</h2>
+<p><code>git log --name-only --pretty=format:"%h - %an, %ar : %s" --graph
+--all</code> will show a short commit #, who committed it, the commit
+message, and list of files changed:</p>
+<div class="highlight"><pre><span></span><code>*<span class="w"> </span>f48af046<span class="w"> </span>-<span class="w"> </span>fxia1,<span class="w"> </span><span class="m">18</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w"> </span>:<span class="w"> </span>Minor<span class="w"> </span>change<span class="w"> </span>of<span class="w"> </span>webapp/README.md.<span class="w"> </span>Add<span class="w"> </span>branch<span class="w"> </span><span class="m">422</span><span class="w"> </span>strategy<span class="w"> </span>diagram<span class="w"> </span>to<span class="w"> </span>git.<span class="p">|</span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span>diagrams/git<span class="w"> </span>develop<span class="w"> </span>branch<span class="w"> </span><span class="m">422</span><span class="w"> </span>strategy.dia
+<span class="p">|</span><span class="w"> </span>diagrams/git<span class="w"> </span>develop<span class="w"> </span>branch<span class="w"> </span><span class="m">422</span><span class="w"> </span>strategy.png
+<span class="p">|</span><span class="w"> </span>mwc/src/main/webapp/README.md
+</code></pre></div>
+
+<h2>train tracks</h2>
+<p>Another one is to draw a log graph of train tracks:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--full-history<span class="w"> </span>--all<span class="w"> </span>--color<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--pretty<span class="o">=</span>format:<span class="s2">&quot;%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s&quot;</span>
+
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--abbrev-commit<span class="w"> </span>--decorate<span class="w"> </span>--format<span class="o">=</span>format:<span class="s1">&#39;%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)&#39;</span><span class="w"> </span>--name-only
+</code></pre></div>
+
+<p>This will show in terminal of full git histories and draw those train
+track graphs. An example of my blog git:</p>
+<div class="highlight"><pre><span></span><code>*<span class="w"> </span>8775404a<span class="w">       </span>Update<span class="w"> </span>pandoc<span class="w"> </span>Makefile<span class="w"> </span>and<span class="w"> </span>pandoc.css
+*<span class="w">   </span>495b70e4<span class="w">     </span>Merge<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ </span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span>*<span class="w"> </span>9d44fd57<span class="w">     </span>Update<span class="w"> </span>draft<span class="w"> </span>doc.
+*<span class="w"> </span><span class="p">|</span><span class="w">   </span>656ed837<span class="w">   </span>Merge<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span><span class="p">|</span>/<span class="w">  </span>
+<span class="p">|</span><span class="w"> </span>*<span class="w"> </span>bd47499b<span class="w">     </span>Adding<span class="w"> </span>cp<span class="w"> </span>deployment.md<span class="w"> </span>and<span class="w"> </span>git.md
+*<span class="w"> </span><span class="p">|</span><span class="w">   </span>2b4cdbd0<span class="w">   </span>Merge<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span><span class="p">|</span>/<span class="w">  </span>
+<span class="p">|</span><span class="w"> </span>*<span class="w"> </span>cf000d79<span class="w">     </span>Add<span class="w"> </span>a<span class="w"> </span>summary<span class="w"> </span>to<span class="w"> </span>.md.
+*<span class="w"> </span><span class="p">|</span><span class="w">   </span>eaa16ba3<span class="w">   </span>Merge<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span><span class="p">|</span>/<span class="w">  </span>
+<span class="p">|</span><span class="w"> </span>*<span class="w"> </span>a2efd99c<span class="w">     </span>Add<span class="w"> </span>thoughts/smart<span class="w"> </span>phone.md
+*<span class="w"> </span><span class="p">|</span><span class="w">   </span>e346f0d5<span class="w">   </span>Merge<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span><span class="p">|</span>/<span class="w">  </span>
+<span class="p">|</span><span class="w"> </span>*<span class="w"> </span>b1c05698<span class="w">     </span>Upgrade<span class="w"> </span>pelican<span class="w"> </span>to<span class="w"> </span><span class="m">4</span>.1.2.<span class="w"> </span>Fixing<span class="w"> </span>page<span class="w"> </span>iteration<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>index<span class="w"> </span>page.
+*<span class="w"> </span><span class="p">|</span><span class="w">   </span>e2456350<span class="w">   </span>Merge<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;dev&#39;</span>
+<span class="p">|</span><span class="se">\ \ </span><span class="w"> </span>
+<span class="p">|</span><span class="w"> </span><span class="p">|</span>/<span class="w">  </span>
+<span class="p">|</span><span class="w"> </span>*<span class="w"> </span>d9bfa593<span class="w">     </span>Add<span class="w"> </span>thoughts/what<span class="w"> </span>we<span class="w"> </span>know<span class="w"> </span>is<span class="w"> </span>untrue.md
+<span class="p">|</span>/<span class="w">  </span>
+*<span class="w"> </span>5e8e909b<span class="w">       </span>Replacing<span class="w"> </span><span class="o">{</span>filename<span class="o">}</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>download<span class="w"> </span>content<span class="w"> </span>w/<span class="w"> </span><span class="o">{</span>static<span class="o">}</span>.
+</code></pre></div>
+
+<h2>commits between two dates</h2>
+<p><code>git log --since "DEC 1 2014" --until "DEC 5 2014"</code></p>
+<h1>tag</h1>
+<ul>
+<li>Add one: <code>git tag -a &lt;tag name&gt; -m "Say something"</code></li>
+<li>Delete: <code>git tag -d &lt;tag name&gt;</code></li>
+<li>Show a tag list: <code>git tag</code></li>
+</ul>
+<h1>diff</h1>
+<ul>
+<li>two branches: <code>git diff &lt;branch A&gt;..&lt;branch B&gt;</code></li>
+<li>two commits: <code>git diff ee4be da82da</code></li>
+<li>a single file: <code>git diff &lt;file name&gt;</code>: this will diff between disk
+  file and branch's HEAD.</li>
+<li>a single file between two branches: <code>git diff &lt;branch A&gt;..&lt;branch B&gt;
+  -- &lt;file name&gt;</code></li>
+<li>list of commits between two branches/commits: <code>git log --left-right
+  --cherry-pick --oneline c1..c2</code></li>
+</ul>
+<h1>revert</h1>
+<ul>
+<li>back to HEAD: <code>git reset --hard HEAD</code>: this throws away everything
+  you have changed in this branch.</li>
+<li>back to a commit but keep the local changes: <code>git reset --soft
+  &lt;commit #&gt;</code> &larr; this is going back in time, but keep my changes
+  since then scenario. Neat!</li>
+<li>a commit: <code>git revert &lt;commit #&gt;</code></li>
+</ul>
+<h1>port change from one branch to another</h1>
+<p>This is common when a feature is delayed/moved into a later release,
+thus we have to create a newer branch for the new release, but keep
+all the old changes. How to do that?</p>
+<ol>
+<li>Create a new branch off the new release staging.</li>
+<li>Checkout the old feature branch.</li>
+<li>Use <code>git log --name-only</code> (see a fancy one above) to see the list
+   of file changes.</li>
+<li>Switch back to the new branch, <code>git checkout &lt;old branch&gt;
+   &lt;filename&gt;</code>, one by one.</li>
+</ol>
+<h1>remove remote branch</h1>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>-d<span class="w"> </span>origin<span class="w"> </span>&lt;branch_name&gt;
+</code></pre></div>
+
+<h1>Ref</h1>
+<p>I like <a href="https://ohshitgit.com/">this blog</a>.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

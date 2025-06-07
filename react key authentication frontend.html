@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2021-08-22
+
+
+    <a class="wave-effect" href="dev.html">
+      <i class="fa fa-folder-open-o"></i>
+      dev
+    </a>
+
+    <a class="wave-effect" href="tag-dev.html">
+      <i class="fa fa-tag"></i>
+      dev
+    </a>
+
+    <h1 class="myhighlight">REACT Key Authentication (2/2) - frontend</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>Following last article on <a href="https://fengxia41103.github.io/myblog/react key authentication backend.html">API backend</a> using Tastypie, this
+article will show REACT frontend side, in particular, the <code>login</code> and
+<code>logout</code>. Again, I'm very surprised that not many <code>npm</code> readily
+available to encapsulate such a common task. Blogs show how the author
+has done the authentication, aka. authentication, but I couldn't find
+much on how to design the logout &mdash; Should I redirect to page
+upon logout? if yes, which page, any? How then should the routing be?
+and how to protect all pages to require authentication?</p>
+<h1>Design</h1>
+<figure class="col s12">
+  <img src="images/react%20login%20logout.png"/>
+  <figcaption>REACT login & logout</figcaption>
+</figure>
+
+<p>Observe the followings:</p>
+<ol>
+<li>
+<p><code>login view</code>: First of all, I'm not saying this page is only doing
+   login. It can be any view as you wish. As long as the login call is
+   happening while user is using this page, I'm calling it the <code>login</code>
+   page, thus there is always a <code>login view</code>. The actual login call to
+   <code>post</code> can be component rendered by this view.</p>
+</li>
+<li>
+<p><code>logout component</code>: is most likely a button/icon on nav bar that
+   lets user to logout. Nothing prevents you doing a full page just
+   for the logout. So similar to the <code>login view</code>, as long as the
+   logout call to API is happening on this page/view, this is the
+   <code>logout component</code>.</p>
+</li>
+<li>
+<p><code>Auth logic root view</code>: is the mother view of the <code>login view</code>. For
+   simplicity purpose I'm also drawing it to be the mother of all
+   other views which <strong>require authentication</strong>. Theoretically the
+   latter is not mandatory because you can use routing to <code>goto</code>
+   another URL. But keeping them as children view ensures that they
+   can not escape the login logic.</p>
+</li>
+<li>
+<p><code>Auth protected views</code>: any view that requires authentication.</p>
+</li>
+</ol>
+<p>Once we have these concepts, the requirements are clear:</p>
+<blockquote>
+<ol>
+<li>If not authenticated, show <code>login view</code>.</li>
+<li>
+<p>Once authenticated:</p>
+<ol>
+<li>If login was his first page, go to app's landing page</li>
+<li>If user was to view a protected view but was rerouted to the
+   login, show the protected view.</li>
+</ol>
+</li>
+<li>
+<p>Logout will put user back to <code>login view</code>, or any other public view
+   which does not require authentication, ie. marketing site.
+</p>
+</li>
+</ol>
+</blockquote>
+<h1>Where to save the key</h1>
+<p>There isn't a single answer. Here I'm using <code>sessionStorage</code> because
+it is <strong>per browser tab</strong> instead of <code>localStorage</code> which is
+global. Whatever your storage solution is, the auth key needs to be
+saved because different view/component would use this storage to
+determine whether a key is presented, thus driving its logic what to
+render.</p>
+<h1>Pseudo code</h1>
+<h2>Auth logic root view</h2>
+<p>View itself isn't important. A pseudo code to handle auth is shown
+below:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">get</span><span class="w"> </span><span class="nv">storaged</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="nv">key</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">kye</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">found</span>:
+<span class="w">  </span><span class="nv">render</span><span class="w"> </span><span class="nv">login</span><span class="w"> </span><span class="nv">view</span>
+<span class="k">else</span>:
+<span class="w">  </span><span class="nv">render</span><span class="w"> </span><span class="nv">by</span><span class="w"> </span><span class="nv">routing</span>
+</code></pre></div>
+
+<h2>Login view</h2>
+<p>This is where you design the login form/dialog/inputs, and submit
+username and pwd to API for authentication.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">get</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">password</span>
+<span class="nv">POST</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">API</span><span class="w"> </span><span class="nv">login</span><span class="w"> </span><span class="nv">URL</span>
+<span class="k">if</span><span class="w"> </span><span class="nv">success</span>:
+<span class="w">  </span><span class="nv">save</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">API</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">storage</span>
+<span class="w">  </span><span class="k">goto</span><span class="w"> </span><span class="nl">protected</span><span class="w"> </span><span class="nv">landing</span><span class="w"> </span><span class="nv">page</span>
+</code></pre></div>
+
+<h2>Logout component</h2>
+<div class="highlight"><pre><span></span><code><span class="nv">read</span><span class="w"> </span><span class="nv">storaged</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">auth</span><span class="w"> </span><span class="nv">key</span>
+<span class="k">Call</span><span class="w"> </span><span class="nl">API</span><span class="w"> </span><span class="nv">logout</span><span class="w"> </span><span class="nv">URL</span>
+<span class="k">if</span><span class="w"> </span><span class="nv">success</span>:
+<span class="w">  </span><span class="nv">clean</span><span class="w"> </span><span class="nv">storaged</span><span class="w"> </span><span class="nv">info</span>
+<span class="w">  </span><span class="k">goto</span><span class="w"> </span><span class="nl">login</span><span class="w"> </span><span class="nv">page</span>
+</code></pre></div>
+
+<p>When using <code>sessionStorage</code>, make sure you do both the <code>removeItem(key_name)</code>
+and at last the <code>.clear()</code>.</p>
+<h1>Routing</h1>
+<ol>
+<li>Login view is at <code>/login</code>.</li>
+<li>Application views are at <code>/&lt;something&gt;</code>.</li>
+<li><code>/</code> is mapped to anything but <code>/login</code> &larr; so upon logged in,
+   goto <code>/</code> will lead us somewhere other than the login<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</li>
+<li>Once logged in, goto <code>/</code>.</li>
+<li>Once logged out, goto <code>/login</code>.</li>
+</ol>
+<h2>central routing mapping</h2>
+<p>In <code>route.js</code> where REACT routers are defined:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="c1">// auth</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">element</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">LoginView</span><span class="w"> </span><span class="o">/&gt;</span><span class="w"> </span><span class="p">},</span>
+
+<span class="w">  </span><span class="c1">// application specific</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">element</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">MainLayout</span><span class="w"> </span><span class="nx">sideNavs</span><span class="o">=</span><span class="p">{</span><span class="nx">navbar_items</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">children</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="c1">// landing page, default to dashboard</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">element</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Navigate</span><span class="w"> </span><span class="nx">to</span><span class="o">=</span><span class="s2">&quot;/dashboard&quot;</span><span class="w"> </span><span class="o">/&gt;</span><span class="w"> </span><span class="p">},</span>
+
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;404&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">element</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">NotFoundView</span><span class="w"> </span><span class="o">/&gt;</span><span class="w"> </span><span class="p">},</span>
+
+<span class="w">      </span><span class="c1">// catch all, 404</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">element</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Navigate</span><span class="w"> </span><span class="nx">to</span><span class="o">=</span><span class="s2">&quot;/404&quot;</span><span class="w"> </span><span class="o">/&gt;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">];</span>
+</code></pre></div>
+
+<h2>in login</h2>
+<p>Upon success, <code>navigate("/")</code>, thus use the routing above for further
+navigation:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// call login handler</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">on_submit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">login</span><span class="p">({</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">pwd</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">set_auth</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">navigate</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h2>in logout</h2>
+<p>Upon logout, <code>navigate("login")</code>. Here we can't go to <code>/</code> but must use
+<code>/login</code> because of <strong>disk cache</strong>! &mdash; Goto <code>/</code> will route you to
+the default landing page. You would expect that landing page will be
+reloaded, thus noticing that authenticate info is not there anymore,
+thus redirect yet again to <code>/login</code>. But because of disk cache,
+browser will actually render the landing page just fine (<strong>without
+rerendering it</strong>, thus skipping its code)! If you force browser to
+reload this landing page again (hold down left <code>CTRL</code> then refresh),
+it will get you back to login page because now it runs code as if for
+the first time, and realizes that authentication info is
+missing. Therefore, you <strong>must</strong> goto <code>/login</code> upon logout.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// call logout handler</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">on_logout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">logout</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// clear session storage</span>
+<span class="w">    </span><span class="nx">session</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">session</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s2">&quot;api_key&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">session</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// back to root</span>
+<span class="w">    </span><span class="nx">navigate</span><span class="p">(</span><span class="s2">&quot;login&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>We could write in login code  <code>navigate("/landing")</code>. But this
+presents two issues: 1. This is hardcoded behavior that logged in
+will always go to this landing page. This is not necessarily the
+case. If user is logging in from <code>/</code> view, this is correct
+behavior. But if he was thinking to go <code>/another/page</code> and was
+rerouted back to do the login first, he should be sent to
+<code>/another/page</code> in the end. This, if you go to <code>/</code> at the end of
+login, will be naturally achieved by the routing, instead of you
+writing yet another code to catch his intention, then goto that at
+the end.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

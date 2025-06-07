@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai-sublime.min.css" integrity="sha512-ade8vHOXH67Cm9z/U2vBpckPD1Enhdxl3N05ChXyFx5xikfqggrK4RrEele+VWY/iaZyfk7Bhk6CyZvlh7+5JQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fengxia41103.github.io/myblog/theme/css/my.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Be Care Free</title>
+  </head>
+
+  <body>
+    <header id="mypage-index">
+      <a href="https://fengxia41103.github.io/myblog/">Be Care Free </a>
+
+      <a href="https://fengxia41103.github.io/myblog/about.html"> . About </a>
+      <a href="https://fengxia41103.github.io/myblog/lei.html"> . 夏雷 </a>
+      <a href="https://fengxia41103.github.io/myblog/project euler.html"> . Project Euler </a>
+      <a href="https://fengxia41103.github.io/myblog/quote.html"> . Quote </a>
+      <a href="https://fengxia41103.github.io/myblog/resume.html"> . Resum&eacute; </a>
+      <a href="https://fengxia41103.github.io/myblog/search.html"> . Search </a>
+      <a href="https://fengxia41103.github.io/myblog/slides.html"> . Impression </a>
+    </header>
+    <!-- end of block navbar -->
+
+    <div class="split-screen">
+      <div class="split-left-pane">
+<!-- <video autoplay muted loop id="myVideo">
+     <source src="downloads/polina.mp4" type="video/mp4" />}
+     </video>
+-->
+      </div>
+
+      <div class="split-right-pane">
+        <div id="content" class="container">
+<article>
+   <div>
+    <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
+    2016-06-06
+
+
+    <a class="wave-effect" href="fashion.html">
+      <i class="fa fa-folder-open-o"></i>
+      fashion
+    </a>
+
+    <a class="wave-effect" href="tag-fashion.html">
+      <i class="fa fa-tag"></i>
+      fashion
+    </a>
+
+    <h1 class="myhighlight">Fashion ERP &mdash; orders</h1>
+  </div>
+
+  <ol id="toc" class="row"></ol>
+
+  <div>
+    <div id="article-content">
+      <p><p>In <a href="https://fengxia41103.github.io/myblog/fashion introduction.html">part one</a> I have
+shown the design and function behind Product and Inventory management.
+In this article I'll talk about orders.</p>
+<p>Sales order and purchase order are like two sides of the same coin.
+Each sales order(SO) can include a mixed bag of products from
+different vendors. Once a SO has been created, application will parse
+it into multiple purchase order (PO) and route them to their
+vendor. Reversely, company can place a PO with a vendor, and purchased
+products can be used to fulfill multiple sales orders later.</p>
+<h1>Order life cycle</h1>
+<p>To understand the design of orders, one has to first grasp the life
+cycle of an order. I'd like to divide its functions into roughly two
+areas: <em>about physical good</em> and <em>about money</em>.</p>
+<p>The area of physical goods takes care of the acquisition of products
+on order. This includes shipping, receiving, reconciliation,
+inventory, product return and substitution. Like what we did in
+inventory, we maintain a theoretical list which comes from the sales
+order itself (think of it as a wish list) and an actual list which
+tracks all the above activities. The ratio between the two is
+<code>full-fill rate</code>. All products are cleared when full-fill rate hits
+100%.  At this point, seller has fulfilled what the buyer is
+expecting, either by original products or replacement or any other
+forms of settlement in between.</p>
+<figure>
+    <img class="center img-responsive" src="images/order life cycle.png">
+    <figcaption>Order life cycle</figcaption>
+</figure>
+
+<p>The second area of interest is about money. Depending on the business
+model and industry, some will require a form of payment, either by a
+percentage or in full, before any shipment, while others can live with
+zero down up front. The hinge that links activities handling physical
+goods and the money is the <em>invoice</em>. Invoice is a detailed record
+(bill) that both the seller and the buyer will eventually agree in
+order to proceed with a financial reconciliation.  Ideally buyer pays
+against an invoice, though I have seen other forms of arrangement in
+different industries.  Therefore, on the money side there are also a
+theoretical represented by invoices and an actual which are actual
+payments. The ratio between these two forms <code>payment ratio</code>. To
+simplify things here we will regard financial reconciliation is
+complete when payment ratio hits 100%.</p>
+<h1>Create an order</h1>
+<p>Sales order can be taken in one of two ways. The <em>quick way</em> is designed
+for internal staff to create an sales order by directly typing in
+line items using a simple syntax:</p>
+<blockquote>
+<p>Each line starts with SKU number, followed by comma delimited
+  size-qty pairs.</p>
+</blockquote>
+<p>For example, <code>234, S-1, M-2</code> is to order product <code>SKU# 234</code>, one <code>small</code>
+and two <code>medium</code>. Alternatively one can also create a sales order
+through traditional shopping cart method.</p>
+<figure>
+  <div class="row">
+    <div class="col s6">
+      <img class="center img-responsive" src="images/fashion_7.png">
+    </div><div class="col s6">
+      <img class="center img-responsive" src="images/fashion_8.png">
+    </div></div>
+    <figcaption>
+      One can use a quick way or shopping cart to create a sales order
+    </figcaption>
+</figure>
+
+<h2>Order summary and details</h2>
+<p>A nice feature here is that for an aggregated information such as total
+quantity and sum, the application offers a dropdown that user can
+easily view a broken-down detail by each vendor.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_9.png">
+</figure>
+
+<p>Order details are grouped by vendor also. Each vendor tab has details
+of products on order. At the bottom of tab, the application computes
+a <em>total qty</em> and <em>total value</em> for that vendor.</p>
+<figure>
+  <img class="center img-responsive" src="images/fashion_10.png">
+  <figcaption>Order detail tabs are a set of shopping basket, one per vendor</figcaption>
+</figure>
+
+<h1>Product receiving and fulfillment</h1>
+<p>Product receiving is represented by fulfillment in the application.  I
+call an item fulfilled when buyer side has <em>received and accepted</em>
+that item. In turn, fulfill rate is the count of items that met this
+condition over the total products on order. It is important to note
+that only <em>accepted</em> one is counted as fulfilled. Received counts are
+inaccurate because item can be received but then returned due to
+damage.</p>
+<blockquote>
+<p>fulfill rate = count of fulfilled item / total number of items</p>
+</blockquote>
+<figure>
+  <img class="center img-responsive" src="images/fashion_11.png">
+  <figcaption>Create an order fulfillment</figcaption>
+</figure>
+
+<p>Fulfilling a product is almost like filling in an inventory count
+sheet.  Potentially this can be automated using barcode scanner or
+other form of scanning technology But unlike a count sheet that is
+specific for a vendor, fulfillment form lists all vendors and products
+on order. This accounts for the fact that shipments can come in at
+random order. Therefore, showing them on a single page saves the
+receiving staff from jumping through multiple screens in order to
+record shipments. <code>QTY BALANCE</code> column shows the remaining quantity
+that the application is expecting. This is the <em>theoretical</em> value for
+a line time, and the addition of all received fulfillment will be the
+<em>actual</em>.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_12.png">
+    <figcaption>Fulfillment summary</figcaption>
+</figure>
+
+<p>Fulfillment summary is a great way to keep track of receiving status.
+One interesting distinction here is the <em>fulfill rate of quantity
+versus that of value</em>. This accounts for the fact that products have
+different values.  Therefore, a 90% fulfill rate of quantity may not
+be a good news if in value the fulfill rate is much lower. Monitoring
+this gap can be an early warning sign that the supplier is lagging
+behind.</p>
+<p>Finalizing a fulfillment is to lock in the receiving status. User can
+either do this on each fulfillment (eg. in a long running order where
+fulfillment come in over a stretched period of time), or close them
+all with a single click. Simple.</p>
+<h1>Return a product</h1>
+<p>Product return is a common scenario.  Rule we applied here is that
+<em>quantity available for return is determined by received
+fulfillments</em>. This also means that a return is always associated with
+an order. This contrasts to the approach where return is checked
+against inventory regardless how that product got into the inventory
+at the first place.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_16.png">
+    <figcaption>Return a product</figcaption>
+</figure>
+
+<p>Also, each line item needs a <code>reason</code>. The list is configurable. An
+important decision to make is who will absorb the damage, seller or
+buyer. For example, if the agreement is that buyer bears damages if it
+was caused by third-party shipper, then no credit will be issued,
+which in the application shows as unchanged <code>account
+payable</code>. Otherwise, if seller is to pay for this, a credit will be
+deducted from the current <em>account payable</em> so buyer owes less now due
+to the return.</p>
+<h1>Make a payment</h1>
+<figure>
+    <img class="center img-responsive" src="images/fashion_13.png">
+    <figcaption>Make a payment</figcaption>
+</figure>
+
+<p>The application has not yet integrated with a payment system. As of
+now it provides a function to register a payment against an order.
+Also, user can finalize a payment by <em>reviewing</em> it. This in effect
+locks down the payment so it is not editable anymore.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_14.png">
+    <figcaption>Review a payment</figcaption>
+</figure>
+
+<h1>Drop shipping</h1>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Drop_shipping">Drop shipping</a> is a supply chain management method in which the
+retailer does not keep goods in stock but instead transfers customer
+orders and shipment details to either the manufacturer, another
+retailer, or a wholesaler, who then ships the goods directly to the
+customer.</p>
+</blockquote>
+<p>A sales order can include products from different vendors.
+When we shop at Amazon, products do not necessarily come
+from an Amazon warehouse. Instead, the order is routed
+to the actual seller who will fulfill the order
+as if he works for Amazon.</p>
+<p>The application parses automatically
+a sales order into multiple purchase orders, one per vendor.
+These orders will then be tracked individually for fulfillment, payment
+and so forth.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_15.png">
+    <figcaption>Keep purchase orders in sync with sales order in drop shipping</figcaption>
+</figure>
+
+<h1>Purchase order</h1>
+<p>I have always viewed purchase as the mirror image of sales. It really
+depends on whose view you are referring to because in any transaction
+there are always two parties, one will sell and the other will buy. So
+from buyer's stand point of view, an order is a PO, and the same order
+is a SO for the seller. In turn, a SO will reduce inventory while PO
+increases inventory.  However, SO and PO bring in some important
+factors in practice besides driving the supply chain in opposite
+directions.</p>
+<p>First, tax. In most cases seller is responsible for paying tax. In
+application this becomes a requirement that SO has functions to
+compute and track tax.  Because each business model, industry, state
+and country can be quite different in this matter, this is an area I
+have experienced a lot of customization and code refactoring.</p>
+<p>Second, what is the relationship of a SO and a PO in your business?
+Drop shipping, for example, can be modeled as a back-to-back 1-N model
+where one SO is parsed to create multiple(N) POs.  This provides full
+traceability from sales to purchase.  Retail, on the other hand, may
+purchase in bulk with PO way before a SO takes place. Therefore,
+seller may not be interested in knowing the product just sold came
+from which PO. But on top of this, there are retail business to whom
+such traceability is required, for example, food retailer.  Therefore,
+attempting to answer this question with a single answer will not work!</p>
+<p>What is missing is a business context, something that provides
+additional information for the application to make such decision.  In
+my client's case, she sells supplier's stock under her name with a
+markup.  Goods are then shipped to her distribution warehouse before
+re-shipped to end client.  Therefore, when the application runs in
+this business context it will enforce a back-to-back SO-PO reference.
+She also runs a wholesale business in which purchase and sales have no
+such strong bound. Thus the application will leave the SO-PO reference
+optional.</p>
+<figure>
+    <img class="center img-responsive" src="images/fashion_17.png">
+    <figcaption>Purchase order summary</figcaption>
+</figure>
+
+<p>An interesting thing of fashion industry is that product often has
+long lead time. For most vendors a calendar year is divided into two
+seasons &mdash; Spring/Summer season and Fall/Winter season. Buyer
+will place PO in October or even earlier for the Spring/Summer season
+of next year.  So it is not uncommon to see a 6-month lead time, which
+introduces large amount of uncertainties to the buyer's operation. To
+accommodate this, it is wise to keep informed by vendor on which line
+item will be available when. In application we have add a dropdown
+list, <em>"Available In"</em>, so this information is captured:</p>
+<ul>
+<li><span class="myhighlight">unknown</span>: default state, vendor has not released information of its availability</li>
+<li><span class="myhighlight">never</span>: this product has been dropped out or sold out</li>
+<li><span class="myhighlight">local</span>: can be fulfilled right now by vendor's local outlet</li>
+<li><span class="myhighlight">Jan - Dec</span>: calendar month. Its year is implied.</li>
+</ul>
+<figure>
+    <img class="center img-responsive" src="images/fashion_18.png">
+    <figcaption>Purchase order line item availability</figcaption>
+</figure>
+
+<p>In this article, I have covered sales order and purchase order.  They
+are the core of the company's operation.  In <a href="https://fengxia41103.github.io/myblog/fashion reports.html">part
+three</a>, we will get to the
+exciting part of the application where all these data points will be
+utilized to drive a better operation.</p></p>
+
+      <p>
+        &mdash; by
+        <a href="feng-xia.html">Feng Xia</a>
+      </p>
+    </div>
+  </div>
+
+</article>
+
+
+
+          <div id="related">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="split-screen">
+      <div class="container">
+        <h5>Categories:</h5>
+        <a href="https://fengxia41103.github.io/myblog/demo.html">
+          <i class="fa fa-folder-open-o"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/dev.html">
+          <i class="fa fa-folder-open-o"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/fashion.html">
+          <i class="fa fa-folder-open-o"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/gkp.html">
+          <i class="fa fa-folder-open-o"></i>
+          gkp
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/lenovo.html">
+          <i class="fa fa-folder-open-o"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/odoo.html">
+          <i class="fa fa-folder-open-o"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/openstack.html">
+          <i class="fa fa-folder-open-o"></i>
+          openstack
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/pm.html">
+          <i class="fa fa-folder-open-o"></i>
+          pm
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/react.html">
+          <i class="fa fa-folder-open-o"></i>
+          REACT
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/rh.html">
+          <i class="fa fa-folder-open-o"></i>
+          rh
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/stock.html">
+          <i class="fa fa-folder-open-o"></i>
+          stock
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/thoughts.html">
+          <i class="fa fa-folder-open-o"></i>
+          thoughts
+        </a>
+
+        <h5>Tags:</h5>
+        <a href="https://fengxia41103.github.io/myblog/tag-thoughts.html">
+          <i class="fa fa-tag"></i>
+          thoughts
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-dev.html">
+          <i class="fa fa-tag"></i>
+          dev
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-react.html">
+          <i class="fa fa-tag"></i>
+          react
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-love.html">
+          <i class="fa fa-tag"></i>
+          love
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-lenovo.html">
+          <i class="fa fa-tag"></i>
+          lenovo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-angular.html">
+          <i class="fa fa-tag"></i>
+          angular
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-feng.html">
+          <i class="fa fa-tag"></i>
+          feng
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-design.html">
+          <i class="fa fa-tag"></i>
+          design
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-family.html">
+          <i class="fa fa-tag"></i>
+          family
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-demo.html">
+          <i class="fa fa-tag"></i>
+          demo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-odoo.html">
+          <i class="fa fa-tag"></i>
+          odoo
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-fashion.html">
+          <i class="fa fa-tag"></i>
+          fashion
+        </a>
+        <a href="https://fengxia41103.github.io/myblog/tag-gkp.html">
+          <i class="fa fa-tag"></i>
+          gkp
+        </a>
+        <div class="">
+          <h5>Show Cases:</h5>
+          <div id="showcase">
+            <p>
+              Photo album:
+              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+            </p>
+            <p>
+              API & charts:
+              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                >SP500</a
+              >
+            </p>
+            <p>
+              API & charts:
+              <a
+                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                >Snapshot of The World</a
+              >
+            </p>
+
+            <p>
+              Django (in Chinese):
+              <a href="https://fengxia41103.github.io/myblog/project gkp demo.html">GKP</a>
+            </p>
+            <p>
+              ERP:
+              <a href="https://fengxia41103.github.io/myblog/project fashion demo.html">Fashion</a>
+            </p>
+            <p>
+              Data processing:
+              <a href="https://fengxia41103.github.io/myblog/project stock demo.html">Stock</a>
+            </p>
+            <p>
+              Angular & REACT:
+              <a href="https://fengxia41103.github.io/myblog/car leasing.html">Car leasing</a>
+              &nbsp;|&nbsp;
+              <a href="https://fengxia41103.github.io/spa-dashboard/">
+                YAML Config Dashboard
+              </a>
+            </p>
+            <p>
+              API & REACT:
+              <a href="https://fengxia41103.github.io/movie/">Movies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <video autoplay muted loop id="myVideo">
+        <source src="downloads/polina.mp4" type="video/mp4" />
+      </video>
+    </footer>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col l8 m8 s12">
+            <p>
+              2016-2022 PY Consulting Ltd. 601 W. Rosemary St., Chapel Hill, NC 27516
+            </p>
+
+            <p>
+              <a href="mailto:feng_xia41103@hotmail.com">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <a href="http://github.com/fengxia41103">
+                <i class="fa fa-github"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/fengxia41103">
+                <i class="fa fa-linkedin"></i>
+              </a>
+
+              <a href="">
+                <i class="fa fa-phone-square"></i>
+                (508)801-1794
+              </a>
+            </p>
+          </div>
+          <div class="col l4 m4 s12">
+            <p class="right">
+              <i class="fa fa-copyright"></i>
+              All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of block main -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://fengxia41103.github.io/myblog/theme/js/bundle.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/diff.min.js"
+    ></script>
+
+    <script type="text/javascript">
+     var exports = {};
+     var j$ = jQuery.noConflict();
+
+     j$(document).ready(function () {
+       // highlight.js initialization
+       hljs.initHighlightingOnLoad();
+       j$("pre").each(function (i, block) {
+         hljs.highlightBlock(block);
+       });
+
+       // tooltips
+       j$('[data-toggle="tooltip"]').tooltip();
+
+       // image materialbox
+       j$(".materialboxed").materialbox();
+     });
+    </script>
+    <!-- end of block JS -->
+
+  </body>
+</html>

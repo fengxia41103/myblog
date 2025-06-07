@@ -196,9 +196,6 @@ First, make sure it gets installed if it is not there yet.
 
 #+BEGIN_SRC emacs-lisp
   ;; make sure use-package is installed
-  (unless (package-install-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
   (require 'use-package)
 #+END_SRC
 
@@ -1137,7 +1134,7 @@ Set which prettier to use. Note that w/ NVM, you must set =nvm use 16.15.1= in
 which is the default node path in effect in Emacs by =M-x prettier-info=.
 
 #+begin_src emacs-lisp :tangle no
-(setenv "NODE_PATH" "/home/fengxia/.nvm/versions/node/v16.15.1/bin")
+(setenv "NODE_PATH" "/home/fengxia/.nvm/versions/node/v20.17.0/bin")
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
@@ -1487,7 +1484,6 @@ So, to enfore this on some modes:
   (add-hook 'groovy-mode-hook 'my-personal-code-style)
 #+END_SRC
 
-
 * Base packages
 
 There are some packages you'd better load prior to everything else, so
@@ -1577,7 +1573,12 @@ Make Emacs request UTF-8 first when pasting stuff
   :init
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 (set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 #+END_SRC
+
 
 *** shell env
 
@@ -3375,6 +3376,8 @@ e.g. =(setq org-directory "/ssh:fleury@machine.site.com:OrgFiles")=
 Don't know what they belong to. Just stuck them here. There are some functions
 used by the following code. So unfortunately this section must comes in early.
 
+[[https://susamn.medium.com/ultimate-emacs-setup-with-documentation-in-org-mode-8ed32e2b3487][A good article]] on org-mode setup.
+
 *** by packages
 **** org-protocol
 
@@ -3417,6 +3420,46 @@ Make the display of images a simple key-stroke away.
                                (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
                               )))
 #+END_SRC
+
+**** golden
+
+When working with many windows at the same time, each window has a size that is
+not convenient for editing. golden-ratio helps on this issue by resizing
+automatically the windows you are working on to the size specified in the
+“Golden Ratio”.
+
+#+begin_src emacs-lisp
+(use-package golden-ratio :ensure t)
+(golden-ratio-mode 1)
+(setq golden-ratio-auto-scale t)
+#+end_src
+
+**** evil
+
+#+begin_src emacs-lisp
+(use-package evil
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+#+end_src
+
+Install evil-collection, which provides evil-friendly bindings for many modes.
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil)
+#+end_src
+
+Enable surround everywhere.
+
+#+begin_src emacs-lisp
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
+#+end_src
+
+
 
 *** snippets found online
 
@@ -3598,6 +3641,12 @@ this in my =.emacs= as it is host- and user-specific.
 
 #+END_SRC
 
+**** Align tags
+[[https://emacs.stackexchange.com/questions/56287/org-mode-tag-column-setting-is-ignored][Found it here]]
+
+#+begin_src emacs-lisp
+(setq org-tags-column -500)
+#+end_src
 ** key mappings
 
 #+BEGIN_SRC emacs-lisp
@@ -4376,5 +4425,14 @@ solution:
 #+BEGIN_SRC emacs-lisp
   (org-mode-restart)
 #+END_SRC
+
+* AI time
+** emacs-openai
+[[https://github.com/emacs-openai/chatgpt][github link]]
+
+#+begin_src emacs-lisp
+(use-package org-ai :ensure t)
+#+end_src
+
 
 * THE END

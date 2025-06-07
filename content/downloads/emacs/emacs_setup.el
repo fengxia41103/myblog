@@ -799,6 +799,10 @@ cleared, make sure the overlay doesn't come back too soon."
   :init
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 (set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 (setq exec-path-from-shell-debug t)
 (setenv "SHELL" "/usr/bin/zsh")
@@ -1723,6 +1727,23 @@ If given prefix arg ARG, skips markdown conversion."
                              (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
                             )))
 
+(use-package golden-ratio :ensure t)
+(golden-ratio-mode 1)
+(setq golden-ratio-auto-scale t)
+
+(use-package evil
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil)
+
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
+
 (defcustom remote-org-directory "~/OrgFiles"
   "Location of remove OrgFile directory, should you have one."
   :type 'string
@@ -1754,6 +1775,8 @@ If given prefix arg ARG, skips markdown conversion."
              :file-name "meeting/%<%Y%m%d%H%M%S>-${slug}"
              :head "#+title: ${title}\n#+roam_tags: %^{with}\n\n"
              )))
+
+(setq org-tags-column -500)
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -2217,3 +2240,5 @@ If given prefix arg ARG, skips markdown conversion."
 (setq org-pretty-entities t)
 
 (org-mode-restart)
+
+(use-package org-ai :ensure t)

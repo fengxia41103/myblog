@@ -30,11 +30,6 @@ and the tangled file is compiled."
 
 (custom-set-variables '(ad-redefinition-action (quote accept)))
 
-(use-package flycheck
-  :ensure t)
-
-(global-flycheck-mode)
-
 (setq auth-sources '("~/.authinfo"))
 
 (use-package tj3-mode
@@ -1726,10 +1721,6 @@ If given prefix arg ARG, skips markdown conversion."
                              ;; display images
                              (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
                             )))
-
-(use-package golden-ratio :ensure t)
-(golden-ratio-mode 1)
-(setq golden-ratio-auto-scale t)
 
 (use-package evil
   :init

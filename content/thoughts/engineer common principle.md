@@ -15,6 +15,59 @@ should-not-do, and some are hard to evaluate if not given a
 condition. Thus, I'd like to dump what I view of such topics, and see
 what I could summarize, and perhaps, share w/ the team.
 
+## Engineering = being Deterministic
+
+I learned this word from Miro. Engineering is an effort to be
+deterministic. Sometimes this line is presented from the other end of
+the certainty spectrum &mdash; engineering is of controlling the
+uncertainty/risk. Both are speaking of the same idea.
+
+Engineering is to produce a predictable result w/ a given input. There
+are endless possibilities in real world, of course. But that's exactly
+why engineer must think deep & hard, like playing chess, you are not
+in the business of reading mind or enumerating all possible paths,
+well, Alpha Go is hardly doing that even, but you are to think and
+compute the possible outcome of a move, and try to confine your
+opponent's move into a predictable manner, and that, is what I mean by
+being deterministic.
+
+Also like chess, you move is never based on the happy path, but is on
+how your opponent will counter. Therefore, building a well of
+knowledge of the game and your opponent is the only way, and it should
+be difficult to achieve &mdash; how many chess master there is in this
+world, in your life!?
+
+
+## Engineering = Data driven decision
+
+> "If we have data, let's look at data. If all we have are opinions,
+> let's go with mine"
+>
+> -- Jim Barksdale, the former CEO of Netscape
+>
+
+First time heard this line AWS event in 2024. Love it.
+
+All engineering is data engineering in its core. We deal w/ facts, and
+fact = can be proven wrong, and we all know there is no wrong
+opinion. Thus, it will be a logical fallacy if a conclusion is only
+backed by opinion. We must collect data, use data, and base a decision
+on data.
+
+This is easier said than done. We also know the other proverb: garbage
+in, garbage out. The _quality_ of the data in this process determines
+the quality of decision. Yet there isn't a clean yard stick on the
+quality of data in most cases. Engineer's ingenuity is ultimately
+determining this, but we can do more. Crosschecking methods such as
+peer review, fact checker, independent assessment, spot checking, are
+all useful tool to improve the quality of input. One thing to watch
+out for is that these crosschecking should themselves be based on
+data. If one subjective opinion is **not sufficient**, then two don't
+make it much better.
+
+What to do? **Trust, but verify.**
+
+
 ## The value of POC
 
 We do many POCs. Myself is also a strong advocate of POC-culture
@@ -22,8 +75,8 @@ We do many POCs. Myself is also a strong advocate of POC-culture
 working path. The moral of the story is simple &mdash; To see is to
 believe. If you claim something, show me.
 
-However, there is a caution of this exercise. POC is always built upon
-a core technology of a sort, which is often a vendor product,
+However, there needs a caution of this exercise. POC is always built
+upon a core technology of a sort, which is often a vendor product,
 including COTS and things like the AWS services. Based on what this
 product **can do**, an idea emerged of using it to solve a problem we
 have. It is a natural course as this is exactly how human mind
@@ -56,7 +109,7 @@ kids in a toy store. It's fun to explore, to discover, to try, and to
 be creative. At the meantime, don't get carried away. The value of the
 POC is **not of how cool this new toy is**, but how it breaks the
 limit we reached using the old method, and in particular, why we had
-that limit.
+that limit to begin with.
 
 ## Critical thinking = prove what it is NOT
 
@@ -64,8 +117,7 @@ Extending the POC discussion above, another topic is how to evaluate a
 new technology. I love new technologies. Everytime I chanced on some
 social media on new opensource projects, I can't wait to download it
 and try it out. This is the fun part. Using it to build a happy path
-for our solution is more fun &mdash; literally we are proving its
-worth.
+for our solution is fun &mdash; literally we are proving its worth.
 
 But, there is more. Take a step and ask this:"Why I want to try this
 myself?" The underline theme is a matter of verification. If we would
@@ -88,68 +140,65 @@ black swan event.
 
 Therefore, it is more valuable, if not essential, to prove the
 limitation/constraints of this new technology, than to prove its happy
-path. How to achieve this? Easy, focus on your problem &mdash; your
-problem is unique to the point that we felt stuck, right? What's so
-unique about it? Coin the case, then throw this case at this
+path. How to achieve this? Focus on the problem &mdash; your problem
+is unique to the point that we felt stuck, right? What's so unique
+about it? Coin the case, then throw this case at this
 tool. Fundamentally, a tool is like a mass-made clothes &mdash; GAP
-knows nothing about your particular body sizing, and we know too well
-some Medium shirt fits better of your arm's length than others. Same
-logic here. You must have a sense of what's so unique of yourself,
-using that to the test, thus stretching the boundary of this
+knows nothing about your particular body size, and we know too well
+some Medium shirt fits better of your arm's length than other
+Mediums. Same logic here. You must have a sense of what's so unique of
+yourself, using that to the test, thus stretching the boundary of this
 new-found-solution, and try to break it even. Then, you would have a
 pretty good sense how _bad_ it can be.
 
-## Design = reality being measurable
+## Document = job description, not a goodwill
 
-In the [Capability Model][1], I put the "day 0, design &mdash;
-reality" as level 4. You would be wondering, don't we do this everyday
-already, thus we are already at level 4? After all, implementing sth
-based on a design is exactly what engineers do.
+Writing document is fun, to some people, and painful, to some
+others. Engineers, coders, we write a lot, and it's tiring
+sometimes. In particular, document become obsolete quickly, for
+example, your API doc, if a code was changed yesterday. It seems an
+unsolvable problem and even a wast of time.
 
-But. In many cases, the design itself is so fluid that itself lost its
-value &mdash; if it doesn't have a measurable definition, I'm sorry to
-say, that we don't have a design at all. And w/o having a design,
-what's the determine a design&mdash;reality? In JIRA, we are asking to
-have an AC. It feels overkill, but it is not. This is not a nuance,
-but a training of mindset. This should be an engineer's 2nd
-instinct, and it is counter intuitive!
+It is. Except code-as-doc, or even literate programming, there isn't a
+solution to this dilemma. But, document is like testing &mdash; you
+better have some than none, even if the testing is poor.
 
-Engineers are exploring _uncharted territory_, thus how could we put
-down any milestone upfront to be measurable? That's why this is hard,
-and often under-emphasized if altogether ignored.  But that's wrong!
-Exactly because we don't know where the final destination will be, it
-is only logical that we constantly leave some breadcrumbs along the
-way, so that we could backtrack when we hit a dead end or changing a
-direction. This thought has been depicted too well in the story of
-[Theseus and the Minotaur][2] &mdash; we are navigating a labyrinth,
-and the mythology has spoken its wisdom.
+Engineers are exploring _uncharted territory_, thus it sounds counter
+intuitive to lay down milestone upfront. However, exactly because we
+don't know where the final destination will be, it is only logical
+that we constantly leave some breadcrumbs along the way, so that we
+could backtrack when we hit a dead end or changing a direction. This
+thought has been depicted too well in the story of [Theseus and the
+Minotaur][2] &mdash; we are navigating a labyrinth, and the mythology
+has spoken its wisdom.
 
-## Engineering = feedback loop and iteration
+If drafting a plan into the future is difficult, at least writing a
+log of historical events, so that we have an account of what happened,
+and learn from it.
+
+## Feedback loop, timing
+
+An open loop system is inherently unstable. Period.
 
 We can only solve something if we can iterate, and iteration requires
-feedback loop. An open loop system is inherently unstable. So, what is
-a feedback? Factual reality. What is factual? Can be proven
-wrong. What is wrong? Only relative to right. What is right? your
-requirement/criteria/design.
+feedback loop. An engineering process, a SDLC, must be a close-loop
+system. Close-loop system requires using the feedback as input for the
+next iteration. How much weight it carries can become quite an
+art. But one thing would be clear, that is, the shorter the iteration,
+the better. A reality check, ideally, should be _real-time_, meaning
+whenever I want to see it. On-demand or being-continuous are both
+fine, and the driving factor isn't arbitrary, but is determined how
+quickly the system needs to adjust. In embedded engineering, for
+example, if the system runs at 500hz frequency, then its feedback loop
+must be less than `2ms`. Therefore, if a project wishes to move
+forward everyday, well, you do the math.
 
-Full circle, isn't it? That's what engineering is ultimately
-about. Names don't matter; the concepts hold. SDLC must be a
-close-loop system. It's easier said than done. Close-loop system
-requires using the feedback as input for the next iteration. How much
-weight it carries can become quite an art. But one thing would be
-clear, that is, the shorter the iteration, the better. A reality
-check, ideally, should be _real-time_, meaning whenever I want to see
-it. On-demand or being-continuous are both well, and the driving
-factor isn't arbitrary, but is determined how quickly the system needs
-to react. In embedded engineering, if the system needs to be
-deterministic w/ 500hz frequency, then its feedback loop must be less
-than `2ms`. Period. Therefore, if a project wishes to move forward
-everyday, well, you do the math.
-
-But why would some projects still fail? Because having feedback !=
-using feedback. Feedback can be ignored, down played, times a zero
-weight.
-
+What this derives to, is that, in managing a project or building a
+system, information flow must be time boxed, including the process of
+human effort to produce this info and analyze this info. Just like any
+other data point we have talked about so far, this timebox must be
+measurable. For example, in JIRA, we measure its `age=close date -
+creation date`.
 
 [1]: {filename}/thoughts/capability%20model.md
 [2]: https://en.wikipedia.org/wiki/Ariadne

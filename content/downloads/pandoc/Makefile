@@ -102,6 +102,10 @@ resume_devops_md := resume-devops.md
 RESUME_DEVOPS_INPUTS = $(resume_devops_md)
 resume_devops_pdf := ../feng\ xia\ resume\ devops.pdf
 
+resume_noah_md := resume-noah.md
+RESUME_NOAH_INPUTS = $(resume_noah_md)
+resume_noah_pdf := ../noah\ resume.pdf
+
 # cover letter
 cover_letter_md := cover\ letter.md
 COVER_LETTER_INPUTS = $(cover_letter_md)
@@ -156,6 +160,7 @@ unc: unc_pdf unc_docx
 lucidum: lucidum_pdf lucidum_docx lucidum_html
 personal_referral: personal_referral_pdf
 cwis: cwis_html cwis_tex cwis_pdf
+noah: resume_noah_pdf
 
 all: rhhi_ra loc_ra webapp resume git netbox unc cover_letter personal_referral cwis
 
@@ -243,6 +248,14 @@ resume_devops_pdf: $(RESUME_DEVOPS_INPUTS)
 	-o $(resume_devops_pdf) \
 	--pdf-engine=xelatex \
 	$(RESUME_DEVOPS_INPUTS)
+
+resume_noah_pdf: $(RESUME_NOAH_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(resume_noah_pdf) \
+	--pdf-engine=xelatex \
+	$(RESUME_NOAH_INPUTS)
 
 cover_letter_pdf: $(COVER_LETTER_INPUTS) $(LATEX_LETTER_CONFIG)
 	pandoc $(LATEX_LETTER_CONFIG) $(COVER_LETTER_INPUTS) \

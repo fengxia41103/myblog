@@ -33,74 +33,121 @@ header-includes: |
 
 ---
 
-Seeking an education to give me strength
-&mdash; I welcome challenges, and am genuinely interested in making
-the people around me healthy, happy, and feel warmth.
+
+*Personal Mission*: I seek an education that will empower me to embrace
+challenges while pursuing my genuine passion for improving the health,
+happiness, and well-being of those around me.
 
 # Highlights
 
-- **Swimmer Competed at Regional**
-  - Six days a week, year-round training at elite Triangle Aquatic Center Titan
-  - Competed at 2024 Regional, Men's 50 Free, 7th place
-  - Competed at
-  -
+- **ACT**: STEM (35, US rank 99%), including Math (35, 99%), Science
+  (34, 99%).
+- **AP Scholar Award** in 2024
+- **AP Scholar Award with Distinction** in 2025
+- **Academic Rigor**: Completed six AP classes and twelve Honors
+courses by Grade 11, with five additional Honors courses currently in
+progress.  Maintained a weighted GPA of 3.917 while pursuing this
+accelerated curriculum.
 
-- **Six AP classes and 5 honors**
-
-- **Yearbook Committee**
-
-- **Model UN Representative**
+- **[Competitive swimmer][3]** representing Panther Creek High School
+  - Year-round training six days per week at Triangle Aquatic Center Titans since 2022
+  - Advanced from Gold to Senior Championships through consistent
+    performance and dedication
+  - **6th place** on varsity swim team
+  - Competed at 2024 NCHSAA 4A Regional Championships: 15th place
+    (200Y Individual Medley), 13th place (200Y Free Relay)
+- **Yearbook Committee Member** for 2025-2026 Panther Creek High
+  School Yearbook
+- **Model United Nations** representative since 2022
 
 # Experience
 
 ## 9/2022 - present
 Panther Creek High School, Student
 
-- Led design of the next-gen product architecture to drive expansion
-  of target industry and customer base. Transformed on-prem-only model
-  to hybrid and cloud-native. Introduced and integrated various AWS &
-  Azure services to achieve a successful transition of twelve
-  production systems.
+- **Academic Excellence**: Pursued rigorous coursework exceeding
+school requirements, completing six AP classes and twelve Honors
+courses by Grade 11 with five additional Honors courses in
+progress. Achieved weighted GPA of 3.917.
 
-## 6/2025 - 8/2025
-Amberly Community Swim Team, Assistant Coach
+- **Academic excellence** demonstrated through exceptional
+standardized test performance and advanced coursework
+recognition. Achieved composite ACT score of 35, placing in the 99th
+percentile nationally, with perfect scores in Math (35, 99th
+percentile) and near-perfect performance in Science (34, 99th
+percentile), showcasing exceptional aptitude in STEM
+disciplines. Academic rigor further validated by consecutive AP
+Scholar Awards—earning the AP Scholar Award in 2024 and advancing to
+AP Scholar Award with Distinction in 2025—reflecting sustained
+commitment to challenging coursework and consistent high performance
+across multiple advanced placement examinations.
 
-- As lead Python developer a Datacenter Infrastructure Management
-  (DCIM) system based on Netbox, administrating a portfolio of
-  in-house infrastructure comprising over 300 servers and switches
-  located globally. Stack include Django, React, Celery, Redis, MySQL,
-  Docker, Ansible, ENOS/NOS.
+- **Varsity Swimming Achievement**: Joined varsity swim team in Grade
+11 and immediately made impact at Southwest Wake 4A Conference
+Championships, competing in four events (50Y Butterfly, 100Y
+Butterfly, 50Y Freestyle, 200Y Freestyle) and contributing 330.30
+points to team score. Selected to represent school at 2024 NCHSAA
+Regional Championships in two events.
 
-## 01/2020 - present
-Triangle Aquatic Center/TAC TITANS, Swimmer
+- **Yearbook Leadership**: Elected to 2025-2026 Yearbook Committee
+with responsibilities including sports event coverage, photography,
+content editing, and publication coordination.
 
-_Linkage, Contractor_
+- **Curiosity and Deep Thinking**: Active participant in school
+Philosophy Club, engaging in complex ethical discussions including AI
+integration in the workforce, establishing moral frameworks for
+decision-making, and examining capital punishment in the modern era.
 
-- Initiated its software development SDLC from the ground up. Fostered
-  development culture of the startup. Created its "_2016-17 Technology
-  Roadmap_", providing a comprehensive and forward-thinking vision for
-  the company to grow. Hands-on coding in Python ODOO (OpenERP).
+
+## 8/2022 - present
+Triangle Aquatic Center/TAC Titans, Swimmer
+
+- **Competitive Advancement**: Progressed from Group Gold to Senior
+Championships level since 2022 through consistent performance
+improvement. Achieved dramatic time reduction in 50 Freestyle short
+course from [35.62 seconds to 25.04 seconds][2] &mdash; a 10.58-second
+improvement demonstrating exceptional dedication and skill
+development.
+
+- **Training Commitment**: Maintained rigorous six-day weekly training
+schedule with over 90% attendance rate despite two-hour round-trip
+commute to Triangle Aquatic Center, demonstrating unwavering
+dedication to athletic excellence.
+
+- **Recent Competition Success**: Earned [first place][1] in 200
+Individual Medley and [second place][1] in 100 Butterfly at "NC TAC
+July Qualifier Meet" (July 2025 ), showcasing competitive performance
+at regional level.
+
+- **Community Service**: Volunteered at multiple swim meets,
+contributing to the swimming community while gaining valuable event
+management experience.
+
+
+## 6/2022 - 8/2025
+Amberly Community Swim Team, Top Swimmer, Assistant Coach
+
+- **Assistant Coach Leadership**: Served as assistant coach during
+  Summer 2025, training beginner swimmers ages 8-10 and ensuring pool
+  safety during community swim team classes.
+
+- **Team Leadership**: Captained team at Triangle Community Swim
+  meets, earning [specific achievement to be added].
+
+- **Mentorship Impact**: Inspired two young swimmers to pursue
+  competitive swimming, both of whom successfully joined the Cary West
+  YMCA swim team.
+
+- **Community Service**: Volunteered at community center summer
+  events, contributing to local recreational programming.
+
 
 # Education
 
-- _MBA (04/2007 - 09/2008)_, Boston Univ., International Management & Finance
-- _Master of Science (09/1995 - 05/1997)_, Ohio Univ., Electrical Engineering
-- _Bachelor of Science (09/1990 - 07/1994)_, Shanghai JiaoTong
-  Univ., China, Electrical Engineering
+• _High School Diploma_ (Expected May 2026), Panther Creek High School, Cary, NC
 
-# References
 
-| Name                  | Contact                      | Capacity |
-|-----------------------|------------------------------|----------|
-| Yan, Kai              | kai@lucidumsecurity.com      | Manager  |
-| Wu, Shuning           | sw@lucidumsecurity.com       | Peer     |
-| McColgan, Meg         | mmccolgan@lenovo.com         | Manager  |
-| Herman, Joseph        | jherman1@lenovo.com          | Manager  |
-| Stambach, Ricky       | rstambach@lenovo.com         | Peer     |
-| Li, Jian              | jianli@lenovo.com            | Peer     |
-| Khullar, Lakhesh      | lakhesh\_khullar@med.unc.edu | Manager  |
-| Steere, Sylvia Irene  | sylvia\_steere@med.unc.edu   | PM       |
-| Harrold, Matthew Kyle | matthew_harrold@med.unc.edu  | Peer     |
 
-[1]: https://lenovopress.com/lp1148-red-hat-hyperconverged-infrastructure-for-virtualization-reference-architecture
-[2]: https://lenovopress.com/lp1149-lenovo-open-cloud-reference-architecture
+[1]: https://www.swimcloud.com/results/347590/swimmer/1641809/
+[2]: https://www.swimcloud.com/swimmer/1641809/times/
+[3]: https://www.swimcloud.com/swimmer/1641809/

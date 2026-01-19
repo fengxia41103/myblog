@@ -104,15 +104,16 @@ Triangle Aquatic Center/TAC Titans, Swimmer
 
 - **Competitive Advancement**: Progressed from Group Gold to Senior
 Championships level since 2022 through consistent performance
-improvement. Achieved dramatic time reduction in 50 Freestyle short
-course from [35.62 seconds to 25.04 seconds][2] &mdash; a 10.58-second
+improvement. Achieved dramatic time reduction in 50 Yard Freestyle short
+course from [35.62 seconds to 24.95 seconds][2] &mdash; a 10.67-second
 improvement demonstrating exceptional dedication and skill
 development.
 
-- **Training Commitment**: Maintained rigorous six-day weekly training
-schedule with over 90% attendance rate despite two-hour round-trip
-commute to Triangle Aquatic Center, demonstrating unwavering
-dedication to athletic excellence.
+- **Training Commitment**: Maintained rigorous year-round, six-day
+per week training schedule (15 hours total) with over 90% attendance
+rate despite two-hour round-trip commute to the TAC,
+demonstrating unwavering dedication to athletic excellence and sense
+of responsibility.
 
 - **Recent Competition Success**: Earned [first place][1] in 200
 Individual Medley and [second place][1] in 100 Butterfly at "NC TAC
@@ -144,7 +145,7 @@ Amberly Community Swim Team, Top Swimmer, Assistant Coach
 
 # Education
 
-• _High School Diploma_ (Expected May 2026), Panther Creek High School, Cary, NC
+- _High School Diploma_ (Expected May 2026), Panther Creek High School, Cary, NC
 
 
 

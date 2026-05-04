@@ -289,10 +289,10 @@ So far, soooooooooooooooooooooooo good ~~~~~
 
 [1]: https://github.com/ahungry/org-jira
 [2]: https://github.com/go-jira/jira
-[3]: {filename}/downloads/jira/jira
-[4]: {filename}/downloads/jira/templates/table
-[5]: {filename}/downloads/jira/templates/create
+[3]: {static}/downloads/jira/jira
+[4]: {static}/downloads/jira/templates/table
+[5]: {static}/downloads/jira/templates/create
 [6]: https://gohugo.io/templates/introduction/
 [7]: https://gohugo.io/functions/
-[8]: {filename}/downloads/jira/config.yml
+[8]: {static}/downloads/jira/config.yml
 [9]: https://yaml-multiline.info/

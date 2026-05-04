@@ -63,7 +63,7 @@ IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
 
 # plugins
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["tipue_search"]
+PLUGINS = ["tipue_search", "carousel"]
 
 # make a flat structure
 PAGE_URL = "{slug}.html"

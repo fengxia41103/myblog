@@ -1,7 +1,7 @@
 {% extends "index.html" %} {% block content %}
 <article>
   {% block main_content %} {# article title #}
-  <div>
+  <div class="article-meta">
     {# article date #}
     <i class="fa fa-calendar" style="opacity: 0.5">&nbsp;</i>
     {{ article.date|strftime('%Y-%m-%d') }}

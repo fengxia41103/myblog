@@ -83,7 +83,7 @@ are going onto k8s: frontend, backend, celery.
 
 After everything is done:
 
-![](images/django%20fullstack%20on%20k8s.png)
+![django fullstack on k8s](images/django%20fullstack%20on%20k8s.png)
 
 # Harbor
 

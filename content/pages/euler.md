@@ -2173,7 +2173,7 @@ times of *n*.
 
 [Question](https://projecteuler.net/problem=27):
 
-![]({static}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
+![Euler p27]({static}/downloads/euler/Euler_p27.jpg "Euler_p27.jpg")
 
 -   problem space: `|a| < 1000 and |b| < 1000`
 -   test criteria: n*n+a*n+b, n=0,1.... is prime?
@@ -4103,7 +4103,7 @@ Taking this a bit further, I searched benchmark vs. count to analyze
 how quickly this relationship will converge. To my surprise it is
 quite linear!
 
-![]({static}/downloads/euler/P53.png){.col .s12}
+![P53]({static}/downloads/euler/P53.png){.col .s12}
 
 ---
 
@@ -4807,7 +4807,7 @@ This approach is messy.
 I know this is not `clever`. But I failed to see a hard test criteria
 to know that decoded message is correct.
 
-![]({static}/downloads/euler/P59.png){.col .l6 .m6 .s12}
+![P59]({static}/downloads/euler/P59.png){.col .l6 .m6 .s12}
 
 ## method 2
 
@@ -4964,7 +4964,7 @@ def method_1():
 Graph below shows that the length of candidate list grows almost
 `linearly` with the growing of primes generated.
 
-![]({static}/downloads/euler/P60.png){.col .s12}
+![P60]({static}/downloads/euler/P60.png){.col .s12}
 
 When stopped at break condition, we had two pairs:
 

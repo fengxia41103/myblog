@@ -63,5 +63,5 @@ I find that the easiest way to revert a mistake is to `git checkout
 
 Happy coding.
 
-[1]: {filename}/downloads/emacs/emacs_setup.html
-[2]: {filename}/downloads/emacs/dot_emacs.el
+[1]: {static}/downloads/emacs/emacs_setup.html
+[2]: {static}/downloads/emacs/dot_emacs.el

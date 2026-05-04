@@ -69,7 +69,7 @@ Read [RFC][1]. Some points not clear from the RFC, but are important:
 
 # OAuth2 workflow
 
-![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*9R2CC0_HxtzYERiqHyGs-Q.png)
+![django oauth2 flow](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*9R2CC0_HxtzYERiqHyGs-Q.png)
 
 # OAuth2 scope
 
@@ -153,7 +153,7 @@ and implementation, there are different level of security you could
 enforce. Ideally the underline permission **is directly translated
 into scope**. In Django's world, this is what it looks like:
 
-![](images/oauth2%20scope%20and%20django%20permissions.png)
+![oauth2 scope and django permissions](images/oauth2%20scope%20and%20django%20permissions.png)
 
 Django model CRUD permissions are created whenever a model is
 created. So you get `blog.view_post` permission for free, which means

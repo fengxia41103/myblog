@@ -211,7 +211,7 @@ See [intro][10].
 </figure>
 
 
-[1]: {filename}/workspace/stock/stock%20detail.md
+[1]: {filename}/workspace/stock/design.md
 [2]: https://github.com/rrag/react-stockcharts
 [3]: https://en.wikipedia.org/wiki/Bollinger_Bands
 [4]: https://www.investopedia.com/terms/e/elderray.asp

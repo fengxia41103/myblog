@@ -4,7 +4,7 @@ Tags: thoughts
 Slug: nikon df split screen
 Author: Feng Xia
 
-![](images/df/done.png)
+![done](images/df/done.png)
 
 I recently got a DF, and put a split screen in it.  I'm not a handy
 man. I was very hesitant about this, but really wanted to give this a
@@ -27,7 +27,7 @@ payment pending w/ the amount you intended.
 
 ## what you get
 
-![](images/df/package.png)
+![package](images/df/package.png)
 
 I ordered it on 7/24, arrived 8/19. Be patient. In between I had many
 times swing back and forth of actually changing the screen.
@@ -75,7 +75,7 @@ Be slow an cautious.
 
 ## the screen
 
-![](images/df/canon.png)
+![canon](images/df/canon.png)
 
 The screen sits inside the Canon box. As mentioned in other places,
 this screen is essentially a Canon screen w/ some customization to fit
@@ -86,7 +86,7 @@ paper packaging material. Well done!
 The screen sits inside a plastic box in the package as if it were
 originally made by Canon! Everything is mint!
 
-![](images/df/tweezer.png)
+![tweezer](images/df/tweezer.png)
 
 There is a small plastic tool in the box w/ the screen. It seems to be
 for grabbing the tab of the screen. But it's **difficult to use**. I
@@ -107,7 +107,7 @@ concern to me. So if this is also yours, rest assured.
 
 ## special tool
 
-![](images/df/special.png)
+![special](images/df/special.png)
 
 In the instruction it's called "special tool". In practice, this is
 **the tool** you want to use! Notice the tiny lip at the end? It's
@@ -129,7 +129,7 @@ hesitation. The show is on!
 
 ## rubber finger condom
 
-![](images/df/condom.png)
+![condom](images/df/condom.png)
 
 I don't know what it's called. It's just like condom. I decided to put
 them on my left hand index finger and thumb, because I'm going to use
@@ -188,7 +188,7 @@ tiny vibration. So trust your finger and sense.
 
 ## shims
 
-![](images/df/shim.png)
+![shim](images/df/shim.png)
 
 No idea. I didn't play with the shims. I have no heart to do this
 again. It front-focus a bit. But hell, I will just develop muscle

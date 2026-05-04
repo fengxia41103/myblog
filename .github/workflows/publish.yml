@@ -26,6 +26,13 @@ jobs:
     - name: Build
       run: make publish
 
+    - name: Clean artifacts
+      run: |
+        rm -rf output/drafts
+        rm -rf output/downloads/emacs
+        rm -rf output/downloads/euler
+        rm -rf output/downloads/jira
+        rm -rf output/downloads/pandoc
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4

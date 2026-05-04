@@ -63,6 +63,19 @@
   </div>
 
   {% endblock %}
+
+  <nav class="article-nav">
+    {% if article is defined and article.prev_article %}
+    <a class="article-nav-prev" href="{{ SITEURL }}/{{ article.prev_article.url }}">
+      <i class="fa fa-arrow-left"></i> {{ article.prev_article.title }}
+    </a>
+    {% endif %}
+    {% if article is defined and article.next_article %}
+    <a class="article-nav-next" href="{{ SITEURL }}/{{ article.next_article.url }}">
+      {{ article.next_article.title }} <i class="fa fa-arrow-right"></i>
+    </a>
+    {% endif %}
+  </nav>
 </article>
 
 {% endblock %}

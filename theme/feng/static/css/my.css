@@ -85,9 +85,6 @@ body .split-left-pane {
   body .split-right-pane {
     margin-left: 50%;
   }
-  body #toggle-fullscreen {
-    display: block;
-  }
 }
 body .split-left-pane .collage-cell {
   position: relative;
@@ -141,7 +138,6 @@ body .split-right-pane {
   overflow: auto;
 }
 body #toggle-fullscreen {
-  display: none;
   position: fixed;
   top: 80px;
   right: 20px;
@@ -154,9 +150,15 @@ body #toggle-fullscreen {
   height: 40px;
   cursor: pointer;
   font-size: 1rem;
+  display: none;
 }
 body #toggle-fullscreen:hover {
   background: #d52349;
+}
+@media (min-resolution: 1dppx) and (min-width: 1080px) {
+  body #toggle-fullscreen {
+    display: block;
+  }
 }
 body.fullscreen .split-screen {
   grid-template-columns: 1fr !important;
@@ -181,6 +183,28 @@ body article .article-meta {
   body article .article-meta {
     margin-top: 0;
   }
+}
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  border-top: none;
+  margin-top: 0;
+  background: #fff;
+  box-shadow: none !important;
+}
+.article-nav a {
+  color: #d52349;
+  text-decoration: none;
+  max-width: 45%;
+  box-shadow: none !important;
+}
+.article-nav a:hover {
+  text-decoration: underline;
+}
+.article-nav-next {
+  margin-left: auto;
+  text-align: right;
 }
 #article-content {
   font-family: "Lora", serif;

@@ -16,7 +16,9 @@ import os.path
 import urllib
 from codecs import open
 
-from bs4 import BeautifulSoup
+import warnings
+from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
+warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
 from pelican import signals
 
 try:

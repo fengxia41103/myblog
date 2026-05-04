@@ -470,5 +470,5 @@ Enjoy. (also available in [pdf][2])
 
 
 [1]: {filename}/dev/git.md
-[2]: {filename}/downloads/git.pdf
+[2]: {static}/downloads/git.pdf
 

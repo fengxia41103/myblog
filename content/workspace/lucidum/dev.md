@@ -560,7 +560,7 @@ are key configurations:
 Networking path describes the path from SaaS user's browser to a
 Tenant.
 
-![](./images/networking%20path.png)
+![networking path](./images/networking%20path.png)
 
 Overall the networking traffic go through:
 

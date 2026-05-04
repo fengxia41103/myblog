@@ -233,7 +233,7 @@ ports.
 
 ## ingress w/ an external LB
 
-![](images/k8s%20expose%20app%20lb.png)
+![k8s expose app load balancer](images/k8s%20expose%20app%20lb.png)
 
 
 A better way is to deploy an ingress controller as a central

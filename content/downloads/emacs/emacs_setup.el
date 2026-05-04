@@ -280,21 +280,12 @@ and the tangled file is compiled."
 (use-package restclient
   :ensure)
 
-(load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
-(require 'ob-restclient)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((restclient . t)))
-
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (XXX-mode . lsp)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+(when (file-exists-p "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+  (load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
+  (require 'ob-restclient)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t))))
 
 (use-package lsp-mode
   :ensure t
@@ -378,15 +369,16 @@ and the tangled file is compiled."
 ;;     (mapc (lambda (pkg) (package-install pkg)) pkg-list)))
 
 ;; install copilot.el
-(add-to-list 'load-path "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
-(require 'copilot)
+(when (file-exists-p "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
+  (add-to-list 'load-path "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
+  (require 'copilot)
 
-;; enable mode
-(add-hook 'prog-mode-hook 'copilot-mode)
+  ;; enable mode
+  (add-hook 'prog-mode-hook 'copilot-mode)
 
-;; add keyboard shortcuts
-(define-key copilot-completion-map (kbd "M-<tab>") 'copilot-accept-completion)
-(define-key copilot-completion-map (kbd "M-TAB") 'copilot-accept-completion)
+  ;; add keyboard shortcuts
+  (define-key copilot-completion-map (kbd "M-<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "M-TAB") 'copilot-accept-completion))
 
 (defun rk/copilot-complete-or-accept ()
   "Command that either triggers a completion or accepts one if one
@@ -429,7 +421,7 @@ cleared, make sure the overlay doesn't come back too soon."
            nil
            (lambda ()
              (setq copilot-disable-predicates pre-copilot-disable-predicates)))))
-    (error handler)))
+    (error nil)))
 
 (advice-add 'keyboard-quit :before #'rk/copilot-quit)
 
@@ -442,13 +434,13 @@ cleared, make sure the overlay doesn't come back too soon."
 
   :ensure
   :config
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-hook 'markdown-mode-hook
             (lambda ()
               (visual-line-mode t)
               (writegood-mode t)
               (auto-fill-mode t)
-              (flyspell-mode t)))))
+              (flyspell-mode t))))
 
 (custom-theme-set-faces
  'user
@@ -594,13 +586,11 @@ cleared, make sure the overlay doesn't come back too soon."
 (setq sqlformat-command 'pgformatter)
 (setq sqlformat-args '("-s4" "-B" "-w150" "-k" "-f2" "-U2" "--extra-keyword=/home/fengxia/workspace/tmp/oracle-keywords"))
 
-(setq sqlformat-command 'sqlformat)
-(setq sqlformat-args '("-k" "upper" "-i" "upper" "-s" "-r" "--indent_width=4"))
-
 (add-hook 'sql-mode-hook '(lambda()
   (define-key sql-mode-map (kbd "C-c C-f") 'sqlformat-buffer)))
 
-(load "~/.emacs.d/dax-mode/dax-mode.el")
+(when (file-exists-p "~/.emacs.d/dax-mode/dax-mode.el")
+  (load "~/.emacs.d/dax-mode/dax-mode.el"))
 
 (defun dax-pretty-print ()
   "Pretty print the DAX buffer via DaxFormatter API."
@@ -631,6 +621,12 @@ cleared, make sure the overlay doesn't come back too soon."
     (kill-buffer newbuff)
     )
   )
+
+(use-package terraform-mode
+    :ensure
+    :config)
+(add-hook 'terraform-mode-hook #'outline-minor-mode)
+(setq terraform-format-on-sav t)
 
 (use-package lsp-java
   :after java
@@ -1075,7 +1071,7 @@ cleared, make sure the overlay doesn't come back too soon."
 (set-face-attribute 'region nil
                     :background "#666"
                     :foreground "#d52349")
-(set-face-background 'show-paren-match (face-background 'default))
+(set-face-background 'show-paren-match (or (face-background 'default) "#282828"))
 (set-face-foreground 'show-paren-match "#d52349")
 (set-face-attribute 'show-paren-match nil
                     :weight 'extra-bold)
@@ -1344,61 +1340,7 @@ cleared, make sure the overlay doesn't come back too soon."
                                   helm-source-bookmarks
                                   helm-source-buffer-not-found))
 
-(use-package pyim
-  :ensure
-  :defer 10
-  :config
-
-  ;; 五笔用户使用 wbdict 词库
-  ;; (use-package pyim-wbdict
-  ;;   :ensure nil
-  ;;   :config (pyim-wbdict-gbk-enable))
-
-  (setq default-input-method "pyim")
-
-  ;; 我使用全拼
-  (setq pyim-default-scheme 'quanpin)
-
-  ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
-  ;; 我自己使用的中英文动态切换规则是：
-  ;; 1. 光标只有在注释里面时，才可以输入中文。
-  ;; 2. 光标前是汉字字符时，才能输入中文。
-  ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-  ;; (setq-default pyim-english-input-switch-functions
-  ;;               '(pyim-probe-dynamic-english
-  ;;                 pyim-probe-isearch-mode
-  ;;                 pyim-probe-program-mode
-  ;;                 pyim-probe-org-structure-template))
-
-  ;; (setq-default pyim-punctuation-half-width-functions
-  ;;               '(pyim-probe-punctuation-line-beginning
-  ;;                 pyim-probe-punctuation-after-punctuation))
-
-  ;; 开启拼音搜索功能
-  (pyim-isearch-mode 1)
-
-  ;; 使用 pupup-el 来绘制选词框
-  (setq pyim-page-tooltip 'popup)
-
-  ;; 选词框显示5个候选词
-  (setq pyim-page-length 7)
-
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  (add-hook 'emacs-startup-hook
-            #'(lambda () (pyim-restart-1 t)))
-  :bind
-  (;与 pyim-probe-dynamic-english 配合
-  ("M-j" . pyim-convert-code-at-point)
-
-  ("C-;" . pyim-delete-word-from-personal-buffer)))
-
-;; Basedict
-(use-package pyim-basedict
-  :ensure t)
-(pyim-basedict-enable)
-
 (global-set-key (kbd "C-\\") 'toggle-input-method)
-(setq default-input-method "pyim")
 
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
@@ -2170,7 +2112,8 @@ If given prefix arg ARG, skips markdown conversion."
 (setq org-agenda-current-time-string ">>>>>>>>>> NOW <<<<<<<<<<")
 
 ;; will refresh it only if already visible
-(run-at-time nil 180 'update-agenda-if-visible)
+(run-with-idle-timer 10 nil
+  (lambda () (run-at-time nil 180 'update-agenda-if-visible)))
 ;;(add-hook 'org-mode-hook
 ;;          (lambda () (run-at-time nil 180 'kiwon/org-agenda-redo-in-other-window)))
 

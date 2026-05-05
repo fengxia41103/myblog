@@ -93,73 +93,77 @@
       </div>
     </div>
 
-    <footer class="split-screen">
-      <div class="container">
-        <h5>Categories:</h5>
-        {% for c,article in categories %}
-        <a href="{{SITEURL}}/{{c.url}}">
-          <i class="fa fa-folder-open-o"></i>
-          {{ c }}
-        </a>
-        {% endfor %}
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-content">
+          <h5>Categories:</h5>
+          {% for c,article in categories %}
+          <a href="{{SITEURL}}/{{c.url}}">
+            <i class="fa fa-folder-open-o"></i>
+            {{ c }}
+          </a>
+          {% endfor %}
 
-        <h5>Tags:</h5>
-        {% for c,article in tags %}
-        <a href="{{SITEURL}}/{{c.url}}">
-          <i class="fa fa-tag"></i>
-          {{ c }}
-        </a>
-        {% endfor %}
-        <div class="">
-          <h5>Show Cases:</h5>
-          <div id="showcase">
-            <p>
-              Photo album:
-              <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
-            </p>
-            <p>
-              API & charts:
-              <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
-                >SP500</a
-              >
-            </p>
-            <p>
-              API & charts:
-              <a
-                href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
-                >Snapshot of The World</a
-              >
-            </p>
+          <h5>Tags:</h5>
+          {% for c,article in tags %}
+          <a href="{{SITEURL}}/{{c.url}}">
+            <i class="fa fa-tag"></i>
+            {{ c }}
+          </a>
+          {% endfor %}
+          <div>
+            <h5>Show Cases:</h5>
+            <div id="showcase">
+              <p>
+                Photo album:
+                <a href="https://fengxia41103.github.io/moment/1236/#/">1236</a>
+              </p>
+              <p>
+                API & charts:
+                <a href="http://sp500chart.s3-website-us-east-1.amazonaws.com"
+                  >SP500</a
+                >
+              </p>
+              <p>
+                API & charts:
+                <a
+                  href="http://snapshots.world.s3-website.ap-northeast-2.amazonaws.com/"
+                  >Snapshot of The World</a
+                >
+              </p>
 
-            <p>
-              Django (in Chinese):
-              <a href="{{SITEURL}}/project gkp demo.html">GKP</a>
-            </p>
-            <p>
-              ERP:
-              <a href="{{SITEURL}}/project fashion demo.html">Fashion</a>
-            </p>
-            <p>
-              Data processing:
-              <a href="{{SITEURL}}/project stock demo.html">Stock</a>
-            </p>
-            <p>
-              Angular & REACT:
-              <a href="{{SITEURL}}/car leasing.html">Car leasing</a>
-              &nbsp;|&nbsp;
-              <a href="https://fengxia41103.github.io/spa-dashboard/">
-                YAML Config Dashboard
-              </a>
-            </p>
-            <p>
-              API & REACT:
-              <a href="https://fengxia41103.github.io/movie/">Movies</a>
-            </p>
+              <p>
+                Django (in Chinese):
+                <a href="{{SITEURL}}/project gkp demo.html">GKP</a>
+              </p>
+              <p>
+                ERP:
+                <a href="{{SITEURL}}/project fashion demo.html">Fashion</a>
+              </p>
+              <p>
+                Data processing:
+                <a href="{{SITEURL}}/project stock demo.html">Stock</a>
+              </p>
+              <p>
+                Angular & REACT:
+                <a href="{{SITEURL}}/car leasing.html">Car leasing</a>
+                &nbsp;|&nbsp;
+                <a href="https://fengxia41103.github.io/spa-dashboard/">
+                  YAML Config Dashboard
+                </a>
+              </p>
+              <p>
+                API & REACT:
+                <a href="https://fengxia41103.github.io/movie/">Movies</a>
+              </p>
+            </div>
           </div>
         </div>
-        <video autoplay muted loop id="myVideo">
-          <source src="downloads/polina.mp4" type="video/mp4" />
-        </video>
+        <div class="footer-video">
+          <video autoplay muted loop id="myVideo">
+            <source src="downloads/polina.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
     </footer>
     <div class="footer-copyright">
@@ -273,12 +277,12 @@
        // image materialbox
        j$(".materialboxed").materialbox();
 
-       // header drawer
+       // header: show on trigger hover
        j$(".header-trigger").on("mouseenter", function () {
-         j$("header").addClass("open");
+         j$("header").css("transform", "translateY(0)");
        });
        j$("header").on("mouseleave", function () {
-         j$(this).removeClass("open");
+         j$(this).css("transform", "translateY(-100%)");
        });
 
        // wrap article images with pin wrapper

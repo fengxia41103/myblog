@@ -1,6 +1,5 @@
 import React, { StrictMode, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import fetchJsonp from "fetch-jsonp";
 
 export default function QuoteBox(props) {
   const [quote, setQuote] = useState(null);
@@ -10,21 +9,19 @@ export default function QuoteBox(props) {
   const getImage = () => {
     setLoading(true);
 
-    // AJAX
     const min = 1,
-      max = 1743; // 1743 is from manual testing
+      max = 2900;
     const id = Math.floor(Math.random() * (max - min) + min);
 
-    // NOTE: must use `https` if using github page, which is
-    // served in https (is a setting option, however).
-    const apiUrl = `https://dynamic.xkcd.com/api-0/jsonp/comic/${id}`;
-    fetchJsonp(apiUrl)
+    const apiUrl = `https://xkcd.vercel.app/?comic=${id}`;
+    fetch(apiUrl)
       .then((resp) => resp.json())
       .then((data) => {
         setQuote(data.title);
         setImg(data.img);
         setLoading(false);
-      });
+      })
+      .catch(() => setLoading(false));
   };
 
   useEffect(() => getImage(), []);

@@ -1,7 +1,7 @@
 @import "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap";
 @import "https://fonts.googleapis.com/css2?family=Mitr:wght@500&family=Source+Sans+Pro:wght@400&display=swap";
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@500&family=Montserrat:wght@900&family=Source+Sans+Pro:wght@400&family=Raleway:wght@900&family=Ubuntu+Mono&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&family=Noto+Serif+SC&family=Roboto&family=Lora:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&family=Noto+Serif+SC&family=Roboto&family=Lora:wght@400;500&family=Playfair+Display:wght@400;700&display=swap");
 /* Customize Bootstrap default CSS
    -------------------------------------------------- */
 /* Lastly, apply responsive CSS fixes as necessary */
@@ -10,32 +10,37 @@
 /* 4x3 Aspect Ratio */
 /* new CSS for grid layout */
 html {
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 22px;
+  font-family: "Lora", serif;
+  font-size: 18px;
+  background-color: #fff;
+  color: #333;
 }
 
 body * .myhighlight {
-  color: #d52349;
+  color: #c9a96e;
 }
 body strong {
-  color: #d52349;
+  color: #c9a96e;
 }
 body header {
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: rgba(52, 52, 52, 0.9);
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 8px 30px;
+  padding: 20px 40px;
   z-index: 2000;
-  font-size: 14px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   transform: translateY(-100%);
   transition: transform 0.3s ease-in-out;
 }
 body header:hover {
   transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 body header.hidden {
   transform: translateY(-100%);
@@ -49,13 +54,14 @@ body .header-trigger {
   z-index: 1999;
 }
 body header a {
-  color: #fefefe;
+  color: #333;
+  margin-right: 2em;
 }
 body header a:hover {
-  border-bottom: 1px solid #d52349;
+  border-bottom: 1px solid #333;
 }
 body footer {
-  background-color: rgba(12, 12, 22, 0.9);
+  background-color: rgba(12, 12, 22, 0.8);
   color: #fefff5;
 }
 body footer h1 {
@@ -69,7 +75,7 @@ body .split-left-pane {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0;
-  background-color: #fff;
+  background-color: #fafafa;
   color: #efefef;
   padding: 30px;
   overflow: hidden;
@@ -93,7 +99,7 @@ body .split-left-pane .collage-cell {
   cursor: pointer;
   margin: 25px;
   border-radius: 3px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   background-color: #fff;
   aspect-ratio: 1 / 1;
   padding: 8px 8px 30px 8px;
@@ -114,7 +120,7 @@ body .split-left-pane .collage-cell .collage-caption {
   height: 24px;
   line-height: 24px;
   font-size: 10px;
-  color: #999;
+  color: #888;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
@@ -192,11 +198,11 @@ body article .article-meta {
   padding: 0;
   border-top: none;
   margin-top: 0;
-  background: #fff;
+  background: transparent;
   box-shadow: none !important;
 }
 .article-nav a {
-  color: #d52349;
+  color: #333;
   text-decoration: none;
   max-width: 45%;
   box-shadow: none !important;
@@ -220,7 +226,7 @@ body article .article-meta {
   padding: 10px 10px 35px 10px;
   background: #fff;
   border: none;
-  box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
   margin: 0;
   display: block;
@@ -311,26 +317,27 @@ body .footer-copyright {
   counter-reset: h1 h2 h3 h4 h5 h6 figures;
   padding-bottom: 3em;
   padding-top: 0 !important;
-  color: rgb(52, 52, 52);
+  color: #333;
   width: 90%;
+  max-width: 700px;
 }
 #content h1 {
-  font-family: "Mitr", sans-serif;
-  color: #634f33;
-  font-weight: 400;
-  font-size: 1.5rem;
+  font-family: "Playfair Display", serif;
+  color: #222;
+  font-weight: 700;
+  font-size: 2.2rem;
   word-wrap: break-word;
 }
 #content h2 {
-  font-family: "Mitr", sans-serif;
-  color: #634f33;
+  font-family: "Playfair Display", serif;
+  color: #333;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   word-wrap: break-word;
 }
 #content h3 {
-  font-family: "Mitr", sans-serif;
-  color: #634f33;
+  font-family: "Playfair Display", serif;
+  color: #444;
   font-weight: 400;
   font-size: 1.5rem;
   word-wrap: break-word;

@@ -8417,20 +8417,19 @@
 	  const [loading, setLoading] = react.exports.useState(false);
 
 	  const getImage = () => {
-	    setLoading(true); // AJAX
+	    setLoading(true);
 
 	    const min = 1,
-	          max = 1743; // 1743 is from manual testing
+	          max = 2900;
 
-	    const id = Math.floor(Math.random() * (max - min) + min); // NOTE: must use `https` if using github page, which is
-	    // served in https (is a setting option, however).
+	    const id = Math.floor(Math.random() * (max - min) + min);
 
-	    const apiUrl = `https://dynamic.xkcd.com/api-0/jsonp/comic/${id}`;
-	    fetchJsonp(apiUrl).then(resp => resp.json()).then(data => {
+	    const apiUrl = `https://xkcd.vercel.app/?comic=${id}`;
+	    fetch(apiUrl).then(resp => resp.json()).then(data => {
 	      setQuote(data.title);
 	      setImg(data.img);
 	      setLoading(false);
-	    });
+	    }).catch(() => setLoading(false));
 	  };
 
 	  react.exports.useEffect(() => getImage(), []);

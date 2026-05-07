@@ -296,29 +296,7 @@
          j$("body").toggleClass("fullscreen");
        });
 
-       // left pane: stop at bottom of #content
-       j$(window).on("scroll", function () {
-         var $pane = j$("#left-pane-carousel");
-         var $content = j$("#content");
-         if (!$pane.length || !$content.length) return;
-         var contentBottom = $content.offset().top + $content.outerHeight();
-         var scrollBottom = j$(window).scrollTop() + j$(window).height();
-         if (scrollBottom >= contentBottom) {
-           $pane.css({
-             position: "absolute",
-             top: "auto",
-             bottom: (j$(document).height() - contentBottom) + "px",
-             height: j$(window).height() + "px"
-           });
-         } else {
-           $pane.css({
-             position: "fixed",
-             top: "0",
-             bottom: "auto",
-             height: "100vh"
-           });
-         }
-       });
+       // left pane: sticky handles scroll behavior via CSS
 
        // left pane image collage billboard
        var carouselImages = [

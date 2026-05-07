@@ -175,7 +175,11 @@ body.fullscreen .split-left-pane {
   display: none !important;
 }
 body.fullscreen .split-right-pane {
-  margin-left: 0;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+body.fullscreen #content {
+  max-width: 100% !important;
 }
 body.fullscreen #toggle-fullscreen i::before {
   content: "\f066";

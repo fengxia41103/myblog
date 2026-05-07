@@ -144,6 +144,13 @@ body {
     .split-left-pane {
       display: none !important;
     }
+    .split-right-pane {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+    #content {
+      max-width: 100% !important;
+    }
     #toggle-fullscreen i {
       &::before {
         content: "\f066"; // fa-compress

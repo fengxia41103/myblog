@@ -102,6 +102,14 @@ resume_devops_md := resume-devops.md
 RESUME_DEVOPS_INPUTS = $(resume_devops_md)
 resume_devops_pdf := ../feng\ xia\ resume\ devops.pdf
 
+resume_architect_md := resume-architect.md
+RESUME_ARCHITECT_INPUTS = $(resume_architect_md)
+resume_architect_pdf := ../feng\ xia\ resume\ architect.pdf
+
+resume_director_md := resume-director.md
+RESUME_DIRECTOR_INPUTS = $(resume_director_md)
+resume_director_pdf := ../feng\ xia\ resume\ director.pdf
+
 resume_noah_md := resume-noah.md
 RESUME_NOAH_INPUTS = $(resume_noah_md)
 resume_noah_pdf := ../noah\ resume.pdf
@@ -152,7 +160,7 @@ cwis_tex := cwis.tex
 rhhi_ra: rhhi_ra_pdf rhhi_ra_docx  rhhi_ra_html
 loc_ra: loc_ra_pdf loc_ra_docx loc_ra_html
 webapp: webapp_pdf webapp_docx webapp_html
-resume: resume_pdf resume_docx resume_devops_pdf
+resume: resume_pdf resume_docx resume_devops_pdf resume_architect_pdf resume_director_pdf
 cover_letter: cover_letter_pdf
 git: git_pdf
 netbox: netbox_pdf netbox_docx
@@ -248,6 +256,22 @@ resume_devops_pdf: $(RESUME_DEVOPS_INPUTS)
 	-o $(resume_devops_pdf) \
 	--pdf-engine=xelatex \
 	$(RESUME_DEVOPS_INPUTS)
+
+resume_architect_pdf: $(RESUME_ARCHITECT_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(resume_architect_pdf) \
+	--pdf-engine=xelatex \
+	$(RESUME_ARCHITECT_INPUTS)
+
+resume_director_pdf: $(RESUME_DIRECTOR_INPUTS)
+	pandoc \
+	-s \
+	-t latex \
+	-o $(resume_director_pdf) \
+	--pdf-engine=xelatex \
+	$(RESUME_DIRECTOR_INPUTS)
 
 resume_noah_pdf: $(RESUME_NOAH_INPUTS)
 	pandoc \

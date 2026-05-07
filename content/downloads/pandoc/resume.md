@@ -98,6 +98,108 @@ practical problems using technologies.
 
 # Experience
 
+\hdashrule{\textwidth}{0.5pt}{2pt}
+\begin{center}
+\small\textit{
+Firmware Engr $\rightarrow$ Researcher $\rightarrow$ Business Mgr
+$\rightarrow$ Project Mgr $\rightarrow$ Assoc. Director
+$\rightarrow$ Founder $\rightarrow$ Sr. Solution Architect
+$\rightarrow$ \textbf{Principal System Architect (\$93M state program, 3000+ users, 100 counties)}
+}
+\end{center}
+\hdashrule{\textwidth}{0.5pt}{2pt}
+
+## 12/2023 -
+Department of Health and Human Service, North Carolina, Principal
+System Architect
+
+- As the principal system architect of the PATH NC ($93M) child
+  welfare modernization, led the successful go-live (June 2025) of a
+  statewide Salesforce platform serving 3,000+ users across all 100 NC
+  counties, phased in 6 rollout groups. Oversaw 50+ repositories,
+  2,745+ Apex classes, 1,195+ LWC components, 532+ Flows, 647+ custom
+  objects, and 30+ licensed SaaS/COTS products spanning 7 AWS
+  accounts and 3 Azure subscriptions.
+
+- Established the program's architecture governance from scratch:
+  authored the reference architecture, formal DIT/State architecture
+  review decision points, custom code dev/build/deploy standards,
+  SBOM and license compliance tracking, backup & restore strategy,
+  production incident management process, and PROD health dashboards.
+  Systematically drove go-live readiness and post-go-live tech debt
+  resolution across all workstreams.
+
+- Architected a serverless document management system replacing legacy
+  IBM FileNet, featuring event-driven ingestion (S3, EventBridge,
+  Lambda, DynamoDB), intelligent document processing (AWS Textract,
+  Amazon Bedrock for driver's licenses, birth certificates, SSN
+  cards), SHA-256 integrity validation, DLQ retry orchestration, and
+  automated Glacier archival with 90%+ test coverage.
+
+- Built the PATH NC Enterprise AI platform (GenAIe), a RAG solution
+  using AWS Bedrock (Claude, Titan embeddings), OpenSearch Serverless,
+  Bedrock Guardrails, and a Django/FastAPI/React stack with Celery
+  workers, deployed on OpenShift via ArgoCD across 6 environments.
+  Evaluated and selected architecture over alternatives (Kendra,
+  Salesforce AgentForce, Microsoft Copilot).
+
+- Designed the MuleSoft API-led integration layer (13+ APIs)
+  connecting PATH NC to 12 external systems: NCID, Adobe Sign, AEM,
+  CNDS background checks, DPI school records, FIS financials, NEICE
+  interstate compact, EB benefits, ACTS, NCFS, Vital Records, and
+  Medicaid/NC Analytics.
+
+- Managed multi-cluster ROSA (Red Hat OpenShift on AWS) infrastructure
+  (Dev, Pre-Prod, Prod) with auto-scaling worker nodes (r6a.2xl, up
+  to 12 nodes/96 CPU/768 GB), using Terraform, Kustomize, and ArgoCD
+  GitOps. Managed Azure infrastructure including Synapse Workspace,
+  Dedicated SQL Pool, ADLS, Entra ID/RBAC, and Power Automate.
+  Implemented drift detection and Day 0/1/2 cluster automation.
+
+- Architected the end-to-end financial data movement pipeline
+  (Salesforce → Azure Pipeline → Synapse → Power BI → AWS SFTP → NCFS
+  mainframe) with Power Automate orchestration, enabling monthly
+  county payment processing for Foster Care, Vendor Payments, and
+  Adoption Assistance.
+
+- Built a high-performance NC Medicaid Analytics ETL service
+  (Python/FastAPI) handling monthly SFTP ingestion of 1.2M+ records,
+  streaming delta loads to PostgreSQL via staging/merge pattern, and
+  exposing REST search APIs secured via MuleSoft OAuth, deployed as
+  OpenShift CronJob with Athena serverless analytics.
+
+- Designed centralized CI/CD pipeline orchestration via reusable
+  GitHub Actions workflows shared across the organization, integrating
+  MuleSoft deployment, SonarQube, Postman API testing, security
+  scanning (Trivy, Veracode), and commitlint enforcement.
+
+- Built a real-time PROD health monitoring dashboard checking 48+
+  API endpoints and OpenShift pods every 60 seconds with AWS SNS
+  alerting on consecutive failures, React UI with WebSocket updates,
+  complementing Splunk and CloudWatch dashboards.
+
+- Designed the user lifecycle and RBAC model: Azure AD/NCID SSO with
+  SCIM provisioning, JIT activation, per-county role matrix (400+
+  application roles), and Salesforce ACL model. Built a user
+  validation tool processing Excel against NCID SOAP and multi-org
+  Salesforce APIs for phased county rollouts.
+
+- Led security hardening including FedRAMP SSP documentation (NIST
+  800-53), Terraform-based AWS Secrets Manager with IAM policies and
+  rotation alerting, Salesforce permission sets and sharing rules, and
+  network security across Direct Connect, Transit Gateway, and
+  Cloudflare WAF.
+
+- Initiated comprehensive test automation: Robot Framework regression
+  suites (IA and OCM modules), Playwright E2E (TypeScript/Python),
+  YAML-driven declarative Salesforce test framework, JMeter load
+  testing, and automated code review tooling integrating JIRA.
+
+- Managed Adobe Experience Manager (AEM) content platform and
+  DocuEdge document vault (Django/DRF on OpenShift) for the child
+  welfare portal ecosystem. Led legacy Curam/DB2 data conversion
+  with SQL extraction, post-load verification, and ad-hoc queries.
+
 ## 3/2022 - 3/2023
 Lucidum, Principal System Architect
 
@@ -184,7 +286,7 @@ Lenovo US, P8, Advisory Engineer, Senior Solution Architect, Team Lead
   located globally. Stack include Django, React, Celery, Redis, MySQL,
   Docker, Ansible, ENOS/NOS.
 
-## 01/2015 - present
+## 01/2015 - 11/2016
 PY Consulting, Founder, Freelance
 
 _UNC Chapel Hill, School of Medicine, Contractor_

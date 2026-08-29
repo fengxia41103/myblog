@@ -56,7 +56,7 @@ requests==2.26.0
 rich==14.0.0
 SecretStorage==3.3.1
 six==1.16.0
-soupsieve==2.7
+soupsieve==2.8.4
 stevedore==3.5.0
 typing_extensions==4.14.0
 Unidecode==1.4.0

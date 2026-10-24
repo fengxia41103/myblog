@@ -512,6 +512,12 @@ image instead of host-installed binaries.")
   (dolist (m '(js2-mode js-mode json-mode css-mode scss-mode
                web-mode html-mode typescript-mode))
     (setf (alist-get m apheleia-mode-alist) 'prettier))
+  ;; Salesforce Apex: format through the lsp-langservers Docker image
+  ;; (prettier + prettier-plugin-apex). Pure stdin->stdout via `apex-fmt',
+  ;; so no mount/path-mapping needed. Keeps prettier+JVM plugin off the host.
+  (setf (alist-get 'apex apheleia-formatters)
+        '("docker" "run" "-i" "--rm" "lsp-langservers:1" "apex-fmt"))
+  (setf (alist-get 'apex-mode apheleia-mode-alist) 'apex)
   (apheleia-global-mode +1))
 
 (use-package sphinx-doc
@@ -551,6 +557,13 @@ image instead of host-installed binaries.")
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook  'emmet-mode)
 (add-hook 'scss-mode-hook  'emmet-mode)
+
+(define-derived-mode apex-mode java-mode "Apex"
+  "Major mode for editing Salesforce Apex code (derived from `java-mode').")
+
+(add-to-list 'auto-mode-alist '("\\.cls\\'"     . apex-mode))
+(add-to-list 'auto-mode-alist '("\\.trigger\\'" . apex-mode))
+(add-to-list 'auto-mode-alist '("\\.apex\\'"    . apex-mode))
 
 ;; Must run BEFORE js2-mode loads (see note above).
 (require 'js)                 ; defines js-indent-level as a global defcustom

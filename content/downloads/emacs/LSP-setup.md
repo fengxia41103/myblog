@@ -77,6 +77,12 @@ host Node no longer breaks LSP).
 - **Servers in image (verified via LSP `initialize` handshake):** pylsp 1.12.0,
   typescript-language-server 5.1.3, vscode-css/html/json/eslint-language-server,
   jdtls 1.49.0 (JDK 17), bash-language-server.
+- **Salesforce Apex (formatting only):** the image also carries prettier +
+  prettier-plugin-apex. `apex-mode` (a thin `java-mode` derivative in
+  `emacs_setup.org`) handles `.cls`/`.trigger`; apheleia formats via
+  `docker run -i --rm lsp-langservers:1 apex-fmt` (stdin->stdout). No Apex
+  language server — that needs an SFDX-format project (pathnc-sf is
+  metadata-format).
 
 > The per-machine host-install table below is retained for reference / the
 > non-container fallback path.

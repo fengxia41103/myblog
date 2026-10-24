@@ -1071,6 +1071,12 @@ which formatter runs.
     (dolist (m '(js2-mode js-mode json-mode css-mode scss-mode
                  web-mode html-mode typescript-mode))
       (setf (alist-get m apheleia-mode-alist) 'prettier))
+    ;; Salesforce Apex: format through the lsp-langservers Docker image
+    ;; (prettier + prettier-plugin-apex). Pure stdin->stdout via `apex-fmt',
+    ;; so no mount/path-mapping needed. Keeps prettier+JVM plugin off the host.
+    (setf (alist-get 'apex apheleia-formatters)
+          '("docker" "run" "-i" "--rm" "lsp-langservers:1" "apex-fmt"))
+    (setf (alist-get 'apex-mode apheleia-mode-alist) 'apex)
     (apheleia-global-mode +1))
 #+END_SRC
 #+END_SRC
@@ -1156,6 +1162,22 @@ Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencod
   (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode)
   (add-hook 'scss-mode-hook  'emmet-mode)
+#+END_SRC
+
+*** salesforce apex: .cls .trigger .apex
+Apex is a Java-family language, so a thin mode derived from =java-mode=
+gives syntax highlighting + indentation with no external package. There is
+no Apex language server here (that needs an SFDX-format project);
+formatting is handled by apheleia through the Docker image (see apheleia:
+=apex= formatter -> =apex-fmt= = prettier + prettier-plugin-apex).
+
+#+BEGIN_SRC emacs-lisp
+  (define-derived-mode apex-mode java-mode "Apex"
+    "Major mode for editing Salesforce Apex code (derived from `java-mode').")
+
+  (add-to-list 'auto-mode-alist '("\\.cls\\'"     . apex-mode))
+  (add-to-list 'auto-mode-alist '("\\.trigger\\'" . apex-mode))
+  (add-to-list 'auto-mode-alist '("\\.apex\\'"    . apex-mode))
 #+END_SRC
 
 *** javascript family: .js .ts .jsx

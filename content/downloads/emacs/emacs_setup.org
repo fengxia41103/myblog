@@ -1136,7 +1136,20 @@ formatting is handled by apheleia running host =prettier= with
 
 #+BEGIN_SRC emacs-lisp
   (define-derived-mode apex-mode java-mode "Apex"
-    "Major mode for editing Salesforce Apex code (derived from `java-mode').")
+    "Major mode for editing Salesforce Apex code (derived from `java-mode').
+  LSP is intentionally NOT used (no Apex language server for a metadata-format
+  project); formatting is via apheleia + prettier-plugin-apex.")
+
+  ;; apex-mode inherits java-mode's hooks (which include `lsp-deferred'), so
+  ;; lsp tries to attach and warns it can't find a languageId for apex-mode.
+  ;; There is no Apex language server, so (a) teach lsp a languageId so the
+  ;; warning stops, and (b) cancel lsp in apex buffers since nothing serves it.
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-language-id-configuration '(apex-mode . "apex")))
+  (add-hook 'apex-mode-hook
+            (lambda ()
+              (when (bound-and-true-p lsp-mode)
+                (ignore-errors (lsp-mode -1)))))
 
   (add-to-list 'auto-mode-alist '("\\.cls\\'"     . apex-mode))
   (add-to-list 'auto-mode-alist '("\\.trigger\\'" . apex-mode))

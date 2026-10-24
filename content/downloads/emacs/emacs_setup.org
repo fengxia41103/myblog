@@ -819,84 +819,48 @@ Then wrap it w/ this, you can then embed restcall in org!
   ;;   :after (lsp-java))
 #+end_src
 
-*** lsp-docker (containerized language servers)
+*** lsp server environment (host servers + nvm node on PATH)
 
-Run every language server from a single pinned Docker image instead of
-installing them into =$HOME=. This keeps the host clean and, crucially,
-makes the servers *immune to =nvm use <version>=*: the JS/TS/CSS/HTML
-servers run on the image's own pinned Node, so switching the host Node
-version no longer breaks LSP.
+Language servers run as host-installed binaries. The one catch on this
+machine: several servers (=typescript-language-server=, the
+=vscode-*-language-server= family) are Node scripts (=#!/usr/bin/env node=),
+and Node is provided by =nvm=. A GUI Emacs does not inherit the shell PATH,
+and nvm only initializes in *interactive* shells — so without help Emacs
+can't find =node= and =ts-ls= dies with "exited abnormally with code 1".
 
-The image is built from =~/workspace/me/dev/lsp= (Dockerfile +
-=docker compose build=); it is tagged =lsp-langservers:1=. See that
-folder's =README.md= for build/rebuild instructions.
-
-How it works: =lsp-mode= launches a server by running
-=docker run -i lsp-langservers:1 <server> --stdio= and pipes JSON-RPC
-over stdio. The project is bind-mounted at an *identical absolute path*
-(=path-mappings=) so =file://= URIs line up between Emacs and the
-container — without this, go-to-def / diagnostics / rename misbehave.
-
-Notes:
-- =lsp-docker='s built-in defaults use the obsolete =css-languageserver= /
-  =html-languageserver= binaries, so we override them with the modern
-  =vscode-*-language-server= commands shipped by the image.
-- =lsp-docker= ships no Java client, so we add a =jdtls= entry that calls
-  the image's =jdtls-stdio= wrapper.
-- Set =my/lsp-use-docker= to =nil= to fall back to host-installed servers.
+Two measures make it robust:
+1. =exec-path-from-shell= imports PATH from an *interactive* login shell
+   (=-i=), so nvm's init runs and the current node dir is picked up.
+2. As a belt-and-suspenders fallback, add nvm's =default= node bin dir to
+   =exec-path= / =PATH= directly, so Emacs still finds node even if the
+   shell import is skipped.
 
 #+begin_src emacs-lisp
-  (defvar my/lsp-use-docker t
-    "When non-nil, run language servers from the lsp-langservers Docker
-  image instead of host-installed binaries.")
+  (require 'subr-x)  ; string-trim
 
-  ;; Absolute path shared by host and container. Projects opened under this
-  ;; directory get LSP via the container; the identical mapping keeps URIs
-  ;; consistent so navigation/diagnostics resolve correctly.
-  (defvar my/lsp-docker-root
-    (expand-file-name "workspace/me/dev" (getenv "HOME"))
-    "Host directory bind-mounted (at the same path) into the LSP container.")
+  ;; (1) Import the interactive shell's PATH so nvm's node is visible.
+  ;;     exec-path-from-shell is configured elsewhere; force interactive args
+  ;;     here so .zshrc (where nvm is sourced) actually runs.
+  (with-eval-after-load 'exec-path-from-shell
+    (setq exec-path-from-shell-arguments '("-l" "-i")))
 
-  (defun my/lsp-docker-register ()
-    "Register the containerized LSP clients (idempotent)."
-    (lsp-docker-init-clients
-     :docker-image-id "lsp-langservers:1"
-     :docker-container-name "lsp-langservers"
-     ;; Identical path on both sides -> file:// URIs match.
-     :path-mappings (list (cons my/lsp-docker-root my/lsp-docker-root))
-     ;; Priority must exceed host clients so the containerized servers win.
-     :priority 20
-     :client-packages '(lsp-css lsp-html lsp-javascript lsp-pylsp lsp-java)
-     :client-configs
-     (list
-      ;; Python
-      (list :server-id 'pylsp        :docker-server-id 'pylsp-docker
-            :server-command "pylsp")
-      ;; JS / TS / JSX / TSX (one server covers all four)
-      (list :server-id 'ts-ls        :docker-server-id 'tsls-docker
-            :server-command "typescript-language-server --stdio")
-      ;; CSS  (override lsp-docker's stale "css-languageserver")
-      (list :server-id 'css-ls       :docker-server-id 'cssls-docker
-            :server-command "vscode-css-language-server --stdio")
-      ;; HTML (override lsp-docker's stale "html-languageserver")
-      (list :server-id 'html-ls      :docker-server-id 'htmls-docker
-            :server-command "vscode-html-language-server --stdio")
-      ;; Java (lsp-docker has no default jdtls client; use the wrapper)
-      (list :server-id 'jdtls        :docker-server-id 'jdtls-docker
-            :server-command "jdtls-stdio"))))
-
-  (use-package lsp-docker
-    :ensure t
-    :when my/lsp-use-docker
-    ;; IMPORTANT: load (and register clients) as soon as lsp-mode is
-    ;; available. A plain `:defer t :after lsp-mode` is NOT enough -- nothing
-    ;; would ever load lsp-docker, so :config (the client registration) would
-    ;; never run and lsp-mode would silently fall back to host servers (no
-    ;; container). `with-eval-after-load` forces the require + registration.
-    :init
-    (with-eval-after-load 'lsp-mode
-      (require 'lsp-docker)
-      (my/lsp-docker-register)))
+  ;; (2) Fallback: make sure Emacs can find the node whose globals hold the
+  ;;     language servers, even if the shell import is skipped. Prefer the nvm
+  ;;     node version dir that actually contains `typescript-language-server';
+  ;;     that is where css/html servers + prettier live too.
+  (let* ((nvm-dir (expand-file-name ".nvm" (getenv "HOME")))
+         (verdirs (file-expand-wildcards
+                   (expand-file-name "versions/node/*/bin" nvm-dir)))
+         ;; the bin dir that has ts-ls installed (the one we provisioned)
+         (bin (seq-find (lambda (d)
+                          (file-exists-p
+                           (expand-file-name "typescript-language-server" d)))
+                        verdirs))
+         ;; else fall back to whatever `nvm which default' / highest resolves to
+         (bin (or bin (car (last verdirs)))))
+    (when (and bin (file-directory-p bin))
+      (add-to-list 'exec-path bin)
+      (setenv "PATH" (concat bin path-separator (getenv "PATH")))))
 #+end_src
 
 ** languages
@@ -1071,11 +1035,10 @@ which formatter runs.
     (dolist (m '(js2-mode js-mode json-mode css-mode scss-mode
                  web-mode html-mode typescript-mode))
       (setf (alist-get m apheleia-mode-alist) 'prettier))
-    ;; Salesforce Apex: format through the lsp-langservers Docker image
-    ;; (prettier + prettier-plugin-apex). Pure stdin->stdout via `apex-fmt',
-    ;; so no mount/path-mapping needed. Keeps prettier+JVM plugin off the host.
+    ;; Salesforce Apex: format with host prettier + prettier-plugin-apex.
+    ;; apheleia pipes the buffer through prettier on stdin/stdout.
     (setf (alist-get 'apex apheleia-formatters)
-          '("docker" "run" "-i" "--rm" "lsp-langservers:1" "apex-fmt"))
+          '("prettier" "--parser" "apex" "--plugin" "prettier-plugin-apex"))
     (setf (alist-get 'apex-mode apheleia-mode-alist) 'apex)
     (apheleia-global-mode +1))
 #+END_SRC
@@ -1168,8 +1131,8 @@ Useful abbreviations when coding in HTML. See [[https://github.com/rooney/zencod
 Apex is a Java-family language, so a thin mode derived from =java-mode=
 gives syntax highlighting + indentation with no external package. There is
 no Apex language server here (that needs an SFDX-format project);
-formatting is handled by apheleia through the Docker image (see apheleia:
-=apex= formatter -> =apex-fmt= = prettier + prettier-plugin-apex).
+formatting is handled by apheleia running host =prettier= with
+=prettier-plugin-apex= (see the apheleia =apex= formatter).
 
 #+BEGIN_SRC emacs-lisp
   (define-derived-mode apex-mode java-mode "Apex"

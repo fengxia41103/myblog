@@ -1345,11 +1345,69 @@ cleared, make sure the overlay doesn't come back too soon."
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
 (require 'mu4e-contrib)
+;; Pin to mu 1.9.19 (schema 466) to match the mu4e lisp above.
+;; Avoids "schema mismatch" from the stale /usr/bin/mu 1.6.10.
+(setq mu4e-mu-binary "/usr/local/bin/mu")
 
 (use-package mu4e-maildirs-extension
-  :ensure
-  :config)
-(mu4e-maildirs-extension)
+    :ensure
+    :config)
+  (mu4e-maildirs-extension)
+
+  ;; Make `u' in the mu4e main view fully refresh: clear the cached
+  ;; folder counts AND redraw. Plain force-update (no prefix) only
+  ;; re-indexes without clearing the stale `(unread/total)' cache,
+  ;; which is equivalent to `C-u C-u u'.
+  (defun my/mu4e-maildirs-refresh ()
+    "Clear mu4e-maildirs-extension cache and redraw the summary."
+    (interactive)
+    (mu4e-maildirs-extension-force-update '(16)))
+
+  ;; Rebind in a hook so it wins after the extension redraws the main view.
+  (add-hook 'mu4e-main-mode-hook
+            (lambda ()
+              (define-key mu4e-main-mode-map
+                (kbd "u") #'my/mu4e-maildirs-refresh)))
+
+  ;; --- One-keystroke junk-sender cleanup -------------------------------
+  ;; Runs the Python mail-cleanup tool. The tool needs the mu database lock,
+  ;; which mu4e holds, so we must shut the mu server down first, run the
+  ;; script (which moves junk-sender mail to each account's trash and
+  ;; re-indexes), then relaunch mu4e. Senders are configured in
+  ;; content/downloads/mail-cleanup.yaml (edit that file to add/remove).
+  (defvar my/mail-cleanup-script
+    (expand-file-name "~/workspace/me/myblog/content/downloads/mail-cleanup.py")
+    "Path to the mail-cleanup Python script.")
+
+  (defvar my/mail-cleanup-python "/usr/bin/python3"
+    "Python interpreter used to run the cleanup script (has PyYAML).")
+
+  (defun my/mu4e-cleanup-junk (&optional dry-run)
+    "Move configured junk-sender mail to trash via the Python tool.
+With a prefix arg, do a DRY-RUN (show what would move, change nothing).
+Quits the mu server first (releases the DB lock), then relaunches mu4e."
+    (interactive "P")
+    (when (y-or-n-p (if dry-run
+                        "Mail cleanup DRY-RUN (no changes)? "
+                      "Run mail cleanup and move junk mail to trash? "))
+      ;; Release the DB lock held by the running mu server.
+      (when (fboundp 'mu4e--server-kill) (ignore-errors (mu4e--server-kill)))
+      (when (fboundp 'mu4e-quit) (ignore-errors (mu4e-quit)))
+      (sleep-for 1)
+      (let* ((args (append (list my/mail-cleanup-python my/mail-cleanup-script)
+                           (unless dry-run '("--apply"))))
+             (buf (get-buffer-create "*mail-cleanup*")))
+        (with-current-buffer buf (erase-buffer))
+        (apply #'call-process (car args) nil buf t (cdr args))
+        (display-buffer buf))
+      ;; Bring mu4e back up.
+      (mu4e)
+      (message "Mail cleanup done. In mu4e press `u' then update to sync/expunge.")))
+
+  (add-hook 'mu4e-main-mode-hook
+            (lambda ()
+              (define-key mu4e-main-mode-map
+                (kbd "c") #'my/mu4e-cleanup-junk)))
 
 (setq mail-user-agent 'mu4e-user-agent)
 

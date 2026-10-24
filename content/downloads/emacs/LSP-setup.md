@@ -53,6 +53,34 @@ and how to reproduce the setup on a fresh machine.
 `which-key` will surface the full `C-c l` menu (rename, find refs,
 format, etc.) when you press the prefix.
 
+## Containerized servers (lsp-docker) — current approach
+
+As of 2026-10-24 the language servers run from a **single pinned Docker
+image** instead of host installs, via the `lsp-docker` package. This keeps
+`$HOME` clean and makes the servers **immune to `nvm use <version>`** (the
+JS/TS/CSS/HTML servers run on the image's own pinned Node, so switching the
+host Node no longer breaks LSP).
+
+- **Image source:** `~/workspace/me/dev/lsp/` (Dockerfile + `docker-compose.yml`
+  + `jdtls-stdio` wrapper). Build with `docker compose build` in that folder;
+  the image is tagged `lsp-langservers:1`. See that folder's `README.md`.
+- **Emacs config:** section *lsp-docker (containerized language servers)* in
+  `emacs_setup.org`, right after `** lsp`. It calls `lsp-docker-init-clients`
+  with:
+  - `:docker-image-id "lsp-langservers:1"`,
+  - `:path-mappings` using an **identical** host/container path
+    (`~/workspace/me/dev`) so `file://` URIs resolve,
+  - modern server commands overriding lsp-docker's stale
+    `css-languageserver` / `html-languageserver` defaults,
+  - a `jdtls` client (lsp-docker ships none) calling `jdtls-stdio`.
+- **Toggle:** set `my/lsp-use-docker` to `nil` to fall back to host servers.
+- **Servers in image (verified via LSP `initialize` handshake):** pylsp 1.12.0,
+  typescript-language-server 5.1.3, vscode-css/html/json/eslint-language-server,
+  jdtls 1.49.0 (JDK 17), bash-language-server.
+
+> The per-machine host-install table below is retained for reference / the
+> non-container fallback path.
+
 ## Per-language status
 
 Hooks in `lsp-mode`'s `:hook` enable LSP for: css, html, web, js2,

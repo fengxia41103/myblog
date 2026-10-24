@@ -384,6 +384,49 @@ and the tangled file is compiled."
 ;;   :defer t
 ;;   :after (lsp-java))
 
+(defvar my/lsp-use-docker t
+  "When non-nil, run language servers from the lsp-langservers Docker
+image instead of host-installed binaries.")
+
+;; Absolute path shared by host and container. Projects opened under this
+;; directory get LSP via the container; the identical mapping keeps URIs
+;; consistent so navigation/diagnostics resolve correctly.
+(defvar my/lsp-docker-root
+  (expand-file-name "workspace/me/dev" (getenv "HOME"))
+  "Host directory bind-mounted (at the same path) into the LSP container.")
+
+(use-package lsp-docker
+  :ensure t
+  :defer t
+  :after lsp-mode
+  :when my/lsp-use-docker
+  :config
+  (lsp-docker-init-clients
+   :docker-image-id "lsp-langservers:1"
+   :docker-container-name "lsp-langservers"
+   ;; Identical path on both sides -> file:// URIs match.
+   :path-mappings (list (cons my/lsp-docker-root my/lsp-docker-root))
+   ;; Priority must exceed host clients so the containerized servers win.
+   :priority 20
+   :client-packages '(lsp-css lsp-html lsp-javascript lsp-pylsp lsp-java)
+   :client-configs
+   (list
+    ;; Python
+    (list :server-id 'pylsp        :docker-server-id 'pylsp-docker
+          :server-command "pylsp")
+    ;; JS / TS / JSX / TSX (one server covers all four)
+    (list :server-id 'ts-ls        :docker-server-id 'tsls-docker
+          :server-command "typescript-language-server --stdio")
+    ;; CSS  (override lsp-docker's stale "css-languageserver")
+    (list :server-id 'css-ls       :docker-server-id 'cssls-docker
+          :server-command "vscode-css-language-server --stdio")
+    ;; HTML (override lsp-docker's stale "html-languageserver")
+    (list :server-id 'html-ls      :docker-server-id 'htmls-docker
+          :server-command "vscode-html-language-server --stdio")
+    ;; Java (lsp-docker has no default jdtls client; use the wrapper)
+    (list :server-id 'jdtls        :docker-server-id 'jdtls-docker
+          :server-command "jdtls-stdio"))))
+
 (use-package writegood-mode
   :ensure
   :config)

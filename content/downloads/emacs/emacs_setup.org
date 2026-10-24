@@ -819,6 +819,77 @@ Then wrap it w/ this, you can then embed restcall in org!
   ;;   :after (lsp-java))
 #+end_src
 
+*** lsp-docker (containerized language servers)
+
+Run every language server from a single pinned Docker image instead of
+installing them into =$HOME=. This keeps the host clean and, crucially,
+makes the servers *immune to =nvm use <version>=*: the JS/TS/CSS/HTML
+servers run on the image's own pinned Node, so switching the host Node
+version no longer breaks LSP.
+
+The image is built from =~/workspace/me/dev/lsp= (Dockerfile +
+=docker compose build=); it is tagged =lsp-langservers:1=. See that
+folder's =README.md= for build/rebuild instructions.
+
+How it works: =lsp-mode= launches a server by running
+=docker run -i lsp-langservers:1 <server> --stdio= and pipes JSON-RPC
+over stdio. The project is bind-mounted at an *identical absolute path*
+(=path-mappings=) so =file://= URIs line up between Emacs and the
+container — without this, go-to-def / diagnostics / rename misbehave.
+
+Notes:
+- =lsp-docker='s built-in defaults use the obsolete =css-languageserver= /
+  =html-languageserver= binaries, so we override them with the modern
+  =vscode-*-language-server= commands shipped by the image.
+- =lsp-docker= ships no Java client, so we add a =jdtls= entry that calls
+  the image's =jdtls-stdio= wrapper.
+- Set =my/lsp-use-docker= to =nil= to fall back to host-installed servers.
+
+#+begin_src emacs-lisp
+  (defvar my/lsp-use-docker t
+    "When non-nil, run language servers from the lsp-langservers Docker
+  image instead of host-installed binaries.")
+
+  ;; Absolute path shared by host and container. Projects opened under this
+  ;; directory get LSP via the container; the identical mapping keeps URIs
+  ;; consistent so navigation/diagnostics resolve correctly.
+  (defvar my/lsp-docker-root
+    (expand-file-name "workspace/me/dev" (getenv "HOME"))
+    "Host directory bind-mounted (at the same path) into the LSP container.")
+
+  (use-package lsp-docker
+    :ensure t
+    :defer t
+    :after lsp-mode
+    :when my/lsp-use-docker
+    :config
+    (lsp-docker-init-clients
+     :docker-image-id "lsp-langservers:1"
+     :docker-container-name "lsp-langservers"
+     ;; Identical path on both sides -> file:// URIs match.
+     :path-mappings (list (cons my/lsp-docker-root my/lsp-docker-root))
+     ;; Priority must exceed host clients so the containerized servers win.
+     :priority 20
+     :client-packages '(lsp-css lsp-html lsp-javascript lsp-pylsp lsp-java)
+     :client-configs
+     (list
+      ;; Python
+      (list :server-id 'pylsp        :docker-server-id 'pylsp-docker
+            :server-command "pylsp")
+      ;; JS / TS / JSX / TSX (one server covers all four)
+      (list :server-id 'ts-ls        :docker-server-id 'tsls-docker
+            :server-command "typescript-language-server --stdio")
+      ;; CSS  (override lsp-docker's stale "css-languageserver")
+      (list :server-id 'css-ls       :docker-server-id 'cssls-docker
+            :server-command "vscode-css-language-server --stdio")
+      ;; HTML (override lsp-docker's stale "html-languageserver")
+      (list :server-id 'html-ls      :docker-server-id 'htmls-docker
+            :server-command "vscode-html-language-server --stdio")
+      ;; Java (lsp-docker has no default jdtls client; use the wrapper)
+      (list :server-id 'jdtls        :docker-server-id 'jdtls-docker
+            :server-command "jdtls-stdio"))))
+#+end_src
+
 ** languages
 
 These are minor modes to handle programming language specifics which

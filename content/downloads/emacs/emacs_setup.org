@@ -2705,18 +2705,6 @@ Found [[https://www.reddit.com/r/emacs/comments/30yer0/helm_and_recentf_tips/][t
                                   helm-source-buffer-not-found))
 #+END_SRC
 
-* Write chinese
-
-This section is disabled.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  ;; pyim removed - not needed
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-\\") 'toggle-input-method)
-#+END_SRC
-
 * Office stuff
 Using emacs in a corporate env can be daunting.
 

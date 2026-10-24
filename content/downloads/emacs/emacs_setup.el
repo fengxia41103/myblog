@@ -1368,8 +1368,6 @@ cleared, make sure the overlay doesn't come back too soon."
                                   helm-source-bookmarks
                                   helm-source-buffer-not-found))
 
-(global-set-key (kbd "C-\\") 'toggle-input-method)
-
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
 (require 'mu4e-contrib)

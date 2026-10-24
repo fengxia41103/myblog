@@ -551,18 +551,12 @@ cleared, make sure the overlay doesn't come back too soon."
    (when (string-match "\\.[tj]sx?$" buffer-file-name)
      (setq-local prettier-parsers '(typescript)))))
 
-(use-package js-doc
-  :ensure
-  :config
-  (setq js-doc-mail-address "feng.xia@mycompany.io")
-  (setq js-doc-author (format "Feng Xia <%s>" js-doc-mail-address))
-  (setq js-doc-url "http://www.mycompany.com")
-  (setq js-doc-license "Company License")
-)
-(add-hook 'js2-mode-hook
-          #'(lambda ()
-              (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
-              (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+(with-eval-after-load 'js2-mode
+  ;; Code actions (e.g. "Add JSDoc comment" where the server offers it)
+  ;; are already on M-<RET> via lsp-mode. Here we just add quick doc
+  ;; lookup. C-c i stays as lsp-ui-imenu (set in lsp-ui-mode-map).
+  ;; C-c d : show the documentation for the symbol at point.
+  (define-key js2-mode-map (kbd "C-c d") #'lsp-ui-doc-glance))
 
 (use-package json-mode
   :ensure

@@ -1131,26 +1131,14 @@ Link js2-mode to prettier to beautify my code.
 Follow [[https://github.com/jscheid/prettier.el][official site]] to install and config.
 
 Set which prettier to use. Note that w/ NVM, you must set =nvm use 16.15.1= in
-=.bashrc= or =.zshrc= so that shell will use the right path, also. You can check
-which is the default node path in effect in Emacs by =M-x prettier-info=.
-
-#+begin_src emacs-lisp :tangle no
-(setenv "NODE_PATH" "/home/fengxia/.nvm/versions/node/v20.17.0/bin")
-#+end_src
+Formatting is handled by the language server (LSP) rather than the
+=prettier= package, which required an external =prettier= Node binary and
+errored on save when it was missing. With LSP attached you can format a
+buffer with =C-c l = =` (lsp-format-buffer) or enable format-on-save per
+project. We keep only the basic indentation defaults here.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package prettier
-    :ensure
-    :config)
-  (add-hook 'js2-mode-hook 'prettier-mode)
-  (add-hook 'json-mode-hook 'prettier-mode)
-  (add-hook 'js-mode-hook 'prettier-mode)
   (setq indent-tabs-mode nil js-indent-level 2)
-  (add-hook
-   'js2-mode-hook
-   (lambda ()
-     (when (string-match "\\.[tj]sx?$" buffer-file-name)
-       (setq-local prettier-parsers '(typescript)))))
 #+END_SRC
 
 **** doc comments (via LSP)

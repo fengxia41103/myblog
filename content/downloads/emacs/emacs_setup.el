@@ -538,18 +538,7 @@ cleared, make sure the overlay doesn't come back too soon."
   (add-hook 'js2-mode-hook #'smartparens-mode)
   (add-hook 'js2-mode-hook (lambda () (setq-local electric-indent-inhibit t))))
 
-(use-package prettier
-  :ensure
-  :config)
-(add-hook 'js2-mode-hook 'prettier-mode)
-(add-hook 'json-mode-hook 'prettier-mode)
-(add-hook 'js-mode-hook 'prettier-mode)
 (setq indent-tabs-mode nil js-indent-level 2)
-(add-hook
- 'js2-mode-hook
- (lambda ()
-   (when (string-match "\\.[tj]sx?$" buffer-file-name)
-     (setq-local prettier-parsers '(typescript)))))
 
 (with-eval-after-load 'js2-mode
   ;; Code actions (e.g. "Add JSDoc comment" where the server offers it)

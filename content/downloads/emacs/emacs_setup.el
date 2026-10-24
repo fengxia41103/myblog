@@ -498,11 +498,51 @@ and the tangled file is compiled."
                web-mode html-mode typescript-mode))
     (setf (alist-get m apheleia-mode-alist) 'prettier))
   ;; Salesforce Apex: format with host prettier + prettier-plugin-apex.
-  ;; apheleia pipes the buffer through prettier on stdin/stdout.
-  (setf (alist-get 'apex apheleia-formatters)
-        '("prettier" "--parser" "apex" "--plugin" "prettier-plugin-apex"))
+  ;; prettier 3 resolves a named plugin relative to the input file, which
+  ;; fails for stdin, so we pass the plugin's ABSOLUTE path. The path is
+  ;; resolved at call time from the global npm root, so it survives nvm
+  ;; node-version changes. apheleia accepts a function returning the command.
+  (defun my/apex-prettier-command (&rest _)
+    (let* ((groot (string-trim
+                   (shell-command-to-string "npm root -g 2>/dev/null")))
+           (plugin (expand-file-name
+                    "prettier-plugin-apex/dist/src/index.js" groot)))
+      (list "prettier" "--parser" "apex" "--plugin" plugin)))
+  (setf (alist-get 'apex apheleia-formatters) #'my/apex-prettier-command)
   (setf (alist-get 'apex-mode apheleia-mode-alist) 'apex)
   (apheleia-global-mode +1))
+
+(defhydra hydra-dev (:color blue :hint nil)
+  "
+^Format^              ^Navigate^            ^LSP action^           ^Diagnostics^
+^^^^^^^^-----------------------------------------------------------------------------
+_f_: format buffer    _d_: definition       _r_: rename symbol     _e_: next error
+_F_: format region    _D_: references       _a_: code action       _E_: prev error
+^ ^                   _b_: back (M-,)       _h_: hover doc         _l_: list errors
+^ ^                   _i_: imenu/symbols    _o_: organize imports  _q_: quit
+"
+  ;; Format (apheleia; falls back to lsp if no apheleia formatter)
+  ("f" apheleia-format-buffer)
+  ("F" (lambda () (interactive)
+         (if (use-region-p) (lsp-format-region (region-beginning) (region-end))
+           (message "Select a region first"))))
+  ;; Navigate
+  ("d" xref-find-definitions)
+  ("D" lsp-find-references)
+  ("b" xref-pop-marker-stack)
+  ("i" lsp-ui-imenu)
+  ;; LSP actions
+  ("r" lsp-rename)
+  ("a" lsp-execute-code-action)
+  ("h" lsp-ui-doc-glance)
+  ("o" lsp-organize-imports)
+  ;; Diagnostics
+  ("e" flycheck-next-error :color red)
+  ("E" flycheck-previous-error :color red)
+  ("l" lsp-treemacs-errors-list)
+  ("q" nil))
+
+(global-set-key (kbd "C-c j") #'hydra-dev/body)
 
 (use-package sphinx-doc
   :ensure)

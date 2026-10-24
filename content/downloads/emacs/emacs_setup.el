@@ -552,6 +552,10 @@ image instead of host-installed binaries.")
 (add-hook 'css-mode-hook  'emmet-mode)
 (add-hook 'scss-mode-hook  'emmet-mode)
 
+;; Must run BEFORE js2-mode loads (see note above).
+(require 'js)                 ; defines js-indent-level as a global defcustom
+(defvaralias 'js2-basic-offset 'js-indent-level)
+
 (use-package js2-mode
   :ensure
   :mode ("\\.jsx?\\'" "\\.tsx?\\'")

@@ -1164,7 +1164,19 @@ There are a couple packages for .js files.
 **** js2-mode
 First, use =js2-mode= to handle =.js= and =.jsx= files.
 
+Workaround (Emacs 28.0.50): js2-mode runs
+=(defvaralias 'js2-basic-offset 'js-indent-level)= at load time. If
+=js-indent-level= has already become buffer-local (e.g. =editorconfig= or
+=js-mode= touched it first), that alias errors with /"Don't know how to
+make a localized variable an alias"/ and the mode fails to start. Creating
+the alias *first*, while =js-indent-level= is still a global, makes
+js2-mode's later identical call a harmless no-op.
+
 #+BEGIN_SRC emacs-lisp
+  ;; Must run BEFORE js2-mode loads (see note above).
+  (require 'js)                 ; defines js-indent-level as a global defcustom
+  (defvaralias 'js2-basic-offset 'js-indent-level)
+
   (use-package js2-mode
     :ensure
     :mode ("\\.jsx?\\'" "\\.tsx?\\'")

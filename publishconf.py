@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
 
 import os
 import sys
@@ -9,8 +7,7 @@ import sys
 # explicitly specify it as your config file.
 
 sys.path.append(os.curdir)
-from pelicanconf import *
-
+from pelicanconf import *  # noqa: F403  (Pelican convention: inherit dev settings)
 
 SITEURL = 'https://fengxia41103.github.io/myblog/'
 RELATIVE_URLS = False

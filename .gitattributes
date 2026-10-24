@@ -1,0 +1,19 @@
+# Normalize line endings for text; auto-detect the rest.
+* text=auto eol=lf
+
+# Generated/vendored — collapse in diffs and exclude from language stats.
+theme/feng/static/package-lock.json linguist-generated=true
+theme/feng/static/yarn.lock         linguist-generated=true
+plugins/tipue_search/*              linguist-vendored=true
+
+# Binary assets — never try to merge or diff as text.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.mp4  binary
+*.webm binary
+*.pdf  binary
+*.docx binary
+*.jar  binary

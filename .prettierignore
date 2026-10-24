@@ -1,0 +1,6 @@
+theme/feng/static/node_modules/
+theme/feng/static/bower_components/
+theme/feng/static/package-lock.json
+theme/feng/static/yarn.lock
+output/
+plugins/tipue_search/

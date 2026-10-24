@@ -1,5 +1,6 @@
 # emacs
-[.#]*
+.#*
+\#*#
 *.autosave
 bower_components/
 
@@ -78,3 +79,10 @@ content/downloads/emacs/emacs_setup.elc
 content/downloads/emacs/emacs_setup.emacs_lisp
 content/downloads/emacs/emacs_setup.pdf
 content/downloads/emacs/emacs_setup.tex
+
+# secrets / local-only credential scratch (NEVER commit — contains tokens)
+.pta.tmp
+*.pta.tmp
+*.kc.tmp
+.env
+.env.*

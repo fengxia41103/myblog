@@ -59,7 +59,6 @@ def optimize_one(path: Path, max_dim: int, quality: int) -> int:
         with Image.open(path) as img:
             # Respect EXIF orientation, then drop EXIF to save bytes.
             img = ImageOps.exif_transpose(img)
-            fmt = img.format or ("JPEG" if ext in JPEG_EXTS else "PNG")
 
             # Downscale only if larger than the cap.
             width, height = img.size

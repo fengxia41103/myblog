@@ -1,0 +1,26 @@
+[tool.ruff]
+# Pelican site: Python is limited to build config (pelicanconf.py,
+# publishconf.py, fabfile.py) and helper scripts under tools/ and
+# content/downloads/. Keep the generated site and vendored code out.
+line-length = 100
+target-version = "py310"
+extend-exclude = [
+    "output",
+    ".venv",
+    "theme/feng/static",
+    "plugins/tipue_search",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B"]
+ignore = [
+    "E501",  # line length handled by formatter
+]
+
+[tool.ruff.lint.isort]
+# stdlib -> third-party -> first-party
+known-first-party = ["pelicanconf", "publishconf"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

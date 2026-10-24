@@ -388,7 +388,7 @@ is available. Useful if you tend to hammer your keys like I do."
       (progn
         (copilot-accept-completion)
         (open-line 1)
-        (next-line))
+        (forward-line 1))
     (copilot-complete)))
 
 (define-key copilot-mode-map (kbd "M-C-<next>") #'copilot-next-completion)
@@ -1038,14 +1038,13 @@ cleared, make sure the overlay doesn't come back too soon."
   (setq dumb-jump-prefer-searcher 'ag))
 
 (defhydra dumb-jump-hydra (:color blue :columns 3)
-    "Dumb Jump"
-    ("j" dumb-jump-go "Go")
-    ("o" dumb-jump-go-other-window "Other window")
-    ("e" dumb-jump-go-prefer-external "Go external")
-    ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
-    ("i" dumb-jump-go-prompt "Prompt")
-    ("l" dumb-jump-quick-look "Quick look")
-    ("b" dumb-jump-back "Back"))
+    "Dumb Jump (via xref)"
+    ("j" xref-find-definitions "Go")
+    ("o" xref-find-definitions-other-window "Other window")
+    ("r" xref-find-references "References")
+    ("i" xref-find-apropos "Apropos")
+    ("f" xref-find-definitions-other-frame "Other frame")
+    ("b" xref-pop-marker-stack "Back"))
 
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
@@ -1804,7 +1803,7 @@ If given prefix arg ARG, skips markdown conversion."
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'org-iswitchb)
+(global-set-key (kbd "C-c b") 'org-switchb)
 
 (add-hook 'org-mode-hook
           (lambda ()

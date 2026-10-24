@@ -384,74 +384,6 @@ and the tangled file is compiled."
 ;;   :defer t
 ;;   :after (lsp-java))
 
-;; (require 'cl)
-;; (let ((pkg-list '(use-package
-;; 		          s
-;; 		          dash
-;; 		          editorconfig
-;;               company)))
-;;   (package-initialize)
-;;   (when-let ((to-install (map-filter (lambda (pkg _) (not (package-installed-p pkg))) pkg-list)))
-;;     (package-refresh-contents)
-;;     (mapc (lambda (pkg) (package-install pkg)) pkg-list)))
-
-;; install copilot.el
-(when (file-exists-p "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
-  (add-to-list 'load-path "/home/fengxia/workspace/3rd/copilot-emacsd/copilot.el")
-  (require 'copilot)
-
-  ;; enable mode
-  (add-hook 'prog-mode-hook 'copilot-mode)
-
-  ;; add keyboard shortcuts
-  (define-key copilot-completion-map (kbd "M-<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "M-TAB") 'copilot-accept-completion))
-
-(defun rk/copilot-complete-or-accept ()
-  "Command that either triggers a completion or accepts one if one
-is available. Useful if you tend to hammer your keys like I do."
-  (interactive)
-  (if (copilot--overlay-visible)
-      (progn
-        (copilot-accept-completion)
-        (open-line 1)
-        (forward-line 1))
-    (copilot-complete)))
-
-(define-key copilot-mode-map (kbd "M-C-<next>") #'copilot-next-completion)
-(define-key copilot-mode-map (kbd "M-C-<prior>") #'copilot-previous-completion)
-(define-key copilot-mode-map (kbd "M-C-<right>") #'copilot-accept-completion-by-word)
-(define-key copilot-mode-map (kbd "M-C-<down>") #'copilot-accept-completion-by-line)
-(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
-
-(defun rk/copilot-tab ()
-  "Tab command that will complet with copilot if a completion is
-available. Otherwise will try company, yasnippet or normal
-tab-indent."
-  (interactive)
-  (or (copilot-accept-completion)
-      (indent-for-tab-command)))
-
-(define-key global-map (kbd "M-<tab>") #'rk/copilot-tab)
-
-(defun rk/copilot-quit ()
-  "Run `copilot-clear-overlay' or `keyboard-quit'. If copilot is
-cleared, make sure the overlay doesn't come back too soon."
-  (interactive)
-  (condition-case err
-      (when copilot--overlay
-        (lexical-let ((pre-copilot-disable-predicates copilot-disable-predicates))
-          (setq copilot-disable-predicates (list (lambda () t)))
-          (copilot-clear-overlay)
-          (run-with-idle-timer
-           1.0
-           nil
-           (lambda ()
-             (setq copilot-disable-predicates pre-copilot-disable-predicates)))))
-    (error nil)))
-
-(advice-add 'keyboard-quit :before #'rk/copilot-quit)
-
 (use-package writegood-mode
   :ensure
   :config)
@@ -2274,5 +2206,3 @@ If given prefix arg ARG, skips markdown conversion."
 (setq org-pretty-entities t)
 
 (org-mode-restart)
-
-(use-package org-ai :ensure t)

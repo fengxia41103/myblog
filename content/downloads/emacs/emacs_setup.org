@@ -3491,18 +3491,6 @@ Make the display of images a simple key-stroke away.
                               )))
 #+END_SRC
 
-**** golden
-
-When working with many windows at the same time, each window has a size that is
-not convenient for editing. golden-ratio helps on this issue by resizing
-automatically the windows you are working on to the size specified in the
-“Golden Ratio”.
-
-#+begin_src emacs-lisp :tangle no
-(use-package golden-ratio :ensure t)
-(golden-ratio-mode 1)
-(setq golden-ratio-auto-scale t)
-#+end_src
 
 *** snippets found online
 

@@ -2751,6 +2751,35 @@ Quits the mu server first (releases the DB lock), then relaunches mu4e."
             (lambda ()
               (define-key mu4e-main-mode-map
                 (kbd "c") #'my/mu4e-cleanup-junk)))
+
+  ;; --- Self-documenting hydra for the mu4e main view -------------------
+  ;; Press `.' in the mu4e main view to pop up a menu of the common
+  ;; actions, so you don't have to remember individual keys.
+  (defhydra hydra-mu4e (:color blue :hint nil)
+    "
+  ^Mail^              ^Cleanup^                 ^Navigate^
+  ^────^──────────────^───────^─────────────────^────────^──────
+  _U_ update & index   _c_ run junk cleanup      _s_ search
+  _r_ refresh counts   _d_ dry-run cleanup       _C_ compose
+  ^^                   _e_ edit sender rules     _j_ jump to maildir
+  ^^                   ^^                        _q_ quit mu4e
+  "
+    ("U" mu4e-update-mail-and-index)
+    ("r" my/mu4e-maildirs-refresh)
+    ("c" my/mu4e-cleanup-junk)
+    ("d" (my/mu4e-cleanup-junk t))
+    ("e" (find-file (expand-file-name
+                     "~/workspace/me/myblog/content/downloads/mail-cleanup.yaml")))
+    ("s" mu4e-search)
+    ("C" mu4e-compose-new)
+    ("j" mu4e-search-maildir)
+    ("q" mu4e-quit)
+    ("." nil "cancel"))
+
+  (add-hook 'mu4e-main-mode-hook
+            (lambda ()
+              (define-key mu4e-main-mode-map
+                (kbd ".") #'hydra-mu4e/body)))
 #+END_SRC
 
 

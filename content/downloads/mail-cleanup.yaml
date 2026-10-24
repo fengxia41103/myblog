@@ -1,0 +1,31 @@
+# mail-cleanup configuration
+#
+# Edit the `rules` list to add/remove senders. Each rule is a full `mu find`
+# query, so you can refine with OR / AND / NOT. Any message already in an
+# account's trash is skipped automatically.
+#
+# Examples:
+#   - "from:newsletter@example.com"
+#   - "from:brand.com AND NOT from:realperson@brand.com"
+#   - "from:a@x.com OR from:b@y.com"
+
+# Optional overrides (defaults shown). Usually leave as-is.
+mu_binary: /usr/local/bin/mu
+maildir: "~/Maildir"
+log_dir: "~"
+
+rules:
+  # --- marketing / notifications to purge ---
+  - "from:redfin"
+  - "from:spotify"
+  # indeed: noise only — keeps real recruiter/application correspondence
+  - "from:alert@indeed.com OR from:donotreply@match.indeed.com"
+  - "from:poshmark.com"
+  - "from:redditmail.com"
+  - "from:gfiber.com"
+  - "from:plex.tv"
+  - "from:noreply@email.openai.com"   # ChatGPT / OpenAI
+  - "from:airbnb.com"
+  - "from:slickdeals.net"
+  # Lowe's store only — keeps 'Kumon Lowes Grove' (a real contact)
+  - "from:lowes@e.lowes.com OR from:lowes@express.medallia.com"

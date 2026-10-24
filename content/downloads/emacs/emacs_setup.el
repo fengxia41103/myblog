@@ -499,20 +499,20 @@ and the tangled file is compiled."
     (setf (alist-get m apheleia-mode-alist) 'prettier))
   ;; Salesforce Apex: format with host prettier + prettier-plugin-apex.
   ;; prettier 3 resolves a named plugin relative to the input file, which
-  ;; fails for stdin, so we pass the plugin's ABSOLUTE path. We resolve both
-  ;; the prettier binary and the plugin from Emacs `exec-path' (no shelling
-  ;; out to npm, which may not be found in a GUI Emacs). From a global
-  ;; prettier at <prefix>/bin/prettier, the plugin lives at
-  ;; <prefix>/lib/node_modules/prettier-plugin-apex/dist/src/index.js.
-  (defun my/apex-prettier-command (&rest _)
+  ;; fails for stdin, so we pass the plugin's ABSOLUTE path. NOTE: apheleia
+  ;; treats a *function-symbol* formatter as a whole-buffer reformatter, not
+  ;; "a function returning a command" -- so we must use a COMMAND LIST with
+  ;; an embedded form. Non-string elements are evaluated and spliced in.
+  ;; `my/apex-plugin-path' returns the plugin's absolute path, derived from
+  ;; the prettier binary on `exec-path' (<prefix>/lib/node_modules/...).
+  (defun my/apex-plugin-path ()
     (let* ((prettier (or (executable-find "prettier") "prettier"))
            (prefix (file-name-directory
-                    (directory-file-name (file-name-directory prettier))))
-           (plugin (expand-file-name
-                    "lib/node_modules/prettier-plugin-apex/dist/src/index.js"
-                    prefix)))
-      (list prettier "--parser" "apex" "--plugin" plugin)))
-  (setf (alist-get 'apex apheleia-formatters) #'my/apex-prettier-command)
+                    (directory-file-name (file-name-directory prettier)))))
+      (expand-file-name
+       "lib/node_modules/prettier-plugin-apex/dist/src/index.js" prefix)))
+  (setf (alist-get 'apex apheleia-formatters)
+        '("prettier" "--parser" "apex" "--plugin" (my/apex-plugin-path)))
   (setf (alist-get 'apex-mode apheleia-mode-alist) 'apex)
   (apheleia-global-mode +1))
 

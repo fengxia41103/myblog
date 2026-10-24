@@ -846,8 +846,12 @@ cleared, make sure the overlay doesn't come back too soon."
 (add-hook 'java-mode-hook 'display-line-numbers-mode)
 (add-hook 'groovy-mode-hook 'display-line-numbers-mode)
 
-(setq display-line-numbers-width nil)
-(setq linum-format "%4d ")
+;; display-line-numbers replaces the deprecated linum. Use a minimum
+;; width so the gutter doesn't jump as line counts grow, and widen
+;; automatically for larger files.
+(setq display-line-numbers-width 4)
+(setq display-line-numbers-grow-only t)
+(setq display-line-numbers-width-start t)
 
 (electric-indent-mode -1)
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))

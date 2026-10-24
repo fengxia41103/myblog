@@ -1710,8 +1710,12 @@ brings value. *Note* that the ones I skip are:
 Format the line no and add a solid line as separation:
 
 #+BEGIN_SRC emacs-lisp
-(setq display-line-numbers-width nil)
-(setq linum-format "%4d ")
+;; display-line-numbers replaces the deprecated linum. Use a minimum
+;; width so the gutter doesn't jump as line counts grow, and widen
+;; automatically for larger files.
+(setq display-line-numbers-width 4)
+(setq display-line-numbers-grow-only t)
+(setq display-line-numbers-width-start t)
 #+END_SRC
 
 ** disable electric-indent

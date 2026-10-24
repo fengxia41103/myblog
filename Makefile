@@ -99,6 +99,14 @@ stopserver:
 publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
+# Downscale/recompress images in the generated output (not the sources).
+# Safe to re-run; only shrinks files. Tunable via MAX_DIM / JPEG_QUALITY.
+MAX_DIM ?= 1920
+JPEG_QUALITY ?= 82
+optimize_images:
+	$(PY) $(BASEDIR)/tools/optimize-images.py $(OUTPUTDIR)/images \
+		--max-dim $(MAX_DIM) --quality $(JPEG_QUALITY)
+
 ssh_upload: publish
 	scp -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
 
@@ -117,8 +125,8 @@ s3_upload: publish
 cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
 
-github: publish
+github: publish optimize_images
 	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
 	git push origin $(GITHUB_PAGES_BRANCH)
 
-.PHONY: html help clean regenerate serve serve-global devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
+.PHONY: html help clean regenerate serve serve-global devserver publish optimize_images ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github

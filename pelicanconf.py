@@ -10,8 +10,6 @@ SITEURL = ""
 
 PATH = "content"
 
-IGNORE_FILES = [".#*"]
-
 # These folders will be copied to `/output` without pelican modification
 STATIC_PATHS = ["images", "downloads",
                 "app", "data", "slides"]  # "extra/CNAME"
@@ -59,7 +57,24 @@ LINKEDIN_ADDRESS = "https://www.linkedin.com/in/fengxia41103"
 LOAD_CONTENT_CACHE = False  # for development use
 
 SUMMARY_MAX_LENGTH = 175
-IGNORE_FILES = ["README.*", "readme.*", "Readme.*"]
+
+# Files that Pelican must NOT process or copy into `output/`.
+# This also filters STATIC_PATHS (images, downloads, ...). Only editor
+# backups, caches, and build/intermediate artifacts are excluded -- all
+# real downloadable assets (PDF/docx/configs/scripts referenced from
+# `.md`) are kept.
+IGNORE_FILES = [
+    # emacs / editor temp, autosave and backup files
+    ".#*", "#*#", "*~",
+    # readmes
+    "README.*", "readme.*", "Readme.*",
+    # python / tool caches
+    "__pycache__", "*.py[cod]",
+    # emacs config tangle artifacts (downloads/emacs/)
+    "*.elc", "*.el.bak.*", "*.emacs_lisp",
+    # pandoc/LaTeX intermediate build artifacts (downloads/pandoc/)
+    "*.tex", "*.aux", "*.log", "*.toc", "*.lof", "*.lot", "*.out",
+]
 
 # plugins
 PLUGIN_PATHS = ["plugins"]

@@ -395,12 +395,8 @@ image instead of host-installed binaries.")
   (expand-file-name "workspace/me/dev" (getenv "HOME"))
   "Host directory bind-mounted (at the same path) into the LSP container.")
 
-(use-package lsp-docker
-  :ensure t
-  :defer t
-  :after lsp-mode
-  :when my/lsp-use-docker
-  :config
+(defun my/lsp-docker-register ()
+  "Register the containerized LSP clients (idempotent)."
   (lsp-docker-init-clients
    :docker-image-id "lsp-langservers:1"
    :docker-container-name "lsp-langservers"
@@ -426,6 +422,19 @@ image instead of host-installed binaries.")
     ;; Java (lsp-docker has no default jdtls client; use the wrapper)
     (list :server-id 'jdtls        :docker-server-id 'jdtls-docker
           :server-command "jdtls-stdio"))))
+
+(use-package lsp-docker
+  :ensure t
+  :when my/lsp-use-docker
+  ;; IMPORTANT: load (and register clients) as soon as lsp-mode is
+  ;; available. A plain `:defer t :after lsp-mode` is NOT enough -- nothing
+  ;; would ever load lsp-docker, so :config (the client registration) would
+  ;; never run and lsp-mode would silently fall back to host servers (no
+  ;; container). `with-eval-after-load` forces the require + registration.
+  :init
+  (with-eval-after-load 'lsp-mode
+    (require 'lsp-docker)
+    (my/lsp-docker-register)))
 
 (use-package writegood-mode
   :ensure

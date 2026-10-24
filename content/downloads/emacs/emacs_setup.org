@@ -711,7 +711,9 @@ Use =circe=.
 
 #+BEGIN_SRC emacs-lisp
 (use-package restclient
-  :ensure)
+  :ensure
+  :mode ("\\.http\\'" . restclient-mode)
+  :commands (restclient-mode))
 #+END_SRC
 
 
@@ -1043,13 +1045,15 @@ web-mode with config for Polymer editing
 #+BEGIN_SRC emacs-lisp
   (use-package web-mode
     :ensure t
+    :mode ("\\.html?\\'" "\\.phtml\\'" "\\.vue\\'" "\\.hbs\\'"
+           "\\.jsp\\'" "\\.erb\\'" "\\.djhtml\\'")
     :config
     (setq web-mode-enable-current-element-highlight t)
     (setq web-mode-enable-current-column-highlight t)
-    (setq web-mode-enable-css-colorization t))
+    (setq web-mode-enable-css-colorization t)
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-code-indent-offset 2))
 #+END_SRC
 
 
@@ -1115,12 +1119,11 @@ First, use =js2-mode= to handle =.js= and =.jsx= files.
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
     :ensure
-    :config)
-  (setq js2-indent-level 2)
-  (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . js2-mode))
-  (add-hook 'js2-mode-hook #'smartparens-mode)
-  (add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
+    :mode ("\\.jsx?\\'" "\\.tsx?\\'")
+    :config
+    (setq js2-indent-level 2)
+    (add-hook 'js2-mode-hook #'smartparens-mode)
+    (add-hook 'js2-mode-hook (lambda () (setq-local electric-indent-inhibit t))))
 #+END_SRC
 
 **** prettier
@@ -1185,7 +1188,7 @@ using the =prettier= as beautifier.
 #+BEGIN_SRC emacs-lisp
   (use-package json-mode
     :ensure
-    :config)
+    :mode ("\\.json\\'" "\\.jsonld\\'"))
 #+END_SRC
 
 *** yaml
@@ -1195,11 +1198,8 @@ Details are [[https://github.com/yoshiki/yaml-mode][here]].
 #+BEGIN_SRC emacs-lisp
   (use-package yaml-mode
     :ensure
-    :config)
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-hook 'yaml-mode-hook
-            '(lambda ()
-          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+    :mode ("\\.ya?ml\\'")
+    :bind (:map yaml-mode-map ("C-m" . newline-and-indent)))
 #+END_SRC
 
 Add [[https://github.com/iquiw/lsp-yaml][lsp-yaml]]:
@@ -1309,9 +1309,10 @@ Last, define a keyboard bind for formatting:
 #+begin_src emacs-lisp
   (use-package terraform-mode
     :ensure
-    :config)
-(add-hook 'terraform-mode-hook #'outline-minor-mode)
-(setq terraform-format-on-sav t)
+    :mode ("\\.tf\\'" "\\.tfvars\\'")
+    :config
+    (add-hook 'terraform-mode-hook #'outline-minor-mode)
+    (setq terraform-format-on-save t))
 #+end_src
 
 *** Java

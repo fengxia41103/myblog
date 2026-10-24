@@ -281,7 +281,9 @@ and the tangled file is compiled."
   :config)
 
 (use-package restclient
-  :ensure)
+  :ensure
+  :mode ("\\.http\\'" . restclient-mode)
+  :commands (restclient-mode))
 
 (when (file-exists-p "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
   (load-file "~/workspace/3rd/ob-restclient.el/ob-restclient.el")
@@ -498,13 +500,15 @@ cleared, make sure the overlay doesn't come back too soon."
 
 (use-package web-mode
   :ensure t
+  :mode ("\\.html?\\'" "\\.phtml\\'" "\\.vue\\'" "\\.hbs\\'"
+         "\\.jsp\\'" "\\.erb\\'" "\\.djhtml\\'")
   :config
   (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-css-colorization t))
+  (setq web-mode-enable-css-colorization t)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
 
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -528,12 +532,11 @@ cleared, make sure the overlay doesn't come back too soon."
 
 (use-package js2-mode
   :ensure
-  :config)
-(setq js2-indent-level 2)
-(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . js2-mode))
-(add-hook 'js2-mode-hook #'smartparens-mode)
-(add-hook 'js2-mode-hook #'(lambda () (setq-local electric-indent-inhibit t)))
+  :mode ("\\.jsx?\\'" "\\.tsx?\\'")
+  :config
+  (setq js2-indent-level 2)
+  (add-hook 'js2-mode-hook #'smartparens-mode)
+  (add-hook 'js2-mode-hook (lambda () (setq-local electric-indent-inhibit t))))
 
 (use-package prettier
   :ensure
@@ -563,15 +566,12 @@ cleared, make sure the overlay doesn't come back too soon."
 
 (use-package json-mode
   :ensure
-  :config)
+  :mode ("\\.json\\'" "\\.jsonld\\'"))
 
 (use-package yaml-mode
   :ensure
-  :config)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-hook 'yaml-mode-hook
-          '(lambda ()
-        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  :mode ("\\.ya?ml\\'")
+  :bind (:map yaml-mode-map ("C-m" . newline-and-indent)))
 
 (use-package lsp-yaml
   :after lsp
@@ -626,10 +626,11 @@ cleared, make sure the overlay doesn't come back too soon."
   )
 
 (use-package terraform-mode
-    :ensure
-    :config)
-(add-hook 'terraform-mode-hook #'outline-minor-mode)
-(setq terraform-format-on-sav t)
+  :ensure
+  :mode ("\\.tf\\'" "\\.tfvars\\'")
+  :config
+  (add-hook 'terraform-mode-hook #'outline-minor-mode)
+  (setq terraform-format-on-save t))
 
 (use-package lsp-java
   :after java

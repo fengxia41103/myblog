@@ -1,0 +1,48 @@
+{{/* create template */ -}}
+fields:
+
+  # [OL, LR]
+  project:
+    key: {{ or .overrides.project "" }}
+
+  # Epic link: [OL-318, OL-321]
+  customfield_10002: OL-318
+
+  # [Bug, Story]
+  issuetype:
+    name: {{ or .overrides.issuetype "" }}
+
+  # Requird field
+  summary: >-
+    {{ or .overrides.summary "" }}
+
+  description: |~
+    {{ or .overrides.description "" | indent 4 }}
+
+{{if .meta.fields.assignee}}
+  assignee:
+    name: {{ or .overrides.assignee "" }}
+{{end}}
+
+{{if .meta.fields.priority.allowedValues}}
+  # Values: [{{ range .meta.fields.priority.allowedValues }}{{.name}}, {{end}}]
+  priority:
+    name: {{ or .overrides.priority ""}}
+{{end}}
+
+{{if .meta.fields.components.allowedValues}}
+  # components: [{{ range .meta.fields.components.allowedValues }}{{.name}}, {{end}}]
+  components:
+   {{ range split "," (or .overrides.components "")}}
+    - name: {{ . }}
+   {{end}}
+{{end}}
+
+{{if .meta.fields.customfield_10110}}
+  # watchers
+  customfield_10110:
+    {{ range split "," (or .overrides.watchers "")}}
+    - name: {{.}}
+    {{end}}
+    - name:
+ {{end}}

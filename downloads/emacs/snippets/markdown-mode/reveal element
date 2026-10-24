@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Reveal element
+# contributor: feng xia
+# key: .element
+# --
+
+<!-- .element: class="$1" -->

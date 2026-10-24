@@ -1,0 +1,133 @@
+endpoint: https://jira1.labs.company.com:8443
+user: fxia1
+editor: emacsclient
+
+custom-commands:
+  - name: mine
+    help: Display issues assigned to me
+    script: >-
+      {{jira}} list --template table --query "
+      assignee=currentUser()
+        AND status not in (DONE,CANCELED)
+      ORDER BY
+        issuetype ASC,
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: today-mine
+    help: Display issues assigned to me from Today
+    script: >-
+      {{jira}} list --template today --query "
+      assignee=currentUser()
+        AND status not in (DONE,CANCELED)
+      ORDER BY
+        issuetype ASC,
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-story
+    help: All CP stories
+    script: >-
+
+      {{jira}} list --template table --query "
+      'Epic Link' in (OL-318,OL-321)
+        AND type='STORY'
+        AND status not in (DONE,CANCELED)
+      ORDER BY
+        assignee DESC,
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-bug
+    help: All CP bugs
+    script: >-
+
+      {{jira}} list --template table --query "
+      'Epic Link' in(OL-318,OL-321)
+        AND type='BUG'
+        AND status not in (DONE,CANCELED)
+      ORDER BY
+        assignee DESC,
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-story-mine
+    help: My CP stories
+    script: >-
+
+      {{jira}} list --template table --query "
+      'Epic Link' in (OL-318,OL-321)
+        AND type='STORY'
+        AND status not in (DONE,CANCELED)
+        AND assignee=currentUser()
+      ORDER BY
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-bug-mine
+    help: My CP bugs
+    script: >-
+      {{jira}} list --template table --query "
+      'Epic Link' in (OL-318,OL-321)
+        AND type='BUG'
+        AND status not in (DONE,CANCELED)
+        AND assignee=currentUser()
+      ORDER BY
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-mine
+    help: Everything of CP that is assigned to me
+    script: >-
+
+      {{jira}} list --template table --query "
+      'Epic Link' in (OL-318,OL-321)
+        AND assignee=currentUser()
+        AND status not in (DONE,CANCELED)
+      ORDER BY
+        issuetype ASC,
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-done
+    help: CP done items
+    script: >-
+
+      {{jira}} list --template table --query "
+      'Epic Link' in (OL-318,OL-321)
+        AND status in (DONE,CANCELED)
+      ORDER BY
+        issuetype ASC,
+        status DESC,
+        created DESC,
+        key DESC
+      "
+
+  - name: cp-unassigned
+    help: CP unassigned items
+    script: >-
+
+      {{jira}} list --template table --query "
+      'Epic Link' in (OL-318,OL-321)
+        AND assignee=null
+        AND status not in (DONE,CANCELED)
+      ORDER BY
+        issuetype ASC,
+        status DESC,
+        created DESC,
+        key DESC
+      "

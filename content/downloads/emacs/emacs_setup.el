@@ -33,6 +33,28 @@ and the tangled file is compiled."
 
 (custom-set-variables '(ad-redefinition-action (quote accept)))
 
+(use-package flycheck
+  :ensure t
+  :hook (prog-mode . flycheck-mode)
+  :config
+  ;; This flycheck (34.1) has no built-in ruff checker, so define a
+  ;; minimal one. `ruff' reads the nearest pyproject.toml / ruff.toml,
+  ;; so Emacs diagnostics match each repo's configuration.
+  (unless (flycheck-valid-checker-p 'python-ruff)
+    (flycheck-define-checker python-ruff
+      "A Python syntax/style checker using ruff."
+      :command ("ruff" "check"
+                "--output-format" "concise"
+                "--stdin-filename" source-original
+                "-")
+      :standard-input t
+      :error-patterns
+      ((error line-start (file-name) ":" line ":" (optional column ":") " "
+              (id (one-or-more (any alpha)) (one-or-more digit)) " "
+              (message) line-end))
+      :modes (python-mode python-ts-mode)))
+  (add-to-list 'flycheck-checkers 'python-ruff))
+
 (setq auth-sources '("~/.authinfo"))
 
 (use-package tj3-mode
@@ -476,13 +498,9 @@ cleared, make sure the overlay doesn't come back too soon."
   (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
   )
 
-(use-package
-  py-isort
-
+(use-package py-isort
   :ensure
-  :config
-  (add-hook 'before-save-hook 'py-isort-before-save)
-  (setq py-isort-options '("-sl --profile black --filter-files")))
+  :commands (py-isort-buffer py-isort-region))
 
 (use-package imenu-list
 :ensure)
@@ -491,6 +509,26 @@ cleared, make sure the overlay doesn't come back too soon."
 
 (use-package python-black
   :ensure)
+
+(use-package apheleia
+  :ensure t
+  :config
+  ;; Define a ruff formatter chain: organise imports + fix, then format.
+  ;; `ruff' is resolved from the project venv / PATH; it reads the nearest
+  ;; pyproject.toml, so per-service configs are respected.
+  (setf (alist-get 'ruff-isort apheleia-formatters)
+        '("ruff" "check" "--select" "I" "--fix" "--stdin-filename" filepath "-"))
+  (setf (alist-get 'ruff-format apheleia-formatters)
+        '("ruff" "format" "--stdin-filename" filepath "-"))
+  ;; Python buffers: run import-fix then format.
+  (setf (alist-get 'python-mode apheleia-mode-alist)
+        '(ruff-isort ruff-format))
+  ;; JS/TS/JSON/CSS/HTML use prettier (apheleia's built-in
+  ;; `prettier' formatter already prefers the project-local binary).
+  (dolist (m '(js2-mode js-mode json-mode css-mode scss-mode
+               web-mode html-mode typescript-mode))
+    (setf (alist-get m apheleia-mode-alist) 'prettier))
+  (apheleia-global-mode +1))
 
 (use-package sphinx-doc
   :ensure)

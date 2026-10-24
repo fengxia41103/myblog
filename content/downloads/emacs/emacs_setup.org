@@ -258,11 +258,28 @@ related stuff.
 9/7/2025, flycheck is giving me warning when openning Python file. Troubleshoot
 this later.
 
-#+begin_src emacs-lisp :tangle no
-(use-package flycheck
-  :ensure t)
-
-(global-flycheck-mode)
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :hook (prog-mode . flycheck-mode)
+    :config
+    ;; This flycheck (34.1) has no built-in ruff checker, so define a
+    ;; minimal one. `ruff' reads the nearest pyproject.toml / ruff.toml,
+    ;; so Emacs diagnostics match each repo's configuration.
+    (unless (flycheck-valid-checker-p 'python-ruff)
+      (flycheck-define-checker python-ruff
+        "A Python syntax/style checker using ruff."
+        :command ("ruff" "check"
+                  "--output-format" "concise"
+                  "--stdin-filename" source-original
+                  "-")
+        :standard-input t
+        :error-patterns
+        ((error line-start (file-name) ":" line ":" (optional column ":") " "
+                (id (one-or-more (any alpha)) (one-or-more digit)) " "
+                (message) line-end))
+        :modes (python-mode python-ts-mode)))
+    (add-to-list 'flycheck-checkers 'python-ruff))
 #+end_src
 
 ** set authinfo as source
@@ -990,16 +1007,16 @@ error.
 #+END_SRC
 
 **** py-isort
-Sort python import. Need to install =pip install isort= offline.
+Sort python imports. Import sorting now happens per-project via =ruff=
+(its =I= rule) through =apheleia= on save, so each repo's own config is
+honored. We keep =py-isort= available for manual =M-x py-isort-buffer=
+but do NOT register a global before-save hook (it would fight the
+project's ruff/isort settings).
 
 #+BEGIN_SRC emacs-lisp
-  (use-package
-    py-isort
-
+  (use-package py-isort
     :ensure
-    :config
-    (add-hook 'before-save-hook 'py-isort-before-save)
-    (setq py-isort-options '("-sl --profile black --filter-files")))
+    :commands (py-isort-buffer py-isort-region))
 #+END_SRC
 
 **** imenu-list
@@ -1025,6 +1042,42 @@ Now use the emacs wrapper:
 #+BEGIN_SRC emacs-lisp
 (use-package python-black
   :ensure)
+#+END_SRC
+
+**** apheleia (project-aware format-on-save)
+
+Rather than hardcode a formatter in Emacs, =apheleia= formats a buffer
+on save by shelling out to the right external tool, which reads the
+*project's own* config (=pyproject.toml=/=ruff.toml=, =.prettierrc=,
+etc.). So each repo's line-length, quote-style, and import-order are
+honored automatically, and a =.dir-locals.el= in a repo can override
+which formatter runs.
+
+- Python  -> =ruff format= + =ruff check --fix= (import sort via its I rule)
+- JS/TS/JSON/CSS/HTML/web -> =prettier= (apheleia finds the repo-local
+  =node_modules/.bin/prettier= and its =.prettierrc=)
+
+#+BEGIN_SRC emacs-lisp
+  (use-package apheleia
+    :ensure t
+    :config
+    ;; Define a ruff formatter chain: organise imports + fix, then format.
+    ;; `ruff' is resolved from the project venv / PATH; it reads the nearest
+    ;; pyproject.toml, so per-service configs are respected.
+    (setf (alist-get 'ruff-isort apheleia-formatters)
+          '("ruff" "check" "--select" "I" "--fix" "--stdin-filename" filepath "-"))
+    (setf (alist-get 'ruff-format apheleia-formatters)
+          '("ruff" "format" "--stdin-filename" filepath "-"))
+    ;; Python buffers: run import-fix then format.
+    (setf (alist-get 'python-mode apheleia-mode-alist)
+          '(ruff-isort ruff-format))
+    ;; JS/TS/JSON/CSS/HTML use prettier (apheleia's built-in
+    ;; `prettier' formatter already prefers the project-local binary).
+    (dolist (m '(js2-mode js-mode json-mode css-mode scss-mode
+                 web-mode html-mode typescript-mode))
+      (setf (alist-get m apheleia-mode-alist) 'prettier))
+    (apheleia-global-mode +1))
+#+END_SRC
 #+END_SRC
 
 **** sphinx-doc

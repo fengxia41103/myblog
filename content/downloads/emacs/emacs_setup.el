@@ -319,13 +319,19 @@ and the tangled file is compiled."
   :defer t
   :init
   (setq lsp-keymap-prefix "C-c l")
+  ;; apex-mode derives from java-mode and so inherits this java hook. There
+  ;; is no Apex language server, so skip lsp for apex buffers (otherwise lsp
+  ;; probes and matches unrelated clients like semgrep-ls).
+  (defun my/lsp-deferred-unless-apex ()
+    (unless (derived-mode-p 'apex-mode)
+      (lsp-deferred)))
   :hook ((css-mode . lsp-deferred)
          (html-mode . lsp-deferred)
          (web-mode . lsp-deferred)
          (js2-mode . lsp-deferred)
          (c++-mode . lsp-deferred)
          (c-mode . lsp-deferred)
-         (java-mode . lsp-deferred)
+         (java-mode . my/lsp-deferred-unless-apex)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :bind (:map lsp-mode-map
@@ -375,7 +381,12 @@ and the tangled file is compiled."
           tab-width 2
           indent-tabs-mode nil
           require-final-newline nil))
-  :hook (java-mode . (lsp my/java-mode-hook)))
+  ;; Start the Java LSP only for real java-mode, not derived apex-mode
+  ;; (no Apex server). Indentation settings still apply to both.
+  (defun my/java-lsp-maybe ()
+    (unless (derived-mode-p 'apex-mode)
+      (lsp)))
+  :hook (java-mode . (my/java-lsp-maybe my/java-mode-hook)))
 
 ;; Requires dap-mode
 

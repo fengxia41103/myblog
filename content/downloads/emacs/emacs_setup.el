@@ -1757,19 +1757,6 @@ If given prefix arg ARG, skips markdown conversion."
                              (local-set-key "\M-I" 'paf/org-toggle-iimage-in-org)
                             )))
 
-(use-package evil
-  :init
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
-(use-package evil-collection
-  :after evil)
-
-(use-package evil-surround
-  :config
-  (global-evil-surround-mode 1))
-
 (defcustom remote-org-directory "~/OrgFiles"
   "Location of remove OrgFile directory, should you have one."
   :type 'string

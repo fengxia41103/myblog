@@ -169,8 +169,11 @@ Make sure we have the package system initialized before we load anything.
 
 #+BEGIN_SRC emacs-lisp
 (require 'package)
-(when (< emacs-major-version 27)
-  (package-initialize))
+;; Initialize package.el so installed packages (use-package, etc.) are on
+;; the load-path before we `require' them below. Call it explicitly rather
+;; than relying on Emacs 27+ auto-init, which can be bypassed depending on
+;; how Emacs is launched.
+(package-initialize)
 #+END_SRC
 
 Adding my choice of packages repositories.

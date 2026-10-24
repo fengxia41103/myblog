@@ -1,8 +1,11 @@
 ;; ===== this file was auto-tangled, only edit the emacs_setup.org =====
 
 (require 'package)
-(when (< emacs-major-version 27)
-  (package-initialize))
+;; Initialize package.el so installed packages (use-package, etc.) are on
+;; the load-path before we `require' them below. Call it explicitly rather
+;; than relying on Emacs 27+ auto-init, which can be bypassed depending on
+;; how Emacs is launched.
+(package-initialize)
 
 (setq package-archives '(("org" . "https://orgmode.org/elpa/")
                          ("stable-melpa" . "https://stable.melpa.org/packages/")

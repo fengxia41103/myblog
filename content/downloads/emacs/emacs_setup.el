@@ -297,14 +297,14 @@ and the tangled file is compiled."
   :defer t
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((css-mode-hook . lsp-deferred)
-         (html-mode-hook . lsp-deferred)
-         (web-mode-hook . lsp-deferred)
-         (js2-mode-hook . lsp-deferred)
-         (c++-mode-hook . lsp-deferred)
-         (c-mode-hook . lsp-deferred)
-         (java-mode-hook . lsp-deferred)
-         (lsp-mode-hook . lsp-enable-which-key-integration))
+  :hook ((css-mode . lsp-deferred)
+         (html-mode . lsp-deferred)
+         (web-mode . lsp-deferred)
+         (js2-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (c-mode . lsp-deferred)
+         (java-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :bind (:map lsp-mode-map
               ("M-<RET>" . lsp-execute-code-action)))
@@ -314,7 +314,7 @@ and the tangled file is compiled."
   :defer t
   :config
   (setq lsp-ui-sideline-enable nil)
-  :hook (lsp-mode-hook . lsp-ui-mode)
+  :hook (lsp-mode . lsp-ui-mode)
   :bind (:map lsp-ui-mode-map
               ("C-c i" . lsp-ui-imenu)))
 
@@ -353,7 +353,7 @@ and the tangled file is compiled."
           tab-width 2
           indent-tabs-mode nil
           require-final-newline nil))
-  :hook (java-mode-hook . (lsp my/java-mode-hook)))
+  :hook (java-mode . (lsp my/java-mode-hook)))
 
 ;; Requires dap-mode
 
@@ -567,10 +567,7 @@ cleared, make sure the overlay doesn't come back too soon."
   :mode ("\\.ya?ml\\'")
   :bind (:map yaml-mode-map ("C-m" . newline-and-indent)))
 
-(use-package lsp-yaml
-  :after lsp
-  :config
-  (add-hook 'yaml-mode-hook #'lsp))
+(add-hook 'yaml-mode-hook #'lsp-deferred)
 
 (use-package jenkinsfile-mode
   :ensure

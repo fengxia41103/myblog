@@ -1066,7 +1066,7 @@ which formatter runs.
 **** dev hydra (format + LSP cheat-sheet)
 
 A single, memorable entry point for the commands that are otherwise easy to
-forget. Press =C-c j= to pop the menu; each key runs a command and the hydra
+forget. Press =<f6>= (or =C-c J=) to pop the menu; each key runs a command and the hydra
 exits (=:color blue=). Formatting works everywhere (apheleia); the LSP
 actions only do something in an LSP-managed buffer.
 
@@ -1101,7 +1101,11 @@ actions only do something in an LSP-managed buffer.
     ("l" lsp-treemacs-errors-list)
     ("q" nil))
 
-  (global-set-key (kbd "C-c j") #'hydra-dev/body)
+  ;; Bind to keys that aren't shadowed by mode-local maps. (`C-c j'
+  ;; lowercase was getting intercepted in some buffers.) <f6> is the easy
+  ;; primary; C-c J (capital) is a secondary.
+  (global-set-key (kbd "<f6>") #'hydra-dev/body)
+  (global-set-key (kbd "C-c J") #'hydra-dev/body)
 #+END_SRC
 
 Creat [[https://github.com/naiquevin/sphinx-doc.el][sphinx doc]] string from function definition directly.

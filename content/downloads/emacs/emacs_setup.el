@@ -542,7 +542,11 @@ _F_: format region    _D_: references       _a_: code action       _E_: prev err
   ("l" lsp-treemacs-errors-list)
   ("q" nil))
 
-(global-set-key (kbd "C-c j") #'hydra-dev/body)
+;; Bind to keys that aren't shadowed by mode-local maps. (`C-c j'
+;; lowercase was getting intercepted in some buffers.) <f6> is the easy
+;; primary; C-c J (capital) is a secondary.
+(global-set-key (kbd "<f6>") #'hydra-dev/body)
+(global-set-key (kbd "C-c J") #'hydra-dev/body)
 
 (use-package sphinx-doc
   :ensure)

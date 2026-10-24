@@ -924,7 +924,10 @@ cleared, make sure the overlay doesn't come back too soon."
 (setq frame-title-format "emacs @ %b - %f")
 (when window-system
   (mouse-wheel-mode)  ;; enable wheelmouse support by default
-  (set-selection-coding-system 'compound-text-with-extensions))
+  ;; Use UTF-8 for X selections. The old `compound-text-with-extensions'
+  ;; convention scrambles UTF-8 on paste and, loading after
+  ;; `set-clipboard-coding-system', used to override it.
+  (set-selection-coding-system 'utf-8))
 
 (setq hcz-set-cursor-color-color "")
 (setq hcz-set-cursor-color-buffer "")

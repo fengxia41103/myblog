@@ -1511,6 +1511,107 @@ Quits the mu server first (releases the DB lock), then relaunches mu4e."
               (define-key mu4e-main-mode-map
                 (kbd "c") #'my/mu4e-cleanup-junk)))
 
+  ;; --- Add the sender at point to the cleanup rules -------------------
+  ;; From the headers (list) or message view, grab the sender of the
+  ;; message at point, let you edit the `mu find' query, and append it as
+  ;; a new rule in mail-cleanup.yaml. Bound to `C-c k' (kill-sender).
+  (defvar my/mail-cleanup-config
+    (expand-file-name "~/workspace/me/myblog/content/downloads/mail-cleanup.yaml")
+    "Path to the mail-cleanup YAML config.")
+
+  (defun my/mu4e--sender-at-point ()
+    "Return the email address of the sender of the message at point, or nil."
+    (let ((msg (ignore-errors (mu4e-message-at-point))))
+      (when msg
+        (let ((from (mu4e-message-field msg :from)))
+          (cond
+           ;; mu4e >= 1.8: list of `mu4e-contact' structs/plists
+           ((and (listp from) from (fboundp 'mu4e-contact-email))
+            (ignore-errors (mu4e-contact-email (car from))))
+           ;; older: list of (name . email) conses
+           ((and (consp from) (consp (car from))) (cdar from))
+           ((stringp from) from)
+           (t nil))))))
+
+  (defun my/mail-cleanup--append-rule (query)
+    "Append a `from:' QUERY as a rule in `my/mail-cleanup-config'.
+Return non-nil if a new rule was added, nil if it was already present.
+Does not save the buffer (caller saves once after a batch)."
+    (with-current-buffer (find-file-noselect my/mail-cleanup-config)
+      (save-excursion
+        (goto-char (point-min))
+        (if (re-search-forward
+             (concat "^[ \t]*-[ \t]*\"" (regexp-quote query) "\"[ \t]*$")
+             nil t)
+            nil ;; duplicate
+          (goto-char (point-min))
+          (unless (re-search-forward "^rules:[ \t]*$" nil t)
+            (user-error "No `rules:' list found in %s" my/mail-cleanup-config))
+          ;; Insert after the last top-level `- ' item in the rules list.
+          (let ((insert-at (line-end-position)))
+            (while (and (zerop (forward-line 1))
+                        (not (eobp))
+                        (string-match-p "^\\([ \t]*-\\|[ \t]*#\\|[ \t]*$\\)"
+                                        (buffer-substring-no-properties
+                                         (line-beginning-position)
+                                         (line-end-position))))
+              (when (string-match-p "^[ \t]*-"
+                                    (buffer-substring-no-properties
+                                     (line-beginning-position)
+                                     (line-end-position)))
+                (setq insert-at (line-end-position))))
+            (goto-char insert-at)
+            (insert "\n" (format "  - \"%s\"" query)))
+          t))))
+
+  (defun my/mu4e--sender-variations (email)
+    "Return the list of `from:' query variations for EMAIL.
+e.g. noreply@updates.gfiber.com ->
+     (\"from:gfiber\" \"from:updates.gfiber.com\" \"from:noreply@updates.gfiber.com\")."
+    (let* ((domain (cadr (split-string email "@")))
+           (labels (split-string (or domain "") "\\."))
+           ;; registrable-ish term: second-to-last dotted label
+           (term (if (>= (length labels) 2)
+                     (nth (- (length labels) 2) labels)
+                   domain)))
+      (delete-dups
+       (delq nil
+             (list (and term (format "from:%s" term))
+                   (and domain (format "from:%s" domain))
+                   (format "from:%s" email))))))
+
+  (defun my/mu4e-add-sender-to-cleanup ()
+    "Add ALL sender variations of the message at point to the cleanup rules.
+For the sender address, builds the brand term, the full domain, and the
+exact address (e.g. `from:gfiber', `from:updates.gfiber.com',
+`from:noreply@updates.gfiber.com'), shows them, and after ONE
+confirmation appends every variation that is not already present."
+    (interactive)
+    (let ((email (my/mu4e--sender-at-point)))
+      (unless (and email (string-match-p "@" email))
+        (user-error "No sender address found at point"))
+      (let ((variations (my/mu4e--sender-variations email)))
+        (when (y-or-n-p
+               (format "Add %d cleanup rule(s) for %s?\n  %s\n"
+                       (length variations) email
+                       (mapconcat #'identity variations "\n  ")))
+          (let ((added '()) (dup '()))
+            (dolist (q variations)
+              (if (my/mail-cleanup--append-rule q)
+                  (push q added)
+                (push q dup)))
+            (when added
+              (with-current-buffer (find-file-noselect my/mail-cleanup-config)
+                (save-buffer)))
+            (message "Cleanup rules — added: %d%s"
+                     (length added)
+                     (if dup (format " (skipped %d dup)" (length dup)) "")))))))
+
+  (dolist (hook '(mu4e-headers-mode-hook mu4e-view-mode-hook))
+    (add-hook hook
+              (lambda ()
+                (local-set-key (kbd "C-c k") #'my/mu4e-add-sender-to-cleanup))))
+
   ;; --- Self-documenting hydra for the mu4e main view -------------------
   ;; Press `.' in the mu4e main view to pop up a menu of the common
   ;; actions, so you don't have to remember individual keys.
@@ -1522,13 +1623,14 @@ Quits the mu server first (releases the DB lock), then relaunches mu4e."
   _r_ refresh counts   _d_ dry-run cleanup       _C_ compose
   ^^                   _e_ edit sender rules     _j_ jump to maildir
   ^^                   ^^                        _q_ quit mu4e
+
+  In headers/view:  C-c k  adds all sender variations at point to cleanup.
   "
     ("U" mu4e-update-mail-and-index)
     ("r" my/mu4e-maildirs-refresh)
     ("c" my/mu4e-cleanup-junk)
     ("d" (my/mu4e-cleanup-junk t))
-    ("e" (find-file (expand-file-name
-                     "~/workspace/me/myblog/content/downloads/mail-cleanup.yaml")))
+    ("e" (find-file my/mail-cleanup-config))
     ("s" mu4e-search)
     ("C" mu4e-compose-new)
     ("j" mu4e-search-maildir)

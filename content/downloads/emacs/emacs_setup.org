@@ -2831,6 +2831,32 @@ Then we load =maildirs-extension=:
   (defvar my/mail-cleanup-python "/usr/bin/python3"
     "Python interpreter used to run the cleanup script (has PyYAML).")
 
+  (defun my/mu-server-running-p ()
+    "Return non-nil if a real `mu server' process is active.
+Mirrors the cleanup script's check: a process whose executable name
+is exactly `mu' with `server' in its arguments."
+    (with-temp-buffer
+      (ignore-errors
+        (call-process "ps" nil t nil "-eo" "comm,args"))
+      (goto-char (point-min))
+      (let (found)
+        (while (and (not found) (not (eobp)))
+          (let ((line (buffer-substring-no-properties
+                       (line-beginning-position) (line-end-position))))
+            (when (string-match "\\`mu[ \t]+.*\\bserver\\b" line)
+              (setq found t)))
+          (forward-line 1))
+        found)))
+
+  (defun my/wait-for-mu-server-gone (&optional timeout)
+    "Block until no `mu server' process remains, up to TIMEOUT seconds.
+Return non-nil if the server is gone, nil if it timed out."
+    (let ((deadline (+ (float-time) (or timeout 10))))
+      (while (and (my/mu-server-running-p)
+                  (< (float-time) deadline))
+        (sleep-for 0.3))
+      (not (my/mu-server-running-p))))
+
   (defun my/mu4e-cleanup-junk (&optional dry-run)
     "Move configured junk-sender mail to trash via the Python tool.
 With a prefix arg, do a DRY-RUN (show what would move, change nothing).
@@ -2842,7 +2868,11 @@ Quits the mu server first (releases the DB lock), then relaunches mu4e."
       ;; Release the DB lock held by the running mu server.
       (when (fboundp 'mu4e--server-kill) (ignore-errors (mu4e--server-kill)))
       (when (fboundp 'mu4e-quit) (ignore-errors (mu4e-quit)))
-      (sleep-for 1)
+      ;; mu4e-quit only *requests* the subprocess to die; the OS has not
+      ;; necessarily reaped the `mu server` process yet, so a fixed sleep
+      ;; races the Python tool's lock check. Poll until it is really gone.
+      (unless (my/wait-for-mu-server-gone 10)
+        (message "Warning: a 'mu server' is still running; cleanup may refuse."))
       (let* ((args (append (list my/mail-cleanup-python my/mail-cleanup-script)
                            (unless dry-run '("--apply"))))
              (buf (get-buffer-create "*mail-cleanup*")))

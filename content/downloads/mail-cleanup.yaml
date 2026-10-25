@@ -22,7 +22,9 @@ rules:
   - "from:alert@indeed.com OR from:donotreply@match.indeed.com"
   - "from:poshmark.com"
   - "from:redditmail.com"
-  - "from:gfiber.com"
+  # gFiber sends from noreply@updates.gfiber.com; `from:gfiber.com` matches
+  # nothing (mu tokenizes the full domain), so match the `gfiber` term.
+  - "from:gfiber"
   - "from:plex.tv"
   - "from:noreply@email.openai.com"   # ChatGPT / OpenAI
   - "from:airbnb.com"

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Myblog header
+# contributor: feng xia
+# key: .myblog-header
+# --
+
+Title: ${1}
+Date: `(format-time-string "%Y-%m-%d %H:%M")`
+Tags: thoughts
+Slug: ${2}
+Author: Feng Xia
+
+<figure class="col s12">
+  <img src="images/1968%20earth.jpg"/>
+</figure>
+
+$0
